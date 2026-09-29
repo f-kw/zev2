@@ -1,0 +1,268 @@
+[
+  {
+    "intervalId": "representative-01",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:10:14.621938+00:00",
+    "endedAt": "2026-09-29T17:10:43.623644+00:00",
+    "wallSeconds": 29.001605792203918,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-independent-batch.log"
+  },
+  {
+    "intervalId": "representative-02",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-02",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001"
+    ],
+    "startedAt": "2026-09-29T17:10:43.624943+00:00",
+    "endedAt": "2026-09-29T17:11:02.423823+00:00",
+    "wallSeconds": 18.79883133294061,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-batch.log"
+  },
+  {
+    "intervalId": "representative-02",
+    "phase": "qc",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001/completion.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001"
+    ],
+    "startedAt": "2026-09-29T17:11:02.424357+00:00",
+    "endedAt": "2026-09-29T17:11:37.495560+00:00",
+    "wallSeconds": 35.0710617499426,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-batch.log"
+  },
+  {
+    "intervalId": "representative-02",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:11:37.496376+00:00",
+    "endedAt": "2026-09-29T17:12:08.512442+00:00",
+    "wallSeconds": 31.01593999983743,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-independent-batch.log"
+  },
+  {
+    "intervalId": "representative-03",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-03",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001"
+    ],
+    "startedAt": "2026-09-29T17:12:08.513418+00:00",
+    "endedAt": "2026-09-29T17:12:31.068471+00:00",
+    "wallSeconds": 22.554972666082904,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-batch.log"
+  },
+  {
+    "intervalId": "representative-03",
+    "phase": "qc",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001/completion.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-qc-001"
+    ],
+    "startedAt": "2026-09-29T17:12:31.069182+00:00",
+    "endedAt": "2026-09-29T17:13:13.042177+00:00",
+    "wallSeconds": 41.97280883300118,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-qc-batch.log"
+  },
+  {
+    "intervalId": "representative-03",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:13:13.042831+00:00",
+    "endedAt": "2026-09-29T17:13:47.313904+00:00",
+    "wallSeconds": 34.27093233400956,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-independent-batch.log"
+  },
+  {
+    "intervalId": "representative-04",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-04",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001"
+    ],
+    "startedAt": "2026-09-29T17:13:47.314762+00:00",
+    "endedAt": "2026-09-29T17:14:11.006322+00:00",
+    "wallSeconds": 23.691475542029366,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-batch.log"
+  },
+  {
+    "intervalId": "representative-04",
+    "phase": "qc",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001/completion.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-qc-001"
+    ],
+    "startedAt": "2026-09-29T17:14:11.007091+00:00",
+    "endedAt": "2026-09-29T17:14:55.302621+00:00",
+    "wallSeconds": 44.295331791974604,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-qc-batch.log"
+  },
+  {
+    "intervalId": "representative-04",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:14:55.303397+00:00",
+    "endedAt": "2026-09-29T17:15:29.069463+00:00",
+    "wallSeconds": 33.765923166880384,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-independent-batch.log"
+  },
+  {
+    "intervalId": "representative-05",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-05",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-001"
+    ],
+    "startedAt": "2026-09-29T17:15:29.070431+00:00",
+    "endedAt": "2026-09-29T17:15:48.444046+00:00",
+    "wallSeconds": 19.37355975015089,
+    "exitCode": 1,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-batch.log"
+  },
+  {
+    "intervalId": "representative-06",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-06",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001"
+    ],
+    "startedAt": "2026-09-29T17:15:48.444880+00:00",
+    "endedAt": "2026-09-29T17:16:10.964646+00:00",
+    "wallSeconds": 22.519691625144333,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-batch.log"
+  },
+  {
+    "intervalId": "representative-06",
+    "phase": "qc",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001/completion.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001"
+    ],
+    "startedAt": "2026-09-29T17:16:10.965570+00:00",
+    "endedAt": "2026-09-29T17:16:49.170884+00:00",
+    "wallSeconds": 38.20515258307569,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-batch.log"
+  },
+  {
+    "intervalId": "representative-06",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:16:49.171764+00:00",
+    "endedAt": "2026-09-29T17:17:21.201399+00:00",
+    "wallSeconds": 32.02950491709635,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-independent-batch.log"
+  },
+  {
+    "intervalId": "representative-07",
+    "phase": "media",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-media.mjs",
+      "run",
+      "representative-07",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001"
+    ],
+    "startedAt": "2026-09-29T17:17:21.202322+00:00",
+    "endedAt": "2026-09-29T17:17:48.577302+00:00",
+    "wallSeconds": 27.374879749957472,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-batch.log"
+  },
+  {
+    "intervalId": "representative-07",
+    "phase": "qc",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001/completion.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001"
+    ],
+    "startedAt": "2026-09-29T17:17:48.578414+00:00",
+    "endedAt": "2026-09-29T17:18:27.286712+00:00",
+    "wallSeconds": 38.70813308400102,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-batch.log"
+  },
+  {
+    "intervalId": "representative-07",
+    "phase": "independent",
+    "command": [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001/completion.json"
+    ],
+    "startedAt": "2026-09-29T17:18:27.287837+00:00",
+    "endedAt": "2026-09-29T17:19:02.908917+00:00",
+    "wallSeconds": 35.62093445798382,
+    "exitCode": 0,
+    "log": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-independent-batch.log"
+  }
+]

@@ -1,0 +1,3436 @@
+{
+  "schemaVersion": "representative-results-v001",
+  "measuredAt": "2026-09-29T17:26:42.358Z",
+  "selectionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/original-resolution-representatives-20260930/selection.json",
+    "bytes": 28303,
+    "fileSha256": "3135d9361a6074986652a629c0921d70e33e58e5f726fffaec0b6d7714e43d6f"
+  },
+  "status": "technical-passed",
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed",
+  "classification": [
+    {
+      "categories": [
+        "normal-cut"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-01"
+    },
+    {
+      "categories": [
+        "soft-separator"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-02"
+    },
+    {
+      "categories": [
+        "Bounce"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-03"
+    },
+    {
+      "categories": [
+        "Shake"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-04"
+    },
+    {
+      "categories": [
+        "black-separator"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-05"
+    },
+    {
+      "categories": [
+        "Yellow"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-06"
+    },
+    {
+      "categories": [
+        "LightSkyBlue"
+      ],
+      "status": "present-and-passed",
+      "intervalId": "representative-07"
+    },
+    {
+      "categories": [
+        "Pulse"
+      ],
+      "status": "absent-in-saved-input"
+    }
+  ],
+  "totals": {
+    "intervals": 7,
+    "frames": 257,
+    "seconds": 8.566666666666666,
+    "samples": 47,
+    "logicalCandidates": 336,
+    "peakSimultaneousReferenceBytes": 6726132,
+    "retainedReferenceBytes": 0,
+    "violations": 0
+  },
+  "storage": {
+    "newAreaIncludingFailedAttempts": {
+      "logical": 1208819368,
+      "allocated": 1217224704,
+      "files": 3162
+    },
+    "freeBytes": 18035662848,
+    "minimumObservedFreeBytes": 18029867008,
+    "meaning": "end of current new area includes failed and resumed attempts; logical/allocated separately, no old media included; instantaneous overall peak and physical IO not measured"
+  },
+  "memory": {
+    "parentRss": null,
+    "childRss": null,
+    "reason": "not measured; process timing logs do not measure RSS"
+  },
+  "rows": [
+    {
+      "interval": {
+        "id": "representative-01",
+        "categories": [
+          "normal-cut"
+        ],
+        "targets": [
+          "connection-01"
+        ],
+        "range": {
+          "startFrame": 728,
+          "endFrameExclusive": 730,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 2,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 728,
+            "endFrameExclusive": 730
+          },
+          "displayFrameCount": 2,
+          "workingRange": {
+            "startFrame": 728,
+            "endFrameExclusive": 730
+          },
+          "workingFrameCount": 2,
+          "sourceRange": {
+            "startFrame": 728,
+            "endFrameExclusive": 730,
+            "startSample": 1070160,
+            "endSampleExclusive": 1073100
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 2,
+            "startSample": 0,
+            "endSampleExclusive": 2940
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 1070160,
+            "endSampleExclusive": 1073100,
+            "localSampleCount": 2940
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 2,
+                "startFrame": 0,
+                "endFrameExclusive": 2
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 728,
+              "endFrameExclusive": 730,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 2,
+              "sourceStartFrame": 728,
+              "sourceEndFrameExclusive": 730
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0001",
+            "baseStart": 728,
+            "baseEnd": 729,
+            "sourceStartFrame30": 5521,
+            "sourceEndFrame30": 5522,
+            "audioStartSample": 8115870,
+            "audioEndSample": 8117340
+          },
+          {
+            "segmentId": "segment-0002",
+            "baseStart": 729,
+            "baseEnd": 730,
+            "sourceStartFrame30": 6392,
+            "sourceEndFrame30": 6393,
+            "audioStartSample": 9396240,
+            "audioEndSample": 9397710
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "7b-intro-0001-readability-11",
+            "startFrame": 671,
+            "endFrameExclusive": 729
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000001",
+            "startFrame": 729,
+            "endFrameExclusive": 792
+          }
+        ],
+        "states": [
+          {
+            "captionId": "7b-intro-0001-readability-11",
+            "state": "static",
+            "elementSha256": "89c04f9cfe5b52c774d7e708c5f65100a38c6cf910daca2ca467ac94c6f7bf7d"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000001",
+            "state": "static",
+            "elementSha256": "70c15d1534502132e2c9cebe924339f0af17b43f9a615b875bf37e45640c6355"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-media-003/completion.json",
+        "bytes": 113805,
+        "fileSha256": "d9534ac243eccf479006f0314797b756802204fce2abbac9455d63a18438a963"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-qc-001/completion.json",
+        "bytes": 13032,
+        "fileSha256": "6fcc266992534d22092174354b853b6656c54470b10c34a2f840af075ae64f7d"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-qc-001/completion.json",
+        "bytes": 13032,
+        "fileSha256": "6fcc266992534d22092174354b853b6656c54470b10c34a2f840af075ae64f7d"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-qc-001/native-qc.json",
+        "fileSha256": "d03bc9a0c7c405f364931f89807dc3980a2460acef958de6c009cf40079c86b5",
+        "bytes": 100030
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-independent-batch.log",
+        "bytes": 400,
+        "fileSha256": "049652490cebe6407ddad4ef004c5c82990f6bc32143fba2f1b8a4d122396bc6"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-media-003/normal.mp4",
+        "bytes": 107900,
+        "fileSha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-media-003/repeat.mp4",
+        "bytes": 107900,
+        "fileSha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 2,
+      "status": "technical-passed",
+      "rawStatus": "technical-passed",
+      "background": {
+        "status": "passed",
+        "frames": 2,
+        "samples": 2940,
+        "videoSha256": "51bb5ddc7abbd77bd1f9cf79c05b30bae8da3898acab622d650364e557c51e00",
+        "pcmSha256": "76ed932b9f99a42fd17b6bac432bd1cb87c68a6eff61ea8544581c9392030e2e",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 2,
+        "clockSha256": "d208079b7b904fe73f4e065a677c5f53107796c0b7c7cbe43d8d89b52ffa4d71"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 2940,
+        "durationSeconds": 0.06666666666666667,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 2048,
+          "dts": 2048,
+          "duration": 892
+        },
+        "packetCount": 4,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "97262c346d3e13f278d745f2e7b02ce66c9e8bdd05d0b6e51215487e47b424ab",
+        "rawDecodedSampleCount": 3072,
+        "logicalDecodedSampleCount": 2940,
+        "decodedTailSampleCount": 132,
+        "rawDecodedPayloadSha256": "3c0bb3021b21e6fa748893fab5c92529cd234421c2636912a6d8628d6be4d83f",
+        "logicalDecodedPayloadSha256": "977082be53f4953a95a14184a0ec37460afd161c044613c42fcf3b1c7c4729e4",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 2940
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 2,
+      "candidates": 10,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 2,
+        "verifiedFileCount": 16,
+        "releasedSamples": 2,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 12.782430542,
+        "background": 1.750060125,
+        "compositeAndMediaChecks": [
+          0.7914302920000009,
+          0.7644170840000006
+        ],
+        "qcIncludingPreparationAndRetention": 33.45104025,
+        "qcPreparation": 0.023880582999998297,
+        "native": 14.060982916999997,
+        "stateEnvelopeCompletion": 0,
+        "finalIndependentReader": 28.922451833000004
+      },
+      "nativePerformance": {
+        "wallClockMs": 14060.982916999998,
+        "phasesMilliseconds": {
+          "inputBinding": 6504.967166999999,
+          "frameExtraction": 210.38683400000082,
+          "nativeLayerPreparation": 345.92212500000096,
+          "nativeLayerDecode": 95.30183400000169,
+          "completedRgbCrop": 72.01154099999621,
+          "referenceComposition": 174.50783299999966,
+          "rgbDistance": 0,
+          "evidenceWrite": 2.7180829999997513,
+          "verification": 22.81116700000348,
+          "evidenceConstruction": 6486.94975,
+          "inputVerification": 29.72924899999998,
+          "referenceVerification": 3.8018339999980526,
+          "rgbComparison": 65.14545800000269,
+          "checkpointRead": 2.6775419999976293,
+          "cleanup": 4.376376000000164
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 12,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 2,
+          "native-layer-decode": 2,
+          "completed-rgb-crop": 2,
+          "native-reference-composite": 2
+        },
+        "sourceFrameOutputs": 2,
+        "completedFrameOutputs": 2,
+        "completedRgbOutputs": 2,
+        "logicalReferenceCount": 10,
+        "referenceRgbOutputs": 8,
+        "reusedReferenceRgbCount": 2,
+        "preparedLayerOutputs": 2,
+        "decodedLayerOutputs": 2,
+        "decodedLayerBytes": 16588800,
+        "exactDistanceCalculations": 8,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 2914560,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:08:32.071Z",
+          "availableBytes": 19297345536
+        },
+        {
+          "at": "2026-09-29T17:08:42.146Z",
+          "availableBytes": 19274584064
+        },
+        {
+          "at": "2026-09-29T17:08:43.931Z",
+          "availableBytes": 19272736768
+        },
+        {
+          "at": "2026-09-29T17:08:44.853Z",
+          "availableBytes": 19293790208
+        },
+        {
+          "at": "2026-09-29T17:09:04.614Z",
+          "availableBytes": 19292229632
+        },
+        {
+          "at": "2026-09-29T17:09:23.984Z",
+          "availableBytes": 19290664960
+        },
+        {
+          "at": "2026-09-29T17:09:30.527Z",
+          "availableBytes": 19290677248
+        },
+        {
+          "at": "2026-09-29T17:09:30.632Z",
+          "availableBytes": 19289395200
+        },
+        {
+          "at": "2026-09-29T17:09:30.737Z",
+          "availableBytes": 19288129536
+        },
+        {
+          "at": "2026-09-29T17:09:30.910Z",
+          "availableBytes": 19288018944
+        },
+        {
+          "at": "2026-09-29T17:09:31.083Z",
+          "availableBytes": 19287900160
+        },
+        {
+          "at": "2026-09-29T17:09:31.131Z",
+          "availableBytes": 19279585280
+        },
+        {
+          "at": "2026-09-29T17:09:31.178Z",
+          "availableBytes": 19271270400
+        },
+        {
+          "at": "2026-09-29T17:09:31.181Z",
+          "availableBytes": 19271270400
+        },
+        {
+          "at": "2026-09-29T17:09:31.221Z",
+          "availableBytes": 19270520832
+        },
+        {
+          "at": "2026-09-29T17:09:31.376Z",
+          "availableBytes": 19270463488
+        },
+        {
+          "at": "2026-09-29T17:09:31.378Z",
+          "availableBytes": 19270463488
+        },
+        {
+          "at": "2026-09-29T17:09:31.412Z",
+          "availableBytes": 19269713920
+        },
+        {
+          "at": "2026-09-29T17:09:38.065Z",
+          "availableBytes": 19269509120
+        }
+      ],
+      "startedAt": "2026-09-29T17:08:32.070Z",
+      "endedAt": "2026-09-29T17:09:38.065Z"
+    },
+    {
+      "interval": {
+        "id": "representative-02",
+        "categories": [
+          "soft-separator"
+        ],
+        "targets": [
+          "connection-02"
+        ],
+        "range": {
+          "startFrame": 4144,
+          "endFrameExclusive": 4168,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 24,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 4144,
+            "endFrameExclusive": 4168
+          },
+          "displayFrameCount": 24,
+          "workingRange": {
+            "startFrame": 4144,
+            "endFrameExclusive": 4168
+          },
+          "workingFrameCount": 24,
+          "sourceRange": {
+            "startFrame": 4144,
+            "endFrameExclusive": 4156,
+            "startSample": 6091680,
+            "endSampleExclusive": 6109320
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 24,
+            "startSample": 0,
+            "endSampleExclusive": 35280
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 6091680,
+            "endSampleExclusive": 6126960,
+            "localSampleCount": 35280
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 6,
+                "startFrame": 0,
+                "endFrameExclusive": 6
+              },
+              {
+                "kind": "black",
+                "beforeSegmentId": "segment-0002",
+                "afterSegmentId": "segment-0003",
+                "startFrame": 6,
+                "endFrameExclusive": 18
+              },
+              {
+                "kind": "base",
+                "baseStartFrame": 6,
+                "baseEndFrame": 12,
+                "startFrame": 18,
+                "endFrameExclusive": 24
+              }
+            ]
+          },
+          "softWindows": [
+            {
+              "connectionId": "connection-02",
+              "beforeSegmentId": "segment-0002",
+              "afterSegmentId": "segment-0003",
+              "blackStartFrame": 6,
+              "blackEndFrameExclusive": 18
+            }
+          ],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 4144,
+              "endFrameExclusive": 4150,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 6,
+              "sourceStartFrame": 4144,
+              "sourceEndFrameExclusive": 4150
+            },
+            {
+              "kind": "black",
+              "startFrame": 4150,
+              "endFrameExclusive": 4162,
+              "localStartFrame": 6,
+              "localEndFrameExclusive": 18,
+              "beforeSegmentId": "segment-0002",
+              "afterSegmentId": "segment-0003",
+              "connectionId": "connection-02"
+            },
+            {
+              "kind": "base",
+              "startFrame": 4162,
+              "endFrameExclusive": 4168,
+              "localStartFrame": 18,
+              "localEndFrameExclusive": 24,
+              "sourceStartFrame": 4150,
+              "sourceEndFrameExclusive": 4156
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0002",
+            "baseStart": 4144,
+            "baseEnd": 4150,
+            "sourceStartFrame30": 9807,
+            "sourceEndFrame30": 9813,
+            "audioStartSample": 14416290,
+            "audioEndSample": 14425110
+          },
+          {
+            "segmentId": "segment-0003",
+            "baseStart": 4150,
+            "baseEnd": 4156,
+            "sourceStartFrame30": 59793,
+            "sourceEndFrame30": 59799,
+            "audioStartSample": 87895710,
+            "audioEndSample": 87904530
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000053",
+            "startFrame": 4095,
+            "endFrameExclusive": 4150
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000054",
+            "startFrame": 4162,
+            "endFrameExclusive": 4196
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000053",
+            "state": "static",
+            "elementSha256": "4bd449bfe550aac27e2171a63026d8588be6c17a191fe7a9a797d536aa3ca958"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000054",
+            "state": "static",
+            "elementSha256": "8a40f2e6339494f38b8ba6568b877d004941beaf24fa1b0e9036f66ab7cfd990"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001/completion.json",
+        "bytes": 104882,
+        "fileSha256": "9310f5e402d5d217782a6054d627b577c70b86443ecc1bcdaba55dd5718ce49b"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001/completion.json",
+        "bytes": 17029,
+        "fileSha256": "1b0150b49e61d786b56352620b7fa4407894b3e9394ba3b04f1cdb6cdb3dc524"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001/completion.json",
+        "bytes": 17029,
+        "fileSha256": "1b0150b49e61d786b56352620b7fa4407894b3e9394ba3b04f1cdb6cdb3dc524"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001/native-qc.json",
+        "fileSha256": "a49cdaf7093a7c1353f9cfbd0f98dd4491bb85763d8ff87ce270bb731418117c",
+        "bytes": 187639
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-independent-batch.log",
+        "bytes": 394,
+        "fileSha256": "cc41033d24fc004e5fe3823baf42e97941776420f4dabdeeaddc25e1f556d4f5"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001/normal.mp4",
+        "bytes": 534756,
+        "fileSha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001/repeat.mp4",
+        "bytes": 534756,
+        "fileSha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 2,
+      "status": "technical-passed",
+      "rawStatus": "technical-passed",
+      "background": {
+        "status": "passed",
+        "frames": 24,
+        "samples": 35280,
+        "videoSha256": "66e510787ac0b6875f20e3c32260da24f1ae2c02c662154c2e2d92243a4653e9",
+        "pcmSha256": "c42b5baa506e17ff4faee318fd1110426a7e56d964598051800190a0963a0b0d",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 24,
+        "clockSha256": "b78bc3748dd9d2eb44fde1f3e4057ddaa816e6f2414542f0306a04631d352a94"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 35280,
+        "durationSeconds": 0.8,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 34816,
+          "dts": 34816,
+          "duration": 464
+        },
+        "packetCount": 36,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "df7d958a172f6ced8c96c064ed4bbd9c36577b1ca3f9446bb7a923ce41af65ba",
+        "rawDecodedSampleCount": 35840,
+        "logicalDecodedSampleCount": 35280,
+        "decodedTailSampleCount": 560,
+        "rawDecodedPayloadSha256": "6363fd190dfe4bcb6ef29aea6ca1bc2772ab25329d2ee74458920e0f6c773505",
+        "logicalDecodedPayloadSha256": "2f78780a727439b0825067025ef9355a7331be7ebaf257d3db853bea24b0226e",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 35280
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 6,
+      "candidates": 30,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 6,
+        "verifiedFileCount": 32,
+        "releasedSamples": 6,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 18.718785083,
+        "background": 4.917715875,
+        "compositeAndMediaChecks": [
+          1.8971328749999994,
+          1.8749687909999992
+        ],
+        "qcIncludingPreparationAndRetention": 34.989321458,
+        "qcPreparation": 0.02340387499999997,
+        "native": 15.453656041999999,
+        "stateEnvelopeCompletion": 0,
+        "finalIndependentReader": 30.936132916
+      },
+      "nativePerformance": {
+        "wallClockMs": 15453.656041999999,
+        "phasesMilliseconds": {
+          "inputBinding": 6544.114624999998,
+          "frameExtraction": 580.6091670000023,
+          "nativeLayerPreparation": 592.2112500000003,
+          "nativeLayerDecode": 180.10370899999907,
+          "completedRgbCrop": 207.09295900000143,
+          "referenceComposition": 528.0470830000013,
+          "rgbDistance": 0,
+          "evidenceWrite": 6.8194169999987935,
+          "verification": 49.74258400000326,
+          "evidenceConstruction": 6520.196042000003,
+          "inputVerification": 84.34620799999539,
+          "referenceVerification": 8.735501000002841,
+          "rgbComparison": 90.92991700000857,
+          "checkpointRead": 6.543832000003022,
+          "cleanup": 10.471624000001611
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 20,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 2,
+          "native-layer-decode": 2,
+          "completed-rgb-crop": 6,
+          "native-reference-composite": 6
+        },
+        "sourceFrameOutputs": 6,
+        "completedFrameOutputs": 6,
+        "completedRgbOutputs": 6,
+        "logicalReferenceCount": 30,
+        "referenceRgbOutputs": 24,
+        "reusedReferenceRgbCount": 6,
+        "preparedLayerOutputs": 4,
+        "decodedLayerOutputs": 6,
+        "decodedLayerBytes": 49766400,
+        "exactDistanceCalculations": 24,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 2157840,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:10:43.694Z",
+          "availableBytes": 19267239936
+        },
+        {
+          "at": "2026-09-29T17:10:57.406Z",
+          "availableBytes": 19252314112
+        },
+        {
+          "at": "2026-09-29T17:11:00.328Z",
+          "availableBytes": 19248758784
+        },
+        {
+          "at": "2026-09-29T17:11:02.412Z",
+          "availableBytes": 19270103040
+        },
+        {
+          "at": "2026-09-29T17:11:02.496Z",
+          "availableBytes": 19269988352
+        },
+        {
+          "at": "2026-09-29T17:11:21.983Z",
+          "availableBytes": 19267379200
+        },
+        {
+          "at": "2026-09-29T17:11:28.564Z",
+          "availableBytes": 19264987136
+        },
+        {
+          "at": "2026-09-29T17:11:28.879Z",
+          "availableBytes": 19261173760
+        },
+        {
+          "at": "2026-09-29T17:11:29.145Z",
+          "availableBytes": 19256668160
+        },
+        {
+          "at": "2026-09-29T17:11:29.444Z",
+          "availableBytes": 19256459264
+        },
+        {
+          "at": "2026-09-29T17:11:29.738Z",
+          "availableBytes": 19256287232
+        },
+        {
+          "at": "2026-09-29T17:11:29.827Z",
+          "availableBytes": 19231383552
+        },
+        {
+          "at": "2026-09-29T17:11:29.917Z",
+          "availableBytes": 19206479872
+        },
+        {
+          "at": "2026-09-29T17:11:29.920Z",
+          "availableBytes": 19206479872
+        },
+        {
+          "at": "2026-09-29T17:11:29.956Z",
+          "availableBytes": 19205918720
+        },
+        {
+          "at": "2026-09-29T17:11:30.111Z",
+          "availableBytes": 19205853184
+        },
+        {
+          "at": "2026-09-29T17:11:30.113Z",
+          "availableBytes": 19205853184
+        },
+        {
+          "at": "2026-09-29T17:11:30.148Z",
+          "availableBytes": 19205292032
+        },
+        {
+          "at": "2026-09-29T17:11:30.274Z",
+          "availableBytes": 19205230592
+        },
+        {
+          "at": "2026-09-29T17:11:30.275Z",
+          "availableBytes": 19205230592
+        },
+        {
+          "at": "2026-09-29T17:11:30.306Z",
+          "availableBytes": 19204669440
+        },
+        {
+          "at": "2026-09-29T17:11:30.417Z",
+          "availableBytes": 19204603904
+        },
+        {
+          "at": "2026-09-29T17:11:30.419Z",
+          "availableBytes": 19204603904
+        },
+        {
+          "at": "2026-09-29T17:11:30.450Z",
+          "availableBytes": 19204050944
+        },
+        {
+          "at": "2026-09-29T17:11:30.547Z",
+          "availableBytes": 19203985408
+        },
+        {
+          "at": "2026-09-29T17:11:30.549Z",
+          "availableBytes": 19203985408
+        },
+        {
+          "at": "2026-09-29T17:11:30.587Z",
+          "availableBytes": 19203424256
+        },
+        {
+          "at": "2026-09-29T17:11:30.703Z",
+          "availableBytes": 19203362816
+        },
+        {
+          "at": "2026-09-29T17:11:30.705Z",
+          "availableBytes": 19203362816
+        },
+        {
+          "at": "2026-09-29T17:11:30.745Z",
+          "availableBytes": 19202801664
+        },
+        {
+          "at": "2026-09-29T17:11:37.485Z",
+          "availableBytes": 19202543616
+        }
+      ],
+      "startedAt": "2026-09-29T17:10:43.694Z",
+      "endedAt": "2026-09-29T17:11:37.485Z"
+    },
+    {
+      "interval": {
+        "id": "representative-03",
+        "categories": [
+          "Bounce"
+        ],
+        "targets": [
+          "new-material-digest-20260926-v001-instruction-instruction-000095"
+        ],
+        "range": {
+          "startFrame": 8285,
+          "endFrameExclusive": 8321,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 36,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 8285,
+            "endFrameExclusive": 8321
+          },
+          "displayFrameCount": 36,
+          "workingRange": {
+            "startFrame": 8285,
+            "endFrameExclusive": 8321
+          },
+          "workingFrameCount": 36,
+          "sourceRange": {
+            "startFrame": 8273,
+            "endFrameExclusive": 8309,
+            "startSample": 12161310,
+            "endSampleExclusive": 12214230
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 36,
+            "startSample": 0,
+            "endSampleExclusive": 52920
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 12178950,
+            "endSampleExclusive": 12231870,
+            "localSampleCount": 52920
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 36,
+                "startFrame": 0,
+                "endFrameExclusive": 36
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 8285,
+              "endFrameExclusive": 8321,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 36,
+              "sourceStartFrame": 8273,
+              "sourceEndFrameExclusive": 8309
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0003",
+            "baseStart": 8273,
+            "baseEnd": 8309,
+            "sourceStartFrame30": 63916,
+            "sourceEndFrame30": 63952,
+            "audioStartSample": 93956520,
+            "audioEndSample": 94009440
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "startFrame": 8285,
+            "endFrameExclusive": 8321
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "stable",
+            "elementSha256": "d9b96b8875d1f21a9c8dd9049efdf0a007e252c1795f7ed1a1b022342649dd50"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "small",
+            "elementSha256": "1859e1b5e89b25341a9ca7b2efe78caeef8d3e2bf9c73a7cc81b418158ce9ff9"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "middle",
+            "elementSha256": "94935719b6f5a6532c871798625240f002b45c9e3ae29e5f5987c0535bc43a43"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "maximum",
+            "elementSha256": "dfce8c1291664587d84029cc718dff3a3f23408392d64db08e565678dcc7b4a9"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "between-middle-maximum",
+            "elementSha256": "f8ab637bb3fd5f40eeecd612a8c1568eda0b9f7eab6d6e2d78dc76f9f3cb0ce3"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000095",
+            "state": "between-middle-stable",
+            "elementSha256": "7971ff7e59ca2c42dcef65fc9405250fe9b2203e3fd62b867f1462098b4efc40"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001/completion.json",
+        "bytes": 297178,
+        "fileSha256": "493b2664ed1b07bc81d0248645e5602806c39a80ef5489694467a3701700570c"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-qc-001/completion.json",
+        "bytes": 27951,
+        "fileSha256": "71745257375eea3c22a5269fb61fb91f8284b2f1ec15a90a1babfa970eed6a3d"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-state-completion-001/completion.json",
+        "bytes": 1487,
+        "fileSha256": "1c0448d0033d805c6598c76e2b7e1e5acc625af0535dc138f4b0e232b59d0058"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-state-completion-001/native-qc.json",
+        "fileSha256": "7c69688cb7c13b2202a35e1952215e906897943786c56b41d76081d9a5342a51",
+        "bytes": 519727
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-state-independent.log",
+        "bytes": 402,
+        "fileSha256": "ca47dd8ed8cae25808bf51189da9975559104442fc8e6a3ae2c6570aea790d17"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001/normal.mp4",
+        "bytes": 936829,
+        "fileSha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001/repeat.mp4",
+        "bytes": 936829,
+        "fileSha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 6,
+      "status": "technical-passed",
+      "rawStatus": "native-failed",
+      "background": {
+        "status": "passed",
+        "frames": 36,
+        "samples": 52920,
+        "videoSha256": "db05e129fa6f33977317d9fd40371dc4a82024acc7625c7c8144744d3c7e4446",
+        "pcmSha256": "3d61d526cc60a85952ab3897655918dce50a79f6ce7518e5f06683c75e0e1896",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 36,
+        "clockSha256": "90ab544a697ea3477dc4902273cc994ffec00144f359fb81fb717ba2039bb7ab"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 52920,
+        "durationSeconds": 1.2,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 52224,
+          "dts": 52224,
+          "duration": 696
+        },
+        "packetCount": 53,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "74643510dc167b0ef36d5b787add861c77c1a5d29680d10cfd3d39ca897e4090",
+        "rawDecodedSampleCount": 53248,
+        "logicalDecodedSampleCount": 52920,
+        "decodedTailSampleCount": 328,
+        "rawDecodedPayloadSha256": "01e0c3b4cf2e3ba9cd5427f24a675847551da1f2f69c7b573c58d2c44fa78b63",
+        "logicalDecodedPayloadSha256": "16e127ffb0402f3179222ddba20465c142ae6a9dca88658d5b77d87da0a950a8",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 52920
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 13,
+      "candidates": 104,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 13,
+        "verifiedFileCount": 75,
+        "releasedSamples": 13,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 22.466833,
+        "background": 4.5263177080000006,
+        "compositeAndMediaChecks": [
+          2.1540799579999983,
+          2.126330667000002
+        ],
+        "qcIncludingPreparationAndRetention": 41.886297207999995,
+        "qcPreparation": 0.02520837500000198,
+        "native": 21.496630209,
+        "stateEnvelopeCompletion": 22.377171333,
+        "finalIndependentReader": 33.41672041699999
+      },
+      "nativePerformance": {
+        "wallClockMs": 21496.630209,
+        "phasesMilliseconds": {
+          "inputBinding": 6792.809499999999,
+          "frameExtraction": 673.0571249999994,
+          "nativeLayerPreparation": 2524.7475840000006,
+          "nativeLayerDecode": 727.6251249999987,
+          "completedRgbCrop": 518.0300009999992,
+          "referenceComposition": 1716.375584000005,
+          "rgbDistance": 0,
+          "evidenceWrite": 18.086414999997942,
+          "verification": 181.28174999999464,
+          "evidenceConstruction": 7237.2071670000005,
+          "inputVerification": 595.9626649999846,
+          "referenceVerification": 51.54862499999945,
+          "rgbComparison": 298.7614200000098,
+          "checkpointRead": 34.631375000000844,
+          "cleanup": 60.012292000013986
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 42,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 6,
+          "native-layer-decode": 6,
+          "completed-rgb-crop": 13,
+          "native-reference-composite": 13
+        },
+        "sourceFrameOutputs": 13,
+        "completedFrameOutputs": 13,
+        "completedRgbOutputs": 13,
+        "logicalReferenceCount": 104,
+        "referenceRgbOutputs": 91,
+        "reusedReferenceRgbCount": 13,
+        "preparedLayerOutputs": 18,
+        "decodedLayerOutputs": 24,
+        "decodedLayerBytes": 199065600,
+        "exactDistanceCalculations": 91,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 6726132,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:12:08.585Z",
+          "availableBytes": 19202248704
+        },
+        {
+          "at": "2026-09-29T17:12:23.648Z",
+          "availableBytes": 19109486592
+        },
+        {
+          "at": "2026-09-29T17:12:28.729Z",
+          "availableBytes": 19102654464
+        },
+        {
+          "at": "2026-09-29T17:12:31.051Z",
+          "availableBytes": 19124572160
+        },
+        {
+          "at": "2026-09-29T17:12:31.142Z",
+          "availableBytes": 19124256768
+        },
+        {
+          "at": "2026-09-29T17:12:51.363Z",
+          "availableBytes": 19124183040
+        },
+        {
+          "at": "2026-09-29T17:12:58.195Z",
+          "availableBytes": 19123388416
+        },
+        {
+          "at": "2026-09-29T17:12:58.555Z",
+          "availableBytes": 19107725312
+        },
+        {
+          "at": "2026-09-29T17:12:58.868Z",
+          "availableBytes": 19091832832
+        },
+        {
+          "at": "2026-09-29T17:12:59.288Z",
+          "availableBytes": 19091402752
+        },
+        {
+          "at": "2026-09-29T17:12:59.709Z",
+          "availableBytes": 19090026496
+        },
+        {
+          "at": "2026-09-29T17:13:00.130Z",
+          "availableBytes": 19089629184
+        },
+        {
+          "at": "2026-09-29T17:13:00.555Z",
+          "availableBytes": 19089190912
+        },
+        {
+          "at": "2026-09-29T17:13:00.975Z",
+          "availableBytes": 19088822272
+        },
+        {
+          "at": "2026-09-29T17:13:01.395Z",
+          "availableBytes": 19088478208
+        },
+        {
+          "at": "2026-09-29T17:13:01.519Z",
+          "availableBytes": 19055276032
+        },
+        {
+          "at": "2026-09-29T17:13:01.642Z",
+          "availableBytes": 19021946880
+        },
+        {
+          "at": "2026-09-29T17:13:01.761Z",
+          "availableBytes": 18988736512
+        },
+        {
+          "at": "2026-09-29T17:13:01.885Z",
+          "availableBytes": 18955534336
+        },
+        {
+          "at": "2026-09-29T17:13:01.996Z",
+          "availableBytes": 18922332160
+        },
+        {
+          "at": "2026-09-29T17:13:02.120Z",
+          "availableBytes": 18889129984
+        },
+        {
+          "at": "2026-09-29T17:13:02.126Z",
+          "availableBytes": 18889129984
+        },
+        {
+          "at": "2026-09-29T17:13:02.167Z",
+          "availableBytes": 18888142848
+        },
+        {
+          "at": "2026-09-29T17:13:02.412Z",
+          "availableBytes": 18888155136
+        },
+        {
+          "at": "2026-09-29T17:13:02.414Z",
+          "availableBytes": 18888155136
+        },
+        {
+          "at": "2026-09-29T17:13:02.453Z",
+          "availableBytes": 18887168000
+        },
+        {
+          "at": "2026-09-29T17:13:02.698Z",
+          "availableBytes": 18887061504
+        },
+        {
+          "at": "2026-09-29T17:13:02.700Z",
+          "availableBytes": 18887061504
+        },
+        {
+          "at": "2026-09-29T17:13:02.743Z",
+          "availableBytes": 18886070272
+        },
+        {
+          "at": "2026-09-29T17:13:02.991Z",
+          "availableBytes": 18885971968
+        },
+        {
+          "at": "2026-09-29T17:13:02.994Z",
+          "availableBytes": 18885967872
+        },
+        {
+          "at": "2026-09-29T17:13:03.035Z",
+          "availableBytes": 18884984832
+        },
+        {
+          "at": "2026-09-29T17:13:03.243Z",
+          "availableBytes": 18884882432
+        },
+        {
+          "at": "2026-09-29T17:13:03.246Z",
+          "availableBytes": 18884882432
+        },
+        {
+          "at": "2026-09-29T17:13:03.286Z",
+          "availableBytes": 18883899392
+        },
+        {
+          "at": "2026-09-29T17:13:03.490Z",
+          "availableBytes": 18883801088
+        },
+        {
+          "at": "2026-09-29T17:13:03.492Z",
+          "availableBytes": 18883796992
+        },
+        {
+          "at": "2026-09-29T17:13:03.532Z",
+          "availableBytes": 18882818048
+        },
+        {
+          "at": "2026-09-29T17:13:03.730Z",
+          "availableBytes": 18882715648
+        },
+        {
+          "at": "2026-09-29T17:13:03.735Z",
+          "availableBytes": 18882715648
+        },
+        {
+          "at": "2026-09-29T17:13:03.780Z",
+          "availableBytes": 18881732608
+        },
+        {
+          "at": "2026-09-29T17:13:03.984Z",
+          "availableBytes": 18881634304
+        },
+        {
+          "at": "2026-09-29T17:13:03.986Z",
+          "availableBytes": 18881630208
+        },
+        {
+          "at": "2026-09-29T17:13:04.027Z",
+          "availableBytes": 18880651264
+        },
+        {
+          "at": "2026-09-29T17:13:04.226Z",
+          "availableBytes": 18880548864
+        },
+        {
+          "at": "2026-09-29T17:13:04.228Z",
+          "availableBytes": 18880548864
+        },
+        {
+          "at": "2026-09-29T17:13:04.270Z",
+          "availableBytes": 18879565824
+        },
+        {
+          "at": "2026-09-29T17:13:04.471Z",
+          "availableBytes": 18879447040
+        },
+        {
+          "at": "2026-09-29T17:13:04.473Z",
+          "availableBytes": 18879447040
+        },
+        {
+          "at": "2026-09-29T17:13:04.513Z",
+          "availableBytes": 18878464000
+        },
+        {
+          "at": "2026-09-29T17:13:04.715Z",
+          "availableBytes": 18878361600
+        },
+        {
+          "at": "2026-09-29T17:13:04.717Z",
+          "availableBytes": 18878357504
+        },
+        {
+          "at": "2026-09-29T17:13:04.757Z",
+          "availableBytes": 18877374464
+        },
+        {
+          "at": "2026-09-29T17:13:04.956Z",
+          "availableBytes": 18877267968
+        },
+        {
+          "at": "2026-09-29T17:13:04.961Z",
+          "availableBytes": 18877267968
+        },
+        {
+          "at": "2026-09-29T17:13:05.001Z",
+          "availableBytes": 18876289024
+        },
+        {
+          "at": "2026-09-29T17:13:05.201Z",
+          "availableBytes": 18876186624
+        },
+        {
+          "at": "2026-09-29T17:13:05.203Z",
+          "availableBytes": 18876186624
+        },
+        {
+          "at": "2026-09-29T17:13:05.243Z",
+          "availableBytes": 18875199488
+        },
+        {
+          "at": "2026-09-29T17:13:13.028Z",
+          "availableBytes": 18874605568
+        }
+      ],
+      "startedAt": "2026-09-29T17:12:08.584Z",
+      "endedAt": "2026-09-29T17:13:13.029Z"
+    },
+    {
+      "interval": {
+        "id": "representative-04",
+        "categories": [
+          "Shake"
+        ],
+        "targets": [
+          "new-material-digest-20260926-v001-instruction-instruction-000099"
+        ],
+        "range": {
+          "startFrame": 8376,
+          "endFrameExclusive": 8412,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 36,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 8376,
+            "endFrameExclusive": 8412
+          },
+          "displayFrameCount": 36,
+          "workingRange": {
+            "startFrame": 8376,
+            "endFrameExclusive": 8412
+          },
+          "workingFrameCount": 36,
+          "sourceRange": {
+            "startFrame": 8364,
+            "endFrameExclusive": 8400,
+            "startSample": 12295080,
+            "endSampleExclusive": 12348000
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 36,
+            "startSample": 0,
+            "endSampleExclusive": 52920
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 12312720,
+            "endSampleExclusive": 12365640,
+            "localSampleCount": 52920
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 36,
+                "startFrame": 0,
+                "endFrameExclusive": 36
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 8376,
+              "endFrameExclusive": 8412,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 36,
+              "sourceStartFrame": 8364,
+              "sourceEndFrameExclusive": 8400
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0003",
+            "baseStart": 8364,
+            "baseEnd": 8400,
+            "sourceStartFrame30": 64007,
+            "sourceEndFrame30": 64043,
+            "audioStartSample": 94090290,
+            "audioEndSample": 94143210
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "startFrame": 8376,
+            "endFrameExclusive": 8412
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "stable",
+            "elementSha256": "42d45813954c82cea64e7af5f5bba5b8a7cf7db88746841bc23d3bbfd550381a"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "left-18",
+            "elementSha256": "dc1fae656eb1e91a16381a671d15f8d9371915363387f9ad113284b0b4827d6b"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "right-18",
+            "elementSha256": "82aa47535d819684763b2c6f5c9b89fd23fca8000064357255b2974b86423e97"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "left-12",
+            "elementSha256": "67c08351ebf8ce7cee86f89679f0d38efe0a35cd777e587fe6fee1286903da17"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "right-12",
+            "elementSha256": "5ea4b6664ff4fdc1d8b84d7b81a8b947ed2144d7e2af4a9b7a34aacaad2a7eb7"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "left-6",
+            "elementSha256": "444d0d3478cbd1dfd1c21b4a5cc67a8ec9bf61589a2445757ab651260db3fe4c"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000099",
+            "state": "right-6",
+            "elementSha256": "e658ef9137c7f5a3ccdd99b34288ff9d13260ae7202093f4d8bc073c10f42bfe"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001/completion.json",
+        "bytes": 288493,
+        "fileSha256": "27749632905dd2645560abf01ab2701f91727ce861982be571fa4963a30f67cc"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-qc-001/completion.json",
+        "bytes": 32858,
+        "fileSha256": "959713f81c49349607468b66f810f05e2b2cfbd417d5275ef9153c6d5abe80c1"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-state-completion-001/completion.json",
+        "bytes": 1487,
+        "fileSha256": "bbc3263fffd0be72db6125c59485c070dac028883a8b26e3291236d34425578b"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-state-completion-001/native-qc.json",
+        "fileSha256": "f5fb899b7dd12a409b23a9dac659e966b1250a16c995450a5cc98b8bd02118a8",
+        "bytes": 701917
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-state-independent.log",
+        "bytes": 403,
+        "fileSha256": "43f49ef483622045a72a471ca8364a673e3aabc9fc00686dd1bcffef2f904a84"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001/normal.mp4",
+        "bytes": 947916,
+        "fileSha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001/repeat.mp4",
+        "bytes": 947916,
+        "fileSha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 7,
+      "status": "technical-passed",
+      "rawStatus": "native-failed",
+      "background": {
+        "status": "passed",
+        "frames": 36,
+        "samples": 52920,
+        "videoSha256": "a8645aefdd1010ee97c11f6a50be864372cb059661c8ea47abc557cbc6038be4",
+        "pcmSha256": "0a150f6e6511ac5ec43a9d2d6a0dd29e96608a32bb7f07c5d0f459765d81126a",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 36,
+        "clockSha256": "90ab544a697ea3477dc4902273cc994ffec00144f359fb81fb717ba2039bb7ab"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 52920,
+        "durationSeconds": 1.2,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 52224,
+          "dts": 52224,
+          "duration": 696
+        },
+        "packetCount": 53,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "6dddd43e3e7d06926fb00e0009452f43e77587a3fd841c4d63b43d022885c596",
+        "rawDecodedSampleCount": 53248,
+        "logicalDecodedSampleCount": 52920,
+        "decodedTailSampleCount": 328,
+        "rawDecodedPayloadSha256": "713b68426d00db3d6b5fd6f3f1d6e523068e3065c200be23cff7c13010d58f57",
+        "logicalDecodedPayloadSha256": "5ce6524c95b6c525d543d0bfa705e92f7c20361870f8c3fb4f51e2c93b177860",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 52920
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 17,
+      "candidates": 153,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 17,
+        "verifiedFileCount": 92,
+        "releasedSamples": 17,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 23.598411083000002,
+        "background": 4.463661916,
+        "compositeAndMediaChecks": [
+          2.1599151249999995,
+          2.172835166000001
+        ],
+        "qcIncludingPreparationAndRetention": 44.210685082999994,
+        "qcPreparation": 0.02620704200000182,
+        "native": 23.268336458999997,
+        "stateEnvelopeCompletion": 20.642452042,
+        "finalIndependentReader": 33.826760042000004
+      },
+      "nativePerformance": {
+        "wallClockMs": 23268.336459,
+        "phasesMilliseconds": {
+          "inputBinding": 6850.059999999998,
+          "frameExtraction": 776.5044589999998,
+          "nativeLayerPreparation": 2905.675833000001,
+          "nativeLayerDecode": 825.7920000000013,
+          "completedRgbCrop": 623.4132479999898,
+          "referenceComposition": 2462.0833749999983,
+          "rgbDistance": 0,
+          "evidenceWrite": 30.784709999999905,
+          "verification": 197.61245800000324,
+          "evidenceConstruction": 7356.651208000003,
+          "inputVerification": 788.6278350000066,
+          "referenceVerification": 41.10858500000177,
+          "rgbComparison": 234.47970700000224,
+          "checkpointRead": 45.46774800001003,
+          "cleanup": 59.938166000007186
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 52,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 7,
+          "native-layer-decode": 7,
+          "completed-rgb-crop": 17,
+          "native-reference-composite": 17
+        },
+        "sourceFrameOutputs": 17,
+        "completedFrameOutputs": 17,
+        "completedRgbOutputs": 17,
+        "logicalReferenceCount": 153,
+        "referenceRgbOutputs": 136,
+        "reusedReferenceRgbCount": 17,
+        "preparedLayerOutputs": 21,
+        "decodedLayerOutputs": 28,
+        "decodedLayerBytes": 232243200,
+        "exactDistanceCalculations": 136,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 3615840,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:13:47.390Z",
+          "availableBytes": 18873331712
+        },
+        {
+          "at": "2026-09-29T17:14:03.051Z",
+          "availableBytes": 18805780480
+        },
+        {
+          "at": "2026-09-29T17:14:08.611Z",
+          "availableBytes": 18802016256
+        },
+        {
+          "at": "2026-09-29T17:14:10.988Z",
+          "availableBytes": 18822385664
+        },
+        {
+          "at": "2026-09-29T17:14:11.081Z",
+          "availableBytes": 18822086656
+        },
+        {
+          "at": "2026-09-29T17:14:31.824Z",
+          "availableBytes": 18804682752
+        },
+        {
+          "at": "2026-09-29T17:14:38.714Z",
+          "availableBytes": 18814652416
+        },
+        {
+          "at": "2026-09-29T17:14:39.119Z",
+          "availableBytes": 18796990464
+        },
+        {
+          "at": "2026-09-29T17:14:39.490Z",
+          "availableBytes": 18778632192
+        },
+        {
+          "at": "2026-09-29T17:14:39.905Z",
+          "availableBytes": 18778370048
+        },
+        {
+          "at": "2026-09-29T17:14:40.320Z",
+          "availableBytes": 18778050560
+        },
+        {
+          "at": "2026-09-29T17:14:40.733Z",
+          "availableBytes": 18777796608
+        },
+        {
+          "at": "2026-09-29T17:14:41.149Z",
+          "availableBytes": 18777530368
+        },
+        {
+          "at": "2026-09-29T17:14:41.563Z",
+          "availableBytes": 18777227264
+        },
+        {
+          "at": "2026-09-29T17:14:41.980Z",
+          "availableBytes": 18776952832
+        },
+        {
+          "at": "2026-09-29T17:14:42.399Z",
+          "availableBytes": 18776682496
+        },
+        {
+          "at": "2026-09-29T17:14:42.519Z",
+          "availableBytes": 18743480320
+        },
+        {
+          "at": "2026-09-29T17:14:42.638Z",
+          "availableBytes": 18710278144
+        },
+        {
+          "at": "2026-09-29T17:14:42.758Z",
+          "availableBytes": 18677071872
+        },
+        {
+          "at": "2026-09-29T17:14:42.874Z",
+          "availableBytes": 18643869696
+        },
+        {
+          "at": "2026-09-29T17:14:42.989Z",
+          "availableBytes": 18610663424
+        },
+        {
+          "at": "2026-09-29T17:14:43.103Z",
+          "availableBytes": 18577387520
+        },
+        {
+          "at": "2026-09-29T17:14:43.222Z",
+          "availableBytes": 18544185344
+        },
+        {
+          "at": "2026-09-29T17:14:43.227Z",
+          "availableBytes": 18544185344
+        },
+        {
+          "at": "2026-09-29T17:14:43.264Z",
+          "availableBytes": 18543714304
+        },
+        {
+          "at": "2026-09-29T17:14:43.502Z",
+          "availableBytes": 18543603712
+        },
+        {
+          "at": "2026-09-29T17:14:43.504Z",
+          "availableBytes": 18543603712
+        },
+        {
+          "at": "2026-09-29T17:14:43.539Z",
+          "availableBytes": 18543124480
+        },
+        {
+          "at": "2026-09-29T17:14:43.784Z",
+          "availableBytes": 18543017984
+        },
+        {
+          "at": "2026-09-29T17:14:43.787Z",
+          "availableBytes": 18543013888
+        },
+        {
+          "at": "2026-09-29T17:14:43.824Z",
+          "availableBytes": 18542534656
+        },
+        {
+          "at": "2026-09-29T17:14:44.045Z",
+          "availableBytes": 18542424064
+        },
+        {
+          "at": "2026-09-29T17:14:44.047Z",
+          "availableBytes": 18542424064
+        },
+        {
+          "at": "2026-09-29T17:14:44.086Z",
+          "availableBytes": 18541944832
+        },
+        {
+          "at": "2026-09-29T17:14:44.300Z",
+          "availableBytes": 18541838336
+        },
+        {
+          "at": "2026-09-29T17:14:44.302Z",
+          "availableBytes": 18541834240
+        },
+        {
+          "at": "2026-09-29T17:14:44.340Z",
+          "availableBytes": 18541359104
+        },
+        {
+          "at": "2026-09-29T17:14:44.551Z",
+          "availableBytes": 18541248512
+        },
+        {
+          "at": "2026-09-29T17:14:44.553Z",
+          "availableBytes": 18541248512
+        },
+        {
+          "at": "2026-09-29T17:14:44.591Z",
+          "availableBytes": 18540773376
+        },
+        {
+          "at": "2026-09-29T17:14:44.797Z",
+          "availableBytes": 18540662784
+        },
+        {
+          "at": "2026-09-29T17:14:44.799Z",
+          "availableBytes": 18540658688
+        },
+        {
+          "at": "2026-09-29T17:14:44.836Z",
+          "availableBytes": 18540191744
+        },
+        {
+          "at": "2026-09-29T17:14:45.041Z",
+          "availableBytes": 18540081152
+        },
+        {
+          "at": "2026-09-29T17:14:45.043Z",
+          "availableBytes": 18540081152
+        },
+        {
+          "at": "2026-09-29T17:14:45.080Z",
+          "availableBytes": 18539606016
+        },
+        {
+          "at": "2026-09-29T17:14:45.290Z",
+          "availableBytes": 18539495424
+        },
+        {
+          "at": "2026-09-29T17:14:45.292Z",
+          "availableBytes": 18539491328
+        },
+        {
+          "at": "2026-09-29T17:14:45.330Z",
+          "availableBytes": 18539016192
+        },
+        {
+          "at": "2026-09-29T17:14:45.535Z",
+          "availableBytes": 18538905600
+        },
+        {
+          "at": "2026-09-29T17:14:45.541Z",
+          "availableBytes": 18538905600
+        },
+        {
+          "at": "2026-09-29T17:14:45.579Z",
+          "availableBytes": 18538430464
+        },
+        {
+          "at": "2026-09-29T17:14:45.788Z",
+          "availableBytes": 18538323968
+        },
+        {
+          "at": "2026-09-29T17:14:45.790Z",
+          "availableBytes": 18538319872
+        },
+        {
+          "at": "2026-09-29T17:14:45.829Z",
+          "availableBytes": 18537848832
+        },
+        {
+          "at": "2026-09-29T17:14:46.036Z",
+          "availableBytes": 18537730048
+        },
+        {
+          "at": "2026-09-29T17:14:46.040Z",
+          "availableBytes": 18537730048
+        },
+        {
+          "at": "2026-09-29T17:14:46.078Z",
+          "availableBytes": 18537254912
+        },
+        {
+          "at": "2026-09-29T17:14:46.282Z",
+          "availableBytes": 18537148416
+        },
+        {
+          "at": "2026-09-29T17:14:46.284Z",
+          "availableBytes": 18537144320
+        },
+        {
+          "at": "2026-09-29T17:14:46.322Z",
+          "availableBytes": 18536673280
+        },
+        {
+          "at": "2026-09-29T17:14:46.542Z",
+          "availableBytes": 18536558592
+        },
+        {
+          "at": "2026-09-29T17:14:46.544Z",
+          "availableBytes": 18536558592
+        },
+        {
+          "at": "2026-09-29T17:14:46.582Z",
+          "availableBytes": 18536083456
+        },
+        {
+          "at": "2026-09-29T17:14:46.796Z",
+          "availableBytes": 18535972864
+        },
+        {
+          "at": "2026-09-29T17:14:46.798Z",
+          "availableBytes": 18535968768
+        },
+        {
+          "at": "2026-09-29T17:14:46.835Z",
+          "availableBytes": 18535497728
+        },
+        {
+          "at": "2026-09-29T17:14:47.049Z",
+          "availableBytes": 18535383040
+        },
+        {
+          "at": "2026-09-29T17:14:47.050Z",
+          "availableBytes": 18535383040
+        },
+        {
+          "at": "2026-09-29T17:14:47.088Z",
+          "availableBytes": 18534907904
+        },
+        {
+          "at": "2026-09-29T17:14:47.293Z",
+          "availableBytes": 18534801408
+        },
+        {
+          "at": "2026-09-29T17:14:47.295Z",
+          "availableBytes": 18534797312
+        },
+        {
+          "at": "2026-09-29T17:14:47.333Z",
+          "availableBytes": 18534326272
+        },
+        {
+          "at": "2026-09-29T17:14:55.291Z",
+          "availableBytes": 18533433344
+        }
+      ],
+      "startedAt": "2026-09-29T17:13:47.390Z",
+      "endedAt": "2026-09-29T17:14:55.292Z"
+    },
+    {
+      "interval": {
+        "id": "representative-05",
+        "categories": [
+          "black-separator"
+        ],
+        "targets": [
+          "connection-03"
+        ],
+        "range": {
+          "startFrame": 11124,
+          "endFrameExclusive": 11138,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 14,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 11124,
+            "endFrameExclusive": 11138
+          },
+          "displayFrameCount": 14,
+          "workingRange": {
+            "startFrame": 11124,
+            "endFrameExclusive": 11138
+          },
+          "workingFrameCount": 14,
+          "sourceRange": {
+            "startFrame": 11112,
+            "endFrameExclusive": 11114,
+            "startSample": 16334640,
+            "endSampleExclusive": 16337580
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 14,
+            "startSample": 0,
+            "endSampleExclusive": 20580
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 16352280,
+            "endSampleExclusive": 16372860,
+            "localSampleCount": 20580
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 1,
+                "startFrame": 0,
+                "endFrameExclusive": 1
+              },
+              {
+                "kind": "black",
+                "beforeSegmentId": "segment-0003",
+                "afterSegmentId": "segment-0004",
+                "startFrame": 1,
+                "endFrameExclusive": 13
+              },
+              {
+                "kind": "base",
+                "baseStartFrame": 1,
+                "baseEndFrame": 2,
+                "startFrame": 13,
+                "endFrameExclusive": 14
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 11124,
+              "endFrameExclusive": 11125,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 1,
+              "sourceStartFrame": 11112,
+              "sourceEndFrameExclusive": 11113
+            },
+            {
+              "kind": "black",
+              "startFrame": 11125,
+              "endFrameExclusive": 11137,
+              "localStartFrame": 1,
+              "localEndFrameExclusive": 13,
+              "beforeSegmentId": "segment-0003",
+              "afterSegmentId": "segment-0004",
+              "connectionId": "connection-03"
+            },
+            {
+              "kind": "base",
+              "startFrame": 11137,
+              "endFrameExclusive": 11138,
+              "localStartFrame": 13,
+              "localEndFrameExclusive": 14,
+              "sourceStartFrame": 11113,
+              "sourceEndFrameExclusive": 11114
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0003",
+            "baseStart": 11112,
+            "baseEnd": 11113,
+            "sourceStartFrame30": 66755,
+            "sourceEndFrame30": 66756,
+            "audioStartSample": 98129850,
+            "audioEndSample": 98131320
+          },
+          {
+            "segmentId": "segment-0004",
+            "baseStart": 11113,
+            "baseEnd": 11114,
+            "sourceStartFrame30": 164070,
+            "sourceEndFrame30": 164071,
+            "audioStartSample": 241182900,
+            "audioEndSample": 241184370
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+            "startFrame": 11049,
+            "endFrameExclusive": 11125
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000138",
+            "startFrame": 11137,
+            "endFrameExclusive": 11174
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000137",
+            "state": "static",
+            "elementSha256": "c3f541f2f8e5caa9f7cd2bc649e1bee1d98b92404b85a4c506ddb2e430164597"
+          },
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000138",
+            "state": "static",
+            "elementSha256": "591ace9c542ce652cdcf65770b60bb6d17c39669f233c27c199c8c57d249b2b9"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/completion.json",
+        "bytes": 102605,
+        "fileSha256": "1d73f337f424f294850b7a426829758ef9ebb53d8d0bdbf89c55ed778e41710f"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-qc-001/completion.json",
+        "bytes": 23541,
+        "fileSha256": "e16af03239f18a1a24d2f70dd2581517a81685432fa50fa56c4a120b9f7a44a1"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-qc-001/completion.json",
+        "bytes": 23541,
+        "fileSha256": "e16af03239f18a1a24d2f70dd2581517a81685432fa50fa56c4a120b9f7a44a1"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-qc-001/native-qc.json",
+        "fileSha256": "485d6c44f47cab9f08b437ef714619e513427f2f6ff39dcc402f0b644fa6596b",
+        "bytes": 118997
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-independent-resume.log",
+        "bytes": 394,
+        "fileSha256": "69356b56b086fbf4a83f9de798873c6773209cd39b383caa896e9f4248e1615f"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/normal.mp4",
+        "bytes": 231494,
+        "fileSha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/repeat.mp4",
+        "bytes": 231494,
+        "fileSha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 2,
+      "status": "technical-passed",
+      "rawStatus": "technical-passed",
+      "background": {
+        "status": "passed",
+        "frames": 14,
+        "samples": 20580,
+        "videoSha256": "158ae17ee54d6632d21f29879f1b6c14911615d412ff1d01f5e7a9adaff8aca5",
+        "pcmSha256": "6f3a238f4ada9a895313d082112c4c29a3a99587f69db4fd6c7312dc1f917a13",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 14,
+        "clockSha256": "dd7c1b983e3a5c0f30ed84038ca54403441c11f77fe472b93935270e592a9d00"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 20580,
+        "durationSeconds": 0.4666666666666667,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 20480,
+          "dts": 20480,
+          "duration": 100
+        },
+        "packetCount": 22,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "3386742a75a3478f57e0844d339d23158d80419517d500ad37c4d7c2ee0d7e4c",
+        "rawDecodedSampleCount": 21504,
+        "logicalDecodedSampleCount": 20580,
+        "decodedTailSampleCount": 924,
+        "rawDecodedPayloadSha256": "c66b4ff1ed0d522373e94d0910af96fede37e9dde2e8d2c880728a922a12a4a3",
+        "logicalDecodedPayloadSha256": "b9a3b53f6cb788ec43af7ad3d61b8025d3e702cd16e70c1370970e67ac698a36",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 20580
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 2,
+      "candidates": 11,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 2,
+        "verifiedFileCount": 20,
+        "releasedSamples": 2,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 14.920189875,
+        "background": null,
+        "compositeAndMediaChecks": [
+          0.831783125,
+          0.8224436669999996
+        ],
+        "qcIncludingPreparationAndRetention": 38.924608333,
+        "qcPreparation": 2.61764775,
+        "native": 15.612145833000003,
+        "stateEnvelopeCompletion": 0,
+        "finalIndependentReader": 32.625632125
+      },
+      "nativePerformance": {
+        "wallClockMs": 15612.145833000002,
+        "phasesMilliseconds": {
+          "inputBinding": 6813.006207999999,
+          "frameExtraction": 513.0783329999977,
+          "nativeLayerPreparation": 730.2575830000023,
+          "nativeLayerDecode": 204.61349999999948,
+          "completedRgbCrop": 86.06500099999903,
+          "referenceComposition": 226.44008400000166,
+          "rgbDistance": 0,
+          "evidenceWrite": 2.8473750000011933,
+          "verification": 36.198334000000614,
+          "evidenceConstruction": 6828.819833999998,
+          "inputVerification": 45.58745699999781,
+          "referenceVerification": 5.48475000000326,
+          "rgbComparison": 72.8333749999947,
+          "checkpointRead": 2.7587080000012065,
+          "cleanup": 5.136624999999185
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 16,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 4,
+          "native-layer-decode": 4,
+          "completed-rgb-crop": 2,
+          "native-reference-composite": 2
+        },
+        "sourceFrameOutputs": 2,
+        "completedFrameOutputs": 2,
+        "completedRgbOutputs": 2,
+        "logicalReferenceCount": 11,
+        "referenceRgbOutputs": 10,
+        "reusedReferenceRgbCount": 1,
+        "preparedLayerOutputs": 4,
+        "decodedLayerOutputs": 4,
+        "decodedLayerBytes": 33177600,
+        "exactDistanceCalculations": 10,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 4998024,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:22:04.113Z",
+          "availableBytes": 18081251328
+        },
+        {
+          "at": "2026-09-29T17:22:19.032Z",
+          "availableBytes": 18076258304
+        },
+        {
+          "at": "2026-09-29T17:23:09.426Z",
+          "availableBytes": 18074845184
+        },
+        {
+          "at": "2026-09-29T17:23:32.706Z",
+          "availableBytes": 18072895488
+        },
+        {
+          "at": "2026-09-29T17:23:39.556Z",
+          "availableBytes": 18071744512
+        },
+        {
+          "at": "2026-09-29T17:23:39.830Z",
+          "availableBytes": 18068467712
+        },
+        {
+          "at": "2026-09-29T17:23:40.069Z",
+          "availableBytes": 18065657856
+        },
+        {
+          "at": "2026-09-29T17:23:40.250Z",
+          "availableBytes": 18065514496
+        },
+        {
+          "at": "2026-09-29T17:23:40.430Z",
+          "availableBytes": 18065391616
+        },
+        {
+          "at": "2026-09-29T17:23:40.617Z",
+          "availableBytes": 18065252352
+        },
+        {
+          "at": "2026-09-29T17:23:40.800Z",
+          "availableBytes": 18065121280
+        },
+        {
+          "at": "2026-09-29T17:23:40.851Z",
+          "availableBytes": 18056806400
+        },
+        {
+          "at": "2026-09-29T17:23:40.902Z",
+          "availableBytes": 18048495616
+        },
+        {
+          "at": "2026-09-29T17:23:40.953Z",
+          "availableBytes": 18040180736
+        },
+        {
+          "at": "2026-09-29T17:23:41.004Z",
+          "availableBytes": 18031865856
+        },
+        {
+          "at": "2026-09-29T17:23:41.007Z",
+          "availableBytes": 18031865856
+        },
+        {
+          "at": "2026-09-29T17:23:41.055Z",
+          "availableBytes": 18031013888
+        },
+        {
+          "at": "2026-09-29T17:23:41.270Z",
+          "availableBytes": 18030944256
+        },
+        {
+          "at": "2026-09-29T17:23:41.273Z",
+          "availableBytes": 18030944256
+        },
+        {
+          "at": "2026-09-29T17:23:41.313Z",
+          "availableBytes": 18030088192
+        },
+        {
+          "at": "2026-09-29T17:23:48.351Z",
+          "availableBytes": 18029867008
+        }
+      ],
+      "startedAt": "2026-09-29T17:22:04.112Z",
+      "endedAt": "2026-09-29T17:23:48.351Z"
+    },
+    {
+      "interval": {
+        "id": "representative-06",
+        "categories": [
+          "Yellow"
+        ],
+        "targets": [
+          "new-material-digest-20260926-v001-instruction-instruction-000164-readability-01"
+        ],
+        "range": {
+          "startFrame": 13272,
+          "endFrameExclusive": 13296,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 24,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 13272,
+            "endFrameExclusive": 13296
+          },
+          "displayFrameCount": 24,
+          "workingRange": {
+            "startFrame": 13272,
+            "endFrameExclusive": 13296
+          },
+          "workingFrameCount": 24,
+          "sourceRange": {
+            "startFrame": 13248,
+            "endFrameExclusive": 13272,
+            "startSample": 19474560,
+            "endSampleExclusive": 19509840
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 24,
+            "startSample": 0,
+            "endSampleExclusive": 35280
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 19509840,
+            "endSampleExclusive": 19545120,
+            "localSampleCount": 35280
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 24,
+                "startFrame": 0,
+                "endFrameExclusive": 24
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 13272,
+              "endFrameExclusive": 13296,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 24,
+              "sourceStartFrame": 13248,
+              "sourceEndFrameExclusive": 13272
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0004",
+            "baseStart": 13248,
+            "baseEnd": 13272,
+            "sourceStartFrame30": 166205,
+            "sourceEndFrame30": 166229,
+            "audioStartSample": 244321350,
+            "audioEndSample": 244356630
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000164-readability-01",
+            "startFrame": 13272,
+            "endFrameExclusive": 13296
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000164-readability-01",
+            "state": "static",
+            "elementSha256": "8b255212cddb64a4c058732f772e0d904295502783934cf4e4ee162bb5d56ed8"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001/completion.json",
+        "bytes": 66710,
+        "fileSha256": "96d5e42008e89a372cf1e273f2e2ec02306c0567104519c3b3b5de22a185b9b4"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001/completion.json",
+        "bytes": 24655,
+        "fileSha256": "183fddf2d4bc5f0bbf61286524d47fc65620697f76fbe148062a9b34da2b06fc"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001/completion.json",
+        "bytes": 24655,
+        "fileSha256": "183fddf2d4bc5f0bbf61286524d47fc65620697f76fbe148062a9b34da2b06fc"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001/native-qc.json",
+        "fileSha256": "6b6552c65bb97f09a6a0c860e59100eee22fa547703b111df373c90c08848fb7",
+        "bytes": 137870
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-independent-batch.log",
+        "bytes": 400,
+        "fileSha256": "ff6972205e8d4fe3444650fccccefd346d79d39ec3b04d9c23c6172d5bee3791"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001/normal.mp4",
+        "bytes": 698803,
+        "fileSha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001/repeat.mp4",
+        "bytes": 698803,
+        "fileSha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 1,
+      "status": "technical-passed",
+      "rawStatus": "technical-passed",
+      "background": {
+        "status": "passed",
+        "frames": 24,
+        "samples": 35280,
+        "videoSha256": "6e34e0ef29cb6edfd304f614ee179f2de0a9c128b9d0321e7c54e1264a5377ab",
+        "pcmSha256": "389e7817d506bcdf9aad8e2395ada897a6303fe2b07a0ac573c19fdb2114fb74",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 24,
+        "clockSha256": "b78bc3748dd9d2eb44fde1f3e4057ddaa816e6f2414542f0306a04631d352a94"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 35280,
+        "durationSeconds": 0.8,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 34816,
+          "dts": 34816,
+          "duration": 464
+        },
+        "packetCount": 36,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "18144aee1bf9270df367c92c9992604e0e0b0a3805b91838412a38aff3b45f5b",
+        "rawDecodedSampleCount": 35840,
+        "logicalDecodedSampleCount": 35280,
+        "decodedTailSampleCount": 560,
+        "rawDecodedPayloadSha256": "ea96c893c5fc30c0f577575509288162205c78fbe67aef8e0f040bae0947cf1b",
+        "logicalDecodedPayloadSha256": "bb1d2a6075b9384cf9295e69f75fa701650d37583bb2a92d28a7f4935750dc95",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 35280
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 4,
+      "candidates": 16,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 4,
+        "verifiedFileCount": 27,
+        "releasedSamples": 4,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 22.430499166999997,
+        "background": 8.175611415999999,
+        "compositeAndMediaChecks": [
+          2.3129551250000002,
+          2.2947489170000006
+        ],
+        "qcIncludingPreparationAndRetention": 38.12104854099999,
+        "qcPreparation": 2.3630423330000014,
+        "native": 15.837193999999997,
+        "stateEnvelopeCompletion": 0,
+        "finalIndependentReader": 31.952794666000003
+      },
+      "nativePerformance": {
+        "wallClockMs": 15837.193999999996,
+        "phasesMilliseconds": {
+          "inputBinding": 6888.649207999999,
+          "frameExtraction": 513.7178339999991,
+          "nativeLayerPreparation": 524.5556670000005,
+          "nativeLayerDecode": 188.84929199999897,
+          "completedRgbCrop": 151.8840829999972,
+          "referenceComposition": 386.5261240000036,
+          "rgbDistance": 0,
+          "evidenceWrite": 4.405334999999468,
+          "verification": 53.74725000000035,
+          "evidenceConstruction": 6912.359082999996,
+          "inputVerification": 81.22124999999141,
+          "referenceVerification": 5.280623999999079,
+          "rgbComparison": 74.91466699999728,
+          "checkpointRead": 4.612624999994296,
+          "cleanup": 6.705332999994425
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 18,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 3,
+          "native-layer-decode": 3,
+          "completed-rgb-crop": 4,
+          "native-reference-composite": 4
+        },
+        "sourceFrameOutputs": 4,
+        "completedFrameOutputs": 4,
+        "completedRgbOutputs": 4,
+        "logicalReferenceCount": 16,
+        "referenceRgbOutputs": 16,
+        "reusedReferenceRgbCount": 0,
+        "preparedLayerOutputs": 3,
+        "decodedLayerOutputs": 6,
+        "decodedLayerBytes": 49766400,
+        "exactDistanceCalculations": 16,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 1927680,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:15:48.514Z",
+          "availableBytes": 18527997952
+        },
+        {
+          "at": "2026-09-29T17:16:05.488Z",
+          "availableBytes": 18469183488
+        },
+        {
+          "at": "2026-09-29T17:16:08.449Z",
+          "availableBytes": 18466906112
+        },
+        {
+          "at": "2026-09-29T17:16:10.944Z",
+          "availableBytes": 18487222272
+        },
+        {
+          "at": "2026-09-29T17:16:11.038Z",
+          "availableBytes": 18487136256
+        },
+        {
+          "at": "2026-09-29T17:16:33.275Z",
+          "availableBytes": 18479136768
+        },
+        {
+          "at": "2026-09-29T17:16:40.200Z",
+          "availableBytes": 18477973504
+        },
+        {
+          "at": "2026-09-29T17:16:40.476Z",
+          "availableBytes": 18472185856
+        },
+        {
+          "at": "2026-09-29T17:16:40.713Z",
+          "availableBytes": 18466656256
+        },
+        {
+          "at": "2026-09-29T17:16:40.888Z",
+          "availableBytes": 18466570240
+        },
+        {
+          "at": "2026-09-29T17:16:41.064Z",
+          "availableBytes": 18466476032
+        },
+        {
+          "at": "2026-09-29T17:16:41.239Z",
+          "availableBytes": 18466385920
+        },
+        {
+          "at": "2026-09-29T17:16:41.300Z",
+          "availableBytes": 18449776640
+        },
+        {
+          "at": "2026-09-29T17:16:41.365Z",
+          "availableBytes": 18433167360
+        },
+        {
+          "at": "2026-09-29T17:16:41.427Z",
+          "availableBytes": 18416562176
+        },
+        {
+          "at": "2026-09-29T17:16:41.430Z",
+          "availableBytes": 18416562176
+        },
+        {
+          "at": "2026-09-29T17:16:41.470Z",
+          "availableBytes": 18416058368
+        },
+        {
+          "at": "2026-09-29T17:16:41.630Z",
+          "availableBytes": 18415996928
+        },
+        {
+          "at": "2026-09-29T17:16:41.633Z",
+          "availableBytes": 18415996928
+        },
+        {
+          "at": "2026-09-29T17:16:41.672Z",
+          "availableBytes": 18415489024
+        },
+        {
+          "at": "2026-09-29T17:16:41.809Z",
+          "availableBytes": 18415423488
+        },
+        {
+          "at": "2026-09-29T17:16:41.811Z",
+          "availableBytes": 18415423488
+        },
+        {
+          "at": "2026-09-29T17:16:41.849Z",
+          "availableBytes": 18414915584
+        },
+        {
+          "at": "2026-09-29T17:16:41.984Z",
+          "availableBytes": 18414854144
+        },
+        {
+          "at": "2026-09-29T17:16:41.986Z",
+          "availableBytes": 18414854144
+        },
+        {
+          "at": "2026-09-29T17:16:42.024Z",
+          "availableBytes": 18414350336
+        },
+        {
+          "at": "2026-09-29T17:16:49.159Z",
+          "availableBytes": 18414325760
+        }
+      ],
+      "startedAt": "2026-09-29T17:15:48.514Z",
+      "endedAt": "2026-09-29T17:16:49.159Z"
+    },
+    {
+      "interval": {
+        "id": "representative-07",
+        "categories": [
+          "LightSkyBlue"
+        ],
+        "targets": [
+          "new-material-digest-20260926-v001-instruction-instruction-000197-readability-02"
+        ],
+        "range": {
+          "startFrame": 17124,
+          "endFrameExclusive": 17245,
+          "fullFrameCount": 17613
+        },
+        "frameCount": 121,
+        "recipe": {
+          "schemaVersion": "presentation-orchestration-background-range-v001",
+          "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+          "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+          "fullDisplayFrameCount": 17613,
+          "range": {
+            "startFrame": 17124,
+            "endFrameExclusive": 17245
+          },
+          "displayFrameCount": 121,
+          "workingRange": {
+            "startFrame": 17124,
+            "endFrameExclusive": 17245
+          },
+          "workingFrameCount": 121,
+          "sourceRange": {
+            "startFrame": 17100,
+            "endFrameExclusive": 17221,
+            "startSample": 25137000,
+            "endSampleExclusive": 25314870
+          },
+          "trimRange": {
+            "startFrame": 0,
+            "endFrameExclusive": 121,
+            "startSample": 0,
+            "endSampleExclusive": 177870
+          },
+          "playbackRange": {
+            "sampleRate": 44100,
+            "startSample": 25172280,
+            "endSampleExclusive": 25350150,
+            "localSampleCount": 177870
+          },
+          "presentationTimeline": {
+            "spans": [
+              {
+                "kind": "base",
+                "baseStartFrame": 0,
+                "baseEndFrame": 121,
+                "startFrame": 0,
+                "endFrameExclusive": 121
+              }
+            ]
+          },
+          "softWindows": [],
+          "parts": [
+            {
+              "kind": "base",
+              "startFrame": 17124,
+              "endFrameExclusive": 17245,
+              "localStartFrame": 0,
+              "localEndFrameExclusive": 121,
+              "sourceStartFrame": 17100,
+              "sourceEndFrameExclusive": 17221
+            }
+          ]
+        },
+        "sourceParts": [
+          {
+            "segmentId": "segment-0004",
+            "baseStart": 17100,
+            "baseEnd": 17221,
+            "sourceStartFrame30": 170057,
+            "sourceEndFrame30": 170178,
+            "audioStartSample": 249983790,
+            "audioEndSample": 250161660
+          }
+        ],
+        "captions": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000197-readability-02",
+            "startFrame": 17124,
+            "endFrameExclusive": 17245
+          }
+        ],
+        "states": [
+          {
+            "captionId": "new-material-digest-20260926-v001-instruction-instruction-000197-readability-02",
+            "state": "static",
+            "elementSha256": "eafde3b0de70a49d165eac89cb2c8769b8c96eec29b87c2e910b53bf85fcfd9a"
+          }
+        ]
+      },
+      "mediaReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001/completion.json",
+        "bytes": 74367,
+        "fileSha256": "20c58bcc96a0dadf58037b7b89a6b9d365717fc4a58d405899234bd33c384403"
+      },
+      "rawQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001/completion.json",
+        "bytes": 23641,
+        "fileSha256": "a917749fd1248eab168373c1484d7dc45cffd7382b82e51f8745598cf0d04e46"
+      },
+      "finalQcReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001/completion.json",
+        "bytes": 23641,
+        "fileSha256": "a917749fd1248eab168373c1484d7dc45cffd7382b82e51f8745598cf0d04e46"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001/native-qc.json",
+        "fileSha256": "3746095f32e8c3b27369119f5c07fdb9e0522bafe84a547caa173c7c158a768b",
+        "bytes": 120223
+      },
+      "independentReceipt": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-independent-batch.log",
+        "bytes": 394,
+        "fileSha256": "1bc7b382b41ad3848478df65d06a8e13ee35230d59325e8e0f5ede87b55ab935"
+      },
+      "video": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001/normal.mp4",
+        "bytes": 2556550,
+        "fileSha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc"
+      },
+      "repeat": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001/repeat.mp4",
+        "bytes": 2556550,
+        "fileSha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc"
+      },
+      "allMp4BytesEqual": true,
+      "alphaStates": 1,
+      "status": "technical-passed",
+      "rawStatus": "technical-passed",
+      "background": {
+        "status": "passed",
+        "frames": 121,
+        "samples": 177870,
+        "videoSha256": "c7a09df3680d2db9734daba5ddb12003ef99e0af939e8929ca2829ce2cd70f3d",
+        "pcmSha256": "d5abe7c487afb810061bb9635f01be8d60a67d89b51436f338de866712c00d86",
+        "method": "every local YUV and PCM byte; retained source frames and saved integer connection arithmetic"
+      },
+      "clock": {
+        "frameCount": 121,
+        "clockSha256": "807d55adab91368960c7a346d54eacfdd0d6097a6cc44b6d73831ee87f85e7b2"
+      },
+      "audio": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 177870,
+        "durationSeconds": 4.033333333333333,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 177152,
+          "dts": 177152,
+          "duration": 718
+        },
+        "packetCount": 175,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "153ac94ee662e34ab7531c766e01528a967b3d0401ed46a41090d49b391b6f0d",
+        "rawDecodedSampleCount": 178176,
+        "logicalDecodedSampleCount": 177870,
+        "decodedTailSampleCount": 306,
+        "rawDecodedPayloadSha256": "e2d7c1e1e3022b9dc9fe562f9cf52dfa5eddb67e4b91a78e7c78714e7c04c759",
+        "logicalDecodedPayloadSha256": "061340304cf07466971743e665569b4405861e0a56738573bb55fa140188f397",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 177870
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "samples": 3,
+      "candidates": 12,
+      "violations": [],
+      "retained": {
+        "status": "passed",
+        "samples": 3,
+        "verifiedFileCount": 24,
+        "releasedSamples": 3,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": {
+        "mediaIncludingPreparationAndVerification": 27.291171334,
+        "background": 11.598135124999999,
+        "compositeAndMediaChecks": [
+          3.4275189580000007,
+          3.4207586249999986
+        ],
+        "qcIncludingPreparationAndRetention": 38.625967792,
+        "qcPreparation": 2.3890565419999983,
+        "native": 16.180270209,
+        "stateEnvelopeCompletion": 0,
+        "finalIndependentReader": 35.538851667
+      },
+      "nativePerformance": {
+        "wallClockMs": 16180.270208999998,
+        "phasesMilliseconds": {
+          "inputBinding": 6971.759083000001,
+          "frameExtraction": 825.2642919999998,
+          "nativeLayerPreparation": 538.6114589999997,
+          "nativeLayerDecode": 189.48920799999905,
+          "completedRgbCrop": 121.28216599999723,
+          "referenceComposition": 294.362500999996,
+          "rgbDistance": 0,
+          "evidenceWrite": 3.477543000004516,
+          "verification": 81.84104200000002,
+          "evidenceConstruction": 6942.984499999999,
+          "inputVerification": 67.30512599999929,
+          "referenceVerification": 5.625584000001254,
+          "rgbComparison": 84.92804199999591,
+          "checkpointRead": 3.5115010000008624,
+          "cleanup": 6.808708000000479
+        },
+        "phaseMeaning": "disjoint measured operations; total also includes tool versions and setup",
+        "childProcessCount": 16,
+        "childProcessesByPurpose": {
+          "tool-version": 2,
+          "source-frames-extract": 1,
+          "completed-frames-extract": 1,
+          "native-layer-prepare": 3,
+          "native-layer-decode": 3,
+          "completed-rgb-crop": 3,
+          "native-reference-composite": 3
+        },
+        "sourceFrameOutputs": 3,
+        "completedFrameOutputs": 3,
+        "completedRgbOutputs": 3,
+        "logicalReferenceCount": 12,
+        "referenceRgbOutputs": 12,
+        "reusedReferenceRgbCount": 0,
+        "preparedLayerOutputs": 3,
+        "decodedLayerOutputs": 6,
+        "decodedLayerBytes": 49766400,
+        "exactDistanceCalculations": 12,
+        "reusedExactDistances": 0,
+        "peakReferenceBytes": 3038592,
+        "retainedReferenceBytes": 0,
+        "frameCountMeaning": "verified selected output frames; internal decoder work is not inferred"
+      },
+      "spaces": [
+        {
+          "at": "2026-09-29T17:17:21.270Z",
+          "availableBytes": 18414186496
+        },
+        {
+          "at": "2026-09-29T17:17:40.926Z",
+          "availableBytes": 18154938368
+        },
+        {
+          "at": "2026-09-29T17:17:44.947Z",
+          "availableBytes": 18150326272
+        },
+        {
+          "at": "2026-09-29T17:17:48.560Z",
+          "availableBytes": 18168295424
+        },
+        {
+          "at": "2026-09-29T17:17:48.648Z",
+          "availableBytes": 18168205312
+        },
+        {
+          "at": "2026-09-29T17:18:11.050Z",
+          "availableBytes": 18165088256
+        },
+        {
+          "at": "2026-09-29T17:18:18.062Z",
+          "availableBytes": 18165141504
+        },
+        {
+          "at": "2026-09-29T17:18:18.577Z",
+          "availableBytes": 18160316416
+        },
+        {
+          "at": "2026-09-29T17:18:18.887Z",
+          "availableBytes": 18155585536
+        },
+        {
+          "at": "2026-09-29T17:18:19.065Z",
+          "availableBytes": 18155425792
+        },
+        {
+          "at": "2026-09-29T17:18:19.244Z",
+          "availableBytes": 18155282432
+        },
+        {
+          "at": "2026-09-29T17:18:19.426Z",
+          "availableBytes": 18155139072
+        },
+        {
+          "at": "2026-09-29T17:18:19.489Z",
+          "availableBytes": 18138533888
+        },
+        {
+          "at": "2026-09-29T17:18:19.552Z",
+          "availableBytes": 18121920512
+        },
+        {
+          "at": "2026-09-29T17:18:19.615Z",
+          "availableBytes": 18105307136
+        },
+        {
+          "at": "2026-09-29T17:18:19.618Z",
+          "availableBytes": 18105307136
+        },
+        {
+          "at": "2026-09-29T17:18:19.660Z",
+          "availableBytes": 18104520704
+        },
+        {
+          "at": "2026-09-29T17:18:19.834Z",
+          "availableBytes": 18104455168
+        },
+        {
+          "at": "2026-09-29T17:18:19.836Z",
+          "availableBytes": 18104455168
+        },
+        {
+          "at": "2026-09-29T17:18:19.877Z",
+          "availableBytes": 18103668736
+        },
+        {
+          "at": "2026-09-29T17:18:20.018Z",
+          "availableBytes": 18103607296
+        },
+        {
+          "at": "2026-09-29T17:18:20.020Z",
+          "availableBytes": 18103607296
+        },
+        {
+          "at": "2026-09-29T17:18:20.062Z",
+          "availableBytes": 18102824960
+        },
+        {
+          "at": "2026-09-29T17:18:27.273Z",
+          "availableBytes": 18102714368
+        }
+      ],
+      "startedAt": "2026-09-29T17:17:21.269Z",
+      "endedAt": "2026-09-29T17:18:27.274Z"
+    }
+  ],
+  "continuations": {
+    "bounceStateEnvelope": {
+      "schemaVersion": "representative-state-inspection-completion-v001",
+      "intervalId": "representative-03",
+      "status": "technical-passed",
+      "rawRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-qc-001/completion.json",
+        "bytes": 27951,
+        "fileSha256": "71745257375eea3c22a5269fb61fb91f8284b2f1ec15a90a1babfa970eed6a3d"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-state-completion-001/native-qc.json",
+        "fileSha256": "7c69688cb7c13b2202a35e1952215e906897943786c56b41d76081d9a5342a51",
+        "bytes": 519727
+      },
+      "implementation": {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-representative-state-inspections.mjs",
+        "bytes": 7055,
+        "fileSha256": "1ed032edb0239235ab1f6d06c3177a8ffab0b33aeb2533f17e8d33a3c161aa8f"
+      },
+      "violations": [],
+      "samples": 13,
+      "retained": {
+        "status": "passed",
+        "samples": 13,
+        "verifiedFileCount": 75,
+        "releasedSamples": 13,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": 22.377171333,
+      "outlineChoice": null,
+      "mediaRerendered": false,
+      "comparisonRgbRegenerated": false,
+      "repair": "renderer finite-state inspection envelope from existing SHA-bound preparation records; all comparisons unchanged"
+    },
+    "shakeStateEnvelope": {
+      "schemaVersion": "representative-state-inspection-completion-v001",
+      "intervalId": "representative-04",
+      "status": "technical-passed",
+      "rawRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-qc-001/completion.json",
+        "bytes": 32858,
+        "fileSha256": "959713f81c49349607468b66f810f05e2b2cfbd417d5275ef9153c6d5abe80c1"
+      },
+      "nativeRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-state-completion-001/native-qc.json",
+        "fileSha256": "f5fb899b7dd12a409b23a9dac659e966b1250a16c995450a5cc98b8bd02118a8",
+        "bytes": 701917
+      },
+      "implementation": {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-representative-state-inspections.mjs",
+        "bytes": 7055,
+        "fileSha256": "1ed032edb0239235ab1f6d06c3177a8ffab0b33aeb2533f17e8d33a3c161aa8f"
+      },
+      "violations": [],
+      "samples": 17,
+      "retained": {
+        "status": "passed",
+        "samples": 17,
+        "verifiedFileCount": 92,
+        "releasedSamples": 17,
+        "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+      },
+      "seconds": 20.642452042,
+      "outlineChoice": null,
+      "mediaRerendered": false,
+      "comparisonRgbRegenerated": false,
+      "repair": "renderer finite-state inspection envelope from existing SHA-bound preparation records; all comparisons unchanged"
+    },
+    "blackClock": {
+      "schemaVersion": "representative-background-clock-resume-v001",
+      "inputRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-001/input.json",
+        "bytes": 49953,
+        "fileSha256": "d00cb6a402f329f1b03471b5fb9f1f20de4a8968d4bdbb6283cd9cabda22b526"
+      },
+      "failureRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-001/failure.json",
+        "bytes": 1022,
+        "fileSha256": "4e708e63b7015222baa28389ba108694ec0fc9210ef971e1da264d26015fa192"
+      },
+      "implementation": {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-representative-clock-resume.mjs",
+        "bytes": 8818,
+        "fileSha256": "6dc5962ecf2444ca08c036d4c0f0361465dca18d2a6b1ba4c18a8ba33c6ba990"
+      },
+      "original": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-001/background/background.nut",
+        "bytes": 1378948,
+        "fileSha256": "00246f2a5c61b1c97efc8101c775624fcbc1f64b2bb576e4419e8465fc811216"
+      },
+      "normalized": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/background.nut",
+        "bytes": 1378944,
+        "fileSha256": "0e9e822807c761871bcff11f644ef6114d2ddf6611b9756fe3fbca28ed9c5362"
+      },
+      "command": [
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-001/background/background.nut",
+        "-map",
+        "0:v:0",
+        "-map",
+        "0:a:0",
+        "-vf",
+        "settb=expr=1/30,setpts=N",
+        "-fps_mode",
+        "passthrough",
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "copy",
+        "-f",
+        "nut",
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/background.nut"
+      ],
+      "oldClock": {
+        "frames": [
+          {
+            "pts": 0
+          },
+          {
+            "pts": 1
+          },
+          {
+            "pts": 2048
+          },
+          {
+            "pts": 4096
+          },
+          {
+            "pts": 6144
+          },
+          {
+            "pts": 8192
+          },
+          {
+            "pts": 10240
+          },
+          {
+            "pts": 12288
+          },
+          {
+            "pts": 14336
+          },
+          {
+            "pts": 16384
+          },
+          {
+            "pts": 18432
+          },
+          {
+            "pts": 20480
+          },
+          {
+            "pts": 22528
+          },
+          {
+            "pts": 24576
+          }
+        ],
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "time_base": "1/61440",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "encoder": "Lavc62.11.100 ffv1"
+            }
+          }
+        ]
+      },
+      "newClock": {
+        "frameCount": 14,
+        "clockSha256": "b7c1364c2e84fc7004d4521ca85db2db308c0850822e3003f6670ebce4a9ede9"
+      }
+    },
+    "blackClockIndependent": {
+      "status": "media-verified-native-qc-pending",
+      "intervalId": "representative-05",
+      "frames": 14,
+      "clock": "every frame exactly n/30",
+      "pixels": "same original ordered YUV",
+      "audio": "same PCM and copied AAC"
+    }
+  },
+  "continuationCommands": [
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-state-inspections.mjs",
+      "finish",
+      "<representative-03/04-qc-001/completion.json>",
+      "<unused-state-completion-directory>"
+    ],
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-state-inspections.mjs",
+      "read",
+      "<representative-03/04-state-completion-001/completion.json>"
+    ],
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-clock-resume.mjs",
+      "run",
+      "<representative-05-media-001>",
+      "<unused-resume-directory>"
+    ],
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-clock-resume.mjs",
+      "read",
+      "<representative-05-media-002/completion.json>"
+    ],
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "run",
+      "<representative-05-media-002/completion.json>",
+      "<unused-qc-directory>"
+    ],
+    [
+      "node",
+      "tools/digest-quality/original-resolution-representative-qc.mjs",
+      "read",
+      "<representative-05-qc-001/completion.json>"
+    ]
+  ]
+}
