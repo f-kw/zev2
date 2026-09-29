@@ -1,0 +1,33 @@
+{
+  "status": "input-contract-mismatch-reproduced",
+  "evidenceRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-palette-20260929-v001/drawing-evidence.json",
+    "bytes": 829,
+    "fileSha256": "072f3018a64b143ed9ee5a5f474364c5074d5af049e31468d77175797f3e564a"
+  },
+  "viewSchema": "caption-palette-drawing-view-v001",
+  "renderRange": {
+    "startFrame": 9708,
+    "endFrameExclusive": 9918,
+    "fullFrameCount": 17613
+  },
+  "captionCount": 6,
+  "attempts": [
+    {
+      "name": "native-alternatives",
+      "rejected": true,
+      "message": "ORCHESTRATION_INVALID: drawing view must be derived from current saved state"
+    },
+    {
+      "name": "native-evidence-export",
+      "rejected": true,
+      "message": "ORCHESTRATION_INVALID: drawing view must be derived from current saved state"
+    },
+    {
+      "name": "native-evidence-restore",
+      "rejected": true,
+      "message": "ORCHESTRATION_INVALID: drawing proof fields"
+    }
+  ],
+  "qcExecuted": false
+}
