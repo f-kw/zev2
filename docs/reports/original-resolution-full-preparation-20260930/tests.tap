@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: full preparation reconstructs all saved clocks and finite states, never claims completed media
+ok 1 - full preparation reconstructs all saved clocks and finite states, never claims completed media
+  ---
+  duration_ms: 49.955416
+  ...
+# Subtest: different input, text, time, color, outline and state ordering cannot replace saved preparation
+ok 2 - different input, text, time, color, outline and state ordering cannot replace saved preparation
+  ---
+  duration_ms: 1783.144208
+  ...
+# Subtest: missing, duplicate, substituted PNG and incomplete-as-passed are rejected
+ok 3 - missing, duplicate, substituted PNG and incomplete-as-passed are rejected
+  ---
+  duration_ms: 117.691917
+  ...
+# Subtest: existing geometry validator rejects absent per-line pixels and missing finite motion state
+ok 4 - existing geometry validator rejects absent per-line pixels and missing finite motion state
+  ---
+  duration_ms: 110.835792
+  ...
+# Subtest: byte-tampered or absent saved PNG is rejected by the reader file verifier
+ok 5 - byte-tampered or absent saved PNG is rejected by the reader file verifier
+  ---
+  duration_ms: 5.3005
+  ...
+# Subtest: black-separator PNGs are now bound to distinct independent drawing files
+ok 6 - black-separator PNGs are now bound to distinct independent drawing files
+  ---
+  duration_ms: 0.229083
+  ...
+# Subtest: previous rendering, local QC, streaming, store and strict readers remain byte unchanged
+ok 7 - previous rendering, local QC, streaming, store and strict readers remain byte unchanged
+  ---
+  duration_ms: 68.838333
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10130.215625
