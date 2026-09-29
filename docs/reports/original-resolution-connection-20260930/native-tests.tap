@@ -1,0 +1,25 @@
+TAP version 13
+# Subtest: actual native evidence rejects missing candidate, sample and drawing state
+ok 1 - actual native evidence rejects missing candidate, sample and drawing state
+  ---
+  duration_ms: 72508.315167
+  ...
+# Subtest: incomplete, altered, missing and other saved inputs are rejected without touching originals
+ok 2 - incomplete, altered, missing and other saved inputs are rejected without touching originals
+  ---
+  duration_ms: 21814.97825
+  ...
+# Subtest: missing, duplicate and substituted pixels retain the old strict rejection
+ok 3 - missing, duplicate and substituted pixels retain the old strict rejection
+  ---
+  duration_ms: 0.832208
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 94425.663084

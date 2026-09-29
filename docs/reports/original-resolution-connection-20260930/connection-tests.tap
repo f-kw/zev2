@@ -1,0 +1,25 @@
+TAP version 13
+# Subtest: strict separate-process restore/export and common A baseline retain the saved source
+ok 1 - strict separate-process restore/export and common A baseline retain the saved source
+  ---
+  duration_ms: 14080.830417
+  ...
+# Subtest: unknown version, changed binding, missing input and forged baseline cannot become a view
+ok 2 - unknown version, changed binding, missing input and forged baseline cannot become a view
+  ---
+  duration_ms: 14384.848917
+  ...
+# Subtest: numerical native processing and all old entry files are byte unchanged
+ok 3 - numerical native processing and all old entry files are byte unchanged
+  ---
+  duration_ms: 47.2905
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 28611.218959

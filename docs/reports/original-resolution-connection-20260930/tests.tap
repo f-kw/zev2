@@ -1,0 +1,25 @@
+TAP version 13
+# Subtest: display clock removes saved connection shift and retains global-even source frames and exact samples
+ok 1 - display clock removes saved connection shift and retains global-even source frames and exact samples
+  ---
+  duration_ms: 35.087666
+  ...
+# Subtest: wrong input, changed saved caption clock, and changed source mapping are rejected
+ok 2 - wrong input, changed saved caption clock, and changed source mapping are rejected
+  ---
+  duration_ms: 87.101417
+  ...
+# Subtest: missing completion does not become verified evidence
+ok 3 - missing completion does not become verified evidence
+  ---
+  duration_ms: 2.609708
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 214.2275
