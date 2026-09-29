@@ -1,0 +1,694 @@
+{
+  "schemaVersion": "caption-readability-full-candidate-recovery-record-v001",
+  "session": "Codex2",
+  "epic": "7A 字幕可読性・分割",
+  "recordedAt": "2026-09-29T01:06:52.309Z",
+  "status": "technical-verification-passed",
+  "technicalCompletion": true,
+  "humanQuality": "not-evaluated",
+  "productionDefaultChanged": false,
+  "scope": "既存の軽量記録・点別ログから実走を集計し、保存後の別process独立再読結果と復元来歴を追加。全媒体・巨大QC graphを集計用に再検査していない。",
+  "evidenceKinds": {
+    "measured": "実行processの保存値",
+    "calculated": "保存された点別値の和・最大・時刻差。境界を併記",
+    "notMeasured": "全process同時RSS・物理I/O・連続的な空き容量最小・全run同時保持ピークは未計測"
+  },
+  "sourceRefs": {
+    "executionResult": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/execution-result.json",
+      "bytes": 2550,
+      "fileSha256": "a8d9a7951ad9c8b3c5750309b570687814081b18be5d42eb4a875a9d5f38253a"
+    },
+    "executionStart": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/execution-start.json",
+      "bytes": 690,
+      "fileSha256": "7c02843668ff2065499d1b90b12c4d4c3e7f0f1791b53f1696d9833d86a5d8e9"
+    },
+    "recoveryJob": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/job.json",
+      "bytes": 4694,
+      "fileSha256": "09c5eedb0b3ad567785384eb0e1a0204715ee3aeff57cbe860b2402ba4435fd7"
+    },
+    "originalJob": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/job.json",
+      "bytes": 60864,
+      "fileSha256": "cba979eab71910b0099dc824220cc9f7275f3e22792a5c50f408a9e8faf4cd99"
+    },
+    "progress": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/progress.jsonl",
+      "bytes": 194503567,
+      "fileSha256": "6cf1ae95fe70b1442f79d8535aa3953fbfdf4a386545dc602217fddd88226295"
+    },
+    "originalProgress": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/execution-progress.jsonl",
+      "bytes": 2281,
+      "fileSha256": "5fccdf1c8b04a249803d934fbee39a9490f4dbc89f3557d3ff85cd0af8064826"
+    },
+    "capacityStopReport": {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/full-run-capacity-stop-20260929.json",
+      "bytes": 11605,
+      "fileSha256": "93ff826481898c382a74e870d606d5796a75ea89b27e3861411f11688ac8efbb"
+    },
+    "recoveryPreflight": {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/native-recovery-preflight-20260929.json",
+      "bytes": 17431,
+      "fileSha256": "17bca2b35fb82dce633ed6aee756f342cd8c566c8cacf15f843b09f824a234c0"
+    },
+    "originalRawRelease": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/raw-release.json",
+      "bytes": 910,
+      "fileSha256": "d62034e931d09ac40d0fb816e50a0a1234a69636e4bca335f4120c4955a95529"
+    },
+    "old000103Decision": {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/new-material-digest-20260926/qc-decision-evidence.json",
+      "bytes": 2655,
+      "fileSha256": "abe606534416a979ae87b5feec2565e5b1198d964128d7c2a274032db0f6e856"
+    },
+    "independentReread": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/independent-reread.json",
+      "bytes": 501675,
+      "fileSha256": "d663a68210b5a111656049f47973640554311211d9f84e4514ecdb8b10d28021"
+    },
+    "independentMaterialization": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/independent-materialization.json",
+      "bytes": 47583960,
+      "fileSha256": "02cb76efc5076bf8058ee1e34fc504e8647d5ad5c8d63328e698e5a21816e70d"
+    },
+    "independentCapacity": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/independent-read-capacity.jsonl",
+      "bytes": 8388714,
+      "fileSha256": "761882a7c44a29c8abd3fa5869036c3f1f21ad92cac079ee9a4d76d9d113cb73"
+    }
+  },
+  "implementation": {
+    "branch": "main",
+    "recoveryCommit": "8109a621bb8b47b56d95f3323c528bdc310bb3bd",
+    "bodyAndReplayCommit": "f4af0913ebc6cdf09b90b663e9714bb1549d71e7",
+    "candidateVersion": "candidate-readability-v001",
+    "viewSha256": "7b8f47471c7fa404ba00547cc2abf074d068342b3fcd3a8cc309369f1df0c3d1",
+    "drawingRulesCanonicalSha256": "a14578768bcb5f4fe184c3fb5ba3ad9ecd2eb0647438ce1ccb7671796a2c22c6",
+    "drawingRuleFiles": 69,
+    "fixedCoreRefs": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_qc_streaming_v001.mjs",
+        "bytes": 29659,
+        "fileSha256": "b867758e127ff8be323241390ce3bebeee3a82e7f8510f0a9f59e81a6f6df643"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+        "bytes": 71166,
+        "fileSha256": "14554443e52f190186c66d29f1924ed4919a2483a1be8322791d6c1911b640e7"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_qc_evidence_store_v001.mjs",
+        "bytes": 8660,
+        "fileSha256": "4bfa73105f4d47e8327948b95c2edde0cbc1150c8be455167362da342ad3bd81"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_caption_contract_v002.mjs",
+        "bytes": 4613,
+        "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+      }
+    ],
+    "controllerRefs": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/caption-readability-native-recovery-run.mjs",
+        "bytes": 28699,
+        "fileSha256": "52e8c24496f93c98c42217fa9acc51c8ae7bc19ee1eb9722fbf6499f3d19d8e3"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_layer_recovery_v001.mjs",
+        "bytes": 27140,
+        "fileSha256": "9d7b542f4216ec060c6c33a9bdb4255be8ba94cfd7e2501d986fb6dad79f0283"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_resume_v001.mjs",
+        "bytes": 30578,
+        "fileSha256": "4b4702d5a1f1f0de8eee076652042a1da5b0f0b3cc6a1a4a35b220b5b3bb6f98"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_resume_integrity_v001.mjs",
+        "bytes": 34592,
+        "fileSha256": "46204a1259c61bb5218355728a59e72277801a70edc4c709ce16d597c81845fb"
+      }
+    ],
+    "toolRefs": {
+      "ffmpeg": {
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+        "path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "role": "tool-ffmpeg"
+      },
+      "imageMagick": {
+        "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29",
+        "path": "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick",
+        "role": "tool-imagemagick"
+      }
+    },
+    "meaning": "旧169点の元来歴を保持し、新360点との連続2区間を別schemaで最終検証。描画束縛69ファイルと4 QC core不変はpreflightおよびdriverの照合に依拠。"
+  },
+  "boundaries": {
+    "originalAttempt": {
+      "startedAt": "2026-09-28T15:39:40.082Z",
+      "endedAt": "2026-09-28T18:00:25.810Z",
+      "elapsedSeconds": 8445.823189416,
+      "status": "容量guardで中断し証拠保存",
+      "executed": "固定判断受入れ・候補字幕PNG準備・本体合成・全編再現・旧169点と次点の途中まで",
+      "finalQcCompleted": false
+    },
+    "recoveryAttempt": {
+      "startedAt": "2026-09-28T18:50:20.749Z",
+      "endedAt": "2026-09-28T23:24:22.860Z",
+      "elapsedSeconds": 16441.699055375,
+      "status": "passed",
+      "startBoundary": "保存jobと固定入力の読込みから旧169点の受入れへ",
+      "endBoundary": "新360点・最終QC・成果物領域へ固定保存・completion証拠保存後。独立再読は除外",
+      "bodyAndReplayReexecuted": false,
+      "sttAiAndExternalMedia": "保存結果再利用・新規実行なし",
+      "publicationMeaning": "既存ローカル成果物領域への固定。外部公開・tag・releaseではない"
+    },
+    "independentReread": {
+      "status": "passed",
+      "reportPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/independent-reread.json",
+      "processId": 95534,
+      "endedAt": "2026-09-29T01:04:51.912Z",
+      "elapsedSeconds": 6001.309436417,
+      "calculatedStartedAt": "2026-09-28T23:24:50.602Z",
+      "startTimeMeaning": "終了UTCと単調時計の経過秒から算定した開始時刻。独立した開始UTC観測ではない。",
+      "includedInRecoveryWallTime": false,
+      "regeneratedVideo": false,
+      "receiptVerification": {
+        "status": "passed",
+        "samples": 529,
+        "oldReceiptCount": 169,
+        "resumedReceiptCount": 360,
+        "readerCalls": 529,
+        "readerBypass": 0,
+        "verifiedFileCount": 512759,
+        "verifiedFileCountMeaning": "sum of unchanged per-sample reader checks; shared inputs repeat"
+      },
+      "outputVerification": {
+        "status": "passed",
+        "verifiedFileCount": 5534,
+        "rawFileCount": 1987,
+        "readerBypass": 0
+      },
+      "finalQcStatus": "passed",
+      "actualRawShaMismatches": 0,
+      "observedUniqueRawLayers": 1987,
+      "materializationMetrics": {
+        "currentMaterializedLogicalBytes": 0,
+        "decodeProcesses": 1363,
+        "decodeWallMilliseconds": 698251.4394240032,
+        "decoderInputLogicalBytes": 3251339858,
+        "ensureCalls": 1085,
+        "ensureWallMilliseconds": 2651908.5349699934,
+        "ioScope": "Logical commanded/input/output bytes; physical I/O and child RSS are not measured",
+        "peakMaterializedLogicalBytes": 3973017600,
+        "rawExistingVerified": 228006,
+        "rawGenerated": 26393,
+        "rawReleased": 26393,
+        "regeneratedLogicalBytes": 218914099200,
+        "releaseWallMilliseconds": 618611.5259669913,
+        "releasedLogicalBytes": 218914099200,
+        "verifiedLogicalReadBytes": 2635325982156
+      },
+      "childTimings": {
+        "native-layer-recovery-decode": {
+          "processCount": 1363,
+          "childMilliseconds": 693487.0046550157,
+          "evidenceWriteMilliseconds": 4313.01586299816
+        }
+      },
+      "allChildExitsPassed": true,
+      "retainedReferenceRgbRegenerated": false,
+      "note": "正式readerの入力・記録照合と最終QC再評価。整理済みの正常比較RGB全件やnative距離を新たに再計算した結果ではない。復元対象はmanifestに束縛した生描画層。",
+      "resources": {
+        "capacityObservations": 1363,
+        "minimumObservedAvailableBytes": 10361364480,
+        "capacityHardStops": 0,
+        "finishedDisk": {
+          "observedAt": "2026-09-29T01:06:52.309Z",
+          "availableBytes": 17505058816
+        },
+        "memory": "独立再読の最大RSSは未計測。復旧実走のNode親最大RSSとは区別する。",
+        "diskMeaning": "重いbatch前の実空き観測。連続最小ではなく、OSや同時作業の影響を含む。物理I/Oと全run同時ピークは未計測。"
+      }
+    },
+    "arithmetic": {
+      "kind": "calculated",
+      "twoAttemptWallSeconds": 24887.522244791,
+      "calendarStartToSavedEndSeconds": 27882.778,
+      "betweenAttemptsCalendarSeconds": 2994.939,
+      "note": "二attempt wallの和には中断後の証拠確認・修正・承認待ち・復旧準備を含まない。calendarには含む。一発完走や通常制作時間ではない。独立再読は除外。wallとUTC差には計時方式差がある。",
+      "attemptsAndIndependentRereadWallSeconds": 30888.831681207997,
+      "calendarOriginalStartToIndependentRereadEndSeconds": 33911.83,
+      "independentRereadAddedMeaning": "2実走と別process再読の実測wallの和。停止後の診断・修正・監査・準備・工程間待機は除外し、暦時間とは区別する。"
+    }
+  },
+  "fullNativeResult": {
+    "status": "passed",
+    "violationCount": 0,
+    "captionCount": 431,
+    "frameCount": 27949,
+    "sampleCount": 529,
+    "logicalReferenceCount": 511014,
+    "passedSampleCount": 529,
+    "unresolvedViolationCount": 0,
+    "countEvidence": "元job.expectedとdriverの全sample数・全references総数assertが成功した後、最終QC passedでexecution-resultを保存。巨大graphをこの記録作成時に再集計した値ではない。",
+    "reusedPrefix": {
+      "startSampleIndex": 0,
+      "endSampleIndexExclusive": 169,
+      "sampleCount": 169,
+      "logicalReferenceCount": 163159,
+      "logicalCountKind": "全511014から新360点の347855を差引いた算定",
+      "receiptRechecked": true,
+      "readerBypass": 0,
+      "referencesRecomposed": false,
+      "sourceInterruptionRef": {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/native-frame-qc/native-frame-qc-rkG58x/interrupted-native-qc.json",
+        "bytes": 506407141,
+        "fileSha256": "a919b85e354b4e40d70c3a22fa6448c9940f57d16c88798e4f9cbc23455dbe85"
+      },
+      "retention": "元の正常整理済みreceiptと実入力を正式readerで再照合"
+    },
+    "newSuffix": {
+      "startSampleIndex": 169,
+      "endSampleIndexExclusive": 529,
+      "sampleCount": 360,
+      "logicalReferenceCount": 347855,
+      "pointIndexesContiguous": true,
+      "visiblePassed": 360,
+      "retentionStates": [
+        "released-verified-pass"
+      ],
+      "oldPartial169Reused": false,
+      "note": "index169は旧途中物を使わず新directoryで最初から比較。旧928枚は別証拠として保持。"
+    },
+    "finalQcAndFixedSave": "passed。driverは統合判定と最終QCの両方をassertしてから保存先を固定。",
+    "finalValidator": "presentation-native-resume-integrity-qc-v001 / resume-integrity-v001",
+    "basis": "exact-replay-and-native-finite-state-v001"
+  },
+  "timing": {
+    "unit": "seconds",
+    "originalStages": {
+      "kind": "measured-existing-record",
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/full-run-capacity-stop-20260929.json",
+      "values": {
+        "preflightOutsideRun": 32.854066291,
+        "inputValidation": 6.676541625,
+        "preparationInclusive": 745.581028084,
+        "backgroundReuseAdmissionWithinPreparation": 25.867303125,
+        "captionImagesProgressInterval": 616.964,
+        "bodyComposition": 879.416316875,
+        "fullReplayComposition": 877.085376958,
+        "fullReplayInspectionInclusive": 902.9544225,
+        "startToNativeGate": 3333.9669045,
+        "nativeGateToHardStop": 5106.12,
+        "nativeToFirstSample": 470.302,
+        "completed169SamplesWallSum": 4619.665,
+        "incompleteSamplePartial": 15.863,
+        "stopToFailureEvidenceSaved": 5.736,
+        "readbackAfterStopOutsideRun": 25.078989625
+      },
+      "completed169PointPhases": {
+        "inputValidation": 663.341,
+        "completedRgbCrop": 9.625,
+        "referenceComposition": 2443.927,
+        "referenceValidation": 252.272,
+        "rgbComparison": 816.505,
+        "evidenceSave": 10.178,
+        "evidenceReadback": 21.177,
+        "normalReferenceRelease": 293.858
+      },
+      "note": "準備内の部分工程・本体前進捗区間・全編再現内の合成は入れ子。総wallへ足さない。"
+    },
+    "recoveryNative": {
+      "kind": "measured",
+      "wallSeconds": 15440.356086208,
+      "phases": {
+        "fixedInputAdmission": {
+          "meaning": "固定入力・中断証拠・再開境界の受入れ",
+          "seconds": 22.189559250000006
+        },
+        "savedFrameRead": {
+          "meaning": "保存済み背景・完成フレームの再読",
+          "seconds": 2.0084525409999987
+        },
+        "oldReceiptAdmission": {
+          "meaning": "旧169点の正式receipt再読。必要rawの復元と次点不要raw整理を含む",
+          "seconds": 1527.120278625
+        },
+        "rawMaterialization": {
+          "meaning": "新360点の検査前に必要rawを復元・照合",
+          "seconds": 1558.1878303510025
+        },
+        "resumedSamples": {
+          "meaning": "新360点の比較・保存・再読・正常比較RGB整理（内訳は別掲）",
+          "seconds": 10633.515173463002
+        },
+        "newReceiptRead": {
+          "meaning": "新360点の正式readerによる追加再読",
+          "seconds": 1043.2664526650105
+        },
+        "rawRelease": {
+          "meaning": "新360点の後に次点不要rawを整理",
+          "seconds": 293.41175237698855
+        },
+        "finalInputRead": {
+          "meaning": "最終入力・中断証拠・復旧来歴の再照合",
+          "seconds": 12.991026792000978
+        },
+        "finalOutputRead": {
+          "meaning": "旧169点＋新360点の保存出力再照合。必要raw復元・解放を含む",
+          "seconds": 338.82427358300055
+        }
+      },
+      "note": "native wallは結果の共有証拠書出し前に採取。フェーズ外に構造化・既存native semantic検証等が残る。旧169点受入れ・最終出力再読にraw処理を含む。raw全体内訳を別途足さない。"
+    },
+    "new360PointPhases": {
+      "kind": "calculated-sum-of-measured-points",
+      "pointWallSumSeconds": 10633.49414971302,
+      "phases": {
+        "inputVerification": {
+          "meaning": "比較入力照合",
+          "seconds": 1469.302855185002
+        },
+        "completedRgbCrop": {
+          "meaning": "完成側RGB切出し",
+          "seconds": 22.009000759982737
+        },
+        "evidenceWrite": {
+          "meaning": "点証拠保存",
+          "seconds": 22.544387281001313
+        },
+        "referenceComposition": {
+          "meaning": "比較RGB合成",
+          "seconds": 5622.088989540984
+        },
+        "referenceVerification": {
+          "meaning": "比較RGB出力照合",
+          "seconds": 705.8288051059646
+        },
+        "rgbComparison": {
+          "meaning": "実byte距離・等価クラス照合",
+          "seconds": 1769.3724187389994
+        },
+        "checkpointRead": {
+          "meaning": "点証拠の保存直後再読",
+          "seconds": 46.14394846103806
+        },
+        "cleanup": {
+          "meaning": "正常点の新規比較RGB整理",
+          "seconds": 710.6864124199918
+        }
+      },
+      "parentPhase": "recoveryNative.phases.resumedSamples",
+      "note": "新360点の内訳。外側の追加正式reader・点間raw復元と解放・旧169点照合は含まない。"
+    },
+    "finalizationAfterNativeEvent": {
+      "kind": "calculated-event-difference",
+      "from": "2026-09-28T23:08:32.533Z",
+      "to": "2026-09-28T23:24:22.860Z",
+      "seconds": 950.3174833330013,
+      "scope": "全編再現証拠読込み、統合検証、最終QC、共有証拠保存、音声時計再読、保護参照照合、動画SHA照合、固定保存、completion保存を含む",
+      "individualValidationAndWriteSeconds": null,
+      "completeResumeValidationCalls": 2,
+      "note": "約950秒の全区間をvalidator単独時間としない。別process独立再読は含まない。"
+    },
+    "nativeCompletionEvent": {
+      "observedAt": "2026-09-28T23:08:32.533Z",
+      "elapsedSeconds": 15491.381572041999
+    },
+    "finalSummaryObservation": {
+      "summaryEnd": "2026-09-28T23:24:22.860Z",
+      "finalDiskObservation": "2026-09-28T23:24:28.687Z",
+      "completeEvent": "2026-09-28T23:24:28.687Z",
+      "completeEventElapsedSeconds": 16447.526434208998,
+      "note": "endedAt/wall採取後に巨大証拠のSHA読取りとdisk確認を実施。completeイベントは約5.827秒後。記録済み実走wallを上書きしない。"
+    },
+    "originalRawReleaseOutsideRecovery": {
+      "before": "2026-09-28T18:49:27.306Z",
+      "after": "2026-09-28T18:49:48.050Z",
+      "calendarSeconds": 20.744,
+      "note": "復旧実走開始前。代表再生成証明・承認後の既存raw解放。"
+    }
+  },
+  "comparisonRgb": {
+    "unit": "logical bytes",
+    "kind": "calculated-from-measured-point-metrics",
+    "new360": {
+      "logicalCandidates": 347855,
+      "physicalOutputs": 343227,
+      "sharedLogicalCandidates": 4628,
+      "exactDistanceCalculations": 342660,
+      "distanceReuse": 0,
+      "cumulativeGeneratedBytes": 897194005092,
+      "cumulativeNormalReleasedBytes": 897194005092,
+      "retainedNormalComparisonBytes": 0,
+      "peakSinglePointComparisonBytes": 2498980176,
+      "receiptJsonBytes": 2650822523,
+      "compositionProcessCount": 10800,
+      "batchSize": 32
+    },
+    "old169": {
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/full-run-capacity-stop-20260929.json",
+      "cumulativeGeneratedAndNormalReleasedBytes": 420788006100,
+      "retainedNormalComparisonBytes": 0,
+      "peakSinglePointComparisonBytes": 2498980176,
+      "receiptJsonBytes": 1256157147
+    },
+    "all529Completed": {
+      "cumulativeGeneratedBytes": 1317982011192,
+      "peakSinglePointComparisonBytes": 2498980176,
+      "note": "二attemptの正常完了点のみ。ピークは点単位。raw・完成RGB・PNG・receipt・旧途中物を含む全runピークではない。"
+    },
+    "preservedOldIncomplete169": {
+      "comparisonRgbCount": 928,
+      "comparisonRgbBytes": 2425788288,
+      "notGeneratedCount": 21,
+      "notGeneratedBytes": 54893916,
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/full-run-capacity-stop-20260929.json",
+      "currentRestatPerformed": false,
+      "note": "旧中断記録の保持量。新360点の生成・整理量に算入しない。削除・上書きは行わない。"
+    },
+    "ioCountersNew360": {
+      "referenceReadBytes": 1795329048744,
+      "inputVerificationBytes": 1455539469325,
+      "rgbReadBytes": 922871287800,
+      "baselineReadBytes": 0,
+      "note": "論理読込みカウンタ。相互に含み得るため加算して物理I/Oとしない。baselineRead=0は旧画像との追加全byte比較をこの実走で行わなかった意味。"
+    }
+  },
+  "rawRecovery": {
+    "initialReleaseBeforeAttempt": {
+      "status": "raw-released",
+      "before": {
+        "observedAt": "2026-09-28T18:49:27.306Z",
+        "availableBytes": 9093115904
+      },
+      "after": {
+        "observedAt": "2026-09-28T18:49:48.050Z",
+        "availableBytes": 25574391808
+      },
+      "released": {
+        "releasedCount": 1987,
+        "releasedLogicalBytes": 16480972800
+      },
+      "manifestRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/raw-recovery-manifest.json",
+        "bytes": 11899013,
+        "fileSha256": "aa84a98806331131dddcd795a1201bb439dc1ada99a16423320c9e995731f769"
+      },
+      "proofRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/representative-proof.json",
+        "bytes": 162752,
+        "fileSha256": "9618261770d4aec4d60997c42fc4c9a63364c9ec8a1c991ebe9c49eb0d0096bf"
+      },
+      "oldArtifactsDeleted": 0,
+      "nativeReexecuted": false
+    },
+    "measuredDuringRecovery": {
+      "ensureCalls": 1085,
+      "rawExistingVerified": 228006,
+      "rawGenerated": 26393,
+      "rawReleased": 26393,
+      "regeneratedLogicalBytes": 218914099200,
+      "verifiedLogicalReadBytes": 2635325982156,
+      "decoderInputLogicalBytes": 3251339858,
+      "releasedLogicalBytes": 218914099200,
+      "currentMaterializedLogicalBytes": 0,
+      "peakMaterializedLogicalBytes": 3973017600,
+      "decodeProcesses": 1363,
+      "decodeWallMilliseconds": 652517.9894579707,
+      "ensureWallMilliseconds": 2404072.057414022,
+      "releaseWallMilliseconds": 572939.4505409966,
+      "ioScope": "Logical commanded/input/output bytes; physical I/O and child RSS are not measured"
+    },
+    "scope": "旧169点reader・新360点比較・最終保存出力照合を含む。同じrawの複数復元を累積計上。ピーク3973017600 bytesはrawのみ。比較RGBピークとは時刻が異なり得るため合算しない。",
+    "timeOverlap": "復元・再照合・解放の全体時間は各native phaseへ含まれる。decodeはensureに含まれる。native wallへ追加しない。",
+    "finalDuringExecutionMaterializedRawBytes": 0,
+    "independentRereadMaterializationIncluded": false
+  },
+  "resources": {
+    "parentMemory": {
+      "kind": "measured",
+      "maximumRssBytes": 11323785216,
+      "scope": "Node parent only",
+      "includes": "この復旧processの入力読込み・native・最終統合・証拠保存",
+      "childToolRssBytes": null,
+      "processTreePeakBytes": null,
+      "note": "Node親だけ。子toolや別process再読の最大値を合算しない。"
+    },
+    "disk": {
+      "kind": "minimum-of-recorded-observations",
+      "recoveryStart": {
+        "observedAt": "2026-09-28T18:50:52.700Z",
+        "availableBytes": 25202536448
+      },
+      "minDuringProgress": {
+        "phase": "native-reference-composite",
+        "sampleIndex": 528,
+        "frame": 27915,
+        "batchIndex": 29,
+        "observedAt": "2026-09-28T23:01:58.667Z",
+        "availableBytes": 14124167168
+      },
+      "minIncludingFinalSummary": {
+        "phase": "execution-result",
+        "observedAt": "2026-09-28T23:24:28.687Z",
+        "availableBytes": 14122434560
+      },
+      "afterSaved": {
+        "observedAt": "2026-09-28T23:24:28.687Z",
+        "availableBytes": 14122434560
+      },
+      "hardFloorBytes": 10000000000,
+      "continuousMinimumBytes": null,
+      "scope": "同じfilesystem全体の空き。新run専有量や同時保持ピークへ変換しない。境界観測間の最小は未計測。"
+    },
+    "evidenceStorage": {
+      "drawResult": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/draw-result.json",
+        "bytes": 1606021836,
+        "fileSha256": "37fe2d97c7f4afb4e5b7fa0920d95008ea092c40957856c17c14afef347d2898"
+      },
+      "completion": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/completion.json",
+        "bytes": 1612895645,
+        "fileSha256": "8b27555e44eac3d94e4ed47157b85935fc9bcc2bdd69cad1a4342058fed64961"
+      },
+      "note": "今回生成した共有DAGの保存bytes。全run容量ではない。"
+    },
+    "physicalIoBytes": null,
+    "totalNewRunPeakLogicalBytes": null,
+    "totalNewRunPeakAllocatedBytes": null,
+    "noSpeedupClaim": "復旧込み実測を旧制作17時間や14.7通常経路へ直接割って高速化率を出さない。"
+  },
+  "caption000103": {
+    "sourceRef": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/native-recovery-v001/references/sample-191/sample-proof.json",
+      "fileSha256": "c30b01d3635bbebef2b9e8dabe1ecc1dac08dcdc35a1365ae4128ec8cc6d16b8",
+      "bytes": 7370641
+    },
+    "readback": "単一点の共有証拠をexpectedFileSha付き正式readerで再読。画像再生成・媒体再hashなし。",
+    "candidate": {
+      "sampleIndex": 191,
+      "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000103",
+      "frame": 7801,
+      "logicalReferences": 967,
+      "rgbClasses": 954,
+      "physicalRgbOutputs": 955,
+      "visible": true,
+      "expected": {
+        "id": "class-0",
+        "absoluteRgbDifference": 2125105,
+        "referenceIds": [
+          "expected",
+          "alternate-normal",
+          "replace-caption-128-native-static"
+        ],
+        "rgbSha256": "a112bc54551995339981b46d865a292c6c40d531619e7c586b51bbf638467c12"
+      },
+      "nearestOtherClass": {
+        "id": "class-316",
+        "absoluteRgbDifference": 2758939,
+        "referenceIds": [
+          "add-caption-128-native-static"
+        ]
+      },
+      "omitted": {
+        "id": "class-1",
+        "absoluteRgbDifference": 61754390
+      },
+      "crop": {
+        "left": 16,
+        "top": 542,
+        "right": 1902,
+        "bottom": 1004,
+        "width": 1886,
+        "height": 462
+      },
+      "completedRgbSha256": "bfd496aadecc5874585dba47f9f155628c313506cae4c8d160efba15ce332e22",
+      "expectedOverlaySha256": "17492e34808866b2dde95159d6f5cb85bee4f5e988560fa9988a83d3814020af",
+      "videoSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+    },
+    "protectedOriginalDraft": {
+      "nativeStatus": "failed",
+      "frame": 7801,
+      "expectedRgbDifference": 1345125,
+      "nearestCounterfactualRgbDifference": 1344947,
+      "videoSha256": "11611ff2071aa21325eb672094b90f5c495b77af311aa409a460c69e7cb16b8a",
+      "nativePassedSamples": 423,
+      "nativeTotalSamples": 424,
+      "sourceRef": {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/new-material-digest-20260926/qc-decision-evidence.json",
+        "bytes": 2655,
+        "fileSha256": "abe606534416a979ae87b5feec2565e5b1198d964128d7c2a274032db0f6e856"
+      },
+      "independentCodecDiagnosis": "元初稿の独立解決は過去記録として保持。今回candidate合格へ流用しない。"
+    },
+    "meaning": "同じ字幕ID/frameでも候補版の字形・配置・recipe・MP4は別。新実測による合格であり、旧初稿の不合格値を訂正・合格化した結果ではない。"
+  },
+  "artifacts": {
+    "candidateVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-full-20260929-v001/presentation-rendered-v002.mp4",
+      "bytes": 675155103,
+      "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+    },
+    "bodyAndReplayShaEqual": true,
+    "bodyAndReplayEvidenceSource": "/Users/kawafmm/workspace/zev2/docs/reports/caption-readability-splitting-20260928/full-run-capacity-stop-20260929.json",
+    "recoveryCompletion": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/completion.json",
+      "bytes": 1612895645,
+      "fileSha256": "8b27555e44eac3d94e4ed47157b85935fc9bcc2bdd69cad1a4342058fed64961"
+    },
+    "recoveryDrawResult": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/draw-result.json",
+      "bytes": 1606021836,
+      "fileSha256": "37fe2d97c7f4afb4e5b7fa0920d95008ea092c40957856c17c14afef347d2898"
+    },
+    "recoveryManifest": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-native-recovery-20260929-v001/raw-recovery-manifest.json",
+      "bytes": 11899013,
+      "fileSha256": "aa84a98806331131dddcd795a1201bb439dc1ada99a16423320c9e995731f769"
+    },
+    "nativeResultPath": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/native-recovery-v001/native-resume-result.json",
+    "oldReferencesRoot": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/scratch/native-frame-qc/native-frame-qc-rkG58x/references",
+    "newReferencesRoot": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/.stage4-editing-caption-readability-full-20260929-v001.presentation-renderer-v002-work-fDcUGt/native-recovery-v001/references",
+    "originalPathsRetainedInProcessEvidence": true,
+    "publicationBinding": "元の実行args/path/SHAを変更せず移動先を束縛し、公開後の別processから全529点・保持入力・最終判定を検証して合格。"
+  },
+  "pending": [
+    "最終統合後の人間品質確認（機械合格では代替しない）",
+    "後続主線は技術報告とNEXT_REQUEST送信後、相談役の個別指示で継続する"
+  ],
+  "excluded": [
+    "STT/AI再実行",
+    "新素材取得/有料API",
+    "途中停止後の本体/全編再現の再合成",
+    "旧途中RGB/旧証拠/保護初稿削除",
+    "新QC項目/候補削減/閾値変更",
+    "正式production defaultへの候補自動採用"
+  ],
+  "technicalCompletionMeaning": "全編candidateの製造・QC・固定保存・独立再読の技術検証。commit/pushと直接送信の状態はGit履歴および指示元相談役会話で確認する。人間品質採用ではない。"
+}
