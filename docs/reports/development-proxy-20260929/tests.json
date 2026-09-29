@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "development-proxy-test-summary-v001",
+  "observedDate": "2026-09-29",
+  "newModules": {
+    "command": "node --test evals/clip_composition/presentation_dev_proxy_profile_v001.test.mjs evals/clip_composition/presentation_dev_proxy_overlay_session_v001.test.mjs evals/clip_composition/presentation_dev_proxy_media_v001.test.mjs evals/clip_composition/presentation_dev_proxy_render_v001.test.mjs",
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0,
+    "durationMilliseconds": 1530.156625,
+    "log": "runtime/artifacts/development-proxy-20260929-v001/new-module-tests.tap",
+    "note": "Before the range-NUT timestamp repair; affected render tests rerun below."
+  },
+  "rangeNUTRepair": {
+    "command": "node --test evals/clip_composition/presentation_dev_proxy_render_v001.test.mjs",
+    "log": "runtime/artifacts/development-proxy-20260929-v001/render-final-tests.tap",
+    "tap": "TAP version 13\n# Subtest: explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range\nok 1 - explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range\n  ---\n  duration_ms: 25.1785\n  ...\n# Subtest: unknown, absent and final profile never enter the development drawing path\nok 2 - unknown, absent and final profile never enter the development drawing path\n  ---\n  duration_ms: 6.962834\n  ...\n# Subtest: source projection origin, end, frame rate and audio clock must match the passed full background\nok 3 - source projection origin, end, frame rate and audio clock must match the passed full background\n  ---\n  duration_ms: 5.211\n  ...\n# Subtest: range cutting derives exact frame and PCM sample boundaries for both existing sample rates\nok 4 - range cutting derives exact frame and PCM sample boundaries for both existing sample rates\n  ---\n  duration_ms: 10.0695\n  ...\n# Subtest: structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion\nok 5 - structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion\n  ---\n  duration_ms: 25.640542\n  ...\n# Subtest: actual alpha observations reject empty and physically out-of-area overlays without a tolerance\nok 6 - actual alpha observations reject empty and physically out-of-area overlays without a tolerance\n  ---\n  duration_ms: 4.877667\n  ...\n# Subtest: short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting\nok 7 - short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting\n  ---\n  duration_ms: 87.896292\n  ...\n1..7\n# tests 7\n# suites 0\n# pass 7\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 238.076959\n"
+  },
+  "existing1080Regression": {
+    "command": "node --test evals/clip_composition/presentation_orchestration_projection_v001.test.mjs evals/clip_composition/presentation_orchestration_range_composition_v001.test.mjs evals/clip_composition/presentation_orchestration_readability_candidate_v001.test.mjs",
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "durationMilliseconds": 11354.898958,
+    "evidence": "Agent execution tool output session 43369; no file-backed TAP; no full 7A video regenerated."
+  }
+}

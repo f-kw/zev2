@@ -1,0 +1,855 @@
+{
+  "schemaVersion": "development-proxy-measurement-v001",
+  "status": "technical-evidence-complete",
+  "headAtExecution": "767bf743b822f08edf16e09e249a4e5fe8a12628",
+  "profile": {
+    "schemaVersion": "presentation-development-output-profile-v001",
+    "profileId": "dev-proxy-540p-v001",
+    "purpose": "development-structure-only",
+    "sourceCanvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30
+    },
+    "outputCanvas": {
+      "width": 960,
+      "height": 540,
+      "fps": 30
+    },
+    "pixelScale": 0.5,
+    "projection": "whole-logical-canvas-at-rasterization",
+    "clocks": "unchanged",
+    "finalPixelQc": "not-run-dev-only",
+    "humanQuality": "not-evaluated"
+  },
+  "scope": "saved 7A projected background made once at 540p; two representative ranges rendered and independently reread; original 3h20 source not fully transcoded",
+  "provenance": {
+    "jobRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/job.json",
+      "bytes": 328060,
+      "fileSha256": "e12d8967b45522471795155390af884f3d48b38b8a60fd46687a4c24c0acb626"
+    },
+    "mediaResultRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/media-result.json",
+      "bytes": 10121,
+      "fileSha256": "7d91e0b09cde9ec6fcf7f6b1c42a7601751fad81ffe2f7d55474303d4cd5c508"
+    },
+    "reuseResultRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/reuse-result.json",
+      "bytes": 10119,
+      "fileSha256": "9c4c0bb01e128f066b5e31294a1e23dbf92c501494147523175c5b4b012aabb2"
+    },
+    "geometryDrawingsRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/geometry-fixtures/drawings.json",
+      "bytes": 81682,
+      "fileSha256": "66a493b834d809255469e9905b065b542cf56d0a0235496dab218ffadf1e10a8"
+    },
+    "geometryVerificationRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/geometry-fixtures/verification.json",
+      "bytes": 57064,
+      "fileSha256": "f998a27a80a6336fd7d47ba6a2f9c2baf4c5b6401b88543275327c2d10354f8e"
+    },
+    "mp4CapacityRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/mp4-capacity-fixture/result.json",
+      "bytes": 16187,
+      "fileSha256": "5c6790746518f5f03683ee124e58b5f106062e1994e9aaf25f28636a0a2da387"
+    }
+  },
+  "input": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/background.nut",
+    "fileSha256": "7f3121a8640b23b29c9093a12f150d5ebfc6fc4f4eb9dbe25b773cf5e9ef6229",
+    "bytes": 19423708759
+  },
+  "expected": {
+    "captionCount": 431,
+    "frameCount": 27949
+  },
+  "background": {
+    "sourceStorage": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/background/background.nut",
+      "logicalBytes": 19423708759,
+      "allocatedBytes": 19423711232
+    },
+    "proxyStorage": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/background-proxy/proxy.nut",
+      "logicalBytes": 535800247,
+      "allocatedBytes": 537919488
+    },
+    "mediaRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/background-proxy/proxy.nut",
+      "bytes": 535800247,
+      "fileSha256": "9743bf120a14eb3bc8f56bb02a4136fd9c50872c8943b227f7e8681efbfb6269"
+    },
+    "manifestRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/background-proxy/proxy-manifest.json",
+      "bytes": 11416,
+      "fileSha256": "e7397fae3433eb099bd6eeca28e169028724a5c18302ea3c26cffb0b3beda1a7"
+    },
+    "video": {
+      "source": {
+        "status": "passed",
+        "fps": 30,
+        "frameCount": 27949,
+        "timeBase": "1/61440",
+        "firstPts": "0",
+        "lastPts": "57237504",
+        "rule": "every-decoded-PTS-equals-frame-index-over-fps"
+      },
+      "output": {
+        "status": "passed",
+        "fps": 30,
+        "frameCount": 27949,
+        "timeBase": "1/61440",
+        "firstPts": "0",
+        "lastPts": "57237504",
+        "rule": "every-decoded-PTS-equals-frame-index-over-fps"
+      },
+      "outputCanvas": {
+        "width": 960,
+        "height": 540,
+        "fps": 30
+      },
+      "extractionRule": "source-frame-30fps-identity-v001"
+    },
+    "audio": {
+      "status": "passed",
+      "mode": "packet-copy",
+      "source": {
+        "codec": "pcm_f32le",
+        "sampleRate": 44100,
+        "channels": 2,
+        "timeBase": "1/44100",
+        "startTime": "0.000000",
+        "packetCount": 40130,
+        "firstPts": "0",
+        "endPtsExclusive": "41085030",
+        "packetPayloadBytes": 328680240,
+        "packetClockAndPayloadSha256": "278fd959664d74f062c4d9455c39c1fabade95f5c084843359a8cfa5ae4c2b17",
+        "packetPayloadHashesSha256": "e3d746efa3d0e3c8366bd20fc02ee3afd9b859ef2a0d498122dc413892437578"
+      },
+      "output": {
+        "codec": "pcm_f32le",
+        "sampleRate": 44100,
+        "channels": 2,
+        "timeBase": "1/44100",
+        "startTime": "0.000000",
+        "packetCount": 40130,
+        "firstPts": "0",
+        "endPtsExclusive": "41085030",
+        "packetPayloadBytes": 328680240,
+        "packetClockAndPayloadSha256": "278fd959664d74f062c4d9455c39c1fabade95f5c084843359a8cfa5ae4c2b17",
+        "packetPayloadHashesSha256": "e3d746efa3d0e3c8366bd20fc02ee3afd9b859ef2a0d498122dc413892437578"
+      }
+    },
+    "wallSeconds": 882.788904375,
+    "startedAt": "2026-09-29T01:39:26.695Z",
+    "endedAt": "2026-09-29T01:54:09.491Z",
+    "parentOnlyMaxRssBytes": 137543680,
+    "stages": [
+      {
+        "phase": "input-streams",
+        "wallSeconds": 0.06102824999999939,
+        "startedAt": "2026-09-29T01:39:36.619Z",
+        "endedAt": "2026-09-29T01:39:36.680Z"
+      },
+      {
+        "phase": "input-all-frame-clock",
+        "wallSeconds": 725.8853598329999,
+        "startedAt": "2026-09-29T01:39:36.681Z",
+        "endedAt": "2026-09-29T01:51:42.572Z"
+      },
+      {
+        "phase": "input-audio-packets",
+        "wallSeconds": 3.5738710000000427,
+        "startedAt": "2026-09-29T01:51:42.572Z",
+        "endedAt": "2026-09-29T01:51:46.146Z"
+      },
+      {
+        "phase": "encode",
+        "wallSeconds": 107.93782425000006,
+        "startedAt": "2026-09-29T01:51:46.146Z",
+        "endedAt": "2026-09-29T01:53:34.084Z"
+      },
+      {
+        "phase": "output-streams",
+        "wallSeconds": 0.036786333000054586,
+        "startedAt": "2026-09-29T01:53:34.085Z",
+        "endedAt": "2026-09-29T01:53:34.121Z"
+      },
+      {
+        "phase": "output-all-frame-clock",
+        "wallSeconds": 23.95013075000001,
+        "startedAt": "2026-09-29T01:53:34.121Z",
+        "endedAt": "2026-09-29T01:53:58.072Z"
+      },
+      {
+        "phase": "output-audio-packets",
+        "wallSeconds": 1.0663521669999463,
+        "startedAt": "2026-09-29T01:53:58.072Z",
+        "endedAt": "2026-09-29T01:53:59.138Z"
+      }
+    ],
+    "reuse": {
+      "wallSeconds": 10.296033167,
+      "encoderInvocations": 0,
+      "reused": true
+    },
+    "meaning": "FFV1 1080p to H.264 540p; PCM copied exactly; size change includes codec and resolution, not resolution alone"
+  },
+  "ranges": [
+    {
+      "name": "normal-motion",
+      "range": {
+        "startFrame": 7347,
+        "endFrameExclusive": 7872
+      },
+      "captionCount": 13,
+      "stateCount": 30,
+      "captionIds": [
+        "new-material-digest-20260926-v001-instruction-instruction-000091",
+        "new-material-digest-20260926-v001-instruction-instruction-000092",
+        "new-material-digest-20260926-v001-instruction-instruction-000093",
+        "new-material-digest-20260926-v001-instruction-instruction-000094",
+        "new-material-digest-20260926-v001-instruction-instruction-000095",
+        "new-material-digest-20260926-v001-instruction-instruction-000096",
+        "new-material-digest-20260926-v001-instruction-instruction-000097",
+        "new-material-digest-20260926-v001-instruction-instruction-000098",
+        "new-material-digest-20260926-v001-instruction-instruction-000099",
+        "new-material-digest-20260926-v001-instruction-instruction-000100",
+        "new-material-digest-20260926-v001-instruction-instruction-000101",
+        "new-material-digest-20260926-v001-instruction-instruction-000102",
+        "new-material-digest-20260926-v001-instruction-instruction-000103"
+      ],
+      "savedDecisionSha256": {
+        "captionAuto": "20fe93e7444df6f1283fc257db6479b4f05110875ed8f79a347bc0084a851b6f",
+        "captionOverrides": "3f7a13bc01f53ef1d61e85f4259b55f70eef22ef431c572e34b654e403fbf165",
+        "connectionAuto": "78d1391c953cdc9ec9082caf35779226e3132ffb253b3b8f8e2208bd7aeb6a94",
+        "connectionOverrides": "50dc08e7a0c87daaca4835195e90735dd1e3029cf6ddfcb97fbca69e5ab5e97e"
+      },
+      "projectionSha256": "e7d22e87e0e635f7d7ec8c9e17631124f029daffec5f7e640d0c52b87b45b979",
+      "completionRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/normal-motion/completion.json",
+        "bytes": 718821,
+        "fileSha256": "d916a78893e3f077fef25cf47d41f088bf2582e598c1f2a63472835e853a764b"
+      },
+      "media": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/normal-motion/development-proxy.mp4",
+        "bytes": 3255122,
+        "fileSha256": "5cc3b1e981323162b5f68a275312370de07ec2c56aead3a46fc1e3e2f6e8bcbc"
+      },
+      "storage": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/normal-motion/development-proxy.mp4",
+        "logicalBytes": 3255122,
+        "allocatedBytes": 4198400
+      },
+      "render": {
+        "startedAt": "2026-09-29T01:54:32.453Z",
+        "endedAt": "2026-09-29T01:55:08.385Z",
+        "wallSeconds": 35.931982458,
+        "parentOnlyMaxRssBytes": 516489216,
+        "insideRenderMilliseconds": {
+          "logicalLayoutMilliseconds": 281.1035840000004,
+          "overlayMilliseconds": 11595.238833000001,
+          "rangePreparationMilliseconds": 2953.488207999999,
+          "compositeMilliseconds": 4805.323916000005,
+          "elapsedMilliseconds": 21175.320417
+        }
+      },
+      "reread": {
+        "startedAt": "2026-09-29T01:55:26.126Z",
+        "endedAt": "2026-09-29T01:55:53.585Z",
+        "wallSeconds": 27.459019207999997,
+        "status": "passed",
+        "parentOnlyMaxRssBytes": 338739200,
+        "evidenceRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/reread-0-result.json",
+          "bytes": 799596,
+          "fileSha256": "f57acdcb2e3a2ead9f96d1cad904c85b6e049f25c775ca961283090288f86059"
+        }
+      },
+      "videoClock": {
+        "status": "passed",
+        "frameCount": 525,
+        "fps": 30,
+        "timeBase": "1/15360",
+        "firstPts": "0",
+        "lastPts": "268288",
+        "decodedFrameClockCanonicalSha256": "7a0d15068a45c2d4462a06690f245dd061c8230388b9707d89bc8a88edb1765c",
+        "rule": "every-decoded-PTS-equals-frame-index-over-fps"
+      },
+      "outputMedia": {
+        "durationMs": 17500,
+        "video": {
+          "codecName": "h264",
+          "width": 960,
+          "height": 540,
+          "fps": 30,
+          "frameCount": 525
+        },
+        "audio": {
+          "codecName": "aac",
+          "sampleRate": 44100,
+          "channelLayout": "stereo",
+          "durationMs": 17500,
+          "packetPayloadSha256": "75cadba39b79f6a183b4f79006b1c1a386011164d38b8799a5411cbf5408c76c"
+        }
+      },
+      "sourcePcmSha256": "a4567c9bab6104f4bb14618a90a3bcdd89ab2eb61755f61fb06236f0743f2590",
+      "localPcmSha256": "a4567c9bab6104f4bb14618a90a3bcdd89ab2eb61755f61fb06236f0743f2590",
+      "inputAudioClock": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 771750,
+        "durationSeconds": 17.5,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 771072,
+          "dts": 771072,
+          "duration": 678
+        },
+        "packetCount": 755,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "75cadba39b79f6a183b4f79006b1c1a386011164d38b8799a5411cbf5408c76c",
+        "rawDecodedSampleCount": 772096,
+        "logicalDecodedSampleCount": 771750,
+        "decodedTailSampleCount": 346,
+        "rawDecodedPayloadSha256": "43a259205f59f3bb393f782809e2fcc11674b0f604eac344ed2a9f7476d17685",
+        "logicalDecodedPayloadSha256": "eccbaddc386c74e60a05cda85f5104019d21b1d15d8ad02b3876bcb2f344d9f7",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 771750
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "outputAudioClock": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 771750,
+        "durationSeconds": 17.5,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 771072,
+          "dts": 771072,
+          "duration": 678
+        },
+        "packetCount": 755,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "75cadba39b79f6a183b4f79006b1c1a386011164d38b8799a5411cbf5408c76c",
+        "rawDecodedSampleCount": 772096,
+        "logicalDecodedSampleCount": 771750,
+        "decodedTailSampleCount": 346,
+        "rawDecodedPayloadSha256": "43a259205f59f3bb393f782809e2fcc11674b0f604eac344ed2a9f7476d17685",
+        "logicalDecodedPayloadSha256": "eccbaddc386c74e60a05cda85f5104019d21b1d15d8ad02b3876bcb2f344d9f7",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 771750
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "structuralQc": {
+        "status": "passed",
+        "scope": "source decisions/clocks/state order, logical layout, output dimensions/frame count/audio"
+      },
+      "finalPixelQc": "not-run-dev-only",
+      "humanQuality": "not-evaluated"
+    },
+    {
+      "name": "color-panel-connection",
+      "range": {
+        "startFrame": 10058,
+        "endFrameExclusive": 10552
+      },
+      "captionCount": 7,
+      "stateCount": 12,
+      "captionIds": [
+        "new-material-digest-20260926-v001-instruction-instruction-000134",
+        "new-material-digest-20260926-v001-instruction-instruction-000135",
+        "new-material-digest-20260926-v001-instruction-instruction-000136",
+        "new-material-digest-20260926-v001-instruction-instruction-000137",
+        "new-material-digest-20260926-v001-instruction-instruction-000138",
+        "new-material-digest-20260926-v001-instruction-instruction-000139",
+        "new-material-digest-20260926-v001-instruction-instruction-000140"
+      ],
+      "savedDecisionSha256": {
+        "captionAuto": "20fe93e7444df6f1283fc257db6479b4f05110875ed8f79a347bc0084a851b6f",
+        "captionOverrides": "3f7a13bc01f53ef1d61e85f4259b55f70eef22ef431c572e34b654e403fbf165",
+        "connectionAuto": "78d1391c953cdc9ec9082caf35779226e3132ffb253b3b8f8e2208bd7aeb6a94",
+        "connectionOverrides": "50dc08e7a0c87daaca4835195e90735dd1e3029cf6ddfcb97fbca69e5ab5e97e"
+      },
+      "projectionSha256": "e7d22e87e0e635f7d7ec8c9e17631124f029daffec5f7e640d0c52b87b45b979",
+      "completionRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/color-panel-connection/completion.json",
+        "bytes": 415617,
+        "fileSha256": "537f42dfbc90937412dcbf426cc005df342dae015ed2305ffc1c2761cba56aac"
+      },
+      "media": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/color-panel-connection/development-proxy.mp4",
+        "bytes": 3006231,
+        "fileSha256": "f6907f251a20c8db16f419fd879b9790a9190f16bea9b69904bd4438090a0428"
+      },
+      "storage": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/color-panel-connection/development-proxy.mp4",
+        "logicalBytes": 3006231,
+        "allocatedBytes": 3149824
+      },
+      "render": {
+        "startedAt": "2026-09-29T01:55:24.956Z",
+        "endedAt": "2026-09-29T01:56:05.164Z",
+        "wallSeconds": 40.20777566699999,
+        "parentOnlyMaxRssBytes": 575045632,
+        "insideRenderMilliseconds": {
+          "logicalLayoutMilliseconds": 271.0822499999995,
+          "overlayMilliseconds": 6190.452708000001,
+          "rangePreparationMilliseconds": 3539.917042000001,
+          "compositeMilliseconds": 3236.127499999995,
+          "elapsedMilliseconds": 14776.271999999997
+        }
+      },
+      "reread": {
+        "startedAt": "2026-09-29T01:56:28.320Z",
+        "endedAt": "2026-09-29T01:56:44.261Z",
+        "wallSeconds": 15.941754834,
+        "status": "passed",
+        "parentOnlyMaxRssBytes": 341344256,
+        "evidenceRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/reread-1-result.json",
+          "bytes": 462440,
+          "fileSha256": "4ae8edcb309c5f0784607e0c9f82e03ab8183066d95f813b3306a847e6180e66"
+        }
+      },
+      "videoClock": {
+        "status": "passed",
+        "frameCount": 494,
+        "fps": 30,
+        "timeBase": "1/15360",
+        "firstPts": "0",
+        "lastPts": "252416",
+        "decodedFrameClockCanonicalSha256": "5d1d1fb88de23d328320862a24b65fbf5726be82ce6ab5c2128b5b9cfa3627b1",
+        "rule": "every-decoded-PTS-equals-frame-index-over-fps"
+      },
+      "outputMedia": {
+        "durationMs": 16467,
+        "video": {
+          "codecName": "h264",
+          "width": 960,
+          "height": 540,
+          "fps": 30,
+          "frameCount": 494
+        },
+        "audio": {
+          "codecName": "aac",
+          "sampleRate": 44100,
+          "channelLayout": "stereo",
+          "durationMs": 16466.667,
+          "packetPayloadSha256": "b2d6bd52245ccb3a8f904d0db5ab6381ff9892bcb1f4829a9badb276427b33bd"
+        }
+      },
+      "sourcePcmSha256": "ff9b88ec160f117f244c0f685a79af13114d175c1b747b5722ec6d825896f921",
+      "localPcmSha256": "ff9b88ec160f117f244c0f685a79af13114d175c1b747b5722ec6d825896f921",
+      "inputAudioClock": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 726180,
+        "durationSeconds": 16.466666666666665,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 726016,
+          "dts": 726016,
+          "duration": 164
+        },
+        "packetCount": 711,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "b2d6bd52245ccb3a8f904d0db5ab6381ff9892bcb1f4829a9badb276427b33bd",
+        "rawDecodedSampleCount": 727040,
+        "logicalDecodedSampleCount": 726180,
+        "decodedTailSampleCount": 860,
+        "rawDecodedPayloadSha256": "2fbed1960a5fb1ce0ee2d6522820ce66f1e31d39c95e8256c5f13c4bfc027ffe",
+        "logicalDecodedPayloadSha256": "b9e71dd4969239c1d8b6c5543863efa29359c6479567592797038000bad328a2",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 726180
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "outputAudioClock": {
+        "status": "passed",
+        "sampleRate": 44100,
+        "channels": 2,
+        "streamTimeBase": "1/44100",
+        "presentationStartSample": 0,
+        "presentationEndSampleExclusive": 726180,
+        "durationSeconds": 16.466666666666665,
+        "firstPacket": {
+          "pts": -1024,
+          "dts": -1024,
+          "duration": 1024,
+          "side_data_list": [
+            {
+              "side_data_type": "Skip Samples",
+              "skip_samples": 1024,
+              "discard_padding": 0,
+              "skip_reason": 0,
+              "discard_reason": 0
+            }
+          ]
+        },
+        "lastPacket": {
+          "pts": 726016,
+          "dts": 726016,
+          "duration": 164
+        },
+        "packetCount": 711,
+        "primingSkipSamples": 1024,
+        "firstDecodedFrame": {
+          "pts": 0,
+          "best_effort_timestamp": 0,
+          "nb_samples": 1024
+        },
+        "packetPayloadSha256": "b2d6bd52245ccb3a8f904d0db5ab6381ff9892bcb1f4829a9badb276427b33bd",
+        "rawDecodedSampleCount": 727040,
+        "logicalDecodedSampleCount": 726180,
+        "decodedTailSampleCount": 860,
+        "rawDecodedPayloadSha256": "2fbed1960a5fb1ce0ee2d6522820ce66f1e31d39c95e8256c5f13c4bfc027ffe",
+        "logicalDecodedPayloadSha256": "b9e71dd4969239c1d8b6c5543863efa29359c6479567592797038000bad328a2",
+        "logicalDecodedInterval": {
+          "startSample": 0,
+          "endSampleExclusive": 726180
+        },
+        "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+      },
+      "structuralQc": {
+        "status": "passed",
+        "scope": "source decisions/clocks/state order, logical layout, output dimensions/frame count/audio"
+      },
+      "finalPixelQc": "not-run-dev-only",
+      "humanQuality": "not-evaluated"
+    }
+  ],
+  "geometry": {
+    "status": "passed",
+    "realPngCount": 12,
+    "savedScaleCount": 1,
+    "syntheticPulseStateCount": 5,
+    "actualSavedPulseCount": 0,
+    "capacity": {
+      "source": {
+        "pngLogicalBytes": 769804,
+        "pngAllocatedBytes": 782336,
+        "rawFormats": {
+          "rgb24": {
+            "cumulativeGeneratedLogicalBytes": 37324800,
+            "cumulativeGeneratedAllocatedBytes": 37330944,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          },
+          "rgba": {
+            "cumulativeGeneratedLogicalBytes": 49766400,
+            "cumulativeGeneratedAllocatedBytes": 49766400,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          },
+          "gbrap": {
+            "cumulativeGeneratedLogicalBytes": 49766400,
+            "cumulativeGeneratedAllocatedBytes": 49766400,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          }
+        }
+      },
+      "proxy": {
+        "pngLogicalBytes": 290257,
+        "pngAllocatedBytes": 299008,
+        "rawFormats": {
+          "rgb24": {
+            "cumulativeGeneratedLogicalBytes": 9331200,
+            "cumulativeGeneratedAllocatedBytes": 9338880,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          },
+          "rgba": {
+            "cumulativeGeneratedLogicalBytes": 12441600,
+            "cumulativeGeneratedAllocatedBytes": 12460032,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          },
+          "gbrap": {
+            "cumulativeGeneratedLogicalBytes": 12441600,
+            "cumulativeGeneratedAllocatedBytes": 12460032,
+            "retainedLogicalBytes": 0,
+            "retainedAllocatedBytes": 0
+          }
+        }
+      },
+      "measuredMaximumConcurrentDiagnosticRawLogicalBytes": 22809600,
+      "measuredMaximumConcurrentDiagnosticRawAllocatedBytes": 22810624,
+      "scope": "three raw pixel formats coexist for one PNG; then measured and removed; PNGs retained",
+      "physicalDeviceIo": "not-measured"
+    },
+    "sourceLogicalCanvasUnchanged": true,
+    "sourceLogicalLayout": "passed",
+    "physicalAlphaSafeArea": "passed",
+    "interpretation": "Logical canvas and all layout inputs remain identical. Whole-raster scale halves the output canvas and spatial values. Alpha bounds can differ from exact half-pixel positions due to raster sampling, antialiasing and integer pixel coverage; deltas are observations, not a new acceptance threshold or cross-resolution byte equality claim.",
+    "verificationWallMilliseconds": 2674.4125829999994,
+    "drawingWallMilliseconds": 5111.474083
+  },
+  "mp4Capacity": {
+    "status": "passed",
+    "range": {
+      "startFrame": 7347,
+      "endFrameExclusive": 7497,
+      "fps": 30,
+      "frameCount": 150
+    },
+    "encoding": {
+      "videoCodec": "libx264",
+      "preset": "fast",
+      "crf": 20,
+      "pixelFormat": "yuv420p",
+      "fps": 30,
+      "audio": "one local AAC 192k encode from selected interval; identical packet copy into both MP4 outputs",
+      "movieTimescale": 30
+    },
+    "outputs": [
+      {
+        "mediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/mp4-capacity-fixture/capacity-1080p.mp4",
+          "bytes": 3606356,
+          "fileSha256": "7941d3339c5d2f4fbc79f3a73a67d0dfe61f85dc2dc2fd466577e00e2b676284"
+        },
+        "capacity": {
+          "logicalBytes": 3606356,
+          "allocatedBytes": 3608576,
+          "allocationMethod": "POSIX st_blocks multiplied by 512; allocated file blocks, not physical I/O"
+        },
+        "video": {
+          "status": "passed",
+          "width": 1920,
+          "height": 1080,
+          "frameCount": 150,
+          "fps": 30,
+          "durationSeconds": 5,
+          "timeBase": "1/15360",
+          "firstPts": 0,
+          "lastPts": 76288,
+          "rule": "every decoded PTS equals frame index / 30; exact duration"
+        },
+        "audio": {
+          "status": "passed",
+          "sampleRate": 44100,
+          "channels": 2,
+          "streamTimeBase": "1/44100",
+          "presentationStartSample": 0,
+          "presentationEndSampleExclusive": 220500,
+          "durationSeconds": 5,
+          "firstPacket": {
+            "pts": -1024,
+            "dts": -1024,
+            "duration": 1024,
+            "side_data_list": [
+              {
+                "side_data_type": "Skip Samples",
+                "skip_samples": 1024,
+                "discard_padding": 0,
+                "skip_reason": 0,
+                "discard_reason": 0
+              }
+            ]
+          },
+          "lastPacket": {
+            "pts": 220160,
+            "dts": 220160,
+            "duration": 340
+          },
+          "packetCount": 217,
+          "primingSkipSamples": 1024,
+          "firstDecodedFrame": {
+            "pts": 0,
+            "best_effort_timestamp": 0,
+            "nb_samples": 1024
+          },
+          "packetPayloadSha256": "4cb77b25c4fa705c70a49088ea3b446fdd37d3e52e31e9f6e4cc0328c5be7ce9",
+          "rawDecodedSampleCount": 221184,
+          "logicalDecodedSampleCount": 220500,
+          "decodedTailSampleCount": 684,
+          "rawDecodedPayloadSha256": "9705e04da42e21847bcf5d488d28a274fab2d8205ee4dd15f5aa845eaf359d20",
+          "logicalDecodedPayloadSha256": "9573a71755bee0b8045bd394eb084adeb142a63bfff2d5bc5db3e20971a12b8d",
+          "logicalDecodedInterval": {
+            "startSample": 0,
+            "endSampleExclusive": 220500
+          },
+          "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+        }
+      },
+      {
+        "mediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/development-proxy-20260929-v001/mp4-capacity-fixture/capacity-540p.mp4",
+          "bytes": 995277,
+          "fileSha256": "5e5e5070cff150dfc553d4c0854b8bd2736652b98cf4a31f129cd530fcf1364f"
+        },
+        "capacity": {
+          "logicalBytes": 995277,
+          "allocatedBytes": 995328,
+          "allocationMethod": "POSIX st_blocks multiplied by 512; allocated file blocks, not physical I/O"
+        },
+        "video": {
+          "status": "passed",
+          "width": 960,
+          "height": 540,
+          "frameCount": 150,
+          "fps": 30,
+          "durationSeconds": 5,
+          "timeBase": "1/15360",
+          "firstPts": 0,
+          "lastPts": 76288,
+          "rule": "every decoded PTS equals frame index / 30; exact duration"
+        },
+        "audio": {
+          "status": "passed",
+          "sampleRate": 44100,
+          "channels": 2,
+          "streamTimeBase": "1/44100",
+          "presentationStartSample": 0,
+          "presentationEndSampleExclusive": 220500,
+          "durationSeconds": 5,
+          "firstPacket": {
+            "pts": -1024,
+            "dts": -1024,
+            "duration": 1024,
+            "side_data_list": [
+              {
+                "side_data_type": "Skip Samples",
+                "skip_samples": 1024,
+                "discard_padding": 0,
+                "skip_reason": 0,
+                "discard_reason": 0
+              }
+            ]
+          },
+          "lastPacket": {
+            "pts": 220160,
+            "dts": 220160,
+            "duration": 340
+          },
+          "packetCount": 217,
+          "primingSkipSamples": 1024,
+          "firstDecodedFrame": {
+            "pts": 0,
+            "best_effort_timestamp": 0,
+            "nb_samples": 1024
+          },
+          "packetPayloadSha256": "4cb77b25c4fa705c70a49088ea3b446fdd37d3e52e31e9f6e4cc0328c5be7ce9",
+          "rawDecodedSampleCount": 221184,
+          "logicalDecodedSampleCount": 220500,
+          "decodedTailSampleCount": 684,
+          "rawDecodedPayloadSha256": "9705e04da42e21847bcf5d488d28a274fab2d8205ee4dd15f5aa845eaf359d20",
+          "logicalDecodedPayloadSha256": "9573a71755bee0b8045bd394eb084adeb142a63bfff2d5bc5db3e20971a12b8d",
+          "logicalDecodedInterval": {
+            "startSample": 0,
+            "endSampleExclusive": 220500
+          },
+          "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+        }
+      }
+    ],
+    "comparison": {
+      "logicalBytesSaved": 2611079,
+      "logicalBytesReductionPercent": 72.40214221779546,
+      "audioPacketsAndDecodedLogicalIntervalEqual": true,
+      "frameCountAndClockEqual": true,
+      "noExtrapolation": "measured MP4 file bytes for these five seconds only; not proportional to pixel area or full movie"
+    },
+    "wallSeconds": 3.247789875,
+    "scope": "five-second resolution/capacity experiment; separate from native proxy pipeline and final quality"
+  },
+  "preserved7A": {
+    "drawingSources": 69,
+    "status": "all-preserved",
+    "candidateVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-full-20260929-v001/presentation-rendered-v002.mp4",
+      "bytes": 675155103,
+      "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+    }
+  },
+  "measuredStorage": {
+    "observedAt": "2026-09-29T01:58:00.552Z",
+    "runDirectory": {
+      "files": 1020,
+      "logicalBytes": 574671781,
+      "allocatedBytes": 581914624
+    },
+    "freeBytes": 26053816320,
+    "basis": "logical file bytes and filesystem allocated blocks; not peak or physical device I/O"
+  },
+  "limitations": [
+    "540p structural pass is not 1080p final pixel or human quality approval",
+    "No new 1080p full render/replay/native QC; completed 7A media and source graph preserved",
+    "Full original source proxy not generated in this run; 60fps extraction verified in seven-frame fixture",
+    "Initial proxy creation validates all saved background frame clocks; subsequent reuse still hashes input/output, so is not zero cost",
+    "First representative reread overlaps second representative render; wall times are local observations, not isolated benchmark",
+    "Parent RSS is not total process memory; no combined child RSS or physical I/O measured",
+    "No automatic adoption of cyan or human appearance decisions"
+  ]
+}
