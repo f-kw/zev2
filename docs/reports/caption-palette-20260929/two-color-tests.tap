@@ -1,0 +1,185 @@
+TAP version 13
+# Subtest: a single extended semantic reply delegates the unchanged expression, range and connection judgment
+ok 1 - a single extended semantic reply delegates the unchanged expression, range and connection judgment
+  ---
+  duration_ms: 15.422167
+  ...
+# Subtest: palette choices are explicit and unconstrained by quotas; Yellow-only is valid
+ok 2 - palette choices are explicit and unconstrained by quotas; Yellow-only is valid
+  ---
+  duration_ms: 7.913542
+  ...
+# Subtest: partial Color stays exact through the original judgment and the separate fixed palette resolver
+ok 3 - partial Color stays exact through the original judgment and the separate fixed palette resolver
+  ---
+  duration_ms: 7.958375
+  ...
+# Subtest: new judgments require one known palette ID and refuse arbitrary RGB, null and missing values
+ok 4 - new judgments require one known palette ID and refuse arbitrary RGB, null and missing values
+  ---
+  duration_ms: 4.511875
+  ...
+# Subtest: original range, coverage, semantic role, evidence and non-Color selection checks cannot be bypassed
+ok 5 - original range, coverage, semantic role, evidence and non-Color selection checks cannot be bypassed
+  ---
+  duration_ms: 6.666708
+  ...
+# Subtest: old Panel choice remains in its original contract and contributes no Color palette row
+ok 6 - old Panel choice remains in its original contract and contributes no Color palette row
+  ---
+  duration_ms: 3.459875
+  ...
+# Subtest: source and extended input binding reject changed palettes, policy, clocks and unknown fields
+ok 7 - source and extended input binding reject changed palettes, policy, clocks and unknown fields
+  ---
+  duration_ms: 1.747041
+  ...
+# Subtest: strict JSON rejects duplicate keys, non-JSON payloads and lossy UTF-8
+ok 8 - strict JSON rejects duplicate keys, non-JSON payloads and lossy UTF-8
+  ---
+  duration_ms: 2.007667
+  ...
+# Subtest: saved replay checks original bytes, normalized delegate, selected palettes and both hashes
+ok 9 - saved replay checks original bytes, normalized delegate, selected palettes and both hashes
+  ---
+  duration_ms: 19.128584
+  ...
+# Subtest: two approved finite candidate palettes retain the same range, targets, 1080p layout and 540p development meaning
+ok 10 - two approved finite candidate palettes retain the same range, targets, 1080p layout and 540p development meaning
+  ---
+  duration_ms: 7819.954666
+  ...
+# Subtest: short ranges retain the saved finite motion state order and global start clock
+ok 11 - short ranges retain the saved finite motion state order and global start clock
+  ---
+  duration_ms: 208.885375
+  ...
+# Subtest: Panel geometry remains the saved geometry when the finite palette view is scoped
+ok 12 - Panel geometry remains the saved geometry when the finite palette view is scoped
+  ---
+  duration_ms: 204.820666
+  ...
+# Subtest: missing, unknown and final profiles fail before accessing a renderer or output
+ok 13 - missing, unknown and final profiles fail before accessing a renderer or output
+  ---
+  duration_ms: 207.933125
+  ...
+# Subtest: missing/full/outside ranges and cloned unverified views fail before drawing
+ok 14 - missing/full/outside ranges and cloned unverified views fail before drawing
+  ---
+  duration_ms: 228.941459
+  ...
+# Subtest: saved structural receipt rejects omitted/changed glyphs, range, clock, geometry, palette or drawing props
+ok 15 - saved structural receipt rejects omitted/changed glyphs, range, clock, geometry, palette or drawing props
+  ---
+  duration_ms: 237.848833
+  ...
+# Subtest: saved receipt rejects missing alpha, overflow, false final/human approval and changed media clocks
+ok 16 - saved receipt rejects missing alpha, overflow, false final/human approval and changed media clocks
+  ---
+  duration_ms: 246.169958
+  ...
+# Subtest: independent reader rejects changed completion bytes or a symlink before reading source media or launching tools
+ok 17 - independent reader rejects changed completion bytes or a symlink before reading source media or launching tools
+  ---
+  duration_ms: 6.740791
+  ...
+# Subtest: finite probe changes only the existing Color fill and refuses unknown/additional targets
+ok 18 - finite probe changes only the existing Color fill and refuses unknown/additional targets
+  ---
+  duration_ms: 1.458792
+  ...
+# Subtest: exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+ok 19 - exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+  ---
+  duration_ms: 1.148041
+  ...
+# Subtest: isolated-fill auxiliary alpha differences remain reported without replacing the full-overlay alpha invariant
+ok 20 - isolated-fill auxiliary alpha differences remain reported without replacing the full-overlay alpha invariant
+  ---
+  duration_ms: 0.089875
+  ...
+# Subtest: background Y statistics are measured values and exact crop counts, without an acceptance threshold
+ok 21 - background Y statistics are measured values and exact crop counts, without an acceptance threshold
+  ---
+  duration_ms: 3.381042
+  ...
+# Subtest: two approved candidate colors only, and only a missing palette field restores legacy Yellow
+ok 22 - two approved candidate colors only, and only a missing palette field restores legacy Yellow
+  ---
+  duration_ms: 1.360541
+  ...
+# Subtest: palette-only resolution preserves exact ranges, partial child-full scope, source clocks and all other effects
+ok 23 - palette-only resolution preserves exact ranges, partial child-full scope, source clocks and all other effects
+  ---
+  duration_ms: 4.814125
+  ...
+# Subtest: legacy materialization stays byte-for-byte Yellow and does not write palette metadata into old inputs
+ok 24 - legacy materialization stays byte-for-byte Yellow and does not write palette metadata into old inputs
+  ---
+  duration_ms: 1.798
+  ...
+# Subtest: one palette edit saves and reloads; Reset removes only that override and restores the saved nonyellow choice
+ok 25 - one palette edit saves and reloads; Reset removes only that override and restores the saved nonyellow choice
+  ---
+  duration_ms: 9.961125
+  ...
+# Subtest: existing Normal override clears one Color without losing its saved range; Reset restores it exactly
+ok 26 - existing Normal override clears one Color without losing its saved range; Reset restores it exactly
+  ---
+  duration_ms: 4.878625
+  ...
+# Subtest: palette edits cannot add a Color target, change a range, alter another role, or inject raw RGB
+ok 27 - palette edits cannot add a Color target, change a range, alter another role, or inject raw RGB
+  ---
+  duration_ms: 9.349875
+  ...
+# Subtest: existing substring, overlapping occurrence, codepoint and grapheme validation still rejects malformed targets
+ok 28 - existing substring, overlapping occurrence, codepoint and grapheme validation still rejects malformed targets
+  ---
+  duration_ms: 1.292375
+  ...
+# Subtest: modified source clocks/text/order/Color range or saved automatic/override hashes cannot restore
+ok 29 - modified source clocks/text/order/Color range or saved automatic/override hashes cannot restore
+  ---
+  duration_ms: 5.93625
+  ...
+# Subtest: a separate process reconstructs the saved colors, scopes and non-Color elements without a decision call
+ok 30 - a separate process reconstructs the saved colors, scopes and non-Color elements without a decision call
+  ---
+  duration_ms: 53.9405
+  ...
+# Subtest: saved 7B has exactly its 18 partial Color targets; a uniform Yellow candidate reproduces the old plan
+ok 31 - saved 7B has exactly its 18 partial Color targets; a uniform Yellow candidate reproduces the old plan
+  ---
+  duration_ms: 1122.449833
+  ...
+# Subtest: real saved 7B palette changes only existing Color font values and preserves structure, glyphs, clocks and all other effects
+ok 32 - real saved 7B palette changes only existing Color font values and preserves structure, glyphs, clocks and all other effects
+  ---
+  duration_ms: 7728.747583
+  ...
+# Subtest: palette range scope preserves global source clock and refuses out-of-range or forged views
+ok 33 - palette range scope preserves global source clock and refuses out-of-range or forged views
+  ---
+  duration_ms: 172.224208
+  ...
+# Subtest: one finite override and Reset reconstruct the exact saved automatic plan without changing unrelated captions
+ok 34 - one finite override and Reset reconstruct the exact saved automatic plan without changing unrelated captions
+  ---
+  duration_ms: 567.350333
+  ...
+# Subtest: separate process rederives saved palette evidence; missing/changed state and forged semantic receipt are rejected
+ok 35 - separate process rederives saved palette evidence; missing/changed state and forged semantic receipt are rejected
+  ---
+  duration_ms: 20522.564
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 29064.738875

@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: three explicit finite palettes retain the same range, targets, 1080p layout and 540p development meaning
+ok 1 - three explicit finite palettes retain the same range, targets, 1080p layout and 540p development meaning
+  ---
+  duration_ms: 5002.723417
+  ...
+# Subtest: short ranges retain the saved finite motion state order and global start clock
+ok 2 - short ranges retain the saved finite motion state order and global start clock
+  ---
+  duration_ms: 226.22175
+  ...
+# Subtest: Panel geometry remains the saved geometry when the finite palette view is scoped
+ok 3 - Panel geometry remains the saved geometry when the finite palette view is scoped
+  ---
+  duration_ms: 224.702917
+  ...
+# Subtest: missing, unknown and final profiles fail before accessing a renderer or output
+ok 4 - missing, unknown and final profiles fail before accessing a renderer or output
+  ---
+  duration_ms: 226.288792
+  ...
+# Subtest: missing/full/outside ranges and cloned unverified views fail before drawing
+ok 5 - missing/full/outside ranges and cloned unverified views fail before drawing
+  ---
+  duration_ms: 250.711042
+  ...
+# Subtest: saved structural receipt rejects omitted/changed glyphs, range, clock, geometry, palette or drawing props
+ok 6 - saved structural receipt rejects omitted/changed glyphs, range, clock, geometry, palette or drawing props
+  ---
+  duration_ms: 241.07225
+  ...
+# Subtest: saved receipt rejects missing alpha, overflow, false final/human approval and changed media clocks
+ok 7 - saved receipt rejects missing alpha, overflow, false final/human approval and changed media clocks
+  ---
+  duration_ms: 247.107417
+  ...
+# Subtest: independent reader rejects changed completion bytes or a symlink before reading source media or launching tools
+ok 8 - independent reader rejects changed completion bytes or a symlink before reading source media or launching tools
+  ---
+  duration_ms: 5.500333
+  ...
+# Subtest: finite probe changes only the existing Color fill and refuses unknown/additional targets
+ok 9 - finite probe changes only the existing Color fill and refuses unknown/additional targets
+  ---
+  duration_ms: 1.395125
+  ...
+# Subtest: exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+ok 10 - exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+  ---
+  duration_ms: 1.287208
+  ...
+# Subtest: isolated-fill auxiliary alpha differences remain reported without replacing the full-overlay alpha invariant
+ok 11 - isolated-fill auxiliary alpha differences remain reported without replacing the full-overlay alpha invariant
+  ---
+  duration_ms: 0.142459
+  ...
+# Subtest: background Y statistics are measured values and exact crop counts, without an acceptance threshold
+ok 12 - background Y statistics are measured values and exact crop counts, without an acceptance threshold
+  ---
+  duration_ms: 3.829625
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6513.601958

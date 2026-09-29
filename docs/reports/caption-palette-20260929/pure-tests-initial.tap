@@ -1,0 +1,95 @@
+TAP version 13
+# Subtest: finite probe changes only the existing Color fill and refuses unknown/additional targets
+ok 1 - finite probe changes only the existing Color fill and refuses unknown/additional targets
+  ---
+  duration_ms: 1.932583
+  ...
+# Subtest: exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+ok 2 - exact pixel predicate accepts range-only changes and detects one-byte alpha/outside/stroke faults
+  ---
+  duration_ms: 1.270333
+  ...
+# Subtest: background Y statistics are measured values and exact crop counts, without an acceptance threshold
+ok 3 - background Y statistics are measured values and exact crop counts, without an acceptance threshold
+  ---
+  duration_ms: 3.505417
+  ...
+# Subtest: three fixed colors only, and only a missing palette field restores legacy Yellow
+ok 4 - three fixed colors only, and only a missing palette field restores legacy Yellow
+  ---
+  duration_ms: 0.948958
+  ...
+# Subtest: palette-only resolution preserves exact ranges, partial child-full scope, source clocks and all other effects
+ok 5 - palette-only resolution preserves exact ranges, partial child-full scope, source clocks and all other effects
+  ---
+  duration_ms: 5.518584
+  ...
+# Subtest: legacy materialization stays byte-for-byte Yellow and does not write palette metadata into old inputs
+ok 6 - legacy materialization stays byte-for-byte Yellow and does not write palette metadata into old inputs
+  ---
+  duration_ms: 1.871292
+  ...
+# Subtest: one palette edit saves and reloads; Reset removes only that override and restores the saved nonyellow choice
+ok 7 - one palette edit saves and reloads; Reset removes only that override and restores the saved nonyellow choice
+  ---
+  duration_ms: 10.577208
+  ...
+# Subtest: existing Normal override clears one Color without losing its saved range; Reset restores it exactly
+ok 8 - existing Normal override clears one Color without losing its saved range; Reset restores it exactly
+  ---
+  duration_ms: 4.981375
+  ...
+# Subtest: palette edits cannot add a Color target, change a range, alter another role, or inject raw RGB
+ok 9 - palette edits cannot add a Color target, change a range, alter another role, or inject raw RGB
+  ---
+  duration_ms: 9.593958
+  ...
+# Subtest: existing substring, overlapping occurrence, codepoint and grapheme validation still rejects malformed targets
+ok 10 - existing substring, overlapping occurrence, codepoint and grapheme validation still rejects malformed targets
+  ---
+  duration_ms: 1.082834
+  ...
+# Subtest: modified source clocks/text/order/Color range or saved automatic/override hashes cannot restore
+ok 11 - modified source clocks/text/order/Color range or saved automatic/override hashes cannot restore
+  ---
+  duration_ms: 6.254542
+  ...
+# Subtest: a separate process reconstructs the saved colors, scopes and non-Color elements without a decision call
+ok 12 - a separate process reconstructs the saved colors, scopes and non-Color elements without a decision call
+  ---
+  duration_ms: 54.424625
+  ...
+# Subtest: saved 7B has exactly its 18 partial Color targets; a uniform Yellow candidate reproduces the old plan
+ok 13 - saved 7B has exactly its 18 partial Color targets; a uniform Yellow candidate reproduces the old plan
+  ---
+  duration_ms: 1217.280542
+  ...
+# Subtest: real saved 7B palette changes only existing Color font values and preserves structure, glyphs, clocks and all other effects
+ok 14 - real saved 7B palette changes only existing Color font values and preserves structure, glyphs, clocks and all other effects
+  ---
+  duration_ms: 4776.369417
+  ...
+# Subtest: palette range scope preserves global source clock and refuses out-of-range or forged views
+ok 15 - palette range scope preserves global source clock and refuses out-of-range or forged views
+  ---
+  duration_ms: 191.555583
+  ...
+# Subtest: one finite override and Reset reconstruct the exact saved automatic plan without changing unrelated captions
+ok 16 - one finite override and Reset reconstruct the exact saved automatic plan without changing unrelated captions
+  ---
+  duration_ms: 616.918958
+  ...
+# Subtest: separate process rederives saved palette evidence; missing/changed state and forged semantic receipt are rejected
+ok 17 - separate process rederives saved palette evidence; missing/changed state and forged semantic receipt are rejected
+  ---
+  duration_ms: 21624.454334
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 27280.442

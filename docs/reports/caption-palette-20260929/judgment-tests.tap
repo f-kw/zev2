@@ -1,0 +1,55 @@
+TAP version 13
+# Subtest: a single extended semantic reply delegates the unchanged expression, range and connection judgment
+ok 1 - a single extended semantic reply delegates the unchanged expression, range and connection judgment
+  ---
+  duration_ms: 16.120166
+  ...
+# Subtest: palette choices are explicit and unconstrained by quotas; Yellow-only is valid
+ok 2 - palette choices are explicit and unconstrained by quotas; Yellow-only is valid
+  ---
+  duration_ms: 7.950708
+  ...
+# Subtest: partial Color stays exact through the original judgment and the separate fixed palette resolver
+ok 3 - partial Color stays exact through the original judgment and the separate fixed palette resolver
+  ---
+  duration_ms: 7.453875
+  ...
+# Subtest: new judgments require one known palette ID and refuse arbitrary RGB, null and missing values
+ok 4 - new judgments require one known palette ID and refuse arbitrary RGB, null and missing values
+  ---
+  duration_ms: 4.396208
+  ...
+# Subtest: original range, coverage, semantic role, evidence and non-Color selection checks cannot be bypassed
+ok 5 - original range, coverage, semantic role, evidence and non-Color selection checks cannot be bypassed
+  ---
+  duration_ms: 6.839916
+  ...
+# Subtest: old Panel choice remains in its original contract and contributes no Color palette row
+ok 6 - old Panel choice remains in its original contract and contributes no Color palette row
+  ---
+  duration_ms: 3.605542
+  ...
+# Subtest: source and extended input binding reject changed palettes, policy, clocks and unknown fields
+ok 7 - source and extended input binding reject changed palettes, policy, clocks and unknown fields
+  ---
+  duration_ms: 1.766083
+  ...
+# Subtest: strict JSON rejects duplicate keys, non-JSON payloads and lossy UTF-8
+ok 8 - strict JSON rejects duplicate keys, non-JSON payloads and lossy UTF-8
+  ---
+  duration_ms: 2.049916
+  ...
+# Subtest: saved replay checks original bytes, normalized delegate, selected palettes and both hashes
+ok 9 - saved replay checks original bytes, normalized delegate, selected palettes and both hashes
+  ---
+  duration_ms: 19.829459
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 134.701875
