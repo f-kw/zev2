@@ -10,6 +10,10 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {restoreOrchestrationDrawingViewEvidenceV001, assertOrchestrationDrawingViewV001}
   from './presentation_orchestration_v001.mjs';
 import {createOrchestrationRenderScopeV001} from './presentation_orchestration_render_scope_v001.mjs';
+import {DIGEST_STRUCTURE_VIEW_VERSION, assertDigestStructureDrawingViewV001, createDigestStructureRenderScopeV001}
+  from '../../tools/digest-quality/digest-structure-view.mjs';
+import {readDigestStructureDrawingEvidenceV001} from '../../tools/digest-quality/digest-structure-evidence.mjs';
+import {readPresentationDevProxyStructureBackgroundV001} from './presentation_dev_proxy_structure_background_v001.mjs';
 import {assertPresentationDevProxyProfileV001, assertPresentationDevProxySourceCanvasV001}
   from './presentation_dev_proxy_profile_v001.mjs';
 import {createPresentationDevProxyOverlaySessionV001} from './presentation_dev_proxy_overlay_session_v001.mjs';
@@ -38,7 +42,10 @@ const json = async file => JSON.parse(await readFile(file, 'utf8'));
 const save = async (file, value) => {await writeFile(file, JSON.stringify(value, null, 2) + '\n', {flag: 'wx'}); return bind(file);};
 const same = (a, b, reason) => assert.equal(canonicalJson(a), canonicalJson(b), reason);
 const VERSION = 'presentation-dev-proxy-completion-v001';
-const ownNames = ['presentation_dev_proxy_render_v001.mjs', 'presentation_dev_proxy_profile_v001.mjs',
+const ownNames = ['../../tools/digest-quality/digest-structure-view.mjs',
+  '../../tools/digest-quality/digest-structure-evidence.mjs', '../../tools/digest-quality/digest-structure-policy.mjs',
+  '../../tools/digest-quality/digest-structure-new-captions.mjs', 'presentation_dev_proxy_structure_background_v001.mjs',
+  'presentation_dev_proxy_render_v001.mjs', 'presentation_dev_proxy_profile_v001.mjs',
   'presentation_dev_proxy_overlay_session_v001.mjs', 'presentation_dev_proxy_media_v001.mjs'];
 async function bind(file) {
   assert(path.isAbsolute(file), 'an absolute artifact path is required');
@@ -51,6 +58,10 @@ async function verify(ref) {
   if (ref.bytes !== undefined) assert.equal(actual.bytes, ref.bytes, 'artifact size changed');
   return actual;
 }
+const isStructureView = view => view?.schemaVersion === DIGEST_STRUCTURE_VIEW_VERSION;
+const assertDevelopmentView = view => isStructureView(view) ? assertDigestStructureDrawingViewV001(view) : assertOrchestrationDrawingViewV001(view);
+const developmentScope = (view, range = null) => isStructureView(view)
+  ? createDigestStructureRenderScopeV001(view, range) : createOrchestrationRenderScopeV001(view, range);
 function finite(element, canvas) {
   assert(!(element.presentationPulse && element.presentationMotion), 'caption cannot have two finite programs');
   if (element.presentationMotion) return {kind: 'motion',
@@ -64,8 +75,8 @@ function finite(element, canvas) {
 
 /** Pure derivation: neither a second layout plan nor a new effect selection. */
 export function buildPresentationDevProxyStructureV001({view, profileId, range = null}) {
-  const profile = assertPresentationDevProxyProfileV001(profileId); assertOrchestrationDrawingViewV001(view);
-  const derived = createOrchestrationRenderScopeV001(view, range), plan = derived.resolvedPlan;
+  const profile = assertPresentationDevProxyProfileV001(profileId); assertDevelopmentView(view);
+  const derived = developmentScope(view, range), plan = derived.resolvedPlan;
   assertPresentationDevProxySourceCanvasV001(plan.canvas);
   const captions = plan.elements.map(element => ({captionId: element.instructionId,
     element: clone(element), ...clone(finite(element, plan.canvas))}));
@@ -99,6 +110,7 @@ export function assertPresentationDevProxyAlphaBoundsV001({element, canvas, prof
   return {alphaMax: observation.alphaMax, alphaBounds: clone(bounds)};
 }
 function sourceRefs(view) {
+  if (isStructureView(view)) return view.structureSourceReferences;
   const source = view.sourceRefs;
   return [source.planRef, source.timelineRef, source.mediaRef, source.decisionInputRef,
     source.pulseTimingEvidence.sourceRef, source.pulseTimingEvidence.candidatesRef, source.pulseTimingEvidence.peaksRef];
@@ -153,17 +165,31 @@ export function assertPresentationDevProxyBackgroundBindingV001({view, manifest,
   assert.equal(clock.audio.sampleRate, view.projection.sourceClock.playbackSampleRate);
   assert.equal(clock.audio.channels, 2);
 }
-async function loadInput({drawingEvidenceRef, profileId, range, baseProxyManifestRef, backgroundProofRef, tools}) {
+async function loadInput({drawingEvidenceRef, profileId, range, baseProxyManifestRef, backgroundProofRef, tools,
+  structureVerification = 'saved-receipt'}) {
   assertPresentationDevProxyProfileV001(profileId);
-  await verify(drawingEvidenceRef); const view = restoreOrchestrationDrawingViewEvidenceV001(await json(drawingEvidenceRef.path));
+  await verify(drawingEvidenceRef); const evidence = await json(drawingEvidenceRef.path);
+  const view = evidence.schemaVersion === 'digest-structure-drawing-evidence-v001'
+    ? await readDigestStructureDrawingEvidenceV001({evidenceRef: drawingEvidenceRef})
+    : restoreOrchestrationDrawingViewEvidenceV001(evidence);
   const structure = buildPresentationDevProxyStructureV001({view, profileId, range});
   for (const ref of sourceRefs(view)) await verify(ref);
   await verify(baseProxyManifestRef); await verify(backgroundProofRef);
   const baseManifest = await json(baseProxyManifestRef.path), background = await json(backgroundProofRef.path);
-  assertPresentationDevProxyBackgroundBindingV001({view, manifest: baseManifest, background});
-  const proxy = await readPresentationDevProxyMediaV001({manifestPath: baseProxyManifestRef.path,
-    sourceRef: baseManifest.sourceRef, sourceClock: baseManifest.sourceClock, profileId,
-    ffmpegPath: tools.ffmpegPath, ffprobePath: tools.ffprobePath});
+  let proxy;
+  if (isStructureView(view)) {
+    proxy = await readPresentationDevProxyStructureBackgroundV001({manifestRef: baseProxyManifestRef, profileId,
+      tools: {ffmpegPath: tools.ffmpegPath, ffprobePath: tools.ffprobePath}, expectedProjection: view.projection,
+      verification: structureVerification});
+    same(background, proxy.backgroundProof, 'structure background proof differs');
+    assert.equal(background.projectionSha256, view.projection.projectionSha256);
+    assert.equal(background.displayFrameCount, view.projection.displayFrameCount);
+  } else {
+    assertPresentationDevProxyBackgroundBindingV001({view, manifest: baseManifest, background});
+    proxy = await readPresentationDevProxyMediaV001({manifestPath: baseProxyManifestRef.path,
+      sourceRef: baseManifest.sourceRef, sourceClock: baseManifest.sourceClock, profileId,
+      ffmpegPath: tools.ffmpegPath, ffprobePath: tools.ffprobePath});
+  }
   return {view, structure, background, proxy, baseManifest};
 }
 function recordsFromStates(structure, stateRecords) {
@@ -261,7 +287,7 @@ export function validatePresentationDevProxyStructureV001({completion, view}) {
     same(row.props.canvas, view.resolvedPlan.canvas, 'logical canvas changed');
     for (const key of ['text', 'indexedLines', 'visualState']) same(row.props[key], wanted.element[key], 'source drawing property changed: ' + key);
     same(row.props.presentationColorRange ?? null, wanted.element.presentationColorRange ?? null, 'Color scope changed');
-    const sourceProps = builder(wanted.element, createOrchestrationRenderScopeV001(view, completion.range).resolvedPlan, completion.registry);
+    const sourceProps = builder(wanted.element, developmentScope(view, completion.range).resolvedPlan, completion.registry);
     const needsCalibration = wanted.element.visualState.position.preset === 'top-band'
       || isPresentationPanelBackgroundV002(wanted.element.visualState.background);
     assert.equal(row.calibration !== null, needsCalibration, 'source visible-center calibration coverage differs');
@@ -276,7 +302,7 @@ export function validatePresentationDevProxyStructureV001({completion, view}) {
   assert.equal(completion.logicalPlanCanonicalSha256, structure.sourcePlanCanonicalSha256);
   same(completion.localMedia.recipe, buildPresentationDevProxyRangeRecipeV001({sourceClock: completion.baseSourceClock, scope: structure.scope}), 'saved local range differs');
   same(completion.compositorArguments, buildPresentationCompositeArgumentsV001({baseMediaPath: completion.localMedia.videoAndPcm.path,
-    plan: createOrchestrationRenderScopeV001(view, completion.range).resolvedPlan,
+    plan: developmentScope(view, completion.range).resolvedPlan,
     overlayRecords: recordsFromStates(structure, completion.stateRecords), expectedFrameCount: structure.scope.frameCount,
     serializePngAndFilters: true, audioMediaPath: completion.localMedia.audio.path, renderRange: structure.renderRange}), 'saved compositor command differs');
   checkMedia(completion.outputMedia, structure, completion.inputAudio);
@@ -289,7 +315,7 @@ export async function renderPresentationDevProxyV001({drawingEvidenceRef, profil
   onProgress = () => {}}) {
   assertPresentationDevProxyProfileV001(profileId); const tools = toolOptions(requestedTools);
   const input = await loadInput({drawingEvidenceRef, profileId, range, baseProxyManifestRef, backgroundProofRef, tools});
-  const {view, structure} = input, plan = createOrchestrationRenderScopeV001(view, range).resolvedPlan;
+  const {view, structure} = input, plan = developmentScope(view, range).resolvedPlan;
   const start = performance.now(), timings = {}, guarded = assertIgnoredPresentationOutputDirectoryV001({repositoryRoot: repo, outputDirectory});
   await mkdir(outputDirectory);
   const processObserver = createPresentationRendererProcessObserverV001({observationDirectory: path.join(outputDirectory, 'processes')});
@@ -396,7 +422,8 @@ export async function renderPresentationDevProxyV001({drawingEvidenceRef, profil
 export async function readPresentationDevProxyV001({completionRef}) {
   await verify(completionRef); const completion = await json(completionRef.path);
   const tools = toolOptions(completion.tools);
-  const {view, structure, baseManifest, proxy} = await loadInput({...completion, tools});
+  const {view, structure, baseManifest, proxy} = await loadInput({...completion, tools,
+    structureVerification: 'independent-observation'});
   validatePresentationDevProxyStructureV001({completion, view});
   same(completion.baseSourceClock, baseManifest.sourceClock, 'saved background clock differs');
   same(completion.localMedia.sourceProxyRef, proxy.mediaRef, 'saved local media source differs');
@@ -449,5 +476,7 @@ export async function readPresentationDevProxyV001({completionRef}) {
   same(audio, completion.outputAudioClock, 'saved proxy audio clock differs');
   await verify(completionRef);
   return {status: 'development-proxy-ready', completion, completionRef, mediaRef: completion.outputVideo,
+    ...(isStructureView(view) ? {structureInputVerification: proxy.verification,
+      structureIndependentObservation: proxy.independentVerification} : {}),
     finalPixelQc: 'not-run-dev-only', humanQuality: 'not-evaluated'};
 }

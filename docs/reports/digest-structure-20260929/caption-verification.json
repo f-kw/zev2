@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "digest-structure-caption-verification-v001",
+  "status": "passed",
+  "startedAt": "2026-09-29T02:50:55.648Z",
+  "endedAt": "2026-09-29T02:50:56.803Z",
+  "wallMilliseconds": 1153.732416,
+  "scope": "Independent saved JSON and source-atom verification; no media decoding, raster check, font remeasurement or human-quality decision.",
+  "refs": {
+    "captionsResult": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/captions-result.json",
+      "bytes": 1457,
+      "fileSha256": "69633755ba9a816ee7446b03daceb9c7aadaf3f272ac656f78ef2123a059e97b"
+    },
+    "newCaptions": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/new-captions.json",
+      "bytes": 2345693,
+      "fileSha256": "cfd77ae725ff989bf6d5d8e16e19ae5f9b6d06d9d05e58d148aa253510757e64"
+    },
+    "drawingEvidence": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/drawing-evidence.json",
+      "bytes": 2269,
+      "fileSha256": "d6d83eb9cc3097413990ff526f496d08f58a9fb1bf48bed6ce1b0c7afb84e7cf"
+    },
+    "projection": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/projection.json",
+      "bytes": 6599,
+      "fileSha256": "e598e56c6ca421f5e746c669ca922ee100c8c1282899da43e5f6fb8250390d81"
+    },
+    "sourcePlans": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/source-plans.json",
+      "bytes": 3016442,
+      "fileSha256": "27340621898c26225318027ee2983ddd473f3005356fa86fc599b08f80632b46"
+    },
+    "baseNormalPlan": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-normal-plan.json",
+      "bytes": 1380169,
+      "fileSha256": "b000e95c53f8c72628d9f653f2b97ee63458612278985d22b4a20a78409df7c3"
+    },
+    "timeline": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/timeline.json",
+      "bytes": 2115,
+      "fileSha256": "ed1167aefbcb7cf1e48c1cb286ab06728f712afa0277ce4743f4b627afa49dc6"
+    },
+    "structureState": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/structure-state.json",
+      "bytes": 167561,
+      "fileSha256": "ad68f21a63b7d669693e72f21df1bdc27edb3d696cff9b63e7439494d55d8801"
+    },
+    "transcript": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+      "bytes": 6804193,
+      "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+    },
+    "retained7AEvidence": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/candidate-drawing-evidence.json",
+      "bytes": 14946621,
+      "fileSha256": "47daba62ab462c1945a2d4742a46604aecf359eb004cca92577636bcb7ce39e1"
+    }
+  },
+  "counts": {
+    "introCaptions": 11,
+    "closureCaptions": 4,
+    "newCaptions": 15,
+    "preservedMainCaptions": 250,
+    "combinedCaptions": 265,
+    "newSingleLineCaptions": 14,
+    "newTwoLineCaptions": 1,
+    "newSourceAtoms": 153,
+    "zeroFrameSourceAtomsPreserved": 2,
+    "retainedByOldSegment": {
+      "segment-0001": 68,
+      "segment-0002": 98,
+      "segment-0003": 84
+    }
+  },
+  "clocks": {
+    "newCaptionPackage": "pre-connection base clock",
+    "preConnectionFrameCount": 17589,
+    "postConnectionFrameCount": 17613,
+    "fps": 30,
+    "insertedFrames": 24
+  },
+  "invariants": {
+    "newTextAndSourceFragmentOrderExact": true,
+    "allSourceAtomsCoveredExactlyOnce": true,
+    "zeroFrameAtomsRetained": true,
+    "sourceMsAndExisting30FpsConversionExact": true,
+    "internalCutsAtRightSourceAtomStart": true,
+    "outerFramesUnchanged": true,
+    "newNormalAndResolvedIdentical": true,
+    "newMeasuredLineWidthsFitSavedLimit": true,
+    "preservedMainNormalAndResolvedIdenticalExceptExactClockAndSegmentShift": true,
+    "savedMainOriginalCanonicalHashesMatch": true,
+    "combinedNormalPlanMatchesBoundPlan": true,
+    "inputRefsUnchangedDuringVerification": true
+  },
+  "newCaptionDetails": [
+    {
+      "role": "intro",
+      "captionCount": 11,
+      "sourceAtomCount": 105,
+      "firstSourceFragmentId": 68,
+      "lastSourceFragmentId": 172,
+      "sourceStartMs": 159770,
+      "sourceEndMs": 184064,
+      "outerBaseRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 729
+      },
+      "rows": [
+        {
+          "captionId": "7b-intro-0001-readability-01",
+          "lineCount": 1,
+          "startFrame": 0,
+          "endFrameExclusive": 117,
+          "measuredWidthsPx": [
+            1468
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-02",
+          "lineCount": 1,
+          "startFrame": 117,
+          "endFrameExclusive": 141,
+          "measuredWidthsPx": [
+            1180
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-03",
+          "lineCount": 1,
+          "startFrame": 141,
+          "endFrameExclusive": 173,
+          "measuredWidthsPx": [
+            892
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-04",
+          "lineCount": 1,
+          "startFrame": 173,
+          "endFrameExclusive": 244,
+          "measuredWidthsPx": [
+            1180
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-05",
+          "lineCount": 1,
+          "startFrame": 244,
+          "endFrameExclusive": 335,
+          "measuredWidthsPx": [
+            1900
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-06",
+          "lineCount": 1,
+          "startFrame": 335,
+          "endFrameExclusive": 403,
+          "measuredWidthsPx": [
+            1612
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-07",
+          "lineCount": 1,
+          "startFrame": 403,
+          "endFrameExclusive": 535,
+          "measuredWidthsPx": [
+            1756
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-08",
+          "lineCount": 1,
+          "startFrame": 535,
+          "endFrameExclusive": 614,
+          "measuredWidthsPx": [
+            1468
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-09",
+          "lineCount": 1,
+          "startFrame": 614,
+          "endFrameExclusive": 642,
+          "measuredWidthsPx": [
+            1324
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-10",
+          "lineCount": 1,
+          "startFrame": 642,
+          "endFrameExclusive": 671,
+          "measuredWidthsPx": [
+            1468
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-intro-0001-readability-11",
+          "lineCount": 1,
+          "startFrame": 671,
+          "endFrameExclusive": 729,
+          "measuredWidthsPx": [
+            1128
+          ],
+          "twoLineReason": null
+        }
+      ]
+    },
+    {
+      "role": "closure",
+      "captionCount": 4,
+      "sourceAtomCount": 48,
+      "firstSourceFragmentId": 43937,
+      "lastSourceFragmentId": 43984,
+      "sourceStartMs": 11919259,
+      "sourceEndMs": 11928188,
+      "outerBaseRange": {
+        "startFrame": 17321,
+        "endFrameExclusive": 17589
+      },
+      "rows": [
+        {
+          "captionId": "7b-closure-0001-readability-01",
+          "lineCount": 2,
+          "startFrame": 17321,
+          "endFrameExclusive": 17403,
+          "measuredWidthsPx": [
+            460,
+            1612
+          ],
+          "twoLineReason": "先頭句単独では保存時計に対して既存fadeの8フレームを確保できないため、謝辞を一つの表示として意味境界に改行する。"
+        },
+        {
+          "captionId": "7b-closure-0001-readability-02",
+          "lineCount": 1,
+          "startFrame": 17403,
+          "endFrameExclusive": 17445,
+          "measuredWidthsPx": [
+            1468
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-closure-0001-readability-03",
+          "lineCount": 1,
+          "startFrame": 17445,
+          "endFrameExclusive": 17512,
+          "measuredWidthsPx": [
+            1756
+          ],
+          "twoLineReason": null
+        },
+        {
+          "captionId": "7b-closure-0001-readability-04",
+          "lineCount": 1,
+          "startFrame": 17512,
+          "endFrameExclusive": 17589,
+          "measuredWidthsPx": [
+            1756
+          ],
+          "twoLineReason": null
+        }
+      ]
+    }
+  ],
+  "notVerified": [
+    "Final video raster clipping and visibility",
+    "Media frame/PTS/audio correctness",
+    "Human-quality acceptance",
+    "Independent media reread"
+  ],
+  "measurement": {
+    "origin": "loaded-font-browser",
+    "requestCount": 166,
+    "rowCount": 166,
+    "maxAllowedWidthPx": 1912
+  },
+  "humanQuality": "not-evaluated",
+  "rasterClipping": "not-evaluated"
+}

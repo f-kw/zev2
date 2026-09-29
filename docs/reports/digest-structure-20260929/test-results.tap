@@ -1,0 +1,286 @@
+TAP version 13
+# Subtest: explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range
+ok 1 - explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range
+  ---
+  duration_ms: 35.997042
+  ...
+# Subtest: unknown, absent and final profile never enter the development drawing path
+ok 2 - unknown, absent and final profile never enter the development drawing path
+  ---
+  duration_ms: 18.585083
+  ...
+# Subtest: source projection origin, end, frame rate and audio clock must match the passed full background
+ok 3 - source projection origin, end, frame rate and audio clock must match the passed full background
+  ---
+  duration_ms: 16.29
+  ...
+# Subtest: range cutting derives exact frame and PCM sample boundaries for both existing sample rates
+ok 4 - range cutting derives exact frame and PCM sample boundaries for both existing sample rates
+  ---
+  duration_ms: 15.656917
+  ...
+# Subtest: structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion
+ok 5 - structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion
+  ---
+  duration_ms: 49.45075
+  ...
+# Subtest: actual alpha observations reject empty and physically out-of-area overlays without a tolerance
+ok 6 - actual alpha observations reject empty and physically out-of-area overlays without a tolerance
+  ---
+  duration_ms: 13.200458
+  ...
+# Subtest: short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting
+ok 7 - short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting
+  ---
+  duration_ms: 117.014958
+  ...
+# Subtest: selected intervals use source absolute PTS and samples, preserving global-even parity after bounded seeking
+ok 8 - selected intervals use source absolute PTS and samples, preserving global-even parity after bounded seeking
+  ---
+  duration_ms: 1.83725
+  ...
+# Subtest: rejects foreign source SHA
+ok 9 - rejects foreign source SHA
+  ---
+  duration_ms: 0.879792
+  ...
+# Subtest: rejects foreign source path
+ok 10 - rejects foreign source path
+  ---
+  duration_ms: 1.001542
+  ...
+# Subtest: rejects unknown profile
+ok 11 - rejects unknown profile
+  ---
+  duration_ms: 0.564917
+  ...
+# Subtest: rejects shifted mapping
+ok 12 - rejects shifted mapping
+  ---
+  duration_ms: 2.651084
+  ...
+# Subtest: rejects shifted sample mapping
+ok 13 - rejects shifted sample mapping
+  ---
+  duration_ms: 0.540416
+  ...
+# Subtest: rejects source frame offset
+ok 14 - rejects source frame offset
+  ---
+  duration_ms: 0.662916
+  ...
+# Subtest: rejects source gap
+ok 15 - rejects source gap
+  ---
+  duration_ms: 1.509209
+  ...
+# Subtest: rejects unsupported frame rate
+ok 16 - rejects unsupported frame rate
+  ---
+  duration_ms: 0.684292
+  ...
+# Subtest: rejects source rotation
+ok 17 - rejects source rotation
+  ---
+  duration_ms: 0.848792
+  ...
+# Subtest: small actual selected-source manufacture, connections and independent readback preserve every clock and PCM sample
+    # Subtest: explicit recovery preserves previous video packets and replaces sought PCM from source origin
+    ok 1 - explicit recovery preserves previous video packets and replaces sought PCM from source origin
+      ---
+      duration_ms: 3301.403041
+      ...
+    # Subtest: rejects unrelated recovery input and unsuccessful original command
+    ok 2 - rejects unrelated recovery input and unsuccessful original command
+      ---
+      duration_ms: 119.53275
+      ...
+    # Subtest: refuses output reuse
+    ok 3 - refuses output reuse
+      ---
+      duration_ms: 65.356125
+      ...
+    # Subtest: refuses changed source bytes
+    ok 4 - refuses changed source bytes
+      ---
+      duration_ms: 3.716917
+      ...
+    # Subtest: failed child process leaves incomplete evidence, never a successful receipt
+    ok 5 - failed child process leaves incomplete evidence, never a successful receipt
+      ---
+      duration_ms: 89.608083
+      ...
+    # Subtest: refuses different requested structure
+    ok 6 - refuses different requested structure
+      ---
+      duration_ms: 1.223
+      ...
+    # Subtest: rejects forged successful receipt after failed production command
+    ok 7 - rejects forged successful receipt after failed production command
+      ---
+      duration_ms: 1.540875
+      ...
+    # Subtest: rejects corrupted media payload
+    ok 8 - rejects corrupted media payload
+      ---
+      duration_ms: 126.456875
+      ...
+    1..8
+ok 18 - small actual selected-source manufacture, connections and independent readback preserve every clock and PCM sample
+  ---
+  duration_ms: 8039.727583
+  ...
+# Subtest: new roles preserve text, zero-frame atoms and exact source clocks through existing 7A partitioning
+ok 19 - new roles preserve text, zero-frame atoms and exact source clocks through existing 7A partitioning
+  ---
+  duration_ms: 8.086542
+  ...
+# Subtest: fresh-process restore rejects altered source, measurement, plan and unknown/main roles
+ok 20 - fresh-process restore rejects altered source, measurement, plan and unknown/main roles
+  ---
+  duration_ms: 164.811833
+  ...
+# Subtest: optional exact projection adds only connection shift and binds original timeline bytes
+ok 21 - optional exact projection adds only connection shift and binds original timeline bytes
+  ---
+  duration_ms: 14.408667
+  ...
+# Subtest: synthetic widths cannot be written as real measured evidence; missing spans are rejected
+ok 22 - synthetic widths cannot be written as real measured evidence; missing spans are rejected
+  ---
+  duration_ms: 26.813083
+  ...
+# Subtest: an explicit two-line exception preserves a phrase whose short leading clause cannot form a faded caption
+ok 23 - an explicit two-line exception preserves a phrase whose short leading clause cannot form a faded caption
+  ---
+  duration_ms: 12.952541
+  ...
+# Subtest: new NUT media keeps its actual path and identical clock mapping without claiming the old MP4 timeline contract
+ok 24 - new NUT media keeps its actual path and identical clock mapping without claiming the old MP4 timeline contract
+  ---
+  duration_ms: 20.984708
+  ...
+# Subtest: fixed context judgments produce finite roles and existing exact source frame/sample mappings
+ok 25 - fixed context judgments produce finite roles and existing exact source frame/sample mappings
+  ---
+  duration_ms: 2.991
+  ...
+# Subtest: no intro or closure is a valid explicitly absent choice; related side topic stays intact
+ok 26 - no intro or closure is a valid explicitly absent choice; related side topic stays intact
+  ---
+  duration_ms: 1.031292
+  ...
+# Subtest: one override changes only its target; Reset removes it and restores the saved automatic proposal
+ok 27 - one override changes only its target; Reset removes it and restores the saved automatic proposal
+  ---
+  duration_ms: 4.829417
+  ...
+# Subtest: exclude restoration preserves all original candidate fragments and exposes explicit old/new correspondence
+ok 28 - exclude restoration preserves all original candidate fragments and exposes explicit old/new correspondence
+  ---
+  duration_ms: 2.707208
+  ...
+# Subtest: main/unknown targets and nonboolean controls cannot edit structure
+ok 29 - main/unknown targets and nonboolean controls cannot edit structure
+  ---
+  duration_ms: 1.650375
+  ...
+# Subtest: source order and overlap are rejected, never repaired by sorting
+ok 30 - source order and overlap are rejected, never repaired by sorting
+  ---
+  duration_ms: 1.125666
+  ...
+# Subtest: a closure before a restored candidate needs explicit disabling; other overrides are never silently changed
+ok 31 - a closure before a restored candidate needs explicit disabling; other overrides are never silently changed
+  ---
+  duration_ms: 7.617958
+  ...
+# Subtest: saved prior candidates cannot be dropped from catalog, reidentified, trimmed or internally repartitioned
+ok 32 - saved prior candidates cannot be dropped from catalog, reidentified, trimmed or internally repartitioned
+  ---
+  duration_ms: 4.297334
+  ...
+# Subtest: new source candidates cannot add new main roles and evidence must quote actual ordered fragments
+ok 33 - new source candidates cannot add new main roles and evidence must quote actual ordered fragments
+  ---
+  duration_ms: 3.492667
+  ...
+# Subtest: source reference forgery, incorrect file SHA, byte count and missing transcript clocks are refused
+ok 34 - source reference forgery, incorrect file SHA, byte count and missing transcript clocks are refused
+  ---
+  duration_ms: 1.517375
+  ...
+# Subtest: missing interior fragments and source-rounded interval changes are refused
+ok 35 - missing interior fragments and source-rounded interval changes are refused
+  ---
+  duration_ms: 0.972417
+  ...
+# Subtest: save/reload rederives hashes, choices, source mappings and diff from original bytes
+ok 36 - save/reload rederives hashes, choices, source mappings and diff from original bytes
+  ---
+  duration_ms: 1.667208
+  ...
+# Subtest: tampered saved automatic plans, override entries, missing fields and resolved hashes do not restore
+ok 37 - tampered saved automatic plans, override entries, missing fields and resolved hashes do not restore
+  ---
+  duration_ms: 2.304417
+  ...
+# Subtest: a separate process restores the same selected source/frame/sample correspondence without an AI call
+ok 38 - a separate process restores the same selected source/frame/sample correspondence without an AI call
+  ---
+  duration_ms: 108.676875
+  ...
+# Subtest: retained real 7A children keep IDs, text, lines, source atoms and effects while timeline IDs and integer clocks move once
+ok 39 - retained real 7A children keep IDs, text, lines, source atoms and effects while timeline IDs and integer clocks move once
+  ---
+  duration_ms: 1507.689459
+  ...
+# Subtest: same adjacent main pairs retain Soft/Black while intro and closure use normal cuts; projection is applied once
+ok 40 - same adjacent main pairs retain Soft/Black while intro and closure use normal cuts; projection is applied once
+  ---
+  duration_ms: 171.764958
+  ...
+# Subtest: one exclusion override restores its exact children and Reset reconstructs the same complete saved structure view
+ok 41 - one exclusion override restores its exact children and Reset reconstructs the same complete saved structure view
+  ---
+  duration_ms: 611.076792
+  ...
+# Subtest: missing, reordered, changed-text or changed-effect retained children cannot replace the bound saved source plans
+ok 42 - missing, reordered, changed-text or changed-effect retained children cannot replace the bound saved source plans
+  ---
+  duration_ms: 525.959875
+  ...
+# Subtest: unbranded or edited copies of the 7A source and copies of the derived structure view are rejected
+ok 43 - unbranded or edited copies of the 7A source and copies of the derived structure view are rejected
+  ---
+  duration_ms: 364.553458
+  ...
+# Subtest: extra, missing, mismatched, duplicate or out-of-range new captions are not silently discarded
+ok 44 - extra, missing, mismatched, duplicate or out-of-range new captions are not silently discarded
+  ---
+  duration_ms: 209.847667
+  ...
+# Subtest: timeline, caption bytes and connection substitutions cannot change the intended projection
+ok 45 - timeline, caption bytes and connection substitutions cannot change the intended projection
+  ---
+  duration_ms: 561.164208
+  ...
+# Subtest: a bounded render keeps global caption/state clocks and uses exact frame/sample range coordinates
+ok 46 - a bounded render keeps global caption/state clocks and uses exact frame/sample range coordinates
+  ---
+  duration_ms: 172.0055
+  ...
+# Subtest: Pulse peak, all finite states and motion phrase-end anchors shift by the same integer without changing the source decision
+ok 47 - Pulse peak, all finite states and motion phrase-end anchors shift by the same integer without changing the source decision
+  ---
+  duration_ms: 1.113584
+  ...
+1..47
+# tests 55
+# suites 0
+# pass 55
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8102.899166

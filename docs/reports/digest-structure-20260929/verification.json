@@ -1,0 +1,450 @@
+{
+  "schemaVersion": "digest-structure-verification-v001",
+  "observedAt": "2026-09-29T03:00:20.392Z",
+  "status": "technical-checks-passed",
+  "baselineHead": "46cbae74de41793ad20cef763a139fdb7a351131",
+  "instructionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/instruction.txt",
+    "bytes": 7965,
+    "fileSha256": "f99f4cd241d95d511455f29737eafcc1971eadc846c7dd3e8fcfff5969c1e47e"
+  },
+  "candidate": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/development-proxy.mp4",
+    "bytes": 94261728,
+    "fileSha256": "0f67cb73b646bbe209b41d0af3378bf09f4ebbfbddab651a7784291a6137ee35"
+  },
+  "completionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/completion.json",
+    "bytes": 7875030,
+    "fileSha256": "35e04e4909d35cfb8907d7e63755ce19f84176d36766faac5b0f223597a4ee48"
+  },
+  "inputs": {
+    "structureStateRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/structure-state.json",
+      "bytes": 167561,
+      "fileSha256": "ad68f21a63b7d669693e72f21df1bdc27edb3d696cff9b63e7439494d55d8801"
+    },
+    "sourceInspectionRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+      "bytes": 2744,
+      "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+    },
+    "sourceDrawingEvidenceRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-full-20260929-v001/candidate-drawing-evidence.json",
+      "bytes": 14946621,
+      "fileSha256": "47daba62ab462c1945a2d4742a46604aecf359eb004cca92577636bcb7ce39e1"
+    },
+    "preservedVideo": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-full-20260929-v001/presentation-rendered-v002.mp4",
+      "bytes": 675155103,
+      "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+    }
+  },
+  "captions": {
+    "evidenceRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/drawing-evidence.json",
+      "bytes": 2269,
+      "fileSha256": "d6d83eb9cc3097413990ff526f496d08f58a9fb1bf48bed6ce1b0c7afb84e7cf"
+    },
+    "projectionRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/projection.json",
+      "bytes": 6599,
+      "fileSha256": "e598e56c6ca421f5e746c669ca922ee100c8c1282899da43e5f6fb8250390d81"
+    },
+    "newCaptionPackageRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/new-captions.json",
+      "bytes": 2345693,
+      "fileSha256": "cfd77ae725ff989bf6d5d8e16e19ae5f9b6d06d9d05e58d148aa253510757e64"
+    },
+    "captionCount": 265,
+    "preservedCaptionCount": 250,
+    "newCaptionCount": 15,
+    "frameCount": 17613,
+    "viewSha256": "48b71ee7c075f871f5b2934d6575325475843370d7abe298759be675a1284ca1"
+  },
+  "captionVerification": "caption-verification.json",
+  "structure": {
+    "selectedSegments": 5,
+    "baseFrames": 17589,
+    "displayFrames": 17613,
+    "durationSeconds": 587.1,
+    "overrideAndReset": [
+      {
+        "segmentId": "structure-intro",
+        "changeSavedAndRestored": true,
+        "resetExactOriginal": true,
+        "frameCount": 16860
+      },
+      {
+        "segmentId": "segment-0004",
+        "changeSavedAndRestored": true,
+        "resetExactOriginal": true,
+        "frameCount": 26061
+      },
+      {
+        "segmentId": "segment-0005",
+        "changeSavedAndRestored": true,
+        "resetExactOriginal": true,
+        "frameCount": 20426
+      },
+      {
+        "segmentId": "structure-closure",
+        "changeSavedAndRestored": true,
+        "resetExactOriginal": true,
+        "frameCount": 17321
+      }
+    ],
+    "decisionReruns": 0
+  },
+  "media": {
+    "durationMs": 587100,
+    "video": {
+      "codecName": "h264",
+      "width": 960,
+      "height": 540,
+      "fps": 30,
+      "frameCount": 17613
+    },
+    "audio": {
+      "codecName": "aac",
+      "sampleRate": 44100,
+      "channelLayout": "stereo",
+      "durationMs": 587100,
+      "packetPayloadSha256": "ea550bc89739fec8a3cf8a7d3ec506107203fdbff66e4144fecd5dee6a9aabe5"
+    }
+  },
+  "frameClock": {
+    "status": "passed",
+    "frameCount": 17613,
+    "fps": 30,
+    "timeBase": "1/15360",
+    "firstPts": "0",
+    "lastPts": "9017344",
+    "decodedFrameClockCanonicalSha256": "7ed4df824def779c0e036f060fe2755a0207d8fca2482fb04d665a783b37c107",
+    "rule": "every-decoded-PTS-equals-frame-index-over-fps"
+  },
+  "audioClock": {
+    "status": "passed",
+    "sampleRate": 44100,
+    "channels": 2,
+    "streamTimeBase": "1/44100",
+    "presentationStartSample": 0,
+    "presentationEndSampleExclusive": 25891110,
+    "durationSeconds": 587.1,
+    "firstPacket": {
+      "pts": -1024,
+      "dts": -1024,
+      "duration": 1024,
+      "side_data_list": [
+        {
+          "side_data_type": "Skip Samples",
+          "skip_samples": 1024,
+          "discard_padding": 0,
+          "skip_reason": 0,
+          "discard_reason": 0
+        }
+      ]
+    },
+    "lastPacket": {
+      "pts": 25890816,
+      "dts": 25890816,
+      "duration": 294
+    },
+    "packetCount": 25286,
+    "primingSkipSamples": 1024,
+    "firstDecodedFrame": {
+      "pts": 0,
+      "best_effort_timestamp": 0,
+      "nb_samples": 1024
+    },
+    "packetPayloadSha256": "ea550bc89739fec8a3cf8a7d3ec506107203fdbff66e4144fecd5dee6a9aabe5",
+    "rawDecodedSampleCount": 25891840,
+    "logicalDecodedSampleCount": 25891110,
+    "decodedTailSampleCount": 730,
+    "rawDecodedPayloadSha256": "e69309fc87706979b2a903f0428523da898dd2e511b75c26a7f93bffbb377014",
+    "logicalDecodedPayloadSha256": "7d50805ad4d73e7868448eb9a3c0458dd5c9de61abfe4eeaa1ed57314fddbc06",
+    "logicalDecodedInterval": {
+      "startSample": 0,
+      "endSampleExclusive": 25891110
+    },
+    "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+  },
+  "audioMatchesEncodedInput": true,
+  "rendering": {
+    "stateCount": 307,
+    "allPhysicalStateAlphaBoundsVerified": true,
+    "structuralQc": {
+      "status": "passed",
+      "scope": "source decisions/clocks/state order, logical layout, output dimensions/frame count/audio"
+    },
+    "finalPixelQc": "not-run-dev-only",
+    "humanQuality": "not-evaluated",
+    "timings": {
+      "logicalLayoutMilliseconds": 305.8718749999989,
+      "overlayMilliseconds": 109131.32075,
+      "rangePreparationMilliseconds": 40947.21624999998,
+      "compositeMilliseconds": 151679.79025000002,
+      "elapsedMilliseconds": 326814.888584
+    }
+  },
+  "independentRead": {
+    "status": "development-proxy-ready",
+    "mode": {
+      "mode": "independent-observation",
+      "status": "passed"
+    },
+    "background": "passed",
+    "sourceBase": "passed",
+    "resultRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/reread-result.json",
+      "bytes": 8807205,
+      "fileSha256": "41321bb213e22ae533c0878f371356f2ddd3219a47e902f839f922586641a90e"
+    }
+  },
+  "oldArtifacts": {
+    "status": "all-preserved",
+    "drawingSourceFiles": 69,
+    "video": {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-full-20260929-v001/presentation-rendered-v002.mp4",
+      "bytes": 675155103,
+      "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+    }
+  },
+  "recovery": {
+    "initialStatus": "incomplete",
+    "message": "selected source audio samples changed\n+ actual - expected\n\n+ '{\"bytes\":40230960,\"sha256\":\"45ab1621f62bf9303709a1df9bedf4d9a7c0d58e629cde5eb01fcc507fe1e32b\"}'\n- '{\"bytes\":40230960,\"sha256\":\"a81ff90489d8e2bab9819417d5a1a853b577cd53c4210cfc2a3f2de1b2b69730\"}'",
+    "startedAt": "2026-09-29T02:33:28.325Z",
+    "failureRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base/failure.json",
+      "bytes": 13781,
+      "fileSha256": "d2458a5c9ba318766e55c69ade4c301496ad1b1fa49a4991a01ba91f63a4906c"
+    },
+    "oldImplementationRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base/source-before-aac-origin-fix.mjs",
+      "bytes": 37004,
+      "fileSha256": "d6f25a514bf0db6bc65f612e959cc408544f43ddefaee7eb53995fdaf9c2e3fc"
+    },
+    "diagnosis": "source-aac-seek-diagnosis.json",
+    "audioDecode": "source-origin-zero-continuous-decoder-absolute-sample-trim-v001",
+    "reusedVideoPieces": [
+      {
+        "mediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-resume-v001/piece-0001.nut",
+          "bytes": 11317843,
+          "fileSha256": "b279b36a3b9d1ae1d8af276d14d9924f65d2a737aa88103e1b4f51745372e187"
+        },
+        "oldMediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base/piece-0001.nut",
+          "bytes": 11317874,
+          "fileSha256": "80979cce13017592441dfb79df425b1c9e14cbae349e10fa5b754bb0e913f4f6"
+        },
+        "videoPacketIdentity": {
+          "packets": 729,
+          "packetHashesSha256": "4c29983ac51b4b2d61b925f309453cb94cf1fb445da2d1d2b89ba057b765494f"
+        },
+        "audioMatchesOrigin": true
+      },
+      {
+        "mediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-resume-v001/piece-0002.nut",
+          "bytes": 53079099,
+          "fileSha256": "a0a541553e5b605058ac46da14a823fb40683af610e6d0625f174f9a307b8dbe"
+        },
+        "oldMediaRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base/piece-0002.nut",
+          "bytes": 53079130,
+          "fileSha256": "c808569b56486c2a9a18dced0f355b87e8ab99717e73604b8edbb166b3cd7f86"
+        },
+        "videoPacketIdentity": {
+          "packets": 3421,
+          "packetHashesSha256": "f5d76e02c8837c758dfb60b91e749237edaaaf8e8cc5fbff25b366357edbe6da"
+        },
+        "audioMatchesOrigin": true
+      }
+    ],
+    "oldMediaDeleted": false
+  },
+  "stages": [
+    {
+      "stage": "base-resume",
+      "startedAt": "2026-09-29T02:44:43.036Z",
+      "endedAt": "2026-09-29T02:47:28.176Z",
+      "wallSeconds": 165.141397792,
+      "parentMaxRssBytes": 206880768,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:44:43.045Z",
+        "freeBytes": 25950769152
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:47:28.176Z",
+        "freeBytes": 25317421056
+      }
+    },
+    {
+      "stage": "captions",
+      "startedAt": "2026-09-29T02:47:49.261Z",
+      "endedAt": "2026-09-29T02:47:55.916Z",
+      "wallSeconds": 6.656619916,
+      "parentMaxRssBytes": 810762240,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:47:49.268Z",
+        "freeBytes": 25314709504
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:47:55.916Z",
+        "freeBytes": 25307947008
+      }
+    },
+    {
+      "stage": "background",
+      "startedAt": "2026-09-29T02:48:07.330Z",
+      "endedAt": "2026-09-29T02:48:45.822Z",
+      "wallSeconds": 38.493674583,
+      "parentMaxRssBytes": 470269952,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:48:07.337Z",
+        "freeBytes": 25307877376
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:48:45.822Z",
+        "freeBytes": 25004032000
+      }
+    },
+    {
+      "stage": "render",
+      "startedAt": "2026-09-29T02:49:07.152Z",
+      "endedAt": "2026-09-29T02:54:47.710Z",
+      "wallSeconds": 340.55809583300004,
+      "parentMaxRssBytes": 685621248,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:49:07.160Z",
+        "freeBytes": 25003823104
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:54:47.711Z",
+        "freeBytes": 24509849600
+      }
+    },
+    {
+      "stage": "reread",
+      "startedAt": "2026-09-29T02:55:22.903Z",
+      "endedAt": "2026-09-29T02:58:40.683Z",
+      "wallSeconds": 197.78051700000003,
+      "parentMaxRssBytes": 476200960,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:55:22.914Z",
+        "freeBytes": 24514150400
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:58:40.683Z",
+        "freeBytes": 24515317760
+      }
+    },
+    {
+      "stage": "overrides",
+      "startedAt": "2026-09-29T02:30:06.281Z",
+      "endedAt": "2026-09-29T02:30:06.579Z",
+      "wallSeconds": 0.29842337500000005,
+      "parentMaxRssBytes": 160907264,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:30:06.289Z",
+        "freeBytes": 26023993344
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:30:06.580Z",
+        "freeBytes": 26023985152
+      }
+    },
+    {
+      "stage": "preserved",
+      "startedAt": "2026-09-29T02:50:21.555Z",
+      "endedAt": "2026-09-29T02:50:24.359Z",
+      "wallSeconds": 2.806238417,
+      "parentMaxRssBytes": 205799424,
+      "memoryScope": "Node parent only",
+      "diskBefore": {
+        "observedAt": "2026-09-29T02:50:21.562Z",
+        "freeBytes": 24915820544
+      },
+      "diskAfter": {
+        "observedAt": "2026-09-29T02:50:24.359Z",
+        "freeBytes": 24914898944
+      }
+    }
+  ],
+  "resources": {
+    "scope": "7B runtime directory only, including retained failed attempt and evidence; final size, not peak or physical I/O",
+    "storage": {
+      "bytes": 1447933512,
+      "allocatedBytes": 1472294912,
+      "fileCount": 4225
+    },
+    "childRss": "not-measured",
+    "simultaneousParentChildPeakRss": "not-measured",
+    "peakDisk": "not-measured",
+    "physicalIo": "not-measured"
+  },
+  "tests": {
+    "passed": 55,
+    "failed": 0,
+    "skipped": 0,
+    "wallMilliseconds": 8102.899166,
+    "record": "test-results.tap"
+  },
+  "opEd": {
+    "status": "not-established-from-saved-records",
+    "used": false,
+    "evidence": "metadata has no chapters; transcript silence does not establish OP/ED; no music/visual inference"
+  },
+  "notRun": [
+    "STT",
+    "external AI/API",
+    "new source acquisition",
+    "full-source proxy",
+    "full 1080p render/QC",
+    "human quality adoption"
+  ],
+  "inputAndExecutionRecords": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/structure-resolution.json",
+      "bytes": 90106,
+      "fileSha256": "7ed7cc10587514111789bb304b082f7901b8a15891990828ce0f3027ac6c2fbe"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-resume-result.json",
+      "bytes": 112353,
+      "fileSha256": "999d5bd606be615c01ab556a6a7f950f745d32b8ce226aa55b974f06b4b3bcee"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/captions-result.json",
+      "bytes": 1457,
+      "fileSha256": "69633755ba9a816ee7446b03daceb9c7aadaf3f272ac656f78ef2123a059e97b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/background-result.json",
+      "bytes": 34083,
+      "fileSha256": "7621dc2defcfe00c212e372711efae195be0b6d2e7e9ce377adb48522987e177"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/render-result.json",
+      "bytes": 8751808,
+      "fileSha256": "edbbed8e90678f020fcdd9e3a6902a805a8464fde283ea989d045edfefae5c61"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/overrides-result.json",
+      "bytes": 1224,
+      "fileSha256": "eb79e9e29b0bb3fe268695def477bccc7d680f38818f7edcac85461b59338639"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/preserved-result.json",
+      "bytes": 867,
+      "fileSha256": "505de9b88237996914fc81945debba7d443622612516c58e28211195424b8720"
+    }
+  ]
+}
