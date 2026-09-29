@@ -91,4 +91,4 @@ node --test evals/clip_composition/presentation_dev_proxy_render_v001.test.mjs e
 
 自動表情認識や汎用cropは追加しない。次の統合candidateは相談役の個別指示による。
 
-報告経路の障害：13.4〜13.5の直接報告と本指示受領後、相談役「ZEV Build Loop」に会話長上限が表示された。新しい相談役URLをユーザーへ問い合わせ済み。**本件の直接報告はまだ送信済みと扱わない。** これはローカル技術検証の不合格ではない。
+報告経路：旧相談役の会話長上限で未送信だったが、ユーザーの再開指示を受け、2026-09-29 23:57 JSTに新しい[ZEV Build Loop](https://chatgpt.com/g/g-p-6a8aab6b92308191b44f77a03945fed4-zevxiang-tan-yi/c/6abbcacc-8c98-83ee-9276-248a1d29b047)へ直接送信し、本文表示と監査応答を確認した。GitHubとの整合を確認する応答を受領し、[既存改善の統合準備](../integration-preparation-20260930/README.md)へ続行した。人間品質・正式採用は未確認のまま。

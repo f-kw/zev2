@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: unanswered outline stays unanswered; no render/adoption claim
+ok 1 - unanswered outline stays unanswered; no render/adoption claim
+  ---
+  duration_ms: 54.293708
+  ...
+# Subtest: both outline previews preserve all content, clocks, colors, panels and finite states
+ok 2 - both outline previews preserve all content, clocks, colors, panels and finite states
+  ---
+  duration_ms: 194.19625
+  ...
+# Subtest: Normal framing preserves selected preview and all caption settings
+ok 3 - Normal framing preserves selected preview and all caption settings
+  ---
+  duration_ms: 222.217125
+  ...
+# Subtest: Reset returns exactly to saved unselected original, not Normal or a chosen outline
+ok 4 - Reset returns exactly to saved unselected original, not Normal or a chosen outline
+  ---
+  duration_ms: 145.705041
+  ...
+# Subtest: unknown choices and non-preview fields are rejected
+ok 5 - unknown choices and non-preview fields are rejected
+  ---
+  duration_ms: 106.735666
+  ...
+# Subtest: foreign input, changed source, changed interval and forged selection rejected
+ok 6 - foreign input, changed source, changed interval and forged selection rejected
+  ---
+  duration_ms: 93.056542
+  ...
+# Subtest: missing or incomplete receipt is not a verified integration
+ok 7 - missing or incomplete receipt is not a verified integration
+  ---
+  duration_ms: 9.062917
+  ...
+# Subtest: full background range partitions exactly and only original local interval changes
+ok 8 - full background range partitions exactly and only original local interval changes
+  ---
+  duration_ms: 25.645667
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 964.147875
