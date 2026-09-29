@@ -1,0 +1,441 @@
+{
+  "observedAt": "2026-09-29T16:00:36.873Z",
+  "status": "inputs-and-gaps-recorded-not-executable-final-job",
+  "source": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+    "bytes": 4803412827,
+    "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+  },
+  "sourceInspection": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+    "bytes": 2744,
+    "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+  },
+  "sourceFormat": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 60
+  },
+  "outputRequired": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 17613,
+    "captions": 265,
+    "states": 307
+  },
+  "savedInputs": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/structure-state.json",
+      "bytes": 167561,
+      "fileSha256": "ad68f21a63b7d669693e72f21df1bdc27edb3d696cff9b63e7439494d55d8801"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/structure-resolution.json",
+      "bytes": 90106,
+      "fileSha256": "7ed7cc10587514111789bb304b082f7901b8a15891990828ce0f3027ac6c2fbe"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-resume-v001/base-manifest.json",
+      "bytes": 99639,
+      "fileSha256": "6d5eaaac3061e9978a85424f5d4281f9454f6101972ee5815033af003376a360"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/background/structure-background-manifest.json",
+      "bytes": 29552,
+      "fileSha256": "1db00f8dc5fe9e8479657628c6e70c3009b367555bef792e42671e0a403daef7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-normal-plan.json",
+      "bytes": 1380169,
+      "fileSha256": "b000e95c53f8c72628d9f653f2b97ee63458612278985d22b4a20a78409df7c3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/timeline.json",
+      "bytes": 2115,
+      "fileSha256": "ed1167aefbcb7cf1e48c1cb286ab06728f712afa0277ce4743f4b627afa49dc6"
+    }
+  ],
+  "sourceRanges": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 159770,
+      "sourceEndMs": 184064,
+      "sourceStartFrame30": 4793,
+      "sourceEndFrame30": 5522,
+      "outputStartFrame": 0,
+      "outputEndFrame": 729,
+      "audioSamples": {
+        "sourceStart": 7045710,
+        "sourceEnd": 8117340,
+        "outputStart": 0,
+        "outputEnd": 1071630
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 213077,
+      "sourceEndMs": 327084,
+      "sourceStartFrame30": 6392,
+      "sourceEndFrame30": 9813,
+      "outputStartFrame": 729,
+      "outputEndFrame": 4150,
+      "audioSamples": {
+        "sourceStart": 9396240,
+        "sourceEnd": 14425110,
+        "outputStart": 1071630,
+        "outputEnd": 6100500
+      }
+    },
+    {
+      "segmentId": "segment-0003",
+      "sourceStartMs": 1993090,
+      "sourceEndMs": 2225192,
+      "sourceStartFrame30": 59793,
+      "sourceEndFrame30": 66756,
+      "outputStartFrame": 4150,
+      "outputEndFrame": 11113,
+      "audioSamples": {
+        "sourceStart": 87895710,
+        "sourceEnd": 98131320,
+        "outputStart": 6100500,
+        "outputEnd": 16336110
+      }
+    },
+    {
+      "segmentId": "segment-0004",
+      "sourceStartMs": 5468987,
+      "sourceEndMs": 5675926,
+      "sourceStartFrame30": 164070,
+      "sourceEndFrame30": 170278,
+      "outputStartFrame": 11113,
+      "outputEndFrame": 17321,
+      "audioSamples": {
+        "sourceStart": 241182900,
+        "sourceEnd": 250308660,
+        "outputStart": 16336110,
+        "outputEnd": 25461870
+      }
+    },
+    {
+      "segmentId": "segment-0005",
+      "sourceStartMs": 11919259,
+      "sourceEndMs": 11928188,
+      "sourceStartFrame30": 357578,
+      "sourceEndFrame30": 357846,
+      "outputStartFrame": 17321,
+      "outputEndFrame": 17589,
+      "audioSamples": {
+        "sourceStart": 525639660,
+        "sourceEnd": 526033620,
+        "outputStart": 25461870,
+        "outputEnd": 25855830
+      }
+    }
+  ],
+  "displayProjection": {
+    "schemaVersion": "presentation-orchestration-projection-v001",
+    "sourceClock": {
+      "schemaVersion": "presentation-orchestration-source-clock-v001",
+      "digestRef": {
+        "version": "digest-structure-v001",
+        "sha256": "d49a9ac53e638abc0ab75ce77c76c110d49ac11dce8c5108835ad4ea5878e0eb"
+      },
+      "planRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-normal-plan.json",
+        "fileSha256": "b000e95c53f8c72628d9f653f2b97ee63458612278985d22b4a20a78409df7c3"
+      },
+      "timelineRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/timeline.json",
+        "fileSha256": "ed1167aefbcb7cf1e48c1cb286ab06728f712afa0277ce4743f4b627afa49dc6"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/base-resume-v001/selected-base.nut",
+        "fileSha256": "f97e8777875154d8f7ccc17494269eb08fe6dacf2354939894332320f1775741"
+      },
+      "frameRate": 30,
+      "sourceFrameCount": 17589,
+      "playbackSampleRate": 44100,
+      "observationSampleRate": 16000
+    },
+    "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+    "sourceFrameCount": 17589,
+    "displayFrameCount": 17613,
+    "sourcePlaybackSampleCount": 25855830,
+    "displayPlaybackSampleCount": 25891110,
+    "connections": [
+      {
+        "connectionId": "connection-01",
+        "beforeSegmentId": "segment-0001",
+        "afterSegmentId": "segment-0002",
+        "boundaryFrame": 729,
+        "role": "normal-cut",
+        "preset": "normal-cut",
+        "presetVersion": "v001",
+        "insertedFrameCount": 0
+      },
+      {
+        "connectionId": "connection-02",
+        "beforeSegmentId": "segment-0002",
+        "afterSegmentId": "segment-0003",
+        "boundaryFrame": 4150,
+        "role": "separator",
+        "preset": "soft-separator",
+        "presetVersion": "v001",
+        "insertedFrameCount": 12
+      },
+      {
+        "connectionId": "connection-03",
+        "beforeSegmentId": "segment-0003",
+        "afterSegmentId": "segment-0004",
+        "boundaryFrame": 11113,
+        "role": "separator",
+        "preset": "black-separator",
+        "presetVersion": "v001",
+        "insertedFrameCount": 12
+      },
+      {
+        "connectionId": "connection-04",
+        "beforeSegmentId": "segment-0004",
+        "afterSegmentId": "segment-0005",
+        "boundaryFrame": 17321,
+        "role": "normal-cut",
+        "preset": "normal-cut",
+        "presetVersion": "v001",
+        "insertedFrameCount": 0
+      }
+    ],
+    "retainedSpans": [
+      {
+        "segmentId": "segment-0001",
+        "sourceStartFrame": 0,
+        "sourceEndFrameExclusive": 729,
+        "displayStartFrame": 0,
+        "displayEndFrameExclusive": 729,
+        "shiftFrames": 0,
+        "sourceStartSample": 0,
+        "sourceEndSampleExclusive": 1071630,
+        "displayStartSample": 0,
+        "displayEndSampleExclusive": 1071630
+      },
+      {
+        "segmentId": "segment-0002",
+        "sourceStartFrame": 729,
+        "sourceEndFrameExclusive": 4150,
+        "displayStartFrame": 729,
+        "displayEndFrameExclusive": 4150,
+        "shiftFrames": 0,
+        "sourceStartSample": 1071630,
+        "sourceEndSampleExclusive": 6100500,
+        "displayStartSample": 1071630,
+        "displayEndSampleExclusive": 6100500
+      },
+      {
+        "segmentId": "segment-0003",
+        "sourceStartFrame": 4150,
+        "sourceEndFrameExclusive": 11113,
+        "displayStartFrame": 4162,
+        "displayEndFrameExclusive": 11125,
+        "shiftFrames": 12,
+        "sourceStartSample": 6100500,
+        "sourceEndSampleExclusive": 16336110,
+        "displayStartSample": 6118140,
+        "displayEndSampleExclusive": 16353750
+      },
+      {
+        "segmentId": "segment-0004",
+        "sourceStartFrame": 11113,
+        "sourceEndFrameExclusive": 17321,
+        "displayStartFrame": 11137,
+        "displayEndFrameExclusive": 17345,
+        "shiftFrames": 24,
+        "sourceStartSample": 16336110,
+        "sourceEndSampleExclusive": 25461870,
+        "displayStartSample": 16371390,
+        "displayEndSampleExclusive": 25497150
+      },
+      {
+        "segmentId": "segment-0005",
+        "sourceStartFrame": 17321,
+        "sourceEndFrameExclusive": 17589,
+        "displayStartFrame": 17345,
+        "displayEndFrameExclusive": 17613,
+        "shiftFrames": 24,
+        "sourceStartSample": 25461870,
+        "sourceEndSampleExclusive": 25855830,
+        "displayStartSample": 25497150,
+        "displayEndSampleExclusive": 25891110
+      }
+    ],
+    "insertedSpans": [
+      {
+        "connectionId": "connection-02",
+        "preset": "soft-separator",
+        "sourceBoundaryFrame": 4150,
+        "displayStartFrame": 4150,
+        "displayEndFrameExclusive": 4162,
+        "playbackStartSample": 6100500,
+        "playbackEndSampleExclusive": 6118140,
+        "playbackSampleCount": 17640,
+        "observationSampleCount": 6400
+      },
+      {
+        "connectionId": "connection-03",
+        "preset": "black-separator",
+        "sourceBoundaryFrame": 11113,
+        "displayStartFrame": 11125,
+        "displayEndFrameExclusive": 11137,
+        "playbackStartSample": 16353750,
+        "playbackEndSampleExclusive": 16371390,
+        "playbackSampleCount": 17640,
+        "observationSampleCount": 6400
+      }
+    ],
+    "presentationTimeline": {
+      "spans": [
+        {
+          "kind": "base",
+          "baseStartFrame": 0,
+          "baseEndFrame": 4150,
+          "startFrame": 0,
+          "endFrameExclusive": 4150
+        },
+        {
+          "kind": "black",
+          "beforeSegmentId": "segment-0002",
+          "afterSegmentId": "segment-0003",
+          "startFrame": 4150,
+          "endFrameExclusive": 4162
+        },
+        {
+          "kind": "base",
+          "baseStartFrame": 4150,
+          "baseEndFrame": 11113,
+          "startFrame": 4162,
+          "endFrameExclusive": 11125
+        },
+        {
+          "kind": "black",
+          "beforeSegmentId": "segment-0003",
+          "afterSegmentId": "segment-0004",
+          "startFrame": 11125,
+          "endFrameExclusive": 11137
+        },
+        {
+          "kind": "base",
+          "baseStartFrame": 11113,
+          "baseEndFrame": 17589,
+          "startFrame": 11137,
+          "endFrameExclusive": 17613
+        }
+      ]
+    },
+    "softWindows": [
+      {
+        "connectionId": "connection-02",
+        "beforeSegmentId": "segment-0002",
+        "afterSegmentId": "segment-0003",
+        "blackStartFrame": 4150,
+        "blackEndFrameExclusive": 4162
+      }
+    ],
+    "endpointRule": "points-at-boundary-after;exclusive-caption-end-before;audio-parts-half-open",
+    "audioEvidenceRule": "preserve-source;intersect-retained-presentation;exclude-insertion-and-decoder-tail",
+    "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976"
+  },
+  "audio": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/range/audio.m4a",
+    "bytes": 14513563,
+    "fileSha256": "75fa835ad15cc4c5800def26c111241c459a78e5f94410f5304bd16812bced55"
+  },
+  "captionPreparation": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/integration-preparation-20260930-v001/attempt-002/draft.json",
+    "bytes": 1588317,
+    "fileSha256": "be5e76cb18e9a7cdde26f576a7e5d9c3b2275ae77888fc754f6501f17c362e41"
+  },
+  "entryPoints": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/digest-structure-policy.mjs",
+      "bytes": 17213,
+      "fileSha256": "68632033ff394d760eec06e63920bc879e39bbaa0e8e95ec88cc76dc0246dfe1"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/digest-structure-view.mjs",
+      "bytes": 9315,
+      "fileSha256": "2efc5e01107bcb7af8c2b4b772f597f25e8bbd2e65d5767603221edbdd737243"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/caption-palette-view.mjs",
+      "bytes": 4965,
+      "fileSha256": "75e3deaac5544e1830ee02cd8e06792393f169471a39c7b0aad6437e45c49a95"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_dev_proxy_structure_background_v001.mjs",
+      "bytes": 41518,
+      "fileSha256": "3647a8486d2e0c5e119170f5c0a5e2b0b474e2b5abda18fe2e52fa181abc0930"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_orchestration_background_v001.mjs",
+      "bytes": 61871,
+      "fileSha256": "3a01da6a3897c44beea540aba4602793d5e445780f79ce891daee258a40f7ecd"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_overlay_render_session_v001.mjs",
+      "bytes": 17094,
+      "fileSha256": "9bc00ae3a2b7a696e69bba64c3ab061dac57b2700de10956519ed6b30a3bb7e5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 150414,
+      "fileSha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_v001.mjs",
+      "bytes": 71166,
+      "fileSha256": "14554443e52f190186c66d29f1924ed4919a2483a1be8322791d6c1911b640e7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_qc_streaming_v001.mjs",
+      "bytes": 29659,
+      "fileSha256": "b867758e127ff8be323241390ce3bebeee3a82e7f8510f0a9f59e81a6f6df643"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_qc_evidence_store_v001.mjs",
+      "bytes": 8660,
+      "fileSha256": "4bfa73105f4d47e8327948b95c2edde0cbc1150c8be455167362da342ad3bd81"
+    }
+  ],
+  "reuse": {
+    "STT": "保存結果のみ。再実行なし",
+    "decisions": "7B保存採否・保持・構成・265字幕・307状態・18 Colorを固定",
+    "audio": "正規source-clockと接続済みAACを照合して利用",
+    "fonts": "既存許可資産",
+    "background540": "元解像度背景として使わない",
+    "png540": "1080p品質用に拡大しない"
+  },
+  "missing": [
+    {
+      "item": "7B構成の元解像度背景",
+      "reason": "保存されたselected-base/structure-backgroundは540p専用。現inventoryに最終1080p背景はない",
+      "required": "原動画から同じ5保持範囲を30fps・元解像度で製造し、soft/blackの24接続frameを同じ時計で追加"
+    },
+    {
+      "item": "統合条件の1080p字幕307状態",
+      "reason": "今回の実描画は540p。旧1080p字幕は同じ縁・配色の統合成果ではない",
+      "required": "保存原案と選択済み縁を解決し、144px基準を縮小せず実描画・領域・native用入力を検証"
+    },
+    {
+      "item": "統合候補から1080p最終QC/保存への実行receipt",
+      "reason": "現在の統合previewは540p限定。proxyの契約を最終出力へ読み替えない",
+      "required": "限定接続の承認後、新実装来歴・最終背景・307状態からfull replay/native/最終QC・共有証拠・再読を結ぶ"
+    }
+  ],
+  "humanOutstanding": {
+    "outline": null,
+    "reaction": "未回答",
+    "integratedQuality": "最終1080p確認へ残す"
+  },
+  "executed1080Full": false,
+  "newMediaFetched": false,
+  "newApiCalls": 0
+}

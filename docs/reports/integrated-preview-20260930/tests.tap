@@ -1,0 +1,35 @@
+TAP version 13
+# Subtest: full background uses only the fixed 82 frames and preserves audio packets
+ok 1 - full background uses only the fixed 82 frames and preserves audio packets
+  ---
+  duration_ms: 56.206833
+  ...
+# Subtest: A/B composite records retain all static, Pulse and Motion states in order
+ok 2 - A/B composite records retain all static, Pulse and Motion states in order
+  ---
+  duration_ms: 160.726542
+  ...
+# Subtest: A Normal and off are the same; Reset restores the unselected original and reaction
+ok 3 - A Normal and off are the same; Reset restores the unselected original and reaction
+  ---
+  duration_ms: 312.834459
+  ...
+# Subtest: candidate B failure cannot become a completed A/B receipt
+ok 4 - candidate B failure cannot become a completed A/B receipt
+  ---
+  duration_ms: 14.213042
+  ...
+# Subtest: modified source interval cannot enter the composite command
+ok 5 - modified source interval cannot enter the composite command
+  ---
+  duration_ms: 9.541458
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 674.720709

@@ -1,0 +1,102 @@
+{
+  "schema_version": "zev-point-review-v001",
+  "batch_id": "HRB-INTEGRATED-20260930",
+  "revision": "v001",
+  "title": "字幕の縁と局所アップ：後日の確認用",
+  "intro": "保存のみ・今回は未提示です。144px、新分割、水色への既存の肯定は保持しています。縁Bは全編の論理領域検査に不合格があり、以下の旧3例が技術成立していても全編で選択可能とは扱いません。技術解決後にまとめて確認します。",
+  "media": [
+    {
+      "media_id": "OUTLINE",
+      "label": "既存3例の縁A→B",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/A-B-outline-comparison.mp4",
+      "sha256": "bd199d4557bd3391c5e32b12390a178ff052b99b06dfbdf11037ed582066757e",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 712,
+      "timeline_id": "OUTLINE-bd199d4557bd3391c5e32b12390a178ff052b99b06dfbdf11037ed582066757e",
+      "timeline_start_frame": 0
+    },
+    {
+      "media_id": "REACTION",
+      "label": "既存の局所アップ7秒",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/candidate.mp4",
+      "sha256": "c0b92e33896f4f4874149edfc2755e412e8bdfac25c6020e305cfd583d659425",
+      "fps_num": 30,
+      "fps_den": 1,
+      "total_frames": 210,
+      "timeline_id": "REACTION-c0b92e33896f4f4874149edfc2755e412e8bdfac25c6020e305cfd583d659425",
+      "timeline_start_frame": 9708
+    }
+  ],
+  "points": [
+    {
+      "point_id": "INTEGRATED-OUTLINE",
+      "review_id": "HR-009",
+      "related_review_ids": [],
+      "title": "読みやすいサイズでの縁",
+      "question": "この3例では、A（外周が細い）とB（外周が太い）のどちらが自然に読みやすいですか。選べない場合はそのまま記録します。",
+      "target_function": "通常字幕の縁と外周を保存する処理",
+      "change_summary": "144px・本文・分割・色・時計を保持し、縁A=8/4、B=8/12だけを比較。Bの全編技術不合格は別途解決が必要です。",
+      "why_human_review": "細さの好みは機械合否から決められません。現時点では回答を要求せず、技術候補の正式採用もしません。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "保存した3例の縁の見心地のみ"
+        ],
+        "does_not_apply_to": [
+          "Bの全字幕領域検査の合格",
+          "全編正式採用",
+          "144pxと条件付き分割の再確認",
+          "配色・構成・局所アップの採否"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "OUTLINE-EXAMPLES",
+          "label": "3例を各A→Bで表示",
+          "role": "candidate",
+          "media_id": "OUTLINE",
+          "start_frame": 0,
+          "end_frame": 712,
+          "context_start_frame": 0,
+          "context_end_frame": 712
+        }
+      ]
+    },
+    {
+      "point_id": "INTEGRATED-REACTION",
+      "review_id": "HR-REACTION-CLOSEUP-20260930",
+      "related_review_ids": [],
+      "title": "驚く一箇所だけ少し寄る",
+      "question": "この一箇所のアップは自然ですか。うるささ・違和感が増えていませんか。",
+      "target_function": "保存した82フレームだけ画角を寄せる処理",
+      "change_summary": "05:25.700〜05:28.433の固定1.2倍だけ。本文・時計・音声を維持。HUDの一部はこの間だけ画面外です。",
+      "why_human_review": "実装の同一性検査では表情の見心地を正式採用できません。",
+      "scope": {
+        "level": "point",
+        "applies_to": [
+          "字幕000119の固定1.2倍・82フレームの見心地",
+          "回答後のこの一箇所の採用・解除"
+        ],
+        "does_not_apply_to": [
+          "他場面や全素材への一般化",
+          "顔追跡・表情認識",
+          "全編・1080p品質の採用",
+          "字幕の縁の採用"
+        ]
+      },
+      "views": [
+        {
+          "view_id": "REACTION-LOCAL",
+          "label": "アップ前後を含む7秒",
+          "role": "candidate",
+          "media_id": "REACTION",
+          "start_frame": 0,
+          "end_frame": 210,
+          "context_start_frame": 0,
+          "context_end_frame": 210
+        }
+      ]
+    }
+  ]
+}

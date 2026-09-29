@@ -70,7 +70,7 @@ async function inspectOutput(input,video,o){const m=await media(video,{...input.
  const a=await audioClock({audioPath:video,logicalSampleCount:25891110,sampleRate:44100,...input.tools});
  const original=await audioClock({audioPath:input.draft.input.audio.path,logicalSampleCount:25891110,sampleRate:44100,...input.tools});same(a,original);
  return {media:m,clock:await clock(video,input.tools,17613,o),audio:a};}
-export async function renderIntegratedPreviewV001(destination){
+export async function renderIntegratedPreviewV001(destination,reuseRaster=null){
  assert(path.resolve(destination).startsWith(area+path.sep));guard({repositoryRoot:root,outputDirectory:destination});await mkdir(destination);
  const start=performance.now(),startedAt=new Date().toISOString(),o=observer({observationDirectory:path.join(destination,'processes')}),timings={},spaces=[];
  const log=async data=>{await appendFile(path.join(destination,'progress.jsonl'),JSON.stringify({at:new Date().toISOString(),...data})+'\n');console.log(JSON.stringify(data));};
@@ -78,15 +78,22 @@ export async function renderIntegratedPreviewV001(destination){
   spaces.push(await capacity());const input=await inputs(await bind(preparationPath));
   await save(path.join(destination,'inputs.json'),{preparationRef:input.preparationRef,implementation:input.implementation});
   const cache=new Map(),variants=[];
+  if(reuseRaster){
+   await verify(reuseRaster);const prior=await json(reuseRaster.path),d=wanted(input,'A');same(prior.variant,'A');same(prior.saved,d.saved);same(prior.violations,[]);validateRows(input,d,prior.rows);
+   await verify(prior.layoutRef);same((await json(prior.layoutRef.path)).status,'passed');
+   for(const r of prior.rows){await verify(r.png);same(await png({instructionId:r.captionId,pngPath:r.png.path,imageMagickPath:input.tools.imageMagickPath,processObserver:o}),r.alpha);cache.set(r.propsSha256,r);}
+  }
   session=overlaySession({repositoryRoot:root,entryPoint:path.join(ev,'presentation_renderer_entry_v001.tsx'),publicDir:path.join(root,'runner/public'),...input.tools,processObserver:o,profileId});
   for(const variant of ['A','B']) {
    spaces.push(await capacity());const d=wanted(input,variant),props=builtProps(input,d),dir=path.join(destination,variant);await mkdir(dir);await mkdir(path.join(dir,'overlays'));
    const layoutIn=path.join(dir,'layout-input.json'),layoutOut=path.join(dir,'layout-output.json');await save(layoutIn,{canvas:d.plan.canvas,overlays:props.map(p=>p.props)});
-   const ls=performance.now();await child(input.tools.tsxPath,[input.tools.layoutInspectorPath,layoutIn,layoutOut],{processObserver:o,observationLabel:'integrated-layout',env:{NODE_PATH:path.join(root,'runner/node_modules')}});
-   const layout=await json(layoutOut);assert.equal(layout.status,'passed');assert.equal(layout.items.length,307);
+   const ls=performance.now();try{await child(input.tools.tsxPath,[input.tools.layoutInspectorPath,layoutIn,layoutOut],{processObserver:o,observationLabel:'integrated-layout',env:{NODE_PATH:path.join(root,'runner/node_modules')}});}catch(e){
+    const failed=await json(layoutOut);if(failed.status!=='failed'||!failed.violations.length)throw e;
+   }
+   const layout=await json(layoutOut);assert.equal(layout.items.length,307);assert(['passed','failed'].includes(layout.status));
    let cursor=0;for(const e of d.plan.elements){const n=d.states.filter(s=>s.captionId===e.instructionId).length,items=layout.items.slice(cursor,cursor+n);cursor+=n;
     if(e.presentationMotion)motionLayouts({element:e,canvas:d.plan.canvas,layoutItems:items});if(e.presentationPulse)pulseAnchors(items);}
-   const rows=[],violations=[],rs=performance.now();
+   const rows=[],violations=layout.violations.map(v=>({...v,stage:'logical-layout'})),rs=performance.now();
    for(const [i,state]of d.states.entries()) {
     const {props:p,calibration}=props[i],key=hash(p);let record=cache.get(key),reusedFrom=null;
     if(record){await verify(record.png);same(record.props,p);reusedFrom=record.png.path;}
@@ -94,7 +101,7 @@ export async function renderIntegratedPreviewV001(destination){
     try{bounds({element:state.element,canvas:d.plan.canvas,profileId,observation:record.alpha});}catch(e){violations.push({captionId:state.captionId,state:state.state,message:e.message,alpha:record.alpha});}
     rows.push({...state,...record,propsSha256:key,calibration,reusedFrom});if(i%25===0)await log({phase:'raster',variant,index:i,count:307,violations:violations.length});
    }
-   const rowRef=await save(path.join(dir,'raster.json'),{variant,saved:d.saved,rows,violations,layoutRef:await bind(layoutOut),layoutMilliseconds:rs-ls,rasterMilliseconds:performance.now()-rs});
+   const rowRef=await save(path.join(dir,'raster.json'),{variant,saved:d.saved,rows,violations,reuseRaster,layoutRef:await bind(layoutOut),layoutMilliseconds:rs-ls,rasterMilliseconds:performance.now()-rs});
    variants.push({variant,rowRef,violations});await log({phase:'raster-complete',variant,violations:violations.length});
   }
   await session.close();session=null;timings.rasterFinishedMilliseconds=performance.now()-start;
@@ -118,24 +125,25 @@ export async function renderIntegratedPreviewV001(destination){
   return save(path.join(destination,'completion.json'),result);
  }catch(e){await save(path.join(destination,'failure.json'),{status:'incomplete',startedAt,endedAt:new Date().toISOString(),message:e.message,stack:e.stack,timings,capacity:spaces});throw e;}finally{await session?.close();}
 }
-export async function readIntegratedPreviewV001(completionRef){
- await verify(completionRef);const c=await json(completionRef.path);assert.equal(c.schemaVersion,'digest-integrated-preview-v001');assert.equal(c.status,'development-preview-ready');
+export async function readIntegratedPreviewV001(completionRef,{allowIncomplete=false}={}){
+ await verify(completionRef);const c=await json(completionRef.path);assert.equal(c.schemaVersion,'digest-integrated-preview-v001');assert(allowIncomplete?['development-preview-ready','incomplete'].includes(c.status):c.status==='development-preview-ready');
  same(c.outputs.map(r=>r.variant),['A','B']);assert.equal(c.outlineChoice,null);assert.equal(c.final1080pQc,'not-run');assert.equal(c.humanQuality,'not-reviewed');
  const input=await inputs(c.preparationRef);same(input.implementation,c.implementation);for(const ref of c.implementation)await verify(ref);
  await verify(c.backgroundRef);const bg=await json(c.backgroundRef.path);same(bg.source,input.draft.input.background);same(bg.audio,input.draft.input.audio);await verify(bg.output);same(bg.args,integratedBackgroundArgsV001(input.draft,bg.output.path));same(await backgroundCheck(input,bg.output.path),bg.check);
- const observed=new Map();for(const v of c.outputs){await verify(v.rowRef);await verify(v.video);const r=await json(v.rowRef.path),d=wanted(input,v.variant);same(r.saved,d.saved);same(r.violations,[]);validateRows(input,d,r.rows);
-  await verify(r.layoutRef);const layout=await json(r.layoutRef.path);assert.equal(layout.status,'passed');assert.equal(layout.items.length,307);
-  for(const row of r.rows){await verify(row.png);let actual=observed.get(row.png.path);if(!actual){const header=await readFile(row.png.path);assert.equal(header.readUInt32BE(16),960);assert.equal(header.readUInt32BE(20),540);actual=await png({instructionId:row.captionId,pngPath:row.png.path,imageMagickPath:input.tools.imageMagickPath});observed.set(row.png.path,actual);}same(actual,row.alpha);bounds({element:row.element,canvas:d.plan.canvas,profileId,observation:actual});
+ const observed=new Map();for(const v of c.outputs){await verify(v.rowRef);if(v.video)await verify(v.video);const r=await json(v.rowRef.path),d=wanted(input,v.variant);same(r.saved,d.saved);if(v.status==='development-preview-ready'){same(r.violations,[]);validateRows(input,d,r.rows);}else {assert(allowIncomplete);assert(r.violations.length>0);same(r.rows.map(({captionId,state,element})=>({captionId,state,element})),d.states);r.rows.forEach((r,i)=>same(r.props,builtProps(input,d)[i].props));}
+  await verify(r.layoutRef);const layout=await json(r.layoutRef.path);assert.equal(layout.status,r.violations.some(v=>v.stage==='logical-layout')?'failed':'passed');assert.equal(layout.items.length,307);
+  for(const row of r.rows){await verify(row.png);let actual=observed.get(row.png.path);if(!actual){const header=await readFile(row.png.path);assert.equal(header.readUInt32BE(16),960);assert.equal(header.readUInt32BE(20),540);actual=await png({instructionId:row.captionId,pngPath:row.png.path,imageMagickPath:input.tools.imageMagickPath});observed.set(row.png.path,actual);}same(actual,row.alpha);if(v.status==='development-preview-ready')bounds({element:row.element,canvas:d.plan.canvas,profileId,observation:actual});
    for(const line of row.calibration?.lines??[])await verify(line.file);}
+  if(v.status!=='development-preview-ready')continue;
   same(v.compositorArguments,compositeArgs(composite(input,d,r.rows,bg.output.path,v.video.path)));
   same(await inspectOutput(input,v.video.path),v.observation);
  }
- same(c.outputs[0].observation.audio,c.outputs[1].observation.audio);for(const ref of input.receipt.protectedFiles)await verify(ref);await verify(completionRef);
- return {status:'passed',videos:2,frameCountEach:17613,captionCountEach:265,stateCountEach:307,changedBackgroundFrames:82,
+ if(c.status==='development-preview-ready')same(c.outputs[0].observation.audio,c.outputs[1].observation.audio);for(const ref of input.receipt.protectedFiles)await verify(ref);await verify(completionRef);
+ return {status:c.status==='development-preview-ready'?'passed':'incomplete-evidence-verified',videos:c.outputs.filter(v=>v.video).length,frameCountEach:17613,captionCountEach:265,stateCountEach:307,changedBackgroundFrames:82,
   logicalRasterCount:614,physicalRasterCount:observed.size,outlineChoice:null,final1080pQc:'not-run',humanQuality:'not-reviewed'};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const [command,target]=process.argv.slice(2);assert(target);const start=performance.now();
- const result=command==='run'?await renderIntegratedPreviewV001(path.resolve(target)):command==='read'?await readIntegratedPreviewV001(await bind(path.resolve(target))):assert.fail('run | read');
+ const [command,target,reuse]=process.argv.slice(2);assert(target);const start=performance.now();
+ const result=command==='run'?await renderIntegratedPreviewV001(path.resolve(target),reuse?await bind(path.resolve(reuse)):null):['read','read-incomplete'].includes(command)?await readIntegratedPreviewV001(await bind(path.resolve(target)),{allowIncomplete:command==='read-incomplete'}):assert.fail('run | read');
  console.log(JSON.stringify({result,seconds:(performance.now()-start)/1000,parentMaxRssBytes:process.resourceUsage().maxRSS*1024},null,2));
 }
