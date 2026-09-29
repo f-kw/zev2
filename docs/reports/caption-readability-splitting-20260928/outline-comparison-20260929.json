@@ -1,0 +1,109 @@
+{
+  "status": "comparison-ready-human-choice-pending",
+  "humanChoice": null,
+  "variants": [
+    {
+      "id": "A",
+      "borderWidthPx": 8,
+      "glowWidthPx": 4,
+      "label": "A 輪郭を太く・外周は控えめ"
+    },
+    {
+      "id": "B",
+      "borderWidthPx": 8,
+      "glowWidthPx": 12,
+      "label": "B 輪郭・外周とも元の太さ"
+    }
+  ],
+  "video": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/A-B-outline-comparison.mp4",
+    "bytes": 15433443,
+    "fileSha256": "bd199d4557bd3391c5e32b12390a178ff052b99b06dfbdf11037ed582066757e"
+  },
+  "media": {
+    "durationMs": 23766,
+    "video": {
+      "codecName": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frameCount": 712
+    },
+    "audio": {
+      "codecName": "aac",
+      "sampleRate": 44100,
+      "channelLayout": "stereo",
+      "durationMs": 23762.676,
+      "packetPayloadSha256": "00578f86a09b690b7a1af708199764312c7ff8889852fa3787e1bc11346bfc04"
+    }
+  },
+  "seconds": 37.521201125,
+  "rasterImages": 18,
+  "allRastersWithinSafeArea": true,
+  "allSixSegmentsShareTheirOriginalAudio": true,
+  "captionTextSizeSplitMotionInputsUnchanged": true,
+  "sourceFilesUnchanged": true,
+  "inputs": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/human-package-final.json",
+      "bytes": 133739,
+      "fileSha256": "14e30d5486e1f104f7125a4b3570eb8175b1a7864cd7ca94bf5cd7af515886ae"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/candidate-render-plan.json",
+      "bytes": 2361077,
+      "fileSha256": "cbac650c8677f12df573f06fa8d3502260d9e91ba5998d462548b89e56200e5d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/raster-records.json",
+      "bytes": 240685,
+      "fileSha256": "2ca8406cae3805702244301934fe7e45a2861db82a16de4f20e7b92ed1b4ad74"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/0-background.nut",
+      "bytes": 171174688,
+      "fileSha256": "ed356f8d5f90a0655c6a58e450ab38ab2fb7f066c1313c5c9c0332d1e3c938d9"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/0-shared-audio.m4a",
+      "bytes": 134736,
+      "fileSha256": "a1bd16605f4b29d510404954eefe8284e4815eb45b3b57b92083ce3102d62e77"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/1-background.nut",
+      "bytes": 51860060,
+      "fileSha256": "97c96e63908a630b78b756fe1689557e2c077d6d7e903daa73d84049d716c1c7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/1-shared-audio.m4a",
+      "bytes": 42639,
+      "fileSha256": "208a96949fc99d48b07dc3f956bd2eed67a7306c7267c56af9df680d8860fdf7"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/2-background.nut",
+      "bytes": 17771318,
+      "fileSha256": "32b37f476c316883aa315aebdf06cb3541edfc8b87af8068b4cae48ea75062c8"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-readability-20260928-preview-v004/review-v002/2-shared-audio.m4a",
+      "bytes": 20848,
+      "fileSha256": "22c24b699bd3d62c44442277f597f840d294f9f74bf407f014ba203e83a37cfd"
+    }
+  ],
+  "verification": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/verification.json",
+    "bytes": 241623,
+    "fileSha256": "2eb9421958f975f9fd0f5200626711c8b61d53fcbf6970b034d5c5ef9c456f0d"
+  },
+  "priorAttempts": [
+    {
+      "attempt": 1,
+      "reason": "既存描画器の必須process observer接続不足。媒体生成前失敗。"
+    },
+    {
+      "attempt": 2,
+      "reason": "動き途中の保存132pxを通常144pxだけとする比較用検査で拒否。保存サイズは変更せず、状態別サイズを保持してattempt3へ。"
+    }
+  ],
+  "productionDefaultChanged": false
+}
