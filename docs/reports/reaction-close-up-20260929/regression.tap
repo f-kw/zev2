@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: fixed old compositor matches Normal, partial Color, Panel, lengths 1–9, gaps and simultaneous translucent layers
+ok 1 - fixed old compositor matches Normal, partial Color, Panel, lengths 1–9, gaps and simultaneous translucent layers
+  ---
+  duration_ms: 795.006916
+  ...
+# Subtest: fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+ok 2 - fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+  ---
+  duration_ms: 1765.320208
+  ...
+# Subtest: the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+ok 3 - the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+  ---
+  duration_ms: 507.050875
+  ...
+# Subtest: explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range
+ok 4 - explicit proxy preserves source decisions and every finite-state clock through save/reload and partial range
+  ---
+  duration_ms: 25.578083
+  ...
+# Subtest: unknown, absent and final profile never enter the development drawing path
+ok 5 - unknown, absent and final profile never enter the development drawing path
+  ---
+  duration_ms: 7.590416
+  ...
+# Subtest: source projection origin, end, frame rate and audio clock must match the passed full background
+ok 6 - source projection origin, end, frame rate and audio clock must match the passed full background
+  ---
+  duration_ms: 5.478583
+  ...
+# Subtest: range cutting derives exact frame and PCM sample boundaries for both existing sample rates
+ok 7 - range cutting derives exact frame and PCM sample boundaries for both existing sample rates
+  ---
+  duration_ms: 9.856292
+  ...
+# Subtest: structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion
+ok 8 - structural reader rejects state omission/order/clock/text/font/audio mutations and final-QC promotion
+  ---
+  duration_ms: 26.495125
+  ...
+# Subtest: actual alpha observations reject empty and physically out-of-area overlays without a tolerance
+ok 9 - actual alpha observations reject empty and physically out-of-area overlays without a tolerance
+  ---
+  duration_ms: 4.514083
+  ...
+# Subtest: short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting
+ok 10 - short NUT range retains frame and PCM origin with its explicit no-B-frame intermediate setting
+  ---
+  duration_ms: 79.704791
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3138.673041

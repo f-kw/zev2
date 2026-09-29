@@ -1,0 +1,1387 @@
+{
+  "status": "local-technical-candidate",
+  "humanQuality": "not-evaluated",
+  "authority": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/instruction.txt",
+    "bytes": 8380,
+    "fileSha256": "90cdb01c6394998922a7e3a560c05f1ad142248b16a0165e93efa19aabbcfc58"
+  },
+  "candidate": {
+    "schemaVersion": "reaction-close-up-candidate-v001",
+    "sourceViewSha256": "bed24eece4f856860786281a3a12597aa7afa4462575bb15d722f9b8cd15d04c",
+    "sourceMediaSha256": "9b310ba3533890aab5c9f84ba242cbd4785f29825da1f16972e6a1483e987bdb",
+    "mainRange": {
+      "startFrame": 4162,
+      "endFrameExclusive": 11125
+    },
+    "window": {
+      "startFrame": 9708,
+      "endFrameExclusive": 9918
+    },
+    "interval": {
+      "startFrame": 9771,
+      "endFrameExclusive": 9853
+    },
+    "reason": "本編2の既存字幕000119「うわあああああ」に合わせた明示的技術見本。右下の固定配信位置を4フレームで確認。表情の自動検出ではない。",
+    "state": "reaction-close-up",
+    "viewport": [
+      0.16666666666666666,
+      0.16666666666666666,
+      1,
+      1
+    ],
+    "pixelCrop": {
+      "left": 160,
+      "top": 90,
+      "width": 800,
+      "height": 450
+    },
+    "canvas": {
+      "width": 960,
+      "height": 540,
+      "fps": 30
+    },
+    "scale": {
+      "numerator": 6,
+      "denominator": 5
+    },
+    "transition": "instant",
+    "origin": "explicit-local-fixed-framing-proof",
+    "humanQuality": "not-evaluated",
+    "productionDefaultChanged": false,
+    "recordSha256": "455c6db296b9406adc55f718fb58f547e8e74838995e0f42773dfad020255872"
+  },
+  "completionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/completion.json",
+    "bytes": 103280,
+    "fileSha256": "992072167197be60ba8e0ee8dc71223b9c2871d1c243166e39322ae349280d8f"
+  },
+  "drawingEvidenceRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-palette-20260929-v001/drawing-evidence.json",
+    "bytes": 829,
+    "fileSha256": "072f3018a64b143ed9ee5a5f474364c5074d5af049e31468d77175797f3e564a"
+  },
+  "source": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/background/background-proxy.nut",
+    "bytes": 302168635,
+    "fileSha256": "9b310ba3533890aab5c9f84ba242cbd4785f29825da1f16972e6a1483e987bdb"
+  },
+  "media": [
+    {
+      "name": "candidate",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/candidate.mp4",
+      "bytes": 1523602,
+      "fileSha256": "c0b92e33896f4f4874149edfc2755e412e8bdfac25c6020e305cfd583d659425",
+      "renderAndInspectSeconds": 4.247529084
+    },
+    {
+      "name": "normal",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/normal.mp4",
+      "bytes": 1400048,
+      "fileSha256": "27b64d21fa007e66d71d1bfe17e56207aeca7ffbcb195d20721176dc53e0d41d",
+      "renderAndInspectSeconds": 4.267321207999999
+    },
+    {
+      "name": "reset",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/reset.mp4",
+      "bytes": 1523602,
+      "fileSha256": "c0b92e33896f4f4874149edfc2755e412e8bdfac25c6020e305cfd583d659425",
+      "renderAndInspectSeconds": 4.208513875
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "completionRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v002/completion.json",
+      "bytes": 103280,
+      "fileSha256": "992072167197be60ba8e0ee8dc71223b9c2871d1c243166e39322ae349280d8f"
+    },
+    "frameCount": 210,
+    "changedBackgroundFrames": 82,
+    "unchangedBackgroundFrames": 128,
+    "unchangedCaptionPngs": 6,
+    "resetByteIdentical": true,
+    "audioClockIdentical": true,
+    "sourcePlanSha256": "9da4264e442b2981323567ffd404f7f5c375635d7c8756fc7483ba1973e6e22b",
+    "humanQuality": "not-evaluated",
+    "finalPixelQc": "not-run-local-540p-proof",
+    "sourcePcmSha256": "SHA256=ec976a6e88f0ddb70fc7f421666ca5283bc6a2f21a78f16234c0d52da616fe14",
+    "encodedAudio": {
+      "status": "passed",
+      "sampleRate": 44100,
+      "channels": 2,
+      "streamTimeBase": "1/44100",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 308700,
+      "durationSeconds": 7,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 308224,
+        "dts": 308224,
+        "duration": 476
+      },
+      "packetCount": 303,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "bb39299831e930dc52773305be5695707d9027f93639acb22a42cbdeb2e7e7de",
+      "rawDecodedSampleCount": 309248,
+      "logicalDecodedSampleCount": 308700,
+      "decodedTailSampleCount": 548,
+      "rawDecodedPayloadSha256": "9bbf245f05d495a767c3001a00a4b1043838ce53b4e61b739befe0105b520aa1",
+      "logicalDecodedPayloadSha256": "6f7f31f82d1c6d588996205e2447d48cb68b119f282a8a0e7759f5b76fee1e57",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 308700
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "backgroundFrameChecks": {
+      "frameCount": 210,
+      "changedFrames": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144
+      ],
+      "normalSha256": "0d64329e4db4bd55fde56286466e75d515f1e174496f2714655097ad0ad85fca",
+      "candidateSha256": "3f6e7d097464ec763f090bb78b347ac4c82fafc8e17953611925c7828b432fa1"
+    },
+    "reusedCaptionImages": [
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000117",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000117",
+          "kind": "speech-caption",
+          "text": "間違いがあってもいいんです",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "間",
+                  "codePoint": 38291,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "違",
+                  "codePoint": 36949,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "い",
+                  "codePoint": 12356,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "が",
+                  "codePoint": 12364,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 5,
+                  "character": "っ",
+                  "codePoint": 12387,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 6,
+                  "character": "て",
+                  "codePoint": 12390,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 7,
+                  "character": "も",
+                  "codePoint": 12418,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "間違いがあっても",
+              "text": "間違いがあっても",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "logicalWidth": 16,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001331",
+                "new-material-digest-20260926-v001-atom-001332",
+                "new-material-digest-20260926-v001-atom-001333",
+                "new-material-digest-20260926-v001-atom-001334",
+                "new-material-digest-20260926-v001-atom-001335",
+                "new-material-digest-20260926-v001-atom-001336",
+                "new-material-digest-20260926-v001-atom-001337",
+                "new-material-digest-20260926-v001-atom-001338"
+              ]
+            },
+            {
+              "lineIndex": 1,
+              "characters": [
+                {
+                  "sourceIndex": 8,
+                  "character": "い",
+                  "codePoint": 12356,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 9,
+                  "character": "い",
+                  "codePoint": 12356,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 10,
+                  "character": "ん",
+                  "codePoint": 12435,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 11,
+                  "character": "で",
+                  "codePoint": 12391,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 12,
+                  "character": "す",
+                  "codePoint": 12377,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "いいんです",
+              "text": "いいんです",
+              "codePointIndices": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "logicalWidth": 10,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001339",
+                "new-material-digest-20260926-v001-atom-001340",
+                "new-material-digest-20260926-v001-atom-001341",
+                "new-material-digest-20260926-v001-atom-001342",
+                "new-material-digest-20260926-v001-atom-001343"
+              ]
+            }
+          ],
+          "sourceStartMs": 2176791,
+          "sourceEndMs": 2178151,
+          "startFrame": 9673,
+          "endFrameExclusive": 9714,
+          "displayFrameCount": 41,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 144,
+              "fontColor": "#4B2C16",
+              "borderColor": "#111827",
+              "borderWidthPx": 0,
+              "lineSpacingPercent": 150,
+              "glowColor": "#000000",
+              "glowWidthPx": 0,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": {
+              "color": "#FFF0DC",
+              "borderRadiusPx": 0,
+              "paddingXPx": 24,
+              "paddingYPx": 16,
+              "panelPresetId": "plain",
+              "panelPaletteId": "warm"
+            },
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001331",
+              "new-material-digest-20260926-v001-atom-001332",
+              "new-material-digest-20260926-v001-atom-001333",
+              "new-material-digest-20260926-v001-atom-001334",
+              "new-material-digest-20260926-v001-atom-001335",
+              "new-material-digest-20260926-v001-atom-001336",
+              "new-material-digest-20260926-v001-atom-001337",
+              "new-material-digest-20260926-v001-atom-001338",
+              "new-material-digest-20260926-v001-atom-001339",
+              "new-material-digest-20260926-v001-atom-001340",
+              "new-material-digest-20260926-v001-atom-001341",
+              "new-material-digest-20260926-v001-atom-001342",
+              "new-material-digest-20260926-v001-atom-001343"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/186.png",
+          "bytes": 37614,
+          "fileSha256": "56dc0f399644197a0bad81d00fd7d8ea64083fc615edaee677e34375a27fd5e4"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 177,
+            "top": 271,
+            "right": 783,
+            "bottom": 488,
+            "width": 606,
+            "height": 217
+          }
+        }
+      },
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000118-readability-01",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000118-readability-01",
+          "kind": "speech-caption",
+          "text": "常に気づきを得る、",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "常",
+                  "codePoint": 24120,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "に",
+                  "codePoint": 12395,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "気",
+                  "codePoint": 27671,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "づ",
+                  "codePoint": 12389,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "き",
+                  "codePoint": 12365,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 5,
+                  "character": "を",
+                  "codePoint": 12434,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 6,
+                  "character": "得",
+                  "codePoint": 24471,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 7,
+                  "character": "る",
+                  "codePoint": 12427,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 8,
+                  "character": "、",
+                  "codePoint": 12289,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "常に気づきを得る、",
+              "text": "常に気づきを得る、",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "logicalWidth": 18,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001344",
+                "new-material-digest-20260926-v001-atom-001345",
+                "new-material-digest-20260926-v001-atom-001346",
+                "new-material-digest-20260926-v001-atom-001347",
+                "new-material-digest-20260926-v001-atom-001348",
+                "new-material-digest-20260926-v001-atom-001349",
+                "new-material-digest-20260926-v001-atom-001350",
+                "new-material-digest-20260926-v001-atom-001351",
+                "new-material-digest-20260926-v001-atom-001352"
+              ]
+            }
+          ],
+          "sourceStartMs": 2178151,
+          "sourceEndMs": 2179392,
+          "startFrame": 9714,
+          "endFrameExclusive": 9751,
+          "displayFrameCount": 37,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 144,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#2F4F4F",
+              "borderWidthPx": 4,
+              "lineSpacingPercent": 150,
+              "glowColor": "#2F4F4F",
+              "glowWidthPx": 4,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001344",
+              "new-material-digest-20260926-v001-atom-001345",
+              "new-material-digest-20260926-v001-atom-001346",
+              "new-material-digest-20260926-v001-atom-001347",
+              "new-material-digest-20260926-v001-atom-001348",
+              "new-material-digest-20260926-v001-atom-001349",
+              "new-material-digest-20260926-v001-atom-001350",
+              "new-material-digest-20260926-v001-atom-001351",
+              "new-material-digest-20260926-v001-atom-001352"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/187.png",
+          "bytes": 59762,
+          "fileSha256": "0a637c0e418666614b212c91394e3c40cb897de22a1c42c9fc57fe1a47c99328"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 155,
+            "top": 410,
+            "right": 768,
+            "bottom": 488,
+            "width": 613,
+            "height": 78
+          }
+        }
+      },
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000118-readability-02",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000118-readability-02",
+          "kind": "speech-caption",
+          "text": "これがだ…",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "こ",
+                  "codePoint": 12371,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "れ",
+                  "codePoint": 12428,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "が",
+                  "codePoint": 12364,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "だ",
+                  "codePoint": 12384,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "…",
+                  "codePoint": 8230,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "これがだ…",
+              "text": "これがだ…",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "logicalWidth": 10,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001353",
+                "new-material-digest-20260926-v001-atom-001354",
+                "new-material-digest-20260926-v001-atom-001355",
+                "new-material-digest-20260926-v001-atom-001356",
+                "new-material-digest-20260926-v001-atom-001357"
+              ]
+            }
+          ],
+          "sourceStartMs": 2179392,
+          "sourceEndMs": 2180052,
+          "startFrame": 9751,
+          "endFrameExclusive": 9771,
+          "displayFrameCount": 20,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 144,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#2F4F4F",
+              "borderWidthPx": 4,
+              "lineSpacingPercent": 150,
+              "glowColor": "#2F4F4F",
+              "glowWidthPx": 4,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001353",
+              "new-material-digest-20260926-v001-atom-001354",
+              "new-material-digest-20260926-v001-atom-001355",
+              "new-material-digest-20260926-v001-atom-001356",
+              "new-material-digest-20260926-v001-atom-001357"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/188.png",
+          "bytes": 42979,
+          "fileSha256": "06c7f0f9af6578a9080f2755b314f38a9f823b13e1617d35b05f281514673067"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 306,
+            "top": 411,
+            "right": 658,
+            "bottom": 486,
+            "width": 352,
+            "height": 75
+          }
+        }
+      },
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000119",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000119",
+          "kind": "speech-caption",
+          "text": "うわあああああ",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "う",
+                  "codePoint": 12358,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "わ",
+                  "codePoint": 12431,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 5,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 6,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "うわあああああ",
+              "text": "うわあああああ",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "logicalWidth": 14,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001358",
+                "new-material-digest-20260926-v001-atom-001359",
+                "new-material-digest-20260926-v001-atom-001360",
+                "new-material-digest-20260926-v001-atom-001361",
+                "new-material-digest-20260926-v001-atom-001362",
+                "new-material-digest-20260926-v001-atom-001363",
+                "new-material-digest-20260926-v001-atom-001364"
+              ]
+            }
+          ],
+          "sourceStartMs": 2180052,
+          "sourceEndMs": 2182813,
+          "startFrame": 9771,
+          "endFrameExclusive": 9853,
+          "displayFrameCount": 82,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 192,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#2F4F4F",
+              "borderWidthPx": 4,
+              "lineSpacingPercent": 150,
+              "glowColor": "#2F4F4F",
+              "glowWidthPx": 4,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001358",
+              "new-material-digest-20260926-v001-atom-001359",
+              "new-material-digest-20260926-v001-atom-001360",
+              "new-material-digest-20260926-v001-atom-001361",
+              "new-material-digest-20260926-v001-atom-001362",
+              "new-material-digest-20260926-v001-atom-001363",
+              "new-material-digest-20260926-v001-atom-001364"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/189.png",
+          "bytes": 39991,
+          "fileSha256": "10a943532e85b6c494136007804da5fc35465c1ba003724dcdacc128bce5c9bb"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 149,
+            "top": 391,
+            "right": 813,
+            "bottom": 487,
+            "width": 664,
+            "height": 96
+          }
+        }
+      },
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000120",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000120",
+          "kind": "speech-caption",
+          "text": "ちょ、これやらな、",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "ち",
+                  "codePoint": 12385,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "ょ",
+                  "codePoint": 12423,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "、",
+                  "codePoint": 12289,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "こ",
+                  "codePoint": 12371,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "れ",
+                  "codePoint": 12428,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 5,
+                  "character": "や",
+                  "codePoint": 12420,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 6,
+                  "character": "ら",
+                  "codePoint": 12425,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 7,
+                  "character": "な",
+                  "codePoint": 12394,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 8,
+                  "character": "、",
+                  "codePoint": 12289,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "ちょ、これやらな、",
+              "text": "ちょ、これやらな、",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "logicalWidth": 18,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001365",
+                "new-material-digest-20260926-v001-atom-001366",
+                "new-material-digest-20260926-v001-atom-001367",
+                "new-material-digest-20260926-v001-atom-001368",
+                "new-material-digest-20260926-v001-atom-001369",
+                "new-material-digest-20260926-v001-atom-001370",
+                "new-material-digest-20260926-v001-atom-001371",
+                "new-material-digest-20260926-v001-atom-001372",
+                "new-material-digest-20260926-v001-atom-001373"
+              ]
+            }
+          ],
+          "sourceStartMs": 2182813,
+          "sourceEndMs": 2183593,
+          "startFrame": 9853,
+          "endFrameExclusive": 9877,
+          "displayFrameCount": 24,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 144,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#2F4F4F",
+              "borderWidthPx": 4,
+              "lineSpacingPercent": 150,
+              "glowColor": "#2F4F4F",
+              "glowWidthPx": 4,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001365",
+              "new-material-digest-20260926-v001-atom-001366",
+              "new-material-digest-20260926-v001-atom-001367",
+              "new-material-digest-20260926-v001-atom-001368",
+              "new-material-digest-20260926-v001-atom-001369",
+              "new-material-digest-20260926-v001-atom-001370",
+              "new-material-digest-20260926-v001-atom-001371",
+              "new-material-digest-20260926-v001-atom-001372",
+              "new-material-digest-20260926-v001-atom-001373"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/190.png",
+          "bytes": 56651,
+          "fileSha256": "00691425005013aaa3bb30a4eb7a6c0022ef6bda463f7d3d1991ce3278031032"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 158,
+            "top": 412,
+            "right": 763,
+            "bottom": 487,
+            "width": 605,
+            "height": 75
+          }
+        }
+      },
+      {
+        "captionId": "new-material-digest-20260926-v001-instruction-instruction-000121",
+        "element": {
+          "instructionId": "new-material-digest-20260926-v001-instruction-instruction-000121",
+          "kind": "speech-caption",
+          "text": "これやらなあかんて",
+          "indexedLines": [
+            {
+              "lineIndex": 0,
+              "characters": [
+                {
+                  "sourceIndex": 0,
+                  "character": "こ",
+                  "codePoint": 12371,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 1,
+                  "character": "れ",
+                  "codePoint": 12428,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 2,
+                  "character": "や",
+                  "codePoint": 12420,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 3,
+                  "character": "ら",
+                  "codePoint": 12425,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 4,
+                  "character": "な",
+                  "codePoint": 12394,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 5,
+                  "character": "あ",
+                  "codePoint": 12354,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 6,
+                  "character": "か",
+                  "codePoint": 12363,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 7,
+                  "character": "ん",
+                  "codePoint": 12435,
+                  "role": "visible"
+                },
+                {
+                  "sourceIndex": 8,
+                  "character": "て",
+                  "codePoint": 12390,
+                  "role": "visible"
+                }
+              ],
+              "renderedText": "これやらなあかんて",
+              "text": "これやらなあかんて",
+              "codePointIndices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ],
+              "logicalWidth": 18,
+              "sourceUnitIds": [
+                "new-material-digest-20260926-v001-atom-001374",
+                "new-material-digest-20260926-v001-atom-001375",
+                "new-material-digest-20260926-v001-atom-001376",
+                "new-material-digest-20260926-v001-atom-001377",
+                "new-material-digest-20260926-v001-atom-001378",
+                "new-material-digest-20260926-v001-atom-001379",
+                "new-material-digest-20260926-v001-atom-001380",
+                "new-material-digest-20260926-v001-atom-001381",
+                "new-material-digest-20260926-v001-atom-001382"
+              ]
+            }
+          ],
+          "sourceStartMs": 2183593,
+          "sourceEndMs": 2185374,
+          "startFrame": 9877,
+          "endFrameExclusive": 9930,
+          "displayFrameCount": 53,
+          "requestedProfileId": "normal-landscape-readable-pop-v001",
+          "appliedProfileId": "normal-landscape-readable-pop-v001",
+          "requestedPresetId": "normal-landscape-readable-pop-v001",
+          "appliedPresetId": "normal-landscape-readable-pop-v001",
+          "presetId": "normal-landscape-readable-pop-v001",
+          "registryVersion": "normal-landscape-preset-registry-v001",
+          "presetRegistryVersion": "normal-landscape-preset-registry-v001",
+          "stateId": "caption-core-v001",
+          "visualState": {
+            "stateId": "caption-core-v001",
+            "textStyle": {
+              "fontAssetId": "line-seed-jp-extra-bold-v001",
+              "fontSizePx": 144,
+              "fontColor": "#FFFDF8",
+              "borderColor": "#2F4F4F",
+              "borderWidthPx": 4,
+              "lineSpacingPercent": 150,
+              "glowColor": "#2F4F4F",
+              "glowWidthPx": 4,
+              "glowOpacityPercent": 82
+            },
+            "position": {
+              "preset": "bottom-center",
+              "alignment": "center",
+              "offsetXPercent": 0,
+              "offsetYPercent": -6
+            },
+            "background": null,
+            "layout": {
+              "maxCharsPerLine": 36,
+              "maxLines": 2,
+              "singleLine": false
+            },
+            "transitionId": "quick-fade-4f-v001"
+          },
+          "transition": {
+            "transitionId": "quick-fade-4f-v001",
+            "entry": {
+              "type": "alpha-fade",
+              "frames": 4
+            },
+            "exit": {
+              "type": "alpha-fade",
+              "frames": 4
+            }
+          },
+          "timelineSegmentId": "segment-0003",
+          "targetProvenance": {
+            "targetRefId": "new-material-digest-20260926-v001-caption",
+            "targetType": "semantic-caption",
+            "sourceAtomIds": [
+              "new-material-digest-20260926-v001-atom-001374",
+              "new-material-digest-20260926-v001-atom-001375",
+              "new-material-digest-20260926-v001-atom-001376",
+              "new-material-digest-20260926-v001-atom-001377",
+              "new-material-digest-20260926-v001-atom-001378",
+              "new-material-digest-20260926-v001-atom-001379",
+              "new-material-digest-20260926-v001-atom-001380",
+              "new-material-digest-20260926-v001-atom-001381",
+              "new-material-digest-20260926-v001-atom-001382"
+            ]
+          },
+          "materialRefs": []
+        },
+        "png": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/overlays/191.png",
+          "bytes": 64654,
+          "fileSha256": "bf44ba4257075d0e0814b5e88384301c9725091191905633bcaecbca5edab140"
+        },
+        "alpha": {
+          "alphaMax": 1,
+          "alphaBounds": {
+            "left": 162,
+            "top": 412,
+            "right": 787,
+            "bottom": 487,
+            "width": 625,
+            "height": 75
+          }
+        }
+      }
+    ],
+    "protectedRefs": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/outputs/presentation/stage4-editing-caption-readability-full-20260929-v001/presentation-rendered-v002.mp4",
+        "bytes": 675155103,
+        "fileSha256": "c5191911e77c2b20da19b5a4d6156a9c7eabe011134e5bcfa2fb1a6226d6a4fa"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-structure-20260929-v001/candidate/development-proxy.mp4",
+        "bytes": 94261728,
+        "fileSha256": "0f67cb73b646bbe209b41d0af3378bf09f4ebbfbddab651a7784291a6137ee35"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/caption-palette-20260929-v001/clips/cyan/development-palette-proxy.mp4",
+        "bytes": 1024308,
+        "fileSha256": "f37beb8049b5c3c5f30b2c60cf32abeaa854c29e5288866dc294bf0a4580be63"
+      }
+    ]
+  },
+  "localFrameInspection": {
+    "globalFrames": [
+      9740,
+      9780,
+      9830,
+      9880
+    ],
+    "candidateFrames": [
+      32,
+      72,
+      122,
+      172
+    ],
+    "result": "人物の顔／頭が残り、字幕6枚のalpha領域は既存safe area内。拡大中の恐怖対象・室内場面は残る。字幕は胸元に重なるが目・口を覆わない。",
+    "limitation": "拡大中2.733秒は左上時刻／カメラ名と左下報告数がcrop外。右端／下端で元から切れている髪・身体は復元せず、新たな顔切れは観測なし。人間の面白さ・快適さ・正式採用は未確認。"
+  },
+  "measurements": {
+    "startedAt": "2026-09-29T12:58:23.060Z",
+    "endedAt": "2026-09-29T12:58:43.490Z",
+    "localProofSeconds": 20.822478125,
+    "independentReadSeconds": 11.807870416,
+    "nodeParentPeakBytes": 490864640,
+    "readerNodeParentPeakBytes": 483803136,
+    "childPeakBytes": null,
+    "proofDirectoryLogicalBytes": 112874221,
+    "allNewArtifactsLogicalBytesBeforeThisRecord": 194999832,
+    "physicalIoBytes": null
+  },
+  "tests": {
+    "target": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    "existing": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "earlierAttempt": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/reaction-close-up-20260929-v001/proof-v001",
+    "accepted": false,
+    "reason": "正常背景の入力と出力に同じpathを指定していたため、解除時の独立出力を証明できない。元証拠を保持し、別pathを強制したv002で局所3状態を再実行。"
+  },
+  "scope": {
+    "newApiCalls": 0,
+    "newSource": 0,
+    "newSubtitleTargets": 0,
+    "productionDefaultChanged": false,
+    "full1080Render": false,
+    "tracking": false,
+    "automaticTrigger": false
+  }
+}

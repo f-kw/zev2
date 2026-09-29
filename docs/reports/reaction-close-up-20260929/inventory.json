@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "reaction-close-up-inventory-v001",
+  "observedAt": "2026-09-29T12:58:44.626Z",
+  "currentMaterialId": "-2UUTkv9qvk",
+  "files": [
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/renderer-job.json",
+        "bytes": 10370,
+        "fileSha256": "3cbfe5015e53d632243092f5ba30dd9d08c0a1da005c40d27ed011b2517dba7a"
+      },
+      "matches": [
+        {
+          "key": "$.executionInputs.screenLayoutId",
+          "value": null
+        },
+        {
+          "key": "$.executionInputs.cropPolicy",
+          "value": {
+            "mode": "already-applied"
+          }
+        }
+      ]
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source-package.json",
+        "bytes": 1805428,
+        "fileSha256": "64d7cc753bd63961a68741e04bca75574b198fb43c4452c64f7c84ad5ba7f97e"
+      },
+      "matches": [
+        {
+          "key": "$.reconstructionMap.caseContexts.0.horizontalStyleInput.screenLayoutId",
+          "value": null
+        },
+        {
+          "key": "$.reconstructionMap.caseContexts.0.horizontalStyleInput.cropPolicy",
+          "value": {
+            "mode": "identity"
+          }
+        },
+        {
+          "key": "$.reconstructionMap.caseContexts.0.resolvedStyle.screenLayoutId",
+          "value": null
+        },
+        {
+          "key": "$.reconstructionMap.caseContexts.0.resolvedStyle.cropMode",
+          "value": "identity"
+        }
+      ]
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/candidate-set.json",
+        "bytes": 4791,
+        "fileSha256": "ec16a7bf90834932bc2762b3d095edb7a83c9e86a3feeb7f4d274f4d1ee79eec"
+      },
+      "matches": []
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/core-invocation.json",
+        "bytes": 1990,
+        "fileSha256": "d2bef1dcdf68523166d23985d45bdef61e3d577d463bc146b16de5f37863bcb5"
+      },
+      "matches": []
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/edit-plan.json",
+        "bytes": 61378,
+        "fileSha256": "62e82dc5392b7158f7ab7f3a8d6431686c1ea16e6807bf0178e91b190def6ac3"
+      },
+      "matches": []
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/presentation/context.json",
+        "bytes": 87794,
+        "fileSha256": "e5639aefc7608fc30b50dc1b34e538acfaa8030999ca691602a865c6e4b1fce4"
+      },
+      "matches": []
+    },
+    {
+      "ref": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/base-media/generation-manifest.json",
+        "bytes": 12261,
+        "fileSha256": "41b7396b7608a685311de56ec5d32164958eedd568fd8caebd9540378f5e6e2d"
+      },
+      "matches": []
+    }
+  ],
+  "implementation": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/screen-layout.ts",
+      "bytes": 26874,
+      "fileSha256": "63db69fa9a9280e26443dfffa0160de3715d0e434c313b423cb347f3f6452896"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs",
+      "bytes": 32966,
+      "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_vertical_review_v001.ts",
+      "bytes": 95083,
+      "fileSha256": "6fb4edfd9c9a9161f474921368b05bd32c0aaef2b1fd5155e148d291134c8c75"
+    }
+  ],
+  "conclusion": "調べた現素材の保存入口では人物／顔viewportなし。全画面identity。別素材のviewportを流用せず、指示Bにより局所4フレームから技術proof専用の1.2倍右下固定cropを選択。",
+  "reuse": "既存の正規化viewport表現・原入力hash束縛・保存／再読思想、既存crop/scale tool、既存字幕PNGと合成器を再利用。縦動画契約へ偽装せず、新しい局所candidateとして記録。",
+  "inspectedGlobalFrames": [
+    9740,
+    9780,
+    9830,
+    9880
+  ],
+  "newApiCalls": 0,
+  "faceTracking": false
+}
