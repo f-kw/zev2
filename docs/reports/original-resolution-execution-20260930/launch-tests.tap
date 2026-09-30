@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: unsupervised CLI/entry refuses full production before creating any media
+ok 1 - unsupervised CLI/entry refuses full production before creating any media
+  ---
+  duration_ms: 67.475875
+  ...
+# Subtest: whole launch plan preserves all input/state/sample identity and records no execution claim
+ok 2 - whole launch plan preserves all input/state/sample identity and records no execution claim
+  ---
+  duration_ms: 18738.325584
+  ...
+# Subtest: rebind transformation changes decision/baseline references without mutating saved preparation or images
+ok 3 - rebind transformation changes decision/baseline references without mutating saved preparation or images
+  ---
+  duration_ms: 129.150083
+  ...
+# Subtest: rebind refuses changed plan/baseline, missing media and a trial scope
+ok 4 - rebind refuses changed plan/baseline, missing media and a trial scope
+  ---
+  duration_ms: 18.993834
+  ...
+# Subtest: every frozen execution/input/native/renderer module stays identical to accepted commit
+ok 5 - every frozen execution/input/native/renderer module stays identical to accepted commit
+  ---
+  duration_ms: 82.822625
+  ...
+# Subtest: allocation guard reserves the entire next point and only new bytes within a batch
+ok 6 - allocation guard reserves the entire next point and only new bytes within a batch
+  ---
+  duration_ms: 4.491708
+  ...
+# Subtest: approved resource boundaries fail closed and distinguish initial and next allocation checks
+ok 7 - approved resource boundaries fail closed and distinguish initial and next allocation checks
+  ---
+  duration_ms: 181.446917
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19354.24275

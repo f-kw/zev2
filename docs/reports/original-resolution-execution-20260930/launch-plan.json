@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "original-resolution-full-launch-plan-v001",
+  "status": "approved-awaiting-execution",
+  "launcherRef": {
+    "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-launch.mjs",
+    "bytes": 20375,
+    "fileSha256": "1f495649deb80821acf8f296caab645ec401a16b1bc0a3b2904a5afdb54545ea"
+  },
+  "instructionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/original-resolution-execution-20260930/launch-instruction.md",
+    "bytes": 6611,
+    "fileSha256": "d76a834a4f0c56383ad844eb660edc060098293d010cbbe54bab9954c963ec84"
+  },
+  "drawingPreparationRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-full-preparation-20260930-v001/attempt-001/completion.json",
+    "bytes": 6047404,
+    "fileSha256": "74dfb788ba83861392134d6606c5fbebf84c627099a51d3caf8c9eb7ec683aa1"
+  },
+  "nativePreparationRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-native-preparation-001/completion.json",
+    "bytes": 409315,
+    "fileSha256": "98c716d51c999f484eb766784be5ffa53c05bf2e7a16e7e6f93b36e9d82c5d04"
+  },
+  "implementation": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution-input.mjs",
+      "bytes": 6565,
+      "fileSha256": "cf78a70523b36325505dfc0000392acb5488397b1a6e69c68f2ccf370f55b46d"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution-background.mjs",
+      "bytes": 9889,
+      "fileSha256": "4a7ed14bd4582bf3ed237d71eb4f9a4d4a48edfbd96000d23a40d1ce50dbb6ed"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution.mjs",
+      "bytes": 6938,
+      "fileSha256": "9ed0c3f493bb007c9108d678401896144b06e7fdbd6a6f37ad8323eb851c0aa5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution-qc.mjs",
+      "bytes": 9292,
+      "fileSha256": "56353cfe22b53695332a5b69995ff3dcf26f74a3320096ce5ff6d48214e16dd3"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/integrated-native-qc-input-v003.mjs",
+      "bytes": 5350,
+      "fileSha256": "f943de04e18ad296109f9589121ee68433193dca79185d6292213f662dc015f0"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_integrated_v003.mjs",
+      "bytes": 71766,
+      "fileSha256": "2ef44425cebbe22c3a791c073f1ae1677bac355a5d8f8e7cf16c6e0494710eed"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_native_frame_qc_preparation_integrated_v003.mjs",
+      "bytes": 21103,
+      "fileSha256": "1fae31a699551edc748ba982c50fb2108ed473a65050bbf1ebeb637003931cdc"
+    }
+  ],
+  "scope": {
+    "id": "full",
+    "range": null,
+    "start": 0,
+    "end": 17613,
+    "frameCount": 17613,
+    "recipe": {
+      "schemaVersion": "presentation-orchestration-background-range-v001",
+      "projectionSha256": "582f6a3a67b5345bd932d7c1e6e943343217e6f0a44456be0789c85899641976",
+      "sourceClockSha256": "fd49ee28b7068057174882ca7062890965e3e7cf26c1ea0ad9e7f735a661eb37",
+      "fullDisplayFrameCount": 17613,
+      "range": {
+        "startFrame": 0,
+        "endFrameExclusive": 17613
+      },
+      "displayFrameCount": 17613,
+      "workingRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 17613
+      },
+      "workingFrameCount": 17613,
+      "sourceRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 17589,
+        "startSample": 0,
+        "endSampleExclusive": 25855830
+      },
+      "trimRange": {
+        "startFrame": 0,
+        "endFrameExclusive": 17613,
+        "startSample": 0,
+        "endSampleExclusive": 25891110
+      },
+      "playbackRange": {
+        "sampleRate": 44100,
+        "startSample": 0,
+        "endSampleExclusive": 25891110,
+        "localSampleCount": 25891110
+      },
+      "presentationTimeline": {
+        "spans": [
+          {
+            "kind": "base",
+            "baseStartFrame": 0,
+            "baseEndFrame": 4150,
+            "startFrame": 0,
+            "endFrameExclusive": 4150
+          },
+          {
+            "kind": "black",
+            "beforeSegmentId": "segment-0002",
+            "afterSegmentId": "segment-0003",
+            "startFrame": 4150,
+            "endFrameExclusive": 4162
+          },
+          {
+            "kind": "base",
+            "baseStartFrame": 4150,
+            "baseEndFrame": 11113,
+            "startFrame": 4162,
+            "endFrameExclusive": 11125
+          },
+          {
+            "kind": "black",
+            "beforeSegmentId": "segment-0003",
+            "afterSegmentId": "segment-0004",
+            "startFrame": 11125,
+            "endFrameExclusive": 11137
+          },
+          {
+            "kind": "base",
+            "baseStartFrame": 11113,
+            "baseEndFrame": 17589,
+            "startFrame": 11137,
+            "endFrameExclusive": 17613
+          }
+        ]
+      },
+      "softWindows": [
+        {
+          "connectionId": "connection-02",
+          "beforeSegmentId": "segment-0002",
+          "afterSegmentId": "segment-0003",
+          "blackStartFrame": 4150,
+          "blackEndFrameExclusive": 4162
+        }
+      ],
+      "parts": [
+        {
+          "kind": "base",
+          "startFrame": 0,
+          "endFrameExclusive": 4150,
+          "localStartFrame": 0,
+          "localEndFrameExclusive": 4150,
+          "sourceStartFrame": 0,
+          "sourceEndFrameExclusive": 4150
+        },
+        {
+          "kind": "black",
+          "startFrame": 4150,
+          "endFrameExclusive": 4162,
+          "localStartFrame": 4150,
+          "localEndFrameExclusive": 4162,
+          "beforeSegmentId": "segment-0002",
+          "afterSegmentId": "segment-0003",
+          "connectionId": "connection-02"
+        },
+        {
+          "kind": "base",
+          "startFrame": 4162,
+          "endFrameExclusive": 11125,
+          "localStartFrame": 4162,
+          "localEndFrameExclusive": 11125,
+          "sourceStartFrame": 4150,
+          "sourceEndFrameExclusive": 11113
+        },
+        {
+          "kind": "black",
+          "startFrame": 11125,
+          "endFrameExclusive": 11137,
+          "localStartFrame": 11125,
+          "localEndFrameExclusive": 11137,
+          "beforeSegmentId": "segment-0003",
+          "afterSegmentId": "segment-0004",
+          "connectionId": "connection-03"
+        },
+        {
+          "kind": "base",
+          "startFrame": 11137,
+          "endFrameExclusive": 17613,
+          "localStartFrame": 11137,
+          "localEndFrameExclusive": 17613,
+          "sourceStartFrame": 11113,
+          "sourceEndFrameExclusive": 17589
+        }
+      ]
+    },
+    "sourceParts": [
+      {
+        "segmentId": "segment-0001",
+        "baseStart": 0,
+        "baseEnd": 729,
+        "sourceStartFrame30": 4793,
+        "sourceEndFrame30": 5522,
+        "audioStartSample": 7045710,
+        "audioEndSample": 8117340
+      },
+      {
+        "segmentId": "segment-0002",
+        "baseStart": 729,
+        "baseEnd": 4150,
+        "sourceStartFrame30": 6392,
+        "sourceEndFrame30": 9813,
+        "audioStartSample": 9396240,
+        "audioEndSample": 14425110
+      },
+      {
+        "segmentId": "segment-0003",
+        "baseStart": 4150,
+        "baseEnd": 11113,
+        "sourceStartFrame30": 59793,
+        "sourceEndFrame30": 66756,
+        "audioStartSample": 87895710,
+        "audioEndSample": 98131320
+      },
+      {
+        "segmentId": "segment-0004",
+        "baseStart": 11113,
+        "baseEnd": 17321,
+        "sourceStartFrame30": 164070,
+        "sourceEndFrame30": 170278,
+        "audioStartSample": 241182900,
+        "audioEndSample": 250308660
+      },
+      {
+        "segmentId": "segment-0005",
+        "baseStart": 17321,
+        "baseEnd": 17589,
+        "sourceStartFrame30": 357578,
+        "sourceEndFrame30": 357846,
+        "audioStartSample": 525639660,
+        "audioEndSample": 526033620
+      }
+    ]
+  },
+  "captionCount": 265,
+  "stateCount": 307,
+  "samples": 345,
+  "logicalCandidates": 211732,
+  "steps": [
+    "verify-fixed-inputs",
+    "background",
+    "reference-audio",
+    "body",
+    "replay",
+    "bind-existing-diagnostics-to-media",
+    "native",
+    "shared-save",
+    "independent-read"
+  ],
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed",
+  "fullExecution": "not-started",
+  "operationalGuard": "approved-this-run-only",
+  "supervisorRef": {
+    "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor.py",
+    "bytes": 5253,
+    "fileSha256": "19b86743746bcb334ab7bbfa109fb3dac20b0d4dbc26bfba313a69e6f03fef74"
+  }
+}
