@@ -1,0 +1,1436 @@
+{
+  "schemaVersion": "selection-structure-improvement-reviewable-proposal-v001",
+  "basisHead": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+  "sourceId": "-2UUTkv9qvk",
+  "observedModel": "gpt-6.1-sol",
+  "humanAdoption": false,
+  "productionIntent": {
+    "schemaVersion": "production-intent-plan-v0",
+    "productionIntent": "同じホラー監視ゲーム配信から、自然な開始と内容を理解できる説明、単独で伝わる複数の見どころ、本編の進行と結末を持つDigest案を作る。導入が理解に有効なら残す。商品紹介・スパチャ読みは主題に直接関係しなければ除外するが、キーワードや配信位置だけで排除しない。ゲーム終了・本編終了と配信末尾の挨拶を区別し、内容に適した締めを選ぶ。前振り・展開・反応・結末を保ち、候補間の重複と保存全文の候補外の取りこぼしを確認する。自然な雑談を消さず、件数と尺の正解を置かない。元発話・断片IDだけで提案し、時刻は既存コードで解決する。保存字幕から映像だけの出来事やOP/EDを捏造しない。"
+  },
+  "judgments": {
+    "discovery": {
+      "status": "complete",
+      "candidates": [
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "夏のホラー監視を始める有能バイト",
+          "reason": "夏にホラーを始める理由、実際の心霊現象への不安、前作で有能だったという自己紹介を後のベテラン役へつなぐ。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000002",
+            "common-utterance-000003",
+            "common-utterance-000005",
+            "common-utterance-000010"
+          ],
+          "contextStartUtteranceId": "common-utterance-000002",
+          "contextEndUtteranceId": "common-utterance-000010"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "犬に負けたアレルギー対策とホラーのお守り",
+          "reason": "犬の誘惑に薬の対策が負けた結果と、お化けから守ってくれるという言い直しがホラーへの自然な雑談導入になる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000011",
+            "common-utterance-000013",
+            "common-utterance-000014",
+            "common-utterance-000015",
+            "common-utterance-000016"
+          ],
+          "contextStartUtteranceId": "common-utterance-000011",
+          "contextEndUtteranceId": "common-utterance-000016"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "監視ゲームで何を報告するか",
+          "reason": "ゲーム名と変化する画面の異変を報告する説明を採る。後の報告責任・クリア・特別手当を初見でも理解できる文脈であり、利用規約の読み上げは今回の理解に不要。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000017",
+            "common-utterance-000018"
+          ],
+          "contextStartUtteranceId": "common-utterance-000017",
+          "contextEndUtteranceId": "common-utterance-000018"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "勤続15年のベテランが叫びながら報告しクリア",
+          "reason": "ベテランとして新入りを叱る自信、接近する霊への恐怖、責任への立て直し、弁当の冗談を保つ。直後のクリア確認で一つの仕事の結果まで閉じる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000431",
+            "common-utterance-000434",
+            "common-utterance-000441",
+            "common-utterance-000448",
+            "common-utterance-000452",
+            "common-utterance-000453",
+            "common-utterance-000456",
+            "common-utterance-000463"
+          ],
+          "contextStartUtteranceId": "common-utterance-000426",
+          "contextEndUtteranceId": "common-utterance-000463"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "トイレの我慢から貞子のデジタル化へ",
+          "reason": "トイレに行かないベテランの理由から、呪怨のチームプレイと貞子の時代適応を比較する。候補4の恐怖反応と異なるホラー談義で、既存の結論で話が閉じる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001008",
+            "common-utterance-001010",
+            "common-utterance-001011",
+            "common-utterance-001015",
+            "common-utterance-001016",
+            "common-utterance-001018",
+            "common-utterance-001019"
+          ],
+          "contextStartUtteranceId": "common-utterance-001007",
+          "contextEndUtteranceId": "common-utterance-001019"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "全ステージ完了後の特別手当で追いつけなくなる",
+          "reason": "通常ステージの完了と追加挑戦の説明、自信、異変が増える速度への苦戦、探しても追いつかない終盤をつなぐ。候補4の一回の成功と違い、強がるベテランの限界という配信後半の変化を追加し、次の退勤へ因果を運ぶ。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001073",
+            "common-utterance-001074",
+            "common-utterance-001075",
+            "common-utterance-001332",
+            "common-utterance-001333",
+            "common-utterance-001338",
+            "common-utterance-001341",
+            "common-utterance-001348",
+            "common-utterance-001352"
+          ],
+          "contextStartUtteranceId": "common-utterance-001073",
+          "contextEndUtteranceId": "common-utterance-001353"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "特別手当を諦めて退勤・ゲーム終了",
+          "reason": "特別手当は無理だと本人が諦め、頑張ったと結び、退勤とゲーム終了を宣言する。全ステージクリアと追加挑戦の未達を混同せず、本編自体の締めにする。トイレ移動とコメント操作は締めの後なので外す。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001354",
+            "common-utterance-001355",
+            "common-utterance-001356",
+            "common-utterance-001358",
+            "common-utterance-001359",
+            "common-utterance-001360"
+          ],
+          "contextStartUtteranceId": "common-utterance-001354",
+          "contextEndUtteranceId": "common-utterance-001360"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "普段使いバッグの設計と販売紹介",
+          "reason": "バッグの工夫として独立した価値はあるが、今回の監視ゲームの理解・反応・結果にはつながらない。商品という語だけで拒否せずiPadと販売・用途の本文を読んで今回は外す。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001371",
+            "common-utterance-001376",
+            "common-utterance-001379",
+            "common-utterance-001382",
+            "common-utterance-001384"
+          ],
+          "contextStartUtteranceId": "common-utterance-001371",
+          "contextEndUtteranceId": "common-utterance-001384"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "通話でゲームを振り返る仕事への意地",
+          "reason": "ホラー配信に直接関係する後日ではない同配信内の振り返りで、スパチャ中の通話だからという理由では拒否しない。ただし報告責任と仕事への意地は候補4・6・7で本人の行動と結末により示せるため、別の記念通話への導入を足して締めを戻す必要はない。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001477",
+            "common-utterance-001478",
+            "common-utterance-001479"
+          ],
+          "contextStartUtteranceId": "common-utterance-001477",
+          "contextEndUtteranceId": "common-utterance-001479"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "ダンスの苦手さと人生初の動き",
+          "reason": "本人像を示す別話題としては成立するが、フェス・周年のスパチャ回答であり今回の監視業務と結末を支える文脈にはならない。犬の雑談を残す判断と区別して除外を維持する。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001567",
+            "common-utterance-001568",
+            "common-utterance-001571",
+            "common-utterance-001573",
+            "common-utterance-001574"
+          ],
+          "contextStartUtteranceId": "common-utterance-001567",
+          "contextEndUtteranceId": "common-utterance-001575"
+        },
+        {
+          "sourceId": "youtube-2UUTkv9qvk",
+          "title": "配信末尾の謝辞とお化けへの注意",
+          "reason": "本編終了ではなくスパチャと通話を終えた配信全体の挨拶。今回は候補7で本編の結果と退勤が閉じるため、解除時の時系列維持を理由にこの挨拶を選ばない。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001614"
+          ],
+          "contextStartUtteranceId": "common-utterance-001614",
+          "contextEndUtteranceId": "common-utterance-001614"
+        }
+      ]
+    },
+    "discoveryNote": "Codex2 / gpt-6.1-sol。保存全1615発話を今回読み、旧5候補外の導入・ゲーム説明・初物件クリア・全ステージ完了・追加挑戦・本編終了・主題関連の通話を確認。候補件数・尺の目標なし。映像の意味観察ではなく保存本文による判断。",
+    "selection": {
+      "status": "complete",
+      "decisions": [
+        {
+          "candidateId": "candidate-0001",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "necessary-structure",
+          "reason": "夏にホラーを始める理由、実際の心霊現象への不安、前作で有能だったという自己紹介を後のベテラン役へつなぐ。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000002",
+            "common-utterance-000003",
+            "common-utterance-000005",
+            "common-utterance-000010"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000431"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "distinct-highlight",
+          "reason": "犬の誘惑に薬の対策が負けた結果と、お化けから守ってくれるという言い直しがホラーへの自然な雑談導入になる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000011",
+            "common-utterance-000013",
+            "common-utterance-000014",
+            "common-utterance-000015",
+            "common-utterance-000016"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000431",
+                "common-utterance-000448"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0003",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "necessary-context",
+          "reason": "ゲーム名と変化する画面の異変を報告する説明を採る。後の報告責任・クリア・特別手当を初見でも理解できる文脈であり、利用規約の読み上げは今回の理解に不要。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000017",
+            "common-utterance-000018"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000452",
+                "common-utterance-000453"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0004",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "distinct-highlight",
+          "reason": "ベテランとして新入りを叱る自信、接近する霊への恐怖、責任への立て直し、弁当の冗談を保つ。直後のクリア確認で一つの仕事の結果まで閉じる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-000431",
+            "common-utterance-000434",
+            "common-utterance-000441",
+            "common-utterance-000448",
+            "common-utterance-000452",
+            "common-utterance-000453",
+            "common-utterance-000456",
+            "common-utterance-000463"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0006",
+              "evidenceUtteranceIds": [
+                "common-utterance-001074",
+                "common-utterance-001332"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0005",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "distinct-highlight",
+          "reason": "トイレに行かないベテランの理由から、呪怨のチームプレイと貞子の時代適応を比較する。候補4の恐怖反応と異なるホラー談義で、既存の結論で話が閉じる。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001008",
+            "common-utterance-001010",
+            "common-utterance-001011",
+            "common-utterance-001015",
+            "common-utterance-001016",
+            "common-utterance-001018",
+            "common-utterance-001019"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000431",
+                "common-utterance-000452"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0006",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "distinct-highlight",
+          "reason": "通常ステージの完了と追加挑戦の説明、自信、異変が増える速度への苦戦、探しても追いつかない終盤をつなぐ。候補4の一回の成功と違い、強がるベテランの限界という配信後半の変化を追加し、次の退勤へ因果を運ぶ。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001073",
+            "common-utterance-001074",
+            "common-utterance-001075",
+            "common-utterance-001332",
+            "common-utterance-001333",
+            "common-utterance-001338",
+            "common-utterance-001341",
+            "common-utterance-001348",
+            "common-utterance-001352"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000431",
+                "common-utterance-000456",
+                "common-utterance-000463"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0007",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "adopt",
+          "basis": "necessary-structure",
+          "reason": "特別手当は無理だと本人が諦め、頑張ったと結び、退勤とゲーム終了を宣言する。全ステージクリアと追加挑戦の未達を混同せず、本編自体の締めにする。トイレ移動とコメント操作は締めの後なので外す。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001354",
+            "common-utterance-001355",
+            "common-utterance-001356",
+            "common-utterance-001358",
+            "common-utterance-001359",
+            "common-utterance-001360"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0006",
+              "evidenceUtteranceIds": [
+                "common-utterance-001073",
+                "common-utterance-001332",
+                "common-utterance-001348"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0008",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "reject",
+          "basis": "weak",
+          "reason": "バッグの工夫として独立した価値はあるが、今回の監視ゲームの理解・反応・結果にはつながらない。商品という語だけで拒否せずiPadと販売・用途の本文を読んで今回は外す。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001371",
+            "common-utterance-001376",
+            "common-utterance-001379",
+            "common-utterance-001382",
+            "common-utterance-001384"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0004",
+              "evidenceUtteranceIds": [
+                "common-utterance-000431",
+                "common-utterance-000452"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0009",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "reject",
+          "basis": "redundant",
+          "reason": "ホラー配信に直接関係する後日ではない同配信内の振り返りで、スパチャ中の通話だからという理由では拒否しない。ただし報告責任と仕事への意地は候補4・6・7で本人の行動と結末により示せるため、別の記念通話への導入を足して締めを戻す必要はない。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001477",
+            "common-utterance-001478",
+            "common-utterance-001479"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0006",
+              "evidenceUtteranceIds": [
+                "common-utterance-001074",
+                "common-utterance-001332",
+                "common-utterance-001333"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0010",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "reject",
+          "basis": "weak",
+          "reason": "本人像を示す別話題としては成立するが、フェス・周年のスパチャ回答であり今回の監視業務と結末を支える文脈にはならない。犬の雑談を残す判断と区別して除外を維持する。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001567",
+            "common-utterance-001568",
+            "common-utterance-001571",
+            "common-utterance-001573",
+            "common-utterance-001574"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0002",
+              "evidenceUtteranceIds": [
+                "common-utterance-000011",
+                "common-utterance-000016"
+              ]
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0011",
+          "sourceId": "youtube-2UUTkv9qvk",
+          "decision": "reject",
+          "basis": "redundant",
+          "reason": "本編終了ではなくスパチャと通話を終えた配信全体の挨拶。今回は候補7で本編の結果と退勤が閉じるため、解除時の時系列維持を理由にこの挨拶を選ばない。",
+          "evidenceUtteranceIds": [
+            "common-utterance-001614"
+          ],
+          "comparisons": [
+            {
+              "candidateId": "candidate-0007",
+              "evidenceUtteranceIds": [
+                "common-utterance-001354",
+                "common-utterance-001359",
+                "common-utterance-001360"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "selectionNote": "今回要求を全候補へ伝え、本文と相互比較で採否を新判断。商品紹介とダンスは今回主題への関係で外す。関連通話も読み、単純キーワード除外ではない。人間採用0。",
+    "retention": {
+      "status": "complete",
+      "candidates": [
+        {
+          "candidateId": "candidate-0001",
+          "meaningPreserved": "necessary-structure",
+          "blocks": [
+            {
+              "action": "drop",
+              "startSourceSegmentId": 5,
+              "endSourceSegmentId": 67,
+              "roles": [
+                "digression"
+              ],
+              "reason": "配置確認は制作準備であり内容導入の前。"
+            },
+            {
+              "action": "keep",
+              "startSourceSegmentId": 68,
+              "endSourceSegmentId": 284,
+              "roles": [
+                "lead-in",
+                "development"
+              ],
+              "reason": "導入・不安と有能バイトの前振り"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "meaningPreserved": "distinct-highlight",
+          "blocks": [
+            {
+              "action": "keep",
+              "startSourceSegmentId": 285,
+              "endSourceSegmentId": 942,
+              "roles": [
+                "lead-in",
+                "development",
+                "payoff",
+                "reaction"
+              ],
+              "reason": "犬との出会い・薬・誘惑・アレルギーの結果・ホラーのお守り"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 943,
+              "endSourceSegmentId": 972,
+              "roles": [
+                "digression"
+              ],
+              "reason": "片付けの別話題への途中導入で、犬の逆転とお守りの結びは直前で完結。"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0003",
+          "meaningPreserved": "necessary-context",
+          "blocks": [
+            {
+              "action": "drop",
+              "startSourceSegmentId": 973,
+              "endSourceSegmentId": 1128,
+              "roles": [
+                "digression"
+              ],
+              "reason": "片付けの冗談と繰返し、または利用規約読み上げであり、採用したゲーム説明を補わない。"
+            },
+            {
+              "action": "keep",
+              "startSourceSegmentId": 1129,
+              "endSourceSegmentId": 1248,
+              "roles": [
+                "lead-in",
+                "development"
+              ],
+              "reason": "ゲーム名・前作経験・変化した異変を報告する説明"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 1249,
+              "endSourceSegmentId": 1299,
+              "roles": [
+                "digression"
+              ],
+              "reason": "片付けの冗談と繰返し、または利用規約読み上げであり、採用したゲーム説明を補わない。"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0004",
+          "meaningPreserved": "distinct-highlight",
+          "blocks": [
+            {
+              "action": "drop",
+              "startSourceSegmentId": 7667,
+              "endSourceSegmentId": 7688,
+              "roles": [
+                "digression"
+              ],
+              "reason": "先行する肉塊の報告または次の物件への移行。今回のベテラン役の一回の仕事からは外れる。"
+            },
+            {
+              "action": "keep",
+              "startSourceSegmentId": 7689,
+              "endSourceSegmentId": 8721,
+              "roles": [
+                "lead-in",
+                "development",
+                "payoff",
+                "reaction"
+              ],
+              "reason": "新入りを叱る前振り・恐怖・報告責任・弁当の冗談・初物件クリア確認"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 8722,
+              "endSourceSegmentId": 8780,
+              "roles": [
+                "digression"
+              ],
+              "reason": "先行する肉塊の報告または次の物件への移行。今回のベテラン役の一回の仕事からは外れる。"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0005",
+          "meaningPreserved": "distinct-highlight",
+          "blocks": [
+            {
+              "action": "keep",
+              "startSourceSegmentId": 18662,
+              "endSourceSegmentId": 19439,
+              "roles": [
+                "lead-in",
+                "development",
+                "payoff",
+                "reaction"
+              ],
+              "reason": "トイレの助言から呪怨と貞子の比較、訂正、時代適応の結論まで"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0006",
+          "meaningPreserved": "distinct-highlight",
+          "blocks": [
+            {
+              "action": "keep",
+              "startSourceSegmentId": 21936,
+              "endSourceSegmentId": 22193,
+              "roles": [
+                "lead-in",
+                "development"
+              ],
+              "reason": "全ステージ完了と特別手当への追加挑戦、自信とルールの留保"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 22194,
+              "endSourceSegmentId": 25128,
+              "roles": [
+                "duplicate"
+              ],
+              "reason": "途中の繰返し探索・別雑談、または同じ報告を重ねる部分。追加挑戦の前提、速度に負ける転換、終盤と次の退勤の結末は別keepで保つ。"
+            },
+            {
+              "action": "keep",
+              "startSourceSegmentId": 25129,
+              "endSourceSegmentId": 25286,
+              "roles": [
+                "lead-in",
+                "development"
+              ],
+              "reason": "異変が増える速度に追いつかず、報告しても絶えないという変化"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 25287,
+              "endSourceSegmentId": 25363,
+              "roles": [
+                "duplicate"
+              ],
+              "reason": "途中の繰返し探索・別雑談、または同じ報告を重ねる部分。追加挑戦の前提、速度に負ける転換、終盤と次の退勤の結末は別keepで保つ。"
+            },
+            {
+              "action": "keep",
+              "startSourceSegmentId": 25364,
+              "endSourceSegmentId": 25530,
+              "roles": [
+                "lead-in",
+                "development"
+              ],
+              "reason": "終盤の時刻・急ぐ判断・最後の探索と恐怖反応"
+            }
+          ]
+        },
+        {
+          "candidateId": "candidate-0007",
+          "meaningPreserved": "necessary-structure",
+          "blocks": [
+            {
+              "action": "keep",
+              "startSourceSegmentId": 25531,
+              "endSourceSegmentId": 25754,
+              "roles": [
+                "payoff",
+                "reaction"
+              ],
+              "reason": "特別手当を諦める本人の結論、労い、退勤とゲーム終了"
+            },
+            {
+              "action": "drop",
+              "startSourceSegmentId": 25755,
+              "endSourceSegmentId": 25821,
+              "roles": [
+                "digression"
+              ],
+              "reason": "ゲーム終了後のトイレ移動・コメント欄の準備であり今回の本編締めを補わない。"
+            }
+          ]
+        }
+      ]
+    },
+    "retentionNote": "新候補の全断片を既存keep/drop形式で説明。犬と貞子は旧保持を維持。ベテランは直後のクリアで閉じ、追加挑戦は前提・速度に負ける展開・終盤・退勤へつなぐ。時刻を生成せず既存ID時計解決へ渡す。",
+    "roles": {
+      "candidate-0001": "intro",
+      "candidate-0002": "main",
+      "candidate-0003": "related-side-topic",
+      "candidate-0004": "main",
+      "candidate-0005": "main",
+      "candidate-0006": "main",
+      "candidate-0007": "closure",
+      "candidate-0008": "exclude-goods",
+      "candidate-0009": "related-side-topic",
+      "candidate-0010": "exclude-superchat",
+      "candidate-0011": "closure"
+    }
+  },
+  "fullTextRead": {
+    "utterances": 1615,
+    "sourceFragments": 44002,
+    "warning": "保存STTの反復・誤認識は修正していない。映像だけの出来事・音楽・OP/EDは未観測"
+  },
+  "selectedSpans": [
+    {
+      "candidateId": "candidate-0001",
+      "segmentId": "segment-0001",
+      "sourceFragmentRange": [
+        68,
+        284
+      ],
+      "utteranceIds": [
+        "common-utterance-000002",
+        "common-utterance-000003",
+        "common-utterance-000004",
+        "common-utterance-000005",
+        "common-utterance-000006",
+        "common-utterance-000007",
+        "common-utterance-000008",
+        "common-utterance-000009",
+        "common-utterance-000010"
+      ],
+      "reason": "導入・不安と有能バイトの前振り",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "sourceStartMs": 159770,
+      "sourceEndMs": 213077,
+      "clock": {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 159770,
+        "sourceEndMs": 213077,
+        "sourceStartFrame30": 4793,
+        "sourceEndFrame30": 6392,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1599,
+        "audioSamples": {
+          "sourceStart": 7045710,
+          "sourceEnd": 9396240,
+          "outputStart": 0,
+          "outputEnd": 2350530
+        }
+      },
+      "text": "なんか久々に夏なんでホラーゲームとかやろうかなと思ったんですけどなんかエゴサしてたらすごいこのゲームで心霊現象が実際に怒ってるとあの噂のやるんですねみたいな言われててそんなの聞いてないんですけどそうなんですか?さすがに大丈夫だと思うんですけどはいマリちゃんホラゲいけんの?これ1の時は割と結構有能なバイトだったと辞任していますのでいけるかなと思いますけどそうらしいね。いや、そうなんだ。知らなかったんだけど。大丈夫かな?大丈夫でしょ。"
+    },
+    {
+      "candidateId": "candidate-0002",
+      "segmentId": "segment-0002",
+      "sourceFragmentRange": [
+        285,
+        942
+      ],
+      "utteranceIds": [
+        "common-utterance-000011",
+        "common-utterance-000012",
+        "common-utterance-000013",
+        "common-utterance-000014",
+        "common-utterance-000015",
+        "common-utterance-000016"
+      ],
+      "reason": "犬との出会い・薬・誘惑・アレルギーの結果・ホラーのお守り",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "sourceStartMs": 213077,
+      "sourceEndMs": 327084,
+      "clock": {
+        "segmentId": "segment-0002",
+        "sourceStartMs": 213077,
+        "sourceEndMs": 327084,
+        "sourceStartFrame30": 6392,
+        "sourceEndFrame30": 9813,
+        "outputStartFrame": 1599,
+        "outputEndFrame": 5020,
+        "audioSamples": {
+          "sourceStart": 9396240,
+          "sourceEnd": 14425110,
+          "outputStart": 2350530,
+          "outputEnd": 7379400
+        }
+      },
+      "text": "あのー、マリン昨日ね、ノエちゃん家でドッグセラピー受けたんで。ドッグセラピー、ノエちゃん家にすっげー可愛い犬いて、マリンアレルギー出るからめっちゃ強いアレルギーの薬を飲んで行ったんですよで触ったらアレルギー出るからでもなんかねすっごいねすっごいねなんかね撫でて撫でて撫でて撫でてってすごいぴょんぴょんぴょんぴょんってマリンの足に絡みついてきて撫でざるを得なかったんで一旦撫でさせてもらったんですよで手洗ってでまたふーって座ったらまた撫でて撫でて撫でてしかもお腹見せて転がっていやそんな撫でますがな撫でさせていただきますがなって感じで撫でまくってで割とどれくらいいたんだろう1時間半くらい多分いてノエちゃん家にちょっと語らいながらもあのワンチョムバチクソ撫でまくってで帰ってきてからむちゃむちゃアレルギー出て家の中いるときは薬効いてて全然大丈夫だったんですけど帰ってからむちゃむちゃアレルギー出て顔中ジンマシンが出て目やにが止まらなくなるしでもちょっと薬が効いてるから鼻がいつもだったら詰まって鼻水が出るけど鼻が詰まるみたいな風邪みたいになるんですけど鼻は通ってるけど下向くと鼻水がだーって垂れてくるみたいなズタボロになりながら今日も肌がボロボロですけどちょっとうまく隠しながらやっていこうかなとあかんかったちょっと誘惑に勝てませんでした犬可愛すぎたわそういうわけでドッグセラピー受けてきたんで大丈夫だと思うたぶんワンチョムがマリンを守ってくれると思うわけのわからないことを言いながらちょっとやってみようかなやれるかな"
+    },
+    {
+      "candidateId": "candidate-0003",
+      "segmentId": "segment-0003",
+      "sourceFragmentRange": [
+        1129,
+        1248
+      ],
+      "utteranceIds": [
+        "common-utterance-000017",
+        "common-utterance-000018"
+      ],
+      "reason": "ゲーム名・前作経験・変化した異変を報告する説明",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "sourceStartMs": 355551,
+      "sourceEndMs": 379620,
+      "clock": {
+        "segmentId": "segment-0003",
+        "sourceStartMs": 355551,
+        "sourceEndMs": 379620,
+        "sourceStartFrame30": 10667,
+        "sourceEndFrame30": 11389,
+        "outputStartFrame": 5020,
+        "outputEndFrame": 5742,
+        "audioSamples": {
+          "sourceStart": 15680490,
+          "sourceEnd": 16741830,
+          "outputStart": 7379400,
+          "outputEnd": 8440740
+        }
+      },
+      "text": "日本事故物件監視協会こちら、あの1やったことあるんですけどなぜか2はやってないんですけどあのーえっとーなんかアハ体験的に画面がちょっと変わっていっておばけがだんだん出てくるからそれを報告するみたいな感じでしたよね多分ねちょっとやってみますか"
+    },
+    {
+      "candidateId": "candidate-0004",
+      "segmentId": "segment-0004",
+      "sourceFragmentRange": [
+        7689,
+        8721
+      ],
+      "utteranceIds": [
+        "common-utterance-000426",
+        "common-utterance-000427",
+        "common-utterance-000428",
+        "common-utterance-000429",
+        "common-utterance-000430",
+        "common-utterance-000431",
+        "common-utterance-000432",
+        "common-utterance-000433",
+        "common-utterance-000434",
+        "common-utterance-000435",
+        "common-utterance-000436",
+        "common-utterance-000437",
+        "common-utterance-000438",
+        "common-utterance-000439",
+        "common-utterance-000440",
+        "common-utterance-000441",
+        "common-utterance-000442",
+        "common-utterance-000443",
+        "common-utterance-000444",
+        "common-utterance-000445",
+        "common-utterance-000446",
+        "common-utterance-000447",
+        "common-utterance-000448",
+        "common-utterance-000449",
+        "common-utterance-000450",
+        "common-utterance-000451",
+        "common-utterance-000452",
+        "common-utterance-000453",
+        "common-utterance-000454",
+        "common-utterance-000455",
+        "common-utterance-000456",
+        "common-utterance-000457",
+        "common-utterance-000458",
+        "common-utterance-000459",
+        "common-utterance-000460",
+        "common-utterance-000461",
+        "common-utterance-000462",
+        "common-utterance-000463"
+      ],
+      "reason": "新入りを叱る前振り・恐怖・報告責任・弁当の冗談・初物件クリア確認",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "sourceStartMs": 1993090,
+      "sourceEndMs": 2256057,
+      "clock": {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 1993090,
+        "sourceEndMs": 2256057,
+        "sourceStartFrame30": 59793,
+        "sourceEndFrame30": 67682,
+        "outputStartFrame": 5742,
+        "outputEndFrame": 13631,
+        "audioSamples": {
+          "sourceStart": 87895710,
+          "sourceEnd": 99492540,
+          "outputStart": 8440740,
+          "outputEnd": 20037570
+        }
+      },
+      "text": "花瓶あったっけ?君さぁ何を見てたんですか今まで君不思議待ってなんかでかくなってるかもこんなでかくなかったかもしんないでかかったかも君さぁ何回ここ見てんすかここに葉っぱなんか落ちてたっけ?なんかこれ新しくない?新しく出てきたくない?これもともとあったか君花瓶はさずっとあったでしょこれだから新入りは困るんですよ私みたいにねこの仕事金属15年やってるんですよ私はねあなたみたいなね、新入りがねぇうわっ!ドアバーンドアバーンねあなたみたいな新入りがねぇこないだ入ったばっかのぺいぺいが知ってんの?口聞かないでくださいこの職場のことはね、アーシーが一番わかってるんですから一番知ってるんですから長年やってるんですからねちゃんと見つけてましたか?今君あの勘を見落とすようじゃおーなんかすげーゴージャスになってるなんかめでたいまであるななんか同じ箇所に複数は発生しないんだろうかうんうん異常なし異常なしお風呂場が最近窓が割れるくらいのことしか起こらないんですよねもうちょっと何かありそうですけど異常なしここもなんかうわ!うわ!やばいやばいやばい!こいつ一番やばいやつ!これ一番やばいやつ!あー!こっち来てる!こっち来てる!あー!早く早く早く!こっち来ちゃうからこっち来ちゃうから鼻水出たびっくりしすぎてあれ?あいつが一番やばいんだからあいつがいっちゃんやばいんだからこの部屋なんも起きないぞいい加減にしろよカーテンが…いや、そんなことないかいや、なんか違和感があるめくれすぎな気がしない?へ、変だよ、変じゃないめくれすぎだった、もともとでもこういう気づき?間違いがあってもいいんです常に気づきを得る、これがだ…うわあああああちょ、これやらな、これやらなあかんてギャーじゃなくて、やらないと責任だからこれは正社員としての金属15年正社員としてのこれ責任ですからこれギャーじゃないからねご馳走が並んでるご馳走が並んでるこれありがた以上これありがた以上ですね今日食べ放題あんたも持って帰ってあんたも持って帰っていいわよ今日廃棄出てるから霊障弁当の廃棄が出てますめったにないことだからこれラッキーな霊障だからなんかこれなんかこんなんじゃなかったかな?なんかなんか変な気がする雰囲気変な感じがする間違っ…あっ!21,427円え、これクリアってこと?クリアってこと?クリアってこと?クリアってこと?クリアしたってこと?でいいのかな?え?クリアしたって…あチェックついてるクリアしたってことだ"
+    },
+    {
+      "candidateId": "candidate-0005",
+      "segmentId": "segment-0005",
+      "sourceFragmentRange": [
+        18662,
+        19439
+      ],
+      "utteranceIds": [
+        "common-utterance-001007",
+        "common-utterance-001008",
+        "common-utterance-001009",
+        "common-utterance-001010",
+        "common-utterance-001011",
+        "common-utterance-001012",
+        "common-utterance-001013",
+        "common-utterance-001014",
+        "common-utterance-001015",
+        "common-utterance-001016",
+        "common-utterance-001017",
+        "common-utterance-001018",
+        "common-utterance-001019"
+      ],
+      "reason": "トイレの助言から呪怨と貞子の比較、訂正、時代適応の結論まで",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "sourceStartMs": 5468987,
+      "sourceEndMs": 5675926,
+      "clock": {
+        "segmentId": "segment-0005",
+        "sourceStartMs": 5468987,
+        "sourceEndMs": 5675926,
+        "sourceStartFrame30": 164070,
+        "sourceEndFrame30": 170278,
+        "outputStartFrame": 13631,
+        "outputEndFrame": 19839,
+        "audioSamples": {
+          "sourceStart": 241182900,
+          "sourceEnd": 250308660,
+          "outputStart": 20037570,
+          "outputEnd": 29163330
+        }
+      },
+      "text": "いやいや、行ってきな!いやいや、今行かないって!ま、こんなんこんなん!こんな開きながらトイレ行くのはお前素人の判断なんだってばこんな風な画面開いたままいいですか君あのこの金属30年のマリンがねこの仕事を安全に30年続けてきた理由がこういう最中にトイレには行かない君はホラー映画だったら真っ先にね死ぬタイプ一人になって一人になったら過去の餌食でしょそんなこともわからないんですかだからジュオンくらいは見とけって言ってんのジュオンの世界だったらばジュオンの世界では一人だろうと二人だろうと全員殺されるんだけど強すぎるからね強いんだよなジュオンのお化けカヤコカヤコとトシオと黒猫が三味一体、あぁこれさっきも出ました三味一体でチームプレイで殺しに来るからねジオンだから強いんだよジオンは貞子は言うてターゲットした人?割とだけ?割とだけ狙い撃ちタイプ?だけどカヤコは関係ない人も関わりを持ったらまとめてやるからねサダコはソロプレイだから一人でやってるから長年ねビデオの時代から今の時代だったらYouTubeとかあるからSNSとかカヤコの勢いは増すばかりでしょかやこじゃねえ、さだこあ、だだだだだベイビーが立った不機嫌だいや、かやこんちは口コミであの家やばいですってなってどんどん誰も行かなくなるけどさだこはビデオは誰も見なくなったもののね?動画、動画だから結局はそれをね、あのなんかさだこvsかやことかでねYouTubeとか動画配信サイトにアップロードするみたいなのも出てきてたから時代に適合してんだよなそこが強いよねかやこんちはもう誰も行かなくなるで終わりなんだけど家にね、立ち入らないとねことが始まんないから貞子は現代でも通用すんだよなそこが強いところですよねトレンドに乗ってて偉いいやマジでデジタル化までしていくちょっと格がやっぱ違うのかなって感じがしますよね"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0006",
+      "sourceFragmentRange": [
+        21936,
+        22193
+      ],
+      "utteranceIds": [
+        "common-utterance-001073",
+        "common-utterance-001074",
+        "common-utterance-001075"
+      ],
+      "reason": "全ステージ完了と特別手当への追加挑戦、自信とルールの留保",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "sourceStartMs": 6394302,
+      "sourceEndMs": 6449886,
+      "clock": {
+        "segmentId": "segment-0006",
+        "sourceStartMs": 6394302,
+        "sourceEndMs": 6449886,
+        "sourceStartFrame30": 191829,
+        "sourceEndFrame30": 193497,
+        "outputStartFrame": 19839,
+        "outputEndFrame": 21507,
+        "audioSamples": {
+          "sourceStart": 281988630,
+          "sourceEnd": 284440590,
+          "outputStart": 29163330,
+          "outputEnd": 31615290
+        }
+      },
+      "text": "はい、まあいいでしょうお、あ、全部完了しましたはい、皆さん無事にマリンは完了できたようですまあ残りの異常いっぱいあるなでも残りの異常ってさ特別手当やってみようちょっと試しに全ステージクリアおめありがとうございますありがとうございます皆さんどうもありがとうございます懐かしいなここうん、ベテランですから任してくださいこれさ、見つけた以上もだって出てきちゃうんだよね全部見つけるには運ゲーが過ぎないか?見つけてないやつが出てきてくれるならいいけど見つけてないやつが出てきちゃうとなりましたら特別手当は最初から異変出てる?"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0007",
+      "sourceFragmentRange": [
+        25129,
+        25286
+      ],
+      "utteranceIds": [
+        "common-utterance-001332",
+        "common-utterance-001333"
+      ],
+      "reason": "異変が増える速度に追いつかず、報告しても絶えないという変化",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "sourceStartMs": 7566646,
+      "sourceEndMs": 7620361,
+      "clock": {
+        "segmentId": "segment-0007",
+        "sourceStartMs": 7566646,
+        "sourceEndMs": 7620361,
+        "sourceStartFrame30": 226999,
+        "sourceEndFrame30": 228611,
+        "outputStartFrame": 21507,
+        "outputEndFrame": 23119,
+        "audioSamples": {
+          "sourceStart": 333688530,
+          "sourceEnd": 336058170,
+          "outputStart": 31615290,
+          "outputEnd": 33984930
+        }
+      },
+      "text": "何もないなやばいすごい勢いですごい勢いであってあって布団布団布団布団布団布団なんでだよなんで布団がいっぱいになってんだよすごい勢いで異変が増えるやん追いつけないぞこの速度あ、目玉目玉目玉目玉やばいまたまたやばいやばいやばいやばいどんどん来るどんどん来る報告しても報告しても報告しても報告しても異変が絶えないえ、どこ?"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0008",
+      "sourceFragmentRange": [
+        25364,
+        25530
+      ],
+      "utteranceIds": [
+        "common-utterance-001338",
+        "common-utterance-001339",
+        "common-utterance-001340",
+        "common-utterance-001341",
+        "common-utterance-001342",
+        "common-utterance-001343",
+        "common-utterance-001344",
+        "common-utterance-001345",
+        "common-utterance-001346",
+        "common-utterance-001347",
+        "common-utterance-001348",
+        "common-utterance-001349",
+        "common-utterance-001350",
+        "common-utterance-001351",
+        "common-utterance-001352",
+        "common-utterance-001353"
+      ],
+      "reason": "終盤の時刻・急ぐ判断・最後の探索と恐怖反応",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "sourceStartMs": 7662774,
+      "sourceEndMs": 7751288,
+      "clock": {
+        "segmentId": "segment-0008",
+        "sourceStartMs": 7662774,
+        "sourceEndMs": 7751288,
+        "sourceStartFrame30": 229883,
+        "sourceEndFrame30": 232539,
+        "outputStartFrame": 23119,
+        "outputEndFrame": 25775,
+        "audioSamples": {
+          "sourceStart": 337928010,
+          "sourceEnd": 341832330,
+          "outputStart": 33984930,
+          "outputEnd": 37889250
+        }
+      },
+      "text": "3時3時までやってまいりました絶対なんか今怒ってるよね絶対なんかなってるよねこれ絶対またそろそろ来るよ複数怒ってます来るぞこれ急げ泣くにゃいか?何にもにゃくにゃいか?異常ないっす!異常!うぇぇぇぇ!異常ないっすよ!ないっすもん!だって!なんかこのドアが広いドアが広いもうないですよー!どこっすか!動いてるこれ!いやー!見せんなよ!はい"
+    },
+    {
+      "candidateId": "candidate-0007",
+      "segmentId": "segment-0009",
+      "sourceFragmentRange": [
+        25531,
+        25754
+      ],
+      "utteranceIds": [
+        "common-utterance-001354",
+        "common-utterance-001355",
+        "common-utterance-001356",
+        "common-utterance-001357",
+        "common-utterance-001358",
+        "common-utterance-001359",
+        "common-utterance-001360"
+      ],
+      "reason": "特別手当を諦める本人の結論、労い、退勤とゲーム終了",
+      "meaningRoles": [
+        "payoff",
+        "reaction"
+      ],
+      "sourceStartMs": 7759082,
+      "sourceEndMs": 7822947,
+      "clock": {
+        "segmentId": "segment-0009",
+        "sourceStartMs": 7759082,
+        "sourceEndMs": 7822947,
+        "sourceStartFrame30": 232772,
+        "sourceEndFrame30": 234688,
+        "outputStartFrame": 25775,
+        "outputEndFrame": 27691,
+        "audioSamples": {
+          "sourceStart": 342174840,
+          "sourceEnd": 344991360,
+          "outputStart": 37889250,
+          "outputEnd": 40705770
+        }
+      },
+      "text": "いやーこれで37いやでもまあ言うて言うて結構発見できたんじゃないですかこれマリンうんやれたでしょ結構ねうん一応全部発見全体的に見つけました特別手当は無理だこれは諦めますもう無理だこれはトイレ行きたいしはいということで気持ちいいまあマリンはこんなもんにしようかなと思います?よう頑張ったんー頑張った頑張ったんんんんんいいでしょう!よし!退勤退勤退勤しようちょっと待ってねーん?こうしてはい退勤でーすちょっと音怖い音怖いよ音怖いよ終わらしてよゲーム終了"
+    }
+  ],
+  "differences": {
+    "firstDraft": {
+      "added": [
+        {
+          "sourceFragmentRange": [
+            68,
+            284
+          ],
+          "sourceStartMs": 159770,
+          "sourceEndMs": 213077,
+          "text": "なんか久々に夏なんでホラーゲームとかやろうかなと思ったんですけどなんかエゴサしてたらすごいこのゲームで心霊現象が実際に怒ってるとあの噂のやるんですねみたいな言われててそんなの聞いてないんですけどそうなんですか?さすがに大丈夫だと思うんですけどはいマリちゃんホラゲいけんの?これ1の時は割と結構有能なバイトだったと辞任していますのでいけるかなと思いますけどそうらしいね。いや、そうなんだ。知らなかったんだけど。大丈夫かな?大丈夫でしょ。"
+        },
+        {
+          "sourceFragmentRange": [
+            1129,
+            1248
+          ],
+          "sourceStartMs": 355551,
+          "sourceEndMs": 379620,
+          "text": "日本事故物件監視協会こちら、あの1やったことあるんですけどなぜか2はやってないんですけどあのーえっとーなんかアハ体験的に画面がちょっと変わっていっておばけがだんだん出てくるからそれを報告するみたいな感じでしたよね多分ねちょっとやってみますか"
+        },
+        {
+          "sourceFragmentRange": [
+            8583,
+            8721
+          ],
+          "sourceStartMs": 2225192,
+          "sourceEndMs": 2256057,
+          "text": "なんかこれなんかこんなんじゃなかったかな?なんかなんか変な気がする雰囲気変な感じがする間違っ…あっ!21,427円え、これクリアってこと?クリアってこと?クリアってこと?クリアってこと?クリアしたってこと?でいいのかな?え?クリアしたって…あチェックついてるクリアしたってことだ"
+        },
+        {
+          "sourceFragmentRange": [
+            21936,
+            22193
+          ],
+          "sourceStartMs": 6394302,
+          "sourceEndMs": 6449886,
+          "text": "はい、まあいいでしょうお、あ、全部完了しましたはい、皆さん無事にマリンは完了できたようですまあ残りの異常いっぱいあるなでも残りの異常ってさ特別手当やってみようちょっと試しに全ステージクリアおめありがとうございますありがとうございます皆さんどうもありがとうございます懐かしいなここうん、ベテランですから任してくださいこれさ、見つけた以上もだって出てきちゃうんだよね全部見つけるには運ゲーが過ぎないか?見つけてないやつが出てきてくれるならいいけど見つけてないやつが出てきちゃうとなりましたら特別手当は最初から異変出てる?"
+        },
+        {
+          "sourceFragmentRange": [
+            25129,
+            25286
+          ],
+          "sourceStartMs": 7566646,
+          "sourceEndMs": 7620361,
+          "text": "何もないなやばいすごい勢いですごい勢いであってあって布団布団布団布団布団布団なんでだよなんで布団がいっぱいになってんだよすごい勢いで異変が増えるやん追いつけないぞこの速度あ、目玉目玉目玉目玉やばいまたまたやばいやばいやばいやばいどんどん来るどんどん来る報告しても報告しても報告しても報告しても異変が絶えないえ、どこ?"
+        },
+        {
+          "sourceFragmentRange": [
+            25364,
+            25754
+          ],
+          "sourceStartMs": 7662774,
+          "sourceEndMs": 7822947,
+          "text": "3時3時までやってまいりました絶対なんか今怒ってるよね絶対なんかなってるよねこれ絶対またそろそろ来るよ複数怒ってます来るぞこれ急げ泣くにゃいか?何にもにゃくにゃいか?異常ないっす!異常!うぇぇぇぇ!異常ないっすよ!ないっすもん!だって!なんかこのドアが広いドアが広いもうないですよー!どこっすか!動いてるこれ!いやー!見せんなよ!はいいやーこれで37いやでもまあ言うて言うて結構発見できたんじゃないですかこれマリンうんやれたでしょ結構ねうん一応全部発見全体的に見つけました特別手当は無理だこれは諦めますもう無理だこれはトイレ行きたいしはいということで気持ちいいまあマリンはこんなもんにしようかなと思います?よう頑張ったんー頑張った頑張ったんんんんんいいでしょう!よし!退勤退勤退勤しようちょっと待ってねーん?こうしてはい退勤でーすちょっと音怖い音怖いよ音怖いよ終わらしてよゲーム終了"
+        }
+      ],
+      "removed": [
+        {
+          "sourceFragmentRange": [
+            26132,
+            27562
+          ],
+          "sourceStartMs": 8054427,
+          "sourceEndMs": 8336849,
+          "text": "あのーXとかで話したんですけどグッズのねー話でねちょっとそうだ言っとかないと意外と知らない人がいるかもしれないからちょっと教えておきたいんですけどまずーえっとねーまずーんーこのバッグこれねでけぇちょっと待ってで、でけぇバッグ、バッグこのバッグこれね、なんかね、マリンがあのね、足にね、付けてるやつがこれこういうのを付けててで、これとお揃いのデザインなんですよっていう話をしたんですけどはい見ての通り手前についてるこのポーチみたいのがほらお揃いのデザインになっているでしょ?ね?って言ったからすごいちっちゃいポーチだと思われててこのバッグがこれねでかいんですよ気持ちちっちゃくはありませんはいこれはですねあのマリンが仕事とかでiPadとかを持っていくときにちょうどiPadが入るようなサイズ感のカバンがなくていつもでけえトートバッグに入れていってるんですよねだからちょうどいいサイズ感のものが欲しいなと思って運営さんにiPadが入ってかつそこがさトートとかってiPadとか入れるとそこがねカバンの底がその重みでグニョンって飛び出すのねあれが嫌でだからちょっとカッチリした形でそういうiPadとかの重みのあるものを入れてもその底がグニャンってあのたわまないような風にしたいですっていうことを言っていましてだからそういう仕様になる予定ですであのサイズ感的にせんちゃんよくあんまりサイズよくわかんないんですけどどのくらいがどのくらいっていうのがでもあのエゴサしてた感じA4も入るってひまちが言ってんの見たんでA4とかも入るサイズっぽいっすはい実用性も考えてるの?ま、当たり前じゃん自分も使おうと思って考えたんだからで、なんかこのデザインがさとはいえさ使いやすいシックなデザインだけどさこの手前のこのハートのところとかがねぇちょっと恥ずかしい時は外せるみたいな仕様にしたいとかそんな話もしたんであのー書いてあると思うんですけどフラップはお好みに合わせて付け替えできるみたいな書いてあるんですけどはい付け替えれるような仕様みたいなそうなんか男性でも恥ずかしくないようにっていうのは意識しましたはいでぬいぐるみとかを入れて押しバック風にできる感じにもしたいみたいな話もしてたんですけどちょっとまだマリンも現物がまだサンプルが届いてないんでなんとも言えないんですけど現物届いたらね、あの動画撮って見せますね君たちにええでもとにかくねあのーA4が入る時点でかなり便利だしいつもマリンが考えるグッズがかなりオタクオタクしていてマリン船長大好きですみたいなオタクっぽいグッズを考えてたんでそれを頑張って君たちの君たちからすごくあのあんまりオタク感のないカバンが欲しいって言われたから考えました一生懸命でこうやってこれ2wayなんですけどあのなんか手で持つハンドバッグみたいななんか上にさ手で持つ部分持ち手ついてんじゃん手で持つこともできるしショルダーにもできるみたいなマリンはどう考えてもショルダーバッグ以外使わないしショルダー?絶対ショルダー派なんだけど結構なんか男性とかだとショルダーはちょっとなみたいなあるのかなと思ってなんか男の人ってさなんかカバン自体そもそも持ってる印象あんまないけどさ手で持ったりリュック背負ったりするもんなのかなみたいなイメージでだからちょっとこのショルダー部分はショルダーでもショルダーじゃなくてもいけるみたいなのイメージしましたということではいでした"
+        },
+        {
+          "sourceFragmentRange": [
+            40548,
+            40910
+          ],
+          "sourceStartMs": 11147538,
+          "sourceEndMs": 11242100,
+          "text": "え、え、えうん、船長はダンスに限界感じてるとおっしゃってましたがいや、ダンスだね、マジでもうね、もうあ、もう無理だと感じる、ほんとに自己肯定感失っていくわダンスできんダンスできねーよ苦しいもともとめっちゃ運動神経悪いからもうレッスンもなんかすっごい一一倍時間かかるしまぁ超苦しいテクニック?体力?テクニック?体力っていうよりはそんなに体力はそんなにきつくないんだけどあのダンス?どちらかというとテクニックができないのと覚えられないこれがつらいなんでこんな覚えられないんだろうってくらい覚えらんない初期から比べるとうまくなってるそうだよねもうあの頃を思うとダンスなんてさやったことないよ船長人生で一度もワッタンとかとさやりながらさこんな動き人生で初めてしたって言いながらやってるもん船長この動き人生で初めてした?ってよく言ってる"
+        }
+      ],
+      "unchanged": [
+        {
+          "sourceFragmentRange": [
+            285,
+            942
+          ],
+          "sourceStartMs": 213077,
+          "sourceEndMs": 327084,
+          "text": "あのー、マリン昨日ね、ノエちゃん家でドッグセラピー受けたんで。ドッグセラピー、ノエちゃん家にすっげー可愛い犬いて、マリンアレルギー出るからめっちゃ強いアレルギーの薬を飲んで行ったんですよで触ったらアレルギー出るからでもなんかねすっごいねすっごいねなんかね撫でて撫でて撫でて撫でてってすごいぴょんぴょんぴょんぴょんってマリンの足に絡みついてきて撫でざるを得なかったんで一旦撫でさせてもらったんですよで手洗ってでまたふーって座ったらまた撫でて撫でて撫でてしかもお腹見せて転がっていやそんな撫でますがな撫でさせていただきますがなって感じで撫でまくってで割とどれくらいいたんだろう1時間半くらい多分いてノエちゃん家にちょっと語らいながらもあのワンチョムバチクソ撫でまくってで帰ってきてからむちゃむちゃアレルギー出て家の中いるときは薬効いてて全然大丈夫だったんですけど帰ってからむちゃむちゃアレルギー出て顔中ジンマシンが出て目やにが止まらなくなるしでもちょっと薬が効いてるから鼻がいつもだったら詰まって鼻水が出るけど鼻が詰まるみたいな風邪みたいになるんですけど鼻は通ってるけど下向くと鼻水がだーって垂れてくるみたいなズタボロになりながら今日も肌がボロボロですけどちょっとうまく隠しながらやっていこうかなとあかんかったちょっと誘惑に勝てませんでした犬可愛すぎたわそういうわけでドッグセラピー受けてきたんで大丈夫だと思うたぶんワンチョムがマリンを守ってくれると思うわけのわからないことを言いながらちょっとやってみようかなやれるかな"
+        },
+        {
+          "sourceFragmentRange": [
+            7689,
+            8582
+          ],
+          "sourceStartMs": 1993090,
+          "sourceEndMs": 2225192,
+          "text": "花瓶あったっけ?君さぁ何を見てたんですか今まで君不思議待ってなんかでかくなってるかもこんなでかくなかったかもしんないでかかったかも君さぁ何回ここ見てんすかここに葉っぱなんか落ちてたっけ?なんかこれ新しくない?新しく出てきたくない?これもともとあったか君花瓶はさずっとあったでしょこれだから新入りは困るんですよ私みたいにねこの仕事金属15年やってるんですよ私はねあなたみたいなね、新入りがねぇうわっ!ドアバーンドアバーンねあなたみたいな新入りがねぇこないだ入ったばっかのぺいぺいが知ってんの?口聞かないでくださいこの職場のことはね、アーシーが一番わかってるんですから一番知ってるんですから長年やってるんですからねちゃんと見つけてましたか?今君あの勘を見落とすようじゃおーなんかすげーゴージャスになってるなんかめでたいまであるななんか同じ箇所に複数は発生しないんだろうかうんうん異常なし異常なしお風呂場が最近窓が割れるくらいのことしか起こらないんですよねもうちょっと何かありそうですけど異常なしここもなんかうわ!うわ!やばいやばいやばい!こいつ一番やばいやつ!これ一番やばいやつ!あー!こっち来てる!こっち来てる!あー!早く早く早く!こっち来ちゃうからこっち来ちゃうから鼻水出たびっくりしすぎてあれ?あいつが一番やばいんだからあいつがいっちゃんやばいんだからこの部屋なんも起きないぞいい加減にしろよカーテンが…いや、そんなことないかいや、なんか違和感があるめくれすぎな気がしない?へ、変だよ、変じゃないめくれすぎだった、もともとでもこういう気づき?間違いがあってもいいんです常に気づきを得る、これがだ…うわあああああちょ、これやらな、これやらなあかんてギャーじゃなくて、やらないと責任だからこれは正社員としての金属15年正社員としてのこれ責任ですからこれギャーじゃないからねご馳走が並んでるご馳走が並んでるこれありがた以上これありがた以上ですね今日食べ放題あんたも持って帰ってあんたも持って帰っていいわよ今日廃棄出てるから霊障弁当の廃棄が出てますめったにないことだからこれラッキーな霊障だから"
+        },
+        {
+          "sourceFragmentRange": [
+            18662,
+            19439
+          ],
+          "sourceStartMs": 5468987,
+          "sourceEndMs": 5675926,
+          "text": "いやいや、行ってきな!いやいや、今行かないって!ま、こんなんこんなん!こんな開きながらトイレ行くのはお前素人の判断なんだってばこんな風な画面開いたままいいですか君あのこの金属30年のマリンがねこの仕事を安全に30年続けてきた理由がこういう最中にトイレには行かない君はホラー映画だったら真っ先にね死ぬタイプ一人になって一人になったら過去の餌食でしょそんなこともわからないんですかだからジュオンくらいは見とけって言ってんのジュオンの世界だったらばジュオンの世界では一人だろうと二人だろうと全員殺されるんだけど強すぎるからね強いんだよなジュオンのお化けカヤコカヤコとトシオと黒猫が三味一体、あぁこれさっきも出ました三味一体でチームプレイで殺しに来るからねジオンだから強いんだよジオンは貞子は言うてターゲットした人?割とだけ?割とだけ狙い撃ちタイプ?だけどカヤコは関係ない人も関わりを持ったらまとめてやるからねサダコはソロプレイだから一人でやってるから長年ねビデオの時代から今の時代だったらYouTubeとかあるからSNSとかカヤコの勢いは増すばかりでしょかやこじゃねえ、さだこあ、だだだだだベイビーが立った不機嫌だいや、かやこんちは口コミであの家やばいですってなってどんどん誰も行かなくなるけどさだこはビデオは誰も見なくなったもののね?動画、動画だから結局はそれをね、あのなんかさだこvsかやことかでねYouTubeとか動画配信サイトにアップロードするみたいなのも出てきてたから時代に適合してんだよなそこが強いよねかやこんちはもう誰も行かなくなるで終わりなんだけど家にね、立ち入らないとねことが始まんないから貞子は現代でも通用すんだよなそこが強いところですよねトレンドに乗ってて偉いいやマジでデジタル化までしていくちょっと格がやっぱ違うのかなって感じがしますよね"
+        }
+      ]
+    },
+    "sevenB": {
+      "added": [
+        {
+          "sourceFragmentRange": [
+            173,
+            284
+          ],
+          "sourceStartMs": 184064,
+          "sourceEndMs": 213077,
+          "text": "さすがに大丈夫だと思うんですけどはいマリちゃんホラゲいけんの?これ1の時は割と結構有能なバイトだったと辞任していますのでいけるかなと思いますけどそうらしいね。いや、そうなんだ。知らなかったんだけど。大丈夫かな?大丈夫でしょ。"
+        },
+        {
+          "sourceFragmentRange": [
+            1129,
+            1248
+          ],
+          "sourceStartMs": 355551,
+          "sourceEndMs": 379620,
+          "text": "日本事故物件監視協会こちら、あの1やったことあるんですけどなぜか2はやってないんですけどあのーえっとーなんかアハ体験的に画面がちょっと変わっていっておばけがだんだん出てくるからそれを報告するみたいな感じでしたよね多分ねちょっとやってみますか"
+        },
+        {
+          "sourceFragmentRange": [
+            8583,
+            8721
+          ],
+          "sourceStartMs": 2225192,
+          "sourceEndMs": 2256057,
+          "text": "なんかこれなんかこんなんじゃなかったかな?なんかなんか変な気がする雰囲気変な感じがする間違っ…あっ!21,427円え、これクリアってこと?クリアってこと?クリアってこと?クリアってこと?クリアしたってこと?でいいのかな?え?クリアしたって…あチェックついてるクリアしたってことだ"
+        },
+        {
+          "sourceFragmentRange": [
+            21936,
+            22193
+          ],
+          "sourceStartMs": 6394302,
+          "sourceEndMs": 6449886,
+          "text": "はい、まあいいでしょうお、あ、全部完了しましたはい、皆さん無事にマリンは完了できたようですまあ残りの異常いっぱいあるなでも残りの異常ってさ特別手当やってみようちょっと試しに全ステージクリアおめありがとうございますありがとうございます皆さんどうもありがとうございます懐かしいなここうん、ベテランですから任してくださいこれさ、見つけた以上もだって出てきちゃうんだよね全部見つけるには運ゲーが過ぎないか?見つけてないやつが出てきてくれるならいいけど見つけてないやつが出てきちゃうとなりましたら特別手当は最初から異変出てる?"
+        },
+        {
+          "sourceFragmentRange": [
+            25129,
+            25286
+          ],
+          "sourceStartMs": 7566646,
+          "sourceEndMs": 7620361,
+          "text": "何もないなやばいすごい勢いですごい勢いであってあって布団布団布団布団布団布団なんでだよなんで布団がいっぱいになってんだよすごい勢いで異変が増えるやん追いつけないぞこの速度あ、目玉目玉目玉目玉やばいまたまたやばいやばいやばいやばいどんどん来るどんどん来る報告しても報告しても報告しても報告しても異変が絶えないえ、どこ?"
+        },
+        {
+          "sourceFragmentRange": [
+            25364,
+            25754
+          ],
+          "sourceStartMs": 7662774,
+          "sourceEndMs": 7822947,
+          "text": "3時3時までやってまいりました絶対なんか今怒ってるよね絶対なんかなってるよねこれ絶対またそろそろ来るよ複数怒ってます来るぞこれ急げ泣くにゃいか?何にもにゃくにゃいか?異常ないっす!異常!うぇぇぇぇ!異常ないっすよ!ないっすもん!だって!なんかこのドアが広いドアが広いもうないですよー!どこっすか!動いてるこれ!いやー!見せんなよ!はいいやーこれで37いやでもまあ言うて言うて結構発見できたんじゃないですかこれマリンうんやれたでしょ結構ねうん一応全部発見全体的に見つけました特別手当は無理だこれは諦めますもう無理だこれはトイレ行きたいしはいということで気持ちいいまあマリンはこんなもんにしようかなと思います?よう頑張ったんー頑張った頑張ったんんんんんいいでしょう!よし!退勤退勤退勤しようちょっと待ってねーん?こうしてはい退勤でーすちょっと音怖い音怖いよ音怖いよ終わらしてよゲーム終了"
+        }
+      ],
+      "removed": [
+        {
+          "sourceFragmentRange": [
+            43937,
+            43984
+          ],
+          "sourceStartMs": 11919259,
+          "sourceEndMs": 11928188,
+          "text": "今日はありがとうございましたそれでは行きますよーしゅふっこー行きましょうお化けには気をつけてねー"
+        }
+      ],
+      "unchanged": [
+        {
+          "sourceFragmentRange": [
+            68,
+            172
+          ],
+          "sourceStartMs": 159770,
+          "sourceEndMs": 184064,
+          "text": "なんか久々に夏なんでホラーゲームとかやろうかなと思ったんですけどなんかエゴサしてたらすごいこのゲームで心霊現象が実際に怒ってるとあの噂のやるんですねみたいな言われててそんなの聞いてないんですけどそうなんですか?"
+        },
+        {
+          "sourceFragmentRange": [
+            285,
+            942
+          ],
+          "sourceStartMs": 213077,
+          "sourceEndMs": 327084,
+          "text": "あのー、マリン昨日ね、ノエちゃん家でドッグセラピー受けたんで。ドッグセラピー、ノエちゃん家にすっげー可愛い犬いて、マリンアレルギー出るからめっちゃ強いアレルギーの薬を飲んで行ったんですよで触ったらアレルギー出るからでもなんかねすっごいねすっごいねなんかね撫でて撫でて撫でて撫でてってすごいぴょんぴょんぴょんぴょんってマリンの足に絡みついてきて撫でざるを得なかったんで一旦撫でさせてもらったんですよで手洗ってでまたふーって座ったらまた撫でて撫でて撫でてしかもお腹見せて転がっていやそんな撫でますがな撫でさせていただきますがなって感じで撫でまくってで割とどれくらいいたんだろう1時間半くらい多分いてノエちゃん家にちょっと語らいながらもあのワンチョムバチクソ撫でまくってで帰ってきてからむちゃむちゃアレルギー出て家の中いるときは薬効いてて全然大丈夫だったんですけど帰ってからむちゃむちゃアレルギー出て顔中ジンマシンが出て目やにが止まらなくなるしでもちょっと薬が効いてるから鼻がいつもだったら詰まって鼻水が出るけど鼻が詰まるみたいな風邪みたいになるんですけど鼻は通ってるけど下向くと鼻水がだーって垂れてくるみたいなズタボロになりながら今日も肌がボロボロですけどちょっとうまく隠しながらやっていこうかなとあかんかったちょっと誘惑に勝てませんでした犬可愛すぎたわそういうわけでドッグセラピー受けてきたんで大丈夫だと思うたぶんワンチョムがマリンを守ってくれると思うわけのわからないことを言いながらちょっとやってみようかなやれるかな"
+        },
+        {
+          "sourceFragmentRange": [
+            7689,
+            8582
+          ],
+          "sourceStartMs": 1993090,
+          "sourceEndMs": 2225192,
+          "text": "花瓶あったっけ?君さぁ何を見てたんですか今まで君不思議待ってなんかでかくなってるかもこんなでかくなかったかもしんないでかかったかも君さぁ何回ここ見てんすかここに葉っぱなんか落ちてたっけ?なんかこれ新しくない?新しく出てきたくない?これもともとあったか君花瓶はさずっとあったでしょこれだから新入りは困るんですよ私みたいにねこの仕事金属15年やってるんですよ私はねあなたみたいなね、新入りがねぇうわっ!ドアバーンドアバーンねあなたみたいな新入りがねぇこないだ入ったばっかのぺいぺいが知ってんの?口聞かないでくださいこの職場のことはね、アーシーが一番わかってるんですから一番知ってるんですから長年やってるんですからねちゃんと見つけてましたか?今君あの勘を見落とすようじゃおーなんかすげーゴージャスになってるなんかめでたいまであるななんか同じ箇所に複数は発生しないんだろうかうんうん異常なし異常なしお風呂場が最近窓が割れるくらいのことしか起こらないんですよねもうちょっと何かありそうですけど異常なしここもなんかうわ!うわ!やばいやばいやばい!こいつ一番やばいやつ!これ一番やばいやつ!あー!こっち来てる!こっち来てる!あー!早く早く早く!こっち来ちゃうからこっち来ちゃうから鼻水出たびっくりしすぎてあれ?あいつが一番やばいんだからあいつがいっちゃんやばいんだからこの部屋なんも起きないぞいい加減にしろよカーテンが…いや、そんなことないかいや、なんか違和感があるめくれすぎな気がしない?へ、変だよ、変じゃないめくれすぎだった、もともとでもこういう気づき?間違いがあってもいいんです常に気づきを得る、これがだ…うわあああああちょ、これやらな、これやらなあかんてギャーじゃなくて、やらないと責任だからこれは正社員としての金属15年正社員としてのこれ責任ですからこれギャーじゃないからねご馳走が並んでるご馳走が並んでるこれありがた以上これありがた以上ですね今日食べ放題あんたも持って帰ってあんたも持って帰っていいわよ今日廃棄出てるから霊障弁当の廃棄が出てますめったにないことだからこれラッキーな霊障だから"
+        },
+        {
+          "sourceFragmentRange": [
+            18662,
+            19439
+          ],
+          "sourceStartMs": 5468987,
+          "sourceEndMs": 5675926,
+          "text": "いやいや、行ってきな!いやいや、今行かないって!ま、こんなんこんなん!こんな開きながらトイレ行くのはお前素人の判断なんだってばこんな風な画面開いたままいいですか君あのこの金属30年のマリンがねこの仕事を安全に30年続けてきた理由がこういう最中にトイレには行かない君はホラー映画だったら真っ先にね死ぬタイプ一人になって一人になったら過去の餌食でしょそんなこともわからないんですかだからジュオンくらいは見とけって言ってんのジュオンの世界だったらばジュオンの世界では一人だろうと二人だろうと全員殺されるんだけど強すぎるからね強いんだよなジュオンのお化けカヤコカヤコとトシオと黒猫が三味一体、あぁこれさっきも出ました三味一体でチームプレイで殺しに来るからねジオンだから強いんだよジオンは貞子は言うてターゲットした人?割とだけ?割とだけ狙い撃ちタイプ?だけどカヤコは関係ない人も関わりを持ったらまとめてやるからねサダコはソロプレイだから一人でやってるから長年ねビデオの時代から今の時代だったらYouTubeとかあるからSNSとかカヤコの勢いは増すばかりでしょかやこじゃねえ、さだこあ、だだだだだベイビーが立った不機嫌だいや、かやこんちは口コミであの家やばいですってなってどんどん誰も行かなくなるけどさだこはビデオは誰も見なくなったもののね?動画、動画だから結局はそれをね、あのなんかさだこvsかやことかでねYouTubeとか動画配信サイトにアップロードするみたいなのも出てきてたから時代に適合してんだよなそこが強いよねかやこんちはもう誰も行かなくなるで終わりなんだけど家にね、立ち入らないとねことが始まんないから貞子は現代でも通用すんだよなそこが強いところですよねトレンドに乗ってて偉いいやマジでデジタル化までしていくちょっと格がやっぱ違うのかなって感じがしますよね"
+        }
+      ]
+    }
+  },
+  "bindings": [
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/production-intent.json",
+      "fileSha256": "c0585ff545245b687993663bb1730fe286d209cb2808b47f367b62b129fb3f18"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/candidate-request.json",
+      "fileSha256": "1e433ce8b9f86c0fe96aec4389fef0d2974235a697a6f9d1414b5e854cc71d36"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/candidate-response.json",
+      "fileSha256": "ef0a19dc3c89cecd0c25f307ccc1030863e9392e4a04505ba9788562f36b476a"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/selection-request.json",
+      "fileSha256": "056c48b64a03d7cd704e14e375b7dd663b71a982edd24f0915a86f6b204fa8cc"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/selection-response.json",
+      "fileSha256": "d35e465a72f6df417df023d241cfbe96a7b82490752bd22eaf775da72f6c1d7c"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/retention-request.json",
+      "fileSha256": "973a8acf58fddd41727255a15193243ec5e817380378371dab06695f80463e23"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/retention-response.json",
+      "fileSha256": "ba5677fea38d5b10d94f454297db6f55b41a5082e1869a3376287db4cb150e9d"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+      "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "fileSha256": "33ed42c4aeef83249177549d2dcc02eb7a5d46bf3f34593f53422353cbac70bd"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/edit-plan.json",
+      "fileSha256": "62e82dc5392b7158f7ab7f3a8d6431686c1ea16e6807bf0178e91b190def6ac3"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/accept.mts",
+      "fileSha256": "f747b41a1d713857a2ff73674bfdbc720f6a92eddd384089e9d924e91977967c"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/candidate-request.json",
+      "fileSha256": "00413ec7951e9ccc20cfb5a93aa508c0b37df9aa3e77011e42ef69d058f9503c"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/candidate-response.json",
+      "fileSha256": "5d2008552bc4746f5de8a897ac45371a7768271696816beaad98808ef2353117"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/candidate-result.json",
+      "fileSha256": "39f4dff61898a5299473dde99418677caf10a5d0886074963b0edd4d091e15a1"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/candidate-set.json",
+      "fileSha256": "a372cdf9d9cb140f044470c710e25e661dbae7e427ace69fef9fefc61e74c8ff"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/clock-resolution.json",
+      "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/content-structure.json",
+      "fileSha256": "5ed13a4b4ad77bd92421a67288c6be1255f9acd78febba947ddc1385a5d80ad7"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/discovery-plan.json",
+      "fileSha256": "b671823b79bbb32a032d8213c88d06438f53d4eba181cb8b31f47ebada65030c"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/discovery-validation.json",
+      "fileSha256": "e29652707caf0ad405cbbc0ac921b21364e6aa7ab877c94057a0e40bf992a284"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/edit-plan.json",
+      "fileSha256": "5e121e28bf03388c74ef7b0f3175fee0d2f28e1fdcc90c43c760751e70967bd5"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/judgment-spec.json",
+      "fileSha256": "34c01f06cd0c0deee91ba2f3b1a5cb0dd12926276ee499e2225d1d252f2fc4f5"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/machine-adoption.json",
+      "fileSha256": "aac123ca8ffa9670a1b76496f55ca55d3f33d49f6c556d1362d91b7a4ecbb3c2"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/production-intent.json",
+      "fileSha256": "2d092118f74b330d3f6bd63c1ff7745c62c14261959e0a014ece49c38a902674"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/received-instruction.json",
+      "fileSha256": "c81e73957711fcec907ce08ebf7990b5177fdab3cb0922d497b4935bd9c8da36"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/retention-request.json",
+      "fileSha256": "4ed0c24ae0c87f671dc4f7e971215d289457aaa97fa9d8ee26e78b70dec983f4"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/retention-response.json",
+      "fileSha256": "665dc560272e5278e2b0ab9360088afea2dd4ffcfbc9d86f35c618c823a2ddf6"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/retention-result.json",
+      "fileSha256": "3bef3fa1c1363a69c6b2e89d5f75b07a2e3273c41952f7411c38e1dd958c9990"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/retention-validation.json",
+      "fileSha256": "f4c2fcccf0e9da53d81d512436027a7d6a7a3961246231b21b43f386f7403b0d"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-adoption.json",
+      "fileSha256": "feb40ffef8097dff29efbf877cc175874c6ad38f12faf611a96f52d41e6eaf94"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-plan.json",
+      "fileSha256": "605440618dbe03a7b66a7f00623277639162801b41a8e81f17648a73af60abc6"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-request.json",
+      "fileSha256": "d44f96905f63516d966743d700dc24c8cdba63014de9e83ca521eb16d5ae1d9a"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-response.json",
+      "fileSha256": "a3246e5f1a67ef6d4fa1c4886c636277c8c65011eb3abf3e8308826e243a9416"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-result.json",
+      "fileSha256": "3787c7164cecd49b2eaaee46f4d34235eb3185b4ec7cec9d4ffc14fcabff2247"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/selection-validation.json",
+      "fileSha256": "42b3cf751337376a3ead2a805b8697c3c3144e6c8c0748a27575e061596edeb5"
+    }
+  ],
+  "localVerification": "not-yet-run",
+  "outlineChoice": null,
+  "technicalOutlineInput": "A=8/4"
+}
