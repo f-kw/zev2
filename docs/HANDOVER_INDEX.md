@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v005
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v006
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しだけを置く運用を推奨する。
 
-**最新更新：本人の「作業止まってる？ 終わったら次に進んで」を受領し、同じID9の後続「通常の依頼から制作意図を渡す接続」の[実行指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を発行した（`05c042ae3efe69e8ef0157a2db2614a3b8fa1c7f`）。担当はCodex2のみ、受領・起動・現在稼働は未確認。前回の実案作成・局所検証は完了のまま。以後、相談役は完了監査と承認済み主線の次指示を同じ返答でつなぎ、本人の再催促を待たない。第1層事項・強制停止等の承認境界は維持する。詳細は§2.3と§6。**
+**最新更新：Codex2の `cc288f8ea5d0ab0937ffb74b952fcf5826616209` を監査。通常依頼→承認後7命令の伝達は成立しているが、Digest3判断の通常callerは欠落している。接続工事は未完了のまま、[caller限定追加 v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)を発行した（保存 `54931a3ab289e5ab826fac64d6ba0cebd9fdc300`）。Codex2単独で、通常factoryの文字起こし検証後から、明示依存を使ってDigest計画を別記録へ保存・再読する接続を実装する。通常テーマ・人間の一テーマ確認・公開API・本番defaultは変えない。v001の受領・着手・判断依頼は確認済み、v002の受領・再開は未確認。詳細は§2.4。**
 
 ## 0. 最初に読む人へ
 
@@ -48,7 +48,7 @@ ZEVは、素材と制作意図から、内容・構成・字幕・必要な演�
 
 1080p生成の実装・報告の照合基準HEAD：`d7e465925c6277a08248b4207d7df8951e988895`。
 ID9の初回新案は `bd0113c8301e49eb74993385286fd12c1b9894b8`、Codex1の独立点検は `9b72bc0fed58684a2cdd8d012ff3757443cfcd18`。ID9の最終技術監査対象は `b69e168cf1d34f21d7b760bdebcd9e19baca69c7`、送信実績・受理保存は `68a32038ebcd6dbee62454deca8999bd3d27d33c`。文書更新HEADと、実案・媒体の監査対象SHAを区別する。
-前回指示作成前のmain照合は `dc7fcb688775b8f83574299591ad44cb35eedfb9`、前回指示書保存は `241d08ac5e9b5cfba2923ce9b1d6dcc090392477`。今回の接続指示の確認基準mainは `46a6557198fe28f2c49af0d77dc6d8d5327fbf05`、指示書保存は `05c042ae3efe69e8ef0157a2db2614a3b8fa1c7f`。
+前回指示作成前のmain照合は `dc7fcb688775b8f83574299591ad44cb35eedfb9`、前回指示書保存は `241d08ac5e9b5cfba2923ce9b1d6dcc090392477`。接続指示v001の確認基準mainは `46a6557198fe28f2c49af0d77dc6d8d5327fbf05`、保存は `05c042ae3efe69e8ef0157a2db2614a3b8fa1c7f`。今回の接続監査は `cc288f8ea5d0ab0937ffb74b952fcf5826616209`、続行指示v002は `54931a3ab289e5ab826fac64d6ba0cebd9fdc300`。
 
 | 担当／項目 | 到達点 | 残件・稼働の扱い |
 |---|---|---|
@@ -56,11 +56,11 @@ ID9の初回新案は `bd0113c8301e49eb74993385286fd12c1b9894b8`、Codex1の独�
 | Codex1：Decisions API / Jev代替評価 | 調査、36判断点分類、J16比較入力326字幕（tuning53/held-out273）の固定まで。報告commit `830ea96811c94e5794f751914e835e20977ce126` | その調査時点では正式仕様・料金・利用権限を確定できず、推論0・本番導入0。実API評価は保留。公開済みになったと推測しない |
 | Codex2：9. 採用区間・構成の改善・前回限定作業 | `b69e168c` の限定技術作業を相談役受理。11探索候補・7採用・9保持、27,691frame（15分23.033秒）の一案と旧版差分、局所540p5本・147字幕、111対象試験、判断と媒体の別process再読。[主report](reports/selection-structure-improvement-20260930/README.md) | 送信実績保存 `68a32038`・Git終了連絡まで受領し、前回担当は終了。心霊会話の不採用理由も相談役受理。人間品質、新案1080p全編、補足版と局所媒体のCodex1点検は未認定。これらを前回作業の再開条件にはしない |
 | Codex1：9の独立点検 | `9b72bc0f` の既存レビュー照合と新案`bd0113c8`の点検を相談役受理。送信実績 `b93870fc` を保存し、Git終了連絡を受領。[点検記録](reports/selection-structure-improvement-20260930/independent-review.md) | 今回担当は終了。点検対象は`bd0113c8`まで。後続補足版・局所媒体を点検済みにせず、追加再点検・自動ポーリング・応答記録だけの再commitは不要 |
-| Codex2：9. 通常依頼の制作意図接続 | 本人の続行指示に基づき[接続指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を発行済み。通常のpurposeから探索・採否・保持までの実経路を追い、不足だけを修正・試験・保存する | 2026-10-01、46219d10へ同期。通常APIで目的2件を承認後7命令ずつへ保存、別process再読一致。通常テーマ・構成は一般目的を使用せず、Digest3判断の通常caller無し。[現物・局所試験・最小差分案](reports/request-intent-connection-20261001/README.md)をGPT_DECISIONへ返すcheckpoint。接続完成ではない。Codex1再起動・新動画・新UI・外部API0 |
+| Codex2：9. 通常依頼の制作意図接続 | v001受領・着手済み。`cc288f8e`で通常API→目的2件→承認後7命令ずつの保存・別process再読と、通常Digest caller欠落を記録。[主report](reports/request-intent-connection-20261001/README.md) | GPT_DECISIONを相談役が監査し、[通常factoryへの限定追加v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)を発行。準備依存を明示した場合の3判断・別保存・再読を実装する。接続工事は未完了。v002受領・再開未確認。通常テーマ・人間確認・本番defaultは変更しない |
 
 前回両担当のGit終了連絡を受け、共通インデックス同期担当は相談役へ戻った。旧「Codex1の送信実績・Git終了未確認」「Codex2の最終Git保存中」「新案・局所検証未完了」は履歴であり、現在状態ではない。共通計画・台帳・各reportの既存担当区分を保ち、他担当の内容を上書きしない。
 
-Codexの「起動中」は実行報告等で確認する。前回両担当は作業終了・次の明示指示まで新作業を開始しないと報告した。今回の指示発行を新たな起動確認にせず、相談役がMac上のprocess一覧を直接観測したとも扱わない。
+Codexの「起動中」は実行報告等で確認する。今回Codex2のv001着手と判断依頼・Git操作終了を受領したが、相談役がMac上のprocess一覧を直接観測したものではない。v002の保存を受領・再開確認にしない。現在の追加実装は具体的な続行指示を待つ状態として報告された。
 
 1080p完成の根拠：[全編完了報告](reports/original-resolution-low-memory-20260930/full-run-report.md)。
 媒体SHA-256：`65afceb046aca0629b0fe097f602caae3b05697b10cff8eb6a295106185f3858`。
@@ -93,19 +93,32 @@ Codexの「起動中」は実行報告等で確認する。前回両担当は作
 
 共通インデックスの同期担当を相談役が受領し、本書とCURRENT_GOALの古い状態を同期した。前回工事について応答記録だけの再commit、追加終了報告、自動監視、Codex1再起動は要求しない。ユーザーへの追加の視聴・採点・転記依頼は0件。
 
-### 2.3 2026-10-01：通常依頼の制作意図接続を開始指示
+### 2.3 2026-10-01：通常依頼の制作意図接続を開始指示（発行時点の記録）
 
 本人から「作業止まってる？ 終わったら次に進んで」を受領。前回終了後、相談役が次指示未発行のまま止めていたことを訂正し、[接続指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を発行した。保存commit `05c042ae3efe69e8ef0157a2db2614a3b8fa1c7f`、確認基準main `46a6557198fe28f2c49af0d77dc6d8d5327fbf05`。
 
-目的は通常の依頼の制作意図を既存の候補探索・採否・保持へ渡すこと。`RequestDraftInput.purpose`・`RequestDraft.purpose`・`AgentRequest.input.purpose` と候補探索／採否の `productionRequest` は存在を確認したが、その間の通常caller全体の接続はまだ未確認。型の存在だけで完成とせず、通常経路を追って不足だけを修正する。新しい入力画面・別の選定基盤は作らない。
+目的は通常の依頼の制作意図を既存の候補探索・採否・保持へ渡すこと。`RequestDraftInput.purpose`・`RequestDraft.purpose`・`AgentRequest.input.purpose` と候補探索／採否の `productionRequest` は存在を確認したが、発行時点ではその間の通常caller全体の接続は未確認だった。型の存在だけで完成とせず、通常経路を追って不足だけを修正する。新しい入力画面・別の選定基盤は作らない。
 
-Codex2一人が、実経路確認→必要最小修正→通信しない接続試験→保存／別process再読→通常commit/push→直接監査報告まで行う。Codex1は今回再起動しない。新しい内容選定・動画製造・API・費用・素材・STT・本番既定・正式採用は対象外。report予定先は `docs/reports/request-intent-connection-20261001/README.md`。今回の保存は指示発行であって、起動・受領・着手確認ではない。
+Codex2一人が、実経路確認→必要最小修正→通信しない接続試験→保存／別process再読→通常commit/push→直接監査報告まで行う。Codex1は今回再起動しない。新しい内容選定・動画製造・API・費用・素材・STT・本番既定・正式採用は対象外。reportは `docs/reports/request-intent-connection-20261001/README.md`。発行だけを起動・受領・着手確認とはしない。その後の受領・実測・判断依頼と具体的続行は§2.4。
 
 以後の継続方針は§6の追記に従う。今回だけ再開用の一つのコードブロックをユーザーへ渡し、着手後はCodexの直接完了報告と相談役の次指示を同じ監査ループでつなぐ。
 
+### 2.4 2026-10-01：通常caller欠落の監査と計画準備接続の続行
+
+`decision: continue`。同じkawafmm承認済みID9接続作業を具体化した[caller限定追加v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)を保存・発行。v001と既存の承認・保存契約の意味は保持する。
+
+- **確認範囲**：main=`cc288f8ea5d0ab0937ffb74b952fcf5826616209`、[報告](reports/request-intent-connection-20261001/README.md)、probe・保存結果・実装参照、通常factoryとindex、構成builder、既存Digest builderを照合。目的全文の通常保存・承認後命令伝達と、Digest通常caller無しの切り分けを受理。接続完成の受理ではない。Macの試験を相談役自身が再実行したものではない。
+- **呼出し位置**：`createStepArtifactBuilders`の`propose_clip_themes`で文字起こし検証直後。通常request・state・実素材参照を使い、明示した準備依存がある場合だけ、runner内executorから探索・比較採否・保持を呼ぶ。試験がhelperを直呼びするだけでは完了にしない。差し替えるのは通信しない判断providerで、入力生成・保存・再読は同じ実装を使う。
+- **保存の範囲**：既存版のDigest要求・回答・受理結果を通常requestごとの別領域へ保存。通常命令との出所対応に不足があれば小さい版付き内部binding記録を追加できるが、公開APIやtheme/compositionのschemaを変えるものではない。目的・条件・素材・依頼ID・要求SHA・全断片被覆を検証し、古い回答の付け替え、欠損・改変・未完了を拒否する。保存段階からの再開・別process再読まで行う。
+- **変えないもの**：通常起動の既定は準備依存未指定。人間の一テーマ確認、`theme_json`／`composition_json`、7工程・公開API・control review・通常後段は不変。Digest複数採否を一テーマ承認へ偽装しない。計画準備は人間採用・完成動画ではなく、通常製品出力への採用／製造接続は未着手として区別する。
+- **実行境界**：Codex2単独、同じセッションで実装・通信しない通常factory接続試験・保存／再開・再読・対象試験まで。実キュー・業務state、新素材、外部推論・費用、STT、動画、UI、renderer、Decisionsは触らない。v002を理由に既存試行錯誤枠をリセットしない。前回実案・レビュー・111試験や媒体の全やり直しは不要。
+- **Git・稼働**：Codex2から`cc288f8e`のpush成功・Git clean・untracked0・staged0・Git操作終了を受領し、相談役が文書保存を担当。ローカル実態はCodex報告、remote HEADと文書は相談役確認。v002受領・再開はまだ未確認。受領だけの独立commitや終了・再起動・転記を増やさない。
+
+今回の指示は、通常factoryからの計画準備接続を実装する指示であり、未実装の段階を完成とする記録ではない。将来の通常Digest採用経路を決めるために人間の既存承認の意味を変える必要がある場合は、その依存部分だけ別判断へ返す。今回、人間への追加作業は0件。
+
 ## 3. ユーザーが今回確定した次の仕事
 
-**本節のID9の前回v001限定作業は実施・技術受理・Git終了まで完了した。** 以下は確定した目的と範囲の履歴を保持する。現在の後続作業は§2.3の接続指示であり、本節の実案作成をやり直すものではない。
+**本節のID9の前回v001限定作業は実施・技術受理・Git終了まで完了した。** 以下は確定した目的と範囲の履歴を保持する。現在の後続作業は§2.4の接続指示であり、本節の実案作成をやり直すものではない。
 
 確定の出所：2026-09-30のZEV Build Loopで、相談役の「既存レビューを反映した採用区間・構成の改善」という提案に対し、ユーザーが「OK 一旦やることはそれで確定して。」と回答。その後、本インデックス整備と突然の会話上限への備えを依頼した。
 
@@ -143,7 +156,8 @@ Codex2一人が、実経路確認→必要最小修正→通信しない接続�
 
 | 資料 | 何を復元するか |
 |---|---|
-| [現在の接続指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md) | 通常入力から制作意図を渡す現在の限定範囲。Codex2単独、通信しない接続試験、完了監査から次指示への継続 |
+| [現在のcaller限定追加v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)、[接続指示v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md) | Codex2単独。通常factoryへの呼出し・別の計画保存・通信しない試験。人間の一テーマ確認・本番defaultは不変 |
+| [通常接続report](reports/request-intent-connection-20261001/README.md)、[probe](reports/request-intent-connection-20261001/connection-probe.mts)、[実測](reports/request-intent-connection-20261001/partial-path-observation.json) | 通常保存・命令伝達の到達点と、`cc288f8e`で判明したcaller欠落。型や保存成功だけを完成にしない |
 | [前回の個別実行指示](work-orders/ZEV_SELECTION_STRUCTURE_IMPROVEMENT_20260930_v001.md) | ID9の完了した実案作成・局所検証の範囲・分担。前回工事の再実施指示にしない |
 | [主reportと保存案](reports/selection-structure-improvement-20260930/README.md)、[独立点検](reports/selection-structure-improvement-20260930/independent-review.md) | ID9の実績・対象SHA・未認定範囲。最終受理と終了は本書§2.2。旧着手状態だけで現在を判断しない |
 | [15分版の人間レビュー](reports/new-material-digest-human-review-20260928/README.md) | 9/28に実施済みの初見レビュー。大きさ・文字量・分割・縁・導入／締め・不要部分・色・確認負荷の一次記録 |
@@ -172,7 +186,7 @@ Codex2一人が、実経路確認→必要最小修正→通信しない接続�
 | 縁A/B | 人間選択はnull。A=8/4は技術入力。B=8/12は21字幕の論理領域不合格。画素が切れていない診断を保証合格へ読み替えない |
 | 字幕サイズ・分割 | 局所の肯定回答あり。未回答へ戻さない。「読む必要がある文章でなかったら」の条件を維持 |
 | 色 | 水色とカラフルな方向は肯定。具体的な色適用・強調箇所・追加色の技術不合格は別。2色で単調さ問題全体が解決したとしない |
-| 構成・どこを使うか | 前回ID9の実案・差分・局所技術確認・対象版独立点検と補足受理は完了。通常依頼入力からの制作意図接続は§2.3で着工指示発行済み・受領未確認。全見どころ網羅性や人間品質採用とは分ける |
+| 構成・どこを使うか | 前回ID9の実案・差分・局所技術確認・対象版独立点検と補足受理は完了。通常依頼の接続は`cc288f8e`でcaller欠落を確認、§2.4の限定追加指示へ続行。通常採用／製造・人間品質・全見どころ網羅性とは分ける |
 | 表情アップ | 手指定1箇所・HUD制約・人間未確認。一般的な自動選択は未実証 |
 | 旧レビュー・UI | 既回答と修正後未回答、UIの技術成立と実操作確認を分けて元台帳で追う。後修正UIを未着手扱いして一から作らない |
 | 制作負担・速度 | 低メモリ化完了と、全工程が十分速いことは別。別素材、入力接続、検査頻度等の未決を黙って完了にしない。新しい高速化を自走着手する指示でもない |
