@@ -1,0 +1,299 @@
+{
+  "schemaVersion": "request-intent-queue-contract-probe-evidence-v001",
+  "status": "passed",
+  "generatedAt": "2026-09-30T23:04:37.274Z",
+  "head": "ee032be8b2f19a0dcb0f795a459725de125ff1f4",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v004-probe-001",
+  "sourceEvidence": "docs/reports/request-intent-connection-20261001/consumer-connection-evidence-attempt-001.json",
+  "sourceBinding": {
+    "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/binding.json",
+    "fileSha256": "478fb3dd24872fd0ab677ce6ec3ecfcfce05076b87da445a8c16f5bc0b877f3a"
+  },
+  "copies": {
+    "machine-adoption.json": {
+      "origin": {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/machine-adoption.json",
+        "fileSha256": "2024b294b781633e22ab1fc56460083fd5d0857724cf1f452235c44fc7b31f5a"
+      },
+      "path": "runtime/artifacts/request-intent-connection-20261001-v004-probe-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/machine-adoption.json",
+      "fileSha256": "2024b294b781633e22ab1fc56460083fd5d0857724cf1f452235c44fc7b31f5a"
+    },
+    "edit-plan.json": {
+      "origin": {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/edit-plan.json",
+        "fileSha256": "39a4adc9716e133a0ba52448ca6e1b5ce7c7ee5ab2ee20b73477dc9dee8266da"
+      },
+      "path": "runtime/artifacts/request-intent-connection-20261001-v004-probe-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/edit-plan.json",
+      "fileSha256": "39a4adc9716e133a0ba52448ca6e1b5ce7c7ee5ab2ee20b73477dc9dee8266da"
+    },
+    "manufacturing-values.json": {
+      "origin": {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/manufacturing-values.json",
+        "fileSha256": "b0694a9ad8662e38d49be032ee219d590cacedcc61d56f6b0a66bb4206d40142"
+      },
+      "path": "runtime/artifacts/request-intent-connection-20261001-v004-probe-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/manufacturing-values.json",
+      "fileSha256": "b0694a9ad8662e38d49be032ee219d590cacedcc61d56f6b0a66bb4206d40142"
+    }
+  },
+  "preparationCopy": {
+    "path": "runtime/artifacts/request-intent-connection-20261001-v004-probe-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/preparation-binding.json",
+    "fileSha256": "b43bec2f1cf47281c9e71111889bd4ff5378ee591d9ae84770f53204d0ff02f2"
+  },
+  "implementations": [
+    {
+      "path": "backend/src/artifacts/validation.ts",
+      "fileSha256": "d044409cb62ebf894b3c2b3f70c38c02514a790762732181e6fd91a08ed289d0"
+    },
+    {
+      "path": "backend/src/artifacts/artifact-path.ts",
+      "fileSha256": "7e87d5ba8e24f08e5579d7a962f660c857ddd704f3586b726a5596db343926a8"
+    },
+    {
+      "path": "backend/src/config/runtime-dir.ts",
+      "fileSha256": "26c873f06596f15d86cfe4a5ddb587f1c3b18c1e5a52d139dfa7411f5aae728c"
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "fileSha256": "4c8a209ce8d951c147b482feff43debd355f95364c82aac919cda3d7be9beca1"
+    },
+    {
+      "path": "runner/src/workflow-artifact-validation.ts",
+      "fileSha256": "71c20a82225e20330485ce752d83f76908c193f8acf384d55ad31d9ffaa02be5"
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+    }
+  ],
+  "results": [
+    {
+      "name": "digest-edit-kind-only",
+      "validator": "validateCompletionFileRef",
+      "status": "accepted",
+      "scope": "kind-only",
+      "requestId": "agent_07Wjk3S2LoeyBaHsEgcaw",
+      "requestType": "create_edit_plan",
+      "originalRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "validatedRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "input": {
+        "uri": "/api/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/edit-plan.json",
+        "mimeType": "application/json"
+      },
+      "observed": {
+        "artifactPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v004-probe-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/edit-plan.json",
+        "metadata": {
+          "artifactFileName": "edit-plan.json",
+          "byteSize": 3177,
+          "sha256": "39a4adc9716e133a0ba52448ca6e1b5ce7c7ee5ab2ee20b73477dc9dee8266da"
+        }
+      }
+    },
+    {
+      "name": "digest-edit-wrong-draft",
+      "validator": "validateCompletionFileRef",
+      "status": "rejected",
+      "scope": "path",
+      "requestId": "agent_07Wjk3S2LoeyBaHsEgcaw",
+      "requestType": "create_edit_plan",
+      "originalRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "validatedRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc-other",
+      "input": {
+        "uri": "/api/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/edit-plan.json",
+        "mimeType": "application/json"
+      },
+      "observed": {
+        "error": "成果物参照は対象の編集コピー配下に保存してください"
+      }
+    },
+    {
+      "name": "digest-edit-missing-isolated-file",
+      "validator": "validateCompletionFileRef",
+      "status": "rejected",
+      "scope": "path",
+      "requestId": "agent_07Wjk3S2LoeyBaHsEgcaw",
+      "requestType": "create_edit_plan",
+      "originalRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "validatedRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "input": {
+        "uri": "/api/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/missing.json",
+        "mimeType": "application/json"
+      },
+      "observed": {
+        "error": "成果物参照のファイルが見つかりません"
+      }
+    },
+    {
+      "name": "preparation-is-not-theme-kind",
+      "validator": "validateCompletionFileRef",
+      "status": "rejected",
+      "scope": "kind",
+      "requestId": "agent_U_wSCQRo5PBIylqJoMNOW",
+      "requestType": "propose_clip_themes",
+      "originalRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "validatedRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "input": {
+        "uri": "/api/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/preparation-binding.json",
+        "mimeType": "application/json"
+      },
+      "observed": {
+        "error": "成果物参照の種別がAI工程と一致していません"
+      }
+    },
+    {
+      "name": "machine-adoption-is-not-composition-kind",
+      "validator": "validateCompletionFileRef",
+      "status": "rejected",
+      "scope": "kind",
+      "requestId": "agent_PFuP3x-goCDDcU2bhHgof",
+      "requestType": "build_clip_composition",
+      "originalRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "validatedRequestDraftId": "draft_8V7ZARrVnEBWPcf48vYOc",
+      "input": {
+        "uri": "/api/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/machine-adoption.json",
+        "mimeType": "application/json"
+      },
+      "observed": {
+        "error": "成果物参照の種別がAI工程と一致していません"
+      }
+    },
+    {
+      "name": "digest-edit-is-not-clip-edit-schema",
+      "validator": "assertJsonArtifactForKind",
+      "kind": "edit_plan_json",
+      "status": "rejected",
+      "scope": "structure",
+      "message": "保存v003出力の作成方法が不正です"
+    },
+    {
+      "name": "preparation-is-not-theme-schema",
+      "validator": "assertJsonArtifactForKind",
+      "kind": "theme_json",
+      "status": "rejected",
+      "scope": "structure",
+      "message": "保存v003出力の種類が不正です"
+    },
+    {
+      "name": "machine-adoption-is-not-clip-composition-schema",
+      "validator": "assertJsonArtifactForKind",
+      "kind": "composition_json",
+      "status": "rejected",
+      "scope": "structure",
+      "message": "保存v003出力の種類が不正です"
+    },
+    {
+      "name": "saved-job-reference-shape",
+      "validator": "validatePresentationBaseMediaBuildJobV001",
+      "status": "accepted",
+      "scope": "shape-only-no-reference-read-no-execution",
+      "observed": {
+        "status": "passed",
+        "violations": []
+      }
+    },
+    {
+      "name": "machine-adoption-is-not-human-assembly",
+      "validator": "validatePresentationBaseMediaAssemblyDecisionV001",
+      "status": "rejected",
+      "scope": "schema-and-human-approval",
+      "observed": {
+        "status": "failed",
+        "violations": [
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.approval",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.decisionId",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.payload.basisEditPlan",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.payload.segments",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.payload.sourceArtifact",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.payload.unresolvedEdits",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.payload",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$.schemaVersion",
+            "relatedIds": [],
+            "details": null
+          },
+          {
+            "code": "ASSEMBLY_DECISION_INVALID",
+            "path": "$",
+            "relatedIds": [],
+            "details": null
+          }
+        ]
+      }
+    }
+  ],
+  "preservation": {
+    "status": "unchanged",
+    "observedPaths": {
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/state.json": "422a09f28d2b430a93718e23134231b5054861cb0708c95c5d86a526356af75a",
+      "runtime/state.json": null,
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/binding.json": "478fb3dd24872fd0ab677ce6ec3ecfcfce05076b87da445a8c16f5bc0b877f3a",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/binding.json": "b43bec2f1cf47281c9e71111889bd4ff5378ee591d9ae84770f53204d0ff02f2",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/machine-adoption.json": "2024b294b781633e22ab1fc56460083fd5d0857724cf1f452235c44fc7b31f5a",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/edit-plan.json": "39a4adc9716e133a0ba52448ca6e1b5ce7c7ee5ab2ee20b73477dc9dee8266da",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/manufacturing-values.json": "b0694a9ad8662e38d49be032ee219d590cacedcc61d56f6b0a66bb4206d40142",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/clock-resolution.json": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/production-intent.json": "17d11b23287c7eb9d9588bac92cbab3bb5d9c9363975ddf6bb0d187855442be1",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/binding-input.json": "bdcb1c7286925308c8601716db91c271f24f9802e839718426ab40f02e6df17f",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/discovery-plan.json": "34e2b6cfe7116f14d2446b69c76d66bd5849fadf5cdb4001b5904742701dc840",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/candidate-request.json": "aef636cf4c1382dea95dec36655180ddcd5a2e4556c7424b037ec34cd42e530a",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/candidate-set.json": "fee87d9294ab842008a77213545f625d115c7fb3aecdc785ef33f0bde1ec1ef9",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/discovery-validation.json": "e65ed9c576edb1ab358fafe03a8b60fb69b7add2eca71686d51f3c05b3e2397a",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/candidate-response.json": "0697973edcb188b228bd5f9a98fa61073dfa227cc35ff1e989044c1be29b4d21",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/candidate-result.json": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-plan.json": "71fb898dee175bafe4c6db49807813d12eba66c80c656d98501294387ff38fd6",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-request.json": "edeef2e2015ef476268ce5c9425fd8ff371c9ced7894d03b15a62c468e60abfe",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-validation.json": "b92be4ea684c77db1328302376eb34c221702532baa24399632abd03f1c7b596",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-adoption.json": "a8100bad349353c41a4b534aeceaf6f7f46e4a6a4d1799bba50abcd8fd37597f",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-response.json": "a30b2961c292cc71c562ca63af0c430320b55b1a566fa21973aa8ed9b56b0390",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/selection-result.json": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/retention-request.json": "eb83020e300f7ce03878f2fdcb9c0d07774e403b8fc066bdae060ca9f8842e44",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/retention-validation.json": "9ef508ca87d5e0f221963d4b09a58eee0ba8b57ce2391518551d2132632fd8b6",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/retention-response.json": "162ca78b0e62f19796be55f1dab25bf573474850bb20fdf8be957054bf8c4cb5",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/retention-result.json": "8c7f4c2528b78750bf8ea1ced4ea9471aacb896df6e2f065fba79afc470672cf"
+    }
+  },
+  "effects": {
+    "completePost": 0,
+    "stateWrites": 0,
+    "videoCopies": 0,
+    "providerCalls": 0,
+    "inspectionCalls": 0,
+    "renderCalls": 0
+  },
+  "limitation": "kind/shape受理と詳細schema・人間承認拒否の境界実測。実完了登録・製造・品質合格は未実施。"
+}

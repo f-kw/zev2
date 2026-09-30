@@ -2,7 +2,7 @@
 
 ## 受領・着手（2026-10-01 JST）
 
-状態：v002の通常factory→探索・採否・保持の限定準備は11809f6fで相談役技術受理。v003をce1d4665で受領し、保存計画→既存Digest編集・製造入力の実consumerへ接続。接続15結果・追加拒否5件・関連型検査・保存／別process再読が合格。通常commit/pushと直接報告へ進む。通常UI／実推論／動画／人間採用は未接続・未認定。
+状態：v002（11809f6f）・v003（7b600a64）は相談役技術受理済み。v004をee032be8で受領し、通常キュー接続の最小仕様案一つと既存境界の10実測を保存、別process再読も合格。製品コード変更0。通常commit/push後、GPT_DECISION＋NEXT_REQUESTを専用Edgeから直接送る。公開契約・承認方式・本番既定・動画の有効化は未承認。
 
 - 受領：`Codex2 続行指示｜9. 通常の依頼から制作意図を渡す接続`、`decision: continue`、`kawafmm承認済み`。本人の「終わったら次に進んで」に基づく後続限定作業。
 - 指示書：`docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md`（保存05c042ae）、指示・現在地の保存HEAD `46219d1037afcf36a5b48bf92f6323946ab9c566`。
@@ -174,3 +174,30 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-int
 次の推奨一件は、**通常の承認済み依頼と内部Digest出力を、通常キューの出力・消費へどう正式接続するかを、既存承認／出力契約と照合して限定すること**。本番default・公開保存物・人間確認の意味変更が必要な箇所は相談役判断へ残す。今回通ったjobのshape検査だけから動画実行や人間採用の権限を推測しない。
 
 本実質checkpointにv002の送信・技術受理とv003の受領・実装・検査を合わせて通常commit/pushする。基準main/originはce1d4665、担当差分だけを明示stageする。push後のSHA・Git状態・直接送信確認は監査本文と次の受領checkpointへ保存し、応答保存だけの独立commitは増やさない。
+
+## v003直接送信checkpoint
+
+2026-10-01T07:43:40.269750+09:00：通常commit `7b600a648cf4ee5228601b72b0a6b6629038fa75` のpush成功後、同じCodex2専用EdgeタブからZEV Build Loopへ `Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 保存Digest計画の後段入力接続` を直接送信。本文送信・応答中表示を確認、画像 `/private/tmp/codex2-intent-v003-sent.jpg` を保存。送信時main/local/origin一致、Git clean、staged0・untracked0、担当Git操作終了を同本文で連絡。実consumerの受理までと未接続の通常UI／正式キュー／動画を区別し、次の具体的指示を依頼した。現在は監査・次指示待ち。送信だけの独立commitはせず、次の実質checkpointと合わせる。
+
+## v004受領checkpoint
+
+2026-10-01T07:55:12.067292+09:00：同じ専用Edgeタブで相談役の最終返答 `decision: continue` を確認。`7b600a64`のv003限定消費接続を技術受理、範囲内必須追加修正なし。次指示は `docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md`、保存HEAD `ee032be8b2f19a0dcb0f795a459725de125ff1f4`。今回は通常依頼・共通キュー・出力登録・後続消費・実行承認を結ぶ最小仕様案一つと、保存v003出力の既存次段validator境界probeだけを行う。製品コード／公開契約／人間承認方式／実キュー／本番defaultは変更しない。形式検査と実製造資格を分け、live実装SHAの旧版保持案も具体化する。累積設営3・製品限定修正2を保持し、同じセッションで最新mainへ同期して続行する。
+
+v004境界実測checkpoint：保存v003の第一計画からJSON4件だけを隔離runtimeへbyte一致copyし、実exported validatorへ10件を投入。編集計画のbackend kind検査と製造jobの参照形状は受理2件。別draft／欠損path2件、kind2件、runner詳細構造3件、機械採否を専用人間組立判断へ渡した1件は想定拒否。編集計画はkindが一致してもClipの作成方法でなく詳細検査が拒否。組立判断はschema／payload／human approvalを欠いて拒否。元state・binding・18準備保存物・4消費保存物とvalidator bytes不変。complete POST・動画copy・provider・inspection・render・業務state書込0。前の20試験を再実行せず、累積設営3・製品限定修正2を維持する。一案では明示Digest種別と専用成果物を共通キューへ載せ、旧一テーマ型・旧承認へ偽装しない。
+
+## v004設計・境界確認完了
+
+[最小仕様案一つ](queue-integration-contract-proposal-v001.md)に、実API→下書き→承認・命令→claim→factory→完了登録→依存参照再読と、製造許可の境界を保存した。明示制作系統、共通キュー内のDigest固有工程・kind/schema、正規FileRefと参照閉包保存、登録出力の所有者、実素材bytesと参照JSONの分離が必要。通常Clipのテーマ／場面承認・詳細型は維持する。Digestの後段は機械採否・保持を実再読し、未接続の字幕／ZEVO・動画許可を不足として保存する案。通常indexの既存ローカルstdin判断callerを接続し、試験で置換するのは判断通信だけとする。
+
+現行のテーマ・場面・生成前確認は実callerと共通準備判定が常に要求し、policy=falseでは解除されないことを確認。人間品質pendingと動画許可・公開を区別した。旧16/5実装のlive SHA変更影響をfileごとに示し、旧固定Git版・保存proofの履歴確認と、新しい依頼／binding版の現行実行を分ける保全案を保存。古い回答SHA・承認の付け替え、hash免除、旧reader大量コピー、旧動画再製造は採らない。旧readerを新HEADで利用できるという主張もしない。
+
+[境界probe](queue-contract-probe.mts)は受理2・想定拒否8、実行失敗0。[保存結果](queue-contract-evidence.json)を別processで再読し、26保護pathとcopy・実装参照のSHA一致を確認した。再読はvalidator再実行0・state書込0。製品コード／依頼stateを変えていないため、前工程で完了したtype-check・20試験・動画QCを再実行しない。型検査を今回の新しい製品修正に適用したとは報告しない。
+
+```sh
+node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-contract-probe.mts
+node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-contract-probe.mts read
+```
+
+今回の完了は設計・境界実測。通常キューの製品接続そのものは未実装。次の推奨一件は、相談役が最小仕様の型・工程・出力差分を限定したうえで、明示Digest依頼→通常計画登録→次の実消費を隔離実装すること。一般の機械採否委任・計画SHAへの動画許可方式は別判断。人間へ視聴・採点・技術方式選択は要求していない。新規人間品質Pendingなし、既存未回答は維持。費用・外部推論・素材／STT／動画／inspection・公開・Decisions・Codex1操作0。
+
+基準main/originはee032be8。今回の6担当fileだけを明示stageし、通常commit/push後のSHA・Git clean・untracked0と担当Git操作終了を直接報告する。送信・監査・次指示の受領は次の実質checkpointへ保存し、受理記録だけの独立commit・終了・再起動は増やさない。累積設営3・製品限定修正2を引き継ぐ。

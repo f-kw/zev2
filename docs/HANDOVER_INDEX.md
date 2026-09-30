@@ -4,7 +4,7 @@
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しを置く。
 
-**最新更新：`7b600a648cf4ee5228601b72b0a6b6629038fa75` を監査し、v003の保存Digest計画→既存編集・製造入力の形状／時計検査・保存再読を限定技術受理した。次は[通常キュー接続の最小仕様案と境界実測v004](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)（保存 `7db8c025c4dbfafe2e7651d18d3bfce3008fcd8a`）。Codex2単独・同じセッションで、正式接続に必要な最小の型・出力・承認・旧版保全の変更案と実測を作る。公開契約・本番設定の変更や動画実走は今回許可していない。v004の受領・再開は未確認。§2.6を参照。**
+**最新更新：v003は`7b600a648cf4ee5228601b72b0a6b6629038fa75`で限定技術受理済み。[v004](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)をCodex2がee032be8で受領し、[最小仕様案一つ](reports/request-intent-connection-20261001/queue-integration-contract-proposal-v001.md)と保存実物の境界10件・別process再読を保存。製品コード・公開契約・承認方式の変更0。通常commit/push後、GPT_DECISION＋NEXT_REQUESTを専用Edgeから直接送り、次の限定差分を同じセッションで受領する。§2.6を参照。**
 
 本書は現在地を短く復元する入口。過去の発行時点の長い重複説明は、[v007全文の固定版](https://github.com/f-kw/zev2/blob/7b600a648cf4ee5228601b72b0a6b6629038fa75/docs/HANDOVER_INDEX.md)と個別指示・reportに原文を保持する。過去の「未確認」「次」を現在へ逆流させない。
 
@@ -91,7 +91,8 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 - **未接続の意味**：job形状検査はassembly承認検査を代替しない。現在の`assemblyDecision`参照先は機械採否保存物で、専用human assembly schemaではない。通常backendのkind検査を通っても、runnerの詳細型・後段消費が成立するとは限らない。これらはv003の範囲外を具体化したもので、v003を不合格へ戻す指摘ではない。
 - **次指示**：[v004](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)、保存`7db8c025c4dbfafe2e7651d18d3bfce3008fcd8a`。これ以上別保存adapterを増やさず、通常キューへ正式接続する最小の一案を作る。明示Digest識別、工程と出力schema、実際の確認条件、計画／実行／品質／公開の承認帰属、旧live-hash束縛の移行を、現行callerと保存実物へ照合する。必要な読取り中心probeを行い、正確な変更file・field・consumerと承認差分を返す。
 - **権限**：v004は同じ承認済み主線の設計・境界確認。公開契約／人間確認方式の改訂・製品コード適用・本番default有効化は未承認で、今回実施しない。旧承認の流用、偽のselectedThemeId、validator免除、動画・外部推論・STT・費用・新素材・新UI・実キュー変更はしない。
-- **運用**：Codex2のstage/commit/push終了を受領し、相談役が指示・共通状態を保存。Git clean等のローカル値はCodex報告、remote mainは相談役確認。累積設営3・製品限定修正2を保持し、版更新でリセットしない。v004受領・再開はまだ未確認。同じセッションで次指示を受領して続行し、応答記録だけの再commit／終了／再起動を増やさない。
+- **v004成果**：[一案](reports/request-intent-connection-20261001/queue-integration-contract-proposal-v001.md)、[probeと10実測](reports/request-intent-connection-20261001/queue-contract-evidence.json)を保存。種別／job形状受理2・path／kind／詳細構造／人間組立承認の想定拒否8、別process再読・26保護path不変。公開制作系統の欠落、通常出力所有者と素材JSONの不足、旧16/5実装SHA変更影響を具体化。推奨次作業は明示Digest→通常計画登録→次の実消費の限定実装。通常製品接続・動画・品質合格は未成立。
+- **運用**：Codex2がee032be8でv004全文を受領・実施。累積設営3・製品限定修正2を保持し、版更新でリセットしない。今回担当6fileだけを通常commit/pushし、相談役へ判断と次差分を依頼する。応答記録だけの再commit／終了／再起動を増やさない。送信・次指示は受領時点でreportへ保存する。
 
 ## 3. ユーザーが確定した主線
 

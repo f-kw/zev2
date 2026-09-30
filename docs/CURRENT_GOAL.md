@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業
 
-**9. 通常キュー接続の最小仕様案と境界実測（v004）。Codex2単独、同じセッションでの続行指示を発行済み。受領・再開は未確認。**
+**9. 通常キュー接続の最小仕様案と境界実測（v004）。Codex2がee032be8で受領、仕様案一つ・10実測・別process再読を保存し、相談役へのGPT_DECISION＋NEXT_REQUESTへ進む。製品実装は未着工。**
 
 本人の「作業止まってる？ 終わったら次に進んで」に基づく、同じID9接続主線の後続。現在の正本は [v004指示書](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)、保存 `7db8c025c4dbfafe2e7651d18d3bfce3008fcd8a`。直前のv003を `7b600a648cf4ee5228601b72b0a6b6629038fa75` で限定技術受理した。
 
@@ -16,7 +16,7 @@
 
 今回は設計・境界確認を進める。公開契約・人間承認方式・製品コード・実キュー・本番設定の変更は許可していない。通常Clipの一テーマ型へDigest複数候補を偽装せず、架空のselectedThemeId・人間承認を作らない。必要な小さい読取りprobeのみ隔離実行し、外部推論・STT・動画・新素材・新UIは行わない。
 
-主reportは [通常接続report](reports/request-intent-connection-20261001/README.md)。一案の予定先は同directoryの `queue-integration-contract-proposal-v001.md`、必要な境界実測は `queue-contract-probe.mts`／`queue-contract-evidence.json`。指示発行時点でこれらの成果は未生成であり、保存した指示を実装完了としない。
+主reportは [通常接続report](reports/request-intent-connection-20261001/README.md)。[最小仕様案](reports/request-intent-connection-20261001/queue-integration-contract-proposal-v001.md)、[境界probe](reports/request-intent-connection-20261001/queue-contract-probe.mts)／[10実測](reports/request-intent-connection-20261001/queue-contract-evidence.json)を保存済み。kind・参照形状受理2件、path・詳細構造・専用人間組立判断の想定拒否8件。26保護pathの保存不変・別process再読を確認。現行の所有者と素材参照JSONの不足、旧live SHAの変更影響も具体化した。次は明示Digest依頼→通常登録→次の実消費の限定実装を推奨するが、公開型・承認意味の変更は相談役の具体的な次差分／必要な第1層判断を待つ。
 
 ## 2.1 今回受理したv003
 
