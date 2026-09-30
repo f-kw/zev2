@@ -56,7 +56,7 @@ ID9の初回新案は `bd0113c8301e49eb74993385286fd12c1b9894b8`、Codex1の独�
 | Codex1：Decisions API / Jev代替評価 | 調査、36判断点分類、J16比較入力326字幕（tuning53/held-out273）の固定まで。報告commit `830ea96811c94e5794f751914e835e20977ce126` | その調査時点では正式仕様・料金・利用権限を確定できず、推論0・本番導入0。実API評価は保留。公開済みになったと推測しない |
 | Codex2：9. 採用区間・構成の改善・前回限定作業 | `b69e168c` の限定技術作業を相談役受理。11探索候補・7採用・9保持、27,691frame（15分23.033秒）の一案と旧版差分、局所540p5本・147字幕、111対象試験、判断と媒体の別process再読。[主report](reports/selection-structure-improvement-20260930/README.md) | 送信実績保存 `68a32038`・Git終了連絡まで受領し、前回担当は終了。心霊会話の不採用理由も相談役受理。人間品質、新案1080p全編、補足版と局所媒体のCodex1点検は未認定。これらを前回作業の再開条件にはしない |
 | Codex1：9の独立点検 | `9b72bc0f` の既存レビュー照合と新案`bd0113c8`の点検を相談役受理。送信実績 `b93870fc` を保存し、Git終了連絡を受領。[点検記録](reports/selection-structure-improvement-20260930/independent-review.md) | 今回担当は終了。点検対象は`bd0113c8`まで。後続補足版・局所媒体を点検済みにせず、追加再点検・自動ポーリング・応答記録だけの再commitは不要 |
-| Codex2：9. 通常依頼の制作意図接続 | 本人の続行指示に基づき[接続指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を発行済み。通常のpurposeから探索・採否・保持までの実経路を追い、不足だけを修正・試験・保存する | 受領・起動・着手・現在稼働は未確認。通常入口の欠落は未確定。Codex1再起動・新動画・新UI・外部APIは不要。report予定先は `docs/reports/request-intent-connection-20261001/README.md`、指示発行時点では未生成 |
+| Codex2：9. 通常依頼の制作意図接続 | 本人の続行指示に基づき[接続指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を発行済み。通常のpurposeから探索・採否・保持までの実経路を追い、不足だけを修正・試験・保存する | 2026-10-01、46219d10へ同期。通常APIで目的2件を承認後7命令ずつへ保存、別process再読一致。通常テーマ・構成は一般目的を使用せず、Digest3判断の通常caller無し。[現物・局所試験・最小差分案](reports/request-intent-connection-20261001/README.md)をGPT_DECISIONへ返すcheckpoint。接続完成ではない。Codex1再起動・新動画・新UI・外部API0 |
 
 前回両担当のGit終了連絡を受け、共通インデックス同期担当は相談役へ戻った。旧「Codex1の送信実績・Git終了未確認」「Codex2の最終Git保存中」「新案・局所検証未完了」は履歴であり、現在状態ではない。共通計画・台帳・各reportの既存担当区分を保ち、他担当の内容を上書きしない。
 

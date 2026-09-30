@@ -10,13 +10,13 @@
 
 ## 2. 現在の主作業
 
-**9. 通常の依頼から制作意図を渡す接続。着工指示発行済み、Codex2の受領・起動・現在稼働は未確認。**
+**9. 通常の依頼から制作意図を渡す接続。2026-10-01、通常命令まで実測済み。Digest通常caller欠落の現物を保存しGPT_DECISIONへ返すcheckpoint。接続完成ではない。**
 
 本人の「作業止まってる？ 終わったら次に進んで」を受け、直前に推奨していた後続作業の[実行指示 v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md)を保存・発行した。指示書commit `05c042ae3efe69e8ef0157a2db2614a3b8fa1c7f`、確認基準main `46a6557198fe28f2c49af0d77dc6d8d5327fbf05`。
 
 通常の `RequestDraftInput.purpose`・`RequestDraft.purpose`・`AgentRequest.input.purpose` と、既存候補探索／採否の `productionRequest` は存在する。その間の通常callerから保持判断までの受渡しを追い、不足があれば必要最小修正する。型の存在だけで接続済みとはしない。毎回検証用スクリプトに制作意図を手書きする形から、通常の依頼入力で渡せる形へつなぐ。
 
-担当はCodex2のみ、相談役が監査。新UI・新しい選定AI・Codex1再起動は不要。通常経路を使った通信しない接続試験、保存・別process再読、通常commit/push、直接報告まで進める。既に成立していれば不要な製品コード差分を作らない。report予定先は `docs/reports/request-intent-connection-20261001/README.md`（指示発行時点では未生成）。具体的な範囲と禁止事項は今回の指示書、状態は[インデックス§2.3](HANDOVER_INDEX.md#23-2026-10-01通常依頼の制作意図接続を開始指示)を参照する。
+担当はCodex2のみ、相談役が監査。新UI・新しい選定AI・Codex1再起動は不要。通常経路を使った通信しない接続試験、保存・別process再読、通常commit/push、直接報告まで進める。既に成立していれば不要な製品コード差分を作らない。受領・追跡記録は[主report](reports/request-intent-connection-20261001/README.md)。具体的な範囲と禁止事項は今回の指示書、状態は[インデックス§2.3](HANDOVER_INDEX.md#23-2026-10-01通常依頼の制作意図接続を開始指示)を参照する。
 
 ## 2.1 直前の完了範囲
 

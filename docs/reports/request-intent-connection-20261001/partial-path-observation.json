@@ -1,0 +1,116 @@
+{
+  "observedAt": "2026-09-30T21:15:52.680Z",
+  "status": "partial-path-observed-digest-not-connected",
+  "checks": {
+    "normalDraftCreationAndApproval": "passed",
+    "twoPurposesPreservedInAllSevenCommands": "passed",
+    "newDraftDoesNotInheritApproval": "passed",
+    "unapprovedDraftProducesNoCommands": "passed",
+    "duplicateApprovalRejected": "passed",
+    "emptyPurposeRejected": "passed",
+    "separateProcessStoreReadback": "passed",
+    "realTranscriptThemeAndCompositionIgnoreGeneralPurpose": "observed",
+    "businessStateAndSavedTranscriptUnchanged": "passed"
+  },
+  "transcript": {
+    "path": "runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+    "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+  },
+  "requests": [
+    {
+      "draftId": "draft_GlBzJDr99ugI3bIOuAeXL",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。",
+      "approvedCommands": [
+        {
+          "id": "agent_ErrX0FuS8cFCeQGoL9u5c",
+          "type": "prepare_video",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_DC4IkAGppYrRVyBbMIhsS",
+          "type": "run_stt",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_4RxfGmO0XOe-wwOThm2W9",
+          "type": "propose_clip_themes",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_74ALyxVpvm1ogt81wWtB-",
+          "type": "build_clip_composition",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_PPipxNdFHoRz96O64tUHT",
+          "type": "create_edit_plan",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_SJDh-kkOnNOtzXC7lJwoh",
+          "type": "apply_adjustment",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        },
+        {
+          "id": "agent_ONTxyo6PnK1-o8SMoS5s6",
+          "type": "render_video",
+          "purpose": "導入で場面を説明し、出来事の流れと反応を残す。\n結末まで理解できる構成にする。"
+        }
+      ]
+    },
+    {
+      "draftId": "draft_ZLYWttiQe3GlBitv-FLJn",
+      "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。",
+      "approvedCommands": [
+        {
+          "id": "agent_epZoC994NY_OES8AWkgs9",
+          "type": "prepare_video",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_4W7WclSZyFw1529CN-HdP",
+          "type": "run_stt",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_CiRUFNFyIHsyAenC8PJNY",
+          "type": "propose_clip_themes",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_9yQcMMOKgV7eu_WbiTEAe",
+          "type": "build_clip_composition",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_7YkpZt7DPP4ciLg06LwgN",
+          "type": "create_edit_plan",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_4W4vcJJ_ZAGxH-QI2fbV4",
+          "type": "apply_adjustment",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        },
+        {
+          "id": "agent_ifHSSSOs6bGNOqD23pniL",
+          "type": "render_video",
+          "purpose": "結果が分かる場面を中心にし、直前の説明と反応を保持する。\n同じ内容の繰り返しを比較する。"
+        }
+      ]
+    }
+  ],
+  "isolatedStateSha256": "abe1fca4b7ae4c97c172166749cf502daec67be6ecd4301284678796e1016ae4",
+  "limits": [
+    "Digest判断3件は通常callerが無いため未実行",
+    "旧回答・別素材のDigest拒否は通常経路未接続のため未検証",
+    "通常UI・人間テーマ選択・動画生成のE2Eではない"
+  ],
+  "externalInferenceCalls": 0,
+  "sttRuns": 0,
+  "generatedVideos": 0,
+  "realQueueMutations": 0
+}
