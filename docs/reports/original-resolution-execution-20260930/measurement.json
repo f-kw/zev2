@@ -1,0 +1,980 @@
+{
+  "status": "technical-trials-passed-full-not-executed",
+  "measuredAt": "2026-09-30T00:47:29.833Z",
+  "scope": "all eight preselected trials; preparation/full recipe is not full execution",
+  "rows": [
+    {
+      "scopeId": "local-seven-seconds",
+      "frames": 210,
+      "bodySeconds": 9.919933250000001,
+      "replaySeconds": 9.911371875,
+      "mediaSeconds": 47.246472499999996,
+      "diagnosticPreparationSeconds": 47.884231875,
+      "nativeAndSaveSeconds": 80.760903167,
+      "nativeWallSeconds": 47.718792207999996,
+      "samples": 22,
+      "logicalCandidates": 289,
+      "peakReferenceBytes": 24279696,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 102817035,
+      "audioBytes": 173626,
+      "bodyBytes": 5670278,
+      "replayBytes": 5670278,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 210,
+        "sourceFrames": 210,
+        "samples": 308700,
+        "changedFrames": 82,
+        "videoSha256": "d5b970de0f715d39d2743f65cdf8d9b785e388896fa2b8e1789a8896825aed2a",
+        "pcmSha256": "ec976a6e88f0ddb70fc7f421666ca5283bc6a2f21a78f16234c0d52da616fe14",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-001/completion.json",
+        "bytes": 24306,
+        "fileSha256": "4eaefd1b6edc10c61c5ef4abf543efbd473ff69874992096159bea91f721678b"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-native-001/completion.json",
+        "bytes": 12420,
+        "fileSha256": "33afb4163eb476828a42b7dfd571b47f1009a456bb3fdaaaf95930fc3df733df"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "local-seven-seconds",
+        "samples": 22,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 22,
+          "verifiedFileCount": 99,
+          "releasedSamples": 22,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-01",
+      "frames": 2,
+      "bodySeconds": 0.9261068750000013,
+      "replaySeconds": 0.9063309590000008,
+      "mediaSeconds": 19.842600959000002,
+      "diagnosticPreparationSeconds": 42.828158292,
+      "nativeAndSaveSeconds": 67.31067725,
+      "nativeWallSeconds": 34.243623875000004,
+      "samples": 2,
+      "logicalCandidates": 10,
+      "peakReferenceBytes": 2914560,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 568913,
+      "audioBytes": 2860,
+      "bodyBytes": 107900,
+      "replayBytes": 107900,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 2,
+        "sourceFrames": 2,
+        "samples": 2940,
+        "changedFrames": 0,
+        "videoSha256": "51bb5ddc7abbd77bd1f9cf79c05b30bae8da3898acab622d650364e557c51e00",
+        "pcmSha256": "76ed932b9f99a42fd17b6bac432bd1cb87c68a6eff61ea8544581c9392030e2e",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-01-001/completion.json",
+        "bytes": 20778,
+        "fileSha256": "d5a46208ad03141ac5ba62fde42ae7f54c445204e4336492da1cefafdeb1204f"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-01-native-001/completion.json",
+        "bytes": 5849,
+        "fileSha256": "290a928977345d0dc6adb2cb42bf09d58066e4479203c5744983fed5f9535ead"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-01",
+        "samples": 2,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 2,
+          "verifiedFileCount": 16,
+          "releasedSamples": 2,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-02",
+      "frames": 24,
+      "bodySeconds": 1.8814279170000046,
+      "replaySeconds": 1.8670527920000022,
+      "mediaSeconds": 24.428906583,
+      "diagnosticPreparationSeconds": 43.57007829099998,
+      "nativeAndSaveSeconds": 71.22487400000001,
+      "nativeWallSeconds": 37.161376709,
+      "samples": 6,
+      "logicalCandidates": 30,
+      "peakReferenceBytes": 2157840,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 4547411,
+      "audioBytes": 12007,
+      "bodyBytes": 534756,
+      "replayBytes": 534756,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 24,
+        "sourceFrames": 12,
+        "samples": 35280,
+        "changedFrames": 0,
+        "videoSha256": "66e510787ac0b6875f20e3c32260da24f1ae2c02c662154c2e2d92243a4653e9",
+        "pcmSha256": "c42b5baa506e17ff4faee318fd1110426a7e56d964598051800190a0963a0b0d",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-02-001/completion.json",
+        "bytes": 22014,
+        "fileSha256": "60e4dd4d5b356d11fc25b8a0710eb4929e06a0bb16405c1ed8420adff42d9f58"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-02-native-001/completion.json",
+        "bytes": 6925,
+        "fileSha256": "3edc1cf20278900688d17754a6eb2c44be3c8a8b3b42f255a608daf2737ed8be"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-02",
+        "samples": 6,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 6,
+          "verifiedFileCount": 32,
+          "releasedSamples": 6,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-03",
+      "frames": 36,
+      "bodySeconds": 2.1279041670000005,
+      "replaySeconds": 2.1218976669999976,
+      "mediaSeconds": 24.952711542000003,
+      "diagnosticPreparationSeconds": 41.82003916600003,
+      "nativeAndSaveSeconds": 76.232652542,
+      "nativeWallSeconds": 43.084644207999986,
+      "samples": 13,
+      "logicalCandidates": 104,
+      "peakReferenceBytes": 6726132,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 17881749,
+      "audioBytes": 30575,
+      "bodyBytes": 936829,
+      "replayBytes": 936829,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 36,
+        "sourceFrames": 36,
+        "samples": 52920,
+        "changedFrames": 0,
+        "videoSha256": "db05e129fa6f33977317d9fd40371dc4a82024acc7625c7c8144744d3c7e4446",
+        "pcmSha256": "3d61d526cc60a85952ab3897655918dce50a79f6ce7518e5f06683c75e0e1896",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-03-001/completion.json",
+        "bytes": 23526,
+        "fileSha256": "fae082659a199b1c1af7ff7a697911499357d54c85af04a338de83c1c128404f"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-03-native-001/completion.json",
+        "bytes": 9516,
+        "fileSha256": "ec253011a22b53f30a7b418ca146c82d64aebab7089a96233414fd31ab86c7d0"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-03",
+        "samples": 13,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 13,
+          "verifiedFileCount": 75,
+          "releasedSamples": 13,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-04",
+      "frames": 36,
+      "bodySeconds": 2.5746834170000072,
+      "replaySeconds": 2.483888791000005,
+      "mediaSeconds": 26.622399833000003,
+      "diagnosticPreparationSeconds": 41.648616041000004,
+      "nativeAndSaveSeconds": 70.97893587500002,
+      "nativeWallSeconds": 40.29766287499998,
+      "samples": 17,
+      "logicalCandidates": 153,
+      "peakReferenceBytes": 3615840,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 15569602,
+      "audioBytes": 30453,
+      "bodyBytes": 947916,
+      "replayBytes": 947916,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 36,
+        "sourceFrames": 36,
+        "samples": 52920,
+        "changedFrames": 0,
+        "videoSha256": "a8645aefdd1010ee97c11f6a50be864372cb059661c8ea47abc557cbc6038be4",
+        "pcmSha256": "0a150f6e6511ac5ec43a9d2d6a0dd29e96608a32bb7f07c5d0f459765d81126a",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-04-001/completion.json",
+        "bytes": 23817,
+        "fileSha256": "b4e3fa2f4406080882a130187fa82b0f1405f266e5c4fa641138e50fbb413ada"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-04-native-001/completion.json",
+        "bytes": 10766,
+        "fileSha256": "f4f404c48c8fde8827d05abf50d4a6acf465d187ff108a513e4d57658d61b4a0"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-04",
+        "samples": 17,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 17,
+          "verifiedFileCount": 92,
+          "releasedSamples": 17,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-05",
+      "frames": 14,
+      "bodySeconds": 1.0692894579999992,
+      "replaySeconds": 1.044169415999997,
+      "mediaSeconds": 28.122484792,
+      "diagnosticPreparationSeconds": 43.90041220799999,
+      "nativeAndSaveSeconds": 70.5324915,
+      "nativeWallSeconds": 36.236668916999996,
+      "samples": 2,
+      "logicalCandidates": 11,
+      "peakReferenceBytes": 4998024,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 1378871,
+      "audioBytes": 4194,
+      "bodyBytes": 231494,
+      "replayBytes": 231494,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 14,
+        "sourceFrames": 2,
+        "samples": 20580,
+        "changedFrames": 0,
+        "videoSha256": "158ae17ee54d6632d21f29879f1b6c14911615d412ff1d01f5e7a9adaff8aca5",
+        "pcmSha256": "6f3a238f4ada9a895313d082112c4c29a3a99587f69db4fd6c7312dc1f917a13",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-001/completion.json",
+        "bytes": 21702,
+        "fileSha256": "12141d766856ac3e3fa8fd0a6f591ffb983ad8e4e2bdb027934cf2fbe3b0a6d6"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-native-001/completion.json",
+        "bytes": 6167,
+        "fileSha256": "803ccc676b3b85a35af55eda9b0a9d473d34061d99b94a829694a7a509b06429"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-05",
+        "samples": 2,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 2,
+          "verifiedFileCount": 20,
+          "releasedSamples": 2,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-06",
+      "frames": 24,
+      "bodySeconds": 2.124866458999997,
+      "replaySeconds": 2.1315462079999996,
+      "mediaSeconds": 29.42468075,
+      "diagnosticPreparationSeconds": 43.91605825,
+      "nativeAndSaveSeconds": 68.01995316699997,
+      "nativeWallSeconds": 33.872389874999996,
+      "samples": 4,
+      "logicalCandidates": 16,
+      "peakReferenceBytes": 1927680,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 12499339,
+      "audioBytes": 20860,
+      "bodyBytes": 698803,
+      "replayBytes": 698803,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 24,
+        "sourceFrames": 24,
+        "samples": 35280,
+        "changedFrames": 0,
+        "videoSha256": "6e34e0ef29cb6edfd304f614ee179f2de0a9c128b9d0321e7c54e1264a5377ab",
+        "pcmSha256": "389e7817d506bcdf9aad8e2395ada897a6303fe2b07a0ac573c19fdb2114fb74",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-06-001/completion.json",
+        "bytes": 19164,
+        "fileSha256": "f391331d15ccd06af02287999d086676d2f07e4fec850aaed63bd20ed81124fe"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-06-native-001/completion.json",
+        "bytes": 6570,
+        "fileSha256": "cf1739161cef71630bcd2140e794e88ccf3ff420b08dc2ba82069a9bbaf6bd8a"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-06",
+        "samples": 4,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 4,
+          "verifiedFileCount": 27,
+          "releasedSamples": 4,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    },
+    {
+      "scopeId": "representative-07",
+      "frames": 121,
+      "bodySeconds": 3.774670792000019,
+      "replaySeconds": 3.8228899589999927,
+      "mediaSeconds": 37.11027875,
+      "diagnosticPreparationSeconds": 46.25994325000001,
+      "nativeAndSaveSeconds": 92.09658724999998,
+      "nativeWallSeconds": 47.51850479199994,
+      "samples": 3,
+      "logicalCandidates": 12,
+      "peakReferenceBytes": 3038592,
+      "retainedReferenceBytes": 0,
+      "backgroundBytes": 76622953,
+      "audioBytes": 101134,
+      "bodyBytes": 2556550,
+      "replayBytes": 2556550,
+      "replayMp4Identical": true,
+      "backgroundVerification": {
+        "status": "passed",
+        "frames": 121,
+        "sourceFrames": 121,
+        "samples": 177870,
+        "changedFrames": 0,
+        "videoSha256": "c7a09df3680d2db9734daba5ddb12003ef99e0af939e8929ca2829ce2cd70f3d",
+        "pcmSha256": "d5abe7c487afb810061bb9635f01be8d60a67d89b51436f338de866712c00d86",
+        "rawFilesCreated": 0,
+        "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+      },
+      "mediaRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-07-001/completion.json",
+        "bytes": 19267,
+        "fileSha256": "50b00234c6eb46787838611a69933440b16eb3d98f463fbe71a0f0694d308791"
+      },
+      "qcRef": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-07-native-001/completion.json",
+        "bytes": 6302,
+        "fileSha256": "3ec39385c903c55cd14d2aa37ee5ed7a7c3e63b06ffa3a5eaab6fe7c038f83a6"
+      },
+      "independentRead": {
+        "status": "technical-passed",
+        "scopeId": "representative-07",
+        "samples": 3,
+        "violations": [],
+        "retained": {
+          "status": "passed",
+          "samples": 3,
+          "verifiedFileCount": 24,
+          "releasedSamples": 3,
+          "scope": "receipts and retained input bytes; absent RGB is regenerated only by the explicit revalidation entry"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "frames": 467,
+    "samples": 69,
+    "logicalCandidates": 625
+  },
+  "resources": [
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-native-resource.json",
+        "bytes": 13492,
+        "fileSha256": "6dbe4bd14eefd6bedcdacbda1cd62d2a29fb5e0378e8fc1deaa0c523849e2054"
+      },
+      "seconds": 71.10139670805074,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 683606016,
+      "simultaneousTreeObservedPeakBytes": 749797376,
+      "childObservedMaxByTool": {
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg": 141213696
+      },
+      "availableBytesMinimum": 57693007872,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    },
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-qc-prepare-resource.json",
+        "bytes": 12796,
+        "fileSha256": "3a6ea9d6c0ab9282cf37c693d472b2df7869bc315d2b7cf60ae5e1afe767c5b8"
+      },
+      "seconds": 44.494986874982715,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 718209024,
+      "simultaneousTreeObservedPeakBytes": 1320353792,
+      "childObservedMaxByTool": {
+        "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell": 92192768,
+        "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+compositor-darwin-arm64@4.0.481/node_modules/@remotion/compositor-darwin-arm64/remotion": 8798208
+      },
+      "availableBytesMinimum": 57791066112,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    },
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-native-resource.json",
+        "bytes": 16486,
+        "fileSha256": "dc9d60622c40e554a902d6765a81f4896ccec37ee5a329f7754b5d41e22621aa"
+      },
+      "seconds": 81.74202916608192,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 712671232,
+      "simultaneousTreeObservedPeakBytes": 1013006336,
+      "childObservedMaxByTool": {
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg": 391168000,
+        "(ffmpeg)": 202948608,
+        "(magick)": 37060608
+      },
+      "availableBytesMinimum": 57363931136,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    },
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-qc-prepare-resource.json",
+        "bytes": 15464,
+        "fileSha256": "03c9278d4051d1d5c8802f4efa26ce2622f722ecfa6b9aac5004446ac047da21"
+      },
+      "seconds": 48.882417917018756,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 783220736,
+      "simultaneousTreeObservedPeakBytes": 1395785728,
+      "childObservedMaxByTool": {
+        "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell": 106070016,
+        "(sh)": 2170880,
+        "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/@remotion+compositor-darwin-arm64@4.0.481/node_modules/@remotion/compositor-darwin-arm64/remotion": 8716288,
+        "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick": 102744064
+      },
+      "availableBytesMinimum": 57692880896,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    },
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/remaining-media-resource.json",
+        "bytes": 45460,
+        "fileSha256": "56f809e121ebfb7d902f68c4a68175b70e3064471579712e0c262f6df4b4e739"
+      },
+      "seconds": 163.18630954204127,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 746602496,
+      "simultaneousTreeObservedPeakBytes": 1645346816,
+      "childObservedMaxByTool": {
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg": 987561984,
+        "(ffprobe)": 1114112,
+        "(ffmpeg)": 1253261312,
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe": 49709056
+      },
+      "availableBytesMinimum": 57620414464,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    },
+    {
+      "file": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/remaining-native-resource.json",
+        "bytes": 133339,
+        "fileSha256": "bcfa16a02e015ec0574e728fedd50a060fffebddd4ca108477ffb79b9a1742df"
+      },
+      "seconds": 706.1038025829475,
+      "sampleIntervalSeconds": 1,
+      "parentObservedPeakBytes": 969998336,
+      "simultaneousTreeObservedPeakBytes": 1405681664,
+      "childObservedMaxByTool": {
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg": 319750144,
+        "(ffmpeg)": 128090112,
+        "/opt/homebrew/Cellar/imagemagick/7.1.2-12_1/bin/magick": 102498304,
+        "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell": 91635712
+      },
+      "availableBytesMinimum": 56626425856,
+      "scope": "Observed samples only; may miss subsecond peaks; no sum of maxima at different times"
+    }
+  ],
+  "availableBytes": 56639909888,
+  "newAreaSize": {
+    "logicalBytes": 1451784027,
+    "allocatedBytes": 1462317056,
+    "files": 3423
+  },
+  "fullResourceCalculation": {
+    "status": "calculated-preparation-only-no-full-execution",
+    "samples": 345,
+    "logicalCandidates": 211732,
+    "uniqueSampleFrames": 345,
+    "extractedPngCount": 690,
+    "nativeLayers": 1259,
+    "generatedFadePngs": 906,
+    "decodedLayerLogicalBytes": 10442649600,
+    "maxSampleReferenceBytes": 1517991552,
+    "sumLogicalReferenceBytes": 521765239104,
+    "maxCropRgbBytes": 2464272,
+    "batchSize": 32,
+    "maxBatchRgbOutputBytes": 78856704,
+    "fullBackgroundRawYuvPayloadBytes": 54783475200,
+    "fullPcmPayloadBytes": 207128880,
+    "compositorPngInputs": 307,
+    "compositorInputCount": 309,
+    "oneExpandedRgbaPerPngBytes": 2546380800,
+    "expectedNewCompressedMedia": [
+      "one FFV1/PCM background",
+      "one AAC reference",
+      "body MP4",
+      "mandatory replay MP4"
+    ],
+    "unmeasured": [
+      "full compressed FFV1 size",
+      "full compressed body/replay sizes",
+      "full compositor decoder/filter peak RSS",
+      "full native JSON receipt peak and compressed frame PNG bytes",
+      "physical I/O"
+    ]
+  },
+  "preservedComparison": {
+    "status": "passed",
+    "results": [
+      {
+        "scopeId": "local-seven-seconds",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-connection-20260930-v001/attempt-002/completion.json",
+          "bytes": 273061,
+          "fileSha256": "218734183d0be3fc63bbbd2b3d3d1b6167e8dc3b0a5d1cbeee50ddd8afc7f370"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-001/completion.json",
+          "bytes": 24306,
+          "fileSha256": "4eaefd1b6edc10c61c5ef4abf543efbd473ff69874992096159bea91f721678b"
+        },
+        "backgroundVideo": {
+          "bytes": 653184000,
+          "sha256": "d5b970de0f715d39d2743f65cdf8d9b785e388896fa2b8e1789a8896825aed2a"
+        },
+        "backgroundPcm": {
+          "bytes": 2469600,
+          "sha256": "ec976a6e88f0ddb70fc7f421666ca5283bc6a2f21a78f16234c0d52da616fe14"
+        },
+        "bodyVideo": {
+          "bytes": 653184000,
+          "sha256": "182e5cf04161a262048803b838c39fc2e18b333955a34b80398bcb2902706aca"
+        },
+        "bodyAudio": {
+          "bytes": 2473984,
+          "sha256": "9bbf245f05d495a767c3001a00a4b1043838ce53b4e61b739befe0105b520aa1"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-01",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-media-003/completion.json",
+          "bytes": 113805,
+          "fileSha256": "d9534ac243eccf479006f0314797b756802204fce2abbac9455d63a18438a963"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-01-001/completion.json",
+          "bytes": 20778,
+          "fileSha256": "d5a46208ad03141ac5ba62fde42ae7f54c445204e4336492da1cefafdeb1204f"
+        },
+        "backgroundVideo": {
+          "bytes": 6220800,
+          "sha256": "51bb5ddc7abbd77bd1f9cf79c05b30bae8da3898acab622d650364e557c51e00"
+        },
+        "backgroundPcm": {
+          "bytes": 23520,
+          "sha256": "76ed932b9f99a42fd17b6bac432bd1cb87c68a6eff61ea8544581c9392030e2e"
+        },
+        "bodyVideo": {
+          "bytes": 6220800,
+          "sha256": "fd902225cc67cde7392a1a302d36cbfdfe84c898aee120ced2b0af0146af619e"
+        },
+        "bodyAudio": {
+          "bytes": 24576,
+          "sha256": "3c0bb3021b21e6fa748893fab5c92529cd234421c2636912a6d8628d6be4d83f"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-02",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-media-001/completion.json",
+          "bytes": 104882,
+          "fileSha256": "9310f5e402d5d217782a6054d627b577c70b86443ecc1bcdaba55dd5718ce49b"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-02-001/completion.json",
+          "bytes": 22014,
+          "fileSha256": "60e4dd4d5b356d11fc25b8a0710eb4929e06a0bb16405c1ed8420adff42d9f58"
+        },
+        "backgroundVideo": {
+          "bytes": 74649600,
+          "sha256": "66e510787ac0b6875f20e3c32260da24f1ae2c02c662154c2e2d92243a4653e9"
+        },
+        "backgroundPcm": {
+          "bytes": 282240,
+          "sha256": "c42b5baa506e17ff4faee318fd1110426a7e56d964598051800190a0963a0b0d"
+        },
+        "bodyVideo": {
+          "bytes": 74649600,
+          "sha256": "b57918dd89fdb2177fb297ee7f004433b85f85a4f14c90136e285b95105256eb"
+        },
+        "bodyAudio": {
+          "bytes": 286720,
+          "sha256": "6363fd190dfe4bcb6ef29aea6ca1bc2772ab25329d2ee74458920e0f6c773505"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-03",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-media-001/completion.json",
+          "bytes": 297178,
+          "fileSha256": "493b2664ed1b07bc81d0248645e5602806c39a80ef5489694467a3701700570c"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-03-001/completion.json",
+          "bytes": 23526,
+          "fileSha256": "fae082659a199b1c1af7ff7a697911499357d54c85af04a338de83c1c128404f"
+        },
+        "backgroundVideo": {
+          "bytes": 111974400,
+          "sha256": "db05e129fa6f33977317d9fd40371dc4a82024acc7625c7c8144744d3c7e4446"
+        },
+        "backgroundPcm": {
+          "bytes": 423360,
+          "sha256": "3d61d526cc60a85952ab3897655918dce50a79f6ce7518e5f06683c75e0e1896"
+        },
+        "bodyVideo": {
+          "bytes": 111974400,
+          "sha256": "1dfeb810b1e27551832237bed5d813c50e8fd34444d29e6332d9ff9edee20625"
+        },
+        "bodyAudio": {
+          "bytes": 425984,
+          "sha256": "01e0c3b4cf2e3ba9cd5427f24a675847551da1f2f69c7b573c58d2c44fa78b63"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-04",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-media-001/completion.json",
+          "bytes": 288493,
+          "fileSha256": "27749632905dd2645560abf01ab2701f91727ce861982be571fa4963a30f67cc"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-04-001/completion.json",
+          "bytes": 23817,
+          "fileSha256": "b4e3fa2f4406080882a130187fa82b0f1405f266e5c4fa641138e50fbb413ada"
+        },
+        "backgroundVideo": {
+          "bytes": 111974400,
+          "sha256": "a8645aefdd1010ee97c11f6a50be864372cb059661c8ea47abc557cbc6038be4"
+        },
+        "backgroundPcm": {
+          "bytes": 423360,
+          "sha256": "0a150f6e6511ac5ec43a9d2d6a0dd29e96608a32bb7f07c5d0f459765d81126a"
+        },
+        "bodyVideo": {
+          "bytes": 111974400,
+          "sha256": "555b25cf0b9cf6a5bfd59d2f15ff7ae27afb382496653b65413016a7c4ae2c49"
+        },
+        "bodyAudio": {
+          "bytes": 425984,
+          "sha256": "713b68426d00db3d6b5fd6f3f1d6e523068e3065c200be23cff7c13010d58f57"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-05",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-media-002/completion.json",
+          "bytes": 102605,
+          "fileSha256": "1d73f337f424f294850b7a426829758ef9ebb53d8d0bdbf89c55ed778e41710f"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-001/completion.json",
+          "bytes": 21702,
+          "fileSha256": "12141d766856ac3e3fa8fd0a6f591ffb983ad8e4e2bdb027934cf2fbe3b0a6d6"
+        },
+        "backgroundVideo": {
+          "bytes": 43545600,
+          "sha256": "158ae17ee54d6632d21f29879f1b6c14911615d412ff1d01f5e7a9adaff8aca5"
+        },
+        "backgroundPcm": {
+          "bytes": 164640,
+          "sha256": "6f3a238f4ada9a895313d082112c4c29a3a99587f69db4fd6c7312dc1f917a13"
+        },
+        "bodyVideo": {
+          "bytes": 43545600,
+          "sha256": "fb3231c0a0d59ac7c84f584d8a9ff9201e5c97d546883f5d1875508e2ad31fbb"
+        },
+        "bodyAudio": {
+          "bytes": 172032,
+          "sha256": "c66b4ff1ed0d522373e94d0910af96fede37e9dde2e8d2c880728a922a12a4a3"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-06",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-media-001/completion.json",
+          "bytes": 66710,
+          "fileSha256": "96d5e42008e89a372cf1e273f2e2ec02306c0567104519c3b3b5de22a185b9b4"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-06-001/completion.json",
+          "bytes": 19164,
+          "fileSha256": "f391331d15ccd06af02287999d086676d2f07e4fec850aaed63bd20ed81124fe"
+        },
+        "backgroundVideo": {
+          "bytes": 74649600,
+          "sha256": "6e34e0ef29cb6edfd304f614ee179f2de0a9c128b9d0321e7c54e1264a5377ab"
+        },
+        "backgroundPcm": {
+          "bytes": 282240,
+          "sha256": "389e7817d506bcdf9aad8e2395ada897a6303fe2b07a0ac573c19fdb2114fb74"
+        },
+        "bodyVideo": {
+          "bytes": 74649600,
+          "sha256": "e2ace2ff4db3746fa75bbeb0be2d00a30b709fb0c7548b56f4de386104c77bee"
+        },
+        "bodyAudio": {
+          "bytes": 286720,
+          "sha256": "ea96c893c5fc30c0f577575509288162205c78fbe67aef8e0f040bae0947cf1b"
+        },
+        "bodyMp4ByteIdentical": true
+      },
+      {
+        "scopeId": "representative-07",
+        "oldRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-media-001/completion.json",
+          "bytes": 74367,
+          "fileSha256": "20c58bcc96a0dadf58037b7b89a6b9d365717fc4a58d405899234bd33c384403"
+        },
+        "newRef": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-07-001/completion.json",
+          "bytes": 19267,
+          "fileSha256": "50b00234c6eb46787838611a69933440b16eb3d98f463fbe71a0f0694d308791"
+        },
+        "backgroundVideo": {
+          "bytes": 376358400,
+          "sha256": "c7a09df3680d2db9734daba5ddb12003ef99e0af939e8929ca2829ce2cd70f3d"
+        },
+        "backgroundPcm": {
+          "bytes": 1422960,
+          "sha256": "d5abe7c487afb810061bb9635f01be8d60a67d89b51436f338de866712c00d86"
+        },
+        "bodyVideo": {
+          "bytes": 376358400,
+          "sha256": "a0c3cbdffa64e65bb365f44647a6d43551067b7a9cc5f4939c28cad4c3f78174"
+        },
+        "bodyAudio": {
+          "bytes": 1425408,
+          "sha256": "e2d7c1e1e3022b9dc9fe562f9cf52dfa5eddb67e4b91a78e7c78714e7c04c759"
+        },
+        "bodyMp4ByteIdentical": true
+      }
+    ]
+  },
+  "nativeComparison": {
+    "status": "passed",
+    "results": [
+      {
+        "scopeId": "local-seven-seconds",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-connection-20260930-v001/native-001/completion.json",
+          "bytes": 49297,
+          "fileSha256": "5b95286bbe06dfa0aee8635467caf3c9d220af84083bcbace2b6cfd32940fee7"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/local-native-001/completion.json",
+          "bytes": 12420,
+          "fileSha256": "33afb4163eb476828a42b7dfd571b47f1009a456bb3fdaaaf95930fc3df733df"
+        },
+        "samples": 22,
+        "logicalCandidates": 289,
+        "numericalSha256": "93ade11818cebfd9724e697ab382e8b1d66ba3ee7783eb5f0b3feab96906d3b1",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-01",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-01-qc-001/completion.json",
+          "bytes": 13032,
+          "fileSha256": "6fcc266992534d22092174354b853b6656c54470b10c34a2f840af075ae64f7d"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-01-native-001/completion.json",
+          "bytes": 5849,
+          "fileSha256": "290a928977345d0dc6adb2cb42bf09d58066e4479203c5744983fed5f9535ead"
+        },
+        "samples": 2,
+        "logicalCandidates": 10,
+        "numericalSha256": "d7a082dec9cb1cc73d42432bb1dd0ebd26c53171b44accbae60395cb4d30c3ce",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-02",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-02-qc-001/completion.json",
+          "bytes": 17029,
+          "fileSha256": "1b0150b49e61d786b56352620b7fa4407894b3e9394ba3b04f1cdb6cdb3dc524"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-02-native-001/completion.json",
+          "bytes": 6925,
+          "fileSha256": "3edc1cf20278900688d17754a6eb2c44be3c8a8b3b42f255a608daf2737ed8be"
+        },
+        "samples": 6,
+        "logicalCandidates": 30,
+        "numericalSha256": "8bd8a0349fb453cb738514fd7d3c14ebc70000e147b37f827a45b267608344dd",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-03",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-03-state-completion-001/completion.json",
+          "bytes": 1487,
+          "fileSha256": "1c0448d0033d805c6598c76e2b7e1e5acc625af0535dc138f4b0e232b59d0058"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-03-native-001/completion.json",
+          "bytes": 9516,
+          "fileSha256": "ec253011a22b53f30a7b418ca146c82d64aebab7089a96233414fd31ab86c7d0"
+        },
+        "samples": 13,
+        "logicalCandidates": 104,
+        "numericalSha256": "82f9aea6552ac9cfc4c6d0b07523af791a0063772511d14772ea3a14ecc02671",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-04",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-04-state-completion-001/completion.json",
+          "bytes": 1487,
+          "fileSha256": "bbc3263fffd0be72db6125c59485c070dac028883a8b26e3291236d34425578b"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-04-native-001/completion.json",
+          "bytes": 10766,
+          "fileSha256": "f4f404c48c8fde8827d05abf50d4a6acf465d187ff108a513e4d57658d61b4a0"
+        },
+        "samples": 17,
+        "logicalCandidates": 153,
+        "numericalSha256": "4c3aa62807010f6ae9bffad01b5d1904d942abc6946c0dd744256dba9d01ab3d",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-05",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-05-qc-001/completion.json",
+          "bytes": 23541,
+          "fileSha256": "e16af03239f18a1a24d2f70dd2581517a81685432fa50fa56c4a120b9f7a44a1"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/black-native-001/completion.json",
+          "bytes": 6167,
+          "fileSha256": "803ccc676b3b85a35af55eda9b0a9d473d34061d99b94a829694a7a509b06429"
+        },
+        "samples": 2,
+        "logicalCandidates": 11,
+        "numericalSha256": "4d13a7a4ba8fcf2cad1f053d4dcc0e695eb71b7ddcc0b35870b2e50b4bbd0338",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-06",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-06-qc-001/completion.json",
+          "bytes": 24655,
+          "fileSha256": "183fddf2d4bc5f0bbf61286524d47fc65620697f76fbe148062a9b34da2b06fc"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-06-native-001/completion.json",
+          "bytes": 6570,
+          "fileSha256": "cf1739161cef71630bcd2140e794e88ccf3ff420b08dc2ba82069a9bbaf6bd8a"
+        },
+        "samples": 4,
+        "logicalCandidates": 16,
+        "numericalSha256": "7776551a28e308a1857b9a7a562c44822d00e7557ecbe3629ff79f0c166d5942",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      },
+      {
+        "scopeId": "representative-07",
+        "oldCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-representatives-20260930-v001/representative-07-qc-001/completion.json",
+          "bytes": 23641,
+          "fileSha256": "a917749fd1248eab168373c1484d7dc45cffd7382b82e51f8745598cf0d04e46"
+        },
+        "newCompletion": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/representative-07-native-001/completion.json",
+          "bytes": 6302,
+          "fileSha256": "3ec39385c903c55cd14d2aa37ee5ed7a7c3e63b06ffa3a5eaab6fe7c038f83a6"
+        },
+        "samples": 3,
+        "logicalCandidates": 12,
+        "numericalSha256": "f7224a9f7101edf0cfb801fc744e1e253c3740ee399ea67083324b4739da281d",
+        "allCandidatesRgbHashesDistancesClassesVerdictsIdentical": true
+      }
+    ]
+  },
+  "limits": [
+    "No 1080p whole background/body/replay/native run",
+    "No physical I/O measurement",
+    "RSS samples may miss subsecond peaks",
+    "Do not extrapolate short compression or RSS into a full guarantee",
+    "Per-stage times are nested; their sum is not an overall wall time"
+  ],
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed"
+}

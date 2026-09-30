@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: full scope derives 265 captions/307 states and preserves every original PNG pair
+ok 1 - full scope derives 265 captions/307 states and preserves every original PNG pair
+  ---
+  duration_ms: 0.980375
+  ...
+# Subtest: only full and the eight previously fixed trials can be selected
+ok 2 - only full and the eight previously fixed trials can be selected
+  ---
+  duration_ms: 0.536334
+  ...
+# Subtest: bounded reader detects missing, extra, child failure and interruption
+ok 3 - bounded reader detects missing, extra, child failure and interruption
+  ---
+  duration_ms: 83.073666
+  ...
+# Subtest: bounded reader preserves short output, exact bytes and end, without whole-output buffering
+ok 4 - bounded reader preserves short output, exact bytes and end, without whole-output buffering
+  ---
+  duration_ms: 20.327042
+  ...
+# Subtest: native v003 differs only in version/input imports and actual-media binding
+ok 5 - native v003 differs only in version/input imports and actual-media binding
+  ---
+  duration_ms: 0.842417
+  ...
+# Subtest: old renderer, preparation, native, streaming and evidence store are unchanged
+ok 6 - old renderer, preparation, native, streaming and evidence store are unchanged
+  ---
+  duration_ms: 53.666542
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8117.44675

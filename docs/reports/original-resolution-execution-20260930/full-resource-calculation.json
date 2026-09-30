@@ -1,0 +1,33 @@
+{
+  "status": "calculated-preparation-only-no-full-execution",
+  "samples": 345,
+  "logicalCandidates": 211732,
+  "uniqueSampleFrames": 345,
+  "extractedPngCount": 690,
+  "nativeLayers": 1259,
+  "generatedFadePngs": 906,
+  "decodedLayerLogicalBytes": 10442649600,
+  "maxSampleReferenceBytes": 1517991552,
+  "sumLogicalReferenceBytes": 521765239104,
+  "maxCropRgbBytes": 2464272,
+  "batchSize": 32,
+  "maxBatchRgbOutputBytes": 78856704,
+  "fullBackgroundRawYuvPayloadBytes": 54783475200,
+  "fullPcmPayloadBytes": 207128880,
+  "compositorPngInputs": 307,
+  "compositorInputCount": 309,
+  "oneExpandedRgbaPerPngBytes": 2546380800,
+  "expectedNewCompressedMedia": [
+    "one FFV1/PCM background",
+    "one AAC reference",
+    "body MP4",
+    "mandatory replay MP4"
+  ],
+  "unmeasured": [
+    "full compressed FFV1 size",
+    "full compressed body/replay sizes",
+    "full compositor decoder/filter peak RSS",
+    "full native JSON receipt peak and compressed frame PNG bytes",
+    "physical I/O"
+  ]
+}
