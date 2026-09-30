@@ -1,0 +1,191 @@
+{
+  "status": "incomplete-resource-interruption",
+  "codeCommit": "b9dce1b2ecd7f753788128c641f6d560429082cf",
+  "supervision": {
+    "status": "interrupted",
+    "reason": "OS memory pressure warning/critical or unknown",
+    "stage": "body",
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "tools/digest-quality/original-resolution-full-launch.mjs",
+      "run",
+      "runtime/artifacts/original-resolution-execution-20260930-v001/full-launch-plan-approved-001/launch-plan.json",
+      "runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001"
+    ],
+    "startedAt": 1790730926.114193,
+    "endedAt": 1790731588.92867,
+    "seconds": 662.8144769668579,
+    "exitCode": -15,
+    "samples": 660,
+    "observedTreePeakBytes": 8216428544,
+    "observedParentPeakBytes": 1178943488,
+    "minimumAvailableBytes": 46120988672,
+    "sampleIntervalSeconds": 1,
+    "limits": {
+      "startBytes": 50000000000,
+      "reserveBytes": 12000000000,
+      "treeRssBytes": 17179869184
+    },
+    "scope": "this run only; owned process group; sampled peaks, no physical I/O measurement"
+  },
+  "triggerObservation": {
+    "at": 1790731588.8893409,
+    "availableBytes": 46121013248,
+    "pressure": 2,
+    "memoryBytes": 38654705664,
+    "parentRssBytes": 36552704,
+    "treeRssBytes": 8216428544,
+    "processes": [
+      {
+        "pid": 54758,
+        "ppid": 54709,
+        "rssBytes": 36552704,
+        "tool": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+      },
+      {
+        "pid": 57507,
+        "ppid": 54758,
+        "rssBytes": 8179875840,
+        "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+      }
+    ]
+  },
+  "completedBackground": {
+    "receipt": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001/background-complete.json",
+      "bytes": 4416,
+      "fileSha256": "3d3bdb2daad8d65174cad5421bd1cb3d409b2420db1cb155518d456b90b09f26"
+    },
+    "media": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001/background/background.nut",
+      "bytes": 10529007182,
+      "fileSha256": "a305dd91e263abe501d85000744b9737d01fba340ae801ba85723a1d3f3618db"
+    },
+    "verification": {
+      "status": "passed",
+      "frames": 17613,
+      "sourceFrames": 17589,
+      "samples": 25891110,
+      "changedFrames": 82,
+      "videoSha256": "3d4bad0531093de1c7a025d741ddd12c50731f022a48966354a1fe28574e4363",
+      "pcmSha256": "56230c91357fd419a1112678ed9495d90d9dd6c3260fd3ee1f08ab4398e6d443",
+      "rawFilesCreated": 0,
+      "method": "every YUV420 frame and float32 stereo sample; independent source decode and integer connection arithmetic; independent crop/scale only for saved 82 frames"
+    },
+    "clock": {
+      "frameCount": 17613,
+      "clockSha256": "a6e8c6a91ba6359ccda7e663e570c96ed88cc7e1eb02701d05c9f02bd7e611d1"
+    }
+  },
+  "completedAudio": {
+    "receipt": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001/reference-audio-complete.json",
+      "bytes": 917,
+      "fileSha256": "84efe6423acd728d130637930ee3c4c097056fcc9cd75c6804e33a1de5cfa716"
+    },
+    "media": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001/reference-audio.m4a",
+      "bytes": 14513563,
+      "fileSha256": "75fa835ad15cc4c5800def26c111241c459a78e5f94410f5304bd16812bced55"
+    }
+  },
+  "partialBody": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-001/normal.mp4",
+    "bytes": 48,
+    "fileSha256": "64d52708f594e8a1a3a4f76deef7275c8ad5184480c9473d8f60a0c9b6f4628b"
+  },
+  "calls": [
+    {
+      "stage": "background",
+      "action": "buildExecutionBackgroundV001 / verifyExecutionBackgroundV001 / representativeClockV001",
+      "startedAt": "2026-09-30T01:15:51.290Z"
+    },
+    {
+      "stage": "reference-audio",
+      "action": "FFmpeg AAC encoding from verified background",
+      "startedAt": "2026-09-30T01:26:13.124Z"
+    },
+    {
+      "stage": "body",
+      "action": "composePresentationMediaV001 / inspectRenderedMediaWithToolsV001 / representativeClockV001 / inspectOrchestrationEncodedAudioV001",
+      "startedAt": "2026-09-30T01:26:22.785Z"
+    }
+  ],
+  "childTimings": [
+    {
+      "sequence": 1,
+      "label": "execution-background",
+      "startedAt": "2026-09-30T01:15:51.292Z",
+      "endedAt": "2026-09-30T01:17:13.137Z",
+      "childMilliseconds": 81844.64754100001,
+      "evidenceWriteMilliseconds": 0.7735420000099111,
+      "code": 0,
+      "signal": null,
+      "spawnFailed": false
+    },
+    {
+      "sequence": 2,
+      "label": "representative-clock",
+      "startedAt": "2026-09-30T01:19:46.284Z",
+      "endedAt": "2026-09-30T01:26:07.383Z",
+      "childMilliseconds": 381098.46837499994,
+      "evidenceWriteMilliseconds": 2.4784579999977723,
+      "code": 0,
+      "signal": null,
+      "spawnFailed": false
+    },
+    {
+      "sequence": 3,
+      "label": "full-reference-audio",
+      "startedAt": "2026-09-30T01:26:13.125Z",
+      "endedAt": "2026-09-30T01:26:22.777Z",
+      "childMilliseconds": 9652.272499999963,
+      "evidenceWriteMilliseconds": 0.5249589999439195,
+      "code": 0,
+      "signal": null,
+      "spawnFailed": false
+    }
+  ],
+  "shutdownDefect": {
+    "description": "supervisor waited for Node exit only; ffmpeg remained after SIGTERM; explicit SIGKILL of owned group required",
+    "cleanup": {
+      "at": 1790731676.696636,
+      "reason": "SIGTERM terminated Node before ffmpeg finished; explicitly stop remaining owned process group",
+      "group": 54758,
+      "membersBefore": [
+        "57507     1 54758 6315712 /opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+      ]
+    },
+    "verified": {
+      "at": 1790731699.900739,
+      "remainingOwnedProcesses": [],
+      "pressure": 2
+    },
+    "sourceUnmodifiedAfterBinding": true
+  },
+  "resourceLog": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-001/resource.jsonl",
+    "bytes": 311910,
+    "fileSha256": "33f212a201132f2c43df4d732f0b2a8bd93a4934a422bdc0e12654e534df2510"
+  },
+  "supervisorSummary": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-001/summary.json",
+    "bytes": 960,
+    "fileSha256": "e83f5d390e45ae1bf89622b131e6359cdb7c77d2f7a1be056eaca34f13c43d8d"
+  },
+  "notExecuted": [
+    "completed body validation",
+    "replay",
+    "full native QC",
+    "shared full QC save",
+    "independent full reread"
+  ],
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed",
+  "resumeConstraints": [
+    "do not regenerate verified background/PNG",
+    "current launch plan includes supervisor SHA; do not overwrite frozen implementation to invalidate prior receipts",
+    "resource stop requires advisor instruction; no automatic retry",
+    "initial 50GB check is not silently lowered for resume; completed background remains reflected in actual free space"
+  ]
+}
