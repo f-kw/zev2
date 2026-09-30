@@ -760,5 +760,181 @@
     "映像上の意味・OP/ED・怪音・実声との字幕内容・接続の人間の自然さは未観測。他サービスへの素材送信は今回対象外",
     "Codex1の対象版の独立点検はbd0113c8。補足理由・局所媒体・後続保存物はCodex1未点検",
     "未見素材での汎化、人間品質、正式採用は未認定"
-  ]
+  ],
+  "additionalFinalJoin": {
+    "reason": "先の4本目は区間8→9を連続素材として含むため、採用案のカット接続を追加確認",
+    "contentCommitBeforeAddition": "1ee636bbacf74edf02ab62223b2220f886ea4a5e",
+    "derivationRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/derivation.json",
+      "fileSha256": "25bce78eae844884512d58e49ed7505a2646685a62e86e31496879ba26a88400"
+    },
+    "executionRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/execution.mjs",
+      "fileSha256": "169122d3d472c441192f08eb72a9a58266bf22d8f7b75a905ebd10599c33cfd2"
+    },
+    "inputRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-input.json",
+      "fileSha256": "817de0659296a3d9169b1f3e8b659eb5811e518a499824623733c5ec3390e841"
+    },
+    "completionRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/completion.json",
+      "fileSha256": "5ee1029b6af9519df9334e942019d02f0b16ffcec3e537ef961d4e5108c5a513"
+    },
+    "rereadRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/independent-reread.json",
+      "fileSha256": "fb3952b280ac088300ee3a271a38cc369c18bc1b18080fdf858e1d0827be2334"
+    },
+    "preparedRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/prepared.json",
+      "fileSha256": "1d55c89df5938275a6ff6ec06ee8a426694f82a991b552e60a9a8808945c8ed0"
+    },
+    "mediaRef": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/development-proxy.mp4",
+      "fileSha256": "93593f9690df0075e6b0cd93b2917493a6f10daa478b2691db403f71c22f39bc"
+    },
+    "sourceRanges": [
+      [
+        25519,
+        25530
+      ],
+      [
+        25531,
+        25538
+      ]
+    ],
+    "sourceGapMs": 7794,
+    "excludedSourceFrames30": 233,
+    "fullPlanJoinFrame": 25775,
+    "localJoinFrame": 179,
+    "frameCount": 301,
+    "captionCount": 2,
+    "joinFrames": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/frames/0.png",
+        "fileSha256": "0033b4d63367a3920245739df6dcc58a8e1751e942db387e6084364344faca85"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/frames/300.png",
+        "fileSha256": "3889089bf8721ec950af61272f12c5b924078e2912f30733a53cfd5305ac38b3"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/frames/178.png",
+        "fileSha256": "7ab5cc382f2bb581d5c16aa55fe12614f1d2209f09929b79b6e2e627249628da"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/selection-structure-improvement-20260930-v001/ending-join-v001/local-v001-final-reaction-to-ending/frames/179.png",
+        "fileSha256": "e88de7579915679820f7c3de5865b9ed98034b13bdaeb1cdf652b6132a591b74"
+      }
+    ],
+    "logicalAndPhysicalAlphaPassed": true,
+    "frameClock": {
+      "count": 301,
+      "firstPtsSeconds": 0,
+      "rate": 30,
+      "allObservedPtsMatch": true
+    },
+    "inputAudioClock": {
+      "status": "passed",
+      "sampleRate": 44100,
+      "channels": 2,
+      "streamTimeBase": "1/44100",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 442470,
+      "durationSeconds": 10.033333333333333,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 442368,
+        "dts": 442368,
+        "duration": 102
+      },
+      "packetCount": 434,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "947bf748b97bab165c3aeeb0b5dccdf1b3d4fc5ba4d00e48ec63f6c25da23daa",
+      "rawDecodedSampleCount": 443392,
+      "logicalDecodedSampleCount": 442470,
+      "decodedTailSampleCount": 922,
+      "rawDecodedPayloadSha256": "6a3ab18a9712eccd14ad10beb0d75bdabb40d6f2d7d24cb72e78a0feeab8a036",
+      "logicalDecodedPayloadSha256": "43dcf721e2ebbe00923e9aeba8ac27bff57569a726b15835d30033524df73558",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 442470
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "outputAudioClock": {
+      "status": "passed",
+      "sampleRate": 44100,
+      "channels": 2,
+      "streamTimeBase": "1/44100",
+      "presentationStartSample": 0,
+      "presentationEndSampleExclusive": 442470,
+      "durationSeconds": 10.033333333333333,
+      "firstPacket": {
+        "pts": -1024,
+        "dts": -1024,
+        "duration": 1024,
+        "side_data_list": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ]
+      },
+      "lastPacket": {
+        "pts": 442368,
+        "dts": 442368,
+        "duration": 102
+      },
+      "packetCount": 434,
+      "primingSkipSamples": 1024,
+      "firstDecodedFrame": {
+        "pts": 0,
+        "best_effort_timestamp": 0,
+        "nb_samples": 1024
+      },
+      "packetPayloadSha256": "947bf748b97bab165c3aeeb0b5dccdf1b3d4fc5ba4d00e48ec63f6c25da23daa",
+      "rawDecodedSampleCount": 443392,
+      "logicalDecodedSampleCount": 442470,
+      "decodedTailSampleCount": 922,
+      "rawDecodedPayloadSha256": "6a3ab18a9712eccd14ad10beb0d75bdabb40d6f2d7d24cb72e78a0feeab8a036",
+      "logicalDecodedPayloadSha256": "43dcf721e2ebbe00923e9aeba8ac27bff57569a726b15835d30033524df73558",
+      "logicalDecodedInterval": {
+        "startSample": 0,
+        "endSampleExclusive": 442470
+      },
+      "transform": "one native AAC encode of verified background float32 PCM; lossy PCM conversion; MP4 priming preserved; copy audio thereafter"
+    },
+    "freshReadStatus": "passed",
+    "sameExecutionLogicReverseChecked": true,
+    "originalFourCasesUnchanged": true
+  },
+  "allLocalCaseTotals": {
+    "clips": 5,
+    "frames": 12174,
+    "seconds": 405.8,
+    "captions": 147,
+    "extractedFrames": 28
+  },
+  "finalJoinObservedAt": "2026-09-30T16:46:06.548547+00:00"
 }
