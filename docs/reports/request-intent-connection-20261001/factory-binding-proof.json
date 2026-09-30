@@ -1,0 +1,1252 @@
+{
+  "status": "verified",
+  "verifiedAt": "2026-10-01T07:06:17.433172+09:00",
+  "evidence": {
+    "path": "docs/reports/request-intent-connection-20261001/factory-connection-evidence-attempt-006.json",
+    "fileSha256": "101b25ce6f4acc8d161e647c745947d592db06538201f656b18bd33bbe810405"
+  },
+  "test": {
+    "path": "docs/reports/request-intent-connection-20261001/factory-connection-test.mts",
+    "fileSha256": "3e99fe0c57a6378e821b68b67ef98faac09343bbf4d85e917a48fdf6f292270f"
+  },
+  "completedBindings": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json",
+      "fileSha256": "066ace784d83fc09fb9d76f166c6bda8ce8427edaed87b8de96797d7a23d1a70",
+      "record": {
+        "schemaVersion": "normal-request-digest-preparation-binding-v001",
+        "identity": {
+          "requestDraftId": "draft_qBO351t1ObMs3nZAe7p7s",
+          "requestId": "agent_bPvxsrQMr5rG9oMDTmDO8",
+          "approvedDraft": {
+            "id": "draft_qBO351t1ObMs3nZAe7p7s",
+            "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+            "source": {
+              "kind": "video_source",
+              "uri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "settings": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "steps": [
+              {
+                "type": "prepare_video",
+                "label": "動画取り込み",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "run_stt",
+                "label": "STT",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "propose_clip_themes",
+                "label": "テーマ作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "build_clip_composition",
+                "label": "切り口作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "create_edit_plan",
+                "label": "演出作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "apply_adjustment",
+                "label": "微調整",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "render_video",
+                "label": "動画生成",
+                "requiresHumanApproval": false
+              }
+            ],
+            "createdAt": "2026-09-30T22:02:50.790Z",
+            "approvedAt": "2026-09-30T22:02:50.799Z"
+          },
+          "approvedDraftSha256": "386bb8b963e1910e167fc7b8c8a828b4279847a33bc64ebdd361cedefd6e648a",
+          "command": {
+            "id": "agent_bPvxsrQMr5rG9oMDTmDO8",
+            "requestDraftId": "draft_qBO351t1ObMs3nZAe7p7s",
+            "type": "propose_clip_themes",
+            "target": {
+              "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "input": {
+              "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+              "settings": {
+                "durationLabel": "接続試験の尺条件",
+                "themeCountLabel": "2候補",
+                "geminiModelName": "接続試験のモデル条件",
+                "preset": "接続試験の編集条件"
+              }
+            },
+            "constraints": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "dependsOnAgentRequestId": "agent_5zwMa_nwhxKxp69U9s40T",
+            "createdAt": "2026-09-30T22:02:50.799Z"
+          },
+          "commandSha256": "184de8c8077ac9a70c74cf66acaf920e231211347f298620a1e494605dd48504",
+          "sourceId": "isolated-saved-source",
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+          "sourceVideo": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "transcript": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/transcript.json",
+            "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+          },
+          "utterances": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/utterances.json",
+            "fileSha256": "861556434b3eb19dfd0ac1cfb00f0ce57cb9d89d918581d2d5c495d37d4a2d4b"
+          },
+          "dependencyReferences": {
+            "video": {
+              "id": "file-agent_tamI6EsNR4ZPRMkhHVI22",
+              "kind": "source_video",
+              "uri": "/api/artifacts/fixture/source-video.mp4",
+              "mimeType": "video/mp4",
+              "access": "shared",
+              "ownerId": "agent_tamI6EsNR4ZPRMkhHVI22",
+              "artifactFileName": "source-video.mp4",
+              "byteSize": 4803412827,
+              "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+              "createdAt": "2026-09-30T22:02:50.799Z"
+            },
+            "transcript": {
+              "id": "file-agent_5zwMa_nwhxKxp69U9s40T",
+              "kind": "transcript_json",
+              "uri": "/api/artifacts/fixture/transcript.json",
+              "mimeType": "application/json",
+              "access": "shared",
+              "ownerId": "agent_5zwMa_nwhxKxp69U9s40T",
+              "artifactFileName": "transcript.json",
+              "byteSize": 6804193,
+              "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+              "createdAt": "2026-09-30T22:02:50.799Z"
+            }
+          },
+          "implementations": [
+            {
+              "path": "runner/src/digest-plan-preparation-v001.ts",
+              "fileSha256": "6244b565c120e9c5ea5992770fedfb453642c7efbeaad842ef2feb6f18c7cef9"
+            },
+            {
+              "path": "runner/src/workflow-step-builders.ts",
+              "fileSha256": "2117790d37209562db314fd3d05a10687ef2e277e101833f49872627bf1d46f1"
+            },
+            {
+              "path": "runner/src/index.ts",
+              "fileSha256": "ce3129146e96cbe401ae506f23f4fa7669eede84294fe5e8ba82519854978db8"
+            },
+            {
+              "path": "packages/shared/src/index.ts",
+              "fileSha256": "4c8a209ce8d951c147b482feff43debd355f95364c82aac919cda3d7be9beca1"
+            },
+            {
+              "path": "runner/src/skills/candidate-discovery-v001.ts",
+              "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+            },
+            {
+              "path": "runner/src/skills/candidate-selection-v001.ts",
+              "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+            },
+            {
+              "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+              "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+            },
+            {
+              "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+              "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+            },
+            {
+              "path": "runner/src/transcript-utils.ts",
+              "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+            },
+            {
+              "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+              "fileSha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176"
+            },
+            {
+              "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+              "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+            },
+            {
+              "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+              "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+            },
+            {
+              "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+              "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+            },
+            {
+              "path": "evals/clip_composition/run_thin_plan_candidate_selection_v0.mts",
+              "fileSha256": "88abb651e704156d98b078e9916db675e99a756ca4a2831862f49116057dddb8"
+            },
+            {
+              "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+              "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3"
+            },
+            {
+              "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+              "fileSha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba"
+            }
+          ]
+        },
+        "status": "complete",
+        "stages": {
+          "discovery": {
+            "request": {
+              "schemaVersion": "candidate-discovery-judgment-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-request.json",
+              "fileSha256": "d71748367761294e36e922607f69e68890c5ecede9f3443f0e977f92bcfb6a2b",
+              "canonicalSha256": "df455a6fc9cafadadb47fd71b99bb0b2940a34331865282b898436991d745ca9"
+            },
+            "response": {
+              "schemaVersion": "candidate-discovery-judgment-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-response.json",
+              "fileSha256": "8733434f4c076de100caecbdd29cde4e4cb589f0f6876dd8b45f29b03c7d8fd3",
+              "canonicalSha256": "292ff7bbbd47ade4d6c42c857854eff4c5a7bb2b9c8b6868a3b63a42dacee7ee"
+            },
+            "result": {
+              "schemaVersion": "candidate-discovery-skill-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-result.json",
+              "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+              "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+            },
+            "accepted": {
+              "candidate-set.json": {
+                "schemaVersion": "candidate-selection-candidate-set-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-set.json",
+                "fileSha256": "85ecd463045e7ceff24b9f244ba80f9a149528857229ab99da625ad2cdcbe9f4",
+                "canonicalSha256": "0689ca989f91a3921ee7ac6ba84e71b1d37aded566328678de9016a59a293703"
+              },
+              "discovery-validation.json": {
+                "schemaVersion": "unseen-material-discovery-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/discovery-validation.json",
+                "fileSha256": "85d595954bb9279cdb9ee6977170e01dc53958962dabf93f8ca53605b47eaf93",
+                "canonicalSha256": "ef12e257ec5a63a63f8e1e59972678d9bc25dd14e6c973f0a88ad84b4ff5f850"
+              }
+            }
+          },
+          "selection": {
+            "request": {
+              "schemaVersion": "candidate-selection-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-request.json",
+              "fileSha256": "28ad69618a1b4d6735440df194588b4ae4ace7b832e979a872468f0f22939029",
+              "canonicalSha256": "823af6bb14c7feab25f5f5fcd9159825889fadefab5793cd06107c3584524857"
+            },
+            "response": {
+              "schemaVersion": "candidate-selection-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-response.json",
+              "fileSha256": "527db1cf0a93c38ad589fd81cc063d3002262fcaa643fa4dbf24348e01a3fa41",
+              "canonicalSha256": "2d47642a227718570aaad278d3abb15112d5c8b5d745f70fa998a252307f02d9"
+            },
+            "result": {
+              "schemaVersion": "candidate-selection-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-result.json",
+              "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+              "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+            },
+            "accepted": {
+              "selection-validation.json": {
+                "schemaVersion": "candidate-selection-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-validation.json",
+                "fileSha256": "93e39086b8ea0631f43def9b6a035840e48e41d78bd8e8a55fc30707ed1763b3",
+                "canonicalSha256": "8008aed8d2f4f8b7243dab562c8e3fec360214dc84949de384aa6243e352311e"
+              },
+              "selection-adoption.json": {
+                "schemaVersion": "candidate-selection-machine-adoption-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-adoption.json",
+                "fileSha256": "79c3a3e1901af443b695a6b0180c1445f127c4994408f6aa0473b4771506b43d",
+                "canonicalSha256": "4248f6ade2d02139a5f0355c72afdc97b9513233d8199a0c207b3d6c7495a94b"
+              }
+            }
+          },
+          "retention": {
+            "request": {
+              "schemaVersion": "candidate-internal-retention-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-request.json",
+              "fileSha256": "f14492933baaa84d7a20ced7436d6373bd68758886771e8e77841def99c2bc26",
+              "canonicalSha256": "deebd3bad8c223c2ac67ed45aba0c3f190295d1c0fe91cc74e6878330a5ade4b"
+            },
+            "response": {
+              "schemaVersion": "candidate-internal-retention-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-response.json",
+              "fileSha256": "f17b5f12f245d18796a4f28220c5836a73b2dcc13bb741757bc5bacf5bb58863",
+              "canonicalSha256": "f2bcfc74e06b5b9ff0d8d3c13b281abbd08da24147ca77ec1c4867682c45f803"
+            },
+            "result": {
+              "schemaVersion": "candidate-internal-retention-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-result.json",
+              "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+              "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+            },
+            "accepted": {
+              "retention-validation.json": {
+                "schemaVersion": "new-material-retention-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-validation.json",
+                "fileSha256": "c273049d4e61bcd9fef15d161720b072c4f1a4506aa9c34f7da3a718216a54af",
+                "canonicalSha256": "7046191b3ffe586aacc38fabd8f7cb965cc8d0ba97b24548bc3f60b1d1fac9a9"
+              }
+            }
+          }
+        },
+        "artifacts": {
+          "production-intent.json": {
+            "schemaVersion": "production-intent-plan-v0",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/production-intent.json",
+            "fileSha256": "9f226dd4ca33c8cee408177bae74ffcde5f81736a4d9023520ad34dae8eeb288",
+            "canonicalSha256": "82df18639929b24d6a0a60bb76758352d0e2006b723ba4bf990f295455a05683"
+          },
+          "binding-input.json": {
+            "schemaVersion": "normal-request-digest-preparation-binding-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding-input.json",
+            "fileSha256": "374b016a4bc20c3f07763e90adce7f35d066e8f05a595995e8013e216b98cb55",
+            "canonicalSha256": "d827ba13e7429c14b840925edebef0a2eb1e23fdfbec14ecf816445643cc1c56"
+          },
+          "discovery-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/discovery-plan.json",
+            "fileSha256": "c1e5dacbe092cf02068b6ac67e2a33527188e29acd015f528ebf3eeea048884c",
+            "canonicalSha256": "bf48ce2583a413856358329ee66753a9d6eca2f3ecc7d49f8de5fa59980eff15"
+          },
+          "candidate-request.json": {
+            "schemaVersion": "candidate-discovery-judgment-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-request.json",
+            "fileSha256": "d71748367761294e36e922607f69e68890c5ecede9f3443f0e977f92bcfb6a2b",
+            "canonicalSha256": "df455a6fc9cafadadb47fd71b99bb0b2940a34331865282b898436991d745ca9"
+          },
+          "candidate-set.json": {
+            "schemaVersion": "candidate-selection-candidate-set-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-set.json",
+            "fileSha256": "85ecd463045e7ceff24b9f244ba80f9a149528857229ab99da625ad2cdcbe9f4",
+            "canonicalSha256": "0689ca989f91a3921ee7ac6ba84e71b1d37aded566328678de9016a59a293703"
+          },
+          "discovery-validation.json": {
+            "schemaVersion": "unseen-material-discovery-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/discovery-validation.json",
+            "fileSha256": "85d595954bb9279cdb9ee6977170e01dc53958962dabf93f8ca53605b47eaf93",
+            "canonicalSha256": "ef12e257ec5a63a63f8e1e59972678d9bc25dd14e6c973f0a88ad84b4ff5f850"
+          },
+          "candidate-response.json": {
+            "schemaVersion": "candidate-discovery-judgment-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-response.json",
+            "fileSha256": "8733434f4c076de100caecbdd29cde4e4cb589f0f6876dd8b45f29b03c7d8fd3",
+            "canonicalSha256": "292ff7bbbd47ade4d6c42c857854eff4c5a7bb2b9c8b6868a3b63a42dacee7ee"
+          },
+          "candidate-result.json": {
+            "schemaVersion": "candidate-discovery-skill-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/candidate-result.json",
+            "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+            "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+          },
+          "selection-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-plan.json",
+            "fileSha256": "1a9d646c9ca552371adcad0e14627e4b881019b2dd54accadc5878033968710f",
+            "canonicalSha256": "372e0a4ec298ef94901c82bf7452ab86b8ca036a88afe9ac74547a9ad366f12d"
+          },
+          "selection-request.json": {
+            "schemaVersion": "candidate-selection-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-request.json",
+            "fileSha256": "28ad69618a1b4d6735440df194588b4ae4ace7b832e979a872468f0f22939029",
+            "canonicalSha256": "823af6bb14c7feab25f5f5fcd9159825889fadefab5793cd06107c3584524857"
+          },
+          "selection-validation.json": {
+            "schemaVersion": "candidate-selection-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-validation.json",
+            "fileSha256": "93e39086b8ea0631f43def9b6a035840e48e41d78bd8e8a55fc30707ed1763b3",
+            "canonicalSha256": "8008aed8d2f4f8b7243dab562c8e3fec360214dc84949de384aa6243e352311e"
+          },
+          "selection-adoption.json": {
+            "schemaVersion": "candidate-selection-machine-adoption-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-adoption.json",
+            "fileSha256": "79c3a3e1901af443b695a6b0180c1445f127c4994408f6aa0473b4771506b43d",
+            "canonicalSha256": "4248f6ade2d02139a5f0355c72afdc97b9513233d8199a0c207b3d6c7495a94b"
+          },
+          "selection-response.json": {
+            "schemaVersion": "candidate-selection-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-response.json",
+            "fileSha256": "527db1cf0a93c38ad589fd81cc063d3002262fcaa643fa4dbf24348e01a3fa41",
+            "canonicalSha256": "2d47642a227718570aaad278d3abb15112d5c8b5d745f70fa998a252307f02d9"
+          },
+          "selection-result.json": {
+            "schemaVersion": "candidate-selection-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/selection-result.json",
+            "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+            "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+          },
+          "retention-request.json": {
+            "schemaVersion": "candidate-internal-retention-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-request.json",
+            "fileSha256": "f14492933baaa84d7a20ced7436d6373bd68758886771e8e77841def99c2bc26",
+            "canonicalSha256": "deebd3bad8c223c2ac67ed45aba0c3f190295d1c0fe91cc74e6878330a5ade4b"
+          },
+          "retention-validation.json": {
+            "schemaVersion": "new-material-retention-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-validation.json",
+            "fileSha256": "c273049d4e61bcd9fef15d161720b072c4f1a4506aa9c34f7da3a718216a54af",
+            "canonicalSha256": "7046191b3ffe586aacc38fabd8f7cb965cc8d0ba97b24548bc3f60b1d1fac9a9"
+          },
+          "retention-response.json": {
+            "schemaVersion": "candidate-internal-retention-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-response.json",
+            "fileSha256": "f17b5f12f245d18796a4f28220c5836a73b2dcc13bb741757bc5bacf5bb58863",
+            "canonicalSha256": "f2bcfc74e06b5b9ff0d8d3c13b281abbd08da24147ca77ec1c4867682c45f803"
+          },
+          "retention-result.json": {
+            "schemaVersion": "candidate-internal-retention-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/retention-result.json",
+            "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+            "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+          }
+        }
+      }
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding.json",
+      "fileSha256": "5c48bf11e06b2a07ae911e4cfae0981cee5fcf4f37841085e8262cabf88f5558",
+      "record": {
+        "schemaVersion": "normal-request-digest-preparation-binding-v001",
+        "identity": {
+          "requestDraftId": "draft_foVKkgMvFq7qxuThRYKyH",
+          "requestId": "agent_No336WhmO6oCR90opf6w8",
+          "approvedDraft": {
+            "id": "draft_foVKkgMvFq7qxuThRYKyH",
+            "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+            "source": {
+              "kind": "video_source",
+              "uri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "settings": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "steps": [
+              {
+                "type": "prepare_video",
+                "label": "動画取り込み",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "run_stt",
+                "label": "STT",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "propose_clip_themes",
+                "label": "テーマ作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "build_clip_composition",
+                "label": "切り口作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "create_edit_plan",
+                "label": "演出作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "apply_adjustment",
+                "label": "微調整",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "render_video",
+                "label": "動画生成",
+                "requiresHumanApproval": false
+              }
+            ],
+            "createdAt": "2026-09-30T22:02:50.807Z",
+            "approvedAt": "2026-09-30T22:02:50.809Z"
+          },
+          "approvedDraftSha256": "e9b6804a9a55514676a60470a8595c79285ef5bf715405a8c6687b208f601520",
+          "command": {
+            "id": "agent_No336WhmO6oCR90opf6w8",
+            "requestDraftId": "draft_foVKkgMvFq7qxuThRYKyH",
+            "type": "propose_clip_themes",
+            "target": {
+              "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "input": {
+              "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+              "settings": {
+                "durationLabel": "接続試験の尺条件",
+                "themeCountLabel": "2候補",
+                "geminiModelName": "接続試験のモデル条件",
+                "preset": "接続試験の編集条件"
+              }
+            },
+            "constraints": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "dependsOnAgentRequestId": "agent_BcQwaO9Rhu3ixVuemAKsD",
+            "createdAt": "2026-09-30T22:02:50.809Z"
+          },
+          "commandSha256": "b08797aec29b016c536ac62c620e1f3e6821880ab10d43248de8d6722d6999cf",
+          "sourceId": "isolated-saved-source",
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+          "sourceVideo": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "transcript": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/transcript.json",
+            "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+          },
+          "utterances": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/utterances.json",
+            "fileSha256": "861556434b3eb19dfd0ac1cfb00f0ce57cb9d89d918581d2d5c495d37d4a2d4b"
+          },
+          "dependencyReferences": {
+            "video": {
+              "id": "file-agent_gn9S9iVUWJs9SlA0AyobE",
+              "kind": "source_video",
+              "uri": "/api/artifacts/fixture/source-video.mp4",
+              "mimeType": "video/mp4",
+              "access": "shared",
+              "ownerId": "agent_gn9S9iVUWJs9SlA0AyobE",
+              "artifactFileName": "source-video.mp4",
+              "byteSize": 4803412827,
+              "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+              "createdAt": "2026-09-30T22:02:50.809Z"
+            },
+            "transcript": {
+              "id": "file-agent_BcQwaO9Rhu3ixVuemAKsD",
+              "kind": "transcript_json",
+              "uri": "/api/artifacts/fixture/transcript.json",
+              "mimeType": "application/json",
+              "access": "shared",
+              "ownerId": "agent_BcQwaO9Rhu3ixVuemAKsD",
+              "artifactFileName": "transcript.json",
+              "byteSize": 6804193,
+              "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+              "createdAt": "2026-09-30T22:02:50.809Z"
+            }
+          },
+          "implementations": [
+            {
+              "path": "runner/src/digest-plan-preparation-v001.ts",
+              "fileSha256": "6244b565c120e9c5ea5992770fedfb453642c7efbeaad842ef2feb6f18c7cef9"
+            },
+            {
+              "path": "runner/src/workflow-step-builders.ts",
+              "fileSha256": "2117790d37209562db314fd3d05a10687ef2e277e101833f49872627bf1d46f1"
+            },
+            {
+              "path": "runner/src/index.ts",
+              "fileSha256": "ce3129146e96cbe401ae506f23f4fa7669eede84294fe5e8ba82519854978db8"
+            },
+            {
+              "path": "packages/shared/src/index.ts",
+              "fileSha256": "4c8a209ce8d951c147b482feff43debd355f95364c82aac919cda3d7be9beca1"
+            },
+            {
+              "path": "runner/src/skills/candidate-discovery-v001.ts",
+              "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+            },
+            {
+              "path": "runner/src/skills/candidate-selection-v001.ts",
+              "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+            },
+            {
+              "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+              "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+            },
+            {
+              "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+              "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+            },
+            {
+              "path": "runner/src/transcript-utils.ts",
+              "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+            },
+            {
+              "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+              "fileSha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176"
+            },
+            {
+              "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+              "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+            },
+            {
+              "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+              "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+            },
+            {
+              "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+              "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+            },
+            {
+              "path": "evals/clip_composition/run_thin_plan_candidate_selection_v0.mts",
+              "fileSha256": "88abb651e704156d98b078e9916db675e99a756ca4a2831862f49116057dddb8"
+            },
+            {
+              "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+              "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3"
+            },
+            {
+              "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+              "fileSha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba"
+            }
+          ]
+        },
+        "status": "complete",
+        "stages": {
+          "discovery": {
+            "request": {
+              "schemaVersion": "candidate-discovery-judgment-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-request.json",
+              "fileSha256": "c5095bbe5ac7c78f57327ef740f6136b1b8bb889e3c3f25c7f23167d0e147b4c",
+              "canonicalSha256": "cd6775c63fac18fb09928da906b4cce4ee74721807050e815c7beffb9b65ad08"
+            },
+            "response": {
+              "schemaVersion": "candidate-discovery-judgment-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-response.json",
+              "fileSha256": "c0a46de4180d87b321e10dfb28081244ad49682e68719c47206fca03c94ada67",
+              "canonicalSha256": "d4b99833f9429ab3b59296cd27d949d85cf9c9f475b1aae1aad6689b92ca6736"
+            },
+            "result": {
+              "schemaVersion": "candidate-discovery-skill-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-result.json",
+              "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+              "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+            },
+            "accepted": {
+              "candidate-set.json": {
+                "schemaVersion": "candidate-selection-candidate-set-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-set.json",
+                "fileSha256": "63fbc519cdfc99963ec5429bac1474b539ae97465c7a38cfcc1c4152b8a7aa8d",
+                "canonicalSha256": "92618e832b25829d64cc33121bdb24a6eac3d0f5b48c344d6dc1cbde080189e7"
+              },
+              "discovery-validation.json": {
+                "schemaVersion": "unseen-material-discovery-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/discovery-validation.json",
+                "fileSha256": "066942c0aff6cdb1245127eac8af7edf3a017a5ba974550680cceb0e756939a3",
+                "canonicalSha256": "a276990c3ec40b65a88d46e17114a92b00798fc40fb9d17b4df62d520c6d1012"
+              }
+            }
+          },
+          "selection": {
+            "request": {
+              "schemaVersion": "candidate-selection-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-request.json",
+              "fileSha256": "0a075d1f3ba409bd1336d8def5473bd40669c102e7d5f34ce4ddf53ec3dc1e98",
+              "canonicalSha256": "28f4e6db27b7f552b639c859b4b3facc125488926fad5bb6d72f85d5af616c46"
+            },
+            "response": {
+              "schemaVersion": "candidate-selection-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-response.json",
+              "fileSha256": "95dba6efc3e57022a0402c3c4c62ffa68667117dafeb3f4f5ecf92165f66d944",
+              "canonicalSha256": "305d3f9c4298d03688ba102f583d637912b396cf9c8eb6e08290c5d510e5fd0a"
+            },
+            "result": {
+              "schemaVersion": "candidate-selection-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-result.json",
+              "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+              "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+            },
+            "accepted": {
+              "selection-validation.json": {
+                "schemaVersion": "candidate-selection-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-validation.json",
+                "fileSha256": "514594fdbb20df7f6b5c50e59a7af9d21596c987625c0888eb75bd03da6d8ae3",
+                "canonicalSha256": "292785f2def7e6088a13917823a08c20d5ae448c3b079abaf3bf670304a22480"
+              },
+              "selection-adoption.json": {
+                "schemaVersion": "candidate-selection-machine-adoption-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-adoption.json",
+                "fileSha256": "d075347249c076e1b25a68cae27298a677d72fe0a967c4ea435a11b1498eaca8",
+                "canonicalSha256": "eb1dca9d5a9a9f7643d0cd3410d2278e22c17b29056898b36959d051cd826a76"
+              }
+            }
+          },
+          "retention": {
+            "request": {
+              "schemaVersion": "candidate-internal-retention-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-request.json",
+              "fileSha256": "41288ace182365f5f09a66455a0c8340cdba2331a186b57d8cf6b8ea50e7a2da",
+              "canonicalSha256": "9fe36132ce398d06002ec3929e2abed66b6bf67497e47af433e47da28e35a577"
+            },
+            "response": {
+              "schemaVersion": "candidate-internal-retention-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-response.json",
+              "fileSha256": "d655f23845182121e74570f7056e3f36cc40b4ed9548b6797636372afee12ea5",
+              "canonicalSha256": "8eb792d052627f85ca06c31a0bd919e0a738d6fd861760a777c209e665cfc9e9"
+            },
+            "result": {
+              "schemaVersion": "candidate-internal-retention-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-result.json",
+              "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+              "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+            },
+            "accepted": {
+              "retention-validation.json": {
+                "schemaVersion": "new-material-retention-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-validation.json",
+                "fileSha256": "15e44d28a244faa9e8c84a298f159398dee927ba3f58a906edfb9390b5aeee12",
+                "canonicalSha256": "cbea27aa700e03f6c8f0f83d2560f43ed9289770fc8cb140d94264f5166cf8b5"
+              }
+            }
+          }
+        },
+        "artifacts": {
+          "production-intent.json": {
+            "schemaVersion": "production-intent-plan-v0",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/production-intent.json",
+            "fileSha256": "cbf25f5c4dcad44bb21fdfe87506f1f5fb236276ee873fe527f7a0d1f2eb79df",
+            "canonicalSha256": "cf13de3b27950d04bdcbde1c7d75abdf1759da56a30f9f3edf3028dedf679922"
+          },
+          "binding-input.json": {
+            "schemaVersion": "normal-request-digest-preparation-binding-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding-input.json",
+            "fileSha256": "6da4b3c759ac77a4654e7070b1b6c4345a5be2f4c72c574a1181d01d61c9dcc9",
+            "canonicalSha256": "b11c2faeb9a617e86055b39ec24bbebdec7a01d220124adfa889ece5b31518d6"
+          },
+          "discovery-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/discovery-plan.json",
+            "fileSha256": "0aec20e66ca4bf9ab109b2165bda799390bcda5f266863e5731e6de80599bda9",
+            "canonicalSha256": "3a258a80ea2e8ba078524655ad1962c68b32445685632590cd1f440170cb7e0a"
+          },
+          "candidate-request.json": {
+            "schemaVersion": "candidate-discovery-judgment-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-request.json",
+            "fileSha256": "c5095bbe5ac7c78f57327ef740f6136b1b8bb889e3c3f25c7f23167d0e147b4c",
+            "canonicalSha256": "cd6775c63fac18fb09928da906b4cce4ee74721807050e815c7beffb9b65ad08"
+          },
+          "candidate-set.json": {
+            "schemaVersion": "candidate-selection-candidate-set-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-set.json",
+            "fileSha256": "63fbc519cdfc99963ec5429bac1474b539ae97465c7a38cfcc1c4152b8a7aa8d",
+            "canonicalSha256": "92618e832b25829d64cc33121bdb24a6eac3d0f5b48c344d6dc1cbde080189e7"
+          },
+          "discovery-validation.json": {
+            "schemaVersion": "unseen-material-discovery-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/discovery-validation.json",
+            "fileSha256": "066942c0aff6cdb1245127eac8af7edf3a017a5ba974550680cceb0e756939a3",
+            "canonicalSha256": "a276990c3ec40b65a88d46e17114a92b00798fc40fb9d17b4df62d520c6d1012"
+          },
+          "candidate-response.json": {
+            "schemaVersion": "candidate-discovery-judgment-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-response.json",
+            "fileSha256": "c0a46de4180d87b321e10dfb28081244ad49682e68719c47206fca03c94ada67",
+            "canonicalSha256": "d4b99833f9429ab3b59296cd27d949d85cf9c9f475b1aae1aad6689b92ca6736"
+          },
+          "candidate-result.json": {
+            "schemaVersion": "candidate-discovery-skill-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/candidate-result.json",
+            "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+            "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+          },
+          "selection-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-plan.json",
+            "fileSha256": "0034a41a421ddefef15f66da375bfca7954698d6c6f69c514a8dc0a38f0df6ff",
+            "canonicalSha256": "12730a648a782a2e6693b2c2b5ee3cdbfa824c9a2e0759f8b95fa50c44f9539d"
+          },
+          "selection-request.json": {
+            "schemaVersion": "candidate-selection-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-request.json",
+            "fileSha256": "0a075d1f3ba409bd1336d8def5473bd40669c102e7d5f34ce4ddf53ec3dc1e98",
+            "canonicalSha256": "28f4e6db27b7f552b639c859b4b3facc125488926fad5bb6d72f85d5af616c46"
+          },
+          "selection-validation.json": {
+            "schemaVersion": "candidate-selection-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-validation.json",
+            "fileSha256": "514594fdbb20df7f6b5c50e59a7af9d21596c987625c0888eb75bd03da6d8ae3",
+            "canonicalSha256": "292785f2def7e6088a13917823a08c20d5ae448c3b079abaf3bf670304a22480"
+          },
+          "selection-adoption.json": {
+            "schemaVersion": "candidate-selection-machine-adoption-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-adoption.json",
+            "fileSha256": "d075347249c076e1b25a68cae27298a677d72fe0a967c4ea435a11b1498eaca8",
+            "canonicalSha256": "eb1dca9d5a9a9f7643d0cd3410d2278e22c17b29056898b36959d051cd826a76"
+          },
+          "selection-response.json": {
+            "schemaVersion": "candidate-selection-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-response.json",
+            "fileSha256": "95dba6efc3e57022a0402c3c4c62ffa68667117dafeb3f4f5ecf92165f66d944",
+            "canonicalSha256": "305d3f9c4298d03688ba102f583d637912b396cf9c8eb6e08290c5d510e5fd0a"
+          },
+          "selection-result.json": {
+            "schemaVersion": "candidate-selection-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/selection-result.json",
+            "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+            "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+          },
+          "retention-request.json": {
+            "schemaVersion": "candidate-internal-retention-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-request.json",
+            "fileSha256": "41288ace182365f5f09a66455a0c8340cdba2331a186b57d8cf6b8ea50e7a2da",
+            "canonicalSha256": "9fe36132ce398d06002ec3929e2abed66b6bf67497e47af433e47da28e35a577"
+          },
+          "retention-validation.json": {
+            "schemaVersion": "new-material-retention-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-validation.json",
+            "fileSha256": "15e44d28a244faa9e8c84a298f159398dee927ba3f58a906edfb9390b5aeee12",
+            "canonicalSha256": "cbea27aa700e03f6c8f0f83d2560f43ed9289770fc8cb140d94264f5166cf8b5"
+          },
+          "retention-response.json": {
+            "schemaVersion": "candidate-internal-retention-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-response.json",
+            "fileSha256": "d655f23845182121e74570f7056e3f36cc40b4ed9548b6797636372afee12ea5",
+            "canonicalSha256": "8eb792d052627f85ca06c31a0bd919e0a738d6fd861760a777c209e665cfc9e9"
+          },
+          "retention-result.json": {
+            "schemaVersion": "candidate-internal-retention-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/retention-result.json",
+            "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+            "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+          }
+        }
+      }
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/binding.json",
+      "fileSha256": "4cf63cda5ab75df7efd5f5c32c361d19dc6c431087d0a6ecf7aaf554f6f0e287",
+      "record": {
+        "schemaVersion": "normal-request-digest-preparation-binding-v001",
+        "identity": {
+          "requestDraftId": "draft_WocWT6m1Dmi9R637Ncm6O",
+          "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+          "approvedDraft": {
+            "id": "draft_WocWT6m1Dmi9R637Ncm6O",
+            "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+            "source": {
+              "kind": "video_source",
+              "uri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "settings": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "steps": [
+              {
+                "type": "prepare_video",
+                "label": "動画取り込み",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "run_stt",
+                "label": "STT",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "propose_clip_themes",
+                "label": "テーマ作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "build_clip_composition",
+                "label": "切り口作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "create_edit_plan",
+                "label": "演出作成",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "apply_adjustment",
+                "label": "微調整",
+                "requiresHumanApproval": false
+              },
+              {
+                "type": "render_video",
+                "label": "動画生成",
+                "requiresHumanApproval": false
+              }
+            ],
+            "createdAt": "2026-09-30T22:03:06.225Z",
+            "approvedAt": "2026-09-30T22:03:06.229Z"
+          },
+          "approvedDraftSha256": "e37180489c9b758184c0461565e7ffed17ee48c30f88992b33327aafdee073f6",
+          "command": {
+            "id": "agent_gefu-kLMEzkvnDFuEcwXs",
+            "requestDraftId": "draft_WocWT6m1Dmi9R637Ncm6O",
+            "type": "propose_clip_themes",
+            "target": {
+              "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+            },
+            "input": {
+              "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+              "settings": {
+                "durationLabel": "接続試験の尺条件",
+                "themeCountLabel": "2候補",
+                "geminiModelName": "接続試験のモデル条件",
+                "preset": "接続試験の編集条件"
+              }
+            },
+            "constraints": {
+              "durationLabel": "接続試験の尺条件",
+              "themeCountLabel": "2候補",
+              "geminiModelName": "接続試験のモデル条件",
+              "preset": "接続試験の編集条件"
+            },
+            "policy": {
+              "humanApprovalRequiredBeforeRender": false
+            },
+            "dependsOnAgentRequestId": "agent_VUFfXvssSqLH88bWyweM4",
+            "createdAt": "2026-09-30T22:03:06.229Z"
+          },
+          "commandSha256": "15c40a54a2994856c19682330926d664e7c6f9b39160e7b80f48697c082fec03",
+          "sourceId": "isolated-saved-source",
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+          "sourceVideo": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "transcript": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/transcript.json",
+            "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+          },
+          "utterances": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/utterances.json",
+            "fileSha256": "861556434b3eb19dfd0ac1cfb00f0ce57cb9d89d918581d2d5c495d37d4a2d4b"
+          },
+          "dependencyReferences": {
+            "video": {
+              "id": "file-agent_oN0Cl4h6WtwbDQGZwEDdC",
+              "kind": "source_video",
+              "uri": "/api/artifacts/fixture/source-video.mp4",
+              "mimeType": "video/mp4",
+              "access": "shared",
+              "ownerId": "agent_oN0Cl4h6WtwbDQGZwEDdC",
+              "artifactFileName": "source-video.mp4",
+              "byteSize": 4803412827,
+              "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+              "createdAt": "2026-09-30T22:03:06.229Z"
+            },
+            "transcript": {
+              "id": "file-agent_VUFfXvssSqLH88bWyweM4",
+              "kind": "transcript_json",
+              "uri": "/api/artifacts/fixture/transcript.json",
+              "mimeType": "application/json",
+              "access": "shared",
+              "ownerId": "agent_VUFfXvssSqLH88bWyweM4",
+              "artifactFileName": "transcript.json",
+              "byteSize": 6804193,
+              "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+              "createdAt": "2026-09-30T22:03:06.229Z"
+            }
+          },
+          "implementations": [
+            {
+              "path": "runner/src/digest-plan-preparation-v001.ts",
+              "fileSha256": "6244b565c120e9c5ea5992770fedfb453642c7efbeaad842ef2feb6f18c7cef9"
+            },
+            {
+              "path": "runner/src/workflow-step-builders.ts",
+              "fileSha256": "2117790d37209562db314fd3d05a10687ef2e277e101833f49872627bf1d46f1"
+            },
+            {
+              "path": "runner/src/index.ts",
+              "fileSha256": "ce3129146e96cbe401ae506f23f4fa7669eede84294fe5e8ba82519854978db8"
+            },
+            {
+              "path": "packages/shared/src/index.ts",
+              "fileSha256": "4c8a209ce8d951c147b482feff43debd355f95364c82aac919cda3d7be9beca1"
+            },
+            {
+              "path": "runner/src/skills/candidate-discovery-v001.ts",
+              "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+            },
+            {
+              "path": "runner/src/skills/candidate-selection-v001.ts",
+              "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+            },
+            {
+              "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+              "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+            },
+            {
+              "path": "runner/src/distant-connection-common-utterance-artifact-v001.ts",
+              "fileSha256": "e3d2792913b284ba2b2f3cee5e1371a15d2fd3ee54ce6b1615041dfd7217562b"
+            },
+            {
+              "path": "runner/src/transcript-utils.ts",
+              "fileSha256": "9604833fd62d3c52ca5d6dd1ef0f7136d342511901de13ae80f31570e8cecd17"
+            },
+            {
+              "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+              "fileSha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176"
+            },
+            {
+              "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+              "fileSha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec"
+            },
+            {
+              "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+              "fileSha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac"
+            },
+            {
+              "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+              "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+            },
+            {
+              "path": "evals/clip_composition/run_thin_plan_candidate_selection_v0.mts",
+              "fileSha256": "88abb651e704156d98b078e9916db675e99a756ca4a2831862f49116057dddb8"
+            },
+            {
+              "path": "evals/clip_composition/presentation_output_crop_application_v001.mjs",
+              "fileSha256": "322fdc1e06a13600c522f577913336c6f042851305880e5053b8728f2d8640d3"
+            },
+            {
+              "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+              "fileSha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba"
+            }
+          ]
+        },
+        "status": "complete",
+        "stages": {
+          "discovery": {
+            "request": {
+              "schemaVersion": "candidate-discovery-judgment-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-request.json",
+              "fileSha256": "bfadb57b7c70d23c86922b7d8db07290b9fae4dbf2487a449e09c2eca7860c3c",
+              "canonicalSha256": "99c0e5ecebbaa09388d0c360d652d86b919784ff4a93b8bc4775bfbdd16e30c5"
+            },
+            "response": {
+              "schemaVersion": "candidate-discovery-judgment-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-response.json",
+              "fileSha256": "b06a04c4d72eb90db46fcaa0468175cfed70b19ea3811b744eec6283bd556ea6",
+              "canonicalSha256": "1c70b8fc0412a626ed4643b3d9ff2c1a27a19bd3af2cede311d9400f404498f4"
+            },
+            "result": {
+              "schemaVersion": "candidate-discovery-skill-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-result.json",
+              "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+              "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+            },
+            "accepted": {
+              "candidate-set.json": {
+                "schemaVersion": "candidate-selection-candidate-set-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-set.json",
+                "fileSha256": "58a9da1689ef73a5aa5cf348a6c765286e6d02024ceeb70a47ec68804ccc61fd",
+                "canonicalSha256": "7ab46dfbcd0ecee2e8c93ff053067c88e68e449469167d3174957549a24e96d1"
+              },
+              "discovery-validation.json": {
+                "schemaVersion": "unseen-material-discovery-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/discovery-validation.json",
+                "fileSha256": "784defd150a1603b66476063ffbca5fccc33797d73796643ca5ad18cee9455bc",
+                "canonicalSha256": "0b8e38612f6719541c939d6459ed1c7e70f5d77530ea42d89a823f0e74db83aa"
+              }
+            }
+          },
+          "selection": {
+            "request": {
+              "schemaVersion": "candidate-selection-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-request.json",
+              "fileSha256": "4379ad3519e776e86d0451ef85bbe320a0ce132745e58b1da5346745a15ff97f",
+              "canonicalSha256": "1286d6bea776df08150aa1af5ced23abd074c6a5f6301a2fa75e44415b5ee0be"
+            },
+            "response": {
+              "schemaVersion": "candidate-selection-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-response.json",
+              "fileSha256": "4ff1921e285c9b0fb201c273d8fd2cc30beabdacee38e093e95f9d02de30df9a",
+              "canonicalSha256": "4b7fd78e5346aecfa16053c834ac8218a7ef7d9a8fbd65974c68845c74664015"
+            },
+            "result": {
+              "schemaVersion": "candidate-selection-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-result.json",
+              "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+              "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+            },
+            "accepted": {
+              "selection-validation.json": {
+                "schemaVersion": "candidate-selection-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-validation.json",
+                "fileSha256": "143c325e7bffb346b204c202f789c9dbe63e40cd285d5051765af28ac86f4258",
+                "canonicalSha256": "5bea6a18abdc0dec4f43683ca54276a03ffd4b063c3dc5b7e71f21bd87fb266f"
+              },
+              "selection-adoption.json": {
+                "schemaVersion": "candidate-selection-machine-adoption-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-adoption.json",
+                "fileSha256": "bc407443fe70a744024bfd65bae30968a9ec3474035e0437d5748532c6051e23",
+                "canonicalSha256": "c447739159c5931769c0c12b94c395c663a55b93709bc24afe04af2177329e05"
+              }
+            }
+          },
+          "retention": {
+            "request": {
+              "schemaVersion": "candidate-internal-retention-request-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-request.json",
+              "fileSha256": "ac73f977abc80707af4b3c2b1f2b083f5dfd5123c07d1646105dc656da469328",
+              "canonicalSha256": "e4cd43e88ea7a9810570da2ae89b47edab2643c2e4b1704c27fa5641d20e9d28"
+            },
+            "response": {
+              "schemaVersion": "candidate-internal-retention-response-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-response.json",
+              "fileSha256": "f7995e89f2a938e29d58297a6f864eac88dce7f4eec050cce5eab5a753c48706",
+              "canonicalSha256": "864e476cf6f2980ca1683baaca72033a1f9884ad4ff2f36ff27cc3ca864a9748"
+            },
+            "result": {
+              "schemaVersion": "candidate-internal-retention-result-v001",
+              "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-result.json",
+              "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+              "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+            },
+            "accepted": {
+              "retention-validation.json": {
+                "schemaVersion": "new-material-retention-validation-v001",
+                "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-validation.json",
+                "fileSha256": "18bbafd7cc915a733947b189b0dd1013da68b4ab9a07c20eaaa7009676d4f286",
+                "canonicalSha256": "39c7adf9c7f1b8abed6c3efa1095ff0a627757d10087ee253dc9c4ebb5ce7acd"
+              }
+            }
+          }
+        },
+        "artifacts": {
+          "production-intent.json": {
+            "schemaVersion": "production-intent-plan-v0",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/production-intent.json",
+            "fileSha256": "eedcab5a23ee266b043d3cb6cd692c204b591c8a3f946d714140661ac72ced3e",
+            "canonicalSha256": "e3a161940e006b5948033940f84fd79186599efb3edf31323d6b07ee3d3065f2"
+          },
+          "binding-input.json": {
+            "schemaVersion": "normal-request-digest-preparation-binding-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/binding-input.json",
+            "fileSha256": "d274fae5977a7a1fb650b50f428344bd5748f23c10376218fe915b1e3ffebaa7",
+            "canonicalSha256": "40d926b8a30fb281697d1c81aa771bf74ebf40afa5565d847ef03c18449bce03"
+          },
+          "discovery-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/discovery-plan.json",
+            "fileSha256": "f85ee601b80ac2de1c21376e5b3e4f9f4c54aec9aabe23e89c2d36f4dbb689a0",
+            "canonicalSha256": "612d7ea4af52d59c4a423de4abc1ccd897185af00259f103363836e4a0b3f4d0"
+          },
+          "candidate-request.json": {
+            "schemaVersion": "candidate-discovery-judgment-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-request.json",
+            "fileSha256": "bfadb57b7c70d23c86922b7d8db07290b9fae4dbf2487a449e09c2eca7860c3c",
+            "canonicalSha256": "99c0e5ecebbaa09388d0c360d652d86b919784ff4a93b8bc4775bfbdd16e30c5"
+          },
+          "candidate-set.json": {
+            "schemaVersion": "candidate-selection-candidate-set-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-set.json",
+            "fileSha256": "58a9da1689ef73a5aa5cf348a6c765286e6d02024ceeb70a47ec68804ccc61fd",
+            "canonicalSha256": "7ab46dfbcd0ecee2e8c93ff053067c88e68e449469167d3174957549a24e96d1"
+          },
+          "discovery-validation.json": {
+            "schemaVersion": "unseen-material-discovery-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/discovery-validation.json",
+            "fileSha256": "784defd150a1603b66476063ffbca5fccc33797d73796643ca5ad18cee9455bc",
+            "canonicalSha256": "0b8e38612f6719541c939d6459ed1c7e70f5d77530ea42d89a823f0e74db83aa"
+          },
+          "candidate-response.json": {
+            "schemaVersion": "candidate-discovery-judgment-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-response.json",
+            "fileSha256": "b06a04c4d72eb90db46fcaa0468175cfed70b19ea3811b744eec6283bd556ea6",
+            "canonicalSha256": "1c70b8fc0412a626ed4643b3d9ff2c1a27a19bd3af2cede311d9400f404498f4"
+          },
+          "candidate-result.json": {
+            "schemaVersion": "candidate-discovery-skill-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/candidate-result.json",
+            "fileSha256": "4cc5dc7740945e3e3aa687c411af382ca0c0cbca2841103243f37c18ee677753",
+            "canonicalSha256": "c167342a85e9974fda42373bf024d5f0a72db1cf7faee0d512ab8e8569beebd9"
+          },
+          "selection-plan.json": {
+            "schemaVersion": "new-material-digest-execution-plan-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-plan.json",
+            "fileSha256": "fd8c2787051083ca44ccf3857f2af99c72274d370017b6b5da1767ad54541dd5",
+            "canonicalSha256": "ad77eb09395a4b7b1a9c8b65da93eedfa18b231c9967ba94b87ee2facfe1223a"
+          },
+          "selection-request.json": {
+            "schemaVersion": "candidate-selection-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-request.json",
+            "fileSha256": "4379ad3519e776e86d0451ef85bbe320a0ce132745e58b1da5346745a15ff97f",
+            "canonicalSha256": "1286d6bea776df08150aa1af5ced23abd074c6a5f6301a2fa75e44415b5ee0be"
+          },
+          "selection-validation.json": {
+            "schemaVersion": "candidate-selection-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-validation.json",
+            "fileSha256": "143c325e7bffb346b204c202f789c9dbe63e40cd285d5051765af28ac86f4258",
+            "canonicalSha256": "5bea6a18abdc0dec4f43683ca54276a03ffd4b063c3dc5b7e71f21bd87fb266f"
+          },
+          "selection-adoption.json": {
+            "schemaVersion": "candidate-selection-machine-adoption-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-adoption.json",
+            "fileSha256": "bc407443fe70a744024bfd65bae30968a9ec3474035e0437d5748532c6051e23",
+            "canonicalSha256": "c447739159c5931769c0c12b94c395c663a55b93709bc24afe04af2177329e05"
+          },
+          "selection-response.json": {
+            "schemaVersion": "candidate-selection-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-response.json",
+            "fileSha256": "4ff1921e285c9b0fb201c273d8fd2cc30beabdacee38e093e95f9d02de30df9a",
+            "canonicalSha256": "4b7fd78e5346aecfa16053c834ac8218a7ef7d9a8fbd65974c68845c74664015"
+          },
+          "selection-result.json": {
+            "schemaVersion": "candidate-selection-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/selection-result.json",
+            "fileSha256": "b516d274c09cf18c88667ac2929f24f2aea457214eae729ba42fbea69d828b5f",
+            "canonicalSha256": "cbcbebf6e346aad6bb2c656c4a5d991bc2e1df09d96f4c0686f4a607b85eb149"
+          },
+          "retention-request.json": {
+            "schemaVersion": "candidate-internal-retention-request-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-request.json",
+            "fileSha256": "ac73f977abc80707af4b3c2b1f2b083f5dfd5123c07d1646105dc656da469328",
+            "canonicalSha256": "e4cd43e88ea7a9810570da2ae89b47edab2643c2e4b1704c27fa5641d20e9d28"
+          },
+          "retention-validation.json": {
+            "schemaVersion": "new-material-retention-validation-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-validation.json",
+            "fileSha256": "18bbafd7cc915a733947b189b0dd1013da68b4ab9a07c20eaaa7009676d4f286",
+            "canonicalSha256": "39c7adf9c7f1b8abed6c3efa1095ff0a627757d10087ee253dc9c4ebb5ce7acd"
+          },
+          "retention-response.json": {
+            "schemaVersion": "candidate-internal-retention-response-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-response.json",
+            "fileSha256": "f7995e89f2a938e29d58297a6f864eac88dce7f4eec050cce5eab5a753c48706",
+            "canonicalSha256": "864e476cf6f2980ca1683baaca72033a1f9884ad4ff2f36ff27cc3ca864a9748"
+          },
+          "retention-result.json": {
+            "schemaVersion": "candidate-internal-retention-result-v001",
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/retention-result.json",
+            "fileSha256": "d5208496e477dc8a4b20b020f23290b7f004745350805c45393385dbfd547a1c",
+            "canonicalSha256": "7ba9fabdf9c03d1ce37daa510eb24e2b32cb4df20639d0d7557c26bcf7769faf"
+          }
+        }
+      }
+    }
+  ],
+  "implementationReferencesMatchCurrentFiles": true,
+  "artifactReferencesMatchSavedBytes": true
+}

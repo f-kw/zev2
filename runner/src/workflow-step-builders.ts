@@ -1,4 +1,4 @@
-import type { AgentRequest, AgentRequestType, FileRef, FileRefKind, Zev2State } from '@zev2/shared';
+import {findById, lastMatching, type AgentRequest, type AgentRequestType, type FileRef, type FileRefKind, type Zev2State} from '@zev2/shared';
 import type {
   ArtifactInfo,
   ClipCompositionArtifact,
@@ -9,6 +9,7 @@ import type {
   WorkflowStepManifest
 } from './workflow-artifacts.js';
 import { assertJsonArtifactForKind } from './workflow-artifact-validation.js';
+import { prepareDigestPlanV001, type DigestPlanPreparationDependenciesV001 } from './digest-plan-preparation-v001.js';
 
 export type StepArtifactBuilder = (context: {
   request: AgentRequest;
@@ -16,6 +17,7 @@ export type StepArtifactBuilder = (context: {
 }) => Promise<ArtifactInfo>;
 
 export type WorkflowStepRuntime = {
+  digestPlanPreparation?: DigestPlanPreparationDependenciesV001;
   prepareSourceVideo: (request: AgentRequest) => Promise<ArtifactInfo>;
   buildTranscript: (request: AgentRequest, state: Zev2State) => Promise<TranscriptArtifact>;
   buildThemeOptionsArtifact: (transcript: TranscriptArtifact, request: AgentRequest) => Promise<ThemeArtifact>;
@@ -43,6 +45,16 @@ export type WorkflowStepRuntime = {
   writeStepManifest: (request: AgentRequest, manifest: WorkflowStepManifest) => Promise<void>;
   writeJsonArtifact: (request: AgentRequest, kind: FileRefKind, payload: unknown) => Promise<ArtifactInfo>;
 };
+
+export function requireWorkflowRequestOutputFileRef(
+  state: Zev2State, request: AgentRequest, dependencyType: AgentRequestType, missingMessage: string
+): FileRef {
+  const dependency = lastMatching(state.agentRequests, r => r.requestDraftId === request.requestDraftId
+    && r.type === dependencyType && r.status === 'succeeded');
+  const ref = findById(state.fileRefs, dependency?.result?.fileRefId);
+  if (!ref) throw new Error(missingMessage);
+  return ref;
+}
 
 async function readValidatedRequestArtifact<T>(
   runtime: WorkflowStepRuntime,
@@ -192,6 +204,12 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         '文字起こし成果物がないためテーマを整理できません',
         'テーマ作成が読む文字起こし成果物'
       );
+      if (runtime.digestPlanPreparation) {
+        await prepareDigestPlanV001(runtime.digestPlanPreparation, {
+          request, state, transcript: transcriptInput.artifact,
+          transcriptUri: transcriptInput.input.uri,
+        });
+      }
       return finishStep(
         runtime,
         request,

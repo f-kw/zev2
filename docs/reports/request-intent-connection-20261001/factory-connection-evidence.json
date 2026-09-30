@@ -1,0 +1,315 @@
+{
+  "status": "passed",
+  "caller": "createStepArtifactBuilders.propose_clip_themes",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004",
+  "sourceAndStt": "existing-saved-artifact-completion-fixtures; no ingestion/STT execution",
+  "sourceVideo": "independent copy of existing saved video; no source byte mutation",
+  "judgment": "non-communicating fixed provider; no AI content-quality claim",
+  "results": [
+    {
+      "name": "normal-api-store-claim-factory-two-purposes-default-and-readback",
+      "status": "passed"
+    },
+    {
+      "name": "provider-failure",
+      "status": "rejected"
+    },
+    {
+      "name": "incomplete-readback",
+      "status": "rejected"
+    },
+    {
+      "name": "resume-accepted-stage-without-rejudging",
+      "status": "passed"
+    },
+    {
+      "name": "draft-approval",
+      "status": "rejected"
+    },
+    {
+      "name": "claim",
+      "status": "rejected"
+    },
+    {
+      "name": "purpose",
+      "status": "rejected"
+    },
+    {
+      "name": "conditions",
+      "status": "rejected"
+    },
+    {
+      "name": "source",
+      "status": "rejected"
+    },
+    {
+      "name": "other-request",
+      "status": "rejected"
+    },
+    {
+      "name": "dependency",
+      "status": "rejected"
+    },
+    {
+      "name": "expired-claim",
+      "status": "rejected"
+    },
+    {
+      "name": "stale-response-sha",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-id",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-version",
+      "status": "rejected"
+    },
+    {
+      "name": "missing",
+      "status": "rejected"
+    },
+    {
+      "name": "changed",
+      "status": "rejected"
+    },
+    {
+      "name": "bad-reference",
+      "status": "rejected"
+    },
+    {
+      "name": "missing-stage",
+      "status": "rejected"
+    }
+  ],
+  "captures": [
+    {
+      "requestId": "agent_7d37l3HUrDOAgsrY898hp",
+      "stage": "discovery",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "354585dec5066134adc97b3e2b886afd56f5bd03ad1ac2fd3dbd6cbaefee2302",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_7d37l3HUrDOAgsrY898hp",
+      "stage": "selection",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "073ea7bab1d79de6a12f084d443977d1855ef5cb4833b20654b65fa898c47082",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_7d37l3HUrDOAgsrY898hp",
+      "stage": "retention",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "451480cd1364d7da939040eff2d53389d6e3d35a74417d2dc21933595d865d8c",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_B__EvbEkQg29hVQ058koq",
+      "stage": "discovery",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "4b010d5d2b1e687f1c17ca0ba59437a2bb77046cb327e384f868bd4909da7bec",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_B__EvbEkQg29hVQ058koq",
+      "stage": "selection",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "58e40b7de7ac6bcea6f5a1934d17fd50ff9e322106c4c1ce21c8a32e9d7ec026",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_B__EvbEkQg29hVQ058koq",
+      "stage": "retention",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "5f44305f8d0b3432f4b93ec224cea693b500fc86373b4ade1ed75b1959f80a6e",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_JGOxH5WMMeQX6iX8mzefC",
+      "stage": "discovery",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "9b6c2f44ad3ac02fad4ae354bc7001dad83a940799d448a593ea9408362ba522",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_JGOxH5WMMeQX6iX8mzefC",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "ae2597f2ed41f200ba7fbe140dcf01ec6b8ec2c8f29bc44fe639b07b18e45982",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_JGOxH5WMMeQX6iX8mzefC",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "ae2597f2ed41f200ba7fbe140dcf01ec6b8ec2c8f29bc44fe639b07b18e45982",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_JGOxH5WMMeQX6iX8mzefC",
+      "stage": "retention",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "8cf102f7ea98084c0bde683d995c27076411a9d14fc6d7cd74a4467ec10719a5",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_j_eLnlABQjmhHyIAY0M_q",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。unknown-id",
+      "requestFileSha256": "eb6b6c071ed4f2bc6f06b928eb3f16509b054505ab98660c2d2527ab3a24b51a",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_GpFcFTqlNEOVQo60rVeFB",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "08140ba9809ee0f941c84f70a94205b20890a505c1c821fff4cea09218c7261d",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_GpFcFTqlNEOVQo60rVeFB",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "5b1515e9a329685fe55172b95a5dab32d453db5f1b6426526112206973f42b17",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_3pDIVr9q4KodDqXx2DIbt",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "8c0b6b4b0f75e023afb7a550ff3e2f099ef149beacb1fbbf4c73b0e14658a0b2",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_3pDIVr9q4KodDqXx2DIbt",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "10fc17df847efa8fa28851bdafe7b2ad4832683ea2aabe66e9420bdc0a7546ba",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_sJeWvvzckYusEjBxx7Fs4",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "14d07a556f5303bc167ecfa35d3a1cb81b91585fb9d737708d98c1ade5c269e1",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_sJeWvvzckYusEjBxx7Fs4",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "f156b01ee29f3f8901930707c88734221761e11f4025bdfc7497e6be311b07f3",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_sJeWvvzckYusEjBxx7Fs4",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "b1087b184d64631ba5305a680fb1dccbd2c1425918ca7cd83a668359b85caa65",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_Mb1ukXdsv1uDSo-mAyWzC",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "323e12ce0c28895a13a9ec874b36ab60b4c90df5ae5fc95e8c17cd1fc854958b",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_Mb1ukXdsv1uDSo-mAyWzC",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "c21ef51499e466ba1628c29bd439f89f2be88f70cc74accac8c7c91cbd4e874e",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_Mb1ukXdsv1uDSo-mAyWzC",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "aa220066356a705df98cdb40315d2e0b082c21b3809fb64e59d0d4aba16d079e",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    }
+  ],
+  "completed": [
+    {
+      "requestDraftId": "draft_uSgAKJGUoi7QKp2uMGW7h",
+      "requestId": "agent_7d37l3HUrDOAgsrY898hp",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_uSgAKJGUoi7QKp2uMGW7h/digest-preparation/agent_7d37l3HUrDOAgsrY898hp/binding.json"
+    },
+    {
+      "requestDraftId": "draft_RvEvRudmEpdIz_dhd9NIf",
+      "requestId": "agent_B__EvbEkQg29hVQ058koq",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_RvEvRudmEpdIz_dhd9NIf/digest-preparation/agent_B__EvbEkQg29hVQ058koq/binding.json"
+    },
+    {
+      "requestDraftId": "draft_YFsEsamulRO1G_oY9OhSu",
+      "requestId": "agent_JGOxH5WMMeQX6iX8mzefC",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_YFsEsamulRO1G_oY9OhSu/digest-preparation/agent_JGOxH5WMMeQX6iX8mzefC/binding.json"
+    }
+  ],
+  "externalInferenceCalls": 0,
+  "sttRuns": 0,
+  "generatedVideos": 0,
+  "humanReviewMutations": 0,
+  "businessStateMutations": 0
+}

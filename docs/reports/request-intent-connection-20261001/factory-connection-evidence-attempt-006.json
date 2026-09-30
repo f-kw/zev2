@@ -1,0 +1,331 @@
+{
+  "status": "passed",
+  "caller": "createStepArtifactBuilders.propose_clip_themes",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006",
+  "sourceAndStt": "existing-saved-artifact-completion-fixtures; no ingestion/STT execution",
+  "sourceVideo": "independent copy of existing saved video; no source byte mutation",
+  "judgment": "non-communicating fixed provider; no AI content-quality claim",
+  "results": [
+    {
+      "name": "default-and-enabled-normal-composition-output-identical",
+      "status": "passed"
+    },
+    {
+      "name": "normal-api-store-claim-factory-two-purposes-default-and-readback",
+      "status": "passed"
+    },
+    {
+      "name": "provider-failure",
+      "status": "rejected"
+    },
+    {
+      "name": "incomplete-readback",
+      "status": "rejected"
+    },
+    {
+      "name": "resume-accepted-stage-without-rejudging",
+      "status": "passed"
+    },
+    {
+      "name": "draft-approval",
+      "status": "rejected"
+    },
+    {
+      "name": "claim",
+      "status": "rejected"
+    },
+    {
+      "name": "purpose",
+      "status": "rejected"
+    },
+    {
+      "name": "conditions",
+      "status": "rejected"
+    },
+    {
+      "name": "source",
+      "status": "rejected"
+    },
+    {
+      "name": "other-request",
+      "status": "rejected"
+    },
+    {
+      "name": "dependency",
+      "status": "rejected"
+    },
+    {
+      "name": "expired-claim",
+      "status": "rejected"
+    },
+    {
+      "name": "stale-response-sha",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-id",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-version",
+      "status": "rejected"
+    },
+    {
+      "name": "missing",
+      "status": "rejected"
+    },
+    {
+      "name": "changed",
+      "status": "rejected"
+    },
+    {
+      "name": "bad-reference",
+      "status": "rejected"
+    },
+    {
+      "name": "missing-stage",
+      "status": "rejected"
+    },
+    {
+      "name": "different-approved-version",
+      "status": "rejected"
+    },
+    {
+      "name": "other-saved-transcript-binding",
+      "status": "rejected"
+    },
+    {
+      "name": "unapproved-api-input-produces-no-command-or-digest-save",
+      "status": "passed"
+    }
+  ],
+  "captures": [
+    {
+      "requestId": "agent_bPvxsrQMr5rG9oMDTmDO8",
+      "stage": "discovery",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "d71748367761294e36e922607f69e68890c5ecede9f3443f0e977f92bcfb6a2b",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_bPvxsrQMr5rG9oMDTmDO8",
+      "stage": "selection",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "28ad69618a1b4d6735440df194588b4ae4ace7b832e979a872468f0f22939029",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_bPvxsrQMr5rG9oMDTmDO8",
+      "stage": "retention",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "f14492933baaa84d7a20ced7436d6373bd68758886771e8e77841def99c2bc26",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_No336WhmO6oCR90opf6w8",
+      "stage": "discovery",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "c5095bbe5ac7c78f57327ef740f6136b1b8bb889e3c3f25c7f23167d0e147b4c",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_No336WhmO6oCR90opf6w8",
+      "stage": "selection",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "0a075d1f3ba409bd1336d8def5473bd40669c102e7d5f34ce4ddf53ec3dc1e98",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_No336WhmO6oCR90opf6w8",
+      "stage": "retention",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "41288ace182365f5f09a66455a0c8340cdba2331a186b57d8cf6b8ea50e7a2da",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+      "stage": "discovery",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "bfadb57b7c70d23c86922b7d8db07290b9fae4dbf2487a449e09c2eca7860c3c",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "4379ad3519e776e86d0451ef85bbe320a0ce132745e58b1da5346745a15ff97f",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "4379ad3519e776e86d0451ef85bbe320a0ce132745e58b1da5346745a15ff97f",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+      "stage": "retention",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "ac73f977abc80707af4b3c2b1f2b083f5dfd5123c07d1646105dc656da469328",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_cKJ6qwf_3LpZ_yg2etYIS",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。unknown-id",
+      "requestFileSha256": "9b8427fd8b005e638b8b1c0df07fb086c39cb9a7d0c639c38161473335792529",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_VM0W8hgpTpqLl9ELDw3L0",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "e11c12cd320279832f66945c6c968aa62b41a80c08186996a65d5f9132be5f20",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_VM0W8hgpTpqLl9ELDw3L0",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "761368443cb7a49654a61bd1a23fdb7a2fee7c56e1bd006d6a1b0901a0869257",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_P58i4QdmfX4gdl5siBWZd",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "18ae7be87cb2faa6e43ba76d039ac85875d80ce735a1f9effdbf0d0a5dcfbd5b",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_P58i4QdmfX4gdl5siBWZd",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "d0d35113bf2e647387735b6d75c3e0b06758d65f5108d18c3abf4ba367ff2191",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_iHcHNpKvqxHRVOUn8T0Nm",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "73cc3c4a556350827cd374a463be3409b7eee1fd2d5d85eda13d0658e6676346",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_iHcHNpKvqxHRVOUn8T0Nm",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "c1c9515c576b265c2f947ce18ca384cf6449b55caf5d5b2a6dffa9487864448a",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_iHcHNpKvqxHRVOUn8T0Nm",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "394e388bb9ec4e50c483cd30b6868ed65abd55e98b48f5eca956064237e663d6",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_Y2Pc7vH7x79ADgYMQfOaz",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "c46ce7db7dfaee2313cba00acadeb536f741f9d12e5ec23080d83c39fc001a68",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_Y2Pc7vH7x79ADgYMQfOaz",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "6f95852795cc692d09a4559ab9a00d19cc58e2a11a33e8c23e1d3e88ffa7fc45",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_Y2Pc7vH7x79ADgYMQfOaz",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "a77a35d9cbd6f1e96500ea330a28b53f76197e6b2c2d61c1a2cc7345f5968f84",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    }
+  ],
+  "completed": [
+    {
+      "requestDraftId": "draft_qBO351t1ObMs3nZAe7p7s",
+      "requestId": "agent_bPvxsrQMr5rG9oMDTmDO8",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json"
+    },
+    {
+      "requestDraftId": "draft_foVKkgMvFq7qxuThRYKyH",
+      "requestId": "agent_No336WhmO6oCR90opf6w8",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding.json"
+    },
+    {
+      "requestDraftId": "draft_WocWT6m1Dmi9R637Ncm6O",
+      "requestId": "agent_gefu-kLMEzkvnDFuEcwXs",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/binding.json"
+    }
+  ],
+  "externalInferenceCalls": 0,
+  "sttRuns": 0,
+  "generatedVideos": 0,
+  "humanReviewMutations": 0,
+  "businessStateMutations": 0
+}

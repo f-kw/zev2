@@ -1,0 +1,873 @@
+{
+  "stage": "normal-factory-before-provider",
+  "failure": "existing stable streaming reader rejects hardlinks (nlink != 1)",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v002",
+  "stateSha256": "33e3659b3d4e3162ae8639f6bf7c9e274803a0e53d58c6306f6d1d20e15a4961",
+  "state": {
+    "requestDrafts": [
+      {
+        "id": "draft_fCBG8u1kVMwhXareuzhHd",
+        "status": "approved",
+        "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+        "source": {
+          "kind": "video_source",
+          "uri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "settings": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "steps": [
+          {
+            "type": "prepare_video",
+            "label": "動画取り込み",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "run_stt",
+            "label": "STT",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "propose_clip_themes",
+            "label": "テーマ作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "build_clip_composition",
+            "label": "切り口作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "create_edit_plan",
+            "label": "演出作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "apply_adjustment",
+            "label": "微調整",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "render_video",
+            "label": "動画生成",
+            "requiresHumanApproval": false
+          }
+        ],
+        "createdAt": "2026-09-30T21:51:03.815Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z"
+      },
+      {
+        "id": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "status": "approved",
+        "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+        "source": {
+          "kind": "video_source",
+          "uri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "settings": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "steps": [
+          {
+            "type": "prepare_video",
+            "label": "動画取り込み",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "run_stt",
+            "label": "STT",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "propose_clip_themes",
+            "label": "テーマ作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "build_clip_composition",
+            "label": "切り口作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "create_edit_plan",
+            "label": "演出作成",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "apply_adjustment",
+            "label": "微調整",
+            "requiresHumanApproval": false
+          },
+          {
+            "type": "render_video",
+            "label": "動画生成",
+            "requiresHumanApproval": false
+          }
+        ],
+        "createdAt": "2026-09-30T21:51:03.799Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z"
+      }
+    ],
+    "agentRequests": [
+      {
+        "id": "agent_E-baoR_8RY_awJFaYV0of",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "prepare_video",
+        "label": "動画取り込み",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "succeeded",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "result": {
+          "fileRefId": "file-agent_E-baoR_8RY_awJFaYV0of",
+          "meaning": "既存source/STT完了fixture"
+        }
+      },
+      {
+        "id": "agent_eMD7-qjReKUtQRDCOddkZ",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "run_stt",
+        "label": "STT",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "succeeded",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "dependsOnAgentRequestId": "agent_E-baoR_8RY_awJFaYV0of",
+        "result": {
+          "fileRefId": "file-agent_eMD7-qjReKUtQRDCOddkZ",
+          "meaning": "既存source/STT完了fixture"
+        }
+      },
+      {
+        "id": "agent_kVpPDWZi90SNlzmW7IKZL",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "propose_clip_themes",
+        "label": "テーマ作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "running",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.813Z",
+        "dependsOnAgentRequestId": "agent_eMD7-qjReKUtQRDCOddkZ",
+        "claimOwnerId": "codex2-isolated",
+        "claimedAt": "2026-09-30T21:51:03.813Z",
+        "claimUpdatedAt": "2026-09-30T21:51:03.813Z"
+      },
+      {
+        "id": "agent_CJjtT3tyIg1wZeAJfaVoC",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "build_clip_composition",
+        "label": "切り口作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "dependsOnAgentRequestId": "agent_kVpPDWZi90SNlzmW7IKZL"
+      },
+      {
+        "id": "agent_FICO1sOOYwbd--DMTq7Oc",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "create_edit_plan",
+        "label": "演出作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "dependsOnAgentRequestId": "agent_CJjtT3tyIg1wZeAJfaVoC"
+      },
+      {
+        "id": "agent_b1AAPyZ-aW13OQzvrSjF4",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "apply_adjustment",
+        "label": "微調整",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "dependsOnAgentRequestId": "agent_FICO1sOOYwbd--DMTq7Oc"
+      },
+      {
+        "id": "agent_JyePaozr6jNUlKXRhHIhk",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "type": "render_video",
+        "label": "動画生成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "updatedAt": "2026-09-30T21:51:03.806Z",
+        "dependsOnAgentRequestId": "agent_b1AAPyZ-aW13OQzvrSjF4"
+      },
+      {
+        "id": "agent_yjlS8IAjOdP2bh9CEJnQz",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "prepare_video",
+        "label": "動画取り込み",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "succeeded",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "result": {
+          "fileRefId": "file-agent_yjlS8IAjOdP2bh9CEJnQz",
+          "meaning": "既存source/STT完了fixture"
+        }
+      },
+      {
+        "id": "agent_xWDUP9tp0Z9a2wkwmeRQ8",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "run_stt",
+        "label": "STT",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "succeeded",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "dependsOnAgentRequestId": "agent_yjlS8IAjOdP2bh9CEJnQz",
+        "result": {
+          "fileRefId": "file-agent_xWDUP9tp0Z9a2wkwmeRQ8",
+          "meaning": "既存source/STT完了fixture"
+        }
+      },
+      {
+        "id": "agent_MIn7kRQgpBzo7x4xp0t9W",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "propose_clip_themes",
+        "label": "テーマ作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "running",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.822Z",
+        "dependsOnAgentRequestId": "agent_xWDUP9tp0Z9a2wkwmeRQ8",
+        "claimOwnerId": "codex2-isolated",
+        "claimedAt": "2026-09-30T21:51:03.822Z",
+        "claimUpdatedAt": "2026-09-30T21:51:03.822Z"
+      },
+      {
+        "id": "agent_oElJqk4sLiwZPbOGhK6Ab",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "build_clip_composition",
+        "label": "切り口作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "dependsOnAgentRequestId": "agent_MIn7kRQgpBzo7x4xp0t9W"
+      },
+      {
+        "id": "agent_qS8P8Gi7Btc57tP600MFV",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "create_edit_plan",
+        "label": "演出作成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "dependsOnAgentRequestId": "agent_oElJqk4sLiwZPbOGhK6Ab"
+      },
+      {
+        "id": "agent_X32YO7YkLfBJWas76VDHt",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "apply_adjustment",
+        "label": "微調整",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "dependsOnAgentRequestId": "agent_qS8P8Gi7Btc57tP600MFV"
+      },
+      {
+        "id": "agent_cuzqdQy5yD-dPxLWuUYbF",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "type": "render_video",
+        "label": "動画生成",
+        "target": {
+          "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+        },
+        "input": {
+          "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+          "settings": {
+            "durationLabel": "接続試験の尺条件",
+            "themeCountLabel": "2候補",
+            "geminiModelName": "接続試験のモデル条件",
+            "preset": "接続試験の編集条件"
+          }
+        },
+        "constraints": {
+          "durationLabel": "接続試験の尺条件",
+          "themeCountLabel": "2候補",
+          "geminiModelName": "接続試験のモデル条件",
+          "preset": "接続試験の編集条件"
+        },
+        "policy": {
+          "humanApprovalRequiredBeforeRender": false
+        },
+        "status": "queued",
+        "fileRefIds": [],
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "updatedAt": "2026-09-30T21:51:03.817Z",
+        "dependsOnAgentRequestId": "agent_X32YO7YkLfBJWas76VDHt"
+      }
+    ],
+    "fileRefs": [
+      {
+        "id": "file-agent_E-baoR_8RY_awJFaYV0of",
+        "kind": "source_video",
+        "uri": "/api/artifacts/fixture/source-video.mp4",
+        "mimeType": "video/mp4",
+        "access": "shared",
+        "ownerId": "agent_E-baoR_8RY_awJFaYV0of",
+        "artifactFileName": "source-video.mp4",
+        "byteSize": 4803412827,
+        "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+        "createdAt": "2026-09-30T21:51:03.806Z"
+      },
+      {
+        "id": "file-agent_eMD7-qjReKUtQRDCOddkZ",
+        "kind": "transcript_json",
+        "uri": "/api/artifacts/fixture/transcript.json",
+        "mimeType": "application/json",
+        "access": "shared",
+        "ownerId": "agent_eMD7-qjReKUtQRDCOddkZ",
+        "artifactFileName": "transcript.json",
+        "byteSize": 6804193,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+        "createdAt": "2026-09-30T21:51:03.806Z"
+      },
+      {
+        "id": "file-agent_yjlS8IAjOdP2bh9CEJnQz",
+        "kind": "source_video",
+        "uri": "/api/artifacts/fixture/source-video.mp4",
+        "mimeType": "video/mp4",
+        "access": "shared",
+        "ownerId": "agent_yjlS8IAjOdP2bh9CEJnQz",
+        "artifactFileName": "source-video.mp4",
+        "byteSize": 4803412827,
+        "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+        "createdAt": "2026-09-30T21:51:03.817Z"
+      },
+      {
+        "id": "file-agent_xWDUP9tp0Z9a2wkwmeRQ8",
+        "kind": "transcript_json",
+        "uri": "/api/artifacts/fixture/transcript.json",
+        "mimeType": "application/json",
+        "access": "shared",
+        "ownerId": "agent_xWDUP9tp0Z9a2wkwmeRQ8",
+        "artifactFileName": "transcript.json",
+        "byteSize": 6804193,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+        "createdAt": "2026-09-30T21:51:03.817Z"
+      }
+    ],
+    "outputs": [],
+    "agentOperationLogs": [
+      {
+        "eventType": "draft_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "actor": "user",
+        "toStatus": "draft",
+        "detail": "実行前下書きを保存した",
+        "createdAt": "2026-09-30T21:51:03.799Z",
+        "id": "agent_log_DgKogdwYr3dnoxI6e1f_0"
+      },
+      {
+        "eventType": "draft_approved",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "actor": "user",
+        "fromStatus": "draft",
+        "toStatus": "approved",
+        "detail": "人間が依頼を承認し、AIエージェント用作業を作れる状態にした",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "id": "agent_log_TaAz7idTtLqAc7MVfLho-"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_E-baoR_8RY_awJFaYV0of",
+        "stepType": "prepare_video",
+        "detail": "動画取り込みをAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_UbikmFaSR7TwTSvUb7coP"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_eMD7-qjReKUtQRDCOddkZ",
+        "stepType": "run_stt",
+        "detail": "STTをAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_w_QtaUxJCbwhGYC1C1Z_i"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_kVpPDWZi90SNlzmW7IKZL",
+        "stepType": "propose_clip_themes",
+        "detail": "テーマ作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_4sXOKafgqalzY0fZvnq5N"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_CJjtT3tyIg1wZeAJfaVoC",
+        "stepType": "build_clip_composition",
+        "detail": "切り口作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_ddcHbSfUDWRJKUP37ewtu"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_FICO1sOOYwbd--DMTq7Oc",
+        "stepType": "create_edit_plan",
+        "detail": "演出作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_tYog8ZLXZnnjDlM1BxmUg"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_b1AAPyZ-aW13OQzvrSjF4",
+        "stepType": "apply_adjustment",
+        "detail": "微調整をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_TEcqwR2UMKIbVcVhYS26a"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.806Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_JyePaozr6jNUlKXRhHIhk",
+        "stepType": "render_video",
+        "detail": "動画生成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_vJQVogVm2b925CkP38iBH"
+      },
+      {
+        "actor": "agent",
+        "fromStatus": "queued",
+        "toStatus": "running",
+        "ownerId": "codex2-isolated",
+        "createdAt": "2026-09-30T21:51:03.813Z",
+        "eventType": "agent_request_claimed",
+        "requestDraftId": "draft_h0k0a9GFY-s_ukANFkIoC",
+        "agentRequestId": "agent_kVpPDWZi90SNlzmW7IKZL",
+        "stepType": "propose_clip_themes",
+        "detail": "テーマ作成をAIエージェントが取得した",
+        "id": "agent_log_LR0nQv8Eqw-siQI973-3t"
+      },
+      {
+        "eventType": "draft_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "actor": "user",
+        "toStatus": "draft",
+        "detail": "実行前下書きを保存した",
+        "createdAt": "2026-09-30T21:51:03.815Z",
+        "id": "agent_log_O1STilTk3-JEUA25oKfJ9"
+      },
+      {
+        "eventType": "draft_approved",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "actor": "user",
+        "fromStatus": "draft",
+        "toStatus": "approved",
+        "detail": "人間が依頼を承認し、AIエージェント用作業を作れる状態にした",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "id": "agent_log_2VKD9PES9rvIyx1vvOC4i"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_yjlS8IAjOdP2bh9CEJnQz",
+        "stepType": "prepare_video",
+        "detail": "動画取り込みをAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_V8qY5QJjtWOyvYD64M5Wz"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_xWDUP9tp0Z9a2wkwmeRQ8",
+        "stepType": "run_stt",
+        "detail": "STTをAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_Tgn0dANetPU4CQPxAXfS7"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_MIn7kRQgpBzo7x4xp0t9W",
+        "stepType": "propose_clip_themes",
+        "detail": "テーマ作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_Z6lVK1ZblY7U5tZ9LXvJZ"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_oElJqk4sLiwZPbOGhK6Ab",
+        "stepType": "build_clip_composition",
+        "detail": "切り口作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_Uq_7HLE2TrK-fWc0i0Xbg"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_qS8P8Gi7Btc57tP600MFV",
+        "stepType": "create_edit_plan",
+        "detail": "演出作成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_au-5A1oyY_4vY9YukLYEx"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_X32YO7YkLfBJWas76VDHt",
+        "stepType": "apply_adjustment",
+        "detail": "微調整をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log_ahis0j0y08H0tnFbLyi6Z"
+      },
+      {
+        "actor": "backend",
+        "toStatus": "queued",
+        "createdAt": "2026-09-30T21:51:03.817Z",
+        "eventType": "agent_request_created",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_cuzqdQy5yD-dPxLWuUYbF",
+        "stepType": "render_video",
+        "detail": "動画生成をAIエージェント用作業としてキューに追加した",
+        "id": "agent_log__7PgLfkuY02dT2C3pKJ0o"
+      },
+      {
+        "actor": "agent",
+        "fromStatus": "queued",
+        "toStatus": "running",
+        "ownerId": "codex2-isolated",
+        "createdAt": "2026-09-30T21:51:03.822Z",
+        "eventType": "agent_request_claimed",
+        "requestDraftId": "draft_fCBG8u1kVMwhXareuzhHd",
+        "agentRequestId": "agent_MIn7kRQgpBzo7x4xp0t9W",
+        "stepType": "propose_clip_themes",
+        "detail": "テーマ作成をAIエージェントが取得した",
+        "id": "agent_log_4cs8SUQnbT9Pzlsd7jYh0"
+      }
+    ],
+    "decisionLogs": [],
+    "controlReviewItems": [],
+    "humanReviewActions": [],
+    "finalReviewActions": [],
+    "webGeminiReviews": []
+  },
+  "oldSourceBytesModified": false,
+  "providerCalls": 0,
+  "repair": "independent copy with existing single-link guard preserved"
+}

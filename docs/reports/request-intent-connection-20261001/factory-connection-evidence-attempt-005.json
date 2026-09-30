@@ -1,0 +1,323 @@
+{
+  "status": "passed",
+  "caller": "createStepArtifactBuilders.propose_clip_themes",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005",
+  "sourceAndStt": "existing-saved-artifact-completion-fixtures; no ingestion/STT execution",
+  "sourceVideo": "independent copy of existing saved video; no source byte mutation",
+  "judgment": "non-communicating fixed provider; no AI content-quality claim",
+  "results": [
+    {
+      "name": "normal-api-store-claim-factory-two-purposes-default-and-readback",
+      "status": "passed"
+    },
+    {
+      "name": "provider-failure",
+      "status": "rejected"
+    },
+    {
+      "name": "incomplete-readback",
+      "status": "rejected"
+    },
+    {
+      "name": "resume-accepted-stage-without-rejudging",
+      "status": "passed"
+    },
+    {
+      "name": "draft-approval",
+      "status": "rejected"
+    },
+    {
+      "name": "claim",
+      "status": "rejected"
+    },
+    {
+      "name": "purpose",
+      "status": "rejected"
+    },
+    {
+      "name": "conditions",
+      "status": "rejected"
+    },
+    {
+      "name": "source",
+      "status": "rejected"
+    },
+    {
+      "name": "other-request",
+      "status": "rejected"
+    },
+    {
+      "name": "dependency",
+      "status": "rejected"
+    },
+    {
+      "name": "expired-claim",
+      "status": "rejected"
+    },
+    {
+      "name": "stale-response-sha",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-id",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "selection-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "retention-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-version",
+      "status": "rejected"
+    },
+    {
+      "name": "missing",
+      "status": "rejected"
+    },
+    {
+      "name": "changed",
+      "status": "rejected"
+    },
+    {
+      "name": "bad-reference",
+      "status": "rejected"
+    },
+    {
+      "name": "missing-stage",
+      "status": "rejected"
+    },
+    {
+      "name": "different-approved-version",
+      "status": "rejected"
+    },
+    {
+      "name": "other-saved-transcript-binding",
+      "status": "rejected"
+    }
+  ],
+  "captures": [
+    {
+      "requestId": "agent_KW8z7N6yxqPIh-nWHuQK8",
+      "stage": "discovery",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "88872fac60511d6b6329bee1032232e87bbce896734c7004f0265e235cd6184b",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_KW8z7N6yxqPIh-nWHuQK8",
+      "stage": "selection",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "c95cd3ae669dc738cae5ad64f35821efb18f74faedc224ac2176de1b29e0da05",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_KW8z7N6yxqPIh-nWHuQK8",
+      "stage": "retention",
+      "purpose": "導入の説明と出来事の反応を保持する。\n結末が理解できる構成。",
+      "requestFileSha256": "9d92b83f0944470fa3c3347e9f59e3d5290b079f596c34f5f211c65d583622c7",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_4W58rLzWyG38-ApKpcVnP",
+      "stage": "discovery",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "107d080c85c30761002f34fb4097a827fec4fb80c72c47242a12e41f6543188a",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_4W58rLzWyG38-ApKpcVnP",
+      "stage": "selection",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "080f7954513d711f0737e9957ec0347b26ca33eb61fd339595b289aee837f0a2",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_4W58rLzWyG38-ApKpcVnP",
+      "stage": "retention",
+      "purpose": "結末の意味を優先し、直前の説明を保持する。\n候補間の重複を比較する。",
+      "requestFileSha256": "c866c20dc4c4fbddd2db6d2fd2ddf5cd374c455bde974589b153fe77a159c422",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_sE0AHLHgX065Ednzts7Kd",
+      "stage": "discovery",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "53eb3818cc56114a297accbb31030ef6a4d915d384d6453a585b453ddafa471a",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_sE0AHLHgX065Ednzts7Kd",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "eaabd6a329afdc10d0b77ad0e6ba0ddc512bdf606267c3590c9114e7712555e4",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_sE0AHLHgX065Ednzts7Kd",
+      "stage": "selection",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "eaabd6a329afdc10d0b77ad0e6ba0ddc512bdf606267c3590c9114e7712555e4",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_sE0AHLHgX065Ednzts7Kd",
+      "stage": "retention",
+      "purpose": "途中再開の配線試験。全文の制作意図を保持する。",
+      "requestFileSha256": "1655641766c84c9a938deaf5c3ffa6997e27a805d5774f58fd9736413324ef83",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_FJqGMkUFz9aGFPVOnPDfQ",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。unknown-id",
+      "requestFileSha256": "1728b890de7e50b28eaaa1bfbdb23d20b6ec567ca04061c9e94e1b0a30d21350",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_9HPg21DKWbYen7i07vb6f",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "5d8053a312d8ef4d1dc1e87bb6c4fafbab4b10d1a540e6704c277c9baac4be7d",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_9HPg21DKWbYen7i07vb6f",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-gap",
+      "requestFileSha256": "15df3ba043d42fe9212e807645925e94a9177ac87272d9748a3d3c16153f258e",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_xi06K8Q7hL76WfjVtEXYf",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "540ef6a5ab6503f77b74dbbec7d31a11b3a9f688ee1991e77746afbb6ef41071",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_xi06K8Q7hL76WfjVtEXYf",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。selection-duplicate",
+      "requestFileSha256": "ca9ba8c4ed3250b446ca731e7687e0c1bcf4476bbab7394583b0917292e78428",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_kihqT8xzES6WclXArYLg1",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "eaa2a9c6a758992cfa39750db31bacec51c038fc8cb9aef8ac0927a29fd8da79",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_kihqT8xzES6WclXArYLg1",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "716135bddb852cd61137a136d0d218b1d8d63defb1f6843faaa16eb097bbad4c",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_kihqT8xzES6WclXArYLg1",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-gap",
+      "requestFileSha256": "976dad0dc656b41f459fb602a859ced324adb8e1ce93d4e8291c1c0733383353",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_XmR4DkYzlxwtoJD4fZEwV",
+      "stage": "discovery",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "83301290f366f65c2617d91a818012acf6943551856df4ca107ebbe7ea1475aa",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_XmR4DkYzlxwtoJD4fZEwV",
+      "stage": "selection",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "d722c83b57cbeeb20cf31d0d39d315d5fc6461e21e0f67090e5f8c7e7dfa95ec",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_XmR4DkYzlxwtoJD4fZEwV",
+      "stage": "retention",
+      "purpose": "ID集合と被覆を確認する隔離入力。retention-duplicate",
+      "requestFileSha256": "f8cb584d754371337345ca613a00ff8822ce1b2ac273ab03bfd896b51ea033f4",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    }
+  ],
+  "completed": [
+    {
+      "requestDraftId": "draft_iv4MYTAj_T4BHLW-S0T2c",
+      "requestId": "agent_KW8z7N6yxqPIh-nWHuQK8",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_iv4MYTAj_T4BHLW-S0T2c/digest-preparation/agent_KW8z7N6yxqPIh-nWHuQK8/binding.json"
+    },
+    {
+      "requestDraftId": "draft_I60rc0bwn2pCBQ6kZrqsM",
+      "requestId": "agent_4W58rLzWyG38-ApKpcVnP",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_I60rc0bwn2pCBQ6kZrqsM/digest-preparation/agent_4W58rLzWyG38-ApKpcVnP/binding.json"
+    },
+    {
+      "requestDraftId": "draft_Z9HPwDY9rOdSJmIcUkLJ9",
+      "requestId": "agent_sE0AHLHgX065Ednzts7Kd",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Z9HPwDY9rOdSJmIcUkLJ9/digest-preparation/agent_sE0AHLHgX065Ednzts7Kd/binding.json"
+    }
+  ],
+  "externalInferenceCalls": 0,
+  "sttRuns": 0,
+  "generatedVideos": 0,
+  "humanReviewMutations": 0,
+  "businessStateMutations": 0
+}

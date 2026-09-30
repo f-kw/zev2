@@ -48,7 +48,7 @@ import type {
   TranscriptArtifact,
   WorkflowStepManifest
 } from './workflow-artifacts.js';
-import { createStepArtifactBuilders } from './workflow-step-builders.js';
+import { createStepArtifactBuilders, requireWorkflowRequestOutputFileRef } from './workflow-step-builders.js';
 
 interface NextResponse {
   request: AgentRequest | null;
@@ -245,12 +245,7 @@ function requireRequestOutputFileRef(
   dependencyType: AgentRequestType,
   missingMessage: string
 ) {
-  const fileRef = findRequestOutputFileRef(state, request.requestDraftId, dependencyType);
-  if (!fileRef) {
-    throw new Error(missingMessage);
-  }
-
-  return fileRef;
+  return requireWorkflowRequestOutputFileRef(state, request, dependencyType, missingMessage);
 }
 
 async function readArtifactByUrl<T>(uri: string): Promise<T> {
