@@ -1,0 +1,547 @@
+{
+  "classification_meanings": {
+    "A": "Decisions API直接候補（仕様/access/実測待ち）",
+    "B": "通常GPT/Responses向き（J07は現経路にない対象外行）",
+    "C": "deterministic code",
+    "D": "human review"
+  },
+  "counts": {
+    "A": 12,
+    "B": 11,
+    "C": 11,
+    "D": 2
+  },
+  "previous_counts": {
+    "A": 9,
+    "B": 16,
+    "C": 11
+  },
+  "judgments": [
+    {
+      "id": "J01",
+      "meaning": "新しい見どころを発見する",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "J02",
+      "meaning": "候補名・テーマを言語化する",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "J03",
+      "meaning": "候補を採用・不採用にする",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "固定候補と全体文脈が前提。採否理由の生成J06は残る。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S3"
+      ]
+    },
+    {
+      "id": "J04",
+      "meaning": "制作要求・テーマへ合うか判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "制作要求への適合を有限回答化できる。理由生成は別。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S3"
+      ]
+    },
+    {
+      "id": "J05",
+      "meaning": "複数候補の重複・追加価値を比較する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "候補間の重複・追加価値を有限質問へ。ただし相互整合性と全候補文脈が必要。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S3"
+      ]
+    },
+    {
+      "id": "J06",
+      "meaning": "採否の理由と根拠の説明を作る",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S3"
+      ]
+    },
+    {
+      "id": "J07",
+      "meaning": "見どころの優劣順位・scoreを付ける（現経路にはない）",
+      "previous_classification": "B",
+      "current_actor": "該当なし",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "現経路に順位/score判断はない。Bは対象外の便宜分類であり新たに追加しない。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S3"
+      ]
+    },
+    {
+      "id": "J08",
+      "meaning": "採用集合を取り出して素材順に並べる",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S3"
+      ]
+    },
+    {
+      "id": "J09",
+      "meaning": "保持・削除ブロックの両端を発見する",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S4"
+      ]
+    },
+    {
+      "id": "J10",
+      "meaning": "既知ブロックをkeep/dropにする",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "ブロック両端が既に確定した場合のみ。両端発見J09は置換しない。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S4"
+      ]
+    },
+    {
+      "id": "J11",
+      "meaning": "前振り・展開・オチ・反応を残すか判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "固定ブロックに対する保持要否だけ。フリと結末の文脈を共有する。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S4"
+      ]
+    },
+    {
+      "id": "J12",
+      "meaning": "残る意味と削る理由を説明する",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S4"
+      ]
+    },
+    {
+      "id": "J13",
+      "meaning": "表示単位の区切りを組み立てる",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S5"
+      ]
+    },
+    {
+      "id": "J14",
+      "meaning": "各表示の改行位置を組み立てる",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S5"
+      ]
+    },
+    {
+      "id": "J15",
+      "meaning": "元断片から字幕時計を解決する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "J16",
+      "meaning": "演出を付けるかNormalを保つか判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "第一評価対象。Normal/effect/unresolvedの要否だけで、範囲/preset/理由は未解決のまま残る。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J17",
+      "meaning": "意味上の演出役割を選ぶ",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "normal/focus/vocal-energy/reactionの役割選択候補。現回答全体の代替ではない。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J18",
+      "meaning": "許される演出presetの集合を決める",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "許可集合の判断。APIに集合回答があるとは未確認。個別可否の結合案も整合性評価が必要。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J19",
+      "meaning": "対象字幕と全文/部分を判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "字幕IDを固定し、全文/部分というscopeだけ判断。自由substringはJ20。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J20",
+      "meaning": "原文の強調範囲を見つける",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J21",
+      "meaning": "Panel可否・許可背景・許可配色を判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "既存の有限背景/配色集合の許可だけ。実preset確定はJ25のcode。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J22",
+      "meaning": "Bounce/Shakeを許してよいか判断する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "意味に基づくBounce/Shake可否。物理成立の検証はJ32のcode。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J23",
+      "meaning": "声の強調とPulseの観測peakを選ぶ",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "意味上の声の強調と観測peak選択が混在。text観測だけでは声の由来を保証できず初回候補外。算術/peak可否はcodeに残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J24",
+      "meaning": "演出理由と根拠を説明する",
+      "previous_classification": "A",
+      "current_actor": "Codex",
+      "proposed_classification": "B",
+      "decision_candidate": false,
+      "condition_or_reason": "自由生成・範囲発見・説明を通常GPT等に残す。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J25",
+      "meaning": "許可集合からpreset・背景・配色を確定する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S6"
+      ]
+    },
+    {
+      "id": "J26",
+      "meaning": "素繋ぎか区切りかを許可する",
+      "previous_classification": "B",
+      "current_actor": "Codex",
+      "proposed_classification": "A",
+      "decision_candidate": true,
+      "condition_or_reason": "continuation/separator/eitherの許可集合。今回は4接続のみ、一般化不可。",
+      "structured_outputs_candidate": true,
+      "production_adoption": false,
+      "evidence": [
+        "S6",
+        "S7"
+      ]
+    },
+    {
+      "id": "J27",
+      "meaning": "字幕を技術上の要確認へ振り分ける",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S8"
+      ]
+    },
+    {
+      "id": "J28",
+      "meaning": "機械違反の種類と不合格を整理する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S9"
+      ]
+    },
+    {
+      "id": "J29",
+      "meaning": "技術検証後に製造へ進めるか確定する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S3"
+      ]
+    },
+    {
+      "id": "J30",
+      "meaning": "完成動画を採用・修正・保留にする",
+      "previous_classification": "B",
+      "current_actor": "human",
+      "proposed_classification": "D",
+      "decision_candidate": false,
+      "condition_or_reason": "人間の明示判断を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S10"
+      ]
+    },
+    {
+      "id": "J31",
+      "meaning": "hash・file実在・schema・ID被覆を検証する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S1",
+        "S3",
+        "S6"
+      ]
+    },
+    {
+      "id": "J32",
+      "meaning": "safe areaと演出の物理成立を判定する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S7"
+      ]
+    },
+    {
+      "id": "J33",
+      "meaning": "RGB・exact・全編再現一致を判定する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S9",
+        "S10"
+      ]
+    },
+    {
+      "id": "J34",
+      "meaning": "人間指定優先とResetを解決する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S6"
+      ]
+    },
+    {
+      "id": "J35",
+      "meaning": "UIでテーマを選ぶ",
+      "previous_classification": "B",
+      "current_actor": "human",
+      "proposed_classification": "D",
+      "decision_candidate": false,
+      "condition_or_reason": "人間の明示判断を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S11"
+      ]
+    },
+    {
+      "id": "J36",
+      "meaning": "文字起こし群からテーマ候補・構成を機械生成する",
+      "previous_classification": "C",
+      "current_actor": "code",
+      "proposed_classification": "C",
+      "decision_candidate": false,
+      "condition_or_reason": "既存の決定的検証・算術・射影を維持する。",
+      "structured_outputs_candidate": false,
+      "production_adoption": false,
+      "evidence": [
+        "S11"
+      ]
+    }
+  ],
+  "evidence_key_source": "../jev-decision-inventory-20260928/README.md#8-根拠",
+  "scope": "保存済み326字幕の判断点を維持。後段265字幕の現行renderer工事は対象外。"
+}

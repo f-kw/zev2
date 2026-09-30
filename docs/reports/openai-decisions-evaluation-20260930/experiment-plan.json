@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "input-frozen-inference-not-run",
+  "decision": "J16",
+  "limit": {
+    "usd_total": 1.0,
+    "inference_requests_including_retries": 12
+  },
+  "input_manifest": "experiment-input-manifest.json",
+  "modality": "text only; saved acoustic measurements/ASR represented as text, no media upload",
+  "target": {
+    "tuning": 53,
+    "held_out": 273,
+    "total": 326,
+    "later_integrated_265_excluded": true
+  },
+  "reference": "saved ZEV judgment, not ground truth",
+  "minimum_semantic_answers": [
+    "normal",
+    "effect",
+    "unresolved"
+  ],
+  "provider_wire_schema": null,
+  "entry_gates": [
+    "official endpoint and authentication",
+    "official request/response schema and answer syntax",
+    "documented pricing with a conservative upper cost bound for next request/retries",
+    "current account access",
+    "input/question limits and data handling conditions",
+    "official batch/shared-context capability or reduced sample plan"
+  ],
+  "sampling_if_multiquestion_unavailable": {
+    "partition": "tuning only",
+    "selection": "candidate-0001 source-order positions 0..5, fixed before inference, independent of saved labels",
+    "max_distinct_questions": 6,
+    "repeat": "repeat each exact input once only if cost bound allows; total at most12 including failures/retries",
+    "caveat": "not representative of326 and no held-out quality claim"
+  },
+  "batch_if_officially_supported": {
+    "base_requests": 5,
+    "questions": [
+      53,
+      84,
+      61,
+      101,
+      27
+    ],
+    "sequence": "tuning first; freeze instructions/projection/settings before held-out; hold-out decisions may not tune prompt",
+    "repeat": "repeat same frozen tuning input only with remaining request/cost allowance",
+    "unknown_limits": "do not truncate context or infer token count from bytes; smaller fixed sample or do not run"
+  },
+  "request_accounting": "count every inference attempt before dispatch, including failed requests, retries, SDK automatic retries; disable unbounded hidden retries; stop at either approved bound",
+  "cost_gate": "compute conservative maximum input/output/question/image and retry fees using official billing rules; if no finite upper bound is available do not send",
+  "metrics": [
+    "HTTP/API successful requests / all attempts; refusal, timeout, retry, rate-limit counts separately",
+    "finite-answer deviation / received answers; missing, duplicate, extra IDs separately",
+    "valid decision coverage / intended questions; unresolved / valid answers separately",
+    "agreement / valid normal-or-effect comparisons, raw denominator and unresolved/failed counts; also full eligible denominator",
+    "Normal→effect and effect→Normal counts; per-reference-class denominators; tuning and held-out separately",
+    "Japanese behavior review with original scene context; sarcasm/double negation unverified stays missing",
+    "wall time of each request and complete preparation→validation→save separately; request count and batch questions explicit",
+    "official usage as returned, not estimated from bytes; documented fee estimate distinguished from invoiced cost",
+    "probability/confidence only when formally present; no self-reported JSON score substituted for calibration",
+    "repeated frozen input consistency only if repeated; no general reproducibility claim from one response",
+    "batch/shared context efficiency only if documented and actually measured; do not divide batch latency into fictitious per-call latency"
+  ],
+  "adapter_interface_proposal": {
+    "scope": "research-only conceptual boundary, not implemented API client",
+    "inputs": [
+      "frozen context bytes/hash",
+      "question local IDs, exact text, allowed semantic answers",
+      "explicit documented capability/billing contract"
+    ],
+    "outputs": [
+      "request outcome separate from semantic choice",
+      "local-ID-to-answer mapping",
+      "raw documented provider response reference (redacted)",
+      "optional provider probability/usage fields with presence state",
+      "wall clock duration and request ledger"
+    ],
+    "forbidden": [
+      "inventing endpoint/SDK/model/request/response fields",
+      "mapping transport failure or unknown to Normal",
+      "applying result to production",
+      "automatic fallback calls"
+    ]
+  },
+  "result": {
+    "decisions_inference_requests": 0,
+    "responses_comparator_requests": 0,
+    "jev_requests": 0,
+    "retries": 0,
+    "material_bytes_transmitted": 0,
+    "additional_inference_cost_usd": 0.0,
+    "cost_basis": "no inference dispatched, not an invoice measurement",
+    "latency_ms": null,
+    "usage": null,
+    "agreement": null,
+    "disagreements": null,
+    "probabilities": null,
+    "confidence": null,
+    "calibration": null,
+    "japanese_quality": null,
+    "reason": "endpoint/schema/price/account entitlement not confirmed"
+  },
+  "future_checks": [
+    "recheck announcement release state and linked official API docs",
+    "SDK method and version pinned",
+    "API capabilities, limits, billing and data conditions",
+    "account entitlement confirmation",
+    "formal transport mapping without changing frozen semantic input",
+    "only then approved J16 inference; no automatic schedule created"
+  ]
+}

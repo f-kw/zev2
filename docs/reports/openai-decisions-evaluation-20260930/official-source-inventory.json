@@ -1,0 +1,315 @@
+{
+  "as_of": "2026-09-30",
+  "time_zone": "Asia/Tokyo",
+  "sources": [
+    {
+      "id": "O1",
+      "title": "OpenAI DevDay 2026 Recap",
+      "url": "https://openai.com/index/devday-2026-recap/",
+      "observation": "2026-09-29発表。Decisions節でLuna、有限質問・事前回答、text/image、limited preview、coming daysを確認。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O2",
+      "title": "API reference",
+      "url": "https://developers.openai.com/api/reference/overview",
+      "observation": "公開endpoint一覧にDecisions項目を確認できない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O3",
+      "title": "API reference index",
+      "url": "https://developers.openai.com/api/reference/llms.txt",
+      "observation": "Decisions掲載なし。検索対象229行。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O4",
+      "title": "API guide index",
+      "url": "https://developers.openai.com/api/docs/llms.txt",
+      "observation": "Decisions掲載なし。検索対象262行。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O5",
+      "title": "API changelog",
+      "url": "https://developers.openai.com/api/docs/changelog",
+      "observation": "Decisions掲載を確認できない。発表の否定には使わない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O6",
+      "title": "Model catalog",
+      "url": "https://developers.openai.com/api/docs/models",
+      "observation": "Decisions固有model designationを確認できない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O7",
+      "title": "API pricing",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "observation": "Decisions固有価格・画像課金を確認できない。通常Luna価格を代入しない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O8",
+      "title": "Data controls",
+      "url": "https://developers.openai.com/api/docs/guides/your-data",
+      "observation": "Decisions固有の保持・ZDR・地域適用を確認できない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O9",
+      "title": "Structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "observation": "JSON Schema/enumと拒否・不完全応答の扱いを確認。Decisions仕様ではない。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O10",
+      "title": "Function calling",
+      "url": "https://developers.openai.com/api/docs/guides/function-calling",
+      "observation": "tool/argumentsとアプリ側の実行を分離する流れを確認。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "O11",
+      "title": "GPT-6 Luna model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "observation": "通常モデルのStructured Outputs対応を確認。Decisions利用権限とは別。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "J1",
+      "title": "TypeSafe API reference",
+      "url": "https://docs.typesafe.ai/api",
+      "observation": "Noul、Choice分布・confidence、usage、共通stateと質問mapを確認。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "J2",
+      "title": "TypeSafe Models",
+      "url": "https://docs.typesafe.ai/models",
+      "observation": "jev-1.13.0、入力0.042 USD/Mtok、出力無料、text only、64k/32k、100K token/秒・40request/秒。",
+      "checked_on": "2026-09-30"
+    },
+    {
+      "id": "J3",
+      "title": "TypeSafe Primitives",
+      "url": "https://docs.typesafe.ai/primitives",
+      "observation": "同一stateに複数質問。並列・追加質問の低負担はprovider説明で、ZEV実測ではない。",
+      "checked_on": "2026-09-30"
+    }
+  ],
+  "specifications": [
+    {
+      "id": "A",
+      "item": "endpoint",
+      "status": "not confirmed",
+      "finding": "正式path/method未確認。推測pathをprobeしない。",
+      "source_ids": [
+        "O2",
+        "O3",
+        "O4"
+      ]
+    },
+    {
+      "id": "B",
+      "item": "authentication",
+      "status": "not confirmed",
+      "finding": "Decisions固有の認証・権限scope未確認。一般APIのBearerやPlatformログインから移植しない。",
+      "source_ids": [
+        "O2",
+        "O3"
+      ]
+    },
+    {
+      "id": "C",
+      "item": "model designation",
+      "status": "not confirmed",
+      "finding": "Luna intelligenceを使うという発表は確認。リクエストへ指定するmodel ID/alias/versionは未確認。",
+      "source_ids": [
+        "O1",
+        "O6"
+      ]
+    },
+    {
+      "id": "D",
+      "item": "request structure",
+      "status": "not confirmed",
+      "finding": "正式request/response schema、サイズ上限、エラー・retry契約未確認。",
+      "source_ids": [
+        "O2",
+        "O3",
+        "O4"
+      ]
+    },
+    {
+      "id": "E",
+      "item": "finite answer declaration",
+      "status": "confirmed",
+      "finding": "事前定義の有限回答という機能概念のみ確認。回答宣言のfield名・JSON構文・最大選択数は未確認。",
+      "source_ids": [
+        "O1"
+      ]
+    },
+    {
+      "id": "F",
+      "item": "multiple questions per request",
+      "status": "not confirmed",
+      "finding": "発表のquestionsという複数形から1 request多問/batchを推定しない。",
+      "source_ids": [
+        "O1",
+        "O2",
+        "O3"
+      ]
+    },
+    {
+      "id": "G",
+      "item": "shared context",
+      "status": "not confirmed",
+      "finding": "contextの入力は確認。1つを複数質問で共有する処理・課金の契約は未確認。",
+      "source_ids": [
+        "O1",
+        "O2"
+      ]
+    },
+    {
+      "id": "H",
+      "item": "text input",
+      "status": "confirmed",
+      "finding": "text context対応は公式発表で確認。表現形式・上限は未確認。",
+      "source_ids": [
+        "O1"
+      ]
+    },
+    {
+      "id": "I",
+      "item": "image input",
+      "status": "confirmed",
+      "finding": "image context対応は公式発表で確認。サイズ・枚数・課金方式未確認。今回は送信しない。",
+      "source_ids": [
+        "O1",
+        "O7"
+      ]
+    },
+    {
+      "id": "J",
+      "item": "probability/confidence output",
+      "status": "not confirmed",
+      "finding": "分布、confidence、calibrationの仕様・保証は未確認。Jev型から移植しない。",
+      "source_ids": [
+        "O1",
+        "O2",
+        "O3"
+      ]
+    },
+    {
+      "id": "K",
+      "item": "usage metadata",
+      "status": "not confirmed",
+      "finding": "token/decision単位等の返却と課金への対応は未確認。",
+      "source_ids": [
+        "O2",
+        "O3",
+        "O7"
+      ]
+    },
+    {
+      "id": "L",
+      "item": "latency metadata",
+      "status": "not confirmed",
+      "finding": "real-timeという説明は実測latency/SLA/server timing fieldの保証ではない。",
+      "source_ids": [
+        "O1",
+        "O2"
+      ]
+    },
+    {
+      "id": "M",
+      "item": "rate limits",
+      "status": "not confirmed",
+      "finding": "専用RPM/TPM、並列数、429/retry制約未確認。",
+      "source_ids": [
+        "O2",
+        "O4"
+      ]
+    },
+    {
+      "id": "N",
+      "item": "pricing",
+      "status": "not confirmed",
+      "finding": "Decisions固有料金未確認。事前費用計算不能のため課金推論を実行しない。",
+      "source_ids": [
+        "O7"
+      ]
+    },
+    {
+      "id": "O",
+      "item": "data handling/retention",
+      "status": "not confirmed",
+      "finding": "Decisions固有の保持期間、学習利用、ZDR/地域/画像条件への適用を未確認。",
+      "source_ids": [
+        "O8"
+      ]
+    },
+    {
+      "id": "P",
+      "item": "preview access requirements",
+      "status": "not confirmed",
+      "finding": "9/29 limited previewは確認。申込・招待・対象account条件、9/30の一般公開完了は未確認。",
+      "source_ids": [
+        "O1"
+      ]
+    },
+    {
+      "id": "Q",
+      "item": "current account callable",
+      "status": "not confirmed",
+      "finding": "既存アカウントでPlatform Home/More閲覧成功。Decisions入口は見えず、accessの肯定/否定は確定不可。endpoint/schema/price不明につき推論0。",
+      "source_ids": [
+        "O2",
+        "O7"
+      ]
+    }
+  ],
+  "sdk_api_index_checks": [
+    {
+      "repository": "openai/openai-python",
+      "commit": "58aca1dcfd8d04a3c6352fa2c34b3035ea850f57",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/58aca1dcfd8d04a3c6352fa2c34b3035ea850f57/api.md",
+      "bytes": 131774,
+      "sha256": "ed28b607d5c024be055b47039e132fb40f693a7ce63a1d1cc689819ff51cf60d",
+      "decision_lines": [],
+      "responses_present": true,
+      "observed_at_utc": "2026-09-30T05:18:57.707235+00:00"
+    },
+    {
+      "repository": "openai/openai-node",
+      "commit": "02f4ef94e8b3b02b43af6516c71a74c3c7a80b5d",
+      "url": "https://raw.githubusercontent.com/openai/openai-node/02f4ef94e8b3b02b43af6516c71a74c3c7a80b5d/api.md",
+      "bytes": 130396,
+      "sha256": "0eba6ecaf97809e415cef36db1d6fa83f8f8414b5af7254d4544878be29abb41",
+      "decision_lines": [],
+      "responses_present": true,
+      "observed_at_utc": "2026-09-30T05:18:58.333548+00:00"
+    }
+  ],
+  "sdk_limit": "公開mainのapi.mdをcommit固定して確認。非公開preview SDKや全内部resourceの不存在を証明するものではない。web rawの古いcrawlは最新根拠から除外。",
+  "account_check": {
+    "platform_authenticated": true,
+    "surfaces": [
+      "https://platform.openai.com/home",
+      "Home sidebar More menu"
+    ],
+    "decisions_entry_visible": false,
+    "preview_entitlement": "not confirmed",
+    "repository_openai_key_configured": true,
+    "shell_openai_key_configured": false,
+    "key_value_printed_or_saved": false,
+    "inference_requests": 0,
+    "authenticated_model_list_api_calls": 0,
+    "account_identifiers_saved": false
+  },
+  "evidence_boundary": "not confirmedは未公開/不存在の断定ではない。inaccessibleはアクセス障害にのみ使う。本件は認証済みUIを読めたが権限は未確定。"
+}
