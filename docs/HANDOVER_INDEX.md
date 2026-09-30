@@ -4,7 +4,7 @@
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しだけを置く運用を推奨する。
 
-**最新更新：Codex2の `11809f6f6bebed82014971c966b79b383b921a1d` を監査し、v002の限定計画準備接続を技術受理した。同じ返答で[保存Digest計画から既存製造入力への接続v003](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)を発行（保存 `785c28b0cbedcfbe05ddf946f6e64ab078afb5b6`）。次は再判断せずに保持区間を既存Digest編集計画・製造入力へ渡し、既存consumerの受理・保存再読まで進める。通常Clipの一テーマ型への偽装、人間承認の流用、公開API・本番default変更、動画実走はしない。Codex2単独で同じセッションを継続。v003受領・再開は未確認。詳細は§2.5。**
+**最新更新：Codex2の `11809f6f6bebed82014971c966b79b383b921a1d` を監査し、v002の限定計画準備接続を技術受理した。同じ返答で[保存Digest計画から既存製造入力への接続v003](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)を発行（保存 `785c28b0cbedcfbe05ddf946f6e64ab078afb5b6`）。次は再判断せずに保持区間を既存Digest編集計画・製造入力へ渡し、既存consumerの受理・保存再読まで進める。通常Clipの一テーマ型への偽装、人間承認の流用、公開API・本番default変更、動画実走はしない。Codex2単独で同じセッションを継続。Codex2がce1d4665でv003を受領・同期し、新消費側→既存Digest製造入力・時計検査の受理／保存／別process再読を15対象結果＋追加拒否5件と型検査で確認。限定接続は技術完了、通常保存・直接監査報告へ進む。詳細は§2.5。**
 
 ## 0. 最初に読む人へ
 
@@ -57,7 +57,7 @@ ID9の初回新案は `bd0113c8301e49eb74993385286fd12c1b9894b8`、Codex1の独�
 | Codex2：9. 採用区間・構成の改善・前回限定作業 | `b69e168c` の限定技術作業を相談役受理。11探索候補・7採用・9保持、27,691frame（15分23.033秒）の一案と旧版差分、局所540p5本・147字幕、111対象試験、判断と媒体の別process再読。[主report](reports/selection-structure-improvement-20260930/README.md) | 送信実績保存 `68a32038`・Git終了連絡まで受領し、前回担当は終了。心霊会話の不採用理由も相談役受理。人間品質、新案1080p全編、補足版と局所媒体のCodex1点検は未認定。これらを前回作業の再開条件にはしない |
 | Codex1：9の独立点検 | `9b72bc0f` の既存レビュー照合と新案`bd0113c8`の点検を相談役受理。送信実績 `b93870fc` を保存し、Git終了連絡を受領。[点検記録](reports/selection-structure-improvement-20260930/independent-review.md) | 今回担当は終了。点検対象は`bd0113c8`まで。後続補足版・局所媒体を点検済みにせず、追加再点検・自動ポーリング・応答記録だけの再commitは不要 |
 | Codex2：9. 通常callerからのDigest計画準備v002 | `11809f6f` の実factory→既存3判断→別保存・再開・再読を相談役技術受理。最終attempt-006は27対象結果・21入力捕捉・別process再読2件、関連型検査合格。[主report](reports/request-intent-connection-20261001/README.md) | 限定準備は完了。通常index既定・一テーマ確認・公開APIは不変。source/STT完了fixtureと固定providerによる配線試験であり、AI意味品質や通常UIからの製造完成ではない |
-| Codex2：9. 保存Digest計画の後段入力接続v003 | v002の出力を旧readerで再検証し、保持区間を既存Digest編集計画・製造入力へ渡す[続行指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)を発行 | 指示発行済み・受領と再開は未確認。Codex2単独。束縛済みv002実装と保存物を保持し、新しい消費側で接続・保存再読を進める。通常Clipへの偽装、本番default変更、動画実走は対象外 |
+| Codex2：9. 保存Digest計画の後段入力接続v003 | v002の出力を旧readerで再検証し、保持区間を既存Digest編集計画・製造入力へ渡す[続行指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)を発行 | ce1d4665で指示を受領・再開済み、消費側・隔離試験15対象結果と追加拒否5件・型検査・保存再読合格。通常保存・直接報告へ進む。Codex2単独。束縛済みv002実装と保存物を保持し、新しい消費側で接続・保存再読を進める。通常Clipへの偽装、本番default変更、動画実走は対象外 |
 
 共通計画・台帳・各reportの既存担当区分を保ち、他担当の内容を上書きしない。前回の終了と、現在のCodex2単独の後続指示を区別する。`11809f6f`のpush・Git操作終了が報告され、相談役が今回の指示・共通状態保存を担当する。
 
@@ -124,7 +124,7 @@ Codex2の実装・対象試験・保存証拠は主reportと最終attempt-006へ
 - **続行指示**：[v003](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)、保存`785c28b0cbedcfbe05ddf946f6e64ab078afb5b6`。完了bindingを旧厳密readerで再検証し、採否・保持を再判断せず、既存Digestの編集計画・製造入力／時計の実consumerへ渡す。変換・保存・別process再読・拒否まで同じCodex2が実施する。文書やJSON保存だけで終わらせない。
 - **後段と承認の意味**：通常Clipの構成・編集型は`selectedThemeId`等の意味を持ち、Digest複数候補へそのまま流用しない。既存Digest形式と製造入力の経路を使う。テーマ承認の捏造・一テーマへの偽装、control review変更、backendへの通常完了登録、公開API／本番default切替はしない。出力は内部候補であり、動画実行・人間品質採用・公開承認ではない。
 - **内容と旧証拠の保持**：個々の保持区間・断片ID・順序・source時計を維持する。keep/drop/keepを候補のmin/maxへ潰さず、除外区間を復活させない。v002はfactory・indexを含む16実装参照へ束縛されるため、新しい消費側モジュールから既存exportを使い、原則として束縛済み実装と元18保存物を変更しない。旧要求SHA・承認を新しい結果へ付け替えない。既存形式の意味変更が不可避なら具体的差分だけを相談役へ返す。
-- **実行と未確認**：新しい内容判断、素材、外部推論・費用、STT、動画、UI、renderer/native QC、Codex1再起動は不要。現時点の報告累積は設営3・製品限定修正2、v003でリセットしない。Codex2は`11809f6f`の通常push・local/origin一致・Git clean・untracked0・staged0・Git操作終了を報告。remote mainは相談役確認、ローカル状態はCodex報告である。相談役の今回文書保存後に同じセッションで続行する。v003の受領・再開は保存時点では未確認。
+- **実行と未確認**：新しい内容判断、素材、外部推論・費用、STT、動画、UI、renderer/native QC、Codex1再起動は不要。現時点の報告累積は設営3・製品限定修正2、v003でリセットしない。Codex2は`11809f6f`の通常push・local/origin一致・Git clean・untracked0・staged0・Git操作終了を報告。remote mainは相談役確認、ローカル状態はCodex報告である。相談役の今回文書保存後に同じセッションで続行する。v003はce1d4665で受領・再開。新消費側による製造入力／時計検査、15対象結果＋追加拒否5件と型検査を確認。現在はCodex2が本checkpointのGit保存・直接報告を担当。
 
 今回の受理・次指示は本節とv003が正本。受理記録だけの再commit・終了連絡・再起動を挟まない。人間の視聴・採点・過去の感想の再説明・転記依頼は0件。
 

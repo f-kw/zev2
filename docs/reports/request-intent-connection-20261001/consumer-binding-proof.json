@@ -1,0 +1,342 @@
+{
+  "status": "verified",
+  "verifiedAt": "2026-10-01T07:40:00.672330+09:00",
+  "consumedBindings": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/binding.json",
+      "fileSha256": "478fb3dd24872fd0ab677ce6ec3ecfcfce05076b87da445a8c16f5bc0b877f3a",
+      "record": {
+        "schemaVersion": "normal-request-digest-consumption-binding-v001",
+        "status": "complete",
+        "preparationBinding": {
+          "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/binding.json",
+          "fileSha256": "b43bec2f1cf47281c9e71111889bd4ff5378ee591d9ae84770f53204d0ff02f2"
+        },
+        "sourceInspectionBinding": {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+        },
+        "sourceByteEquivalence": {
+          "prepared": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "inspected": {
+            "path": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          }
+        },
+        "implementations": [
+          {
+            "path": "runner/src/digest-plan-consumption-v001.ts",
+            "fileSha256": "e9360acf2dc0ffd031d6a9b8b53e14707b2d3197350b9cf6586dc53dabd14141"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+            "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+            "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+            "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+            "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+          }
+        ],
+        "outputs": {
+          "machine-adoption.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/machine-adoption.json",
+            "fileSha256": "2024b294b781633e22ab1fc56460083fd5d0857724cf1f452235c44fc7b31f5a"
+          },
+          "edit-plan.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/edit-plan.json",
+            "fileSha256": "39a4adc9716e133a0ba52448ca6e1b5ce7c7ee5ab2ee20b73477dc9dee8266da"
+          },
+          "manufacturing-values.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/manufacturing-values.json",
+            "fileSha256": "b0694a9ad8662e38d49be032ee219d590cacedcc61d56f6b0a66bb4206d40142"
+          },
+          "clock-resolution.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/clock-resolution.json",
+            "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271"
+          }
+        },
+        "consumers": {
+          "manufacturingJob": {
+            "function": "validatePresentationBaseMediaBuildJobV001",
+            "status": "passed"
+          },
+          "intervalClock": {
+            "function": "validatePresentationBaseMediaSegmentPlanV002",
+            "status": "passed"
+          }
+        },
+        "humanQuality": "pending",
+        "renderExecuted": false,
+        "backendCompletionRegistered": false
+      }
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/binding.json",
+      "fileSha256": "0f54205af2c3f6ff654ca87f2612617e109aae1bad1590d370a24ec215a612e8",
+      "record": {
+        "schemaVersion": "normal-request-digest-consumption-binding-v001",
+        "status": "complete",
+        "preparationBinding": {
+          "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-preparation/agent_US3Ukkwkt1bmxRt_RLg-0/binding.json",
+          "fileSha256": "6106d81a9fcf7b5a6c31e0b9895bd87dfedb586780cba68416289e4ee5e5b13e"
+        },
+        "sourceInspectionBinding": {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+        },
+        "sourceByteEquivalence": {
+          "prepared": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "inspected": {
+            "path": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          }
+        },
+        "implementations": [
+          {
+            "path": "runner/src/digest-plan-consumption-v001.ts",
+            "fileSha256": "e9360acf2dc0ffd031d6a9b8b53e14707b2d3197350b9cf6586dc53dabd14141"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+            "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+            "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+            "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+            "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+          }
+        ],
+        "outputs": {
+          "machine-adoption.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/machine-adoption.json",
+            "fileSha256": "bcdf2454223c34d634f6b4808c8f18270fc1924dd6964d41d22f4d74c55809a6"
+          },
+          "edit-plan.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/edit-plan.json",
+            "fileSha256": "58eb15d55941dade0e79ed0e42fcc8a57793b81f5130f7b676a4f24e20cd77d0"
+          },
+          "manufacturing-values.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/manufacturing-values.json",
+            "fileSha256": "dceaec0444d9f1572090503b76cf14cbb000ea6f2123b9ddfae59f70f5751a8f"
+          },
+          "clock-resolution.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/clock-resolution.json",
+            "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271"
+          }
+        },
+        "consumers": {
+          "manufacturingJob": {
+            "function": "validatePresentationBaseMediaBuildJobV001",
+            "status": "passed"
+          },
+          "intervalClock": {
+            "function": "validatePresentationBaseMediaSegmentPlanV002",
+            "status": "passed"
+          }
+        },
+        "humanQuality": "pending",
+        "renderExecuted": false,
+        "backendCompletionRegistered": false
+      }
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-consumption/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json",
+      "fileSha256": "eb2180625bd8d1409ce0706646772dc215bcd104ff799e1ef551481b20d3a86b",
+      "record": {
+        "schemaVersion": "normal-request-digest-consumption-binding-v001",
+        "status": "complete",
+        "preparationBinding": {
+          "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json",
+          "fileSha256": "066ace784d83fc09fb9d76f166c6bda8ce8427edaed87b8de96797d7a23d1a70"
+        },
+        "sourceInspectionBinding": {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+        },
+        "sourceByteEquivalence": {
+          "prepared": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "inspected": {
+            "path": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          }
+        },
+        "implementations": [
+          {
+            "path": "runner/src/digest-plan-consumption-v001.ts",
+            "fileSha256": "e9360acf2dc0ffd031d6a9b8b53e14707b2d3197350b9cf6586dc53dabd14141"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+            "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+            "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+            "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+            "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+          }
+        ],
+        "outputs": {
+          "machine-adoption.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-consumption/agent_bPvxsrQMr5rG9oMDTmDO8/machine-adoption.json",
+            "fileSha256": "06be2fd9ed36c43b4c88243c84b5d4994da1ea272f52c94b24b243046229077e"
+          },
+          "edit-plan.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-consumption/agent_bPvxsrQMr5rG9oMDTmDO8/edit-plan.json",
+            "fileSha256": "4469a5734170aa62d28a69b659669dce005d8f72f447aa67de8d43cbdb128fe5"
+          },
+          "manufacturing-values.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-consumption/agent_bPvxsrQMr5rG9oMDTmDO8/manufacturing-values.json",
+            "fileSha256": "146b52a19c09aa8f7073e2760921cdcc25989fb04b619619c3f38813b0b3768d"
+          },
+          "clock-resolution.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-consumption/agent_bPvxsrQMr5rG9oMDTmDO8/clock-resolution.json",
+            "fileSha256": "2cf51f73458b2310d48cd5d40746de6f556da3f5a1596b71a2ea4cced68872bf"
+          }
+        },
+        "consumers": {
+          "manufacturingJob": {
+            "function": "validatePresentationBaseMediaBuildJobV001",
+            "status": "passed"
+          },
+          "intervalClock": {
+            "function": "validatePresentationBaseMediaSegmentPlanV002",
+            "status": "passed"
+          }
+        },
+        "humanQuality": "pending",
+        "renderExecuted": false,
+        "backendCompletionRegistered": false
+      }
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-consumption/agent_No336WhmO6oCR90opf6w8/binding.json",
+      "fileSha256": "d3e4ac16d0ef4fa904ee542be270748fd7d68235c8abbc8149a7d92f6ac874e5",
+      "record": {
+        "schemaVersion": "normal-request-digest-consumption-binding-v001",
+        "status": "complete",
+        "preparationBinding": {
+          "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding.json",
+          "fileSha256": "5c48bf11e06b2a07ae911e4cfae0981cee5fcf4f37841085e8262cabf88f5558"
+        },
+        "sourceInspectionBinding": {
+          "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+        },
+        "sourceByteEquivalence": {
+          "prepared": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          },
+          "inspected": {
+            "path": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+            "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+          }
+        },
+        "implementations": [
+          {
+            "path": "runner/src/digest-plan-consumption-v001.ts",
+            "fileSha256": "e9360acf2dc0ffd031d6a9b8b53e14707b2d3197350b9cf6586dc53dabd14141"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+            "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff"
+          },
+          {
+            "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+            "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+            "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c"
+          },
+          {
+            "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+            "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292"
+          }
+        ],
+        "outputs": {
+          "machine-adoption.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-consumption/agent_No336WhmO6oCR90opf6w8/machine-adoption.json",
+            "fileSha256": "3ae5eb5cab85c7959d1ffc5ab171016617a2e7d0d4316dee2cd2a9b5f4654ba7"
+          },
+          "edit-plan.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-consumption/agent_No336WhmO6oCR90opf6w8/edit-plan.json",
+            "fileSha256": "04f07c29f2afb45dcdfde9ff5facd098dbde6efb9de2dc3c8f38d3bea1411428"
+          },
+          "manufacturing-values.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-consumption/agent_No336WhmO6oCR90opf6w8/manufacturing-values.json",
+            "fileSha256": "984224928450feec34640f79c82d1733973fee0da1d8c275abb99f8ded8bdd43"
+          },
+          "clock-resolution.json": {
+            "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-consumption/agent_No336WhmO6oCR90opf6w8/clock-resolution.json",
+            "fileSha256": "2cf51f73458b2310d48cd5d40746de6f556da3f5a1596b71a2ea4cced68872bf"
+          }
+        },
+        "consumers": {
+          "manufacturingJob": {
+            "function": "validatePresentationBaseMediaBuildJobV001",
+            "status": "passed"
+          },
+          "intervalClock": {
+            "function": "validatePresentationBaseMediaSegmentPlanV002",
+            "status": "passed"
+          }
+        },
+        "humanQuality": "pending",
+        "renderExecuted": false,
+        "backendCompletionRegistered": false
+      }
+    }
+  ],
+  "oldV002BindingsAndArtifactsUnchanged": true,
+  "old16ImplementationReferencesUnchanged": true,
+  "testReferences": [
+    {
+      "path": "docs/reports/request-intent-connection-20261001/consumer-connection-test.mts",
+      "fileSha256": "7b4fb746974a6f154a9e11bd39ff1809e31c2c92ce2ad8b6e348a73355211e2a"
+    },
+    {
+      "path": "docs/reports/request-intent-connection-20261001/consumer-rejection-test.mts",
+      "fileSha256": "75c72633925f7cf8c5119206633a78e124710cbf0e5bd927b60c846531a6e6f8"
+    },
+    {
+      "path": "docs/reports/request-intent-connection-20261001/consumer-connection-evidence-attempt-001.json",
+      "fileSha256": "a620d5dac532bcb2c5aa3dd09e934e056050bff61e8d32632b28e88a69d5d571"
+    },
+    {
+      "path": "docs/reports/request-intent-connection-20261001/consumer-rejection-evidence.json",
+      "fileSha256": "f628523053f79f679162dddae89f1c94c1b5efff974fb0f5009065b11f9450c1"
+    }
+  ]
+}

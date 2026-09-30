@@ -1,0 +1,435 @@
+{
+  "status": "passed",
+  "runtime": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001",
+  "results": [
+    {
+      "name": "normal-api-store-claim-factory-consumer-two-noncontiguous-purposes",
+      "status": "passed"
+    },
+    {
+      "name": "keep-drop-keep-ids-clocks-frame-sample-order-and-readback",
+      "status": "passed"
+    },
+    {
+      "name": "other-request",
+      "status": "rejected"
+    },
+    {
+      "name": "purpose",
+      "status": "rejected"
+    },
+    {
+      "name": "source",
+      "status": "rejected"
+    },
+    {
+      "name": "approved-version",
+      "status": "rejected"
+    },
+    {
+      "name": "expired-claim",
+      "status": "rejected"
+    },
+    {
+      "name": "unknown-version",
+      "status": "rejected"
+    },
+    {
+      "name": "bad-reference",
+      "status": "rejected"
+    },
+    {
+      "name": "missing-output",
+      "status": "rejected"
+    },
+    {
+      "name": "changed-output",
+      "status": "rejected"
+    },
+    {
+      "name": "segment-gap",
+      "status": "rejected"
+    },
+    {
+      "name": "segment-duplicate",
+      "status": "rejected"
+    },
+    {
+      "name": "changed-preparation",
+      "status": "rejected"
+    },
+    {
+      "name": "old-v002-bindings-read-consumed-without-provider-or-original-changes",
+      "status": "passed"
+    }
+  ],
+  "captures": [
+    {
+      "requestId": "agent_U_wSCQRo5PBIylqJoMNOW",
+      "stage": "discovery",
+      "purpose": "前後の役割を残し、中間除外が復活しない構成。",
+      "requestFileSha256": "aef636cf4c1382dea95dec36655180ddcd5a2e4556c7424b037ec34cd42e530a",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_U_wSCQRo5PBIylqJoMNOW",
+      "stage": "selection",
+      "purpose": "前後の役割を残し、中間除外が復活しない構成。",
+      "requestFileSha256": "edeef2e2015ef476268ce5c9425fd8ff371c9ced7894d03b15a62c468e60abfe",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_U_wSCQRo5PBIylqJoMNOW",
+      "stage": "retention",
+      "purpose": "前後の役割を残し、中間除外が復活しない構成。",
+      "requestFileSha256": "eb83020e300f7ce03878f2fdcb9c0d07774e403b8fc066bdae060ca9f8842e44",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_US3Ukkwkt1bmxRt_RLg-0",
+      "stage": "discovery",
+      "purpose": "別の制作意図と条件を出所として維持する。非連続保持を順序どおり渡す。",
+      "requestFileSha256": "80e80084a25c7c274ea815ca49baf9141a98a49caf8b7d37cce1a36aa9aef5eb",
+      "sourceId": "isolated-saved-source",
+      "utterances": 1615,
+      "candidates": null
+    },
+    {
+      "requestId": "agent_US3Ukkwkt1bmxRt_RLg-0",
+      "stage": "selection",
+      "purpose": "別の制作意図と条件を出所として維持する。非連続保持を順序どおり渡す。",
+      "requestFileSha256": "a9df23707fe08306cfd14aa32565e15c8acd4199a2364392b15d9a692e73d109",
+      "sourceId": "isolated-saved-source",
+      "utterances": null,
+      "candidates": 2
+    },
+    {
+      "requestId": "agent_US3Ukkwkt1bmxRt_RLg-0",
+      "stage": "retention",
+      "purpose": "別の制作意図と条件を出所として維持する。非連続保持を順序どおり渡す。",
+      "requestFileSha256": "c93d50de2f031dcc7e86a056d0dc2dc744357b60b06ea8ec78fbfed35de345fb",
+      "sourceId": null,
+      "utterances": null,
+      "candidates": 2
+    }
+  ],
+  "completed": [
+    {
+      "requestId": "agent_U_wSCQRo5PBIylqJoMNOW",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-consumption/agent_U_wSCQRo5PBIylqJoMNOW/binding.json",
+      "sourceIntervals": [
+        {
+          "candidateId": "candidate-0001",
+          "segmentId": "segment-0001",
+          "sourceStartMs": 213077,
+          "sourceEndMs": 213898,
+          "sourceSegmentIds": [
+            285,
+            286,
+            287,
+            288,
+            289,
+            290
+          ]
+        },
+        {
+          "candidateId": "candidate-0001",
+          "segmentId": "segment-0002",
+          "sourceStartMs": 215418,
+          "sourceEndMs": 218100,
+          "sourceSegmentIds": [
+            297,
+            298,
+            299,
+            300,
+            301,
+            302,
+            303,
+            304,
+            305,
+            306,
+            307,
+            308,
+            309,
+            310,
+            311,
+            312,
+            313,
+            314,
+            315
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "segmentId": "segment-0003",
+          "sourceStartMs": 419134,
+          "sourceEndMs": 420115,
+          "sourceSegmentIds": [
+            1461,
+            1462,
+            1463,
+            1464,
+            1465,
+            1466
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "segmentId": "segment-0004",
+          "sourceStartMs": 422277,
+          "sourceEndMs": 435769,
+          "sourceSegmentIds": [
+            1473,
+            1474,
+            1475,
+            1476,
+            1477,
+            1478,
+            1479,
+            1480,
+            1481,
+            1482,
+            1483,
+            1484,
+            1485,
+            1486,
+            1487,
+            1488,
+            1489,
+            1490,
+            1491,
+            1492,
+            1493,
+            1494,
+            1495,
+            1496,
+            1497,
+            1498,
+            1499,
+            1500,
+            1501,
+            1502,
+            1503,
+            1504,
+            1505,
+            1506,
+            1507,
+            1508,
+            1509,
+            1510,
+            1511,
+            1512,
+            1513,
+            1514,
+            1515,
+            1516,
+            1517,
+            1518,
+            1519,
+            1520,
+            1521,
+            1522,
+            1523,
+            1524,
+            1525,
+            1526,
+            1527,
+            1528,
+            1529,
+            1530,
+            1531,
+            1532,
+            1533,
+            1534,
+            1535,
+            1536,
+            1537,
+            1538,
+            1539,
+            1540,
+            1541,
+            1542,
+            1543,
+            1544,
+            1545,
+            1546,
+            1547,
+            1548,
+            1549,
+            1550,
+            1551
+          ]
+        }
+      ],
+      "outputFrameCount": 539
+    },
+    {
+      "requestId": "agent_US3Ukkwkt1bmxRt_RLg-0",
+      "binding": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-consumption/agent_US3Ukkwkt1bmxRt_RLg-0/binding.json",
+      "sourceIntervals": [
+        {
+          "candidateId": "candidate-0001",
+          "segmentId": "segment-0001",
+          "sourceStartMs": 213077,
+          "sourceEndMs": 213898,
+          "sourceSegmentIds": [
+            285,
+            286,
+            287,
+            288,
+            289,
+            290
+          ]
+        },
+        {
+          "candidateId": "candidate-0001",
+          "segmentId": "segment-0002",
+          "sourceStartMs": 215418,
+          "sourceEndMs": 218100,
+          "sourceSegmentIds": [
+            297,
+            298,
+            299,
+            300,
+            301,
+            302,
+            303,
+            304,
+            305,
+            306,
+            307,
+            308,
+            309,
+            310,
+            311,
+            312,
+            313,
+            314,
+            315
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "segmentId": "segment-0003",
+          "sourceStartMs": 419134,
+          "sourceEndMs": 420115,
+          "sourceSegmentIds": [
+            1461,
+            1462,
+            1463,
+            1464,
+            1465,
+            1466
+          ]
+        },
+        {
+          "candidateId": "candidate-0002",
+          "segmentId": "segment-0004",
+          "sourceStartMs": 422277,
+          "sourceEndMs": 435769,
+          "sourceSegmentIds": [
+            1473,
+            1474,
+            1475,
+            1476,
+            1477,
+            1478,
+            1479,
+            1480,
+            1481,
+            1482,
+            1483,
+            1484,
+            1485,
+            1486,
+            1487,
+            1488,
+            1489,
+            1490,
+            1491,
+            1492,
+            1493,
+            1494,
+            1495,
+            1496,
+            1497,
+            1498,
+            1499,
+            1500,
+            1501,
+            1502,
+            1503,
+            1504,
+            1505,
+            1506,
+            1507,
+            1508,
+            1509,
+            1510,
+            1511,
+            1512,
+            1513,
+            1514,
+            1515,
+            1516,
+            1517,
+            1518,
+            1519,
+            1520,
+            1521,
+            1522,
+            1523,
+            1524,
+            1525,
+            1526,
+            1527,
+            1528,
+            1529,
+            1530,
+            1531,
+            1532,
+            1533,
+            1534,
+            1535,
+            1536,
+            1537,
+            1538,
+            1539,
+            1540,
+            1541,
+            1542,
+            1543,
+            1544,
+            1545,
+            1546,
+            1547,
+            1548,
+            1549,
+            1550,
+            1551
+          ]
+        }
+      ],
+      "outputFrameCount": 539
+    }
+  ],
+  "consumers": [
+    "validatePresentationBaseMediaBuildJobV001",
+    "validatePresentationBaseMediaSegmentPlanV002"
+  ],
+  "sourceAndStt": "saved artifact completion fixtures; no ingestion/STT",
+  "judgment": "fixed noncommunicating noncontiguous-retention fixtures; no content-quality claim",
+  "externalInferenceCalls": 0,
+  "sttRuns": 0,
+  "generatedVideos": 0,
+  "humanReviewMutations": 0,
+  "businessStateMutations": 0,
+  "originalV002PreparationMutations": 0,
+  "oldImplementationMutations": 0
+}

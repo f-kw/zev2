@@ -2,7 +2,7 @@
 
 ## 受領・着手（2026-10-01 JST）
 
-状態：v001のcaller欠落を相談役へ返し、v002を受領して限定接続を実装。通常API→承認→claim→実factory→探索・採否・保持の保存／再読がattempt-005で成立。追加検査attempt-006は27結果・21捕捉、関連型検査も合格。実装・保存・再読の限定範囲は技術完了、通常commit/pushと直接監査報告へ進む。通常UIからの採用／製造は未接続。
+状態：v002の通常factory→探索・採否・保持の限定準備は11809f6fで相談役技術受理。v003をce1d4665で受領し、保存計画→既存Digest編集・製造入力の実consumerへ接続。接続15結果・追加拒否5件・関連型検査・保存／別process再読が合格。通常commit/pushと直接報告へ進む。通常UI／実推論／動画／人間採用は未接続・未認定。
 
 - 受領：`Codex2 続行指示｜9. 通常の依頼から制作意図を渡す接続`、`decision: continue`、`kawafmm承認済み`。本人の「終わったら次に進んで」に基づく後続限定作業。
 - 指示書：`docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md`（保存05c042ae）、指示・現在地の保存HEAD `46219d1037afcf36a5b48bf92f6323946ab9c566`。
@@ -126,3 +126,51 @@ attempt-006は27結果・21provider捕捉が合格。異なる制作意図2件�
 最終3記録の全18artifactと16実装参照を現在fileのbytesで照合し、出所記録のsnapshot／SHAを上記proofへ保存した。依存未指定の既定、凍結済みvalidator、旧素材／全文、業務stateは保持。費用0、製品限定修正2・設営修正3。主report・自分のCURRENT_GOAL/HANDOVER行を技術成立範囲と通常採用／製造未接続に同期する。DECISIONS・Codex1点検・前回成果は変更0。
 
 Git保存は本checkpoint commitで行う。基準main/origin `127aa06a35bde302f81e6ba44d5b00dd012453ec`から担当差分のみを明示stageし、通常push後にSHA、Git clean・untracked0、Git操作終了を直接報告本文で示す。self SHAのためだけの追記commitは増やさない。直接報告の送信表示・監査応答・次指示はその受領checkpointへ保存する。現在は送信前であり、報告済みとはしない。
+
+## v002直接送信checkpoint
+
+2026-10-01T07:08:49.296653+09:00：通常commit `11809f6f6bebed82014971c966b79b383b921a1d` のpush後、Codex2専用EdgeタブからZEV Build Loopへ `Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 通常callerからのDigest計画接続` を直接送信。送信本文・応答中の表示を確認、画像 `/private/tmp/codex2-intent-final-sent.jpg` を保存。送信時はmain/local/origin一致、Git clean、staged0・untracked0。担当Git操作終了と次指示依頼を同じ本文で伝達。他セッション／共有／ユーザーのタブ操作0。現時点は相談役の最終監査・次指示待ち。送信実績だけの追加commitをせず、次の実質checkpointへこの記録を合わせる。
+
+## v003受領checkpoint
+
+2026-10-01T07:19:57.049980+09:00：同じ専用Edgeタブで相談役の最終返答 `decision: continue` を確認。`11809f6f`のv002限定準備を技術受理、範囲内必須追加修正なし。固定providerと実AI品質、Mac試験未再実行の監査範囲を区別した返答。次指示は `docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md`、保存HEAD `ce1d4665ddc7c628a7665f5707261c6b9f036315`。保存済み採用・保持計画を再判断せず既存Digest編集・製造入力の実消費側へ渡し、保存／別process再読まで接続する。動画描画・通常一テーマ出力／人間承認変更はしない。旧16実装参照・18保存物とSHA検査を維持し、新しい消費側の別領域だけに保存する。設営修正3・製品限定修正2を保持。受理だけの独立commit・終了・再起動を挟まず、最新main同期・v003全文復元から続行する。
+
+v003実装方針checkpoint：ce1d4665へfast-forwardし、START_HERE・HANDOVER全文・v003全文を復元。既存Digestの採用／編集形式と、製造入力job検査・区間時計解決の実consumerを確認した。通常一テーマ型や人間assembly承認へ偽装せず、既存jobの技術入力検査と保持区間→frame/sample解決まで渡す。旧source SHAに束縛されたinspectionを明示依存で受け取り、旧元動画と独立copyの実SHAを照合して使う。新消費側モジュール／試験／出所記録だけを追加し、旧16実装参照・18保存物・前回コードを変更しない。目的は保存済み内容を後段入力へ欠落なく渡すことであり、新しい選定・字幕・製造は行わない。
+
+v003実走checkpoint：最初の接続試験attempt-001は15対象結果・6入力捕捉が合格。通常API→store→claim→変更しない実factory→新消費側→既存製造入力job検査／区間時計validatorが成立。二つの非連続保持fixtureは各2候補・4keep区間を渡し、dropの断片・中間時刻を復活させずframe/sample対応を確認。旧v002の2計画も新consumerで消費・新process再読し、元の保存物とstateは不変。最終agent-runner型検査も合格。製品実装の追加修正0、累積設営3・製品限定修正2を維持。未完了・未承認・条件違い・消費記録欠損・別inspection参照の拒否を、同じ消費関数の追加局所検査で補う。
+
+## v003技術完了｜保存計画の後段入力接続
+
+### 実装した処理と、実際の消費先
+
+新しいrunner内消費モジュールだけを追加した。通常factoryの実呼出し後、同じ命令・state・素材参照を受け、旧厳密readerから完了済み準備を再検証する。保存採否と保持解決から、前回実案で使う既存版のDigest採用／編集計画と製造入力を作る。新しい選定・タイトル・字幕・構成役割は加えない。保持の理由・意味役割・境界根拠は受理済み保存物から継承する。
+
+製造入力は `validatePresentationBaseMediaBuildJobV001`、各keep区間と実素材時計は `validatePresentationBaseMediaSegmentPlanV002`（ともに既存presentation_base_media_build_v003.mjs）へ実際に渡し、passedを要求する。後者が元ms→30fps出力frame→音声sampleを解決する。既存job検査と区間時計入口までの受理であり、動画build関数・旧人間assembly承認入口・renderは起動しない。
+
+同じ候補の複数keepを別々の製造区間に保つ。区間ID・候補ID・断片列・順序・始終時刻を保ち、候補のmin/maxへ戻さない。各区間のclock mappingは保持区間の件数・ID・元始終時計と1対1に照合する。除外ブロックの断片や中間時刻を復活させない。
+
+通常下書き・目的・条件・policy・素材・承認版は準備bindingに束縛したまま引き継ぐ。元の18保存物と16実装参照を変更しない。新しい消費出力は同じ依頼の別子領域へ保存し、一種類の内部記録で準備binding・inspection・元動画とcopyのSHA対応・新消費側5実装・4出力・実consumer受理を結ぶ。既存のsource SHAに束縛されたinspectionを再利用し、inspectionの元動画側の実SHAも検査してcopyと対応させる。動画・音声のinspection再走査／再製造0。
+
+### 最終証拠と対象試験
+
+- [接続試験](consumer-connection-test.mts)、[15対象結果・6入力捕捉](consumer-connection-evidence-attempt-001.json)：隔離した通常API→store→承認・claim→変更しないv002実factory→新しい消費関数→既存製造入力／時計検査を一系列で実行。必要な非連続保持2依頼だけを通信しない固定providerで作成した。各2候補・4keep区間、異なる目的、dropを復活させない元断片・順序・ms・frame・sample対応を確認。完全保存の再利用は追加判断0、新process再読2件は再計算一致。
+- 旧v002の既存2依頼もそのまま再検証・消費し、新processで消費結果を再読した。旧claimに期限設定はなく、延長・更新・移譲はしない。新出力だけを別子領域へ追加し、旧stateと元準備記録／18保存物のbytes不変を比較した。
+- 別依頼・目的・素材・承認版・期限切れclaim、未知出力版・不正参照・出力欠損／改変・区間欠落／重複・元準備改変を拒否。区間欠落／重複は出力のSHAも更新した否定fixtureを使い、保存準備から再構築した内容との不一致で拒否する。
+- [追加拒否試験](consumer-rejection-test.mts)、[5件の保存不変証拠](consumer-rejection-evidence.json)：未承認・条件変更・元準備未完了・消費記録欠損・異なるbytesへ結び付いたinspectionを拒否。provider／state／準備／消費出力の作用0。
+- [4件の消費binding証拠](consumer-binding-proof.json)：新2依頼と旧2依頼、各4出力・5新実装・元準備binding・inspection参照を現在bytesで照合。v002の全3完了binding・18保存物・16実装参照も元proofのSHAと不変一致。
+
+agent-runnerの関連type-checkはshared build・runner・Remotionが合格。凍結済みfactory／index／準備executor／builder／validatorとbackendの変更0。旧27試験・前回111試験・媒体QCの再実行はしていない。今回の新しい実走失敗・設営／製品修正は0、累積設営3・製品限定修正2を維持。固定回答は配線fixtureであり、人間品質や実AIの意味判断の合格とはしない。
+
+```sh
+corepack pnpm --filter @zev2/agent-runner type-check
+node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/consumer-connection-test.mts run attempt-001
+node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/consumer-rejection-test.mts
+```
+
+### 成立範囲と残り
+
+保存された採用・保持計画を再判断せず、既存Digest形式の編集・製造入力として実job検査・時計解決まで受理・保存・再読できる。製造実行、字幕／演出、通常backend完了登録・後続キュー起動、通常UIや本番既定は接続していない。人間品質はpending、テーマ承認・架空selectedThemeId・人間assembly承認の捏造0。費用・外部推論・STT・新素材・動画・実業務state変更・公開0。
+
+次の推奨一件は、**通常の承認済み依頼と内部Digest出力を、通常キューの出力・消費へどう正式接続するかを、既存承認／出力契約と照合して限定すること**。本番default・公開保存物・人間確認の意味変更が必要な箇所は相談役判断へ残す。今回通ったjobのshape検査だけから動画実行や人間採用の権限を推測しない。
+
+本実質checkpointにv002の送信・技術受理とv003の受領・実装・検査を合わせて通常commit/pushする。基準main/originはce1d4665、担当差分だけを明示stageする。push後のSHA・Git状態・直接送信確認は監査本文と次の受領checkpointへ保存し、応答保存だけの独立commitは増やさない。
