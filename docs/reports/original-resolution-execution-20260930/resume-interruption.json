@@ -1,0 +1,378 @@
+{
+  "status": "incomplete-resource-interruption-after-one-resume",
+  "implementationCommit": "7d744cca8f2c14112468f398f4d7a40f8adcd2c4",
+  "resumePermit": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-resume-plan-001/resume-permit.json",
+    "bytes": 4051,
+    "fileSha256": "3725f6dd50689c7a4b679606331738d239f12d2f17085c1da08c7931c336a724"
+  },
+  "instructionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/original-resolution-execution-20260930/resume-instruction.md",
+    "bytes": 6870,
+    "fileSha256": "c51afc08706490ae522aabeeb280ef5bdbe2992daed0b0a1267746bec4f75512"
+  },
+  "originalStopEvidence": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/original-resolution-execution-20260930/full-interruption.json",
+    "bytes": 7228,
+    "fileSha256": "c0586ad1a33cdf7b08b8c4a9280685a7b69b99d7aa10c568d08841c229d98e4f"
+  },
+  "preflight": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-resume-plan-001/preflight-resource.json",
+    "bytes": 308,
+    "fileSha256": "292b46b1efaf5f099560ed38a10ad741992c9b45baa5ad6a065d60f69ae730d2"
+  },
+  "supervision": {
+    "status": "interrupted",
+    "reason": "OS memory pressure warning/critical or unknown",
+    "stage": "body",
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-resume.mjs",
+      "run",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-resume-plan-001/resume-permit.json",
+      "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-002"
+    ],
+    "resumePermit": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-resume-plan-001/resume-permit.json",
+    "startedAt": 1790732750.526041,
+    "endedAt": 1790733394.625352,
+    "seconds": 644.0993118286133,
+    "exitCode": -15,
+    "samples": 637,
+    "observedTreePeakBytes": 6938050560,
+    "observedParentPeakBytes": 1217626112,
+    "minimumAvailableBytes": 46116143104,
+    "remainingRunning": [],
+    "sampleIntervalSeconds": 1,
+    "limits": {
+      "initialRunStartBytes": 50000000000,
+      "reserveBytes": 12000000000,
+      "treeRssBytes": 17179869184
+    },
+    "scope": "same run resume, original start verified; owned process group; sampled peaks"
+  },
+  "supervisionRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-002/summary.json",
+    "bytes": 1232,
+    "fileSha256": "1a12feb134e79bd7a5647cd4ba457e3368348749452b6347307ade8aef703c9e"
+  },
+  "resourcesRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-002/resource.jsonl",
+    "bytes": 340702,
+    "fileSha256": "1bc4a8a633b41c1a737e68f004e0063e011fdbfb2987e5e95cb72ceb2b2eb839"
+  },
+  "ownedGroupRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-002/owned-group.json",
+    "bytes": 518,
+    "fileSha256": "7458f4526b8c2eeccfb13fc135edeb061e5d8505456a64ac636ce65c4d248304"
+  },
+  "initialObservation": {
+    "at": 1790732750.590988,
+    "availableBytes": 46122827776,
+    "pressure": 1,
+    "memoryBytes": 38654705664,
+    "parentRssBytes": 0,
+    "treeRssBytes": 0,
+    "processes": []
+  },
+  "immediatelyBeforeBody": [
+    {
+      "at": 1790733383.6206121,
+      "availableBytes": 46116306944,
+      "pressure": 1,
+      "memoryBytes": 38654705664,
+      "parentRssBytes": 656179200,
+      "treeRssBytes": 656179200,
+      "processes": [
+        {
+          "pid": 60316,
+          "ppid": 60267,
+          "pgid": 60316,
+          "state": "Ss",
+          "rssBytes": 656179200,
+          "tool": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+        }
+      ],
+      "phase": "immediately-before-body"
+    }
+  ],
+  "triggerObservation": {
+    "at": 1790733386.73799,
+    "availableBytes": 46116282368,
+    "pressure": 2,
+    "memoryBytes": 38654705664,
+    "parentRssBytes": 549601280,
+    "treeRssBytes": 6938050560,
+    "processes": [
+      {
+        "pid": 60316,
+        "ppid": 60267,
+        "pgid": 60316,
+        "state": "Ss",
+        "rssBytes": 549601280,
+        "tool": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+      },
+      {
+        "pid": 63437,
+        "ppid": 60316,
+        "pgid": 60316,
+        "state": "R",
+        "rssBytes": 6388449280,
+        "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+      }
+    ]
+  },
+  "shutdown": {
+    "group": 60316,
+    "events": [
+      {
+        "at": 1790733388.0491369,
+        "action": "before-stop",
+        "members": [
+          {
+            "pid": 60316,
+            "ppid": 60267,
+            "pgid": 60316,
+            "state": "Ss",
+            "rssBytes": 299024384,
+            "tool": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+          },
+          {
+            "pid": 63437,
+            "ppid": 60316,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 7762198528,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 8061222912,
+        "system": {
+          "at": 1790733388.8748071,
+          "availableBytes": 46116360192,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733390.054254,
+        "action": "termination-wait",
+        "members": [
+          {
+            "pid": 63437,
+            "ppid": 1,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 7957217280,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 7957217280,
+        "system": {
+          "at": 1790733390.122018,
+          "availableBytes": 46120435712,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733391.229759,
+        "action": "termination-wait",
+        "members": [
+          {
+            "pid": 63437,
+            "ppid": 1,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 8148598784,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 8148598784,
+        "system": {
+          "at": 1790733391.2947562,
+          "availableBytes": 46123704320,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733392.40711,
+        "action": "termination-wait",
+        "members": [
+          {
+            "pid": 63437,
+            "ppid": 1,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 8356478976,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 8356478976,
+        "system": {
+          "at": 1790733392.4733791,
+          "availableBytes": 46123618304,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733393.584602,
+        "action": "termination-wait",
+        "members": [
+          {
+            "pid": 63437,
+            "ppid": 1,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 8542011392,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 8542011392,
+        "system": {
+          "at": 1790733393.649452,
+          "availableBytes": 46123483136,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733394.0671968,
+        "action": "SIGTERM-survivors",
+        "members": [
+          {
+            "pid": 63437,
+            "ppid": 1,
+            "pgid": 60316,
+            "state": "R",
+            "rssBytes": 8609660928,
+            "tool": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg"
+          }
+        ],
+        "treeRssBytes": 8609660928,
+        "system": {
+          "at": 1790733394.135929,
+          "availableBytes": 46123417600,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      },
+      {
+        "at": 1790733394.556436,
+        "action": "after-stop",
+        "members": [],
+        "treeRssBytes": 0,
+        "system": {
+          "at": 1790733394.624236,
+          "availableBytes": 46122360832,
+          "pressure": 2,
+          "memoryBytes": 38654705664,
+          "parentRssBytes": 0,
+          "treeRssBytes": 0,
+          "processes": []
+        }
+      }
+    ],
+    "remaining": [],
+    "remainingRunning": []
+  },
+  "shutdownRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-002/group-shutdown.json",
+    "bytes": 4234,
+    "fileSha256": "f87fd448b6a668412725b42b8fbf589b456df31c9651d12003b7bdbc2f8e8fc2"
+  },
+  "independentStopCheck": {
+    "at": 1790733500.51917,
+    "remainingOwnedProcesses": [],
+    "resource": {
+      "at": 1790733500.583782,
+      "availableBytes": 46251732992,
+      "pressure": 2,
+      "memoryBytes": 38654705664,
+      "parentRssBytes": 0,
+      "treeRssBytes": 0,
+      "processes": []
+    }
+  },
+  "independentStopCheckRef": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-supervised-002/independent-stop-check.json",
+    "bytes": 266,
+    "fileSha256": "693f59a2795b4f1a38a2c4a112db84b486053cf4f1f6347791c239cfd9eed70c"
+  },
+  "completedStages": {
+    "background": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-002/background-complete.json",
+      "bytes": 4416,
+      "fileSha256": "04e6d7ba0d70cd1e25d6ad4737495d146de8c472597cbb4af7dcc9873bd83d06"
+    },
+    "reference-audio": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-002/reference-audio-complete.json",
+      "bytes": 917,
+      "fileSha256": "82edf692c88b17c939c6deec015943ba94977b51dff041d4f388343fa9805fdb"
+    }
+  },
+  "completedMediaVerifiedUnchanged": true,
+  "originalPartialBodyVerifiedUnchanged": true,
+  "partialBody": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/original-resolution-execution-20260930-v001/full-production-002/normal.mp4",
+    "bytes": 0,
+    "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "calls": [
+    {
+      "stage": "background",
+      "action": "buildExecutionBackgroundV001 / verifyExecutionBackgroundV001 / representativeClockV001",
+      "startedAt": "2026-09-30T01:46:38.048Z"
+    },
+    {
+      "stage": "reference-audio",
+      "action": "FFmpeg AAC encoding from verified background",
+      "startedAt": "2026-09-30T01:55:58.389Z"
+    },
+    {
+      "stage": "body",
+      "action": "composePresentationMediaV001 / inspectRenderedMediaWithToolsV001 / representativeClockV001 / inspectOrchestrationEncodedAudioV001",
+      "startedAt": "2026-09-30T01:56:23.664Z"
+    }
+  ],
+  "stageIntervalsSeconds": {
+    "startToBackgroundVerification": 47.52195906639099,
+    "backgroundReverificationIncludingClock": 560.3409998416901,
+    "audioReuseAndBoundInputVerification": 25.27500009536743,
+    "bodyStartToTrigger": 3.0739898681640625,
+    "triggerToShutdownComplete": 7.887362003326416
+  },
+  "timingCaveat": "stage intervals include receipt and fixed-input validation; no separate encode time for reused background/AAC; no new background/AAC/PNG manufacturing",
+  "cleanupObservedGroupPeakBytes": 8609660928,
+  "notExecuted": [
+    "completed body media/clock/audio validation",
+    "replay",
+    "345-point 211732-candidate native QC",
+    "full shared save",
+    "independent completed-media reread"
+  ],
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed",
+  "automaticRetry": false,
+  "physicalIO": "not-measured",
+  "instantaneousPeak": "not-guaranteed"
+}
