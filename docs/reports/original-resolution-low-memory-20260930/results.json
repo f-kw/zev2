@@ -1,0 +1,795 @@
+{
+  "schemaVersion": "original-resolution-low-memory-evidence-v001",
+  "baselineHead": "755e93d833ccb1d319ecda05b7275280ce0a67ad",
+  "source": {
+    "backgroundBytes": 10529007182,
+    "backgroundSha256": "a305dd91e263abe501d85000744b9737d01fba340ae801ba85723a1d3f3618db",
+    "referenceAacBytes": 14513563,
+    "referenceAacSha256": "75fa835ad15cc4c5800def26c111241c459a78e5f94410f5304bd16812bced55",
+    "unfinishedNormalBytes": 48,
+    "fullCaptionCount": 265,
+    "fullPngStates": 307
+  },
+  "plan": {
+    "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-full-plan-v002.json",
+    "sha256": "feae672fc1c41c5a4ac3f18a58994a2d6c4d90830ad5dd5e1e5174d61b669ce0",
+    "fullFrames": 17613,
+    "segments": 84,
+    "maximumFramesPerSegment": 210,
+    "maximumCaptions": 8,
+    "maximumPngStates": 21,
+    "maximumFfmpegInputs": 22,
+    "uniquePngStates": 307,
+    "endFrameExclusive": 17613
+  },
+  "tests": {
+    "newUnit": "3/3",
+    "supervisorV002Faults": "8/8",
+    "oldLaunchAndResume": "10/10",
+    "shortScopes": 9,
+    "independentSeries": 18
+  },
+  "scopes": [
+    {
+      "name": "fullbg-local-001",
+      "frameCount": 210,
+      "maxFrames": 105,
+      "segments": 2,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 4,
+      "maxStates": 4,
+      "maxInputs": 5,
+      "rawYuvSha256": "7ddcff5a6575f7d205e8122c9fa08f3e918e37c403a85231789b0b32ef24a907",
+      "rawYuvBytes": 653184000,
+      "newNormalMp4Sha256": "0b7c0dbcc595e3c1bbd96e342ffb062797fc08cd05248db8249c743ad956585e",
+      "newReplayMp4Sha256": "0b7c0dbcc595e3c1bbd96e342ffb062797fc08cd05248db8249c743ad956585e",
+      "oldNormalMp4Sha256": "0b7c0dbcc595e3c1bbd96e342ffb062797fc08cd05248db8249c743ad956585e",
+      "oldReplayMp4Sha256": "0b7c0dbcc595e3c1bbd96e342ffb062797fc08cd05248db8249c743ad956585e",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 210,
+          "fps": "30/1",
+          "audioDurationSamples": 308700
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 210,
+          "fps": "30/1",
+          "audioDurationSamples": 308700
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 488996864,
+        "parentChildPeakBytes": 1877377024,
+        "minimumAvailableBytes": 55631106048,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 1611710464,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-fullbg-local-001/completion.json",
+          "sha256": "93bcbdb0bfc5ca531f46733f833b481d1d14a7385e6dfbfc16c945a427f844b6"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-fullbg-local-001/comparison.json",
+          "sha256": "541316ce06f0a8bf13f730b421090bda3741ba0577df99494ca1fae2aaac028c"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-fullbg-local-001/summary.json",
+          "sha256": "050a71d8678ad69431b822f7aea77b3ab225af7c213b2a5031c2482e3fb3f862"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-fullbg-local-001/summary.json",
+          "sha256": "d047f2b1562bed83c9cca936e687d235a40b9949f6e01f82da6ed47a58678d42"
+        }
+      }
+    },
+    {
+      "name": "black-gap-001",
+      "frameCount": 14,
+      "maxFrames": 1,
+      "segments": 14,
+      "zeroCaptionSegments": 12,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "6366e03ce1a550f019dbbb676ed65123eec770c7c61fd41cbe9e7a6f98106fd1",
+      "rawYuvBytes": 43545600,
+      "newNormalMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "newReplayMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "oldNormalMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "oldReplayMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 14,
+          "fps": "30/1",
+          "audioDurationSamples": 20580
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 14,
+          "fps": "30/1",
+          "audioDurationSamples": 20580
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 477396992,
+        "parentChildPeakBytes": 732626944,
+        "minimumAvailableBytes": 55644721152,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 849952768,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-black-gap-001/completion.json",
+          "sha256": "621f76207d641a615c5bc4d01f84bc6109a1f3307e3b06fd33a89e1795dffa73"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-black-gap-001/comparison.json",
+          "sha256": "ea196cab2f190cf7d6dae6eb3b5c17dbca337aed89f10c601b188c9bb2b38297"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-black-gap-001/summary.json",
+          "sha256": "e595dd2254f5c2154d254288a0c17f71e65aef5f09d3358e0f05f0b6a246b208"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-black-gap-001/summary.json",
+          "sha256": "26f562b116adb860e765c658c9cd4d2b10a589d1a43546449c283190a36e131c"
+        }
+      }
+    },
+    {
+      "name": "representative-01",
+      "frameCount": 2,
+      "maxFrames": 1,
+      "segments": 2,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "aa99003b13349ed9a6e708737e042d20a1c5027ff442c2531dc0779bceb2488e",
+      "rawYuvBytes": 6220800,
+      "newNormalMp4Sha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b",
+      "newReplayMp4Sha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b",
+      "oldNormalMp4Sha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b",
+      "oldReplayMp4Sha256": "eb3ce10ceacaaf117f808ca11c7a0dc721017e4f61b1f9931b1d4a5176ed0f1b",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 2,
+          "fps": "30/1",
+          "audioDurationSamples": 2940
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 2,
+          "fps": "30/1",
+          "audioDurationSamples": 2940
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 516866048,
+        "parentChildPeakBytes": 665026560,
+        "minimumAvailableBytes": 55664754688,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 637042688,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-01/completion.json",
+          "sha256": "8aa2013f51ae86e463973dae7891ccd02b7b771bf662f2a03266e466d2f759fc"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-01/comparison.json",
+          "sha256": "eaed4c572a5214438274cbafd8608d02e8477ac7e57d0c6b29df8ea14b6d93c4"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-01/summary.json",
+          "sha256": "6003ea9f606c48c500e3ab7d6c54646ba0acefaf4d93d9fce137e90915198b41"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-01/summary.json",
+          "sha256": "7bbafae79bfa014d3de0a7f537ada31b1f4bd1b93253956deb20b92b327e04e4"
+        }
+      }
+    },
+    {
+      "name": "representative-02",
+      "frameCount": 24,
+      "maxFrames": 12,
+      "segments": 2,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "1876bd5ee854856b09dc5b411c21f112d21c4e2f5290dd33328820a04f864328",
+      "rawYuvBytes": 74649600,
+      "newNormalMp4Sha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0",
+      "newReplayMp4Sha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0",
+      "oldNormalMp4Sha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0",
+      "oldReplayMp4Sha256": "854a82bde1a5b846c7d32bef0dd0e159c7d5fa4e8b6110ffcf1757ba587b0cd0",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 24,
+          "fps": "30/1",
+          "audioDurationSamples": 35280
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 24,
+          "fps": "30/1",
+          "audioDurationSamples": 35280
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 553926656,
+        "parentChildPeakBytes": 837124096,
+        "minimumAvailableBytes": 55662776320,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 753188864,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-02/completion.json",
+          "sha256": "96e7c8b59064ae0d7259e688992f12e2114f2551bb3c81707a9a180885ad7a2a"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-02/comparison.json",
+          "sha256": "576c549689287cbb3621cad9d71a8da789082a7b343e8c58da695c83e869e3f9"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-02/summary.json",
+          "sha256": "6fd2f5bfd24c9ecbfa15f48887a41712512a63e15b85266241644ec0df7b12dc"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-02/summary.json",
+          "sha256": "1d9ac65f59dcd27a0e749980bec9430cde5f9a832d6f55cca86d2e25fcaac260"
+        }
+      }
+    },
+    {
+      "name": "representative-03",
+      "frameCount": 36,
+      "maxFrames": 12,
+      "segments": 3,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 6,
+      "maxInputs": 7,
+      "rawYuvSha256": "efd8cc27758936ab8fb0692347e48b9c5a283f85ea1bb84ce6f06d19f11abcbe",
+      "rawYuvBytes": 111974400,
+      "newNormalMp4Sha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f",
+      "newReplayMp4Sha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f",
+      "oldNormalMp4Sha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f",
+      "oldReplayMp4Sha256": "202ae2634f622f0d5256905339c2c61e43729fc2fe2f8c46a1b787c1c67f632f",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 36,
+          "fps": "30/1",
+          "audioDurationSamples": 52920
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 36,
+          "fps": "30/1",
+          "audioDurationSamples": 52920
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 552910848,
+        "parentChildPeakBytes": 1238319104,
+        "minimumAvailableBytes": 55660032000,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 1230700544,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-03/completion.json",
+          "sha256": "624cbfd711c1dfe0e7a48f4836eecc60ab2ae6fe9a3a5810f9c871d99b413597"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-03/comparison.json",
+          "sha256": "05aeecc11bb3886036089410b13b86b6f8f1e72e3dd016e8916e6c69a4fde211"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-03/summary.json",
+          "sha256": "526e6a3ee533142bfcbb137479206e3b20503e5ef51526d371ac172aeb94ec9f"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-03/summary.json",
+          "sha256": "a7aaa9894a21bb739efadceee1fb14dea99e9d69080e921f428b28b0dd509b1d"
+        }
+      }
+    },
+    {
+      "name": "representative-04",
+      "frameCount": 36,
+      "maxFrames": 12,
+      "segments": 3,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 6,
+      "maxInputs": 7,
+      "rawYuvSha256": "aa1f96aeaa0c004c32052175fe5f9a42a9ab7ad7a1ef2da2df11554e67a98597",
+      "rawYuvBytes": 111974400,
+      "newNormalMp4Sha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38",
+      "newReplayMp4Sha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38",
+      "oldNormalMp4Sha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38",
+      "oldReplayMp4Sha256": "9a9daf9ed5439227f341634ca661dcc32ae6dfdbc8b36f534f3775c4eb103e38",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 36,
+          "fps": "30/1",
+          "audioDurationSamples": 52920
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 36,
+          "fps": "30/1",
+          "audioDurationSamples": 52920
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 477478912,
+        "parentChildPeakBytes": 929284096,
+        "minimumAvailableBytes": 55654993920,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 1223557120,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-04/completion.json",
+          "sha256": "73b4cc30c34dffa574bcdef30aa27d5567d6396b0ac539e1434677c9727ca4d2"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-04/comparison.json",
+          "sha256": "ccb5020ec3cc35566df71f175b71bd904c962d4c528dcc5077e833d23f2775c8"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-04/summary.json",
+          "sha256": "26fb640d5005557512c0907c9eab54ac34d5a9ea429f315e1276cf1ec0074e7b"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-04/summary.json",
+          "sha256": "e0b442754b4938c6d11860df7591051afa55fbd797ef5c2403a78755612d38ce"
+        }
+      }
+    },
+    {
+      "name": "representative-05",
+      "frameCount": 14,
+      "maxFrames": 7,
+      "segments": 2,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "6366e03ce1a550f019dbbb676ed65123eec770c7c61fd41cbe9e7a6f98106fd1",
+      "rawYuvBytes": 43545600,
+      "newNormalMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "newReplayMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "oldNormalMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "oldReplayMp4Sha256": "92ee016c33f348da89908f1d62b1032bf186db2c862b1d0a2e0208b142c69902",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 14,
+          "fps": "30/1",
+          "audioDurationSamples": 20580
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 14,
+          "fps": "30/1",
+          "audioDurationSamples": 20580
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 488751104,
+        "parentChildPeakBytes": 749158400,
+        "minimumAvailableBytes": 55653605376,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 851361792,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-05/completion.json",
+          "sha256": "d964a58d53ff7813edfb5d8069ef52554606db3d183c5bc28cc2d12eb82216f5"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-05/comparison.json",
+          "sha256": "52bd3a253cf5c84d2899669bca123046d8dae42f6ca37ce6b3f40c3a50be7743"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-05/summary.json",
+          "sha256": "aabd768f8e97e62c016bf9bd59467b3fab8b31ac847653187722b2c6dc1b6903"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-05/summary.json",
+          "sha256": "34b4125d3a21687d86d8b20c5c8d9cd07e7e093958233a9707cf8d396510551c"
+        }
+      }
+    },
+    {
+      "name": "representative-06",
+      "frameCount": 24,
+      "maxFrames": 12,
+      "segments": 2,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "982d4c4b8f2868f3c102d834709bc88c4fdc569cc842375783576f925fb716bb",
+      "rawYuvBytes": 74649600,
+      "newNormalMp4Sha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20",
+      "newReplayMp4Sha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20",
+      "oldNormalMp4Sha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20",
+      "oldReplayMp4Sha256": "2237b71cd7a615058f027c24178d4afafbb775c4d27c42eb449671c23d090b20",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 24,
+          "fps": "30/1",
+          "audioDurationSamples": 35280
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 24,
+          "fps": "30/1",
+          "audioDurationSamples": 35280
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 488816640,
+        "parentChildPeakBytes": 832569344,
+        "minimumAvailableBytes": 55652450304,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 725975040,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-06/completion.json",
+          "sha256": "c6aac1c82918bd9dfc7a78fff954184189a6c37bb19a26f86b97560725b2efea"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-06/comparison.json",
+          "sha256": "7690961f6b01d6be4e7813de9ceed795ff7a455366ceb5968e14d2de4810769e"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-06/summary.json",
+          "sha256": "6c5849e6937eb53110531cfc1dfd7a584044584319859b67e5b0f9200ce66a92"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-06/summary.json",
+          "sha256": "9cb66c54a40d44a787718bb51b087020d8e2f7a8f92f59dd457e51444ed85ae0"
+        }
+      }
+    },
+    {
+      "name": "representative-07",
+      "frameCount": 121,
+      "maxFrames": 60,
+      "segments": 3,
+      "zeroCaptionSegments": 0,
+      "maxCaptions": 1,
+      "maxStates": 1,
+      "maxInputs": 2,
+      "rawYuvSha256": "d72fc263739f7da0c31eb93b83bdd6384807ece500e988a5b0ec471073bfad7f",
+      "rawYuvBytes": 376358400,
+      "newNormalMp4Sha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc",
+      "newReplayMp4Sha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc",
+      "oldNormalMp4Sha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc",
+      "oldReplayMp4Sha256": "a33071837d1fb40fb3a09344ce9af62270d3d9c516fa24f551d225ff092ad9dc",
+      "comparisons": [
+        {
+          "series": "normal",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 121,
+          "fps": "30/1",
+          "audioDurationSamples": 177870
+        },
+        {
+          "series": "repeat",
+          "rawYuvEqual": true,
+          "decodedYuvEqual": true,
+          "aacEqual": true,
+          "aacMatchesReference": true,
+          "pcmEqual": true,
+          "pcmMatchesReference": true,
+          "mp4ByteEqual": true,
+          "videoFrames": 121,
+          "fps": "30/1",
+          "audioDurationSamples": 177870
+        }
+      ],
+      "trialResource": {
+        "parentPeakBytes": 551223296,
+        "parentChildPeakBytes": 1591115776,
+        "minimumAvailableBytes": 55650050048,
+        "pressureValues": [
+          1
+        ],
+        "maximumObservedProcesses": 3,
+        "remainingRunning": []
+      },
+      "compareResource": {
+        "parentChildPeakBytes": 920010752,
+        "pressureValues": [
+          1
+        ],
+        "remainingRunning": []
+      },
+      "receipts": {
+        "trial": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-representative-07/completion.json",
+          "sha256": "fc52f160996eb74616c2fab2bda87826e7a9f90c89027d7666c60e771553e0e2"
+        },
+        "comparison": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-representative-07/comparison.json",
+          "sha256": "c0ef7c21a63ca5279c17dc69b1e521360c7525eaf1e386112817f19f93329b47"
+        },
+        "monitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-trial-representative-07/summary.json",
+          "sha256": "1dbde3fef9dad41d241fa8eefdb122e54cae4c903e0e9ee40e9728f1801cb8d2"
+        },
+        "compareMonitor": {
+          "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-representative-07/summary.json",
+          "sha256": "2adf8f610491196c4dea1c36c5e92db54b722588dfe43baf92515a3f2f2038cc"
+        }
+      }
+    }
+  ],
+  "resourcePeakSample": {
+    "scope": "local-002",
+    "parentRssBytes": 483262464,
+    "childrenRssBytes": 1501773824,
+    "parentChildRssBytes": 1985036288,
+    "pressure": 1,
+    "availableBytes": 55672328192,
+    "simultaneousProcesses": 3
+  },
+  "oldFiles": [
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "sha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-launch.mjs",
+      "sha256": "1f495649deb80821acf8f296caab645ec401a16b1bc0a3b2904a5afdb54545ea"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-resume.mjs",
+      "sha256": "3867006ab7c036efd73cb907a30c82cee0382165a869b4b787b4099901e01696"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "sha256": "a4a6b5325793b42009f2250edb462469ef5f5daa441c5bfe4a1a2ef573da9439"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor.py",
+      "sha256": "19b86743746bcb334ab7bbfa109fb3dac20b0d4dbc26bfba313a69e6f03fef74"
+    },
+    {
+      "path": "docs/reports/original-resolution-execution-20260930/full-interruption.json",
+      "sha256": "c0586ad1a33cdf7b08b8c4a9280685a7b69b99d7aa10c568d08841c229d98e4f"
+    }
+  ],
+  "fullProduction": "not-started",
+  "outlineChoice": null,
+  "humanQuality": "not-reviewed",
+  "finalComparatorRecheck": {
+    "comparison": {
+      "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-compare-fullbg-local-002/comparison.json",
+      "sha256": "541316ce06f0a8bf13f730b421090bda3741ba0577df99494ca1fae2aaac028c"
+    },
+    "monitor": {
+      "path": "runtime/artifacts/original-resolution-execution-20260930-v001/lowmem-monitor-compare-fullbg-local-002/summary.json",
+      "sha256": "7ef52be45c4f25f0d67638644e7a1bd454de94527212f343d881a9c459c658ba"
+    },
+    "codeSha256": "78837368a0705f16c59d6bf99ce0bcbdc6412ea731a7e630be6e1064f9be28b4",
+    "rowsIdentical": true
+  }
+}
