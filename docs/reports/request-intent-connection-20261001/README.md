@@ -201,3 +201,16 @@ node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-int
 今回の完了は設計・境界実測。通常キューの製品接続そのものは未実装。次の推奨一件は、相談役が最小仕様の型・工程・出力差分を限定したうえで、明示Digest依頼→通常計画登録→次の実消費を隔離実装すること。一般の機械採否委任・計画SHAへの動画許可方式は別判断。人間へ視聴・採点・技術方式選択は要求していない。新規人間品質Pendingなし、既存未回答は維持。費用・外部推論・素材／STT／動画／inspection・公開・Decisions・Codex1操作0。
 
 基準main/originはee032be8。今回の6担当fileだけを明示stageし、通常commit/push後のSHA・Git clean・untracked0と担当Git操作終了を直接報告する。送信・監査・次指示の受領は次の実質checkpointへ保存し、受理記録だけの独立commit・終了・再起動は増やさない。累積設営3・製品限定修正2を引き継ぐ。
+
+## v004直接送信checkpoint
+
+2026-10-01T08:18:08.928650+09:00：通常commit `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` のpush成功後、同じCodex2専用EdgeタブからZEV Build Loopへ `Codex2 GPT_DECISION＋NEXT_REQUEST｜9. 通常キュー接続の最小仕様案` を直接送信。本文送信・応答中表示を確認し、画像 `/private/tmp/codex2-intent-v004-sent.jpg` を保存・会話へ提示。送信時main/local/origin一致、Git clean・staged0・untracked0、Git操作終了。現時点は監査と次の具体的な許可差分待ち。送信記録だけの独立commitは行わず、次の実質checkpointへ合わせる。
+
+## v005受領checkpoint
+
+2026-10-01T08:29:25.734136+09:00：同じCodex2専用Edgeタブで最終返答 `decision: continue` を確認。v004は `d77f2a5d` で設計・境界確認を受理。明示Digestと共通queueの骨格を開発候補として採用し、計画成果物のconsumptionBindingは必須から外して次の検証成果物へ移す。次の正本は `docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md`、保存HEAD `999346faabe282e23d5c41329455e1556c8e66a9`。通常approve/claim/PUT/completeから計画登録・次工程の実消費・検証結果completeまで、実業務と分離した開発候補実装のみ許可。製品本適用・一般委任・動画許可改訂・動画命令は未承認のまま。旧成功依存fixture注入を使わず、OutputEntity所有者・素材JSONと動画bytes・local/upload閉包を実登録で検査する。累積設営3・製品限定修正2を維持し、最新main同期・v005全文読了後、同じセッションで続行する。
+
+
+v005開始checkpoint：main/origin 999346faへ同期し、START_HERE・HANDOVER全文・v005全文を復元。実業務backend／runner／Vite／tsx watcherの稼働はprocess・port実測で見つからず、既存サービス操作0。変更前の旧proof・binding・参照データと固定Git版11809f6f／7b600a64の対応をqueue-history-preservation-proof.jsonへ保存した。履歴検査であり旧reader再実行・現行資格の認定ではない。モデル表記gpt-6.1-sol、比較／旧成果再生成0。目的は通常の明示依頼から保存計画・次工程の再読までを接続することであり、新しい選定基盤や動画工程の追加ではない。
+
+v005実装checkpoint：共通の明示系統、Digest2工程・専用kind、通常factory／indexとstdin transport、登録OutputEntity所有者、素材参照JSONと実bytesの分離、同一draft論理参照・全データ閉包の転送を実装作成中。shared/backend/runner/Remotion型検査は通過。clientは既存表示名の全kind型が新2kindへ未追従で不一致。App.vueは明示clip入力だけを変更し、表示名二行の追加はv005の限定から外れるためqueue-client-type-followup-request.mdの一差分をGPT_DECISIONへ返す。新しい画面・入力・契約本適用を求めない。初回正式接続試験は未実行。累積設営3・製品限定修正2を維持し、独立するAPI／runner検査は進める。

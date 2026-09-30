@@ -129,6 +129,7 @@ export function createAgentRequestForDraftStep(
       sourceUri: draft.source.uri
     },
     input: {
+      productionType: draft.productionType,
       purpose: draft.purpose,
       settings: { ...draft.settings }
     },
@@ -371,6 +372,7 @@ export async function createCopiedEditRestart(
     return { error: 'コピーする編集が見つかりません' };
   }
 
+  if (sourceDraft.productionType !== 'clip') return {error: 'DigestのClip専用再編集は未対応です'};
   const startIndex = workflowStepIndex(startType);
   const copiedDraft = copyDraftForRestart(sourceDraft, reason, createdAt, materialReselectInstruction);
   const requests: AgentRequest[] = [];
@@ -562,6 +564,7 @@ export function createAgentRequestAfter(
     label: step.label,
     target: { ...sourceRequest.target },
     input: {
+      productionType: sourceRequest.input.productionType,
       purpose: sourceRequest.input.purpose,
       settings: { ...sourceRequest.input.settings }
     },
@@ -581,10 +584,12 @@ export function markReplaceableRequestsAsReplaced(
   startType: AgentRequest['type'],
   updatedAt: string
 ) {
+  if(stateAgentRequests.some(r=>r.requestDraftId === requestDraftId && r.input.productionType !== 'clip')) throw new Error('DigestのClip専用再編集は未対応です');
   const startIndex = workflowStepIndex(startType);
   const renderIndex = workflowStepIndex('render_video');
 
   for (const request of stateAgentRequests) {
+    if(request.requestDraftId !== requestDraftId) continue;
     const requestIndex = workflowStepIndex(request.type);
     const shouldReplace =
       request.requestDraftId === requestDraftId &&

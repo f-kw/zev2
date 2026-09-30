@@ -94,6 +94,7 @@ let webGeminiRefreshTimer: number | undefined;
 let requestActivityLoadNumber = 0;
 
 const requestInput = reactive<RequestDraftInput>({
+  productionType: 'clip',
   purpose: initialPurpose,
   sourceUri: '',
   durationLabel: '60秒以内',

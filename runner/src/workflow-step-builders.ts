@@ -1,4 +1,4 @@
-import {findById, lastMatching, type AgentRequest, type AgentRequestType, type FileRef, type FileRefKind, type Zev2State} from '@zev2/shared';
+import {findById, type AgentRequest, type AgentRequestType, type FileRef, type FileRefKind, type Zev2State} from '@zev2/shared';
 import type {
   ArtifactInfo,
   ClipCompositionArtifact,
@@ -9,6 +9,8 @@ import type {
   WorkflowStepManifest
 } from './workflow-artifacts.js';
 import { assertJsonArtifactForKind } from './workflow-artifact-validation.js';
+import {consumePreparedDigestPlanV001} from './digest-plan-consumption-v001.js';
+import {registeredDigestDependencyV001} from './digest-plan-preparation-v001.js';
 import { prepareDigestPlanV001, type DigestPlanPreparationDependenciesV001 } from './digest-plan-preparation-v001.js';
 
 export type StepArtifactBuilder = (context: {
@@ -49,11 +51,22 @@ export type WorkflowStepRuntime = {
 export function requireWorkflowRequestOutputFileRef(
   state: Zev2State, request: AgentRequest, dependencyType: AgentRequestType, missingMessage: string
 ): FileRef {
-  const dependency = lastMatching(state.agentRequests, r => r.requestDraftId === request.requestDraftId
-    && r.type === dependencyType && r.status === 'succeeded');
-  const ref = findById(state.fileRefs, dependency?.result?.fileRefId);
-  if (!ref) throw new Error(missingMessage);
-  return ref;
+  const seen = new Set<string>();
+  let dependency = findById(state.agentRequests,request.dependsOnAgentRequestId);
+  while(dependency) {
+    if(seen.has(dependency.id) || dependency.requestDraftId !== request.requestDraftId
+      || dependency.input.productionType !== request.input.productionType) throw new Error('依存工程の参照が不正です');
+    seen.add(dependency.id);
+    if(dependency.type === dependencyType) {
+      if(request.input.productionType === 'digest') return registeredDigestDependencyV001(state,dependency,
+        dependencyType === 'prepare_digest_plan' ? 'digest_plan_json' : dependencyType === 'run_stt' ? 'transcript_json' : 'source_video');
+      const ref=findById(state.fileRefs,dependency.result?.fileRefId);
+      if(dependency.status !== 'succeeded' || !ref) throw new Error(missingMessage);
+      return ref;
+    }
+    dependency=findById(state.agentRequests,dependency.dependsOnAgentRequestId);
+  }
+  throw new Error(missingMessage);
 }
 
 async function readValidatedRequestArtifact<T>(
@@ -194,6 +207,27 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
       );
     },
 
+    prepare_digest_plan: async ({request,state}) => {
+      if(!runtime.digestPlanPreparation) throw new Error('Digest判断入力の接続がありません');
+      const transcriptInput=await readValidatedRequestArtifact<TranscriptArtifact>(runtime,state,request,'run_stt','transcript_json',
+        'Digestの保存STT参照がありません','Digest採否・保持が読む保存STT');
+      const prepared=await prepareDigestPlanV001(runtime.digestPlanPreparation,{request,state,
+        transcript:transcriptInput.artifact,transcriptUri:transcriptInput.input.uri});
+      const output=await writeValidatedJsonArtifact(runtime,request,'digest_plan_json',prepared.artifact,'Digest採否・保持計画');
+      output.dataBindings=prepared.artifact.dataBindings;
+      return finishStep(runtime,request,[transcriptInput.input],'digest_plan_json',output,'承認依頼に束縛した採否・保持の保存参照');
+    },
+    validate_digest_plan: async ({request,state}) => {
+      if(!runtime.digestPlanPreparation) throw new Error('Digest登録計画の読取接続がありません');
+      const planInput=requestOutputInputRef(runtime,state,request,'prepare_digest_plan','digest_plan_json',
+        '登録済みDigest計画がありません','検証が再読する登録計画');
+      const result=await consumePreparedDigestPlanV001({preparation:{workspaceRoot:runtime.digestPlanPreparation.workspaceRoot,
+        artifactRoot:runtime.digestPlanPreparation.artifactRoot}},{request,state});
+      const output=await writeValidatedJsonArtifact(runtime,request,'digest_execution_input_json',result.artifact,'Digest入力検証結果');
+      output.dataBindings=result.artifact.dataBindings;
+      return finishStep(runtime,request,[planInput],'digest_execution_input_json',output,'計画整合と未接続・未承認の記録');
+    },
+
     propose_clip_themes: async ({ request, state }) => {
       const transcriptInput = await readValidatedRequestArtifact<TranscriptArtifact>(
         runtime,
@@ -204,12 +238,6 @@ export function createStepArtifactBuilders(runtime: WorkflowStepRuntime): Record
         '文字起こし成果物がないためテーマを整理できません',
         'テーマ作成が読む文字起こし成果物'
       );
-      if (runtime.digestPlanPreparation) {
-        await prepareDigestPlanV001(runtime.digestPlanPreparation, {
-          request, state, transcript: transcriptInput.artifact,
-          transcriptUri: transcriptInput.input.uri,
-        });
-      }
       return finishStep(
         runtime,
         request,

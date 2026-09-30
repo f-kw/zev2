@@ -3,7 +3,8 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { resolveRuntimeDir } from '../config/runtime-dir.js';
 import {
-  WORKFLOW_STEPS,
+  ALL_WORKFLOW_STEPS,
+  isProductionType,
   createInitialState,
   recordValue,
   type AgentOperationLogEventType,
@@ -36,8 +37,8 @@ function createEmptyState(): Zev2State {
   return createInitialState();
 }
 
-const currentWorkflowTypes = new Set(WORKFLOW_STEPS.map((step) => step.type));
-const currentFileRefKinds = new Set(WORKFLOW_STEPS.map((step) => step.outputKind));
+const currentWorkflowTypes = new Set(ALL_WORKFLOW_STEPS.map((step) => step.type));
+const currentFileRefKinds = new Set(ALL_WORKFLOW_STEPS.map((step) => step.outputKind));
 const currentAgentRequestStatuses = new Set<AgentRequestStatus>([
   'queued',
   'running',
@@ -80,6 +81,7 @@ function isCurrentRequestDraft(value: unknown): boolean {
 
   return (
     typeof draft.id === 'string' &&
+    isProductionType(draft.productionType) &&
     typeof draft.purpose === 'string' &&
     typeof settings.durationLabel === 'string' &&
     typeof settings.themeCountLabel === 'string' &&
@@ -96,6 +98,7 @@ function isCurrentAgentRequest(value: unknown): boolean {
   return (
     typeof request.id === 'string' &&
     typeof request.requestDraftId === 'string' &&
+    isProductionType(recordValue(request.input).productionType) &&
     currentWorkflowTypes.has(request.type as never) &&
     currentAgentRequestStatuses.has(request.status as AgentRequestStatus)
   );
@@ -184,6 +187,7 @@ function isZev2State(value: unknown): value is Zev2State {
     state.requestDrafts.every(isCurrentRequestDraft) &&
     state.agentRequests.every(isCurrentAgentRequest) &&
     state.fileRefs.every(isCurrentFileRef) &&
+    state.outputs.every(v=>{const o=recordValue(v);return typeof o.id==='string' && typeof o.fileRefId==='string' && ['Video','Transcript','ThemeCandidates','ClipComposition','EditPlan','Patch','OutputVideo','DigestPlan','DigestExecutionInput'].includes(String(o.type));}) &&
     state.agentOperationLogs.every(isCurrentAgentOperationLog) &&
     state.controlReviewItems.every(isCurrentControlReview) &&
     state.humanReviewActions.every(isCurrentHumanReviewAction) &&
@@ -192,44 +196,21 @@ function isZev2State(value: unknown): value is Zev2State {
   );
 }
 
-export async function loadState(): Promise<Zev2State> {
-  await mkdir(runtimeDir, { recursive: true });
-
-  if (!existsSync(statePath)) {
-    const initialState = createEmptyState();
-    await saveState(initialState);
-    return initialState;
-  }
-
-  const raw = await readFile(statePath, 'utf8');
-  if (!raw.trim()) {
-    const initialState = createEmptyState();
-    await saveState(initialState);
-    return initialState;
-  }
-
-  try {
-    const state = withCurrentStateShape(JSON.parse(raw) as unknown);
-    if (isZev2State(state)) {
-      return state;
-    }
-
-    return quarantineBrokenState('state.jsonが現在のスキーマと一致しません');
-  } catch {
-    return quarantineBrokenState('state.jsonをJSONとして読めません');
-  }
+/** 旧状態の参照は無改変で行う。作用するcallerはloadStateを使う。 */
+export async function readStateSnapshot(): Promise<unknown> {
+  return JSON.parse(await readFile(statePath, 'utf8')) as unknown;
 }
-
-async function quarantineBrokenState(reason: string): Promise<Zev2State> {
-  const brokenStatePath = `${statePath}.broken-${Date.now()}`;
-  await rename(statePath, brokenStatePath);
-  console.error(`${reason}。既存の状態を退避して空の状態から再開します: ${brokenStatePath}`);
-  const initialState = createEmptyState();
-  await saveState(initialState);
-  return initialState;
+export async function loadState(): Promise<Zev2State> {
+  if (!existsSync(statePath)) {const state = createEmptyState(); await saveState(state); return state;}
+  const state = withCurrentStateShape(await readStateSnapshot());
+  if (!isZev2State(state)) throw new Error('STATE_MIGRATION_REQUIRED: 現行の明示制作系統を持たない状態への作用を拒否します');
+  return state;
 }
 
 export async function saveState(state: Zev2State): Promise<void> {
+  if (!isZev2State(state)) throw new Error('STATE_MIGRATION_REQUIRED: 保存型が不正な状態を更新できません');
+  if (existsSync(statePath) && !isZev2State(withCurrentStateShape(await readStateSnapshot())))
+    throw new Error('STATE_MIGRATION_REQUIRED: 旧状態の移行は未承認です');
   await mkdir(runtimeDir, { recursive: true });
   const temporaryPath = `${statePath}.tmp`;
   await writeFile(temporaryPath, JSON.stringify(state, null, 2));

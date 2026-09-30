@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業
 
-**9. 明示Digest依頼→通常登録→次工程消費の隔離実装（v005）。v004の設計・境界実測を `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` で受理し、同じ返答で具体的開発差分を発行した。担当はCodex2単独。v005の受領・再開・稼働は未確認。**
+**9. 明示Digest依頼→通常登録→次工程消費の隔離実装（v005）。v004の設計・境界実測を `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` で受理し、同じ返答で具体的開発差分を発行した。担当はCodex2単独。v005をCodex2が受領し、999346faへ同期して隔離実装中。**
 
 正本は [v005指示書](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)、保存 `a3bd8594df7c9151e164bf1e96024029a2356a0a`。本人の「終わったら次に進んで」に基づく同じID9の開発・隔離試験であり、公開契約の正式適用・一般の機械判断委任・実業務導入・動画承認方式について新たな本人承認を受領したものではない。実装候補と本適用を区別する。
 
@@ -22,7 +22,7 @@
 
 `admission`の計画整合、字幕／演出未接続、動画許可未承認、人間品質pendingを分離する。参照が未提供なのか、提供された参照が欠損・改変なのかも区別し、後者をpendingへ丸めない。通常キューの検証工程が完了しても動画完成・実行可能とは報告しない。
 
-主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。成果はまだ未生成。v005保存を受領・実装済みにしない。
+主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。受領・経路調査を保存済み。実装と試験は進行中。
 
 ## 2.1 v004の受理と未承認の適用事項
 

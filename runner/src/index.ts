@@ -1,12 +1,15 @@
 import { spawn } from 'node:child_process';
-import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, rm, writeFile, lstat, realpath } from 'node:fs/promises';
 import { createReadStream, createWriteStream, existsSync } from 'node:fs';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
+  assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactFileNameV001, type DigestByteBindingV001,
   DEFAULT_GEMINI_MODEL,
   findById,
   lastMatching,
@@ -321,15 +324,61 @@ async function downloadArtifactFromBackend(uri: string): Promise<void> {
   }
 }
 
-async function downloadRequestArtifactsFromBackend(state: Zev2State, requestDraftId: string): Promise<void> {
-  if (artifactDeliveryMode !== 'upload') {
-    return;
+async function hashStreamingFile(file:string) {
+  const hash=createHash('sha256');for await(const chunk of createReadStream(file)) hash.update(chunk);
+  return hash.digest('hex');
+}
+async function digestFile(binding:DigestByteBindingV001,draftId:string) {
+  const name=digestArtifactFileNameV001(binding.path,draftId);
+  const absolute=path.join(runnerArtifactRoot(),draftId,name);
+  const info=await lstat(absolute);
+  if(!info.isFile() || info.isSymbolicLink() || await realpath(absolute)!==absolute
+    || await hashStreamingFile(absolute)!==binding.fileSha256) throw new Error('DIGEST_DATA_BYTES_MISMATCH');
+  return absolute;
+}
+async function downloadDigestBinding(binding:DigestByteBindingV001,draftId:string) {
+  const name=digestArtifactFileNameV001(binding.path,draftId);
+  const uri=`/api/artifacts/${draftId}/${name}`;
+  await downloadArtifactFromBackend(uri);await digestFile(binding,draftId);
+}
+async function downloadRequestArtifactsFromBackend(state: Zev2State, request: AgentRequest): Promise<void> {
+  const requestDraftId=request.requestDraftId;
+  if(request.input.productionType==='digest') assertApprovedAgentRequestInput(state,request);
+  const draftArtifactPrefix=`/api/artifacts/${requestDraftId}/`;
+  for(const ref of state.fileRefs.filter(f=>f.uri.startsWith(draftArtifactPrefix))) {
+    await downloadArtifactFromBackend(ref.uri);
+    if(request.input.productionType==='digest') {
+      const binding={path:`artifacts/${ref.uri.slice('/api/artifacts/'.length)}`,fileSha256:ref.sha256};
+      const absolute=await digestFile(binding,requestDraftId);
+      if((await lstat(absolute)).size!==ref.byteSize) throw new Error('DIGEST_DATA_SIZE_MISMATCH');
+      if(ref.kind==='source_video' && !ref.mimeType.startsWith('video/')) {
+        const source=JSON.parse(await readFile(absolute,'utf8'));
+        if(source.sourceInspectionBinding) await downloadDigestBinding(source.sourceInspectionBinding,requestDraftId);
+      }
+      if(ref.kind==='digest_plan_json') {
+        const plan=JSON.parse(await readFile(absolute,'utf8'));assertDigestArtifactV001(plan,'digest_plan_json');
+        for(const b of plan.dataBindings) await downloadDigestBinding(b,requestDraftId);
+      }
+    }
   }
-
-  const draftArtifactPrefix = `/api/artifacts/${encodeURIComponent(sanitizePathPart(requestDraftId))}/`;
-  for (const fileRef of state.fileRefs.filter((item) => item.uri.startsWith(draftArtifactPrefix))) {
-    await downloadArtifactFromBackend(fileRef.uri);
-  }
+}
+async function remoteDigestSha(uri:string) {
+  const response=await fetch(`${runnerOptions.apiBaseUrl}${agentArtifactReadRouteFromUri(uri)}`,{headers:agentApiAuthorizationHeader()});
+  if(response.status===404) return null;
+  if(!response.ok || !response.body) throw new Error('DIGEST_REMOTE_READ_FAILED');
+  const hash=createHash('sha256');for await(const chunk of Readable.fromWeb(response.body as any)) hash.update(chunk);
+  return hash.digest('hex');
+}
+async function uploadDigestFile(draftId:string,binding:DigestByteBindingV001,mimeType:string) {
+  const name=digestArtifactFileNameV001(binding.path,draftId),uri=`/api/artifacts/${draftId}/${name}`;
+  const absolute=await digestFile(binding,draftId),saved=await remoteDigestSha(uri);
+  if(saved!==null) {if(saved!==binding.fileSha256) throw new Error('DIGEST_UPLOAD_EXISTING_BYTES_MISMATCH');return;}
+  const response=await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(uri)}`,{method:'PUT',
+    headers:{'content-type':mimeType,...agentApiAuthorizationHeader()},body:createReadStream(absolute) as any,duplex:'half'} as any);
+  if(!response.ok) throw new Error(`DIGEST_UPLOAD_FAILED: ${response.status}`);
+  const metadata=await response.json() as {uri:string;sha256:string};
+  if(metadata.uri!==uri || metadata.sha256!==binding.fileSha256 || await remoteDigestSha(uri)!==binding.fileSha256)
+    throw new Error('DIGEST_UPLOAD_BYTES_MISMATCH');
 }
 
 async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<ArtifactInfo> {
@@ -337,6 +386,12 @@ async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<Artifact
     return artifact;
   }
 
+  if(artifact.dataBindings) {
+    const draftId=artifact.uri.slice('/api/artifacts/'.length).split('/')[0]!;
+    for(const b of artifact.dataBindings) await uploadDigestFile(draftId,b,b.path.endsWith('.mp4')?'video/mp4':'application/json');
+    await uploadDigestFile(draftId,{path:`artifacts/${artifact.uri.slice('/api/artifacts/'.length)}`,fileSha256:await hashStreamingFile(artifact.path)},artifact.mimeType);
+    return artifact;
+  }
   const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(artifact.uri)}`, {
     method: 'PUT',
     headers: {
@@ -363,11 +418,15 @@ async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<Artifact
 }
 
 async function writeJsonArtifact(request: AgentRequest, kind: FileRefKind, payload: unknown): Promise<ArtifactInfo> {
-  const fileName = ARTIFACT_FILE_NAME_BY_KIND[kind];
+  const fileName = request.input.productionType==='digest' ? `${request.id}--${ARTIFACT_FILE_NAME_BY_KIND[kind]}` : ARTIFACT_FILE_NAME_BY_KIND[kind];
   const directory = requestArtifactDir(request);
   const artifactPath = path.join(directory, fileName);
   await mkdir(directory, { recursive: true });
-  await writeFile(artifactPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  const bytes=`${JSON.stringify(payload,null,2)}\n`;
+  if(request.input.productionType==='digest') {
+    try {if(await readFile(artifactPath,'utf8')!==bytes) throw new Error('DIGEST_SAVED_OUTPUT_CHANGED');}
+    catch(e) {if((e as NodeJS.ErrnoException).code!=='ENOENT') throw e;await writeFile(artifactPath,bytes,{flag:'wx'});}
+  } else await writeFile(artifactPath,bytes,'utf8');
 
   return {
     path: artifactPath,
@@ -660,6 +719,11 @@ async function renderFixtureVideo(request: AgentRequest, editPlan: EditPlanArtif
 }
 
 const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
+  digestPlanPreparation: {workspaceRoot:workspaceRoot(),artifactRoot:runnerArtifactRoot(),
+    judge:async (_stage,request)=>{
+      const transport=await import(pathToFileURL(path.join(workspaceRoot(),'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts')).href);
+      return transport.judgeThroughStdinV001(request);
+    }},
   prepareSourceVideo,
   buildTranscript,
   buildThemeOptionsArtifact,
@@ -675,7 +739,7 @@ const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
 
 async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactInfo> {
   const state = await loadState();
-  await downloadRequestArtifactsFromBackend(state, request.requestDraftId);
+  await downloadRequestArtifactsFromBackend(state, request);
   return STEP_ARTIFACT_BUILDERS[request.type]({ request, state });
 }
 

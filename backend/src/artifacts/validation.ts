@@ -1,9 +1,10 @@
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import { access, open, readFile, stat } from 'node:fs/promises';
+import { access, open, readFile, stat, lstat, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import {
   getFileRefKindForRequest,
+  assertDigestArtifactV001, digestArtifactFileNameV001,
   type AgentCompletionInput,
   type AgentRequest,
   type FileRef
@@ -106,6 +107,10 @@ export async function validateCompletionFileRef(
   }
 
   try {
+    if (expectedKind === 'digest_plan_json' || expectedKind === 'digest_execution_input_json') {
+      const value=JSON.parse(await readFile(validation.artifactPath,'utf8'));
+      assertDigestArtifactV001(value,expectedKind,{requestDraftId:agentRequest.requestDraftId,requestId:agentRequest.id});
+    }
     return {
       artifactPath: validation.artifactPath,
       metadata: await readArtifactFileMetadata(validation.artifactPath)
@@ -168,6 +173,28 @@ export async function validateArtifactFileRefForKind(
     return { error: '成果物参照のJSONを読めません' };
   }
 
+  if(expectedKind === 'digest_plan_json' || expectedKind === 'digest_execution_input_json') {
+    try {
+      const v=JSON.parse(await readFile(artifactPath,'utf8'));assertDigestArtifactV001(v,expectedKind);
+      if(v.requestDraftId !== requestDraftId) throw new Error('Digest依頼が一致しません');
+      const closure=new Map(v.dataBindings.map(b=>[b.path,b.fileSha256]));
+      for(const b of v.dataBindings) {
+        const name=digestArtifactFileNameV001(b.path,requestDraftId), absolute=artifactPathByUrl(`${expectedPrefix}${name}`);
+        const info=await lstat(absolute);
+        if(!info.isFile() || info.isSymbolicLink() || await realpath(absolute) !== absolute
+          || await hashFileSha256(absolute) !== b.fileSha256) throw new Error('Digestの参照bytesが欠損または不一致です');
+      }
+      if(expectedKind === 'digest_plan_json' && 'preparationBinding' in v) {
+        const prep=JSON.parse(await readFile(artifactPathByUrl(`${expectedPrefix}${digestArtifactFileNameV001(v.preparationBinding.path,requestDraftId)}`),'utf8'));
+        if(prep.schemaVersion !== 'normal-request-digest-preparation-binding-v002' || prep.status !== 'complete'
+          || prep.identity.requestDraftId !== v.requestDraftId || prep.identity.requestId !== v.requestId) throw new Error('Digest準備の版・完了対応が不正です');
+        const required=[...Object.values(prep.artifacts) as {path:string;fileSha256:string}[],
+          prep.identity.sourceRegistration,prep.identity.sourceVideo,prep.identity.transcript,prep.identity.utterances,
+          ...(prep.identity.sourceInspection?[prep.identity.sourceInspection]:[])];
+        for(const b of required) if(closure.get(b.path) !== b.fileSha256) throw new Error('Digest参照一式が未転送です');
+      }
+    } catch(e) {return {error:e instanceof Error?e.message:'Digestの参照一式を確認できません'};}
+  }
   return { artifactPath };
 }
 

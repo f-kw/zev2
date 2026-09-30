@@ -5,6 +5,7 @@ import { access, copyFile, mkdir, open, readFile, stat } from 'node:fs/promises'
 import path from 'node:path';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
+  assertApprovedAgentRequestInput,
   WORKFLOW_STEPS,
   type AgentOperationLog,
   type AgentOperationLogEventType,
@@ -54,6 +55,7 @@ import {
   validateRequestDraftInput,
   type RequestDraftInput
 } from '@zev2/shared';
+import {readStateSnapshot} from '../store/json-store.js';
 import { loadState, runExclusiveStateOperation, saveState } from '../store/json-store.js';
 import { startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
@@ -361,8 +363,8 @@ router.get('/runtime-config', async (_, response) => {
 });
 
 router.get('/state', async (_, response) => {
-  const state = await loadStateWithClaimRecovery();
-  response.json(state);
+  try {response.json(await loadStateWithClaimRecovery());}
+  catch(e) {if(e instanceof Error && e.message.startsWith('STATE_MIGRATION_REQUIRED')) response.json(await readStateSnapshot());else throw e;}
 });
 
 router.get('/request-drafts/:id/activity', async (request, response) => {
@@ -646,6 +648,7 @@ router.post('/agent-requests/:id/claim', requireAgentApiToken, async (request, r
     return;
   }
 
+  try {assertApprovedAgentRequestInput(state,agentRequest);} catch(e) {response.status(409).json({error:e instanceof Error?e.message:'承認入力が不正です'});return;}
   const previousStatus = agentRequest.status;
   const dependency = findAgentRequestDependency(state, agentRequest);
   if (dependency && dependency.status !== 'succeeded') {
@@ -731,6 +734,7 @@ router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request
     response.status(400).json({ error: 'AI操作の完了には成果物参照が必要です', state });
     return;
   }
+  try {assertApprovedAgentRequestInput(state,agentRequest);} catch(e) {response.status(409).json({error: e instanceof Error?e.message:'承認入力が不正です'});return;}
   const completionInput = input as AgentCompletionInput;
   const fileRefValidation = await validateCompletionFileRef(agentRequest, completionInput.fileRef);
   if ('error' in fileRefValidation) {
@@ -738,6 +742,18 @@ router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request
     return;
   }
 
+  if(agentRequest.type === 'validate_digest_plan') {
+    const v=JSON.parse(await readFile(fileRefValidation.artifactPath,'utf8'));
+    const dep=findById(state.agentRequests,agentRequest.dependsOnAgentRequestId), ref=findById(state.fileRefs,dep?.result?.fileRefId);
+    const output=findById(state.outputs,dep?.result?.outputId), b=v.planFileRefBinding;
+    if(!dep || dep.type !== 'prepare_digest_plan' || dep.status !== 'succeeded' || !ref || !output
+      || ref.ownerId !== output.id || output.fileRefId !== ref.id || dep.result?.outputType !== output.type
+      || output.type !== 'DigestPlan' || ref.kind !== 'digest_plan_json' || dep.fileRefIds.length !== 1 || dep.fileRefIds[0] !== ref.id
+      || b.requestId !== dep.id || b.outputId !== output.id || b.fileRefId !== ref.id || b.fileSha256 !== ref.sha256
+      || b.byteSize !== ref.byteSize || b.path !== `artifacts/${ref.uri.slice('/api/artifacts/'.length)}`) {
+      response.status(400).json({error:'検証結果の登録計画・出力所有者が一致しません'});return;
+    }
+  }
   const reviewKind = getRequiredControlReviewKind(agentRequest);
   if (reviewKind) {
     const errors = validateAgentDecision(completionInput.decision);

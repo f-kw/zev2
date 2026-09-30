@@ -1,3 +1,4 @@
+import {assertDigestArtifactV001} from '@zev2/shared';
 import type { FileRefKind } from '@zev2/shared';
 import type {
   ClipCompositionArtifact,
@@ -369,6 +370,7 @@ export function assertPatchArtifact(value: unknown, label = '調整結果成果�
 }
 
 export function assertJsonArtifactForKind(kind: FileRefKind, value: unknown, label: string): void {
+  if (kind === 'digest_plan_json' || kind === 'digest_execution_input_json') {assertDigestArtifactV001(value,kind);return;}
   if (kind === 'transcript_json') {
     assertTranscriptArtifact(value, label);
     return;

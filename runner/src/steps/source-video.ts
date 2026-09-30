@@ -21,7 +21,7 @@ export type SourceVideoArtifactContext = {
   runCommand: (command: string, args: string[]) => Promise<void>;
 };
 
-function resolveLocalSourcePath(sourceUri: string, workspaceRoot: string): string | undefined {
+export function resolveLocalSourcePath(sourceUri: string, workspaceRoot: string): string | undefined {
   if (sourceUri.startsWith('file://')) {
     const url = new URL(sourceUri);
     if (url.hostname && url.hostname !== 'localhost') {

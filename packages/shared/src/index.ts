@@ -5,6 +5,7 @@ export * from './common.js';
 export * from './caption-local-repair-v001.js';
 export * from './activity.js';
 export * from './web-gemini-review.js';
+export * from './digest-plan-artifacts-v001.js';
 
 export const WORKFLOW_STEPS = [
   {
@@ -51,6 +52,18 @@ export const WORKFLOW_STEPS = [
   }
 ] as const;
 
+export const DIGEST_WORKFLOW_STEPS = [WORKFLOW_STEPS[0], WORKFLOW_STEPS[1],
+  {type: 'prepare_digest_plan', label: 'Digest採否・保持計画', outputKind: 'digest_plan_json', requiresHumanApproval: false},
+  {type: 'validate_digest_plan', label: 'Digest登録計画の検証', outputKind: 'digest_execution_input_json', requiresHumanApproval: false},
+] as const;
+export const ALL_WORKFLOW_STEPS = [...WORKFLOW_STEPS, ...DIGEST_WORKFLOW_STEPS.slice(2)] as const;
+export type ProductionType = 'clip' | 'digest';
+export function isProductionType(value: unknown): value is ProductionType {return value === 'clip' || value === 'digest';}
+export function workflowStepsForProductionType(value: ProductionType) {
+  if (!isProductionType(value)) throw new Error('制作系統が未指定または不正です');
+  return value === 'clip' ? WORKFLOW_STEPS : DIGEST_WORKFLOW_STEPS;
+}
+
 export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
 
 export const GEMINI_MODEL_OPTIONS = [
@@ -61,7 +74,7 @@ export const GEMINI_MODEL_OPTIONS = [
   }
 ] as const;
 
-export type WorkflowStep = (typeof WORKFLOW_STEPS)[number];
+export type WorkflowStep = (typeof ALL_WORKFLOW_STEPS)[number];
 export type AgentRequestType = WorkflowStep['type'];
 export type FileRefKind = WorkflowStep['outputKind'];
 
@@ -72,7 +85,9 @@ export const ARTIFACT_FILE_NAME_BY_KIND = {
   composition_json: 'clip-composition.json',
   edit_plan_json: 'edit-plan.json',
   patch_json: 'adjustment-patch.json',
-  output_video: 'output.mp4'
+  output_video: 'output.mp4',
+  digest_plan_json: 'digest-plan.json',
+  digest_execution_input_json: 'digest-execution-input.json'
 } as const satisfies Record<FileRefKind, string>;
 
 export type SttRuntimeMode = 'fixed' | 'local';
@@ -125,6 +140,7 @@ export interface ControlReviewOption {
 }
 
 export interface RequestDraftInput {
+  productionType: ProductionType;
   purpose: string;
   sourceUri: string;
   durationLabel: string;
@@ -169,6 +185,7 @@ export interface HumanControlPolicy {
 }
 
 export interface RequestDraft {
+  productionType: ProductionType;
   id: string;
   status: RequestDraftStatus;
   purpose: string;
@@ -201,6 +218,7 @@ export interface AgentRequest {
     sourceUri: string;
   };
   input: {
+    productionType: ProductionType;
     purpose: string;
     settings: RequestDraft['settings'];
   };
@@ -278,7 +296,9 @@ export type OutputEntity =
   | { id: string; type: 'ClipComposition'; meaning: string; fileRefId: string }
   | { id: string; type: 'EditPlan'; meaning: string; fileRefId: string }
   | { id: string; type: 'Patch'; meaning: string; fileRefId: string }
-  | { id: string; type: 'OutputVideo'; meaning: string; fileRefId: string };
+  | { id: string; type: 'OutputVideo'; meaning: string; fileRefId: string }
+  | { id: string; type: 'DigestPlan'; meaning: string; fileRefId: string }
+  | { id: string; type: 'DigestExecutionInput'; meaning: string; fileRefId: string };
 
 export type OutputEntityType = OutputEntity['type'];
 
@@ -377,7 +397,8 @@ const OUTPUT_TYPE_BY_REQUEST_TYPE = {
   build_clip_composition: 'ClipComposition',
   create_edit_plan: 'EditPlan',
   apply_adjustment: 'Patch',
-  render_video: 'OutputVideo'
+  render_video: 'OutputVideo',
+  prepare_digest_plan: 'DigestPlan', validate_digest_plan: 'DigestExecutionInput'
 } satisfies Record<AgentRequestType, OutputEntityType>;
 
 const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
@@ -387,7 +408,9 @@ const DRY_RUN_MEANING_BY_REQUEST_TYPE = {
   build_clip_composition: '選ばれたテーマの切り口と編集元場面を整理した結果',
   create_edit_plan: '切り口と編集元場面をもとに演出案を作った結果',
   apply_adjustment: '修正指示を複数箇所の演出案へ反映した結果',
-  render_video: '編集案から複数箇所を連結して動画を生成した結果'
+  render_video: '編集案から複数箇所を連結して動画を生成した結果',
+  prepare_digest_plan: '承認依頼の制作意図で採否と内部保持を検査・保存した計画',
+  validate_digest_plan: '登録済み計画を再読し、整合と後段の未接続・未承認を記録した結果'
 } satisfies Record<AgentRequestType, string>;
 
 export function createInitialState(): Zev2State {
@@ -406,7 +429,7 @@ export function createInitialState(): Zev2State {
 }
 
 export function getWorkflowStep(requestType: AgentRequestType): WorkflowStep {
-  const step = WORKFLOW_STEPS.find((item) => item.type === requestType);
+  const step = ALL_WORKFLOW_STEPS.find((item) => item.type === requestType);
   if (!step) {
     throw new Error(`未知の作業種別です: ${requestType}`);
   }
@@ -445,11 +468,30 @@ export function findAgentRequestDependency(
   return findById(state.agentRequests, request.dependsOnAgentRequestId);
 }
 
+export function assertApprovedAgentRequestInput(state: Zev2State, request: AgentRequest): void {
+  const drafts = state.requestDrafts.filter(d => d.id === request.requestDraftId);
+  const d = drafts[0];
+  if (drafts.length !== 1 || !d || d.status !== 'approved' || !isProductionType(d.productionType)
+    || request.input.productionType !== d.productionType || request.input.purpose !== d.purpose
+    || request.target.sourceUri !== d.source.uri || JSON.stringify(request.input.settings) !== JSON.stringify(d.settings)
+    || JSON.stringify(request.constraints) !== JSON.stringify(d.settings) || JSON.stringify(request.policy) !== JSON.stringify(d.policy))
+    throw new Error('承認済み依頼と命令の入力が一致しません');
+  const steps = workflowStepsForProductionType(d.productionType);
+  const index = steps.findIndex(s => s.type === request.type);
+  if (index < 0 || JSON.stringify(d.steps.map(s => s.type)) !== JSON.stringify(steps.map(s => s.type)))
+    throw new Error('制作系統と工程が一致しません');
+  const dep = findAgentRequestDependency(state, request);
+  if (index === 0 ? Boolean(request.dependsOnAgentRequestId)
+    : !dep || dep.requestDraftId !== d.id || dep.type !== steps[index - 1]?.type || dep.input.productionType !== d.productionType)
+    throw new Error('命令の依存が制作系統の工程列と一致しません');
+}
+
 export function isAgentRequestReady(state: Zev2State, request: AgentRequest): boolean {
   if (!isStatusIn(request.status, ['queued', 'waiting'])) {
     return false;
   }
 
+  try {assertApprovedAgentRequestInput(state, request);} catch {return false;}
   const dependency = findAgentRequestDependency(state, request);
   return (!dependency || dependency.status === 'succeeded') && !isBlockedByHumanReview(state, request);
 }
@@ -531,6 +573,7 @@ function requiredApprovedReviewKindBeforeRequest(requestType: AgentRequestType):
 
 export function validateRequestDraftInput(input: Partial<RequestDraftInput>): string[] {
   const errors: string[] = [];
+  if (!isProductionType(input.productionType)) errors.push('制作系統を明示してください');
 
   if (!input.purpose?.trim()) {
     errors.push('目的を入力してください');
@@ -620,6 +663,7 @@ export function createRequestDraft(
   return {
     id: createId('draft'),
     status: 'draft',
+    productionType: input.productionType,
     purpose: input.purpose.trim(),
     source: {
       kind: 'video_source',
@@ -634,7 +678,7 @@ export function createRequestDraft(
     policy: {
       humanApprovalRequiredBeforeRender: false
     },
-    steps: WORKFLOW_STEPS.map((step) => ({
+    steps: workflowStepsForProductionType(input.productionType).map((step) => ({
       type: step.type,
       label: step.label,
       requiresHumanApproval: step.requiresHumanApproval
@@ -649,7 +693,8 @@ export function createAgentRequestsFromDraft(
   now: string,
   createId: (prefix: string) => string
 ): AgentRequest[] {
-  const requestedSteps = WORKFLOW_STEPS;
+  const requestedSteps = workflowStepsForProductionType(draft.productionType);
+  if (JSON.stringify(draft.steps.map(s => s.type)) !== JSON.stringify(requestedSteps.map(s => s.type))) throw new Error('制作系統と保存工程列が一致しません');
 
   let previousAgentRequestId = '';
 
@@ -663,6 +708,7 @@ export function createAgentRequestsFromDraft(
         sourceUri: draft.source.uri
       },
       input: {
+        productionType: draft.productionType,
         purpose: draft.purpose,
         settings: draft.settings
       },

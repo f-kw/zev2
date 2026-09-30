@@ -1,4 +1,4 @@
-import type { AgentRequestType, ControlReference, FileRefAccess, FileRefKind } from '@zev2/shared';
+import type { DigestByteBindingV001, AgentRequestType, ControlReference, FileRefAccess, FileRefKind } from '@zev2/shared';
 import type { ShortsScreenLayoutPlan } from './screen-layout.js';
 
 export type ArtifactInfo = {
@@ -7,6 +7,7 @@ export type ArtifactInfo = {
   mimeType: string;
   access: FileRefAccess;
   payload?: unknown;
+  dataBindings?: DigestByteBindingV001[];
 };
 
 export type SourceVideoArtifact = {
@@ -16,6 +17,7 @@ export type SourceVideoArtifact = {
   purpose: string;
   registeredAt: string;
   localPath?: string;
+  sourceInspectionBinding?: DigestByteBindingV001;
   fileName?: string;
   downloadTool?: string;
 };

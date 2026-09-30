@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
-import {readFile, writeFile, mkdir, rename, lstat, realpath} from 'node:fs/promises';
+import {readFile, writeFile, mkdir, rename, lstat, realpath, copyFile} from 'node:fs/promises';
 import path from 'node:path';
+import {constants} from 'node:fs';
 import {pathToFileURL} from 'node:url';
-import {findById, isAgentRequestReady, type AgentRequest, type Zev2State, type FileRef} from '@zev2/shared';
+import {findById, isAgentRequestReady, type AgentRequest, type Zev2State, type FileRef, getFileRefKindForRequest, getOutputTypeForRequest, assertDigestArtifactV001, digestArtifactFileNameV001, type DigestPlanArtifactV001} from '@zev2/shared';
 import type {TranscriptArtifact} from './workflow-artifacts.js';
-import {validateDistantConnectionCommonUtteranceArtifactAgainstTranscriptBytesV001} from './distant-connection-common-utterance-artifact-v001.js';
+import {resolveLocalSourcePath} from './steps/source-video.js';
+import {buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001, validateDistantConnectionCommonUtteranceArtifactAgainstTranscriptBytesV001} from './distant-connection-common-utterance-artifact-v001.js';
 import {runCandidateDiscoveryV001} from './skills/candidate-discovery-v001.js';
 import {runCandidateSelectionV001} from './skills/candidate-selection-v001.js';
 import {runInternalRetentionV001, assertInternalRetentionInputV001} from './skills/candidate-internal-retention-v001.js';
@@ -16,15 +18,15 @@ export type DigestPreparationStageV001 = 'discovery' | 'selection' | 'retention'
 export type DigestPlanPreparationDependenciesV001 = {
   workspaceRoot: string;
   artifactRoot: string;
-  sourceId: string;
-  utterances: ByteBinding;
   judge: (stage: DigestPreparationStageV001, request: Readonly<Json>) => Promise<unknown>;
 };
 type Input = {request: AgentRequest; state: Zev2State; transcript: TranscriptArtifact; transcriptUri: string};
-const SCHEMA = 'normal-request-digest-preparation-binding-v001';
+const SCHEMA = 'normal-request-digest-preparation-binding-v002';
 const IMPLEMENTATIONS = [
   'runner/src/digest-plan-preparation-v001.ts', 'runner/src/workflow-step-builders.ts',
   'runner/src/index.ts', 'packages/shared/src/index.ts',
+  'packages/shared/src/digest-plan-artifacts-v001.ts', 'runner/src/steps/source-video.ts',
+  'runner/src/workflow-artifact-validation.ts',
   'runner/src/skills/candidate-discovery-v001.ts', 'runner/src/skills/candidate-selection-v001.ts',
   'runner/src/skills/candidate-internal-retention-v001.ts',
   'runner/src/distant-connection-common-utterance-artifact-v001.ts', 'runner/src/transcript-utils.ts',
@@ -55,12 +57,25 @@ async function safeFile(root: string, name: string) {
   assert(info.isFile() && !info.isSymbolicLink() && await realpath(absolute) === absolute, 'DIGEST_REFERENCE_INVALID');
   return absolute;
 }
+export function digestDataPathV001(artifactRoot: string, draftId: string, logicalPath: string) {
+  const file = digestArtifactFileNameV001(logicalPath, draftId);
+  return path.join(path.resolve(artifactRoot), draftId, file);
+}
 function artifactPath(deps: DigestPlanPreparationDependenciesV001, uri: string) {
-  assert(uri.startsWith('/api/artifacts/'), 'DIGEST_ARTIFACT_URI_INVALID');
-  const tail = uri.slice('/api/artifacts/'.length).split('/').map(decodeURIComponent).join('/');
-  const absolute = path.resolve(deps.artifactRoot, tail);
-  relative(path.resolve(deps.artifactRoot), absolute);
-  return relative(path.resolve(deps.workspaceRoot), absolute);
+  assert(/^\/api\/artifacts\/[A-Za-z0-9_-]+\/[A-Za-z0-9_.-]+$/u.test(uri), 'DIGEST_ARTIFACT_URI_INVALID');
+  return `artifacts/${uri.slice('/api/artifacts/'.length)}`;
+}
+export function registeredDigestDependencyV001(state: Zev2State, dependency: AgentRequest, kind: FileRef['kind']) {
+  const outputs = state.outputs.filter(o => o.id === dependency.result?.outputId);
+  const refs = state.fileRefs.filter(f => f.id === dependency.result?.fileRefId);
+  const o = outputs[0], f = refs[0];
+  assert(dependency.status === 'succeeded' && outputs.length === 1 && refs.length === 1 && o && f
+    && o.type === getOutputTypeForRequest(dependency.type) && dependency.result?.outputType === o.type
+    && o.fileRefId === f.id && f.ownerId === o.id && f.kind === kind && kind === getFileRefKindForRequest(dependency.type)
+    && same(dependency.fileRefIds,[f.id]) && /^[0-9a-f]{64}$/u.test(f.sha256) && Number.isSafeInteger(f.byteSize)
+    && f.byteSize > 0, 'DIGEST_DEPENDENCY_REFERENCE_INVALID');
+  assert(f.uri.startsWith(`/api/artifacts/${dependency.requestDraftId}/`), 'DIGEST_DEPENDENCY_OTHER_DRAFT');
+  return f;
 }
 function commandSnapshot(r: AgentRequest) {
   return {id: r.id, requestDraftId: r.requestDraftId, type: r.type, target: r.target,
@@ -69,16 +84,16 @@ function commandSnapshot(r: AgentRequest) {
 }
 function qualify(input: Input, execution: boolean) {
   const {request: r, state} = input;
-  assert(identifier(r.id) && identifier(r.requestDraftId) && r.type === 'propose_clip_themes', 'DIGEST_REQUEST_INVALID');
+  assert(identifier(r.id) && identifier(r.requestDraftId) && r.type === 'prepare_digest_plan' && r.input.productionType === 'digest', 'DIGEST_REQUEST_INVALID');
   const current = state.agentRequests.filter(x => x.id === r.id);
   const drafts = state.requestDrafts.filter(x => x.id === r.requestDraftId);
   assert(current.length === 1 && same(current[0], r) && drafts.length === 1, 'DIGEST_REQUEST_STATE_MISMATCH');
   const d = drafts[0]!;
-  assert(d.status === 'approved' && d.purpose.trim(), 'DIGEST_REQUEST_NOT_APPROVED');
+  assert(d.status === 'approved' && d.productionType === 'digest' && d.purpose.trim(), 'DIGEST_REQUEST_NOT_APPROVED');
   if (execution) assert(r.status === 'running' && r.claimOwnerId?.trim() && r.claimedAt && r.claimUpdatedAt && !r.claimExpiredAt
     && (!r.claimExpiresAt || Date.parse(r.claimExpiresAt) > Date.now()), 'DIGEST_REQUEST_NOT_CLAIMED');
   assert(isAgentRequestReady(state, {...r, status: 'queued'}), 'DIGEST_DEPENDENCY_OR_REVIEW_NOT_READY');
-  const matches = (x: AgentRequest) => x.requestDraftId === d.id && x.target.sourceUri === d.source.uri
+  const matches = (x: AgentRequest) => x.input.productionType === d.productionType && x.requestDraftId === d.id && x.target.sourceUri === d.source.uri
     && x.input.purpose === d.purpose && same(x.input.settings, d.settings)
     && same(x.constraints, d.settings) && same(x.policy, d.policy);
   assert(matches(r), 'DIGEST_APPROVED_INPUT_CHANGED');
@@ -86,19 +101,12 @@ function qualify(input: Input, execution: boolean) {
   const video = findById(state.agentRequests, stt?.dependsOnAgentRequestId);
   assert(stt?.type === 'run_stt' && stt.status === 'succeeded' && matches(stt)
     && video?.type === 'prepare_video' && video.status === 'succeeded' && matches(video), 'DIGEST_DEPENDENCY_INPUT_CHANGED');
-  const ref = (dep: AgentRequest, kind: FileRef['kind']) => {
-    const rows = state.fileRefs.filter(f => f.id === dep.result?.fileRefId);
-    assert(rows.length === 1 && rows[0]?.ownerId === dep.id && rows[0].kind === kind
-      && /^[0-9a-f]{64}$/u.test(rows[0].sha256) && Number.isSafeInteger(rows[0].byteSize)
-      && rows[0].byteSize > 0, 'DIGEST_DEPENDENCY_REFERENCE_INVALID');
-    return rows[0];
-  };
-  const transcriptRef = ref(stt, 'transcript_json'), videoRef = ref(video, 'source_video');
+  const transcriptRef = registeredDigestDependencyV001(state, stt, 'transcript_json'), videoRef = registeredDigestDependencyV001(state, video, 'source_video');
   assert(transcriptRef.uri === input.transcriptUri && input.transcript.sourceUri === d.source.uri, 'DIGEST_TRANSCRIPT_SOURCE_MISMATCH');
   return {draft: d, transcriptRef, videoRef};
 }
 
-/** 明示依存でのみ実行。通常のテーマ選択・完成命令・公開APIを変更しない。 */
+/** 明示Digestの通常採否・保持工程。通信だけを外部判断へ委任する。 */
 export async function prepareDigestPlanV001(deps: DigestPlanPreparationDependenciesV001, input: Input) {
   return prepare(deps, input, true);
 }
@@ -110,11 +118,11 @@ export async function readPreparedDigestPlanV001(deps: Omit<DigestPlanPreparatio
 
 async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input, execution: boolean) {
   input = structuredClone(input);
-  deps = {...deps, utterances: structuredClone(deps.utterances)};
+  deps = {...deps};
   const approved = qualify(input, execution); // 保存やproviderより前に、実stateの承認・claim・依存を検査。
-  assert(identifier(deps.sourceId), 'DIGEST_SOURCE_ID_INVALID');
+  const sourceId = approved.videoRef.id;
   const root = await realpath(deps.workspaceRoot), artifactRoot = await realpath(deps.artifactRoot);
-  relative(root, artifactRoot);
+
   const load = (name: string) => import(pathToFileURL(path.resolve(root, 'evals/clip_composition', name)).href);
   // 凍結済み.mtsの純粋builder/validatorを既存tsx実行環境で利用する。CLIのmain guardは起動しない。
   const base = await load('run_candidate_discovery_digest_skill_e2e_v001.mts');
@@ -122,39 +130,78 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   const selection = await load('candidate_selection_validation_v001.mts');
   const retention = await load('candidate_internal_retention_validation_v001.mts');
   const {formal, bind, sha, canonicalSha, fileSha} = base;
+  const directory = path.join(artifactRoot, input.request.requestDraftId);
+  const outputRoot = `artifacts/${input.request.requestDraftId}`;
+  const file = (name: string) => `${outputRoot}/${input.request.id}--${name}`;
+  const dataPath = (name: string) => digestDataPathV001(artifactRoot,input.request.requestDraftId,name);
+  const recordPath = dataPath(file('preparation-binding.json'));
   const readByte = async (b: ByteBinding) => {
-    assert(exact(b, ['path', 'fileSha256']) && /^[0-9a-f]{64}$/u.test(b.fileSha256), 'DIGEST_BYTE_BINDING_INVALID');
-    const absolute = await safeFile(root, b.path);
+    assert(exact(b, ['path','fileSha256']) && /^[0-9a-f]{64}$/u.test(b.fileSha256), 'DIGEST_BYTE_BINDING_INVALID');
+    const absolute = dataPath(b.path);
+    assert.equal(await safeFile(artifactRoot, relative(artifactRoot,absolute)), absolute);
     assert.equal(await fileSha(absolute), b.fileSha256, 'DIGEST_SOURCE_SHA_MISMATCH');
     return absolute;
   };
   const reference = async (f: FileRef) => {
-    const b = {path: artifactPath(deps, f.uri), fileSha256: f.sha256};
+    const b = {path:artifactPath(deps,f.uri),fileSha256:f.sha256};
     const absolute = await readByte(b);
-    assert.equal((await lstat(absolute)).size, f.byteSize, 'DIGEST_SOURCE_SIZE_MISMATCH');
-    return b;
+    assert.equal((await lstat(absolute)).size,f.byteSize,'DIGEST_SOURCE_SIZE_MISMATCH'); return b;
   };
-  const sourceVideo = await reference(approved.videoRef), transcriptBinding = await reference(approved.transcriptRef);
-  const transcriptBytes = await readFile(path.resolve(root, transcriptBinding.path));
+  let prior: Json | undefined;
+  try {prior=JSON.parse(await readFile(recordPath,'utf8'));assert(prior?.schemaVersion === SCHEMA,'DIGEST_SAVED_BINDING_VERSION_INVALID');}
+  catch(e) {if((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e;}
+  const sourceRegistration = await reference(approved.videoRef), transcriptBinding = await reference(approved.transcriptRef);
+  const transcriptBytes = await readFile(dataPath(transcriptBinding.path));
   const transcript = JSON.parse(transcriptBytes.toString());
-  assert(base.same(transcript, input.transcript), 'DIGEST_TRANSCRIPT_BODY_CHANGED');
-  const utterancePath = await readByte(deps.utterances);
-  const utterances = JSON.parse(await readFile(utterancePath, 'utf8'));
+  assert(base.same(transcript,input.transcript),'DIGEST_TRANSCRIPT_BODY_CHANGED');
+  const registration = approved.videoRef.mimeType.startsWith('video/') ? null
+    : JSON.parse(await readFile(dataPath(sourceRegistration.path),'utf8'));
+  if(registration) assert(registration.kind === 'source_video' && registration.sourceUri === input.request.target.sourceUri
+    && registration.purpose === input.request.input.purpose,'DIGEST_SOURCE_REGISTRATION_CHANGED');
+  let sourceVideo: ByteBinding, sourceOrigin: Json;
+  if(prior && !execution) {
+    sourceVideo=prior.identity.sourceVideo;sourceOrigin=prior.identity.sourceOrigin;await readByte(sourceVideo);
+  } else {
+    const media = registration ? resolveLocalSourcePath(registration.sourceUri,root) : dataPath(sourceRegistration.path);
+    assert(media,'DIGEST_SOURCE_MEDIA_UNRESOLVED');
+    if(registration) await safeFile(root,relative(root,media));
+    else await safeFile(artifactRoot,relative(artifactRoot,media));
+    const sourceSha = await fileSha(media), size = (await lstat(media)).size;
+    sourceOrigin={registration:sourceRegistration,mode:registration?'json-reference':'video-bytes',
+      declaredSourceUri:input.request.target.sourceUri,byteSize:size,fileSha256:sourceSha};
+    sourceVideo=registration ? {path:file('source-media.mp4'),fileSha256:sourceSha} : sourceRegistration;
+
+  }
+  const sourceInspection = registration?.sourceInspectionBinding ?? null;
+  if(sourceInspection) {const inspected=JSON.parse(await readFile(await readByte(sourceInspection),'utf8'));
+    assert(inspected.schemaVersion === 'new-material-source-inspection-v001'
+      && inspected.sourceVideoBinding?.fileSha256 === sourceVideo.fileSha256,'DIGEST_INSPECTION_SOURCE_MISMATCH');}
+    if(registration && execution) {
+      assert(execution,'DIGEST_READ_ONLY_SOURCE_MISSING');
+      await mkdir(directory,{recursive:true});assert.equal(await realpath(directory),directory,'DIGEST_OUTPUT_REFERENCE_INVALID');
+      try {await readByte(sourceVideo);} catch(e) {if((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e;
+        await copyFile(resolveLocalSourcePath(registration.sourceUri,root)!,dataPath(sourceVideo.path),constants.COPYFILE_EXCL|constants.COPYFILE_FICLONE);await readByte(sourceVideo);}
+    }
+  const utterances = buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001({
+    sourceTranscriptPath:transcriptBinding.path,sourceTranscriptBytes:transcriptBytes});
   validateDistantConnectionCommonUtteranceArtifactAgainstTranscriptBytesV001(utterances,
-    {sourceTranscriptPath: transcriptBinding.path, sourceTranscriptBytes: transcriptBytes});
-  const directory = path.join(artifactRoot, input.request.requestDraftId, 'digest-preparation', input.request.id);
-  const outputRoot = relative(root, directory), recordPath = path.join(directory, 'binding.json');
-  const file = (name: string) => `${outputRoot}/${name}`;
+    {sourceTranscriptPath:transcriptBinding.path,sourceTranscriptBytes:transcriptBytes});
+  const utteranceBinding=bind(file('utterances.json'),utterances);
+  if(execution) {
+    await mkdir(directory,{recursive:true});
+    try {assert.equal(sha(await readFile(dataPath(utteranceBinding.path))),utteranceBinding.fileSha256,'DIGEST_UTTERANCES_CHANGED');}
+    catch(e) {if((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e;await writeFile(dataPath(utteranceBinding.path),formal(utterances),{flag:'wx'});}
+  } else await readByte({path:utteranceBinding.path,fileSha256:utteranceBinding.fileSha256});
   const implementations = [];
   for (const p of IMPLEMENTATIONS) implementations.push({path: p, fileSha256: await fileSha(await safeFile(root, p))});
-  const draftSnapshot = {id: approved.draft.id, purpose: approved.draft.purpose, source: approved.draft.source,
+  const draftSnapshot = {id: approved.draft.id, productionType: approved.draft.productionType, purpose: approved.draft.purpose, source: approved.draft.source,
     settings: approved.draft.settings, policy: approved.draft.policy, steps: approved.draft.steps,
     createdAt: approved.draft.createdAt, approvedAt: approved.draft.updatedAt};
   const identity = {requestDraftId: input.request.requestDraftId, requestId: input.request.id,
     approvedDraft: draftSnapshot, approvedDraftSha256: canonicalSha(draftSnapshot),
     command: commandSnapshot(input.request), commandSha256: canonicalSha(commandSnapshot(input.request)),
-    sourceId: deps.sourceId, sourceUri: input.request.target.sourceUri,
-    sourceVideo, transcript: transcriptBinding, utterances: deps.utterances,
+    sourceId, sourceUri: input.request.target.sourceUri,
+    sourceVideo, sourceRegistration, sourceOrigin, sourceInspection, transcript: transcriptBinding, utterances: {path:utteranceBinding.path,fileSha256:utteranceBinding.fileSha256},
     dependencyReferences: {video: approved.videoRef, transcript: approved.transcriptRef}, implementations};
   let record: Json;
   try {
@@ -178,18 +225,18 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
     const b = bind(file(name), value);
     if (record.artifacts[name]) {
       assert(base.same(record.artifacts[name], b), 'DIGEST_SAVED_BINDING_CHANGED');
-      assert.equal(sha(await readFile(await safeFile(root, b.path))), b.fileSha256, 'DIGEST_SAVED_ARTIFACT_CHANGED');
+      assert.equal(sha(await readFile(await safeFile(artifactRoot, relative(artifactRoot,dataPath(b.path))))), b.fileSha256, 'DIGEST_SAVED_ARTIFACT_CHANGED');
       return b;
     }
     assert(execution, 'DIGEST_READ_ONLY_ARTIFACT_MISSING');
-    try {assert.equal(sha(await readFile(path.resolve(root, b.path))), b.fileSha256, 'DIGEST_SAVED_ARTIFACT_CHANGED');}
-    catch (e) {if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e; await writeFile(path.resolve(root, b.path), formal(value), {flag: 'wx'});}
+    try {assert.equal(sha(await readFile(dataPath(b.path))), b.fileSha256, 'DIGEST_SAVED_ARTIFACT_CHANGED');}
+    catch (e) {if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e; await writeFile(dataPath(b.path), formal(value), {flag: 'wx'});}
     record.artifacts[name] = b; await update();
     return b;
   };
   const bound = async (b: Binding) => {
     base.assertBinding(b); assert.equal(path.dirname(b.path), outputRoot, 'DIGEST_STAGE_REFERENCE_OUTSIDE_REQUEST');
-    const bytes = await readFile(await safeFile(root, b.path));
+    const bytes = await readFile(await safeFile(artifactRoot, relative(artifactRoot,dataPath(b.path))));
     assert.equal(sha(bytes), b.fileSha256, 'DIGEST_SAVED_ARTIFACT_CHANGED');
     const v = JSON.parse(bytes.toString()); assert(base.same(bind(b.path, v), b), 'DIGEST_CANONICAL_BINDING_CHANGED'); return v;
   };
@@ -204,7 +251,7 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   for (const saved of Object.values(record.stages) as Json[]) {
     assert(exact(saved, ['request', 'response', 'result', 'accepted']) && plain(saved.accepted), 'DIGEST_STAGE_BINDING_INVALID');
     for (const b of [saved.request, saved.response, saved.result, ...Object.values(saved.accepted)] as Binding[]) {
-      assert(plain(b) && base.same(record.artifacts[path.basename(b.path)], b), 'DIGEST_STAGE_REGISTRY_MISMATCH');
+      assert(plain(b) && base.same(record.artifacts[path.basename(b.path).slice(input.request.id.length+2)], b), 'DIGEST_STAGE_REGISTRY_MISMATCH');
     }
   }
   if (record.status === 'complete') assert(base.same(Object.keys(record.artifacts).sort(), [...names].sort()), 'DIGEST_COMPLETE_ARTIFACT_MISSING');
@@ -217,8 +264,8 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
     planId: input.request.id, stage: 'candidate-discovery',
     authorization,
     thinPlanBinding: thinBinding,
-    request: {purpose: input.request.input.purpose, sourceId: deps.sourceId, sourceVideo,
-      transcript: transcriptBinding, utterances: bind(deps.utterances.path, utterances)},
+    request: {purpose: input.request.input.purpose, sourceId, sourceVideo,
+      transcript: transcriptBinding, utterances: utteranceBinding},
     structureConditions: [...discovery.STRUCTURE024], implementationBindings: implementations, outputRoot};
   const planBinding = await persist('discovery-plan.json', plan);
   const c: Json = {plan, planBinding, thinPlan: thin, transcript, utterances};
@@ -291,5 +338,13 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
     requestBinding: bind(file('retention-request.json'), r.request), transcriptBinding};
   await accepted('retention', r, {'retention-validation.json': validation});
   record.status = 'complete'; await update();
-  return {status: 'prepared' as const, bindingPath: relative(root, recordPath), resumed: recordExisted};
+  const preparationBinding = bind(file('preparation-binding.json'),record);
+  const all = [sourceRegistration,sourceVideo,transcriptBinding,utteranceBinding,...Object.values(record.artifacts) as Binding[],preparationBinding,
+    ...(sourceInspection?[sourceInspection]:[])];
+  const dataBindings = [...new Map(all.map(b => [b.path,{path:b.path,fileSha256:b.fileSha256}])).values()];
+  const artifact: DigestPlanArtifactV001 = {schemaVersion:'digest-plan-artifact-v001',kind:'digest_plan_json',
+    requestDraftId:input.request.requestDraftId,requestId:input.request.id,approvedRequestBinding:authorization,
+    sourceVideoBinding:sourceVideo,transcriptBinding,utteranceBinding,preparationBinding,dataBindings,quality:'human-review-pending'};
+  assertDigestArtifactV001(artifact,'digest_plan_json',{requestDraftId:input.request.requestDraftId,requestId:input.request.id});
+  return {status:'prepared' as const,bindingPath:preparationBinding.path,resumed:recordExisted,artifact};
 }
