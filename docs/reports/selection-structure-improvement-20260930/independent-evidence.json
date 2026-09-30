@@ -1,0 +1,924 @@
+{
+  "reviewer": "Codex1",
+  "receivedDateJst": "2026-10-01",
+  "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+  "modelObserved": "gpt-6.1-sol",
+  "checks": [
+    {
+      "meaning": "旧探索に全共通発話の本文とIDが渡された",
+      "passed": true,
+      "observed": 1615
+    },
+    {
+      "meaning": "共通発話と保存断片の本文が一致",
+      "passed": true,
+      "observed": 1615
+    },
+    {
+      "meaning": "採否は探索結果の全候補を受けた",
+      "passed": true,
+      "observed": 5
+    },
+    {
+      "meaning": "旧採否回答に欠落・重複がない",
+      "passed": true,
+      "observed": {
+        "adopt": 5
+      }
+    },
+    {
+      "meaning": "candidate-response.jsonの入力参照SHA",
+      "passed": true,
+      "observed": "1e433ce8b9f86c0fe96aec4389fef0d2974235a697a6f9d1414b5e854cc71d36"
+    },
+    {
+      "meaning": "selection-response.jsonの入力参照SHA",
+      "passed": true,
+      "observed": "056c48b64a03d7cd704e14e375b7dd663b71a982edd24f0915a86f6b204fa8cc"
+    },
+    {
+      "meaning": "retention-response.jsonの入力参照SHA",
+      "passed": true,
+      "observed": "973a8acf58fddd41727255a15193243ec5e817380378371dab06695f80463e23"
+    },
+    {
+      "meaning": "candidate-0001保持・削除の全文被覆",
+      "passed": true,
+      "observed": 888
+    },
+    {
+      "meaning": "candidate-0001保持回答と旧編集計画が一致",
+      "passed": true,
+      "observed": 658
+    },
+    {
+      "meaning": "candidate-0001保存断片の時計と計画両端が一致",
+      "passed": true,
+      "observed": [
+        213077,
+        327084
+      ]
+    },
+    {
+      "meaning": "candidate-0002保持・削除の全文被覆",
+      "passed": true,
+      "observed": 937
+    },
+    {
+      "meaning": "candidate-0002保持回答と旧編集計画が一致",
+      "passed": true,
+      "observed": 894
+    },
+    {
+      "meaning": "candidate-0002保存断片の時計と計画両端が一致",
+      "passed": true,
+      "observed": [
+        1993090,
+        2225192
+      ]
+    },
+    {
+      "meaning": "candidate-0003保持・削除の全文被覆",
+      "passed": true,
+      "observed": 778
+    },
+    {
+      "meaning": "candidate-0003保持回答と旧編集計画が一致",
+      "passed": true,
+      "observed": 778
+    },
+    {
+      "meaning": "candidate-0003保存断片の時計と計画両端が一致",
+      "passed": true,
+      "observed": [
+        5468987,
+        5675926
+      ]
+    },
+    {
+      "meaning": "candidate-0004保持・削除の全文被覆",
+      "passed": true,
+      "observed": 1466
+    },
+    {
+      "meaning": "candidate-0004保持回答と旧編集計画が一致",
+      "passed": true,
+      "observed": 1431
+    },
+    {
+      "meaning": "candidate-0004保存断片の時計と計画両端が一致",
+      "passed": true,
+      "observed": [
+        8054427,
+        8336849
+      ]
+    },
+    {
+      "meaning": "candidate-0005保持・削除の全文被覆",
+      "passed": true,
+      "observed": 383
+    },
+    {
+      "meaning": "candidate-0005保持回答と旧編集計画が一致",
+      "passed": true,
+      "observed": 363
+    },
+    {
+      "meaning": "candidate-0005保存断片の時計と計画両端が一致",
+      "passed": true,
+      "observed": [
+        11147538,
+        11242100
+      ]
+    },
+    {
+      "meaning": "7B保持区間に重複断片がない",
+      "passed": true,
+      "observed": 2483
+    },
+    {
+      "meaning": "structure-intro原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 105
+    },
+    {
+      "meaning": "segment-0001原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 658
+    },
+    {
+      "meaning": "segment-0002原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 894
+    },
+    {
+      "meaning": "segment-0003原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 778
+    },
+    {
+      "meaning": "segment-0004原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 1431
+    },
+    {
+      "meaning": "segment-0005原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 363
+    },
+    {
+      "meaning": "structure-closure原文根拠が保存断片と一致",
+      "passed": true,
+      "observed": 48
+    },
+    {
+      "meaning": "segment-00017B本編が旧保持範囲と一致",
+      "passed": true,
+      "observed": "candidate-0001"
+    },
+    {
+      "meaning": "segment-00027B本編が旧保持範囲と一致",
+      "passed": true,
+      "observed": "candidate-0002"
+    },
+    {
+      "meaning": "segment-00037B本編が旧保持範囲と一致",
+      "passed": true,
+      "observed": "candidate-0003"
+    }
+  ],
+  "sourceCounts": {
+    "transcriptFragments": 44002,
+    "commonUtterances": 1615,
+    "discoveryCandidates": 5,
+    "retentionInputFragments": 4452,
+    "retentionKeptFragments": 4124
+  },
+  "retention": [
+    {
+      "candidate": "candidate-0001",
+      "inputFragments": 888,
+      "keptFragments": 658,
+      "sourceRangeMs": [
+        213077,
+        327084
+      ],
+      "firstFragment": 285,
+      "lastFragment": 942,
+      "startText": "あのー、マリン昨日ね、ノエちゃん家でドッグセラピー受けたんで。ドッグセラピー、ノエちゃん家にすっげー可愛い犬いて、マリンアレルギー出るからめっちゃ強いアレルギーの薬を飲んで行ったん",
+      "endText": "っとうまく隠しながらやっていこうかなとあかんかったちょっと誘惑に勝てませんでした犬可愛すぎたわそういうわけでドッグセラピー受けてきたんで大丈夫だと思うたぶんワンチョムがマリンを守ってくれると思うわけのわからないことを言いながらちょっとやってみようかなやれるかな"
+    },
+    {
+      "candidate": "candidate-0002",
+      "inputFragments": 937,
+      "keptFragments": 894,
+      "sourceRangeMs": [
+        1993090,
+        2225192
+      ],
+      "firstFragment": 7689,
+      "lastFragment": 8582,
+      "startText": "花瓶あったっけ?君さぁ何を見てたんですか今まで君不思議待ってなんかでかくなってるかもこんなでかくなかったかもしんないでかかったかも君さぁ何回ここ見てんすかここに葉っぱなんか落ちてた",
+      "endText": "のこれ責任ですからこれギャーじゃないからねご馳走が並んでるご馳走が並んでるこれありがた以上これありがた以上ですね今日食べ放題あんたも持って帰ってあんたも持って帰っていいわよ今日廃棄出てるから霊障弁当の廃棄が出てますめったにないことだからこれラッキーな霊障だから"
+    },
+    {
+      "candidate": "candidate-0003",
+      "inputFragments": 778,
+      "keptFragments": 778,
+      "sourceRangeMs": [
+        5468987,
+        5675926
+      ],
+      "firstFragment": 18662,
+      "lastFragment": 19439,
+      "startText": "いやいや、行ってきな!いやいや、今行かないって!ま、こんなんこんなん!こんな開きながらトイレ行くのはお前素人の判断なんだってばこんな風な画面開いたままいいですか君あのこの金属30年",
+      "endText": "こが強いよねかやこんちはもう誰も行かなくなるで終わりなんだけど家にね、立ち入らないとねことが始まんないから貞子は現代でも通用すんだよなそこが強いところですよねトレンドに乗ってて偉いいやマジでデジタル化までしていくちょっと格がやっぱ違うのかなって感じがしますよね"
+    },
+    {
+      "candidate": "candidate-0004",
+      "inputFragments": 1466,
+      "keptFragments": 1431,
+      "sourceRangeMs": [
+        8054427,
+        8336849
+      ],
+      "firstFragment": 26132,
+      "lastFragment": 27562,
+      "startText": "あのーXとかで話したんですけどグッズのねー話でねちょっとそうだ言っとかないと意外と知らない人がいるかもしれないからちょっと教えておきたいんですけどまずーえっとねーまずーんーこのバッ",
+      "endText": "てなんか男の人ってさなんかカバン自体そもそも持ってる印象あんまないけどさ手で持ったりリュック背負ったりするもんなのかなみたいなイメージでだからちょっとこのショルダー部分はショルダーでもショルダーじゃなくてもいけるみたいなのイメージしましたということではいでした"
+    },
+    {
+      "candidate": "candidate-0005",
+      "inputFragments": 383,
+      "keptFragments": 363,
+      "sourceRangeMs": [
+        11147538,
+        11242100
+      ],
+      "firstFragment": 40548,
+      "lastFragment": 40910,
+      "startText": "え、え、えうん、船長はダンスに限界感じてるとおっしゃってましたがいや、ダンスだね、マジでもうね、もうあ、もう無理だと感じる、ほんとに自己肯定感失っていくわダンスできんダンスできねー",
+      "endText": "んだろうってくらい覚えらんない初期から比べるとうまくなってるそうだよねもうあの頃を思うとダンスなんてさやったことないよ船長人生で一度もワッタンとかとさやりながらさこんな動き人生で初めてしたって言いながらやってるもん船長この動き人生で初めてした?ってよく言ってる"
+    }
+  ],
+  "references": [
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+      "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+      "bytes": 6804193
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "sha256": "33ed42c4aeef83249177549d2dcc02eb7a5d46bf3f34593f53422353cbac70bd",
+      "bytes": 1098414
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/candidate-request.json",
+      "sha256": "1e433ce8b9f86c0fe96aec4389fef0d2974235a697a6f9d1414b5e854cc71d36",
+      "bytes": 269386
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/candidate-response.json",
+      "sha256": "ef0a19dc3c89cecd0c25f307ccc1030863e9392e4a04505ba9788562f36b476a",
+      "bytes": 4396
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/candidate-set.json",
+      "sha256": "ec16a7bf90834932bc2762b3d095edb7a83c9e86a3feeb7f4d274f4d1ee79eec",
+      "bytes": 4791
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/selection-request.json",
+      "sha256": "056c48b64a03d7cd704e14e375b7dd663b71a982edd24f0915a86f6b204fa8cc",
+      "bytes": 24000
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/selection-response.json",
+      "sha256": "d35e465a72f6df417df023d241cfbe96a7b82490752bd22eaf775da72f6c1d7c",
+      "bytes": 4880
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/retention-request.json",
+      "sha256": "973a8acf58fddd41727255a15193243ec5e817380378371dab06695f80463e23",
+      "bytes": 475950
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/retention-response.json",
+      "sha256": "ba5677fea38d5b10d94f454297db6f55b41a5082e1869a3376287db4cb150e9d",
+      "bytes": 5534
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/retention-result.json",
+      "sha256": "b4769f618ccdec3cafae9f59206979fd028f4f67fc5d25faa53798e9b56c3abc",
+      "bytes": 5294
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/edit-plan.json",
+      "sha256": "62e82dc5392b7158f7ab7f3a8d6431686c1ea16e6807bf0178e91b190def6ac3",
+      "bytes": 61378
+    },
+    {
+      "path": "runtime/artifacts/digest-structure-20260929-v001/structure-state.json",
+      "sha256": "ad68f21a63b7d669693e72f21df1bdc27edb3d696cff9b63e7439494d55d8801",
+      "bytes": 167561
+    },
+    {
+      "path": "runtime/artifacts/digest-structure-20260929-v001/structure-resolution.json",
+      "sha256": "7ed7cc10587514111789bb304b082f7901b8a15891990828ce0f3027ac6c2fbe",
+      "bytes": 90106
+    },
+    {
+      "path": "runtime/artifacts/digest-structure-20260929-v001/semantic-decisions.json",
+      "sha256": "4e82f44fc4a15698b0ceab801b62f1c9990f72ac97ce0f008ffda193c563bf80",
+      "bytes": 1513
+    }
+  ],
+  "codeReferences": [
+    {
+      "path": "evals/clip_composition/run_new_material_digest_20260926.mts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "4704f828ab672fc4d5331f4c0c71b5fc64bb46c49a440aee9ad6edcf7144001e",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "runner/src/skills/candidate-discovery-v001.ts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "runner/src/skills/candidate-selection-v001.ts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "tools/digest-quality/digest-structure-run.mjs",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "0f4ab33f2781fd3bd76a9fcdf45311fdd0ed3ff871ae64a7f927ef141a8be0b3",
+      "workingCopySameAsTarget": true
+    },
+    {
+      "path": "tools/digest-quality/digest-structure-policy.mjs",
+      "targetCommit": "66ce83a3547b220ab0d2b3682ae3c14b0ef7d8c9",
+      "sha256": "68632033ff394d760eec06e63920bc879e39bbaa0e8e95ec88cc76dc0246dfe1",
+      "workingCopySameAsTarget": true
+    }
+  ],
+  "limits": [
+    "映像・音声・自然さは未観測",
+    "全1615発話の全文を使った新探索・新採否・新保持は今回未実行",
+    "保存済み候補の必要な原文と前後文脈を独立照合した",
+    "意味的な選定品質・人間採用・見どころ全件の網羅性は機械照合の合格に含めない"
+  ],
+  "independentOriginalContexts": [
+    {
+      "meaning": "ゲーム説明の候補外文脈",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-000018",
+          "sourceStartMs": 362790,
+          "sourceEndMs": 390146,
+          "firstFragmentId": 1173,
+          "lastFragmentId": 1299,
+          "text": "あのーえっとーなんかアハ体験的に画面がちょっと変わっていっておばけがだんだん出てくるからそれを報告するみたいな感じでしたよね多分ねちょっとやってみますか利用規約ねはい本ゲームは激しい恐怖表現を含むホラーゲームはいはいはいはい精神精神をねやられるかもとはい"
+        }
+      ]
+    },
+    {
+      "meaning": "ベテラン場面の直後にあるクリア反応",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-000456",
+          "sourceStartMs": 2240196,
+          "sourceEndMs": 2243597,
+          "firstFragmentId": 8633,
+          "lastFragmentId": 8651,
+          "text": "21,427円え、これクリアってこと?"
+        },
+        {
+          "utteranceId": "common-utterance-000457",
+          "sourceStartMs": 2243597,
+          "sourceEndMs": 2244558,
+          "firstFragmentId": 8652,
+          "lastFragmentId": 8659,
+          "text": "クリアってこと?"
+        },
+        {
+          "utteranceId": "common-utterance-000458",
+          "sourceStartMs": 2244558,
+          "sourceEndMs": 2245118,
+          "firstFragmentId": 8660,
+          "lastFragmentId": 8667,
+          "text": "クリアってこと?"
+        },
+        {
+          "utteranceId": "common-utterance-000459",
+          "sourceStartMs": 2245118,
+          "sourceEndMs": 2245858,
+          "firstFragmentId": 8668,
+          "lastFragmentId": 8675,
+          "text": "クリアってこと?"
+        },
+        {
+          "utteranceId": "common-utterance-000460",
+          "sourceStartMs": 2246954,
+          "sourceEndMs": 2247814,
+          "firstFragmentId": 8676,
+          "lastFragmentId": 8685,
+          "text": "クリアしたってこと?"
+        },
+        {
+          "utteranceId": "common-utterance-000461",
+          "sourceStartMs": 2247814,
+          "sourceEndMs": 2251555,
+          "firstFragmentId": 8686,
+          "lastFragmentId": 8692,
+          "text": "でいいのかな?"
+        },
+        {
+          "utteranceId": "common-utterance-000462",
+          "sourceStartMs": 2251555,
+          "sourceEndMs": 2251775,
+          "firstFragmentId": 8693,
+          "lastFragmentId": 8694,
+          "text": "え?"
+        },
+        {
+          "utteranceId": "common-utterance-000463",
+          "sourceStartMs": 2251775,
+          "sourceEndMs": 2272762,
+          "firstFragmentId": 8695,
+          "lastFragmentId": 8780,
+          "text": "クリアしたって…あチェックついてるクリアしたってことだ行きました埼玉県青い家さああなた次の物件行くわよ私のねこの金属16年えー金属16年の…わかったわかったわかったからうん"
+        }
+      ]
+    },
+    {
+      "meaning": "貞子場面の前にあるトイレへの応答",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-000986",
+          "sourceStartMs": 5358414,
+          "sourceEndMs": 5385586,
+          "firstFragmentId": 18321,
+          "lastFragmentId": 18427,
+          "text": "今行ったら怖いでしょうがこんな画面開きっぱなしって行かないだろトイレゲーム終わってからに決まってんだろ今行ったら怖いがなこんなこんな最中にトイレ行くのは素人判断ですよ君あうそーどこー壁がなんか変になってる知らんけど"
+        }
+      ]
+    },
+    {
+      "meaning": "ゲーム本編を終了する元発話",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-001354",
+          "sourceStartMs": 7759082,
+          "sourceEndMs": 7786726,
+          "firstFragmentId": 25531,
+          "lastFragmentId": 25649,
+          "text": "いやーこれで37いやでもまあ言うて言うて結構発見できたんじゃないですかこれマリンうんやれたでしょ結構ねうん一応全部発見全体的に見つけました特別手当は無理だこれは諦めますもう無理だこれはトイレ行きたいしはいということで気持ちいいまあマリンは"
+        },
+        {
+          "utteranceId": "common-utterance-001355",
+          "sourceStartMs": 7788010,
+          "sourceEndMs": 7790072,
+          "firstFragmentId": 25650,
+          "lastFragmentId": 25666,
+          "text": "こんなもんにしようかなと思います?"
+        },
+        {
+          "utteranceId": "common-utterance-001356",
+          "sourceStartMs": 7790072,
+          "sourceEndMs": 7794656,
+          "firstFragmentId": 25667,
+          "lastFragmentId": 25694,
+          "text": "よう頑張ったんー頑張った頑張ったんんんんんいいでしょう!"
+        },
+        {
+          "utteranceId": "common-utterance-001357",
+          "sourceStartMs": 7794656,
+          "sourceEndMs": 7796517,
+          "firstFragmentId": 25695,
+          "lastFragmentId": 25697,
+          "text": "よし!"
+        },
+        {
+          "utteranceId": "common-utterance-001358",
+          "sourceStartMs": 7796517,
+          "sourceEndMs": 7816073,
+          "firstFragmentId": 25698,
+          "lastFragmentId": 25717,
+          "text": "退勤退勤退勤しようちょっと待ってねーん?"
+        },
+        {
+          "utteranceId": "common-utterance-001359",
+          "sourceStartMs": 7816073,
+          "sourceEndMs": 7816634,
+          "firstFragmentId": 25718,
+          "lastFragmentId": 25728,
+          "text": "こうしてはい退勤でーす"
+        },
+        {
+          "utteranceId": "common-utterance-001360",
+          "sourceStartMs": 7818826,
+          "sourceEndMs": 7844214,
+          "firstFragmentId": 25729,
+          "lastFragmentId": 25821,
+          "text": "ちょっと音怖い音怖いよ音怖いよ終わらしてよゲーム終了トニーもカグリもねマリンおしっこをしたいっす一旦ちょっとトイレ行ってきていいですか自分えーっとちょっとコメント欄が固まってるからこれを"
+        }
+      ]
+    },
+    {
+      "meaning": "スパチャ開始後のホラー主題に関係する会話",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-001363",
+          "sourceStartMs": 7967232,
+          "sourceEndMs": 7990822,
+          "firstFragmentId": 25847,
+          "lastFragmentId": 25925,
+          "text": "よいしょよいしょさてさてスパチャ読みをねしたいんですけどもスパチャ読みと言いましてもえっと前回途中だったところからやりたいなと思っていますので主にそんな感じで"
+        },
+        {
+          "utteranceId": "common-utterance-001364",
+          "sourceStartMs": 7991786,
+          "sourceEndMs": 8005314,
+          "firstFragmentId": 25926,
+          "lastFragmentId": 25981,
+          "text": "今日のスパチャというより前回の途中だったものを読みに行くというようなイメージをしておりますので心霊現象なさそう?"
+        },
+        {
+          "utteranceId": "common-utterance-001365",
+          "sourceStartMs": 8005314,
+          "sourceEndMs": 8011958,
+          "firstFragmentId": 25982,
+          "lastFragmentId": 26008,
+          "text": "ないと思いますけどわかんないけどあまり感じていませんね"
+        },
+        {
+          "utteranceId": "common-utterance-001366",
+          "sourceStartMs": 8023170,
+          "sourceEndMs": 8030493,
+          "firstFragmentId": 26009,
+          "lastFragmentId": 26052,
+          "text": "変な音が入ってたよいや、またまた一瞬船長の声が二重になった気がするいや、またまた君たち!"
+        },
+        {
+          "utteranceId": "common-utterance-001367",
+          "sourceStartMs": 8030493,
+          "sourceEndMs": 8033674,
+          "firstFragmentId": 26053,
+          "lastFragmentId": 26065,
+          "text": "さあ物の配置変わってない?"
+        },
+        {
+          "utteranceId": "common-utterance-001368",
+          "sourceStartMs": 8033674,
+          "sourceEndMs": 8035075,
+          "firstFragmentId": 26066,
+          "lastFragmentId": 26070,
+          "text": "この部屋?"
+        },
+        {
+          "utteranceId": "common-utterance-001369",
+          "sourceStartMs": 8035075,
+          "sourceEndMs": 8037736,
+          "firstFragmentId": 26071,
+          "lastFragmentId": 26077,
+          "text": "こ、この部屋?"
+        },
+        {
+          "utteranceId": "common-utterance-001370",
+          "sourceStartMs": 8037736,
+          "sourceEndMs": 8051502,
+          "firstFragmentId": 26078,
+          "lastFragmentId": 26131,
+          "text": "いやいや、だ、だ、大丈夫でしょ霊とか見たことないうーん、船長はないですね霊感ないんですよ船長はいそういえばね"
+        }
+      ]
+    },
+    {
+      "meaning": "配信末尾挨拶の直前文脈",
+      "source": "runtime/artifacts/digest-new-material-20260926-v001/utterances.json",
+      "utterances": [
+        {
+          "utteranceId": "common-utterance-001613",
+          "sourceStartMs": 11893007,
+          "sourceEndMs": 11917990,
+          "firstFragmentId": 43778,
+          "lastFragmentId": 43929,
+          "text": "台風で中止にならなくてよかったね、ほんとギリギリ次の日はね、中止になっちゃいましたからねギリギリ帰れてよかったですてなわけでえ、ほんとにね、あの執念のあの振り返り配信のスタジオの方読ませてもらいましたありがとうございましたはいえ、あのー今度こそ近々映画同時視聴やりたいなと思っていますのでまたやりましょう"
+        },
+        {
+          "utteranceId": "common-utterance-001614",
+          "sourceStartMs": 11918698,
+          "sourceEndMs": 11930591,
+          "firstFragmentId": 43930,
+          "lastFragmentId": 43997,
+          "text": "手に合うわけで今日はありがとうございましたそれでは行きますよーしゅふっこー行きましょうお化けには気をつけてねーエッチなことしてお化けとは"
+        }
+      ]
+    }
+  ],
+  "savedStructureRestoration": {
+    "meaning": "既存の構成復元処理をローカルで実行し、返却された構成と保存済み構成を深い比較で照合",
+    "executed": true,
+    "identicalToSavedResolution": true,
+    "includedSourceRangesMs": [
+      [
+        159770,
+        184064
+      ],
+      [
+        213077,
+        327084
+      ],
+      [
+        1993090,
+        2225192
+      ],
+      [
+        5468987,
+        5675926
+      ],
+      [
+        11919259,
+        11928188
+      ]
+    ],
+    "baseFrames": 17589,
+    "connectionFrames": 24,
+    "humanQuality": "not-evaluated",
+    "newVideoGenerated": false,
+    "networkUsed": false
+  },
+  "existingReviewSnapshotCompletedAtUtc": "2026-09-30T15:50:33Z",
+  "newProposalAudit": {
+    "targetCommit": "bd0113c8301e49eb74993385286fd12c1b9894b8",
+    "proposalSha256": "e5de83bff9fa3a749d4db7c1acd6dbc58cf961b5376126c83feec201af90eb3f",
+    "checks": [
+      {
+        "meaning": "SHA固定新案の34参照が保存現物と一致",
+        "passed": true,
+        "observed": 34
+      },
+      {
+        "meaning": "SHA固定受理コードとruntime保存コードが同一",
+        "passed": true,
+        "observed": "f747b41a1d713857a2ff73674bfdbc720f6a92eddd384089e9d924e91977967c"
+      },
+      {
+        "meaning": "新探索に全1615発話の本文とIDが渡された",
+        "passed": true,
+        "observed": 1615
+      },
+      {
+        "meaning": "制作要求が探索・採否・保持へ伝わる",
+        "passed": true,
+        "observed": 3
+      },
+      {
+        "meaning": "candidate回答の入力参照SHA一致",
+        "passed": true,
+        "observed": "00413ec7951e9ccc20cfb5a93aa508c0b37df9aa3e77011e42ef69d058f9503c"
+      },
+      {
+        "meaning": "selection回答の入力参照SHA一致",
+        "passed": true,
+        "observed": "d44f96905f63516d966743d700dc24c8cdba63014de9e83ca521eb16d5ae1d9a"
+      },
+      {
+        "meaning": "retention回答の入力参照SHA一致",
+        "passed": true,
+        "observed": "4ed0c24ae0c87f671dc4f7e971215d289457aaa97fa9d8ee26e78b70dec983f4"
+      },
+      {
+        "meaning": "SHA固定新判断とruntimeの3回答が一致",
+        "passed": true,
+        "observed": 3
+      },
+      {
+        "meaning": "11探索候補と11採否の集合に欠落・重複なし",
+        "passed": true,
+        "observed": 11
+      },
+      {
+        "meaning": "探索文脈と根拠発話が実在・文脈内",
+        "passed": true,
+        "observed": 11
+      },
+      {
+        "meaning": "採用7件だけが保持へ渡された",
+        "passed": true,
+        "observed": 7
+      },
+      {
+        "meaning": "candidate-0001本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 280,
+          "kept": 217
+        }
+      },
+      {
+        "meaning": "candidate-0002本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 688,
+          "kept": 658
+        }
+      },
+      {
+        "meaning": "candidate-0003本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 327,
+          "kept": 120
+        }
+      },
+      {
+        "meaning": "candidate-0004本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 1114,
+          "kept": 1033
+        }
+      },
+      {
+        "meaning": "candidate-0005本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 778,
+          "kept": 778
+        }
+      },
+      {
+        "meaning": "candidate-0006本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 3595,
+          "kept": 583
+        }
+      },
+      {
+        "meaning": "candidate-0007本文一致・全断片被覆",
+        "passed": true,
+        "observed": {
+          "input": 291,
+          "kept": 224
+        }
+      },
+      {
+        "meaning": "保持・新案・編集の9区間一致",
+        "passed": true,
+        "observed": 9
+      },
+      {
+        "meaning": "segment-0001原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          68,
+          284
+        ]
+      },
+      {
+        "meaning": "segment-0002原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          285,
+          942
+        ]
+      },
+      {
+        "meaning": "segment-0003原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          1129,
+          1248
+        ]
+      },
+      {
+        "meaning": "segment-0004原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          7689,
+          8721
+        ]
+      },
+      {
+        "meaning": "segment-0005原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          18662,
+          19439
+        ]
+      },
+      {
+        "meaning": "segment-0006原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          21936,
+          22193
+        ]
+      },
+      {
+        "meaning": "segment-0007原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          25129,
+          25286
+        ]
+      },
+      {
+        "meaning": "segment-0008原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          25364,
+          25530
+        ]
+      },
+      {
+        "meaning": "segment-0009原文・実保持・元時計一致",
+        "passed": true,
+        "observed": [
+          25531,
+          25754
+        ]
+      },
+      {
+        "meaning": "保持に重複なし・元時計順",
+        "passed": true,
+        "observed": 3613
+      },
+      {
+        "meaning": "保存時計と新案時計一致・連続出力",
+        "passed": true,
+        "observed": 27691
+      },
+      {
+        "meaning": "firstDraft追加・除外・不変の集合一致",
+        "passed": true,
+        "observed": {
+          "added": 1283,
+          "removed": 1794,
+          "unchanged": 2330
+        }
+      },
+      {
+        "meaning": "sevenB追加・除外・不変の集合一致",
+        "passed": true,
+        "observed": {
+          "added": 1178,
+          "removed": 48,
+          "unchanged": 2435
+        }
+      },
+      {
+        "meaning": "人間採用なし・縁選択null維持",
+        "passed": true,
+        "observed": {
+          "humanAdoption": false,
+          "outlineChoice": null
+        }
+      }
+    ],
+    "retentionInputFragments": 7073,
+    "keptFragments": 3613,
+    "inspectionRepairCount": 1,
+    "inspectionRepairMeaning": "保存7Bの返却形を確認して比較対象欄を修正。製品・契約・fixture・APIの変更なし",
+    "limitations": [
+      "時計照合は保存データの整合であり、局所540pの動画音声検査は本担当未実行",
+      "全見どころ網羅性・映像・音声・自然さ・人間品質採用は未確認"
+    ],
+    "meaningAudit": "independent-review.mdに記録"
+  }
+}
