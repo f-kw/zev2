@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業
 
-**9. 明示Digest依頼→通常登録→次工程消費の隔離実装（v005）。v004の設計・境界実測を `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` で受理し、同じ返答で具体的開発差分を発行した。担当はCodex2単独。v005受領後、通常計画登録の部分実測まで進行。参照graph不整合と製品限定修正累積3により中断、GPT_DECISION待ち。**
+**9. 明示Digest依頼→通常登録→次工程消費の隔離実装（v005）は未完了・停止中。`debd58971f543958df0022988e00bed9e20ddcbc` の中断を相談役が監査し、参照不整合の修正方針を整理した。製品限定修正3回に達しているため、今回の参照対応修正に限る追加1回と検証再開は本人判断待ち（decision: human_decision）。枠の変更・リセット・追加実走は許可していない。**
 
 正本は [v005指示書](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)、保存 `a3bd8594df7c9151e164bf1e96024029a2356a0a`。本人の「終わったら次に進んで」に基づく同じID9の開発・隔離試験であり、公開契約の正式適用・一般の機械判断委任・実業務導入・動画承認方式について新たな本人承認を受領したものではない。実装候補と本適用を区別する。
 
@@ -22,7 +22,7 @@
 
 `admission`の計画整合、字幕／演出未接続、動画許可未承認、人間品質pendingを分離する。参照が未提供なのか、提供された参照が欠損・改変なのかも区別し、後者をpendingへ丸めない。通常キューの検証工程が完了しても動画完成・実行可能とは報告しない。
 
-主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。受領・経路調査を保存済み。実装と試験は進行中。
+主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。`debd5897`で通常計画登録までの部分実測と停止証拠を保存済み。実装・試験の追加作用は止めている。
 
 ## 2.1 v004の受理と未承認の適用事項
 
@@ -30,7 +30,7 @@
 
 公開型・工程は**開発候補の隔離実装**として扱う。正式適用に残る判断は `ID9-PD-01`（一般のDigest下書き承認で品質pendingの機械採否・保持まで任せるか）、`ID9-PD-02`（特定計画／基礎映像／最終出力への動画許可SHA・scopeの正式な束縛）。旧業務state移行・本番有効化も未承認。これらは品質視聴の未回答とは別の適用事項で、今回の固定応答試験を一般委任の実績へ読み替えない。
 
-新しい人間の視聴・採点・技術方式選択を今要求しない。動画許可recordや人間品質採用を代理で作らず、独立した開発・隔離試験はv005の範囲で進める。
+新しい人間の視聴・採点・技術方式選択を今要求しない。動画許可recordや人間品質採用を代理で作らず、開発・隔離試験はv005と現在の停止／再開条件に従う。
 
 ## 2.2 受理済みv003
 
@@ -39,6 +39,20 @@
 source/STT成功依存とproviderは隔離fixtureであり、実completeを通した所有者やlocal素材JSONの確認はv005で行う。前回の限定成果を無効にしない一方、通常全工程・実AI品質・動画製造・人間採用へ広げない。旧v002の16実装・18保存物の保全はその検証時点の記録として保持する。
 
 job形状検査は専用human assembly承認の検査・実行資格とは別。backend kindが通ることもrunner詳細schemaの受理と別。v004で確認したこれらの境界をv005でも偽装しない。
+
+## 2.3 参照不整合の停止監査と再開案（本人承認未受領）
+
+現物と判断は[インデックス§2.8](HANDOVER_INDEX.md#28-2026-10-01参照不整合の停止監査追加修正の本人判断待ち)へ保存した。今回の記録は再開指示ではない。
+
+採否要求の参照は`artifacts/<draft>/candidate-set.json`、実保存名は`artifacts/<draft>/<request>--candidate-set.json`。内容SHAは一致するが宣言pathは存在しない。[証拠](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)とshared resolver・準備moduleのoutputRoot/fileを相談役が照合し、完了にせず停止した判断を妥当とした。Macの試験再実行や全保存物の直接hash検査ではない。
+
+技術方針は、新規論理参照`artifacts/<draft>/<request>/<file>`を既存の安全な単一保存名`<request>--<file>`へ共通resolverで対応付け、準備のoutputRoot／registryと必要な参照形成を合わせること。内容builder／validator・PUT/GET・認証／安全条件は変えない。上位manifestに加え要求内の参照も登録前・次の実消費で検証し、欠損・別依頼・衝突を拒否する。旧JSON／要求／回答SHAの付け替え・alias作成で隠さず、新しい隔離attemptだけへ適用する案。
+
+現在は製品修正3／設営4。推奨する本人判断は**今回の参照対応修正に限り追加1回（累積4回目）を許し、既承認の未実施検証を再開すること**。一般の3回上限・履歴を変更／リセットする案ではない。例外承認は未受領。承認後も別の製品修正が必要になれば勝手に継ぎ足さず報告する。
+
+stdoutの元発話「失敗」を判定から外し、実exitと実queue状態を見る設営修正は未実施で、適用時には既存枠内の設営5回目となる。App.vueの二表示名は`83f9112939457ddc0f4dcfc4e172b39b7d19b785`で許可済みだが未適用。これらも停止を迂回して進めず、本人の再開判断後の実質checkpointにまとめる。表示名の再承認を要求するものではない。
+
+通常source/STT登録・3判断・計画completeは部分到達。次工程complete、upload／別root消費、MP4枝、inspection未提供枝、否定回帰・client型再合格は未実施。旧成果・人間回答は保持し、全動画の再生成・再レビューは不要。Codex2は停止維持、Codex1再起動や応答保存だけの再commit・終了連絡も不要。
 
 ## 3. 完了済みを再開しない
 
@@ -58,12 +72,12 @@ job形状検査は専用human assembly承認の検査・実行資格とは別。
 
 縁A/B選択null、A=8/4は技術入力、Bの21字幕の論理不合格、色の種類と適用、アップのHUD制約・手指定、旧レビューと修正後未回答、制作負担・通常キュー本適用・実推論・人間品質は残件として保持する。Decisions調査は完了・実API評価は保留であり、この接続の依存にしない。必要時に公式情報を再確認する。
 
-新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除を包括承認しない。今回の開発候補の具体的な型／caller差分はv005に限定。STT・inspection・動画実走は行わない。現在の累積は設営修正4・製品限定修正3。参照graph修正が追加で必要なため中断した。版更新でリセットせず、既存の安全／停止条件を維持する。
+新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除を包括承認しない。今回の開発候補の具体的な型／caller差分はv005に限定。STT・inspection・動画実走は行わない。現在の累積は設営修正4・製品限定修正3。参照graph修正が追加で必要なため中断した。版更新でリセットせず、既存の安全／停止条件を維持する。追加1回の例外と再開は§2.3の本人判断待ち。
 
 ## 5. 保存と継続
 
 方針・指示発行・監査・完了・中断は同じターンに正本へ反映し、会話の上限を待たない。取得・保存不能や未確認の稼働は明示する。初回／再起動の指示はコピー可能な一つのコードブロック、着手後はCodexの直接報告と相談役の監査・次指示を同じセッションでつなぐ。
 
-各セッションは自分専用のEdgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化、担当fileだけ明示stageし、他者成果を保持する。`d77f2a5d`のGit操作終了と担当返却は受領済み。相談役の本指示保存後にCodex2が同期する。remote確認と、ローカル状態／processのCodex報告は区別する。受理記録だけの再commit・終了連絡・再起動を増やさない。
+各セッションは自分専用のEdgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化、担当fileだけ明示stageし、他者成果を保持する。`debd5897`のGit操作終了・担当返却と隔離process残存なしはCodex報告として受領し、remote mainは相談役が確認した。追加作用は停止中で、新しい再開指示はまだ発行していない。受理記録だけの再commit・終了連絡・再起動を増やさない。
 
-上位運用は [AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。旧GOAL_DEFINITIONの意味・数値を今回変更していない。更新前の本書は[固定Git版](https://github.com/f-kw/zev2/blob/d77f2a5ddc48016e6e1c7f22bee454fc231ffda7/docs/CURRENT_GOAL.md)で保持し、古い現在地は履歴として扱う。
+上位運用は [AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。旧GOAL_DEFINITIONの意味・数値を今回変更していない。更新前の本書は[中断時の固定Git版](https://github.com/f-kw/zev2/blob/debd58971f543958df0022988e00bed9e20ddcbc/docs/CURRENT_GOAL.md)と[前の固定Git版](https://github.com/f-kw/zev2/blob/d77f2a5ddc48016e6e1c7f22bee454fc231ffda7/docs/CURRENT_GOAL.md)で保持し、古い現在地は履歴として扱う。
