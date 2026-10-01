@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v037
+更新日：2026-10-02（JST） / revision：handover-index-20261002-v038
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`738f63752b20970b766a064797e601718dbd876c`の現行否定資格attempt-002を監査し、19結果・親exit0・backend2件exit0・別process reader0を限定技術受理。期限切れclaim、wrong owner、承認入力／旧state、owner参照、旧／未知版、旧preparation版、不完全転送complete拒否まで現行版で直接成立。親v005 §8.4に残る直接証拠は、source登録JSONとvideo bytesの混同拒否、Clip／Digest成果物相互誤消費拒否の2点だけ。媒体なし小fixtureでcurrent artifact validator＋実workflow builderを通す設営15を相談役承認。正本は[final cross-type rejections](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)、保存`181f0f5293f8f9d9ef7271ec8a5a2262fe8cfd8d`。製品5／設営14、15は適用時に計上。Codex2の受領・設営15適用・実行結果は未確認。v005全体は未完了。**
+**最新更新：Codex2がd0259442／設営15のcontinue返信全文を専用Edgeで受領、同じセッションで続行。実artifact validatorのA1 JSON→video MIME・A2 tiny ftyp→JSON、実Digest builder／登録依存のB Clip kind拒否、実Clip builderのC Digest計画→transcript拒否、4件すべてpassed。実親exit0・別process reader0、read／build／write前の拒否とstate不変を実測。旧705小file・006／007の120metadata・製品／旧失敗不変、媒体作用0、新runtime4小file／316,925 bytes。製品5／設営15、一般履歴不変。親§8.1〜8.6を既存の正実走／52／9／15／19と再対照し「v005隔離実装試験 技術完了候補」として最終監査提出。相談役最終受理は未受領、ID9-PD-01/02・本番・実AI品質・字幕演出・動画許可・人間品質は未承認／pending。[4結果と親条件対照](reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-evidence-v001.json)。次は監査返信完了・全文受領。同じ範囲の具体指示へ同じセッションで続行し、別エピックへ自動着工しない。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 

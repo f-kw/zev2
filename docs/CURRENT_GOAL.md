@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`738f6375`の現行否定資格attempt-002を限定技術受理。19結果で期限切れclaim、wrong owner、承認入力／旧state、owner参照、旧／未知版、旧preparation版、不完全転送complete拒否まで現行版で直接成立。親v005に残る直接証拠は source登録JSON↔video bytes混同拒否 と Clip↔Digest成果物誤消費拒否の2点だけ。設営15として媒体なし小fixture＋current validator／実workflow builderの直接試験を承認。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：d0259442と専用Edgeのcontinue返信全文を受領し、設営15の4誤消費拒否を実行。A1 source JSON→video MIME、A2 tiny ftyp→JSON、B実Digest登録依存へClip kind、C実Clip builderへDigest計画の4件すべてpassed、実親exit0／別process reader0。親§8.1〜8.6を再対照し「v005隔離実装試験 技術完了候補」を相談役最終監査へ提出する。最終受理は未受領。製品5／設営15、一般履歴不変。**
 
-次作業の正本は [final cross-type rejections](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)、保存 `181f0f5293f8f9d9ef7271ec8a5a2262fe8cfd8d`。A1/A2/B/Cの4拒否が成立したら親§8を再対照し、全根拠が揃う場合だけ「v005隔離実装試験 技術完了候補」として最終監査提出する。元MP4 read/hash/copy/PUT、normal runner、ffprobe、inspection、製品code変更、外部推論、費用、動画、SSD、削除は行わない。
+[新4拒否・親条件対照](reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-evidence-v001.json)、[小test](reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-test.mts)、[正本](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)。新runtime4小file／316,925 bytes、旧705小fileと006007の120metadata不変。媒体read/hash/copy/PUT、通常runner、ffprobe、外部推論／費用、動画、SSD、削除0。次は専用Edgeの最終監査返信生成完了・全文を受領し、同じ範囲の具体指示へ続行する。ID9-PD-01/02・本番・実AI品質・字幕演出・動画許可・人間品質は別の未承認／pending。
 
 ## 2.0 初回キック
 
@@ -132,3 +132,8 @@ main85b077a3の正本と専用Edge最終返信を受領。設営12の明示入�
 設営14の一箇所201修正と新attempt metadataだけを適用。19結果は通常API/store2、current関数memory10、current artifact/tiny6、否定専用complete1。完成時通常store別process再読exit0。取得者違い409と期限切れ回復→旧owner409で作用不増加、不完全転送400でstate18,848 bytesのSHA前後一致・対象running・新成果物0。通常state18,175 bytes・FileRef／Output／人間承認0、新runtime11小file／324,687 bytes。元媒体read試行・hash・copy・PUT0、旧684小file／006007120file／製品8path／旧失敗4file不変、製品5／設営14、一般履歴リセット0。
 
 今回の8指定群は現行直接実証成立。親§8を再対照し、素材JSONを動画と取り違えた入力とClip/Digest成果物誤消費の明示拒否は直接証拠未確認と分離。正常登録2枝や工程列拒否で埋めず、技術完了候補保留で相談役へ次一件を求める。ID9-PD-01/02、字幕演出／動画許可／人間品質pendingは維持。
+
+
+## 14. 設営15・残る誤消費拒否4件成立
+
+実validatorの167-byte JSON／16-byte headerが誤MIMEで拒否、実Digest builderの登録依存がClip kindをread前拒否、実Clip builderが正規Digest計画をtranscript kindとして受けた時にテーマbuild／write前拒否。両memory state SHA一致、メモリfixtureの通常store注入0。別process readerで4小fileと旧705fileを再対照、旧失敗4file不変。製品dirsは60b959d9型検査済み版と不変、再型検査・旧52／15／19／111・媒体正実走の再実行0。親の残る2直接否定証拠を閉じ、隔離実装試験の技術完了候補として相談役へ最終監査提出する。人間品質・正式採用とは別。

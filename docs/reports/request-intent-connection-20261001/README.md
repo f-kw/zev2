@@ -597,3 +597,39 @@ syntax transpileはexit0・生成file0。preflightは実exit0、保存007の対�
 今回正本の現行否定資格一件は検証完了。親の文言ごとに根拠を要求すると8.4の上記2拒否は直接証拠が足りないため、**親v005全体の「隔離実装試験 技術完了候補」はまだ提出しない**。不具合を観測したとは扱わず、静的／正常枝と直接否定を区別する。次の一件は相談役の現物監査により、この2誤消費拒否を小JSON／メモリfixtureで既存validatorへ通す範囲を具体化すること。今回の設営14へ追加fixtureをまとめない。
 
 ID9-PD-01/02、本番有効化、実AI品質、字幕演出、動画許可、人間品質は未承認／pending。人間Pending新規0・人間採用への昇格0。Codex1起動・他者タブ操作・本人への確認／視聴／採点／転記要求0。専用Edgeの古い生成表示は一回reloadして今回の手貼り初回キックと最終相談役返信を取得し、同じ会話がmainを触らずCodex2監査待ちであることまで全文確認。モデル変更0。担当fileのみ通常commit/push・Git clean確認後にAUDIT_ONLY＋NEXT_REQUESTを直接送り、相談役返信完了・全文受領まで同じセッションで確認する。
+
+
+## 2026-10-02 設営15受領・媒体型／制作系統の誤消費4拒否試験準備
+
+19結果の報告を専用Edgeから送信・表示確認し、3m7sの返信生成完了・全文を受領。同じID9内のcontinueとして、相談役の個別設営15承認と正本 FINAL_CROSS_TYPE_REJECTIONS を読了し、main d0259442763d7e9ea9ac2fb2e80045aa6d065f00へcleanのままff同期。19件は限定技術受理、旧証拠・失敗現物不変。受領だけの独立commitや再起動は行わない。
+
+今回の目的は残る2誤消費拒否の直接証拠を、A1 JSON→video MIME／A2 tiny ftyp→JSON MIME／B Clip kind→実Digest登録依存／C Digest plan→実Clip builder の4件で閉じること。製品変更0、元MP4・ffprobe・通常runner・媒体処理・通信／費用・動画・SSD・削除0。小test一本と小fixture／新証拠だけを設営累積15として適用し、製品5・一般履歴と未承認境界を維持する。formal run前に構文transpile、対象export・ID・新runtime不存在をpreflightする。
+
+
+## 2026-10-02 設営15・素材型／制作系統の誤消費4拒否成立：v005技術完了候補
+
+[小test](queue-source-kind-and-cross-production-rejection-test.mts) のsyntax transpileと無作用preflightはpassed／command exit0。5実export、既存Digest命令・依存IDとClip命令・STT依存ID、正規Digest計画kind、新runtime／新証拠不存在を確認した。正式commandは `node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-test.mts run`、**実親exit0、4件すべてpassed、別process小保存物reader exit0**。設営15の一回、追加修正・新実質問題なし。製品5／設営15、一般上限・累積履歴リセット0。
+
+| 実経路 | 直接実証 | 拒否後の作用 |
+|---|---|---|
+| A1 current backend artifact validator | kind／mode／sourceUri／purposeを持つ167-byte source JSONをvideo/mp4として渡し、「動画成果物はMP4ファイルを指定してください」で拒否 | FileRef／Output／業務state変更0 |
+| A2 同validator | 新しい16-byte ftyp header fixtureをapplication/jsonとして渡し、「成果物参照のJSONを読めません」で拒否 | 元MP4 read/hash/copy/PUT0。このheaderを実動画／品質合格とは扱わない |
+| B 実Digest検証builder→実登録依存resolver | 正規保存依存をメモリcloneしてFileRefのkindだけcomposition_jsonへ変更。digest_plan_json要求にDIGEST_DEPENDENCY_REFERENCE_INVALID | 依存resolver1、成果物read0、判断0、build/write0、メモリstate SHA前後一致 |
+| C 実Clipテーマbuilder→実依存resolver→書き起こしkind検査 | ClipのSTT依存へDigest plan kind／URIをメモリfixtureで接続。diskの代わりに正規kind検査済みDigest計画objectを一回返し、「テーマ作成が読む文字起こし成果物の種類が不正です」で拒否 | メモリread1、disk read0、テーマbuild0、manifest／JSON write0、判断0、メモリstate SHA前後一致 |
+
+[新4結果・保全・親条件再対照](queue-source-kind-and-cross-production-rejection-evidence-v001.json)へ観測値・actual error・作用カウンタ・before/after SHAを保存。全705保護小fileのsize／SHA不変、006／007の120fileのsize・inode・device・mtime／ctime・割当量不変。旧19結果と証拠・旧失敗4file・元Clip storeも保護対象に含む。製品8pathに加え実workflow builder／kind validator／backend validatorの現物SHAを保存。削除済み8pathは不存在。旧失敗SHA・固定Git版を保持し、旧proofを書換え0。旧媒体のhash0、旧runtime全体の即時再読は主張しない。
+
+新runtimeは `request-intent-final-cross-type-rejections-20261002-v001-attempt-001` の4小file／316,925 bytesだけ（2tiny fixture、メモリ入力、保全記録）。小fixture以外のopen/readStream、B/C中disk read／write、媒体read、copy、製品側外部process／通信をguardし、すべて試行0。readerの実起動を製品側外部processへ合算せず区別した。normal runner、source/STT／inspection／ffprobe、外部推論／費用、動画、SSD、追加削除、本番・公開0。成功値fixtureはメモリ内の否定単体のみ、通常storeへ注入0。
+
+親v005§8.1〜8.6を旧保存実績と今回現行4拒否へ再対照した。
+
+| 親完了条件 | 現行根拠と限界 |
+|---|---|
+| 8.1 通常依頼・登録・MP4枝・出所 | local005／upload006の通常承認・source JSON／旧STT実登録、MP4007実登録・正規出力所有者。006／007の異なる目的と各探索・採否・保持6要求／対応回答SHA。source取得／STT処理は実行していない。整理済みlocal005媒体の即時再読資格はない |
+| 8.2 通常dispatch・転送・計画→検証complete | 006／007の実index／factory・通常4工程complete、006実upload・分離root・receiver-only reader exit0。006旧親exit未返却はそのまま、今回exit0へ付け替えない |
+| 8.3 目的・断片・順序・時計・保存復元 | 006の複数候補、keep/drop/keep、4区間・frame/sample時計、転送先のみ再構築、007未提供時null・理由・再読一致、2目的6組の要求SHA対応。再判断・動画QCなし |
+| 8.4 不正入力・資格・参照・版・転送・系統誤消費 | 現行52、参照9、時計15、現行19で従来の拒否を保存。今回A1/A2/B/Cが残る2誤消費拒否を実validator／workflowで閉じた。正常分岐や静的確認への読み替えなし |
+| 8.5 Clip確認／Digest不足・人間品質区別 | 52の通常Clip7／Digest4、目的全文・条件、確認生成元3／独立ゲート3、policy=falseでも確認必須。006／007のDigest動画命令なし、字幕演出未接続・動画許可未承認・人間品質pending |
+| 8.6 旧保全・現行旧版拒否・影響型検査 | 今回705小file・旧120metadata・旧失敗不変、19の旧state／旧未知成果物・旧準備版直接拒否。製品dirsは60b959d9のshared/backend/runner＋Remotion/client型検査exit0版とdiffなし。無変更の型検査・旧試験は再実行0 |
+
+以上を **「v005隔離実装試験 技術完了候補」** として最終相談役監査へ提出する。限定実装試験の条件が揃ったという候補であり、相談役最終受理は未受領。ID9-PD-01/02、旧業務state移行／本番、実AI内容品質、字幕演出接続、動画許可、人間品質採用は別の未承認／pending。人間Pending新規0、正式採用0。担当5fileの通常commit/push・Git clean確認後、専用Edgeから AUDIT_ONLY＋NEXT_REQUEST を直接送信し、返信生成完了・全文読了まで受領する。
