@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "scope": "reference shape and actual bytes only; normal consumer tested separately",
+  "runtime": "runtime/artifacts/request-intent-clock-attempt-005",
+  "clockResolutionBinding": {
+    "path": "artifacts/draft_clock_attempt_005/agent_clock_check/clock-resolution.json",
+    "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271"
+  },
+  "clockBodyUnchanged": true,
+  "results": [
+    {
+      "name": "clock-byte-save-read",
+      "expected": "accepted",
+      "artifactPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-clock-attempt-005/artifacts/draft_clock_attempt_005/agent_clock_check--clock-byte-save-read.json"
+    },
+    {
+      "name": "clock-missing-field",
+      "expected": "rejected",
+      "error": "DIGEST_EXECUTION_VERSION_OR_FIELDS_INVALID"
+    },
+    {
+      "name": "clock-other-reference",
+      "expected": "rejected",
+      "error": "DIGEST_DATA_CLOSURE_INCOMPLETE"
+    },
+    {
+      "name": "clock-fictional-version",
+      "expected": "rejected",
+      "error": "DIGEST_BYTE_BINDING_INVALID"
+    },
+    {
+      "name": "clock-missing-bytes",
+      "expected": "rejected",
+      "error": "ENOENT: no such file or directory, lstat '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-clock-attempt-005/artifacts/draft_clock_attempt_005/agent_clock_check--missing-bytes.json'"
+    },
+    {
+      "name": "clock-modified-bytes",
+      "expected": "rejected",
+      "error": "Digestの参照bytesが欠損または不一致です"
+    },
+    {
+      "name": "consumptionBinding-version-required",
+      "expected": "rejected",
+      "error": "DIGEST_JSON_BINDING_INVALID"
+    },
+    {
+      "name": "editPlanBinding-version-required",
+      "expected": "rejected",
+      "error": "DIGEST_JSON_BINDING_INVALID"
+    },
+    {
+      "name": "manufacturingInputBinding-version-required",
+      "expected": "rejected",
+      "error": "DIGEST_JSON_BINDING_INVALID"
+    },
+    {
+      "name": "inspection-missing-null",
+      "expected": "accepted",
+      "artifactPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-clock-attempt-005/artifacts/draft_clock_attempt_005/agent_clock_check--inspection-missing-null.json"
+    },
+    {
+      "name": "inspection-missing-reason-required",
+      "expected": "rejected",
+      "error": "DIGEST_MISSING_INSPECTION_INVALID"
+    },
+    {
+      "name": "inspection-missing-consumptionBinding",
+      "expected": "rejected",
+      "error": "DIGEST_MISSING_INSPECTION_INVALID"
+    },
+    {
+      "name": "inspection-missing-editPlanBinding",
+      "expected": "rejected",
+      "error": "DIGEST_MISSING_INSPECTION_INVALID"
+    },
+    {
+      "name": "inspection-missing-manufacturingInputBinding",
+      "expected": "rejected",
+      "error": "DIGEST_MISSING_INSPECTION_INVALID"
+    },
+    {
+      "name": "inspection-missing-clockResolutionBinding",
+      "expected": "rejected",
+      "error": "DIGEST_MISSING_INSPECTION_INVALID"
+    }
+  ]
+}

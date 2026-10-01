@@ -161,7 +161,8 @@ async function consume(deps: DigestPlanConsumptionDependenciesV001, input: Input
     requestId:r.id,approvedCommand:{input:r.input,target:r.target,constraints:r.constraints,policy:r.policy,dependsOnAgentRequestId:r.dependsOnAgentRequestId},
     planFileRefBinding, preparationBinding, sourceInspectionBinding: inspectionBinding,
     sourceByteEquivalence: {prepared: preparation.identity.sourceVideo, inspected: inspection.sourceVideoBinding},
-    implementations, outputs: Object.fromEntries(NAMES.map(name => [name, bind(file(name),outputs[name])])),
+    implementations, outputs: Object.fromEntries(NAMES.map(name => [name, name === 'clock-resolution.json'
+      ? {path:file(name),fileSha256:sha(formal(outputs[name]))} : bind(file(name),outputs[name])])),
     consumers: {manufacturingJob: {function: 'validatePresentationBaseMediaBuildJobV001', status: admittedJob.status},
       intervalClock: {function: 'validatePresentationBaseMediaSegmentPlanV002', status: clock.status}},
     humanQuality: 'pending', renderExecuted: false, backendCompletionRegistered: false};

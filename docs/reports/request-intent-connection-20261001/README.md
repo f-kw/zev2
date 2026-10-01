@@ -304,3 +304,29 @@ source/STTの実claim・PUT・complete→実index/factory→探索／採否／�
 停止時の別process確認：実registered planを現行readerで再構築し、保存計画と完全一致。24参照データと内部参照5件を確認し、provider再実行0・state不変。保存された消費4出力のSHAと、旧attempt-003の3保存fileのSHA不変を確認。queue-clock-stop-readback-attempt-004.jsonへ保存。消費completeは未成立のまま。今回の隔離backend・runner・試験親processは終了済み、既存サービス操作0。
 
 Git基準はmain/local/origin 9f031229。§12の設営4行差分と失敗／局所合格／別process証拠・担当共通状態の9fileだけを明示stageし、通常監査checkpoint commit/push後に相談役へGPT_DECISIONで直接提出する。製品コード追加修正は0、累積は製品4／設営6。自動承認の具体的範囲が返るまでCodexが例外を自己適用しない。
+
+## 時計参照追補の受領・適用 checkpoint（2026-10-01）
+
+相談役保存HEAD `8cbde0b9359ab090ab30561862d49dcfd83b1e0a`へ他者差分を保持してfast-forward。main／受領時Git clean。時計参照追補全文・親v005・AGENTSの相談役自動承認節を確認した。実行metadataのモデル表記は `gpt-6.1-sol`。モデル比較・旧成果再生成は行わない。
+
+実行前に失敗attempt-004の実4出力を再読し、採用・編集・製造入力には版がある一方、時計結果には版がないことを照合した。時計結果は1,610 bytes、SHA `7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271`。旧failed stateと4出力を変更しない。稼働中backend／runner／watcherはprocess一覧で観測されず、隔離を確認した。
+
+許可された二pathだけに時計byte参照と既存byte検査を適用した。時計本文・計算・serializer・他JSON参照・null・admissionを維持する。同一欠陥の製品修正累積 **5**、設営累積 **6**。一般上限と履歴は変更しない。対象試験／新attemptの通常消費completeはこのcheckpoint時点では未確認。次は時計参照の局所試験、その後通常キュー検証。
+
+## 時計参照修正の検証結果・容量不足で中断（attempt-005）
+
+| 確認 | 実結果 |
+|---|---|
+| 局所参照 | 15検査exit0。時計byte保存／再読、欠損field・別参照・架空版・欠損bytes・改変拒否、他3JSONの版必須、未提供のnull／理由条件 |
+| 型検査 | shared build、backend、runner（Remotion含む）、clientすべてexit0 |
+| 通常local JSON | 実APIの下書き／承認→source/STT実claim・PUT・complete→実index/factoryの3判断→計画complete→検証の実消費complete。全文意図・要求SHAを対応する通信しない新回答へ渡した |
+| 消費の参照 | 時計はbyte参照、消費記録／編集／製造入力は版付きJSON。元4区間・時計SHA `7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271` は同条件の旧attempt-004と一致 |
+| 別process再読 | 通常の消費readerで1完成経路を再構築、provider不要。旧96保護file確認。upload転送先の再読とは区別する |
+| 通常upload | source/STT登録後、素材独立copy中ENOSPCで計画failed。計画／検証FileRef未登録、次工程queued。空き1.9GiB、素材4,803,412,827 bytes |
+| 未実施 | upload／分離root／転送先のみ再読、MP4／inspection未提供の通常complete、通常否定・Clip回帰 |
+
+新しい試験作用を停止し、今回の試験親と二backendのみSIGTERM（親exit143）。通常index子processは停止前に既に観測されなかった。stdout文言を成否判定には使っていない。試験全体は未完了であり、時計修正・local成立を取り消さない。累積は製品5／設営6、容量不足への追加修正・削除は行わない。
+
+[15参照検査](queue-clock-reference-evidence-attempt-005.json)、[部分接続](queue-integration-evidence-attempt-005.json)、[容量停止現物](queue-capacity-stop-evidence-attempt-005.json)、[停止後再読／保全](queue-clock-capacity-readback-attempt-005.json)、[相談役への一点](queue-capacity-followup-request.md)。旧attempt-004の失敗state・4出力、既存Git管理のqueue証拠は基準HEADと不変。保護96fileに含まれない業務stateの新しい全repo棚卸しは行わず、実業務への作用はない。
+
+ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間品質pending維持。外部推論・費用・新素材・取得・STT実行・inspection実行・動画製造0。相談役へGPT_DECISIONで容量準備を返す。報告送信表示はcommit/push後に専用Edgeで確認する。受領記録だけの再commit・人間転記は要求しない。

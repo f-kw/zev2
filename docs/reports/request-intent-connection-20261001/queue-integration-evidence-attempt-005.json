@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "request-intent-queue-integration-evidence-v001",
+  "attempt": "attempt-005",
+  "results": [
+    {
+      "name": "local-json normal registration/runner/complete",
+      "status": "passed",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "dataFiles": 24,
+      "inspection": true
+    }
+  ],
+  "captures": [
+    {
+      "stage": "discovery",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "01f2a573e11fcf893c0eece870459dfa70fa011f5e2273b1de6a2a427f85824e",
+      "sourceId": "fileref_-q8hsRM92XN-E5twvAJwW",
+      "utteranceCount": 1615,
+      "candidateCount": null
+    },
+    {
+      "stage": "selection",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "5fa4bfc42cd1dc23af8caece1e87151c57aea738f79f376bc68cb096ef51949e",
+      "sourceId": "fileref_-q8hsRM92XN-E5twvAJwW",
+      "utteranceCount": null,
+      "candidateCount": 2
+    },
+    {
+      "stage": "retention",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "aa42b336342b0a45a437bf0c569c72b70b3f50f7f0e72cf5be608a7a40193203",
+      "sourceId": null,
+      "utteranceCount": null,
+      "candidateCount": 2
+    }
+  ],
+  "completed": [
+    {
+      "name": "local-json",
+      "backendRuntime": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json",
+      "readerRuntime": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json",
+      "readerArtifactRoot": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts",
+      "draftId": "draft_24o0Va-7yYUymmrICp03U",
+      "prepareRequestId": "agent_3eTUH53d0duI1svD3-pnu",
+      "validateRequestId": "agent_Nk3ZGMMBh2pvhlmo6Yxx2",
+      "planPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--digest-plan.json",
+      "executionPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2--digest-execution-input.json",
+      "separateProcess": true,
+      "forbiddenReads": [],
+      "sourceRegistrationMode": "json-reference",
+      "dataBindings": [
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_yvK4bAb8VEdqVVAU70vsw/source-video.json",
+          "fileSha256": "f630eb00fd45ac943b6ae7aa4bb9870c89697429c0bd43d064d39f6b014383a6"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/source-media.mp4",
+          "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_rmcoZ2W1hzDAVN-Cx0Zs_/transcript.json",
+          "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/utterances.json",
+          "fileSha256": "2cf346685c46640bcaddc20d9cf17edea79ef760cdf50e1f759fc07fba0df1bf"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/production-intent.json",
+          "fileSha256": "4610e93e72744c35f441458579c3371ba589fac75ca736f839b40e3014f5a369"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/binding-input.json",
+          "fileSha256": "aac4d57a4ff6e96c6c3073feb689117acbaaf7b9d0ee4de3e1c9abaf63ccfe70"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/discovery-plan.json",
+          "fileSha256": "9a58dec9f4350dec7384845a8f0aaa193048e98c01deeb4c57aac6fdb4601db1"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/candidate-request.json",
+          "fileSha256": "01f2a573e11fcf893c0eece870459dfa70fa011f5e2273b1de6a2a427f85824e"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/candidate-set.json",
+          "fileSha256": "819ba29a994865c5cae2b2a4bf7c5de2099afc71d685c6c42c724246fd4529cb"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/discovery-validation.json",
+          "fileSha256": "6ab412223e8291be2164d2b635e518b05113cbe7a38884bd03300cca47bde21c"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/candidate-response.json",
+          "fileSha256": "35912a8c0c80132eea3205777928290ed8dd100c1e704dbcadb91027ed15ab0f"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/candidate-result.json",
+          "fileSha256": "3939483d18d42ac63313045ce580d4881f8f2c9cdbea63c850512dd5c1acbe7b"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-plan.json",
+          "fileSha256": "72283e02f27ebc7aef9f194f89abfcc3d71966c9327c140e3d0d946298638ed2"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-request.json",
+          "fileSha256": "5fa4bfc42cd1dc23af8caece1e87151c57aea738f79f376bc68cb096ef51949e"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-validation.json",
+          "fileSha256": "2944bd26b1fe039926c0e5ba42b167ff43d2601ab8b7ca03a95e6aee0e1e2b34"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-adoption.json",
+          "fileSha256": "14f6a63a6fe61342d8fe465b3bd1cbd77f53b6be0696204ce659c931faad1d6b"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-response.json",
+          "fileSha256": "35b4022b2cd4cf6b9d958373f4d450ad0a6d0fb56b28b4fc4512d4c343e2736f"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/selection-result.json",
+          "fileSha256": "4a7193a1c77556b611e71e36204eab055bb4f736f74871618f22f9bbb60d3d22"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/retention-request.json",
+          "fileSha256": "aa42b336342b0a45a437bf0c569c72b70b3f50f7f0e72cf5be608a7a40193203"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/retention-validation.json",
+          "fileSha256": "17826c9b83beac5fb915f0e6a9cc584f45078b10edd54591019641c9aef46282"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/retention-response.json",
+          "fileSha256": "68416819680ee8bb9628d5aef820c25248404ac0a722f766eae87fc403c40666"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/retention-result.json",
+          "fileSha256": "52d71d35f7009f26008280ead9664b47172785d15165f8c66a2319e256cd59df"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/preparation-binding.json",
+          "fileSha256": "8f9a09e2641e0fa7226c8a401f64e0160c8a39a9d396009c661f35078e82500e"
+        },
+        {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_yvK4bAb8VEdqVVAU70vsw/source-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d"
+        }
+      ],
+      "admission": {
+        "planIntegrity": "passed",
+        "presentation": "not-connected",
+        "executionPermission": "not-approved",
+        "humanQuality": "pending"
+      }
+    }
+  ],
+  "inputPath": "normal draft API/approve/next/claim/runner index/factory/PUT/complete",
+  "sourceProcessingExecuted": false,
+  "sttExecuted": false,
+  "externalInferenceExecuted": false,
+  "inspectionExecuted": false,
+  "renderExecuted": false,
+  "productionAdoption": false,
+  "status": "interrupted",
+  "error": "ENOSPC: no space left on device, copyfile '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4' -> '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json-worker/runner-artifacts/draft_bf6hKeP7hmmx5CMKYTCNb/agent_jGgk6ywiuluA2Sv0IkOrQ--source-media.mp4'",
+  "interruptionReason": "actual queue failure ENOSPC; no additional scenario started; parent process stopped after evidence preservation",
+  "unfinished": [
+    "upload complete/destination-only reader",
+    "MP4/no-inspection normal branches",
+    "queue negatives",
+    "Clip regression"
+  ]
+}

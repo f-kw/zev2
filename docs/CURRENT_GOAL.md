@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業
 
-**9. 明示Digestの通常キュー接続検証。`b9bb6b40b26a454bb850b0967b457b7fedbfff4a`の時計結果参照による中断を監査し、相談役が二pathの限定修正を製品累積5回目として個別承認した。decision: continue。新しい本人確認は不要。修正と既承認の未完了検証へ進む指示を発行済みだが、受領・適用・実再開は未確認。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続検証。相談役保存HEAD `8cbde0b9`で時計二path修正を受領し、製品累積5／設営6として適用済み。局所15検査・関連型検査、attempt-005のlocal計画→検証complete・別process再読が成立した。uploadは素材copy中のENOSPCで実計画failedとなり追加作用停止。空き約1.9GiB、素材約4.47GiB。旧保存物を削除せずに容量を準備する一点をGPT_DECISIONへ返す。v005全体は未完了。**
 
-今回の正本は [v005時計参照修正の限定追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md)、保存 `eab83a079db3c095174fc248fd73ddaf161e685c`。親の [v005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) の範囲・完了条件・§12の相談役自動承認を維持する。同じ工事の一件であり、一般上限や履歴をリセットしない。現在の実施履歴は製品4／設営6。今回の製品5は適用時に計上する。
+今回の正本は [v005時計参照修正の限定追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md)、保存 `eab83a079db3c095174fc248fd73ddaf161e685c`。親の [v005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) の範囲・完了条件・§12の相談役自動承認を維持する。同じ工事の一件であり、一般上限や履歴をリセットしない。現在の実施履歴は製品5／設営6。今回の二pathは適用済み。一般上限・履歴は変更しない。
 
 前回の局所試験4行修正は設営6として適用済み。新局所attempt-004は内部5参照／拒否9件合格。通常attempt-004は実source/STT登録→実index/factoryの3判断→計画complete、実OutputEntity所有者3鎖、要求内部5参照のregistry／bytes対応まで進んだ。旧candidate-set参照不整合を未修正へ戻さない。
 
@@ -68,6 +68,14 @@ Codex2は論理`artifacts/<draft>/<producer-request>/<file>`を既存の単一�
 
 新しい隔離attemptで小さい参照型試験からvalidate実消費／complete、upload・分離root・転送先だけの別process消費、MP4直接登録・inspection未提供、通常キュー否定・Clip回帰・修正影響の型検査まで既承認範囲を続行する。過去の全動画・旧111試験・人間レビューをやり直さない。型検査合格や計画completeをv005全体の完成にしない。
 
+## 2.7 時計修正成立・attempt-005の容量不足停止（Codex2実測）
+
+時計参照追補を受領・二path適用、製品累積5／設営6。局所15参照検査、shared/backend/runner/Remotion/client型検査がexit0。通常localは旧保存source/STTの実登録、実index/factory、計画completeから次の実消費completeへ到達し、別process再構築を確認した。時計結果は同条件の旧attempt-004とbyte一致、消費記録・他JSONの版参照は維持。
+
+通常uploadは独立素材copyで容量不足となり計画failed。計画／検証の登録はなく検証queued。空き1.9GiBに対して素材4,803,412,827 bytesであり、削除・上書き・通常通信の迂回を自己判断せず、試験作用停止・自分の二backendと親process停止（親exit143）を実施した。容量準備の具体的一点を相談役へ返す。追加の製品／設営修正はしていない。
+
+upload・分離root・転送先だけの再読、MP4／未提供の通常complete、通常否定・Clip回帰は未実施。局所null条件の合格を未提供の通常completeとしない。旧attempt-004の失敗state・4出力、旧96保護file・既存queue証拠は不変。詳細は[主report](reports/request-intent-connection-20261001/README.md)、[停止現物](reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json)、[一点の判断依頼](reports/request-intent-connection-20261001/queue-capacity-followup-request.md)。外部推論・費用・新素材・STT／inspection実行・動画0、ID9-PD-01/02・品質pending維持。
+
 ## 3. 完了済みを再開しない
 
 - 新素材の15分31.633秒初稿と9/28の人間初見レビューは実施済み。9/29の144pxと条件付き新分割への肯定回答も保持する。
@@ -86,13 +94,13 @@ Codex2は論理`artifacts/<draft>/<producer-request>/<file>`を既存の単一�
 
 縁A/B選択null、A=8/4技術入力、Bの21字幕論理不合格、色の種類と適用、アップのHUD制約・手指定、旧レビューと修正後未回答、制作負担、通常キュー本適用・実推論・人間品質は残件。Decisions調査は完了・実API評価保留で、この接続の依存にしない。必要時に公式情報を再確認する。
 
-新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除は包括承認しない。具体的開発差分はv005と今回の時計参照追補。製品4／設営6の実施履歴を保持し、今回の製品5は適用時に累積する。一般上限・その他停止条件は維持する。
+新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除は包括承認しない。具体的開発差分はv005と今回の時計参照追補。製品5／設営6の実施履歴を保持する。一般上限・その他停止条件は維持する。
 
 ## 5. 保存と継続
 
 方針・指示発行・監査・完了・中断は同じターンに正本へ反映し、会話上限を待たない。取得・保存不能や未確認の稼働は明示する。初回／再起動はコピー可能な一つのコードブロック、着手後はCodex直接報告と相談役の監査・次指示を同じセッションでつなぐ。
 
-各担当は専用Edgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化し、担当fileだけ明示stageする。`b9bb6b40`のGit終了・担当返却・追加作用停止を受領、remote mainは相談役確認。Macの稼働・ローカルGitは直接観測していない。今回の修正・再開指示を発行済みだが、受領・実再開は未確認。受理記録だけの再commit・終了連絡・Codex1再起動は行わない。
+各担当は専用Edgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化し、担当fileだけ明示stageする。`b9bb6b40`のGit終了・担当返却・追加作用停止を受領、remote mainは相談役確認。Macの稼働・ローカルGitは直接観測していない。今回の時計修正・実再開・local成立を確認したが、uploadの容量不足で追加作用停止した（§2.7）。受理記録だけの再commit・終了連絡・Codex1再起動は行わない。
 
 上位運用は[AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。一般の上限・旧GOAL_DEFINITIONの意味や数値を変更しない。更新前全文は[時計参照中断時の固定版](https://github.com/f-kw/zev2/blob/b9bb6b40b26a454bb850b0967b457b7fedbfff4a/docs/CURRENT_GOAL.md)、以前の[設営中断版](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/CURRENT_GOAL.md)等で保持する。
 

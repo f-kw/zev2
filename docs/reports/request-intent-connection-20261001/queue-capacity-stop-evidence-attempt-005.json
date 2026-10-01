@@ -1,0 +1,183 @@
+{
+  "status": "interrupted",
+  "recordedAt": "2026-10-01T02:56:33.336833+00:00",
+  "head": "8cbde0b9359ab090ab30561862d49dcfd83b1e0a",
+  "productFixes": 5,
+  "setupFixes": 6,
+  "failedRequest": {
+    "id": "agent_jGgk6ywiuluA2Sv0IkOrQ",
+    "requestDraftId": "draft_bf6hKeP7hmmx5CMKYTCNb",
+    "type": "prepare_digest_plan",
+    "label": "Digest採否・保持計画",
+    "target": {
+      "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4"
+    },
+    "input": {
+      "productionType": "digest",
+      "purpose": "前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。",
+      "settings": {
+        "durationLabel": "隔離試験の尺条件",
+        "themeCountLabel": "隔離試験の候補条件",
+        "geminiModelName": "通信しない接続試験",
+        "preset": "隔離試験の編集条件"
+      }
+    },
+    "constraints": {
+      "durationLabel": "隔離試験の尺条件",
+      "themeCountLabel": "隔離試験の候補条件",
+      "geminiModelName": "通信しない接続試験",
+      "preset": "隔離試験の編集条件"
+    },
+    "policy": {
+      "humanApprovalRequiredBeforeRender": false
+    },
+    "status": "failed",
+    "fileRefIds": [],
+    "createdAt": "2026-10-01T02:53:15.700Z",
+    "updatedAt": "2026-10-01T02:53:27.175Z",
+    "dependsOnAgentRequestId": "agent_c5zPeuJBXm6lX_5CCLh4_",
+    "claimOwnerId": "zev2-runner:98746",
+    "claimedAt": "2026-10-01T02:53:15.924Z",
+    "claimUpdatedAt": "2026-10-01T02:53:27.175Z",
+    "errorMessage": "ENOSPC: no space left on device, copyfile '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4' -> '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json-worker/runner-artifacts/draft_bf6hKeP7hmmx5CMKYTCNb/agent_jGgk6ywiuluA2Sv0IkOrQ--source-media.mp4'"
+  },
+  "disk": "Filesystem   1024-blocks      Used Available Capacity iused    ifree %iused  Mounted on\n/dev/disk3s5   971350180 946735676   1965724   100% 2756187 19657240   12%   /System/Volumes/Data\n",
+  "states": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/state.json",
+      "fileSha256": "4aaabdac9c6d3ed5550c7d622febfae8ce0253e2b71fdf0b4100f32a3d107122",
+      "requests": [
+        {
+          "id": "agent_yvK4bAb8VEdqVVAU70vsw",
+          "type": "prepare_video",
+          "status": "succeeded",
+          "errorMessage": null
+        },
+        {
+          "id": "agent_rmcoZ2W1hzDAVN-Cx0Zs_",
+          "type": "run_stt",
+          "status": "succeeded",
+          "errorMessage": null
+        },
+        {
+          "id": "agent_3eTUH53d0duI1svD3-pnu",
+          "type": "prepare_digest_plan",
+          "status": "succeeded",
+          "errorMessage": null
+        },
+        {
+          "id": "agent_Nk3ZGMMBh2pvhlmo6Yxx2",
+          "type": "validate_digest_plan",
+          "status": "succeeded",
+          "errorMessage": null
+        }
+      ]
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json/state.json",
+      "fileSha256": "71fe529e47a24c65ea9b60b2833aa4869351a2734d455d5647a7299ba65641df",
+      "requests": [
+        {
+          "id": "agent_oTt62YYOqBus9St3Rieym",
+          "type": "prepare_video",
+          "status": "succeeded",
+          "errorMessage": null
+        },
+        {
+          "id": "agent_c5zPeuJBXm6lX_5CCLh4_",
+          "type": "run_stt",
+          "status": "succeeded",
+          "errorMessage": null
+        },
+        {
+          "id": "agent_jGgk6ywiuluA2Sv0IkOrQ",
+          "type": "prepare_digest_plan",
+          "status": "failed",
+          "errorMessage": "ENOSPC: no space left on device, copyfile '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4' -> '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json-worker/runner-artifacts/draft_bf6hKeP7hmmx5CMKYTCNb/agent_jGgk6ywiuluA2Sv0IkOrQ--source-media.mp4'"
+        },
+        {
+          "id": "agent_Zn2gHGjdIc3V0bDUUGa1s",
+          "type": "validate_digest_plan",
+          "status": "queued",
+          "errorMessage": null
+        }
+      ]
+    }
+  ],
+  "successfulLocalConsumer": {
+    "requestId": "agent_Nk3ZGMMBh2pvhlmo6Yxx2",
+    "executionPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2--digest-execution-input.json",
+    "files": {
+      "consumptionBinding": {
+        "binding": {
+          "schemaVersion": "normal-request-digest-consumption-binding-v002",
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2/consumption-binding.json",
+          "fileSha256": "af24fe97bada4af63c829f411ed54d806c4df8b364be6879a9eee4eb17502c80",
+          "canonicalSha256": "5c2e62977faf211d2f73ab8da62b5a22dbab59d2120576ddabd1f66bd207c609"
+        },
+        "actualByteSha256": "af24fe97bada4af63c829f411ed54d806c4df8b364be6879a9eee4eb17502c80",
+        "actualSchemaVersion": "normal-request-digest-consumption-binding-v002"
+      },
+      "editPlanBinding": {
+        "binding": {
+          "schemaVersion": "new-material-digest-edit-plan-v001",
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2/edit-plan.json",
+          "fileSha256": "545bd3236da08f2ab1a1da60ad68d28e1d75b57f8ec345cbc93a54977f435e8b",
+          "canonicalSha256": "6923a079b63d4df4340548559da9e3cc477c9a9980800439b69b908e8be4bed7"
+        },
+        "actualByteSha256": "545bd3236da08f2ab1a1da60ad68d28e1d75b57f8ec345cbc93a54977f435e8b",
+        "actualSchemaVersion": "new-material-digest-edit-plan-v001"
+      },
+      "manufacturingInputBinding": {
+        "binding": {
+          "schemaVersion": "presentation-base-media-build-job-v001",
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2/manufacturing-values.json",
+          "fileSha256": "e49e1d1aa4efdc955e6f63ed955ad05ea0ab8607a1dea215b555f4102d372b21",
+          "canonicalSha256": "ecc161bea55178d146709f5ca2298c998ac270e55a231b242328423c26b24536"
+        },
+        "actualByteSha256": "e49e1d1aa4efdc955e6f63ed955ad05ea0ab8607a1dea215b555f4102d372b21",
+        "actualSchemaVersion": "presentation-base-media-build-job-v001"
+      },
+      "clockResolutionBinding": {
+        "binding": {
+          "path": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_Nk3ZGMMBh2pvhlmo6Yxx2/clock-resolution.json",
+          "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271"
+        },
+        "actualByteSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271",
+        "actualSchemaVersion": null
+      }
+    },
+    "admission": {
+      "planIntegrity": "passed",
+      "presentation": "not-connected",
+      "executionPermission": "not-approved",
+      "humanQuality": "pending"
+    }
+  },
+  "oldAttempt004": {
+    "stateSha256": "ec8b404d67d7695aa49482712b5c3e11b60168cb4105cae3a8151c925a4c6c49",
+    "status": "failed",
+    "files": [
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--machine-adoption.json",
+        "fileSha256": "1e89c4cd4522ab4a7f464f0194b3784b971aef2dc8c6f4dac450f5d166b83e6f",
+        "byteSize": 13345
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--edit-plan.json",
+        "fileSha256": "c3e6df11b06c50d5cae3e868b2d34b87df3a951303f48caca19e514d481796d9",
+        "byteSize": 3066
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--manufacturing-values.json",
+        "fileSha256": "30251567812cd1596b786d481cd1835f1831a8245dd0e1bf807b58ca274e1026",
+        "byteSize": 884
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--clock-resolution.json",
+        "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271",
+        "byteSize": 1610
+      }
+    ]
+  }
+}

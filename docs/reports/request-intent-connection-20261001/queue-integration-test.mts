@@ -38,6 +38,56 @@ if(mode==='backend') {
   }
   const originalStream=fs.createReadStream;(fs as any).createReadStream=function(p:any,...args:any[]){check(p);return (originalStream as any)(p,...args);};
   syncBuiltinESMExports();await import('../../../runner/src/index.ts');
+ } else if(mode==='clock') {
+  const attempt=process.argv[3]??'attempt-005',draft='draft_clock_'+attempt.replaceAll('-','_'),producer='agent_clock_check';
+  const runtime=path.join(root,'runtime/artifacts/request-intent-clock-'+attempt);await mkdir(runtime);
+  const directory=path.join(runtime,'artifacts',draft);await mkdir(directory,{recursive:true});
+  process.env.ZEV2_RUNTIME_DIR=runtime;
+  const {validateArtifactFileRefForKind}=await import('../../../backend/src/artifacts/validation.ts');
+  const logical=(name:string)=>`artifacts/${draft}/${producer}/${name}`;
+  const saveBytes=async(name:string,bytes:Uint8Array|string)=>{await writeFile(path.join(directory,digestArtifactFileNameV001(logical(name),draft)),bytes,{flag:'wx'});return {path:logical(name),fileSha256:sha(bytes)};};
+  const saveJson=async(name:string,value:any)=>{await saveBytes(name,formal(value));return bind(logical(name),value);};
+  const oldClock=path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--clock-resolution.json');
+  const clockBytes=await readFile(oldClock);assert(!Object.hasOwn(JSON.parse(clockBytes.toString()),'schemaVersion'));
+  const clockResolutionBinding=await saveBytes('clock-resolution.json',clockBytes);
+  assert.deepEqual(await readFile(path.join(directory,digestArtifactFileNameV001(clockResolutionBinding.path,draft))),clockBytes);
+  const plan=await saveBytes('plan.json',formal({schemaVersion:'clock-test-plan-v001'}));
+  const inspection=await saveBytes('inspection.json',formal({schemaVersion:'clock-test-inspection-v001'}));
+  const consumptionBinding=await saveJson('consumption-binding.json',{schemaVersion:'normal-request-digest-consumption-binding-v002'});
+  const editPlanBinding=await saveJson('edit-plan.json',{schemaVersion:'new-material-digest-edit-plan-v001'});
+  const manufacturingInputBinding=await saveJson('manufacturing-values.json',{schemaVersion:'presentation-base-media-build-job-v001'});
+  const artifact={schemaVersion:'digest-execution-input-artifact-v001',kind:'digest_execution_input_json',requestDraftId:draft,requestId:producer,
+    planFileRefBinding:{...plan,requestId:producer,outputId:'output_clock_test',fileRefId:'file_clock_test',byteSize:formal({schemaVersion:'clock-test-plan-v001'}).length},
+    sourceInspectionBinding:inspection,sourceInspectionMissingReason:null,consumptionBinding,editPlanBinding,manufacturingInputBinding,clockResolutionBinding,
+    dataBindings:[plan,inspection,consumptionBinding,editPlanBinding,manufacturingInputBinding,clockResolutionBinding].map(({path,fileSha256})=>({path,fileSha256})),
+    admission:{planIntegrity:'passed',presentation:'not-connected',executionPermission:'not-approved',humanQuality:'pending'}};
+  const results:any[]=[];
+  const check=async(name:string,value:any,valid:boolean)=>{
+    const filename=`${producer}--${name}.json`;await writeFile(path.join(directory,filename),formal(value),{flag:'wx'});
+    const result=await validateArtifactFileRefForKind(draft,'digest_execution_input_json',`/api/artifacts/${draft}/${filename}`,'application/json');
+    assert.equal(!('error' in result),valid,JSON.stringify(result));results.push({name,expected:valid?'accepted':'rejected',...result});
+  };
+  await check('clock-byte-save-read',artifact,true);
+  const mutated=(change:(v:any)=>void)=>{const v=structuredClone(artifact);change(v);return v;};
+  await check('clock-missing-field',mutated(v=>delete v.clockResolutionBinding),false);
+  await check('clock-other-reference',mutated(v=>v.clockResolutionBinding.path=logical('other-clock.json')),false);
+  await check('clock-fictional-version',mutated(v=>Object.assign(v.clockResolutionBinding,{schemaVersion:'invented-clock-v001',canonicalSha256:v.clockResolutionBinding.fileSha256})),false);
+  for(const [name,bytes]of [['missing-bytes',null],['modified-bytes',Buffer.concat([clockBytes,Buffer.from(' ')])]] as const) {
+    if(bytes)await saveBytes(name+'.json',bytes);
+    await check('clock-'+name,mutated(v=>{v.clockResolutionBinding.path=logical(name+'.json');v.dataBindings.find((b:any)=>b.path===clockResolutionBinding.path).path=logical(name+'.json');}),false);
+  }
+  for(const field of ['consumptionBinding','editPlanBinding','manufacturingInputBinding'])
+    await check(field+'-version-required',mutated(v=>delete v[field].schemaVersion),false);
+  const missing=mutated(v=>{v.sourceInspectionBinding=null;v.sourceInspectionMissingReason='未提供';
+    for(const field of ['consumptionBinding','editPlanBinding','manufacturingInputBinding','clockResolutionBinding'])v[field]=null;});
+  await check('inspection-missing-null',missing,true);
+  await check('inspection-missing-reason-required',{...missing,sourceInspectionMissingReason:null},false);
+  for(const field of ['consumptionBinding','editPlanBinding','manufacturingInputBinding','clockResolutionBinding'])
+    await check('inspection-missing-'+field,{...missing,[field]:artifact[field]},false);
+  assert.equal(await fileSha(oldClock),clockResolutionBinding.fileSha256);
+  await writeFile(path.join(report,`queue-clock-reference-evidence-${attempt}.json`),JSON.stringify({status:'passed',scope:'reference shape and actual bytes only; normal consumer tested separately',
+    runtime:relative(runtime),clockResolutionBinding,clockBodyUnchanged:true,results},null,2)+'\n',{flag:'wx'});
+  console.log(JSON.stringify({status:'passed',clockReferenceChecks:results.length}));
  } else if(mode==='references') {
   const {buildUnseenDiscoveryRequestV001,projectUnseenSelectionPlanV001,STRUCTURE024}=await import('../../../evals/clip_composition/unseen_material_thin_plan_v001.mts');
   const {buildSelectionRequestV001}=await import('../../../evals/clip_composition/candidate_selection_validation_v001.mts');

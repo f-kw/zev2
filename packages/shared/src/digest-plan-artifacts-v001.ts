@@ -22,7 +22,7 @@ export type DigestExecutionInputArtifactV001 = {
   consumptionBinding: DigestJsonBindingV001 | null;
   editPlanBinding: DigestJsonBindingV001 | null;
   manufacturingInputBinding: DigestJsonBindingV001 | null;
-  clockResolutionBinding: DigestJsonBindingV001 | null;
+  clockResolutionBinding: DigestByteBindingV001 | null;
   dataBindings: DigestByteBindingV001[];
   admission: {planIntegrity: 'passed'; presentation: 'not-connected'; executionPermission: 'not-approved'; humanQuality: 'pending'};
 };
@@ -105,7 +105,8 @@ export function assertDigestArtifactV001(value: unknown, kind: 'digest_plan_json
     } else {
       add(value.sourceInspectionBinding);
       requireCondition(value.sourceInspectionMissingReason === null, 'DIGEST_INSPECTION_REASON_INVALID');
-      for (const n of ['consumptionBinding','editPlanBinding','manufacturingInputBinding','clockResolutionBinding']) add(value[n],true);
+      for (const n of ['consumptionBinding','editPlanBinding','manufacturingInputBinding']) add(value[n],true);
+      add(value.clockResolutionBinding);
     }
   }
   requireCondition(Array.isArray(value.dataBindings) && value.dataBindings.length > 0, 'DIGEST_DATA_CLOSURE_MISSING');

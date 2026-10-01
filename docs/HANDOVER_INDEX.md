@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v014
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v015
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しを置く。
 
-**最新更新：`b9bb6b40b26a454bb850b0967b457b7fedbfff4a`の時計結果参照による中断を監査し、相談役が二pathの限定修正を製品累積5回目として個別承認した。decision: continue。本人の軽微技術判断の委任に基づき、新たな本人確認は不要。[v005時計参照修正追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md)を発行（保存 `eab83a079db3c095174fc248fd73ddaf161e685c`）。局所5参照／拒否9件、通常source/STT・計画completeと内部参照対応は部分成立。validate complete・upload等は未完了。実施履歴は製品4／設営6、今回の製品5は適用時に計上。指示の受領・適用・再稼働は未確認。費用・素材・本番・動画・公開・人間品質・ID9-PD-01/02は未変更。詳細は§2.13。**
+**最新更新：Codex2は `8cbde0b9`で時計追補を受領・二path修正を製品累積5として適用（設営6維持）。局所15参照検査・関連型検査、attempt-005のlocal計画→検証の実complete・別process再読が成立した。uploadは素材copyのENOSPCで実計画failed。空き1.9GiBに対して素材約4.47GiBであり、旧保存物を削除せず容量を準備する一点をGPT_DECISIONへ返す。追加作用停止、試験親／二backendのみ停止。残りのupload／MP4／未提供／否定／Clip回帰は未実施、v005全体未完了。旧failed証拠・未承認事項・品質pendingは維持。詳細は§2.14。**
 
 本書は現在地を復元する入口。過去の詳細原文は[更新前v013全文](https://github.com/f-kw/zev2/blob/b9bb6b40b26a454bb850b0967b457b7fedbfff4a/docs/HANDOVER_INDEX.md)、[v011全文](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/HANDOVER_INDEX.md)、[v010全文](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/HANDOVER_INDEX.md)、個別指示・reportに保持する。過去の「未確認」「次」を現在へ逆流させない。
 
@@ -57,7 +57,7 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 | Codex2：通常callerの計画準備v002 | `11809f6f6bebed82014971c966b79b383b921a1d`を技術受理。通常API→承認・claim→実factory→3判断→別保存・再開・再読。27結果・21捕捉 | source/STT完了はfixture。通常complete所有者と素材JSONの扱いはv005で確認する。限定成果を一般E2Eへ広げない |
 | Codex2：保存計画の後段入力v003 | `7b600a648cf4ee5228601b72b0a6b6629038fa75`を技術受理。非連続保持を既存Digest形式へ変換、job形状／時計検査、4出力保存・再読。15結果＋5拒否 | 通常完了登録・後続キュー・実製造・人間採用は当該範囲外。旧計画消費と旧bytes不変はその検証時点の結果 |
 | Codex2：仕様案・境界実測v004 | `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7`の一案、実validator受理2／想定拒否8、別process26保護path再読、6file差分を相談役受理 | 製品コード変更0。通常キューの完成ではない |
-| Codex2：明示Digest通常キュー隔離実装v005 | `b9bb6b40`。製品4／設営6。局所内部5参照／拒否9件、通常source/STT・計画completeと内部参照対応まで成立。消費4出力保存後に時計参照の型でfailed | 二pathの時計参照修正を製品5回目として相談役承認・指示発行済み。受領・再開・適用は未確認。validate complete、upload・MP4・否定回帰等は未完了 |
+| Codex2：明示Digest通常キュー隔離実装v005 | 時計二pathを製品5／設営6で適用。局所15検査・型検査、attempt-005のlocal計画／検証complete・別process再読成立 | uploadは素材copyでENOSPC、実計画failed。容量準備をGPT_DECISION。upload転送・MP4／未提供・通常否定／Clip回帰未実施。全体未完了 |
 
 Codex2から`b9bb6b40`のmain/local/origin一致、通常push成功、Git clean・staged0・untracked0、9担当fileだけの保存、Git操作終了・追加作用停止を受領。remote mainと対象文書・実装は相談役が確認した。Macのprocess一覧・ローカルGit・型検査・実bytesはCodexの実測報告であり、相談役の直接実測ではない。共通状態の保存担当は相談役へ返却済み。今回の指示発行をCodex2の実再開と混同しない。
 
@@ -141,6 +141,16 @@ Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを
 - 境界：serializer／内容validator・時計処理・認証・PUT/GET・path安全条件・renderer/native QC・実業務・外部推論等は対象外。汎用fallbackや架空版番号、旧回答SHA付替えを使わない。既に通った前回局所試験や旧全動画・111試験・人間レビューをやり直す仕事にしない。
 - 状態：指示発行・正本保存済み、Codex2の受領・実再開・適用は未確認。Codex1起動、受理記録だけの再commit・終了連絡、本人転記は不要。同じセッションで次の実質checkpointまで進める。
 
+### 2.14 Codex2：時計参照修正成立後、通常uploadの容量不足で停止
+
+`8cbde0b9359ab090ab30561862d49dcfd83b1e0a`で追補を受領。時計だけbyte参照へ訂正し、他JSON／時計計算／serializerは不変。製品5／設営6として保存。15対象検査、shared/backend/runner/Remotion/client型検査はexit0。attempt-005のlocalでは実source/STT登録→通常計画complete→次の消費completeへ到達し、別processで再構築。時計SHAは同条件の旧attempt-004と一致。
+
+uploadは計画の素材copy中にENOSPCとなり実failed、検証queued。空き1.9GiBに対し素材4,803,412,827 bytes。自己判断の削除や旧保存物上書き、通常通信の試験置換はせず、今回の試験親／二backendを停止（親exit143）。容量準備を相談役へGPT_DECISIONとして返す。一般枠・履歴をリセットせず、追加修正は未実施。
+
+[主report](reports/request-intent-connection-20261001/README.md)、[15参照検査](reports/request-intent-connection-20261001/queue-clock-reference-evidence-attempt-005.json)、[部分接続](reports/request-intent-connection-20261001/queue-integration-evidence-attempt-005.json)、[停止現物](reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json)、[停止後再読](reports/request-intent-connection-20261001/queue-clock-capacity-readback-attempt-005.json)、[一点の依頼](reports/request-intent-connection-20261001/queue-capacity-followup-request.md)。旧attempt-004の4出力・stateと96保護file・旧Git証拠は不変。
+
+未実施はupload転送／分離root／転送先のみの再読、MP4直接登録／inspection未提供の通常complete、通常否定・Clip回帰。局所未提供nullの合格を通常未提供枝の完了へ広げない。外部推論・費用・新素材・取得／STT／inspection・動画0。ID9-PD-01/02・字幕演出・動画許可・人間品質pending維持。Codex1起動・人間の転記／採点要求なし。
+
 ## 3. ユーザーが確定した主線
 
 「既存レビューを反映した採用区間・構成の改善」は本人の「OK 一旦やることはそれで確定して。」で確定。[前回v001](work-orders/ZEV_SELECTION_STRUCTURE_IMPROVEMENT_20260930_v001.md)、保存`241d08ac5e9b5cfba2923ce9b1d6dcc090392477`の案作成は完了し、現在は通常依頼接続の後続である。
@@ -190,7 +200,7 @@ Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを
 | 旧レビュー／UI | 旧10回答受領済みとR1〜R3修正後7ポイント未回答は別。旧カット・色への肯定を別素材へ移さない。既存一件編集・保存・Resetを未着手へ戻さない |
 | 制作負担 | 低メモリ化完了と全工程の速度・操作負荷は別。別素材、入力、検査頻度等の残件を消さず、新しい高速化を無断着工しない |
 | 本適用・承認 | ID9-PD-01（公開型／工程・一般委任）、ID9-PD-02（動画許可SHA／scope）、旧業務state移行・本番有効化は未承認。隔離試験とは分ける |
-| 今回の時計参照修正 | 製品4／設営6まで適用済み。今回の二path修正を製品5回目として相談役承認、受領／適用／再開は未確認。一般枠・品質Pending・PD-01/02とは別 |
+| 今回の時計参照修正 | 製品5／設営6適用、15検査・local通常complete・再読成立。upload容量不足で停止、残検証未完了。一般枠・品質Pending・PD-01/02とは別 |
 
 これが全課題の件数確定ではない。既存IDと根拠で新しい課題を結び、全残件解消を独立作業の開始条件にしない。別素材検証ID8は将来の一般化確認であり、済んだ新素材初稿・15分レビューの再実施指示ではない。
 
