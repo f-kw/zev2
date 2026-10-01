@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：0d1b0810の初回キックとHTTP201追補を受領し、設営14を適用。現行否定資格attempt-002は親exit0・backend2件0・別process reader0、19件すべてpassed。指定した資格・版・不完全転送拒否の一件は検証完了。親§8.4の素材JSON／動画混同とClip／Digest成果物誤消費の明示的な拒否証拠は未確認のため、v005全体技術完了候補は保留。製品5／設営14、媒体read／hash／copy／PUT0、旧失敗と006／007不変。**
+**9. 明示Digestの通常キュー接続（v005）：`738f6375`の現行否定資格attempt-002を限定技術受理。19結果で期限切れclaim、wrong owner、承認入力／旧state、owner参照、旧／未知版、旧preparation版、不完全転送complete拒否まで現行版で直接成立。親v005に残る直接証拠は source登録JSON↔video bytes混同拒否 と Clip↔Digest成果物誤消費拒否の2点だけ。設営15として媒体なし小fixture＋current validator／実workflow builderの直接試験を承認。v005全体は未完了。**
 
-[今回19結果](reports/request-intent-connection-20261001/queue-current-negative-qualification-evidence-v002.json)、[別process照合・保全・親条件対照](reports/request-intent-connection-20261001/queue-current-negative-readback-parent-audit-v002.json)、[正本HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)。次は相談役監査で残る2誤消費拒否の媒体なし直接実証を具体化する。追加fixtureは設営14へ含めず、製品・費用・新素材・動画・SSD・削除・本番・公開へ広げない。問い合わせは専用Edgeから返信本文まで受領し、同じ範囲の具体指示なら同じセッションで続行する。
+次作業の正本は [final cross-type rejections](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)、保存 `181f0f5293f8f9d9ef7271ec8a5a2262fe8cfd8d`。A1/A2/B/Cの4拒否が成立したら親§8を再対照し、全根拠が揃う場合だけ「v005隔離実装試験 技術完了候補」として最終監査提出する。元MP4 read/hash/copy/PUT、normal runner、ffprobe、inspection、製品code変更、外部推論、費用、動画、SSD、削除は行わない。
 
 ## 2.0 初回キック
 
