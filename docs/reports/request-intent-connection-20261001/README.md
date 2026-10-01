@@ -344,3 +344,27 @@ ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間�
 削除前検査の実結果：8本すべて4,803,412,827 bytes・SHA `504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4`で保持元素材と一致、合計38,427,302,616 bytes（35.79GiB）。各fileは別inode・単一link・通常file、Git管理外、利用中0。保存済み33参照で複製の由来と削除後の再作成対象を記録。旧binding／state／Git管理のJSON証拠69件のSHAと、その他runtime file634件のmetadata集計を保存した。保持元3fileの実SHAも一致。調査時の同volume空き2,161,881,088 bytes。
 
 整理scriptの初回は旧attempt-002の実参照形状の照合だけでexit1となり、削除0。当該保存pathをそのまま物理fileへ対応させて一覧作成はexit0となった。初回の実stream SHA9件を、先行inode／size・更新時刻と再確認して再利用し、残り2素材を実hashした。製品reader／validatorの変更や旧参照の書換えではない。削除前記録は約40KB、新たな大容量backupなし。
+
+## 検証用コピー削除の完了・容量回復（2026-10-01）
+
+削除前一覧を `04c21bfdeccde7210193d731bcf205f4ea19a03e` として通常commit/pushし、main／origin一致・cleanを確認してから個別削除を実施した。実行はexit0。8本を `retired-by-user-approved-cleanup` と記録し、全8pathの不存在を別processで確認した。未削除の適格候補0。失敗uploadのpartial指定先はもともと不存在のため削除件数0、旧ENOSPC証拠を保持した。
+
+| 実測項目 | 結果 |
+|---|---|
+| 削除件数／論理量 | 8本／38,427,302,616 bytes（35.79GiB） |
+| 削除直前の同volume空き | 2,145,939,456 bytes（2.00GiB）、06:01:30 UTC |
+| 削除直後の同volume空き | 40,604,250,112 bytes（37.82GiB）、06:01:38 UTC |
+| volume全体の実空き増加 | 38,458,310,656 bytes（35.82GiB）。論理削除量とは別の観測値 |
+| 元入力の保全 | 元素材・書き起こし・inspectionの同一identity／size維持。削除前の実SHAを再利用 |
+| 旧記録の保全 | 旧binding／state／Git管理JSON証拠69件のSHA不変 |
+| その他の試験file | 634件のpath・identity／size等のmetadata集計不変 |
+
+完成／確認用媒体・他領域・他担当file・業務state・Git管理の旧原本へ削除作用0。旧proof／成功・失敗stateの書換え0。削除前情報を残して結果を[軽量記録](queue-storage-cleanup-20261001-v001.json)へ追記した。旧96保護fileの全走査・旧全動画QC・111試験・人間レビューは再実行しない。製品code変更0のため既存型検査の再実行は不要、今回の検証は削除条件・不存在・保持元／旧記録不変・空き実測に限る。
+
+削除した素材8本を使う保存済み33参照は、保持元から対応するbytesを再作成するまで旧runtimeとしてそのまま再読できない。旧技術受理は過去時点の事実として維持するが、runtime全体の復元・即時再読合格へ読み替えない。書き起こし・inspection・計画・要求／回答・採否／保持・時計4出力・state・ログは残っている。
+
+大容量copy／upload／MP4は再開0、SSD探索・移行・format・外部転送0。製品5／設営6、先行preflight設営7は未適用、一般枠・履歴リセット0。v005のupload／分離root／転送先再読、MP4／inspection未提供の通常complete、通常否定・Clip回帰は未完了のまま。ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間品質pending維持。次の一点は相談役による残検証の具体的な再開順・条件の指示であり、容量回復だけで大容量工程を再開しない。
+
+担当fileのみの通常commit/push・clean確認後、Codex2専用EdgeのZEV Build Loopへ `AUDIT_ONLY＋NEXT_REQUEST` で直接報告する。受領だけの再commit・終了連絡・人間転記を要求しない。
+
+削除後記録の別process再読もexit0。push済み削除前データの全fieldは進捗status以外不変、旧進捗statusも別fieldへ保持した。8path不存在・保持元3fileの同一identity・旧証拠69件SHA・その他634fileのmetadata対応を再確認。これは整理記録の保存再読であり、素材を削除した旧runtimeの通常reader合格ではない。

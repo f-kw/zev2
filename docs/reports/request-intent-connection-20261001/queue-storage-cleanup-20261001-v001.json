@@ -1,6 +1,6 @@
 {
   "schemaVersion": "id9-user-approved-storage-cleanup-v001",
-  "status": "pre-deletion",
+  "status": "cleanup-completed",
   "receivedAt": "2026-10-01T05:58:57.203349+00:00",
   "instructionHead": "9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58",
   "session": "Codex2",
@@ -484,5 +484,106 @@
     "change": "historical saved reference matched its exact physical path; product code and old records unchanged",
     "streamHashesReused": 9,
     "remainingVideoStreamHashes": 2
-  }
+  },
+  "preDeletionCommit": "04c21bfdeccde7210193d731bcf205f4ea19a03e",
+  "availableBeforeDeletion": {
+    "at": "2026-10-01T06:01:30.335216+00:00",
+    "device": 16777234,
+    "availableBytes": 2145939456,
+    "blockSize": 4096
+  },
+  "preDeletionOpenFileCheck": {
+    "exitCode": 1,
+    "output": "",
+    "checkedAt": "2026-10-01T06:01:30.301167+00:00"
+  },
+  "results": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/fixture/source-video.mp4",
+      "at": "2026-10-01T06:01:30.335267+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4",
+      "at": "2026-10-01T06:01:30.556778+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4",
+      "at": "2026-10-01T06:01:30.735671+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+      "at": "2026-10-01T06:01:30.896247+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+      "at": "2026-10-01T06:01:30.993857+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--source-media.mp4",
+      "at": "2026-10-01T06:01:31.779658+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--source-media.mp4",
+      "at": "2026-10-01T06:01:32.675266+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--source-media.mp4",
+      "at": "2026-10-01T06:01:37.283083+00:00",
+      "deleted": true,
+      "status": "retired-by-user-approved-cleanup",
+      "logicalBytes": 4803412827
+    }
+  ],
+  "availableAfterDeletion": {
+    "at": "2026-10-01T06:01:38.660493+00:00",
+    "device": 16777234,
+    "availableBytes": 40604250112,
+    "blockSize": 4096
+  },
+  "otherRuntimeFilesAfterDeletion": {
+    "fileCount": 634,
+    "metadataSha256": "4d69a42324fee08b306e0cf6792094537525334081548d6cce6f2900f3117b79"
+  },
+  "otherRuntimeFilesUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "retainedIdentitiesUnchanged": true,
+  "deletedCount": 8,
+  "logicalDeletedBytes": 38427302616,
+  "actualAvailableIncreaseBytes": 38458310656,
+  "completedAt": "2026-10-01T06:01:38.684878+00:00",
+  "largeTestsResumed": false,
+  "oldRuntimeImmediatelyReadable": false,
+  "separateProcessReadback": {
+    "at": "2026-10-01T06:04:33.708320+00:00",
+    "exitCode": 0,
+    "preDeletionFieldsRetained": true,
+    "deletedPathsAbsent": 8,
+    "retainedIdentitiesUnchanged": 3,
+    "preservedEvidenceShaMatches": 69,
+    "otherRuntimeMetadataMatches": 634,
+    "oldRuntimeReaderExecuted": false,
+    "progressStatusUpdatedSeparately": true
+  },
+  "preDeletionStatus": "pre-deletion"
 }

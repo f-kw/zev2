@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）の容量整理。本人から「また容量が問題になってるのか。SSD用意するから一旦削除して」を受領。検証用の重複素材コピーと失敗copyだけを特定して削除し、空きを回復する指示へ切り替えた。元素材・完成動画・判断／検査記録は残す。削除許可と指示発行は済み、Codex2の受領・実削除・空き回復・SSD準備は未確認。**
+**9. 明示Digestの通常キュー接続（v005）：本人承認済みの容量整理をCodex2が実施。元素材と実size／SHAが一致した試験コピー8本（35.79GiB）を削除し、同volume空きを2.00GiBから37.82GiBへ回復した。元素材・元STT／inspection・完成／確認用動画・判断／検査記録・stateを保持。削除した素材を参照する旧runtimeは再作成前の即時再読不可。大容量試験は再開せず、SSDの接続・移行先・利用開始は未確認。v005全体は未完了。**
 
 `decision: continue`（限定した容量整理）。正本は [本人承認済みの削除指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_STORAGE_CLEANUP.md)、保存 `a8fc1a7d4f2631055fef907017e6b82dccfbb1d3`。直前の [容量preflight指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md) の削除禁止を、今回明示した検証用複製／partialだけについて更新する。一般の旧成果削除許可ではなく、今回の本人の直接依頼に基づく一回の整理である。
 
@@ -20,7 +20,7 @@
 
 - 時計だけ実保存bytesのSHAを持つbyte参照、他JSON・消費記録は版付き。時計本文／計算／区間／断片／順序／frame/sample、serializer、null・admissionを維持した修正は受理済み。
 - 15局所検査、shared/backend/runner/Remotion/client型検査のexit0、attempt-005 localの通常下書き／承認→旧source/STTの実claim/PUT/complete→実index/factoryの3判断→計画complete→実消費complete、別process再構築、96保護file確認、旧attempt-004との時計SHA一致を記録。実AI品質や素材取得／STT処理の全工程合格ではない。
-- uploadは当時のData volume空き約1.9GiB、素材4,803,412,827 bytes（約4.47GiB）の条件でcopyがENOSPC。計画failed、計画／検証FileRefなし、検証queued。試験親／二backendのみ停止という報告。現在のMac空き・稼働は未観測。
+- uploadは当時のData volume空き約1.9GiB、素材4,803,412,827 bytes（約4.47GiB）の条件でcopyがENOSPC。計画failed、計画／検証FileRefなし、検証queued。試験親／二backendのみ停止という報告。今回の削除直後の実空きは37.82GiB、ID9試験writerは観測されなかった（削除記録の時点）。
 - upload／分離root／転送先だけの別process再読、MP4直接登録／inspection未提供の通常complete、通常否定・Clip回帰等は未実施。直前preflight指示で新たに実施した項目があればCodexの実報告で更新する。目的2件の全3判断・全経路の合格は未認定。
 
 根拠：[主report](reports/request-intent-connection-20261001/README.md)、[容量依頼](reports/request-intent-connection-20261001/queue-capacity-followup-request.md)、[停止現物](reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json)、[15検査](reports/request-intent-connection-20261001/queue-clock-reference-evidence-attempt-005.json)、[再読・保全](reports/request-intent-connection-20261001/queue-clock-capacity-readback-attempt-005.json)。
@@ -37,7 +37,9 @@
 
 SSDは本人の準備意向のみ確認。接続・mount先・利用開始や移行は未確認。大容量再試行は別の具体的な再開指示まで保留する。既承認の小JSONのみの独立検証は削除対象へ依存しない範囲で可能だが、容量整理の報告を先延ばししない。
 
-削除一覧・実行結果は既存report directoryの `queue-storage-cleanup-20261001-v001.json`、主reportへ関連付ける。直前preflight／scenario選択の設営7は許可済み・適用未確認。製品5／設営6の履歴を維持し、今回の本人指示による容量整理を修正枠のリセットに使わない。
+削除一覧・実行結果は既存report directoryの `queue-storage-cleanup-20261001-v001.json`、主reportへ関連付ける。直前preflight／scenario選択の設営7は許可済み・未適用。製品5／設営6の履歴を維持し、今回の本人指示による容量整理を修正枠のリセットに使わない。
+
+削除実績：削除前記録を `04c21bfdeccde7210193d731bcf205f4ea19a03e` でpushしてから8本を個別削除。論理量38,427,302,616 bytes、実空き2,145,939,456→40,604,250,112 bytes、観測増加38,458,310,656 bytes。保持元3fileのidentity不変、旧証拠69件SHA不変、その他試験file634件metadata不変。partial指定先は元から不存在。大容量工程は保留。
 
 ## 5. 親v005の製品境界と未承認事項
 
@@ -63,6 +65,6 @@ ID9-PD-01（一般のDigest下書き承認による機械採否／保持の委�
 
 役割・残課題・担当状態は [HANDOVER_INDEX.md](HANDOVER_INDEX.md)、人間原文と対象版は [HUMAN_REVIEW_PENDING.md](HUMAN_REVIEW_PENDING.md)。縁A/B未選択、B論理不合格、字幕の条件付き評価、色・強調、HUD、旧レビュー修正版未回答、制作負担・通常適用・人間品質等を失わない。通常技術事項を本人へ転記させない。
 
-方針・指示・受理・中断は同じターンで正本へ反映。Codex2の`60b959d9`のGit終了は受領済み、直前preflightの実行状態は未確認。最新の未commit・担当競合を確認し、他者変更を保持する。担当fileのみ明示stage、直列commit/push、専用Edgeを維持。受領だけの再commit・終了連絡・再起動、Codex1再起動は不要。削除結果と回収空きはCodex2の実報告で確定する。
+方針・指示・受理・中断は同じターンで正本へ反映。Codex2の`60b959d9`のGit終了は受領済み。先行preflightの設営7は未適用、今回は削除だけを実施。最新の未commit・担当競合を確認し、他者変更を保持する。担当fileのみ明示stage、直列commit/push、専用Edgeを維持。受領だけの再commit・終了連絡・再起動、Codex1再起動は不要。削除実績は[削除前一覧・実行結果](reports/request-intent-connection-20261001/queue-storage-cleanup-20261001-v001.json)と主reportで確認する。
 
 上位運用は[AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。一般上限・強制停止条件は変更しない。更新前全文は[034503d7固定版](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/CURRENT_GOAL.md)に保持する。
