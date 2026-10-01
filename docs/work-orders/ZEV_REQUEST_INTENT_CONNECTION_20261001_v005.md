@@ -188,3 +188,54 @@ digest_execution_input_json: 'Digest入力検証'
 ID9-PD-01/02、一般委任、本適用、旧業務state移行、動画実行許可、公開、人間品質は未承認／pendingのまま。外部推論・費用・新素材取得・STT実行・inspection実行・映像音声製造・新UIは今回の対象外。Codex1は起動せず、Codex2専用Edgeタブを維持する。
 
 報告は従来どおり `Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 参照対応修正・通常キュー接続の再検証`。軽微な設営判断だけを理由にkawafmmへ転記・確認を要求しない。
+
+
+## 13. 2026-10-02：相談役最終監査 — v005隔離実装試験 技術完了
+
+`decision: accept`。
+
+最終監査対象：`7c8f34ce02de427614a2ce4fd2c69a1f08dece17`。
+
+相談役は、親§8.1〜§8.6について、保存済みの正実走・現行回帰・現行否定資格・最終4拒否を照合した。Mac上の全試験を相談役自身が再実行したものではなく、GitHubへ保存された現物証拠と実装を監査した結論である。
+
+### 13.1 受理する完成範囲
+
+**v005「明示Digestの通常キュー接続」の隔離実装試験を技術完了として受理する。**
+
+§8各項目の根拠：
+- **8.1**：source JSON登録、旧STT登録、MP4直接登録、正規Output/FileRef所有者、異なる2purposeの6要求と対応回答SHA。
+- **8.2**：実index／factoryからprepare_digest_plan→validate_digest_planの通常complete、upload、分離root、receiver-only別process再読。
+- **8.3**：複数候補、keep/drop/keep、4区間、frame/sample時計、全文目的・出所・断片・順序、保存後再構築、inspection未提供枝。
+- **8.4**：現行52回帰、参照9拒否、時計15検査、現行19否定資格、最終4拒否により、claim／承認入力／owner／版／不完全転送／source JSON↔video bytes混同／Clip↔Digest誤消費まで直接拒否を確認。
+- **8.5**：Clip7／Digest4工程、確認生成元3・独立ゲート3、Digest動画命令なし、admissionの未接続・未承認・人間品質pending境界を維持。
+- **8.6**：旧証拠・旧state・旧版履歴保全、現行旧state／旧未知artifact／旧preparation版拒否、製品directoryは既受理型検査checkpointから不変。
+
+最終4拒否の現物は
+`docs/reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-evidence-v001.json`。
+A1/A2/B/Cはいずれもpassed、親process exit0、別process reader exit0。媒体read/hash/copy/PUT、normal runner、ffprobe、外部推論、費用、動画、SSD、削除は0。
+
+累積履歴は**製品5／設営15**として保持し、一般上限・過去履歴をリセットしない。
+
+### 13.2 この受理に含まれないもの
+
+この技術完了は次を承認しない。
+
+- `ID9-PD-01`：通常Digest下書き承認後の機械採否・保持を一般的に本適用すること。
+- `ID9-PD-02`：動画実行許可を具体的SHA／scopeへ結び付けること。
+- 旧業務state移行。
+- 本番有効化。
+- 実AI内容品質。
+- 字幕演出接続。
+- 動画実行。
+- 人間品質採用。
+- 公開。
+
+固定応答による隔離試験を、一般委任・正式採用・製品品質合格へ読み替えない。
+
+### 13.3 終了
+
+v005内に追加の技術作業は残さない。受理記録だけの再試験・再commit・終了通知commitは不要。
+
+Codex2は相談役の本返信を専用Edgeで全文受領したら、このID9/v005エピックを終了する。別エピック・未承認本適用・動画・人間品質へ自動着工しない。
+
+次の開発着工は、kawafmmへ提示する新しい初回キック指示を別途発行した場合のみ開始する。
