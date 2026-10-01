@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v026
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v027
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：f0df4fb6の設営10再開を受領し、await一語を適用して保存後readerを実行。保存state・validate succeeded・receiver検証成果物SHAまで進んだが、最初のguard拒否probeで同期throwをPromise拒否検査へ直接渡す試験側の問題によりexit1。実consumer再構築前。製品5／設営10、追加修正未適用・追加作用停止。guard条件不変でasync callbackへ包む一行を設営11として相談役へ個別判断依頼。旧90file／旧669小証拠／旧転送・失敗証拠／製品8pathは不変。upload通常系列を再実走していない。保存後再読とv005全体を完成にしない。**
+**最新更新：`a8dffc7f53b97d6c3230264bd02041107b58a1bf`の保存後receiver再読停止を監査。設営10のawait修正後、保存state・validate succeeded・receiver成果物SHAまでは成立。次のguard拒否probeだけが同期throwをassert.rejectsへ直接渡してconsumer前にexit1したため、async callbackで包む一行を設営11として相談役承認した。禁止root・guard本文・期待error・実consumer・比較条件は不変。大容量再実走なしでattempt-006保存物だけの別process再読へ戻す。正本は[v005 guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存`2530d96685b33d1317dd5b6750cf5939155e85ae`。製品5／設営10、11は適用時に計上。再読合格は未確認、v005全体は未完了。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
