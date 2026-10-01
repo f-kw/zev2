@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`88d5e5a0`のupload-json attempt-006は通常4工程succeeded、実upload、別root receiverの転送先のみ消費、validate completeまで成立。追加の保存後readerは非同期snapshotのawait不足でconsumer前にexit1。相談役はawait一語だけを設営10として承認し、大容量再実走なしでattempt-006保存物だけのreceiver-only再読へ戻す。製品5／設営9、10は適用時に計上。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：f0df4fb6の再開指示を受領し、保存後readerのawait一語を設営10として適用。保存state／検証命令succeeded／receiver成果物SHAまで確認したが、最初のguard拒否probeで同期throwをPromiseの拒否検査へ直接渡す試験設営の問題によりexit1。実consumer再構築前で停止、製品5／設営10、追加修正未適用。最小案は同じreadをasync callback経由で検査する一行だけ、設営11の個別判断を相談役へ返す。upload通常系列は既に成立、再実走なし。v005全体・保存後再読は未完了。**
 
 今回の再開正本は [upload保存後readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)、保存 `ac1cc33ad56d7ecfc9f89baa57409ac21ce0434d`。許可差分は保存後readerの `await` 一語だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・大容量転送は起動しない。
 
@@ -91,3 +91,9 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 通常source/STT登録、計画／検証の実complete、目的の3判断到達、24参照と時計・4区間・admissionが成立。prepareの予定max-steps停止exit1と実succeededを区別、receiver exit0。終了後の追加再読はstore snapshotのPromiseを待たず命令一覧を検索して失敗し、consumer呼出前。新state21,458 bytes不変、4成功命令。旧小証拠669件・製品8path SHA不変、削除済み8path不存在。製品変更・外部推論・費用・動画・品質採用0。
 
 推奨はawait一行の設営10を相談役が個別判断し、保存されたattempt-006で追加receiver-only再読だけを行うこと。Codexは未適用・追加作用停止でGPT_DECISION。大容量系列の再実行は不要。MP4／inspection未提供・目的2件・本適用等の残件は維持する。
+
+## 9. 設営10実行結果とguard-probe停止
+
+[新失敗証拠・未適用一行案](reports/request-intent-connection-20261001/queue-upload-readback-setup010-failure-attempt-006.json)と主reportへ保存。正しいguard拒否が試験側の引数評価中に同期throwし、Promise拒否検査へ到達しない局所設営欠陥。guard条件・期待errorを変えないasync callback案は未適用。consumer／deepEqual／禁止read 0は未合格。修正累積は製品5／設営10、一般上限・履歴は不変、追加作用停止で相談役判断へ返す。
+
+旧90fileの小SHAと全metadata、旧669小証拠・旧転送／旧失敗証拠2件・製品8path SHA不変、保存state21,458 bytes不変。大容量copy・backend／通常runner／factory／PUT／download再実行0、新runtime proof0。新3copy保持・旧削除8path不存在。必要な続行は保存物だけのreaderであり、人間確認・SSD・大容量再実走を必要条件にしない。

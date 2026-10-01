@@ -444,3 +444,19 @@ preflight境界4検査exit0。source本文read／copy／PUTなしでsize・devic
 旧request-intent小JSON／state／ログとreport証拠669件の前後size／SHA不変、製品8path SHA不変、削除済み8pathは不存在のまま。旧成功／失敗proofと33参照は復元していない。新state21,458 bytes／SHA335243e67c81bae5d4ae3ebbcb9035d9344ee3b7bde99282114c3d3eae042f65。新[転送証拠](queue-upload-transfer-evidence-attempt-006.json)と局所停止を区別し、保存後追加再読を合格へ足していない。
 
 現在は追加作用停止。upload通常系列は成立したが、今回の保存後再読は未確認として完了報告にはせずGPT_DECISIONする。local-json再製造・MP4直接登録・inspection未提供通常complete・目的2件の全3判断はnot-run。前回52検査や旧15／111／動画QC／人間レビューは再実行0。取得・STT／inspection処理・外部推論・費用・動画・新UI・本番・正式採用・公開0。ID9-PD-01/02未承認等は維持。担当fileだけ通常commit/pushし、Codex2専用Edgeで直接相談役へ返す。
+
+## 2026-10-01 設営10受領・保存後再読の実行前checkpoint
+
+main f0df4fb629eef60b6b6e05bc6964f81007ce0cf8へ他者変更を保持して同期し、upload readback追補全文を受領。失敗証拠内の実code/SHAと旧一時scriptを照合し、一致を確認した。保存後readerへ非同期snapshotを待つawait一語だけを適用、設営累積10・製品5。出力小proofの別filenameへの追従を除き、対象state／命令／FileRef／receiver root／実consumer／SHA／deepEqual／guard条件は不変。失敗codeと旧証拠は書き換えない。新readerは別processで起動し、既存attempt-006だけを再読する。旧90fileの小JSON SHAと3素材copyのmetadata、stateと旧証拠SHAを実行前保存。backend／通常runner／factory／upload／download・再判断・再登録・completeは起動しない。今回の目的は保存物だけで同じ検証成果物を再構築できることの実証であり、v005全体・動画品質の完成とはしない。
+
+## 2026-10-01 設営10適用後：guard拒否確認の新しい局所設営停止
+
+承認されたawait一語を適用し、新別process readerを実行した。実loadStateとawait付きreadStateSnapshotで既存attempt-006の保存stateを取得し、検証命令succeeded、receiverの保存済み検証成果物8,540 bytesとFileRef SHA61090777442a301927129d30ae9cccaa99c14a78dfd04db03d9d03daaf184134の一致まで進んだ。修正意味は非同期読取を待つ一語だけ、別proof名への追従以外の対象と検査条件を維持した。製品5／設営10、一般枠・履歴リセット0。
+
+**新readerは最初のguard拒否probeでexit1、実consumerの再構築前で停止した。** worker直接readを拒否する既存fs wrapperは同期的にthrowする。試験側はその呼出を先に評価してPromiseの拒否検査へ渡していたため、検査関数に渡る前に正しい拒否が外へ出た。guardが破られた製品欠陥とは認定せず、guard自体は緩和していない。まだ実consumer／保存artifact deepEqual／再構築中の禁止read 0／残り4probeの合格は未確認。失敗code全文・SHA・実exit／エラー・一語差分・未適用最小案を[設営10失敗証拠](queue-upload-readback-setup010-failure-attempt-006.json)へ保存した。
+
+最小案は既存の拒否検査へasync callbackを渡し、その中で同じreadを呼ぶ一行だけ。拒否error pattern、5禁止path、guard、consumer、SHAとdeepEqual条件を変えず、同期throwをPromiseの拒否として正しく検査する。**この修正は未適用**、次の設営11として相談役の個別判断へ返す。自己承認で枠を増やさない。保存物だけのreader再実行で足り、backend・通常runner・factory・upload／download・大容量copyを再実行する理由はない。
+
+attempt-006の旧90fileは小JSON SHAと全fileのsize／inode／device／更新時刻／割当bytesが前後不変、旧669小証拠SHA不変、旧転送証拠とawait不足の旧失敗証拠2件もSHA不変。製品8path SHA不変。新3copyは保持、削除済み8path不存在、state21,458 bytes／SHA335243e67c81bae5d4ae3ebbcb9035d9344ee3b7bde99282114c3d3eae042f65不変。新runtime proofは未生成、大容量file生成0。旧一時失敗scriptも変更していない。
+
+追加作用停止、保存後receiver-only再構築は未完了。backend／通常runner／factory／upload／download・再判断・再登録・complete・state更新0。MP4・inspection未提供・目的2件の全3判断はnot-run、SSD・追加削除・外部推論・費用・動画・本番・正式採用・公開0。旧52／15／111・全動画QC・人間レビューや型検査は製品無変更なので再実行しない。ID9-PD-01/02、字幕演出未接続、動画許可未承認、人間品質pendingを維持。本人への視聴・採点・転記は要求せず、同じ専用EdgeへGPT_DECISIONする。

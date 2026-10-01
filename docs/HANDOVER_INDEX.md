@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v025
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v026
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`88d5e5a0b04b611f2453acf623625ff37c2360c2`のupload-jsonは通常4工程succeeded、実upload、別root receiverの転送先のみ消費、validate completeまで成立。追加の保存後readerはreadStateSnapshot()のawait不足でconsumer前に停止したため、await一語だけを設営10として相談役承認。大容量再実走なしでattempt-006保存物だけのreceiver-only再読へ戻す。正本は[v005 upload readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)、保存`ac1cc33ad56d7ecfc9f89baa57409ac21ce0434d`。製品5／設営9、10は適用時に計上。再読合格は未確認、v005全体は未完了。**
+**最新更新：f0df4fb6の設営10再開を受領し、await一語を適用して保存後readerを実行。保存state・validate succeeded・receiver検証成果物SHAまで進んだが、最初のguard拒否probeで同期throwをPromise拒否検査へ直接渡す試験側の問題によりexit1。実consumer再構築前。製品5／設営10、追加修正未適用・追加作用停止。guard条件不変でasync callbackへ包む一行を設営11として相談役へ個別判断依頼。旧90file／旧669小証拠／旧転送・失敗証拠／製品8pathは不変。upload通常系列を再実走していない。保存後再読とv005全体を完成にしない。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -239,3 +239,9 @@ Codexは受領・実質checkpoint・完了・中断・未送信を報告前に�
 空きは40,661,536,768→31,008,292,864→26,188,054,528 bytes。source-size保持は0→2→3実体、14,410,238,481 bytesで既知ピークに一致。停止保存時の新90fileは論理14,435,157,718 bytes、割当14,464,991,232 bytes。追加削除・SSD・旧33参照復元・外部推論・動画なし。
 
 追加readerは通常storeの非同期snapshotにawaitがない設営欠陥でexit1。製品code変更不要、consumer呼出前。未適用推奨差分はawait一行、相談役へ設営10の個別判断を依頼する。既存attempt-006の追加再読だけでよく、大容量copy／upload／runner再実行は不要。Codex自己承認・一般枠リセットをしない。設営9／製品5、旧小証拠669件／製品8path不変、旧コピー8path不存在。MP4／inspection未提供・目的2件の全3判断、本適用・動画許可・人間品質は未完了／未承認を維持。
+
+## 10. 設営10適用・guard拒否probeの局所設営停止
+
+[失敗code全文・SHAと未適用最小案](reports/request-intent-connection-20261001/queue-upload-readback-setup010-failure-attempt-006.json)、[主report](reports/request-intent-connection-20261001/README.md)。一語修正で実store保存state取得、検証命令成功、receiver成果物SHA一致は成立した。新reader exit1の原因は既存guardが同期throwするreadを試験側が引数で先に評価したこと。製品側の拒否は正しく、最小案は同じ拒否検査のasync callback化一行だけ。guard／期待error／対象path／consumer／SHA／deepEqualを変えず、設営11の個別判断を相談役へ返す。未適用、追加作用停止。
+
+consumer再構築・保存artifact deepEqual・再構築中禁止read 0・残り4拒否probeは未確認。旧90fileの小SHAと全metadata、旧669小証拠、旧転送／旧失敗証拠2件、製品8path不変。新state21,458 bytes不変、旧3copy保持・削除8path不存在。新runtime proof／大容量file0、backend／runner／factory／upload／download起動0、再判断・complete・state更新0。MP4・inspection未提供・目的2件・人間品質等の残件を維持する。
