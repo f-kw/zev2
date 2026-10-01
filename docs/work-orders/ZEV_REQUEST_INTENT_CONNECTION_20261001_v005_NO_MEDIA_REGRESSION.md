@@ -72,3 +72,33 @@ upload、worker/backend分離root・転送先だけの消費再読、MP4直接�
 同じZEV Build LoopへCodex2専用Edgeタブで直接送信する。受理だけの再commit・終了連絡・再起動・Codex1起動は不要。
 
 本指示の受領・再稼働・新試験結果は発行時点では未確認。容量整理は受理済みだが、v005全体・通常動画制作・SSD利用は未完了／未認定である。
+
+## 6. 2026-10-01：局所fixtureの対象選択修正を相談役が個別承認
+
+`decision: continue`。**kawafmm承認済みID9と、本人の「独断で決めれる程度なら自動で承認して」に基づく相談役の個別承認。追加の本人確認は不要。** 同じCodex2セッションで修正・媒体なし再検証へ直ちに進む。新エピックや一般上限の変更ではない。
+
+### 6.1 現物監査と許可理由
+
+対象checkpointは `b47999f7398118b1ef53b68b5b95a7ea922e7779`。同SHAの試験コード、[失敗証拠と未適用最小案](../reports/request-intent-connection-20261001/queue-no-media-regression-evidence-v001.json)、5file差分を照合した。試験のmemoryRequestはClip命令だが、3つのmutationがrequestDrafts[0]を選ぶ。保存診断でも先頭はDigest、対象Clipは別IDであり、期待した未承認状態を作っていなかったという説明は整合する。製品側の承認入力検査の欠陥とは認定しない。
+
+38件の部分成立（入口1／実API-store28／制御関数メモリ9）は保存証拠として保持する。停止後の原因照合は正式な完成時再読とは別で、対象試験全体・未実施ゲート・v005全体の合格はまだ受理しない。相談役がMac上で再実行した監査ではない。
+
+### 6.2 許可差分
+
+対象実装は `docs/reports/request-intent-connection-20261001/queue-no-media-regression-test.mts` だけ。
+
+- 未承認・下書き重複・工程列変更の3fixtureは、配列先頭ではなく検査対象命令のrequestDraftIdで下書きを選ぶ。証拠JSONのrecommendedMinimalFix.codeの小さいhelperを採用してよい。
+- mutation前の基準fixtureでは対象IDが一意に存在し、選んだ下書きが対象命令の承認元であることを確認する。重複fixtureはその確認後に対象下書きの複製を追加する。先頭や末尾、Clipらしさへのfallbackは作らない。通常storeを並べ替えて試験を通す対応もしない。
+- 同じメモリfixtureの配列順を入れ替えても、選ぶ対象が同じIDであることを小さく確認する。検査対象以外の下書きへ誤って作用していないことを確認し、全repoのfixture棚卸しへ広げない。
+- 通常caller・control関数・認証・入力／保存の契約、既存の期待例外・HTTP期待値・ゲート条件は変えない。他の独立した欠陥を混ぜない。
+- 旧attempt-001、v001失敗証拠、失敗時code SHAは固定Git版と現物で保持する。新runtimeは `runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-002`、新結果は同report directoryの `queue-no-media-regression-evidence-attempt-002.json` に固定する。test内のruntime／結果名と実行metadataだけを追従させ、親・backend・readerが同じ新runtimeを使うことを確認する。旧結果を上書きせず、新しい汎用再試行システムを作らない。
+
+この同一欠陥の修正を**設営累積8回目**として例外承認する。現在の適用済みは製品5／設営7で、8は実施時に計上する。一般の設営枠・製品枠・別の強制停止条件・過去履歴を増枠／リセットしない。費用・素材・品質・製品方針・本番・公開・権限の判断を含まず、既承認検証の試験対象選択だけに閉じるため、相談役の委任範囲で決定する。
+
+### 6.3 再開と終点
+
+明示的な `no-media` 入口で新attempt-002を実行する。新しい一系列の整合確認に必要な小さい前段試験の再実行は可とし、旧38件との数の合算で全体合格を作らない。残る5件の承認入力否定、確認生成元3件、依存成立時の独立確認ゲート3件、完成時API応答と通常storeの別process完全対照、旧証拠保全まで進める。単体メモリfixtureと実API／storeの結果を分け、通常storeへ成功工程・架空成果物・人間承認を注入しない。
+
+素材read/hash/copy/PUT、source/STT complete、通常runner・大容量試験・SSD操作・追加削除・外部推論・動画は起動しない。今回の停止理由はSSDではなく試験設営であり、SSD到着を再開条件にしない。新しい小state／JSON／logだけを保存する。
+
+新attempt・失敗版との関係・実際の修正回数・残るnot-runを主report／現在地へ保存し、通常mainへ担当fileだけ明示stage・commit/push、専用Edgeタブから同じ会話へ直接報告する。受領だけの再commit・終了連絡・再起動・本人転記は不要。今回の指示受領・適用・実再開は保存時点では未確認。完了報告名は§5を維持する。
