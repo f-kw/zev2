@@ -55,3 +55,67 @@
 通常main、担当fileのみ明示stage、直列commit/push、Codex2専用Edgeタブで同じZEV Build Loopへ直接報告する。報告は `Codex2 GPT_DECISION＋NEXT_REQUEST｜9. 容量実測・再開案と低容量検証`。受領記録だけの再commit・終了連絡・再起動、Codex1起動、ユーザーへの転記／採点要求は不要。
 
 指示発行時点で、Macの最新空き・追加保存先・容量確保の実施・Codex2の本指示受領／再稼働は未確認。今回の指示は大容量経路の再開済みやv005全体の完成を意味しない。
+
+
+## 6. 2026-10-01：媒体なし回帰受理後のupload-json単独再開
+
+`decision: continue`。**kawafmm承認済みID9と「終わったら次に進んで」、軽微技術判断の相談役委任に基づく。本人への追加確認は不要。**
+
+監査対象は `f54cd09af22621ddf0b5a5fdf3bf5776b87e8350`。新媒体なしattempt-002は52結果・親exit0・隔離backend終了0・別process通常store reader exit0。実API/store、Clip7／Digest4工程、承認入力14否定、確認生成元3、独立確認ゲート3、完成時state完全対照と旧証拠保全が一系列で成立し、旧38件・停止後診断との合算は0。相談役はこの**媒体なし回帰一件を限定技術受理**する。Mac上で相談役自身が再実行した監査ではない。
+
+### 6.1 次の一件：upload-json転送だけを単独再開
+
+残る大容量系を一度に走らせない。次は既存 `queue-integration-test.mts` の **upload-json scenarioだけ**を、新しい隔離attemptで実行する。local-jsonは既に受理済みなので再製造せず、local-mp4／inspection未提供も今回は実行しない。
+
+既存コードの実装を照合すると、upload-jsonで大きい素材bytesが新規に同時保持され得る場所は、通常経路の
+1. workerの `runner-artifacts`
+2. backendの保存先
+3. receiver/readerの `runner-artifacts`
+の最大3実体。backend PUTとreader downloadは一時fileを最終fileへrenameするため、同じ転送先でtempとfinalを別のsource-size実体として永続二重保持する設計ではない。元素材は既存保持元であり新規増加量に含めない。
+
+保持元素材は `4,803,412,827 bytes`。既知の大容量追加保持ピークは
+`3 × 4,803,412,827 = 14,410,238,481 bytes`（約13.42 GiB）。
+本人承認の整理直後に観測した同volume空きは `40,604,250,112 bytes`（約37.82 GiB）だった。ただし現在値ではない。
+
+### 6.2 実行直前preflightと設営9
+
+既存testは引数なしでlocal→upload→MP4を連続実行するため、**upload-jsonだけを明示選択する最小の試験入口**と、作用なし容量preflightを追加してよい。対象は既存 `docs/reports/request-intent-connection-20261001/queue-integration-test.mts` と、必要なら同directoryの小さいpreflight helperだけ。製品code・通常runner・通常API・PUT/GET・consumer・固定応答・検査条件は変更しない。
+
+この試験設営の一件を**設営累積9回目**として相談役が個別承認する。現在の製品5／設営8を保持し、9は適用時に計上する。一般上限・強制停止条件・過去履歴の増枠／リセットではない。
+
+preflightは次を実測する。
+- 元素材size
+- worker／backend／reader予定rootのdeviceとavailable bytes
+- 3rootが同一volumeか別volumeか
+- 新attemptの対象pathが既存しないこと
+
+同一volumeなら、今回だけの試験開始条件を `availableBytes >= 4 × sourceBytes` とする。これは既知の3 source-sizeコピーに**source 1本分の一時的な試験余裕**を加えた今回限定のpreflightであり、製品の容量上限・一般監視値ではない。今回のsourceでは `19,213,651,308 bytes`（約17.89 GiB）。別volumeなら、各volumeで実際に置くsource-size実体数に対応する必要量を個別に満たすこと。予定外のsource-size copyがコード／実path確認で増えるなら、その分を計算へ追加し、無断で実走しない。
+
+preflightが条件を満たさなければ**大容量fileを1byteも新規copy／PUTせず停止**し、実測値と不足量だけ相談役へ返す。SSD pathを推測して代替しない。
+
+### 6.3 upload-jsonの実証範囲
+
+preflight通過時だけ、新しい隔離attemptでupload-json一件を実行する。
+
+- 旧保存source/STTを通常APIの実claim／PUT／completeで登録する。ただし動画取得・STT処理自体は行わない。
+- 実index/factoryで探索・採否・保持→計画complete。
+- workerからbackendへの実upload、backend保存、別root readerへの実downloadを行う。
+- readerは既存guardでworker、元素材、保存STT、inspectionの直接readを禁止し、**転送先だけ**から登録計画・dataBindingsを再構築してvalidate_digest_planの実消費／completeまで進める。
+- FileRef owner、要求SHA、内部参照、実bytes、時計、薄い検証成果物、通常completeを確認する。
+- 実行前・主要転送後・完了後のavailable bytesとsource-size実体の実path／sizeを記録し、事前のピーク見積りとの差を残す。
+- 旧attempt・削除済み33参照・過去失敗stateは復元／上書きしない。
+
+今回の完了条件は**upload-jsonの転送経路とreceiver-only再読の成立**まで。MP4直接登録、inspection未提供の通常complete、目的2件の全3判断はnot-runのまま残す。upload成功をv005全体完成、実AI品質、動画実行許可、人間品質採用へ広げない。
+
+### 6.4 禁止・保存・報告
+
+今回の新attemptで生成した大容量copyは、追加の削除承認なしに自動削除しない。追加削除、旧成果移動、SSD探索／format／移行、外部/cloud転送、新素材、外部推論、費用、動画製造、新UI、本番、公開は対象外。ID9-PD-01/02、字幕演出未接続、動画許可未承認、人間品質pendingを維持する。
+
+結果は既存主reportと新しいupload単独証拠へ保存する。例：
+`docs/reports/request-intent-connection-20261001/queue-upload-transfer-evidence-attempt-006.json`。
+preflight、実転送、別process reader、容量前後、旧証拠保全、not-runを分ける。担当fileだけ明示stage・通常mainへcommit/push・Git clean確認後、Codex2専用Edgeから同じZEV Build Loopへ直接報告する。
+
+報告名：
+`Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. upload-json転送・receiver-only再読`
+
+本節保存時点では、Codex2の受領・設営9適用・preflight・upload実走は未確認。
