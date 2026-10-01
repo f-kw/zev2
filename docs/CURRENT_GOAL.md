@@ -46,19 +46,11 @@ Codex2は論理`artifacts/<draft>/<producer-request>/<file>`を既存の単一�
 
 局所試験が次節の設営欠陥で止まったため、参照対応の実合格や通常接続完成は未認定。今回の停止を、前回の本人承認未受領や表示名未適用の状態へ戻さない。
 
-## 2.4 局所試験の設営6回目・本人判断待ち
+## 2.4 局所試験の設営6回目・中断履歴
 
-**decision: human_decision。** [インデックス§2.10](HANDOVER_INDEX.md#210-2026-10-01局所試験の設営枠による中断監査本人判断待ち)に監査・推奨範囲を保存した。この記録は再開指示ではない。
+`01ad1e54`では、局所試験helperがschemaVersionのない旧書き起こしを版付きJSON bindingへしてしまい、正式JSON保存前にexit1で止まった。通常接続attempt-003は未起動、localReferencesAccepted=false。原因は試験組立てであり、製品serializer／validatorの欠陥とは扱わない。
 
-相談役は`01ad1e54`の具体的4行案、失敗記録、`queue-integration-test.mts`のreferences枝、14file差分一覧、AGENTSとv005 §11を照合した。試験helperがschemaVersionのない旧書き起こしへ版付きbindingを作り、探索計画の正式JSON保存時に未定義値を拒否されたという原因説明は整合する。失敗はexit1、局所保存3file、参照accepted=false、通常接続attempt-003未起動。Macでの直接再実行や14file全体の完成監査ではない。
-
-推奨する修正はreferences枝の書き起こしだけ、旧transcriptBytesをそのまま保存し、pathとfileSha256だけのbyte参照でvalues／bindingsへ登録する4行案。架空schemaVersionを足さず、製品serializer／validator・通常caller・provider・旧素材／回答を変更しない。この修正で後続すべてが通るとは未確認である。
-
-**必要な本人判断は、この試験設営1件だけ追加1回（適用時累積6）と、その後の既承認検証続行。** 現在は製品4／設営5。一般の上限・履歴は変更／リセットしない。前回の製品4回目許可は設営6回目を含まず、今回はまだ未承認。新たな製品修正も許可しない。
-
-承認後に行う案は、旧attempt-003を保持し、新しい局所attemptで参照を確認後、v005の未実施検証（通常source/STT実登録→計画complete→validate実消費／complete、local/upload・分離root・転送先だけの別process再読、MP4／inspection未提供、否定試験・Clip対象回帰）へ戻ること。本人承認と具体的再開指示までは追加作用を停止する。
-
-旧96保護file・21固定Git blob・旧証拠等の不変はCodexの別process診断報告として保持。旧reader再実行・新consumer合格・通常complete全系列成立の証明にはしない。今回の判断に人間の視聴・採点・正解区間指定は不要。Codex1再起動、応答記録だけの再commit・終了連絡・自動監視も不要。
+当時は設営5回枠到達のため本人判断待ちとしたが、後続の本人方針更新により、今回の4行は相談役自動承認の対象となった。**現在の再開条件は§2.5とv005 §12を正とする。** 当時の停止・失敗証拠は変更しない。
 
 
 ## 2.5 軽微な技術判断の自動承認（本人方針更新）
@@ -87,12 +79,12 @@ Codex2は論理`artifacts/<draft>/<producer-request>/<file>`を既存の単一�
 
 縁A/B選択null、A=8/4技術入力、Bの21字幕論理不合格、色の種類と適用、アップのHUD制約・手指定、旧レビューと修正後未回答、制作負担、通常キュー本適用・実推論・人間品質は残件。Decisions調査は完了・実API評価保留で、この接続の依存にしない。必要時に公式情報を再確認する。
 
-新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除は包括承認しない。具体的開発差分はv005、現在の追加設営と再開は§2.4の本人判断待ち。製品4／設営5の実施履歴を保持し、一般上限・その他停止条件は維持する。
+新規素材・外部推論API・費用・一般委任契約・製品モデル設定・本番既定・正式採用・公開・旧成果削除は包括承認しない。具体的開発差分はv005、今回の設営6回目と再開は§2.5／v005 §12で相談役自動承認済み。製品4／設営5の実施履歴を保持し、6回目は適用時に累積する。一般上限・その他停止条件は維持する。
 
 ## 5. 保存と継続
 
 方針・指示発行・監査・完了・中断は同じターンに正本へ反映し、会話上限を待たない。取得・保存不能や未確認の稼働は明示する。初回／再起動はコピー可能な一つのコードブロック、着手後はCodex直接報告と相談役の監査・次指示を同じセッションでつなぐ。
 
-各担当は専用Edgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化し、担当fileだけ明示stageする。`01ad1e54`のGit終了・担当返却・追加作用停止を受領、remote mainは相談役確認。Macの稼働・ローカルGitは直接観測していない。今回の記録更新後もCodex2は停止を維持し、受理記録だけの再commit・終了連絡・Codex1再起動は行わない。
+各担当は専用Edgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化し、担当fileだけ明示stageする。`01ad1e54`のGit終了・担当返却・追加作用停止を受領、remote mainは相談役確認。Macの稼働・ローカルGitは直接観測していない。今回の再開指示は発行済み。Codex2の受領・実再開は未確認であり、保存だけで稼働済みにしない。受理記録だけの再commit・終了連絡・Codex1再起動は行わない。
 
 上位運用は[AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。一般の上限・旧GOAL_DEFINITIONの意味や数値を変更しない。更新前全文は[固定Git版](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/CURRENT_GOAL.md)、以前の本人判断待ち原文は[ad180adc](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/CURRENT_GOAL.md)等で保持する。
