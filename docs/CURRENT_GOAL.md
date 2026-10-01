@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：相談役個別承認の設営8を適用し、新媒体なしattempt-002は52結果・process exit0で検証完了。通常APIの入力拒否・Clip7／Digest4工程と目的・条件、承認入力否定14・確認生成元3・独立ゲート3、完成時API応答と通常storeの別process完全対照・旧証拠保全が成立。製品5／設営8、追加修正0。媒体なし一件の監査へ提出し、v005全体の転送・MP4等は未完了／保留。大容量・SSD・容量整理は再開しない。**
+**9. 明示Digestの通常キュー接続（v005）：`f54cd09a` の媒体なしattempt-002を限定技術受理。52結果・exit0、通常API／store、Clip7／Digest4工程、承認入力否定、人間確認ゲート、完成時別process store対照・旧証拠保全が成立。次はupload-json転送だけを単独再開する。設営9として明示upload-only入口＋作用なし容量preflightを承認し、実行直前の空きが今回限定条件を満たす場合だけworker→backend→receiver-only再読まで進める。MP4・inspection未提供・SSD操作はまだ行わない。v005全体は未完了。**
 
-正本は [媒体なし回帰の限定指示 §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、今回の判断保存 `a76ceedb322091883dda20d01f81312c23edb745`。初回指示保存`bf24872681eba292f2bb0211f162ea94db7f9e46`と、先行[容量preflight](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)の媒体なし検証範囲は維持する。新エピック・製品code変更・新しい人間確認の追加ではない。
+媒体なし回帰の正本は [媒体なし指示 §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)。次作業の正本は [容量preflight §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)、保存 `c4f851681fbc1041114ddb09b883d8e40fc1b9dc`。既知のupload追加ピークはsource 3コピー＝14,410,238,481 bytes（約13.42GiB）。同一volumeでは今回限定の開始条件を4×sourceBytes＝19,213,651,308 bytes（約17.89GiB）とし、実行直前に測る。これは製品容量上限ではない。
 
 5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
@@ -46,6 +46,15 @@ attempt-001の停止履歴：通常API／store28検査、入口拒否1、承認�
 今回の実結果：[attempt-002証拠](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-attempt-002.json)。52結果は新一系列（入口1・API28・対象選択1・制御関数20・保存2）。旧38件との合算0。完成時API応答と実通常storeの全stateが新processで一致、state26,434 bytes不変・新領域53,218 bytesの4小file。旧失敗state／証拠と旧report6件SHA不変、失敗時testは固定Git版に保持。製品変更0・媒体作用0・人間Pending追加0。前節の未実施履歴は今回の完了へ逆流させない。
 
 次に相談役へ依頼する一件は、保留中の転送検証の実確認済み保存先・必要容量・再開条件の具体化。SSDや保存先を自己推測して操作・大容量再開しない。
+
+
+## 4.1 媒体なし回帰の受理とupload-json単独再開
+
+相談役は `f54cd09a` の52結果、新attemptのstate／reader proof、旧証拠保全と製品実装SHA不変を照合し、媒体なし回帰を限定技術受理する。製品5／設営8、追加修正0。人間品質・本適用・動画許可とは別。
+
+次は既存upload-json scenarioだけ。試験側に明示scenario選択と作用なし容量preflightを最小追加し、設営9として適用する。local-jsonを再製造せず、local-mp4も今回は走らせない。preflight不通過なら大容量作用を起こさず停止する。
+
+preflight通過後は新attemptで、通常source/STT登録、実index/factory、計画complete、worker→backendの実upload、別root receiverの転送先のみ再読、validate_digest_plan実消費／completeまで確認する。receiverではworker・元素材・保存STT・inspectionへの直接readを既存guardで禁止する。成功時もMP4／inspection未提供・目的2件の全3判断は残件。
 
 ## 5. 未完了・承認境界
 
