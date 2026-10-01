@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v027
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v028
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`a8dffc7f53b97d6c3230264bd02041107b58a1bf`の保存後receiver再読停止を監査。設営10のawait修正後、保存state・validate succeeded・receiver成果物SHAまでは成立。次のguard拒否probeだけが同期throwをassert.rejectsへ直接渡してconsumer前にexit1したため、async callbackで包む一行を設営11として相談役承認した。禁止root・guard本文・期待error・実consumer・比較条件は不変。大容量再実走なしでattempt-006保存物だけの別process再読へ戻す。正本は[v005 guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存`2530d96685b33d1317dd5b6750cf5939155e85ae`。製品5／設営10、11は適用時に計上。再読合格は未確認、v005全体は未完了。**
+**最新更新：相談役承認の設営11一行を適用し、attempt-006保存物だけの別process readerがexit0。5禁止pathの拒否probe、実store保存state／検証命令成功／receiver成果物SHA、実consumerによる再構築と保存artifactのdeepEqual、再構築中禁止read0がすべて成立。upload-json転送＋保存後receiver-only再構築の限定検証完了、製品5／設営11。旧90runtime・669小証拠・旧転送／失敗3証拠・製品8path不変、新小proof1,162 bytesのみ。大容量再実走なし。[新実証拠](reports/request-intent-connection-20261001/queue-upload-receiver-readback-evidence-attempt-006.json)と主report／現在地へ保存。v005全体・MP4／inspection未提供枝・実AI品質・動画許可・人間品質は未完了／未承認。専用Edgeで限定監査と次の一件を直接依頼する。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -245,3 +245,9 @@ Codexは受領・実質checkpoint・完了・中断・未送信を報告前に�
 [失敗code全文・SHAと未適用最小案](reports/request-intent-connection-20261001/queue-upload-readback-setup010-failure-attempt-006.json)、[主report](reports/request-intent-connection-20261001/README.md)。一語修正で実store保存state取得、検証命令成功、receiver成果物SHA一致は成立した。新reader exit1の原因は既存guardが同期throwするreadを試験側が引数で先に評価したこと。製品側の拒否は正しく、最小案は同じ拒否検査のasync callback化一行だけ。guard／期待error／対象path／consumer／SHA／deepEqualを変えず、設営11の個別判断を相談役へ返す。未適用、追加作用停止。
 
 consumer再構築・保存artifact deepEqual・再構築中禁止read 0・残り4拒否probeは未確認。旧90fileの小SHAと全metadata、旧669小証拠、旧転送／旧失敗証拠2件、製品8path不変。新state21,458 bytes不変、旧3copy保持・削除8path不存在。新runtime proof／大容量file0、backend／runner／factory／upload／download起動0、再判断・complete・state更新0。MP4・inspection未提供・目的2件・人間品質等の残件を維持する。
+
+## 11. 設営11適用・upload保存後receiver-only再読の限定検証完了
+
+[実reader全文／SHA・結果・保全](reports/request-intent-connection-20261001/queue-upload-receiver-readback-evidence-attempt-006.json)、[主report](reports/request-intent-connection-20261001/README.md)。相談役の[一行追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)をbf8814a1で受領し、拒否probeだけをasync callback経由へ修正。最終続行指示9225e894も同期、禁止path／guard／期待error／実consumer／入力／SHA／deepEqualは維持。別process exit0、実store保存stateと検証命令成功、成果物参照SHA一致、5拒否probe成立、転送先保存計画／dataからの実consumer再構築、保存artifact完全一致、再構築中禁止read0。新小proof1,162 bytes、旧90runtime・669小証拠・旧転送／2失敗証拠・製品8path不変。新3copy保持・削除8path不存在。製品5／設営11、一般上限・履歴リセットなし。
+
+backend／runner／factory／upload／download再起動、再判断・再登録・complete・state更新、大容量file追加なし。既存upload本体と今回の保存後readerを分け、旧親終了code未返却の記録は保持。旧52／15／111・全動画QC・人間レビューの再実行なし。MP4直接登録／inspection未提供の通常complete・目的2件の全3判断、字幕演出／動画許可／人間品質等は残件。ID9-PD-01/02未承認。限定完成監査と次の通常登録枝一件の具体化を同じ会話へ直接依頼し、今回それらへ自走着手しない。

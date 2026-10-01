@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`a8dffc7f`の保存後receiver再読停止を監査。設営10のawait修正後、保存state・validate succeeded・receiver成果物SHAまでは成立。guard拒否probeだけが同期throwをassert.rejectsへ直接渡してconsumer前にexit1したため、async callbackで包む一行だけを設営11として相談役承認。大容量再実走なしでattempt-006保存物だけのreceiver-only再読へ戻す。製品5／設営10、11は適用時に計上。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：相談役承認の設営11一行を適用し、attempt-006保存物だけの別process readerがexit0。5禁止pathの拒否、実通常store保存state・検証命令成功・receiver成果物SHA、実consumer再構築と保存artifact deepEqual、再構築中禁止read0がすべて成立。upload-json転送＋保存後receiver-only再構築は限定検証完了。製品5／設営11、一般上限・履歴不変。旧90runtime・旧669小証拠・旧転送／失敗3証拠・製品8path不変、新小proof1,162 bytesだけ。通常runnerや大容量転送の再実走なし。v005全体・実AI品質・人間採用は未完了／未承認。**
 
-今回の再開正本は [guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存 `2530d96685b33d1317dd5b6750cf5939155e85ae`。許可差分は `assert.rejects` に渡すreadをasync callbackで包む一行だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・upload・download・大容量copyは起動しない。
+今回受領・適用した正本は [guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存 `2530d96685b33d1317dd5b6750cf5939155e85ae`。許可差分は `assert.rejects` に渡すreadをasync callbackで包む一行だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・upload・download・大容量copyは起動しない。
 
 5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
@@ -97,3 +97,9 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 [新失敗証拠・未適用一行案](reports/request-intent-connection-20261001/queue-upload-readback-setup010-failure-attempt-006.json)と主reportへ保存。正しいguard拒否が試験側の引数評価中に同期throwし、Promise拒否検査へ到達しない局所設営欠陥。guard条件・期待errorを変えないasync callback案は未適用。consumer／deepEqual／禁止read 0は未合格。修正累積は製品5／設営10、一般上限・履歴は不変、追加作用停止で相談役判断へ返す。
 
 旧90fileの小SHAと全metadata、旧669小証拠・旧転送／旧失敗証拠2件・製品8path SHA不変、保存state21,458 bytes不変。大容量copy・backend／通常runner／factory／PUT／download再実行0、新runtime proof0。新3copy保持・旧削除8path不存在。必要な続行は保存物だけのreaderであり、人間確認・SSD・大容量再実走を必要条件にしない。
+
+## 10. 設営11適用・保存後receiver-only再構築の限定検証完了
+
+[新実証拠](reports/request-intent-connection-20261001/queue-upload-receiver-readback-evidence-attempt-006.json)、[主report](reports/request-intent-connection-20261001/README.md)。相談役保存bf8814a1の一行承認を受領・適用し、最終Edge指示と9225e894のCURRENT_GOAL更新も同期。実別process exit0、guard probe5／再構築中禁止read0、保存実行入力とのdeepEqual一致。新proof1,162 bytes、SHA0b61eef381f59fb14a1318a7e68caead3572606f9cf92c5dfce0d9409db49964。旧state／90runtime／669小証拠／旧転送と失敗3証拠／製品8path不変、既存3copy保持・削除8path不存在。
+
+製品5／設営11、一般枠・過去履歴不変。backend／runner／factory／upload／download・再判断・登録・complete・state更新なし。MP4直接登録、inspection未提供、目的2件の全3判断、字幕演出・動画許可・人間品質等は残件／未承認。次は相談役の限定監査と残る通常登録枝の具体的指示へつなぎ、Codexは今回の承認外を起動しない。

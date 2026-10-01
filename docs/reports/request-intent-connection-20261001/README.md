@@ -460,3 +460,33 @@ main f0df4fb629eef60b6b6e05bc6964f81007ce0cf8へ他者変更を保持して同�
 attempt-006の旧90fileは小JSON SHAと全fileのsize／inode／device／更新時刻／割当bytesが前後不変、旧669小証拠SHA不変、旧転送証拠とawait不足の旧失敗証拠2件もSHA不変。製品8path SHA不変。新3copyは保持、削除済み8path不存在、state21,458 bytes／SHA335243e67c81bae5d4ae3ebbcb9035d9344ee3b7bde99282114c3d3eae042f65不変。新runtime proofは未生成、大容量file生成0。旧一時失敗scriptも変更していない。
 
 追加作用停止、保存後receiver-only再構築は未完了。backend／通常runner／factory／upload／download・再判断・再登録・complete・state更新0。MP4・inspection未提供・目的2件の全3判断はnot-run、SSD・追加削除・外部推論・費用・動画・本番・正式採用・公開0。旧52／15／111・全動画QC・人間レビューや型検査は製品無変更なので再実行しない。ID9-PD-01/02、字幕演出未接続、動画許可未承認、人間品質pendingを維持。本人への視聴・採点・転記は要求せず、同じ専用EdgeへGPT_DECISIONする。
+
+## 2026-10-01 設営11受領・保存後再読の実行前checkpoint
+
+main bf8814a1へ他者変更を保持して同期し、相談役保存2530d966のguard-probe追補全文を受領。設営10失敗code全文／SHAと旧一時scriptの一致を確認し、拒否probeの同じreadをasync callback内で呼ぶ一行だけを新readerへ適用した。別proof filenameへの追従を除き、5禁止path、guard本文、期待error、実consumer、入力、SHA比較、deepEqual、最終成功条件は不変。製品5／設営11、一般枠・履歴リセット0。旧90runtime fileの小SHAと全metadata、旧669小証拠、旧転送／await失敗／設営10失敗の3証拠、製品8path、削除8pathの不在を実行前に照合・保存。attempt-006保存物だけの別processを実行し、backend／runner／factory／upload／download・再判断・登録・complete・state更新は起動しない。受領だけのcommitは作らず、このまま再読検証へ進む。
+
+## 2026-10-01 設営11適用・upload保存後receiver-only再構築の限定完了
+
+相談役の個別承認を保存bf8814a1で受領し、拒否probeの一行を修正して別process readerを実行した。実process exit0、5禁止pathの拒否probeすべて成立、実consumerによる保存物からの再構築と保存済み検証成果物のdeepEqualが一致。再構築中の禁止readは0。保存stateの実取得からconsumer再構築まで同じ一系列で通過した。設営11適用・製品5、一般上限と過去履歴は不変。専用Edgeの最終続行返信も確認し、相談役の非競合CURRENT_GOAL更新を9225e894へ同期した。許可・実行対象を変える差分はない。
+
+[新実証拠](queue-upload-receiver-readback-evidence-attempt-006.json)に実reader code全文・SHA、意味差分一行、実command／exit0／stdout、小proofの全文／SHA、要求ごとの完了対照と旧物保全を保存した。新reader SHAはe13291f2519a540ab13319e425e7fc8e049ed8a11c8dca0795a7d19353dd2315。実行commandは `node --import ./runner/node_modules/tsx/dist/loader.mjs /private/tmp/codex2-upload-receiver-read-attempt006-setup011.mts`。通常runner全体を起動せず、製品側の保存消費readerを直接呼ぶ既存試験を維持した。
+
+| 今回の完了条件 | 実証 |
+|---|---|
+| 保存stateを実通常storeで取得 | 実loadStateとawait付きsnapshot取得が成立、元の4命令すべてsucceeded |
+| 計画検証命令の成功を確認 | 対象依頼IDのvalidate命令を選択して成功状態を確認 |
+| 成果物参照とreceiver保存bytesのSHA一致 | 検証成果物8,540 bytes、SHA61090777442a301927129d30ae9cccaa99c14a78dfd04db03d9d03daaf184134 |
+| 5禁止pathの直接readを拒否 | worker、元素材、保存STT、元inspection、backend artifactsの全probeで期待した拒否が成立 |
+| receiver側の保存先だけから再構築 | 実readConsumedDigestPlanV001が保存計画・内部参照・データ・消費記録を検査して再構築 |
+| 保存済み成果物と完全一致 | 実consumerの再構築成果物と保存済み実行入力のdeepEqual成立 |
+| 再構築中の禁止読取0 | probe後の拒否回数が増えていないことをassertで確認、0 |
+| 再判断・再登録・complete・state更新なし | 読取専用consumer、provider/API/runner起動なし、旧90fileとstateのbytes／metadata不変 |
+| 新しい小proofと旧失敗現物の保全 | 新proofは別filenameでwx保存、旧669小証拠と旧転送／2失敗証拠3件が不変 |
+
+新proofはattempt-006内のreceiver-readback-proof-setup-011.json、1,162 bytes／SHA0b61eef381f59fb14a1318a7e68caead3572606f9cf92c5dfce0d9409db49964、再構築4,565ms。旧90runtime fileは小SHAと全fileのsize／inode／device／mtime／ctime／割当metadataが一致し、追加はこの小proof1件だけ。state21,458 bytes／SHA335243e67c81bae5d4ae3ebbcb9035d9344ee3b7bde99282114c3d3eae042f65不変。旧669小証拠、旧転送・await失敗・設営10失敗3証拠のsize/SHAと旧失敗code SHA、製品8path SHA不変。新3素材copyは保持、削除済み8pathは不存在のまま。全repo棚卸し、容量調査、元素材の再hash・copy・PUTは実施していない。
+
+実readerの前後で自分のbackend／通常runner／試験の残存なしを確認。backend／runner／factory／upload／download起動0、再判断・登録・complete・state更新0、大容量file追加0。旧52／15／111試験・全動画QC・人間レビューと製品無変更の型検査は再実行0。今回のreader実実行、記録の別process再読、差分検査に限定する。
+
+これで今回のupload-json転送＋保存後receiver-only再構築は限定検証完了。旧親試験のtool終了code未返却という記録は変更せず、今回別process readerのexit0と区別する。v005全体完成ではない。MP4直接登録／inspection未提供の通常complete、目的2件の全3判断はnot-run。外部推論・費用・新素材・STT／inspection処理・動画・新UI・SSD・追加削除・本番・正式採用・公開0。ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間品質pendingを維持する。
+
+次に進む一件は、相談役が残る通常登録枝（MP4直接登録／inspection未提供）の承認範囲と容量作用を具体化して選ぶこと。Codexは今回それらを起動しない。担当4fileのみ明示stage・通常main commit/push・Git clean確認後、専用EdgeからAUDIT_ONLY＋NEXT_REQUESTで限定完成監査と次指示を同じ会話へ送る。本人への視聴・採点・転記、Codex1起動、受領だけの再commitは不要。
