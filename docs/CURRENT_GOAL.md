@@ -12,6 +12,10 @@
 
 今回の再開正本は [HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)、保存 `e36e236591acec67df1c41e8824ba139a17f0f39`。修正は `assert.equal(made.httpStatus,200)` → `201` の一箇所だけ。新attempt-002では期限切れclaim、wrong owner、承認版／素材／旧state、owner参照、旧／未知版、不完全転送complete拒否、完成時再読まで進める。元MP4のcopy／PUT／hash、製品code変更、外部推論、動画、SSD、削除は行わない。
 
+## 2.1 問い合わせの完了条件
+
+GPT_DECISION / HUMAN_DECISION / NEXT_REQUEST付き報告は、Codexが相談役会話へ送信して表示確認しただけでは完了しない。専用Edgeで相談役の返信生成完了を確認し、返信本文をCodex自身が読了した時点を受領とする。返信が同じ承認済みwork-order内の具体的continue/reviseなら、その回答を反映して同じセッションで続行する。「返信生成中・未確認」をkawafmmへの中継報告やturn終了に置き換えない。実際のUI／通信障害で返信取得不能の場合だけ未受領として証拠化する。
+
 ## 3. 容量整理の受理と保留
 
 削除前一覧・script保存は`04c21bfdeccde7210193d731bcf205f4ea19a03e`、実績は`78805d86`。相談役は主report、明示8pathの一回script、一覧／削除／別process確認記録、5file差分を照合した。Macでの直接削除・再hash・process観測ではない。
