@@ -1,12 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v010
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v011
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しを置く。
 
-**最新更新：`debd58971f543958df0022988e00bed9e20ddcbc` の中断報告を監査。v005は未完了。通常計画登録までは部分実測したが、要求内の参照と保存名が不一致で、参照先一式の成立は未確認。製品限定修正3回に達して追加修正が必要なため、`decision: human_decision`として停止を維持する。相談役の推奨は、今回の参照対応修正に限る追加1回と、その後の既承認範囲の検証再開。本人承認は未受領で、一般の修正上限変更・枠リセット・再開許可は発行していない。詳細は§2.8。**
+**最新更新：本人から「良い。指示書作って」を受領し、`debd5897`の参照対応不整合に限る追加1回（製品修正累積4回目）と、既承認の接続検証再開を許可した。[v005 §11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)へ再開指示を保存（`16de0445ff4bba405e2d32189c4e1d5d35aac86b`）。今回の本人承認待ちは解消。一般の修正上限・履歴は変更せず、ID9-PD-01/02や本適用・動画の承認とは別。Codex2単独、指示発行済み・受領／再開は未確認。v005の完成受理ではない。詳細は§2.9。**
 
-本書は現在地を復元する入口。更新前の[v009全文](https://github.com/f-kw/zev2/blob/debd58971f543958df0022988e00bed9e20ddcbc/docs/HANDOVER_INDEX.md)、[v008全文](https://github.com/f-kw/zev2/blob/d77f2a5ddc48016e6e1c7f22bee454fc231ffda7/docs/HANDOVER_INDEX.md)、過去の[v007全文](https://github.com/f-kw/zev2/blob/7b600a648cf4ee5228601b72b0a6b6629038fa75/docs/HANDOVER_INDEX.md)と個別指示・reportに原文を保持する。過去の「未確認」「次」を現在へ逆流させない。
+本書は現在地を復元する入口。更新前の[v010全文](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/HANDOVER_INDEX.md)、[v009全文](https://github.com/f-kw/zev2/blob/debd58971f543958df0022988e00bed9e20ddcbc/docs/HANDOVER_INDEX.md)、[v008全文](https://github.com/f-kw/zev2/blob/d77f2a5ddc48016e6e1c7f22bee454fc231ffda7/docs/HANDOVER_INDEX.md)、過去の[v007全文](https://github.com/f-kw/zev2/blob/7b600a648cf4ee5228601b72b0a6b6629038fa75/docs/HANDOVER_INDEX.md)と個別指示・reportに原文を保持する。過去の「未確認」「次」を現在へ逆流させない。
 
 ## 0. 最初に読む人へ
 
@@ -46,7 +46,7 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 
 ## 2. 最新状態のカプセル
 
-最新監査対象：`debd58971f543958df0022988e00bed9e20ddcbc`（v005の参照不整合・修正枠による中断）。実装全体の完成受理ではない。指示・状態更新commitとは区別する。
+最新の実装監査対象：`debd58971f543958df0022988e00bed9e20ddcbc`（v005の参照不整合・修正枠による中断）。実装全体の完成受理ではない。本人承認後の再開指示はv005 §11、保存`16de0445ff4bba405e2d32189c4e1d5d35aac86b`。指示・状態更新commitと実行成果を区別する。
 
 | 担当／項目 | 到達点 | 残件・扱い |
 |---|---|---|
@@ -57,9 +57,9 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 | Codex2：通常callerの計画準備v002 | `11809f6f6bebed82014971c966b79b383b921a1d`を技術受理。通常API→承認・claim→実factory→3判断→別保存・再開・再読。27結果・21捕捉 | source/STT完了はfixture。通常complete所有者と素材JSONの扱いはv005で検査する。限定成果を一般E2Eへ広げない |
 | Codex2：保存計画の後段入力v003 | `7b600a648cf4ee5228601b72b0a6b6629038fa75`を技術受理。非連続保持を既存Digest形式へ変換、job形状／時計検査、4出力保存・再読。15結果＋5拒否 | 通常完了登録・後続キュー・実製造・人間採用は当該範囲外。旧計画消費と旧bytes不変はその検証時点の結果 |
 | Codex2：仕様案・境界実測v004 | `d77f2a5d`の一案、実validatorの受理2／想定拒否8、別process26保護path再読、6file差分を相談役受理 | 製品コード変更0。通常キューが完成したわけではない。Git終了受領済み。次の開発候補実装はv005 |
-| Codex2：明示Digest通常キュー隔離実装v005 | 通常source/STT登録・3判断・計画completeまで部分実測。`debd5897`で証拠保存・追加作用停止・push・Git終了を報告 | 未完了。参照不整合と製品修正3回到達により停止。技術方針は§2.8へ保存、追加1回の個別例外と再開は本人判断待ち。表示名2項目は許可済みだが未適用。次工程／upload／否定回帰等は未実施 |
+| Codex2：明示Digest通常キュー隔離実装v005 | 通常source/STT登録・3判断・計画completeまで部分実測。`debd5897`で中断・push・Git終了。今回本人が参照修正追加1回と検証再開を承認し、v005 §11を発行 | 未完了。追加修正は累積4回目に限定。指示受領・実再開・修正適用は未確認。§10の二表示名も未適用。次工程／upload／否定回帰等の未実施を続行する |
 
-`debd5897`の通常push・local/origin一致・Git clean・staged0・untracked0・Git操作終了と隔離process残存なしの報告を受領した。remote HEAD・保存文書は相談役が確認、Macのprocess一覧・ローカルGit状態はCodexの実測報告であって相談役の直接観測ではない。共通状態の保存担当は相談役へ返却済み。新しい再開・稼働は未確認ではなく、現時点では未許可で停止を維持する。
+`debd5897`の通常push・local/origin一致・Git clean・staged0・untracked0・Git操作終了と隔離process残存なしの報告を受領した。remote HEAD・保存文書は相談役が確認、Macのprocess一覧・ローカルGit状態はCodexの実測報告であって相談役の直接観測ではない。共通状態の保存担当は相談役。今回の例外・再開は本人承認済みだが、文書の保存をCodex2の再稼働確認にしない。
 
 旧1080p媒体：[完了報告](reports/original-resolution-low-memory-20260930/full-run-report.md)、SHA `65afceb046aca0629b0fe097f602caae3b05697b10cff8eb6a295106185f3858`。実体はMacの `runtime/artifacts/original-resolution-execution-20260930-v001/full-lowmem-production-001/`。GitHubやChatGPT sandboxで再生できると仮定しない。
 
@@ -102,20 +102,29 @@ v004自体は設計・境界確認のみで製品コード変更0。相談役が
 - **実登録／転送**：source/STTの処理は旧保存物を使うが、登録は実claim・PUT・completeで行う。OutputEntity／FileRefの正規所有者を検査。参照JSONと実動画を分離。既存PUTの安全な単一fileNameを使い、新版の論理参照から転送先のみで再読する。無制限path・新endpoint・旧回答の付け替えはしない。
 - **旧版**：旧データ・proofは不変。変更前の固定Git版と旧proofの照合を保存し、新コードで旧binding版を拒否する。固定版の来歴確認は旧reader再実行や現行製造資格ではない。コードを永久凍結せず、大量reader複製・hash免除・旧動画再生成にも広げない。
 - **別判断**：`ID9-PD-01`＝公開型／工程の本適用と、通常Digest下書き承認で品質pendingの機械採否・保持を一般的に任せる範囲。`ID9-PD-02`＝特定計画／基礎映像／最終出力の動画許可SHA・scopeの正式方式。いずれも未承認。旧業務state移行・本番有効化も別。品質視聴Pendingとは混同しない。
-- **実行と状態**：Codex2単独。新しい隔離stateだけで実走し、実業務・稼働中サービス・旧stateは変更しない。固定応答の試験を実AI品質や一般委任の実績にしない。現在は設営4・製品限定修正3へ到達。外部推論・費用・新素材・STT・inspection・動画・新UI・公開は今回実施しない。v005受領後、通常計画登録まで部分実測。参照不整合／製品限定修正累積3により中断。次工程・uploadは未検証。停止監査と再開の扱いは§2.8を優先する。
+- **実行と状態（中断時）**：Codex2単独。新しい隔離stateだけで実走し、実業務・稼働中サービス・旧stateは変更しない。固定応答の試験を実AI品質や一般委任の実績にしない。設営4・製品限定修正3へ到達。通常計画登録まで部分実測後、参照不整合により中断。次工程・uploadは未検証。停止監査は§2.8、今回の本人承認と再開は§2.9を優先する。
 
-### 2.8 2026-10-01：参照不整合の停止監査・追加修正の本人判断待ち
+### 2.8 2026-10-01：参照不整合の停止監査・追加修正の本人判断待ち（当時の記録）
 
-`decision: human_decision`。中断報告は受領し、証拠保存と停止は妥当と判断する。v005の完成は受理していない。本節は監査と再開案の記録であって、未承認の追加作用を許可する指示ではない。
+当時は`decision: human_decision`。中断報告を受領し、証拠保存と停止は妥当と判断した。v005の完成は受理していない。本節の未許可・本人判断待ちは停止監査時点の履歴であり、今回の回答と再開指示は§2.9に保存した。
 
 - **確認根拠**：`debd5897`の[中断report](reports/request-intent-connection-20261001/README.md)、[参照不整合の実測](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)、`packages/shared/src/digest-plan-artifacts-v001.ts`のresolver、`runner/src/digest-plan-preparation-v001.ts`のoutputRoot／file生成、9file差分、AGENTSの修正枠・判断所有を照合した。保存されたローカル診断の監査であり、Macの試験再実行ではない。
 - **不整合**：採否要求は`artifacts/<draft>/candidate-set.json`を宣言する一方、保存は`artifacts/<draft>/<request>--candidate-set.json`。内容SHAは一致するが宣言pathは不存在。計画completeやregistryに列挙した25データのSHA一致だけでは、要求内部の参照先一式が読める証明にならない。旧回答・素材の破損や新しい内容品質不合格とは判断していない。
 - **部分到達と未実施**：通常source/STT登録、3判断への制作意図、実OutputEntity所有者、素材JSON／実動画SHA分離、計画completeまで部分実測。次の検証命令、upload／別rootの消費、MP4枝、inspection未提供枝、否定回帰、client再合格は未実施。GET /stateの401はclaim応答の実request/state利用で限定修正済みという報告。人間UIの認証を緩める再修正は不要。
-- **技術方針（実施は未許可）**：新しい論理参照を`artifacts/<draft>/<request>/<file>`へ統一し、共通resolverで既存PUTの安全な単一名`<request>--<file>`へ決定的に対応させる。準備のoutputRoot・basename登録と既存呼出し側の参照形成を同じ規則へ合わせる。内容builder／validator・PUT/GET・認証／path安全条件は変えない。別draft／別request、名前衝突、欠損、SHA相違を拒否し、aliasファイルや旧JSONの書換で不整合を隠さない。新しい隔離attemptだけへ適用し、旧要求／回答SHAを付け替えない。
+- **技術方針（当時未許可）**：新しい論理参照を`artifacts/<draft>/<request>/<file>`へ統一し、共通resolverで既存PUTの安全な単一名`<request>--<file>`へ決定的に対応させる。準備のoutputRoot・basename登録と既存呼出し側の参照形成を同じ規則へ合わせる。内容builder／validator・PUT/GET・認証／path安全条件は変えない。別draft／依存外request、名前衝突、欠損、SHA相違を拒否し、aliasファイルや旧JSONの書換で不整合を隠さない。新しい隔離attemptだけへ適用し、旧要求／回答SHAを付け替えない。
 - **再発防止の検証案**：上位manifestだけでなく、探索・採否・保持の要求内参照を含め、実参照とregistryの一致を登録前・次工程消費で確認する。既存の閉包検査へ必要最小限の確認を加え、汎用基盤の新設にしない。まず局所参照試験、次に既承認の通常complete／次工程・local/upload・別processと否定試験を進める。旧全動画／旧111試験を一律再実行しない。
-- **修正枠の一点**：現在は製品修正3／設営4。AGENTSの自走実装修正3回と、上限・任せる範囲の本人専決を維持する。推奨する本人判断は「今回の参照対応修正に限り追加1回（履歴は累積4回目と記録）を許し、その修正後にv005の未実施検証を再開する」。一般の3回上限を増やさず、枠や失敗履歴をリセットしない。承認は未受領であり、追加の製品修正・実走は停止中。再び別の製品修正が必要なら、余剰枠を推定せず報告する。
-- **同時に扱う既存残件**：stdoutの元発話「失敗」をエラーと誤認する設営判定は、本文検索ではなくprocess exitと実queue状態を基準に直す案。実装すれば設営5回目で、既存の5回枠内。成功exitだけで閉包を合格にしない。App.vue二表示名は`83f91129`で許可済みだが未適用。これらも現在の停止を迂回して単独再開せず、本人の再開判断後の実質checkpointへまとめる。
-- **保全・運用**：旧96参照・21固定Git blob、隔離データと失敗証拠は保存されたとの報告を保持。旧媒体・業務state・サービス・費用・素材・人間品質・ID9-PD-01/02の範囲を変えない。新しい人間視聴・採点・転記は不要。Codex1起動、応答保存だけの再commit／終了連絡、自動監視は要求しない。本人の例外判断と、その範囲を反映した次の明示指示までは停止を維持する。
+- **修正枠の一点（当時）**：製品修正3／設営4。AGENTSの自走実装修正3回と、上限・任せる範囲の本人専決を維持し、今回の参照対応に限る追加1回と検証再開を本人へ推奨した。一般の3回上限や履歴をリセットせず、本人回答まで停止した。後続回答は§2.9。
+- **同時に扱う既存残件**：stdoutの元発話「失敗」をエラーと誤認する設営判定は、本文検索ではなくprocess exitと実queue状態を基準に直す案。実装すれば設営5回目で、既存の5回枠内。成功exitだけで閉包を合格にしない。App.vue二表示名は`83f91129`で許可済みだが未適用であり、再承認が必要な問題ではない。
+- **保全・運用**：旧96参照・21固定Git blob、隔離データと失敗証拠は保存されたとの報告を保持。旧媒体・業務state・サービス・費用・素材・人間品質・ID9-PD-01/02の範囲を変えない。新しい人間視聴・採点・転記は不要。Codex1起動、応答保存だけの再commit／終了連絡、自動監視は要求しない。
+
+### 2.9 2026-10-01：今回の参照対応修正1回と検証再開を本人承認
+
+- **本人回答**：相談役の「今回の不具合修正だけ追加1回を許可し、そのまま接続検証を続ける」という提案に対し、「良い。指示書作って」を受領。`decision: continue`、kawafmm承認済みとして[v005 §11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)へ保存した。保存commit `16de0445ff4bba405e2d32189c4e1d5d35aac86b`。この一点の再承認は不要。
+- **許可範囲**：参照対応不整合の最小修正に限り追加1回、実施時に製品修正累積4回目と記録する。一般の3回上限・AGENTS・既存履歴は変更しない。stdout設営修正は適用時に既存枠内の5回目。§10の二表示名も既許可どおり適用。別の製品修正や設営枠超過が必要になれば停止報告し、例外を横展開しない。
+- **具体的な作業**：sharedの論理参照resolverと準備moduleを主対象に、draft／生成元request／basenameから既存PUTの単一保存名へ決定的に対応付ける。同じ欠陥への不可欠なcallsite追従だけ§5の既許可path内で行う。要求内部の参照も登録前・次工程で検証する。source/STTの正規依存requestと任意の別requestを区別し、衝突・欠損・改変を拒否する。
+- **再開後の終点**：旧attemptを上書きせず、新しい隔離attemptで局所参照試験→通常計画登録→validate実消費／complete→local/upload・別root・別process→MP4／inspection未提供枝・否定試験・Clip対象回帰・必要型検査までv005の未実施を進める。内容判断validator・PUT/GET・認証・安全条件は不変。旧動画・全111試験・人間レビューはやり直さない。
+- **変えない承認**：今回の例外はID9-PD-01/02、本適用・一般委任・旧業務state移行・動画実行・公開を許可しない。字幕／演出未接続・動画許可未承認・人間品質pendingを保持する。
+- **現在状態**：本人承認受領・再開指示発行済み。Codex2の受領・実再開・修正適用・検証合格は未確認。Codex2単独、Git書込みは相談役の文書保存後に受け渡す。最初の再開用コードブロックを本人へ渡し、着手後の報告は同じZEV Build LoopへCodex2専用Edgeタブから直接行う。応答保存だけの終了・再起動・再commitは不要。
 
 ## 3. ユーザーが確定した主線
 
@@ -135,8 +144,8 @@ v004自体は設計・境界確認のみで製品コード変更0。相談役が
 
 | 資料 | 復元するもの |
 |---|---|
-| [中断report](reports/request-intent-connection-20261001/README.md)、[参照不整合](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)、[中断再読記録](reports/request-intent-connection-20261001/queue-interruption-readback-proof.json) | `debd5897`の部分到達・未完了・製品3／設営4。再開案と本人判断待ちは本書§2.8 |
-| [現在のv005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 明示Digestの通常キュー隔離実装、正確な差分・実complete・転送／再読・未承認本適用の区別。§10のclient表示名許可は未適用 |
+| [現在のv005 §11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 今回の参照修正追加1回と検証再開の本人承認・具体的範囲。§10の二表示名は既許可。受領・実再開は未確認 |
+| [中断report](reports/request-intent-connection-20261001/README.md)、[参照不整合](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)、[中断再読記録](reports/request-intent-connection-20261001/queue-interruption-readback-proof.json) | `debd5897`の部分到達・未完了・製品3／設営4。停止時の未承認を今回回答へ逆流させない |
 | [v004](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)、[一案](reports/request-intent-connection-20261001/queue-integration-contract-proposal-v001.md)、[境界実測](reports/request-intent-connection-20261001/queue-contract-evidence.json) | 受理済み設計と通常登録の不足。v005で具体化した差分を優先 |
 | [v003](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)、[v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)、[v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md) | 完了した準備・消費の範囲。過去の未確認を現在へ戻さない |
 | [通常接続report](reports/request-intent-connection-20261001/README.md)、[consumer結果](reports/request-intent-connection-20261001/consumer-connection-evidence-attempt-001.json)、[追加拒否](reports/request-intent-connection-20261001/consumer-rejection-evidence.json)、[consumer binding](reports/request-intent-connection-20261001/consumer-binding-proof.json) | 実装・結果・保全・未接続。v003の根拠 |
@@ -165,7 +174,7 @@ v004自体は設計・境界確認のみで製品コード変更0。相談役が
 | 旧レビュー／UI | 旧10回答受領済みとR1〜R3修正後7ポイント未回答は別。旧カット・色への肯定を別素材へ移さない。既存一件編集・保存・Resetを未着手へ戻さない |
 | 制作負担 | 低メモリ化完了と全工程の速度・操作負荷は別。別素材、入力、検査頻度等の残件を消さず、新しい高速化を無断着工しない |
 | 本適用・承認 | ID9-PD-01（公開型／工程・一般の機械判断委任）、ID9-PD-02（動画許可SHA／scopeの正式方式）、旧業務state移行・本番有効化は未承認。固定応答の隔離試験とは分ける |
-| 今回の修正再開 | §2.8の参照対応修正に限る追加1回の例外とv005検証再開を本人へ推奨。未承認・停止中。一般修正上限・品質Pendingとは別 |
+| 今回の修正再開 | §2.9の参照修正追加1回とv005検証再開は本人承認済み、指示発行済み。適用・再開は未確認。一般修正上限・品質Pending・PD-01/02とは別 |
 
 これが全課題の件数確定ではない。既存IDと根拠を使って新しい課題を結び、全残件の解消を独立作業の開始条件にしない。別素材検証ID8は将来の一般化確認であり、済んだ新素材初稿・15分レビューの再実施指示ではない。
 
