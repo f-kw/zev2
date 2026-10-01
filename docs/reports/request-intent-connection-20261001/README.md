@@ -368,3 +368,29 @@ ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間�
 担当fileのみの通常commit/push・clean確認後、Codex2専用EdgeのZEV Build Loopへ `AUDIT_ONLY＋NEXT_REQUEST` で直接報告する。受領だけの再commit・終了連絡・人間転記を要求しない。
 
 削除後記録の別process再読もexit0。push済み削除前データの全fieldは進捗status以外不変、旧進捗statusも別fieldへ保持した。8path不存在・保持元3fileの同一identity・旧証拠69件SHA・その他634fileのmetadata対応を再確認。これは整理記録の保存再読であり、素材を削除した旧runtimeの通常reader合格ではない。
+
+## 媒体なし通常入力拒否・Clip回帰：再開・設営7 checkpoint
+
+2026-10-01：本人の「キックしろ」に基づく相談役のcontinueを受領し、最新main `6f72ce8ac5b5a53c5337dc686b410acb3c074e24`へ他者変更を保持して同期。START_HERE・HANDOVER v019全文・媒体なし回帰正本を確認した。同じCodex2、受領時main／Git clean、同じ試験の稼働なし、モデル表記gpt-6.1-sol。相談役応答待ちは終了し、容量整理・旧媒体／旧111試験を再実行しない。
+
+目的は不正・未承認の依頼を通常API／storeで拒否し、Clip7工程・Digest4工程と目的／条件、既存人間確認ゲートを維持していることの検証。新しい[媒体なし専用入口](queue-no-media-regression-test.mts)一経路を追加し、先行承認済みの設営累積7回目として適用した。製品5回目は不変、一般上限・履歴リセット0。既存queue-integration-test.mtsの引数なしrunと通常runnerを呼ばず、既存control router／通常store・認証・auto-runner無効設定を使う。新しい小stateだけを別processで再読し、ゲートのメモリfixtureは通常storeへ保存しない。このcheckpoint時点の実試験結果は未確認。
+
+新規人間品質Pending追加0、既存ID9-PD-01/02未承認・字幕演出未接続・動画許可未承認・人間品質pendingを維持。媒体read／hash／copy／PUT／complete・削除コピー復元・追加削除・大容量upload・SSD操作・外部推論・費用・動画製造0の範囲で進める。
+
+## 媒体なしattempt-001：通常API成立・局所fixtureの設営停止
+
+実コマンド `node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-no-media-regression-test.mts no-media` はexit1。新試験のsyntax transpileはexit0、既存Node v20.19.6／tsx・shared dist／control router／通常storeを使用した。製品code変更0なので全repo型検査は再実行していない。
+
+[失敗現物と部分結果](queue-no-media-regression-evidence-v001.json)に38検査を保存：入口1、通常API／store28、制御関数メモリ9。引数なし入口の拒否、現行認証境界3、制作系統欠損／未知・目的空／空白と入力条件の拒否9、未承認2下書きの命令0／nextなし／不存在claim404、正常承認のClip7工程・各kind／Digest4工程と依存順、目的全文・改行／条件、重複承認409、未完了依存9工程の直接claim409、source最初の2命令だけ認証済み実claimを確認した。素材処理・completeは行わず、保存stateは2命令running／9命令waiting、成功命令・FileRef・Output・人間確認／承認0。
+
+局所制御では目的・条件・素材参照・制作系統・policy・依存不存在／工程違い／別draftの不一致拒否9件を確認した。次の「下書き未承認」fixtureが検査対象を配列先頭で選び、Digest下書きを変更していた。Clip命令の承認元は別の下書きなので、既存関数は正当に一致したまま。例外を期待したtestが失敗したもので、製品の未承認拒否が壊れている証拠ではない。
+
+別processの原因照合で、通常storeの下書き先頭がDigest・対象Clipが2番目であることを確認。先頭だけの変更は対象Clip命令に作用せず、同じメモリ上で命令に束縛された依頼IDを選んで未承認へ変えると、現行の承認入力検査は拒否した。test本体へこの修正は未適用。通常storeの読取も通り、stateは26,434 bytes、SHA `f3099a3aa295522196b1d31fbecebdddc32ad27a63f2eaa14cc27634c7759294` のまま不変。新runtimeのfileはこの小state1件のみ。旧report証拠6件SHAも不変。試験／backend processの残存なし。
+
+未完了：残る5件の承認入力否定、確認生成元3件・依存を満たした独立ゲート3件、完成時API応答と保存stateの完全対照による別process再読、対象試験全体の合格。停止後の保存state読取を完成時の保存再読へ合算しない。旧localや旧15／111試験も今回へ合算しない。
+
+最小推奨案を同JSONへ未適用で保存した。局所fixtureの未承認・重複・工程列の3caseだけ、命令に束縛された依頼IDで下書きを選ぶ。失敗attempt-001・v001証拠・code SHAを不変で保持し、attempt-002／別証拠filenameで同じ媒体なし入口を再実行する。目的・入力／保存・認証・通常route・制御関数・期待値・製品は変更しない。設営累積7適用後に判明した別の試験欠陥なので、[媒体なし正本§3](../../work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)の「別の試験欠陥・製品変更が必要なら証拠と最小差分をGPT_DECISIONへ返し」に従い、同じ欠陥の局所修正を設営8として個別例外判断へ提出する。Codexは自己承認しない。
+
+製品5／設営7を維持、追加修正未適用・正式再実行0、一般上限・累積リセット0。新素材read／hash／copy／PUT・source/STT complete・通常runner・削除コピー復元・追加削除・大容量upload・SSD操作・外部推論・費用・動画製造0。ID9-PD-01/02未承認・字幕演出未接続・動画許可未承認・人間品質pending、新規人間Pending0。
+
+範囲内checkpointを担当のみ通常commit/pushして、同じCodex2専用EdgeからZEV Build LoopへGPT_DECISIONで直接報告する。本人への再確認・転記・視聴／採点・Codex1起動は要求しない。媒体なし回帰は完了とは報告しない。

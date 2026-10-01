@@ -8,11 +8,11 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）。検証用コピー8本の削除・容量回復を`78805d861a41955ccf3f3914d5946f0446e4178d`で相談役受理し、この整理は閉じる。次は、素材コピー不要の「通常入力拒否・Clip回帰」。同じCodex2で続行する。大容量copy／upload／MP4試験は再開しない。**
+**9. 明示Digestの通常キュー接続（v005）：媒体なし通常API／store28検査・入口1・承認入力の局所否定9件は成立。次の局所fixtureが対象Clipではなく配列先頭のDigest下書きを変更して試験exit1となった。製品5／設営7、追加修正未適用。最小差分と失敗証拠を相談役へGPT_DECISIONし、個別修正判断まで追加作用停止。容量整理は受理済み、素材処理・大容量再開なし。媒体なし回帰とv005全体は未完了。**
 
 `decision: continue`。正本は [媒体なし回帰の限定指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、指示保存`bf24872681eba292f2bb0211f162ea94db7f9e46`。先行[容量preflight](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)で既に許可した低容量残検証を具体化する。新エピック・製品code変更・新しい人間確認の追加ではない。
 
-次指示は発行済み、受領・新試験の実行・結果は未確認。Codex2の今回報告でGit操作終了を受領し、相談役の正本保存と直列化する。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
+今回キックを6f72ce8aで受領・実行し、失敗／部分成立と未実施を保存した。Codex2の今回報告でGit操作終了を受領し、相談役の正本保存と直列化する。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
 ## 3. 容量整理の受理と保留
 
@@ -33,9 +33,13 @@
 
 実shared関数で承認入力の不一致拒否とClipのテーマ／場面／生成前確認の回帰を確認する。ゲート単体の比較に必要な小さいメモリfixtureは単体試験として区別し、通常storeに成功工程・架空成果物・人間承認を注入してE2E成立にしない。依存不成立だけで人間確認ゲートを検証済みとしない。policy=falseで確認不要に変える修正は行わない。
 
-試験pathは既存queue-integration-test.mtsと必要なら新queue-no-media-regression-test.mts。最小の一経路を選び、引数なしrunが媒体経路へ進む現行入口は呼ばない。媒体なし入口の分離には先行指示で許可済みの設営7を使用してよい。適用時にだけ設営累積7、製品累積5は維持。今回不要な汎用preflight・storage基盤・監視装置・数値上限は作らない。
+試験pathは既存queue-integration-test.mtsと必要なら新queue-no-media-regression-test.mts。最小の一経路を選び、引数なしrunが媒体経路へ進む現行入口は呼ばない。媒体なし入口の分離には先行指示で許可済みの設営7を使用してよい。新しい媒体なし専用test一経路へ適用して設営累積7、製品累積5を維持。今回不要な汎用preflight・storage基盤・監視装置・数値上限は作らない。
 
 書込みは隔離state・小JSON・ログ・結果だけ。素材のread／hash／copy／PUT、削除33参照の復元、link／sparseによる代用、旧readerの欠損無視はしない。旧local成功を今回の試験結果に合算しない。
+
+今回attempt-001の停止：通常API入力拒否／未承認／工程と目的・条件／重複承認／未完了依存claimの28検査、引数なし入口拒否1、承認入力不一致の局所9検査は成立。未承認下書きの否定fixtureだけ、対象依頼IDを使わず配列先頭を変更し、期待例外が出なかった。別processの通常store読取で小state不変（26,434 bytes）、対象Clipを依頼IDで変更すれば現行関数が拒否することを原因照合した。これは試験側の誤りで、製品修正は不要。
+
+[実結果・失敗と最小推奨案](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-v001.json)。残り5否定・確認生成元3／独立ゲート3・完成時応答と小stateの別process照合は未実施。v001失敗証拠・attempt-001を保持して、同じ3fixtureの対象選択と次attempt名／別証拠名だけを直す設営8の個別例外判断を相談役へ返す。未承認の追加修正・再実行はしない。媒体なし正本§3に基づく停止であり、SSD待ちが理由ではない。
 
 ## 5. 未完了・承認境界
 
@@ -63,4 +67,4 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 
 今回結果はqueue-no-media-regression-evidence-v001.jsonと主reportへ保存する。API実測・制御関数単体・保存再読・未実施を分け、媒体作用0と小さい試験領域の増加量を記録。実質checkpointで現在地を同期し、通常main・担当fileのみ明示stage・直列commit/push・専用Edgeから直接報告する。
 
-方針・指示・受理・中断は同じターンに正本へ反映し、会話上限を待たない。新指示の受領・稼働は未確認。受理記録だけの再commit・終了連絡・再起動を増やさない。上位はAGENTS・監査プロトコル・人間確認方針。更新前全文と削除時の詳細は[78805d86固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/CURRENT_GOAL.md)に保持する。
+方針・指示・受理・中断は同じターンに正本へ反映し、会話上限を待たない。今回の試験はexit1で終了、自分の試験／backend残存なし。受理記録だけの再commit・終了連絡・再起動を増やさない。上位はAGENTS・監査プロトコル・人間確認方針。更新前全文と削除時の詳細は[78805d86固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/CURRENT_GOAL.md)に保持する。

@@ -1,0 +1,1050 @@
+{
+  "schemaVersion": "request-intent-no-media-regression-evidence-v001",
+  "status": "failed",
+  "receivedHead": "6f72ce8ac5b5a53c5337dc686b410acb3c074e24",
+  "session": "Codex2",
+  "modelMetadata": "gpt-6.1-sol",
+  "productFixes": 5,
+  "setupFixes": 7,
+  "setup7": "先行承認済みの媒体なし入口分離。新test一経路のみ、一般上限・履歴不変",
+  "runtime": "runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-001",
+  "runtimeBytesBefore": 0,
+  "results": [
+    {
+      "name": "引数なし入口は作用前に拒否",
+      "category": "entry",
+      "status": "passed",
+      "details": {
+        "exitCode": 1,
+        "mediaFallback": false
+      }
+    },
+    {
+      "name": "人間routeの未認証拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/state",
+        "httpStatus": 401,
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "人間tokenでagent routeを拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/next",
+        "httpStatus": 401,
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "agent tokenで人間routeを拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 401,
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "制作系統欠損を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "制作系統を明示してください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "制作系統未知値を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "制作系統を明示してください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "目的空を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "目的を入力してください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "目的空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "目的を入力してください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "sourceUri空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "動画ソースを入力してください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "durationLabel空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "尺を選んでください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "themeCountLabel空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "候補数を選んでください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "geminiModelName空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "Geminiモデルを選んでください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "preset空白を登録前に拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts",
+        "httpStatus": 400,
+        "actualErrors": [
+          "プリセットを選んでください"
+        ],
+        "businessObjectsUnchanged": true
+      }
+    },
+    {
+      "name": "未承認2依頼から命令0・nextなし・不存在claim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "draftIds": [
+          "draft_UPSkniVT4q6cOOnayVsSP",
+          "draft_cU4felI3Fq-UZ-KpbLR_2"
+        ],
+        "commands": 0,
+        "next": null,
+        "missingClaimHttpStatus": 404
+      }
+    },
+    {
+      "name": "clip正常承認・工程／kind／依存順／目的全文と条件",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts/draft_UPSkniVT4q6cOOnayVsSP/approve",
+        "httpStatus": 200,
+        "productionType": "clip",
+        "draftId": "draft_UPSkniVT4q6cOOnayVsSP",
+        "purpose": "自然な導入を残す。\n反応と結末をつなぐ。\n\n寄り道は主題との関係で判断する。",
+        "settings": {
+          "durationLabel": "媒体なし試験の尺条件",
+          "themeCountLabel": "媒体なし試験の候補条件",
+          "geminiModelName": "通信しない入口回帰",
+          "preset": "媒体なし試験の編集条件"
+        },
+        "types": [
+          "prepare_video",
+          "run_stt",
+          "propose_clip_themes",
+          "build_clip_composition",
+          "create_edit_plan",
+          "apply_adjustment",
+          "render_video"
+        ],
+        "kinds": [
+          "source_video",
+          "transcript_json",
+          "theme_json",
+          "composition_json",
+          "edit_plan_json",
+          "patch_json",
+          "output_video"
+        ],
+        "requestIds": [
+          "agent_bfgcXKz-QtAH2RGIuDADp",
+          "agent_9Y1UQjmOTTdUnJTopBiiy",
+          "agent_kI-aG0Zb8_Tvmi02MGVN8",
+          "agent_FO4B22q_7Bro9VDSBtWHm",
+          "agent_HSrg1waqgKysw386qwZYa",
+          "agent_RNPKlcMQN_ScGQ-c7jfdh",
+          "agent_oAyjYPWm7XTwwOt6LwWTq"
+        ],
+        "scope": "命令到達のみ。3Skillの内容判断・媒体処理は未実行"
+      }
+    },
+    {
+      "name": "clip重複承認を拒否・工程増殖なし",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "httpStatus": 409,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "clip:run_stt未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_9Y1UQjmOTTdUnJTopBiiy/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip:propose_clip_themes未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_kI-aG0Zb8_Tvmi02MGVN8/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip:build_clip_composition未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_FO4B22q_7Bro9VDSBtWHm/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip:create_edit_plan未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_HSrg1waqgKysw386qwZYa/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip:apply_adjustment未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_RNPKlcMQN_ScGQ-c7jfdh/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip:render_video未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_oAyjYPWm7XTwwOt6LwWTq/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "clip最初の命令だけ実claim・処理／completeなし",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "httpStatus": 200,
+        "requestId": "agent_bfgcXKz-QtAH2RGIuDADp",
+        "savedStatus": "running"
+      }
+    },
+    {
+      "name": "digest正常承認・工程／kind／依存順／目的全文と条件",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/request-drafts/draft_cU4felI3Fq-UZ-KpbLR_2/approve",
+        "httpStatus": 200,
+        "productionType": "digest",
+        "draftId": "draft_cU4felI3Fq-UZ-KpbLR_2",
+        "purpose": "前振りと展開を保持する。\nゲーム本編の終わりと配信末尾の挨拶を区別する。",
+        "settings": {
+          "durationLabel": "媒体なし試験の尺条件",
+          "themeCountLabel": "媒体なし試験の候補条件",
+          "geminiModelName": "通信しない入口回帰",
+          "preset": "媒体なし試験の編集条件"
+        },
+        "types": [
+          "prepare_video",
+          "run_stt",
+          "prepare_digest_plan",
+          "validate_digest_plan"
+        ],
+        "kinds": [
+          "source_video",
+          "transcript_json",
+          "digest_plan_json",
+          "digest_execution_input_json"
+        ],
+        "requestIds": [
+          "agent_I9UmfQBt9UNnSBieer3pz",
+          "agent_I0ldMW84KPVaXWvrhdpCy",
+          "agent_KSxgPQ9nUoJHdj59-ldBd",
+          "agent_eodQwVoErxyj915tCcsgc"
+        ],
+        "scope": "命令到達のみ。3Skillの内容判断・媒体処理は未実行"
+      }
+    },
+    {
+      "name": "digest重複承認を拒否・工程増殖なし",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "httpStatus": 409,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "digest:run_stt未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_I0ldMW84KPVaXWvrhdpCy/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "digest:prepare_digest_plan未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_KSxgPQ9nUoJHdj59-ldBd/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "digest:validate_digest_plan未完了依存へのclaim拒否",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "route": "/agent-requests/agent_eodQwVoErxyj915tCcsgc/claim",
+        "httpStatus": 409,
+        "savedStatus": "waiting",
+        "error": "前工程の完了待ちです",
+        "scope": "依存境界のみ。人間確認ゲートの証明とは別"
+      }
+    },
+    {
+      "name": "digest最初の命令だけ実claim・処理／completeなし",
+      "category": "api-store",
+      "status": "passed",
+      "details": {
+        "httpStatus": 200,
+        "requestId": "agent_I9UmfQBt9UNnSBieer3pz",
+        "savedStatus": "running"
+      }
+    },
+    {
+      "name": "承認入力不一致:目的変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:編集条件変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:外側条件変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:素材参照変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:制作系統変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:policy変更",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:依存不存在",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:依存工程違い",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    },
+    {
+      "name": "承認入力不一致:依存別draft",
+      "category": "control-memory",
+      "status": "passed",
+      "details": {
+        "actualFunctions": [
+          "assertApprovedAgentRequestInput",
+          "isAgentRequestReady"
+        ],
+        "stored": false
+      }
+    }
+  ],
+  "apiCalls": [
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "none",
+      "status": 401,
+      "error": "人間UIの認証が必要です",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/next",
+      "method": "GET",
+      "actor": "human",
+      "status": 401,
+      "error": "AIエージェントAPIの認証が必要です",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "agent",
+      "status": 401,
+      "error": "人間UIの認証が必要です",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "制作系統を明示してください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "制作系統を明示してください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "目的を入力してください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "目的を入力してください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "動画ソースを入力してください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "尺を選んでください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "候補数を選んでください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "Geminiモデルを選んでください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 400,
+      "error": null,
+      "errors": [
+        "プリセットを選んでください"
+      ]
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 201,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts",
+      "method": "POST",
+      "actor": "human",
+      "status": 201,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/next",
+      "method": "GET",
+      "actor": "agent",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent-not-created/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 404,
+      "error": "AI操作が見つかりません",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts/draft_UPSkniVT4q6cOOnayVsSP/approve",
+      "method": "POST",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts/draft_UPSkniVT4q6cOOnayVsSP/approve",
+      "method": "POST",
+      "actor": "human",
+      "status": 409,
+      "error": "この下書きはすでに処理済みです",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_9Y1UQjmOTTdUnJTopBiiy/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_kI-aG0Zb8_Tvmi02MGVN8/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_FO4B22q_7Bro9VDSBtWHm/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_HSrg1waqgKysw386qwZYa/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_RNPKlcMQN_ScGQ-c7jfdh/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_oAyjYPWm7XTwwOt6LwWTq/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_bfgcXKz-QtAH2RGIuDADp/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts/draft_cU4felI3Fq-UZ-KpbLR_2/approve",
+      "method": "POST",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/request-drafts/draft_cU4felI3Fq-UZ-KpbLR_2/approve",
+      "method": "POST",
+      "actor": "human",
+      "status": 409,
+      "error": "この下書きはすでに処理済みです",
+      "errors": null
+    },
+    {
+      "route": "/state",
+      "method": "GET",
+      "actor": "human",
+      "status": 200,
+      "error": null,
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_I0ldMW84KPVaXWvrhdpCy/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_KSxgPQ9nUoJHdj59-ldBd/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_eodQwVoErxyj915tCcsgc/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 409,
+      "error": "前工程の完了待ちです",
+      "errors": null
+    },
+    {
+      "route": "/agent-requests/agent_I9UmfQBt9UNnSBieer3pz/claim",
+      "method": "POST",
+      "actor": "agent",
+      "status": 200,
+      "error": null,
+      "errors": null
+    }
+  ],
+  "memoryFixturesPersistedToStore": false,
+  "automaticRunnerDisabled": true,
+  "mediaRead": false,
+  "mediaHash": false,
+  "mediaCopy": false,
+  "mediaPut": false,
+  "sourceSttComplete": false,
+  "normalRunnerStarted": false,
+  "externalInference": false,
+  "rendering": false,
+  "oldRuntimeReadersExecuted": false,
+  "cleanupRepeated": false,
+  "ssdAccessed": false,
+  "notRun": [
+    "upload transfer/worker-backend split/receiver-only consumption",
+    "MP4 normal complete",
+    "inspection missing normal complete",
+    "two purposes through all three Skills",
+    "video production/human quality"
+  ],
+  "oldRecordHashesBefore": {
+    "queue-storage-cleanup-20261001-v001.json": "d5828ffae0f3b226fefde90e14ed3464d5a93059ea3804c6f6586f72969f2585",
+    "queue-integration-evidence-attempt-005.json": "efe4f82c8796bf9d3b4e5cf212ab1dca0936a063c510d209c8b1c12fbe8a4f59",
+    "queue-capacity-stop-evidence-attempt-005.json": "659c6ea6f506cfaf5e78d4ff400ee191d5cf689a6d8bc2a427c5c5a5368bb49a",
+    "queue-clock-capacity-readback-attempt-005.json": "9d92c44e289e407b33f0c40a0df379dd525e1c6a33476fe396b31ad92fc4c122",
+    "queue-clock-reference-evidence-attempt-005.json": "031438325aca0cd7b17b0c92e807b873ad846553778a2add0d653c1fffa3df31",
+    "queue-clock-binding-failure-attempt-004.json": "72c9316db802d32a3b87379c9deedb7ef749f32d8abfc92f11576fd3dbf0a42c"
+  },
+  "actualImplementationHashes": {
+    "packages/shared/src/index.ts": "0298fad1af7a349198ad523277d551d1c6284c2f2f5abc433fa0dc0566978bbc",
+    "packages/shared/dist/index.js": "9481e92a3c6dfb25350258444c8fc096da7e9bcb212f86fe685e79eb2347e07b",
+    "backend/src/routes/control.ts": "0a8e8ab043858fb84d4ffb567c0111b3ceb14b840f0595d739452284fb425d31",
+    "backend/src/store/json-store.ts": "437daf9d8e29a3b95cf7b71bfd8b9e6d5328c624e3f4c0cb005fe62402c66895",
+    "backend/src/runner/auto-runner.ts": "83224e6d215a204eb4a4ea067e25db25084e355368faa7321633d74458bbd63d"
+  },
+  "apiBase": "http://127.0.0.1:61879/api",
+  "backendPid": 4355,
+  "error": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at <anonymous> (/Users/kawafmm/workspace/zev2/docs/reports/request-intent-connection-20261001/queue-no-media-regression-test.mts:230:14)",
+  "stopDiagnostic": {
+    "at": "2026-10-01T09:56:48.731Z",
+    "realProcessExitCode": 1,
+    "setupFixes": 7,
+    "productFixes": 5,
+    "failingCase": "下書き未承認のメモリfixture",
+    "cause": "requestDrafts[0]はDigest。検査対象のClipはrequestDraftIdで同定すべき",
+    "firstDraftId": "draft_cU4felI3Fq-UZ-KpbLR_2",
+    "firstDraftProductionType": "digest",
+    "targetClipDraftId": "draft_UPSkniVT4q6cOOnayVsSP",
+    "wrongDraftMutationAccepted": true,
+    "targetIdMutationRejected": true,
+    "scope": "原因照合のみ。test実装は未修正、正式再実行なし",
+    "separateProcessStoreRead": true,
+    "stateBytesUnchanged": true,
+    "stateSha256": "f3099a3aa295522196b1d31fbecebdddc32ad27a63f2eaa14cc27634c7759294",
+    "stateBytes": 26434,
+    "commands": 11,
+    "running": 2,
+    "waiting": 9,
+    "succeeded": 0,
+    "fileRefs": 0,
+    "outputs": 0,
+    "backendAndTestProcessesObservedAfterStop": 0
+  },
+  "oldRecordHashesAfter": {
+    "queue-storage-cleanup-20261001-v001.json": "d5828ffae0f3b226fefde90e14ed3464d5a93059ea3804c6f6586f72969f2585",
+    "queue-integration-evidence-attempt-005.json": "efe4f82c8796bf9d3b4e5cf212ab1dca0936a063c510d209c8b1c12fbe8a4f59",
+    "queue-capacity-stop-evidence-attempt-005.json": "659c6ea6f506cfaf5e78d4ff400ee191d5cf689a6d8bc2a427c5c5a5368bb49a",
+    "queue-clock-capacity-readback-attempt-005.json": "9d92c44e289e407b33f0c40a0df379dd525e1c6a33476fe396b31ad92fc4c122",
+    "queue-clock-reference-evidence-attempt-005.json": "031438325aca0cd7b17b0c92e807b873ad846553778a2add0d653c1fffa3df31",
+    "queue-clock-binding-failure-attempt-004.json": "72c9316db802d32a3b87379c9deedb7ef749f32d8abfc92f11576fd3dbf0a42c"
+  },
+  "runtimeFiles": [
+    {
+      "path": "runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-001/state.json",
+      "bytes": 26434
+    }
+  ],
+  "runtimeBytesAfter": 26434,
+  "pending": [
+    "残る5件の承認入力否定",
+    "確認生成元3件・独立ゲート3件",
+    "完成時API応答対照の別process再読",
+    "最終保全・対象実行合格"
+  ],
+  "recommendedMinimalFix": {
+    "applied": false,
+    "productChanges": 0,
+    "changes": [
+      "局所fixtureの未承認・重複・工程列の3caseだけ、配列先頭を使わず対象requestDraftIdで下書きを選ぶ",
+      "失敗attempt-001とv001証拠を不変に残し、attempt-002と別結果filenameへ固定して同じ媒体なし入口を実行"
+    ],
+    "code": "const fixtureDraft = (state: Zev2State) => { const draft = state.requestDrafts.find(d => d.id === memoryRequest.requestDraftId); assert(draft); return draft; };\n['下書き未承認', (s) => fixtureDraft(s).status = 'draft'],\n['下書き重複', (s) => s.requestDrafts.push(structuredClone(fixtureDraft(s)))],\n['工程列変更', (s) => fixtureDraft(s).steps.reverse()],",
+    "newRuntime": "runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-002",
+    "newEvidence": "docs/reports/request-intent-connection-20261001/queue-no-media-regression-evidence-attempt-002.json",
+    "request": "同じ欠陥の設営累積8として個別例外承認し、修正後の媒体なし検証続行を指示してください。一般上限・履歴は維持。"
+  },
+  "syntaxTranspile": {
+    "exitCode": 0,
+    "target": "new test only",
+    "productBuildRepeated": false
+  },
+  "stoppedAt": "2026-10-01T09:56:48.733Z",
+  "testFileSha256AtFailure": "107ab6270807c3b29d98be147852415746bd7d028d1fa683711f85821cdf533f",
+  "passedGroups": {
+    "entry": 1,
+    "actualApiStore": 28,
+    "controlMemoryBeforeStop": 9
+  },
+  "completed": false
+}
