@@ -8,6 +8,12 @@
 - Codexへの指示はすべてZEV相談役セッション経由でkawafmmの言葉として届く。kawafmmからの直接指示は行われない。相談役の指示に「kawafmm承認」が明記されない限り、契約・費用・素材・成果物・commit・tag・Goal・work-orderに触れる作業を開始しない。この列挙に該当しない作業（文書作成・検査実行・probe・調査を含む）も、着工承認済みwork-orderの範囲内であるか、個別指示がある場合のみ行う。
 - 相談役からの`continue`は、既に指示された範囲内の続行のみを意味し、新しい作業・権限を与えない。
 
+### Codex2の初回キック（2026-10-02 kawafmm確定）
+
+- 新しい作業開始またはCodex2を最初に動かす初回キックは、**相談役がコピー可能な一つの指示書を作り、kawafmmがCodex2へ手で貼る。** 相談役が正本へ指示を保存しただけでCodex2が動いたと扱わない。
+- 初回キック後の同じ作業中は、Codex2が `GPT_DECISION` / `HUMAN_DECISION` / `NEXT_REQUEST` を専用EdgeからZEV Build Loopへ直接送り、相談役返信本文まで受領して同じセッションで続行する。kawafmmを通常の中継役へ戻さない。
+- 相談役は初回手貼り用の指示書を、現在main SHA・正本path・現在地・実行範囲・禁止事項・問い合わせ受領ルール・完了条件を含む一つのコピー可能な本文として出す。
+
 ### Codex–ChatGPT監査プロトコル（2026-09-06 kawafmm承認）
 
 - Codexの通常の実装・テスト・限定修正は、着工承認済みwork-orderの範囲内で自律的に進める。判断または監査が必要な箇所では、まずChatGPTへ監査を依頼し、ChatGPTで判断できない第1層事項だけをkawafmmへ上げる。詳細は `docs/CODEX_CHATGPT_AUDIT_PROTOCOL.md` を正本とする。
