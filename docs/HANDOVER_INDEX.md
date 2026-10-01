@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v036
+更新日：2026-10-02（JST） / revision：handover-index-20261002-v037
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：Codex2が0d1b0810の初回キック／設営14承認を受領し、作成HTTP期待一箇所201と新attempt名／metadataだけ適用。現行否定資格attempt-002は実親exit0・backend2件0・reader0、19結果passed。通常API拒否2・memory10・artifact/tiny6・否定専用complete1、元媒体read試行／hash／copy／PUT0、旧684小file・006／007の120file・旧失敗4file・製品8path不変。製品5／設営14。今回の指定資格一件は検証完了。親§8.4の素材JSON／動画混同とClip/Digest成果物誤消費は、現行で明示的に拒否した直接証拠が未確認のため、親全体技術完了候補は保留。[19結果](reports/request-intent-connection-20261001/queue-current-negative-qualification-evidence-v002.json)と[保全・親条件対照](reports/request-intent-connection-20261001/queue-current-negative-readback-parent-audit-v002.json)へ保存。相談役へ限定完成監査＋次の2拒否の媒体なし実証範囲を求め、返信本文まで受領する。初回貼付と受領／実行／技術受理を区別し、本人中継・Codex1起動なし。ID9-PD-01/02・動画／人間品質等の未承認境界を維持。**
+**最新更新：`738f63752b20970b766a064797e601718dbd876c`の現行否定資格attempt-002を監査し、19結果・親exit0・backend2件exit0・別process reader0を限定技術受理。期限切れclaim、wrong owner、承認入力／旧state、owner参照、旧／未知版、旧preparation版、不完全転送complete拒否まで現行版で直接成立。親v005 §8.4に残る直接証拠は、source登録JSONとvideo bytesの混同拒否、Clip／Digest成果物相互誤消費拒否の2点だけ。媒体なし小fixtureでcurrent artifact validator＋実workflow builderを通す設営15を相談役承認。正本は[final cross-type rejections](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)、保存`181f0f5293f8f9d9ef7271ec8a5a2262fe8cfd8d`。製品5／設営14、15は適用時に計上。Codex2の受領・設営15適用・実行結果は未確認。v005全体は未完了。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -187,6 +187,24 @@ MP4直接登録、inspection未提供の通常complete、目的2件の全3判断
 元MP4のcopy／PUT／hash、大容量file作成、製品code変更、外部推論、STT／inspection処理、動画、SSD、削除は0。既存006／007の大容量成果物は変更しない。
 
 この否定一件が成立したら親v005§8を再対照し、全条件に現行版の根拠が揃う場合だけ「v005隔離実装試験 技術完了候補」として相談役最終監査へ提出する。ID9-PD-01/02、本番、実AI品質、字幕演出、動画許可、人間品質は別のまま。
+
+
+### 2.31 2026-10-02：現行否定19件受理・最後の2誤消費拒否へ
+
+**decision: continue。** `738f6375` のattempt-002は19結果すべてpassed。通常API/storeでwrong owner、expired claim recovery、旧owner complete拒否、current実関数で承認入力／旧state8拒否、registered dependency owner／参照2拒否、artifact/tiny fixtureで旧未知版4＋旧preparation版＋不完全転送validator、negative-only normal complete HTTP400＋state/FileRef/Output/result不増加、完成時別process state完全対照が成立。元媒体read/hash/copy/PUT0。相談役はこの一件を限定技術受理する。
+
+親v005 §8.4で未実証として残るのは2点のみ：
+1. source登録JSONとvideo bytesの混同拒否
+2. Clip／Digest成果物の相互誤消費拒否
+
+[設営15正本](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)で、製品code変更なし・媒体なしの小試験を承認した。
+
+- A1：tiny source JSONをvideo/mp4としてcurrent backend artifact validatorへ渡し、MP4 header検査で拒否。
+- A2：tiny ftyp bytesをapplication/jsonとして渡し、JSON/kind検査で拒否。ffprobe不要、元MP4は読まない。
+- B：Digestの実workflow依存解決経路へClip kindのFileRefをmemory fixtureで接続し、registeredDigestDependencyV001等のcurrent依存検査でartifact read/write前に拒否。
+- C：Clipの実workflow builderへDigest plan objectを誤入力し、current readValidatedRequestArtifact→assertJsonArtifactForKindで拒否。build/writeへ到達しない。
+
+A1/A2/B/Cが成立したら親§8.1〜§8.6を既存の正実走・52回帰・15時計・19否定と合わせて再対照し、全根拠が揃う場合だけ「v005隔離実装試験 技術完了候補」として相談役最終監査へ提出する。ID9-PD-01/02、本番、実AI品質、字幕演出、動画許可、人間品質は別のまま。
 
 ## 3. ユーザーが確定した主線
 
