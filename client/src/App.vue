@@ -868,7 +868,9 @@ function fileRefKindText(kind: FileRef['kind']): string {
     composition_json: '編集元場面',
     edit_plan_json: '演出案',
     patch_json: '微調整結果',
-    output_video: '完成動画'
+    output_video: '完成動画',
+    digest_plan_json: 'Digest計画',
+    digest_execution_input_json: 'Digest入力検証'
   };
   return textByKind[kind];
 }

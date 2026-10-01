@@ -1,4 +1,5 @@
 import express from 'express';
+import { digestArtifactPathFromUriV001 } from '@zev2/shared';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, copyFile, mkdir, open, readFile, stat } from 'node:fs/promises';
@@ -736,7 +737,7 @@ router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request
   }
   try {assertApprovedAgentRequestInput(state,agentRequest);} catch(e) {response.status(409).json({error: e instanceof Error?e.message:'承認入力が不正です'});return;}
   const completionInput = input as AgentCompletionInput;
-  const fileRefValidation = await validateCompletionFileRef(agentRequest, completionInput.fileRef);
+  const fileRefValidation = await validateCompletionFileRef(agentRequest, completionInput.fileRef, state);
   if ('error' in fileRefValidation) {
     response.status(400).json({ error: fileRefValidation.error, state });
     return;
@@ -750,7 +751,7 @@ router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request
       || ref.ownerId !== output.id || output.fileRefId !== ref.id || dep.result?.outputType !== output.type
       || output.type !== 'DigestPlan' || ref.kind !== 'digest_plan_json' || dep.fileRefIds.length !== 1 || dep.fileRefIds[0] !== ref.id
       || b.requestId !== dep.id || b.outputId !== output.id || b.fileRefId !== ref.id || b.fileSha256 !== ref.sha256
-      || b.byteSize !== ref.byteSize || b.path !== `artifacts/${ref.uri.slice('/api/artifacts/'.length)}`) {
+      || b.byteSize !== ref.byteSize || b.path !== digestArtifactPathFromUriV001(ref.uri,agentRequest.requestDraftId,dep.id)) {
       response.status(400).json({error:'検証結果の登録計画・出力所有者が一致しません'});return;
     }
   }

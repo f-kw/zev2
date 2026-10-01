@@ -3,7 +3,7 @@ import {readFile, writeFile, mkdir, lstat, realpath} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {readPreparedDigestPlanV001, registeredDigestDependencyV001, digestDataPathV001, type DigestPlanPreparationDependenciesV001} from './digest-plan-preparation-v001.js';
-import {assertApprovedAgentRequestInput, assertDigestArtifactV001, findById, type AgentRequest, type Zev2State, type DigestExecutionInputArtifactV001} from '@zev2/shared';
+import {assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactPathFromUriV001, digestArtifactFileNameV001, digestProducerRequestIdsV001, findById, type AgentRequest, type Zev2State, type DigestExecutionInputArtifactV001} from '@zev2/shared';
 import type {TranscriptArtifact} from './workflow-artifacts.js';
 
 type Json = Record<string, any>;
@@ -60,12 +60,13 @@ async function consume(deps: DigestPlanConsumptionDependenciesV001, input: Input
   assert(planRequest?.type === 'prepare_digest_plan','DIGEST_CONSUMPTION_PLAN_DEPENDENCY_INVALID');
   const planRef=registeredDigestDependencyV001(state,planRequest,'digest_plan_json');
   const artifactRoot=await realpath(deps.preparation.artifactRoot);
-  const dataPath=(name:string)=>digestDataPathV001(artifactRoot,r.requestDraftId,name);
-  const planPath=`artifacts/${planRef.uri.slice('/api/artifacts/'.length)}`;
+  const producers=digestProducerRequestIdsV001(state,r);
+  const dataPath=(name:string)=>{digestArtifactFileNameV001(name,r.requestDraftId,producers);return digestDataPathV001(artifactRoot,r.requestDraftId,name);};
+  const planPath=digestArtifactPathFromUriV001(planRef.uri,r.requestDraftId,planRequest.id);
   const stt=findById(state.agentRequests,planRequest.dependsOnAgentRequestId);
   assert(stt?.type === 'run_stt','DIGEST_CONSUMPTION_STT_DEPENDENCY_INVALID');
   const transcriptRef=registeredDigestDependencyV001(state,stt,'transcript_json');
-  const transcriptPath=`artifacts/${transcriptRef.uri.slice('/api/artifacts/'.length)}`;
+  const transcriptPath=digestArtifactPathFromUriV001(transcriptRef.uri,r.requestDraftId,stt.id);
   const transcript=JSON.parse(await readFile(dataPath(transcriptPath),'utf8')) as TranscriptArtifact;
   const prepared=await readPreparedDigestPlanV001(deps.preparation,{request:planRequest,state,transcript,transcriptUri:transcriptRef.uri});
   const root = await realpath(deps.preparation.workspaceRoot);
@@ -116,8 +117,8 @@ async function consume(deps: DigestPlanConsumptionDependenciesV001, input: Input
   const preparationBinding={path:prepared.bindingPath,fileSha256:sha(preparationBytes)};
   const directory=path.join(artifactRoot,r.requestDraftId);
   assert.equal(await realpath(directory),directory,'DIGEST_CONSUMPTION_OUTPUT_INVALID');
-  const outputRoot=`artifacts/${r.requestDraftId}`;
-  const file=(name:string)=>`${outputRoot}/${r.id}--${name}`;
+  const outputRoot=`artifacts/${r.requestDraftId}/${r.id}`;
+  const file=(name:string)=>`${outputRoot}/${name}`;
   const parts = retention.segments.map((part: Json, i: number) => ({...part, outputOrdinal: i + 1}));
   const adoption = {...selection, schemaVersion: 'new-material-digest-execution-adoption-v001',
     selectionAdoptionBinding: preparation.artifacts['selection-adoption.json'],

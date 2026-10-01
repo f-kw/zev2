@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "request-intent-reference-setup-failure-v001",
+  "attempt": "attempt-003",
+  "status": "stopped",
+  "processExitCode": 1,
+  "error": "TypeError: crop application formal JSON is invalid",
+  "failureLocation": "queue-integration-test.mts:59; bind(discovery-plan)",
+  "cause": "Local test save used a JSON binding for the saved transcript, whose root has no schemaVersion. The binding embedded undefined schemaVersion in the new plan. Existing formal serializer correctly rejected it.",
+  "savedTranscriptKeys": [
+    "kind",
+    "mode",
+    "sourceUri",
+    "notes",
+    "generatedAt",
+    "language",
+    "durationSec",
+    "segmentCount",
+    "segments",
+    "speechUnitGroups"
+  ],
+  "savedTranscriptHasSchemaVersion": false,
+  "savedLocalFiles": [
+    {
+      "path": "runtime/artifacts/request-intent-reference-attempt-003/draft_reference_attempt_003/agent_reference_plan--utterances.json",
+      "fileSha256": "d5cc9377be0e898f64d79351a55172899d982455863d18ad15b75e48f0898bcf",
+      "byteSize": 1098420
+    },
+    {
+      "path": "runtime/artifacts/request-intent-reference-attempt-003/draft_reference_attempt_003/agent_reference_source--source-metadata.json",
+      "fileSha256": "cffe99fb8d4dcd15e25b47a08567f01d2af42d2f09fa8bf15bb1cba4e6487719",
+      "byteSize": 185
+    },
+    {
+      "path": "runtime/artifacts/request-intent-reference-attempt-003/draft_reference_attempt_003/agent_reference_stt--transcript.json",
+      "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+      "byteSize": 6804193
+    }
+  ],
+  "productLimitedFixesApplied": 4,
+  "setupFixesApplied": 5,
+  "additionalSetupCorrectionApplied": false,
+  "normalQueueAttempt003Started": false,
+  "localReferencesAccepted": false,
+  "normalCompleteRegistered": false,
+  "oldAttemptsChanged": false,
+  "externalInferenceExecuted": false,
+  "renderExecuted": false,
+  "passedTypeChecks": [
+    "shared",
+    "backend",
+    "runner",
+    "Remotion",
+    "client"
+  ]
+}

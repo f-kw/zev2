@@ -1,3 +1,4 @@
+import {registeredDigestDependencyV001} from './digest-plan-preparation-v001.js';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, rename, rm, writeFile, lstat, realpath } from 'node:fs/promises';
 import { createReadStream, createWriteStream, existsSync } from 'node:fs';
@@ -9,7 +10,7 @@ import { pipeline } from 'node:stream/promises';
 import { GoogleGenAI, type GenerateContentResponse, type Part } from '@google/genai';
 import {
   ARTIFACT_FILE_NAME_BY_KIND,
-  assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactFileNameV001, type DigestByteBindingV001,
+  assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001, type DigestByteBindingV001,
   DEFAULT_GEMINI_MODEL,
   findById,
   lastMatching,
@@ -21,7 +22,7 @@ import {
   type AgentRequestType,
   type ArtifactDeliveryMode,
   type ControlReviewOption,
-  type FileRefKind,
+  type FileRefKind, getFileRefKindForRequest,
   getDryRunMeaningForRequest,
   type Zev2State
 } from '@zev2/shared';
@@ -341,19 +342,26 @@ async function downloadRequestArtifactsFromBackend(state: Zev2State, request: Ag
   const requestDraftId=request.requestDraftId;
   if(request.input.productionType==='digest') assertApprovedAgentRequestInput(state,request);
   const draftArtifactPrefix=`/api/artifacts/${requestDraftId}/`;
-  for(const ref of state.fileRefs.filter(f=>f.uri.startsWith(draftArtifactPrefix))) {
+  const producers=request.input.productionType==='digest'?digestProducerRequestIdsV001(state,request):null;
+  const refs=producers?producers.slice(1).map(id=>{
+    const dependency=findById(state.agentRequests,id)!;
+    return registeredDigestDependencyV001(state,dependency,getFileRefKindForRequest(dependency.type));
+  }):state.fileRefs.filter(f=>f.uri.startsWith(draftArtifactPrefix));
+  for(const ref of refs) {
     await downloadArtifactFromBackend(ref.uri);
     if(request.input.productionType==='digest') {
-      const binding={path:`artifacts/${ref.uri.slice('/api/artifacts/'.length)}`,fileSha256:ref.sha256};
+      const producer=state.agentRequests.find(r=>r.result?.fileRefId===ref.id && producers!.includes(r.id));
+      if(!producer) throw new Error('DIGEST_REFERENCE_PRODUCER_MISSING');
+      const binding={path:digestArtifactPathFromUriV001(ref.uri,requestDraftId,producer.id),fileSha256:ref.sha256};
       const absolute=await digestFile(binding,requestDraftId);
       if((await lstat(absolute)).size!==ref.byteSize) throw new Error('DIGEST_DATA_SIZE_MISMATCH');
       if(ref.kind==='source_video' && !ref.mimeType.startsWith('video/')) {
         const source=JSON.parse(await readFile(absolute,'utf8'));
-        if(source.sourceInspectionBinding) await downloadDigestBinding(source.sourceInspectionBinding,requestDraftId);
+        if(source.sourceInspectionBinding) {digestArtifactFileNameV001(source.sourceInspectionBinding.path,requestDraftId,producers!);await downloadDigestBinding(source.sourceInspectionBinding,requestDraftId);}
       }
       if(ref.kind==='digest_plan_json') {
         const plan=JSON.parse(await readFile(absolute,'utf8'));assertDigestArtifactV001(plan,'digest_plan_json');
-        for(const b of plan.dataBindings) await downloadDigestBinding(b,requestDraftId);
+        for(const b of plan.dataBindings) {digestArtifactFileNameV001(b.path,requestDraftId,producers!);await downloadDigestBinding(b,requestDraftId);}
       }
     }
   }
@@ -377,15 +385,15 @@ async function uploadDigestFile(draftId:string,binding:DigestByteBindingV001,mim
     throw new Error('DIGEST_UPLOAD_BYTES_MISMATCH');
 }
 
-async function uploadArtifactToBackend(artifact: ArtifactInfo): Promise<ArtifactInfo> {
+async function uploadArtifactToBackend(artifact: ArtifactInfo, request: AgentRequest, state: Zev2State): Promise<ArtifactInfo> {
   if (artifactDeliveryMode !== 'upload') {
     return artifact;
   }
 
   if(artifact.dataBindings) {
-    const draftId=artifact.uri.slice('/api/artifacts/'.length).split('/')[0]!;
-    for(const b of artifact.dataBindings) await uploadDigestFile(draftId,b,b.path.endsWith('.mp4')?'video/mp4':'application/json');
-    await uploadDigestFile(draftId,{path:`artifacts/${artifact.uri.slice('/api/artifacts/'.length)}`,fileSha256:await hashStreamingFile(artifact.path)},artifact.mimeType);
+    const draftId=request.requestDraftId,producers=digestProducerRequestIdsV001(state,request);
+    for(const b of artifact.dataBindings) {digestArtifactFileNameV001(b.path,draftId,producers);await uploadDigestFile(draftId,b,b.path.endsWith('.mp4')?'video/mp4':'application/json');}
+    await uploadDigestFile(draftId,{path:digestArtifactPathFromUriV001(artifact.uri,draftId,request.id),fileSha256:await hashStreamingFile(artifact.path)},artifact.mimeType);
     return artifact;
   }
   const response = await fetch(`${runnerOptions.apiBaseUrl}${artifactApiRouteFromUri(artifact.uri)}`, {
@@ -852,7 +860,7 @@ async function claimRequest(request: AgentRequest): Promise<{request:AgentReques
 
 async function completeRequest(request: AgentRequest,state:Zev2State): Promise<void> {
   const artifact = await buildArtifactForRequest(request,state);
-  const completedArtifact = await uploadArtifactToBackend(artifact);
+  const completedArtifact = await uploadArtifactToBackend(artifact,request,state);
   await requestJson<StateResponse>(`/agent-requests/${request.id}/complete`, {
     method: 'POST',
     body: JSON.stringify(buildCompletion(request, completedArtifact))

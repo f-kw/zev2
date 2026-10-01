@@ -4,9 +4,9 @@ import { access, open, readFile, stat, lstat, realpath } from 'node:fs/promises'
 import path from 'node:path';
 import {
   getFileRefKindForRequest,
-  assertDigestArtifactV001, digestArtifactFileNameV001,
+  assertDigestArtifactV001, digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001, assertDigestPlanReferenceClosureV001,
   type AgentCompletionInput,
-  type AgentRequest,
+  type AgentRequest, type Zev2State,
   type FileRef
 } from '@zev2/shared';
 import {
@@ -92,7 +92,8 @@ export async function validateMp4Artifact(artifactPath: string): Promise<string 
 
 export async function validateCompletionFileRef(
   agentRequest: AgentRequest,
-  fileRef: AgentCompletionInput['fileRef']
+  fileRef: AgentCompletionInput['fileRef'],
+  state: Zev2State
 ): Promise<{ artifactPath: string; metadata: ArtifactFileMetadata } | { error: string }> {
   if (!fileRef) {
     return { error: 'AI操作の完了には成果物参照が必要です' };
@@ -110,6 +111,9 @@ export async function validateCompletionFileRef(
     if (expectedKind === 'digest_plan_json' || expectedKind === 'digest_execution_input_json') {
       const value=JSON.parse(await readFile(validation.artifactPath,'utf8'));
       assertDigestArtifactV001(value,expectedKind,{requestDraftId:agentRequest.requestDraftId,requestId:agentRequest.id});
+      digestArtifactPathFromUriV001(uri,agentRequest.requestDraftId,agentRequest.id);
+      const producers=digestProducerRequestIdsV001(state,agentRequest);
+      for(const b of value.dataBindings) digestArtifactFileNameV001(b.path,agentRequest.requestDraftId,producers);
     }
     return {
       artifactPath: validation.artifactPath,
@@ -192,6 +196,10 @@ export async function validateArtifactFileRefForKind(
           prep.identity.sourceRegistration,prep.identity.sourceVideo,prep.identity.transcript,prep.identity.utterances,
           ...(prep.identity.sourceInspection?[prep.identity.sourceInspection]:[])];
         for(const b of required) if(closure.get(b.path) !== b.fileSha256) throw new Error('Digest参照一式が未転送です');
+        const documents=new Map<string,unknown>();
+        for(const b of Object.values(prep.artifacts) as {path:string}[]) documents.set(b.path,JSON.parse(await readFile(
+          artifactPathByUrl(`${expectedPrefix}${digestArtifactFileNameV001(b.path,requestDraftId)}`),'utf8')));
+        assertDigestPlanReferenceClosureV001(v,prep,documents);
       }
     } catch(e) {return {error:e instanceof Error?e.message:'Digestの参照一式を確認できません'};}
   }

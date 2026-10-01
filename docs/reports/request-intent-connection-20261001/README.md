@@ -239,3 +239,39 @@ attempt-002では旧source/STTの通常登録、実index→factory→既存3Skil
 停止処理は証拠保存→追加作用停止→通常checkpoint commit/push→専用EdgeからGPT_DECISION直接送信・表示確認→turn終了。完了報告と称さず、新指示を受領するまでは自走再開しない。外部推論・費用・新素材取得・STT・inspection・映像／音声製造・実業務サービス操作・公開0。旧素材bytesの独立copyは隔離保存のみ。
 
 中断の別process読取checkpoint：queue-interruption-readback-proof.jsonへ、旧96保護fileと固定Git版21blobのSHA不変、今回の25登録参照fileの実bytes、source/STT/計画の実所有者3鎖、隔離stateのSHAを保存した。旧reader・新consumer・uploadは起動0。宣言された候補一覧pathが不存在である不整合を別記録と対応付け、全閉包accepted=falseを維持した。今回の隔離backend／runner／試験親processは残っていない。主report・CURRENT_GOAL・HANDOVERの担当行を中断へ同期し、担当差分だけをmainへ通常commit/pushしてGPT_DECISIONへ直接報告する。型追従許可の正本83f91129は保持。Git・送信確認だけの再commitは増やさない。
+
+
+## v005 §11 再開受領checkpoint
+
+2026-10-01：本人回答「良い。指示書作って」に基づく参照対応だけの追加1回と検証続行を受領。mainを87c53aded07af838cf400092a1d4f60daf13cfcbへfast-forwardし、START_HERE・HANDOVER全文・v005全文（§10／11含む）と運用資料を復元した。実行環境で確認できるモデル表記はgpt-6.1-sol。旧成果再生成・モデル比較は行わない。Codex2単独、他者変更なし・staged0・untracked0、相談役のGit保存終了後に担当操作を引き継いだ。
+
+目的は通常の依頼から探索・採否・保持と次の登録済み計画消費まで参照を欠落なく渡すこと。旧attempt-001/002、旧要求／回答SHA、旧96保護file・21固定Git blobは保持する。製品修正は現在3、今回の対応修正を適用時に4、stdout設営修正は適用時に5と記録する。一般上限・AGENTS・履歴を変更しない。ID9-PD-01/02、字幕／演出未接続、動画許可未承認、人間品質pendingは維持する。
+
+前回debd5897の中断報告はCodex2専用EdgeからZEV Build Loopへ直接送信・表示確認済み（画像/private/tmp/codex2-intent-v005-interruption-sent.jpg、送信receipt同ディレクトリ）。今回の再開はその後の明示指示による。
+
+
+## v005 §11 修正checkpoint・局所試験の設営枠停止
+
+参照対応の一連の最小修正を累積製品4回目として適用した。新しい論理参照はdraft／生成元request／basename、物理名は生成元request--basename。登録URIから戻す際も検証済み生成元を要求し、依存鎖だけを許す。探索・採否・保持の要求、前段計画・採否・保持保存物の内部bindingをregistryと列挙データへ照合する共通検査を追加し、登録前と次工程の再読へ接続した。物理名衝突・別draft・依存外・traversalを拒否する規則を設けたが、拒否試験の完了とはまだ認定しない。
+
+必要な追従は保存準備、消費、通常indexの取得／転送、backend完了前検査の同じ参照対応だけ。内容builder／validator・時計処理・認証・PUT/GET endpointは不変。App.vueは§10の二表示名だけを追加、既存七表示名を維持した。shared build、backend type-check、runner＋Remotion type-check、client type-checkは全てexit0。
+
+stdout本文から「失敗」を検索する判定を除き、実process exitと実queue工程状態を基準にする設営修正を累積5回目として適用。証拠ファイルは新attempt別名とし、旧attempt-001/002の証拠・保存物を上書きしない。
+
+最初の小さい局所参照試験attempt-003は、探索計画JSONの保存前にexit1。試験用保存が書き起こしへ存在しない版情報を含むJSON参照を作り、既存正式JSON直列化が未定義値を拒否した。queue-reference-setup-failure-attempt-003.jsonへ実失敗・3保存file・未実施範囲を保存。製品の許可済み参照修正を取り消したり、旧JSON／要求／回答SHAを付け替えたりしていない。局所参照の合格も通常接続の合格も未認定。
+
+必要な設営一差分は書き起こし旧bytesと版なしbytes参照を局所registryへ保存すること。queue-reference-setup-followup-request.mdに具体案を保存し、未適用。設営5回枠に到達したため§11どおり追加修正・通常接続実走を停止し、GPT_DECISIONへ返す。一般枠や過去累積は変更しない。通常source/STT登録→計画complete→validate complete、upload・分離root／別process、MP4／inspection未提供、否定試験・Clip回帰は再開後の未完了として保持。今回旧動画／STT／inspection／外部推論／費用／製造／公開／人間作業0。
+
+停止後の別process読取確認：旧96保護file・21固定Git blob・debd5897の旧証拠5件はSHA／bytes不変。局所失敗記録と新規保存3fileも別processで再読・SHA／size一致。queue-reference-stop-readback-attempt-003.jsonへ保存。これは履歴と失敗証拠の保全確認であり、旧reader実行・新consumer・通常completeの合格ではない。
+
+
+| 今回追従した担当path | 同じ参照欠陥との関係 |
+|---|---|
+| packages/shared/src/digest-plan-artifacts-v001.ts | 論理参照と単一保存名の対応、生成元依存鎖、衝突と内部参照の共通照合 |
+| runner/src/digest-plan-preparation-v001.ts | 純粋builderへ渡す保存領域とregistry basenameを統一し、保存要求本文まで照合 |
+| runner/src/digest-plan-consumption-v001.ts | 登録された計画と書き起こし、消費出力の論理参照を同じ生成元規則へ統一 |
+| runner/src/index.ts | 正規依存出力だけを読取対象にし、取得／転送の論理参照を単一ファイル名へ解決 |
+| backend/src/artifacts/validation.ts | 通常完了の前に全bytes・内部参照・生成元の対応を検査 |
+| backend/src/routes/control.ts | 上の完了前検査へ実stateを渡し、消費計画の実所有者との参照対応を確認 |
+
+App.vueは既許可の二表示名、試験は設営5回目と局所参照／新attempt証拠の追加のみ。業務state・旧attempt・旧回答へ作用しない。停止時のGit基準はmain/local/origin 87c53ade一致。担当14fileだけを明示stageし、通常checkpoint commit/push後のSHAとclean・staged0・untracked0を専用Edgeの停止報告で示す。受領記録だけの独立commitは行わない。

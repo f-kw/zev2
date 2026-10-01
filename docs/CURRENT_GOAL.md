@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業
 
-**9. 明示Digestの参照対応不整合を修正し、通常キュー接続の検証を再開する。本人の「良い。指示書作って」を受領し、当該修正に限る追加1回（製品修正累積4回目）と既承認検証の再開を許可、v005 §11へ指示を発行した。本人承認待ちは解消。Codex2の受領・実再開・適用は未確認。v005全体は未完了であり、今回の指示を完成受理とはしない。**
+**9. 明示Digestの参照対応不整合を修正し、通常キュー接続の検証を再開する。本人の「良い。指示書作って」を受領し、当該修正に限る追加1回（製品修正累積4回目）と既承認検証の再開を許可、v005 §11へ指示を発行した。本人承認待ちは解消。Codex2が87c53adeで受領・再開し、参照対応修正を製品累積4回目として適用。全対象型検査は通過した。局所attempt-003の書き起こし参照を組み立てる試験設営で保存前に失敗し、設営5回へ到達しているため追加作用を停止、未適用の設営一差分をGPT_DECISIONへ返す。v005全体は未完了。**
 
 正本は [v005指示書、とくに§11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)、再開指示保存 `16de0445ff4bba405e2d32189c4e1d5d35aac86b`。初回指示保存は `a3bd8594df7c9151e164bf1e96024029a2356a0a`。中断実装は `debd58971f543958df0022988e00bed9e20ddcbc`、停止監査・本人判断待ちの保存は `ad180adce010bd3eb765f081f451a39b354b7d9f`。今回の本人承認を、一般の修正上限改訂・公開契約の本適用・一般の機械判断委任・実業務導入・動画承認方式の承認へ広げない。
 
@@ -22,7 +22,7 @@
 
 `admission`の計画整合、字幕／演出未接続、動画許可未承認、人間品質pendingを分離する。参照が未提供なのか、提供された参照が欠損・改変なのかも区別し、後者をpendingへ丸めない。通常キューの検証工程が完了しても動画完成・実行可能とは報告しない。
 
-主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。`debd5897`で通常計画登録までの部分実測と停止証拠を保存済み。その旧attemptは変更せず、修正後の新しい隔離attemptへ進む指示。再開自体はまだ観測していない。
+主report：[通常接続report](reports/request-intent-connection-20261001/README.md)。今回の試験は同directoryの`queue-integration-test.mts`と必要な軽量証拠・旧版保全proofへ保存する。`debd5897`で通常計画登録までの部分実測と停止証拠を保存済み。その旧attemptは変更せず、修正後の新しい隔離attemptへ進む指示。参照修正と二表示名は適用済み。局所試験の失敗は[設営証拠](reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json)、具体的未適用案は[一差分](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)へ保存した。
 
 ## 2.1 v004の受理と未承認の適用事項
 
@@ -54,7 +54,7 @@ job形状検査は専用human assembly承認の検査・実行資格とは別。
 
 stdoutの元発話「失敗」を判定から外し、実exitと実queue状態を見る設営修正は、適用時に既存枠内の設営5回目とする。App.vueの二表示名は`83f9112939457ddc0f4dcfc4e172b39b7d19b785`で許可済み。この再開内で適用・client型検査を行い、結果を次の実質checkpointにまとめる。表示名の再承認は不要で、型検査を弱めない。
 
-通常source/STT登録・3判断・計画completeは部分到達。再開後は次工程complete、upload／別root消費、MP4枝、inspection未提供枝、否定回帰・clientを含む必要型検査まで続行する。旧成果・人間回答は保持し、全動画の再生成・再レビューは不要。Codex2単独、Codex1再起動や応答保存だけの再commit・終了連絡も不要。指示は発行済みだが、実再開・修正完了・各検証合格はまだ未確認。
+通常source/STT登録・3判断・計画completeは部分到達。再開後は次工程complete、upload／別root消費、MP4枝、inspection未提供枝、否定回帰・clientを含む必要型検査まで続行する。旧成果・人間回答は保持し、全動画の再生成・再レビューは不要。Codex2単独、Codex1再起動や応答保存だけの再commit・終了連絡も不要。指示受領・参照対応修正（製品4）・stdout設営修正（設営5）・二表示名の適用は確認。shared/backend/runner/Remotion/client型検査はexit0。局所参照試験は保存前の試験組立て欠陥でexit1、必要な追加設営修正は未適用。実業務サービスの稼働はprocess実測で見つからず、既存サービス操作0。追加作用を止め、証拠保存・通常commit/push・専用EdgeのGPT_DECISIONへ進む。各接続検証は未完了。
 
 ## 3. 完了済みを再開しない
 

@@ -7,7 +7,8 @@ import {createInterface} from 'node:readline';
 import {syncBuiltinESMExports} from 'node:module';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {formal,sha} from '../../../evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts';
+import {digestArtifactFileNameV001,digestArtifactPathFromUriV001,assertDigestArtifactV001,assertDigestPlanReferenceClosureV001} from '../../../packages/shared/dist/index.js';
+import {formal,sha,bind} from '../../../evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts';
 const root=fileURLToPath(new URL('../../../',import.meta.url));
 const report=path.join(root,'docs/reports/request-intent-connection-20261001');
 const loader=path.join(root,'runner/node_modules/tsx/dist/loader.mjs');
@@ -37,8 +38,70 @@ if(mode==='backend') {
   }
   const originalStream=fs.createReadStream;(fs as any).createReadStream=function(p:any,...args:any[]){check(p);return (originalStream as any)(p,...args);};
   syncBuiltinESMExports();await import('../../../runner/src/index.ts');
+ } else if(mode==='references') {
+  const {buildUnseenDiscoveryRequestV001,projectUnseenSelectionPlanV001,STRUCTURE024}=await import('../../../evals/clip_composition/unseen_material_thin_plan_v001.mts');
+  const {buildSelectionRequestV001}=await import('../../../evals/clip_composition/candidate_selection_validation_v001.mts');
+  const {buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001}=await import('../../../runner/src/distant-connection-common-utterance-artifact-v001.ts');
+  const attempt=process.argv[3]??'attempt-003',draft='draft_reference_'+attempt.replaceAll('-','_'),producer='agent_reference_plan',stt='agent_reference_stt',video='agent_reference_source';
+  const artifactRoot=path.join(root,'runtime/artifacts/request-intent-reference-'+attempt);await mkdir(artifactRoot);await mkdir(path.join(artifactRoot,draft));
+  const logical=(name:string)=>`artifacts/${draft}/${producer}/${name}`;
+  const dataPath=(name:string)=>path.join(artifactRoot,draft,digestArtifactFileNameV001(name,draft,[producer,stt,video]));
+  const values=new Map<string,any>(),bindings=new Map<string,any>();
+  const save=async(name:string,value:any)=>{const b=bind(name,value);await writeFile(dataPath(name),formal(value),{flag:'wx'});values.set(name,value);bindings.set(name,b);return b;};
+  const transcriptBytes=await readFile(savedTranscript),transcript=JSON.parse(transcriptBytes.toString());
+  const transcriptBinding=await save(`artifacts/${draft}/${stt}/transcript.json`,transcript);
+  const sourceBinding=await save(`artifacts/${draft}/${video}/source-metadata.json`,{schemaVersion:'reference-test-source-metadata-v001',sourceUri:source});
+  const utterances=buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001({sourceTranscriptPath:transcriptBinding.path,sourceTranscriptBytes:transcriptBytes});
+  const utteranceBinding=await save(logical('utterances.json'),utterances);
+  const thinPlan={schemaVersion:'production-intent-plan-v0',productionIntent:'局所参照試験。生成した要求の参照対応だけを確認する。'};
+  const plan:any={schemaVersion:'new-material-digest-execution-plan-v001',planId:producer,outputRoot:`artifacts/${draft}/${producer}`,
+    structureConditions:[...STRUCTURE024],request:{purpose:thinPlan.productionIntent,sourceId:'source_reference_test',sourceVideo:sourceBinding,transcript:transcriptBinding,utterances:utteranceBinding}};
+  const planBinding=await save(logical('discovery-plan.json'),plan),c:any={plan,planBinding,thinPlan,transcript,utterances};
+  const discovery=buildUnseenDiscoveryRequestV001(c);await save(logical('candidate-request.json'),discovery);
+  const candidateSet={schemaVersion:'candidate-selection-candidate-set-v001',sourceId:plan.request.sourceId,sourceVideoBinding:sourceBinding,
+    transcriptBinding,utteranceBinding,origins:{},candidates:[10,20].map(i=>({candidateId:'reference-candidate-'+i,sourceId:plan.request.sourceId,title:'参照試験'+i,
+      contextStartUtteranceId:utterances.utterances[i].utteranceId,contextEndUtteranceId:utterances.utterances[i].utteranceId,evidenceUtteranceIds:[utterances.utterances[i].utteranceId]}))};
+  await save(logical('candidate-set.json'),candidateSet);
+  const selectionPlan=projectUnseenSelectionPlanV001(c,candidateSet),selectionPlanBinding=await save(logical('selection-plan.json'),selectionPlan);
+  const selection=buildSelectionRequestV001({...c,plan:selectionPlan,planBinding:selectionPlanBinding,candidateSet});await save(logical('selection-request.json'),selection);
+  const adoptionBinding=await save(logical('selection-adoption.json'),{schemaVersion:'reference-test-adoption-v001'});
+  const retention={schemaVersion:'candidate-internal-retention-request-v001',planBinding:selectionPlanBinding,selectionAdoptionBinding:adoptionBinding,
+    input:{schemaVersion:'reference-test-only',taskDescription:thinPlan.productionIntent}};await save(logical('retention-request.json'),retention);
+  const names=['binding-input.json','production-intent.json','discovery-plan.json','selection-plan.json','candidate-request.json','candidate-response.json',
+    'candidate-result.json','candidate-set.json','discovery-validation.json','selection-request.json','selection-response.json','selection-result.json',
+    'selection-validation.json','selection-adoption.json','retention-request.json','retention-response.json','retention-result.json','retention-validation.json'];
+  for(const name of names)if(!values.has(logical(name)))await save(logical(name),name==='binding-input.json'?{schemaVersion:'reference-test-only',identity:{implementations:[]}}:thinPlan);
+  const prep={schemaVersion:'normal-request-digest-preparation-binding-v002',status:'complete',identity:{requestDraftId:draft,requestId:producer,implementations:[]},
+    artifacts:Object.fromEntries(names.map(n=>[n,bindings.get(logical(n))]))};
+  const preparationBinding=await save(logical('preparation-binding.json'),prep);
+  const artifact:any={schemaVersion:'digest-plan-artifact-v001',kind:'digest_plan_json',requestDraftId:draft,requestId:producer,
+    approvedRequestBinding:bindings.get(logical('binding-input.json')),sourceVideoBinding:{path:sourceBinding.path,fileSha256:sourceBinding.fileSha256},
+    transcriptBinding:{path:transcriptBinding.path,fileSha256:transcriptBinding.fileSha256},utteranceBinding,preparationBinding,
+    dataBindings:[...bindings.values()].map(({path,fileSha256}:any)=>({path,fileSha256})),quality:'human-review-pending'};
+  assertDigestArtifactV001(artifact,'digest_plan_json');assertDigestPlanReferenceClosureV001(artifact,prep,values,[producer,stt,video]);
+  const correspondences:any[]=[];
+  for(const [stage,q]of [['discovery',discovery],['selection',selection],['retention',retention]] as const)
+    for(const [field,b]of Object.entries(q).filter(([,v]:any)=>v?.path) as [string,any][]) {
+      assert.equal(await fileSha(dataPath(b.path)),b.fileSha256);correspondences.push({stage,field,...b,fileName:digestArtifactFileNameV001(b.path,draft)});
+    }
+  const rejected:string[]=[],reject=(name:string,fn:()=>unknown)=>{assert.throws(fn);rejected.push(name);};
+  for(const [name,logicalPath]of [['other-draft',`artifacts/other/${producer}/x.json`],['outside-dependency',`artifacts/${draft}/agent_unrelated/x.json`],
+    ['traversal',`artifacts/${draft}/${producer}/../x.json`],['legacy-flat',`artifacts/${draft}/${producer}--x.json`]])
+    reject(name,()=>digestArtifactFileNameV001(logicalPath,draft,[producer,stt,video]));
+  reject('wrong-producer-URI',()=>digestArtifactPathFromUriV001(`/api/artifacts/${draft}/other--x.json`,draft,producer));
+  for(const [name,change]of [['missing-registry',(q:any)=>q.candidateSetBinding.path=logical('missing.json')],['SHA-mismatch',(q:any)=>q.candidateSetBinding.fileSha256='0'.repeat(64)] ]as [string,(q:any)=>void][]) {
+    const changed=new Map(values);const q=structuredClone(selection);change(q);changed.set(logical('selection-request.json'),q);
+    reject(name,()=>assertDigestPlanReferenceClosureV001(artifact,prep,changed,[producer,stt,video]));
+  }
+  const collision=structuredClone(artifact);collision.dataBindings.push({path:`artifacts/${draft}/agent_a--b/c.json`,fileSha256:'0'.repeat(64)},
+    {path:`artifacts/${draft}/agent_a/b--c.json`,fileSha256:'0'.repeat(64)});reject('physical-name-collision',()=>assertDigestArtifactV001(collision,'digest_plan_json'));
+  await assert.rejects(readFile(dataPath(logical('missing.json'))));rejected.push('missing-bytes');
+  await writeFile(path.join(report,`queue-reference-evidence-${attempt}.json`),JSON.stringify({status:'passed',scope:'reference-only; no semantic response validation or normal completion',
+    actualPureBuilders:['buildUnseenDiscoveryRequestV001','projectUnseenSelectionPlanV001','buildSelectionRequestV001'],correspondences,rejected,artifactRoot:relative(artifactRoot)},null,2)+'\n',{flag:'wx'});
+  console.log(JSON.stringify({status:'passed',internalReferences:correspondences.length,rejected:rejected.length}));
 } else if(mode==='read') {
-  const evidence=JSON.parse(await readFile(path.join(report,'queue-integration-evidence.json'),'utf8'));
+  const attempt=process.argv[3]??'attempt-003';
+  const evidence=JSON.parse(await readFile(path.join(report,`queue-integration-evidence-${attempt}.json`),'utf8'));
   const {readConsumedDigestPlanV001}=await import('../../../runner/src/digest-plan-consumption-v001.ts');
   for(const entry of evidence.completed) {
     const state=JSON.parse(await readFile(path.join(root,entry.backendRuntime,'state.json'),'utf8'));
@@ -53,14 +116,14 @@ if(mode==='backend') {
   console.log(JSON.stringify({status:'verified',separateProcessReconstructed:evidence.completed.length,protectedFiles:history.protectedFiles.length,oldReaderExecuted:false}));
 } else {
   assert.equal(mode,'run');
-  const attempt=process.argv[3]??'attempt-001';assert(/^attempt-\d{3}$/u.test(attempt));
+  const attempt=process.argv[3]??'attempt-003';assert(/^attempt-\d{3}$/u.test(attempt));
   const runtime=path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-'+attempt);
   await mkdir(runtime);
   const results:any[]=[],captures:any[]=[],completed:any[]=[],children:any[]=[];
   const evidence:any={schemaVersion:'request-intent-queue-integration-evidence-v001',attempt,results,captures,completed,
     inputPath:'normal draft API/approve/next/claim/runner index/factory/PUT/complete',sourceProcessingExecuted:false,sttExecuted:false,
     externalInferenceExecuted:false,inspectionExecuted:false,renderExecuted:false,productionAdoption:false};
-  const checkpoint=async()=>writeFile(path.join(report,'queue-integration-evidence.json'),JSON.stringify(evidence,null,2)+'\n');
+  const checkpoint=async()=>writeFile(path.join(report,`queue-integration-evidence-${attempt}.json`),JSON.stringify(evidence,null,2)+'\n');
   const record=(name:string,details:any={})=>{results.push({name,status:'passed',...details});console.log(JSON.stringify({test:name,status:'passed'}));};
   const startBackend=async(name:string)=>{
     const directory=path.join(runtime,name);await mkdir(directory);const child=spawn(process.execPath,['--import',loader,fileURLToPath(import.meta.url),'backend'],
@@ -91,7 +154,7 @@ if(mode==='backend') {
       else if(dep.type==='prepare_video') {
         const inspectionMeta=inspection?await put(b,draft.id,`${dep.id}--source-inspection.json`,await readFile(savedInspection)):null;
         const value={kind:'source_video',mode:'local-source-reference',sourceUri:source,purpose,registeredAt:new Date().toISOString(),
-          ...(inspectionMeta?{sourceInspectionBinding:{path:`artifacts/${draft.id}/${inspectionMeta.artifactFileName}`,fileSha256:inspectionMeta.sha256}}:{})};
+          ...(inspectionMeta?{sourceInspectionBinding:{path:digestArtifactPathFromUriV001(inspectionMeta.uri,draft.id,dep.id),fileSha256:inspectionMeta.sha256}}:{})};
         meta=await put(b,draft.id,`${dep.id}--source-video.json`,Buffer.from(JSON.stringify(value,null,2)+'\n'));
       } else meta=await put(b,draft.id,`${dep.id}--transcript.json`,await readFile(savedTranscript));
       const done=await api(b,`/agent-requests/${dep.id}/complete`,'POST',{ownerId:'codex2-fixture-registration',meaning:'旧保存物の登録のみ。取得/STT処理未実施',
@@ -132,7 +195,7 @@ if(mode==='backend') {
     const code=await new Promise<number|null>(ok=>child.on('exit',ok));if(handlerError)throw handlerError;
     if(expectBoundary) {assert.equal(code,1,err+'\n'+out);assert(err.includes('最大処理件数 1 件に到達'));}
     else assert.equal(code,0,err+'\n'+out);
-    if(out.includes('失敗'))throw new Error(out+err);return {stdout:out,stderr:err};
+    return {stdout:out,stderr:err,exitCode:code};
   };
   try {
     for(const config of [{name:'local-json',mode:'local',video:'json',inspection:true,purpose:'自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。'},
@@ -143,9 +206,10 @@ if(mode==='backend') {
       await runner(b,worker,config.mode,config.purpose,[],true);
       let state=await api(b,'/state'),prep=state.agentRequests.find((r:any)=>r.id===fixture.requests[2].id);assert.equal(prep.status,'succeeded');
       const planRef=state.fileRefs.find((f:any)=>f.id===prep.result.fileRefId),planPath=path.join(b.directory,'artifacts',fixture.draft.id,planRef.artifactFileName);
+      const dataPath=(logical:string)=>path.join(b.directory,'artifacts',fixture.draft.id,digestArtifactFileNameV001(logical,fixture.draft.id));
       const plan=JSON.parse(await readFile(planPath,'utf8'));assert.equal(plan.kind,'digest_plan_json');assert(!('consumptionBinding' in plan));
-      for(const binding of plan.dataBindings) assert.equal(await fileSha(path.join(b.directory,binding.path)),binding.fileSha256);
-      const preparation=JSON.parse(await readFile(path.join(b.directory,plan.preparationBinding.path),'utf8'));
+      for(const binding of plan.dataBindings) assert.equal(await fileSha(dataPath(binding.path)),binding.fileSha256);
+      const preparation=JSON.parse(await readFile(dataPath(plan.preparationBinding.path),'utf8'));
       if(config.video==='json') assert.notEqual(preparation.identity.sourceRegistration.fileSha256,plan.sourceVideoBinding.fileSha256);
       else assert.equal(preparation.identity.sourceRegistration.fileSha256,plan.sourceVideoBinding.fileSha256);
       const nextWorker=config.mode==='upload'?path.join(runtime,config.name+'-reader'):b.directory;
@@ -155,7 +219,7 @@ if(mode==='backend') {
       assert.equal(state.controlReviewItems.length,0);assert.equal(state.agentRequests.length,4);
       const executionRef=state.fileRefs.find((f:any)=>f.id===validated.result.fileRefId),executionPath=path.join(b.directory,'artifacts',fixture.draft.id,executionRef.artifactFileName);
       const execution=JSON.parse(await readFile(executionPath,'utf8'));assert.deepEqual(execution.admission,{planIntegrity:'passed',presentation:'not-connected',executionPermission:'not-approved',humanQuality:'pending'});
-      if(config.inspection) {assert(execution.consumptionBinding && execution.clockResolutionBinding);const edit=JSON.parse(await readFile(path.join(b.directory,execution.editPlanBinding.path),'utf8'));assert.equal(edit.segments.length,4);}
+      if(config.inspection) {assert(execution.consumptionBinding && execution.clockResolutionBinding);const edit=JSON.parse(await readFile(dataPath(execution.editPlanBinding.path),'utf8'));assert.equal(edit.segments.length,4);}
       else {assert.equal(execution.sourceInspectionBinding,null);assert.equal(execution.consumptionBinding,null);assert.equal(execution.clockResolutionBinding,null);assert(execution.sourceInspectionMissingReason);}
       completed.push({name:config.name,backendRuntime:relative(b.directory),readerRuntime:relative(config.mode==='upload'?path.join(nextWorker,'runner-artifacts/..'):nextWorker),
         readerArtifactRoot:relative(config.mode==='upload'?path.join(nextWorker,'runner-artifacts'):path.join(nextWorker,'artifacts')),

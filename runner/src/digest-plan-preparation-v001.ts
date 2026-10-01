@@ -3,7 +3,7 @@ import {readFile, writeFile, mkdir, rename, lstat, realpath, copyFile} from 'nod
 import path from 'node:path';
 import {constants} from 'node:fs';
 import {pathToFileURL} from 'node:url';
-import {findById, isAgentRequestReady, type AgentRequest, type Zev2State, type FileRef, getFileRefKindForRequest, getOutputTypeForRequest, assertDigestArtifactV001, digestArtifactFileNameV001, type DigestPlanArtifactV001} from '@zev2/shared';
+import {findById, isAgentRequestReady, type AgentRequest, type Zev2State, type FileRef, getFileRefKindForRequest, getOutputTypeForRequest, assertDigestArtifactV001, digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001, assertDigestPlanReferenceClosureV001, type DigestPlanArtifactV001} from '@zev2/shared';
 import type {TranscriptArtifact} from './workflow-artifacts.js';
 import {resolveLocalSourcePath} from './steps/source-video.js';
 import {buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001, validateDistantConnectionCommonUtteranceArtifactAgainstTranscriptBytesV001} from './distant-connection-common-utterance-artifact-v001.js';
@@ -61,10 +61,6 @@ export function digestDataPathV001(artifactRoot: string, draftId: string, logica
   const file = digestArtifactFileNameV001(logicalPath, draftId);
   return path.join(path.resolve(artifactRoot), draftId, file);
 }
-function artifactPath(deps: DigestPlanPreparationDependenciesV001, uri: string) {
-  assert(/^\/api\/artifacts\/[A-Za-z0-9_-]+\/[A-Za-z0-9_.-]+$/u.test(uri), 'DIGEST_ARTIFACT_URI_INVALID');
-  return `artifacts/${uri.slice('/api/artifacts/'.length)}`;
-}
 export function registeredDigestDependencyV001(state: Zev2State, dependency: AgentRequest, kind: FileRef['kind']) {
   const outputs = state.outputs.filter(o => o.id === dependency.result?.outputId);
   const refs = state.fileRefs.filter(f => f.id === dependency.result?.fileRefId);
@@ -103,7 +99,7 @@ function qualify(input: Input, execution: boolean) {
     && video?.type === 'prepare_video' && video.status === 'succeeded' && matches(video), 'DIGEST_DEPENDENCY_INPUT_CHANGED');
   const transcriptRef = registeredDigestDependencyV001(state, stt, 'transcript_json'), videoRef = registeredDigestDependencyV001(state, video, 'source_video');
   assert(transcriptRef.uri === input.transcriptUri && input.transcript.sourceUri === d.source.uri, 'DIGEST_TRANSCRIPT_SOURCE_MISMATCH');
-  return {draft: d, transcriptRef, videoRef};
+  return {draft: d, transcriptRef, videoRef, stt, video};
 }
 
 /** 明示Digestの通常採否・保持工程。通信だけを外部判断へ委任する。 */
@@ -131,9 +127,10 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   const retention = await load('candidate_internal_retention_validation_v001.mts');
   const {formal, bind, sha, canonicalSha, fileSha} = base;
   const directory = path.join(artifactRoot, input.request.requestDraftId);
-  const outputRoot = `artifacts/${input.request.requestDraftId}`;
-  const file = (name: string) => `${outputRoot}/${input.request.id}--${name}`;
-  const dataPath = (name: string) => digestDataPathV001(artifactRoot,input.request.requestDraftId,name);
+  const outputRoot = `artifacts/${input.request.requestDraftId}/${input.request.id}`;
+  const file = (name: string) => `${outputRoot}/${name}`;
+  const producers = digestProducerRequestIdsV001(input.state,input.request);
+  const dataPath = (name: string) => {digestArtifactFileNameV001(name,input.request.requestDraftId,producers);return digestDataPathV001(artifactRoot,input.request.requestDraftId,name);};
   const recordPath = dataPath(file('preparation-binding.json'));
   const readByte = async (b: ByteBinding) => {
     assert(exact(b, ['path','fileSha256']) && /^[0-9a-f]{64}$/u.test(b.fileSha256), 'DIGEST_BYTE_BINDING_INVALID');
@@ -142,15 +139,15 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
     assert.equal(await fileSha(absolute), b.fileSha256, 'DIGEST_SOURCE_SHA_MISMATCH');
     return absolute;
   };
-  const reference = async (f: FileRef) => {
-    const b = {path:artifactPath(deps,f.uri),fileSha256:f.sha256};
+  const reference = async (f: FileRef, producer: AgentRequest) => {
+    const b = {path:digestArtifactPathFromUriV001(f.uri,input.request.requestDraftId,producer.id),fileSha256:f.sha256};
     const absolute = await readByte(b);
     assert.equal((await lstat(absolute)).size,f.byteSize,'DIGEST_SOURCE_SIZE_MISMATCH'); return b;
   };
   let prior: Json | undefined;
   try {prior=JSON.parse(await readFile(recordPath,'utf8'));assert(prior?.schemaVersion === SCHEMA,'DIGEST_SAVED_BINDING_VERSION_INVALID');}
   catch(e) {if((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e;}
-  const sourceRegistration = await reference(approved.videoRef), transcriptBinding = await reference(approved.transcriptRef);
+  const sourceRegistration = await reference(approved.videoRef,approved.video), transcriptBinding = await reference(approved.transcriptRef,approved.stt);
   const transcriptBytes = await readFile(dataPath(transcriptBinding.path));
   const transcript = JSON.parse(transcriptBytes.toString());
   assert(base.same(transcript,input.transcript),'DIGEST_TRANSCRIPT_BODY_CHANGED');
@@ -251,7 +248,7 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   for (const saved of Object.values(record.stages) as Json[]) {
     assert(exact(saved, ['request', 'response', 'result', 'accepted']) && plain(saved.accepted), 'DIGEST_STAGE_BINDING_INVALID');
     for (const b of [saved.request, saved.response, saved.result, ...Object.values(saved.accepted)] as Binding[]) {
-      assert(plain(b) && base.same(record.artifacts[path.basename(b.path).slice(input.request.id.length+2)], b), 'DIGEST_STAGE_REGISTRY_MISMATCH');
+      assert(plain(b) && base.same(record.artifacts[path.basename(b.path)], b), 'DIGEST_STAGE_REGISTRY_MISMATCH');
     }
   }
   if (record.status === 'complete') assert(base.same(Object.keys(record.artifacts).sort(), [...names].sort()), 'DIGEST_COMPLETE_ARTIFACT_MISSING');
@@ -346,5 +343,8 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
     requestDraftId:input.request.requestDraftId,requestId:input.request.id,approvedRequestBinding:authorization,
     sourceVideoBinding:sourceVideo,transcriptBinding,utteranceBinding,preparationBinding,dataBindings,quality:'human-review-pending'};
   assertDigestArtifactV001(artifact,'digest_plan_json',{requestDraftId:input.request.requestDraftId,requestId:input.request.id});
+  const documents = new Map<string,unknown>();
+  for (const b of Object.values(record.artifacts) as Binding[]) documents.set(b.path,await bound(b));
+  assertDigestPlanReferenceClosureV001(artifact,record,documents,producers);
   return {status:'prepared' as const,bindingPath:preparationBinding.path,resumed:recordExisted,artifact};
 }
