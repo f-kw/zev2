@@ -1,12 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v020
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v021
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：6f72ce8aのキックでCodex2が媒体なし回帰を実行。入口1・通常API／store28・承認入力局所9検査は成立。局所の未承認fixtureが対象Clipではなく配列先頭のDigestを変更し、期待例外なしでexit1。原因は試験側の対象選択で、現行関数は対象依頼IDを正しく変更した場合に拒否する。製品5／設営7を維持、設営8の最小案は未適用で相談役へGPT_DECISION。独立確認ゲート・完成時別process応答対照は未完了。媒体・SSD・容量整理再実行0。詳細§2.19。**
+**最新更新：`b47999f7398118b1ef53b68b5b95a7ea922e7779`の媒体なし回帰停止を監査し、相談役が3fixtureの下書き選択を対象命令のrequestDraftIdへ直す一件を設営累積8回目として個別承認した。decision: continue。正本[媒体なし指示§6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、判断保存`a76ceedb322091883dda20d01f81312c23edb745`。本人への再確認は不要。同じCodex2で新attempt-002の残検証・完成時再読へ進む。適用済みは製品5／設営7、8は適用時に計上。今回の受領・適用・再稼働は未確認。旧38件は部分成立の証拠であり、媒体なし回帰・v005全体は未完了。媒体・SSD・容量整理は再開しない。詳細§2.20。**
 
-更新前全文は[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
+更新前全文は[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
 ## 0. 最初に読む人へ
 
@@ -48,7 +48,7 @@ ZEVは素材と制作意図から、内容・構成・字幕・必要な演出�
 
 ## 2. 最新状態のカプセル
 
-直近の容量整理監査：`78805d861a41955ccf3f3914d5946f0446e4178d`。直近の製品接続限定受理：`60b959d91d0885ac2bf9cf4aaae66eff93454bab`。指示・状態更新commitと実行成果を区別する。
+直近の停止監査：`b47999f7398118b1ef53b68b5b95a7ea922e7779`。直近の容量整理監査：`78805d861a41955ccf3f3914d5946f0446e4178d`。直近の製品接続限定受理：`60b959d91d0885ac2bf9cf4aaae66eff93454bab`。指示・状態更新commitと実行成果を区別する。
 
 | 担当／項目 | 到達点 | 残件・扱い |
 |---|---|---|
@@ -61,9 +61,9 @@ ZEVは素材と制作意図から、内容・構成・字幕・必要な演出�
 | キュー設計v004 | `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7`、一案・10境界・26保護pathを受理 | code変更0、キュー完成ではない |
 | Codex2：v005時計/local | `60b959d9`。製品5／設営6、15検査・型検査、local計画/検証complete・別process再読受理 | upload・MP4/未提供・通常否定/Clip回帰は残件。コピー整理後の旧runtime即時再読は不可 |
 | Codex2：容量整理 | 削除前`04c21bfdeccde7210193d731bcf205f4ea19a03e`、実績`78805d86`。8本削除・論理35.79GiB・削除時空き2.00→37.82GiBを相談役受理 | 整理完了。33素材参照は再作成要、旧記録は保持。追加削除・大容量試験はしない |
-| Codex2：媒体なし残検証 | [今回指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、保存`bf24872681eba292f2bb0211f162ea94db7f9e46` | 入口1／API28／局所9成立、test側の誤対象fixtureでexit1。設営7適用、8の最小案未適用。確認ゲート・完成時応答対照は残件。SSD・媒体経路は別 |
+| Codex2：媒体なし残検証 | `b47999f7`で入口1／API28／局所9が部分成立、誤対象fixtureでexit1。設営7適用 | §6で3fixtureのID指定修正を設営8として相談役承認。新attempt-002で残る否定・ゲート・完成時再読へ。受領／適用／実再開未確認、全体未完了 |
 
-`78805d86`のmain/local/origin一致・通常push・Git clean/staged0/untracked0・Git終了はCodex報告として受領。remote HEADと文書・scriptは相談役確認、Macのprocess・空き・実削除/実SHAは保存されたCodex実測であり相談役の直接観測ではない。
+`b47999f7`のmain/local/origin一致・通常push・Git clean/staged0/untracked0・担当5file・Git終了・追加作用停止はCodex報告として受領。remote HEADと試験コード・証拠を相談役が確認した。Macのprocess・state実bytes・実行結果は保存されたCodex実測であり、相談役の直接再実行ではない。今回の指示保存だけで再稼働済みと扱わない。
 
 旧1080p媒体SHA：`65afceb046aca0629b0fe097f602caae3b05697b10cff8eb6a295106185f3858`。Macの`runtime/artifacts/original-resolution-execution-20260930-v001/full-lowmem-production-001/`、今回削除対象外。GitHub／ChatGPT sandboxから再生できると仮定しない。旧84区間・最大22入力・監視v002は完成済み。50GB開始・12GB保持・RSS16GiBは当該実走限定で現在へ転用しない。
 
@@ -116,9 +116,19 @@ v005はproductionType、source/STT＋prepare_digest_plan／validate_digest_plan�
 
 局所「下書き未承認」caseが配列先頭を変更したが、承認元Clipは2番目。対象を変えていないため既存承認入力関数は正当に一致し、期待例外なしでtestが失敗した。別processで新しい通常storeを読み、対象依頼IDでClipを変更すると現行関数が拒否することを原因照合した。製品の未承認拒否欠陥とは扱わない。state26,434 bytes／SHA f3099a3aa295522196b1d31fbecebdddc32ad27a63f2eaa14cc27634c7759294不変、新runtimeは小state1件のみ。11命令はrunning2／waiting9、成功・成果物・人間確認／承認0。旧report証拠6件SHA不変、自分の試験／backend残存なし。
 
-残る5承認入力否定、確認生成元3件・独立ゲート3件、完成時API応答と保存stateの完全対照は未実施。停止後読取を完成時再読へ合算しない。最小案は未承認・重複・工程列3fixtureの下書き選択を対象依頼IDへ変更し、旧attempt-001／v001証拠を保持した新attempt-002／別証拠名で同じ媒体なし入口を再実行すること。製品5／設営7、追加修正未適用、設営8としての個別判断をGPT_DECISIONへ提出。一般上限・履歴リセット0。
+残る5承認入力否定、確認生成元3件・独立ゲート3件、完成時API応答と保存stateの完全対照は未実施。停止後読取を完成時再読へ合算しない。最小案は未承認・重複・工程列3fixtureの下書き選択を対象依頼IDへ変更し、旧attempt-001／v001証拠を保持した新attempt-002／別証拠名で同じ媒体なし入口を再実行すること。製品5／設営7、追加修正未適用として相談役へ提出した。その判断待ちは次節の個別承認で解消し、適用・実行結果は別に確認する。
 
-[主report](reports/request-intent-connection-20261001/README.md)へ停止を保存し、担当のみ通常commit/push・専用Edge直接報告まで行う。容量整理再実行・追加削除・素材read/hash/copy/PUT／complete・旧コピー復元・大容量upload・SSD操作・外部推論・動画製造0。人間品質pending・ID9-PD-01/02等維持。本人への再確認・転記・Codex1起動を求めず、相談役の個別判断まで追加作用を止める。
+[主report](reports/request-intent-connection-20261001/README.md)へ停止を保存し、担当のみ通常commit/push・専用Edge直接報告まで実施。容量整理再実行・追加削除・素材read/hash/copy/PUT／complete・旧コピー復元・大容量upload・SSD操作・外部推論・動画製造0という報告。人間品質pending・ID9-PD-01/02等維持。
+
+### 2.20 2026-10-01：対象下書き3fixtureの修正・設営8を相談役承認
+
+**decision: continue。** 本人の軽微技術判断委任とAGENTSに基づく個別判断。正本は[媒体なし指示§6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、保存`a76ceedb322091883dda20d01f81312c23edb745`。
+
+- 同SHAのtest、失敗／原因照合／未適用最小案、5file差分を照合。命令の承認元ではない先頭下書きを変更した試験側の欠陥と整合。Macの直接再実行ではなく、38部分成立を対象全体の合格にはしない。
+- 対象は既存queue-no-media-regression-test.mtsだけ。3fixtureを対象requestDraftIdで選び、基準での存在・一意性と配列順非依存を小さく確認。製品関数・caller・認証・期待値は不変。新attempt-002／別結果名／実行metadataの追従を含む同一欠陥の一件。
+- 設営8を適用時に計上、製品5は不変。一般の枠・過去履歴・別強制停止条件をリセットしない。本人へ再確認せず、修正から残る媒体なし検証・完成時別process再読まで同じCodex2で続行する。
+- 旧attempt-001／v001証拠／失敗時code SHAを保持。新結果はqueue-no-media-regression-evidence-attempt-002.json。新一系列を確認する小さい前段再実行は可、旧38件の合算・停止後診断の完成時再読への流用は不可。
+- 素材・大容量upload・SSD・追加削除・製品変更・外部推論・動画・本番・公開へ広げない。SSD到着は今回の開始条件ではない。受領・適用・実再開・完了は未確認。専用Edgeから直接報告、Codex1再起動や受領だけのcommit／終了連絡は不要。
 
 ## 3. ユーザーが確定した主線
 
@@ -132,11 +142,11 @@ v005はproductionType、source/STT＋prepare_digest_plan／validate_digest_plan�
 
 ## 4. 必読資料と根拠の入口
 
-運用3文書は§0。現在は冒頭の媒体なし指示と整理実績を優先。内容品質を判断する場合は一次レビューへ戻る。
+運用3文書は§0。現在は媒体なし指示§6とb47999f7の試験／失敗記録を優先。内容品質を判断する場合は一次レビューへ戻る。
 
 | 資料 | 復元するもの |
 |---|---|
-| [今回の媒体なし指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md) | コピーなし残検証、実API/単体fixtureの別、許可path・設営7・大容量保留 |
+| [媒体なし指示§6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、[失敗・最小案](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-v001.json)、[対象test](reports/request-intent-connection-20261001/queue-no-media-regression-test.mts) | 3fixtureのID指定・設営8の個別承認、新attempt-002、38部分成立と未完了の区別 |
 | [削除一覧・結果](reports/request-intent-connection-20261001/queue-storage-cleanup-20261001-v001.json)、[主report](reports/request-intent-connection-20261001/README.md) | 8本削除・原本保全・33参照再作成要・空き観測・整理受理 |
 | [削除指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_STORAGE_CLEANUP.md)、[preflight](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md) | 本人の一回整理、原本保護、大容量保留、先行設営7の許可 |
 | [容量停止](reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json)、[再読](reports/request-intent-connection-20261001/queue-clock-capacity-readback-attempt-005.json)、[15検査](reports/request-intent-connection-20261001/queue-clock-reference-evidence-attempt-005.json) | local限定成立とupload未完了。削除後の即時再読とは別 |
@@ -162,7 +172,7 @@ v005はproductionType、source/STT＋prepare_digest_plan／validate_digest_plan�
 | 旧レビュー/UI | 旧10回答受領済みとR1〜R3修正版7点未回答は別。旧肯定を別素材へ移さず一件編集を未着手にしない |
 | 制作負担 | 低メモリ製造完了と全工程速度・操作負荷は別。容量回復を品質と混ぜない |
 | 本適用 | ID9-PD-01/02、旧業務state移行・本番有効化は未承認。技術委任・削除承認は別 |
-| 容量/残検証 | 8本整理受理済み、33参照再作成要。媒体なし回帰はAPI部分成立・fixture対象選択の設営判断待ち。upload等保留、SSDは準備意向のみ |
+| 容量/残検証 | 8本整理受理済み、33参照再作成要。媒体なし回帰は38部分成立、設営8修正を指示済み・実行未確認。upload等保留、SSDは準備意向のみ |
 
 全課題数を固定した表ではない。新課題は根拠・既存IDと結び、全残件解消を独立作業開始条件にしない。別素材ID8は将来の一般化確認であり、済んだ初稿/15分レビューの再実施ではない。
 
