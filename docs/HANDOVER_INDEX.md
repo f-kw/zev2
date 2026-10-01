@@ -107,17 +107,11 @@ prepareは採否・保持を登録し、validateが登録計画と参照先一�
 
 Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを物理producer-request--fileへ対応させ、内部参照の検査を接続したと報告。製品4／設営5を適用し、二表示名・shared/backend/runner/Remotion/client型検査は報告上完了。局所参照試験と通常接続はまだ合格していない。前回の許可済み作業を未承認へ戻さず、今回の別の設営例外と分ける。
 
-### 2.10 2026-10-01：局所試験の設営枠による中断監査・本人判断待ち
+### 2.10 2026-10-01：局所試験の設営枠による中断監査（当時の記録）
 
-`decision: human_decision`。**停止報告を受領し、試験設営の4行案を妥当な修正方針として推奨する。適用・検証再開はまだ許可していない。**
+`01ad1e54`で局所attempt-003が試験設営の誤った版付きbindingにより保存前exit1となり、設営5回枠へ到達していたため、当時は追加作用を停止した。[4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)は、旧transcriptBytesをそのまま保存し、path＋fileSha256のbyte bindingへ直す試験helper限定修正。製品serializer／validator、通常caller、provider、旧素材／旧回答の変更ではない。
 
-- **現物監査**：`01ad1e54`の[未適用4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)、[失敗証拠](reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json)、`queue-integration-test.mts`のreferences枝、14file差分一覧、AGENTSとv005 §11を照合。相談役がMacの試験・全保存物を再実行／再hashした判定ではない。製品14file全体を完成受理したものでもない。
-- **失敗の切分け**：試験helperのsaveは版付きJSON bindingを作るが、旧書き起こしにはschemaVersionがない。そのbindingを探索計画へ入れ、既存正式JSON直列化が`TypeError: crop application formal JSON is invalid`で保存前に拒否した。exit1、保存3file、localReferencesAccepted=false、通常接続attempt-003未起動。参照修正の再発・内容判断不良を証明した結果ではなく、製品serializerを緩める理由にもならない。
-- **技術的推奨**：`queue-integration-test.mts`のreferences枝の書き起こし保存だけ、旧transcriptBytesをそのままwriteし、pathとfileSha256だけのbyte bindingをregistryへ登録する4行案。版番号を捏造しない。通常caller・回答生成・製品serializer・validator・旧素材・旧回答は変更しない。これは今回の失敗原因への修正案で、後続試験の全合格を保証しない。
-- **必要な本人判断は一点**：この設営修正に限る追加1回（適用時に設営累積6回目）と、その後の既承認検証の続行。現在は製品4／設営5。一般の設営5回枠・製品3回枠や履歴を変更／リセットしない。前回の製品4回目許可は今回の設営6回目を含まない。例外は未承認で、追加作用を止める。
-- **承認後に予定する範囲**：失敗attempt-003を保持し、新しい局所attemptで参照対応を確認後、v005の未実施の通常登録→次工程消費／complete、local/upload・分離root・転送先だけの別process再読、MP4／inspection未提供枝、否定試験・Clip対象回帰へ戻る。新たな製品修正権・別設営修正権をまとめて許す提案ではない。
-- **保全・未認定**：旧96保護file・21固定Git blob・debd5897証拠5件等の不変はCodexの別process診断報告として保持。参照の実合格、通常消費、動画製造、人間品質は未認定。今回の型検査合格を接続合格にしない。ID9-PD-01/02・費用・素材・本番・公開の権限は不変。
-- **現在の次行動**：本人例外承認待ち。Codex2は追加作用を停止し、受理記録だけの再commit・終了連絡・Codex1再起動・自動監視は行わない。人間視聴・採点・転記・正解区間指定は要求しない。この記録を新しい再開指示にしない。
+この時点では本人判断待ちとしたが、後続の本人方針「独断で決めれる程度なら自動で承認して」により、軽微な技術・設営判断は相談役が自動承認する運用へ変更された。**現在の扱いは次節§2.11を正とし、この当時のhuman_decisionを現在へ戻さない。** 失敗attempt-003・保存3file・参照未合格という事実は履歴として保持する。
 
 
 ### 2.11 2026-10-01：軽微な技術判断の自動承認ルールと設営6回目
