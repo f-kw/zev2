@@ -1,0 +1,488 @@
+{
+  "schemaVersion": "id9-user-approved-storage-cleanup-v001",
+  "status": "pre-deletion",
+  "receivedAt": "2026-10-01T05:58:57.203349+00:00",
+  "instructionHead": "9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58",
+  "session": "Codex2",
+  "workOrder": "docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_STORAGE_CLEANUP.md",
+  "approval": "kawafmm: また容量が問題になってるのか。SSD用意するから一旦削除して",
+  "productFixes": 5,
+  "setupFixes": 6,
+  "setup7Applied": false,
+  "retained": [
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 94150914,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790402893228663921,
+        "changedNs": 1790805126091233848
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/transcript.json",
+      "identity": {
+        "device": 16777234,
+        "inode": 94221867,
+        "size": 6804193,
+        "allocatedBytes": 6807552,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790425873986928357,
+        "changedNs": 1790425873986928357
+      },
+      "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing"
+    },
+    {
+      "path": "runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json",
+      "identity": {
+        "device": 16777234,
+        "inode": 94224524,
+        "size": 2744,
+        "allocatedBytes": 4096,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790430993176803575,
+        "changedNs": 1790430993176803575
+      },
+      "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing"
+    }
+  ],
+  "availableAtInventory": {
+    "at": "2026-10-01T05:58:57.213294+00:00",
+    "device": 16777234,
+    "availableBytes": 2161881088,
+    "blockSize": 4096
+  },
+  "openFileCheck": {
+    "exitCode": 1,
+    "output": "",
+    "checkedAt": "2026-10-01T05:58:57.201546+00:00"
+  },
+  "candidates": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/fixture/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/fixture/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97893193,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790805133341566839,
+        "changedNs": 1790805133341566839
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/draft_iJa8VZCGXJnDr-Cu6x8AR/digest-preparation/agent_Uj91trMov5H4e2KoF6vjB/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/fixture/source-video.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97893317,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790805224605543161,
+        "changedNs": 1790805224605543161
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_-B10iAF023dSQyIeaNRDK/digest-preparation/agent_Mb1ukXdsv1uDSo-mAyWzC/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_-tUDuQOhF52qCAYo0ARxu/digest-preparation/agent_j_eLnlABQjmhHyIAY0M_q/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_RvEvRudmEpdIz_dhd9NIf/digest-preparation/agent_B__EvbEkQg29hVQ058koq/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_SMIxbdupL5vTp7lwohyqJ/digest-preparation/agent_GpFcFTqlNEOVQo60rVeFB/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_YFsEsamulRO1G_oY9OhSu/digest-preparation/agent_JGOxH5WMMeQX6iX8mzefC/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_eXXS8t98dKQheM1NEa9ZC/digest-preparation/agent_9MrWTJrfijfaS1FR9fx9f/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_nCyFtLqnzN39XVOjIzNia/digest-preparation/agent_3pDIVr9q4KodDqXx2DIbt/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_uSgAKJGUoi7QKp2uMGW7h/digest-preparation/agent_7d37l3HUrDOAgsrY898hp/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_y0mudxg6cWOZozIwoJvK_/digest-preparation/agent_sJeWvvzckYusEjBxx7Fs4/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97893752,
+        "size": 4803412827,
+        "allocatedBytes": 4803854336,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790805368774789600,
+        "changedNs": 1790805368774789600
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_0OsiL7gHCOVTqpxuB0Wkj/digest-preparation/agent_kihqT8xzES6WclXArYLg1/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_I60rc0bwn2pCBQ6kZrqsM/digest-preparation/agent_4W58rLzWyG38-ApKpcVnP/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Mfu-OZoYkwlGlmXJ_g682/digest-preparation/agent_9HPg21DKWbYen7i07vb6f/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Mvv3CWqgDh7aUBba-J5no/digest-preparation/agent_FJqGMkUFz9aGFPVOnPDfQ/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_UNWU-RNiGC2BDs64iLefb/digest-preparation/agent_XmR4DkYzlxwtoJD4fZEwV/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Z9HPwDY9rOdSJmIcUkLJ9/digest-preparation/agent_sE0AHLHgX065Ednzts7Kd/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_ZRHVDone6_wxvsDOKFDAE/digest-preparation/agent_xi06K8Q7hL76WfjVtEXYf/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_iv4MYTAj_T4BHLW-S0T2c/digest-preparation/agent_KW8z7N6yxqPIh-nWHuQK8/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_mV9EOChWKsXb9bRDPbdL-/digest-preparation/agent_8iS8X-ap-weau_ADIpYmx/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97894384,
+        "size": 4803412827,
+        "allocatedBytes": 4813332480,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790805770015957127,
+        "changedNs": 1790805770015957127
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_6ArFfkHEdB8DYL-D4AseF/digest-preparation/agent_iHcHNpKvqxHRVOUn8T0Nm/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_9tNgXgJFOjivZ97z3bn8K/digest-preparation/agent_Y2Pc7vH7x79ADgYMQfOaz/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_LRbV9aqeSoal535Hw3pZs/digest-preparation/agent_VM0W8hgpTpqLl9ELDw3L0/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_OByWHrVzW61okiKx5m0R5/digest-preparation/agent_P58i4QdmfX4gdl5siBWZd/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_nif-nqvra283UbjpdGIdR/digest-preparation/agent_cKJ6qwf_3LpZ_yg2etYIS/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_pgHak2UlsEynSTOYEhSYk/digest-preparation/agent_V7kDodKVBLekfnIvaMwEs/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97896063,
+        "size": 4803412827,
+        "allocatedBytes": 4815069184,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790807525564575859,
+        "changedNs": 1790807525564575859
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4"
+        },
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-preparation/agent_US3Ukkwkt1bmxRt_RLg-0/binding.json",
+          "logicalSourceReference": "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--source-media.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--source-media.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97902682,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790813067875206538,
+        "changedNs": 1790813067875206538
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "hashEvidence": "actual streamed hash from process session 92869; inventory stopped only at saved-reference check; preread device/inode/size match and modification/change times predate hashing",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--preparation-binding.json",
+          "logicalSourceReference": "artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--source-media.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--source-media.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--source-media.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97913213,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790820406976062921,
+        "changedNs": 1790820406976062921
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--preparation-binding.json",
+          "logicalSourceReference": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/source-media.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--source-media.mp4",
+      "absolutePath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--source-media.mp4",
+      "identity": {
+        "device": 16777234,
+        "inode": 97915926,
+        "size": 4803412827,
+        "allocatedBytes": 4803416064,
+        "links": 1,
+        "mode": 33188,
+        "modifiedNs": 1790823176450187964,
+        "changedNs": 1790823176450187964
+      },
+      "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "classification": "verified-test-source-copy",
+      "eligible": true,
+      "retainedSourcePath": "runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "retainedSourceSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+      "savedReferences": [
+        {
+          "binding": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--preparation-binding.json",
+          "logicalSourceReference": "artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu/source-media.mp4"
+        }
+      ],
+      "oldReadImpact": "source bytes must be recreated before rereading this test runtime"
+    }
+  ],
+  "preservedEvidenceHashes": {
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/draft_iJa8VZCGXJnDr-Cu6x8AR/digest-preparation/agent_Uj91trMov5H4e2KoF6vjB/binding.json": "4933ba909e372b8e38a528d7393dbb94583f932e642844be4d5cb1fa23d7d008",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/state.json": "d5922f7941dfb5611fe8a28eded8d473e905f96b553c18ebd9943d05c9e6006e",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_-B10iAF023dSQyIeaNRDK/digest-preparation/agent_Mb1ukXdsv1uDSo-mAyWzC/binding.json": "9899d04995dbb76146e8c6c56d0600574b042a612eea04dd3d4a43728b8bb7cd",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_-tUDuQOhF52qCAYo0ARxu/digest-preparation/agent_j_eLnlABQjmhHyIAY0M_q/binding.json": "0e655e8073d4b7dbb01a58befe4d147392536d0ba40883b7bf56287c0b4b72b3",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_RvEvRudmEpdIz_dhd9NIf/digest-preparation/agent_B__EvbEkQg29hVQ058koq/binding.json": "a932b05f8b3cffbe5d946450af682311a08e1f8298d57ef798873cfe5c0ae777",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_SMIxbdupL5vTp7lwohyqJ/digest-preparation/agent_GpFcFTqlNEOVQo60rVeFB/binding.json": "8be12531d0bd573199d0095d01db89bc7a4554fea4a49d10a66b704d65e3438d",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_YFsEsamulRO1G_oY9OhSu/digest-preparation/agent_JGOxH5WMMeQX6iX8mzefC/binding.json": "bf333d86bff73dddc5a800272159f091d3085a980ff9e8388e90353248a80190",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_eXXS8t98dKQheM1NEa9ZC/digest-preparation/agent_9MrWTJrfijfaS1FR9fx9f/binding.json": "a9307c34ab179d709e7c0b74253afef567e983832f094dec9690e153b8e748aa",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_nCyFtLqnzN39XVOjIzNia/digest-preparation/agent_3pDIVr9q4KodDqXx2DIbt/binding.json": "43450db90a4da9c24b0e63252616a2c1c0aae461267fbf7329afdc8c20b13ee1",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_uSgAKJGUoi7QKp2uMGW7h/digest-preparation/agent_7d37l3HUrDOAgsrY898hp/binding.json": "2d3e68fc18e7ea7835680fd963356e2c4db33d88ddf5e6605014afef32e0001c",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/draft_y0mudxg6cWOZozIwoJvK_/digest-preparation/agent_sJeWvvzckYusEjBxx7Fs4/binding.json": "45286f6cff3535d951908fc34bdb813581cfdb752576aa042ab378635217ce19",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/state.json": "012a60478fb24f5a33cc8864b9417c1aca76b5195309c172c5e83291046e2fc7",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_0OsiL7gHCOVTqpxuB0Wkj/digest-preparation/agent_kihqT8xzES6WclXArYLg1/binding.json": "9267dd0acf152dcaa18b9b0037eaa23d41ebffd964c60a9fd98adb5f31568e37",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_I60rc0bwn2pCBQ6kZrqsM/digest-preparation/agent_4W58rLzWyG38-ApKpcVnP/binding.json": "f10ad8410b7e6bd633f36df5245f3e67e4375ba95aa4491a5a8f43fc76a44c62",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Mfu-OZoYkwlGlmXJ_g682/digest-preparation/agent_9HPg21DKWbYen7i07vb6f/binding.json": "d6ac790408701401151b9d9d0f4e63e724021dc99507c5ed3fed142e76c0f5e6",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Mvv3CWqgDh7aUBba-J5no/digest-preparation/agent_FJqGMkUFz9aGFPVOnPDfQ/binding.json": "4388afb33e2d3f7fb32a8211c80ad6db736d4defba0afe463b47cd44e48362a6",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_UNWU-RNiGC2BDs64iLefb/digest-preparation/agent_XmR4DkYzlxwtoJD4fZEwV/binding.json": "37fa6601c3efc1144963ce795f01667f93c66d9554cceb9c393b94ec50791d03",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_Z9HPwDY9rOdSJmIcUkLJ9/digest-preparation/agent_sE0AHLHgX065Ednzts7Kd/binding.json": "c5134372d8f3a3b2afc00a9df43962380fa6876cf6f0792f2383824c2974f528",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_ZRHVDone6_wxvsDOKFDAE/digest-preparation/agent_xi06K8Q7hL76WfjVtEXYf/binding.json": "f4fbe683a72ba544989f36936b4c88e37f99f5d733f9dc38577c767e0ed985eb",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_iv4MYTAj_T4BHLW-S0T2c/digest-preparation/agent_KW8z7N6yxqPIh-nWHuQK8/binding.json": "efe068fbbfa17ba57f25dd2135c458221207d2253f2052a8ad60220091b754ea",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/draft_mV9EOChWKsXb9bRDPbdL-/digest-preparation/agent_8iS8X-ap-weau_ADIpYmx/binding.json": "072080f83c83e398cea391887f24621b26837b363b04c34aec6ad6819fabe07a",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/state.json": "278a53bbb7aa701276545a0dd9cc02c1149ca3b09dd02f59206036a149c7ffd4",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_6ArFfkHEdB8DYL-D4AseF/digest-preparation/agent_iHcHNpKvqxHRVOUn8T0Nm/binding.json": "1f03241b688b210916ee04fb139af6fd78670e38ba59b4667a36361bd5d59943",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_9tNgXgJFOjivZ97z3bn8K/digest-preparation/agent_Y2Pc7vH7x79ADgYMQfOaz/binding.json": "761fe4323f53e47d8593eb06deed2a53f6831c7a06431f57887350eebf9f158c",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_LRbV9aqeSoal535Hw3pZs/digest-preparation/agent_VM0W8hgpTpqLl9ELDw3L0/binding.json": "cabb8945d0d08d2e0aa8b762bfbdba785dabde0605a699d5dad3953423d6ef74",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_OByWHrVzW61okiKx5m0R5/digest-preparation/agent_P58i4QdmfX4gdl5siBWZd/binding.json": "e6672b360d280e00c6dfc9dc092d2ce28505d71b9c293d7f3a1654ba72e37b31",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_WocWT6m1Dmi9R637Ncm6O/digest-preparation/agent_gefu-kLMEzkvnDFuEcwXs/binding.json": "4cf63cda5ab75df7efd5f5c32c361d19dc6c431087d0a6ecf7aaf554f6f0e287",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_foVKkgMvFq7qxuThRYKyH/digest-preparation/agent_No336WhmO6oCR90opf6w8/binding.json": "5c48bf11e06b2a07ae911e4cfae0981cee5fcf4f37841085e8262cabf88f5558",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_nif-nqvra283UbjpdGIdR/digest-preparation/agent_cKJ6qwf_3LpZ_yg2etYIS/binding.json": "1ba8b6a61829ffa0e5a5b5b5a000541bedaf5e276e32ca5b13321137b2c66f7c",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_pgHak2UlsEynSTOYEhSYk/digest-preparation/agent_V7kDodKVBLekfnIvaMwEs/binding.json": "34b130b1bb168c16f5e84b293a61f008d060f4d059af82ba02e3ce5c3880ecf9",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/draft_qBO351t1ObMs3nZAe7p7s/digest-preparation/agent_bPvxsrQMr5rG9oMDTmDO8/binding.json": "066ace784d83fc09fb9d76f166c6bda8ce8427edaed87b8de96797d7a23d1a70",
+    "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/state.json": "1554e953d2c7926442af0fbfc30a72102fb1d9e40353cb1b8e6496dc45e583dc",
+    "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_8V7ZARrVnEBWPcf48vYOc/digest-preparation/agent_U_wSCQRo5PBIylqJoMNOW/binding.json": "b43bec2f1cf47281c9e71111889bd4ff5378ee591d9ae84770f53204d0ff02f2",
+    "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/draft_fkXwQY_ThsNlTmAGTTdic/digest-preparation/agent_US3Ukkwkt1bmxRt_RLg-0/binding.json": "6106d81a9fcf7b5a6c31e0b9895bd87dfedb586780cba68416289e4ee5e5b13e",
+    "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/state.json": "422a09f28d2b430a93718e23134231b5054861cb0708c95c5d86a526356af75a",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--preparation-binding.json": "1dddc3f62e9311b19080cae4a40b656a9375601617b74bb99461d2f19ac1fe0a",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/state.json": "d0a04bccc6f2856fe36701977e27f9dcd31a12e250ecbcc788f250b3a9eab0db",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--preparation-binding.json": "0096820a189ec9f4e4b0136c52454bfc64fafa96c6bc2e968f5e0b2c76ee6d5d",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/state.json": "ec8b404d67d7695aa49482712b5c3e11b60168cb4105cae3a8151c925a4c6c49",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--preparation-binding.json": "8f9a09e2641e0fa7226c8a401f64e0160c8a39a9d396009c661f35078e82500e",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json/state.json": "71fe529e47a24c65ea9b60b2833aa4869351a2734d455d5647a7299ba65641df",
+    "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/state.json": "4aaabdac9c6d3ed5550c7d622febfae8ce0253e2b71fdf0b4100f32a3d107122",
+    "docs/reports/request-intent-connection-20261001/factory-connection-evidence.json": "bfebd1c01f50ef9d6ed37c74fae34cab127a7f8ba09c503a29a19d264c992675",
+    "docs/reports/request-intent-connection-20261001/queue-clock-stop-readback-attempt-004.json": "7bced13325e74a2db62f3f69e91266a580b54e6106936ffe6a778c30e7a81864",
+    "docs/reports/request-intent-connection-20261001/factory-connection-evidence-attempt-005.json": "633d94c98665b49d8e3ccba03b8a5974543057d22935ea583ee141bd3edd0cb5",
+    "docs/reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json": "659c6ea6f506cfaf5e78d4ff400ee191d5cf689a6d8bc2a427c5c5a5368bb49a",
+    "docs/reports/request-intent-connection-20261001/queue-interruption-readback-proof.json": "630a958acb33b5902a3cc74d967f6d0e3d6629a0b53db8c88bba19a6bdf133c9",
+    "docs/reports/request-intent-connection-20261001/queue-reference-evidence-attempt-004.json": "8b1d0fd693096639e113d24916972ef2697b461da871dd766d2e4e03423376d1",
+    "docs/reports/request-intent-connection-20261001/consumer-binding-proof.json": "8bf0e257a28116b1b72ec0e145f2567637db541a79febce8ac949e5f657edf62",
+    "docs/reports/request-intent-connection-20261001/queue-reference-stop-readback-attempt-003.json": "d59438033e9341dedc3b4ccacc2f278dd6fc2493acef7af0b2717a492cc9081b",
+    "docs/reports/request-intent-connection-20261001/factory-failed-attempt-002.json": "d8caeea3ec1a9ba1db13415b998c37d6d56946a541c3928a8de0e8bbcc35cfdd",
+    "docs/reports/request-intent-connection-20261001/partial-path-observation.json": "1349064e6f8831530a6ce7f5a6f0223222eee23bb777fdbc2e1a3981804710b8",
+    "docs/reports/request-intent-connection-20261001/consumer-rejection-evidence.json": "f628523053f79f679162dddae89f1c94c1b5efff974fb0f5009065b11f9450c1",
+    "docs/reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json": "6749a8d76af2072f42428c63b43a248857416155ea98e38971a0e94cee70ffc3",
+    "docs/reports/request-intent-connection-20261001/queue-contract-evidence.json": "148799cc02a404dda471513f72365b1bf51f1312dbaeadb88e4ef80a015c3ae6",
+    "docs/reports/request-intent-connection-20261001/factory-failed-attempt-003.json": "2034271fa84549353fc395a0450a3f9f1b92d6c92af949aac75d62ce4c409812",
+    "docs/reports/request-intent-connection-20261001/queue-clock-reference-evidence-attempt-005.json": "031438325aca0cd7b17b0c92e807b873ad846553778a2add0d653c1fffa3df31",
+    "docs/reports/request-intent-connection-20261001/source-bindings.json": "9d6d30576459ad0a3ff1508d7db9eb633e24891678a5267d650e1454d98ec291",
+    "docs/reports/request-intent-connection-20261001/queue-integration-evidence.json": "131d05e4de57ad907dc0fd73931190d5d28041e4332125368a0240d52a9e2d29",
+    "docs/reports/request-intent-connection-20261001/consumer-connection-evidence-attempt-001.json": "a620d5dac532bcb2c5aa3dd09e934e056050bff61e8d32632b28e88a69d5d571",
+    "docs/reports/request-intent-connection-20261001/factory-binding-proof.json": "a4c85e284ab30438432fc8adc94692819ecdcc9c8e5ee2eb12cb2fb24cf034cc",
+    "docs/reports/request-intent-connection-20261001/queue-integration-auth-failure.json": "bdb93a3e95225d9241575176f9b82fdeceee3052dcaa097553edd587905efd98",
+    "docs/reports/request-intent-connection-20261001/queue-history-preservation-proof.json": "8b6f9c91d2a9af8229ab58a22c2260d1ce5e653e2d99a842c3dda055619bf8df",
+    "docs/reports/request-intent-connection-20261001/factory-connection-evidence-attempt-006.json": "101b25ce6f4acc8d161e647c745947d592db06538201f656b18bd33bbe810405",
+    "docs/reports/request-intent-connection-20261001/queue-integration-evidence-attempt-005.json": "efe4f82c8796bf9d3b4e5cf212ab1dca0936a063c510d209c8b1c12fbe8a4f59",
+    "docs/reports/request-intent-connection-20261001/queue-integration-evidence-attempt-004.json": "19d603423a54e31b1137fea597062caea90415ba12e342d80e763f6d717b22fb",
+    "docs/reports/request-intent-connection-20261001/queue-clock-binding-failure-attempt-004.json": "72c9316db802d32a3b87379c9deedb7ef749f32d8abfc92f11576fd3dbf0a42c",
+    "docs/reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json": "46a3a8bc04a52336f7753edd9e7c2a789dd2cbc02457d533e2d7991f0469dabc",
+    "docs/reports/request-intent-connection-20261001/queue-clock-capacity-readback-attempt-005.json": "9d92c44e289e407b33f0c40a0df379dd525e1c6a33476fe396b31ad92fc4c122"
+  },
+  "otherRuntimeFilesAtInventory": {
+    "fileCount": 634,
+    "metadataSha256": "4d69a42324fee08b306e0cf6792094537525334081548d6cce6f2900f3117b79"
+  },
+  "knownInterruptedCopy": {
+    "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/upload-json-worker/runner-artifacts/draft_bf6hKeP7hmmx5CMKYTCNb/agent_jGgk6ywiuluA2Sv0IkOrQ--source-media.mp4",
+    "exists": false,
+    "deleted": false,
+    "reason": "failure destination is already absent",
+    "evidence": "docs/reports/request-intent-connection-20261001/queue-capacity-stop-evidence-attempt-005.json",
+    "requestId": "agent_jGgk6ywiuluA2Sv0IkOrQ"
+  },
+  "eligibleCount": 8,
+  "eligibleLogicalBytes": 38427302616,
+  "ownTestWriterCheck": {
+    "at": "2026-10-01T06:00:32.649459+00:00",
+    "observedWriters": [],
+    "processQuery": "ps -axo pid,ppid,command filtered to ID9 queue/runner/backend",
+    "otherProcessesStopped": false
+  },
+  "inventoryPreparation": {
+    "initialProcessExit": 1,
+    "initialStop": "one-off cleanup inventory did not recognize saved attempt-002 physical source reference; no deletion occurred",
+    "subsequentProcessExit": 0,
+    "change": "historical saved reference matched its exact physical path; product code and old records unchanged",
+    "streamHashesReused": 9,
+    "remainingVideoStreamHashes": 2
+  }
+}

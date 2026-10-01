@@ -330,3 +330,17 @@ Git基準はmain/local/origin 9f031229。§12の設営4行差分と失敗／局�
 [15参照検査](queue-clock-reference-evidence-attempt-005.json)、[部分接続](queue-integration-evidence-attempt-005.json)、[容量停止現物](queue-capacity-stop-evidence-attempt-005.json)、[停止後再読／保全](queue-clock-capacity-readback-attempt-005.json)、[相談役への一点](queue-capacity-followup-request.md)。旧attempt-004の失敗state・4出力、既存Git管理のqueue証拠は基準HEADと不変。保護96fileに含まれない業務stateの新しい全repo棚卸しは行わず、実業務への作用はない。
 
 ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間品質pending維持。外部推論・費用・新素材・取得・STT実行・inspection実行・動画製造0。相談役へGPT_DECISIONで容量準備を返す。報告送信表示はcommit/push後に専用Edgeで確認する。受領記録だけの再commit・人間転記は要求しない。
+
+## 本人承認済みの検証用コピー整理：受領・削除前checkpoint
+
+2026-10-01：mainを相談役保存HEAD `9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58`へ他者変更を保持して同期し、START_HERE・HANDOVER全文・[削除正本](../../work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_STORAGE_CLEANUP.md)・現行AGENTSを確認。本人原文「また容量が問題になってるのか。SSD用意するから一旦削除して」に基づく一回の容量整理を受領した。Codex2単独、main／受領時clean、モデル表記は同じセッションの `gpt-6.1-sol`。旧成果再生成・モデル比較・Codex1起動0。
+
+試験の書込みprocessは観測されず、保持元と候補のopen-file確認でも利用中fileを観測しなかった。既存の容量調査とENOSPC記録を再利用し、request-intent系試験領域から8本の独立した素材コピーを個別確認する。symlink・hardlink・Git管理fileを削除対象に含めない。失敗uploadの指定先は現在存在せず、削除済みと装わない。元素材・書き起こし・inspection、完成／確認用媒体、全判断・要求／回答・state・ログ・旧検査証拠を保持する。
+
+[一回実行script](queue-storage-cleanup-20261001-v001.py)は明示8pathだけを対象に、実size／stream SHA・保存済み参照・保持元・使用状況を検査して[削除前一覧と実行結果](queue-storage-cleanup-20261001-v001.json)へ保存する。削除前一覧の通常commit/pushを確認してから同じ一覧だけを削除し、削除直前のidentity確認、削除後の空きと保全を記録する。このcheckpoint時点では実削除未実施。本人への一覧再承認は要求しない。
+
+先行容量preflightの設営7回目は未適用、製品累積5／設営累積6を維持。今回の本人承認による削除は一般修正枠の変更・リセットではない。大容量copy／upload／MP4は再開せず、SSDの接続・移行先・利用開始を推測しない。旧技術受理は履歴として保持し、削除する試験コピーに依存する旧runtimeの即時再読は認定しない。
+
+削除前検査の実結果：8本すべて4,803,412,827 bytes・SHA `504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4`で保持元素材と一致、合計38,427,302,616 bytes（35.79GiB）。各fileは別inode・単一link・通常file、Git管理外、利用中0。保存済み33参照で複製の由来と削除後の再作成対象を記録。旧binding／state／Git管理のJSON証拠69件のSHAと、その他runtime file634件のmetadata集計を保存した。保持元3fileの実SHAも一致。調査時の同volume空き2,161,881,088 bytes。
+
+整理scriptの初回は旧attempt-002の実参照形状の照合だけでexit1となり、削除0。当該保存pathをそのまま物理fileへ対応させて一覧作成はexit0となった。初回の実stream SHA9件を、先行inode／size・更新時刻と再確認して再利用し、残り2素材を実hashした。製品reader／validatorの変更や旧参照の書換えではない。削除前記録は約40KB、新たな大容量backupなし。
