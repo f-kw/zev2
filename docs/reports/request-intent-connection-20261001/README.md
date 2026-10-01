@@ -394,3 +394,33 @@ ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間�
 製品5／設営7を維持、追加修正未適用・正式再実行0、一般上限・累積リセット0。新素材read／hash／copy／PUT・source/STT complete・通常runner・削除コピー復元・追加削除・大容量upload・SSD操作・外部推論・費用・動画製造0。ID9-PD-01/02未承認・字幕演出未接続・動画許可未承認・人間品質pending、新規人間Pending0。
 
 範囲内checkpointを担当のみ通常commit/pushして、同じCodex2専用EdgeからZEV Build LoopへGPT_DECISIONで直接報告する。本人への再確認・転記・視聴／採点・Codex1起動は要求しない。媒体なし回帰は完了とは報告しない。
+
+
+## 媒体なしattempt-002：設営8の受領・適用checkpoint
+
+2026-10-01（JST）：相談役の個別承認・再開指示をmain `5cb6c94c213390abefc187ce0553c8bcd2f9aab3`へfast-forward同期して受領。START_HERE、HANDOVER v021全文、媒体なし正本全文と§6、現行AGENTS・監査／人間確認方針、対象testを確認。同じCodex2、受領時Git clean、実行環境のモデル表記gpt-6.1-sol。既読DECISIONSとAGENTSは前checkpointから変更なし。通常依頼の拒否・Clip/Digest工程と確認条件を媒体なしで確認する目的を維持する。
+
+既存test一pathだけの未承認・下書き重複・工程列変更を、対象命令の依頼IDで一意の下書きへ作用させるよう修正。基準が承認元と一致すること、メモリ内の配列逆順でも同じ対象が選ばれること、3caseが他の下書きを変更しないことを限定確認する。設営累積8回目を適用、製品5回は不変、一般上限・履歴リセット0。通常caller・製品制御関数・認証・期待値・人間判断の意味は変更しない。
+
+新runtimeと新証拠は§6指定のattempt-002へ固定し、親／隔離backend／別process readerが共通の参照先を使う。旧attempt-001のstate SHA `f3099a3aa295522196b1d31fbecebdddc32ad27a63f2eaa14cc27634c7759294`、旧失敗証拠SHA `946b023b2633487ecf23d5812f027b12fee066157f1126550ecc7a6576598e33`、固定Git失敗版test SHA `107ab6270807c3b29d98be147852415746bd7d028d1fa683711f85821cdf533f`を実行前に確認・保存。旧証拠／旧stateは上書きせず、旧reader・媒体内容には触れない。このcheckpoint時点では新実行結果は未確認。受領記録だけのcommitは行わず、実試験・保存まで続行する。
+
+
+## 媒体なしattempt-002：限定検証完了
+
+新しい一系列を明示no-media入口で実行し、親process exit0、隔離backend終了0、別processの通常store reader exit0。52結果すべてpassed：入口1／通常API-store28／対象下書き選択1／制御関数メモリ20／保存・保全2。旧attempt-001の38結果との合算ではない。[新実結果](queue-no-media-regression-evidence-attempt-002.json)に実route・HTTP状態・期待値・結果、実装SHA、実行時test SHAと修正履歴を保存した。
+
+今回の修正では、対象命令の承認元が一意に存在すること、逆順のメモリ配列でも同じ下書きを選ぶこと、変更が他の下書きに作用しないことが成立した。前回未実施の5否定（未承認・不存在・重複・工程列変更・Clip外工程）を含む承認入力14否定で、実sharedの承認入力検査が例外を返し、実行可能判定もfalse。正常入力の目的改行全文・条件・素材参照・制作系統・policy・依存検査の意味は変更していない。
+
+Clipの確認生成元3件と独立ゲート3件も成立。テーマ提案→テーマ選択確認、構成作成→場面確認、調整→生成前確認を生成する既存対応を維持した。後段の構成／編集／動画命令に対し、依存成功はメモリ内だけで作り、未回答・回答待ち・却下・修正要求では実行不可、対応する確認の承認で実行可能。別依頼・別確認種類の承認と最新の回答待ちは実行不可。生成前承認のpolicyがfalseでも、対応する人間確認を単独で免除しない。これは実制御関数の単体回帰で、実際の人間品質承認・動画E2Eではない。
+
+通常APIの51通信はGET／POSTのみ。認証境界、9入力拒否で不正な業務オブジェクト増殖なし、未承認で命令0、Clip7／Digest4工程のkind・依存順・目的改行全文・条件、2依頼の重複承認409、未完了依存9工程のclaim409、最初のsource命令2件だけ実claimを確認した。通常storeは11命令running2／waiting9、成功0／成果物0／人間確認・承認0で終了。成功工程や架空成果物の注入、source/STT処理・complete、通常runner起動は0。
+
+完成時GET応答を保存し、隔離backendを通常終了してから、新processが実loadState／readStateSnapshotで全stateを完全対照した。保存bytesは不変、state26,434 bytes／SHA `edfe0338610c0f86aa38023592e2e4010a2ec4d2c5859279ae1289d1b2e2c74a`。新領域はstate・API応答・backend log・reader proofの4小file、増加53,218 bytes。停止後診断の流用ではない。自分の試験／backend process残存0。
+
+旧report証拠6件と旧attempt-001のstate／v001失敗証拠は前後のsize・SHAが一致。失敗時testはb47999f7固定Git版と旧記録のSHAが一致して保持され、新しいtestの改訂と区別する。製品・通常caller・認証・shared distを含む実装SHA5件はattempt-001と同一、製品code差分0。新test自身の実実行と関数／型の対応・diff --checkを確認し、製品変更なしの全repo型検査・旧15／111試験・全動画QC・人間レビューは再実行しない。
+
+今回媒体なし正本§2／§6の残件はすべて検証完了。設営8適用／製品5を維持、追加修正0、一般上限・履歴リセット0。素材read/hash/copy/PUT、source/STT complete、通常runner、大容量upload、SSD操作、削除コピー復元・追加削除、外部推論・費用・動画製造0。新規人間Pending0、ID9-PD-01/02未承認・字幕演出未接続・動画許可未承認・人間品質pendingを維持する。
+
+v005全体は未完了。upload転送／worker-backend分離root／転送先のみ消費再読、MP4直接登録／inspection未提供の通常complete、目的2件の全3判断はnot-run。相談役へ次の一件として、保留中の転送検証の実確認済み保存先・必要容量・再開条件の具体化を依頼する。SSDは接続先も利用開始も未確認で、今回操作していない。大容量経路の自動再開はしない。
+
+現在地とHANDOVERを同期し、担当5fileだけ明示stage・通常main commit/push・Git clean確認後、Codex2専用Edgeから `AUDIT_ONLY＋NEXT_REQUEST｜9. 通常入力拒否・Clip回帰（媒体コピーなし）` を直接送信する。本人の視聴／採点／転記、Codex1起動、受領だけの再commitは不要。

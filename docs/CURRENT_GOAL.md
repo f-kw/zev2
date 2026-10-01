@@ -8,11 +8,11 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`b47999f7398118b1ef53b68b5b95a7ea922e7779`の媒体なし回帰の停止を監査。対象Clipではなく先頭のDigest下書きを変更していた3fixtureを、対象命令のrequestDraftIdで選ぶ修正だけ、相談役が設営累積8回目として個別承認した。decision: continue。本人への再確認は不要。同じCodex2で新attempt-002の媒体なし検証へ進む。受領・修正適用・実再開は未確認。媒体なし回帰とv005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：相談役個別承認の設営8を適用し、新媒体なしattempt-002は52結果・process exit0で検証完了。通常APIの入力拒否・Clip7／Digest4工程と目的・条件、承認入力否定14・確認生成元3・独立ゲート3、完成時API応答と通常storeの別process完全対照・旧証拠保全が成立。製品5／設営8、追加修正0。媒体なし一件の監査へ提出し、v005全体の転送・MP4等は未完了／保留。大容量・SSD・容量整理は再開しない。**
 
 正本は [媒体なし回帰の限定指示 §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)、今回の判断保存 `a76ceedb322091883dda20d01f81312c23edb745`。初回指示保存`bf24872681eba292f2bb0211f162ea94db7f9e46`と、先行[容量preflight](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)の媒体なし検証範囲は維持する。新エピック・製品code変更・新しい人間確認の追加ではない。
 
-適用済みの履歴は製品5／設営7、今回の設営8は適用時に計上する。一般上限・強制停止条件・履歴を変更しない。b47999f7のGit終了・追加作用停止は報告として受領、remote mainと対象コード／証拠は相談役確認済み。今回指示の保存を稼働済みと扱わない。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
+5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
 ## 3. 容量整理の受理と保留
 
@@ -41,13 +41,17 @@ attempt-001の停止履歴：通常API／store28検査、入口拒否1、承認�
 
 [旧実結果・失敗と最小案](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-v001.json)と旧attempt-001、失敗時code SHAは不変に保持する。新runtimeは `runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-002`、新結果は同report directoryの `queue-no-media-regression-evidence-attempt-002.json`。親・backend・readerの参照先を同じ新runtimeへ合わせて明示no-media入口を実行する。
 
-残る5承認入力否定、確認生成元3件、依存成立時の独立確認ゲート3件、完成時API応答と小stateの別process完全対照、旧証拠保全まで続行する。新attemptで一系列を確認するための小さい前段再実行は可。旧38件との合算で全体合格を作らず、停止後診断を完成時再読へ流用しない。SSD待ちはこの検証の開始条件ではない。
+§6の再開指示は残る5承認入力否定、確認生成元3件、依存成立時の独立確認ゲート3件、完成時API応答と小stateの別process完全対照、旧証拠保全までを対象とした。今回この全項目は下記の新一系列で成立。旧38件・停止後診断の流用0、SSDは今回の開始条件ではない。
+
+今回の実結果：[attempt-002証拠](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-attempt-002.json)。52結果は新一系列（入口1・API28・対象選択1・制御関数20・保存2）。旧38件との合算0。完成時API応答と実通常storeの全stateが新processで一致、state26,434 bytes不変・新領域53,218 bytesの4小file。旧失敗state／証拠と旧report6件SHA不変、失敗時testは固定Git版に保持。製品変更0・媒体作用0・人間Pending追加0。前節の未実施履歴は今回の完了へ逆流させない。
+
+次に相談役へ依頼する一件は、保留中の転送検証の実確認済み保存先・必要容量・再開条件の具体化。SSDや保存先を自己推測して操作・大容量再開しない。
 
 ## 5. 未完了・承認境界
 
 時計二path修正・15局所検査・関連型検査、attempt-005のlocal計画→検証complete・別process再読は`60b959d91d0885ac2bf9cf4aaae66eff93454bab`で限定受理済み。容量整理を理由に未修正へ戻さない。元source/STTは旧保存物の登録、判断は固定応答であり実AI品質とは別。
 
-upload転送／worker-backend分離root／転送先のみの消費再読、MP4直接登録／inspection未提供の通常complete、目的2件の全3判断は未完了／未確認。通常否定・Clip回帰は今回実際に確認した項目だけ閉じ、残りはnot-runと理由を残す。v005全体を完成にしない。
+upload転送／worker-backend分離root／転送先のみの消費再読、MP4直接登録／inspection未提供の通常complete、目的2件の全3判断は未完了／未確認。通常否定・Clip回帰と新しい小state再読は今回の限定範囲で検証完了、相談役の技術監査は別。v005全体を完成にしない。
 
 [v005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)の開発候補はproductionType、共通queueのprepare_digest_plan／validate_digest_planと専用2kind。Clipは既存7工程・確認条件を維持、Digestの動画工程は追加しない。FileRef.ownerId＝OutputEntity ID、素材JSONと実動画SHA、要求／回答SHA・全断片被覆・参照検査は維持する。
 
@@ -69,4 +73,4 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 
 旧結果queue-no-media-regression-evidence-v001.jsonは不変、新結果はqueue-no-media-regression-evidence-attempt-002.jsonと主reportへ保存する。API実測・制御関数単体・保存再読・未実施を分け、媒体作用0と小さい試験領域の増加量を記録。実質checkpointで現在地を同期し、通常main・担当fileのみ明示stage・直列commit/push・専用Edgeから直接報告する。
 
-方針・指示・受理・中断は同じターンに正本へ反映し、会話上限を待たない。b47999f7の試験はexit1、自分の試験／backend残存なしという報告を受領。今回の設営8と再開は指示発行済み、受領・適用・稼働・完成は未確認。受理記録だけの再commit・終了連絡・再起動を増やさない。上位はAGENTS・監査プロトコル・人間確認方針。更新前全文は[b47999f7固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/CURRENT_GOAL.md)、削除時の詳細は[78805d86固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/CURRENT_GOAL.md)に保持する。
+方針・指示・受理・中断は同じターンに正本へ反映し、会話上限を待たない。b47999f7の試験はexit1、自分の試験／backend残存なしという報告を受領。今回の設営8を適用・実行し、新attempt-002はexit0／52結果成立。自分の試験・backend残存0、次の大容量再開は未実施。受理記録だけの再commit・終了連絡・再起動を増やさない。上位はAGENTS・監査プロトコル・人間確認方針。更新前全文は[b47999f7固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/CURRENT_GOAL.md)、削除時の詳細は[78805d86固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/CURRENT_GOAL.md)に保持する。

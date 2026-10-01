@@ -16,8 +16,8 @@ import {
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const script = fileURLToPath(import.meta.url);
 const report = path.join(root, 'docs/reports/request-intent-connection-20261001');
-const runtime = path.join(root, 'runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-001');
-const evidencePath = path.join(report, 'queue-no-media-regression-evidence-v001.json');
+const runtime = path.join(root, 'runtime/artifacts/request-intent-no-media-regression-20261001-v001-attempt-002');
+const evidencePath = path.join(report, 'queue-no-media-regression-evidence-attempt-002.json');
 const loader = path.join(root, 'runner/node_modules/tsx/dist/loader.mjs');
 const sourceUri = path.join(root, 'runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4');
 const mode = process.argv[2];
@@ -72,9 +72,12 @@ if (mode === 'backend') {
   const results: Array<{name: string; category: string; status: string; details: Record<string, unknown>}> = [];
   const apiCalls: Array<Record<string, unknown>> = [];
   const evidence: Record<string, unknown> = {schemaVersion: 'request-intent-no-media-regression-evidence-v001',
-    status: 'in-progress', receivedHead: '6f72ce8ac5b5a53c5337dc686b410acb3c074e24', session: 'Codex2',
-    modelMetadata: 'gpt-6.1-sol', productFixes: 5, setupFixes: 7,
+    status: 'in-progress', receivedHead: '5cb6c94c213390abefc187ce0553c8bcd2f9aab3', session: 'Codex2',
+    modelMetadata: 'gpt-6.1-sol', productFixes: 5, setupFixes: 8,
     setup7: '先行承認済みの媒体なし入口分離。新test一経路のみ、一般上限・履歴不変',
+    setup8: '正本§6の相談役個別承認。3fixtureの対象下書きを命令の依頼IDで選択、製品・期待値・一般上限・履歴不変',
+    attempt: 'attempt-002', previousFailureEvidence: 'queue-no-media-regression-evidence-v001.json',
+    previousTestCommit: 'b47999f7398118b1ef53b68b5b95a7ea922e7779', testFileSha256: sha(await readFile(script)),
     runtime: relative(runtime), runtimeBytesBefore: 0, results, apiCalls,
     memoryFixturesPersistedToStore: false, automaticRunnerDisabled: true,
     mediaRead: false, mediaHash: false, mediaCopy: false, mediaPut: false,
@@ -214,6 +217,16 @@ if (mode === 'backend') {
     }
     const memoryBase = structuredClone(approved[0].state);
     const memoryRequest = approved[0].agentRequests[3];
+    const fixtureDraft = (s: Zev2State) => {
+      const matches = s.requestDrafts.filter(d => d.id === memoryRequest.requestDraftId);
+      assert.equal(matches.length, 1);
+      const draft = matches[0]; assert(draft); return draft;
+    };
+    assert.deepEqual(fixtureDraft(memoryBase), approved[0].draft);
+    const reordered = structuredClone(memoryBase); reordered.requestDrafts.reverse();
+    assert.deepEqual(fixtureDraft(reordered), fixtureDraft(memoryBase));
+    await record('対象下書きの一意性・命令ID束縛・配列順非依存', 'fixture-selection',
+      {requestDraftId: memoryRequest.requestDraftId, unique: true, orderIndependent: true, stored: false});
     const mutations: Array<[string, (s: Zev2State, q: AgentRequest) => void]> = [
       ['目的変更', (_s, q) => q.input.purpose += '別意図'], ['編集条件変更', (_s, q) => q.input.settings.preset += '変更'],
       ['外側条件変更', (_s, q) => q.constraints.durationLabel += '変更'], ['素材参照変更', (_s, q) => q.target.sourceUri += '.other'],
@@ -221,12 +234,18 @@ if (mode === 'backend') {
       ['依存不存在', (_s, q) => q.dependsOnAgentRequestId = 'agent-not-created'],
       ['依存工程違い', (_s, q) => q.dependsOnAgentRequestId = approved[0].agentRequests[0].id],
       ['依存別draft', (s, q) => {s.agentRequests.push(...structuredClone(approved[1].agentRequests)); q.dependsOnAgentRequestId = approved[1].agentRequests[0].id;}],
-      ['下書き未承認', (s) => s.requestDrafts[0].status = 'draft'], ['下書き不存在', (s) => s.requestDrafts = []],
-      ['下書き重複', (s) => s.requestDrafts.push(structuredClone(s.requestDrafts[0]))],
-      ['工程列変更', (s) => s.requestDrafts[0].steps.reverse()], ['Clip外工程', (_s, q) => q.type = 'prepare_digest_plan'],
+      ['下書き未承認', (s) => fixtureDraft(s).status = 'draft'], ['下書き不存在', (s) => s.requestDrafts = []],
+      ['下書き重複', (s) => s.requestDrafts.push(structuredClone(fixtureDraft(s)))],
+      ['工程列変更', (s) => fixtureDraft(s).steps.reverse()], ['Clip外工程', (_s, q) => q.type = 'prepare_digest_plan'],
     ];
     for (const [name, change] of mutations) {
       const s = structuredClone(memoryBase), q = structuredClone(memoryRequest); change(s, q);
+      if (['下書き未承認', '下書き重複', '工程列変更'].includes(name)) {
+        assert.deepEqual(s.requestDrafts.filter(d => d.id !== memoryRequest.requestDraftId),
+          memoryBase.requestDrafts.filter(d => d.id !== memoryRequest.requestDraftId));
+        assert.notDeepEqual(s.requestDrafts.filter(d => d.id === memoryRequest.requestDraftId),
+          memoryBase.requestDrafts.filter(d => d.id === memoryRequest.requestDraftId));
+      }
       assert.throws(() => assertApprovedAgentRequestInput(s, q)); assert.equal(isAgentRequestReady(s, q), false);
       await record('承認入力不一致:' + name, 'control-memory', {actualFunctions: ['assertApprovedAgentRequestInput', 'isAgentRequestReady'], stored: false});
     }
