@@ -8,9 +8,11 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：d0259442と専用Edgeのcontinue返信全文を受領し、設営15の4誤消費拒否を実行。A1 source JSON→video MIME、A2 tiny ftyp→JSON、B実Digest登録依存へClip kind、C実Clip builderへDigest計画の4件すべてpassed、実親exit0／別process reader0。親§8.1〜8.6を再対照し「v005隔離実装試験 技術完了候補」を相談役最終監査へ提出する。最終受理は未受領。製品5／設営15、一般履歴不変。**
+**9. 明示Digestの通常キュー接続（v005）：技術完了。** `7c8f34ce` の最終4拒否と親§8.1〜§8.6を相談役が監査し、[親v005 §13](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)で隔離実装試験をacceptした。受理保存 `df9fce022d78527724625e00503965a697b2e994`。製品5／設営15を履歴保持。v005内に追加の技術作業は残さない。
 
-[新4拒否・親条件対照](reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-evidence-v001.json)、[小test](reports/request-intent-connection-20261001/queue-source-kind-and-cross-production-rejection-test.mts)、[正本](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_FINAL_CROSS_TYPE_REJECTIONS.md)。新runtime4小file／316,925 bytes、旧705小fileと006007の120metadata不変。媒体read/hash/copy/PUT、通常runner、ffprobe、外部推論／費用、動画、SSD、削除0。次は専用Edgeの最終監査返信生成完了・全文を受領し、同じ範囲の具体指示へ続行する。ID9-PD-01/02・本番・実AI品質・字幕演出・動画許可・人間品質は別の未承認／pending。
+未承認の別事項：ID9-PD-01/02、旧業務state移行、本番有効化、実AI内容品質、字幕演出接続、動画実行許可、人間品質採用、公開。v005の合格をこれらへ読み替えない。
+
+Codex2は相談役の最終accept返信を全文受領後、このID9/v005エピックを終了する。受理記録だけの再commit・再試験・終了通知commitは不要。別エピックは新しい初回キック指示をkawafmmが手貼りした場合のみ開始する。
 
 ## 2.0 初回キック
 
