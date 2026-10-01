@@ -223,10 +223,6 @@ async function requestJson<T>(routePath: string, init?: RequestInit): Promise<T>
   return body;
 }
 
-async function loadState(): Promise<Zev2State> {
-  return requestJson<Zev2State>('/state');
-}
-
 function findRequestOutputFileRef(state: Zev2State, requestDraftId: string, type: AgentRequestType) {
   const agentRequest = lastMatching(
     state.agentRequests,
@@ -737,8 +733,7 @@ const STEP_ARTIFACT_BUILDERS = createStepArtifactBuilders({
   writeJsonArtifact
 });
 
-async function buildArtifactForRequest(request: AgentRequest): Promise<ArtifactInfo> {
-  const state = await loadState();
+async function buildArtifactForRequest(request: AgentRequest, state: Zev2State): Promise<ArtifactInfo> {
   await downloadRequestArtifactsFromBackend(state, request);
   return STEP_ARTIFACT_BUILDERS[request.type]({ request, state });
 }
@@ -848,15 +843,15 @@ function formatSeconds(milliseconds: number): string {
   return `${(milliseconds / 1000).toFixed(1)}秒`;
 }
 
-async function claimRequest(request: AgentRequest): Promise<void> {
-  await requestJson<StateResponse>(`/agent-requests/${request.id}/claim`, {
+async function claimRequest(request: AgentRequest): Promise<{request:AgentRequest;state:Zev2State}> {
+  return requestJson<{request:AgentRequest;state:Zev2State}>(`/agent-requests/${request.id}/claim`, {
     method: 'POST',
     body: JSON.stringify(buildClaimInput())
   });
 }
 
-async function completeRequest(request: AgentRequest): Promise<void> {
-  const artifact = await buildArtifactForRequest(request);
+async function completeRequest(request: AgentRequest,state:Zev2State): Promise<void> {
+  const artifact = await buildArtifactForRequest(request,state);
   const completedArtifact = await uploadArtifactToBackend(artifact);
   await requestJson<StateResponse>(`/agent-requests/${request.id}/complete`, {
     method: 'POST',
@@ -885,8 +880,8 @@ async function runDryRunLoop(): Promise<void> {
     console.log(`AIエージェント実行開始: ${request.label} (${request.type})`);
 
     try {
-      await claimRequest(request);
-      await completeRequest(request);
+      const claimed=await claimRequest(request);
+      await completeRequest(claimed.request,claimed.state);
       console.log(`AIエージェント実行完了: ${request.label}`);
     } catch (error) {
       await failRequest(request, error);

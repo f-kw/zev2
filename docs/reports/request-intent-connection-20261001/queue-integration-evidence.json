@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "request-intent-queue-integration-evidence-v001",
+  "attempt": "attempt-002",
+  "results": [],
+  "captures": [
+    {
+      "stage": "discovery",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "5d28ee4a2a2abd8b178553103f9c19bf54d1c0b1d625e19f57def83d4f17085d",
+      "sourceId": "fileref_ME1-mfSeF6RIYYr6sjgnX",
+      "utteranceCount": 1615,
+      "candidateCount": null
+    },
+    {
+      "stage": "selection",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "141723fc36a065a7525ad156b35c33ca319fdd6cdf128d19993d7c57eb42220f",
+      "sourceId": "fileref_ME1-mfSeF6RIYYr6sjgnX",
+      "utteranceCount": null,
+      "candidateCount": 2
+    },
+    {
+      "stage": "retention",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "e714097195dce999ccf7f6986cd8ff73eb55aa885eb5f8f6096a3c7645faad69",
+      "sourceId": null,
+      "utteranceCount": null,
+      "candidateCount": 2
+    }
+  ],
+  "completed": [],
+  "inputPath": "normal draft API/approve/next/claim/runner index/factory/PUT/complete",
+  "sourceProcessingExecuted": false,
+  "sttExecuted": false,
+  "externalInferenceExecuted": false,
+  "inspectionExecuted": false,
+  "renderExecuted": false,
+  "productionAdoption": false,
+  "status": "failed",
+  "error": "Test harness incorrectly matched the word 失敗 inside the actual transcript judgment event, after normal prepare complete succeeded. This is a test diagnosis, not a queue failure.",
+  "setupDefectIdentified": "stdout content must not be judged as an error; actual exit and state must be used",
+  "requiredSetupRepairNotPerformed": true
+}

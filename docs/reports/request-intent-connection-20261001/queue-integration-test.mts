@@ -166,6 +166,6 @@ if(mode==='backend') {
     }
     record('different purposes reached all three actual Skills',{captures:captures.length});
     evidence.status='passed';await checkpoint();
-  } catch(e) {evidence.status='failed';evidence.error=e instanceof Error?e.stack:String(e);await checkpoint();throw e;}
+  } catch(e) {evidence.status='failed';evidence.error=e instanceof Error?e.message:String(e);await checkpoint();throw e;}
   finally {for(const c of children)if(c.exitCode===null)c.kill('SIGTERM');}
 }

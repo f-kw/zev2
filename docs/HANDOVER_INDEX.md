@@ -4,7 +4,7 @@
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しを置く。
 
-**最新更新：`d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` のv004設計・境界実測を受理し、[明示Digest依頼→通常登録→次工程消費の隔離実装v005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)を発行した（保存 `a3bd8594df7c9151e164bf1e96024029a2356a0a`）。開発候補の型・2工程・専用成果物・実complete／所有者・source参照・local/uploadを一系列で実装検査する。一般委任・公開契約の本適用・業務state移行・動画許可方式は未承認として分離。Codex2単独、同じセッションで続行。v005をCodex2が受領し隔離実装中。詳細は§2.7。**
+**最新更新：`d77f2a5ddc48016e6e1c7f22bee454fc231ffda7` のv004設計・境界実測を受理し、[明示Digest依頼→通常登録→次工程消費の隔離実装v005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)を発行した（保存 `a3bd8594df7c9151e164bf1e96024029a2356a0a`）。開発候補の型・2工程・専用成果物・実complete／所有者・source参照・local/uploadを一系列で実装検査する。一般委任・公開契約の本適用・業務state移行・動画許可方式は未承認として分離。Codex2単独、同じセッションで続行。v005受領・通常計画登録の部分実測後、参照graph不整合／製品限定修正累積3で中断。詳細は§2.7。**
 
 本書は現在地を復元する入口。更新前の[v008全文](https://github.com/f-kw/zev2/blob/d77f2a5ddc48016e6e1c7f22bee454fc231ffda7/docs/HANDOVER_INDEX.md)、過去の[v007全文](https://github.com/f-kw/zev2/blob/7b600a648cf4ee5228601b72b0a6b6629038fa75/docs/HANDOVER_INDEX.md)と個別指示・reportに原文を保持する。過去の「未確認」「次」を現在へ逆流させない。
 
@@ -57,7 +57,7 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 | Codex2：通常callerの計画準備v002 | `11809f6f6bebed82014971c966b79b383b921a1d`を技術受理。通常API→承認・claim→実factory→3判断→別保存・再開・再読。27結果・21捕捉 | source/STT完了はfixture。通常complete所有者と素材JSONの扱いはv005で検査する。限定成果を一般E2Eへ広げない |
 | Codex2：保存計画の後段入力v003 | `7b600a648cf4ee5228601b72b0a6b6629038fa75`を技術受理。非連続保持を既存Digest形式へ変換、job形状／時計検査、4出力保存・再読。15結果＋5拒否 | 通常完了登録・後続キュー・実製造・人間採用は当該範囲外。旧計画消費と旧bytes不変はその検証時点の結果 |
 | Codex2：仕様案・境界実測v004 | `d77f2a5d`の一案、実validatorの受理2／想定拒否8、別process26保護path再読、6file差分を相談役受理 | 製品コード変更0。通常キューが完成したわけではない。Git終了受領済み。次の開発候補実装はv005 |
-| Codex2：明示Digest通常キュー隔離実装v005 | [具体的指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)発行。必須系統・2工程・専用kind・実complete・参照一式の転送／再読を通常callerで検査する | Codex2受領・隔離実装中。一般委任・契約本適用・旧業務state移行・動画許可方式は未承認。§2.7参照 |
+| Codex2：明示Digest通常キュー隔離実装v005 | [具体的指示](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)発行。必須系統・2工程・専用kind・実complete・参照一式の転送／再読を通常callerで検査する | 通常計画登録まで部分実測。参照graph不整合と限定修正枠により中断、完了ではない。一般委任・契約本適用・旧業務state移行・動画許可方式は未承認。§2.7参照 |
 
 `d77f2a5d`の通常push・Git clean・staged0・untracked0・Git操作終了の報告を受領し、共通状態の保存担当は相談役へ返却された。Macのprocess一覧・ローカルGit状態は相談役が直接観測しておらず、Codexの実測報告とremote確認を区別する。指示発行・受領・作業中を混同しない。
 
@@ -102,7 +102,7 @@ v004自体は設計・境界確認のみで製品コード変更0。今回相談
 - **実登録／転送**：source/STTの処理は旧保存物を使うが、登録は実claim・PUT・completeで行う。OutputEntity／FileRefの正規所有者を検査。参照JSONと実動画を分離。既存PUTの安全な単一fileNameを使い、新版の論理参照から転送先のみで再読する。無制限path・新endpoint・旧回答の付け替えはしない。
 - **旧版**：旧データ・proofは不変。変更前の固定Git版と旧proofの照合を保存し、新コードで旧binding版を拒否する。固定版の来歴確認は旧reader再実行や現行製造資格ではない。コードを永久凍結せず、大量reader複製・hash免除・旧動画再生成にも広げない。
 - **別判断**：`ID9-PD-01`＝公開型／工程の本適用と、通常Digest下書き承認で品質pendingの機械採否・保持を一般的に任せる範囲。`ID9-PD-02`＝特定計画／基礎映像／最終出力の動画許可SHA・scopeの正式方式。いずれも未承認。旧業務state移行・本番有効化も別。品質視聴Pendingとは混同しない。
-- **実行と状態**：Codex2単独。新しい隔離stateだけで実走し、実業務・稼働中サービス・旧stateは変更しない。固定応答の試験を実AI品質や一般委任の実績にしない。累積設営3・製品限定修正2を維持。外部推論・費用・新素材・STT・inspection・動画・新UI・公開は今回実施しない。v005受領済み。Codex2が999346faへ同期し隔離実装中。
+- **実行と状態**：Codex2単独。新しい隔離stateだけで実走し、実業務・稼働中サービス・旧stateは変更しない。固定応答の試験を実AI品質や一般委任の実績にしない。現在は設営4・製品限定修正3へ到達。外部推論・費用・新素材・STT・inspection・動画・新UI・公開は今回実施しない。v005受領後、通常計画登録まで部分実測。参照graph不整合／製品限定修正累積3により中断。次工程・uploadは未検証。
 
 ## 3. ユーザーが確定した主線
 

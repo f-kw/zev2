@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "digest-logical-reference-gap-evidence-v001",
+  "requestId": "agent_gHCs-76lRLPdapgA0RRwR",
+  "requestDraftId": "draft_dYl1usb5pAi3C2XEYCwRr",
+  "status": "unresolved",
+  "planRegistrationSucceeded": true,
+  "declaredSelectionCandidateSetBinding": {
+    "schemaVersion": "candidate-selection-candidate-set-v001",
+    "path": "artifacts/draft_dYl1usb5pAi3C2XEYCwRr/candidate-set.json",
+    "fileSha256": "49adb5acf093f22197d22cb82f74b46a5baafd3de7ef6f0f4604869498e39331",
+    "canonicalSha256": "fd8e4bd99a1b0ecadc456559f05a6a5bc0a255d2593eb3cdef60ebe206c595f8"
+  },
+  "declaredPhysicalPathExists": false,
+  "registeredCandidateSetBinding": {
+    "schemaVersion": "candidate-selection-candidate-set-v001",
+    "path": "artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--candidate-set.json",
+    "fileSha256": "49adb5acf093f22197d22cb82f74b46a5baafd3de7ef6f0f4604869498e39331",
+    "canonicalSha256": "fd8e4bd99a1b0ecadc456559f05a6a5bc0a255d2593eb3cdef60ebe206c595f8"
+  },
+  "registeredPhysicalPathExists": true,
+  "sameContentSha": true,
+  "reason": "Pure existing builders append fixed basenames to outputRoot; current new storage adds request ID prefix to physical/declared artifact names. The nested request bindings and the registry do not resolve to the same bytes.",
+  "recommendedDifference": [
+    "shared logical data resolver maps artifacts/<draft>/<request>/<file> to existing single PUT fileName <request>--<file>",
+    "preparation uses logical request directory and basename registry lookup; pure content builders remain unchanged"
+  ],
+  "productLimitedRepairs": 3,
+  "additionalProductRepairPerformed": false,
+  "sourceOrOldArtifactChanged": false
+}
