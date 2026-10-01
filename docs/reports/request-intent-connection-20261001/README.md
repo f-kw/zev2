@@ -535,3 +535,23 @@ main bf8814a1へ他者変更を保持して同期し、相談役保存2530d966�
 今回のMP4枝・inspection未提供・異なる2目的の3判断到達は限定検証完了。親v005の全否定条件が現行版で直接実行されたとは認定せず、**v005全体の技術完了候補はまだ提出しない**。新たな製品欠陥・試験失敗は観測なし。次の一件として、残る資格・旧版・不完全転送の拒否を大容量copy／素材PUTなしの小さい隔離試験で埋める範囲を相談役へ求める。歴史上の合格を取り消さず、製品修正や一般上限変更を提案していない。
 
 製品5／設営12、一般枠・累積履歴リセット0。今回の構文transpile・無作用preflight・実走・実reader・保存証拠の別process照合を実施し、製品無変更の全型検査・旧52／15／111・全動画QC・人間レビューは再実行しない。外部推論・費用・新素材取得・STT／inspection処理・動画製造・新UI・本番・正式採用・公開0。ID9-PD-01/02未承認、人間品質pendingを維持。Codex1起動・他者タブ操作・本人への視聴／採点／転記要求0。担当6fileのみ明示stage・通常commit/push・Git clean確認後、同じ専用EdgeへAUDIT_ONLY＋NEXT_REQUESTを直接送る。
+
+## 2026-10-02 現行否定資格指示受領・設営13・実行前checkpoint
+
+local-mp4限定成果をf32d4523で通常pushし、Git clean／untracked0を確認、専用Edgeから完成監査＋次依頼を直接送信・表示確認した。相談役の最終返信で限定技術受理と次の現行否定資格指示を受領。同じセッションで79292676へmainを同期し、START_HERE、HANDOVER v031全文、[今回正本](../../work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)全文を確認した。モデル実行表記gpt-6.1-sol、専用Edge表示極高、変更・比較0。
+
+新しい否定試験一pathを設営13として用意した。対象は通常APIでのclaim所有者不一致・期限切れ回復、保存stateのメモリcloneによる承認入力／旧state拒否、登録依存の所有者／出力対応拒否、tiny JSONの版拒否、不完全転送の通常complete拒否。正のE2Eやsource/STT成功を作る試験ではない。試験側guardを製品import前に設定し、元・保存MP4のopen／read／streamと旧006／007への書込みを拒否する。製品5不変、一般枠・履歴リセット0。
+
+syntax transpileはexit0・生成file0。preflightは実exit0、保存007の対象下書きdraft_iWiSs9jXaGXk2mzN9ifr5と計画命令agent_DP8CY1tvAZ9_asnnlywJXをIDで一意に照合、4実関数の存在、保存state／計画SHA、旧006／007の120fileと684小保護fileを確認した。新runtime／証拠不存在、媒体read試行0・旧書込み試行0、backend／通常runner／PUT起動0。設営13を適用して、このまま新隔離小試験へ進む。受領だけのcommit・人間確認・転記は不要。
+
+## 2026-10-02 現行否定資格attempt-001：下書き作成HTTP期待値の設営停止
+
+新[試験](queue-current-negative-qualification-test.mts)の実runはexit1。通常control routerで最初の下書きを作成した実応答はHTTP201だったが、試験helperがHTTP200を期待していた。製品側503行の `response.status(201).json({ draft, state });` と一致する正常応答を試験側が拒否しており、製品の資格拒否欠陥とは認定しない。作成応答を確認せず200とした設営の誤りだった。approveはまだ呼ばれず、claim・complete・各否定検査へ到達していない。合格結果0。
+
+[実失敗証拠](queue-current-negative-qualification-evidence-v001.json)は書換えず保持。[停止後保全・試験全文／SHA・未適用最小案](queue-current-negative-qualification-setup-failure-v001.json)へ実command／exit1／error、routerの対応、停止state、旧物不変と残件を保存。失敗試験SHA53a4f8fc7548a08f57d489fcaeebaa554c67e08babdbfa4b7bfae562245afb96。新runtimeの状態はdraft1件、命令0、claim0、FileRef0、Output0、成功0。state1,789 bytes／SHAfd4b176867120d1f5f4a6bbac1ec132d4fbcb26c9612cd6804219419c723d4b0。新runtimeは実行前保全一覧とstateの2小file、262,031 bytesのみ。
+
+今回のbackendはfinallyで停止し実exit0、親／backend／通常runner残存0。親preflightとbackendのguardは媒体read試行0・旧006／007書込み試行0。素材hash／copy／PUT、通常runner、外部推論・費用、STT／inspection処理・動画・SSD・削除0。旧684小保護fileのsize／SHA、旧006／007の120fileの小SHAと保存metadata、製品8path不変、削除8path不存在。metadataの時刻は旧保存と同じJavaScript Number精度で比較し、追加のns精度を主張しない。停止記録の補助整形では一度そのNumber精度をPython整数との直接比較にしたため保存前停止し、両側を同じ元精度へそろえて再照合した。試験本体の修正・再実行や旧物変更ではない。
+
+**未適用の最小案**は、作成応答一箇所の期待値だけ200→201にすること。承認HTTP200、claim、拒否HTTP409／400、資格・版・SHA／bytes・出力不増加の期待値は変えない。旧attempt-001／v001失敗証拠・失敗時Git版を保持し、新attempt-002／v002証拠名／受領metadataへ追従して同じ否定試験を実行する案を、次の設営14として相談役へGPT_DECISIONする。Codexが例外を自己適用しない。累積は製品5／設営13、14は未承認・未適用、一般上限／履歴不変。
+
+期限切れ回復、claim所有者、保存承認入力／旧state、登録依存所有者、旧・未知成果物版、旧準備版、不完全転送validator／通常complete、完成時別process再読は全てnot-run。旧52や以前の合格へ合算しない。既に受理された006／007の正常経路を取り消さず、v005全体は未完了・技術完了候補ではない。新たな人間視聴・採点・技術確認・転記は要求せず、原因と最小案が確定した軽微設営一点を相談役へ直接返す。追加作用停止、担当6fileのみ通常checkpoint commit/push後に専用Edgeへ停止報告を送る。

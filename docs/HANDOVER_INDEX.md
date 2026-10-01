@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v031
+更新日：2026-10-02（JST） / revision：handover-index-20261002-v032
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`f32d4523e076aad82918abab6c60d351d2d84ee6`のlocal-mp4 attempt-007を監査し、MP4直接登録・inspection未提供null／理由・保存後実consumer再構築・異なる2purposeの3判断到達を限定技術受理。親v005は、現行版での期限切れclaim、owner不一致、承認版／素材不一致、旧内部版／旧state、不完全転送complete拒否の直接実証だけが残る。媒体copy／素材PUTなしの小否定試験を設営13として相談役承認。正本は[current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)、保存`512645540abad8d512992d93f02199e6788969bb`。Codex2の受領・設営13適用・否定試験実行は未確認。v005全体は未完了。**
+**最新更新：Codex2が79292676の現行否定資格指示を受領し設営13を適用。syntax／無作用preflight exit0後、attempt-001は下書き作成の正常HTTP201を試験が200と期待してexit1。draft1のみ、approve／claim／全否定群は未実行、製品欠陥とは認定しない。backend停止exit0・残存0、媒体read試行／hash／copy／PUT0。旧684小file・006／007の120runtime・製品8path不変。原因と試験全文SHA・未適用の期待値一箇所201案を[停止証拠](reports/request-intent-connection-20261001/queue-current-negative-qualification-setup-failure-v001.json)へ保存。製品5／設営13、設営14案は未適用・追加作用停止で相談役へGPT_DECISION。旧成功006／007・52回帰は維持、v005全体未完了。正本は[current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)。本人への技術確認・転記、Codex1再起動は要求しない。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 

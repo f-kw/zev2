@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`f32d4523`のlocal-mp4 attempt-007を限定技術受理。MP4直接登録・inspection未提供・異なる2purposeの3判断到達まで成立。次は親v005に残る現行版の否定資格だけを、媒体copy／素材PUTなしで一件にまとめて閉じる。対象は期限切れclaim、claim／Output-FileRef owner不一致、承認版／素材入力不一致、旧内部版／旧state、不完全転送complete拒否。設営13として小state／小JSON／memory fixtureだけを承認。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：local-mp4007は限定技術受理済み。設営13の現行否定試験attempt-001は、正常な下書き作成HTTP201を試験が200と期待してexit1。draft作成だけ、approve／claim／否定検査はnot-run。製品5／設営13、追加作用停止。期待値一箇所201への修正と新attempt-002／証拠名追従を、未適用の設営14案として相談役GPT_DECISIONへ返す。v005全体未完了。**
 
-次作業の正本は [current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)、保存 `512645540abad8d512992d93f02199e6788969bb`。既存006／007の大容量成果物はread-only扱いとし、元MP4のcopy／PUT／hashは行わない。Codex1再起動、本人への視聴・採点・転記、受領だけの再commit・終了連絡は不要。
+今回の正本は [current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)、保存 `512645540abad8d512992d93f02199e6788969bb`、受領main79292676。[失敗と未適用最小案](reports/request-intent-connection-20261001/queue-current-negative-qualification-setup-failure-v001.json)。次は相談役による作成応答期待値一箇所の設営14判定。旧006／007・元媒体のread／hash／copy／PUT0、旧684小file／120runtime／製品8path不変、停止state1,789 bytes。本人への視聴・採点・技術確認・転記やCodex1再起動を要求しない。
 
 ## 3. 容量整理の受理と保留
 
@@ -109,3 +109,9 @@ main85b077a3の正本と専用Edge最終返信を受領。設営12の明示入�
 元素材／PUT先／FileRefのsize・SHA一致、4出力の正規所有者と命令完了結果一致、inspection／消費／編集／製造入力／時計の明示nullと理由、架空出力不存在を確認。保存後の実store・実consumer別process再読exit0、保存成果物5,777 bytesとdeepEqual一致、state不変・再判断なし。006／007の保存要求と回答6組で異なる目的全文・各要求SHAを照合。旧669小証拠、006の91file、小proof/helper5件、製品8path不変、削除8path不存在。旧runtime全体の即時再読は保証しない。
 
 親v005§8を保存実績と現行codeへ対照。通常経路・転送・2目的・MP4／未提供・Clip／確認ゲートは実証、残る一部資格・版・不完全転送の拒否は静的／旧版履歴に留まるため全体完了候補にしない。新不具合・試験失敗なし。次の限定媒体なし否定実証を相談役に具体化してもらい、受領だけの再commitや人間中継を挟まず同じセッションで続行する。ID9-PD-01/02、字幕演出、動画許可、人間品質は未承認／pending。
+
+## 12. 現行否定資格attempt-001のHTTP期待値設営停止
+
+設営13として新否定入口を適用。syntax transpileと無作用preflight exit0、対象ID／4実関数／旧保全を確認したが、実runは最初の下書き作成HTTP201に対する試験の200期待でexit1。実router503行は201が正しく、製品差分はない。新stateはdraft1・命令／FileRef／Output／成功0、1,789 bytes。backend停止exit0、残存0、媒体read試行0・旧書込み試行0、旧684小fileと006／007の120file不変。
+
+旧失敗証拠／試験全文SHAと未適用一箇所201案を保存。承認・claim・拒否期待値やvalidatorを緩和せず、新attempt002／別証拠名へ進む設営14を相談役へ個別判断依頼する。Codex自己適用0、製品5／設営13と一般履歴維持。全否定群と成功時別process再読はnot-run、親v005技術完了候補ではない。

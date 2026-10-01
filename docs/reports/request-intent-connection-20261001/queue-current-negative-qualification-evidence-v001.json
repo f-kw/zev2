@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "request-intent-current-negative-qualification-evidence-v001",
+  "status": "failed",
+  "receivedHead": "79292676648328c58baf5028435815e5e62800f5",
+  "productFixes": 5,
+  "setupFixes": 13,
+  "preflight": {
+    "status": "passed",
+    "receivedHead": "79292676648328c58baf5028435815e5e62800f5",
+    "existingDraftId": "draft_iWiSs9jXaGXk2mzN9ifr5",
+    "existingPrepareRequestId": "agent_DP8CY1tvAZ9_asnnlywJX",
+    "existingStateSha256": "2a08f80585a35912efa95629666aba77148012c50ff2c69d9b7f09d902dafdcf",
+    "existingPlanSha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f",
+    "functions": 4,
+    "newPathAbsent": true,
+    "legacyFiles": 120,
+    "protectedSmallFiles": 684,
+    "mediaReadAttempts": 0,
+    "legacyWriteAttempts": 0
+  },
+  "runtime": "runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-001",
+  "results": [],
+  "backends": [
+    {
+      "name": "normal-api",
+      "exitCode": 0,
+      "guard": {
+        "mediaReadAttempts": 0,
+        "legacyWriteAttempts": 0
+      },
+      "stderr": ""
+    }
+  ],
+  "oldEvidenceReplayed": false,
+  "mediaCopy": 0,
+  "mediaPut": 0,
+  "mediaHash": 0,
+  "normalRunnerStarted": false,
+  "externalInference": false,
+  "videoManufacturing": false,
+  "sourceSttProcessing": false,
+  "inspectionProcessing": false,
+  "additionalDeletion": false,
+  "ssdOperation": false,
+  "productionAdoption": false,
+  "classification": {
+    "staticOnly": [],
+    "notRun": []
+  },
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n201 !== 200\n\n    at createFirst (/Users/kawafmm/workspace/zev2/docs/reports/request-intent-connection-20261001/queue-current-negative-qualification-test.mts:102:123)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async <anonymous> (/Users/kawafmm/workspace/zev2/docs/reports/request-intent-connection-20261001/queue-current-negative-qualification-test.mts:103:24)"
+}
