@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v024
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v025
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：82c24472のupload単独指示を受領、設営9適用・製品5維持。attempt-006で実行直前容量条件を満たし、source/STT通常登録→実index/factory→計画upload/complete→別root receiverの転送先のみ消費→validate completeは成立（4命令succeeded、receiver exit0）。終了後の追加保存再読は試験側の非同期snapshot読取にawait不足でexit1、consumer呼出前。失敗codeと一行未適用案を保存し、設営10個別判断を相談役へ返す。追加作用停止。新3copyは保持、旧小証拠669件・製品8path SHA不変、削除済み8pathは復元なし。今回・v005全体を完成としない。**
+**最新更新：`88d5e5a0b04b611f2453acf623625ff37c2360c2`のupload-json attempt-006を監査。通常source/STT登録→実index/factory→計画upload/complete→別root receiver転送先のみ消費→validate completeまで成立し、4命令succeeded・receiver guard exit0・実3copyピーク14,410,238,481 bytesは事前見積りと一致。追加の保存後readerだけが非同期readStateSnapshot()のawait不足でconsumer呼出前にexit1したため、相談役がawait一語だけを設営10として個別承認。大容量再実走はせず、attempt-006保存物だけの別process receiver-only再読へ戻す。正本は[v005 upload readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)、保存`ac1cc33ad56d7ecfc9f89baa57409ac21ce0434d`。適用済みは製品5／設営9、10は適用時に計上。受領・修正適用・再読合格は未確認。v005全体は未完了。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -156,6 +156,19 @@ v005全体は未完了。転送／分離root／転送先消費、MP4／inspectio
 preflight通過時だけ新しいupload-only attemptを実行し、旧source/STTの通常登録→実index/factory→計画complete→workerからbackendへ実upload→別root receiverがworker／元素材／保存STT／inspectionを直接読まず転送先だけから計画とdataBindingsを再構築→validate_digest_plan実消費／completeまで確認する。FileRef owner・要求SHA・内部参照・実bytes・時計・薄い検証成果物・通常completeと容量前後を保存する。
 
 今回はlocal-json再製造、MP4直接登録、inspection未提供通常complete、目的2件の全3判断、SSD操作・追加削除をしない。upload単独成功をv005全体完成・実AI品質・動画許可・人間品質へ広げない。Codex2単独、専用Edge、受領だけの再commit／終了連絡・Codex1起動は不要。
+
+
+### 2.23 2026-10-01：upload成立・保存後readerのawait一語を設営10で承認
+
+**decision: continue。** `88d5e5a0` のattempt-006では、preflight通過後に通常4工程すべてsucceeded、計画uploadと別root receiverの転送先のみ消費／validate completeまで成立。receiverはworker・元素材・保存STT・inspectionを直接読まずexit0。新3copy＝14,410,238,481 bytesで容量見積りとも一致した。追加の保存後readerはconsumer前に試験側で停止したため、upload製品欠陥とは扱わない。
+
+[失敗証拠](reports/request-intent-connection-20261001/queue-upload-readback-setup-failure-attempt-006.json)の失敗codeは `const state=readStateSnapshot();`。非同期snapshotをPromiseのままstateとして扱い `state.agentRequests.find` でTypeError。最小案 `const state=await readStateSnapshot();` と一致する。
+
+相談役は[upload readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)を発行し、**await一語だけを設営10**として個別承認。製品5／設営9を保持し、10は適用時に計上。製品code、通常API、runner、consumer、store、期待値、guard、SHA比較は変更しない。
+
+再開はattempt-006の保存物だけ。backend／runner／factory／大容量copy・PUT・downloadは再実行しない。別process readerで保存state、validate命令、FileRef／execution SHA、receiver artifactRoot、guard、実readConsumedDigestPlanV001による再構築、保存artifactとのdeepEqual、forbiddenReadsDuringReconstruction=0を確認し、小proofだけを新規保存する。成立すればupload-json転送＋保存後receiver-only再構築の限定完了として監査へ提出する。
+
+MP4直接登録、inspection未提供の通常complete、目的2件の全3判断、SSD操作・追加削除は残件／対象外。旧669小証拠、製品8path、新3copy、削除済み8pathは変更しない。
 
 ## 3. ユーザーが確定した主線
 
