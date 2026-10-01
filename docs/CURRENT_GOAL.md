@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：local-mp4007は限定技術受理済み。設営13の現行否定試験attempt-001は、正常な下書き作成HTTP201を試験が200と期待してexit1。draft作成だけ、approve／claim／否定検査はnot-run。製品5／設営13、追加作用停止。期待値一箇所201への修正と新attempt-002／証拠名追従を、未適用の設営14案として相談役GPT_DECISIONへ返す。v005全体未完了。**
+**9. 明示Digestの通常キュー接続（v005）：`fa9f56a3`の現行否定資格attempt-001を監査。通常draft作成の正しいHTTP201を試験だけが200期待して停止したため、期待値一箇所201への修正を設営14として相談役承認。旧失敗現物を保持し、新attempt-002から残る現行否定資格を全部続行する。製品5／設営13、14は適用時に計上。v005全体は未完了。**
 
-今回の正本は [current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)、保存 `512645540abad8d512992d93f02199e6788969bb`、受領main79292676。[失敗と未適用最小案](reports/request-intent-connection-20261001/queue-current-negative-qualification-setup-failure-v001.json)。次は相談役による作成応答期待値一箇所の設営14判定。旧006／007・元媒体のread／hash／copy／PUT0、旧684小file／120runtime／製品8path不変、停止state1,789 bytes。本人への視聴・採点・技術確認・転記やCodex1再起動を要求しない。
+今回の再開正本は [HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)、保存 `e36e236591acec67df1c41e8824ba139a17f0f39`。修正は `assert.equal(made.httpStatus,200)` → `201` の一箇所だけ。新attempt-002では期限切れclaim、wrong owner、承認版／素材／旧state、owner参照、旧／未知版、不完全転送complete拒否、完成時再読まで進める。元MP4のcopy／PUT／hash、製品code変更、外部推論、動画、SSD、削除は行わない。
 
 ## 3. 容量整理の受理と保留
 
