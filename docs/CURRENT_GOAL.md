@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：設営12を適用し、attempt-007のMP4直接登録／inspection未提供が実exit0・通常4工程succeeded。別processの実消費reader再構築と保存成果物が完全一致し、006／007の異なる目的が各3判断へ届いたことを保存要求・回答のSHAで照合した。製品5不変。限定検証は完了、v005全体は現行版での一部否定実証が残り未完了。**
+**9. 明示Digestの通常キュー接続（v005）：`f32d4523`のlocal-mp4 attempt-007を限定技術受理。MP4直接登録・inspection未提供・異なる2purposeの3判断到達まで成立。次は親v005に残る現行版の否定資格だけを、媒体copy／素材PUTなしで一件にまとめて閉じる。対象は期限切れclaim、claim／Output-FileRef owner不一致、承認版／素材入力不一致、旧内部版／旧state、不完全転送complete拒否。設営13として小state／小JSON／memory fixtureだけを承認。v005全体は未完了。**
 
-今回の正本は [local-mp4＋inspection未提供追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_LOCAL_MP4_NO_INSPECTION.md)、保存 `e22a87c54dddd0bd97f841b30bb2d5293629b449`。成果は[実走証拠](reports/request-intent-connection-20261001/queue-local-mp4-no-inspection-evidence-attempt-007.json)、[再読・2目的・親完了条件対照](reports/request-intent-connection-20261001/queue-local-mp4-readback-cross-purpose-proof-attempt-007.json)、主report。次は所有者・期限切れclaim・保存承認版／素材・旧内部版／旧state・不完全転送の現行拒否実証を、媒体copy／素材PUTなしで埋める具体的指示を同じ監査返信へ求める。静的確認と旧版の実行合格を現行の直接否定実行に合算しない。local-json/upload-json再実行・大容量試験・Codex1再起動・本人視聴／転記は不要。
+次作業の正本は [current negative qualification](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_CURRENT_NEGATIVE_QUALIFICATION.md)、保存 `512645540abad8d512992d93f02199e6788969bb`。既存006／007の大容量成果物はread-only扱いとし、元MP4のcopy／PUT／hashは行わない。Codex1再起動、本人への視聴・採点・転記、受領だけの再commit・終了連絡は不要。
 
 ## 3. 容量整理の受理と保留
 
