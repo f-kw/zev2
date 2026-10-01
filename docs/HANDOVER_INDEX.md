@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v022
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v023
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：5cb6c94cの再開指示をCodex2が受領・設営8適用。新媒体なしattempt-002は52結果・exit0で限定検証完了。通常API／store28、入口1・対象選択1、承認入力否定14・確認生成元3・独立ゲート3、完成時API応答と通常storeの別process完全対照・旧証拠保全2が成立。製品5／設営8、追加修正0、旧38件の合算0。媒体なし結果を監査へ提出し、v005全体は未完了。大容量転送・MP4等は保留、媒体・SSD・容量整理は再開しない。詳細§2.21。**
+**最新更新：`f54cd09af22621ddf0b5a5fdf3bf5776b87e8350` の媒体なしattempt-002を監査し、52結果・exit0・通常store別process完全対照・旧証拠保全を限定技術受理した。次の一件はupload-json転送／worker-backend分離root／receiver-only再読だけ。既存コードから大容量追加保持は最大3素材コピー＝14,410,238,481 bytes（約13.42GiB）と整理し、実行直前preflightで同一volumeならavailableBytes >= 4×sourceBytes（19,213,651,308 bytes、約17.89GiB）の今回限定条件を満たす場合だけ実走する。明示upload-only入口＋preflightを設営9として相談役承認。local-json・MP4／inspection未提供・SSD操作は今回行わない。正本は容量preflight §6、保存 `c4f851681fbc1041114ddb09b883d8e40fc1b9dc`。Codex2の受領・設営9適用・実走は未確認。v005全体は未完了。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -141,6 +141,21 @@ v005はproductionType、source/STT＋prepare_digest_plan／validate_digest_plan�
 [新52結果と保全](reports/request-intent-connection-20261001/queue-no-media-regression-evidence-attempt-002.json)、[主report](reports/request-intent-connection-20261001/README.md)。媒体なし正本の完了項目は成立し、通常commit/push・専用Edge直接報告で技術監査へ提出する。人間品質pending、ID9-PD-01/02未承認等は維持、新規人間Pending0。素材・通常runner・source/STT complete・大容量upload・SSD・動画・追加削除0、旧15／111・全動画／人間レビュー再実行0。
 
 v005全体は未完了。転送／分離root／転送先消費、MP4／inspection未提供の通常complete、目的2件の全3判断はnot-run。相談役へ次の一件として保留中の転送検証の実確認済み保存先・必要容量・再開条件の具体化を依頼する。SSD接続・利用開始未確認、大容量を自動再開しない。
+
+
+### 2.22 2026-10-01：媒体なし回帰を受理し、upload-json単独転送へ
+
+**decision: continue。** `f54cd09a` のattempt-002は新一系列52結果すべてpassed、親exit0・隔離backend終了0・別process通常store reader exit0。通常API／store、Clip7／Digest4工程、承認入力14否定、確認生成元3、独立ゲート3、完成時state完全対照と旧証拠保全が成立。旧38件との合算0、製品code変更0、媒体作用0。相談役はこの媒体なし回帰一件を限定技術受理する。Mac上での相談役再実行ではない。
+
+次の一件は[容量preflight §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)。既存runner／backend実装から、upload-jsonの大きな新規保持先はworker・backend・receiverの最大3 source-size実体。元素材4,803,412,827 bytesなので既知ピークは14,410,238,481 bytes（約13.42GiB）。削除直後の空きは40,604,250,112 bytes（約37.82GiB）だったが現在保証ではない。
+
+既存queue-integration-testはlocal→upload→MP4を連続するため、upload-jsonだけの明示入口と作用なし容量preflightを**設営9**として相談役個別承認。現在は製品5／設営8、9は適用時に計上。製品code／通常API／PUT/GET／consumer／固定応答・検査意味は変えない。
+
+同一volumeなら今回限定preflightはavailableBytes >= 4×sourceBytes＝19,213,651,308 bytes（約17.89GiB）。3コピーの既知ピークにsource 1本分の一時的試験余裕を置く条件で、製品の容量上限・恒久監視値ではない。別volumeなら各volumeに置く実体数で個別計算する。条件不足なら大容量作用前に停止し、SSDを推測しない。
+
+preflight通過時だけ新しいupload-only attemptを実行し、旧source/STTの通常登録→実index/factory→計画complete→workerからbackendへ実upload→別root receiverがworker／元素材／保存STT／inspectionを直接読まず転送先だけから計画とdataBindingsを再構築→validate_digest_plan実消費／completeまで確認する。FileRef owner・要求SHA・内部参照・実bytes・時計・薄い検証成果物・通常completeと容量前後を保存する。
+
+今回はlocal-json再製造、MP4直接登録、inspection未提供通常complete、目的2件の全3判断、SSD操作・追加削除をしない。upload単独成功をv005全体完成・実AI品質・動画許可・人間品質へ広げない。Codex2単独、専用Edge、受領だけの再commit／終了連絡・Codex1起動は不要。
 
 ## 3. ユーザーが確定した主線
 
