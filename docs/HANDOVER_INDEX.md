@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v023
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v024
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`f54cd09af22621ddf0b5a5fdf3bf5776b87e8350` の媒体なしattempt-002を監査し、52結果・exit0・通常store別process完全対照・旧証拠保全を限定技術受理した。次の一件はupload-json転送／worker-backend分離root／receiver-only再読だけ。既存コードから大容量追加保持は最大3素材コピー＝14,410,238,481 bytes（約13.42GiB）と整理し、実行直前preflightで同一volumeならavailableBytes >= 4×sourceBytes（19,213,651,308 bytes、約17.89GiB）の今回限定条件を満たす場合だけ実走する。明示upload-only入口＋preflightを設営9として相談役承認。local-json・MP4／inspection未提供・SSD操作は今回行わない。正本は容量preflight §6、保存 `c4f851681fbc1041114ddb09b883d8e40fc1b9dc`。Codex2の受領・設営9適用・実走は未確認。v005全体は未完了。**
+**最新更新：82c24472のupload単独指示を受領、設営9適用・製品5維持。attempt-006で実行直前容量条件を満たし、source/STT通常登録→実index/factory→計画upload/complete→別root receiverの転送先のみ消費→validate completeは成立（4命令succeeded、receiver exit0）。終了後の追加保存再読は試験側の非同期snapshot読取にawait不足でexit1、consumer呼出前。失敗codeと一行未適用案を保存し、設営10個別判断を相談役へ返す。追加作用停止。新3copyは保持、旧小証拠669件・製品8path SHA不変、削除済み8pathは復元なし。今回・v005全体を完成としない。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
@@ -218,3 +218,11 @@ Codexは受領・実質checkpoint・完了・中断・未送信を報告前に�
 ## 8. 新セッションへの依頼文
 
 > ZEV_START_HERE.mdから引き継いでください。GitHubの最新HANDOVER_INDEX.mdと必読資料を確認し、役割・現在地・完了済み・未解決・人間回答・次の確定作業を復元してください。済んだレビューや実装をやり直さず、人間確認待ちに依存しない承認済み作業を進めてください。
+
+## 9. attempt-006 uploadの成立と追加reader設営停止
+
+[主report](reports/request-intent-connection-20261001/README.md)、[転送実測](reports/request-intent-connection-20261001/queue-upload-transfer-evidence-attempt-006.json)、[reader失敗・未適用案](reports/request-intent-connection-20261001/queue-upload-readback-setup-failure-attempt-006.json)。通常4工程の成果物所有者と命令参照一致、24data参照・新要求SHAの3固定回答・4編集区間・時計・admission維持。receiver guardはworker／元素材／旧STT／inspection直接readを禁止。prepare exit1はmax-steps=1予定停止、計画成功と対応。親終了codeはtool返却なし、保存status passedだけで親exit0を捏造しない。
+
+空きは40,661,536,768→31,008,292,864→26,188,054,528 bytes。source-size保持は0→2→3実体、14,410,238,481 bytesで既知ピークに一致。停止保存時の新90fileは論理14,435,157,718 bytes、割当14,464,991,232 bytes。追加削除・SSD・旧33参照復元・外部推論・動画なし。
+
+追加readerは通常storeの非同期snapshotにawaitがない設営欠陥でexit1。製品code変更不要、consumer呼出前。未適用推奨差分はawait一行、相談役へ設営10の個別判断を依頼する。既存attempt-006の追加再読だけでよく、大容量copy／upload／runner再実行は不要。Codex自己承認・一般枠リセットをしない。設営9／製品5、旧小証拠669件／製品8path不変、旧コピー8path不存在。MP4／inspection未提供・目的2件の全3判断、本適用・動画許可・人間品質は未完了／未承認を維持。

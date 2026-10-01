@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`f54cd09a` の媒体なしattempt-002を限定技術受理。52結果・exit0、通常API／store、Clip7／Digest4工程、承認入力否定、人間確認ゲート、完成時別process store対照・旧証拠保全が成立。次はupload-json転送だけを単独再開する。設営9として明示upload-only入口＋作用なし容量preflightを承認し、実行直前の空きが今回限定条件を満たす場合だけworker→backend→receiver-only再読まで進める。MP4・inspection未提供・SSD操作はまだ行わない。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：媒体なし52結果はf54cd09aで限定技術受理済み。82c24472の容量preflight §6を受領し、設営9を適用。新attempt-006のupload-json通常系列は4工程の実complete・転送・receiver-only消費まで成立した。終了後の追加保存再読は試験側の非同期store読取にawait不足でexit1。製品5／設営9、追加修正未適用・追加作用停止。旧attempt／証拠を保持して、一行の設営10個別判断を相談役へ返す。v005全体は未完了。**
 
 媒体なし回帰の正本は [媒体なし指示 §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)。次作業の正本は [容量preflight §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)、保存 `c4f851681fbc1041114ddb09b883d8e40fc1b9dc`。既知のupload追加ピークはsource 3コピー＝14,410,238,481 bytes（約13.42GiB）。同一volumeでは今回限定の開始条件を4×sourceBytes＝19,213,651,308 bytes（約17.89GiB）とし、実行直前に測る。これは製品容量上限ではない。
 
@@ -83,3 +83,11 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 旧結果queue-no-media-regression-evidence-v001.jsonは不変、新結果はqueue-no-media-regression-evidence-attempt-002.jsonと主reportへ保存する。API実測・制御関数単体・保存再読・未実施を分け、媒体作用0と小さい試験領域の増加量を記録。実質checkpointで現在地を同期し、通常main・担当fileのみ明示stage・直列commit/push・専用Edgeから直接報告する。
 
 方針・指示・受理・中断は同じターンに正本へ反映し、会話上限を待たない。b47999f7の試験はexit1、自分の試験／backend残存なしという報告を受領。今回の設営8を適用・実行し、新attempt-002はexit0／52結果成立。自分の試験・backend残存0、次の大容量再開は未実施。受理記録だけの再commit・終了連絡・再起動を増やさない。上位はAGENTS・監査プロトコル・人間確認方針。更新前全文は[b47999f7固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/CURRENT_GOAL.md)、削除時の詳細は[78805d86固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/CURRENT_GOAL.md)に保持する。
+
+## 8. upload単独attempt-006の実測checkpoint／停止
+
+[転送証拠](reports/request-intent-connection-20261001/queue-upload-transfer-evidence-attempt-006.json)、[失敗と未適用最小案](reports/request-intent-connection-20261001/queue-upload-readback-setup-failure-attempt-006.json)、主reportに保存。直前空き40,661,536,768 bytesで相談役指定の必要19,213,651,308 bytesを満たし、3分離rootでsource-size新実体3本・14,410,238,481 bytesを確認。現在の空きは停止保存時26,188,337,152 bytes。新copyは保持し、SSD操作・追加削除は行わない。
+
+通常source/STT登録、計画／検証の実complete、目的の3判断到達、24参照と時計・4区間・admissionが成立。prepareの予定max-steps停止exit1と実succeededを区別、receiver exit0。終了後の追加再読はstore snapshotのPromiseを待たず命令一覧を検索して失敗し、consumer呼出前。新state21,458 bytes不変、4成功命令。旧小証拠669件・製品8path SHA不変、削除済み8path不存在。製品変更・外部推論・費用・動画・品質採用0。
+
+推奨はawait一行の設営10を相談役が個別判断し、保存されたattempt-006で追加receiver-only再読だけを行うこと。Codexは未適用・追加作用停止でGPT_DECISION。大容量系列の再実行は不要。MP4／inspection未提供・目的2件・本適用等の残件は維持する。

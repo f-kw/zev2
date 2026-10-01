@@ -9,10 +9,11 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {digestArtifactFileNameV001,digestArtifactPathFromUriV001,assertDigestArtifactV001,assertDigestPlanReferenceClosureV001} from '../../../packages/shared/dist/index.js';
 import {formal,sha,bind} from '../../../evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts';
+import {uploadCapacitySnapshot,assertNewUploadPaths,sourceSizeFiles} from './queue-capacity-preflight.mts';
 const root=fileURLToPath(new URL('../../../',import.meta.url));
 const report=path.join(root,'docs/reports/request-intent-connection-20261001');
 const loader=path.join(root,'runner/node_modules/tsx/dist/loader.mjs');
-const mode=process.argv[2]??'run';
+const mode=process.argv[2]??'';
 const source=path.join(root,'runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4');
 const savedTranscript=path.join(root,'runtime/artifacts/digest-new-material-20260926-v001/transcript.json');
 const savedInspection=path.join(root,'runtime/artifacts/digest-new-material-20260926-v001/base-attempt-002/source-media-inspection.json');
@@ -168,15 +169,30 @@ if(mode==='backend') {
   }
   console.log(JSON.stringify({status:'verified',separateProcessReconstructed:evidence.completed.length,protectedFiles:history.protectedFiles.length,oldReaderExecuted:false}));
 } else {
-  assert.equal(mode,'run');
-  const attempt=process.argv[3]??'attempt-003';assert(/^attempt-\d{3}$/u.test(attempt));
+  assert(['preflight-upload','run'].includes(mode),'Explicit preflight-upload or run/upload-json required');
+  const attempt=process.argv[3];assert(attempt && /^attempt-\d{3}$/u.test(attempt));
+  assert.equal(process.argv[4],'upload-json','Only explicitly selected upload-json is authorized');
   const runtime=path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-'+attempt);
+  const evidencePath=path.join(report,`queue-upload-transfer-evidence-${attempt}.json`);
+  const capacityRoots=['upload-json-worker','upload-json','upload-json-reader'].map(n=>path.join(runtime,n));
+  await assertNewUploadPaths([runtime,...capacityRoots,evidencePath]);
+  const preflight=await uploadCapacitySnapshot(source,capacityRoots);
+  console.log(JSON.stringify({event:'upload-preflight',...preflight}));
+  if(mode==='preflight-upload') {assert(preflight.decision.passed,'UPLOAD_CAPACITY_PREFLIGHT_REJECTED');process.exit(0);}
+  if(!preflight.decision.passed) {
+    await writeFile(evidencePath,JSON.stringify({status:'preflight-rejected',attempt,preflight,largeFileActionStarted:false},null,2)+'\n',{flag:'wx'});
+    throw new Error('UPLOAD_CAPACITY_PREFLIGHT_REJECTED');
+  }
   await mkdir(runtime);
   const results:any[]=[],captures:any[]=[],completed:any[]=[],children:any[]=[];
   const evidence:any={schemaVersion:'request-intent-queue-integration-evidence-v001',attempt,results,captures,completed,
+    selectedScenario:'upload-json',instructionHead:'82c244729409ecd4bbd177ab0611ddaf86996a99',productFixes:5,setupFixes:9,
+    preflight,capacity:[],runnerProcesses:[],notRun:['local-json','local-mp4','inspection-missing','two purposes through all three judgments'],
     inputPath:'normal draft API/approve/next/claim/runner index/factory/PUT/complete',sourceProcessingExecuted:false,sttExecuted:false,
     externalInferenceExecuted:false,inspectionExecuted:false,renderExecuted:false,productionAdoption:false};
-  const checkpoint=async()=>writeFile(path.join(report,`queue-integration-evidence-${attempt}.json`),JSON.stringify(evidence,null,2)+'\n');
+  const checkpoint=async()=>writeFile(evidencePath,JSON.stringify(evidence,null,2)+'\n');
+  const capacity=async(stage:string)=>{evidence.capacity.push({stage,...await uploadCapacitySnapshot(source,capacityRoots),
+    sourceSizeFiles:await sourceSizeFiles(runtime,preflight.source.byteSize)});await checkpoint();};
   const record=(name:string,details:any={})=>{results.push({name,status:'passed',...details});console.log(JSON.stringify({test:name,status:'passed'}));};
   const startBackend=async(name:string)=>{
     const directory=path.join(runtime,name);await mkdir(directory);const child=spawn(process.execPath,['--import',loader,fileURLToPath(import.meta.url),'backend'],
@@ -248,15 +264,18 @@ if(mode==='backend') {
     const code=await new Promise<number|null>(ok=>child.on('exit',ok));if(handlerError)throw handlerError;
     if(expectBoundary) {assert.equal(code,1,err+'\n'+out);assert(err.includes('最大処理件数 1 件に到達'));}
     else assert.equal(code,0,err+'\n'+out);
-    return {stdout:out,stderr:err,exitCode:code};
+    const execution={stdout:out,stderr:err,exitCode:code};evidence.runnerProcesses.push({worker:relative(worker),delivery,guard:guard.map(relative),expectBoundary,...execution});
+    await checkpoint();return execution;
   };
   try {
     for(const config of [{name:'local-json',mode:'local',video:'json',inspection:true,purpose:'自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。'},
       {name:'upload-json',mode:'upload',video:'json',inspection:true,purpose:'前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。'},
-      {name:'local-mp4',mode:'local',video:'mp4',inspection:false,purpose:'本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。'}]) {
+      {name:'local-mp4',mode:'local',video:'mp4',inspection:false,purpose:'本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。'}].filter(c=>c.name===process.argv[4])) {
       const b=await startBackend(config.name),fixture=await register(b,config.purpose,config.video,config.inspection);
+      await capacity('source-STT-registered');
       const worker=config.mode==='local'?b.directory:path.join(runtime,config.name+'-worker');
       await runner(b,worker,config.mode,config.purpose,[],true);
+      await capacity('worker-upload-plan-complete');
       let state=await api(b,'/state'),prep=state.agentRequests.find((r:any)=>r.id===fixture.requests[2].id);assert.equal(prep.status,'succeeded');
       const planRef=state.fileRefs.find((f:any)=>f.id===prep.result.fileRefId),planPath=path.join(b.directory,'artifacts',fixture.draft.id,planRef.artifactFileName);
       const dataPath=(logical:string)=>path.join(b.directory,'artifacts',fixture.draft.id,digestArtifactFileNameV001(logical,fixture.draft.id));
@@ -268,6 +287,7 @@ if(mode==='backend') {
       const nextWorker=config.mode==='upload'?path.join(runtime,config.name+'-reader'):b.directory;
       const blocked=config.mode==='upload'?[worker,source,savedTranscript,savedInspection]:[];
       await runner(b,nextWorker,config.mode,config.purpose,blocked);
+      await capacity('receiver-download-validate-complete');
       state=await api(b,'/state');const validated=state.agentRequests.find((r:any)=>r.id===fixture.requests[3].id);assert.equal(validated.status,'succeeded');
       assert.equal(state.controlReviewItems.length,0);assert.equal(state.agentRequests.length,4);
       const executionRef=state.fileRefs.find((f:any)=>f.id===validated.result.fileRefId),executionPath=path.join(b.directory,'artifacts',fixture.draft.id,executionRef.artifactFileName);
@@ -281,7 +301,8 @@ if(mode==='backend') {
         dataBindings:plan.dataBindings,admission:execution.admission});
       record(config.name+' normal registration/runner/complete',{purpose:config.purpose,dataFiles:plan.dataBindings.length,inspection:config.inspection});await checkpoint();
     }
-    record('different purposes reached all three actual Skills',{captures:captures.length});
+    assert.equal(completed.length,1);assert.deepEqual(captures.map(c=>c.stage),['discovery','selection','retention']);
+    record('selected upload purpose reached all three actual Skills',{captures:captures.length,twoPurposesNotRun:true});
     evidence.status='passed';await checkpoint();
   } catch(e) {evidence.status='failed';evidence.error=e instanceof Error?e.message:String(e);await checkpoint();throw e;}
   finally {for(const c of children)if(c.exitCode===null)c.kill('SIGTERM');}

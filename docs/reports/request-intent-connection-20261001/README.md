@@ -424,3 +424,23 @@ Clipの確認生成元3件と独立ゲート3件も成立。テーマ提案→�
 v005全体は未完了。upload転送／worker-backend分離root／転送先のみ消費再読、MP4直接登録／inspection未提供の通常complete、目的2件の全3判断はnot-run。相談役へ次の一件として、保留中の転送検証の実確認済み保存先・必要容量・再開条件の具体化を依頼する。SSDは接続先も利用開始も未確認で、今回操作していない。大容量経路の自動再開はしない。
 
 現在地とHANDOVERを同期し、担当5fileだけ明示stage・通常main commit/push・Git clean確認後、Codex2専用Edgeから `AUDIT_ONLY＋NEXT_REQUEST｜9. 通常入力拒否・Clip回帰（媒体コピーなし）` を直接送信する。本人の視聴／採点／転記、Codex1起動、受領だけの再commitは不要。
+
+## 2026-10-01 upload-json単独指示受領・設営9・実行前checkpoint
+
+相談役の媒体なし52件限定受理と容量preflight §6を同じ専用Edgeで受領し、mainを82c244729409ecd4bbd177ab0611ddaf86996a99へ同期した。upload-json一件だけの明示入口と無作用preflightを設営累積9として適用、製品5は不変。通常scenario本文・API／runner／factory／PUT／GET／固定判断・内容／時計検査は変更しない。結果名を新attempt-006のupload単独証拠へ追従し、local・MP4・未提供・目的2件はnot-runにした。
+
+preflight境界4検査exit0。source本文read／copy／PUTなしでsize・device・現在空きと新root不存在を確認。3rootは同device16777234、空き40,662,228,992 bytes、必要19,213,651,308 bytes（相談役の今回限定4本条件）、通過。実走入口でも直前に再測定する。旧request-intent小JSON／state／ログと証拠の前hash、製品8pathの前hash、削除済みpathを軽量記録へ保存済み。受領だけのcommitは作らず、これから通常upload系列へ進む。現在のEdge表示は極高、環境Node v20.19.6。外部推論／費用0、ID9-PD-01/02と人間品質pending等は維持。
+
+## 2026-10-01 attempt-006 upload系列成立・保存後readerの局所設営停止
+
+新upload-json単独attemptは、旧source/STTの通常claim／PUT／complete、実index／factoryの3判断、計画の実upload／complete、workerとbackendから分離したreceiverでのdownload／消費／completeまで成立した。新stateの4命令すべてsucceeded、4 OutputEntity／FileRefの相互参照と成果物所有者一致、人間確認0。計画24データ参照、入力全文の3判断到達、keep/drop/keepから4編集区間、既存時計検査とadmission（字幕演出未接続・動画許可未承認・人間品質pending）を通常処理で確認。生成元のsource JSONと実動画SHAは別に束縛されている。判断回答は新要求SHAに対応する通信しないfixture、実AI品質の認定ではない。
+
+実prepare runner exit1は予定したmax-steps=1停止で、計画stateはsucceeded。receiver runnerはexit0。receiverの既存guardはworker・元素材・保存STT・inspectionへの直接readを禁止した状態で消費できた。実API／runner／consumer／PUT／GETや製品8pathは変更していない。親試験の保存statusはpassedで2結果、toolは終了時exit codeを返していないため親exit0の実測とは報告しない。自分の試験／runner／backend残存0をprocess一覧で確認した。
+
+容量：直前空き40,661,536,768 bytes→worker/backend転送後31,008,292,864→receiver消費後26,188,054,528。新source-size実体は0→2→3本、合計14,410,238,481 bytesで見積りと一致。停止保存時の新runtimeは90file・論理14,435,157,718 bytes、割当14,464,991,232 bytes、空き26,188,337,152 bytes。空き差は他のfilesystem変動を含む実測で、排他的な使用量や共有blockは断定しない。新copyは保持、追加削除・SSD操作0。
+
+**終了後にもう一度保存計画を再構築する追加reader試験はexit1で停止した。** 実通常storeの非同期snapshot読取にawaitを付けず、Promiseをstateとして扱ったため、命令一覧の検索時にTypeErrorとなった。消費readerを呼ぶ前の試験側不具合で、製品の転送／消費欠陥とは認定しない。失敗code全文・SHAと実エラー、未適用一行案（非同期snapshot読取をawaitする）を[局所失敗証拠](queue-upload-readback-setup-failure-attempt-006.json)へ固定。設営9適用済み、製品5不変。追加修正は未適用。既存枠を自己承認で増やさず、相談役にこの一行を設営10として個別判断依頼する。再開は既存attempt-006の保存後receiver-only再読だけを推奨し、素材copy／PUT／通常runner／大容量系列の再実行は不要。
+
+旧request-intent小JSON／state／ログとreport証拠669件の前後size／SHA不変、製品8path SHA不変、削除済み8pathは不存在のまま。旧成功／失敗proofと33参照は復元していない。新state21,458 bytes／SHA335243e67c81bae5d4ae3ebbcb9035d9344ee3b7bde99282114c3d3eae042f65。新[転送証拠](queue-upload-transfer-evidence-attempt-006.json)と局所停止を区別し、保存後追加再読を合格へ足していない。
+
+現在は追加作用停止。upload通常系列は成立したが、今回の保存後再読は未確認として完了報告にはせずGPT_DECISIONする。local-json再製造・MP4直接登録・inspection未提供通常complete・目的2件の全3判断はnot-run。前回52検査や旧15／111／動画QC／人間レビューは再実行0。取得・STT／inspection処理・外部推論・費用・動画・新UI・本番・正式採用・公開0。ID9-PD-01/02未承認等は維持。担当fileだけ通常commit/pushし、Codex2専用Edgeで直接相談役へ返す。
