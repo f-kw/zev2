@@ -8,11 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：相談役承認の設営11一行を適用し、attempt-006保存物だけの別process readerがexit0。5禁止pathの拒否、実通常store保存state・検証命令成功・receiver成果物SHA、実consumer再構築と保存artifact deepEqual、再構築中禁止read0がすべて成立。upload-json転送＋保存後receiver-only再構築は限定検証完了。製品5／設営11、一般上限・履歴不変。旧90runtime・旧669小証拠・旧転送／失敗3証拠・製品8path不変、新小proof1,162 bytesだけ。通常runnerや大容量転送の再実走なし。v005全体・実AI品質・人間採用は未完了／未承認。**
+**9. 明示Digestの通常キュー接続（v005）：`bc36743d`のupload-json転送＋保存後receiver-only再構築を限定技術受理。次はlocal-mp4 scenario 1本で、MP4直接登録・inspection未提供・異なる2件目purposeの3判断到達を同時に検証する。設営12として明示local-mp4入口＋無作用容量preflightを承認。実行直前にavailableBytes >= 9,606,825,654 bytesを満たす場合だけattempt-007を実走する。v005全体は未完了。**
 
-今回受領・適用した正本は [guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存 `2530d96685b33d1317dd5b6750cf5939155e85ae`。許可差分は `assert.rejects` に渡すreadをasync callbackで包む一行だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・upload・download・大容量copyは起動しない。
-
-5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
+次作業の正本は [local-mp4＋inspection未提供追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_LOCAL_MP4_NO_INSPECTION.md)、保存 `e22a87c54dddd0bd97f841b30bb2d5293629b449`。local-json/upload-jsonは再実行しない。Codex1再起動、本人への視聴・採点・転記、受領だけの再commit・終了連絡は不要。
 
 ## 3. 容量整理の受理と保留
 
