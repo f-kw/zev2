@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：媒体なし52結果はf54cd09aで限定技術受理済み。82c24472の容量preflight §6を受領し、設営9を適用。新attempt-006のupload-json通常系列は4工程の実complete・転送・receiver-only消費まで成立した。終了後の追加保存再読は試験側の非同期store読取にawait不足でexit1。製品5／設営9、追加修正未適用・追加作用停止。旧attempt／証拠を保持して、一行の設営10個別判断を相談役へ返す。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：`88d5e5a0`のupload-json attempt-006は通常4工程succeeded、実upload、別root receiverの転送先のみ消費、validate completeまで成立。追加の保存後readerは非同期snapshotのawait不足でconsumer前にexit1。相談役はawait一語だけを設営10として承認し、大容量再実走なしでattempt-006保存物だけのreceiver-only再読へ戻す。製品5／設営9、10は適用時に計上。v005全体は未完了。**
 
-媒体なし回帰の正本は [媒体なし指示 §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_NO_MEDIA_REGRESSION.md)。次作業の正本は [容量preflight §6](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CAPACITY_PREFLIGHT.md)、保存 `c4f851681fbc1041114ddb09b883d8e40fc1b9dc`。既知のupload追加ピークはsource 3コピー＝14,410,238,481 bytes（約13.42GiB）。同一volumeでは今回限定の開始条件を4×sourceBytes＝19,213,651,308 bytes（約17.89GiB）とし、実行直前に測る。これは製品容量上限ではない。
+今回の再開正本は [upload保存後readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)、保存 `ac1cc33ad56d7ecfc9f89baa57409ac21ce0434d`。許可差分は保存後readerの `await` 一語だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・大容量転送は起動しない。
 
 5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
