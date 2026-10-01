@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v033
+更新日：2026-10-02（JST） / revision：handover-index-20261002-v034
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには固定入口の写しを置く。
 
-**最新更新：`fa9f56a3ec34ac1a7558b2262f96bd40b22db472`の現行否定資格attempt-001を監査。最初の通常draft作成は現行router仕様どおりHTTP201だったが、試験だけが200を期待してexit1。製品欠陥ではなく、期待値一箇所を201へ直す設営14として相談役承認。旧attempt-001／v001失敗証拠／test SHAを保持し、新attempt-002から残る期限切れclaim、owner不一致、承認版／素材／旧state、旧／未知版、不完全転送complete拒否、完成時別process再読まで続行する。正本は[HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)、保存`e36e236591acec67df1c41e8824ba139a17f0f39`。製品5／設営13、14は適用時に計上。受領・適用・attempt-002実行は未確認。v005全体は未完了。**
+**最新更新：`fa9f56a3ec34ac1a7558b2262f96bd40b22db472`の現行否定資格attempt-001を監査。最初の通常draft作成は現行router仕様どおりHTTP201だったが、試験だけが200を期待してexit1。製品欠陥ではなく、期待値一箇所を201へ直す設営14として相談役承認。旧attempt-001／v001失敗証拠／test SHAを保持し、新attempt-002から残る期限切れclaim、owner不一致、承認版／素材／旧state、旧／未知版、不完全転送complete拒否、完成時別process再読まで続行する。正本は[HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)、保存`e36e236591acec67df1c41e8824ba139a17f0f39`。製品5／設営13、14は適用時に計上。受領・適用・attempt-002実行は未確認。v005全体は未完了。 追加運用変更：GPT_DECISION / HUMAN_DECISION / NEXT_REQUEST付き報告は、Codexが専用Edgeで送信表示を確認しただけでは未完了。相談役の返信生成完了を確認し、本文をCodex自身が読了して受領するまでを問い合わせ処理とする。返信生成中を理由にkawafmmへ戻らない。AGENTS／監査プロトコル／COMMUNICATIONへ同ターンで反映済み。**
 
 更新前全文は[v021固定版](https://github.com/f-kw/zev2/blob/5cb6c94c213390abefc187ce0553c8bcd2f9aab3/docs/HANDOVER_INDEX.md)、[v020固定版](https://github.com/f-kw/zev2/blob/b47999f7398118b1ef53b68b5b95a7ea922e7779/docs/HANDOVER_INDEX.md)、[v019固定版](https://github.com/f-kw/zev2/blob/6f72ce8ac5b5a53c5337dc686b410acb3c074e24/docs/HANDOVER_INDEX.md)、[v018固定版](https://github.com/f-kw/zev2/blob/78805d861a41955ccf3f3914d5946f0446e4178d/docs/HANDOVER_INDEX.md)、過去の詳細は[v017](https://github.com/f-kw/zev2/blob/9aaa5f5b1b6259fce96e66ee4dad3cf8469d4a58/docs/HANDOVER_INDEX.md)、[v016](https://github.com/f-kw/zev2/blob/034503d72e70665615879686e07f1acf24f6cbd1/docs/HANDOVER_INDEX.md)、[v015](https://github.com/f-kw/zev2/blob/60b959d91d0885ac2bf9cf4aaae66eff93454bab/docs/HANDOVER_INDEX.md)と各reportへ保持。以下の要約で原文・実測を消さず、古い未確認・禁止を後続決定へ逆流させない。
 
