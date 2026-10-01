@@ -1,12 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-01（JST） / revision：handover-index-20261001-v013
+更新日：2026-10-01（JST） / revision：handover-index-20261001-v014
 正本：`f-kw/zev2` の `main` 上の `docs/HANDOVER_INDEX.md`
 固定入口：`docs/ZEV_START_HERE.md`。ChatGPTプロジェクトには、この固定入口の写しを置く。
 
-**最新更新：Codex2が9f031229で§12の自動承認を受領、局所4行修正を設営累積6回目として適用。新局所attempt-004は内部5参照／拒否9件が合格。通常APIと実index/factoryでsource/STT・計画completeと内部参照対応まで成立した。次の消費工程は、版なし時計結果へ新consumerが存在しない版情報を付けたため消費記録保存前にfailed。製品4／設営6を保持して追加作用を停止し、時計参照だけをbytes型へする二pathの具体案を相談役の個別自動承認へ返す。v005未完了。費用・素材・本番・動画・公開・人間品質・ID9-PD-01/02は未変更。**
+**最新更新：`b9bb6b40b26a454bb850b0967b457b7fedbfff4a`の時計結果参照による中断を監査し、相談役が二pathの限定修正を製品累積5回目として個別承認した。decision: continue。本人の軽微技術判断の委任に基づき、新たな本人確認は不要。[v005時計参照修正追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md)を発行（保存 `eab83a079db3c095174fc248fd73ddaf161e685c`）。局所5参照／拒否9件、通常source/STT・計画completeと内部参照対応は部分成立。validate complete・upload等は未完了。実施履歴は製品4／設営6、今回の製品5は適用時に計上。指示の受領・適用・再稼働は未確認。費用・素材・本番・動画・公開・人間品質・ID9-PD-01/02は未変更。詳細は§2.13。**
 
-本書は現在地を復元する入口。過去の発行・停止時点の詳細原文は[更新前v011全文](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/HANDOVER_INDEX.md)、[v010全文](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/HANDOVER_INDEX.md)、個別指示・reportに保持する。以下の履歴欄はその要点であり、過去の「未確認」「次」を現在へ逆流させない。
+本書は現在地を復元する入口。過去の詳細原文は[更新前v013全文](https://github.com/f-kw/zev2/blob/b9bb6b40b26a454bb850b0967b457b7fedbfff4a/docs/HANDOVER_INDEX.md)、[v011全文](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/HANDOVER_INDEX.md)、[v010全文](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/HANDOVER_INDEX.md)、個別指示・reportに保持する。過去の「未確認」「次」を現在へ逆流させない。
 
 ## 0. 最初に読む人へ
 
@@ -46,7 +46,7 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 
 ## 2. 最新状態のカプセル
 
-最新の停止監査対象：`01ad1e54dbb95d10e6013a7076d274be2dfcf9fd`。参照修正後の局所試験設営に関する監査であり、14ファイルの製品実装全体・通常接続の完成受理ではない。
+最新の停止監査対象：`b9bb6b40b26a454bb850b0967b457b7fedbfff4a`。時計結果参照の限定欠陥に対する判断であり、v005全体の完成受理ではない。
 
 | 担当／項目 | 到達点 | 残件・扱い |
 |---|---|---|
@@ -57,9 +57,9 @@ Edgeは各Codex・各セッションが自分専用のタブだけを使う。�
 | Codex2：通常callerの計画準備v002 | `11809f6f6bebed82014971c966b79b383b921a1d`を技術受理。通常API→承認・claim→実factory→3判断→別保存・再開・再読。27結果・21捕捉 | source/STT完了はfixture。通常complete所有者と素材JSONの扱いはv005で確認する。限定成果を一般E2Eへ広げない |
 | Codex2：保存計画の後段入力v003 | `7b600a648cf4ee5228601b72b0a6b6629038fa75`を技術受理。非連続保持を既存Digest形式へ変換、job形状／時計検査、4出力保存・再読。15結果＋5拒否 | 通常完了登録・後続キュー・実製造・人間採用は当該範囲外。旧計画消費と旧bytes不変はその検証時点の結果 |
 | Codex2：仕様案・境界実測v004 | `d77f2a5ddc48016e6e1c7f22bee454fc231ffda7`の一案、実validator受理2／想定拒否8、別process26保護path再読、6file差分を相談役受理 | 製品コード変更0。通常キューの完成ではない |
-| Codex2：明示Digest通常キュー隔離実装v005 | `debd5897`で通常計画登録まで部分実測。本人承認の参照修正を適用し、`01ad1e54`へ保存。製品4／設営5、二表示名適用、対象型検査は報告上合格 | §12受領・設営6適用、局所attempt-004は合格。通常source/STT・計画completeと内部参照が成立。消費記録は新しい時計参照の型不一致で保存失敗、二path限定案を相談役判断へ。upload・MP4・否定回帰等は未実施 |
+| Codex2：明示Digest通常キュー隔離実装v005 | `b9bb6b40`。製品4／設営6。局所内部5参照／拒否9件、通常source/STT・計画completeと内部参照対応まで成立。消費4出力保存後に時計参照の型でfailed | 二pathの時計参照修正を製品5回目として相談役承認・指示発行済み。受領・再開・適用は未確認。validate complete、upload・MP4・否定回帰等は未完了 |
 
-Codex2から`01ad1e54`のmain/local/origin一致、通常push成功、Git clean・staged0・untracked0、14担当fileだけの保存、Git操作終了・追加作用停止を受領。remote mainは相談役が確認した。Macのprocess一覧・ローカルGit・各型検査はCodex報告であり、相談役の直接実測ではない。共通状態の保存担当は相談役へ返却済み。その後§12の設営追加1回が承認され、Codex2が受領・適用。現在は通常消費の時計参照で新しい限定実装判断へ停止、製品4／設営6。
+Codex2から`b9bb6b40`のmain/local/origin一致、通常push成功、Git clean・staged0・untracked0、9担当fileだけの保存、Git操作終了・追加作用停止を受領。remote mainと対象文書・実装は相談役が確認した。Macのprocess一覧・ローカルGit・型検査・実bytesはCodexの実測報告であり、相談役の直接実測ではない。共通状態の保存担当は相談役へ返却済み。今回の指示発行をCodex2の実再開と混同しない。
 
 旧1080p媒体：[完了報告](reports/original-resolution-low-memory-20260930/full-run-report.md)、SHA `65afceb046aca0629b0fe097f602caae3b05697b10cff8eb6a295106185f3858`。実体はMacの `runtime/artifacts/original-resolution-execution-20260930-v001/full-lowmem-production-001/`。GitHubやChatGPT sandboxで再生できると仮定しない。
 
@@ -105,38 +105,47 @@ prepareは採否・保持を登録し、validateが登録計画と参照先一�
 
 本人の「良い。指示書作って」を受領し、[v005 §11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)へ保存（`16de0445ff4bba405e2d32189c4e1d5d35aac86b`）。参照対応に限る製品修正累積4回目と既承認検証再開を許可。一般上限は変更せず、stdout設営修正は既存枠内5回目、二表示名は§10で許可済みとした。別製品修正・設営枠超過は停止報告する条件を維持した。
 
-Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを物理producer-request--fileへ対応させ、内部参照の検査を接続したと報告。製品4／設営5を適用し、二表示名・shared/backend/runner/Remotion/client型検査は報告上完了。局所参照試験と通常接続はまだ合格していない。前回の許可済み作業を未承認へ戻さず、今回の別の設営例外と分ける。
+Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを物理producer-request--fileへ対応させ、内部参照の検査を接続したと報告。製品4／設営5を適用し、二表示名・shared/backend/runner/Remotion/client型検査は報告上完了。この時点では局所参照試験・通常接続は未合格だった。その後のattempt-004成立と、新しい時計参照停止は§2.12を参照する。
 
 ### 2.10 2026-10-01：局所試験の設営枠による中断監査（当時の記録）
 
 `01ad1e54`で局所attempt-003が試験設営の誤った版付きbindingにより保存前exit1となり、設営5回枠へ到達していたため、当時は追加作用を停止した。[4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)は、旧transcriptBytesをそのまま保存し、path＋fileSha256のbyte bindingへ直す試験helper限定修正。製品serializer／validator、通常caller、provider、旧素材／旧回答の変更ではない。
 
-この時点では本人判断待ちとしたが、後続の本人方針「独断で決めれる程度なら自動で承認して」により、軽微な技術・設営判断は相談役が自動承認する運用へ変更された。**現在の扱いは次節§2.11を正とし、この当時のhuman_decisionを現在へ戻さない。** 失敗attempt-003・保存3file・参照未合格という事実は履歴として保持する。
-
+この時点では本人判断待ちとしたが、後続の本人方針「独断で決めれる程度なら自動で承認して」により、軽微な技術・設営判断は相談役が自動承認する運用へ変更された。現在の扱いは後続の§2.11〜2.13を正とし、当時のhuman_decisionを現在へ戻さない。失敗attempt-003・保存3file・当時の参照未合格は履歴として保持する。
 
 ### 2.11 2026-10-01：軽微な技術判断の自動承認ルールと設営6回目
 
-本人から「良い。これは重要な確認か？ 独断で決めれる程度なら自動で承認して。指示書を作って」と受領した。相談役は今回の4行を、旧書き起こしを誤って版付きJSON bindingへした**試験設営だけの修正**であり、人間の製品判断ではないと判定した。
+本人から「良い。これは重要な確認か？ 独断で決めれる程度なら自動で承認して。指示書を作って」と受領した。相談役は4行を試験設営だけの修正であり、人間の製品判断ではないと判定した。
 
-- **固定ルール**：[AGENTS](../AGENTS.md)へ「相談役による軽微な技術判断の自動承認」を追加。Codexが上限超過を自己承認するのではなく、証拠を固定して相談役へGPT_DECISIONし、相談役が本人確認の要否を判定する。
-- **相談役だけで承認できる範囲**：既に本人承認済みwork-orderの目的内、原因と最小差分が特定済み、検査helper／fixture／配線／限定実装欠陥などで製品方針・承認意味・人間品質を変えず、費用/API・新素材・公開・削除・本番切替・権限拡張を伴わない一件。回数は履歴へ累積し、一般上限をリセット／恒久増加しない。
-- **本人へ上げる範囲**：契約・任せる範囲・上限値そのものの恒久変更、費用/API、新素材、正式削除・上書き、tag/release/公開、本番切替、権限／セキュリティ、人間の目視・好み・品質採用、製品方針や承認意味、根拠不足。
-- **今回**：[4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)を設営累積6回目として自動承認。旧attempt-003を保持し、新局所attemptから再開する。製品修正累積4は前回本人承認で適用済み。
-- **次**：局所参照合格後、v005の既承認未実施検証へ続行する。別の新しい製品修正や強制停止条件が出れば相談役へ返す。軽微な設営・技術判断なら相談役が同ルールで処理し、本人への都度確認を増やさない。
+- 固定ルール：[AGENTS](../AGENTS.md)へ「相談役による軽微な技術判断の自動承認」を追加（`0c58c6a340ab1d18e1c90d4e487e68a0411b8508`）。Codexが上限超過を自己承認せず、証拠を固定して相談役へGPT_DECISIONし、相談役が本人確認の要否を判定する。
+- 相談役だけで承認できる範囲：本人承認済みwork-order内、原因と最小差分が現物で特定済み、製品方針・承認意味・人間品質を変えず、費用/API・新素材・公開・削除・本番切替・権限拡張を伴わない軽微な一件。回数を累積し、一般上限をリセット／恒久増加しない。
+- 本人へ上げる範囲：契約・任せる範囲・上限値そのものの恒久変更、費用/API、新素材、正式削除・上書き、tag/release/公開、本番切替、権限／セキュリティ、人間の目視・好み・品質採用、製品方針や承認意味、根拠不足。
+- 設営の4行案を累積6回目として承認し、[v005 §12](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)へ保存（`db51ad066f8fb847c8651d65ee4ca94a752139c4`）。旧attempt-003を保持した新attemptで参照確認後、既承認未実施検証へ戻す指示。
 
-正本は[v005 §12](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)。保存 `db51ad066f8fb847c8651d65ee4ca94a752139c4`。指示発行はCodex2の受領・再稼働・試験合格を意味しない。
+後続の別不具合は個別判断し、軽微なら本人へ再確認せず相談役が扱う。費用・素材・本番・動画・公開・品質や他の強制停止条件は変更しない。
 
 ### 2.12 Codex2：§12実再開と新しい時計結果参照の停止
 
-9f031229で指示受領・設営累積6適用。新局所attempt-004の内部5参照／拒否9件は合格、通常attempt-004は実source/STT・計画登録、実所有者3鎖と内部参照5件のregistry／bytes対応を確認。次のconsumerは4出力と4区間の時計結果を保存したが、版なし時計結果を版付きJSON参照にしたため消費記録を正式JSONへ保存できずfailed。検証complete・upload／分離root・MP4／inspection未提供・否定・Clip回帰は未完了。
+`9f031229`で指示受領・設営累積6適用。新局所attempt-004の内部5参照／拒否9件は合格、通常attempt-004は実source/STT・計画登録、実所有者3鎖と内部参照5件のregistry／bytes対応を確認。前の参照対応不整合はこの新attemptで解消した。次のconsumerは4出力と4区間の時計結果を保存したが、版なし時計結果を版付きJSON参照にしたため消費記録を正式JSONへ保存できずfailed。検証complete・upload／分離root・MP4／inspection未提供・否定・Clip回帰は未完了。
 
-[失敗現物](reports/request-intent-connection-20261001/queue-clock-binding-failure-attempt-004.json)、[具体的二path案](reports/request-intent-connection-20261001/queue-clock-binding-followup-request.md)、[主report](reports/request-intent-connection-20261001/README.md)に保存。時計処理・結果bytesを変えず、その結果参照だけをbytes型へする限定案。相談役の軽微技術自動承認の対象として推奨するが、Codexは未適用・追加作用停止。設営6の承認待ちへ巻き戻さず、この新しい一件を個別判断する。
+[失敗現物](reports/request-intent-connection-20261001/queue-clock-binding-failure-attempt-004.json)、[具体的二path案](reports/request-intent-connection-20261001/queue-clock-binding-followup-request.md)、[停止後再読](reports/request-intent-connection-20261001/queue-clock-stop-readback-attempt-004.json)、[主report](reports/request-intent-connection-20261001/README.md)を`b9bb6b40`へ保存。再読は24参照データの計画再構築、内部5参照、4出力と旧attempt-003の3file確認、provider0・state不変という報告。消費completeの合格ではない。設営6の未承認へ巻き戻さない。
+
+### 2.13 2026-10-01：時計結果のbyte参照修正を相談役が個別承認
+
+**decision: continue。** §2.11の本人委任とAGENTSに基づき、既承認v005の限定欠陥修正として本人確認なしで承認した。指示は[v005時計参照修正追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md)、保存 `eab83a079db3c095174fc248fd73ddaf161e685c`。
+
+- 監査：`b9bb6b40`の二path案・失敗証拠・停止後再読と、consumer／共有型・参照検査を照合。時計結果はstatus／violations／mappingsで版情報がなく、全4出力に一律bindを使うためformal(expected)が失敗するという原因説明は整合。Macの再実行・直接再hashやv005全体の完成監査ではない。
+- 許可差分：`runner/src/digest-plan-consumption-v001.ts`で時計結果参照だけをpath＋実保存bytesのSHAへする。`packages/shared/src/digest-plan-artifacts-v001.ts`でclockResolutionBindingだけをDigestByteBindingV001 | nullへし、byte参照検査に合わせる。他の3JSON出力・3JSON薄参照、時計本文／計算／区間／断片／順序／frame/sample、必須field・明示null・admissionは維持する。
+- 判断理由：今回の開発候補の参照型訂正に閉じ、製品方針・承認意味・人間品質・費用・素材・公開・本番・権限を変えない。製品累積5回目として例外承認。実施前は製品4／設営6であり、未適用を実施済みにしない。一般上限や履歴をリセットしない。
+- 次行動：4出力の版有無と参照型を事前照合し、時計byte参照の保存／再読と型・欠損／改変拒否、他JSONの版必須、inspection未提供のnull維持を小さく検証。その後、新しい隔離attemptでv005のvalidate complete・upload・分離root・転送先のみの別process再読・MP4・inspection未提供・否定・Clip回帰・関連型検査まで続ける。旧失敗attempt・4出力・stateを修復上書きしない。
+- 境界：serializer／内容validator・時計処理・認証・PUT/GET・path安全条件・renderer/native QC・実業務・外部推論等は対象外。汎用fallbackや架空版番号、旧回答SHA付替えを使わない。既に通った前回局所試験や旧全動画・111試験・人間レビューをやり直す仕事にしない。
+- 状態：指示発行・正本保存済み、Codex2の受領・実再開・適用は未確認。Codex1起動、受理記録だけの再commit・終了連絡、本人転記は不要。同じセッションで次の実質checkpointまで進める。
 
 ## 3. ユーザーが確定した主線
 
 「既存レビューを反映した採用区間・構成の改善」は本人の「OK 一旦やることはそれで確定して。」で確定。[前回v001](work-orders/ZEV_SELECTION_STRUCTURE_IMPROVEMENT_20260930_v001.md)、保存`241d08ac5e9b5cfba2923ce9b1d6dcc090392477`の案作成は完了し、現在は通常依頼接続の後続である。
 
-「終わったら次に進んで」に従い、相談役は承認済み主線の実施可能な次指示を監査と同じ返答で出す。任意の別エピック・費用・契約・本番切替・停止枠超過への包括許可ではない。
+「終わったら次に進んで」に従い、相談役は承認済み主線の実施可能な次指示を監査と同じ返答で出す。任意の別エピック・費用・契約・本番切替・停止枠超過への包括許可ではない。軽微な技術例外は§2.11の個別判断を使う。
 
 保存済み同素材・全文を使い、制作要求の伝達不足と判断の問題を切り分ける。解決済み／人間保留／技術未解決／未着手を既存台帳へ結び、必要最小修正から実案・差分へ進む。5候補・3採用・9分47秒を正解にせず、商品紹介の単純キーワード除外や「ホラー以外不要」等の未承認規則を足さない。7Bの実装都合による配信末尾の締めと、内容上の終わりを区別する。
 
@@ -146,13 +155,15 @@ Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを
 
 ## 4. 必読資料と根拠の入口
 
-運用3文書は§0。現在作業は最初の三行を優先する。内容・品質を判断する場合は一次レビューまで戻るが、歴史の全再実行はしない。
+運用3文書は§0。現在作業は冒頭の追補・証拠を優先する。内容・品質を判断する場合は一次レビューまで戻るが、歴史の全再実行はしない。
 
 | 資料 | 復元するもの |
 |---|---|
-| [今回の設営4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)、[局所失敗](reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json)、[停止後再読](reports/request-intent-connection-20261001/queue-reference-stop-readback-attempt-003.json) | `01ad1e54`停止時の製品4／設営5・失敗現物。§12で設営6は承認・適用済み。新局所／通常attempt-004と時計参照停止は主reportを参照 |
-| [現在のv005 §10・11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 二表示名・参照修正追加1回は受領／適用済み。一般の設営追加許可とは別。製品改修の対象と完了条件 |
-| [通常接続report](reports/request-intent-connection-20261001/README.md)、[旧参照不整合](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)、[旧中断再読](reports/request-intent-connection-20261001/queue-interruption-readback-proof.json) | 各attempt・部分到達・未完了と、今回までの累積／保全 |
+| [時計参照修正の限定追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_CLOCK_BINDING_FIX.md) | 製品5回目の相談役承認・二path差分・再開条件。受領／実再開は未確認 |
+| [時計の二path案](reports/request-intent-connection-20261001/queue-clock-binding-followup-request.md)、[失敗現物](reports/request-intent-connection-20261001/queue-clock-binding-failure-attempt-004.json)、[停止後再読](reports/request-intent-connection-20261001/queue-clock-stop-readback-attempt-004.json) | `b9bb6b40`、製品4／設営6、計画completeと参照問題解消、消費記録未成立の区別 |
+| [現在のv005](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 全体の対象・完了条件、§10二表示名・§11参照修正・§12設営6回目はいずれも適用済み。今回の差分は追補を優先 |
+| [設営4行案](reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)、[局所失敗](reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json)、[局所合格](reports/request-intent-connection-20261001/queue-reference-evidence-attempt-004.json) | 旧attempt-003失敗から新attempt-004合格まで。古い未承認・未合格へ戻さない |
+| [通常接続report](reports/request-intent-connection-20261001/README.md)、[旧参照不整合](reports/request-intent-connection-20261001/queue-logical-reference-gap-evidence.json)、[旧中断再読](reports/request-intent-connection-20261001/queue-interruption-readback-proof.json) | 各attempt・部分到達・未完了と累積／保全 |
 | [v004](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v004.md)、[一案](reports/request-intent-connection-20261001/queue-integration-contract-proposal-v001.md)、[境界実測](reports/request-intent-connection-20261001/queue-contract-evidence.json) | 受理済み設計、通常登録と承認の不足。v005の具体的差分を優先 |
 | [v003](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v003.md)、[v002](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v002.md)、[v001](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v001.md) | 完了した準備・消費の範囲。過去の未確認を現在へ戻さない |
 | [consumer結果](reports/request-intent-connection-20261001/consumer-connection-evidence-attempt-001.json)、[追加拒否](reports/request-intent-connection-20261001/consumer-rejection-evidence.json)、[consumer binding](reports/request-intent-connection-20261001/consumer-binding-proof.json) | v003の限定成立・旧版保全 |
@@ -179,7 +190,7 @@ Codex2は`87c53ade`で受領・再開。論理draft／producer-request／fileを
 | 旧レビュー／UI | 旧10回答受領済みとR1〜R3修正後7ポイント未回答は別。旧カット・色への肯定を別素材へ移さない。既存一件編集・保存・Resetを未着手へ戻さない |
 | 制作負担 | 低メモリ化完了と全工程の速度・操作負荷は別。別素材、入力、検査頻度等の残件を消さず、新しい高速化を無断着工しない |
 | 本適用・承認 | ID9-PD-01（公開型／工程・一般委任）、ID9-PD-02（動画許可SHA／scope）、旧業務state移行・本番有効化は未承認。隔離試験とは分ける |
-| 今回の設営再開 | 製品4／設営6。局所4行修正と局所試験は完了。通常計画complete後の時計参照に二pathの限定製品案が必要。一般枠・品質Pending・PD-01/02とは別 |
+| 今回の時計参照修正 | 製品4／設営6まで適用済み。今回の二path修正を製品5回目として相談役承認、受領／適用／再開は未確認。一般枠・品質Pending・PD-01/02とは別 |
 
 これが全課題の件数確定ではない。既存IDと根拠で新しい課題を結び、全残件解消を独立作業の開始条件にしない。別素材検証ID8は将来の一般化確認であり、済んだ新素材初稿・15分レビューの再実施指示ではない。
 
@@ -191,7 +202,7 @@ Codexは受領・checkpoint・完了・中断・未送信を報告前にGitへ�
 
 並行担当は自分の範囲だけ更新し、remote最新版とblob SHAを確認する。stage/commit/pushは直列化し、他者の未commitをreset/stash/削除/stageしない。新branch/worktree・force pushを自己判断で行わない。主線は現在Codex2単独。
 
-本人の「終わったら次に進んで」に従い、相談役は完了監査と実施可能な次の具体的指示を同じ返答でつなぐ。「次は未指示」で再催促を待たない。Codexは受領後同じセッションで続行し、受理記録だけの終了・再起動・再commitを増やさない。費用・API・素材・公開・製品方針・契約・強制停止など本当に別判断が必要な依存部分は分けて返す。未確認の稼働や任意の別エピックの許可を推測しない。
+本人の「終わったら次に進んで」に従い、相談役は完了監査と実施可能な次の具体的指示を同じ返答でつなぐ。「次は未指示」で再催促を待たない。Codexは受領後同じセッションで続行し、受理記録だけの終了・再起動・再commitを増やさない。費用・API・素材・公開・製品方針・契約・強制停止など本当に別判断が必要な依存部分は分けて返す。軽微な技術例外はAGENTSの委任に従い相談役が判断する。未確認の稼働や任意の別エピックの許可を推測しない。
 
 ## 7. 撤回済みの誤った次工程案
 
