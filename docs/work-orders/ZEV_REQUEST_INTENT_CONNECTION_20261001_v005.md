@@ -49,7 +49,7 @@ v004の設計・境界実測を受理する。相談役は一案・probe・保�
 |---|---|
 | `packages/shared/src/index.ts` | 明示系統、Digest2工程・2kind／出力種別、系統別の工程列・依存判定・入力整合 |
 | `packages/shared/src/digest-plan-artifacts-v001.ts`（必要なら新規） | 新しい薄い成果物の共通型・閉じたfield/版検査のみ。汎用store・新承認制度は作らない |
-| `client/src/App.vue` | 現行Clip送信へ明示clipを設定するだけ。画面・入力UI追加なし |
+| `client/src/App.vue` | 現行Clip送信へ明示clipを設定するだけ。画面・入力UI追加なし。既存表示名二項目の型追従は§10の限定追記に従う |
 | `client/src/api.ts`、`client/src/stores/controlQueue.ts` | 必須型追加のcaller追従が必要な場合だけ。新変換・新機能なし |
 | `backend/src/store/json-store.ts` | 新型保存・未知版拒否。旧state無改変、移行未承認の状態への作用拒否 |
 | `backend/src/routes/control.ts` | 系統／命令／出力対応、新kind完了登録前検査。既存claim・所有者・一回完了を維持 |
@@ -101,3 +101,22 @@ v004の旧版保全案を今回の開発差分に適用する。旧16/5 live参�
 通常main・明示stage・commit/push、他者変更保全、専用Edgeタブ、同じZEV Build Loopへの直接送信を維持。相談役の本指示保存後に同期し、同じセッションで続行する。新しいbranch/worktree・任意のfeature flag／上限／timerは作らない。
 
 報告：`Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 明示Digestの通常キュー接続（隔離実装）`。実caller、実complete、local/upload、次工程の消費、旧版保全、admissionの不足、未承認適用範囲を示す。完成・不足を相談役が監査し、実施可能な主線の次指示を同じ返答で返す。外部推論・費用・新素材・STT・inspection・動画・公開は0のまま。受理記録だけの再commit・終了連絡・再起動・Codex1呼出しは不要。
+
+## 10. 2026-10-01：client表示名二項目の限定型追従
+
+`decision: continue`。kawafmm承認済みID9／v005の開発候補に伴う型追従として、§5のApp.vue許可差分に以下だけを追加する。一般委任・本適用・動画許可・新UIの承認ではない。
+
+対象checkpoint：`c37ab096b716b9a3b017dd107fba03bc345c2816`。相談役は[判断依頼](../reports/request-intent-connection-20261001/queue-client-type-followup-request.md)と同SHAの `client/src/App.vue` を照合した。`fileRefKindText` は `Record<FileRef['kind'], string>` の全kind必須辞書で、新二kindの表示名がない。型検査の実行結果はCodex報告に基づき、相談役自身の再実行ではない。20ファイルの実装全体や接続完了を今回受理したものではない。
+
+許可する変更は `fileRefKindText` の既存辞書への次の二項目だけ。既存 `output_video: '完成動画'` を含む七項目の文言・挙動は維持し、必要な区切りのカンマ以外を変更しない。
+
+```ts
+digest_plan_json: 'Digest計画',
+digest_execution_input_json: 'Digest入力検証'
+```
+
+`Partial`、`any`、任意文字列index、型assertion、fallbackで網羅検査を弱めない。新画面・Digest選択UI・入力項目・操作・状態／承認判定・本番設定は追加しない。既存の明示clip送信は保持する。
+
+適用後はclient型検査を実施し、結果を次の実質checkpointへ記録する。既に許可された隔離API／実runnerの接続試験は同じセッションで続行し、この表示名追加のために旧動画・全試験を再実行しない。累積設営3・製品限定修正2をリセットせず、既存枠の扱いは維持する。追加の人間作業、Codex1再起動、受理記録だけの再commit・終了連絡は不要。
+
+保存時点：二表示名の適用・client型検査の再合格は未確認。接続試験は報告時点で未実行、実装全体は未完了。相談役はCodexのMac上のprocessを直接観測していない。
