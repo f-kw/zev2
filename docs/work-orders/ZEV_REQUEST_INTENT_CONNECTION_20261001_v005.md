@@ -161,3 +161,30 @@ digest_execution_input_json: 'Digest入力検証'
 担当fileだけを明示stageし、通常commit/push・Git状態の記録・同じZEV Build Loopへの直接報告まで行う。EdgeはCodex2自身の専用タブだけを使う。応答保存だけの独立commit・終了連絡・Codex1再起動は不要。人間の視聴・採点・転記を次作業にしない。
 
 報告名：`Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 参照対応修正・通常キュー接続の再検証`。別不具合や枠超過で停止した場合は `GPT_DECISION` とし、未完了範囲・新しい原因を具体化する。完了後は相談役が監査と実施可能な次指示を同じ返答でつなぐ。今回の受領・再開は保存時点では未確認である。
+
+
+## 12. 2026-10-01：軽微な設営判断の相談役自動承認と再開
+
+`decision: continue`。**kawafmm承認済み。** 本人から「良い。これは重要な確認か？ 独断で決めれる程度なら自動で承認して。指示書を作って」と明示指示を受領した。相談役は、今回の4行修正は製品方針・品質・契約・費用・権限・本番挙動を決める事項ではなく、局所参照試験の組立てだけを直す軽微な設営判断と判定する。今後の同種事項は[AGENTS.md](../../AGENTS.md)「相談役による軽微な技術判断の自動承認」に従い、本人へ都度確認せず相談役が判断する。
+
+### 12.1 今回の自動承認
+
+- 対象checkpoint：`01ad1e54dbb95d10e6013a7076d274be2dfcf9fd`。
+- [失敗証拠](../reports/request-intent-connection-20261001/queue-reference-setup-failure-attempt-003.json)と[未適用4行案](../reports/request-intent-connection-20261001/queue-reference-setup-followup-request.md)を根拠に、`queue-integration-test.mts` の references 枝だけを直す。
+- 旧書き起こしは schemaVersion を持たないため、JSON版付きbindingに偽装せず、既存bytesをそのまま保存し、`path + fileSha256` のbyte参照としてregistryへ入れる。
+- 具体案は保存済みの4行をそのまま適用してよい。製品serializer／validator、通常caller、provider、旧素材、旧回答、要求SHAの意味は変更しない。
+- この修正を**設営修正の累積6回目**として例外承認する。一般の5回上限を恒久変更・リセットしたものではない。次の独立した設営不具合が出た場合も、Codexが自己承認せず相談役へGPT_DECISIONを返す。相談役は新しいAGENTS規則に従い、軽微なら本人確認なしで判断する。
+
+### 12.2 再試験と続行
+
+1. 失敗attempt-003は不変に保持し、新しい局所attemptで4行修正を検証する。
+2. 局所参照が成立したら、§11で既に承認済みの通常接続検証へそのまま戻る。再承認待ちは不要。
+3. 通常source/STT実claim/PUT/complete → 計画complete → validate_digest_plan実消費/complete → local/upload・分離root・転送先だけの別process再読 → MP4枝・inspection未提供枝 → 否定試験・Clip対象回帰 → 必要型検査まで進める。
+4. 成功条件はprocess exitだけでなく、要求内部の参照、registry、実bytes、通常complete、次工程再読が対応していること。元発話本文やログ文字列で成否を推測しない。
+5. 新しい**製品修正**が必要、費用/API/新素材/本番作用が必要、製品方針・承認意味が変わる、または強制停止条件へ到達した場合は停止し相談役へ返す。軽微な設営・技術判断は本人へ直接上げない。
+
+### 12.3 変えない境界
+
+ID9-PD-01/02、一般委任、本適用、旧業務state移行、動画実行許可、公開、人間品質は未承認／pendingのまま。外部推論・費用・新素材取得・STT実行・inspection実行・映像音声製造・新UIは今回の対象外。Codex1は起動せず、Codex2専用Edgeタブを維持する。
+
+報告は従来どおり `Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9. 参照対応修正・通常キュー接続の再検証`。軽微な設営判断だけを理由にkawafmmへ転記・確認を要求しない。
