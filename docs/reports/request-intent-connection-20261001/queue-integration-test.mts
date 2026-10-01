@@ -49,7 +49,10 @@ if(mode==='backend') {
   const values=new Map<string,any>(),bindings=new Map<string,any>();
   const save=async(name:string,value:any)=>{const b=bind(name,value);await writeFile(dataPath(name),formal(value),{flag:'wx'});values.set(name,value);bindings.set(name,b);return b;};
   const transcriptBytes=await readFile(savedTranscript),transcript=JSON.parse(transcriptBytes.toString());
-  const transcriptBinding=await save(`artifacts/${draft}/${stt}/transcript.json`,transcript);
+  const transcriptBinding={path:`artifacts/${draft}/${stt}/transcript.json`,fileSha256:sha(transcriptBytes)};
+  await writeFile(dataPath(transcriptBinding.path),transcriptBytes,{flag:'wx'});
+  values.set(transcriptBinding.path,transcript);
+  bindings.set(transcriptBinding.path,transcriptBinding);
   const sourceBinding=await save(`artifacts/${draft}/${video}/source-metadata.json`,{schemaVersion:'reference-test-source-metadata-v001',sourceUri:source});
   const utterances=buildDistantConnectionCommonUtteranceArtifactFromTranscriptBytesV001({sourceTranscriptPath:transcriptBinding.path,sourceTranscriptBytes:transcriptBytes});
   const utteranceBinding=await save(logical('utterances.json'),utterances);

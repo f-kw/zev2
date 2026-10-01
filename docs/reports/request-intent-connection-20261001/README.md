@@ -275,3 +275,32 @@ stdout本文から「失敗」を検索する判定を除き、実process exit�
 | backend/src/routes/control.ts | 上の完了前検査へ実stateを渡し、消費計画の実所有者との参照対応を確認 |
 
 App.vueは既許可の二表示名、試験は設営5回目と局所参照／新attempt証拠の追加のみ。業務state・旧attempt・旧回答へ作用しない。停止時のGit基準はmain/local/origin 87c53ade一致。担当14fileだけを明示stageし、通常checkpoint commit/push後のSHAとclean・staged0・untracked0を専用Edgeの停止報告で示す。受領記録だけの独立commitは行わない。
+
+
+## v005 §12 再開・設営6回目checkpoint
+
+2026-10-01：本人の「独断で決めれる程度なら自動で承認して」に基づく相談役の自動承認を受領。mainを9f0312295266ceb0e5c497eeaa01d187ac3303afへ他者変更を保持して同期し、START_HERE・HANDOVER全文・v005全文と更新AGENTSの軽微技術判断規則を確認。モデル表記gpt-6.1-sol、比較・旧成果再生成0。Codex2単独、担当Git操作を引き継ぎ、専用Edgeだけを使う。
+
+保存済み4行案をreferences枝だけへ適用。旧書き起こしを版付きJSON参照へせず、旧bytesをそのまま保存して版なしbytes参照をregistryへ登録する。設営修正は累積6回目、製品修正4回目を維持。一般枠・履歴・AGENTSはCodex側で変更しない。attempt-003と旧証拠は保持し、新局所attempt-004へ進む。局所合格後は通常接続の既承認試験へそのまま進み、未承認の品質・一般委任・動画／本番／公開へ広げない。
+
+前回01ad1e54の停止報告は同じ専用EdgeからZEV Build Loopへ直接送信・表示確認済み。画像/private/tmp/codex2-intent-reference-setup-stop-sent.jpgとreceiptを保存し、会話へ提示した。この再開はその後の明示指示による。
+
+局所attempt-004はexit0、内部参照5件・拒否9件が合格。queue-reference-evidence-attempt-004.jsonへ実純粋builderと宣言path・物理名・SHAの対応を保存。これは参照検査の局所fixtureであり、内容判断の受理・通常complete・製造資格ではない。通常接続の新attempt-004へそのまま進む。
+
+
+## v005 §12 通常attempt-004：内部参照成立・時計参照の新しい停止
+
+source/STTの実claim・PUT・complete→実index/factory→探索／採否／保持→計画completeは成功。新要求からSHAを作り、目的全文は3判断へ一致した。探索・採否・保持の内部参照5件を保存registryと実bytesへ照合し、計画の通常登録前検査も通過。旧candidate-set参照不整合はこの新attemptで解消した。queue-integration-evidence-attempt-004.jsonは途中失敗も保存し、completed=[]を維持。局所attempt-004の5参照／拒否9件と通常経路の部分成功を区別する。
+
+次のvalidate_digest_planは正規登録計画を実再読し、非連続keepの4区間・既存時計検査・製造job形状検査へ進んだ。4出力JSONを保存したが、消費記録を正式JSONへする時点で時計結果の参照に未定義の版情報が入り、保存前に拒否された。工程はfailed、消費記録と薄い検証成果物／OutputEntityは未登録。この失敗を予定されたmax-steps停止や元発話の語句と混同しない。
+
+原因は版情報を持たない純粋時計結果（status／violations／mappings）を新consumerが一律に版付きJSON参照へしたこと。内容・時計の計算結果やserializerを緩める問題ではない。queue-clock-binding-failure-attempt-004.jsonへ4出力のSHA／版の有無・実所有者3鎖・内部参照対応を保存。製品4／設営6を維持し、追加製品修正は未適用。
+
+推奨する個別一差分は、時計結果だけを版なしbytes参照にして薄い検証成果物の同じ参照検査を合わせること。runner消費moduleとsharedの薄い成果物moduleの二pathだけ、3JSON参照と既存時計bytesを維持。queue-clock-binding-followup-request.mdへ具体案を保存し、AGENTSの軽微技術判断規則による相談役の自動承認へGPT_DECISIONで返す。Codex自己承認・一般枠リセット・他の欠陥追加は行わない。
+
+未実施：validate complete、upload／worker・backend別root／転送先だけの別process消費、MP4／inspection未提供、通常queueの否定・Clip回帰。今回製品file変更0のため01ad1e54時の全対象型検査結果は保持し、新しい型検査の実行と称さない。字幕／演出未接続・動画未承認・人間品質pending、ID9-PD-01/02は維持。外部推論／費用／新素材／STT／inspection／動画／本番／公開・人間作業0。
+
+
+停止時の別process確認：実registered planを現行readerで再構築し、保存計画と完全一致。24参照データと内部参照5件を確認し、provider再実行0・state不変。保存された消費4出力のSHAと、旧attempt-003の3保存fileのSHA不変を確認。queue-clock-stop-readback-attempt-004.jsonへ保存。消費completeは未成立のまま。今回の隔離backend・runner・試験親processは終了済み、既存サービス操作0。
+
+Git基準はmain/local/origin 9f031229。§12の設営4行差分と失敗／局所合格／別process証拠・担当共通状態の9fileだけを明示stageし、通常監査checkpoint commit/push後に相談役へGPT_DECISIONで直接提出する。製品コード追加修正は0、累積は製品4／設営6。自動承認の具体的範囲が返るまでCodexが例外を自己適用しない。

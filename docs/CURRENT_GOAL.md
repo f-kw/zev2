@@ -8,7 +8,7 @@
 
 ## 2. 現在の主作業
 
-**9. 明示Digestの通常キュー接続（v005）は未完了。本人の新ルールに基づき、今回の軽微な試験設営4行は相談役が自動承認し、検証再開を指示済み。`01ad1e54dbb95d10e6013a7076d274be2dfcf9fd` の局所試験中断を監査し、`decision: continue`。今回の試験設営4行だけを設営累積6回目として相談役が自動承認し、その後の既承認検証続行も指示した。現在の履歴は製品4／設営5、次修正の適用時に設営6。一般上限・履歴はリセットしない。Codex2の受領・再開は未確認。**
+**9. 明示Digestの通常キュー接続検証。§12の相談役自動承認を9f031229で受領し、局所設営4行を累積6回目として適用。新局所attempt-004は内部5参照／拒否9件が合格。通常attempt-004はsource/STT・計画の実complete、内部参照対応まで成立。次の消費工程は時計結果に存在しない版情報を付けた新しい製品欠陥で消費記録保存前にfailed。製品4／設営6を保持して追加作用を停止し、二pathの最小差分を相談役の個別自動承認へ返す。v005未完了。**
 
 正本は [v005指示書、とくに§10・11](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)。参照修正1回の本人承認は「良い。指示書作って」として受領、`16de0445ff4bba405e2d32189c4e1d5d35aac86b`に保存した。Codex2は`87c53ade`で受領・再開し、参照修正を製品累積4、stdout誤検出除去を設営累積5として適用した。二表示名の追加とshared/backend/runner/Remotion/client型検査も報告上完了。これらを未承認・未実施へ戻さない。
 
@@ -88,3 +88,8 @@ Codex2は論理`artifacts/<draft>/<producer-request>/<file>`を既存の単一�
 各担当は専用Edgeタブだけを使い、他担当・ユーザーのタブに触れない。stage/commit/pushは直列化し、担当fileだけ明示stageする。`01ad1e54`のGit終了・担当返却・追加作用停止を受領、remote mainは相談役確認。Macの稼働・ローカルGitは直接観測していない。今回の再開指示は発行済み。Codex2の受領・実再開は未確認であり、保存だけで稼働済みにしない。受理記録だけの再commit・終了連絡・Codex1再起動は行わない。
 
 上位運用は[AGENTS](../AGENTS.md)、[監査プロトコル](CODEX_CHATGPT_AUDIT_PROTOCOL.md)、[人間確認方針](policies/HUMAN_REVIEW_ACCUMULATION_POLICY_v001.md)。一般の上限・旧GOAL_DEFINITIONの意味や数値を変更しない。更新前全文は[固定Git版](https://github.com/f-kw/zev2/blob/01ad1e54dbb95d10e6013a7076d274be2dfcf9fd/docs/CURRENT_GOAL.md)、以前の本人判断待ち原文は[ad180adc](https://github.com/f-kw/zev2/blob/ad180adce010bd3eb765f081f451a39b354b7d9f/docs/CURRENT_GOAL.md)等で保持する。
+
+
+## 9. v005 §12の実再開・時計結果参照での中断
+
+設営6回目は承認・適用済み。前の「設営6回目未承認」は当時の履歴であり、現在の停止理由ではない。通常登録された計画の要求内部5参照はregistry・実bytesへ一致し、前回の参照対応欠陥は新attemptで解消を確認した。時計結果は版情報を持たず、新consumerが一律にJSON版付き参照を作ることだけが新しい保存不成立の原因。具体的な二path案は[一差分](reports/request-intent-connection-20261001/queue-clock-binding-followup-request.md)、[失敗現物](reports/request-intent-connection-20261001/queue-clock-binding-failure-attempt-004.json)。相談役が軽微な限定実装として独立判断できる場合はAGENTSの自動承認運用を使い、本人確認・転記は要求しない。Codex自身は追加修正を未適用。

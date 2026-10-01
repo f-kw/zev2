@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "request-intent-clock-binding-failure-v001",
+  "attempt": "attempt-004",
+  "basisHead": "9f0312295266ceb0e5c497eeaa01d187ac3303af",
+  "status": "stopped",
+  "localReferencesPassed": true,
+  "normalSourceSttPlanComplete": [
+    {
+      "requestId": "agent___gsKTZ2GHv1p2q-OWjly",
+      "type": "prepare_video",
+      "status": "succeeded",
+      "outputId": "prepare_video_6ndfv9MymsXu5sxoF--lc",
+      "fileRefId": "fileref_CwnHvsGtKn5P_vOKuG6j2",
+      "ownerId": "prepare_video_6ndfv9MymsXu5sxoF--lc"
+    },
+    {
+      "requestId": "agent_t-9-G-yN7zWKHJMRc-0PF",
+      "type": "run_stt",
+      "status": "succeeded",
+      "outputId": "run_stt_BCk51hS60xqB6_AyBLlVY",
+      "fileRefId": "fileref_821lovy_4Lfz6CMyFEBFD",
+      "ownerId": "run_stt_BCk51hS60xqB6_AyBLlVY"
+    },
+    {
+      "requestId": "agent_dKhAeos97RZgYjcNiK1-P",
+      "type": "prepare_digest_plan",
+      "status": "succeeded",
+      "outputId": "prepare_digest_plan_5xMQtWz-Ud7a7uJRGrky8",
+      "fileRefId": "fileref_a9M82z6DEFIuLpjVIxO5K",
+      "ownerId": "prepare_digest_plan_5xMQtWz-Ud7a7uJRGrky8"
+    }
+  ],
+  "internalReferenceBytesVerified": [
+    {
+      "request": "candidate-request.json",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/discovery-plan.json",
+      "fileSha256": "d572f028a12d0e3b888fd38372de2e965dc39247f9fc59208ace6e8ced02d40a",
+      "canonicalSha256": "324e1c13cf7b892366323065104705921ffae807cdc15fc4efe7eede8c643e6d",
+      "physicalFileName": "agent_dKhAeos97RZgYjcNiK1-P--discovery-plan.json",
+      "registryMatches": true,
+      "bytesMatches": true
+    },
+    {
+      "request": "selection-request.json",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/selection-plan.json",
+      "fileSha256": "17bdf8c1cdef3db580867871face42ef0fba92a0e54e41ff41a7fb4f6cc20a61",
+      "canonicalSha256": "b93fe2dd79d838b05e3ba34e37c538ed7f8d5256621dbf06bc90c3eda48d9fbe",
+      "physicalFileName": "agent_dKhAeos97RZgYjcNiK1-P--selection-plan.json",
+      "registryMatches": true,
+      "bytesMatches": true
+    },
+    {
+      "request": "selection-request.json",
+      "field": "candidateSetBinding",
+      "schemaVersion": "candidate-selection-candidate-set-v001",
+      "path": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/candidate-set.json",
+      "fileSha256": "d177aefd800d65c9209d456f62d6505bb8daea94897c17f479794686de1e8f36",
+      "canonicalSha256": "8187999cef9b82ebdf34932df7c390ed9d4109a89af72cdd0ed6f386d5a10e15",
+      "physicalFileName": "agent_dKhAeos97RZgYjcNiK1-P--candidate-set.json",
+      "registryMatches": true,
+      "bytesMatches": true
+    },
+    {
+      "request": "retention-request.json",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/selection-plan.json",
+      "fileSha256": "17bdf8c1cdef3db580867871face42ef0fba92a0e54e41ff41a7fb4f6cc20a61",
+      "canonicalSha256": "b93fe2dd79d838b05e3ba34e37c538ed7f8d5256621dbf06bc90c3eda48d9fbe",
+      "physicalFileName": "agent_dKhAeos97RZgYjcNiK1-P--selection-plan.json",
+      "registryMatches": true,
+      "bytesMatches": true
+    },
+    {
+      "request": "retention-request.json",
+      "field": "selectionAdoptionBinding",
+      "schemaVersion": "candidate-selection-machine-adoption-v001",
+      "path": "artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P/selection-adoption.json",
+      "fileSha256": "220302fb88d19785bb9bd4f090347cd2882da7f34dd1c2f1e2a93ea8ed307d2e",
+      "canonicalSha256": "57dd46b73cf95649204a837c7d7a10ef1f86a17222f4cf105379da8f6b1e279e",
+      "physicalFileName": "agent_dKhAeos97RZgYjcNiK1-P--selection-adoption.json",
+      "registryMatches": true,
+      "bytesMatches": true
+    }
+  ],
+  "consumerRequestId": "agent_SdsEDp1FNwVd9h2BO62Ke",
+  "consumerStatus": "failed",
+  "consumerOutputRegistered": false,
+  "savedConsumerOutputs": [
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--machine-adoption.json",
+      "fileSha256": "1e89c4cd4522ab4a7f464f0194b3784b971aef2dc8c6f4dac450f5d166b83e6f",
+      "byteSize": 13345,
+      "hasSchemaVersion": true,
+      "schemaVersion": "new-material-digest-execution-adoption-v001",
+      "fields": [
+        "schemaVersion",
+        "artifactId",
+        "authorityKind",
+        "authorizationBinding",
+        "planBinding",
+        "candidateSetBinding",
+        "resultBinding",
+        "requestBinding",
+        "responseBinding",
+        "validatorResultBinding",
+        "sourceVideoBinding",
+        "transcriptBinding",
+        "utteranceBinding",
+        "adoptedCandidates",
+        "rejectedCandidates",
+        "order",
+        "individualCandidateHumanApproval",
+        "historicalHumanQualityInherited",
+        "humanQuality",
+        "selectionAdoptionBinding",
+        "retentionResultBinding",
+        "selectedCandidates"
+      ],
+      "segments": 0
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--edit-plan.json",
+      "fileSha256": "c3e6df11b06c50d5cae3e868b2d34b87df3a951303f48caca19e514d481796d9",
+      "byteSize": 3066,
+      "hasSchemaVersion": true,
+      "schemaVersion": "new-material-digest-edit-plan-v001",
+      "fields": [
+        "schemaVersion",
+        "kind",
+        "artifactId",
+        "machineAdoptionBinding",
+        "sourceVideoBinding",
+        "segments",
+        "unresolvedEdits",
+        "quality"
+      ],
+      "segments": 4
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--manufacturing-values.json",
+      "fileSha256": "30251567812cd1596b786d481cd1835f1831a8245dd0e1bf807b58ca274e1026",
+      "byteSize": 884,
+      "hasSchemaVersion": true,
+      "schemaVersion": "presentation-base-media-build-job-v001",
+      "fields": [
+        "schemaVersion",
+        "jobId",
+        "assemblyDecision",
+        "sourceArtifact",
+        "outputDirectory"
+      ],
+      "segments": 0
+    },
+    {
+      "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_SdsEDp1FNwVd9h2BO62Ke--clock-resolution.json",
+      "fileSha256": "7038fdd9db7a2aff035a178b07001eb631e20bfacd041515aba5f02bbec47271",
+      "byteSize": 1610,
+      "hasSchemaVersion": false,
+      "schemaVersion": null,
+      "fields": [
+        "status",
+        "violations",
+        "mappings"
+      ],
+      "segments": 4
+    }
+  ],
+  "failureLocation": "runner/src/digest-plan-consumption-v001.ts:185; formal(expected)",
+  "reason": "The pure clock validator returns status/violations/mappings with no schemaVersion. The current consumer uses a JSON-version binding for every output. Its clock binding contains undefined schemaVersion and cannot be serialized. Clock outputs were saved but consumption binding and completion were not registered.",
+  "productLimitedFixesApplied": 4,
+  "setupFixesApplied": 6,
+  "additionalProductCorrectionApplied": false,
+  "remainingUnexecuted": [
+    "validate complete",
+    "upload separated roots",
+    "destination-only readback",
+    "MP4 direct registration",
+    "inspection missing",
+    "negative queue tests",
+    "Clip regression"
+  ],
+  "externalInferenceExecuted": false,
+  "renderExecuted": false,
+  "humanQuality": "pending"
+}

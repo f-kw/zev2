@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "scope": "reference-only; no semantic response validation or normal completion",
+  "actualPureBuilders": [
+    "buildUnseenDiscoveryRequestV001",
+    "projectUnseenSelectionPlanV001",
+    "buildSelectionRequestV001"
+  ],
+  "correspondences": [
+    {
+      "stage": "discovery",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_reference_attempt_004/agent_reference_plan/discovery-plan.json",
+      "fileSha256": "32dd0513824d79183f6b9871143eb2629a30b555b89a85d7b1f7a325d1919470",
+      "canonicalSha256": "cc2c006f854ce4b03131047750da12ac247eeccdf2266c4843df69794e4bbd16",
+      "fileName": "agent_reference_plan--discovery-plan.json"
+    },
+    {
+      "stage": "selection",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_reference_attempt_004/agent_reference_plan/selection-plan.json",
+      "fileSha256": "3ae77a768c59a44ad02a192b630456e6e7b4fa750bae15b71ca2805e6fd37e4c",
+      "canonicalSha256": "845fbfe4d6b3d893c0be903dd88329078d18872f0f485e6ada5f74a6d111ddfc",
+      "fileName": "agent_reference_plan--selection-plan.json"
+    },
+    {
+      "stage": "selection",
+      "field": "candidateSetBinding",
+      "schemaVersion": "candidate-selection-candidate-set-v001",
+      "path": "artifacts/draft_reference_attempt_004/agent_reference_plan/candidate-set.json",
+      "fileSha256": "5d833ace4cca0a001388ae67158606c9574c7aac7dffa3ff851f67f02f6d09d4",
+      "canonicalSha256": "47cfd5e6842769b70dec934170bae94c3a0d5751de7238948aaf106614b96cd2",
+      "fileName": "agent_reference_plan--candidate-set.json"
+    },
+    {
+      "stage": "retention",
+      "field": "planBinding",
+      "schemaVersion": "new-material-digest-execution-plan-v001",
+      "path": "artifacts/draft_reference_attempt_004/agent_reference_plan/selection-plan.json",
+      "fileSha256": "3ae77a768c59a44ad02a192b630456e6e7b4fa750bae15b71ca2805e6fd37e4c",
+      "canonicalSha256": "845fbfe4d6b3d893c0be903dd88329078d18872f0f485e6ada5f74a6d111ddfc",
+      "fileName": "agent_reference_plan--selection-plan.json"
+    },
+    {
+      "stage": "retention",
+      "field": "selectionAdoptionBinding",
+      "schemaVersion": "reference-test-adoption-v001",
+      "path": "artifacts/draft_reference_attempt_004/agent_reference_plan/selection-adoption.json",
+      "fileSha256": "67ad1905b095e053838892b0437ef06d71f7298bb40a75ed32da4584eff02d19",
+      "canonicalSha256": "2bdea3aac6e835ab388809fb95a2ee3da14e9f536b890009365591c3666d9c81",
+      "fileName": "agent_reference_plan--selection-adoption.json"
+    }
+  ],
+  "rejected": [
+    "other-draft",
+    "outside-dependency",
+    "traversal",
+    "legacy-flat",
+    "wrong-producer-URI",
+    "missing-registry",
+    "SHA-mismatch",
+    "physical-name-collision",
+    "missing-bytes"
+  ],
+  "artifactRoot": "runtime/artifacts/request-intent-reference-attempt-004"
+}

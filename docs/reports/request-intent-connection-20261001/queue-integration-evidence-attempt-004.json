@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "request-intent-queue-integration-evidence-v001",
+  "attempt": "attempt-004",
+  "results": [],
+  "captures": [
+    {
+      "stage": "discovery",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "7a54aa4a40a40542e99d5ea19e8458b9cc0b030f94ac79b4c373309803c4c631",
+      "sourceId": "fileref_CwnHvsGtKn5P_vOKuG6j2",
+      "utteranceCount": 1615,
+      "candidateCount": null
+    },
+    {
+      "stage": "selection",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "895c401ddac34adfdae1986d1b28825c9c7ecad48190d0b3018875c5ac79ebd9",
+      "sourceId": "fileref_CwnHvsGtKn5P_vOKuG6j2",
+      "utteranceCount": null,
+      "candidateCount": 2
+    },
+    {
+      "stage": "retention",
+      "purpose": "自然な導入と出来事の反応を保ち、結末が理解できる構成にする。\n関係の薄い寄り道は本編との関係で判断する。",
+      "requestFileSha256": "9755406a3814649a12768f58c2a8159b1c9f3a663afde497281200771d25350f",
+      "sourceId": null,
+      "utteranceCount": null,
+      "candidateCount": 2
+    }
+  ],
+  "completed": [],
+  "inputPath": "normal draft API/approve/next/claim/runner index/factory/PUT/complete",
+  "sourceProcessingExecuted": false,
+  "sttExecuted": false,
+  "externalInferenceExecuted": false,
+  "inspectionExecuted": false,
+  "renderExecuted": false,
+  "productionAdoption": false,
+  "status": "failed",
+  "error": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs:182\n  if (!finiteJson(value)) throw new TypeError('crop application formal JSON is invalid');\n                                ^\n\n\nTypeError: crop application formal JSON is invalid\n    at serializePresentationOutputCropApplicationFormalJsonV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_crop_application_v001.mjs:182:33)\n    at consume (/Users/kawafmm/workspace/zev2/runner/src/digest-plan-consumption-v001.ts:185:33)\n    at async Object.validate_digest_plan (/Users/kawafmm/workspace/zev2/runner/src/workflow-step-builders.ts:224:20)\n    at async completeRequest (/Users/kawafmm/workspace/zev2/runner/src/index.ts:862:20)\n    at async runDryRunLoop (/Users/kawafmm/workspace/zev2/runner/src/index.ts:892:7)\n    at async <anonymous> (/Users/kawafmm/workspace/zev2/runner/src/index.ts:910:1)\n\nNode.js v20.19.6\n\nAIエージェント実行開始: Digest登録計画の検証 (validate_digest_plan)\n\n\n1 !== 0\n"
+}
