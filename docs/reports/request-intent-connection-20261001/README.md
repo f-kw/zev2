@@ -490,3 +490,48 @@ main bf8814a1へ他者変更を保持して同期し、相談役保存2530d966�
 これで今回のupload-json転送＋保存後receiver-only再構築は限定検証完了。旧親試験のtool終了code未返却という記録は変更せず、今回別process readerのexit0と区別する。v005全体完成ではない。MP4直接登録／inspection未提供の通常complete、目的2件の全3判断はnot-run。外部推論・費用・新素材・STT／inspection処理・動画・新UI・SSD・追加削除・本番・正式採用・公開0。ID9-PD-01/02未承認、字幕演出未接続、動画許可未承認、人間品質pendingを維持する。
 
 次に進む一件は、相談役が残る通常登録枝（MP4直接登録／inspection未提供）の承認範囲と容量作用を具体化して選ぶこと。Codexは今回それらを起動しない。担当4fileのみ明示stage・通常main commit/push・Git clean確認後、専用EdgeからAUDIT_ONLY＋NEXT_REQUESTで限定完成監査と次指示を同じ会話へ送る。本人への視聴・採点・転記、Codex1起動、受領だけの再commitは不要。
+
+## 2026-10-02 local-mp4指示受領・設営12・実行前checkpoint
+
+同じ専用Edgeの監査と相談役保存e22a87c5の正本を受領し、main85b077a3へ他者変更を保持して同期。upload-json転送＋保存後再読は限定技術受理済み、Goalの当該保存再読も完了扱いにした。次は既存local-mp4 scenario一件だけで、MP4 bytes直接登録、inspection未提供、異なる目的の全3判断到達を検証する。明示入口・一copy用の無作用preflight・新attempt名／証拠名／実行metadataだけを設営12として適用、製品5不変。通常登録／runner／factory／消費／complete／固定回答／期待値、upload入口の実作用とpreflight helperは維持。
+
+新入口のTypeScript5.9.3 syntax transpileはexit0、生成file0。preflight-onlyもexit0、同device16777234、source4,803,412,827 bytes、空き26,243,956,736 bytes、必要9,606,825,654 bytes（相談役が今回だけ指定した2本条件）を満たした。新attempt-007と新証拠は未作成、媒体read／PUT／backend起動0。旧669小証拠、attempt-006の91file、旧upload／失敗／成功5証拠・helper、製品8path、削除8pathの不在を実行前保存。受領だけのcommitは作らず、実走入口でも直前空きを再測定して新local-mp4系列へ進む。外部推論・費用・取得／STT／inspection処理・動画・SSD・追加削除・本番・公開0、ID9-PD-01/02と人間品質pending等は維持。
+
+## 2026-10-02 local-mp4直接登録・inspection未提供の限定検証完了
+
+専用Edgeで85b077a3の最終続行返信も確認した。設営12の入口と無作用preflightだけを適用、製品5不変。新attempt-007を一回実行し、実process exit0、通常4命令すべてsucceeded。計画工程のexit1は指定max-steps=1の予定停止で、計画の失敗ではないことを実stateと出力登録で確認。検証工程exit0。stdoutの語句から成否を判定していない。
+
+実行command：`node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-integration-test.mts run attempt-007 local-mp4`。隔離backendの通常API／承認／next／claim／PUT／completeと実index／factory／Skillを使用した。判断通信だけを要求SHAに対応する通信しない回答へ置換し、入力経路と保存・検証を変更していない。source/STTの処理成功を証明するものではなく、旧保存物の通常登録を証明する。
+
+| 今回の確認 | 実証 |
+|---|---|
+| 作用前の容量条件 | 実走直前の空き26,240,741,376 bytes、必要9,606,825,654 bytes、同volume、新path不存在を通過 |
+| MP4直接登録 | video/mp4 4,803,412,827 bytes。元素材とPUT先とFileRefのSHA504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4が一致。JSON偽装なし |
+| 正規登録と所有者 | source／STT／計画／検証の4組すべて、命令の完了結果→Output→FileRefの対応・所有者・kind・実size／SHAを照合 |
+| 計画 | 素材由来はvideo-bytes、登録素材と実動画の参照が同じ。22データ参照と要求内部の参照を通常readerが再検証 |
+| inspection未提供 | 保存計画のinspectionがnull。検証成果物のinspection／消費記録／編集／製造入力／時計がすべて明示null、未提供理由あり |
+| 架空出力を生成しない | source inspection・消費記録・採用変換・編集・製造入力・時計の各fileは不存在。大容量新実体はPUT先MP4一件だけ |
+| 異なる2目的 | 保存済みupload006と新MP4007の各探索・採否・保持の実要求bytes SHA／目的全文／対応回答SHAを6組照合。目的は異なり、旧回答SHAの付替えなし |
+| 保存後の別process再読 | 実loadStateとawait付きsnapshot取得、実消費readerでinspection-missingを再構築、保存済み5,777 bytesの検証成果物とdeepEqual一致。state bytes不変、再判断・再登録・completeなし |
+| 未承認境界 | 字幕演出未接続、動画許可未承認、人間品質pending。検証成功を動画実行資格へ変更しない |
+
+[実走証拠](queue-local-mp4-no-inspection-evidence-attempt-007.json)は252,513 bytes、SHA5c9633a55e719305f9937daa1614370cda01191d8dec70cddc1faccf6f84c895。[別process再読・2目的・保全・親条件対照](queue-local-mp4-readback-cross-purpose-proof-attempt-007.json)はreader全文／SHA、実exit0、全4登録出力、実bytes、各目的の3要求と回答、旧物不変を保存する。実走証拠のcross-attempt未確認時点の記録は書換えず、後続proofで成立を示す。reader SHA4ebb64b5d51a44bf381535cbddfe4306b057c71f9f48bc23c876b769c85f4e28。
+
+別process command：`node --import ./runner/node_modules/tsx/dist/loader.mjs /private/tmp/codex2-local-mp4-readback-attempt007.mts`、実exit0。保存stateと登録出力の検査・実消費readerによる再構築であり、通常runner／backendは停止後、再判断・再登録・complete・state更新0。再読proofと実行前保全一覧はattempt-007内へ小JSONとして別名wx保存。
+
+旧669小証拠のsize／SHA、旧attempt-006の91fileの小SHAと全metadata、旧upload・2失敗・再読成功・容量helperの5file、製品8path SHAは前後不変。既存3copyは未再hash・未変更、削除済み8pathは不存在のまま。新MP4一件を保持し、追加削除やSSD操作は行っていない。登録後の空き21,414,846,464、計画後21,412,904,960、検証後21,423,218,688 bytes。新素材コピーの論理量とvolumeの空き変化を混同しない。古い削除済み33参照を含む旧runtime一式の即時再読が可能とは報告しない。
+
+### 親v005完了条件の実証範囲と残件
+
+| 親条件 | 対応する保存実績・今回の扱い |
+|---|---|
+| §8.1 通常承認・登録・2目的・MP4 | 旧local005／upload006のJSON登録2件と今回MP4007。旧local005の素材copyは整理済みで現在の即時再読資格とは区別。006／007の目的3判断は今回実bytesで照合 |
+| §8.2 通常dispatch・転送・完了・消費 | 006の実upload4工程とreceiver-only再読、007のlocal4工程と保存後実reader再読。通常処理の実証 |
+| §8.3 非連続保持・時計・別root・別process | 006の複数候補／keep-drop-keep／4区間・時計・転送先だけからの再構築、007の未提供枝と2目的。旧動画QCや内容判断を再実行していない |
+| §8.4 入力・参照・不完全転送の拒否 | 現行52媒体なし、参照9拒否、時計15検査は保存済み合格。以前の準備27／消費15＋5の否定試験は旧内部版の履歴。所有者不一致、期限切れclaim、保存承認版／素材不一致、意図的な不完全uploadの完了拒否は現行経路の静的対応を確認したが、v005版での直接否定実行は未確認 |
+| §8.5 Clip回帰・確認ゲート・admission | 現行52結果のClip7工程／Digest4工程、確認生成元3件と独立確認ゲート3件。006／007とも動画命令なし、admissionの不足を保持 |
+| §8.6 旧保全・固定履歴・型検査 | 旧保存物保全・固定Git来歴は保持。製品SHAは60b959d9時のshared／backend／runner＋Remotion／client型検査合格版と不変。現行callerによる旧内部版／旧stateの拒否は静的確認、旧版否定の実行証拠とは分ける |
+
+今回のMP4枝・inspection未提供・異なる2目的の3判断到達は限定検証完了。親v005の全否定条件が現行版で直接実行されたとは認定せず、**v005全体の技術完了候補はまだ提出しない**。新たな製品欠陥・試験失敗は観測なし。次の一件として、残る資格・旧版・不完全転送の拒否を大容量copy／素材PUTなしの小さい隔離試験で埋める範囲を相談役へ求める。歴史上の合格を取り消さず、製品修正や一般上限変更を提案していない。
+
+製品5／設営12、一般枠・累積履歴リセット0。今回の構文transpile・無作用preflight・実走・実reader・保存証拠の別process照合を実施し、製品無変更の全型検査・旧52／15／111・全動画QC・人間レビューは再実行しない。外部推論・費用・新素材取得・STT／inspection処理・動画製造・新UI・本番・正式採用・公開0。ID9-PD-01/02未承認、人間品質pendingを維持。Codex1起動・他者タブ操作・本人への視聴／採点／転記要求0。担当6fileのみ明示stage・通常commit/push・Git clean確認後、同じ専用EdgeへAUDIT_ONLY＋NEXT_REQUESTを直接送る。

@@ -1,0 +1,794 @@
+{
+  "schemaVersion": "request-intent-local-mp4-post-audit-v001",
+  "status": "passed",
+  "instructionHead": "85b077a39abdd1004bc903038ff508b20e09b653",
+  "completedAt": "2026-10-01T15:17:32.109Z",
+  "productFixes": 5,
+  "setupFixes": 12,
+  "execution": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-integration-test.mts run attempt-007 local-mp4",
+    "realProcessExitCode": 0,
+    "stdoutTests": [
+      {
+        "name": "local-mp4 normal registration/runner/complete",
+        "status": "passed"
+      },
+      {
+        "name": "selected local-mp4 purpose reached all three actual Skills",
+        "status": "passed"
+      }
+    ],
+    "runnerProcessExitCodes": [
+      {
+        "expectBoundary": true,
+        "exitCode": 1
+      },
+      {
+        "expectBoundary": false,
+        "exitCode": 0
+      }
+    ],
+    "normalQueueCompleted": [
+      {
+        "requestId": "agent_dpwTAfxouJ3ZROitPCzha",
+        "type": "prepare_video",
+        "status": "succeeded",
+        "outputId": "prepare_video_lAiJJJ2piWN_a0VS6dU0h",
+        "outputType": "Video",
+        "fileRefId": "fileref_KYSeSV1mPFvp1u3KogOFq",
+        "ownerId": "prepare_video_lAiJJJ2piWN_a0VS6dU0h",
+        "kind": "source_video",
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4",
+        "mimeType": "video/mp4",
+        "byteSize": 4803412827,
+        "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+      },
+      {
+        "requestId": "agent_m5dqvqiFaoZT-CTkVk1Uw",
+        "type": "run_stt",
+        "status": "succeeded",
+        "outputId": "run_stt_5RHCrn_fE6ppS9Xs16ZdY",
+        "outputType": "Transcript",
+        "fileRefId": "fileref_IXuou594_UFPu5leqvbLb",
+        "ownerId": "run_stt_5RHCrn_fE6ppS9Xs16ZdY",
+        "kind": "transcript_json",
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_m5dqvqiFaoZT-CTkVk1Uw--transcript.json",
+        "mimeType": "application/json",
+        "byteSize": 6804193,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+      },
+      {
+        "requestId": "agent_DP8CY1tvAZ9_asnnlywJX",
+        "type": "prepare_digest_plan",
+        "status": "succeeded",
+        "outputId": "prepare_digest_plan_wWnYUSMQckzZXnnoNSqdv",
+        "outputType": "DigestPlan",
+        "fileRefId": "fileref_iEM7seisfcSzU9vVNWlQ9",
+        "ownerId": "prepare_digest_plan_wWnYUSMQckzZXnnoNSqdv",
+        "kind": "digest_plan_json",
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--digest-plan.json",
+        "mimeType": "application/json",
+        "byteSize": 6305,
+        "sha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f"
+      },
+      {
+        "requestId": "agent_CGBokmEx_1QmhJptoQPSA",
+        "type": "validate_digest_plan",
+        "status": "succeeded",
+        "outputId": "validate_digest_plan_xzCgnGcbqpFs3FF3FZCyi",
+        "outputType": "DigestExecutionInput",
+        "fileRefId": "fileref_0btf7AS9uZS7H1DC_woUr",
+        "ownerId": "validate_digest_plan_xzCgnGcbqpFs3FF3FZCyi",
+        "kind": "digest_execution_input_json",
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_CGBokmEx_1QmhJptoQPSA--digest-execution-input.json",
+        "mimeType": "application/json",
+        "byteSize": 5777,
+        "sha256": "274e4957c2f5029176cf9c311e93329cb36cd19a8d16dc5a4960c27ed012c79a"
+      }
+    ],
+    "ordinaryPrepareBoundaryIsNotCommandFailure": true,
+    "backendAndRunnerProcessesObservedAfterCompletion": 0
+  },
+  "noEffectPreflight": {
+    "status": "passed",
+    "syntaxTranspile": {
+      "exitCode": 0,
+      "typescript": "5.9.3",
+      "filesWritten": 0
+    },
+    "preflightOnly": {
+      "exitCode": 0,
+      "measuredAt": "2026-10-01T15:04:07.865Z",
+      "sourceBytes": 4803412827,
+      "device": 16777234,
+      "availableBytes": 26243956736,
+      "requiredAvailableBytes": 9606825654,
+      "knownPeakBytes": 4803412827,
+      "sameVolume": true,
+      "runtimeCreated": false,
+      "mediaRead": false,
+      "PUT": false,
+      "backendStarted": false
+    },
+    "workOrder": "docs/work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_LOCAL_MP4_NO_INSPECTION.md",
+    "setupFixesApplied": 12,
+    "productFixes": 5
+  },
+  "formalPreflight": {
+    "measuredAt": "2026-10-01T15:10:14.169Z",
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "byteSize": 4803412827,
+      "device": 16777234
+    },
+    "devices": [
+      {
+        "intendedRoot": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4",
+        "measuredPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts",
+        "device": 16777234,
+        "availableBytes": 26240741376,
+        "blockSize": 4096,
+        "filesystemType": 26
+      }
+    ],
+    "decision": {
+      "sameVolume": true,
+      "knownPeakBytes": 4803412827,
+      "requiredAvailableBytes": 9606825654,
+      "availableBytes": 26240741376,
+      "deficitBytes": 0,
+      "passed": true,
+      "rule": "local-mp4 no-inspection work-order §3; this isolated direct PUT test only"
+    }
+  },
+  "testFileSha256": "2284fe997f8db8b4c9a25cfd24efc6bfb339325b25267523954663a6b13b3bdb",
+  "separateProcessReadback": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs /private/tmp/codex2-local-mp4-readback-attempt007.mts",
+    "realProcessExitCode": 0,
+    "syntaxTranspileExitCode": 0,
+    "readerCode": "import assert from 'node:assert/strict';\nimport fs from 'node:fs';\nimport path from 'node:path';\nimport {createHash} from 'node:crypto';\nconst root='/Users/kawafmm/workspace/zev2';\nconst report=path.join(root,'docs/reports/request-intent-connection-20261001');\nconst readJson=async(p:string)=>JSON.parse(await fs.promises.readFile(p,'utf8'));\nconst hash=(b:Uint8Array|string)=>createHash('sha256').update(b).digest('hex');\nconst fileSha=async(p:string)=>{const h=createHash('sha256');for await(const b of fs.createReadStream(p))h.update(b);return h.digest('hex');};\nconst evidence=await readJson(path.join(report,'queue-local-mp4-no-inspection-evidence-attempt-007.json'));\nassert.equal(evidence.status,'passed');assert.equal(evidence.completed.length,1);\nconst entry=evidence.completed[0],runtime=path.join(root,entry.backendRuntime),artifactRoot=path.join(root,entry.readerArtifactRoot);\nprocess.env.ZEV2_RUNTIME_DIR=runtime;process.env.ZEV2_DISABLE_AUTO_RUNNER='1';\nconst statePath=path.join(runtime,'state.json'),stateBytes=await fs.promises.readFile(statePath);\nconst {loadState,readStateSnapshot}=await import(path.join(root,'backend/src/store/json-store.ts'));\nconst loaded=await loadState(),state=await readStateSnapshot();assert.deepEqual(loaded,state);\nassert.deepEqual(state.agentRequests.map((r:any)=>r.type),['prepare_video','run_stt','prepare_digest_plan','validate_digest_plan']);\nassert(state.agentRequests.every((r:any)=>r.status==='succeeded'));assert.equal(state.controlReviewItems.length,0);\nconst ownedOutputs:any[]=[];\nfor(const r of state.agentRequests){\n  const o=state.outputs.find((v:any)=>v.id===r.result.outputId),f=state.fileRefs.find((v:any)=>v.id===r.result.fileRefId);\n  assert(o && f);assert.equal(o.fileRefId,f.id);assert.equal(f.ownerId,o.id);assert.equal(r.result.outputType,o.type);assert.deepEqual(r.fileRefIds,[f.id]);\n  const p=path.join(artifactRoot,entry.draftId,f.artifactFileName),s=await fs.promises.lstat(p);assert(s.isFile()&&!s.isSymbolicLink());assert.equal(s.size,f.byteSize);\n  assert.equal(await fileSha(p),f.sha256);\n  ownedOutputs.push({requestId:r.id,type:r.type,status:r.status,outputId:o.id,outputType:o.type,fileRefId:f.id,ownerId:f.ownerId,kind:f.kind,path:path.relative(root,p),mimeType:f.mimeType,byteSize:f.byteSize,sha256:f.sha256});\n}\nconst sourceRef=ownedOutputs[0];assert.equal(sourceRef.mimeType,'video/mp4');assert.equal(sourceRef.kind,'source_video');\nconst sourcePath=evidence.preflight.source.path,sourceStat=await fs.promises.lstat(sourcePath);\nassert.equal(sourceStat.size,sourceRef.byteSize);const sourceSha=await fileSha(sourcePath);assert.equal(sourceSha,sourceRef.sha256);\nconst logicalFile=(logical:string)=>{const parts=logical.split('/');assert.equal(parts[0],'artifacts');assert.equal(parts[1],entry.draftId);assert.equal(parts.length,4);return path.join(artifactRoot,parts[1],parts[2]+'--'+parts[3]);};\nconst plan=await readJson(path.join(root,entry.planPath)),preparation=await readJson(logicalFile(plan.preparationBinding.path));\nassert.equal(preparation.identity.sourceOrigin.mode,'video-bytes');assert.deepEqual(preparation.identity.sourceRegistration,preparation.identity.sourceVideo);\nassert.equal(preparation.identity.sourceVideo.fileSha256,sourceSha);assert.equal(preparation.identity.sourceOrigin.byteSize,sourceRef.byteSize);assert.equal(preparation.identity.sourceInspection,null);\nconst request=state.agentRequests.find((r:any)=>r.id===entry.validateRequestId),executionBytes=await fs.promises.readFile(path.join(root,entry.executionPath)),execution=JSON.parse(executionBytes.toString());\nconst validateRef=ownedOutputs.find(v=>v.requestId===request.id);assert.equal(hash(executionBytes),validateRef.sha256);\nfor(const field of ['sourceInspectionBinding','consumptionBinding','editPlanBinding','manufacturingInputBinding','clockResolutionBinding'])assert.equal(execution[field],null);\nassert.equal(typeof execution.sourceInspectionMissingReason,'string');assert(execution.sourceInspectionMissingReason.trim());\nassert.deepEqual(execution.admission,{planIntegrity:'passed',presentation:'not-connected',executionPermission:'not-approved',humanQuality:'pending'});\nconst directory=path.join(artifactRoot,entry.draftId),names=await fs.promises.readdir(directory);\nconst absentArtifacts=['source-inspection.json','source-media-inspection.json','consumption-binding.json','clock-resolution.json','machine-adoption.json','edit-plan.json','manufacturing-values.json'];\nfor(const n of absentArtifacts)assert(!names.some(v=>v.endsWith('--'+n)),n);\nconst mediaCopies=names.filter(v=>v.endsWith('.mp4'));assert.deepEqual(mediaCopies,[path.basename(sourceRef.path)]);\nconst {readConsumedDigestPlanV001}=await import(path.join(root,'runner/src/digest-plan-consumption-v001.ts'));\nconst before=Date.now(),result=await readConsumedDigestPlanV001({preparation:{workspaceRoot:root,artifactRoot}},{request,state});\nassert.equal(result.status,'inspection-missing');assert.deepEqual(result.artifact,execution);assert.deepEqual(await fs.promises.readFile(statePath),stateBytes);\nconst readerElapsedMs=Date.now()-before;\nconst cross:any[]=[];\nfor(const name of ['queue-upload-transfer-evidence-attempt-006.json','queue-local-mp4-no-inspection-evidence-attempt-007.json']){\n  const proofBytes=await fs.promises.readFile(path.join(report,name)),proof=JSON.parse(proofBytes.toString());assert.equal(proof.status,'passed');assert.equal(proof.completed.length,1);\n  const e=proof.completed[0],base=path.join(root,e.backendRuntime,'artifacts',e.draftId),checks:any[]=[];\n  assert.deepEqual(proof.captures.map((v:any)=>v.stage),['discovery','selection','retention']);\n  for(const [stage,qname,aname]of [['discovery','candidate-request.json','candidate-response.json'],['selection','selection-request.json','selection-response.json'],['retention','retention-request.json','retention-response.json']]){\n    const qpath=path.join(base,e.prepareRequestId+'--'+qname),apath=path.join(base,e.prepareRequestId+'--'+aname),bytes=await fs.promises.readFile(qpath),q=JSON.parse(bytes.toString()),a=await readJson(apath);\n    const capture=proof.captures.find((v:any)=>v.stage===stage),purpose=stage==='retention'?q.input.taskDescription:q.input.productionRequest;\n    assert.equal(purpose,capture.purpose);assert.equal(hash(bytes),capture.requestFileSha256);assert.equal(a.requestFileSha256,hash(bytes));\n    checks.push({stage,purpose,requestPath:path.relative(root,qpath),requestFileSha256:hash(bytes),answerPath:path.relative(root,apath),answerRequestFileSha256:a.requestFileSha256});\n  }\n  assert(checks.every(v=>v.purpose===checks[0].purpose));cross.push({attempt:proof.attempt,evidencePath:path.relative(root,path.join(report,name)),evidenceFileSha256:hash(proofBytes),purpose:checks[0].purpose,checks});\n}\nassert.notEqual(cross[0].purpose,cross[1].purpose);for(let i=0;i<3;i++)assert.notEqual(cross[0].checks[i].requestFileSha256,cross[1].checks[i].requestFileSha256);\nconst proof={schemaVersion:'request-intent-local-mp4-readback-proof-v001',status:'passed',separateProcess:true,actualStoreRead:true,backendStoppedBeforeRead:true,ownedOutputs,\n  originalSource:{path:sourcePath,byteSize:sourceStat.size,sha256:sourceSha},sourceRegistrationMode:preparation.identity.sourceOrigin.mode,sourceBindingsIdentical:true,sourceInspection:null,\n  executionPath:entry.executionPath,executionFileSha256:hash(executionBytes),executionByteSize:executionBytes.length,executionNullFields:['sourceInspectionBinding','consumptionBinding','editPlanBinding','manufacturingInputBinding','clockResolutionBinding'],missingReason:execution.sourceInspectionMissingReason,admission:execution.admission,\n  absentArtifacts,largeCopies:mediaCopies.length,actualReader:'readConsumedDigestPlanV001',readerStatus:result.status,artifactsDeepEqual:true,stateByteUnchanged:true,stateByteSize:stateBytes.length,stateSha256:hash(stateBytes),rejudgment:false,registrationOrCompleteRepeated:false,readerElapsedMs,crossAttemptPurposes:cross};\nawait fs.promises.writeFile(path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4-readback-proof.json'),JSON.stringify(proof,null,2)+'\\n',{flag:'wx'});\nconsole.log(JSON.stringify({status:'passed',separateProcess:true,normalCompleted:ownedOutputs.length,largeCopies:mediaCopies.length,artifactsDeepEqual:true,inspectionMissing:true,twoPurposes:cross.length,stageShaPairs:3,stateByteUnchanged:true,rejudgment:false}));\n",
+    "readerCodeSha256": "4ebb64b5d51a44bf381535cbddfe4306b057c71f9f48bc23c876b769c85f4e28",
+    "proofPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4-readback-proof.json",
+    "proofSha256": "3683f0c8a14284f0deb711d344decd47f60fd5e6c20d52fafcd12df01d2cd42a",
+    "proof": {
+      "schemaVersion": "request-intent-local-mp4-readback-proof-v001",
+      "status": "passed",
+      "separateProcess": true,
+      "actualStoreRead": true,
+      "backendStoppedBeforeRead": true,
+      "ownedOutputs": [
+        {
+          "requestId": "agent_dpwTAfxouJ3ZROitPCzha",
+          "type": "prepare_video",
+          "status": "succeeded",
+          "outputId": "prepare_video_lAiJJJ2piWN_a0VS6dU0h",
+          "outputType": "Video",
+          "fileRefId": "fileref_KYSeSV1mPFvp1u3KogOFq",
+          "ownerId": "prepare_video_lAiJJJ2piWN_a0VS6dU0h",
+          "kind": "source_video",
+          "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4",
+          "mimeType": "video/mp4",
+          "byteSize": 4803412827,
+          "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+        },
+        {
+          "requestId": "agent_m5dqvqiFaoZT-CTkVk1Uw",
+          "type": "run_stt",
+          "status": "succeeded",
+          "outputId": "run_stt_5RHCrn_fE6ppS9Xs16ZdY",
+          "outputType": "Transcript",
+          "fileRefId": "fileref_IXuou594_UFPu5leqvbLb",
+          "ownerId": "run_stt_5RHCrn_fE6ppS9Xs16ZdY",
+          "kind": "transcript_json",
+          "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_m5dqvqiFaoZT-CTkVk1Uw--transcript.json",
+          "mimeType": "application/json",
+          "byteSize": 6804193,
+          "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+        },
+        {
+          "requestId": "agent_DP8CY1tvAZ9_asnnlywJX",
+          "type": "prepare_digest_plan",
+          "status": "succeeded",
+          "outputId": "prepare_digest_plan_wWnYUSMQckzZXnnoNSqdv",
+          "outputType": "DigestPlan",
+          "fileRefId": "fileref_iEM7seisfcSzU9vVNWlQ9",
+          "ownerId": "prepare_digest_plan_wWnYUSMQckzZXnnoNSqdv",
+          "kind": "digest_plan_json",
+          "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--digest-plan.json",
+          "mimeType": "application/json",
+          "byteSize": 6305,
+          "sha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f"
+        },
+        {
+          "requestId": "agent_CGBokmEx_1QmhJptoQPSA",
+          "type": "validate_digest_plan",
+          "status": "succeeded",
+          "outputId": "validate_digest_plan_xzCgnGcbqpFs3FF3FZCyi",
+          "outputType": "DigestExecutionInput",
+          "fileRefId": "fileref_0btf7AS9uZS7H1DC_woUr",
+          "ownerId": "validate_digest_plan_xzCgnGcbqpFs3FF3FZCyi",
+          "kind": "digest_execution_input_json",
+          "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_CGBokmEx_1QmhJptoQPSA--digest-execution-input.json",
+          "mimeType": "application/json",
+          "byteSize": 5777,
+          "sha256": "274e4957c2f5029176cf9c311e93329cb36cd19a8d16dc5a4960c27ed012c79a"
+        }
+      ],
+      "originalSource": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+        "byteSize": 4803412827,
+        "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+      },
+      "sourceRegistrationMode": "video-bytes",
+      "sourceBindingsIdentical": true,
+      "sourceInspection": null,
+      "executionPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_CGBokmEx_1QmhJptoQPSA--digest-execution-input.json",
+      "executionFileSha256": "274e4957c2f5029176cf9c311e93329cb36cd19a8d16dc5a4960c27ed012c79a",
+      "executionByteSize": 5777,
+      "executionNullFields": [
+        "sourceInspectionBinding",
+        "consumptionBinding",
+        "editPlanBinding",
+        "manufacturingInputBinding",
+        "clockResolutionBinding"
+      ],
+      "missingReason": "保存source inspectionは提供されていません。時計消費は未実施です。",
+      "admission": {
+        "planIntegrity": "passed",
+        "presentation": "not-connected",
+        "executionPermission": "not-approved",
+        "humanQuality": "pending"
+      },
+      "absentArtifacts": [
+        "source-inspection.json",
+        "source-media-inspection.json",
+        "consumption-binding.json",
+        "clock-resolution.json",
+        "machine-adoption.json",
+        "edit-plan.json",
+        "manufacturing-values.json"
+      ],
+      "largeCopies": 1,
+      "actualReader": "readConsumedDigestPlanV001",
+      "readerStatus": "inspection-missing",
+      "artifactsDeepEqual": true,
+      "stateByteUnchanged": true,
+      "stateByteSize": 21199,
+      "stateSha256": "2a08f80585a35912efa95629666aba77148012c50ff2c69d9b7f09d902dafdcf",
+      "rejudgment": false,
+      "registrationOrCompleteRepeated": false,
+      "readerElapsedMs": 6454,
+      "crossAttemptPurposes": [
+        {
+          "attempt": "attempt-006",
+          "evidencePath": "docs/reports/request-intent-connection-20261001/queue-upload-transfer-evidence-attempt-006.json",
+          "evidenceFileSha256": "93648af5b4ee7822ee38c1d920a3fcfbf8eb439659952841f46d054c18abab05",
+          "purpose": "前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。",
+          "checks": [
+            {
+              "stage": "discovery",
+              "purpose": "前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--candidate-request.json",
+              "requestFileSha256": "40f25b053f30e0f27ef8ad111a937549c011c1936389eab50157fdc277193e3a",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--candidate-response.json",
+              "answerRequestFileSha256": "40f25b053f30e0f27ef8ad111a937549c011c1936389eab50157fdc277193e3a"
+            },
+            {
+              "stage": "selection",
+              "purpose": "前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--selection-request.json",
+              "requestFileSha256": "59ba03c59d6cb7555f6ead5064ab0644e36c7fcc30276995c7574e6bcf9aec1f",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--selection-response.json",
+              "answerRequestFileSha256": "59ba03c59d6cb7555f6ead5064ab0644e36c7fcc30276995c7574e6bcf9aec1f"
+            },
+            {
+              "stage": "retention",
+              "purpose": "前振りと展開のつながりを優先し、ゲームの終わりと配信末尾の挨拶を区別する。\n初見に必要な説明を保持する。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--retention-request.json",
+              "requestFileSha256": "e6bffe0cf6737dc2debff37d1ad849b3403f9b11bcd85fa7b624f152c0fd5af3",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-006/upload-json/artifacts/draft_CGQ0TUBZbaxcSfZmYFe-i/agent_SDmSe8tEDa6g_D-PoZ1qA--retention-response.json",
+              "answerRequestFileSha256": "e6bffe0cf6737dc2debff37d1ad849b3403f9b11bcd85fa7b624f152c0fd5af3"
+            }
+          ]
+        },
+        {
+          "attempt": "attempt-007",
+          "evidencePath": "docs/reports/request-intent-connection-20261001/queue-local-mp4-no-inspection-evidence-attempt-007.json",
+          "evidenceFileSha256": "5c9633a55e719305f9937daa1614370cda01191d8dec70cddc1faccf6f84c895",
+          "purpose": "本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。",
+          "checks": [
+            {
+              "stage": "discovery",
+              "purpose": "本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-request.json",
+              "requestFileSha256": "56f8563a8fd6a0c2165c4f597dcf4bc85251ac71dce9f1b8f4b4ea4a5a414dcb",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-response.json",
+              "answerRequestFileSha256": "56f8563a8fd6a0c2165c4f597dcf4bc85251ac71dce9f1b8f4b4ea4a5a414dcb"
+            },
+            {
+              "stage": "selection",
+              "purpose": "本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-request.json",
+              "requestFileSha256": "daee973eee15273852878c9c34d8560b5f6706b1d6ee5958ea0f844345f7f100",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-response.json",
+              "answerRequestFileSha256": "daee973eee15273852878c9c34d8560b5f6706b1d6ee5958ea0f844345f7f100"
+            },
+            {
+              "stage": "retention",
+              "purpose": "本編の見どころの反応と結果を残す。提供されないinspectionを推測で補わない。",
+              "requestPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-request.json",
+              "requestFileSha256": "e3683d940883ed4b451cc842eedf84ec68decae6eb54a530044877b37520fe83",
+              "answerPath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-response.json",
+              "answerRequestFileSha256": "e3683d940883ed4b451cc842eedf84ec68decae6eb54a530044877b37520fe83"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "baselinePath": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4-preservation-baseline.json",
+    "baselineByteSize": 246735,
+    "baselineSha256": "ba478bc8c398874a66cd45f25dbb0588c5a65be5cd8bf6464f0614bc4733af39",
+    "oldSmallFilesChecked": 669,
+    "oldSmallFilesSizeAndShaUnchanged": true,
+    "oldAttempt006FilesChecked": 91,
+    "oldAttempt006SmallShaAndAllMetadataUnchanged": true,
+    "priorProofsAndHelper": [
+      {
+        "path": "docs/reports/request-intent-connection-20261001/queue-upload-transfer-evidence-attempt-006.json",
+        "byteSize": 258561,
+        "sha256": "93648af5b4ee7822ee38c1d920a3fcfbf8eb439659952841f46d054c18abab05"
+      },
+      {
+        "path": "docs/reports/request-intent-connection-20261001/queue-upload-readback-setup-failure-attempt-006.json",
+        "byteSize": 216720,
+        "sha256": "349867977ee5bd0b893e9cf5f87c334d73e467431c01d6beaaaa62f49e2cab8b"
+      },
+      {
+        "path": "docs/reports/request-intent-connection-20261001/queue-upload-readback-setup010-failure-attempt-006.json",
+        "byteSize": 53779,
+        "sha256": "5b1e42e344da81226b2d9c94329087d1682fafdab7a30eda96fae4d6c7cdeda0"
+      },
+      {
+        "path": "docs/reports/request-intent-connection-20261001/queue-upload-receiver-readback-evidence-attempt-006.json",
+        "byteSize": 58362,
+        "sha256": "58c9671386793edca8d1875ebdccc15661521913306cf45ba03f6229b33d6784"
+      },
+      {
+        "path": "docs/reports/request-intent-connection-20261001/queue-capacity-preflight.mts",
+        "byteSize": 3517,
+        "sha256": "899ba599ca43051f4775fffbf8d65407131f021850833abf68412273c0935634"
+      }
+    ],
+    "priorProofsAndHelperUnchanged": true,
+    "productFiles": [
+      {
+        "path": "runner/src/index.ts",
+        "sha256": "2f68df2d48cee53b7fd97f5ba7a7db11e98b9c3c6dd07eabea56d5e68d65ccb7"
+      },
+      {
+        "path": "runner/src/digest-plan-preparation-v001.ts",
+        "sha256": "5100d8649c9151b831ce3174db40899e4ac229b0b4fde026d9b2bbe7b5eb6072"
+      },
+      {
+        "path": "runner/src/digest-plan-consumption-v001.ts",
+        "sha256": "a6c6ff22cf3017a1393fc22578cb1cb9d92ee845636fff8769ec19e78117e842"
+      },
+      {
+        "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+        "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596"
+      },
+      {
+        "path": "packages/shared/dist/digest-plan-artifacts-v001.js",
+        "sha256": "b40b4a6fc11937d393e931f5f9a048882c620cf2ad46140e2f69ea01770f1cb1"
+      },
+      {
+        "path": "backend/src/routes/control.ts",
+        "sha256": "0a8e8ab043858fb84d4ffb567c0111b3ceb14b840f0595d739452284fb425d31"
+      },
+      {
+        "path": "backend/src/store/json-store.ts",
+        "sha256": "437daf9d8e29a3b95cf7b71bfd8b9e6d5328c624e3f4c0cb005fe62402c66895"
+      },
+      {
+        "path": "backend/src/routes/artifact-upload.ts",
+        "sha256": "c2218673fc28c3984af63086f33e3e989b1c71118d93cab92847d4097b6f9301"
+      }
+    ],
+    "productFilesUnchanged": true,
+    "oldDeletedPaths": [
+      "runtime/artifacts/request-intent-connection-20261001-v002-attempt-003/artifacts/fixture/source-video.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v002-attempt-004/artifacts/fixture/source-video.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v002-attempt-005/artifacts/fixture/source-video.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v002-attempt-006/artifacts/fixture/source-video.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v003-attempt-001/artifacts/fixture/source-video.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v005-attempt-002/local-json/artifacts/draft_dYl1usb5pAi3C2XEYCwRr/agent_gHCs-76lRLPdapgA0RRwR--source-media.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v005-attempt-004/local-json/artifacts/draft_q4VWVmXYmvcgGJ4PZKPjl/agent_dKhAeos97RZgYjcNiK1-P--source-media.mp4",
+      "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/artifacts/draft_24o0Va-7yYUymmrICp03U/agent_3eTUH53d0duI1svD3-pnu--source-media.mp4"
+    ],
+    "oldDeletedPathsRemainAbsent": true,
+    "oldLargeFilesRehashed": false,
+    "oldRuntimeImmediatelyRereadable": false,
+    "newFileInventoryBeforeBaselineSave": [
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4-readback-proof.json",
+        "size": 10487,
+        "inode": 97970189,
+        "device": 16777234,
+        "mtimeNs": 1790867661084021800,
+        "ctimeNs": 1790867661084021800,
+        "allocatedBytes": 12288,
+        "sha256": "3683f0c8a14284f0deb711d344decd47f60fd5e6c20d52fafcd12df01d2cd42a"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_CGBokmEx_1QmhJptoQPSA--digest-execution-input.json",
+        "size": 5777,
+        "inode": 97970034,
+        "device": 16777234,
+        "mtimeNs": 1790867447332332500,
+        "ctimeNs": 1790867447332332500,
+        "allocatedBytes": 8192,
+        "sha256": "274e4957c2f5029176cf9c311e93329cb36cd19a8d16dc5a4960c27ed012c79a"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--binding-input.json",
+        "size": 9201,
+        "inode": 97969978,
+        "device": 16777234,
+        "mtimeNs": 1790867430263504000,
+        "ctimeNs": 1790867430263504000,
+        "allocatedBytes": 12288,
+        "sha256": "e9161b07356433a150220fc1529126a80452edbb8630b76568e06703aed5940c"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-request.json",
+        "size": 269361,
+        "inode": 97969982,
+        "device": 16777234,
+        "mtimeNs": 1790867430269931800,
+        "ctimeNs": 1790867430269931800,
+        "allocatedBytes": 270336,
+        "sha256": "56f8563a8fd6a0c2165c4f597dcf4bc85251ac71dce9f1b8f4b4ea4a5a414dcb"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-response.json",
+        "size": 1029,
+        "inode": 97969988,
+        "device": 16777234,
+        "mtimeNs": 1790867430294177800,
+        "ctimeNs": 1790867430294177800,
+        "allocatedBytes": 4096,
+        "sha256": "ac529127e114518a2d4f03180bbce397f8b43cf76c52069e286379148d14db06"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-result.json",
+        "size": 939,
+        "inode": 97969990,
+        "device": 16777234,
+        "mtimeNs": 1790867430294680000,
+        "ctimeNs": 1790867430294680000,
+        "allocatedBytes": 4096,
+        "sha256": "de3aef455cd6fb88f4dcaaa1f662e80ec83a80908d4a35f691044026ea6adf1c"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--candidate-set.json",
+        "size": 2764,
+        "inode": 97969984,
+        "device": 16777234,
+        "mtimeNs": 1790867430290417400,
+        "ctimeNs": 1790867430290417400,
+        "allocatedBytes": 4096,
+        "sha256": "ffbe5eadec29e038b4244a9ef161b1f560e8dd3079fd5dd013f77cf01a1dea52"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--digest-plan.json",
+        "size": 6305,
+        "inode": 97970016,
+        "device": 16777234,
+        "mtimeNs": 1790867430464803600,
+        "ctimeNs": 1790867430464803600,
+        "allocatedBytes": 8192,
+        "sha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--discovery-plan.json",
+        "size": 5404,
+        "inode": 97969980,
+        "device": 16777234,
+        "mtimeNs": 1790867430264138000,
+        "ctimeNs": 1790867430264138000,
+        "allocatedBytes": 8192,
+        "sha256": "d10d3a7d7753b9f91e45115be4464e590fd92e4b1cce8bccce57bc3e3bf7b7f9"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--discovery-validation.json",
+        "size": 2112,
+        "inode": 97969986,
+        "device": 16777234,
+        "mtimeNs": 1790867430291072300,
+        "ctimeNs": 1790867430291072300,
+        "allocatedBytes": 4096,
+        "sha256": "a1be42442724082c5423735bbded048e1e92d6bba25f3c0fd1509b64f2a95114"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--preparation-binding.json",
+        "size": 21936,
+        "inode": 97970015,
+        "device": 16777234,
+        "mtimeNs": 1790867430452052500,
+        "ctimeNs": 1790867430452130800,
+        "allocatedBytes": 24576,
+        "sha256": "6a6e4ecc4629c22b66d95d16124a3d1fe79840242041b55399ae676c9fd86953"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--production-intent.json",
+        "size": 183,
+        "inode": 97969976,
+        "device": 16777234,
+        "mtimeNs": 1790867430262792700,
+        "ctimeNs": 1790867430262792700,
+        "allocatedBytes": 4096,
+        "sha256": "a0c9202f0dba3517462d9bb3698f7927d4d02c28ee1323eff7fa49117c1d0c66"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-request.json",
+        "size": 14311,
+        "inode": 97970006,
+        "device": 16777234,
+        "mtimeNs": 1790867430432514000,
+        "ctimeNs": 1790867430432514000,
+        "allocatedBytes": 16384,
+        "sha256": "e3683d940883ed4b451cc842eedf84ec68decae6eb54a530044877b37520fe83"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-response.json",
+        "size": 1987,
+        "inode": 97970010,
+        "device": 16777234,
+        "mtimeNs": 1790867430450658800,
+        "ctimeNs": 1790867430450658800,
+        "allocatedBytes": 4096,
+        "sha256": "c623368843a7657d49f64bb729d59f2438e2f220b0f6973e1c98a468dfe3ba3c"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-result.json",
+        "size": 1909,
+        "inode": 97970012,
+        "device": 16777234,
+        "mtimeNs": 1790867430451258600,
+        "ctimeNs": 1790867430451258600,
+        "allocatedBytes": 4096,
+        "sha256": "52d71d35f7009f26008280ead9664b47172785d15165f8c66a2319e256cd59df"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--retention-validation.json",
+        "size": 10215,
+        "inode": 97970008,
+        "device": 16777234,
+        "mtimeNs": 1790867430449613300,
+        "ctimeNs": 1790867430449613300,
+        "allocatedBytes": 12288,
+        "sha256": "1826466fbc747f05abc5fa5e3f2cb1fa6f4454ff1714e83741a25e38a1cfc9f7"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-adoption.json",
+        "size": 7609,
+        "inode": 97969999,
+        "device": 16777234,
+        "mtimeNs": 1790867430425473000,
+        "ctimeNs": 1790867430425473000,
+        "allocatedBytes": 8192,
+        "sha256": "7b0c30f7c5236dc9f05b9536c16bc4629589465f62e5dda4a5d6034c8d1d55c1"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-plan.json",
+        "size": 6154,
+        "inode": 97969993,
+        "device": 16777234,
+        "mtimeNs": 1790867430295594200,
+        "ctimeNs": 1790867430295594200,
+        "allocatedBytes": 8192,
+        "sha256": "e8b350b1f2de88099fb10721c5d3b97868416649c1e87c6d2584073a45e33d8d"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-request.json",
+        "size": 3375,
+        "inode": 97969995,
+        "device": 16777234,
+        "mtimeNs": 1790867430299852000,
+        "ctimeNs": 1790867430299852000,
+        "allocatedBytes": 4096,
+        "sha256": "daee973eee15273852878c9c34d8560b5f6706b1d6ee5958ea0f844345f7f100"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-response.json",
+        "size": 1285,
+        "inode": 97970001,
+        "device": 16777234,
+        "mtimeNs": 1790867430426367000,
+        "ctimeNs": 1790867430426367000,
+        "allocatedBytes": 4096,
+        "sha256": "d7271cfff208a9a2cbf3049b934137bf88ebef4b45d6db0e741e468092bc2f58"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-result.json",
+        "size": 1198,
+        "inode": 97970003,
+        "device": 16777234,
+        "mtimeNs": 1790867430426896400,
+        "ctimeNs": 1790867430426896400,
+        "allocatedBytes": 4096,
+        "sha256": "e99467cbc2af2eda999113aa31411fa3f82f8d9226d10ef6e433cb0a661c0da9"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--selection-validation.json",
+        "size": 2303,
+        "inode": 97969997,
+        "device": 16777234,
+        "mtimeNs": 1790867430424508200,
+        "ctimeNs": 1790867430424508200,
+        "allocatedBytes": 4096,
+        "sha256": "9c9aec5866bbfe609fc98f1a9fe3ed58bb167790ed8df4834ed20fbd489ad246"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_DP8CY1tvAZ9_asnnlywJX--utterances.json",
+        "size": 1098428,
+        "inode": 97969974,
+        "device": 16777234,
+        "mtimeNs": 1790867430254631700,
+        "ctimeNs": 1790867430254631700,
+        "allocatedBytes": 1101824,
+        "sha256": "020e3475bf3ae1d9d27421f208725964a833d38d655607fccd90af0c2c13480e"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4",
+        "size": 4803412827,
+        "inode": 97969960,
+        "device": 16777234,
+        "mtimeNs": 1790867419534987800,
+        "ctimeNs": 1790867419535574000,
+        "allocatedBytes": 4818731008,
+        "sha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_m5dqvqiFaoZT-CTkVk1Uw--transcript.json",
+        "size": 6804193,
+        "inode": 97969965,
+        "device": 16777234,
+        "mtimeNs": 1790867422828158000,
+        "ctimeNs": 1790867422828774000,
+        "allocatedBytes": 6807552,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/prepare_digest_plan-manifest.json",
+        "size": 838,
+        "inode": 97970017,
+        "device": 16777234,
+        "mtimeNs": 1790867430465781800,
+        "ctimeNs": 1790867430465781800,
+        "allocatedBytes": 4096,
+        "sha256": "96b35e19d1c28fbde4979d72500036d5e94fff2df2b47af8a858737ae3d2484a"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/validate_digest_plan-manifest.json",
+        "size": 857,
+        "inode": 97970035,
+        "device": 16777234,
+        "mtimeNs": 1790867447333175600,
+        "ctimeNs": 1790867447333175600,
+        "allocatedBytes": 4096,
+        "sha256": "429e303613c739db88ab1efa73b96c48f4efd02adbd4de5642368ba54f1e0fd0"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-007/local-mp4/state.json",
+        "size": 21199,
+        "inode": 97970036,
+        "device": 16777234,
+        "mtimeNs": 1790867450665505500,
+        "ctimeNs": 1790867450665660700,
+        "allocatedBytes": 24576,
+        "sha256": "2a08f80585a35912efa95629666aba77148012c50ff2c69d9b7f09d902dafdcf"
+      }
+    ],
+    "largeNewCopies": 1,
+    "newLargeCopyRetained": true
+  },
+  "restrictions": {
+    "uploadJsonReplayed": false,
+    "localJsonReplayed": false,
+    "sourceAcquisition": false,
+    "sttProcessing": false,
+    "inspectionExecution": false,
+    "externalInference": false,
+    "externalApiCost": 0,
+    "videoManufacturing": false,
+    "ssdOperation": false,
+    "additionalDeletion": false,
+    "productionAdoption": false,
+    "id9Pd01": "not-approved",
+    "id9Pd02": "not-approved",
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending"
+  },
+  "parentV005Audit": {
+    "scope": "saved evidence and current code correspondence; historical negatives are not rerun and are not claimed current E2E",
+    "items": [
+      {
+        "requirement": "8.1",
+        "finding": "Two source-JSON normal approved registrations are saved in local005 and upload006; second distinct purpose plus MP4 current normal registration completed007. Source/STT processing is not executed.",
+        "sources": [
+          "queue-integration-evidence-attempt-005.json",
+          "queue-upload-transfer-evidence-attempt-006.json",
+          "queue-local-mp4-no-inspection-evidence-attempt-007.json"
+        ],
+        "level": "actual saved normal registration and completion; local005 material copy retired by authorized cleanup"
+      },
+      {
+        "requirement": "8.2",
+        "finding": "Actual index/factory preparation and validation, local and upload, correct Output owner chains and normal completes proved.",
+        "sources": [
+          "queue-upload-transfer-evidence-attempt-006.json",
+          "queue-upload-receiver-readback-evidence-attempt-006.json",
+          "queue-local-mp4-no-inspection-evidence-attempt-007.json"
+        ],
+        "level": "current product version actual normal pipeline"
+      },
+      {
+        "requirement": "8.3",
+        "finding": "Two purposes all3 judgments with request/answer real SHA; multiple candidates/keep-drop-keep/clock and transfer-only saved reconstruction006; local no-inspection saved reconstruction007.",
+        "sources": [
+          "queue-upload-receiver-readback-evidence-attempt-006.json",
+          "local-mp4-readback-proof.json"
+        ],
+        "level": "actual normal pipeline and separate-process current readback"
+      },
+      {
+        "requirement": "8.4",
+        "finding": "Current 52 no-media checks cover input/approval/dependency/Clip gates; current9 reference rejection and15 clock binding checks cover paths/closure/SHA/versions/null. Earlier factory27 and consumer15+5 negative cases remain historical. Current-owner mismatch, expired claim, saved approved-version/source mismatch and intentionally incomplete upload are statically traced but not directly rerun after v005 changes.",
+        "sources": [
+          "queue-no-media-regression-evidence-attempt-002.json",
+          "queue-reference-evidence-attempt-004.json",
+          "queue-clock-reference-evidence-attempt-005.json",
+          "factory-connection-evidence-attempt-006.json",
+          "consumer-connection-evidence-attempt-001.json",
+          "consumer-rejection-evidence.json"
+        ],
+        "level": "current partial actual negative coverage plus historical/static coverage",
+        "directCurrentVerificationRemaining": [
+          "owner mismatch",
+          "expired claim",
+          "saved approval-version/source mismatch",
+          "intentionally incomplete transfer rejection before complete"
+        ]
+      },
+      {
+        "requirement": "8.5",
+        "finding": "Clip7/Digest4 and theme/material/render independent human gates proved by current52; no Digest video command; admission unchanged in006/007.",
+        "sources": [
+          "queue-no-media-regression-evidence-attempt-002.json",
+          "local-mp4-readback-proof.json"
+        ],
+        "level": "actual current control functions/API and saved execution artifact"
+      },
+      {
+        "requirement": "8.6",
+        "finding": "Legacy preservation and fixed Git history recorded; current product unchanged since successful shared/backend/runner+Remotion/client typechecks at60b959d9. No new product typing change. Existing business state was absent; production service not acted upon. Current old-version refusal after v005 is statically checked; earlier executable unknown-version tests are historical.",
+        "sources": [
+          "queue-history-preservation-proof.json",
+          "queue-clock-capacity-readback-attempt-005.json",
+          "README.md"
+        ],
+        "level": "actual saved preservation/typechecks plus clearly distinguished static/history",
+        "directCurrentVerificationRemaining": [
+          "old binding/state version rejection under current v005 caller"
+        ]
+      }
+    ],
+    "allCurrentNegativeRequirementsDirectlyExecuted": false,
+    "technicalCompletionCandidate": false,
+    "reason": "Local-mp4 limited scenario is complete. Parent final audit must distinguish current actual checks from earlier-version negative proofs; narrow remaining qualifications can be verified without media copy/upload."
+  }
+}

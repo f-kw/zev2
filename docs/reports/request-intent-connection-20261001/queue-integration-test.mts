@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,lstat,realpath,readdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,lstat,realpath,readdir,statfs} from 'node:fs/promises';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
@@ -169,29 +169,46 @@ if(mode==='backend') {
   }
   console.log(JSON.stringify({status:'verified',separateProcessReconstructed:evidence.completed.length,protectedFiles:history.protectedFiles.length,oldReaderExecuted:false}));
 } else {
-  assert(['preflight-upload','run'].includes(mode),'Explicit preflight-upload or run/upload-json required');
+  assert(['preflight-upload','preflight-local-mp4','run'].includes(mode),'Explicit preflight or run/scenario required');
   const attempt=process.argv[3];assert(attempt && /^attempt-\d{3}$/u.test(attempt));
-  assert.equal(process.argv[4],'upload-json','Only explicitly selected upload-json is authorized');
+  const selectedScenario=process.argv[4];
+  assert(selectedScenario==='upload-json' || selectedScenario==='local-mp4','Only an explicitly authorized scenario is allowed');
+  assert(mode==='run' || mode===(selectedScenario==='upload-json'?'preflight-upload':'preflight-local-mp4'),'Preflight mode/scenario mismatch');
   const runtime=path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-'+attempt);
-  const evidencePath=path.join(report,`queue-upload-transfer-evidence-${attempt}.json`);
-  const capacityRoots=['upload-json-worker','upload-json','upload-json-reader'].map(n=>path.join(runtime,n));
+  const evidencePath=path.join(report,selectedScenario==='upload-json'
+    ?`queue-upload-transfer-evidence-${attempt}.json`:`queue-local-mp4-no-inspection-evidence-${attempt}.json`);
+  const capacityRoots=(selectedScenario==='upload-json'?['upload-json-worker','upload-json','upload-json-reader']:['local-mp4']).map(n=>path.join(runtime,n));
+  const localMp4CapacitySnapshot=async()=>{
+    const sourceStatus=await lstat(source);assert(sourceStatus.isFile() && !sourceStatus.isSymbolicLink());
+    const measuredPath=await realpath(path.dirname(runtime)),status=await lstat(measuredPath),space=await statfs(measuredPath,{bigint:true});
+    const availableBytes=Number(space.bavail*space.bsize),requiredAvailableBytes=2*sourceStatus.size;
+    const sameVolume=sourceStatus.dev===status.dev;
+    return {measuredAt:new Date().toISOString(),source:{path:source,byteSize:sourceStatus.size,device:sourceStatus.dev},
+      devices:[{intendedRoot:capacityRoots[0],measuredPath,device:status.dev,availableBytes,blockSize:Number(space.bsize),filesystemType:Number(space.type)}],
+      decision:{sameVolume,knownPeakBytes:sourceStatus.size,requiredAvailableBytes,availableBytes,
+        deficitBytes:Math.max(0,requiredAvailableBytes-availableBytes),passed:sameVolume && availableBytes>=requiredAvailableBytes,
+        rule:'local-mp4 no-inspection work-order §3; this isolated direct PUT test only'}};
+  };
+  const capacitySnapshot=()=>selectedScenario==='upload-json'?uploadCapacitySnapshot(source,capacityRoots):localMp4CapacitySnapshot();
   await assertNewUploadPaths([runtime,...capacityRoots,evidencePath]);
-  const preflight=await uploadCapacitySnapshot(source,capacityRoots);
-  console.log(JSON.stringify({event:'upload-preflight',...preflight}));
-  if(mode==='preflight-upload') {assert(preflight.decision.passed,'UPLOAD_CAPACITY_PREFLIGHT_REJECTED');process.exit(0);}
+  const preflight=await capacitySnapshot();
+  const rejected=selectedScenario==='upload-json'?'UPLOAD_CAPACITY_PREFLIGHT_REJECTED':'LOCAL_MP4_CAPACITY_PREFLIGHT_REJECTED';
+  console.log(JSON.stringify({event:selectedScenario==='upload-json'?'upload-preflight':'local-mp4-preflight',...preflight}));
+  if(mode==='preflight-upload' || mode==='preflight-local-mp4') {assert(preflight.decision.passed,rejected);process.exit(0);}
   if(!preflight.decision.passed) {
     await writeFile(evidencePath,JSON.stringify({status:'preflight-rejected',attempt,preflight,largeFileActionStarted:false},null,2)+'\n',{flag:'wx'});
-    throw new Error('UPLOAD_CAPACITY_PREFLIGHT_REJECTED');
+    throw new Error(rejected);
   }
   await mkdir(runtime);
   const results:any[]=[],captures:any[]=[],completed:any[]=[],children:any[]=[];
   const evidence:any={schemaVersion:'request-intent-queue-integration-evidence-v001',attempt,results,captures,completed,
-    selectedScenario:'upload-json',instructionHead:'82c244729409ecd4bbd177ab0611ddaf86996a99',productFixes:5,setupFixes:9,
-    preflight,capacity:[],runnerProcesses:[],notRun:['local-json','local-mp4','inspection-missing','two purposes through all three judgments'],
+    selectedScenario,instructionHead:selectedScenario==='upload-json'?'82c244729409ecd4bbd177ab0611ddaf86996a99':'85b077a39abdd1004bc903038ff508b20e09b653',productFixes:5,setupFixes:selectedScenario==='upload-json'?9:12,
+    preflight,capacity:[],runnerProcesses:[],notRun:selectedScenario==='upload-json'
+      ?['local-json','local-mp4','inspection-missing','two purposes through all three judgments']:['local-json replay','upload-json replay','external inference','video manufacturing'],
     inputPath:'normal draft API/approve/next/claim/runner index/factory/PUT/complete',sourceProcessingExecuted:false,sttExecuted:false,
     externalInferenceExecuted:false,inspectionExecuted:false,renderExecuted:false,productionAdoption:false};
   const checkpoint=async()=>writeFile(evidencePath,JSON.stringify(evidence,null,2)+'\n');
-  const capacity=async(stage:string)=>{evidence.capacity.push({stage,...await uploadCapacitySnapshot(source,capacityRoots),
+  const capacity=async(stage:string)=>{evidence.capacity.push({stage,...await capacitySnapshot(),
     sourceSizeFiles:await sourceSizeFiles(runtime,preflight.source.byteSize)});await checkpoint();};
   const record=(name:string,details:any={})=>{results.push({name,status:'passed',...details});console.log(JSON.stringify({test:name,status:'passed'}));};
   const startBackend=async(name:string)=>{
@@ -302,7 +319,8 @@ if(mode==='backend') {
       record(config.name+' normal registration/runner/complete',{purpose:config.purpose,dataFiles:plan.dataBindings.length,inspection:config.inspection});await checkpoint();
     }
     assert.equal(completed.length,1);assert.deepEqual(captures.map(c=>c.stage),['discovery','selection','retention']);
-    record('selected upload purpose reached all three actual Skills',{captures:captures.length,twoPurposesNotRun:true});
+    record(selectedScenario==='upload-json'?'selected upload purpose reached all three actual Skills':'selected local-mp4 purpose reached all three actual Skills',
+      selectedScenario==='upload-json'?{captures:captures.length,twoPurposesNotRun:true}:{captures:captures.length,crossAttemptPurposeProofPending:true});
     evidence.status='passed';await checkpoint();
   } catch(e) {evidence.status='failed';evidence.error=e instanceof Error?e.message:String(e);await checkpoint();throw e;}
   finally {for(const c of children)if(c.exitCode===null)c.kill('SIGTERM');}

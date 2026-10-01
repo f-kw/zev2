@@ -1,6 +1,6 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
-更新日：2026-10-01（JST）
+更新日：2026-10-02（JST）
 
 ## 1. 最初に読む
 
@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`bc36743d`のupload-json転送＋保存後receiver-only再構築を限定技術受理。次はlocal-mp4 scenario 1本で、MP4直接登録・inspection未提供・異なる2件目purposeの3判断到達を同時に検証する。設営12として明示local-mp4入口＋無作用容量preflightを承認。実行直前にavailableBytes >= 9,606,825,654 bytesを満たす場合だけattempt-007を実走する。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：設営12を適用し、attempt-007のMP4直接登録／inspection未提供が実exit0・通常4工程succeeded。別processの実消費reader再構築と保存成果物が完全一致し、006／007の異なる目的が各3判断へ届いたことを保存要求・回答のSHAで照合した。製品5不変。限定検証は完了、v005全体は現行版での一部否定実証が残り未完了。**
 
-次作業の正本は [local-mp4＋inspection未提供追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_LOCAL_MP4_NO_INSPECTION.md)、保存 `e22a87c54dddd0bd97f841b30bb2d5293629b449`。local-json/upload-jsonは再実行しない。Codex1再起動、本人への視聴・採点・転記、受領だけの再commit・終了連絡は不要。
+今回の正本は [local-mp4＋inspection未提供追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_LOCAL_MP4_NO_INSPECTION.md)、保存 `e22a87c54dddd0bd97f841b30bb2d5293629b449`。成果は[実走証拠](reports/request-intent-connection-20261001/queue-local-mp4-no-inspection-evidence-attempt-007.json)、[再読・2目的・親完了条件対照](reports/request-intent-connection-20261001/queue-local-mp4-readback-cross-purpose-proof-attempt-007.json)、主report。次は所有者・期限切れclaim・保存承認版／素材・旧内部版／旧state・不完全転送の現行拒否実証を、媒体copy／素材PUTなしで埋める具体的指示を同じ監査返信へ求める。静的確認と旧版の実行合格を現行の直接否定実行に合算しない。local-json/upload-json再実行・大容量試験・Codex1再起動・本人視聴／転記は不要。
 
 ## 3. 容量整理の受理と保留
 
@@ -101,3 +101,11 @@ v002準備`11809f6f`、v003後段入力`7b600a64`、v004設計`d77f2a5d`は限�
 [新実証拠](reports/request-intent-connection-20261001/queue-upload-receiver-readback-evidence-attempt-006.json)、[主report](reports/request-intent-connection-20261001/README.md)。相談役保存bf8814a1の一行承認を受領・適用し、最終Edge指示と9225e894のCURRENT_GOAL更新も同期。実別process exit0、guard probe5／再構築中禁止read0、保存実行入力とのdeepEqual一致。新proof1,162 bytes、SHA0b61eef381f59fb14a1318a7e68caead3572606f9cf92c5dfce0d9409db49964。旧state／90runtime／669小証拠／旧転送と失敗3証拠／製品8path不変、既存3copy保持・削除8path不存在。
 
 製品5／設営11、一般枠・過去履歴不変。backend／runner／factory／upload／download・再判断・登録・complete・state更新なし。MP4直接登録、inspection未提供、目的2件の全3判断、字幕演出・動画許可・人間品質等は残件／未承認。次は相談役の限定監査と残る通常登録枝の具体的指示へつなぎ、Codexは今回の承認外を起動しない。
+
+## 11. local-mp4／inspection未提供・2目的の限定検証完了
+
+main85b077a3の正本と専用Edge最終返信を受領。設営12の明示入口・無作用preflightだけを適用し、製品5不変。直前空き26,240,741,376 bytesが個別条件9,606,825,654 bytesを満たし、attempt-007を一回実走。通常source MP4／旧STT登録、実index／factoryの3判断、計画complete→検証completeすべて成立。新大容量実体は4,803,412,827 bytesの通常PUT先1本のみ、保持。検証後空き21,423,218,688 bytes。追加削除・SSD操作0。
+
+元素材／PUT先／FileRefのsize・SHA一致、4出力の正規所有者と命令完了結果一致、inspection／消費／編集／製造入力／時計の明示nullと理由、架空出力不存在を確認。保存後の実store・実consumer別process再読exit0、保存成果物5,777 bytesとdeepEqual一致、state不変・再判断なし。006／007の保存要求と回答6組で異なる目的全文・各要求SHAを照合。旧669小証拠、006の91file、小proof/helper5件、製品8path不変、削除8path不存在。旧runtime全体の即時再読は保証しない。
+
+親v005§8を保存実績と現行codeへ対照。通常経路・転送・2目的・MP4／未提供・Clip／確認ゲートは実証、残る一部資格・版・不完全転送の拒否は静的／旧版履歴に留まるため全体完了候補にしない。新不具合・試験失敗なし。次の限定媒体なし否定実証を相談役に具体化してもらい、受領だけの再commitや人間中継を挟まず同じセッションで続行する。ID9-PD-01/02、字幕演出、動画許可、人間品質は未承認／pending。
