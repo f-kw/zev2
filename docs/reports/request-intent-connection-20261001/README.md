@@ -555,3 +555,45 @@ syntax transpileはexit0・生成file0。preflightは実exit0、保存007の対�
 **未適用の最小案**は、作成応答一箇所の期待値だけ200→201にすること。承認HTTP200、claim、拒否HTTP409／400、資格・版・SHA／bytes・出力不増加の期待値は変えない。旧attempt-001／v001失敗証拠・失敗時Git版を保持し、新attempt-002／v002証拠名／受領metadataへ追従して同じ否定試験を実行する案を、次の設営14として相談役へGPT_DECISIONする。Codexが例外を自己適用しない。累積は製品5／設営13、14は未承認・未適用、一般上限／履歴不変。
 
 期限切れ回復、claim所有者、保存承認入力／旧state、登録依存所有者、旧・未知成果物版、旧準備版、不完全転送validator／通常complete、完成時別process再読は全てnot-run。旧52や以前の合格へ合算しない。既に受理された006／007の正常経路を取り消さず、v005全体は未完了・技術完了候補ではない。新たな人間視聴・採点・技術確認・転記は要求せず、原因と最小案が確定した軽微設営一点を相談役へ直接返す。追加作用停止、担当6fileのみ通常checkpoint commit/push後に専用Edgeへ停止報告を送る。
+
+
+## 2026-10-02 初回キック受領・設営14適用・attempt-002実行前checkpoint
+
+最新main0d1b0810eda4b4f9938b3882e3f52d8381c688adへcleanでfast-forward同期。START_HERE、HANDOVER v035、CURRENT_GOAL、AGENTS、監査プロトコル、COMMUNICATION、手動初回キック、HTTP201追補、現行否定資格正本を全文読了。DECISIONSは前回読了版から差分なしで再利用し、追記0。今回の目的は製品や媒体を変更せず現行版の資格・版・不完全転送拒否を直接実証すること。初回貼付を受領し、問い合わせは専用Edgeで返信全文まで取得する現行運用へ従う。
+
+承認された作成HTTP期待一箇所200→201だけを設営累積14として適用し、attempt-002／v002証拠名／受領HEAD・累積metadataへ追従した。承認200／claim200／拒否409・400、guard、validator、state不変・成果物不増加条件は無変更。製品5不変、一般上限・過去履歴リセット0。旧失敗testはfa9f56a3固定Git版と停止証拠の全文SHA53a4f8fc7548a08f57d489fcaeebaa554c67e08babdbfa4b7bfae562245afb96で保持し、旧attempt-001の2小file／v001失敗証拠／停止証拠4fileの実size・SHAを修正前に保存した。旧媒体read／hash0。新runtime／新証拠不存在を確認。
+
+今回の新一系列をsyntax・無作用preflightから実行し、所有者・期限切れ回復・承認入力・旧state・依存出力・旧未知版・準備版・不完全転送通常complete・別process保存再読まで続ける。Codex1起動0、製品・外部推論・費用・STT／inspection・動画・SSD・追加削除0。既存品質pendingとID9-PD-01/02未承認を維持する。前回turnは失敗原因と停止現物を固定した進捗であり、実行中と推測して二重起動しない。
+
+
+## 2026-10-02 現行否定資格attempt-002：設営14・19件の限定検証完了
+
+正式commandは `node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-current-negative-qualification-test.mts run`。**実親process exit0、隔離backend2件とも終了0、完成時の別process通常store reader exit0、19結果すべてpassed**。新しい実質不具合・追加修正なし。構文transpileと無作用preflightもexit0。stdoutの語句や過去合格の合算で判定していない。
+
+| 実証の分類 | 結果と意味 |
+|---|---|
+| 通常API／store：2件 | owner-A取得後のowner-B完了をHTTP409、state bytes不変・FileRef／Output／成功0。期限切れは実通常読取でrunning→queued、取得4field clear、期限切れ時刻と回復logを記録。旧owner complete409で回復後state不変・成果物／成功不増加 |
+| 現行実関数＋memory：10件 | 承認目的、下書き素材、命令素材、設定、条件、制作系統欠損・未知値、旧工程列の8件を直接throwで拒否。依存出力のownerと参照の不一致2件はDIGEST_DEPENDENCY_REFERENCE_INVALID。メモリ変更をstoreへ保存0 |
+| 現行artifact validator＋tiny：6件 | 計画／検証各2旧・未知版、5tiny bindingを閉じた現行計画からの旧準備版、実計画JSONだけ転送して元動画bindingを欠損させた不完全転送を拒否。旧準備版は「Digest準備の版・完了対応が不正です」、欠損は新rootのlstat ENOENT。実動画／実transcriptのcopyなし |
+| 否定専用の通常complete：1件 | 不完全計画をHTTP400拒否。state18,848 bytes／SHAacc70aa0fcc75f9eab8f804a71aac8ddc5f972c54291fcb0fa054fef1d7c77ceが前後一致。対象runningのまま・新resultなし、FileRef／Output／成功は歴史依存の各2から増加0。歴史成功依存を持つ否定専用fixtureであり、新しい正のE2E成功ではない |
+
+今回の8指定群は現行実行で全て成立。完成時readerは現行通常loadState／readStateSnapshotと最終API応答を完全対照し、通常stateと否定stateのbytes不変を確認。通常state18,175 bytes／SHAbe5aff156c39b7fc758afed6ba338f57412e5441dc22feb442902d63eb526ca8、draft2／命令8（running1・queued7）、FileRef0／Output0／人間承認0。queuedの後工程がreadyであるとは主張していない。新runtime11小file・324,687 bytesのみ。
+
+[新19結果](queue-current-negative-qualification-evidence-v002.json)は33,158 bytes／SHA5905abe22e40db9ece9a404a100d1caecfb5815c7cc8bbfc493e7d56a9f48b5a。[実行後別process照合・旧失敗保全・親条件対照](queue-current-negative-readback-parent-audit-v002.json)へ実exit、試験全文／SHA、分類、state、11file一覧とSHA、旧4file、参照した旧実績SHAと再実行0を保存。新試験SHAb1f164a02a84ecfc69b63603bc2f7ca797195b0a9e8e3a982aa1ce138f3f9d2e。
+
+親guardとbackend2件の全存続期間guardで元／保存MP4 read試行0・旧006／007書込み試行0。元媒体hash／copy／PUT、通常runner、外部推論・費用、新素材、STT／inspection処理、動画、SSD、追加削除、本番／公開0。旧684小保護file・006／007の120fileの小SHA／全metadata、製品8path不変、削除8path不存在。旧attempt-001の2小file／v001失敗証拠／停止証拠4fileは修正前とsize・SHA一致、失敗時testはfa9f56a3の固定Git版と旧SHA一致。旧失敗を上書きせず、旧runtime全体の即時再読を主張しない。製品5／設営14、一般上限・履歴リセット0。
+
+### 親v005 §8の再対照：明示的な拒否証拠の残り2点
+
+| 条件 | 現物による対応 |
+|---|---|
+| 8.1 | local005／upload006の通常承認とsource JSON登録、MP4007の通常直接登録、006／007の異なる2目的と各3要求・対応回答SHA。source／STT処理は未実行、local005素材copyは整理済みの歴史 |
+| 8.2 | 006／007の実index／factory、計画登録→次の検証complete、正規出力所有者、uploadと転送先だけの別root／別process再読。006親終了code未返却は旧記録のまま、今回exit0へ付け替えない |
+| 8.3 | 006の複数候補／keep-drop-keep／4編集区間・元時計・転送先再構築、007の未提供枝・別process保存一致、異なる目的6組の要求／回答SHA。再実行なし |
+| 8.4 | 現行52・参照9・時計15と今回19で、未承認・系統／工程・依存・承認入力・期限切れ・owner・別draft・依存外request・path・SHA／bytes・版・不完全転送complete拒否が対応。**「source JSONと動画bytesの混同」「Clip/Digest成果物の誤消費」を現行validator／consumerへ明示的に渡して拒否した保存結果は未確認**。正常な2登録分岐やClip工程資格の拒否をこの2つの拒否試験へ読み替えない |
+| 8.5 | 現行52のClip7／Digest4、確認生成元3件・独立ゲート3件、policy=falseでも免除しない。006／007にDigest動画命令なし、admission不足維持 |
+| 8.6 | 今回の旧／未知artifact・旧準備版・旧state直接拒否、旧保全・固定Git履歴。製品は60b959d9時のshared／backend／runner＋Remotion／client型検査exit0版と不変。無変更の全型・旧52／15／111・全動画QC・人間レビュー再実行0 |
+
+今回正本の現行否定資格一件は検証完了。親の文言ごとに根拠を要求すると8.4の上記2拒否は直接証拠が足りないため、**親v005全体の「隔離実装試験 技術完了候補」はまだ提出しない**。不具合を観測したとは扱わず、静的／正常枝と直接否定を区別する。次の一件は相談役の現物監査により、この2誤消費拒否を小JSON／メモリfixtureで既存validatorへ通す範囲を具体化すること。今回の設営14へ追加fixtureをまとめない。
+
+ID9-PD-01/02、本番有効化、実AI品質、字幕演出、動画許可、人間品質は未承認／pending。人間Pending新規0・人間採用への昇格0。Codex1起動・他者タブ操作・本人への確認／視聴／採点／転記要求0。専用Edgeの古い生成表示は一回reloadして今回の手貼り初回キックと最終相談役返信を取得し、同じ会話がmainを触らずCodex2監査待ちであることまで全文確認。モデル変更0。担当fileのみ通常commit/push・Git clean確認後にAUDIT_ONLY＋NEXT_REQUESTを直接送り、相談役返信完了・全文受領まで同じセッションで確認する。

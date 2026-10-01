@@ -10,8 +10,8 @@ import {createInterface} from 'node:readline';
 const root=fileURLToPath(new URL('../../../',import.meta.url));
 const report=path.join(root,'docs/reports/request-intent-connection-20261001');
 const loader=path.join(root,'runner/node_modules/tsx/dist/loader.mjs');
-const runtime=path.join(root,'runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-001');
-const evidencePath=path.join(report,'queue-current-negative-qualification-evidence-v001.json');
+const runtime=path.join(root,'runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002');
+const evidencePath=path.join(report,'queue-current-negative-qualification-evidence-v002.json');
 const mode=process.argv[2];
 assert(['preflight','run','backend','read'].includes(mode),'Explicit negative qualification mode required');
 const legacyRoots=['006','007'].map(n=>path.join(root,'runtime/artifacts/request-intent-connection-20261001-v005-attempt-'+n));
@@ -77,11 +77,11 @@ if(mode==='backend'){
   const snapshotLegacy=async()=>{const rows:any[]=[];const walk=async(p:string)=>{for(const entry of await fs.promises.readdir(p,{withFileTypes:true})){const f=path.join(p,entry.name);if(entry.isDirectory())await walk(f);else{assert(entry.isFile());const s=await fs.promises.lstat(f,{bigint:true});rows.push({path:relative(f),size:Number(s.size),inode:Number(s.ino),device:Number(s.dev),mtimeNs:Number(s.mtimeNs),ctimeNs:Number(s.ctimeNs),allocatedBytes:Number(s.blocks)*512,sha256:f.endsWith('.mp4')?null:sha(await fs.promises.readFile(f))});}}};for(const p of legacyRoots)await walk(p);return rows.sort((a,b)=>a.path.localeCompare(b.path));};
   metadata.push(...await snapshotLegacy());
   await assert.rejects(fs.promises.lstat(runtime),{code:'ENOENT'});await assert.rejects(fs.promises.lstat(evidencePath),{code:'ENOENT'});
-  const preflight={status:'passed',receivedHead:'79292676648328c58baf5028435815e5e62800f5',existingDraftId:draft.id,existingPrepareRequestId:request.id,existingStateSha256:sha(oldStateBytes),existingPlanSha256:sha(originalPlanBytes),functions:4,newPathAbsent:true,legacyFiles:metadata.length,protectedSmallFiles:oldBytes.length,mediaReadAttempts:guard.mediaReadAttempts,legacyWriteAttempts:guard.legacyWriteAttempts};
+  const preflight={status:'passed',receivedHead:'0d1b0810eda4b4f9938b3882e3f52d8381c688ad',existingDraftId:draft.id,existingPrepareRequestId:request.id,existingStateSha256:sha(oldStateBytes),existingPlanSha256:sha(originalPlanBytes),functions:4,newPathAbsent:true,legacyFiles:metadata.length,protectedSmallFiles:oldBytes.length,mediaReadAttempts:guard.mediaReadAttempts,legacyWriteAttempts:guard.legacyWriteAttempts};
   assert.equal(guard.mediaReadAttempts,0);assert.equal(guard.legacyWriteAttempts,0);
   if(mode==='preflight'){console.log(JSON.stringify(preflight));process.exit(0);}
   await fs.promises.mkdir(runtime);await save(path.join(runtime,'preservation-before.json'),{oldBytes,metadata,deletedPaths:baseline.oldDeleted8});
-  const results:any[]=[],children:any[]=[],backends:any[]=[],e:any={schemaVersion:'request-intent-current-negative-qualification-evidence-v001',status:'running',receivedHead:preflight.receivedHead,productFixes:5,setupFixes:13,preflight,runtime:relative(runtime),results,backends,
+  const results:any[]=[],children:any[]=[],backends:any[]=[],e:any={schemaVersion:'request-intent-current-negative-qualification-evidence-v001',status:'running',receivedHead:preflight.receivedHead,productFixes:5,setupFixes:14,preflight,runtime:relative(runtime),results,backends,
     oldEvidenceReplayed:false,mediaCopy:0,mediaPut:0,mediaHash:0,normalRunnerStarted:false,externalInference:false,videoManufacturing:false,sourceSttProcessing:false,inspectionProcessing:false,additionalDeletion:false,ssdOperation:false,productionAdoption:false,classification:{staticOnly:[],notRun:[]}};
   const checkpoint=()=>fs.promises.writeFile(evidencePath,JSON.stringify(e,null,2)+'\n');
   const record=(category:string,name:string,details:any)=>{results.push({category,name,status:'passed',details});};
@@ -99,7 +99,7 @@ if(mode==='backend'){
   const draftInput=(purpose:string)=>({productionType:'digest',purpose,sourceUri:'isolated-negative-test-no-media',durationLabel:'小否定試験',themeCountLabel:'小否定試験',geminiModelName:'通信なし',preset:'小否定試験'});
   try{
     const b=await startBackend('normal-api');
-    const createFirst=async(purpose:string)=>{const made=await api(b,'/request-drafts','POST',draftInput(purpose));assert.equal(made.httpStatus,200);const approved=await api(b,`/request-drafts/${made.body.draft.id}/approve`,'POST',{});assert.equal(approved.httpStatus,200);const requests=approved.body.agentRequests.filter((v:any)=>v.requestDraftId===made.body.draft.id&&v.type==='prepare_video');assert.equal(requests.length,1);return requests[0];};
+    const createFirst=async(purpose:string)=>{const made=await api(b,'/request-drafts','POST',draftInput(purpose));assert.equal(made.httpStatus,201);const approved=await api(b,`/request-drafts/${made.body.draft.id}/approve`,'POST',{});assert.equal(approved.httpStatus,200);const requests=approved.body.agentRequests.filter((v:any)=>v.requestDraftId===made.body.draft.id&&v.type==='prepare_video');assert.equal(requests.length,1);return requests[0];};
     const ownerRequest=await createFirst('取得者不一致を拒否する小試験');
     const claimed=await api(b,`/agent-requests/${ownerRequest.id}/claim`,'POST',{ownerId:'owner-A'},'agent');assert.equal(claimed.httpStatus,200);assert.equal(claimed.body.request.status,'running');
     const apiStatePath=path.join(b.directory,'state.json'),beforeOwner=await fs.promises.readFile(apiStatePath);
@@ -156,5 +156,5 @@ if(mode==='backend'){
   assert(backends.every(v=>v.exitCode===0 && v.guard?.mediaReadAttempts===0 && v.guard?.legacyWriteAttempts===0));
   e.resultCount=results.length;e.status='passed';await checkpoint();
   const child=spawn(process.execPath,['--import',loader,fileURLToPath(import.meta.url),'read'],{cwd:root,env:env(path.join(runtime,'normal-api')),stdio:['ignore','pipe','pipe']});let out='',err='';child.stdout.on('data',b=>out+=b);child.stderr.on('data',b=>err+=b);const code=await new Promise<number|null>(ok=>child.on('exit',ok));e.separateProcess={command:'node --import ./runner/node_modules/tsx/dist/loader.mjs '+relative(fileURLToPath(import.meta.url))+' read',exitCode:code,stdout:out,stderr:err};await checkpoint();assert.equal(code,0,err);
-  e.testFileSha256=sha(await fs.promises.readFile(fileURLToPath(import.meta.url)));e.completedAt=new Date().toISOString();await checkpoint();console.log(JSON.stringify({status:e.status,results:results.length,backendExitCodes:backends.map(v=>v.exitCode),separateProcessExitCode:code,mediaReadAttempts:guard.mediaReadAttempts,mediaPut:0,productFixes:5,setupFixes:13}));
+  e.testFileSha256=sha(await fs.promises.readFile(fileURLToPath(import.meta.url)));e.completedAt=new Date().toISOString();await checkpoint();console.log(JSON.stringify({status:e.status,results:results.length,backendExitCodes:backends.map(v=>v.exitCode),separateProcessExitCode:code,mediaReadAttempts:guard.mediaReadAttempts,mediaPut:0,productFixes:5,setupFixes:14}));
 }

@@ -1,0 +1,885 @@
+{
+  "schemaVersion": "request-intent-current-negative-qualification-evidence-v001",
+  "status": "passed",
+  "receivedHead": "0d1b0810eda4b4f9938b3882e3f52d8381c688ad",
+  "productFixes": 5,
+  "setupFixes": 14,
+  "preflight": {
+    "status": "passed",
+    "receivedHead": "0d1b0810eda4b4f9938b3882e3f52d8381c688ad",
+    "existingDraftId": "draft_iWiSs9jXaGXk2mzN9ifr5",
+    "existingPrepareRequestId": "agent_DP8CY1tvAZ9_asnnlywJX",
+    "existingStateSha256": "2a08f80585a35912efa95629666aba77148012c50ff2c69d9b7f09d902dafdcf",
+    "existingPlanSha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f",
+    "functions": 4,
+    "newPathAbsent": true,
+    "legacyFiles": 120,
+    "protectedSmallFiles": 684,
+    "mediaReadAttempts": 0,
+    "legacyWriteAttempts": 0
+  },
+  "runtime": "runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002",
+  "results": [
+    {
+      "category": "normal-api-store",
+      "name": "wrong claim owner complete rejected",
+      "status": "passed",
+      "details": {
+        "requestId": "agent_TyYYP8X0SVrPp7lmmtjlL",
+        "httpStatus": 409,
+        "error": "取得者が一致しないため、このAI操作は完了または失敗として記録できません",
+        "stateSha256Before": "45f2c99e818127cb088f04352dbc1f38d3af25cdfe24eea27c30d539ee2049a7",
+        "stateSha256After": "45f2c99e818127cb088f04352dbc1f38d3af25cdfe24eea27c30d539ee2049a7",
+        "stateBytesUnchanged": true,
+        "fileRefSupplied": false,
+        "counts": {
+          "fileRefs": 0,
+          "outputs": 0,
+          "succeeded": 0
+        }
+      }
+    },
+    {
+      "category": "normal-api-store",
+      "name": "expired claim recovered then old owner complete rejected",
+      "status": "passed",
+      "details": {
+        "requestId": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+        "httpStatus": 409,
+        "statusBefore": "running",
+        "statusAfter": "queued",
+        "claimExpiredAt": "2026-10-01T16:29:26.438Z",
+        "claimFieldsCleared": true,
+        "recoveryLog": {
+          "actor": "backend",
+          "fromStatus": "running",
+          "toStatus": "queued",
+          "ownerId": "old-owner",
+          "errorMessage": "取得期限が切れたため復旧しました。前回取得者: old-owner",
+          "createdAt": "2026-10-01T16:29:26.438Z",
+          "eventType": "agent_request_claim_recovered",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+          "stepType": "prepare_video",
+          "detail": "取得期限が切れたため復旧しました。前回取得者: old-owner",
+          "id": "agent_log_gCp7FJ8rzcuuvezwumX4F"
+        },
+        "stateSha256BeforeRecovery": "d6096fb127fc1b37fa2fb19967bd4578b91840714634747aa4bfeecf52121529",
+        "stateSha256AfterRecovery": "be5aff156c39b7fc758afed6ba338f57412e5441dc22feb442902d63eb526ca8",
+        "recoveryChangedState": true,
+        "rejectedCompleteStateUnchanged": true,
+        "counts": {
+          "fileRefs": 0,
+          "outputs": 0,
+          "succeeded": 0
+        }
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "approved draft purpose changed",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "approved draft source changed",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "request target source changed",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "approved draft settings changed",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "request constraints changed",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "legacy state missing productionType",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "unknown productionType",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "承認済み依頼と命令の入力が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "legacy state noncurrent saved steps",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "制作系統と工程が一致しません",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "registered dependency owner mismatch",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_DEPENDENCY_REFERENCE_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-function-memory",
+      "name": "registered dependency output-reference mismatch",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_DEPENDENCY_REFERENCE_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "digest_plan_json v000 rejected",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_PLAN_VERSION_OR_FIELDS_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "digest_plan_json unknown rejected",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_PLAN_VERSION_OR_FIELDS_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "digest_execution_input_json v000 rejected",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_EXECUTION_VERSION_OR_FIELDS_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "digest_execution_input_json unknown rejected",
+      "status": "passed",
+      "details": {
+        "actualThrownError": "DIGEST_EXECUTION_VERSION_OR_FIELDS_INVALID",
+        "memoryOnly": true
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "old preparation binding version rejected after current plan structure and bytes",
+      "status": "passed",
+      "details": {
+        "actualValidatorError": "Digest準備の版・完了対応が不正です",
+        "planStructurePassed": true,
+        "allFiveTinyBindingsPresent": true,
+        "oldVersion": "normal-request-digest-preparation-binding-v001",
+        "mediaBytesUsed": false
+      }
+    },
+    {
+      "category": "current-artifact-validator-tiny",
+      "name": "missing transferred binding rejected",
+      "status": "passed",
+      "details": {
+        "actualValidatorError": "ENOENT: no such file or directory, lstat '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002/negative-fixture/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4'",
+        "missingBinding": {
+          "path": "artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha/source.mp4",
+          "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+        },
+        "missingPhysicalPath": "runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002/negative-fixture/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4",
+        "originalPlanBytesUnchanged": true
+      }
+    },
+    {
+      "category": "negative-only-isolated-complete",
+      "name": "incomplete transfer normal complete rejected with no state/result/output increase",
+      "status": "passed",
+      "details": {
+        "httpStatus": 400,
+        "error": "ENOENT: no such file or directory, lstat '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002/negative-fixture/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4'",
+        "stateSha256Before": "acc70aa0fcc75f9eab8f804a71aac8ddc5f972c54291fcb0fa054fef1d7c77ce",
+        "stateSha256After": "acc70aa0fcc75f9eab8f804a71aac8ddc5f972c54291fcb0fa054fef1d7c77ce",
+        "stateByteSize": 18848,
+        "stateBytesUnchanged": true,
+        "countsBefore": {
+          "fileRefs": 2,
+          "outputs": 2,
+          "succeeded": 2
+        },
+        "countsAfter": {
+          "fileRefs": 2,
+          "outputs": 2,
+          "succeeded": 2
+        },
+        "newFileRef": 0,
+        "newOutput": 0,
+        "newResult": 0,
+        "negativeOnlyFixture": true,
+        "copiedHistoricalSuccessNotANewE2e": true,
+        "originalPlanByteSize": 6305,
+        "originalPlanSha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f",
+        "largeBindingAbsent": true
+      }
+    }
+  ],
+  "backends": [
+    {
+      "name": "normal-api",
+      "exitCode": 0,
+      "guard": {
+        "mediaReadAttempts": 0,
+        "legacyWriteAttempts": 0
+      },
+      "stderr": ""
+    },
+    {
+      "name": "negative-fixture",
+      "exitCode": 0,
+      "guard": {
+        "mediaReadAttempts": 0,
+        "legacyWriteAttempts": 0
+      },
+      "stderr": ""
+    }
+  ],
+  "oldEvidenceReplayed": false,
+  "mediaCopy": 0,
+  "mediaPut": 0,
+  "mediaHash": 0,
+  "normalRunnerStarted": false,
+  "externalInference": false,
+  "videoManufacturing": false,
+  "sourceSttProcessing": false,
+  "inspectionProcessing": false,
+  "additionalDeletion": false,
+  "ssdOperation": false,
+  "productionAdoption": false,
+  "classification": {
+    "staticOnly": [],
+    "notRun": []
+  },
+  "normalApiFinalState": {
+    "byteSize": 18175,
+    "sha256": "be5aff156c39b7fc758afed6ba338f57412e5441dc22feb442902d63eb526ca8",
+    "apiResponse": {
+      "requestDrafts": [
+        {
+          "id": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "status": "approved",
+          "productionType": "digest",
+          "purpose": "期限切れ取得の回復と完了拒否",
+          "source": {
+            "kind": "video_source",
+            "uri": "isolated-negative-test-no-media"
+          },
+          "settings": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "steps": [
+            {
+              "type": "prepare_video",
+              "label": "動画取り込み",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "run_stt",
+              "label": "STT",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "prepare_digest_plan",
+              "label": "Digest採否・保持計画",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "validate_digest_plan",
+              "label": "Digest登録計画の検証",
+              "requiresHumanApproval": false
+            }
+          ],
+          "createdAt": "2026-10-01T16:29:26.430Z",
+          "updatedAt": "2026-10-01T16:29:26.434Z"
+        },
+        {
+          "id": "draft_4860Tr9IzbX71P2BkFtRB",
+          "status": "approved",
+          "productionType": "digest",
+          "purpose": "取得者不一致を拒否する小試験",
+          "source": {
+            "kind": "video_source",
+            "uri": "isolated-negative-test-no-media"
+          },
+          "settings": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "steps": [
+            {
+              "type": "prepare_video",
+              "label": "動画取り込み",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "run_stt",
+              "label": "STT",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "prepare_digest_plan",
+              "label": "Digest採否・保持計画",
+              "requiresHumanApproval": false
+            },
+            {
+              "type": "validate_digest_plan",
+              "label": "Digest登録計画の検証",
+              "requiresHumanApproval": false
+            }
+          ],
+          "createdAt": "2026-10-01T16:29:26.415Z",
+          "updatedAt": "2026-10-01T16:29:26.422Z"
+        }
+      ],
+      "agentRequests": [
+        {
+          "id": "agent_TyYYP8X0SVrPp7lmmtjlL",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "type": "prepare_video",
+          "label": "動画取り込み",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "取得者不一致を拒否する小試験",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "running",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "updatedAt": "2026-10-01T16:29:26.425Z",
+          "claimOwnerId": "owner-A",
+          "claimedAt": "2026-10-01T16:29:26.425Z",
+          "claimUpdatedAt": "2026-10-01T16:29:26.425Z"
+        },
+        {
+          "id": "agent_Z3xCx1rq6wOzia1e9EyrZ",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "type": "run_stt",
+          "label": "STT",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "取得者不一致を拒否する小試験",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "updatedAt": "2026-10-01T16:29:26.422Z",
+          "dependsOnAgentRequestId": "agent_TyYYP8X0SVrPp7lmmtjlL"
+        },
+        {
+          "id": "agent_Q9uO7iTIaEkwBJO1Tfa94",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "type": "prepare_digest_plan",
+          "label": "Digest採否・保持計画",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "取得者不一致を拒否する小試験",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "updatedAt": "2026-10-01T16:29:26.422Z",
+          "dependsOnAgentRequestId": "agent_Z3xCx1rq6wOzia1e9EyrZ"
+        },
+        {
+          "id": "agent_H4fOM2D9BGI7cclm4duXD",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "type": "validate_digest_plan",
+          "label": "Digest登録計画の検証",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "取得者不一致を拒否する小試験",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "updatedAt": "2026-10-01T16:29:26.422Z",
+          "dependsOnAgentRequestId": "agent_Q9uO7iTIaEkwBJO1Tfa94"
+        },
+        {
+          "id": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "type": "prepare_video",
+          "label": "動画取り込み",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "期限切れ取得の回復と完了拒否",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "updatedAt": "2026-10-01T16:29:26.438Z",
+          "claimExpiredAt": "2026-10-01T16:29:26.438Z",
+          "errorMessage": "取得期限が切れたため復旧しました。前回取得者: old-owner"
+        },
+        {
+          "id": "agent_QaEFLJf6L1lv6-F8QnpUf",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "type": "run_stt",
+          "label": "STT",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "期限切れ取得の回復と完了拒否",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "updatedAt": "2026-10-01T16:29:26.434Z",
+          "dependsOnAgentRequestId": "agent_GzUF2l6Bnp5ta8ECFeMcR"
+        },
+        {
+          "id": "agent__r3X53xZ20zrr-dJqOM3g",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "type": "prepare_digest_plan",
+          "label": "Digest採否・保持計画",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "期限切れ取得の回復と完了拒否",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "updatedAt": "2026-10-01T16:29:26.434Z",
+          "dependsOnAgentRequestId": "agent_QaEFLJf6L1lv6-F8QnpUf"
+        },
+        {
+          "id": "agent_2FnumaBQkqkv7HB3k69kN",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "type": "validate_digest_plan",
+          "label": "Digest登録計画の検証",
+          "target": {
+            "sourceUri": "isolated-negative-test-no-media"
+          },
+          "input": {
+            "productionType": "digest",
+            "purpose": "期限切れ取得の回復と完了拒否",
+            "settings": {
+              "durationLabel": "小否定試験",
+              "themeCountLabel": "小否定試験",
+              "geminiModelName": "通信なし",
+              "preset": "小否定試験"
+            }
+          },
+          "constraints": {
+            "durationLabel": "小否定試験",
+            "themeCountLabel": "小否定試験",
+            "geminiModelName": "通信なし",
+            "preset": "小否定試験"
+          },
+          "policy": {
+            "humanApprovalRequiredBeforeRender": false
+          },
+          "status": "queued",
+          "fileRefIds": [],
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "updatedAt": "2026-10-01T16:29:26.434Z",
+          "dependsOnAgentRequestId": "agent__r3X53xZ20zrr-dJqOM3g"
+        }
+      ],
+      "fileRefs": [],
+      "outputs": [],
+      "agentOperationLogs": [
+        {
+          "eventType": "draft_created",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "actor": "user",
+          "toStatus": "draft",
+          "detail": "実行前下書きを保存した",
+          "createdAt": "2026-10-01T16:29:26.415Z",
+          "id": "agent_log_Hbtmyk8mZRocKfL4Bej1C"
+        },
+        {
+          "eventType": "draft_approved",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "actor": "user",
+          "fromStatus": "draft",
+          "toStatus": "approved",
+          "detail": "人間が依頼を承認し、AIエージェント用作業を作れる状態にした",
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "id": "agent_log_xlwsV-jCNtIxO2YA8ZSdU"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "agentRequestId": "agent_TyYYP8X0SVrPp7lmmtjlL",
+          "stepType": "prepare_video",
+          "detail": "動画取り込みをAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_E-RstckZTEkFcG8ZmKXEA"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "agentRequestId": "agent_Z3xCx1rq6wOzia1e9EyrZ",
+          "stepType": "run_stt",
+          "detail": "STTをAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_zWV-EWUFbDGJoyoI2NtpH"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "agentRequestId": "agent_Q9uO7iTIaEkwBJO1Tfa94",
+          "stepType": "prepare_digest_plan",
+          "detail": "Digest採否・保持計画をAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_SXYOuch6Pl5Fkj_LpCPfa"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.422Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "agentRequestId": "agent_H4fOM2D9BGI7cclm4duXD",
+          "stepType": "validate_digest_plan",
+          "detail": "Digest登録計画の検証をAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_zpf138FZGmUUpJ-tR7a1H"
+        },
+        {
+          "actor": "agent",
+          "fromStatus": "queued",
+          "toStatus": "running",
+          "ownerId": "owner-A",
+          "createdAt": "2026-10-01T16:29:26.425Z",
+          "eventType": "agent_request_claimed",
+          "requestDraftId": "draft_4860Tr9IzbX71P2BkFtRB",
+          "agentRequestId": "agent_TyYYP8X0SVrPp7lmmtjlL",
+          "stepType": "prepare_video",
+          "detail": "動画取り込みをAIエージェントが取得した",
+          "id": "agent_log_zGoK_MKZzOkWUzn5Jctci"
+        },
+        {
+          "eventType": "draft_created",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "actor": "user",
+          "toStatus": "draft",
+          "detail": "実行前下書きを保存した",
+          "createdAt": "2026-10-01T16:29:26.430Z",
+          "id": "agent_log_Mdt5JnKOEBsNwKFPtBte5"
+        },
+        {
+          "eventType": "draft_approved",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "actor": "user",
+          "fromStatus": "draft",
+          "toStatus": "approved",
+          "detail": "人間が依頼を承認し、AIエージェント用作業を作れる状態にした",
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "id": "agent_log_Bqc-oCAF0CSmZNtoZeIjO"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+          "stepType": "prepare_video",
+          "detail": "動画取り込みをAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_E4z3NORpOyIKuNkc0iDPh"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_QaEFLJf6L1lv6-F8QnpUf",
+          "stepType": "run_stt",
+          "detail": "STTをAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_-8cvE_kPt5TOG33fKhPBB"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent__r3X53xZ20zrr-dJqOM3g",
+          "stepType": "prepare_digest_plan",
+          "detail": "Digest採否・保持計画をAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_JOVTbySXsM8JjnCxTJxYN"
+        },
+        {
+          "actor": "backend",
+          "toStatus": "queued",
+          "createdAt": "2026-10-01T16:29:26.434Z",
+          "eventType": "agent_request_created",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_2FnumaBQkqkv7HB3k69kN",
+          "stepType": "validate_digest_plan",
+          "detail": "Digest登録計画の検証をAIエージェント用作業としてキューに追加した",
+          "id": "agent_log_a93tbILq3jEhlDulxHrVg"
+        },
+        {
+          "actor": "agent",
+          "fromStatus": "queued",
+          "toStatus": "running",
+          "ownerId": "old-owner",
+          "createdAt": "2026-10-01T16:29:26.436Z",
+          "eventType": "agent_request_claimed",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+          "stepType": "prepare_video",
+          "detail": "動画取り込みをAIエージェントが取得した",
+          "id": "agent_log_pTq5PfUsVQHMDf88kUgh8"
+        },
+        {
+          "actor": "backend",
+          "fromStatus": "running",
+          "toStatus": "queued",
+          "ownerId": "old-owner",
+          "errorMessage": "取得期限が切れたため復旧しました。前回取得者: old-owner",
+          "createdAt": "2026-10-01T16:29:26.438Z",
+          "eventType": "agent_request_claim_recovered",
+          "requestDraftId": "draft_PztPlBrB3LHBnx5gbJZQG",
+          "agentRequestId": "agent_GzUF2l6Bnp5ta8ECFeMcR",
+          "stepType": "prepare_video",
+          "detail": "取得期限が切れたため復旧しました。前回取得者: old-owner",
+          "id": "agent_log_gCp7FJ8rzcuuvezwumX4F"
+        }
+      ],
+      "decisionLogs": [],
+      "controlReviewItems": [],
+      "humanReviewActions": [],
+      "finalReviewActions": [],
+      "webGeminiReviews": []
+    }
+  },
+  "incompleteTransfer": {
+    "httpStatus": 400,
+    "error": "ENOENT: no such file or directory, lstat '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002/negative-fixture/artifacts/draft_iWiSs9jXaGXk2mzN9ifr5/agent_dpwTAfxouJ3ZROitPCzha--source.mp4'",
+    "stateSha256Before": "acc70aa0fcc75f9eab8f804a71aac8ddc5f972c54291fcb0fa054fef1d7c77ce",
+    "stateSha256After": "acc70aa0fcc75f9eab8f804a71aac8ddc5f972c54291fcb0fa054fef1d7c77ce",
+    "stateByteSize": 18848,
+    "stateBytesUnchanged": true,
+    "countsBefore": {
+      "fileRefs": 2,
+      "outputs": 2,
+      "succeeded": 2
+    },
+    "countsAfter": {
+      "fileRefs": 2,
+      "outputs": 2,
+      "succeeded": 2
+    },
+    "newFileRef": 0,
+    "newOutput": 0,
+    "newResult": 0,
+    "negativeOnlyFixture": true,
+    "copiedHistoricalSuccessNotANewE2e": true,
+    "originalPlanByteSize": 6305,
+    "originalPlanSha256": "e20abe585ecbb9d9de57d07297c4d242fc3e5c0af1746c2fa7fc38f739a5441f",
+    "largeBindingAbsent": true
+  },
+  "preservation": {
+    "protectedSmallFiles": 684,
+    "smallSizeAndShaUnchanged": true,
+    "legacyRuntimeFiles": 120,
+    "legacySmallShaAndAllMetadataUnchanged": true,
+    "originalStateSha256": "2a08f80585a35912efa95629666aba77148012c50ff2c69d9b7f09d902dafdcf",
+    "oldDeleted8RemainAbsent": true,
+    "baselinePath": "runtime/artifacts/request-intent-current-negative-qualification-20261002-v001-attempt-002/preservation-before.json",
+    "mediaRehash": false
+  },
+  "mainGuard": {
+    "mediaReadAttempts": 0,
+    "legacyWriteAttempts": 0
+  },
+  "resultCount": 19,
+  "separateProcess": {
+    "command": "node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/request-intent-connection-20261001/queue-current-negative-qualification-test.mts read",
+    "exitCode": 0,
+    "stdout": "{\"status\":\"verified\",\"separateProcess\":true,\"apiStateDeepEqual\":true,\"normalStateBytesUnchanged\":true,\"negativeStateBytesUnchanged\":true,\"mediaReadAttempts\":0}\n",
+    "stderr": ""
+  },
+  "testFileSha256": "b1f164a02a84ecfc69b63603bc2f7ca797195b0a9e8e3a982aa1ce138f3f9d2e",
+  "completedAt": "2026-10-01T16:29:26.923Z"
+}

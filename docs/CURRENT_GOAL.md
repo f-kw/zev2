@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：`fa9f56a3`の現行否定資格attempt-001を監査。通常draft作成の正しいHTTP201を試験だけが200期待して停止したため、期待値一箇所201への修正を設営14として相談役承認。旧失敗現物を保持し、新attempt-002から残る現行否定資格を全部続行する。製品5／設営13、14は適用時に計上。v005全体は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：0d1b0810の初回キックとHTTP201追補を受領し、設営14を適用。現行否定資格attempt-002は親exit0・backend2件0・別process reader0、19件すべてpassed。指定した資格・版・不完全転送拒否の一件は検証完了。親§8.4の素材JSON／動画混同とClip／Digest成果物誤消費の明示的な拒否証拠は未確認のため、v005全体技術完了候補は保留。製品5／設営14、媒体read／hash／copy／PUT0、旧失敗と006／007不変。**
 
-今回の再開正本は [HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)、保存 `e36e236591acec67df1c41e8824ba139a17f0f39`。修正は `assert.equal(made.httpStatus,200)` → `201` の一箇所だけ。新attempt-002では期限切れclaim、wrong owner、承認版／素材／旧state、owner参照、旧／未知版、不完全転送complete拒否、完成時再読まで進める。元MP4のcopy／PUT／hash、製品code変更、外部推論、動画、SSD、削除は行わない。
+[今回19結果](reports/request-intent-connection-20261001/queue-current-negative-qualification-evidence-v002.json)、[別process照合・保全・親条件対照](reports/request-intent-connection-20261001/queue-current-negative-readback-parent-audit-v002.json)、[正本HTTP201追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261002_v005_NEGATIVE_HTTP201_FIX.md)。次は相談役監査で残る2誤消費拒否の媒体なし直接実証を具体化する。追加fixtureは設営14へ含めず、製品・費用・新素材・動画・SSD・削除・本番・公開へ広げない。問い合わせは専用Edgeから返信本文まで受領し、同じ範囲の具体指示なら同じセッションで続行する。
 
 ## 2.0 初回キック
 
@@ -125,3 +125,10 @@ main85b077a3の正本と専用Edge最終返信を受領。設営12の明示入�
 設営13として新否定入口を適用。syntax transpileと無作用preflight exit0、対象ID／4実関数／旧保全を確認したが、実runは最初の下書き作成HTTP201に対する試験の200期待でexit1。実router503行は201が正しく、製品差分はない。新stateはdraft1・命令／FileRef／Output／成功0、1,789 bytes。backend停止exit0、残存0、媒体read試行0・旧書込み試行0、旧684小fileと006／007の120file不変。
 
 旧失敗証拠／試験全文SHAと未適用一箇所201案を保存。承認・claim・拒否期待値やvalidatorを緩和せず、新attempt002／別証拠名へ進む設営14を相談役へ個別判断依頼する。Codex自己適用0、製品5／設営13と一般履歴維持。全否定群と成功時別process再読はnot-run、親v005技術完了候補ではない。
+
+
+## 13. 現行否定資格attempt-002：19結果成立・親条件の残り2拒否
+
+設営14の一箇所201修正と新attempt metadataだけを適用。19結果は通常API/store2、current関数memory10、current artifact/tiny6、否定専用complete1。完成時通常store別process再読exit0。取得者違い409と期限切れ回復→旧owner409で作用不増加、不完全転送400でstate18,848 bytesのSHA前後一致・対象running・新成果物0。通常state18,175 bytes・FileRef／Output／人間承認0、新runtime11小file／324,687 bytes。元媒体read試行・hash・copy・PUT0、旧684小file／006007120file／製品8path／旧失敗4file不変、製品5／設営14、一般履歴リセット0。
+
+今回の8指定群は現行直接実証成立。親§8を再対照し、素材JSONを動画と取り違えた入力とClip/Digest成果物誤消費の明示拒否は直接証拠未確認と分離。正常登録2枝や工程列拒否で埋めず、技術完了候補保留で相談役へ次一件を求める。ID9-PD-01/02、字幕演出／動画許可／人間品質pendingは維持。
