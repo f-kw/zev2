@@ -8,9 +8,9 @@
 
 ## 2. 現在の主作業・次の指示
 
-**9. 明示Digestの通常キュー接続（v005）：f0df4fb6の再開指示を受領し、保存後readerのawait一語を設営10として適用。保存state／検証命令succeeded／receiver成果物SHAまで確認したが、最初のguard拒否probeで同期throwをPromiseの拒否検査へ直接渡す試験設営の問題によりexit1。実consumer再構築前で停止、製品5／設営10、追加修正未適用。最小案は同じreadをasync callback経由で検査する一行だけ、設営11の個別判断を相談役へ返す。upload通常系列は既に成立、再実走なし。v005全体・保存後再読は未完了。**
+**9. 明示Digestの通常キュー接続（v005）：`a8dffc7f`の保存後receiver再読停止を監査。設営10のawait修正後、保存state・validate succeeded・receiver成果物SHAまでは成立。guard拒否probeだけが同期throwをassert.rejectsへ直接渡してconsumer前にexit1したため、async callbackで包む一行だけを設営11として相談役承認。大容量再実走なしでattempt-006保存物だけのreceiver-only再読へ戻す。製品5／設営10、11は適用時に計上。v005全体は未完了。**
 
-今回の再開正本は [upload保存後readback追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_FIX.md)、保存 `ac1cc33ad56d7ecfc9f89baa57409ac21ce0434d`。許可差分は保存後readerの `await` 一語だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・大容量転送は起動しない。
+今回の再開正本は [guard-probe追補](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005_UPLOAD_READBACK_GUARD_FIX.md)、保存 `2530d96685b33d1317dd5b6750cf5939155e85ae`。許可差分は `assert.rejects` に渡すreadをasync callbackで包む一行だけ。attempt-006の既存保存物のみを別processで再読し、backend・通常runner・factory・upload・download・大容量copyは起動しない。
 
 5cb6c94cの再開指示を受領・適用して媒体なしattempt-002を実行した。適用済みの履歴は製品5／設営8、追加修正0。一般上限・強制停止条件・履歴を変更しない。b47999f7の旧停止と失敗証拠を保持し、今回の実結果は別証拠へ保存した。Codex1再起動、本人の視聴・採点・転記、受領記録だけの再commit・終了連絡は不要。
 
