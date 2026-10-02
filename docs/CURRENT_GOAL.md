@@ -70,3 +70,11 @@ B8/12の21論理不合格、強調変更B未肯定、LightCoral技術不合格�
 報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px候補への限定表示再調整。
 
 ebc2269fのpush/Git clean/process0はCodex報告と保存証拠であり、相談役のMac直接観測ではない。今回accept/新指示は保存・発行、受領・設営29適用・新要求/再回答の開始/完成は未確認。保存だけで稼働済みにしない。
+
+
+Codex2 限定再調整受領checkpoint（2026-10-03）：b44bbc56の144PX_REFLOW全文・確定返信を受領。120固定／98内だけ可変、新26/2要求・実回答・既存検査・変更分時計・別process再読まで許可。現在は既存export/shapeの確認、製品6／設営28、設営29は補助作成時。旧受理とscope/字幕本文/媒体禁止を維持。
+
+Codex2 checkpoint：run-reflow.mtsを作成、個別承認の設営29を適用。製品6、過去設営28と全失敗履歴を維持。元要求cloneはrequestId／26条件／input canonical SHAだけ変更。型・preflight前、まだ新要求提示や回答はない。
+
+
+Codex2 限定再調整完成checkpoint（2026-10-03）：設営29／製品6。実9回答が既存検査を通り、固定120同一、可変98のうち73行末のみ／25内部二分割。新243表示・390行・3613atom、領域243passed／違反0、旧218外周と27,691frame／40,705,770sampleは同一。別process再読一回exit0／判断0／traceと対応表bytes一致、旧小入力/code50件不変。manifest SHA 04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41。詳細は docs/reports/digest-caption-144px-reflow-20261003/README.md。製品・媒体・font binary・描画・API/費用・追加コピー0。実glyph／人間品質pending、正式style／後段／動画未承認を保持。担当commit/push・process/Git確認・専用Edge直接監査へ進む。

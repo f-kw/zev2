@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "digest-caption-144px-reflow-evidence-v001",
+  "status": "passed",
+  "receivedHead": "b44bbc56c2d5b001966a1de5760275d0b29c0bf2",
+  "receivedAt": "2026-10-02T19:13:44.463026+00:00",
+  "workOrder": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_144PX_REFLOW_20261003_v001.md",
+    "fileSha256": "a5833ba7c2ddb3890ebe7085ad6730bd16106939512fdd433a1ed2aec0358ea3"
+  },
+  "history": {
+    "product": 6,
+    "setupApplied": 29
+  },
+  "purpose": "Saved single plan: new 26/2 requests, 120 fixed cues and judgment only within 98 incompatible cues",
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null,
+    "ID9-PD-01": "not-approved",
+    "ID9-PD-02": "not-approved"
+  },
+  "validation": {
+    "typecheckExitCode": 0,
+    "preflightExitCode": 0,
+    "actualImportsAndExports": "passed",
+    "inputCount": 50,
+    "newOutputAbsent": true,
+    "requests": 9,
+    "documentAbsent": true,
+    "recordedAt": "2026-10-02T19:22:17.526852+00:00"
+  },
+  "manifestBinding": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+    "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41",
+    "sizeBytes": 45985
+  },
+  "summary": {
+    "groups": 9,
+    "oldCues": 218,
+    "fixedOldCues": 120,
+    "variableOldCues": 98,
+    "newCues": 243,
+    "newLines": 390,
+    "atoms": 3613,
+    "minDisplayFrames": 8,
+    "maxDisplayFrames": 526,
+    "originalClockSummary": {
+      "groups": 9,
+      "cues": 218,
+      "lines": 289,
+      "atoms": 3613,
+      "unmapped": 0,
+      "originalPlanEndFrame": 27691,
+      "originalPlanEndSample": 40705770
+    }
+  },
+  "acceptedResponses": [
+    {
+      "ordinal": 1,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+        "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0001.json",
+        "fileSha256": "d2996900c759d68935f2d384e00d46b818f37c6d24f15e595ea0f17a6f0c0786",
+        "sizeBytes": 36769
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0001.json",
+        "fileSha256": "5b92f9100d841dc86c2065f5472c9c48a227b44bfd5eb12ac5f8947c50fe12f4",
+        "sizeBytes": 6482
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0001.json",
+        "fileSha256": "f4bb9c4c0c17c545dca104cb8abc0194fb5903e74e0e6bc4e4574ee8d2cfe86e",
+        "sizeBytes": 5567
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0001.json",
+        "fileSha256": "53185b09cc47e9b13ecd8f969115166c4b7838d1a7c1d9ec4ac98bda73022012",
+        "sizeBytes": 60866
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0001.json",
+        "fileSha256": "c6ec493af9e25f1988b1179afebae00a3018cec20ed499724957810a2de31977",
+        "sizeBytes": 127115
+      },
+      "cueCount": 16,
+      "lineCount": 24,
+      "atomCount": 217,
+      "fixedOldCues": 9,
+      "variableOldCues": 5,
+      "judgmentNote": "新要求の全文と旧14表示の本文・来歴を読み、適合済み9表示は全行末・cue末を固定再利用した。不適合5表示だけを判断した。夏という前置きで初めの長いcueを分け、ホラーゲームとかやろうかな／と思ったんですけどを続きの二行にする。聞いてないという否定は分割せず、そんなの／聞いてないんですけどとする。大丈夫だと／思うんですけど、マリちゃん／ホラゲいけんの?は元cueの二行化。前作の自己評価は全体が52を超えるため、有能なバイトだったとの内容を二行で保ち、その後の辞任していますのでを別cueに置く。旧各cueの外側末は全て維持し、怒ってる・辞任などSTT疑いも修正しない。本文、順序、所属を変更していない。"
+    },
+    {
+      "ordinal": 2,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+        "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0002.json",
+        "fileSha256": "7f32f2f42e3a94f3f401fb11a32f4ec1e5321769c966d83abf81448057b501ed",
+        "sizeBytes": 106012
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0002.json",
+        "fileSha256": "d2ac0cb7ec04fa0650b9bf36c36e06c5e5fafe3cb20fe9f2d7f0c08e9140dcc2",
+        "sizeBytes": 15927
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0002.json",
+        "fileSha256": "15a3870c20af0be37ebbecc2cbbfee11573077ef16865c9b32a10e1e0de996eb",
+        "sizeBytes": 15007
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0002.json",
+        "fileSha256": "02628360b38cb96cbe35e9f1c2b3077c70127b27835b5dc8c2ddc1b9bf2316c3",
+        "sizeBytes": 170838
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0002.json",
+        "fileSha256": "4051af9eff4f3543ce16d598e0fa8b1e48481deca535bbdc7cf691b522612412",
+        "sizeBytes": 365202
+      },
+      "cueCount": 43,
+      "lineCount": 71,
+      "atomCount": 658,
+      "fixedOldCues": 19,
+      "variableOldCues": 17,
+      "judgmentNote": "新要求と犬の可愛さ、触る前の薬、触れた事情、帰宅後の症状、ホラーへの励ましまで全本文を読んだ。適合済み19cueはそのまま固定再利用。不適合17cueに限り、ノエちゃん・ドッグセラピー・アレルギー・ワンチョム等を語の途中で切らず行末を選ぶ。聞く側の前置き、理由と薬の行動、撫でたいという反応、犬との過ごし方、鼻の対照、最後のセラピー説明の長いcueだけ内部に分割を追加した。撫でてとぴょんぴょんの反復は単位ごとに二行へ、誘惑に勝てませんでしたの否定は保つ。旧cueの外側境界、固定cue、本文、順序、帰宅後の結末は維持。STTのワンチョム等も訂正しない。26は今回技術候補に対する制約で品質採用を意味しない。"
+    },
+    {
+      "ordinal": 3,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+        "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0003.json",
+        "fileSha256": "e03ce6e19b335c554059721ef5d68dc3abda3863da7ae3a226ab9d2e35435d8c",
+        "sizeBytes": 21544
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0003.json",
+        "fileSha256": "4e8c121c0324667ee352f4eff75ff21721d3eb7cd292cb9ad8912bf2557751ab",
+        "sizeBytes": 4024
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0003.json",
+        "fileSha256": "99877c3eb22b91e9c5c6e84241804c04f6b85641e6f53492a8de12cc8674c12f",
+        "sizeBytes": 3233
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0003.json",
+        "fileSha256": "e595c4986fdd5ce11c33564eea932af70b58efb83821901f69cc9108446ad67b",
+        "sizeBytes": 35697
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0003.json",
+        "fileSha256": "d9ff4fd73fcd70c39d1ad976cc36154d35d4e1f31770d04abf7e09ef9236f298",
+        "sizeBytes": 67900
+      },
+      "cueCount": 8,
+      "lineCount": 15,
+      "atomCount": 120,
+      "fixedOldCues": 0,
+      "variableOldCues": 5,
+      "judgmentNote": "今回の新要求の全文を読み、ゲーム名、前作を遊んだ経験、2未経験という否定、アハ体験による画面変化、幽霊の出現と報告という必要な遊び方を維持する。旧5cueは全て不適合で固定再利用部分はない。ゲーム名は一続きの単独cue、前作経験は続く二行にし、アハ体験という説明と画面変化、出現の原因節と報告の行動をそれぞれ旧cue内部だけで分ける。未経験と開始の問いは元cueを二行化する。タイトルやアハ体験を語中で切らず、本文・旧外周・順序・否定を変更しない。目的に必要なゲーム説明を削らず26/2への技術候補として保存する。"
+    },
+    {
+      "ordinal": 4,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+        "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0004.json",
+        "fileSha256": "9eda0bd5911f8fb5243ccc40a9853755b100580647795a9c4dd8952d77b79b0d",
+        "sizeBytes": 164811
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0004.json",
+        "fileSha256": "7b08fba6694d954d7d681398742cf12ec26780350e12f59f7a57afdba742fae5",
+        "sizeBytes": 24766
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0004.json",
+        "fileSha256": "a266249c17a1997211ef975c40a8fd5e12608f29f5a8bac75e44856bc4b4a7a4",
+        "sizeBytes": 23881
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0004.json",
+        "fileSha256": "ac81b4fae570da9e8624fab92094340ac295dcc13ee67acbe3a0d4b482a3db79",
+        "sizeBytes": 267014
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0004.json",
+        "fileSha256": "511624ff26585b06f8ed1c4308c1bac95b936df506d398342f411c23f02587d3",
+        "sizeBytes": 590651
+      },
+      "cueCount": 71,
+      "lineCount": 110,
+      "atomCount": 1033,
+      "fixedOldCues": 41,
+      "variableOldCues": 26,
+      "judgmentNote": "新要求の全1033atomと旧67cueを読み、花瓶などの見落としへの先輩口調、脅かされる反応、カーテンの誤認、仕事の責任、弁当の冗談、クリア確認と結末まで保持する。適合41cueは本文・行末・cue末を固定再利用。不適合26cueだけ、文節、否定、同じ反応の反復を保つ二行へ再配置する。職場説明、お風呂の説明、間違いへの訓示、クリアの反復確認の四つは一つの旧cueでは幅が足りないため内部だけ二cueに分け、ことしか起こらないという限定否定とクリアという問いの単位を切らない。金属15年・アーシー等STTは訂正せず、怖がる反応も省略しない。旧外側境界・固定範囲・元区間・順序を維持した技術候補である。"
+    },
+    {
+      "ordinal": 5,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+        "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0005.json",
+        "fileSha256": "459f490a38df9c76dc0ed0c3dbcfcf803554990c2146ac262c803f3dd4660d46",
+        "sizeBytes": 124794
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0005.json",
+        "fileSha256": "b1d5d56d7d7030fb738797d544a491b9831adb0249cfb516a332583775ca2000",
+        "sizeBytes": 17997
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0005.json",
+        "fileSha256": "926f4b2026318a0652573dae257f465fc0d927b050fff10f666760ade17a6791",
+        "sizeBytes": 16971
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0005.json",
+        "fileSha256": "780b79ebc88c1c8d73d61c93a3fb6da71dca67491ef68bbbd281767dcb8175dd",
+        "sizeBytes": 198858
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0005.json",
+        "fileSha256": "410fc590e6454dc07307f643b81a875ab88c96a13e633857238348f6684a8494",
+        "sizeBytes": 425289
+      },
+      "cueCount": 48,
+      "lineCount": 82,
+      "atomCount": 778,
+      "fixedOldCues": 21,
+      "variableOldCues": 20,
+      "judgmentNote": "新要求とトイレへ行かない理由から怪談の比較、言い直し、貞子の現代への適応まで全本文を読み、適合21cueを固定再利用、不適合20cueだけ再調整した。トイレの否定、わからない、誰も行かなくなるという否定、人物名、さだこvsかやこ、動画配信サイト等の語を保つ。長さが二行に収まらない箇所と、二行だけでは語・否定・のかなって等のまとまりを切る必要がある箇所だけ旧cue内部に追加境界を置く。カヤコが関係ない人も巻き込む説明、ビデオと現代の対照、配信サイトへの行動、誰も来なくなる結末、現代に通用する評価は原因・対象・結論を欠落させない。ジオン、金属、三味一体等は訂正せず、かやこじゃねえ、さだこの固定言い直しもそのまま。外周、順序、固定cueに侵入せず26/2の技術候補のみ作る。"
+    },
+    {
+      "ordinal": 6,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+        "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0006.json",
+        "fileSha256": "08b882e001071712a6f15e833c7ab93303610cc9150f49151c275ab821f0596c",
+        "sizeBytes": 43210
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0006.json",
+        "fileSha256": "876f8f4fe08d54924ce67eeba39a5adb0b5e20991a208954422e16b42edd4e6d",
+        "sizeBytes": 6657
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0006.json",
+        "fileSha256": "facd5572b3cf697dcac8b998425921932d97ffcba8c7be44c79ce51c64ec1d6c",
+        "sizeBytes": 5849
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0006.json",
+        "fileSha256": "a01fc845892d6c2067a6c9ccc4f67844c42faf5eb4db10851d6e3aa7c3f72940",
+        "sizeBytes": 69060
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0006.json",
+        "fileSha256": "9bda471b723e83356060ae5df876d0118c46225d27a3ff731bc2d7fa1e860936",
+        "sizeBytes": 142081
+      },
+      "cueCount": 16,
+      "lineCount": 27,
+      "atomCount": 258,
+      "fixedOldCues": 8,
+      "variableOldCues": 7,
+      "judgmentNote": "新要求と全ステージクリア、視聴者への感謝、残りの異常と特別手当の試行、既発見がまた出ることへの疑問を読む。適合8cueは全く同じ部分として再利用し、不適合7cueのみ二行化する。残りの異常と特別手当の長い一cueだけ、対象の提示を二行の一まとまりにし、やってみようという次の行動を内部の別cueにした。運ゲーが過ぎないかという否定疑問を切らず、ありがとうございます、特別手当、ベテラン等の語と元の結末を残す。以上・任してください等の原文を直さず、未採用の間の断片を追加しない。旧cue外周と固定区間を維持する技術候補である。"
+    },
+    {
+      "ordinal": 7,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+        "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0007.json",
+        "fileSha256": "4e41154dc9b48ea048c377e441a878a49ff605752a2e56f664b3bbb3c63259f3",
+        "sizeBytes": 27512
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0007.json",
+        "fileSha256": "f82ad37623606b184b0df21143fe6d012441901ee92e66c5a410467e26ce9d67",
+        "sizeBytes": 4935
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0007.json",
+        "fileSha256": "88f83570d62157accc96d352a7320d627e2387b7b18bc437ffcffaa7c109ca56",
+        "sizeBytes": 4259
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0007.json",
+        "fileSha256": "5781a6b29c7db15a71d3fae2cebde7aceb2e6fea7a048f7b1f5ff150676084d2",
+        "sizeBytes": 45770
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0007.json",
+        "fileSha256": "7a006e33f0a5f7dc1d1afae48e0d48dec1d72ee28dd2bf0f72cd00c074dd693c",
+        "sizeBytes": 95121
+      },
+      "cueCount": 12,
+      "lineCount": 18,
+      "atomCount": 158,
+      "fixedOldCues": 6,
+      "variableOldCues": 5,
+      "judgmentNote": "実際の新要求と特別手当で急速に異変が増える全本文を読んだ。適合6cueを固定再利用、不適合5cueのみ再調整した。布団、すごい勢いで、やばい、報告してもの反復単位を途中で割らず、省略せず二行へ置く。報告を四回続けても異変が絶えない長いcueだけ、二回の反復を内部の先行cueとし、残り二回と否定の結末を次の二行で保持した。反復と混乱、速度への反応、最後の問いは残し、旧外周と元の非連続保持区間の所属を維持、間の不採用断片は入れない。"
+    },
+    {
+      "ordinal": 8,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+        "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0008.json",
+        "fileSha256": "c6fcbf0698c02c760a9c2d6ce50cfb342c18e821e4aad0c987ddb7a589a80c9f",
+        "sizeBytes": 28897
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0008.json",
+        "fileSha256": "c6436c8ff72daece54747db82758065d8819c1ce273c29d09105043876f7e110",
+        "sizeBytes": 5225
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0008.json",
+        "fileSha256": "65e90877e756eaf1aea855b7fb7c235345bd572ada2e795c4eaac98caccd3502",
+        "sizeBytes": 4539
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0008.json",
+        "fileSha256": "82ceb1e6111204c74075209fdceb32f745eb03d18bf949456239b0a935e1b79a",
+        "sizeBytes": 48281
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0008.json",
+        "fileSha256": "f0125fce3bbc56e3c6b9e55156c615658772ec70fde89eff326dec21c3e9b472",
+        "sizeBytes": 102326
+      },
+      "cueCount": 13,
+      "lineCount": 19,
+      "atomCount": 167,
+      "fixedOldCues": 7,
+      "variableOldCues": 6,
+      "judgmentNote": "新要求と3時までの進行、複数異変への焦り、見つからない否定、ドアの違和感と反応の全本文を読んだ。適合7cueは固定再利用、不適合6cueは全て旧cueを維持した二行への変更だけで収まる。3時の反復、二つの疑問、ドアが広いの反復、ないっす・もうないという否定をそれぞれ読みの単位ごとに保つ。泣くにゃいか、怒ってます等のSTT疑いを訂正せず、追加cueや旧非連続保持区間間の新発話を作らない。旧外側境界・計画frame・全本文・順序は同一の技術候補である。"
+    },
+    {
+      "ordinal": 9,
+      "oldRequestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+        "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943"
+      },
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0009.json",
+        "fileSha256": "202f8207f10acb53163c633df7833197f7f383dd0a8e23760ee195658d533979",
+        "sizeBytes": 37864
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0009.json",
+        "fileSha256": "d34cfa6571229361651b14dd58167a7919350d90e6cc2d00eba316384f712568",
+        "sizeBytes": 6418
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0009.json",
+        "fileSha256": "804231cbff6f764b3e1d9f489c66084941486ac07ff4b3160250a2e1289e5d3a",
+        "sizeBytes": 5567
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0009.json",
+        "fileSha256": "90e2f6e98589d4c37cb0ac88196c88779207365338bdd4c6971461553480303d",
+        "sizeBytes": 62065
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence-0009.json",
+        "fileSha256": "27ed2bd5ce0e19df6cd033d712f753b24e8500111c46e69644309a20263fc131",
+        "sizeBytes": 131131
+      },
+      "cueCount": 16,
+      "lineCount": 24,
+      "atomCount": 224,
+      "fixedOldCues": 9,
+      "variableOldCues": 7,
+      "judgmentNote": "最後の実要求と発見の評価、特別手当を諦める理由、ゲーム内の退勤、本編終了の全本文を読んだ。適合9cueは固定再利用し、以前受理されたまあマリンはこんなもんに／しようかなと思います?の行末もそのまま維持する。不適合7cueは旧cueの二行化のみで追加cueは不要。発見できたんじゃないですかという否定疑問を一行の一続きで残し、特別手当は無理だ／これは諦めます、もう無理だとトイレの理由、頑張ったと音怖いの反復を保持する。配信末尾の挨拶を新たに追加せず、元のゲーム終了という結末・旧外周・本文・順序・時計を維持した技術候補であり、人間品質を合格としない。"
+    }
+  ],
+  "timing": [
+    {
+      "ordinal": 1,
+      "judgmentReuseAndFormattingWallMs": 364957,
+      "validationGeometryAndSaveMs": 19.54837500001304
+    },
+    {
+      "ordinal": 2,
+      "judgmentReuseAndFormattingWallMs": 132392,
+      "validationGeometryAndSaveMs": 23.910332999948878
+    },
+    {
+      "ordinal": 3,
+      "judgmentReuseAndFormattingWallMs": 38907,
+      "validationGeometryAndSaveMs": 8.15570799994748
+    },
+    {
+      "ordinal": 4,
+      "judgmentReuseAndFormattingWallMs": 79624,
+      "validationGeometryAndSaveMs": 28.740832999930717
+    },
+    {
+      "ordinal": 5,
+      "judgmentReuseAndFormattingWallMs": 94073,
+      "validationGeometryAndSaveMs": 28.0325840000296
+    },
+    {
+      "ordinal": 6,
+      "judgmentReuseAndFormattingWallMs": 36513,
+      "validationGeometryAndSaveMs": 15.510709000052884
+    },
+    {
+      "ordinal": 7,
+      "judgmentReuseAndFormattingWallMs": 23812,
+      "validationGeometryAndSaveMs": 13.088292000000365
+    },
+    {
+      "ordinal": 8,
+      "judgmentReuseAndFormattingWallMs": 23320,
+      "validationGeometryAndSaveMs": 12.71329099999275
+    },
+    {
+      "ordinal": 9,
+      "judgmentReuseAndFormattingWallMs": 32363,
+      "validationGeometryAndSaveMs": 14.187749999924563
+    }
+  ],
+  "readbackBinding": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/readback.json",
+    "fileSha256": "e23018520f8bebe0d0827cdf1482c81e731c1b7e156e3fcd2a6fc1c4908ff158",
+    "sizeBytes": 618
+  },
+  "readback": {
+    "status": "passed",
+    "judgmentsCalled": 0,
+    "processId": 38097,
+    "traceAndCorrespondenceBytesEqual": true,
+    "oldInputsUnchanged": true,
+    "summary": {
+      "groups": 9,
+      "oldCues": 218,
+      "fixedOldCues": 120,
+      "variableOldCues": 98,
+      "newCues": 243,
+      "newLines": 390,
+      "atoms": 3613,
+      "minDisplayFrames": 8,
+      "maxDisplayFrames": 526,
+      "originalClockSummary": {
+        "groups": 9,
+        "cues": 218,
+        "lines": 289,
+        "atoms": 3613,
+        "unmapped": 0,
+        "originalPlanEndFrame": 27691,
+        "originalPlanEndSample": 40705770
+      }
+    },
+    "elapsedMs": 166.26024999999998
+  },
+  "completion": {
+    "recordedAt": "2026-10-02T19:38:28.186919+00:00",
+    "typecheckExitCode": 0,
+    "preflightExitCode": 0,
+    "runExitCode": 0,
+    "independentReadbackExitCode": 0,
+    "actualJudgments": 9,
+    "splitOldCues": 25,
+    "variableRelineOnly": 73,
+    "fixedSameCues": 120,
+    "geometryPassedCues": 243,
+    "geometryViolations": 0,
+    "maxLogicalWidth": 26,
+    "maxLines": 2,
+    "oldInputsUnchangedCount": 50,
+    "bodyOrderAndCoverage": "passed",
+    "outerClockAndFixedClockUnchanged": true,
+    "newGapCount": 15,
+    "newGapFrames": 1220,
+    "artifactCountBeforeAudit": 59,
+    "artifactBytesBeforeAudit": 6859802,
+    "copyBytes": 0,
+    "mediaFontBinaryReadHash": 0,
+    "apiCostUsd": 0,
+    "productChanges": 0,
+    "judgmentReuseAndFormattingWallMs": 825961,
+    "validationGeometryAndSaveMs": 163.88787499984028,
+    "runBeforeManifestMs": 826286.2110420001,
+    "separateReadbackMs": 166.26024999999998,
+    "pureJudgmentVsReuseVsFormatting": "not independently measured",
+    "transport": {
+      "firstLongLineNotSubmitted": true,
+      "pendingLineCleared": true,
+      "sameProcessContinued": true,
+      "byteBoundedChunksWithNonemptyTerminalFlush": 700,
+      "finalNewlineOnly": true,
+      "newRequestAnsweredBeforeNext": true
+    },
+    "gitAndDirectAudit": "tests complete; own 5 paths reviewed; normal commit/push and direct audit follow",
+    "ownActiveProcesses": 0
+  },
+  "gitPreCommit": {
+    "branch": "main",
+    "head": "b44bbc56c2d5b001966a1de5760275d0b29c0bf2",
+    "originMain": "b44bbc56c2d5b001966a1de5760275d0b29c0bf2",
+    "diffCheckExitCode": 0,
+    "changedOwnPaths": 5,
+    "otherChanges": 0,
+    "recordedAt": "2026-10-02T19:39:20.066861+00:00"
+  }
+}
