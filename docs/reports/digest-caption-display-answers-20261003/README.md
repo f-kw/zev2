@@ -37,3 +37,6 @@ Codex2、2026-10-03。準備接続a98f569aのacceptと新正本を専用Edgeで�
 attempt-002の全回答/result/trace/manifest/readback/logは成功した技術候補の不変証拠として保持する。補助の新attempt-003への保存先と履歴追従を設営23として個別判断に返す。承認されれば同一実要求SHAを照合して回答1〜8をbyte同一再利用し、9だけ行末を修正した新回答を戻す。全件実Skill/validator、新束の別process一回だけを行う案で、旧試験・媒体・描画は再実行しない。自己承認していない。
 
 時間は要求提示→stdin受領の判断/整形wallで記録。attempt-002の要求2〜9は合計547,125ms、第一再利用待機27,216msは別扱い。検査・result保存合計18.56ms、主process574,758.50ms、別process395.76ms。初回第一回答の判断/整形時間は独立の始終記録がなく未計測。相談役待機は別の通信実績に保存する。第一JSONコピー検査1.25ms/5,405bytes、新媒体copy0bytes。表示時間・物理style・映像音声・見心地・人間品質は未確認のまま。
+
+
+Codex2中断checkpoint（2026-10-03）：LINE_END_FIXを0140357bで全文受領し設営23適用、型/preflight exit0。attempt-003の第一要求を同一性確認して再利用し、既存Skill/validatorとSHA拒否を通過、新result/trace/receiptまで保存。その後、一時の履歴追従コマンドがreport JSON末尾へ改行でなくliteral backslash+nを付け、既存readerがSyntaxErrorで拒否、process exit1。製品欠陥ではなくCodex2の記録整形ミス。壊れた実bytes/log/失敗recordを同attemptへ保存し、reportだけ既知の余剰末尾を除いて有効JSONへ戻し失敗履歴を追加。旧attempt-001/002・元21入力/実装は不変。回答2〜9・一行末修正・新manifest/再読は未実施。製品6/設営23を維持し、新attempt-004へのOUT/履歴追従と一時記録をjson.dumpで保存する最小案を設営24の個別判断へ返す。未適用・未再実行、自己承認なし。媒体/API/描画/費用0。行末の既承認一field修正と候補回答の完成は保留。[report](README.md)/[evidence](evidence.json)。

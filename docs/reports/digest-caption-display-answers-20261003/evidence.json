@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-caption-display-answers-report-v001",
-  "status": "passed",
+  "status": "stopped-reuse-history-json-format",
   "receivedAt": "2026-10-02T16:17:33.542200+00:00",
   "confirmedHead": "c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7",
   "scope": {
@@ -9,9 +9,10 @@
   },
   "history": {
     "productFixes": 6,
-    "setupFixes": 22,
+    "setupFixes": 23,
     "setup21Applied": true,
-    "setup22Applied": true
+    "setup22Applied": true,
+    "setup23Applied": true
   },
   "previousAcceptedCommit": "a98f569aae8a12fe99a2c17314a802c1e1b6e275",
   "admission": {
@@ -487,7 +488,7 @@
     "elapsedMs": 395.76033399999994
   },
   "completedAt": "2026-10-02T16:56:20.553Z",
-  "completionStatus": "stopped-one-bunsetsu-line-boundary",
+  "completionStatus": "pending-one-field-correction-and-new-readback",
   "currentContentCheckpoint": {
     "schemaVersion": "digest-caption-display-content-checkpoint-v001",
     "recordedAt": "2026-10-02T16:58:50.721962+00:00",
@@ -833,5 +834,216 @@
     "readbackExit": 0,
     "oldAttempt001Unchanged": true,
     "oldInputsUnchanged": true
+  },
+  "lineEndCorrectionApproval": {
+    "binding": {
+      "path": "docs/work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001_LINE_END_FIX.md",
+      "fileSha256": "bb21a7b12f06b974db53860a947a223af7c844a8805910cd674083b394135561"
+    },
+    "receivedHead": "0140357bd692e6e94cb37ecf07ce8737cb4d209b",
+    "replyCompleteAndFullyRead": true,
+    "appliedAt": "2026-10-02T17:11:51.286714+00:00",
+    "oldCandidateManifest": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/manifest.json",
+      "fileSha256": "996f506dedbd1c7fc512de9ff0f8ad5bd057d101410d842d54ac418f2c22816a"
+    },
+    "newOutput": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003",
+    "proof": "/private/tmp/codex2-display-setup23-approved.png"
+  },
+  "attempt002TechnicalObservation": {
+    "checks": {
+      "strictTypeCheckExit": 0,
+      "preflightExit": 0,
+      "runExit": 0,
+      "readbackExit": 0,
+      "oldAttempt001Unchanged": true,
+      "oldInputsUnchanged": true
+    },
+    "readback": {
+      "status": "passed",
+      "processId": 29404,
+      "requests": 9,
+      "tracesBytesEqual": true,
+      "oldInputsUnchanged": true,
+      "judgmentsCalled": 0,
+      "elapsedMs": 395.76033399999994
+    },
+    "metadata": [
+      {
+        "ordinal": 1,
+        "inputPresentedAt": "2026-10-02T16:46:45.268Z",
+        "answerReceivedAt": "2026-10-02T16:47:12.484Z",
+        "readJudgmentFormattingWallMs": 27216,
+        "validationAndSaveMs": 1.840250000001106,
+        "totalCallbackElapsedMs": 27221.478666
+      },
+      {
+        "ordinal": 2,
+        "inputPresentedAt": "2026-10-02T16:47:12.491Z",
+        "answerReceivedAt": "2026-10-02T16:49:09.097Z",
+        "readJudgmentFormattingWallMs": 116606,
+        "validationAndSaveMs": 2.968040999985533,
+        "totalCallbackElapsedMs": 116611.65666699999
+      },
+      {
+        "ordinal": 3,
+        "inputPresentedAt": "2026-10-02T16:49:09.104Z",
+        "answerReceivedAt": "2026-10-02T16:49:50.445Z",
+        "readJudgmentFormattingWallMs": 41341,
+        "validationAndSaveMs": 0.9573749999981374,
+        "totalCallbackElapsedMs": 41342.772832999995
+      },
+      {
+        "ordinal": 4,
+        "inputPresentedAt": "2026-10-02T16:49:50.449Z",
+        "answerReceivedAt": "2026-10-02T16:51:33.612Z",
+        "readJudgmentFormattingWallMs": 103163,
+        "validationAndSaveMs": 3.9366249999729916,
+        "totalCallbackElapsedMs": 103170.36562500003
+      },
+      {
+        "ordinal": 5,
+        "inputPresentedAt": "2026-10-02T16:51:33.621Z",
+        "answerReceivedAt": "2026-10-02T16:53:17.739Z",
+        "readJudgmentFormattingWallMs": 104118,
+        "validationAndSaveMs": 3.201208000013139,
+        "totalCallbackElapsedMs": 104124.15620899998
+      },
+      {
+        "ordinal": 6,
+        "inputPresentedAt": "2026-10-02T16:53:17.747Z",
+        "answerReceivedAt": "2026-10-02T16:54:04.396Z",
+        "readJudgmentFormattingWallMs": 46649,
+        "validationAndSaveMs": 1.5568750000093132,
+        "totalCallbackElapsedMs": 46651.846666999976
+      },
+      {
+        "ordinal": 7,
+        "inputPresentedAt": "2026-10-02T16:54:04.402Z",
+        "answerReceivedAt": "2026-10-02T16:54:50.191Z",
+        "readJudgmentFormattingWallMs": 45789,
+        "validationAndSaveMs": 1.3621250000433065,
+        "totalCallbackElapsedMs": 45790.913459
+      },
+      {
+        "ordinal": 8,
+        "inputPresentedAt": "2026-10-02T16:54:50.194Z",
+        "answerReceivedAt": "2026-10-02T16:55:34.063Z",
+        "readJudgmentFormattingWallMs": 43869,
+        "validationAndSaveMs": 1.349290999933146,
+        "totalCallbackElapsedMs": 43871.48875000002
+      },
+      {
+        "ordinal": 9,
+        "inputPresentedAt": "2026-10-02T16:55:34.068Z",
+        "answerReceivedAt": "2026-10-02T16:56:19.658Z",
+        "readJudgmentFormattingWallMs": 45590,
+        "validationAndSaveMs": 1.3927499999990687,
+        "totalCallbackElapsedMs": 45592.84137500008
+      }
+    ],
+    "validatorElapsedMs": 18.56453999995574,
+    "totalProcessWallMs": 574758.4957079999,
+    "manifestBinding": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/manifest.json",
+      "fileSha256": "996f506dedbd1c7fc512de9ff0f8ad5bd057d101410d842d54ac418f2c22816a"
+    }
+  },
+  "attempt003Reuses": [
+    {
+      "ordinal": 1,
+      "source": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0001.json",
+        "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+      },
+      "destination": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/response-0001.json",
+      "sizeBytes": 5405,
+      "byteIdentical": true,
+      "requestFileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567",
+      "promptObservedBeforeCopy": true,
+      "newContentJudgment": false,
+      "copyVerificationElapsedMs": 0.9644170058891177
+    }
+  ],
+  "attempt003Failure": {
+    "schemaVersion": "digest-caption-display-reuse-record-failure-v001",
+    "recordedAt": "2026-10-02T17:14:42.532451+00:00",
+    "processExit": 1,
+    "history": {
+      "productFixes": 6,
+      "setupFixes": 23
+    },
+    "cause": "一時の履歴追従コマンドがJSON末尾へ改行でなくliteral backslash+nを付けた。既存JSON readerが拒否。",
+    "actualError": "SyntaxError: Unexpected non-whitespace character after JSON at position 40923",
+    "firstAnswer": {
+      "existingSkillValidatorAccepted": true,
+      "responseBytesIdentical": true,
+      "newResultTraceReceiptSaved": true
+    },
+    "notCompleted": [
+      "requests2..9",
+      "one-line-end correction",
+      "attempt003 final manifest/readback"
+    ],
+    "malformedEvidence": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/evidence-format-failure.txt",
+      "sizeBytes": 44729,
+      "fileSha256": "c4cafc67cee696b3ad274c4c4734aabd5cb5119ac14bb07e79fc5e179a11189f"
+    },
+    "oldInputsUnchanged": true,
+    "oldAttempts001002Unchanged": true,
+    "proposedNotApplied": {
+      "output": "attempt-004",
+      "setupCountIfApproved": 24,
+      "helper": "OUTと履歴/受領HEADのみ。製品/validator/reader/期待値無変更。",
+      "recordWriting": "一時の記録追従はjson.dumpで有効JSONとして書く。文字列escapeの末尾追記をやめ、stdinへ返す前に実JSON.parse相当の読込で確認。",
+      "responses": "1〜8は承認済み同一実要求へのbyte再利用、9は既承認の一field訂正。旧attempt001/002/003不変。"
+    }
+  },
+  "attempt003FailureFiles": [
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/evidence-format-failure.txt",
+      "sizeBytes": 44729,
+      "fileSha256": "c4cafc67cee696b3ad274c4c4734aabd5cb5119ac14bb07e79fc5e179a11189f"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/failure-run.log",
+      "sizeBytes": 56380,
+      "fileSha256": "914fdaa38f12b206b63b00a51880aa954a9774cd93e3012a7735fd835e82365f"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/failure.json",
+      "sizeBytes": 1552,
+      "fileSha256": "266c4a3461fed2f800185379976862f6f459715437731478b73f241d073ef3ba"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/old-inputs-before.json",
+      "sizeBytes": 3518,
+      "fileSha256": "68721dafed08ef037a2b5a409b8400523565b7c760c727d207d8023a263c6bdb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/receipt-0001.json",
+      "sizeBytes": 2036,
+      "fileSha256": "c23d4e1f17c45ffe910b7737b700522fc84ccd8d2f25c1f09722e0398550c313"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/response-0001.json",
+      "sizeBytes": 5405,
+      "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/result-0001.json",
+      "sizeBytes": 4725,
+      "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-003/trace-0001.json",
+      "sizeBytes": 57955,
+      "fileSha256": "62822019e2032ebacdc871040c64cdf68feae5dfaf092dc83429c44c76236a68"
+    }
+  ],
+  "reportRepair": {
+    "invalidBytesPreserved": true,
+    "removedOnlyTrailingLiteralBackslashNBeforeAddingFailureRecord": true
   }
 }

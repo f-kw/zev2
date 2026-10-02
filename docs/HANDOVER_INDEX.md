@@ -137,3 +137,6 @@ main、担当のみ明示stage、Git操作直列化。他者変更をreset/stash
 旧未調整案停止を保持し当時の貼付を承認へ遡及変換しない。d93e6418の設営22・全9技術検査/再読exit0・内容一点未達・残存0はCodex報告と保存証拠。設営23指示は発行済み、受領・適用・新実行・訂正完了は未確認。Macの現在processを相談役が直接観測したものではない。
 
 方針・指示・完了・中断は同じターンで正本保存。自動監視/非同期作業を装わない。新しい実質問題がなければ今回の訂正から全9候補の保存再検査・通常push・直接報告まで進め、演出/動画製造へは自動着工しない。
+
+
+Codex2中断checkpoint（2026-10-03）：LINE_END_FIXを0140357bで全文受領し設営23適用、型/preflight exit0。attempt-003の第一要求を同一性確認して再利用し、既存Skill/validatorとSHA拒否を通過、新result/trace/receiptまで保存。その後、一時の履歴追従コマンドがreport JSON末尾へ改行でなくliteral backslash+nを付け、既存readerがSyntaxErrorで拒否、process exit1。製品欠陥ではなくCodex2の記録整形ミス。壊れた実bytes/log/失敗recordを同attemptへ保存し、reportだけ既知の余剰末尾を除いて有効JSONへ戻し失敗履歴を追加。旧attempt-001/002・元21入力/実装は不変。回答2〜9・一行末修正・新manifest/再読は未実施。製品6/設営23を維持し、新attempt-004へのOUT/履歴追従と一時記録をjson.dumpで保存する最小案を設営24の個別判断へ返す。未適用・未再実行、自己承認なし。媒体/API/描画/費用0。行末の既承認一field修正と候補回答の完成は保留。[report](reports/digest-caption-display-answers-20261003/README.md)/[evidence](reports/digest-caption-display-answers-20261003/evidence.json)。
