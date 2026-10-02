@@ -61,3 +61,7 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 入力対応は今回accept発行済み。新準備接続の受領・実装・設営19適用・完成は未確認。前件残存0はCodex報告として受領し、現在の実稼働と混同しない。
 
 main、担当fileのみ明示stage、他者変更保全、stage/commit/push直列化。Codex1起動・受理だけの再commitは不要。今回完了から字幕回答・演出・動画工事へ自動着工しない。
+
+## Codex2 checkpoint — 2026-10-03 字幕判断入力準備の局所停止
+
+8c96aa62から新規二pathと設営19を実装。厳密な対象型検査・export/出力不存在確認、旧正常一区間の純粋比較を通過。実入力準備は承認保存参照から目的文を取り出す位置の誤りでexit1、要求保存/別process再構築は未完了。正規参照は準備記録内の承認snapshotを指し、制作要求本文は別の保存物にある。最小未適用差分・初回失敗証拠・旧入力前後不変を[主report](reports/digest-caption-input-preparation-20261003/README.md)へ保存。製品修正5/設営19を維持し、製品6/設営20となる修正・新隔離再走についてGPT_DECISIONする。追加作用は停止中。媒体/通常HTTP/判断/描画/費用0、既存受理・人間Pendingは不変。

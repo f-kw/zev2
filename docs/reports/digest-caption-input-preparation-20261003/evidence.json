@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "digest-caption-input-preparation-report-v001",
+  "status": "stopped-gpt-decision",
+  "receivedAt": "2026-10-02T15:20:36.826409+00:00",
+  "confirmedHead": "8c96aa6248fbf1cac40e87346d5e37baf24b8bc9",
+  "scope": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md",
+    "fileSha256": "c56aa5710696686778ac9cc5ab26787d35395b7c9d9b672db956f22ea09db209"
+  },
+  "history": {
+    "productFixes": 5,
+    "setupFixes": 19,
+    "newImplementationPaths": 2,
+    "setup19Applied": true
+  },
+  "previousAcceptedCommit": "4556e389fc6cb2a9933f98bd5d83716324ef8b01",
+  "initialGitChanges": [],
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null
+  },
+  "preflight": {
+    "exports": "passed",
+    "parent": "present",
+    "output": "absent",
+    "strictTypeCheck": "passed",
+    "typeCommand": "runner/node_modules/.bin/tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --strict --skipLibCheck --allowImportingTsExtensions <new 2 paths + prepare-test.mts>",
+    "typeCheckLog": "/private/tmp/codex2-caption-typecheck.log",
+    "normalHttpStarted": false,
+    "loader": "node --import ./runner/node_modules/tsx/dist/loader.mjs",
+    "cliIpcBlocked": true
+  },
+  "checkpointAt": "2026-10-02T15:40:29.975235+00:00",
+  "failure": {
+    "schemaVersion": "digest-caption-input-preparation-failure-v001",
+    "attempt": "attempt-001",
+    "exitCode": 1,
+    "failure": "CAPTION_PREPARATION_PURPOSE_CHANGED",
+    "location": "runner/src/digest-caption-input-preparation-v001.ts:136",
+    "actualApprovedRequestBindingKind": "normal-request-digest-preparation-binding-v002 (binding-input.json)",
+    "actualPurposeLocation": "identity.approvedDraft.purpose",
+    "separateIntentLocation": "preparation.artifacts[production-intent.json].productionIntent",
+    "proposedProductDiff": "- assert.equal(intent.productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');\n+ assert.deepEqual(record(intent.identity).approvedDraft, approved, 'CAPTION_PREPARATION_APPROVAL_CHANGED');\n+ assert.equal(stage('production-intent.json').productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');\n",
+    "applied": false,
+    "pastProductFixes": 5,
+    "setupFixes": 19,
+    "newImplementationPaths": 2,
+    "bundleSaved": false,
+    "separateProcessReadback": false,
+    "oldSnapshotFiles": 54,
+    "oldInputsUnchanged": true,
+    "runLog": {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001-failure.log",
+      "fileSha256": "1d4add0ca1542cde1369c4a86f35735c9203cd271e864a0dbfa42e9040faf624"
+    },
+    "equivalence": "old normal first part pure comparison returned without assertion failure before preparation; no repeat requested",
+    "newAttemptProposal": "attempt-002/bundle, preserve attempt-001 records",
+    "recordedAt": "2026-10-02T15:43:22.059843+00:00"
+  },
+  "effects": {
+    "mediaReadHashCopyPut": 0,
+    "normalHttp": 0,
+    "judgmentCalls": 0,
+    "rendering": 0,
+    "costUsd": 0
+  }
+}
