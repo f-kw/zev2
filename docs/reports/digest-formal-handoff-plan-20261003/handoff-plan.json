@@ -1,0 +1,1484 @@
+{
+  "schemaVersion": "digest-formal-handoff-proposal-v001",
+  "status": "proposal-complete-not-executable",
+  "receivedHead": "b4a497dc942a7b68990b7ef768a429600a944f08",
+  "receivedAt": "2026-10-02T19:51:08.418509+00:00",
+  "workOrder": {
+    "path": "docs/work-orders/ZEV_DIGEST_FORMAL_HANDOFF_PLAN_20261003_v001.md",
+    "fileSha256": "43c357a62feb0fa8cc1aebf3325685825ab18e96bda14832251174c3015ff569"
+  },
+  "history": {
+    "product": 6,
+    "setup": 29
+  },
+  "scope": "read small JSON/code and known-path metadata; two-document proposal only",
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null,
+    "ID9-PD-01": "not-approved",
+    "ID9-PD-02": "not-approved"
+  },
+  "checkpoint": {
+    "at": "2026-10-02T19:59:32.350312+00:00",
+    "referenceBridge": "通常logical referenceからproducer--fileへ既存resolverで解決。既存公開readerのnormal owner/approval/closure検査を再利用する。",
+    "sourcePackage": "一つの意味captionとglobal boundary列へ9件の検査済みcue列を順接続。旧buildAdoptedCaptionInputsによるID再生成を行わない。",
+    "style": "26/2候補registryと実SHAのcandidate trustが必要。固定style resolverのtrust rootは候補を拒否するため、一般rootを変更せず既存Digest Coreの限定candidate経路を提案する。",
+    "manufacturingEffects": "source snapshot copy/hash/reinspection、video/PCM/grid/AAC mux、完了QC、今回workだけのrmを伴う。未承認。",
+    "compositor": "正式file callerには低メモリcompositor hookなし。既存producer graphの再利用と限定hookが必要。",
+    "capacity": "現空き約13.4GB。旧50GB開始/12GBreserve等は旧運転限定であり新運転へ勝手に継承・緩和しない。"
+  },
+  "completedAt": "2026-10-02T20:03:59.335273+00:00",
+  "sourceMaterialId": "-2UUTkv9qvk",
+  "technicalCandidateResult": {
+    "acceptedCommit": "263dca50299650bca2393a2db24cd10d0050d09a",
+    "cueCount": 243,
+    "lineCount": 390,
+    "atomCount": 3613,
+    "retainedRangeCount": 9,
+    "adoptedCandidateCount": 7,
+    "frameCount": 27691,
+    "audioSampleCount": 40705770,
+    "fps": "30/1",
+    "baselineIsObservedResultNotProductTarget": true
+  },
+  "inputBindings": [
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+      "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41",
+      "sizeBytes": 45985
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/meaning-input.json",
+      "fileSha256": "6e16d247d36f841783d59badc4c4a3f35c8cf4739b6acae29baccc32a7d061a3",
+      "sizeBytes": 1965398
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/traces.json",
+      "fileSha256": "479107679f236221b198c59a0fef95495dbb5ecb1a75df922a700f6fb8b482b6",
+      "sizeBytes": 957794
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence.json",
+      "fileSha256": "950f1edf9ea2a6f4ae8b1b2991d78b1c706bbaf2bf8877d04dcf66df15ed98f5",
+      "sizeBytes": 2045952
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "sizeBytes": 119064
+    }
+  ],
+  "normalStateBinding": {
+    "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/state.json",
+    "fileSha256": "c62e3b38d00c8222f0918b52704e579f87a14346217fada6c9cd754fc6fccf3c",
+    "sizeBytes": 24947
+  },
+  "normalOwners": {
+    "draftId": "draft_eCg3g-IMIzEWMtJuMyJWB",
+    "source": "agent_0sJLSuMCrrFKYJnamJ2_5",
+    "stt": "agent_YchOWHe52hoa1T834AbZT",
+    "plan": "agent_xKOu8eZKSNa5viNENtJ4L",
+    "consumer": "agent_wGiuVx5QiJvjGUxEW8Qxa",
+    "observedStates": [
+      {
+        "id": "agent_0sJLSuMCrrFKYJnamJ2_5",
+        "type": "prepare_video",
+        "status": "succeeded",
+        "requestDraftId": "draft_eCg3g-IMIzEWMtJuMyJWB"
+      },
+      {
+        "id": "agent_YchOWHe52hoa1T834AbZT",
+        "type": "run_stt",
+        "status": "succeeded",
+        "requestDraftId": "draft_eCg3g-IMIzEWMtJuMyJWB"
+      },
+      {
+        "id": "agent_xKOu8eZKSNa5viNENtJ4L",
+        "type": "prepare_digest_plan",
+        "status": "succeeded",
+        "requestDraftId": "draft_eCg3g-IMIzEWMtJuMyJWB"
+      },
+      {
+        "id": "agent_wGiuVx5QiJvjGUxEW8Qxa",
+        "type": "validate_digest_plan",
+        "status": "succeeded",
+        "requestDraftId": "draft_eCg3g-IMIzEWMtJuMyJWB"
+      }
+    ]
+  },
+  "normalReferenceMap": [
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5/source-video.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-video.json",
+        "fileSha256": "a7a51ea8e38913b0cd3d727b5ee0e10b819bc2f5e30dee3e1b78935f243a5297",
+        "sizeBytes": 1377
+      },
+      "consumerMeaning": "source URIとsource登録来歴",
+      "producerRequestId": "agent_0sJLSuMCrrFKYJnamJ2_5"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT/transcript.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT--transcript.json",
+        "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+        "sizeBytes": 6804193
+      },
+      "consumerMeaning": "元断片本文/元時計; byte binding",
+      "producerRequestId": "agent_YchOWHe52hoa1T834AbZT"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/utterances.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--utterances.json",
+        "fileSha256": "11de8ccaabe472cad61808763f0a149f041491e231cd72e135a52591f5fff087",
+        "sizeBytes": 1098428
+      },
+      "consumerMeaning": "共通発話と元断片所属",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/production-intent.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--production-intent.json",
+        "fileSha256": "0453a2dba7be8ac6d0fdaf37662befbca6db148f5864cc45b59dc14a8f228dca",
+        "sizeBytes": 977
+      },
+      "consumerMeaning": "承認purpose全文",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/binding-input.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--binding-input.json",
+        "fileSha256": "b82c4e45a60be7b1eb103b32acd5efcf5232e6149fe36ab2a3a210e87d9f4ba3",
+        "sizeBytes": 11023
+      },
+      "consumerMeaning": "承認snapshotと正規依存参照",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-adoption.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-adoption.json",
+        "fileSha256": "11b8dda61151ff1350e77898bae81e51f783da5b29a8b6ce6a38eaa787136974",
+        "sizeBytes": 180362
+      },
+      "consumerMeaning": "比較採否7候補の根拠",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-request.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-request.json",
+        "fileSha256": "80315b2cdc03c2469cb69d3fa51b588bf1a44a7028d72ab0633144d1660bd4d1",
+        "sizeBytes": 784882
+      },
+      "consumerMeaning": "保持の実要求",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-response.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-response.json",
+        "fileSha256": "48977f1a8b060f2455a8dcf1779f5022bcc649e586be78aa51c0a26723d5344e",
+        "sizeBytes": 10542
+      },
+      "consumerMeaning": "今回の保持回答",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-result.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-result.json",
+        "fileSha256": "e763f363672301b43ad5c94f52000a6b8ad12eebd137b229e4cb9c3e7ea50a97",
+        "sizeBytes": 9976
+      },
+      "consumerMeaning": "既存検査済み保持結果",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-validation.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-validation.json",
+        "fileSha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+        "sizeBytes": 224320
+      },
+      "consumerMeaning": "9保持区間の正規解決",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/digest-plan.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--digest-plan.json",
+        "fileSha256": "cd69dd7fccfab6b4d0f266e6dddf56d5eae4c670283cd7caf467b9fde2925ee3",
+        "sizeBytes": 6724
+      },
+      "consumerMeaning": "正常計画とsource/STT依存closure",
+      "producerRequestId": "agent_xKOu8eZKSNa5viNENtJ4L"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/consumption-binding.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--consumption-binding.json",
+        "fileSha256": "29faf3f4091c53273da1c9ee416d78ae1847a525e68f8650c730ba0437fef6c2",
+        "sizeBytes": 5878
+      },
+      "consumerMeaning": "通常consumer complete/承認命令/参照対応",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/machine-adoption.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--machine-adoption.json",
+        "fileSha256": "624bfebeccbf0825c72bfc7a7ac3ed850408b4e9027c93b4c43dda1ed50fe15d",
+        "sizeBytes": 242559
+      },
+      "consumerMeaning": "buildAdoptedBaseMedia引数adoption/assemblyDecision",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/edit-plan.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--edit-plan.json",
+        "fileSha256": "cde0e6a292de011475b4d4cf3d0a418f4b839a1b9bf7eca5209e3e78e023caf6",
+        "sizeBytes": 53733
+      },
+      "consumerMeaning": "buildAdoptedBaseMedia引数editPlan.segments",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/manufacturing-values.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--manufacturing-values.json",
+        "fileSha256": "20b2341771f33183b0251390e688e9b35a52ca53428d0225bdfc01d7cee89947",
+        "sizeBytes": 884
+      },
+      "consumerMeaning": "派生製造jobの根拠。sourceArtifact.pathのみ検証済み実pathへ解決、新jobID/output/実SHAを別成果へ束縛",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/clock-resolution.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--clock-resolution.json",
+        "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8",
+        "sizeBytes": 3658
+      },
+      "consumerMeaning": "保存9mapping/frame/sample; byte binding維持",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5/source-inspection.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-inspection.json",
+        "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d",
+        "sizeBytes": 2744
+      },
+      "consumerMeaning": "保存sourceClockとaudioClockの根拠、再inspection後の比較対象",
+      "producerRequestId": "agent_0sJLSuMCrrFKYJnamJ2_5"
+    }
+  ],
+  "displayAnswerReferences": [
+    {
+      "ordinal": 1,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0001.json",
+          "fileSha256": "d2996900c759d68935f2d384e00d46b818f37c6d24f15e595ea0f17a6f0c0786",
+          "sizeBytes": 36769
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0001.json",
+          "fileSha256": "5b92f9100d841dc86c2065f5472c9c48a227b44bfd5eb12ac5f8947c50fe12f4",
+          "sizeBytes": 6482
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0001.json",
+          "fileSha256": "f4bb9c4c0c17c545dca104cb8abc0194fb5903e74e0e6bc4e4574ee8d2cfe86e",
+          "sizeBytes": 5567
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0001.json",
+          "fileSha256": "53185b09cc47e9b13ecd8f969115166c4b7838d1a7c1d9ec4ac98bda73022012",
+          "sizeBytes": 60866
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-1",
+      "counts": {
+        "cue": 16,
+        "line": 24,
+        "atom": 217
+      }
+    },
+    {
+      "ordinal": 2,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0002.json",
+          "fileSha256": "7f32f2f42e3a94f3f401fb11a32f4ec1e5321769c966d83abf81448057b501ed",
+          "sizeBytes": 106012
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0002.json",
+          "fileSha256": "d2ac0cb7ec04fa0650b9bf36c36e06c5e5fafe3cb20fe9f2d7f0c08e9140dcc2",
+          "sizeBytes": 15927
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0002.json",
+          "fileSha256": "15a3870c20af0be37ebbecc2cbbfee11573077ef16865c9b32a10e1e0de996eb",
+          "sizeBytes": 15007
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0002.json",
+          "fileSha256": "02628360b38cb96cbe35e9f1c2b3077c70127b27835b5dc8c2ddc1b9bf2316c3",
+          "sizeBytes": 170838
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-2",
+      "counts": {
+        "cue": 43,
+        "line": 71,
+        "atom": 658
+      }
+    },
+    {
+      "ordinal": 3,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0003.json",
+          "fileSha256": "e03ce6e19b335c554059721ef5d68dc3abda3863da7ae3a226ab9d2e35435d8c",
+          "sizeBytes": 21544
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0003.json",
+          "fileSha256": "4e8c121c0324667ee352f4eff75ff21721d3eb7cd292cb9ad8912bf2557751ab",
+          "sizeBytes": 4024
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0003.json",
+          "fileSha256": "99877c3eb22b91e9c5c6e84241804c04f6b85641e6f53492a8de12cc8674c12f",
+          "sizeBytes": 3233
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0003.json",
+          "fileSha256": "e595c4986fdd5ce11c33564eea932af70b58efb83821901f69cc9108446ad67b",
+          "sizeBytes": 35697
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-3",
+      "counts": {
+        "cue": 8,
+        "line": 15,
+        "atom": 120
+      }
+    },
+    {
+      "ordinal": 4,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0004.json",
+          "fileSha256": "9eda0bd5911f8fb5243ccc40a9853755b100580647795a9c4dd8952d77b79b0d",
+          "sizeBytes": 164811
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0004.json",
+          "fileSha256": "7b08fba6694d954d7d681398742cf12ec26780350e12f59f7a57afdba742fae5",
+          "sizeBytes": 24766
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0004.json",
+          "fileSha256": "a266249c17a1997211ef975c40a8fd5e12608f29f5a8bac75e44856bc4b4a7a4",
+          "sizeBytes": 23881
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0004.json",
+          "fileSha256": "ac81b4fae570da9e8624fab92094340ac295dcc13ee67acbe3a0d4b482a3db79",
+          "sizeBytes": 267014
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-4",
+      "counts": {
+        "cue": 71,
+        "line": 110,
+        "atom": 1033
+      }
+    },
+    {
+      "ordinal": 5,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0005.json",
+          "fileSha256": "459f490a38df9c76dc0ed0c3dbcfcf803554990c2146ac262c803f3dd4660d46",
+          "sizeBytes": 124794
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0005.json",
+          "fileSha256": "b1d5d56d7d7030fb738797d544a491b9831adb0249cfb516a332583775ca2000",
+          "sizeBytes": 17997
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0005.json",
+          "fileSha256": "926f4b2026318a0652573dae257f465fc0d927b050fff10f666760ade17a6791",
+          "sizeBytes": 16971
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0005.json",
+          "fileSha256": "780b79ebc88c1c8d73d61c93a3fb6da71dca67491ef68bbbd281767dcb8175dd",
+          "sizeBytes": 198858
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-5",
+      "counts": {
+        "cue": 48,
+        "line": 82,
+        "atom": 778
+      }
+    },
+    {
+      "ordinal": 6,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0006.json",
+          "fileSha256": "08b882e001071712a6f15e833c7ab93303610cc9150f49151c275ab821f0596c",
+          "sizeBytes": 43210
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0006.json",
+          "fileSha256": "876f8f4fe08d54924ce67eeba39a5adb0b5e20991a208954422e16b42edd4e6d",
+          "sizeBytes": 6657
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0006.json",
+          "fileSha256": "facd5572b3cf697dcac8b998425921932d97ffcba8c7be44c79ce51c64ec1d6c",
+          "sizeBytes": 5849
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0006.json",
+          "fileSha256": "a01fc845892d6c2067a6c9ccc4f67844c42faf5eb4db10851d6e3aa7c3f72940",
+          "sizeBytes": 69060
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-6",
+      "counts": {
+        "cue": 16,
+        "line": 27,
+        "atom": 258
+      }
+    },
+    {
+      "ordinal": 7,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0007.json",
+          "fileSha256": "4e41154dc9b48ea048c377e441a878a49ff605752a2e56f664b3bbb3c63259f3",
+          "sizeBytes": 27512
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0007.json",
+          "fileSha256": "f82ad37623606b184b0df21143fe6d012441901ee92e66c5a410467e26ce9d67",
+          "sizeBytes": 4935
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0007.json",
+          "fileSha256": "88f83570d62157accc96d352a7320d627e2387b7b18bc437ffcffaa7c109ca56",
+          "sizeBytes": 4259
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0007.json",
+          "fileSha256": "5781a6b29c7db15a71d3fae2cebde7aceb2e6fea7a048f7b1f5ff150676084d2",
+          "sizeBytes": 45770
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-7",
+      "counts": {
+        "cue": 12,
+        "line": 18,
+        "atom": 158
+      }
+    },
+    {
+      "ordinal": 8,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0008.json",
+          "fileSha256": "c6fcbf0698c02c760a9c2d6ce50cfb342c18e821e4aad0c987ddb7a589a80c9f",
+          "sizeBytes": 28897
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0008.json",
+          "fileSha256": "c6436c8ff72daece54747db82758065d8819c1ce273c29d09105043876f7e110",
+          "sizeBytes": 5225
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0008.json",
+          "fileSha256": "65e90877e756eaf1aea855b7fb7c235345bd572ada2e795c4eaac98caccd3502",
+          "sizeBytes": 4539
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0008.json",
+          "fileSha256": "82ceb1e6111204c74075209fdceb32f745eb03d18bf949456239b0a935e1b79a",
+          "sizeBytes": 48281
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-8",
+      "counts": {
+        "cue": 13,
+        "line": 19,
+        "atom": 167
+      }
+    },
+    {
+      "ordinal": 9,
+      "bindings": {
+        "requestBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/request-0009.json",
+          "fileSha256": "202f8207f10acb53163c633df7833197f7f383dd0a8e23760ee195658d533979",
+          "sizeBytes": 37864
+        },
+        "responseBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/response-0009.json",
+          "fileSha256": "d34cfa6571229361651b14dd58167a7919350d90e6cc2d00eba316384f712568",
+          "sizeBytes": 6418
+        },
+        "resultBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/result-0009.json",
+          "fileSha256": "804231cbff6f764b3e1d9f489c66084941486ac07ff4b3160250a2e1289e5d3a",
+          "sizeBytes": 5567
+        },
+        "traceBinding": {
+          "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/trace-0009.json",
+          "fileSha256": "90e2f6e98589d4c37cb0ac88196c88779207365338bdd4c6971461553480303d",
+          "sizeBytes": 62065
+        }
+      },
+      "inputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption-segment-9",
+      "counts": {
+        "cue": 16,
+        "line": 24,
+        "atom": 224
+      }
+    }
+  ],
+  "savedClockMappings": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 159770,
+      "sourceEndMs": 213077,
+      "sourceStartFrame30": 4793,
+      "sourceEndFrame30": 6392,
+      "outputStartFrame": 0,
+      "outputEndFrame": 1599,
+      "audioSamples": {
+        "sourceStart": 7045710,
+        "sourceEnd": 9396240,
+        "outputStart": 0,
+        "outputEnd": 2350530
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 213077,
+      "sourceEndMs": 327084,
+      "sourceStartFrame30": 6392,
+      "sourceEndFrame30": 9813,
+      "outputStartFrame": 1599,
+      "outputEndFrame": 5020,
+      "audioSamples": {
+        "sourceStart": 9396240,
+        "sourceEnd": 14425110,
+        "outputStart": 2350530,
+        "outputEnd": 7379400
+      }
+    },
+    {
+      "segmentId": "segment-0003",
+      "sourceStartMs": 355551,
+      "sourceEndMs": 379620,
+      "sourceStartFrame30": 10667,
+      "sourceEndFrame30": 11389,
+      "outputStartFrame": 5020,
+      "outputEndFrame": 5742,
+      "audioSamples": {
+        "sourceStart": 15680490,
+        "sourceEnd": 16741830,
+        "outputStart": 7379400,
+        "outputEnd": 8440740
+      }
+    },
+    {
+      "segmentId": "segment-0004",
+      "sourceStartMs": 1993090,
+      "sourceEndMs": 2256057,
+      "sourceStartFrame30": 59793,
+      "sourceEndFrame30": 67682,
+      "outputStartFrame": 5742,
+      "outputEndFrame": 13631,
+      "audioSamples": {
+        "sourceStart": 87895710,
+        "sourceEnd": 99492540,
+        "outputStart": 8440740,
+        "outputEnd": 20037570
+      }
+    },
+    {
+      "segmentId": "segment-0005",
+      "sourceStartMs": 5468987,
+      "sourceEndMs": 5675926,
+      "sourceStartFrame30": 164070,
+      "sourceEndFrame30": 170278,
+      "outputStartFrame": 13631,
+      "outputEndFrame": 19839,
+      "audioSamples": {
+        "sourceStart": 241182900,
+        "sourceEnd": 250308660,
+        "outputStart": 20037570,
+        "outputEnd": 29163330
+      }
+    },
+    {
+      "segmentId": "segment-0006",
+      "sourceStartMs": 6394302,
+      "sourceEndMs": 6449886,
+      "sourceStartFrame30": 191829,
+      "sourceEndFrame30": 193497,
+      "outputStartFrame": 19839,
+      "outputEndFrame": 21507,
+      "audioSamples": {
+        "sourceStart": 281988630,
+        "sourceEnd": 284440590,
+        "outputStart": 29163330,
+        "outputEnd": 31615290
+      }
+    },
+    {
+      "segmentId": "segment-0007",
+      "sourceStartMs": 7566646,
+      "sourceEndMs": 7620361,
+      "sourceStartFrame30": 226999,
+      "sourceEndFrame30": 228611,
+      "outputStartFrame": 21507,
+      "outputEndFrame": 23119,
+      "audioSamples": {
+        "sourceStart": 333688530,
+        "sourceEnd": 336058170,
+        "outputStart": 31615290,
+        "outputEnd": 33984930
+      }
+    },
+    {
+      "segmentId": "segment-0008",
+      "sourceStartMs": 7662774,
+      "sourceEndMs": 7751288,
+      "sourceStartFrame30": 229883,
+      "sourceEndFrame30": 232539,
+      "outputStartFrame": 23119,
+      "outputEndFrame": 25775,
+      "audioSamples": {
+        "sourceStart": 337928010,
+        "sourceEnd": 341832330,
+        "outputStart": 33984930,
+        "outputEnd": 37889250
+      }
+    },
+    {
+      "segmentId": "segment-0009",
+      "sourceStartMs": 7759082,
+      "sourceEndMs": 7822947,
+      "sourceStartFrame30": 232772,
+      "sourceEndFrame30": 234688,
+      "outputStartFrame": 25775,
+      "outputEndFrame": 27691,
+      "audioSamples": {
+        "sourceStart": 342174840,
+        "sourceEnd": 344991360,
+        "outputStart": 37889250,
+        "outputEnd": 40705770
+      }
+    }
+  ],
+  "reviewedCodeBindings": [
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "fileSha256": "a9c6ede906e548ad94596cb83fc70e1c38480b94b2b6c057516a61c55c02d23e",
+      "sizeBytes": 23966
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "fileSha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "sizeBytes": 12085
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f",
+      "sizeBytes": 25159
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70",
+      "sizeBytes": 58665
+    },
+    {
+      "path": "evals/clip_composition/presentation_cue_end_projection_v001.mjs",
+      "fileSha256": "f85ae2a10d92d6bfb72dcd0a568c03fa1cf72e14e68fc32ab23f104872461d89",
+      "sizeBytes": 24112
+    },
+    {
+      "path": "evals/clip_composition/presentation_instruction_artifact_v002.mjs",
+      "fileSha256": "44f67d3297330f339edde9487dd34222584e064b4c1352cfbc3bacdb394ac6c4",
+      "sizeBytes": 22008
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "fileSha256": "e63e4b4cf47d94d763333e13513570abe2dbac418e5ac5b396e1295b22956403",
+      "sizeBytes": 28308
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fileSha256": "3a77c7feb7005fa06d7e45a6364f76ab4bc40a8622370568cf557d5090f08b79",
+      "sizeBytes": 25089
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee",
+      "sizeBytes": 31374
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "47cb1e5e4562913943c844b6087831375b246d114561aee53d51e00423140eb9",
+      "sizeBytes": 28184
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4",
+      "sizeBytes": 150414
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff",
+      "sizeBytes": 111465
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "fileSha256": "e6b66091372a981c724a2aee62ea5ce483d6984debf5fa3ac48aba5191008899",
+      "sizeBytes": 10704
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor.py",
+      "fileSha256": "19b86743746bcb334ab7bbfa109fb3dac20b0d4dbc26bfba313a69e6f03fef74",
+      "sizeBytes": 5253
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "a4a6b5325793b42009f2250edb462469ef5f5daa441c5bfe4a1a2ef573da9439",
+      "sizeBytes": 8260
+    }
+  ],
+  "metadata": {
+    "observedAt": "2026-10-02T20:03:59.334588+00:00",
+    "method": "lstat/stat/realpath/statvfs only; no media open/hash/copy",
+    "knownPlanSource": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+      "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+      "sizeBytes": 4803412827,
+      "device": 16777234,
+      "isRegularFile": true,
+      "isSymbolicLink": false,
+      "declaredSha256NotRehashed": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+    },
+    "originalSource": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "sizeBytes": 4803412827,
+      "device": 16777234,
+      "isRegularFile": true,
+      "isSymbolicLink": false
+    },
+    "outputExistingAncestor": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts",
+      "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts",
+      "device": 16777234,
+      "availableBytes": 13411098624,
+      "blockBytes": 4096,
+      "availableBlocks": 3274194
+    },
+    "candidateOutputRootCreated": false,
+    "externalVolumesSearched": false
+  },
+  "adapterProposal": {
+    "path": "runner/src/digest-formal-handoff-v001.ts",
+    "status": "not-implemented; next scope approval needed",
+    "entryPoints": [
+      {
+        "name": "readDigestFormalHandoffInputsV001",
+        "input": "workspaceRoot、normalStateBinding、expected draft/plan/consumer IDs、accepted preparation/reflow manifest bindings",
+        "processing": "既存公開readPreparedDigestCaptionJudgmentInputsV001で正常owner/approval/dependency/registry/内部参照を復元。保存9request/response/resultから既存validateDisplayForAdoptionV001/readValidatedDisplayTracesV001の実tokenを再構築。判断0、再登録0。",
+        "output": "元意味オブジェクト、採否/保持/edit/clock、検証済み9traces、参照closure。旧stateは読取専用。"
+      },
+      {
+        "name": "prepareDigestFormalCandidateCoreV001",
+        "input": "検証済み元束、明示許可へ束縛する一件candidate style、製造済み背景四参照、専用出力root",
+        "processing": "元意味/atom/semanticCaption/sourceSegment/boundary/9request IDsと本文を維持。9caption入力IDは来歴に保持し、明示した全体input-caption IDのformal集約viewへcue列を順接続。全体viewは新判断要求ではない。",
+        "output": "既存source-package/selection/cue-end/line-end/instruction/renderer job。既存assembleAdoptedCaptionCoreV001で生成/検査。"
+      },
+      {
+        "name": "runDigestFormalCandidateV001",
+        "input": "将来の一件製造許可record、入力binding/候補SHA、監視permit、出力root",
+        "processing": "正規参照を解決して派生jobを実serialize/束縛、buildAdoptedBaseMediaV001→assembleAdoptedCaptionCoreV001→通常renderer file reader/受理/QC/原子的保存。一計画だけ。",
+        "output": "実background四参照、正式caption入力、初回Normal候補MP4と技術QC/監視/実作用記録。品質pending。"
+      }
+    ],
+    "referenceBridge": {
+      "logical": "artifacts/<draft>/<producer>/<file>",
+      "physical": "<normalAttempt>/artifacts/<draft>/<producer>--<file>",
+      "resolver": "digestArtifactFileNameV001 / digestArtifactPathFromUriV001 / digestProducerRequestIdsV001、registeredDigestDependencyV001、既存stable workspace reader",
+      "guards": [
+        "同draft、producer正規依存鎖、succeeded/承認snapshot、登録kind/owner/出力参照",
+        "path safety/no traversal/no symlink、実bytes SHA、内部参照closure",
+        "JSONは実schema/file/canonical binding、clock/transcript/mediaは既存byte参照"
+      ],
+      "ROOTConsumer": "既存readBoundはworkspace相対の実保存pathを読む。派生製造jobのsourceArtifact.pathにはresolverで検証したphysicalPathを明示。元logical bindingとorigin mapは保持し、仮alias/fallbackや旧SHAの付替えをしない。",
+      "smallJsonProjection": "Coreが出力rootのmeaning/adoption/editを参照するため必要な小JSONだけ同内容で新保存し、実serializer bytesから新bindingを作る。元bindingと内容同一の対応をinvocation/provenanceに保存。",
+      "baseMediaCopy": "既存媒体は登録済み実体を直接sourceに渡す。事前の手動copyなし。製造関数のsource snapshot一つだけは将来許可対象。",
+      "approvalBoundary": "保存stateの試験用humanApprovalRequiredBeforeRender=falseや元計画の承認を製造許可へ転用しない。元approvalは制作意図/計画来歴の検査だけ。新製造recordがこのmanifest/素材/区間/style/作用/root/capacityへ一致しなければ媒体作用前に拒否。"
+    },
+    "sourcePackageMapping": {
+      "aggregateCaseId": "digest-formal-handoff-20261003-v001",
+      "aggregateInputCaptionId": "digest-caption-input-preparation-20261003-v001-input-caption",
+      "semanticCaptionId": "digest-caption-input-preparation-20261003-v001-caption",
+      "promptInput": "既存taskDescription、26/2、global boundary列を9実要求から順に連結。9responseのcaptionId自体は変更しない。",
+      "reconstructionMap": "元意味/atom IDsとboundary→afterAtom対応をそのまま全体caption一件へ写像。retainedSpansのtimelineSegmentIdはsegment-0001..0009のまま。",
+      "meaningPackageBindings": "同内容でCore出力rootに保存するmeaning-input.jsonの新実binding。元schema digest-caption-judgment-meaning-input-v001を維持、zev-meaningへ偽装しない。",
+      "caseContexts": "同集約case/input caption、実meaning binding、製造済み4base refs、candidate style bindings/resolvedStyle",
+      "selection": "traces.flatMap(cues)が243件。元9要求のrequestId/response SHA/グループごとのcaptionIdと実traceをcaption-adoption来歴へ保存。",
+      "projections": "既存cueProjection/lineProjection/instructionArtifact/lineLayoutのみ。formal新instruction/cueIDと元boundary/atom IDの関係を記録。保存frame/sampleと比較し、再判断/分割/尺調整なし。",
+      "excludedCaller": "buildAdoptedCaptionInputsV001及び旧fixed Digest context loader、source-package CLIのzev-meaning専用jobは呼ばない。既存Digestのpure sourcePackage validator/assemblerを使う。",
+      "aggregateIdRole": "正式sourcePackage用の新しい全体view ID。元9要求のinputCaptionIdを変更/同一化しない。意味/atom/boundary/fragment/segment IDは維持。"
+    }
+  },
+  "styleProposal": {
+    "candidateOnly": true,
+    "candidateRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/candidate-style",
+    "styleSource": {
+      "path": "runtime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/verification.json",
+      "fileSha256": "2eb9421958f975f9fd0f5200626711c8b61d53fcbf6970b034d5c5ef9c456f0d",
+      "sizeBytes": 241623
+    },
+    "explicitValues": {
+      "format": "normal-landscape",
+      "screenLayoutId": null,
+      "fontSizePx": 144,
+      "borderWidthPx": 8,
+      "glowWidthPx": 4,
+      "maxLogicalWidth": 26,
+      "maxLines": 2,
+      "visualLayoutCapabilityWidth": 36,
+      "visualLayoutCapabilityLines": 2,
+      "fontAssetDeclaration": {
+        "fontAssetId": "line-seed-jp-extra-bold-v001",
+        "fileName": "LINESeedJP_A_OTF_Eb.otf",
+        "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "sha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+        "licensePath": "runner/public/font/OFL_LINESeedJP.txt"
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "safeAreaPx": {
+          "left": 4,
+          "right": 4,
+          "top": 40,
+          "bottom": 40
+        }
+      },
+      "visualState": {
+        "stateId": "caption-core-v001",
+        "textStyle": {
+          "fontAssetId": "line-seed-jp-extra-bold-v001",
+          "fontSizePx": 144,
+          "fontColor": "#FFFDF8",
+          "borderColor": "#2F4F4F",
+          "borderWidthPx": 8,
+          "lineSpacingPercent": 150,
+          "glowColor": "#2F4F4F",
+          "glowWidthPx": 4,
+          "glowOpacityPercent": 82
+        },
+        "position": {
+          "preset": "bottom-center",
+          "alignment": "center",
+          "offsetXPercent": 0,
+          "offsetYPercent": -6
+        },
+        "background": null,
+        "layout": {
+          "maxCharsPerLine": 36,
+          "maxLines": 2,
+          "singleLine": false
+        },
+        "transitionId": "quick-fade-4f-v001"
+      },
+      "layoutRules": "元trustのlayoutRulesは不変",
+      "appearanceQuality": "Node推定passedだけ。glyph/見心地未確認。"
+    },
+    "formalFields": {
+      "profile": "job.registryBindings.styleProfileRegistry→candidate preset-registry。profile.maxLogicalWidth=26/maxLines=2、144px/AのvisualStateを明示。visualState.layout 36は能力上限のままで、26を36と等値だとはしない。",
+      "trust": "job.registryBindings.rendererTrust→candidate trust。presetRegistry参照は新候補registryの実path/file/canonical SHAと完全一致。",
+      "fontLedger": "job.registryBindings.fontLedger→同candidate trustのfontAssets実canonical SHA。元font声明/実font SHA検査維持。",
+      "sourcePackage": "horizontalStyleInput.captionLayoutPolicy/resolvedStyle=26/2、styleBindingsは候補閉包、全体promptInput.styleLimitsも26/2。",
+      "admission": "assembleAdoptedCaptionCoreのSTYLE_LIMIT_MISMATCH、appearance unique state、正式renderer font/material/code/runtime/bytes/receipt/QC検査を維持。"
+    },
+    "candidateFiles": [
+      "preset-registry.json",
+      "preset-validation-index.json",
+      "trusted-registry-bindings.json",
+      "trust.json"
+    ],
+    "materialIndex": "元empty material-validation-indexの実bindingを再利用。candidate閉包が同ディレクトリを要求する箇所は小JSON同内容投影を新SHAで記録。",
+    "fixedResolverConstraint": {
+      "file": "evals/clip_composition/presentation_output_style_resolver_v001.ts",
+      "function": "validateLandscapeTrustArtifacts / resolvePresentationOutputStyleV001",
+      "fixedRootFile": "evals/clip_composition/presentation_renderer_plan_v002.mjs",
+      "fixedRootCanonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2",
+      "reason": "固定trust canonical SHAと固定trust pathを検査するため、candidate trustを入れるだけではこの一般resolverは通らない。",
+      "recommendedRoute": "今回は既存Digest Core assemblerの明示candidate style contextに限定する。adapterは固定baselineの実bindingと許可された差分/plan manifest/製造recordを検証し、一件だけのcandidate contextを作る。一般style resolverは呼ばず、その成功を主張しない。",
+      "permission": "一般root変更・security gate緩和ではなく、明示scope束縛の候補を既存formal admissionへ渡す個別許可が必要。相談役がこの境界を許可できないなら作用前に具体的差分を返す。"
+    },
+    "globalRegistryTrustDefaultMutation": false,
+    "outlineChoice": null,
+    "humanStyleAdopted": false
+  },
+  "manufacturingProposal": {
+    "outputRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+    "created": false,
+    "material": {
+      "logicalBinding": {
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/source-media.mp4",
+        "fileSha256": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+      },
+      "resolvedPhysicalPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+      "sourceBytes": 4803412827,
+      "sourceContentReadInThisScope": false
+    },
+    "normalJobOrigin": {
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/manufacturing-values.json",
+      "physicalBinding": {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--manufacturing-values.json",
+        "fileSha256": "20b2341771f33183b0251390e688e9b35a52ca53428d0225bdfc01d7cee89947",
+        "sizeBytes": 884
+      },
+      "consumerMeaning": "派生製造jobの根拠。sourceArtifact.pathのみ検証済み実pathへ解決、新jobID/output/実SHAを別成果へ束縛",
+      "producerRequestId": "agent_wGiuVx5QiJvjGUxEW8Qxa"
+    },
+    "jobProjection": "sourceArtifact.pathは実path、出力rootはこの新root、新jobIdを別jobに束縛。旧job/state/owner/approved purposeは不変。",
+    "authorization": {
+      "recordId": null,
+      "status": "not-approved; real future manufacturing record required",
+      "bindTo": [
+        "accepted reflow manifest SHA",
+        "normal plan/consumer/9range source and clock bindings",
+        "single material SHA",
+        "candidate style actual bindings",
+        "new output root",
+        "enumerated effects",
+        "explicit capacity and stop authority"
+      ]
+    },
+    "baseFunctions": [
+      "buildAdoptedBaseMediaV001",
+      "projectAdoptedMediaRangesV001",
+      "buildPresentationBaseMediaVideoV001",
+      "buildPresentationBaseMediaAudioV001",
+      "muxPresentationBaseMediaV001",
+      "inspectPresentationBaseMediaOutputV001",
+      "timelineQc/validateHashGraph"
+    ],
+    "expectedClock": {
+      "frameCount": 27691,
+      "audioSamples": 40705770,
+      "sourceClock": "saved60/1 decoded722162 offset0; must compare actual reinspection",
+      "sourceRanges": [
+        {
+          "segmentId": "segment-0001",
+          "sourceStartMs": 159770,
+          "sourceEndMs": 213077,
+          "sourceStartFrame30": 4793,
+          "sourceEndFrame30": 6392,
+          "outputStartFrame": 0,
+          "outputEndFrame": 1599,
+          "audioSamples": {
+            "sourceStart": 7045710,
+            "sourceEnd": 9396240,
+            "outputStart": 0,
+            "outputEnd": 2350530
+          }
+        },
+        {
+          "segmentId": "segment-0002",
+          "sourceStartMs": 213077,
+          "sourceEndMs": 327084,
+          "sourceStartFrame30": 6392,
+          "sourceEndFrame30": 9813,
+          "outputStartFrame": 1599,
+          "outputEndFrame": 5020,
+          "audioSamples": {
+            "sourceStart": 9396240,
+            "sourceEnd": 14425110,
+            "outputStart": 2350530,
+            "outputEnd": 7379400
+          }
+        },
+        {
+          "segmentId": "segment-0003",
+          "sourceStartMs": 355551,
+          "sourceEndMs": 379620,
+          "sourceStartFrame30": 10667,
+          "sourceEndFrame30": 11389,
+          "outputStartFrame": 5020,
+          "outputEndFrame": 5742,
+          "audioSamples": {
+            "sourceStart": 15680490,
+            "sourceEnd": 16741830,
+            "outputStart": 7379400,
+            "outputEnd": 8440740
+          }
+        },
+        {
+          "segmentId": "segment-0004",
+          "sourceStartMs": 1993090,
+          "sourceEndMs": 2256057,
+          "sourceStartFrame30": 59793,
+          "sourceEndFrame30": 67682,
+          "outputStartFrame": 5742,
+          "outputEndFrame": 13631,
+          "audioSamples": {
+            "sourceStart": 87895710,
+            "sourceEnd": 99492540,
+            "outputStart": 8440740,
+            "outputEnd": 20037570
+          }
+        },
+        {
+          "segmentId": "segment-0005",
+          "sourceStartMs": 5468987,
+          "sourceEndMs": 5675926,
+          "sourceStartFrame30": 164070,
+          "sourceEndFrame30": 170278,
+          "outputStartFrame": 13631,
+          "outputEndFrame": 19839,
+          "audioSamples": {
+            "sourceStart": 241182900,
+            "sourceEnd": 250308660,
+            "outputStart": 20037570,
+            "outputEnd": 29163330
+          }
+        },
+        {
+          "segmentId": "segment-0006",
+          "sourceStartMs": 6394302,
+          "sourceEndMs": 6449886,
+          "sourceStartFrame30": 191829,
+          "sourceEndFrame30": 193497,
+          "outputStartFrame": 19839,
+          "outputEndFrame": 21507,
+          "audioSamples": {
+            "sourceStart": 281988630,
+            "sourceEnd": 284440590,
+            "outputStart": 29163330,
+            "outputEnd": 31615290
+          }
+        },
+        {
+          "segmentId": "segment-0007",
+          "sourceStartMs": 7566646,
+          "sourceEndMs": 7620361,
+          "sourceStartFrame30": 226999,
+          "sourceEndFrame30": 228611,
+          "outputStartFrame": 21507,
+          "outputEndFrame": 23119,
+          "audioSamples": {
+            "sourceStart": 333688530,
+            "sourceEnd": 336058170,
+            "outputStart": 31615290,
+            "outputEnd": 33984930
+          }
+        },
+        {
+          "segmentId": "segment-0008",
+          "sourceStartMs": 7662774,
+          "sourceEndMs": 7751288,
+          "sourceStartFrame30": 229883,
+          "sourceEndFrame30": 232539,
+          "outputStartFrame": 23119,
+          "outputEndFrame": 25775,
+          "audioSamples": {
+            "sourceStart": 337928010,
+            "sourceEnd": 341832330,
+            "outputStart": 33984930,
+            "outputEnd": 37889250
+          }
+        },
+        {
+          "segmentId": "segment-0009",
+          "sourceStartMs": 7759082,
+          "sourceEndMs": 7822947,
+          "sourceStartFrame30": 232772,
+          "sourceEndFrame30": 234688,
+          "outputStartFrame": 25775,
+          "outputEndFrame": 27691,
+          "audioSamples": {
+            "sourceStart": 342174840,
+            "sourceEnd": 344991360,
+            "outputStart": 37889250,
+            "outputEnd": 40705770
+          }
+        }
+      ]
+    },
+    "fourOutputs": [
+      {
+        "role": "baseMedia",
+        "proposedPath": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+        "bindingStatus": "未生成・実行後の実bytes/検査結果へ束縛",
+        "fileSha256": null
+      },
+      {
+        "role": "timeline",
+        "proposedPath": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+        "bindingStatus": "未生成・実行後の実bytes/検査結果へ束縛",
+        "fileSha256": null
+      },
+      {
+        "role": "generationManifest",
+        "proposedPath": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+        "bindingStatus": "未生成・実行後の実bytes/検査結果へ束縛",
+        "fileSha256": null
+      },
+      {
+        "role": "validationReceipt",
+        "proposedPath": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+        "bindingStatus": "未生成・実行後の実bytes/検査結果へ束縛",
+        "fileSha256": null
+      }
+    ],
+    "effects": [
+      "登録済みsource媒体read/hash及び今回workへのsource snapshot一つcopy/chmod/hash",
+      "ffprobe/ffmpegでsource再inspection、出力のinspection/decoded QC",
+      "video-only H264、全source-grid f32le、保持区間encode-input f32le、AAC mux背景MP4生成",
+      "実manifest/timeline/hash graph/技術receipt保存",
+      "成功した今回base-media-workだけrm。旧成果削除なし。失敗workは証拠保持して追加作用停止",
+      "font binaryとtool/runtime/codeの実SHA検査、243overlayPNG/repeat/line-mask/glyph/出力検査",
+      "低メモリ順次合成でNormal候補MP4一つ、既存QCに必要な代表frame/omission等の新一時物",
+      "既存原子的publicationと自分のprocess group監視/終了"
+    ],
+    "noNewContentDecisions": [
+      "same7adoption/9ranges/243cues",
+      "straight-cut only",
+      "source audio only",
+      "identity crop",
+      "Normal同一technical style一件",
+      "separator/up/color/emphasis/motionを新規選択しない"
+    ],
+    "unconnectedEffectsRemain": true,
+    "old9m47BackgroundAnd307PngReused": false
+  },
+  "lowMemoryProposal": {
+    "currentLimitations": [
+      "partitionFramesV001が旧17613frameを上限にする",
+      "producerArgumentsV001のrenderRange.fullFrameCountが旧FULL_FRAMESに固定",
+      "runLowMemoryCompositeV001が旧executionRecordsV001とloadExecutionInputのrows/307状態/旧backgroundへ依存",
+      "通常renderer file callerからexecuteDrawへは低メモリcompositor指定が伝わらない。executeDraw capability置換で全描画/QCを複製しない。"
+    ],
+    "reuse": [
+      "buildPresentationCompositeArgumentsV001の既存overlay graph",
+      "有限frame partition、未使用PNG input剪定、numeric index置換のみ",
+      "sequential producer+continuous encoder/pipe backpressure/AAC copy",
+      "既存PNG/glyph/preflight/output/native QCと原子的保存"
+    ],
+    "requiredDifference": "旧full loaderを新計画へ偽装せず、fullFrameCountと既存formal overlayRecords/plan/base/audioを明示入力に取る独立Core entryへ既存合成処理を抽出。通常rendererのcompose直前だけにscope束縛compositorを伝える小さいhookを追加し、前後の検査/receipt/publicationは既存を使う。",
+    "rangeUnit": "既存210frame単位を再利用する技術案。新上限として制定しない。",
+    "maximumConcurrentCompositeProcesses": 2,
+    "rawYuvTransitBytes": 86130086400,
+    "rawYuvDiskBytes": 0,
+    "rawYuvQualification": "pipe合成を採用した場合の確定計算。背景をraw NUTへ変換する案は採らず、完了背景MP4を入力する。",
+    "frozenChangeNeedsExplicitApproval": true,
+    "rendererQcRedesign": false
+  },
+  "storagePlan": {
+    "observation": {
+      "observedAt": "2026-10-02T20:03:59.334588+00:00",
+      "method": "lstat/stat/realpath/statvfs only; no media open/hash/copy",
+      "knownPlanSource": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+        "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+        "sizeBytes": 4803412827,
+        "device": 16777234,
+        "isRegularFile": true,
+        "isSymbolicLink": false,
+        "declaredSha256NotRehashed": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4"
+      },
+      "originalSource": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+        "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+        "sizeBytes": 4803412827,
+        "device": 16777234,
+        "isRegularFile": true,
+        "isSymbolicLink": false
+      },
+      "outputExistingAncestor": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts",
+        "realPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts",
+        "device": 16777234,
+        "availableBytes": 13411098624,
+        "blockBytes": 4096,
+        "availableBlocks": 3274194
+      },
+      "candidateOutputRootCreated": false,
+      "externalVolumesSearched": false
+    },
+    "units": "bytes; logical file sizes, not APFS physical allocation guarantee",
+    "knownNewMediaBeforeCompressedOutputs": {
+      "sourceSnapshot": 4803412827,
+      "canonicalSourceGrid": 4246331392,
+      "encodePcm": 325646160,
+      "sum": 9375390379,
+      "basis": "saved530791424sample/2ch/f32le(4byte) and40705770 outputsample. Actual reinspection can differ; stop on mismatch."
+    },
+    "objects": [
+      {
+        "artifact": "source snapshot",
+        "producer": "buildAdoptedBaseMediaV001 copyFile",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media-work/source-snapshot.mp4",
+        "bytes": 4803412827,
+        "certainty": "確定metadata値",
+        "lifetime": "base hash graph/QC成功まで",
+        "concurrentWith": "video-only/source-grid/encodePCM/base MP4",
+        "cleanup": "今回workのみ成功後rm; failed work preserved"
+      },
+      {
+        "artifact": "source-grid f32le",
+        "producer": "buildPresentationBaseMediaAudioV001",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media-work/source-grid.f32le",
+        "bytes": 4246331392,
+        "certainty": "保存sample値に基づく確定計算、再inspection未実施",
+        "lifetime": "base QC完了まで",
+        "concurrentWith": "snapshot/video-only/encodePCM/base MP4",
+        "cleanup": "同work成功後rm"
+      },
+      {
+        "artifact": "encode-input f32le",
+        "producer": "同audio builder",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media-work/encode-input.f32le",
+        "bytes": 325646160,
+        "certainty": "保存sample値に基づく確定計算",
+        "lifetime": "mux/output audio QCまで",
+        "concurrentWith": "同上",
+        "cleanup": "同work成功後rm"
+      },
+      {
+        "artifact": "video-only.mp4",
+        "producer": "既存H264 CRF20 video builder",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media-work/video-only.mp4",
+        "bytes": null,
+        "certainty": "可変圧縮のため未確認; 元媒体sizeの倍率で捏造しない",
+        "lifetime": "base QC完了まで",
+        "concurrentWith": "snapshot/grid/PCM/base MP4",
+        "cleanup": "同work成功後rm"
+      },
+      {
+        "artifact": "completed background",
+        "producer": "muxPresentationBaseMediaV001",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+        "bytes": null,
+        "certainty": "未製造",
+        "lifetime": "candidate/control/QC再読のため保持",
+        "concurrentWith": "base一時物→PNG/candidate/QC",
+        "cleanup": "正式成果扱いで自動削除しない"
+      },
+      {
+        "artifact": "overlay PNG / repeat / line masks / calibration / QC frames",
+        "producer": "既存executeValidatedPresentationDrawAndQcV001とnative inspector",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/render のstaging/scratch/overlays",
+        "bytes": null,
+        "certainty": "画像圧縮/必要状態数と既存QC実作用のため未確認。243caption=必ず243fileだけとはしない",
+        "lifetime": "既存determinism/glyph/QC/checkpointまで、published overlays保持",
+        "concurrentWith": "完成背景/candidate MP4",
+        "cleanup": "既存新work整理条件のみ;旧307PNG不触"
+      },
+      {
+        "artifact": "initial Normal candidate MP4",
+        "producer": "有限低メモリcompositor/既存正式publication",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/render",
+        "bytes": null,
+        "certainty": "未製造; H264 CRF20/AACcopy",
+        "lifetime": "候補確認/保存再読用に保持",
+        "concurrentWith": "background/PNG/QC scratch",
+        "cleanup": "削除しない"
+      },
+      {
+        "artifact": "必要な再現/omission QC媒体",
+        "producer": "既存QC代表frame/omission/repeat",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/render scratch",
+        "bytes": null,
+        "certainty": "QC実装が要求する作用を保持。独立二本目全編を当然には作らない",
+        "lifetime": "該当QC完了まで",
+        "concurrentWith": "初回candidate/background/PNG",
+        "cleanup": "今回生成一時物だけ既存条件で整理"
+      }
+    ],
+    "peakExpression": "max(snapshot+grid+encodePCM+videoOnly+baseMP4, baseMP4+publishedPNG+repeat/masks/QCscratch+candidateMP4) + smallJSON/logs。未知圧縮bytesを含むため合計未確定。",
+    "comparison": "現在空きと既知新媒体合計の差だけでは全編開始を合格にしない。旧2×source試験条件は今回製造へ適用しない。",
+    "existingMonitorReference": {
+      "startBytes": 50000000000,
+      "reserveBytes": 12000000000,
+      "treeRssBytes": 17179869184,
+      "memoryPressureLevelRequired": 1,
+      "sampleIntervalSeconds": 1,
+      "source": "original-resolution-full-supervisor.py decision",
+      "additionalAllocationCheck": "availableBytes >= reserveBytes + nextUnitBytes; available<=reserve/RSS>=limit/pressure!=1 reject",
+      "shutdown": "v002 actualPGID全member確認、SIGTERM→既存5sec→SIGKILL/残存確認",
+      "authority": "旧same-material run限定。今回へ自動適用も緩和もしない。推奨は同安全条件を今回の一件に明示再承認。",
+      "currentWouldSatisfyOld50GbStart": false,
+      "currentCanPreserveOld12GbReserveEvenBeforeVideo": false
+    },
+    "capacityRequest": "製造許可時、出力deviceと開始/ reserve/次unit条件のauthorityを同scopeへ束縛。現在device/空きでは既存50GB開始案を満たさないため製造開始不可。SSD推測/探索/削除/条件緩和はせず、設置先・十分な空きが確定するまで媒体作用停止。",
+    "resumePoints": [
+      "small-input qualification complete→media作用前",
+      "background four real refs/QC complete→caption formal assembly",
+      "formal inputs/style admission/PNG preflight complete→candidate compositor body",
+      "completed MP4/QC/pub→read-only consumer verification"
+    ],
+    "failedEffects": "違反/参照不一致/監視通信断/worker失敗時は新owned group停止、実partial/log/checkpoint保全。再開には同許可か明示相談役判断、勝手な旧run-resume偽装なし。"
+  },
+  "implementationRequest": {
+    "status": "proposal only; no files implemented",
+    "technicalProductPaths": [
+      {
+        "path": "runner/src/digest-formal-handoff-v001.ts",
+        "action": "new one-plan adapter",
+        "functions": [
+          "readDigestFormalHandoffInputsV001",
+          "prepareDigestFormalCandidateCoreV001",
+          "runDigestFormalCandidateV001"
+        ],
+        "scope": "既存公開reader/resolver/検査token/assembler/manufacture/正式renderer callerを使う。scope-bound candidate来歴と実許可の読取。通常API/queue契約なし。"
+      },
+      {
+        "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+        "action": "既存producer/pipe処理を明示frameCount/overlayRecords入力に抽出",
+        "functions": [
+          "partitionFramesV001",
+          "producerArgumentsV001",
+          "runLowMemoryCompositeV001"
+        ],
+        "scope": "旧fixed wrapperの参照/旧結果SHAは保持。新一計画Core呼出のfreeze解除対象、low-memory算法再設計なし。"
+      },
+      {
+        "path": "evals/clip_composition/render_presentation_v002.mjs",
+        "action": "compose段だけの明示compositor hook",
+        "functions": [
+          "executeValidatedPresentationDrawAndQcV001"
+        ],
+        "scope": "PNG/determinism/glyph/preflight/output/native QC/commitそのまま。実施前に凍結code変更の個別許可が要る。"
+      },
+      {
+        "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+        "action": "file callerから当該scope-bound compositorを伝達",
+        "functions": [
+          "runPresentationInstructionRendererJobFileV002",
+          "executePresentationInstructionRendererJobV002"
+        ],
+        "scope": "real file reads/font/runtime/admission/receipt/line-layout/QC/publication維持。凍結code変更の個別許可。"
+      }
+    ],
+    "setupPath": {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "action": "new plan start permit branchを明示して既存observe_group/shutdown/decisionと通信を利用",
+      "scope": "旧same-run resume permitへ新計画を偽装しない。旧数値を変えず今回scopeへのauthorityを検証。個別設営承認が必要。"
+    },
+    "pathCountProposal": {
+      "technical": 4,
+      "setup": 1,
+      "notAnApprovedPathLimit": true
+    },
+    "history": {
+      "currentProduct": 6,
+      "currentSetup": 29,
+      "newAdapterIsNewImplementationNotOldDefectReset": true,
+      "additionalFixesNotApplied": true,
+      "setup30NotSelfAuthorized": true,
+      "futureCountAssignment": "相談役が次scope発行時に個別指定。一般上限・旧履歴を変更しない。"
+    },
+    "keepFrozen": [
+      "adopted_media_manufacturing_v001.mts",
+      "caption/source/meaning/cue/instruction validators",
+      "presentation_base_media_build_v003.mjs",
+      "presentation_base_media_timeline_v004.mjs",
+      "presentation_output_style_resolver_v001.ts",
+      "presentation_renderer_plan_v002.mjs",
+      "presentation_renderer_admission_receipt_v002.mjs",
+      "existingSkill/normal API/queue/builder/approval gates",
+      "original registry/trust/default/font declarations"
+    ],
+    "shaConsequences": "変更するrenderer2pathの実SHAは新rendererImplementationBindings/candidate trust closureへ実値で束縛。旧manifest/trust/codeSHAを付替えない。変更しない旧成果は保持。",
+    "minimumVerification": [
+      "新adapterだけのID/text/9range/clock/approvalOwner/reference/manifest相互対応を既存validatorで検査; 内容再判断なし",
+      "candidate style26/2=appearance profile26/2及びbaselineとの差分とfont declaration、非許可delta拒否",
+      "新compositorの27691frame連続被覆・既存graphとの差はPNG input numeric indexだけ、境界値・range逸脱の対象検査",
+      "新monitor permitの別plan/root/command/実implementation SHA拒否と実group停止確認",
+      "関連runner/対象type-check、媒体作用なしのJSON保存再読一回; 旧52/9/15/19/4/111/v005/243判断/15分レビュー再走なし",
+      "製造許可後だけ背景実4refs/実glyph/出力frames/audio/既存QC/admission/pub/別process再読。失敗すれば人間品質pendingのまま"
+    ],
+    "scopeRisk": "正式file callerに低メモリ接続口がなく、2凍結renderer pathの限定配線が必要。これを今回文書の許可で実装できるとはしない。"
+  },
+  "decisionsForAdvisor": {
+    "recommendedNext": "まず非媒体の限定adapter/parameterized compositorとscope-bound呼出/監視配線の実装scopeを判断する。製造は実許可recordと容量authorityが揃うまで着工しない。",
+    "technicalDecision": "上記4 technical path+1 setup pathの局所接続、一般style resolverを変更せず一計画candidate contextを正式Coreへ通す境界、凍結2renderer pathの限定配線を許可するか。",
+    "humanOnly": "一計画の初回Normal候補製造・source再inspection/copy/音声/PNG/glyph/出力QC/今回一時work整理、144px/A26/2候補専用trust、許可されたdevice/容量条件。最終縁選択/品質採用/一般本適用/公開は別。",
+    "oneQuestionDraft": "保存済み一素材の15:23計画と243字幕を、144px・A8/4・26/2の技術候補としてNormal動画一件へ接続し、実制作に必要な素材一時コピー・再解析・音声/字幕画像生成・技術検査・今回一時物の整理を、出力先と安全容量条件が確定してから行う許可を出しますか（正式採用・公開・旧成果削除は含みません）。",
+    "currentAuthorizationRecordId": null,
+    "humanQuestionSentByCodex": false,
+    "generalPD01StillUnapproved": true,
+    "videoPD02StillUnapproved": true
+  },
+  "currentScopeEffects": {
+    "smallJsonAndCodeReadHash": true,
+    "knownPathMetadataOnly": true,
+    "docsPaths": 4,
+    "productChanges": 0,
+    "setupChanges": 0,
+    "mediaOpenHashCopyPut": 0,
+    "fontBinaryRead": 0,
+    "inspection": 0,
+    "render": 0,
+    "api": 0,
+    "cost": 0,
+    "externalVolumeSearch": 0,
+    "deletion": 0,
+    "testsOrHelpersRerun": 0
+  },
+  "verification": {
+    "standardSerializerUsed": true,
+    "syntaxReadback": "standard json.loads successful; selected present small references SHA observed; media references metadata/declaration only",
+    "oldReferenceIntegrity": "selected small JSON/code fileSha256 observed; no global old sweep, no media rehash",
+    "candidateQualificationRerun": false,
+    "manufacturingJobGenerated": false,
+    "checkedAt": "2026-10-02T20:07:05.901305+00:00",
+    "presentSmallReferenceCount": 74,
+    "gitDiffCheck": "exit0",
+    "ownActiveWorkProcesses": 0,
+    "otherGitMutationObserved": false,
+    "remoteBeforeCommit": "HEAD=origin/main=b4a497dc942a7b68990b7ef768a429600a944f08",
+    "checksAreDocumentChecksNotMediaOrCandidateRerun": true
+  },
+  "unresolved": [
+    "一般style resolverは固定trust root/pathのためcandidate trustを拒否する。提案する限定Core candidate入口の個別scope許可と厳密delta束縛は未実装/未試験。",
+    "保存意味schemaをzev-meaning専用sourcePackage CLIへ渡すことはできない。既存Digest pure validator/assemblerの対象接続確認は次の許可scopeで行う。",
+    "通常renderer file callerに低メモリcompositor指定がなく、2凍結pathの最小配線を相談役判断へ返す。",
+    "圧縮video/base/PNG/QC/candidate bytesは未生成でピーク未確定。現在deviceの空きでは旧50GB開始安全案を満たさない。",
+    "正式製造record/output device/capacity authority未提供。recordId/SHAを捏造しない。",
+    "実glyph/映像音声/見心地未確認、演出未接続、outlineChoice=null/PD01/PD02/pendingを保持。"
+  ]
+}
