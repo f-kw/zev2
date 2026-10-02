@@ -6,56 +6,58 @@
 
 プロジェクトのZEV_START_HERE.mdを全文読み、GitHub mainの現在HEADと同一SHAの[HANDOVER_INDEX](HANDOVER_INDEX.md)、現行指示を読む。保存・発行・受領・実行・技術受理・人間採用を区別する。
 
-前件の指示・初回停止・設営17・実走checkpointを含む更新前全文は[7bb5de02固定版](https://github.com/f-kw/zev2/blob/7bb5de02a59ab78cd7aae6757dff33b6b20f0b88/docs/CURRENT_GOAL.md)へ不変保持する。v005の設営／容量／再開履歴は[ccd907a5固定版](https://github.com/f-kw/zev2/blob/ccd907a52d15b65083557110700222d1b072c44f/docs/CURRENT_GOAL.md)から辿る。過去の未完了・次の試験を現在へ戻さない。
+更新前全文と入力対応checkpointは[4556e389固定版](https://github.com/f-kw/zev2/blob/4556e389fc6cb2a9933f98bd5d83716324ef8b01/docs/CURRENT_GOAL.md)に不変保持。実判断運転・設営17は7bb5de02、v005の履歴はccd907a5固定版から辿る。過去の未完了・次の試験を現在へ戻さない。
 
-## 2. 完了・今回の監査受理
+## 2. 完了・監査受理
 
 **v005通常キュー接続は技術完了。** 成果7c8f34ceに対する[親v005 §13](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)のacceptを維持し、再検証工事へ戻さない。
 
-**9の後続「通常依頼から実判断付きDigest計画を一件保存する」も、7bb5de02a59ab78cd7aae6757dff33b6b20f0b88で技術完了として相談役accept。** 判定は[字幕演出入口対応指示§1](work-orders/ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md)に保存、commit 321fa0fb8aedd503497870c72f7ed9e1f12750ec。
+**通常依頼から実判断付きDigest計画一件も7bb5de02でaccept。** 12候補・7採用・9保持、keep3,613/drop3,460、通常4工程succeeded、27,691frame/40,705,770sample、別process再読exit0。既存15:23案の区間・順序・時計は維持し、心霊回帰会話を正式比較へ追加した。実AIの未見素材汎化・映像音声・人間品質とは別。
 
-固定purposeが通常承認・4命令・3要求へ全文到達。Codexの今回の段階別実回答で12候補・7採用・9保持を保存し、7,073親断片をkeep3,613/drop3,460で被覆。既存15:23案の区間と時計を維持し、心霊回帰1364–1370を比較候補へ追加して不採用理由を保存。通常4工程succeeded、時計passed（27,691frame・40,705,770sample）、別process reader exit0、API/store一致・state不変。
+**字幕演出入口の入力対応は4556e389fc6cb2a9933f98bd5d83716324ef8b01で今回accept。** 9区間・3,613断片・18項目の供給元/不足/再利用条件・最小案を保存。設営18補助exit0、小診断一回再読bytes一致・元state不変。今回の監査はreport/mapping/小補助/現行関数/5file差分の照合であり、Macの全runtime再実行やpresentation consumer受理ではない。
 
-監査はGitHub上のreport/evidence/補助/差分の照合であり、相談役がMacで全runtimeや媒体を直接再実行・再観測したものではない。内容品質向上・未見素材汎化・完成動画・人間採用には広げない。
+判定と次指示は[字幕判断入力の準備接続v001](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)§1、保存34be96102a430b475e7d2bf4b58583bd92110ede。
 
-累積製品5／設営18。実判断運転完了時の製品5／設営17、初回f1d71624の親directory不足と設営17の一行修正履歴を保持。設営18は今回正本§6による小JSON対応補助の個別承認。15分初稿レビュー、構成改善v001の実案・局所検証、一件後修正/Reset、旧9:47案1080p低メモリ生成も完了範囲を維持する。
+15分初稿レビュー、構成改善v001の実案・局所検証、一件後修正/Reset、旧9:47案1080p低メモリ製造は既存完了範囲を保持する。
 
-## 3. 次の一件 — 字幕演出入口の入力対応（読取準備のみ）
+## 3. 次の一件 — 字幕判断入力の準備接続
 
-正本：[ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md](work-orders/ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md)。kawafmm承認済みID9主線と「終わったら次に進んで」に基づく限定の読取準備。字幕・演出の新規判断／生成、動画、本番工事の着工許可ではない。
+**通常の保存計画から意味atomと区間別表示要求9件を組み立て、保存して再構築する。回答・製造はしない。**
 
-同じCodex2で保存済み9区間と既存字幕・演出入力を対応付け、必須fieldの供給元・未製造／未接続・再利用条件・最小接続案を一つにする。静的に確認できることと実consumerに受理されたことを分ける。仮の背景・timeline・receipt・人間承認で合格を作らない。
+正本：[ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)。kawafmm承認済みID9主線と「終わったら次に進んで」に基づく、今回明示した準備接続だけ。同じCodex2で返信全文を受領して続行する。
 
-書込みは docs/reports/digest-presentation-input-mapping-20261002/ のREADME.md、mapping.json、必要な場合だけmap-inputs.mtsと新しい小JSON。補助を作成・実行する場合だけ設営18として個別計上、文書のみなら適用済みにしない。一般上限・履歴・強制停止・自己承認権は不変。
+提案から一箇所変更：旧adopted_media_manufacturing_v001.mtsを直接編集しない。旧live SHAを保つため、本文/group/要求生成の必要な純粋計算だけを新規adopted_caption_judgment_inputs_v001.mtsへ限定派生し、新規runner/src/digest-caption-input-preparation-v001.tsから呼ぶ。旧builderを新関数へ切替える変更も今回しない。既存validator/owner/resolverは再利用し、reader/製造の大量複製はしない。
 
-元MP4/PNGのread/hash/copy/PUT、通常backend/runner、既存4工程・再読の再実行、内容再選定、表示分割・強調・配色の新回答、ffprobe/STT/inspection/render/native QCは行わない。保存STT・共通発話・採否保持・時計・style等の小JSONと実装を読む。対応不足が確定していることはこの調査の失敗ではない。
+元入力はdraft_eCg3g-IMIzEWMtJuMyJWBの受理済みstate/plan/execution/採否保持/STT/共通発話/時計。正規依存鎖と小JSONの実SHAを確認する。旧purpose・承認snapshotの「今回は字幕を作らない」は不変。本書の準備scopeを新manifestに別束縛し、旧製造許可へ偽装しない。
 
-終点は、9区間の文字と時計、既存関数の引数／field、必要な未製造物・許可、旧成果再利用条件と最小の次接続差分が具体化されること。今回は製品adapterを実装しない。完了済み試験を増やして再監査しない。
+style/taskDescriptionはmappingでSHA確認済みの旧source templateのpromptInputを準備用技術入力に限定して使用する。36論理幅/2行/既存文字幅規則は今回の参照値であり、144px正式style・縁選択を確定するものではない。将来変更は新要求版で扱う。
 
-**Codex2実質checkpoint：専用Edgeで前件acceptと次指示の返信全文を受領、main 9acea7e2へ同期。入力対応記録を作成・検証済み、相談役監査は未受領。** [今回report](reports/digest-presentation-input-mapping-20261002/README.md)とmappingに9区間・3613本文断片・18入力項目の供給元と不足を保存。個別承認の設営18として小JSON補助を一回実行exit0、新しい診断約1.01MiBを一回再読、bytes一致・元state不変。旧attempt・媒体は書き換えていない。
+9保持区間をcandidateIdだけでまとめずsegmentId/順序/断片列で扱う。3,613保持atomと境界候補を決定的に作り、drop3,460や区間間の空白を復活させない。表示回答・cue/行末・各atom出力時計・演出は作らない。
 
-旧7B選択断片2483件のうち共通2435、旧末尾48は今回除外、今回1178件は旧7Bにない。旧7Aの2330共通断片は本文/元ms/共通発話IDが一致するが、共通発話artifact bytesは異なる。字幕・回答・18色・82frameアップを移植していない。
+新保存先：runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001/。元attemptへは書かない。意味入力・9要求・元参照/style/実装/今回scopeのmanifestだけを保存し、通常queueの新成果物登録やcompleteにしない。
 
-背景4出力・製造receipt、今回表示/演出回答、正式style・許可、通常store用の字幕保存境界は未接続。次の差分案は既存の本文準備を完成背景束縛から分離し、通常resolverで意味入力と9表示要求へ渡す二path案だけ。今回は提案保存であり実装していない。製品code/通常process/consumer/媒体read/hash/copy/PUT/API/renderは0。presentation=not-connected等は維持する。
+確認は今回入力の実接続、純粋計算の旧正常例との同等性、今回境界の最小拒否、別process再構築一回に限定。既存4工程・全拒否suite・動画QCを繰り返さない。完成source package・背景4参照・renderer jobは未生成のまま残す。
+
+累積製品修正5／設営18を保持。今回の新2path初回実装は明示許可の接続追加として区別し、製品変更0とは報告しない。小試験補助作成/適用時だけ個別承認の設営19を計上する。一般上限・強制停止・旧履歴は不変。
 
 ## 4. 容量と保全
 
-本人承認の旧8コピー35.79GiB削除、33旧参照の再作成要という履歴を維持。旧runtime全体の即時再読を認定しない。006/007の正実走と保存再読は別の完了実績。
+本人承認の旧8コピー35.79GiB削除、33旧参照の再作成要という履歴を維持。旧runtime全体の即時再読を認定しない。006/007と実判断運転の正実走・保存再読は別の完了実績。
 
-前件の追加媒体は通常prepareのsource-media.mp4一つ（4,803,412,827 bytes）。作用直前17,754,804,224 bytes、終了時12,933,283,840 bytesは過去観測で、現在空きではない。次は小JSONのみで新コピー・容量整理・SSD操作・追加削除は許可しない。
+実判断運転の追加媒体は通常prepareの一つ4,803,412,827 bytes。終了時空き12,933,283,840 bytesは過去観測。今回も小JSONだけで、新媒体read/hash/copy/PUT・旧copy復元・容量整理・SSD操作・追加削除を許可しない。現在空き・Mac processは相談役が直接観測していない。
 
 ## 5. 承認外・人間回答
 
-ID9-PD-01一般本適用、ID9-PD-02動画許可、旧業務state移行、本番、未見素材の実AI品質、人間品質採用、公開は別事項。presentation=not-connected／executionPermission=not-approved／humanQuality=pending／outlineChoice=nullを維持する。
+presentation=not-connected／executionPermission=not-approved／humanQuality=pending／outlineChoice=null。ID9-PD-01一般本適用、ID9-PD-02動画許可、旧業務state移行、本番、未見素材の実AI品質、人間採用、公開は未承認。
 
-144pxと「読む必要がある文章でなかったら」の条件付き分割の肯定、縁B21論理不合格、色・アップ・旧修正版7点等は[人間台帳](HUMAN_REVIEW_PENDING.md)と一次回答へ保持。新しいレビューや全編再視聴を今回の開始条件にしない。
+144pxと「読む必要がある文章でなかったら」の条件付き分割、水色肯定、縁B21論理不合格、他色/強調・アップ・修正版7点・鬼武者Q3-2は[人間台帳](HUMAN_REVIEW_PENDING.md)と一次回答へ保持。済んだレビューを再要求しない。旧字幕/307状態/18色/82frameアップを一括移植しない。
 
-前の未調整案を本人が停止した事実は保持し、当時の貼付を承認に遡及変換しない。その後の新指示7e0de670を受領した実走だけを今回acceptした。
+前の未調整案停止を保持し、当時の貼付を承認に遡及変換しない。現行の明示指示と実受領を区別する。
 
-## 6. 起動・問い合わせ・実行状態
+## 6. 起動・問い合わせ・Git
 
-初回は相談役の一つのコピー可能な指示をkawafmmが手貼りする。開始後はCodex2専用Edgeから同じZEV Build Loopへ直接送り、返信生成完了・全文読了まで受領して具体的指示の範囲を続行する。本人を通常の中継役へ戻さない。
+初回は本人手貼り。開始後はCodex2専用Edgeから同じZEV Build Loopへ直接送信し、返信生成完了・全文読了まで受領する。本人を通常の中継役へ戻さない。
 
-前件の通常runner/backend/reader残存0はCodex報告・保存証拠として受領。Macの現processは相談役が直接観測していない。**前件accept発行済み・全文受領済み。入力対応指示は受領し、設営18適用・小対応検証を完了。今回の記録保存・通常commit/push・直接報告へ進む。監査受理は未認定。**
+入力対応は今回accept発行済み。新準備接続の受領・実装・設営19適用・完成は未確認。前件残存0はCodex報告として受領し、現在の実稼働と混同しない。
 
-Gitはmain、担当fileだけ明示stage、他者変更保全、stage/commit/pushは直列化。Codex1起動・受理だけの再commitは不要。次の実装・製造は今回の対応準備完了から自動で開始しない。
+main、担当fileのみ明示stage、他者変更保全、stage/commit/push直列化。Codex1起動・受理だけの再commitは不要。今回完了から字幕回答・演出・動画工事へ自動着工しない。
