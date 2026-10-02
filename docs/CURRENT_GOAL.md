@@ -67,3 +67,13 @@ B8/12の21論理不合格、強調変更B未肯定、LightCoralの技術不合�
 Codex2は専用Edgeで本返信を全文受領後、人間判断と新着工正本待ちとして区切る。未承認実装/候補trust/媒体、容量ポーリング、待機を理由にした別エピック・新診断・Codex1起動はしない。受理だけの再commit/終了通知commit・本人への転記/手貼り/視聴/採点要求は不要。必要な一問は相談役から提示する。
 
 86875908のpush/4文書差分はGitHubで確認。Git clean/untracked0・対象process0はCodex報告。今回acceptとhuman_decisionは正本保存・発行、本人回答・Codexの返信受領/待機移行・Mac現在processは未確認。保存を稼働と混同しない。
+
+## 6. Codex作業サイクル運用更新（2026-10-03）
+
+kawafmm指示により、Codexの標準完了フローを見直した。正本は `docs/policies/CODEX_WORK_CYCLE_CLEANUP_POLICY_v001.md`。
+
+今後は、指示受領→作業→検証→**不要物cleanup**→process終了→正本/Git→相談役報告→次指示受領、までを一サイクルとする。現在work-orderが自分で作った一時copy・PCM/grid・途中transcode・scratch・不要work等は、成果/証拠固定後かつ後続参照なしを確認して自動削除する。元素材、受理済みcandidate、人間review媒体、他task成果、正本参照物、容量確保目的の既存成果は自動削除しない。
+
+媒体作業では、開始前に一時物/完成物/削除予定と容量条件を確認し、完了報告にcleanup結果・回収bytes・残した大容量物と理由・own process/Git状態を含める。失敗attemptは最小監査証拠を残すが、監査不要の巨大partial媒体を永久保持することを標準にしない。
+
+この運用更新は現在の一計画製造許可待ちを承認へ変えない。現時点の未承認adapter/trust/媒体製造、SSD/旧成果削除、ID9-PD-01/02等の境界は不変。
