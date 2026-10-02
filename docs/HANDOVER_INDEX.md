@@ -137,3 +137,13 @@ kawafmmの明示指示で、Codexの一件完了にcleanupを追加した。正�
 完了報告へcleanup結果、主な削除/保持理由、媒体作業では可能な範囲の回収容量・空き、own process、Git/untrackedを追加する。これは正式成果や旧成果の一般削除権限を与えない。
 
 現在の製造判断待ち、製品6/設営29、未承認adapter/candidate trust/媒体、保存先・容量、ID9-PD-01/02、人間品質等の現在地は変更しない。
+
+## 8. 2026-10-03 Codex session work log運用更新
+
+kawafmmの明示指示で、複数session向けの作業ログを正本化した。[CODEX_SESSION_WORK_LOG_POLICY_v001](policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md)。
+
+共有logへの逐次appendは行わない。各Codex sessionが第一完成・GPT/HUMAN停止・handoff・session終了直前に、指示・判断・主要作業・検証・cleanup・Git・次状態を `docs/work-logs/YYYY-MM/` の専用新規fileへまとめる。月directoryでrotationし、64 KiB超の一summaryだけpart分割する。過去logは自動削除しない。
+
+標準終了順は、証拠固定→cleanup→own process終了→session work log→CURRENT_GOAL/HANDOVER/report等の正本更新→commit/push→相談役報告→次指示受領。logは履歴索引であり、現在地/承認の正本にはしない。
+
+現在の一計画製造はhuman_decision待ちのまま。製品6/設営29、未承認adapter/candidate trust/媒体、SSD/旧成果削除、ID9-PD-01/02等の境界は変更しない。
