@@ -53,10 +53,11 @@ if(mode==='backend') {
   let runner:ReturnType<typeof spawn>|undefined,backend:ReturnType<typeof spawn>|undefined;
   let pending:{event:any;index:number;issuedAt:number;requestPath:string}|undefined;
   let delivery:Promise<void>=Promise.resolve();
-  evidence.history.setupFixes=16;evidence.history.setup16Applied=true;evidence.startedAt=new Date().toISOString();
+  evidence.history.setupFixes=17;evidence.history.setup16Applied=true;evidence.history.setup17Applied=true;evidence.startedAt=new Date().toISOString();
   evidence.status='running';evidence.runtime=path.relative(root,runtime);evidence.judgments=[];evidence.processes=[];
   await checkpoint();
   try {
+    await mkdir(path.dirname(runtime), {recursive:true});
     await mkdir(runtime,{recursive:false});await mkdir(path.join(runtime,'handoff'));
     const instruction=await readFile(path.join(root,'docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md'),'utf8');
     const purpose=instruction.split('\n').find(line=>line.startsWith('> この保存済み配信素材'))!.slice(2);

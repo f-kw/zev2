@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-real-judgment-local-evidence-v001",
-  "status": "stopped",
+  "status": "passed-local-plan-and-readback",
   "receivedAt": "2026-10-02T13:44:01.642991+00:00",
   "instruction": "docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md",
   "confirmedHead": "7e0de670f78220a08984a3c752c2c168ec73ae1e",
@@ -12,9 +12,13 @@
   "modelLabelEvidence": "実行環境のモデル変数が未提供の場合はnull。過去のgpt-6.1-sol表示を現在値へ転用しない。",
   "history": {
     "productFixes": 5,
-    "setupFixes": 16,
+    "setupFixes": 17,
     "approvedSetupIfApplied": 16,
-    "setup16Applied": true
+    "setup16Applied": true,
+    "setup17Applied": true,
+    "setup16Authority": "docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md",
+    "setup17Authority": "docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md",
+    "approvedSetupIfAppliedMeaning": "初回指示が薄い補助に許可した16回目。現行累積はsetupFixes=17。"
   },
   "scope": "保存済み一素材、通常local一系列、段階別の今回のCodex判断、計画と時計の保存・別process再読。動画なし。",
   "checkpoints": [
@@ -25,21 +29,1177 @@
     {
       "at": "2026-10-02T13:48:36.252476+00:00",
       "event": "設営16初回起動exit1、親directory不足。追加作用停止。"
+    },
+    {
+      "at": "2026-10-02T14:01:14.204Z",
+      "event": "設営17の相談役個別承認を全文受領し適用。初回失敗を区別して保持。"
+    },
+    {
+      "at": "2026-10-02T14:12:25.793233+00:00",
+      "event": "通常4工程succeeded、所有者と登録bytes、3回答・purpose全文、旧案保持時計同一、別process再読exit0を確認。"
     }
   ],
-  "startedAt": "2026-10-02T13:47:59.941Z",
+  "startedAt": "2026-10-02T14:01:18.559Z",
   "runtime": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001",
-  "judgments": [],
-  "processes": [],
-  "error": "Error: ENOENT: no such file or directory, mkdir '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001'",
-  "stop": {
-    "at": "2026-10-02T13:48:36.252476+00:00",
-    "cause": "新runtimeの親directoryが存在せず、recursive:falseのattempt mkdirがENOENT。",
-    "processExit": 1,
-    "stateCreated": false,
-    "mediaActionStarted": false,
-    "productChangeNeeded": false,
-    "recommendedDifference": "run-local.mtsでattemptの親をmkdir({recursive:true})した後、attempt自体は既存のrecursive:falseを維持する。既存attemptを上書きしない。",
-    "approval": "設営16まで適用済み。追加の一件をGPT_DECISIONで相談役へ返す。"
-  }
+  "judgments": [
+    {
+      "index": 1,
+      "requestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/request-1.json",
+      "requestFileSha256": "fcc28999dffbfd0aa3a7699f66ad037eb476c71b234b06771dbf51144b466f4e",
+      "responsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/response-1.json",
+      "responseFileSha256": "16c3cb9b3c1cb16a1fa719d300445f345c5c88d6b2c213fbdbc91bc229756ea0",
+      "issuedAt": "2026-10-02T14:01:29.673Z",
+      "returnedAt": "2026-10-02T14:03:45.435Z",
+      "handoffElapsedMs": 135762,
+      "canonicalRequestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--candidate-request.json",
+      "canonicalResponsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--candidate-response.json",
+      "canonicalResponseSha256": "16c3cb9b3c1cb16a1fa719d300445f345c5c88d6b2c213fbdbc91bc229756ea0"
+    },
+    {
+      "index": 2,
+      "requestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/request-2.json",
+      "requestFileSha256": "61b89afc4d234b3d20c017878be50c6d57429995d33e525d9014e5ee09b62bb2",
+      "responsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/response-2.json",
+      "responseFileSha256": "6a033fe4bae5f009b7d5e48b127292dc147efd69a82e63a5614a83b8ffe26980",
+      "issuedAt": "2026-10-02T14:03:45.633Z",
+      "returnedAt": "2026-10-02T14:05:34.932Z",
+      "handoffElapsedMs": 109299,
+      "canonicalRequestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-request.json",
+      "canonicalResponsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-response.json",
+      "canonicalResponseSha256": "6a033fe4bae5f009b7d5e48b127292dc147efd69a82e63a5614a83b8ffe26980"
+    },
+    {
+      "index": 3,
+      "requestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/request-3.json",
+      "requestFileSha256": "80315b2cdc03c2469cb69d3fa51b588bf1a44a7028d72ab0633144d1660bd4d1",
+      "responsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/handoff/response-3.json",
+      "responseFileSha256": "48977f1a8b060f2455a8dcf1779f5022bcc649e586be78aa51c0a26723d5344e",
+      "issuedAt": "2026-10-02T14:05:35.361Z",
+      "returnedAt": "2026-10-02T14:08:15.011Z",
+      "handoffElapsedMs": 159650,
+      "canonicalRequestPath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-request.json",
+      "canonicalResponsePath": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-response.json",
+      "canonicalResponseSha256": "48977f1a8b060f2455a8dcf1779f5022bcc649e586be78aa51c0a26723d5344e"
+    }
+  ],
+  "processes": [
+    {
+      "name": "normal-runner",
+      "pid": 22946,
+      "exitCode": 0
+    },
+    {
+      "name": "isolated-backend",
+      "pid": 22945,
+      "exitCode": 0
+    }
+  ],
+  "failures": [
+    {
+      "checkpoint": "f1d716243ded9c6a783404ffc27a4b84ff209e6f",
+      "startedAt": "2026-10-02T13:47:59.941Z",
+      "error": "Error: ENOENT: no such file or directory, mkdir '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001'",
+      "stop": {
+        "at": "2026-10-02T13:48:36.252476+00:00",
+        "cause": "新runtimeの親directoryが存在せず、recursive:falseのattempt mkdirがENOENT。",
+        "processExit": 1,
+        "stateCreated": false,
+        "mediaActionStarted": false,
+        "productChangeNeeded": false,
+        "recommendedDifference": "run-local.mtsでattemptの親をmkdir({recursive:true})した後、attempt自体は既存のrecursive:falseを維持する。既存attemptを上書きしない。",
+        "approval": "設営16まで適用済み。追加の一件をGPT_DECISIONで相談役へ返す。"
+      },
+      "processExit": 1
+    }
+  ],
+  "resume": {
+    "instructionHead": "58e1bcb41015868970cce5c0ca92a51b60a155a6",
+    "instruction": "docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md",
+    "at": "2026-10-02T14:01:14.204Z",
+    "replyFullyRead": true,
+    "attemptAbsent": true,
+    "ancestorsSafe": true
+  },
+  "settingsBasis": {
+    "path": "runtime/artifacts/request-intent-connection-20261001-v005-attempt-005/local-json/state.json",
+    "fileSha256": "4aaabdac9c6d3ed5550c7d622febfae8ce0253e2b71fdf0b4100f32a3d107122",
+    "settings": {
+      "durationLabel": "隔離試験の尺条件",
+      "themeCountLabel": "隔離試験の候補条件",
+      "geminiModelName": "通信しない接続試験",
+      "preset": "隔離試験の編集条件"
+    },
+    "policy": {
+      "humanApprovalRequiredBeforeRender": false
+    }
+  },
+  "purpose": "この保存済み配信素材から、初見でも何をしているかと各見どころの面白さが分かるDigestの採用区間・構成を一案作る。素材中にある自然な導入と、理解に必要なゲーム説明を比較して残す。各見どころの前振り・展開・反応・結末を保ち、ゲーム／本編の終了がある場合は締めとして比較する。商品紹介・スパチャ読みは原則除外するが、本編の主題に直接関係し追加価値がある会話は、位置や単語だけで除外せず内容で比較する。不要な反復・脱線は省き、候補件数や完成尺は先に固定しない。映像や音声を未確認の事実は断定しない。今回は字幕・演出・動画を作らず、採用と不採用の理由、残す元断片、順序、既存処理で解決した時計を持つ計画を保存する。",
+  "draftInput": {
+    "productionType": "digest",
+    "purpose": "この保存済み配信素材から、初見でも何をしているかと各見どころの面白さが分かるDigestの採用区間・構成を一案作る。素材中にある自然な導入と、理解に必要なゲーム説明を比較して残す。各見どころの前振り・展開・反応・結末を保ち、ゲーム／本編の終了がある場合は締めとして比較する。商品紹介・スパチャ読みは原則除外するが、本編の主題に直接関係し追加価値がある会話は、位置や単語だけで除外せず内容で比較する。不要な反復・脱線は省き、候補件数や完成尺は先に固定しない。映像や音声を未確認の事実は断定しない。今回は字幕・演出・動画を作らず、採用と不採用の理由、残す元断片、順序、既存処理で解決した時計を持つ計画を保存する。",
+    "sourceUri": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+    "durationLabel": "隔離試験の尺条件",
+    "themeCountLabel": "隔離試験の候補条件",
+    "geminiModelName": "通信しない接続試験",
+    "preset": "隔離試験の編集条件"
+  },
+  "draftId": "draft_eCg3g-IMIzEWMtJuMyJWB",
+  "requestIds": [
+    {
+      "id": "agent_0sJLSuMCrrFKYJnamJ2_5",
+      "type": "prepare_video"
+    },
+    {
+      "id": "agent_YchOWHe52hoa1T834AbZT",
+      "type": "run_stt"
+    },
+    {
+      "id": "agent_xKOu8eZKSNa5viNENtJ4L",
+      "type": "prepare_digest_plan"
+    },
+    {
+      "id": "agent_wGiuVx5QiJvjGUxEW8Qxa",
+      "type": "validate_digest_plan"
+    }
+  ],
+  "registration": [
+    {
+      "type": "prepare_video",
+      "meta": {
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-video.json",
+        "artifactFileName": "agent_0sJLSuMCrrFKYJnamJ2_5--source-video.json",
+        "byteSize": 1377,
+        "sha256": "a7a51ea8e38913b0cd3d727b5ee0e10b819bc2f5e30dee3e1b78935f243a5297",
+        "mimeType": "application/json"
+      },
+      "result": {
+        "outputId": "prepare_video_ZoY8IW3qDTIuZQwJlYqxc",
+        "outputType": "Video",
+        "fileRefId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+        "meaning": "既存保存bytesの正規登録。取得/STT/inspection処理は実行していない。"
+      }
+    },
+    {
+      "type": "run_stt",
+      "meta": {
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT--transcript.json",
+        "artifactFileName": "agent_YchOWHe52hoa1T834AbZT--transcript.json",
+        "byteSize": 6804193,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+        "mimeType": "application/json"
+      },
+      "result": {
+        "outputId": "run_stt_BhQbjcsR7aFWJKbFMSBed",
+        "outputType": "Transcript",
+        "fileRefId": "fileref_B5oAyq7duS3evfeV5OPbJ",
+        "meaning": "既存保存bytesの正規登録。取得/STT/inspection処理は実行していない。"
+      }
+    }
+  ],
+  "capacityBefore": {
+    "at": "2026-10-02T14:01:18.871Z",
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "byteSize": 4803412827,
+      "device": 16777234
+    },
+    "intendedRoot": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001",
+    "device": 16777234,
+    "availableBytes": 17754804224,
+    "requiredAvailableBytes": 9606825654,
+    "newLargeObjects": 1,
+    "copyAuthority": "既存prepareのsource-media.mp4一つ。手動素材copyなし。"
+  },
+  "runnerStartedAt": "2026-10-02T14:01:18.871Z",
+  "runnerEndedAt": "2026-10-02T14:08:29.114Z",
+  "completions": [
+    {
+      "requestId": "agent_0sJLSuMCrrFKYJnamJ2_5",
+      "type": "prepare_video",
+      "status": "succeeded",
+      "output": {
+        "id": "prepare_video_ZoY8IW3qDTIuZQwJlYqxc",
+        "type": "Video",
+        "meaning": "既存保存bytesの正規登録。取得/STT/inspection処理は実行していない。",
+        "fileRefId": "fileref_PZjbDBXSPyIXC9kqsqQjt"
+      },
+      "fileRef": {
+        "id": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+        "kind": "source_video",
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-video.json",
+        "mimeType": "application/json",
+        "access": "internal",
+        "ownerId": "prepare_video_ZoY8IW3qDTIuZQwJlYqxc",
+        "artifactFileName": "agent_0sJLSuMCrrFKYJnamJ2_5--source-video.json",
+        "byteSize": 1377,
+        "sha256": "a7a51ea8e38913b0cd3d727b5ee0e10b819bc2f5e30dee3e1b78935f243a5297",
+        "createdAt": "2026-10-02T14:01:18.826Z"
+      }
+    },
+    {
+      "requestId": "agent_YchOWHe52hoa1T834AbZT",
+      "type": "run_stt",
+      "status": "succeeded",
+      "output": {
+        "id": "run_stt_BhQbjcsR7aFWJKbFMSBed",
+        "type": "Transcript",
+        "meaning": "既存保存bytesの正規登録。取得/STT/inspection処理は実行していない。",
+        "fileRefId": "fileref_B5oAyq7duS3evfeV5OPbJ"
+      },
+      "fileRef": {
+        "id": "fileref_B5oAyq7duS3evfeV5OPbJ",
+        "kind": "transcript_json",
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT--transcript.json",
+        "mimeType": "application/json",
+        "access": "internal",
+        "ownerId": "run_stt_BhQbjcsR7aFWJKbFMSBed",
+        "artifactFileName": "agent_YchOWHe52hoa1T834AbZT--transcript.json",
+        "byteSize": 6804193,
+        "sha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+        "createdAt": "2026-10-02T14:01:18.869Z"
+      }
+    },
+    {
+      "requestId": "agent_xKOu8eZKSNa5viNENtJ4L",
+      "type": "prepare_digest_plan",
+      "status": "succeeded",
+      "output": {
+        "id": "prepare_digest_plan_gZJ5dt6Izw1vBmaNEr0Js",
+        "type": "DigestPlan",
+        "meaning": "承認依頼の制作意図で採否と内部保持を検査・保存した計画",
+        "fileRefId": "fileref_9RrefJVODCGrFF53DhlLc"
+      },
+      "fileRef": {
+        "id": "fileref_9RrefJVODCGrFF53DhlLc",
+        "kind": "digest_plan_json",
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--digest-plan.json",
+        "mimeType": "application/json",
+        "access": "internal",
+        "ownerId": "prepare_digest_plan_gZJ5dt6Izw1vBmaNEr0Js",
+        "artifactFileName": "agent_xKOu8eZKSNa5viNENtJ4L--digest-plan.json",
+        "byteSize": 6724,
+        "sha256": "cd69dd7fccfab6b4d0f266e6dddf56d5eae4c670283cd7caf467b9fde2925ee3",
+        "createdAt": "2026-10-02T14:08:18.513Z"
+      }
+    },
+    {
+      "requestId": "agent_wGiuVx5QiJvjGUxEW8Qxa",
+      "type": "validate_digest_plan",
+      "status": "succeeded",
+      "output": {
+        "id": "validate_digest_plan_lV1JjPpta4tjEqgie2T_5",
+        "type": "DigestExecutionInput",
+        "meaning": "登録済み計画を再読し、整合と後段の未接続・未承認を記録した結果",
+        "fileRefId": "fileref_sHAvCOrji38E6YKQaEiw3"
+      },
+      "fileRef": {
+        "id": "fileref_sHAvCOrji38E6YKQaEiw3",
+        "kind": "digest_execution_input_json",
+        "uri": "/api/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--digest-execution-input.json",
+        "mimeType": "application/json",
+        "access": "internal",
+        "ownerId": "validate_digest_plan_lV1JjPpta4tjEqgie2T_5",
+        "artifactFileName": "agent_wGiuVx5QiJvjGUxEW8Qxa--digest-execution-input.json",
+        "byteSize": 8540,
+        "sha256": "735d6763afe6fcfabeb4c103871ee3a65368b96c9fa9df1a01f37717ace08f37",
+        "createdAt": "2026-10-02T14:08:29.100Z"
+      }
+    }
+  ],
+  "capacityAfter": {
+    "at": "2026-10-02T14:08:29.117Z",
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-new-material-20260926-v001/source/source-video.mp4",
+      "byteSize": 4803412827,
+      "device": 16777234
+    },
+    "intendedRoot": "/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001",
+    "device": 16777234,
+    "availableBytes": 12933283840,
+    "requiredAvailableBytes": 9606825654,
+    "newLargeObjects": 1,
+    "copyAuthority": "既存prepareのsource-media.mp4一つ。手動素材copyなし。"
+  },
+  "logicalMediaCopyBytes": 4803412827,
+  "completedAt": "2026-10-02T14:08:29.121Z",
+  "comparison": {
+    "baseline": "b69e168c構成改善v001・15:23.033案",
+    "retainedSegmentsDeepEqual": true,
+    "clockDeepEqual": true,
+    "baselineCandidates": 11,
+    "currentCandidates": 12,
+    "additionalComparison": "心霊回帰会話1364–1370を候補として追加し、導入・退勤と比較して不採用。",
+    "adopted": 7,
+    "keptSpans": 9,
+    "priorAnswerShaRebound": false
+  },
+  "decisions": [
+    {
+      "candidateId": "candidate-0001",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "necessary-structure",
+      "reason": "夏のホラーを始める理由と噂への不安を示し、初見の入口になる。有能だったという自己評価はベテラン役の落差へつながる。末尾の心霊回帰も関連するが結論を補わず、導入を置き換えない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000002",
+        "common-utterance-000003",
+        "common-utterance-000005",
+        "common-utterance-000009",
+        "common-utterance-000010"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0004",
+          "evidenceUtteranceIds": [
+            "common-utterance-000431",
+            "common-utterance-000434"
+          ]
+        },
+        {
+          "candidateId": "candidate-0008",
+          "evidenceUtteranceIds": [
+            "common-utterance-001364",
+            "common-utterance-001365",
+            "common-utterance-001370"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0002",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "薬と手洗いでも犬の誘惑に負け、帰宅後に症状が出る結果まである自然な雑談。犬がお化けから守るという冗談で導入の不安へ戻る追加価値がある。商品の用途紹介とは本編への結び方が異なるため、ホラー以外の話というだけで除外しない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000011",
+        "common-utterance-000013",
+        "common-utterance-000014",
+        "common-utterance-000015",
+        "common-utterance-000016"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0001",
+          "evidenceUtteranceIds": [
+            "common-utterance-000003",
+            "common-utterance-000005"
+          ]
+        },
+        {
+          "candidateId": "candidate-0009",
+          "evidenceUtteranceIds": [
+            "common-utterance-001376",
+            "common-utterance-001377",
+            "common-utterance-001379"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0003",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "necessary-context",
+      "reason": "ゲーム名と画面の変化・お化けを報告する説明が、ベテラン役の仕事責任と異変が増えて追いつけない展開の共通前提になる。単独の派手な反応はなくても理解に必要。片付けの話と規約は残す説明の範囲から分ける。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000017",
+        "common-utterance-000018"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0004",
+          "evidenceUtteranceIds": [
+            "common-utterance-000452",
+            "common-utterance-000453"
+          ]
+        },
+        {
+          "candidateId": "candidate-0006",
+          "evidenceUtteranceIds": [
+            "common-utterance-001073",
+            "common-utterance-001332",
+            "common-utterance-001333"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0004",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "新入りを叱る自信、怖がる反応、責任を果たそうとする立て直し、霊障弁当の冗談とクリア確認が一つの展開になる。後の振り返りは同じ責任を説明するだけで、ここには実際の発話の変化と結末がある。映像上の異変の実在は認定しない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-000431",
+        "common-utterance-000434",
+        "common-utterance-000441",
+        "common-utterance-000448",
+        "common-utterance-000452",
+        "common-utterance-000453",
+        "common-utterance-000454",
+        "common-utterance-000456",
+        "common-utterance-000463"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0001",
+          "evidenceUtteranceIds": [
+            "common-utterance-000005"
+          ]
+        },
+        {
+          "candidateId": "candidate-0010",
+          "evidenceUtteranceIds": [
+            "common-utterance-001478",
+            "common-utterance-001479"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0005",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "トイレに行かないというホラー中の前提から呪怨と貞子を比較し、名前の訂正と動画時代への適合という結論へ進む。ベテラン役の報告責任や弁当のボケとは異なる作品比較の見どころで、現代に通用するという結びまで必要。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001008",
+        "common-utterance-001010",
+        "common-utterance-001011",
+        "common-utterance-001015",
+        "common-utterance-001016",
+        "common-utterance-001018",
+        "common-utterance-001019"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0004",
+          "evidenceUtteranceIds": [
+            "common-utterance-000453",
+            "common-utterance-000454"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0006",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "distinct-highlight",
+      "reason": "全ステージの完了と追加の特別手当への挑戦を分けることで、最後の断念を本編全体の失敗に見せない。増える異変に報告が追いつかず焦る展開は、ベテラン役で一度仕事を終えた場面に対して別の試練になる。途中の別作品談義と反復を省き、前提・苦戦・終盤を保つ。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001073",
+        "common-utterance-001074",
+        "common-utterance-001075",
+        "common-utterance-001331",
+        "common-utterance-001332",
+        "common-utterance-001333",
+        "common-utterance-001338",
+        "common-utterance-001350",
+        "common-utterance-001352",
+        "common-utterance-001353"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0004",
+          "evidenceUtteranceIds": [
+            "common-utterance-000456",
+            "common-utterance-000463"
+          ]
+        },
+        {
+          "candidateId": "candidate-0007",
+          "evidenceUtteranceIds": [
+            "common-utterance-001354",
+            "common-utterance-001356",
+            "common-utterance-001359"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0007",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "adopt",
+      "basis": "necessary-structure",
+      "reason": "特別手当だけを諦める発話と労い、退勤、ゲーム終了で直前の挑戦を閉じる。配信末尾の謝辞より本編の出来事の結末が分かり、今回の構成の締めとして必要。後続のトイレとコメント欄の操作は保持しない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001354",
+        "common-utterance-001355",
+        "common-utterance-001356",
+        "common-utterance-001358",
+        "common-utterance-001359",
+        "common-utterance-001360"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0006",
+          "evidenceUtteranceIds": [
+            "common-utterance-001073",
+            "common-utterance-001332",
+            "common-utterance-001333"
+          ]
+        },
+        {
+          "candidateId": "candidate-0012",
+          "evidenceUtteranceIds": [
+            "common-utterance-001614"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0008",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "reject",
+      "basis": "weak",
+      "reason": "導入の噂に戻る内容なので主題との関連を認めて比較した。しかし「ないと思う」「わかんない」「感じていない」「霊感ない」に留まり、音や配置の疑問も解決していない。噂を肯定も否定も確定できず、退勤で閉じた後に不確かさを再開する追加価値は弱い。スパチャの位置・語句を理由にした除外ではない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001364",
+        "common-utterance-001365",
+        "common-utterance-001366",
+        "common-utterance-001367",
+        "common-utterance-001370"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0001",
+          "evidenceUtteranceIds": [
+            "common-utterance-000003",
+            "common-utterance-000009",
+            "common-utterance-000010"
+          ]
+        },
+        {
+          "candidateId": "candidate-0007",
+          "evidenceUtteranceIds": [
+            "common-utterance-001359",
+            "common-utterance-001360"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0009",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "reject",
+      "basis": "weak",
+      "reason": "バッグのiPad対応・底の形・付け替え・持ち方の紹介で、今回の監視ゲームの理解や反応、結末を補わない。犬の雑談にはホラーの不安への戻りがあるが、この紹介には同じ接点がない。商品という語だけで落としたのではなく、内容の追加価値を比較した。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001371",
+        "common-utterance-001376",
+        "common-utterance-001377",
+        "common-utterance-001379",
+        "common-utterance-001380",
+        "common-utterance-001384"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0002",
+          "evidenceUtteranceIds": [
+            "common-utterance-000013",
+            "common-utterance-000015",
+            "common-utterance-000016"
+          ]
+        },
+        {
+          "candidateId": "candidate-0003",
+          "evidenceUtteranceIds": [
+            "common-utterance-000017",
+            "common-utterance-000018"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0010",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "reject",
+      "basis": "redundant",
+      "reason": "本編に関連する振り返りだが、怖さより仕事をこなす意地という説明は、ゲーム内の責任発話と報告が追いつかない苦戦、特別手当の断念で既に伝わる。ライブの別話題から通話を戻す文脈を増やしても、採用場面にない新しい結果は加わらない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001477",
+        "common-utterance-001478",
+        "common-utterance-001479"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0004",
+          "evidenceUtteranceIds": [
+            "common-utterance-000452",
+            "common-utterance-000453"
+          ]
+        },
+        {
+          "candidateId": "candidate-0006",
+          "evidenceUtteranceIds": [
+            "common-utterance-001332",
+            "common-utterance-001333"
+          ]
+        },
+        {
+          "candidateId": "candidate-0007",
+          "evidenceUtteranceIds": [
+            "common-utterance-001354"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0011",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "reject",
+      "basis": "weak",
+      "reason": "ダンスの苦労と上達は独立した意味を持つが、監視ゲームの出来事を補う会話ではない。貞子の比較はホラー中に話題が発展して結論へ戻る一方、ここはライブの別主題であり、今回は省く。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001567",
+        "common-utterance-001571",
+        "common-utterance-001573",
+        "common-utterance-001574",
+        "common-utterance-001575"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0005",
+          "evidenceUtteranceIds": [
+            "common-utterance-001015",
+            "common-utterance-001018",
+            "common-utterance-001019"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "candidate-0012",
+      "sourceId": "fileref_PZjbDBXSPyIXC9kqsqQjt",
+      "decision": "reject",
+      "basis": "redundant",
+      "reason": "謝辞とお化けへの注意は配信全体の挨拶で、追加挑戦の結果を説明しない。本編の結末は退勤・ゲーム終了で閉じられ、この挨拶を加えるために終了後の別会話へ戻す必要はない。",
+      "evidenceUtteranceIds": [
+        "common-utterance-001614"
+      ],
+      "comparisons": [
+        {
+          "candidateId": "candidate-0007",
+          "evidenceUtteranceIds": [
+            "common-utterance-001354",
+            "common-utterance-001359",
+            "common-utterance-001360"
+          ]
+        }
+      ]
+    }
+  ],
+  "clockMappings": [
+    {
+      "segmentId": "segment-0001",
+      "sourceStartMs": 159770,
+      "sourceEndMs": 213077,
+      "sourceStartFrame30": 4793,
+      "sourceEndFrame30": 6392,
+      "outputStartFrame": 0,
+      "outputEndFrame": 1599,
+      "audioSamples": {
+        "sourceStart": 7045710,
+        "sourceEnd": 9396240,
+        "outputStart": 0,
+        "outputEnd": 2350530
+      }
+    },
+    {
+      "segmentId": "segment-0002",
+      "sourceStartMs": 213077,
+      "sourceEndMs": 327084,
+      "sourceStartFrame30": 6392,
+      "sourceEndFrame30": 9813,
+      "outputStartFrame": 1599,
+      "outputEndFrame": 5020,
+      "audioSamples": {
+        "sourceStart": 9396240,
+        "sourceEnd": 14425110,
+        "outputStart": 2350530,
+        "outputEnd": 7379400
+      }
+    },
+    {
+      "segmentId": "segment-0003",
+      "sourceStartMs": 355551,
+      "sourceEndMs": 379620,
+      "sourceStartFrame30": 10667,
+      "sourceEndFrame30": 11389,
+      "outputStartFrame": 5020,
+      "outputEndFrame": 5742,
+      "audioSamples": {
+        "sourceStart": 15680490,
+        "sourceEnd": 16741830,
+        "outputStart": 7379400,
+        "outputEnd": 8440740
+      }
+    },
+    {
+      "segmentId": "segment-0004",
+      "sourceStartMs": 1993090,
+      "sourceEndMs": 2256057,
+      "sourceStartFrame30": 59793,
+      "sourceEndFrame30": 67682,
+      "outputStartFrame": 5742,
+      "outputEndFrame": 13631,
+      "audioSamples": {
+        "sourceStart": 87895710,
+        "sourceEnd": 99492540,
+        "outputStart": 8440740,
+        "outputEnd": 20037570
+      }
+    },
+    {
+      "segmentId": "segment-0005",
+      "sourceStartMs": 5468987,
+      "sourceEndMs": 5675926,
+      "sourceStartFrame30": 164070,
+      "sourceEndFrame30": 170278,
+      "outputStartFrame": 13631,
+      "outputEndFrame": 19839,
+      "audioSamples": {
+        "sourceStart": 241182900,
+        "sourceEnd": 250308660,
+        "outputStart": 20037570,
+        "outputEnd": 29163330
+      }
+    },
+    {
+      "segmentId": "segment-0006",
+      "sourceStartMs": 6394302,
+      "sourceEndMs": 6449886,
+      "sourceStartFrame30": 191829,
+      "sourceEndFrame30": 193497,
+      "outputStartFrame": 19839,
+      "outputEndFrame": 21507,
+      "audioSamples": {
+        "sourceStart": 281988630,
+        "sourceEnd": 284440590,
+        "outputStart": 29163330,
+        "outputEnd": 31615290
+      }
+    },
+    {
+      "segmentId": "segment-0007",
+      "sourceStartMs": 7566646,
+      "sourceEndMs": 7620361,
+      "sourceStartFrame30": 226999,
+      "sourceEndFrame30": 228611,
+      "outputStartFrame": 21507,
+      "outputEndFrame": 23119,
+      "audioSamples": {
+        "sourceStart": 333688530,
+        "sourceEnd": 336058170,
+        "outputStart": 31615290,
+        "outputEnd": 33984930
+      }
+    },
+    {
+      "segmentId": "segment-0008",
+      "sourceStartMs": 7662774,
+      "sourceEndMs": 7751288,
+      "sourceStartFrame30": 229883,
+      "sourceEndFrame30": 232539,
+      "outputStartFrame": 23119,
+      "outputEndFrame": 25775,
+      "audioSamples": {
+        "sourceStart": 337928010,
+        "sourceEnd": 341832330,
+        "outputStart": 33984930,
+        "outputEnd": 37889250
+      }
+    },
+    {
+      "segmentId": "segment-0009",
+      "sourceStartMs": 7759082,
+      "sourceEndMs": 7822947,
+      "sourceStartFrame30": 232772,
+      "sourceEndFrame30": 234688,
+      "outputStartFrame": 25775,
+      "outputEndFrame": 27691,
+      "audioSamples": {
+        "sourceStart": 342174840,
+        "sourceEnd": 344991360,
+        "outputStart": 37889250,
+        "outputEnd": 40705770
+      }
+    }
+  ],
+  "retainedSegments": [
+    {
+      "candidateId": "candidate-0001",
+      "blockOrdinal": 2,
+      "segmentId": "segment-0001",
+      "sourceStartMs": 159770,
+      "sourceEndMs": 213077,
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "reason": "夏にホラーを始める発話から噂への不安と前作の有能バイトの自信、「大丈夫でしょ」までを残す。後の役柄へつながる内容であり、配置準備を切ってもこの前提が伝わる。",
+      "sourceSegmentRange": [
+        68,
+        284
+      ],
+      "sourceSegmentCount": 217
+    },
+    {
+      "candidateId": "candidate-0002",
+      "blockOrdinal": 1,
+      "segmentId": "segment-0002",
+      "sourceStartMs": 213077,
+      "sourceEndMs": 327084,
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "reason": "犬との出会い、薬と手洗い、また撫でてしまう展開、帰宅後の症状、誘惑に勝てなかった結論、お守りの冗談とやってみようという戻りまでを保持する。",
+      "sourceSegmentRange": [
+        285,
+        942
+      ],
+      "sourceSegmentCount": 658
+    },
+    {
+      "candidateId": "candidate-0003",
+      "blockOrdinal": 2,
+      "segmentId": "segment-0003",
+      "sourceStartMs": 355551,
+      "sourceEndMs": 379620,
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "reason": "日本事故物件監視協会の名前、前作経験、画面が変わりお化けが出るのを報告する説明、「ちょっとやってみますか」までで以後の仕事を理解できる。",
+      "sourceSegmentRange": [
+        1129,
+        1248
+      ],
+      "sourceSegmentCount": 120
+    },
+    {
+      "candidateId": "candidate-0004",
+      "blockOrdinal": 2,
+      "segmentId": "segment-0004",
+      "sourceStartMs": 1993090,
+      "sourceEndMs": 2256057,
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "reaction",
+        "payoff"
+      ],
+      "reason": "花瓶を見落とした新入りへの問い、勤続15年の自信、観察、接近への叫び、ギャーではなく報告する責任、霊障弁当の冗談、金額とチェックを見たクリア確認まで保持。待ちと観察も怖がる反応の前提であり、文字の反復だけでは落とさない。",
+      "sourceSegmentRange": [
+        7689,
+        8721
+      ],
+      "sourceSegmentCount": 1033
+    },
+    {
+      "candidateId": "candidate-0005",
+      "blockOrdinal": 1,
+      "segmentId": "segment-0005",
+      "sourceStartMs": 5468987,
+      "sourceEndMs": 5675926,
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "reaction",
+        "payoff"
+      ],
+      "reason": "行ってきなという促しと今は行かない応答を残して、一人になる危険の話から呪怨と貞子を比較する。名前の言い直しを落とさず、動画時代に通用する結論まで一続きで保持する。前の同趣旨のトイレ談義は追加しない。",
+      "sourceSegmentRange": [
+        18662,
+        19439
+      ],
+      "sourceSegmentCount": 778
+    },
+    {
+      "candidateId": "candidate-0006",
+      "blockOrdinal": 1,
+      "segmentId": "segment-0006",
+      "sourceStartMs": 6394302,
+      "sourceEndMs": 6449886,
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "reason": "全ステージが完了したという発話、特別手当を試す決定、ベテランへの自信と追加異変への問いを残す。以後の断念が追加挑戦だけの結果だと分かる。",
+      "sourceSegmentRange": [
+        21936,
+        22193
+      ],
+      "sourceSegmentCount": 258
+    },
+    {
+      "candidateId": "candidate-0006",
+      "blockOrdinal": 3,
+      "segmentId": "segment-0007",
+      "sourceStartMs": 7566646,
+      "sourceEndMs": 7620361,
+      "meaningRoles": [
+        "development",
+        "reaction"
+      ],
+      "reason": "布団が増え、異変が増える速度に追いつけず、報告しても絶えないと語る発話を残す。前提に対して追加挑戦の困難が具体化する。",
+      "sourceSegmentRange": [
+        25129,
+        25286
+      ],
+      "sourceSegmentCount": 158
+    },
+    {
+      "candidateId": "candidate-0006",
+      "blockOrdinal": 5,
+      "segmentId": "segment-0008",
+      "sourceStartMs": 7662774,
+      "sourceEndMs": 7751288,
+      "meaningRoles": [
+        "development",
+        "reaction"
+      ],
+      "reason": "3時まで来たという終盤の確認、急げという焦り、ない・どこ・動いてる・見せんなよという反応を残す。ここで成功を断定せず、直後の断念と労いへつなげる。",
+      "sourceSegmentRange": [
+        25364,
+        25530
+      ],
+      "sourceSegmentCount": 167
+    },
+    {
+      "candidateId": "candidate-0007",
+      "blockOrdinal": 1,
+      "segmentId": "segment-0009",
+      "sourceStartMs": 7759082,
+      "sourceEndMs": 7822947,
+      "meaningRoles": [
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "reason": "結構発見できたという振り返り、特別手当は無理で諦めるという範囲、よう頑張った、退勤、最後のゲーム終了までを残す。単なる配信の挨拶を締めの代用にしない。",
+      "sourceSegmentRange": [
+        25531,
+        25754
+      ],
+      "sourceSegmentCount": 224
+    }
+  ],
+  "retentionCoverage": {
+    "parentAtoms": 7073,
+    "keep": 3613,
+    "drop": 3460,
+    "status": "resolved",
+    "existingValidatorPassed": true,
+    "duplicateOrMissing": 0
+  },
+  "readback": {
+    "status": "passed",
+    "processId": 23446,
+    "readAt": "2026-10-02T14:09:14.727Z",
+    "requestId": "agent_wGiuVx5QiJvjGUxEW8Qxa",
+    "stateFileSha256": "c62e3b38d00c8222f0918b52704e579f87a14346217fada6c9cd754fc6fccf3c",
+    "apiStoreDeepEqual": true,
+    "stateUnchanged": true,
+    "consumerReused": true,
+    "consumer": "readConsumedDigestPlanV001",
+    "segmentCount": 9,
+    "artifactFileSha256": "735d6763afe6fcfabeb4c103871ee3a65368b96c9fa9df1a01f37717ace08f37",
+    "judgmentProviderCalled": false,
+    "registrationCalled": false,
+    "renderExecuted": false
+  },
+  "normalCompleteAllFour": true,
+  "readbackExitCode": 0,
+  "driverExitCode": 0,
+  "largeObjects": [
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--source-media.mp4",
+      "byteSize": 4803412827
+    }
+  ],
+  "newMediaObjectCount": 1,
+  "sourceShaVerifiedByExistingReaders": "504650457fc6650bf27d6a6094402add0b684c5f32977cde27e201fe4c40a6c4",
+  "registry": {
+    "discovery": {
+      "request": {
+        "schemaVersion": "candidate-discovery-judgment-request-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/candidate-request.json",
+        "fileSha256": "fcc28999dffbfd0aa3a7699f66ad037eb476c71b234b06771dbf51144b466f4e",
+        "canonicalSha256": "b204819ff559907ce7d39815097a5d5010e168e6c5c72c709a457c2d63293b97"
+      },
+      "response": {
+        "schemaVersion": "candidate-discovery-judgment-response-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/candidate-response.json",
+        "fileSha256": "16c3cb9b3c1cb16a1fa719d300445f345c5c88d6b2c213fbdbc91bc229756ea0",
+        "canonicalSha256": "cc09568d005755636d0a31f6951a6149b83c7b1e52f4bbd1d45f82bbb5fa12f1"
+      },
+      "result": {
+        "schemaVersion": "candidate-discovery-skill-result-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/candidate-result.json",
+        "fileSha256": "b3634df53f5963f323266dd216f8e8775aae96f9447699a5b4f2141d7ce732bd",
+        "canonicalSha256": "26d54acc952f0e9500be6a37217e7fb44e438fae8b0c335ee7b00bef2909aa01"
+      },
+      "accepted": {
+        "candidate-set.json": {
+          "schemaVersion": "candidate-selection-candidate-set-v001",
+          "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/candidate-set.json",
+          "fileSha256": "c896a4348055cd01cea35c0d14c439551ee77cfd6c594fc714a418ee4a1249ac",
+          "canonicalSha256": "404a595bb4ac552beeac0631d52c1d0c7e6d60d632a4ff0d4608a6e5b13d9eac"
+        },
+        "discovery-validation.json": {
+          "schemaVersion": "unseen-material-discovery-validation-v001",
+          "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/discovery-validation.json",
+          "fileSha256": "23b7f7312a834246fcabbf85c77ba479808b98f0d62906b0a27b6c987c900e41",
+          "canonicalSha256": "fc38bcb23720ad72a5b28c0be2fe6a540b9de897fd0f5b14d9ba32d4e99ed6ce"
+        }
+      }
+    },
+    "selection": {
+      "request": {
+        "schemaVersion": "candidate-selection-request-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-request.json",
+        "fileSha256": "61b89afc4d234b3d20c017878be50c6d57429995d33e525d9014e5ee09b62bb2",
+        "canonicalSha256": "a544d992284fb9430b1e8498cd752206e03eca72035ce18e3dc659cc8fa5be22"
+      },
+      "response": {
+        "schemaVersion": "candidate-selection-response-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-response.json",
+        "fileSha256": "6a033fe4bae5f009b7d5e48b127292dc147efd69a82e63a5614a83b8ffe26980",
+        "canonicalSha256": "f694e6e0a8337865e01e4bb264ab98a7ecb3b050af9c7c589e5add122fa49571"
+      },
+      "result": {
+        "schemaVersion": "candidate-selection-result-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-result.json",
+        "fileSha256": "1fa895f3d7e6f6a3926a5f01200b9f9edf8b4243db5846b0473135b2223d3fe9",
+        "canonicalSha256": "2f892a9cbc67c7b60224f9f178378aac934948d04400b4c41837217ca29d45b2"
+      },
+      "accepted": {
+        "selection-validation.json": {
+          "schemaVersion": "candidate-selection-validation-v001",
+          "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-validation.json",
+          "fileSha256": "c94a4d994db008fc683df945ae7097b52be1fbcb8d649d1c0d5a341193923575",
+          "canonicalSha256": "24791013e14373fd45c735d6cc4cd3a4037863c20df3669ccfc04466be8aa574"
+        },
+        "selection-adoption.json": {
+          "schemaVersion": "candidate-selection-machine-adoption-v001",
+          "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-adoption.json",
+          "fileSha256": "11b8dda61151ff1350e77898bae81e51f783da5b29a8b6ce6a38eaa787136974",
+          "canonicalSha256": "6ce31d27b83a97b1aa39473139ab6b6aff93c030c2799386fb9cde7d72b1c418"
+        }
+      }
+    },
+    "retention": {
+      "request": {
+        "schemaVersion": "candidate-internal-retention-request-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-request.json",
+        "fileSha256": "80315b2cdc03c2469cb69d3fa51b588bf1a44a7028d72ab0633144d1660bd4d1",
+        "canonicalSha256": "d57f72e31bcc0362c2c139862dd3f9df5c339c7c899e896350e7ad0815743739"
+      },
+      "response": {
+        "schemaVersion": "candidate-internal-retention-response-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-response.json",
+        "fileSha256": "48977f1a8b060f2455a8dcf1779f5022bcc649e586be78aa51c0a26723d5344e",
+        "canonicalSha256": "5a36a70ddaa72fbe8be3714e3230fdb968dc5481e6c9643c47f4858acdfcffea"
+      },
+      "result": {
+        "schemaVersion": "candidate-internal-retention-result-v001",
+        "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-result.json",
+        "fileSha256": "e763f363672301b43ad5c94f52000a6b8ad12eebd137b229e4cb9c3e7ea50a97",
+        "canonicalSha256": "b0e57110ba03aee0b07c647813b7a946054be42993e5ad64f2ce0b5b92a8ecc3"
+      },
+      "accepted": {
+        "retention-validation.json": {
+          "schemaVersion": "new-material-retention-validation-v001",
+          "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-validation.json",
+          "fileSha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+          "canonicalSha256": "c34b18d3bc156627c7c194af7289273db59b56c94b3a1d6b2e27094f9f7f8c99"
+        }
+      }
+    }
+  },
+  "preparationStatus": "complete",
+  "clock": {
+    "status": "passed",
+    "fpsOutput": 30,
+    "sampleRate": 44100,
+    "frames": 27691,
+    "durationSecondsBeforeConnections": 923.0333333333333,
+    "outputSamples": 40705770
+  },
+  "timing": {
+    "runnerElapsedMs": 430243,
+    "judgmentReadAndHandoffMs": 404711,
+    "runnerOutsideHandoffMs": 25532,
+    "stageHandoffMs": [
+      135762,
+      109299,
+      159650
+    ],
+    "pureModelInferenceMs": null,
+    "readbackDurationMs": null,
+    "timingLimits": "判断区間は実要求発行→回答手渡し。本文確認・JSON整形・ツール操作を含む。保存全文の事前読了・設営・監査待ちと純推論を混ぜて製品全自動性能にはしない。別process再読は一回でexit0だが独立timerは未設置。",
+    "advisorThinkingDisplay": "9m 24s",
+    "firstFailureAt": "2026-10-02T13:47:59.941Z",
+    "resumedAt": "2026-10-02T14:01:14.204Z"
+  },
+  "notExecuted": [
+    "fixed answer generator",
+    "new inference API/provider",
+    "source fetch",
+    "STT processing",
+    "inspection processing",
+    "subtitle/presentation/video generation",
+    "old v005 test suites",
+    "upload/MP4/multi-root branches",
+    "SSD operation",
+    "deletion",
+    "production switch",
+    "publication"
+  ],
+  "admission": {
+    "planIntegrity": "passed",
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null,
+    "ID9-PD-01": "not-approved",
+    "ID9-PD-02": "not-approved"
+  },
+  "verifiedAt": "2026-10-02T14:12:25.793233+00:00",
+  "purposePropagation": {
+    "approvalSnapshot": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/approval-api.json",
+    "approvalSnapshotSha256": "76b288213df914b9978d7c33dd9448b2cf2745d93506f6afee4dc2aee424b687",
+    "approvedDraftFullTextEqual": true,
+    "allFourCommandsFullTextEqual": true,
+    "judgmentInputs": [
+      {
+        "stage": 1,
+        "field": "input.productionRequest",
+        "fullTextEqual": true,
+        "requestFileSha256": "fcc28999dffbfd0aa3a7699f66ad037eb476c71b234b06771dbf51144b466f4e"
+      },
+      {
+        "stage": 2,
+        "field": "input.productionRequest",
+        "fullTextEqual": true,
+        "requestFileSha256": "61b89afc4d234b3d20c017878be50c6d57429995d33e525d9014e5ee09b62bb2"
+      },
+      {
+        "stage": 3,
+        "field": "input.taskDescription",
+        "fullTextEqual": true,
+        "requestFileSha256": "80315b2cdc03c2469cb69d3fa51b588bf1a44a7028d72ab0633144d1660bd4d1"
+      }
+    ],
+    "approvalMeaning": "正本の一件限定許可を根拠に通常approve。人間の実クリックではない。"
+  },
+  "repositoryAtValidation": "58e1bcb41015868970cce5c0ca92a51b60a155a6",
+  "gitDelivery": "担当成果のcommit/pushと最終直接報告は本検証記録後に行う。SHAと送信/返信は会話側の実績で照合する。受領記録だけの再commitはしない。",
+  "processesAllEnded": true
 }

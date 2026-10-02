@@ -16,7 +16,7 @@
 
 ## 3. 現在の新指示
 
-**9の後続：通常依頼から実判断付きDigest計画を一件保存する。現在は初回の親directory不足に対し、設営17の一行修正と続行を相談役承認済み。**
+**9の後続：通常依頼から実判断付きDigest計画を一件保存する。Codex2が設営17を適用し、通常4工程completeと別process再読を完了した。担当成果の保存と最終監査報告へ進む。**
 
 親正本：[ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md)。指示保存83c06014a3b39147c5907b751619447866d4a194。
 今回の再開正本：[親directory修正](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md)。保存9ecf3ae3893ab0c9c8d06783f3837720c51d4815。
@@ -53,8 +53,12 @@ ID9-PD-01の一般本適用、ID9-PD-02の動画許可、旧業務state移行、
 
 ## 6. 起動・問い合わせ・実行状態
 
-初回キックは相談役が一つのテキストブロックで渡し、kawafmmがCodex2へ手貼りする。7e0de670の新指示受領・設営16適用・初回停止は今回の報告と保存証拠で確認。旧未調整案の差分/processなし・Git cleanはCodex報告であり、相談役のMac直接観測ではない。**設営17の受領・適用・再稼働・通常系列の完了は未確認。**
+初回キックは相談役が一つのテキストブロックで渡し、kawafmmがCodex2へ手貼りする。7e0de670の新指示受領・設営16適用・初回停止は今回の報告と保存証拠で確認。旧未調整案の差分/processなし・Git cleanはCodex報告であり、相談役のMac直接観測ではない。**設営17の受領・適用、通常4工程succeeded、別process再読exit0はCodex2の実行証拠で確認済み。相談役の最終監査は別段階。**
 
 開始後はCodex2専用Edgeから同じZEV Build Loopへ直接問い合わせ、返信生成完了と全文を自ら受領して同じ範囲を続行する。送信済み・返信生成中だけで本人へ戻らない。Gitはmain、担当のみ明示stage、他者変更保全、stage/commit/pushは直列化する。
 
 新しい実判断計画一件の完成後は監査へ提出し、未承認の字幕・演出・動画工事へ自動着工しない。
+
+### Codex2実行checkpoint — 2026-10-02
+
+新指示を手貼り受領して着手。旧未調整案の差分/processは0。初回設営16の親directory不存在停止をf1d71624へ保存し、相談役の設営17個別承認58e1bcb4を全文受領・適用した。通常local一系列でsource/STTの登録を完了し、実探索12候補・採否7採用・保持9区間の今回回答を逐次stdinへ戻した。計画/検証の通常completeと別process再読exit0を確認済み。3要求の目的全文一致、全7,073断片の被覆、9区間・frame/sample時計、API/store完全一致、state不変を保存した。新規媒体実体は4,803,412,827bytesの一つだけ。製品5／設営17。[主report](reports/request-intent-real-judgment-20261002/README.md)を監査へ提出する。字幕演出・動画・本適用・人間品質の承認外は不変。
