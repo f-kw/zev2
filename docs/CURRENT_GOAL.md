@@ -6,7 +6,7 @@
 
 プロジェクトのZEV_START_HERE.mdを全文読み、GitHub mainの現在HEADと同一SHAの[HANDOVER_INDEX](HANDOVER_INDEX.md)、現行指示を読む。保存・発行・受領・実行・技術受理・人間採用を区別する。
 
-更新前全文と入力対応checkpointは[4556e389固定版](https://github.com/f-kw/zev2/blob/4556e389fc6cb2a9933f98bd5d83716324ef8b01/docs/CURRENT_GOAL.md)に不変保持。実判断運転・設営17は7bb5de02、v005の履歴はccd907a5固定版から辿る。過去の未完了・次の試験を現在へ戻さない。
+更新前全文と初回準備停止は[f577bfba固定版](https://github.com/f-kw/zev2/blob/f577bfbaedd1488b0e64c1f702002eb89a0fea68/docs/CURRENT_GOAL.md)に保持。入力対応checkpointは4556e389、実判断運転・設営17は7bb5de02、v005の履歴はccd907a5固定版から辿る。過去の未完了・次の試験を現在へ戻さない。
 
 ## 2. 完了・監査受理
 
@@ -14,31 +14,43 @@
 
 **通常依頼から実判断付きDigest計画一件も7bb5de02でaccept。** 12候補・7採用・9保持、keep3,613/drop3,460、通常4工程succeeded、27,691frame/40,705,770sample、別process再読exit0。既存15:23案の区間・順序・時計は維持し、心霊回帰会話を正式比較へ追加した。実AIの未見素材汎化・映像音声・人間品質とは別。
 
-**字幕演出入口の入力対応は4556e389fc6cb2a9933f98bd5d83716324ef8b01で今回accept。** 9区間・3,613断片・18項目の供給元/不足/再利用条件・最小案を保存。設営18補助exit0、小診断一回再読bytes一致・元state不変。今回の監査はreport/mapping/小補助/現行関数/5file差分の照合であり、Macの全runtime再実行やpresentation consumer受理ではない。
+**字幕演出入口の入力対応は4556e389fc6cb2a9933f98bd5d83716324ef8b01でaccept。** 9区間・3,613断片・18項目の供給元/不足/再利用条件・最小案を保存。設営18補助exit0、小診断一回再読bytes一致・元state不変。監査はreport/mapping/小補助/現行関数/5file差分の照合であり、Macの全runtime再実行やpresentation consumer受理ではない。
 
-判定と次指示は[字幕判断入力の準備接続v001](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)§1、保存34be96102a430b475e7d2bf4b58583bd92110ede。
+判定と準備接続指示は[字幕判断入力の準備接続v001](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)§1、保存34be96102a430b475e7d2bf4b58583bd92110ede。
 
 15分初稿レビュー、構成改善v001の実案・局所検証、一件後修正/Reset、旧9:47案1080p低メモリ製造は既存完了範囲を保持する。
 
-## 3. 次の一件 — 字幕判断入力の準備接続
+## 3. 現在の一件 — 字幕判断入力の準備接続
 
-**通常の保存計画から意味atomと区間別表示要求9件を組み立て、保存して再構築する。回答・製造はしない。**
+**f577bfbaの初回準備は目的参照位置の誤りでexit1。相談役は製品修正6と設営20を別々に個別承認した。準備の技術完了は未認定。**
 
-正本：[ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)。kawafmm承認済みID9主線と「終わったら次に進んで」に基づく、今回明示した準備接続だけ。同じCodex2で返信全文を受領して続行する。
+親正本：[ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md)。kawafmm承認済みID9主線と「終わったら次に進んで」に基づく準備接続のみ。
 
-提案から一箇所変更：旧adopted_media_manufacturing_v001.mtsを直接編集しない。旧live SHAを保つため、本文/group/要求生成の必要な純粋計算だけを新規adopted_caption_judgment_inputs_v001.mtsへ限定派生し、新規runner/src/digest-caption-input-preparation-v001.tsから呼ぶ。旧builderを新関数へ切替える変更も今回しない。既存validator/owner/resolverは再利用し、reader/製造の大量複製はしない。
+再開正本：[目的参照修正・保存先分離](work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001_PURPOSE_REFERENCE_FIX.md)、指示保存0c94c3c9ebe37e61b4576e5c6eaec33927bb7cf5。同じCodex2が返信全文を受領し、attempt-002で続行する。本人の再手貼りや技術判断の転記は不要。
 
-元入力はdraft_eCg3g-IMIzEWMtJuMyJWBの受理済みstate/plan/execution/採否保持/STT/共通発話/時計。正規依存鎖と小JSONの実SHAを確認する。旧purpose・承認snapshotの「今回は字幕を作らない」は不変。本書の準備scopeを新manifestに別束縛し、旧製造許可へ偽装しない。
+### 3.1 維持する実装と終点
+
+通常保存計画から意味atomと区間別表示要求9件を組み立て、保存して再構築する。回答・製造はしない。
+
+旧adopted_media_manufacturing_v001.mtsは直接編集せず、本文/group/要求生成の必要な純粋計算だけを新規adopted_caption_judgment_inputs_v001.mtsへ限定派生し、新規runner/src/digest-caption-input-preparation-v001.tsから呼ぶ。旧builderの切替もしない。既存validator/owner/resolverを再利用し、reader/製造の大量複製はしない。
+
+元入力はdraft_eCg3g-IMIzEWMtJuMyJWBの受理済みstate/plan/execution/採否保持/STT/共通発話/時計。正規依存鎖と小JSONの実SHAを確認する。旧purpose・承認snapshotの「今回は字幕を作らない」は不変。親正本の準備scopeを新manifestに別束縛し、旧製造許可へ偽装しない。
 
 style/taskDescriptionはmappingでSHA確認済みの旧source templateのpromptInputを準備用技術入力に限定して使用する。36論理幅/2行/既存文字幅規則は今回の参照値であり、144px正式style・縁選択を確定するものではない。将来変更は新要求版で扱う。
 
 9保持区間をcandidateIdだけでまとめずsegmentId/順序/断片列で扱う。3,613保持atomと境界候補を決定的に作り、drop3,460や区間間の空白を復活させない。表示回答・cue/行末・各atom出力時計・演出は作らない。
 
-新保存先：runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001/。元attemptへは書かない。意味入力・9要求・元参照/style/実装/今回scopeのmanifestだけを保存し、通常queueの新成果物登録やcompleteにしない。
+### 3.2 今回の二つの個別修正
 
-確認は今回入力の実接続、純粋計算の旧正常例との同等性、今回境界の最小拒否、別process再構築一回に限定。既存4工程・全拒否suite・動画QCを繰り返さない。完成source package・背景4参照・renderer jobは未生成のまま残す。
+A（製品修正6）：新runnerのget(plan.approvedRequestBinding)が返すbinding-inputは承認記録で、productionIntent直下参照は誤り。承認snapshot全体をrecord(intent.identity).approvedDraftとapprovedでdeepEqualし、目的本文は正規stage('production-intent.json').productionIntentとdraft.purposeでequalする二行へ置換する。他の3判断要求の目的全文・owner・SHA・版検査は維持する。
 
-累積製品修正5／設営18を保持。今回の新2path初回実装は明示許可の接続追加として区別し、製品変更0とは報告しない。小試験補助作成/適用時だけ個別承認の設営19を計上する。一般上限・強制停止・旧履歴は不変。
+B（設営20）：prepare-test.mtsのNEWをruntime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002にし、PARAMS.outputRoot・meaningPath・count・oldPrefixの四箇所を同attempt-002/bundleへ揃える。新parameters/保全一覧/否定fixture/proofだけを新先へ置き、初回rootのparameters・失敗・old-inputs-beforeを上書きしない。
+
+親正本の実SHA c56aa5710696686778ac9cc5ab26787d35395b7c9d9b672db956f22ea09db209は維持。本追補は別の修正承認として記録し、元scopeBindingを付け替えない。新準備は修正後の新runner実装SHAへ束縛する。
+
+確認は今回入力の実接続、既存の小同等性確認、今回境界の最小拒否、別process再構築一回という親の四群のまま。初回旧正常一区間658断片の比較通過は部分成立として保持し、未実施の保存・再読の合格と合算しない。旧suite・通常4工程・動画QCを繰り返さない。完成source package・背景4参照・renderer jobは未生成のまま残す。
+
+適用済み累積は製品修正5／設営19、新二path初回実装。今回承認は適用時に製品6／設営20として別々に計上。一般上限・強制停止・旧履歴をリセットせず、別不具合を混ぜない。
 
 ## 4. 容量と保全
 
@@ -58,10 +70,10 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 
 初回は本人手貼り。開始後はCodex2専用Edgeから同じZEV Build Loopへ直接送信し、返信生成完了・全文読了まで受領する。本人を通常の中継役へ戻さない。
 
-入力対応は今回accept発行済み。新準備接続の受領・実装・設営19適用・完成は未確認。前件残存0はCodex報告として受領し、現在の実稼働と混同しない。
+準備接続の受領・新二path初回実装・設営19適用・局所exit1はCodex報告と保存証拠で確認。製品6／設営20の受領・適用・attempt-002実行・完成は未確認。相談役はMacの実processを直接観測していない。
 
 main、担当fileのみ明示stage、他者変更保全、stage/commit/push直列化。Codex1起動・受理だけの再commitは不要。今回完了から字幕回答・演出・動画工事へ自動着工しない。
 
-## Codex2 checkpoint — 2026-10-03 字幕判断入力準備の局所停止
+## Codex2 checkpoint — 2026-10-03 字幕判断入力準備の初回局所停止
 
-8c96aa62から新規二pathと設営19を実装。厳密な対象型検査・export/出力不存在確認、旧正常一区間の純粋比較を通過。実入力準備は承認保存参照から目的文を取り出す位置の誤りでexit1、要求保存/別process再構築は未完了。正規参照は準備記録内の承認snapshotを指し、制作要求本文は別の保存物にある。最小未適用差分・初回失敗証拠・旧入力前後不変を[主report](reports/digest-caption-input-preparation-20261003/README.md)へ保存。製品修正5/設営19を維持し、製品6/設営20となる修正・新隔離再走についてGPT_DECISIONする。追加作用は停止中。媒体/通常HTTP/判断/描画/費用0、既存受理・人間Pendingは不変。
+f577bfba固定版の履歴：8c96aa62から新規二pathと設営19を実装。対象型検査・export/出力不存在確認、旧正常一区間の純粋比較を通過。実入力準備は承認保存参照から目的文を取り出す位置の誤りでexit1。要求保存/別process再構築は未完了。初回失敗証拠と旧入力54件不変を[主report](reports/digest-caption-input-preparation-20261003/README.md)へ保存。媒体/通常HTTP/判断/描画/費用0、既存受理・人間Pendingは不変。この停止を今回の承認や後続成功へ付け替えない。
