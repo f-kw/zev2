@@ -137,3 +137,16 @@ kawafmmへの判断依頼が必要な場合は、COMMUNICATION.mdの規律に従
 3. 通常の実装・修正はCodexが自律的に進める。
 4. 第一完成ではCodex自身の完了報告で最終監査へ提出し、§3の終了・修正手順に従う。
 5. kawafmmは監督者として残し、日常的な中継役にはしない。
+
+## 10. 完了前cleanupと次指示
+
+第一完成の提出前に、Codexは `docs/policies/CODEX_WORK_CYCLE_CLEANUP_POLICY_v001.md` に従ってcleanupを行う。
+
+1. 最終成果・manifest・report・必要な失敗証拠を先に固定する。
+2. 現work-order/session所有の一時物を KEEP / DELETE_WHEN_DONE / ASK_BEFORE_DELETE に分類する。
+3. DELETE_WHEN_DONEだけを、参照が切れていることを確認して削除する。
+4. 自分のprocess、temp、lock、untrackedを確認する。
+5. 正本更新・commit/push・Git cleanの後、cleanup結果を含む相談役報告を送る。
+6. NEXT_REQUEST付きなら相談役返信全文を受領し、次の明示指示へ進む。
+
+監査用checkpointが必要な途中停止では、原因究明に必要な証拠を失わないことを優先する。ただし巨大なpartial媒体そのものが不要なら、最小証拠固定後の削除を次の承認済み再開/終了処理へ含めてよい。
