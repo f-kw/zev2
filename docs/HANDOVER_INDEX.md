@@ -1,6 +1,6 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v055
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v056
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
