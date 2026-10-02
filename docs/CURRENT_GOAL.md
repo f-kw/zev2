@@ -2,90 +2,71 @@
 
 更新日：2026-10-03（JST）
 
-## 1. 復元・旧履歴
+## 1. 復元と過去記録
 
-プロジェクトZEV_START_HERE.mdを全文読み、GitHub mainの現在HEADと同一SHAのHANDOVER_INDEX、現行指示を読む。保存・発行・受領・適用・実行・技術受理・人間採用を分ける。
+プロジェクトZEV_START_HERE.mdを全文読み、GitHub mainの現在HEADと同一SHAのHANDOVER_INDEX、現行正本を読む。発行・受領・適用・実行・技術受理・人間採用を区別する。
 
-更新前全文、設営27の受領/適用とReact解決停止は[0f103935固定版](https://github.com/f-kw/zev2/blob/0f103935d50b6c6059f8bf0db723f8be80a6923d/docs/CURRENT_GOAL.md)に保持。9dc72330の正本Markdown読取停止、903d79b4計画時計完成、fda455c4表示回答完成、01b25053記録整形停止、d93e6418旧候補と行末未達、d231a911第一回答停止、a98f569a準備完成、f577bfba準備初回停止、4556e389入力対応、7bb5de02実判断、ccd907a5までのv005履歴を辿れる。古い停止・次試験を後のacceptへ逆流させない。
+更新前全文と144px診断完成までの履歴は[ebc2269f固定版](https://github.com/f-kw/zev2/blob/ebc2269f382718e8c04a8ce2bd9176298592806b/docs/CURRENT_GOAL.md)に保持。0f103935のReact解決停止、9dc72330のMarkdown読取停止、903d79b4時計、fda455c4表示回答、a98f569a準備、4556e389入力対応、7bb5de02実判断、v005の履歴を辿れる。過去の停止・未完了を後のacceptへ逆流させない。
 
 ## 2. 完了・相談役受理
 
-- **v005通常キュー接続：技術完了。** 7c8f34ce、[親v005 §13](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md)accept。追加拒否/転送検証へ戻さない。
-- **通常依頼の実判断付き計画：7bb5de02 accept。** 12候補/7採用/9保持、keep3,613/drop3,460、4工程succeeded、27,691frame/40,705,770sample、別process再読0。既見素材一件で汎化・人間品質とは別。
-- **字幕演出入口の入力対応：4556e389 accept。** 18項目の供給元・不足・再利用条件の静的対応。
-- **字幕判断入力準備：a98f569a accept。** 新二path、3,613atom/9要求、旧658断片比較、11拒否、別process再構築。
-- **保存9表示要求への実回答候補：fda455c4 accept。** attempt-004、218表示単位/289行、1〜8同一回答再利用・9一行末訂正、全被覆/既存検査/別process再読0。manifest SHA bbf4536aaae9941a3142630b74a74db5638c570a731b33c03360770a32b6bc88。
-- **接続前計画時計診断：903d79b4 accept。** 全218cue/289行/3,613atomを同じ9区間へ対応、unmapped0、保存再読一致。受理は[STYLE_COMPATIBILITY §1](work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001.md)。時計JSON SHA 72eab2201c0bb3e918aabf314ec3c0613f61ef4641a20402db5e7316282a2761、manifest SHA 36f41a965c891aa5cf35c00c81b2aaf171284a1941d9d9d20a9c64532db44179。8〜526frame/空白15件1,220frame/重なり0は観測だけで見心地合格ではない。
+- v005通常キュー接続：7c8f34ce、親v005 §13 accept。追加拒否・転送試験へ戻さない。
+- 通常依頼の実判断付き計画：7bb5de02 accept。12候補/7採用/9保持、keep3,613/drop3,460、4工程succeeded、27,691frame/40,705,770sample、別process再読0。
+- 字幕演出入口の静的対応：4556e389 accept。18項目の供給元・不足・再利用条件。
+- 字幕判断入力準備：a98f569a accept。3,613atom/9要求、新二path、旧正常比較、11拒否、別process再構築。
+- 保存9表示要求への回答候補：fda455c4 accept。旧36論理幅/2行条件、218cue/289行、行末一点訂正、既存検査・保存再読0。144px適合とは別。
+- 接続前計画時計：903d79b4 accept。218cue全件対応、unmapped0。最短8/最長526frame、空白15件1,220frameは観測で品質判定ではない。
+- **144px/A8/4適合診断：ebc2269f382718e8c04a8ce2bd9176298592806bをaccept。** 218cue/289行/3,613atom不変、適合120/不適合98/評価不能0。全98件は右端116行のLAYOUT_SAFE_AREA_VIOLATION。全9要求が影響する。型/run0、実import/既存関数、保存再読一致、48小入力/実装・5旧失敗file不変。受理は[次正本§1](work-orders/ZEV_DIGEST_CAPTION_144PX_REFLOW_20261003_v001.md)、保存1bdb9b12f84d872fe1f38547093d39d6151fbb49。
 
-15分初稿レビュー、構成改善v001の局所検証、一件後修正/Reset、旧9:47案1080p低メモリ製造も完了範囲を維持。受理はGitHubの保存コード・証拠による相談役監査であり、Macの全runtime再実行・媒体視聴を行ったものではない。
+診断root：runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003/。
+compatibility SHA eb7a7a69c97722fc8433f73d4dbfd7733125d652903498cc1642f036c5336525。
+manifest SHA 948c1e11d2e6c6745c280f3c1797af956bd47a6b160810018525ba4b9516c02d。
 
-## 3. 現在の一件 — 既存Node依存解決で144px診断を再開
+診断のacceptは不適合を合格にするものではなく、変更対象を確定した技術完了。元36条件の表示回答と時計acceptは維持する。15分初稿レビュー、構成改善v001、一件後修正/Reset、旧9:47案の1080p低メモリ製造も完了範囲を保持する。相談役の監査はGitHub保存コード・実測証拠によるもので、Mac上の再実行・実glyphや映像視聴ではない。
 
-**0f103935を監査。設営27の正本byte読取と新先は適用済み、型検査0。実runは既存renderer importのMODULE_NOT_FOUND: reactでexit1、cue診断0・完成出力0。対象childだけNODE_PATHを既存runner/node_modulesへ指定し、失敗保全用attempt-003へ移す一件を設営28として個別承認した。製品6/設営27は実績、28は指示発行済み・適用未確認。**
+## 3. 現在の一件 — 144px候補への98件限定表示再調整
 
-再開正本：[NODE_PATH_FIX](work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001_NODE_PATH_FIX.md)、保存16254bd47eaa8f449ec7a202c88765cb74894ea3。
-親：[STYLE_COMPATIBILITY](work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001.md)。
-前修正：[SCOPE_READ_FIX](work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001_SCOPE_READ_FIX.md)。
+**正本：[ZEV_DIGEST_CAPTION_144PX_REFLOW_20261003_v001.md](work-orders/ZEV_DIGEST_CAPTION_144PX_REFLOW_20261003_v001.md)、保存1bdb9b12f84d872fe1f38547093d39d6151fbb49。decision: continue。**
 
-kawafmm承認済み親作業の起動設営で、既存tools/digest-quality/integrated-preview.mjsとoriginal-resolution-local.mjsにも同じlayout inspector childへのNODE_PATH指定がある。新dependency/製品/検査意味/費用/権限を変えないため、AGENTSの軽微技術判断委任で本人への再確認・転記は不要。一般上限・強制停止・過去履歴・自己承認権は不変。
+kawafmm承認済みID9主線と「終わったら次に進んで」に基づく、既存一計画・A技術候補の新要求/限定実回答/保存検証を明示許可。診断だけの旧scopeを遡及変更せず、本書を別scopeとして束縛する。一般本適用/動画許可/人間品質採用の承認ではない。
 
-### 許可する変更
+### 制約と変更対象
 
-確認済みworkspaceをcwdに、診断commandだけへ次を指定する。
+26論理幅/2行を今回の候補条件とする。使える1912px、stroke/glow24px、padding12px、1重み72pxから26は1908px、27は1980px。26文字ではない。旧36入力やrenderer/registry/default/信頼条件は変更しない。実glyph適合と正式assemblyのstyle制限値整合は別。
 
-```sh
-cd /Users/kawafmm/workspace/zev2 && \
-NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules \
-node --import ./runner/node_modules/tsx/dist/loader.mjs \
-docs/reports/digest-caption-style-compatibility-20261003/check-style.mts run
-```
+元要求の実bytes/SHAを確認し、新requestId、maxLogicalWidthPerLine=26、再計算したinputCanonicalSha256だけを変えた9新要求を別に保存する。schema、元本文/boundary/caption/atom ID、taskDescription、plan/machineAdoption/meaning参照、2行/文字幅規則は維持。新要求の実bytesから新SHAを作り、旧要求や旧responseファイルのSHAを付け替えない。
 
-小補助はOUTだけをruntime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003へ変更し、manifest.historyを28に追従する。evidence/README/現在地へ実受領HEAD、適用回数、command/cwd/NODE_PATH、既存依存解決先、新先/時刻/失敗履歴を記録する。新しいhelperは不要。設営27のbyte/SHA読取は維持する。
+適合120cueは本文・atom列・cue終端・行末・元ms/計画frameを固定。不適合98cue内だけ行末を再判断し、2行で収まらない等の場合は旧cue内部の既存候補境界で追加分割する。旧218cueの外側境界、全9区間、候補6の非連続3区間を維持し、旧cue間の合体や固定部分への侵入はしない。新cue/行数は固定しない。
 
-恒久export、shell profile、本番環境、他process、package.json/lockfile/node_modulesは変更しない。install/update、新symlink、stub、独自resolver/loader、製品/renderer/Skill/validator改変・複製は行わない。既存pnpm symlinkの解決・module読取だけを使う。旧製造toolは起動しない。
+全9新要求の各提示後にCodex2が可変部分を読み、新responseを返す。120部分の判断は根拠付き再利用し、旧response全fileの再利用とは呼ばない。実Skill/validatorで全回答を検査し、新result/token/traceを作る。本文訂正・省略・ID創作・機械的な一律折返しは禁止。既回答の条件付き分割を保持する。
 
-### 保全と未確認
+### 一系列の終点
 
-元evidence.workOrder/出力scopeBindingの親SHA 4e244e34f9b3f04ed338574801a38eccc76e7b1be4fafb5b6a6fed6827b363b5 は不変。今回追補は別path/SHA/受領HEADへ記録し、設営27のrepairApprovalを消さない。旧manifestのhelper SHAを付け替えず、新manifestへ今回実装SHAを記録する。
+新要求準備だけで止まらず、新回答→既存26/2・被覆検査→120固定/98内部差分検査→同じNode領域検査→変更子cueの既存frame算術→保存束→別process一回の内容判断なし再構築まで行う。新分割の時計は既存境界関数/保存9mappingの平行移動だけ。元sampleと全体27,691frame/40,705,770sampleは不変。表示延長・読速閾値・仮timelineを作らない。
 
-旧attempt-001のMarkdown失敗、attempt-002のReact失敗を別々に保持。failure.json/evidence-snapshot.json、attempt-002のprocess-output.txt、失敗helper SHA 1f346a9dcf1752e765c54938118330d6147defb02efa26c7cb9de2b8b13970a8、0f103935固定Git版を不変保持する。新先不存在とwxを維持し、旧attemptの削除・上書きはしない。
+新runtime：runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/。
+Git対象：docs/reports/digest-caption-144px-reflow-20261003/run-reflow.mts、README.md、evidence.jsonと自分の現在地。薄い補助作成・適用時のみ設営29を個別計上。製品6/設営28、全失敗・新二path初実装、一般上限・強制停止を保持。製品code/旧helper/Skill/validator/rendererは変更しない。
 
-React18.3.1/Remotion4.0.481の実pathと元NODE_PATH=nullはCodexのrequire.resolve観測報告。相談役の実機再測定ではない。require.resolveや旧起動例だけで今回の実importを合格にせず、新起動条件で既存の実import/export確認を通してから診断する。未解決なら例外を隠さず相談役へ返し、自動install/stubで通さない。
+起動は対象processだけNODE_PATH=既存runner/node_modules、既存tsx loader。恒久環境/install/stub/symlink追加なし。必要型、実import/export/返却shape、入力SHA、byte/JSON読取の区別、親実在・新先不存在を実回答前に確認。記録は標準JSON・単一writer・排他新規保存。
 
-### 続行する診断
+新しい否定suite・旧4工程・旧suite/QC/人間レビュー・全過去資産走査は追加しない。許可候補だけでは収まらない等の実質問題は該当cue/atomと最小差分を相談役へ返し、validator緩和や120の再判断で隠さない。
 
-218cue/289行を既存144px・縁A=8/4 Normal技術候補へ本文・行末・時計不変で当て、不適合cue/元要求の最小再準備対象を得る。Aの人間選択・最終style採用ではない。
+## 4. 人間回答・別の未承認事項
 
-同一の比較attempt-003 verification内raster[tag=0-A,label=0].props、元candidate-plan/raster-records/font宣言の参照鎖を照合。7A初期4/4・A8/4・B8/12を混ぜず、欠落は具体的不足として返す。既存indexExplicitLinesV001/buildExactTextModel/inspectPresentationRenderLayoutV001を使い、documentなし推定幅と実glyph/rasterを区別する。
+presentation=not-connected／executionPermission=not-approved／humanQuality=pending／outlineChoice=null、ID9-PD-01/02未承認を維持。今回A8/4は技術入力、26はその入力候補制約。144px方向・「読む必要がある文章でなかったら」の分割・水色/カラフル方向肯定は保持し、縁や全編品質へ一般化しない。
 
-必要型/preflight/実import→全cue診断→新小JSON保存再読一回→読んだ旧小入力不変→担当のみcommit/push・Git状態/自分のprocess終了確認→専用Edge直接報告まで進む。通常の領域不適合は想定診断結果として全件収集し、初件でhelper故障扱いしない。折返し・縮小・safe area緩和で無理に合格させない。
+B8/12の21論理不合格、強調変更B未肯定、LightCoral技術不合格と好みの区別、固定アップのHUD/自動選択/品質は既存台帳へ保持。旧10回答・15分レビューは済み、R1〜R3修正版7点・鬼武者Q3-2は未回答。一件後修正/Resetは既存能力。旧307状態/18色/82frameアップを一括移植しない。
 
-新否定suite・別process試験・全旧資産走査、旧run-display/map-timing/通常4工程/QC/人間レビューは追加・再実行しない。
-
-## 4. 人間回答・未承認境界
-
-144pxと「読む必要がある文章でなかったら」の条件付き分割、水色/カラフル方向肯定を保持。36論理幅での候補成立を144px最終style・物理幅・表示時間・全編品質の合格へ広げない。
-
-presentation=not-connected／executionPermission=not-approved／humanQuality=pending／outlineChoice=null、ID9-PD-01/02未承認。Aは技術候補。B8/12の21論理不合格、強調変更B未肯定、LightCoral技術不合格と好みの区別、固定アップのHUD/自動選択/品質未解決を保持。
-
-旧10回答・15分レビューは済み。R1〜R3修正版7点、鬼武者Q3-2未回答は[台帳](HUMAN_REVIEW_PENDING.md)へ保持。一件後修正/Resetは既存能力。旧307状態/18色/82frameアップは一括移植しない。
-
-完成背景4参照、正式style/renderer/font ledgerの採用、ROOT基準後段接続、演出・動画許可・人間品質、旧state移行・本番・公開は別。今回新要求/回答を作らず、旧acceptを取り消さない。
+完成背景4参照、最終style/renderer/font ledgerの採用、ROOT基準正式後段読取、実glyph/表示時間/見心地、演出・動画許可、人間品質、旧state移行・本番/公開は別残件。
 
 ## 5. 容量・禁止・受渡し
 
-旧8コピー35.79GiB削除・33参照再作成要、元動画/STT/inspection/完成媒体/判断/旧state保持を維持。実判断終了時空き12,933,283,840bytesは過去観測で現在空き/SSDは未確認。今回容量整理・SSD・削除をしない。
+旧8コピー35.79GiB削除・33参照再作成要、元媒体/STT/inspection/完成媒体/判断/旧state保持の履歴を維持。実判断終了時空き12,933,283,840bytesは過去観測、現在空き/SSDは未確認。容量整理・SSD・追加削除はしない。
 
-媒体/フォントbinary read/hash/copy/PUT、通常HTTP/backend/index runner、新API/provider/費用、STT/inspection/ffprobe、内容再判断、新要求/回答、描画・背景・演出・動画、新queue/UI、本番/公開は禁止。既存module importを描画許可へ読み替えない。
+媒体/フォントbinary read/hash/copy/PUT、通常HTTP/backend/index runner、新API/provider/費用、STT/inspection/ffprobe、色/motion/アップ判断、描画/背景/音声/動画、新queue/UI、本番/公開は禁止。指定小JSONの候補作成と既存module利用のみ。
 
-同じCodex2専用Edgeで返信生成完了・全文読了まで受領して続行する。本人への再手貼り/転記/視聴/採点、Codex1起動、受領だけの独立commitは不要。main・担当のみ明示stage、他者変更保全、Git操作直列化。
+同じCodex2専用Edgeで返信生成完了・全文読了まで受領し、指定範囲で続行する。本人の再手貼り/転記/視聴/採点、Codex1起動、受領だけの独立commitは不要。main・担当のみ明示stage・Git操作直列化・他者変更保全。新規問題がなければ候補完成/保存再読/commit/push/直接報告まで進む。
 
-報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px技術候補と表示回答の適合。
+報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px候補への限定表示再調整。
 
-現在地：設営27適用・型0/run1・診断0、Git clean/untracked0・実run終了はCodex報告と保存記録。相談役のMac直接観測ではない。設営28は正本保存・発行済み。受領・適用・実import・attempt-003の診断完成は未確認。
-
-
-Codex2 設営28受領・適用checkpoint（2026-10-03）：f83625b4のNODE_PATH_FIX全文と確定返信を受領。対象commandだけNODE_PATH=既存runner/node_modules、OUT attempt-003とmanifest履歴28へ追従。製品6／設営28、旧001/002失敗は不変。正本byte読取・scope・配置・判断・時計を維持。現在は型・実import・診断前。
-
-
-Codex2 144px診断完成checkpoint（2026-10-03）：attempt-003、対象型/run0、実import/export成功。218cue/289行/3613atomは本文・行末・時計不変、A8/4 Normalの既存推定幅検査で適合120／不適合98／評価不能0。98件は右端116行のsafe area超過、元9要求すべてに分布。新小JSON一回再読object/bytes/SHA一致、読んだ48入力/実装と旧失敗5file不変。製品6／設営28、旧001/002失敗を保持。compatibility SHA eb7a7a69…、manifest948c1e11…。新要求／回答は未作成、120cue再利用候補・98cue再準備の最小案を[report](reports/digest-caption-style-compatibility-20261003/README.md)へ保存。縁null・人間品質pending・動画未承認を維持。次は担当のみcommit/push・Git/process確認・専用Edge直接報告。
+ebc2269fのpush/Git clean/process0はCodex報告と保存証拠であり、相談役のMac直接観測ではない。今回accept/新指示は保存・発行、受領・設営29適用・新要求/再回答の開始/完成は未確認。保存だけで稼働済みにしない。
