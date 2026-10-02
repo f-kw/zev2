@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-caption-style-compatibility-evidence-v001",
-  "status": "stopped-existing-node-package-resolution",
+  "status": "complete-diagnostic-not-human-adoption",
   "receivedAt": "2026-10-02T18:23:11.306021+00:00",
   "session": "Codex2",
   "head": "2626106bd8b2f1b68a729aaae3c2ceea189d6d16",
@@ -11,11 +11,12 @@
   "history": {
     "product": 6,
     "setupBefore": 25,
-    "setupApplied": 27,
+    "setupApplied": 28,
     "approvedSetupWhenHelperCreated": 26,
     "appliedSequence": [
       26,
-      27
+      27,
+      28
     ]
   },
   "scope": "Existing saved 144px A8/4 Normal technical candidate; unchanged current text/lines/clock; document-free existing layout inspection only",
@@ -59,7 +60,7 @@
     "fullReplyRead": true,
     "setup": 27
   },
-  "attempt": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002",
+  "attempt": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003",
   "oldFailureBindings": [
     {
       "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-001/failure.json",
@@ -70,6 +71,21 @@
       "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-001/evidence-snapshot.json",
       "sizeBytes": 2184,
       "fileSha256": "9b412cade3d01443ab945a353eac4d55a3fd879f5d67943bf0cd0436a13a6823"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002/failure.json",
+      "sizeBytes": 694,
+      "fileSha256": "715c7b7baefa922ec6c54af71726da24a0e3cf3ea3247d848767d7fbf3f31d32"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002/evidence-snapshot.json",
+      "sizeBytes": 3954,
+      "fileSha256": "fad5494fb0e7e840be3d1bd69d60f6853369970b8792d5943c1876a56485f45f"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002/process-output.txt",
+      "sizeBytes": 1459,
+      "fileSha256": "b91d7f2365b28535f8458c35e53963ebced5bb3bcaa0e59caeffcb8048e4ae79"
     }
   ],
   "failure2": {
@@ -84,5 +100,645 @@
     "mediaOrFontBinaryActions": 0,
     "occurredAt": "2026-10-02T18:46:35.858838+00:00",
     "proposal": "Use NODE_PATH set only for this child process to the existing runner/node_modules; no installation, symlink, product edits or module stub. Preserve attempt-002 and use attempt-003 with history28 if individually approved."
+  },
+  "nodePathApproval": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001_NODE_PATH_FIX.md",
+    "fileSha256": "49b6db5092815a1d70f045f4dd1d96b479954033ad571e0a2b27f3d56266ca41",
+    "receivedHead": "f83625b4f8d2e259ad5f3af433fe876e38d0bba1",
+    "receivedAt": "2026-10-02T18:56:42.015630+00:00",
+    "fullReplyRead": true,
+    "setup": 28
+  },
+  "launch": {
+    "cwd": "/Users/kawafmm/workspace/zev2",
+    "command": "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules node --import ./runner/node_modules/tsx/dist/loader.mjs docs/reports/digest-caption-style-compatibility-20261003/check-style.mts run",
+    "envScope": "this-process-only",
+    "NODE_PATH": "/Users/kawafmm/workspace/zev2/runner/node_modules",
+    "reactResolution": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/react@18.3.1/node_modules/react/index.js",
+    "remotionResolution": "/Users/kawafmm/workspace/zev2/node_modules/.pnpm/remotion@4.0.481_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/remotion/dist/cjs/index.js"
+  },
+  "oldFailureEvidenceUnchanged": true,
+  "completedAt": "2026-10-02T18:59:39.497098+00:00",
+  "validation": {
+    "typecheckExitCode": 0,
+    "runExitCode": 0,
+    "existingImportsAndExportsVerified": true,
+    "newOutputAbsentBeforeRun": true,
+    "oldReadInputsUnchangedCount": 48,
+    "savedReadback": {
+      "count": 1,
+      "objectEqual": true,
+      "bytesAndShaEqual": true,
+      "readbackMs": 9.965207999999961
+    },
+    "newRequestOrResponse": 0,
+    "newContentJudgment": 0,
+    "oldSuitesOrMediaQC": 0,
+    "processEnded": true
+  },
+  "outputBinding": {
+    "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003/compatibility.json",
+    "fileSha256": "eb7a7a69c97722fc8433f73d4dbfd7733125d652903498cc1642f036c5336525",
+    "sizeBytes": 2377757
+  },
+  "manifestBinding": {
+    "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003/manifest.json",
+    "fileSha256": "948c1e11d2e6c6745c280f3c1797af956bd47a6b160810018525ba4b9516c02d",
+    "sizeBytes": 12699
+  },
+  "summary": {
+    "groups": 9,
+    "cues": 218,
+    "lines": 289,
+    "atoms": 3613,
+    "compatible": 120,
+    "incompatible": 98,
+    "unassessable": 0,
+    "minimalAffectedRequestOrdinals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "whollyReusableRequestOrdinals": []
+  },
+  "requestSummary": [
+    {
+      "groupOrdinal": 1,
+      "candidateId": "candidate-0001",
+      "timelineSegmentId": "segment-0001",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+        "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0001.json",
+        "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+      },
+      "cueCount": 14,
+      "compatible": 9,
+      "incompatible": 5,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        1,
+        5,
+        7,
+        8,
+        9
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 2,
+      "candidateId": "candidate-0002",
+      "timelineSegmentId": "segment-0002",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+        "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0002.json",
+        "fileSha256": "d3580e0f8ffabc7e39e86858bbced93cfb13336e369be5e6a6759752aa3ad490"
+      },
+      "cueCount": 36,
+      "compatible": 19,
+      "incompatible": 17,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        13,
+        15,
+        17,
+        20,
+        23,
+        26,
+        30,
+        32,
+        34
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 3,
+      "candidateId": "candidate-0003",
+      "timelineSegmentId": "segment-0003",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+        "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0003.json",
+        "fileSha256": "33b03ce6cf8ef7cb75abe330b39354c32ad69c38ab5d84f383629faba86a8e4d"
+      },
+      "cueCount": 5,
+      "compatible": 0,
+      "incompatible": 5,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 4,
+      "candidateId": "candidate-0004",
+      "timelineSegmentId": "segment-0004",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+        "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0004.json",
+        "fileSha256": "5c354b87645416f89e8266283bba827a0e69f8c0180e59346547aaef8c11fb70"
+      },
+      "cueCount": 67,
+      "compatible": 41,
+      "incompatible": 26,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        2,
+        4,
+        7,
+        11,
+        12,
+        14,
+        20,
+        24,
+        25,
+        29,
+        30,
+        32,
+        35,
+        37,
+        39,
+        40,
+        42,
+        47,
+        49,
+        51,
+        52,
+        54,
+        56,
+        57,
+        63,
+        64
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 5,
+      "candidateId": "candidate-0005",
+      "timelineSegmentId": "segment-0005",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+        "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0005.json",
+        "fileSha256": "ede0b511b0b25e7168c1f44381293f4163e069b0e7a1c49f77a4743d8d672e13"
+      },
+      "cueCount": 41,
+      "compatible": 21,
+      "incompatible": 20,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        11,
+        19,
+        20,
+        21,
+        22,
+        24,
+        29,
+        31,
+        32,
+        33,
+        35,
+        36,
+        38,
+        40,
+        41
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 6,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0006",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+        "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0006.json",
+        "fileSha256": "07e1bc48c1add3bafcd3756293d525511a1c7d2e039e24c64246985e218cd9bb"
+      },
+      "cueCount": 15,
+      "compatible": 8,
+      "incompatible": 7,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        15
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 7,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0007",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+        "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0007.json",
+        "fileSha256": "c53c5a01ea368fd3ce552386180ccfecbad00712b9eb21ac4fb7b5d2af3adf91"
+      },
+      "cueCount": 11,
+      "compatible": 6,
+      "incompatible": 5,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        2,
+        3,
+        5,
+        8,
+        10
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 8,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0008",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+        "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0008.json",
+        "fileSha256": "9436e4b2d1d0101b9a2a03943d200f2f5b09dddf8e2d5ad949600b596fda22bb"
+      },
+      "cueCount": 13,
+      "compatible": 7,
+      "incompatible": 6,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        1,
+        5,
+        6,
+        9,
+        10,
+        11
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    },
+    {
+      "groupOrdinal": 9,
+      "candidateId": "candidate-0007",
+      "timelineSegmentId": "segment-0009",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+        "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0009.json",
+        "fileSha256": "3b8157fe42cfe597d920479c9bec89539079bb0c07adc0a98da191fd53f23b7f"
+      },
+      "cueCount": 16,
+      "compatible": 9,
+      "incompatible": 7,
+      "unassessable": 0,
+      "incompatibleCueOrdinals": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        10,
+        15
+      ],
+      "action": "new-technical-condition-preparation-needed-only-for-listed-cues"
+    }
+  ],
+  "observedInputs": [
+    {
+      "path": "docs/work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001.md",
+      "fileSha256": "4e244e34f9b3f04ed338574801a38eccc76e7b1be4fafb5b6a6fed6827b363b5",
+      "sizeBytes": 11835
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-plan-timing-20261003-v001/attempt-001/cue-time-map.json",
+      "fileSha256": "72eab2201c0bb3e918aabf314ec3c0613f61ef4641a20402db5e7316282a2761",
+      "sizeBytes": 1173467
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-plan-timing-20261003-v001/attempt-001/manifest.json",
+      "fileSha256": "36f41a965c891aa5cf35c00c81b2aaf171284a1941d9d9d20a9c64532db44179",
+      "sizeBytes": 25590
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/manifest.json",
+      "fileSha256": "bbf4536aaae9941a3142630b74a74db5638c570a731b33c03360770a32b6bc88",
+      "sizeBytes": 22403
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/manifest.json",
+      "fileSha256": "83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75",
+      "sizeBytes": 34441
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/meaning-input.json",
+      "fileSha256": "6e16d247d36f841783d59badc4c4a3f35c8cf4739b6acae29baccc32a7d061a3",
+      "sizeBytes": 1965398
+    },
+    {
+      "path": "runtime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/verification.json",
+      "fileSha256": "2eb9421958f975f9fd0f5200626711c8b61d53fcbf6970b034d5c5ef9c456f0d",
+      "sizeBytes": 241623
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/candidate-render-plan.json",
+      "fileSha256": "cbac650c8677f12df573f06fa8d3502260d9e91ba5998d462548b89e56200e5d",
+      "sizeBytes": 2361077
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-20260928-preview-v004/raster-records.json",
+      "fileSha256": "2ca8406cae3805702244301934fe7e45a2861db82a16de4f20e7b92ed1b4ad74",
+      "sizeBytes": 240685
+    },
+    {
+      "path": "docs/reports/caption-readability-splitting-20260928/current-inspection.json",
+      "fileSha256": "24f6035fcef49f1213468955a15eea86a8d6f1905b107754e1c7c8e5fd99732e",
+      "sizeBytes": 54587
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "sizeBytes": 14291
+    },
+    {
+      "path": "docs/reports/caption-readability-splitting-20260928/human-feedback-20260929-v001.md",
+      "fileSha256": "9b2e23d64a2d850cc6b86d7eb9ec48655f1a089810445424283b40e3d7cb393b",
+      "sizeBytes": 2514
+    },
+    {
+      "path": "tools/digest-quality/caption-outline-comparison.mjs",
+      "fileSha256": "39b1b5e093d1123da0405ace56dcefea2a3e0612dc8fed093f1acc811a42481f",
+      "sizeBytes": 7734
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+      "sizeBytes": 28811
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "sizeBytes": 5139
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+      "sizeBytes": 14071
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4",
+      "sizeBytes": 150414
+    },
+    {
+      "path": "evals/clip_composition/presentation_panel_presets_v002.mjs",
+      "fileSha256": "73c1978a27b30a90d1c9036248eb16039a99e0896c365d35e76b5d9158121522",
+      "sizeBytes": 6334
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+      "sizeBytes": 2144
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d",
+      "sizeBytes": 8755
+    },
+    {
+      "path": "docs/reports/digest-caption-style-compatibility-20261003/check-style.mts",
+      "fileSha256": "c86d5ea02e1d4ed378f41c1d075cfc80cdc402bf1c07e7876338291ce2ce055a",
+      "sizeBytes": 16486
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+      "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567",
+      "sizeBytes": 36774
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0001.json",
+      "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034",
+      "sizeBytes": 5405
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0001.json",
+      "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3",
+      "sizeBytes": 4725
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+      "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc",
+      "sizeBytes": 106017
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0002.json",
+      "fileSha256": "d3580e0f8ffabc7e39e86858bbced93cfb13336e369be5e6a6759752aa3ad490",
+      "sizeBytes": 12550
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0002.json",
+      "fileSha256": "7c691350bcc9eab397202940c39b439d9ecea34aa7806f5fddbd5c53d3b17868",
+      "sizeBytes": 11919
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+      "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50",
+      "sizeBytes": 21549
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0003.json",
+      "fileSha256": "33b03ce6cf8ef7cb75abe330b39354c32ad69c38ab5d84f383629faba86a8e4d",
+      "sizeBytes": 2526
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0003.json",
+      "fileSha256": "cd9378c41741acfcc79292535a6c04216900fdf3178f7d930b61d5a7f088ac56",
+      "sizeBytes": 2017
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+      "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721",
+      "sizeBytes": 164816
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0004.json",
+      "fileSha256": "5c354b87645416f89e8266283bba827a0e69f8c0180e59346547aaef8c11fb70",
+      "sizeBytes": 21376
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0004.json",
+      "fileSha256": "586cf76670ecd4afdf22493e090234376bb907133cc289447d0d254efc158e80",
+      "sizeBytes": 20693
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+      "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe",
+      "sizeBytes": 124799
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0005.json",
+      "fileSha256": "ede0b511b0b25e7168c1f44381293f4163e069b0e7a1c49f77a4743d8d672e13",
+      "sizeBytes": 14568
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0005.json",
+      "fileSha256": "e98ed3d8fca1ebe8c9342fb82c3723ce49002dbcdf220f966dccf7ea9f5ae211",
+      "sizeBytes": 13789
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+      "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6",
+      "sizeBytes": 43215
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0006.json",
+      "fileSha256": "07e1bc48c1add3bafcd3756293d525511a1c7d2e039e24c64246985e218cd9bb",
+      "sizeBytes": 5638
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0006.json",
+      "fileSha256": "07a69f7a823a4f20b24d87e084b4c36fb12f1f500e9fcc357ea6a197b4c39640",
+      "sizeBytes": 5099
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+      "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad",
+      "sizeBytes": 27517
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0007.json",
+      "fileSha256": "c53c5a01ea368fd3ce552386180ccfecbad00712b9eb21ac4fb7b5d2af3adf91",
+      "sizeBytes": 4118
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0007.json",
+      "fileSha256": "974e9fb9f53ed7c26753ff852a9e303fb8229cc70982243c5e6bf1eaaefec713",
+      "sizeBytes": 3603
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+      "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996",
+      "sizeBytes": 28902
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0008.json",
+      "fileSha256": "9436e4b2d1d0101b9a2a03943d200f2f5b09dddf8e2d5ad949600b596fda22bb",
+      "sizeBytes": 4524
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0008.json",
+      "fileSha256": "3bc1f5fffdb24edb7b64cc78d33cec11233a2c17b6682e3d3341f2df14de36bf",
+      "sizeBytes": 3975
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+      "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943",
+      "sizeBytes": 37869
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/response-0009.json",
+      "fileSha256": "3b8157fe42cfe597d920479c9bec89539079bb0c07adc0a98da191fd53f23b7f",
+      "sizeBytes": 5536
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-004/result-0009.json",
+      "fileSha256": "a1160f5f9e1c1aa7024ceef1f7467e6be54ac07117d7c9277cea82cb539e3068",
+      "sizeBytes": 4909
+    }
+  ],
+  "effects": {
+    "mediaAndFontBinaryRead": 0,
+    "mediaCopies": 0,
+    "rendering": 0,
+    "rejudgment": 0,
+    "requestOrResponseChanges": 0,
+    "productChanges": 0,
+    "apiCalls": 0
+  },
+  "elapsed": {
+    "diagnosticMs": 27.51670900000002,
+    "totalBeforeManifestMs": 193.473083
+  },
+  "newFilesBeforeAudit": {
+    "count": 3,
+    "bytes": 2391237
+  },
+  "diagnosticDetails": {
+    "violationCodes": {
+      "LAYOUT_SAFE_AREA_VIOLATION": 98
+    },
+    "failingLines": 116,
+    "lineSideCounts": {
+      "right": 116
+    },
+    "maximumObservedTextWidthPx": 2592,
+    "maximumCompatibleObservedTextWidthPx": 1872,
+    "minimumIncompatibleObservedTextWidthPx": 1944
+  },
+  "nextProposal": {
+    "executed": false,
+    "scope": "Prepare new style-bound requests for existing 9 groups, revise only 98 failed cues, preserve 120 compatible cue/line decisions as traceable candidate reuse; revalidate under new request bytes/SHA without old-response SHA replacement",
+    "requiredBindings": [
+      "saved A8/4 props and registry font declaration",
+      "current exact renderer/layout/text-metric implementations",
+      "original meaning/atom/caption/boundary and existing response/map references"
+    ],
+    "widthConstraintProposal": "Existing candidate has 1912px usable width; wrapper adds existing 24px stroke extent plus 12px padding; estimated weight unit=144*0.5=72px. Integer logical weight 26 =>1908px wrapper fits; 27=>1980px fails. This is a derived technical condition proposal, not an applied limit or final style adoption. Keep two-line condition; longer semantic units may need cue-end judgment, not automatic wrapping."
+  },
+  "processCheck": {
+    "ownDiagnosticNodeProcesses": 0,
+    "method": "ps -Ao pid,ppid,command filtered for own Node helper",
+    "result": "[]"
+  },
+  "gitBeforeCommit": {
+    "branch": "main",
+    "head": "f83625b4f8d2e259ad5f3af433fe876e38d0bba1",
+    "originMainSame": true,
+    "onlyOwnTrackedFilesModified": 5,
+    "stagedOtherFiles": 0,
+    "untracked": 0
   }
 }

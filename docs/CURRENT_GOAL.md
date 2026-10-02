@@ -83,3 +83,9 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px技術候補と表示回答の適合。
 
 現在地：設営27適用・型0/run1・診断0、Git clean/untracked0・実run終了はCodex報告と保存記録。相談役のMac直接観測ではない。設営28は正本保存・発行済み。受領・適用・実import・attempt-003の診断完成は未確認。
+
+
+Codex2 設営28受領・適用checkpoint（2026-10-03）：f83625b4のNODE_PATH_FIX全文と確定返信を受領。対象commandだけNODE_PATH=既存runner/node_modules、OUT attempt-003とmanifest履歴28へ追従。製品6／設営28、旧001/002失敗は不変。正本byte読取・scope・配置・判断・時計を維持。現在は型・実import・診断前。
+
+
+Codex2 144px診断完成checkpoint（2026-10-03）：attempt-003、対象型/run0、実import/export成功。218cue/289行/3613atomは本文・行末・時計不変、A8/4 Normalの既存推定幅検査で適合120／不適合98／評価不能0。98件は右端116行のsafe area超過、元9要求すべてに分布。新小JSON一回再読object/bytes/SHA一致、読んだ48入力/実装と旧失敗5file不変。製品6／設営28、旧001/002失敗を保持。compatibility SHA eb7a7a69…、manifest948c1e11…。新要求／回答は未作成、120cue再利用候補・98cue再準備の最小案を[report](reports/digest-caption-style-compatibility-20261003/README.md)へ保存。縁null・人間品質pending・動画未承認を維持。次は担当のみcommit/push・Git/process確認・専用Edge直接報告。

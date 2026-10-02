@@ -5,7 +5,7 @@ import {readFile, writeFile, mkdir, access} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const OUT = 'runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002';
+const OUT = 'runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-003';
 const REPORT = 'docs/reports/digest-caption-style-compatibility-20261003';
 type Obj = Record<string, unknown>;
 type Binding = {path: string; fileSha256: string; sizeBytes: number};
@@ -152,7 +152,7 @@ async function main() {
   same(sha(reread), outputBinding.fileSha256); same(reread.length, outputBinding.sizeBytes); same(JSON.parse(reread.toString()), output);
   const readbackMs = performance.now() - rereadStart;
   for (const b of observed.values()) { const now = await readFile(path.join(ROOT, b.path)); same(now.length, b.sizeBytes); same(sha(now), b.fileSha256); }
-  const manifest = {schemaVersion: 'digest-caption-style-compatibility-bundle-v001', scopeBinding: evidence.workOrder, outputBinding, summary, inputAndImplementationBindings: [...observed.values()], oldInputsUnchanged: true, readback: {count: 1, objectEqual: true, bytesAndShaEqual: true, readbackMs}, history: {product: 6, setup: 27}, admission, elapsed: {diagnosticMs, totalBeforeManifestMs: performance.now() - started}, effects: {mediaAndFontBinaryRead: 0, mediaCopies: 0, rendering: 0, rejudgment: 0, requestOrResponseChanges: 0, productChanges: 0, apiCalls: 0}};
+  const manifest = {schemaVersion: 'digest-caption-style-compatibility-bundle-v001', scopeBinding: evidence.workOrder, outputBinding, summary, inputAndImplementationBindings: [...observed.values()], oldInputsUnchanged: true, readback: {count: 1, objectEqual: true, bytesAndShaEqual: true, readbackMs}, history: {product: 6, setup: 28}, admission, elapsed: {diagnosticMs, totalBeforeManifestMs: performance.now() - started}, effects: {mediaAndFontBinaryRead: 0, mediaCopies: 0, rendering: 0, rejudgment: 0, requestOrResponseChanges: 0, productChanges: 0, apiCalls: 0}};
   const manifestBinding = await save(OUT + '/manifest.json', manifest);
   console.log(JSON.stringify({status: output.status, outputBinding, manifestBinding, summary, observedInputs: observed.size, diagnosticMs, readbackMs}));
 }
