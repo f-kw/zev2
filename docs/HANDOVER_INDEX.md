@@ -82,7 +82,7 @@ Codex2のv005終了・accept返信受領・Git cleanは本人提示報告で受�
 | [v005 §13](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 前工事の最終acceptと承認外 |
 | [通常接続report](reports/request-intent-connection-20261001/README.md) | 実local系列・所有者・保存・再読の参照。旧testを起動しない |
 | [構成改善report](reports/selection-structure-improvement-20260930/README.md)、[案](reports/selection-structure-improvement-20260930/proposal-v001.json)、[独立点検](reports/selection-structure-improvement-20260930/independent-review.md) | 実判断の根拠、比較理由、採用区間と未観測 |
-| [9/28一次レビュー](reports/new-material-digest-human-review-20260928/README.md)、[9/29回答](reports/caption-readability-splitting-20260929/human-feedback-20260929-v001.md) | 導入・説明・締め・除外要求、144px・条件付き分割、縁未選択 |
+| [9/28一次レビュー](reports/new-material-digest-human-review-20260928/README.md)、[9/29回答](reports/caption-readability-splitting-20260928/human-feedback-20260929-v001.md) | 導入・説明・締め・除外要求、144px・条件付き分割、縁未選択 |
 | [人間台帳](HUMAN_REVIEW_PENDING.md)、[開発計画](../相談役/方針/ZEV_開発計画.md) | 完了・回答待ち・別作業を分ける |
 
 現行実装の具体経路は `runner/src/index.ts`、`digest-plan-preparation-v001.ts`、`digest-plan-consumption-v001.ts`、`workflow-step-builders.ts`、既存 `judgeThroughStdinV001`。新指示はその製品変更を許可しない。
