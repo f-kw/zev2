@@ -4,7 +4,7 @@
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトには固定入口の写しを置く。
 
-**最新更新：01b25053bce09484ecd3d6e1e0cf93ab1f36baacを監査。設営23後のattempt-003は第一回答の再利用・Skill/validator・SHA拒否・result/trace/receipt保存まで成立。その後、一時履歴コマンドの余剰末尾二文字でreport JSON読取がSyntaxError、exit1。相談役は一時記録をjson.dump→保存再読一致に直し、旧証拠保全用attempt-004へ移す一件を設営24として個別承認した。正本は[REUSE_JSON_FIX](work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001_REUSE_JSON_FIX.md)、保存90c3d3464d63cde16b199a79db9fed2b33f7627b。再利用元はattempt-002、1〜8同一回答/9一行末訂正の既承認範囲は不変。製品6/設営23が適用済み、24は適用時に計上。新指示受領・新実行・行末訂正完了・全体acceptは未確認。**
+**最新更新：01b25053bce09484ecd3d6e1e0cf93ab1f36baacを監査。設営23後のattempt-003は第一回答の再利用・Skill/validator・SHA拒否・result/trace/receipt保存まで成立。その後、一時履歴コマンドの余剰末尾二文字でreport JSON読取がSyntaxError、exit1。相談役は一時記録をjson.dump→保存再読一致に直し、旧証拠保全用attempt-004へ移す一件を設営24として個別承認した。正本は[REUSE_JSON_FIX](work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001_REUSE_JSON_FIX.md)、保存90c3d3464d63cde16b199a79db9fed2b33f7627b。再利用元はattempt-002、1〜8同一回答/9一行末訂正の既承認範囲は不変。製品6/設営24が適用済み。Codex2は61dd76d9で新指示・確定返信全文を受領し設営24適用。attempt-004の回答1〜8同一再利用/9一field訂正、全9既存検査/保存・別process一回の再読exit0、元21入力/実装/旧試行56file不変を確認した。候補完成として最終監査へ提出、全体acceptはまだ未確認。**
 
 ## 0. 最初に読む
 
@@ -41,7 +41,7 @@ kawafmmは製品方向・任せる範囲・目視/好み・費用/契約/公開�
 | **実判断付き計画** | **7bb5de02 accept、12候補/7採用/9保持、4工程complete、27,691frame/40,705,770sample、再読0** | 既見素材一件。映像音声/STT/汎化/人間品質と別 |
 | **字幕演出入口対応** | **4556e389 accept、9区間/3,613断片/18項目の静的対応・不足・再利用条件** | presentation consumer受理・新字幕/動画完成ではない |
 | **字幕判断入力準備** | **a98f569a accept、新二path、3,613atom/9要求/manifest、658断片比較、11拒否、別process再構築0** | 準備完了。実回答/描画/人間採用とは別 |
-| 保存9表示要求の候補 | d93e6418で218単位/289行、技術run/readback0。一行末訂正が残る | 技術成立は保持、全体acceptと見心地合格は保留 |
+| 保存9表示要求の候補 | attempt-004で一行末訂正/9件実検査/保存/別process再読0。3,613断片/218単位/289行。旧技術候補・失敗は保持 | 候補完成を最終監査へ提出。人間品質・描画/動画完成と別 |
 | 旧9:47案1080p/低メモリ | d7e46592、265字幕/307状態、345点QC、本体/replay/保存再読 | 新15:23案全編・通常アプリ動画生成と別 |
 | 字幕/演出/一件後修正 | 7A/7B/13、Panel/motion、Normal/Reset、性能第一期 | 既存renderer/低メモリ/後修正を再実装しない |
 | Decisions/Jev | 830ea968、9/30調査/36判断点/J16準備、実推論0 | 当時の未確認を現在公開状況と混同せず、主線停止理由にしない |
@@ -134,6 +134,12 @@ upload006の3実体、MP4007の1実体、実判断の1実体4,803,412,827bytes�
 
 main、担当のみ明示stage、Git操作直列化。他者変更をreset/stash/削除/stageせず、branch/worktree/force pushを自己判断で作らない。Codex1起動、受理だけの独立commit、本人中継は不要。
 
-旧未調整案停止を保持し当時の貼付を承認へ遡及変換しない。01b25053の設営23適用・第一部分成立/記録整形exit1・残存0はCodex報告と保存証拠。設営24指示は発行済み、受領・適用・attempt-004実行・訂正完了は未確認。Macの現在processを相談役が直接観測したものではない。
+旧未調整案停止を保持し当時の貼付を承認へ遡及変換しない。01b25053の設営23適用・第一部分成立/記録整形exit1・残存0はCodex報告と保存証拠。設営24を全文受領・適用、attempt-004の行末一点訂正/9件検査/保存/別process再読を確認した。Macの現在processを相談役が直接観測したものではない。
 
 方針・指示・完了・中断は同じターンで正本保存。自動監視/非同期作業を装わない。報告名はCodex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・保存表示要求への実回答。今回の候補完成から演出/動画へ自動着工しない。
+
+
+Codex2 checkpoint（2026-10-03 JST）：61dd76d9のREUSE_JSON_FIXと専用Edgeの生成完了返信を全文受領。製品6を維持し、設営24として補助の新先attempt-004・累積・受領HEADを適用。一時履歴は標準JSON保存後に再読一致を確認してからstdinへ返す。旧attempt-001/002/003と破損実体は保持。新実行と行末一点訂正はこれから確認する。
+
+
+Codex2最終checkpoint（2026-10-03 JST）：manifest SHA bbf4536aaae9941a3142630b74a74db5638c570a731b33c03360770a32b6bc88、型/preflight/run/readback exit0、旧3試行56fileと元21入力/実装不変、42file/2,923,632bytes。製品6/設営24、対象process0。候補完成を担当のみcommit/push後に専用Edgeで直接監査依頼する。相談役の最終返信を生成完了・全文読了まで受領し、同じ承認範囲の具体的次指示だけを同セッションで扱う。[最終report](reports/digest-caption-display-answers-20261003/README.md)。

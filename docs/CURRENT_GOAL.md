@@ -17,9 +17,9 @@
 
 15分初稿レビュー、構成改善v001の局所検証、一件後修正/Reset、旧9:47案1080p低メモリ製造も既存完了範囲を保持する。これらは保存コード・記録に基づく相談役監査であり、Macの全runtimeを相談役が再実行したものではない。
 
-## 3. 現在の一件 — 履歴JSONの整形修正後に行末一点を完成させる
+## 3. 現在の一件 — 保存9表示回答の候補完成・最終監査へ
 
-**01b25053の停止を監査。attempt-003の第一回答は実Skill/validator/拒否確認を通過しresult/trace/receiptまで保存。その後、一時履歴コマンドの余剰末尾二文字でreport JSON読取がSyntaxError、exit1。相談役は一時記録の正しい直列化/再読と旧証拠保全用attempt-004への変更を設営24として個別承認。製品6は不変。全体accept・行末訂正完了は未成立。**
+**Codex2は61dd76d9のREUSE_JSON_FIXと確定返信全文を受領し設営24適用。attempt-004の全9件実検査/保存と別process一回の再読はexit0。回答1〜8は提示された要求との同一性照合後にbytes同一再利用、回答9は承認済み一fieldだけ訂正した。全3,613断片/218表示単位/289行・元21入力/実装・旧3試行不変を確認。製品6/設営24、対象process残存0。候補完成として最終監査へ提出し、人間品質はpending。**
 
 再開正本：[REUSE_JSON_FIX](work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001_REUSE_JSON_FIX.md)、保存90c3d3464d63cde16b199a79db9fed2b33f7627b。
 親：[保存9表示要求への実回答](work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001.md)。
@@ -31,7 +31,7 @@ run-display.mtsのOUTだけを同PARENT/attempt-004へ変更し、累積/実受�
 
 一時履歴コマンドはjson.dumpでUTF-8 fileへ直接保存し、escaped末尾を連結しない。保存・close後にjson.load/json.loadsで再読し更新objectと一致した場合だけstdinへ返す。helperの当該入力待ち中に書込みと照合を完了し、stdin送信後に同じreportを並行更新しない。汎用fallback/JSON自動修復/例外無視/新試験基盤は作らない。
 
-適用済みは製品6/設営23。今回の記録整形修正と失敗保全用新先を設営24の個別一件として適用時に計上する。設営21/22/23、製品修正6、新二path初実装を区別し、一般上限・強制停止・過去履歴をリセットしない。
+適用済みは製品6/設営24。記録整形修正と失敗保全用新先を設営24の個別一件として適用・計上した。設営21/22/23、製品修正6、新二path初実装を区別し、一般上限・強制停止・過去履歴をリセットしない。
 
 ### 3.2 既承認の内容訂正・回答再利用
 
@@ -72,4 +72,10 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 
 main・担当のみ明示stage、他者変更保全、Git操作直列化、Git状態と対象process終了を確認する。報告名：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・保存表示要求への実回答。今回完成から演出/動画へ自動着工しない。
 
-01b25053の設営23適用・第一部分成立・記録整形exit1・残存0はCodex報告と保存証拠として確認。相談役はMacの現processや破損runtimeを直接観測していない。設営24指示は発行済み、受領・適用・attempt-004実行・行末訂正完了は未確認。
+01b25053の設営23適用・第一部分成立・記録整形exit1・残存0はCodex報告と保存証拠として確認。相談役はMacの現processや破損runtimeを直接観測していない。設営24を全文受領・適用し、attempt-004の行末一点訂正/9件検査/保存/別process再読まで確認した。
+
+
+Codex2 checkpoint（2026-10-03 JST）：61dd76d9のREUSE_JSON_FIXと専用Edgeの生成完了返信を全文受領。製品6を維持し、設営24として補助の新先attempt-004・累積・受領HEADを適用。一時履歴は標準JSON保存後に再読一致を確認してからstdinへ返す。旧attempt-001/002/003と破損実体は保持。新実行と行末一点訂正はこれから確認する。
+
+
+Codex2最終checkpoint（2026-10-03 JST）：最終manifest SHA bbf4536aaae9941a3142630b74a74db5638c570a731b33c03360770a32b6bc88。型/preflight/run/readback exit0、旧attempt-001/002/003の56fileと元21入力/実装不変。新束42file/2,923,632bytes、回答JSONコピー70,705bytes、媒体0。主process98,423.34ms/検査保存17.71ms/別process388.12ms。第一回答判断と記録整形の独立時間は未計測。製品6/設営24、process0。担当5fileのcommit/pushと専用Edge直接報告へ進む。[最終report](reports/digest-caption-display-answers-20261003/README.md)。背景/最終style/後段/演出/動画/品質は別の残件。
