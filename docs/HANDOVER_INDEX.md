@@ -133,3 +133,12 @@ main、担当のみ明示stage、Git操作直列化。他者変更をreset/stash
 903d79b4のpush/Git clean/対象process残存0はCodex報告と保存証拠。Macの現在processを相談役が直接観測したものではない。今回時計acceptと144px診断指示は発行済み、新指示受領・設営26適用・実行は未確認。旧未調整案の停止を承認へ遡及変換しない。
 
 方針・指示・完了・中断は同じターンで正本保存。自動監視/非同期作業を装わない。今回の報告名はCodex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px技術候補と表示回答の適合。診断後も新要求/実回答・背景製造・正式style確定・動画へ自動着工しない。
+
+
+### Codex2 144px診断受領checkpoint（2026-10-03）
+
+main 2626106bで今回正本全文・専用Edgeの完了返信を受領。既存A=8/4 Normalの同一保存束を確認中。小補助作成時の設営26だけ個別承認、現在は製品6／設営25。既受理・旧成果・承認境界は維持。媒体・フォントbinary・描画・新要求／回答・内容や時計変更は行わない。詳細は[今回report](reports/digest-caption-style-compatibility-20261003/README.md)。
+
+Codex2 checkpoint：今回小補助check-style.mtsを作成し、個別承認の設営26を適用。製品6、過去設営25と失敗履歴は維持。現在は型・入力・出力先preflight前、診断未実行。
+
+Codex2 停止checkpoint：設営26の型検査0後、正本MarkdownをJSON readerへ渡したSyntaxErrorでrun exit1。字幕診断到達0、旧入力や媒体作用0。新attempt-001失敗証拠を保持。一行のbyte読取化＋新attempt-002だけを設営27候補としてGPT_DECISIONへ返す。自己承認・再実行はしない。

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "digest-caption-style-compatibility-evidence-v001",
+  "status": "stopped-helper-scope-markdown-json",
+  "receivedAt": "2026-10-02T18:23:11.306021+00:00",
+  "session": "Codex2",
+  "head": "2626106bd8b2f1b68a729aaae3c2ceea189d6d16",
+  "workOrder": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001.md",
+    "fileSha256": "4e244e34f9b3f04ed338574801a38eccc76e7b1be4fafb5b6a6fed6827b363b5"
+  },
+  "history": {
+    "product": 6,
+    "setupBefore": 25,
+    "setupApplied": 26,
+    "approvedSetupWhenHelperCreated": 26
+  },
+  "scope": "Existing saved 144px A8/4 Normal technical candidate; unchanged current text/lines/clock; document-free existing layout inspection only",
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null,
+    "ID9-PD-01": "not-approved",
+    "ID9-PD-02": "not-approved"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "command": "runner/node_modules/.bin/tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --strict --skipLibCheck --allowImportingTsExtensions docs/reports/digest-caption-style-compatibility-20261003/check-style.mts",
+    "recordedAt": "2026-10-02T18:34:24.170981+00:00"
+  },
+  "failure": {
+    "exitCode": 1,
+    "stage": "scope-binding-read-before-diagnostic",
+    "exception": "SyntaxError: Unexpected token #; work-order Markdown passed to JSON reader",
+    "failedHelperSha256": "5048864bbf9a3c0073b5f99c971dec0a1641fb1fa0a72e7a615fc49e7a4205c8",
+    "cuesDiagnosed": 0,
+    "oldInputsWritten": 0,
+    "mediaOrFontBinaryActions": 0,
+    "completedOutputs": 0,
+    "occurredAt": "2026-10-02T18:35:12.721560+00:00",
+    "minimalProposal": {
+      "file": "docs/reports/digest-caption-style-compatibility-20261003/check-style.mts",
+      "old": "await ref(evidence.workOrder);",
+      "new": "const scope = obj(evidence.workOrder); await bytes(str(scope.path), str(scope.fileSha256));",
+      "newAttempt": "attempt-002",
+      "scope": "only scope Markdown read and new output destination; no judgment/geometry/product change",
+      "nextSetupIfApproved": 27
+    }
+  }
+}
