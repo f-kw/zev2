@@ -138,3 +138,11 @@ Codexは原則として次の順で一件を閉じる。
 AGENTS.mdの第1層専決事項、正式成果物の削除・上書き、旧成果物の容量整理、新素材/費用/API/公開等の承認条件は維持する。
 
 今回追加するのは、**着工承認済みwork-order内でCodex自身が生成した一時物・中間物を、成果固定後に責任を持って片付けることを標準工程化すること**である。
+
+## 7. session work logとの接続
+
+cleanup完了後、正本/Gitを閉じる前に `docs/policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md` に従ってsession work logを一度まとめる。
+
+複数sessionが走るため、cleanupや作業の細かなイベントを共有logへリアルタイム追記しない。各session専用fileへ、削除したもの・保持したもの・回収容量・own process・Gitへ渡す最終状態をまとめて記録する。
+
+停止時にcleanupを実施しない方が安全なら、証拠を保持したままwork logへcleanup pendingと理由を残す。
