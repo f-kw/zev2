@@ -77,3 +77,11 @@ kawafmm指示により、Codexの標準完了フローを見直した。正本�
 媒体作業では、開始前に一時物/完成物/削除予定と容量条件を確認し、完了報告にcleanup結果・回収bytes・残した大容量物と理由・own process/Git状態を含める。失敗attemptは最小監査証拠を残すが、監査不要の巨大partial媒体を永久保持することを標準にしない。
 
 この運用更新は現在の一計画製造許可待ちを承認へ変えない。現時点の未承認adapter/trust/媒体製造、SSD/旧成果削除、ID9-PD-01/02等の境界は不変。
+
+## 7. Codex session work log運用更新（2026-10-03）
+
+kawafmm指示により、複数Codex sessionの並行稼働を前提に作業ログを追加した。正本は `docs/policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md`。
+
+中央の一つのlogへ逐次追記せず、各sessionが第一完成・停止・handoff・終了直前に、そのサイクルの指示/判断/主要作業/検証/cleanup/Git/次状態を `docs/work-logs/YYYY-MM/` の自分専用fileへまとめる。通常rotationは月directory、1 summaryが64 KiBを超える場合だけpart分割する。
+
+標準終了順は、証拠固定→cleanup→own process終了→session work log→正本更新→commit/push→相談役報告→次指示受領。work logは正本の代替ではなく、現在の一計画製造human_decision待ち等の承認境界も変更しない。
