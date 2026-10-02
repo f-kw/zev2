@@ -70,3 +70,6 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・保存表示要求への実回答。担当のみ通常commit/push、他者変更保持、Git操作直列化、対象process終了を確認する。候補回答の完成から演出/動画工事へ自動着工しない。
 
 現在地：設営21・第一回答/正常受理/否定拒否と補助exit1は保存証拠で確認済み。設営22の指示は発行済み、受領・適用・attempt-002実行・全9回答完成は未確認。残存0はCodex報告であり、相談役がMacの現processを直接観測したものではない。
+
+
+Codex2実行checkpoint（2026-10-03）：設営22追補を全文受領、0c24061eへ同期し比較値/新attempt-002/記録だけを適用。9実回答、全3,613atom、218表示単位/289行を既存Skill/validatorで検査・保存し、別process一回exit0で全SHA/trace bytes一致・元21入力/実装不変を確認。製品6/設営22、旧attempt-001不変。仕上げで要求9の一行末が「こんなもん／にしよう」と文節を分割していることを自ら発見。local124→125の候補案を保存したが未適用。全体完成とはせず、新attempt-003への保存先追従・同一要求の1〜8byte再利用・9だけ実判断修正・最終束再読一回を設営23の個別判断へ返す。attempt-002の技術成立/exit0とこの内容未達を区別し、全保存物を不変保持。製品変更・媒体・費用・人間品質採用は0。[report](reports/digest-caption-display-answers-20261003/README.md)/[evidence](reports/digest-caption-display-answers-20261003/evidence.json)。

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-caption-display-answers-report-v001",
-  "status": "stopped-setup-rejection-message-comparison",
+  "status": "passed",
   "receivedAt": "2026-10-02T16:17:33.542200+00:00",
   "confirmedHead": "c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7",
   "scope": {
@@ -9,8 +9,9 @@
   },
   "history": {
     "productFixes": 6,
-    "setupFixes": 21,
-    "setup21Applied": true
+    "setupFixes": 22,
+    "setup21Applied": true,
+    "setup22Applied": true
   },
   "previousAcceptedCommit": "a98f569aae8a12fe99a2c17314a802c1e1b6e275",
   "admission": {
@@ -102,5 +103,735 @@
     "baseHead": "c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7",
     "fetchedRemoteMatches": true,
     "ownedFilesToStage": 5
+  },
+  "resumeApproval": {
+    "binding": {
+      "path": "docs/work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001_NEGATIVE_MESSAGE_FIX.md",
+      "fileSha256": "4f27564104d42778e4e47e0eeeacaae6a729b4a036fbbd35d1aea50dfbbc954e"
+    },
+    "receivedHead": "0c24061ed1f921379480917c0e803dbc1ed58565",
+    "receivedReply": "runtime/artifacts/digest-caption-display-answers-20261003-v001/decision-setup22-reply.txt",
+    "replyCompleteAndFullyRead": true,
+    "proof": "/private/tmp/codex2-display-setup22-approved.png",
+    "appliedAt": "2026-10-02T16:46:37.127102+00:00",
+    "newOutput": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002",
+    "scopeUnchanged": true
+  },
+  "immutableFailureFiles": [
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/failure-run.log",
+      "sizeBytes": 56549,
+      "fileSha256": "5c1e6b12428d4e30a3ed0553ecf39089ec565592d32b6e4819f04e198860affe"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/failure.json",
+      "sizeBytes": 2374,
+      "fileSha256": "de7f2dcf92bf2fdfa2c51857b186e74a387945136b270b27fa448d4b7e8e3218"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/old-inputs-before.json",
+      "sizeBytes": 3518,
+      "fileSha256": "68721dafed08ef037a2b5a409b8400523565b7c760c727d207d8023a263c6bdb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/response-0001.json",
+      "sizeBytes": 5405,
+      "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/result-0001.json",
+      "sizeBytes": 4725,
+      "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3"
+    }
+  ],
+  "firstAnswerReuse": {
+    "source": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/response-0001.json",
+    "destination": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0001.json",
+    "sizeBytes": 5405,
+    "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034",
+    "requestFileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567",
+    "promptObservedBeforeCopy": true,
+    "byteIdentical": true,
+    "copyVerificationElapsedMs": 1.2453329982236028,
+    "newContentJudgment": false,
+    "oldResultCopied": false
+  },
+  "acceptedResponses": [
+    {
+      "ordinal": 1,
+      "candidateId": "candidate-0001",
+      "timelineSegmentId": "segment-0001",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+        "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0001.json",
+        "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0001.json",
+        "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0001.json",
+        "fileSha256": "62822019e2032ebacdc871040c64cdf68feae5dfaf092dc83429c44c76236a68"
+      },
+      "cueCount": 14,
+      "lineCount": 19,
+      "atomCount": 217,
+      "judgmentNote": "原要求全文を読み、夏にホラーを遊ぶ導入、エゴサで知った心霊の噂、聞いていないという否定、マリちゃんへの問い、前作での自己評価、締めの不安と安心を分けた。前作の説明は因果を含むまとまりとして二行で保ち、短い問い・反応は一行。ホラーゲームとか・固有名詞・心霊現象などの語と助詞は途中で割らない。幅内で文節ごとの行末を選び、不要な一文字分割はしていない。原文の「怒ってる」「辞任」は音声未確認のSTT疑いとしてそのまま保った。"
+    },
+    {
+      "ordinal": 2,
+      "candidateId": "candidate-0002",
+      "timelineSegmentId": "segment-0002",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+        "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0002.json",
+        "fileSha256": "d3580e0f8ffabc7e39e86858bbced93cfb13336e369be5e6a6759752aa3ad490"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0002.json",
+        "fileSha256": "7c691350bcc9eab397202940c39b439d9ecea34aa7806f5fddbd5c53d3b17868"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0002.json",
+        "fileSha256": "411478d8962c0226820939d765349b07ce71068efb41bf16f136411d2cf43608"
+      },
+      "cueCount": 36,
+      "lineCount": 52,
+      "atomCount": 658,
+      "judgmentNote": "全文を読み、犬に触れた理由と薬の準備、触らざるを得ない経緯、帰宅後の症状、犬への肯定、ホラーへ戻る締めを順に保持。アレルギーの説明・否定・因果は文節のまとまりで二行へ分け、撫でて・ぴょんぴょん・むちゃむちゃの反復とノエちゃん/ワンチョム/ジンマシンなどの語を途中で割らない。短い反応は一行、幅内の文章は改行しない。症状の列挙は項目を分けながら理由と条件を保持し、原文は一字も訂正しない。"
+    },
+    {
+      "ordinal": 3,
+      "candidateId": "candidate-0003",
+      "timelineSegmentId": "segment-0003",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+        "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0003.json",
+        "fileSha256": "33b03ce6cf8ef7cb75abe330b39354c32ad69c38ab5d84f383629faba86a8e4d"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0003.json",
+        "fileSha256": "cd9378c41741acfcc79292535a6c04216900fdf3178f7d930b61d5a7f088ac56"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0003.json",
+        "fileSha256": "3bc366aa52a785bac5a1838762846c642860961bd2f81a696182f89f0bec7bdc"
+      },
+      "cueCount": 5,
+      "lineCount": 8,
+      "atomCount": 120,
+      "judgmentNote": "ゲーム名と前作経験を一つの導入、続編未経験の否定を一つのまとまりで残す。アハ体験的に画面が変わる説明、幽霊出現を報告する因果をそれぞれ二行の一表示単位で維持し、報告方法が短い断片へ散らばらないようにした。最後の開始提案は一行。日本事故物件監視協会とアハ体験、だんだんなどの語は切らず、本文は訂正しない。"
+    },
+    {
+      "ordinal": 4,
+      "candidateId": "candidate-0004",
+      "timelineSegmentId": "segment-0004",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+        "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0004.json",
+        "fileSha256": "5c354b87645416f89e8266283bba827a0e69f8c0180e59346547aaef8c11fb70"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0004.json",
+        "fileSha256": "586cf76670ecd4afdf22493e090234376bb907133cc289447d0d254efc158e80"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0004.json",
+        "fileSha256": "61a1c09844213991ff17cc982696604fb0d3e019b7024a602885155cdd507ec3"
+      },
+      "cueCount": 67,
+      "lineCount": 84,
+      "atomCount": 1033,
+      "judgmentNote": "本文全体の先輩口調の説明、異変への割込み、恐怖の反復、勤続と責任の言い直し、弁当の冗談、クリア確認を読み、前振りから結末まで保持。問いや驚きは自然な短い単位、因果や否定は幅を満たす二行で一まとまりにした。ドアバーン/やばい/こっち来てる/早く/ご馳走/クリアの反復は語の途中で切らず、21,427円も一行内で維持。金属/ありがた以上などSTT疑いを修正しない。発話の途切れは原文のまま、未確認音声を想像して補わず、全文を一度ずつ使用した。"
+    },
+    {
+      "ordinal": 5,
+      "candidateId": "candidate-0005",
+      "timelineSegmentId": "segment-0005",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+        "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0005.json",
+        "fileSha256": "ede0b511b0b25e7168c1f44381293f4163e069b0e7a1c49f77a4743d8d672e13"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0005.json",
+        "fileSha256": "e98ed3d8fca1ebe8c9342fb82c3723ce49002dbcdf220f966dccf7ea9f5ae211"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0005.json",
+        "fileSha256": "484462f9f5beef7be0008a9cb5ed3322853b8ebc857ae06829e3a581f7866f21"
+      },
+      "cueCount": 41,
+      "lineCount": 62,
+      "atomCount": 778,
+      "judgmentNote": "全文を読み、今トイレに行かないという否定と安全理由、ジュオン/貞子/カヤコの比較、現代の動画配信へ適合する説明と締めを保持。長い説明は文節や主語・述語のまとまりで二行とし、カヤコ/トシオ/YouTube/SNS/アップロード/三味一体を途中で割らない。かやこじゃねえ、さだこの言い直しは一表示単位。YouTube等の配信先からアップロードする動作までを一単位に含め、後の条件説明を次へ渡す。反復・ためらい・否定も原文のまま使い、金属やジオン等のSTT疑いを訂正しない。件数の目標は置かず、幅内の短い反応には改行しない。"
+    },
+    {
+      "ordinal": 6,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0006",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+        "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0006.json",
+        "fileSha256": "07e1bc48c1add3bafcd3756293d525511a1c7d2e039e24c64246985e218cd9bb"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0006.json",
+        "fileSha256": "07a69f7a823a4f20b24d87e084b4c36fb12f1f500e9fcc357ea6a197b4c39640"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0006.json",
+        "fileSha256": "43b03c74c7ed95bf2e66d9fc0e1308d1bae082c9bb276c5a291d0b6ac4a39f1c"
+      },
+      "cueCount": 15,
+      "lineCount": 21,
+      "atomCount": 258,
+      "judgmentNote": "candidate-0006の第一非連続区間だけを読み、全ステージ完了への反応、感謝、特別手当を試す提案、再出現に対する疑問と条件を保持。否定と条件を語の途中で切らず、見つけてないやつの説明は主語と述部を二行で一表示単位にする。短い反応は一行、重ねた感謝は全文を二行で保持。次の非連続区間の本文を混ぜず、この要求258atomだけを一度ずつ使用する。"
+    },
+    {
+      "ordinal": 7,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0007",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+        "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0007.json",
+        "fileSha256": "c53c5a01ea368fd3ce552386180ccfecbad00712b9eb21ac4fb7b5d2af3adf91"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0007.json",
+        "fileSha256": "974e9fb9f53ed7c26753ff852a9e303fb8229cc70982243c5e6bf1eaaefec713"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0007.json",
+        "fileSha256": "0ff54ba66f565e201a62e891b2f102e1e3b0481925f4483b9c9f68ea4e7d7018"
+      },
+      "cueCount": 11,
+      "lineCount": 13,
+      "atomCount": 158,
+      "judgmentNote": "candidate-0006の第二非連続区間158atomだけを判断。布団・目玉・やばい・どんどん来るの連呼は各語を保ち、幅内は一行でまとめる。布団が増えた問いは主語と述部を二行、報告してもを四回繰り返して異変が絶えないという逆接的な結論は一表示単位の二行で保持。前後の非連続要求を結合せず、焦りの反応を一文字ずつの表示へ分解しない。"
+    },
+    {
+      "ordinal": 8,
+      "candidateId": "candidate-0006",
+      "timelineSegmentId": "segment-0008",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+        "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0008.json",
+        "fileSha256": "9436e4b2d1d0101b9a2a03943d200f2f5b09dddf8e2d5ad949600b596fda22bb"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0008.json",
+        "fileSha256": "3bc1f5fffdb24edb7b64cc78d33cec11233a2c17b6682e3d3341f2df14de36bf"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0008.json",
+        "fileSha256": "ac3662f628b05f7d8a4f18f5091a8ddfc23cc164d152eaf30ab47ed857081546"
+      },
+      "cueCount": 13,
+      "lineCount": 13,
+      "atomCount": 167,
+      "judgmentNote": "candidate-0006の第三非連続区間だけを読み、到達時刻、異変の予告、急ぐ呼びかけ、異常なしの否定、扉の違和感、動いた反応と締めを区切る。全て幅内の意味のまとまりなので不要な改行はしない。3時の数字、連呼、否定と言い直し、伸ばした叫びは元の文字列のまま保持。泣くにゃいか/怒ってる等のSTT疑いを修正・補完せず、他の二要求との結合や省略はしない。"
+    },
+    {
+      "ordinal": 9,
+      "candidateId": "candidate-0007",
+      "timelineSegmentId": "segment-0009",
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+        "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943"
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0009.json",
+        "fileSha256": "7debdc87ea057f3ce36b4bcb4c81af9a7cbec0c271ec68809413dc1e1e0e7e7f"
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0009.json",
+        "fileSha256": "2c617627ef2ecb269340d4b237ece4fb4e46e38aff56ca34a7e8e902e75015af"
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0009.json",
+        "fileSha256": "022cd17a9dcd7b0003c8563d7f6baff7fded781ee505c95d103bd4ab51eca6de"
+      },
+      "cueCount": 16,
+      "lineCount": 17,
+      "atomCount": 224,
+      "judgmentNote": "本編終了の要求全文を読み、発見できた評価、特別手当を諦める否定、今日はここまでという結論、労いの反復、退勤操作、最後の音への反応とゲーム終了を順に保持。特別手当は無理だこれは諦めますは一行のまとまり、長い終了宣言だけ二行にして否定や述部をバラさない。頑張った/退勤/音怖いの反復は語を分断せず、配信末尾の挨拶は創作・追加しない。本文224atomを一度ずつ使用し、37や原文の疑問符も変更しない。"
+    }
+  ],
+  "phaseMetadata": [
+    {
+      "ordinal": 1,
+      "inputPresentedAt": "2026-10-02T16:46:45.268Z",
+      "answerReceivedAt": "2026-10-02T16:47:12.484Z",
+      "readJudgmentFormattingWallMs": 27216,
+      "validationAndSaveMs": 1.840250000001106,
+      "totalCallbackElapsedMs": 27221.478666
+    },
+    {
+      "ordinal": 2,
+      "inputPresentedAt": "2026-10-02T16:47:12.491Z",
+      "answerReceivedAt": "2026-10-02T16:49:09.097Z",
+      "readJudgmentFormattingWallMs": 116606,
+      "validationAndSaveMs": 2.968040999985533,
+      "totalCallbackElapsedMs": 116611.65666699999
+    },
+    {
+      "ordinal": 3,
+      "inputPresentedAt": "2026-10-02T16:49:09.104Z",
+      "answerReceivedAt": "2026-10-02T16:49:50.445Z",
+      "readJudgmentFormattingWallMs": 41341,
+      "validationAndSaveMs": 0.9573749999981374,
+      "totalCallbackElapsedMs": 41342.772832999995
+    },
+    {
+      "ordinal": 4,
+      "inputPresentedAt": "2026-10-02T16:49:50.449Z",
+      "answerReceivedAt": "2026-10-02T16:51:33.612Z",
+      "readJudgmentFormattingWallMs": 103163,
+      "validationAndSaveMs": 3.9366249999729916,
+      "totalCallbackElapsedMs": 103170.36562500003
+    },
+    {
+      "ordinal": 5,
+      "inputPresentedAt": "2026-10-02T16:51:33.621Z",
+      "answerReceivedAt": "2026-10-02T16:53:17.739Z",
+      "readJudgmentFormattingWallMs": 104118,
+      "validationAndSaveMs": 3.201208000013139,
+      "totalCallbackElapsedMs": 104124.15620899998
+    },
+    {
+      "ordinal": 6,
+      "inputPresentedAt": "2026-10-02T16:53:17.747Z",
+      "answerReceivedAt": "2026-10-02T16:54:04.396Z",
+      "readJudgmentFormattingWallMs": 46649,
+      "validationAndSaveMs": 1.5568750000093132,
+      "totalCallbackElapsedMs": 46651.846666999976
+    },
+    {
+      "ordinal": 7,
+      "inputPresentedAt": "2026-10-02T16:54:04.402Z",
+      "answerReceivedAt": "2026-10-02T16:54:50.191Z",
+      "readJudgmentFormattingWallMs": 45789,
+      "validationAndSaveMs": 1.3621250000433065,
+      "totalCallbackElapsedMs": 45790.913459
+    },
+    {
+      "ordinal": 8,
+      "inputPresentedAt": "2026-10-02T16:54:50.194Z",
+      "answerReceivedAt": "2026-10-02T16:55:34.063Z",
+      "readJudgmentFormattingWallMs": 43869,
+      "validationAndSaveMs": 1.349290999933146,
+      "totalCallbackElapsedMs": 43871.48875000002
+    },
+    {
+      "ordinal": 9,
+      "inputPresentedAt": "2026-10-02T16:55:34.068Z",
+      "answerReceivedAt": "2026-10-02T16:56:19.658Z",
+      "readJudgmentFormattingWallMs": 45590,
+      "validationAndSaveMs": 1.3927499999990687,
+      "totalCallbackElapsedMs": 45592.84137500008
+    }
+  ],
+  "provenanceNegative": {
+    "condition": "request SHA substitution",
+    "expected": "DIGEST_SKILL_E2E: DISPLAY_PROVENANCE_MISMATCH",
+    "observed": "DIGEST_SKILL_E2E: DISPLAY_PROVENANCE_MISMATCH",
+    "outputIncrease": 0
+  },
+  "manifestBinding": {
+    "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/manifest.json",
+    "fileSha256": "996f506dedbd1c7fc512de9ff0f8ad5bd057d101410d842d54ac418f2c22816a"
+  },
+  "originalInputsUnchanged": true,
+  "validatorElapsedMs": 18.56453999995574,
+  "totalProcessWallMs": 574758.4957079999,
+  "effects": {
+    "mediaReadHashCopyPut": 0,
+    "normalHttp": 0,
+    "providers": 0,
+    "rendering": 0,
+    "costUsd": 0
+  },
+  "readback": {
+    "status": "passed",
+    "processId": 29404,
+    "requests": 9,
+    "tracesBytesEqual": true,
+    "oldInputsUnchanged": true,
+    "judgmentsCalled": 0,
+    "elapsedMs": 395.76033399999994
+  },
+  "completedAt": "2026-10-02T16:56:20.553Z",
+  "completionStatus": "stopped-one-bunsetsu-line-boundary",
+  "currentContentCheckpoint": {
+    "schemaVersion": "digest-caption-display-content-checkpoint-v001",
+    "recordedAt": "2026-10-02T16:58:50.721962+00:00",
+    "runExit": 0,
+    "readbackExit": 0,
+    "manifestBinding": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/manifest.json",
+      "fileSha256": "996f506dedbd1c7fc512de9ff0f8ad5bd057d101410d842d54ac418f2c22816a"
+    },
+    "summary": [
+      {
+        "ordinal": 1,
+        "candidateId": "candidate-0001",
+        "timelineSegmentId": "segment-0001",
+        "atomCount": 217,
+        "cueCount": 14,
+        "lineCount": 19
+      },
+      {
+        "ordinal": 2,
+        "candidateId": "candidate-0002",
+        "timelineSegmentId": "segment-0002",
+        "atomCount": 658,
+        "cueCount": 36,
+        "lineCount": 52
+      },
+      {
+        "ordinal": 3,
+        "candidateId": "candidate-0003",
+        "timelineSegmentId": "segment-0003",
+        "atomCount": 120,
+        "cueCount": 5,
+        "lineCount": 8
+      },
+      {
+        "ordinal": 4,
+        "candidateId": "candidate-0004",
+        "timelineSegmentId": "segment-0004",
+        "atomCount": 1033,
+        "cueCount": 67,
+        "lineCount": 84
+      },
+      {
+        "ordinal": 5,
+        "candidateId": "candidate-0005",
+        "timelineSegmentId": "segment-0005",
+        "atomCount": 778,
+        "cueCount": 41,
+        "lineCount": 62
+      },
+      {
+        "ordinal": 6,
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0006",
+        "atomCount": 258,
+        "cueCount": 15,
+        "lineCount": 21
+      },
+      {
+        "ordinal": 7,
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0007",
+        "atomCount": 158,
+        "cueCount": 11,
+        "lineCount": 13
+      },
+      {
+        "ordinal": 8,
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0008",
+        "atomCount": 167,
+        "cueCount": 13,
+        "lineCount": 13
+      },
+      {
+        "ordinal": 9,
+        "candidateId": "candidate-0007",
+        "timelineSegmentId": "segment-0009",
+        "atomCount": 224,
+        "cueCount": 16,
+        "lineCount": 17
+      }
+    ],
+    "totalCues": 218,
+    "totalLines": 289,
+    "atomCount": 3613,
+    "contentIssue": {
+      "requestOrdinal": 9,
+      "cueOrdinal": 9,
+      "currentLineEndLocalOrdinal": 124,
+      "proposedLineEndLocalOrdinal": 125,
+      "cueEndLocalOrdinal": 136,
+      "currentLines": [
+        "まあマリンはこんなもん",
+        "にしようかなと思います?"
+      ],
+      "proposedLines": [
+        "まあマリンはこんなもんに",
+        "しようかなと思います?"
+      ],
+      "currentLogicalWidths": [
+        22,
+        23
+      ],
+      "proposedLogicalWidths": [
+        24,
+        21
+      ],
+      "reason": "文節もんにを行末で分割しない。本文/ID所属/順序/cue終端/行数/件数は同じ。",
+      "notApplied": true
+    },
+    "proposal": {
+      "newAttempt": "attempt-003",
+      "setupCountIfApproved": 23,
+      "helperChanges": "OUTと受領HEAD/履歴等の記録のみ。既存処理無変更。",
+      "unchangedResponses": "要求1..8を実要求同一性照合後byte同一再利用。旧resultをコピーせず実Skill/validatorで再検査。",
+      "newResponse9": "Codex2が上記行末だけ判断修正、新規保存。要求SHAは同一。",
+      "readback": "変更した最終束を別processで一回。旧attempt002のexit0/readback証拠は不変。"
+    },
+    "quality": "技術検査9/9は成立。自ら見つけた文節不適合一点が未修正で、今回内容判断の完成とはしない。"
+  },
+  "currentBundleFiles": [
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/content-checkpoint.json",
+      "sizeBytes": 3466,
+      "fileSha256": "99bf49cc37500542e3c7b81431480e2db2e160f285d819b907ee10668c13cf3b"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/manifest.json",
+      "sizeBytes": 22406,
+      "fileSha256": "996f506dedbd1c7fc512de9ff0f8ad5bd057d101410d842d54ac418f2c22816a"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/old-inputs-before.json",
+      "sizeBytes": 3518,
+      "fileSha256": "68721dafed08ef037a2b5a409b8400523565b7c760c727d207d8023a263c6bdb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/readback.json",
+      "sizeBytes": 181,
+      "fileSha256": "91c20b168a63dee41dd2442475ae06b10a311ffac0484a3a06a50c0d4c57d0de"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/readback.log",
+      "sizeBytes": 152,
+      "fileSha256": "3b92263804d000b2b9a18505491490fb5fe8df5411c2aa5aacf80766a6e1117b"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0001.json",
+      "sizeBytes": 2029,
+      "fileSha256": "6f07b8f15ee82993d96a53077367db5359343a4acc2791a8a0883bb010071477"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0002.json",
+      "sizeBytes": 1987,
+      "fileSha256": "77f2310d918f26317e8e6bde63818a7035e87e0de36c5573babd66b44d94f3eb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0003.json",
+      "sizeBytes": 1863,
+      "fileSha256": "3cc49dc32292586630014ea7c1cb501345c812141f8d706491a61de6f574e2d7"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0004.json",
+      "sizeBytes": 2041,
+      "fileSha256": "8da030076687c3b4936398d53671813ba8aea572105356d7a9058f7626589ef4"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0005.json",
+      "sizeBytes": 2135,
+      "fileSha256": "8bb19ca535e338b7a4fd70a15db34bdc632a3fd2550b10c8b3225de59e4cfe08"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0006.json",
+      "sizeBytes": 1895,
+      "fileSha256": "e05439639a012e6d10d4809a511769af3ccfb001ec08a093517b7f746ddc67f4"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0007.json",
+      "sizeBytes": 1865,
+      "fileSha256": "2e0b6f20bf1c2202207f96bdbae11a421feda901899b28675b7a43bb1943ac77"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0008.json",
+      "sizeBytes": 1903,
+      "fileSha256": "7fb34fda97688d15ab9d8f1438b3ba6fd7b7272335e0b36b57ebc8b7cfb8469d"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/receipt-0009.json",
+      "sizeBytes": 1983,
+      "fileSha256": "e1f53646101e10b87014367501782a92d2f983c8e7c93b4cc4d0f7963bf2cbb2"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0001.json",
+      "sizeBytes": 5405,
+      "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0002.json",
+      "sizeBytes": 12550,
+      "fileSha256": "d3580e0f8ffabc7e39e86858bbced93cfb13336e369be5e6a6759752aa3ad490"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0003.json",
+      "sizeBytes": 2526,
+      "fileSha256": "33b03ce6cf8ef7cb75abe330b39354c32ad69c38ab5d84f383629faba86a8e4d"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0004.json",
+      "sizeBytes": 21376,
+      "fileSha256": "5c354b87645416f89e8266283bba827a0e69f8c0180e59346547aaef8c11fb70"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0005.json",
+      "sizeBytes": 14568,
+      "fileSha256": "ede0b511b0b25e7168c1f44381293f4163e069b0e7a1c49f77a4743d8d672e13"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0006.json",
+      "sizeBytes": 5638,
+      "fileSha256": "07e1bc48c1add3bafcd3756293d525511a1c7d2e039e24c64246985e218cd9bb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0007.json",
+      "sizeBytes": 4118,
+      "fileSha256": "c53c5a01ea368fd3ce552386180ccfecbad00712b9eb21ac4fb7b5d2af3adf91"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0008.json",
+      "sizeBytes": 4524,
+      "fileSha256": "9436e4b2d1d0101b9a2a03943d200f2f5b09dddf8e2d5ad949600b596fda22bb"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/response-0009.json",
+      "sizeBytes": 5537,
+      "fileSha256": "7debdc87ea057f3ce36b4bcb4c81af9a7cbec0c271ec68809413dc1e1e0e7e7f"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0001.json",
+      "sizeBytes": 4725,
+      "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0002.json",
+      "sizeBytes": 11919,
+      "fileSha256": "7c691350bcc9eab397202940c39b439d9ecea34aa7806f5fddbd5c53d3b17868"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0003.json",
+      "sizeBytes": 2017,
+      "fileSha256": "cd9378c41741acfcc79292535a6c04216900fdf3178f7d930b61d5a7f088ac56"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0004.json",
+      "sizeBytes": 20693,
+      "fileSha256": "586cf76670ecd4afdf22493e090234376bb907133cc289447d0d254efc158e80"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0005.json",
+      "sizeBytes": 13789,
+      "fileSha256": "e98ed3d8fca1ebe8c9342fb82c3723ce49002dbcdf220f966dccf7ea9f5ae211"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0006.json",
+      "sizeBytes": 5099,
+      "fileSha256": "07a69f7a823a4f20b24d87e084b4c36fb12f1f500e9fcc357ea6a197b4c39640"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0007.json",
+      "sizeBytes": 3603,
+      "fileSha256": "974e9fb9f53ed7c26753ff852a9e303fb8229cc70982243c5e6bf1eaaefec713"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0008.json",
+      "sizeBytes": 3975,
+      "fileSha256": "3bc1f5fffdb24edb7b64cc78d33cec11233a2c17b6682e3d3341f2df14de36bf"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/result-0009.json",
+      "sizeBytes": 4909,
+      "fileSha256": "2c617627ef2ecb269340d4b237ece4fb4e46e38aff56ca34a7e8e902e75015af"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/run.log",
+      "sizeBytes": 909903,
+      "fileSha256": "21cdf71eec62edfbc8861bc787c92cd7484cd6e1321095ecdf6f4365f299b017"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0001.json",
+      "sizeBytes": 57955,
+      "fileSha256": "62822019e2032ebacdc871040c64cdf68feae5dfaf092dc83429c44c76236a68"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0002.json",
+      "sizeBytes": 160745,
+      "fileSha256": "411478d8962c0226820939d765349b07ce71068efb41bf16f136411d2cf43608"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0003.json",
+      "sizeBytes": 31547,
+      "fileSha256": "3bc366aa52a785bac5a1838762846c642860961bd2f81a696182f89f0bec7bdc"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0004.json",
+      "sizeBytes": 256788,
+      "fileSha256": "61a1c09844213991ff17cc982696604fb0d3e019b7024a602885155cdd507ec3"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0005.json",
+      "sizeBytes": 188515,
+      "fileSha256": "484462f9f5beef7be0008a9cb5ed3322853b8ebc857ae06829e3a581f7866f21"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0006.json",
+      "sizeBytes": 66431,
+      "fileSha256": "43b03c74c7ed95bf2e66d9fc0e1308d1bae082c9bb276c5a291d0b6ac4a39f1c"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0007.json",
+      "sizeBytes": 43541,
+      "fileSha256": "0ff54ba66f565e201a62e891b2f102e1e3b0481925f4483b9c9f68ea4e7d7018"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0008.json",
+      "sizeBytes": 46392,
+      "fileSha256": "ac3662f628b05f7d8a4f18f5091a8ddfc23cc164d152eaf30ab47ed857081546"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/trace-0009.json",
+      "sizeBytes": 59798,
+      "fileSha256": "022cd17a9dcd7b0003c8563d7f6baff7fded781ee505c95d103bd4ab51eca6de"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-002/traces.json",
+      "sizeBytes": 911097,
+      "fileSha256": "593f73a050a067a04d2d0ce56dbe074dd910b66e3531258717fd7c5acd801f0f"
+    }
+  ],
+  "checks": {
+    "strictTypeCheckExit": 0,
+    "preflightExit": 0,
+    "runExit": 0,
+    "readbackExit": 0,
+    "oldAttempt001Unchanged": true,
+    "oldInputsUnchanged": true
   }
 }

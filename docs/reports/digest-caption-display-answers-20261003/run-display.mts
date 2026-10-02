@@ -9,7 +9,7 @@ import {readPreparedDigestCaptionJudgmentInputsV001, type DigestCaptionPreparati
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const REPORT = 'docs/reports/digest-caption-display-answers-20261003';
 const PARENT = 'runtime/artifacts/digest-caption-display-answers-20261003-v001';
-const OUT = `${PARENT}/attempt-001`;
+const OUT = `${PARENT}/attempt-002`;
 const INPUT = 'runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002';
 const MB = {path: `${INPUT}/bundle/manifest.json`, fileSha256: '83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75'};
 const MEANING_SHA = '6e16d247d36f841783d59badc4c4a3f35c8cf4739b6acae29baccc32a7d061a3';
@@ -111,8 +111,8 @@ async function run() {
         const wrong = structuredClone(response); wrong.requestFileSha256 = '0'.repeat(64);
         const filesBefore = await readdir(absolute(OUT)); let code = '';
         try {display.validateDisplayForAdoptionV001(req, wrong, result, RESPONSE_SCHEMA);} catch (e) {code = e instanceof Error ? e.message : String(e);}
-        assert.equal(code, 'DISPLAY_PROVENANCE_MISMATCH'); assert.deepEqual(await readdir(absolute(OUT)), filesBefore);
-        negative = {condition: 'request SHA substitution', expected: 'DISPLAY_PROVENANCE_MISMATCH', observed: code, outputIncrease: 0};
+        assert.equal(code, 'DIGEST_SKILL_E2E: DISPLAY_PROVENANCE_MISMATCH'); assert.deepEqual(await readdir(absolute(OUT)), filesBefore);
+        negative = {condition: 'request SHA substitution', expected: 'DIGEST_SKILL_E2E: DISPLAY_PROVENANCE_MISMATCH', observed: code, outputIncrease: 0};
       }
       const answer = record(result.answer), caption = records(answer.captions)[0]!;
       const cues = records(caption.cues); // width admission is exclusively the existing validator above
@@ -126,7 +126,7 @@ async function run() {
         readJudgmentFormattingWallMs: answerReadyAt - openedAt, validationAndSaveMs: validationMs, totalCallbackElapsedMs: performance.now() - parseStart});
       await save(`receipt-${number}.json`, {receipt: receipts[i], metadata: metadata[i]});
       const evidence = await json(`${REPORT}/evidence.json`);
-      await writeFile(absolute(`${REPORT}/evidence.json`), f.formal({...evidence, status: 'judging', history: {productFixes: 6, setupFixes: 21, setup21Applied: true},
+      await writeFile(absolute(`${REPORT}/evidence.json`), f.formal({...evidence, status: 'judging', history: {productFixes: 6, setupFixes: 22, setup21Applied: true, setup22Applied: true},
         acceptedResponses: receipts, phaseMetadata: metadata, provenanceNegative: negative}));
       console.log(JSON.stringify({event: 'display-judgment-validated', ordinal: i + 1, cueCount: cues.length}));
     }
@@ -136,7 +136,7 @@ async function run() {
   assert.deepEqual(await snapshot(), before, 'DISPLAY_ORIGINALS_CHANGED');
   const implementations = await Promise.all(names.map(bindBytes));
   const manifest = {schemaVersion: 'digest-caption-display-answers-bundle-v001', status: 'validated-display-for-review',
-    receivedHead: 'c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7', scopeBinding: pre.scopeBinding, inputManifestBinding: MB,
+    receivedHead: '0c24061ed1f921379480917c0e803dbc1ed58565', scopeBinding: pre.scopeBinding, inputManifestBinding: MB,
     meaningBinding: {path: `${INPUT}/bundle/meaning-input.json`, fileSha256: MEANING_SHA}, originalScope: prepared.manifest.scopeBinding,
     originalPurpose: prepared.manifest.originalPurpose, styleTemplateBinding: prepared.manifest.styleTemplateBinding,
     implementations, responses: receipts, tracesBinding, metadata, provenanceNegative: negative,
