@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "digest-caption-display-answers-report-v001",
+  "status": "stopped-setup-rejection-message-comparison",
+  "receivedAt": "2026-10-02T16:17:33.542200+00:00",
+  "confirmedHead": "c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7",
+  "scope": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_DISPLAY_ANSWERS_20261003_v001.md",
+    "fileSha256": "3f2982a5b55f27c29b62f83cbf2871b3339c3a8b62716fab637f533f9074767a"
+  },
+  "history": {
+    "productFixes": 6,
+    "setupFixes": 21,
+    "setup21Applied": true
+  },
+  "previousAcceptedCommit": "a98f569aae8a12fe99a2c17314a802c1e1b6e275",
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null
+  },
+  "preflight": {
+    "strictTypeCheckExit": 0,
+    "exports": "passed",
+    "fixedInputHashes": "passed",
+    "outputAbsent": true,
+    "typeCheckLog": "/private/tmp/codex2-display-answer-typecheck.log"
+  },
+  "checkpointAt": "2026-10-02T16:33:43.775338+00:00",
+  "failure": {
+    "schemaVersion": "digest-caption-display-answers-failure-v001",
+    "recordedAt": "2026-10-02T16:33:43.775338+00:00",
+    "processExit": 1,
+    "status": "stopped-before-second-request",
+    "phase": "first-answer provenance negative assertion",
+    "history": {
+      "productFixes": 6,
+      "setupFixes": 21
+    },
+    "actualRejection": "DIGEST_SKILL_E2E: DISPLAY_PROVENANCE_MISMATCH",
+    "helperExpected": "DISPLAY_PROVENANCE_MISMATCH",
+    "cause": "既存拒否本文には接頭辞があるが、補助の比較値にはない。拒否自体は成立。",
+    "source": {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+      "sizeBytes": 36774,
+      "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+    },
+    "savedResponse": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/response-0001.json",
+      "sizeBytes": 5405,
+      "fileSha256": "5228394586b8aab05fe8943d3b944a368327627955421494c0083af7e4036034"
+    },
+    "savedResult": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/result-0001.json",
+      "sizeBytes": 4725,
+      "fileSha256": "a4943d074bf4be10a8fd670eadca252d2b82ef17c080c5ea86143caea3dd82a3"
+    },
+    "failureLog": {
+      "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/failure-run.log",
+      "sizeBytes": 56549,
+      "fileSha256": "5c1e6b12428d4e30a3ed0553ecf39089ec565592d32b6e4819f04e198860affe"
+    },
+    "firstAnswer": {
+      "existingSkillReturned": true,
+      "existingValidatorReturnedBeforeAssertion": true,
+      "cueCount": 14,
+      "atomCount": 217,
+      "requestShaMatches": true,
+      "responseResultAnswerMatches": true
+    },
+    "oldInputs": {
+      "count": 21,
+      "allUnchanged": true
+    },
+    "notCompleted": [
+      "first trace/receipt",
+      "requests 2 through 9",
+      "bundle manifest",
+      "separate-process readback"
+    ],
+    "proposedNotApplied": {
+      "helperComparison": "exact existing raw rejection including DIGEST_SKILL_E2E prefix",
+      "newAttempt": "attempt-002",
+      "firstAnswerReuse": "同一実要求SHAのresponse-0001.jsonをbyte同一で再利用し既存Skill/validatorへ通す。旧attemptは不変。"
+    },
+    "effects": {
+      "mediaReadHashCopyPut": 0,
+      "normalHttp": 0,
+      "provider": 0,
+      "render": 0,
+      "costUsd": 0
+    }
+  },
+  "failureBinding": {
+    "path": "runtime/artifacts/digest-caption-display-answers-20261003-v001/attempt-001/failure.json",
+    "sizeBytes": 2374,
+    "fileSha256": "de7f2dcf92bf2fdfa2c51857b186e74a387945136b270b27fa448d4b7e8e3218"
+  },
+  "ownProcessesRemaining": 0,
+  "checkpointGit": {
+    "branch": "main",
+    "baseHead": "c18ac0d6ec5591f4cffbcc9dbd91100ba788eac7",
+    "fetchedRemoteMatches": true,
+    "ownedFilesToStage": 5
+  }
+}

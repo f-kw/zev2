@@ -120,4 +120,6 @@ main・担当fileのみ明示stage、stage/commit/push直列化。他者変更�
 
 旧未調整案停止は保持し、当時の貼付を承認へ遡及変換しない。a98f569aの完了・残存0・Git cleanはCodex報告と保存証拠。Macの現在processは相談役が直接観測していない。今回accept/次指示保存だけで新実回答が開始したとしない。
 
+Codex2実行checkpoint（2026-10-03）：c18ac0d6で正本全文を受領し設営21を適用。第一要求217atom/14表示単位の実回答は既存Skill/validatorを通過。SHA差替えcloneも正しく拒否されたが、補助の比較値が既存エラー接頭辞を欠きprocess exit1。製品6/設営21を維持し、追加修正を自己承認せずGPT_DECISIONする。旧入力21件・準備bundle不変、attempt-001の回答/result/失敗logを保持。残8回答・trace・manifest・別process再読は未実施。[report](reports/digest-caption-display-answers-20261003/README.md)/[evidence](reports/digest-caption-display-answers-20261003/evidence.json)に実際の拒否本文と未適用の最小案を保存。新attempt-002への追従と同じ要求SHAの第一回答byte同一再利用も相談役へ返す。元purpose・製品code・媒体・承認外は変更しない。
+
 方針・指示・完了・中断は同じターンで正本保存。自動監視/非同期作業を装わない。候補回答の完成後も演出・動画製造は次の明示判断まで開始しない。

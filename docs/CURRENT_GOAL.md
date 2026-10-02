@@ -62,6 +62,8 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 
 初回は本人手貼り。開始後はCodex2専用Edgeで同じZEV Build Loopへ直接送信し、返信生成完了・全文読了まで受領。同じ指定範囲を続行し、本人を通常の中継役へ戻さない。
 
-a98f569aの準備完了・対象process残存0・Git cleanはCodex報告と保存証拠で確認し、相談役のMac直接観測とはしない。**前件acceptと次指示を発行済み。新指示受領・設営21適用・実回答作業の実稼働/完成は未確認。**
+a98f569aの準備完了・対象process残存0・Git cleanはCodex報告と保存証拠で確認し、相談役のMac直接観測とはしない。
+
+**Codex2実行checkpoint（2026-10-03）：新指示を全文受領、c18ac0d6へ同期し、設営21を適用。第一表示要求217atomへの14単位の実回答と既存Skill resultを保存し、既存validatorは受理。その直後のSHA差替えcloneも正しく拒否したが、補助の比較値が既存エラー接頭辞を欠きprocess exit1。製品6/設営21を維持して追加作用を止め、比較一行と新attempt-002への追従・同一要求SHAの第一回答byte同一再利用をGPT_DECISIONへ返す。未修正・未再実行。旧入力21件不変、attempt-001失敗証拠を保持。残8回答/trace/manifest/別process再読は未実施。[今回report](reports/digest-caption-display-answers-20261003/README.md)、[証拠](reports/digest-caption-display-answers-20261003/evidence.json)。**
 
 main、担当fileのみ明示stage、他者変更保全、stage/commit/push直列化。Codex1起動・受理だけの独立commitは不要。新しい実質問題がなければ回答→検査→保存→別process再検査→通常commit/push→直接報告まで。今回完了から演出・動画へ自動着工しない。
