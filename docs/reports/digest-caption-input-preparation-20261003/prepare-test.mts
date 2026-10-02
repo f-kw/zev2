@@ -10,7 +10,7 @@ import type {Zev2State} from '../../../packages/shared/src/index.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const REPORT = 'docs/reports/digest-caption-input-preparation-20261003';
-const NEW = 'runtime/artifacts/digest-caption-input-preparation-20261003-v001';
+const NEW = 'runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002';
 const OLD = 'runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001';
 const DRAFT = 'draft_eCg3g-IMIzEWMtJuMyJWB', PLAN = 'agent_xKOu8eZKSNa5viNENtJ4L', EXECUTION = 'agent_wGiuVx5QiJvjGUxEW8Qxa';
 const STT = 'agent_YchOWHe52hoa1T834AbZT';
@@ -24,7 +24,7 @@ const read = async (p: string) => readFile(path.join(ROOT, p));
 const json = async (p: string): Promise<Obj> => record(JSON.parse((await read(p)).toString()));
 const physical = (producer: string, file: string) => `${OLD}/artifacts/${DRAFT}/${producer}--${file}`;
 const PARAMS: DigestCaptionPreparationParametersV001 = {
-  workspaceRoot: ROOT, sourceRuntimeRoot: path.join(ROOT, OLD), outputRoot: path.join(ROOT, NEW, 'attempt-001'),
+  workspaceRoot: ROOT, sourceRuntimeRoot: path.join(ROOT, OLD), outputRoot: path.join(ROOT, NEW, 'bundle'),
   preparationId: 'digest-caption-input-preparation-20261003-v001',
   stateBinding: {path: `${OLD}/state.json`, fileSha256: 'c62e3b38d00c8222f0918b52704e579f87a14346217fada6c9cd754fc6fccf3c'},
   scopeBinding: {path: 'docs/work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001.md', fileSha256: 'c56aa5710696686778ac9cc5ab26787d35395b7c9d9b672db956f22ea09db209'},
@@ -71,7 +71,7 @@ async function currentPureParameters(): Promise<AdoptedCaptionJudgmentParameters
   const prompt = record(template.promptInput), segments = records(adoption.selectedCandidates);
   // Existing inputs were qualified by the runner; the clone tests reuse their exact typed values.
   const result: AdoptedCaptionJudgmentParametersV001 = {
-    preparationId: PARAMS.preparationId, meaningPath: `${NEW}/attempt-001/meaning-input.json`,
+    preparationId: PARAMS.preparationId, meaningPath: `${NEW}/bundle/meaning-input.json`,
     planBinding: {path: `artifacts/${DRAFT}/${PLAN}/digest-plan.json`, fileSha256: PARAMS.expected.planSha256},
     machineAdoptionBinding: formal.bind(`artifacts/${DRAFT}/${EXECUTION}/machine-adoption.json`, adoption),
     transcriptBinding: JSON.parse(JSON.stringify(plan.transcriptBinding)), utteranceBinding: JSON.parse(JSON.stringify(plan.utteranceBinding)),
@@ -144,7 +144,7 @@ async function run() {
   assert(built.meaning.atomOccurrences.every(a => !p.droppedSourceSegmentIds.includes(a.sourceSegmentId)));
   assert.equal(p.droppedSourceSegmentIds.length, 3460);
   const negatives: Array<{condition: string; expected: string; observed: string; savedOutputsIncreased: false}> = [];
-  const count = async () => (await files(`${NEW}/attempt-001`)).length;
+  const count = async () => (await files(`${NEW}/bundle`)).length;
   async function reject(condition: string, expected: string, action: () => unknown | Promise<unknown>) {
     const beforeCount = await count(); let observed = '';
     try {await action();} catch (e) {observed = e instanceof Error ? e.message : String(e);}
@@ -196,7 +196,7 @@ async function run() {
   // Clone the prepared small bundle, coherently rebase its logical paths, then tamper one output.
   const tamperedRoot = `${NEW}/negative-output`, rebasedParams = {...PARAMS, outputRoot: path.join(ROOT, tamperedRoot)};
   await mkdir(rebasedParams.outputRoot);
-  const oldPrefix = `${NEW}/attempt-001`, rebase = (bytes: Buffer) => Buffer.from(bytes.toString().split(oldPrefix).join(tamperedRoot));
+  const oldPrefix = `${NEW}/bundle`, rebase = (bytes: Buffer) => Buffer.from(bytes.toString().split(oldPrefix).join(tamperedRoot));
   const tamperedManifest = structuredClone(prepared.manifest);
   assert(Array.isArray(tamperedManifest.outputs));
   for (const entry of records(tamperedManifest.outputs)) {
@@ -217,7 +217,7 @@ async function run() {
   assert.deepEqual(await snapshot(), before, 'OLD_INPUTS_CHANGED');
   await save('manifest-binding.json', prepared.manifestBinding);
   const evidence = await json(`${REPORT}/evidence.json`);
-  const result = {...evidence, status: 'prepared-awaiting-separate-readback', history: {productFixes: 5, setupFixes: 19, newImplementationPaths: 2, setup19Applied: true},
+  const result = {...evidence, status: 'prepared-awaiting-separate-readback', history: {productFixes: 6, setupFixes: 20, newImplementationPaths: 2, setup19Applied: true, setup20Applied: true},
     startedAt, preflight: pre, implementation: {limitedDerivation: {path: preserved[0], fileSha256: before[preserved[0]!], lines: '175–235'}, existingBytesUnchanged: preserved.map(p => ({path: p, fileSha256: before[p]}))},
     actualConnection: {retainedAtoms: built.meaning.atomOccurrences.length, requests: built.requests.length, groups: built.meaning.orderedCandidates.map(g => ({candidateId: g.candidateId, timelineSegmentId: g.timelineSegmentId, atoms: g.atomOccurrenceIds.length})),
       droppedAtoms: p.droppedSourceSegmentIds.length, dropIncluded: 0, originalClock: prepared.manifest.originalClockBinding, originalPurposePreserved: true,

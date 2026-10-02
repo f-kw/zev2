@@ -77,3 +77,9 @@ main、担当fileのみ明示stage、他者変更保全、stage/commit/push直�
 ## Codex2 checkpoint — 2026-10-03 字幕判断入力準備の初回局所停止
 
 f577bfba固定版の履歴：8c96aa62から新規二pathと設営19を実装。対象型検査・export/出力不存在確認、旧正常一区間の純粋比較を通過。実入力準備は承認保存参照から目的文を取り出す位置の誤りでexit1。要求保存/別process再構築は未完了。初回失敗証拠と旧入力54件不変を[主report](reports/digest-caption-input-preparation-20261003/README.md)へ保存。媒体/通常HTTP/判断/描画/費用0、既存受理・人間Pendingは不変。この停止を今回の承認や後続成功へ付け替えない。
+
+## Codex2 完了checkpoint — 2026-10-03 字幕判断入力の準備接続
+
+追補最終返信を専用Edgeで全文受領、f5ca9bcbへ同期。製品修正6の承認snapshot/目的保存物を分ける二行と、設営20の新保存先対応だけ適用。attempt-002/bundleに意味入力・9要求・準備manifestを保存。3,613atom/9group、候補6三範囲、drop混入0、元本文/ms/順序/style一致。今回一系列内の旧正常658断片比較、最小拒否11条件、別process再構築一回はすべてexit0。manifest実SHA 83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75、元JSON/既存実装54件SHA不変。初回exit1/f577bfba/失敗runtimeは不変に残る。新二path初実装と累積製品6/設営20は別記、一般上限不変。
+
+詳細は[主report](reports/digest-caption-input-preparation-20261003/README.md)と[evidence](reports/digest-caption-input-preparation-20261003/evidence.json)。媒体/通常HTTP/判断/製造/費用0、元scope/purposeと人間Pendingは不変。完成は準備のみで表示回答・背景4出力・renderer接続・動画許可は未成立。担当差分の通常commit/pushと直接報告へ進む。相談役の監査受理とは区別する。

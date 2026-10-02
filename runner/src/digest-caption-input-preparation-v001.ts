@@ -133,7 +133,8 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
     dependsOnAgentRequestId: planRequest.dependsOnAgentRequestId, createdAt: planRequest.createdAt}, 'CAPTION_PREPARATION_COMMAND_CHANGED');
   assert.equal(m.formal.canonicalSha(identity.command), identity.commandSha256, 'CAPTION_PREPARATION_COMMAND_CHANGED');
   const intent = get(plan.approvedRequestBinding);
-  assert.equal(intent.productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');
+  assert.deepEqual(record(intent.identity).approvedDraft, approved, 'CAPTION_PREPARATION_APPROVAL_CHANGED');
+  assert.equal(stage('production-intent.json').productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');
   for (const name of ['candidate-request.json', 'selection-request.json'])
     assert.equal(record(stage(name).input).productionRequest, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');
   assert.equal(record(stage('retention-request.json').input).taskDescription, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');

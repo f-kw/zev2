@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-caption-input-preparation-report-v001",
-  "status": "stopped-gpt-decision",
+  "status": "passed",
   "receivedAt": "2026-10-02T15:20:36.826409+00:00",
   "confirmedHead": "8c96aa6248fbf1cac40e87346d5e37baf24b8bc9",
   "scope": {
@@ -8,10 +8,11 @@
     "fileSha256": "c56aa5710696686778ac9cc5ab26787d35395b7c9d9b672db956f22ea09db209"
   },
   "history": {
-    "productFixes": 5,
-    "setupFixes": 19,
+    "productFixes": 6,
+    "setupFixes": 20,
     "newImplementationPaths": 2,
-    "setup19Applied": true
+    "setup19Applied": true,
+    "setup20Applied": true
   },
   "previousAcceptedCommit": "4556e389fc6cb2a9933f98bd5d83716324ef8b01",
   "initialGitChanges": [],
@@ -25,14 +26,10 @@
     "exports": "passed",
     "parent": "present",
     "output": "absent",
-    "strictTypeCheck": "passed",
-    "typeCommand": "runner/node_modules/.bin/tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --strict --skipLibCheck --allowImportingTsExtensions <new 2 paths + prepare-test.mts>",
-    "typeCheckLog": "/private/tmp/codex2-caption-typecheck.log",
-    "normalHttpStarted": false,
-    "loader": "node --import ./runner/node_modules/tsx/dist/loader.mjs",
-    "cliIpcBlocked": true
+    "fixedInputs": "passed",
+    "normalHttpStarted": false
   },
-  "checkpointAt": "2026-10-02T15:40:29.975235+00:00",
+  "checkpointAt": "2026-10-02T16:00:26.942726+00:00",
   "failure": {
     "schemaVersion": "digest-caption-input-preparation-failure-v001",
     "attempt": "attempt-001",
@@ -62,8 +59,445 @@
   "effects": {
     "mediaReadHashCopyPut": 0,
     "normalHttp": 0,
+    "sourceSttInspectionExecution": 0,
     "judgmentCalls": 0,
     "rendering": 0,
     "costUsd": 0
+  },
+  "resumeApproval": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_JUDGMENT_INPUT_PREPARATION_20261003_v001_PURPOSE_REFERENCE_FIX.md",
+    "fileSha256": "da89ee4118e3b375719d63aa633ec42f48a0262df5395c0307eb22718b1bd6d8",
+    "confirmedHead": "f5ca9bcb3d17ca35ae550df55992ce6138df4d21",
+    "replyComplete": true,
+    "replyFullyRead": true,
+    "productFix": 6,
+    "setupFix": 20,
+    "individuallyApproved": true,
+    "generalLimitsUnchanged": true
+  },
+  "newAttempt": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002",
+  "failureHistory": [
+    {
+      "schemaVersion": "digest-caption-input-preparation-failure-v001",
+      "attempt": "attempt-001",
+      "exitCode": 1,
+      "failure": "CAPTION_PREPARATION_PURPOSE_CHANGED",
+      "location": "runner/src/digest-caption-input-preparation-v001.ts:136",
+      "actualApprovedRequestBindingKind": "normal-request-digest-preparation-binding-v002 (binding-input.json)",
+      "actualPurposeLocation": "identity.approvedDraft.purpose",
+      "separateIntentLocation": "preparation.artifacts[production-intent.json].productionIntent",
+      "proposedProductDiff": "- assert.equal(intent.productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');\n+ assert.deepEqual(record(intent.identity).approvedDraft, approved, 'CAPTION_PREPARATION_APPROVAL_CHANGED');\n+ assert.equal(stage('production-intent.json').productionIntent, draft.purpose, 'CAPTION_PREPARATION_PURPOSE_CHANGED');\n",
+      "applied": false,
+      "pastProductFixes": 5,
+      "setupFixes": 19,
+      "newImplementationPaths": 2,
+      "bundleSaved": false,
+      "separateProcessReadback": false,
+      "oldSnapshotFiles": 54,
+      "oldInputsUnchanged": true,
+      "runLog": {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001-failure.log",
+        "fileSha256": "1d4add0ca1542cde1369c4a86f35735c9203cd271e864a0dbfa42e9040faf624"
+      },
+      "equivalence": "old normal first part pure comparison returned without assertion failure before preparation; no repeat requested",
+      "newAttemptProposal": "attempt-002/bundle, preserve attempt-001 records",
+      "recordedAt": "2026-10-02T15:43:22.059843+00:00"
+    }
+  ],
+  "resumePreflight": {
+    "newAttemptAbsent": true,
+    "parentPresent": true,
+    "outputAbsent": true,
+    "strictTypeCheckExit": 0,
+    "log": "/private/tmp/codex2-caption-typecheck-002.log"
+  },
+  "startedAt": "2026-10-02T15:56:19.693Z",
+  "implementation": {
+    "limitedDerivation": {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f",
+      "lines": "175–235"
+    },
+    "existingBytesUnchanged": [
+      {
+        "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+        "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+      },
+      {
+        "path": "runner/src/digest-plan-preparation-v001.ts",
+        "fileSha256": "5100d8649c9151b831ce3174db40899e4ac229b0b4fde026d9b2bbe7b5eb6072"
+      },
+      {
+        "path": "runner/src/digest-plan-consumption-v001.ts",
+        "fileSha256": "a6c6ff22cf3017a1393fc22578cb1cb9d92ee845636fff8769ec19e78117e842"
+      },
+      {
+        "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+        "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3"
+      },
+      {
+        "path": "runner/src/skills/candidate-discovery-v001.ts",
+        "fileSha256": "e5f8aa2c5eb678edca67c99651638d4ddb11fa059363dc0cd76b88b96aa81f1e"
+      },
+      {
+        "path": "runner/src/skills/candidate-selection-v001.ts",
+        "fileSha256": "1fc8a464ade963e49e26f2eba1bd8b6c0d77c30054308684159078847ab90a8d"
+      },
+      {
+        "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+        "fileSha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291"
+      },
+      {
+        "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+        "fileSha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596"
+      }
+    ]
+  },
+  "actualConnection": {
+    "retainedAtoms": 3613,
+    "requests": 9,
+    "groups": [
+      {
+        "candidateId": "candidate-0001",
+        "timelineSegmentId": "segment-0001",
+        "atoms": 217
+      },
+      {
+        "candidateId": "candidate-0002",
+        "timelineSegmentId": "segment-0002",
+        "atoms": 658
+      },
+      {
+        "candidateId": "candidate-0003",
+        "timelineSegmentId": "segment-0003",
+        "atoms": 120
+      },
+      {
+        "candidateId": "candidate-0004",
+        "timelineSegmentId": "segment-0004",
+        "atoms": 1033
+      },
+      {
+        "candidateId": "candidate-0005",
+        "timelineSegmentId": "segment-0005",
+        "atoms": 778
+      },
+      {
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0006",
+        "atoms": 258
+      },
+      {
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0007",
+        "atoms": 158
+      },
+      {
+        "candidateId": "candidate-0006",
+        "timelineSegmentId": "segment-0008",
+        "atoms": 167
+      },
+      {
+        "candidateId": "candidate-0007",
+        "timelineSegmentId": "segment-0009",
+        "atoms": 224
+      }
+    ],
+    "droppedAtoms": 3460,
+    "dropIncluded": 0,
+    "originalClock": {
+      "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/clock-resolution.json",
+      "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8"
+    },
+    "originalPurposePreserved": true,
+    "requestsSha": [
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+        "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+        "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+        "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+        "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+        "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+        "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+        "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+        "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+        "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943"
+      }
+    ],
+    "manifestBinding": {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/manifest.json",
+      "fileSha256": "83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75"
+    }
+  },
+  "equivalence": {
+    "status": "passed",
+    "contextPlan": "runtime/artifacts/digest-new-material-20260926-v001/selection-plan.json",
+    "selectedPart": "segment-0001",
+    "atomCount": 658,
+    "baseJsonReferencesVerified": 3,
+    "baseMediaBytesRead": 0,
+    "compared": [
+      "raw text",
+      "source IDs/ms",
+      "common utterances",
+      "atom order",
+      "group order",
+      "caption/boundary IDs",
+      "taskDescription",
+      "styleLimits",
+      "request inputCanonicalSha256"
+    ],
+    "intentionalDifferences": [
+      "preparation meaning/request schema names",
+      "meaning binding hashes changed by the new preparation schema",
+      "no sourcePackage, old approval/base/renderer provenance"
+    ],
+    "attempt": "attempt-002",
+    "priorPartial": "attempt-001 pure comparison passed before local prepare failed; this success does not replace the exit1"
+  },
+  "negatives": [
+    {
+      "condition": "other-draft",
+      "expected": "CAPTION_PREPARATION_REQUEST_MISMATCH",
+      "observed": "CAPTION_PREPARATION_REQUEST_MISMATCH",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "owner",
+      "expected": "DIGEST_DEPENDENCY_REFERENCE_INVALID",
+      "observed": "DIGEST_DEPENDENCY_REFERENCE_INVALID",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "reference-other-draft",
+      "expected": "DIGEST_DEPENDENCY_OTHER_DRAFT",
+      "observed": "DIGEST_DEPENDENCY_OTHER_DRAFT",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "incomplete",
+      "expected": "CAPTION_PREPARATION_REQUEST_INCOMPLETE",
+      "observed": "CAPTION_PREPARATION_REQUEST_INCOMPLETE",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "missing-keep",
+      "expected": "CAPTION_KEEP_MEMBERSHIP_OR_ORDER_CHANGED",
+      "observed": "CAPTION_KEEP_MEMBERSHIP_OR_ORDER_CHANGED",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "duplicate-keep",
+      "expected": "CAPTION_KEEP_DUPLICATE",
+      "observed": "CAPTION_KEEP_DUPLICATE",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "drop-inclusion",
+      "expected": "CAPTION_DROP_INCLUDED",
+      "observed": "CAPTION_DROP_INCLUDED",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "text-tamper",
+      "expected": "CAPTION_PREPARATION_SHA_MISMATCH",
+      "observed": "CAPTION_PREPARATION_SHA_MISMATCH",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "unknown-version",
+      "expected": "DIGEST_PLAN_VERSION_OR_FIELDS_INVALID",
+      "observed": "DIGEST_PLAN_VERSION_OR_FIELDS_INVALID",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "style-tamper",
+      "expected": "CAPTION_PREPARATION_SHA_MISMATCH",
+      "observed": "CAPTION_PREPARATION_SHA_MISMATCH",
+      "savedOutputsIncreased": false
+    },
+    {
+      "condition": "saved-output-tamper",
+      "expected": "CAPTION_PREPARATION_SAVED_OUTPUT_CHANGED",
+      "observed": "CAPTION_PREPARATION_SAVED_OUTPUT_CHANGED",
+      "savedOutputsIncreased": false
+    }
+  ],
+  "preserved": {
+    "snapshotPath": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/old-inputs-before.json",
+    "files": 54,
+    "unchanged": true
+  },
+  "phaseTimesMs": {
+    "equivalence": 108.38624999999999,
+    "preparation": 346.04470799999996,
+    "totalSoFar": 2009.253667
+  },
+  "unresolved": [
+    "completed base 4 references",
+    "display answers",
+    "final style/renderer binding",
+    "ROOT-based downstream readBound connection",
+    "video permission",
+    "human quality"
+  ],
+  "completedAt": "2026-10-02T15:56:46.359Z",
+  "separateProcessReadback": {
+    "status": "passed",
+    "separateProcessPid": 26833,
+    "reconstructedAtomCount": 3613,
+    "requestCount": 9,
+    "manifestBinding": {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/manifest.json",
+      "fileSha256": "83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75"
+    },
+    "allBytesReconstructedEqual": true,
+    "originalInputsUnchanged": true,
+    "judgmentCalls": 0,
+    "stateUpdates": 0,
+    "mediaReadHashCopyPut": 0,
+    "elapsedMs": 347.82225000000005
+  },
+  "failurePreservation": [
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/parameters.json",
+      "fileSha256": "a877f7b749f40675a3281667328dbac268f39b7e5a7c4ee82fdac8874f383f51",
+      "kept": true
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/old-inputs-before.json",
+      "fileSha256": "8b9c6cd2cb8720e857b5122415b454074ac19a7991fdb191066b6e698407de69",
+      "kept": true
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001-failure.json",
+      "fileSha256": "7ddceb902f845a662321242957b0a97b24a26d33849a94288117210fd61282be",
+      "kept": true
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-001-failure.log",
+      "fileSha256": "1d4add0ca1542cde1369c4a86f35735c9203cd271e864a0dbfa42e9040faf624",
+      "kept": true
+    }
+  ],
+  "savedBundle": {
+    "files": [
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0001.json",
+        "bytes": 36774,
+        "fileSha256": "fee145844ff2409c4a8ead59558a4d0a5879bf177387e593b2075f1944e6c567"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0002.json",
+        "bytes": 106017,
+        "fileSha256": "c00519c42a0da5e53786004e17f0b560dcc3894d2384f7c01aa45cac93166bbc"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0003.json",
+        "bytes": 21549,
+        "fileSha256": "0c89ad12f01dea925e8738d95c0071e8ad80821f9314c8700aca493e32952c50"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0004.json",
+        "bytes": 164816,
+        "fileSha256": "069411c7b5b1a96664573591376e31c9fc79e5846017beebbb228517c44ef721"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0005.json",
+        "bytes": 124799,
+        "fileSha256": "f4e2c6c9dd333ffff8e9b1cc64c6abfeacd37bd4a22ad8bd18fd89e02033a9fe"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0006.json",
+        "bytes": 43215,
+        "fileSha256": "e2792911f8d52e4fb19ff30d5c5f4fa039a1c3fe89841e68c0b2f71775463bd6"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0007.json",
+        "bytes": 27517,
+        "fileSha256": "9dc41285f9308ed0f34a641ff0651f0f5e38f0bd42734a3eb13c4a45b6fc36ad"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0008.json",
+        "bytes": 28902,
+        "fileSha256": "2ad4164cdcc859c1c4a8373153226d8d74454bd31f87e7658ad0b6f22d148996"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/display-request-0009.json",
+        "bytes": 37869,
+        "fileSha256": "51931ef75ed33d81f7845924b4b9d07258849f1746146ee2b89b5897659b3943"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/manifest.json",
+        "bytes": 34441,
+        "fileSha256": "83052a914317ae8b5a056ff641635ff061ebf59830df68a8090d180f2f0cfb75"
+      },
+      {
+        "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/meaning-input.json",
+        "bytes": 1965398,
+        "fileSha256": "6e16d247d36f841783d59badc4c4a3f35c8cf4739b6acae29baccc32a7d061a3"
+      }
+    ],
+    "logicalBytes": 2591297,
+    "fileCount": 11,
+    "metadataMediaOnly": true
+  },
+  "copyAccounting": {
+    "mediaBytesCopied": 0,
+    "jsonFixtureFilesCopied": 32,
+    "jsonFixtureOriginalBytesCopied": 9894560,
+    "newAttemptJsonBytes": 15323463
+  },
+  "processExits": {
+    "preflight": 0,
+    "strictTypeCheck": 0,
+    "prepareAndNegatives": 0,
+    "separateProcessReadback": 0
+  },
+  "logs": [
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/run.log",
+      "fileSha256": "99621bbdde58ab340f7e044adc5803f1e9fa5a123c6a784bb1410e1c28921178"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/readback.log",
+      "fileSha256": "071e080866576123512e411649d005fb9f0232443782c3e6c0475a0dca46fccc"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/typecheck.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "boundary": "JSON-only preparation; existing whole media reader/normal queue not executed",
+  "targetProcessesRemaining": 0,
+  "finalGitCheckpoint": {
+    "branch": "main",
+    "baseHead": "f5ca9bcb3d17ca35ae550df55992ce6138df4d21",
+    "beforeCommit": "own six tracked files only, staged empty, untracked0",
+    "finalCommitAndPush": "recorded after execution in current attempt Git receipt"
   }
 }
