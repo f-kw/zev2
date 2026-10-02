@@ -150,3 +150,11 @@ kawafmmへの判断依頼が必要な場合は、COMMUNICATION.mdの規律に従
 6. NEXT_REQUEST付きなら相談役返信全文を受領し、次の明示指示へ進む。
 
 監査用checkpointが必要な途中停止では、原因究明に必要な証拠を失わないことを優先する。ただし巨大なpartial媒体そのものが不要なら、最小証拠固定後の削除を次の承認済み再開/終了処理へ含めてよい。
+
+## 11. session work log
+
+複数Codex sessionの並行稼働を前提に、相談役報告の直前に各sessionが自分専用のwork logを確定する。正本は `docs/policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md`。
+
+work logは `docs/work-logs/YYYY-MM/` の新規fileとし、共有日次logへの逐次appendはしない。指示・重要判断・主要作業・検証・cleanup・Git・未完了/次状態をまとめ、詳細はwork-order/report/evidence/commitへ参照する。
+
+第一完成、GPT_DECISION/HUMAN_DECISION停止、handoff、session終了が記録タイミングである。途中の細かな進捗ごとにGit logを増やさない。相談役はwork logを補助履歴として使うが、現在地・承認・再開判断はCURRENT_GOAL/HANDOVER/work-order等の正本から行う。
