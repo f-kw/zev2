@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "digest-real-judgment-local-evidence-v001",
+  "status": "stopped",
+  "receivedAt": "2026-10-02T13:44:01.642991+00:00",
+  "instruction": "docs/work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md",
+  "confirmedHead": "7e0de670f78220a08984a3c752c2c168ec73ae1e",
+  "branch": "main",
+  "initialGitChanges": [],
+  "oldDraftExecuted": false,
+  "oldRelevantProcesses": 0,
+  "modelLabel": null,
+  "modelLabelEvidence": "実行環境のモデル変数が未提供の場合はnull。過去のgpt-6.1-sol表示を現在値へ転用しない。",
+  "history": {
+    "productFixes": 5,
+    "setupFixes": 16,
+    "approvedSetupIfApplied": 16,
+    "setup16Applied": true
+  },
+  "scope": "保存済み一素材、通常local一系列、段階別の今回のCodex判断、計画と時計の保存・別process再読。動画なし。",
+  "checkpoints": [
+    {
+      "at": "2026-10-02T13:44:01.642991+00:00",
+      "event": "新指示受領。最新main同期、旧案差分・対象processなしを確認。"
+    },
+    {
+      "at": "2026-10-02T13:48:36.252476+00:00",
+      "event": "設営16初回起動exit1、親directory不足。追加作用停止。"
+    }
+  ],
+  "startedAt": "2026-10-02T13:47:59.941Z",
+  "runtime": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001",
+  "judgments": [],
+  "processes": [],
+  "error": "Error: ENOENT: no such file or directory, mkdir '/Users/kawafmm/workspace/zev2/runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001'",
+  "stop": {
+    "at": "2026-10-02T13:48:36.252476+00:00",
+    "cause": "新runtimeの親directoryが存在せず、recursive:falseのattempt mkdirがENOENT。",
+    "processExit": 1,
+    "stateCreated": false,
+    "mediaActionStarted": false,
+    "productChangeNeeded": false,
+    "recommendedDifference": "run-local.mtsでattemptの親をmkdir({recursive:true})した後、attempt自体は既存のrecursive:falseを維持する。既存attemptを上書きしない。",
+    "approval": "設営16まで適用済み。追加の一件をGPT_DECISIONで相談役へ返す。"
+  }
+}
