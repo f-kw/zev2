@@ -127,3 +127,13 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 main・担当のみ明示stage・Git直列化・他者変更保全。reset/stash/旧成果削除/他者stage・branch/worktree/force pushを自己判断しない。
 
 86875908のremoteと4文書差分はGitHubで確認。Git clean/untracked0・自分のprocess0はCodex報告で、相談役のMac直接観測ではない。今回accept/human_decisionは保存・発行済み、本人回答・Codex返信受領/待機移行・Mac現在processは未確認。方針/指示/完了/中断は同じターンで記録し、非同期監視を装わない。
+
+## 7. 2026-10-03 Codex作業サイクルcleanup運用更新
+
+kawafmmの明示指示で、Codexの一件完了にcleanupを追加した。正本は [CODEX_WORK_CYCLE_CLEANUP_POLICY_v001](policies/CODEX_WORK_CYCLE_CLEANUP_POLICY_v001.md)。
+
+標準順序は **指示受領→preflight→作業→検証→証拠固定→cleanup→own process終了→正本/Git→相談役報告→次指示受領**。現work-order/sessionが生成した一時copy/PCM/grid/途中transcode/scratch/不要work/監査不要の失敗partial媒体は、成果固定・参照切れ確認後に整理する。元素材・受理済みcandidate/人間review媒体・他task成果・正本参照物・容量確保目的の既存成果は自動削除しない。
+
+完了報告へcleanup結果、主な削除/保持理由、媒体作業では可能な範囲の回収容量・空き、own process、Git/untrackedを追加する。これは正式成果や旧成果の一般削除権限を与えない。
+
+現在の製造判断待ち、製品6/設営29、未承認adapter/candidate trust/媒体、保存先・容量、ID9-PD-01/02、人間品質等の現在地は変更しない。
