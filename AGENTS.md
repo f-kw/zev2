@@ -145,3 +145,14 @@ zev2 は ZEV を参考にするが、既存ZEVの後方互換を持たない新�
 - 本節は三者運用体制の試行錯誤枠（検査設営起因の修正5回/工事1件）の範囲内でのみ有効。着工承認済みwork-orderの外では適用しない。production・契約・正式成果物・fixture値・API通信・費用へ触れず、preflight、検査設営、job製造の配線、測定commandだけに閉じる欠陥は、証拠を版付き保存して自走修正し、そのまま続行する。停止報告の三分法では設営起因をこの自走対象として扱う。
 - 環境依存command・path規則・起動形は組込み前に現環境の実値を確認する。job版更新時は従属物を一件表で閉じる。検査変更時は返却shape、proof割当数と観測数、fixture参照方式を正式実行前に照合する。
 - 枠（5回）を超えた場合、同型の設営起因停止が3件以上続く場合、または前項の点検で塞げない場合は、該当する型と点検が効かなかった理由を添えてkawafmmへ連鎖状況を報告して停止する。
+
+## Codex標準作業サイクルとcleanup（2026-10-03 kawafmm確定）
+
+正本は `docs/policies/CODEX_WORK_CYCLE_CLEANUP_POLICY_v001.md`。Codexの一件は、**指示受領→preflight→作業→検証→証拠固定→cleanup→process終了→正本/Git→相談役報告→次指示受領**までを標準サイクルとする。
+
+- 作業完了後、今回work-order/sessionが自分で生成した一時物・中間素材は、最終成果と監査証拠を固定し、後続参照がないことを確認してから削除する。source snapshot、PCM/audio grid、途中transcode、chunk、frame dump、scratch画像、成功後不要なwork directory、監査に不要な失敗partial media等を対象にできる。
+- 元素材、ユーザーprovided file、受理済みcandidate/完成動画、人間review媒体、他work-order/他sessionの成果物、正本/manifest/reportから参照されるもの、archive/stable相当は自動削除しない。容量確保のため既存成果を消す場合も別の明示承認を要する。
+- 失敗attemptは原因・command・log・必要SHA/size等の**最小監査証拠を残し、巨大partial媒体を永久保持することを標準にしない**。
+- cleanupはGit cleanや.gitignoreで隠すことの代替ではない。削除後に参照整合、残process、Git status/untrackedを確認する。
+- 媒体作業の完了報告では、削除した主な物と回収容量、保持した大容量物と理由、可能なら作業前後の空き容量を示す。
+- 削除権限は所有work-order内の一時物整理に限る。正式成果・旧成果・共有素材の削除権限を一般化しない。
