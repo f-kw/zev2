@@ -156,3 +156,16 @@ zev2 は ZEV を参考にするが、既存ZEVの後方互換を持たない新�
 - cleanupはGit cleanや.gitignoreで隠すことの代替ではない。削除後に参照整合、残process、Git status/untrackedを確認する。
 - 媒体作業の完了報告では、削除した主な物と回収容量、保持した大容量物と理由、可能なら作業前後の空き容量を示す。
 - 削除権限は所有work-order内の一時物整理に限る。正式成果・旧成果・共有素材の削除権限を一般化しない。
+
+## Codex session work log（2026-10-03 kawafmm確定）
+
+正本は `docs/policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md`。
+
+複数session並行を前提に、中央ログへ逐次追記しない。各Codex sessionは、第一完成・GPT/HUMAN停止・handoff・session終了の直前に、そのサイクルの**指示・判断・主要作業・検証・cleanup・Git・次状態**を一度まとめて `docs/work-logs/YYYY-MM/` へ新規fileとして保存する。
+
+- filenameは日時・session名・epic/work-order・final HEADを含め、他sessionと共有編集しない。
+- 通常rotationは月directory。1 summaryが64 KiBを超える場合だけpart分割する。
+- work logはstdout全文・全command・chain-of-thoughtを保存する場所ではなく、既存work-order/report/evidence/commitへの索引兼要約とする。
+- password/API key/cookie等の秘密情報は記録しない。
+- 過去work logは自動削除しない。巨大runtimeのcleanupとは分離する。
+- 標準終了順は、証拠固定→cleanup→own process終了→session work log→正本更新→commit/push→相談役報告→次指示受領。
