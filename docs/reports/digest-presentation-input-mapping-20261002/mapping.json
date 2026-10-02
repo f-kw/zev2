@@ -1,0 +1,1445 @@
+{
+  "schemaVersion": "digest-presentation-input-mapping-report-v001",
+  "status": "static-mapping-complete",
+  "receivedAt": "2026-10-02T14:36:59.450032+00:00",
+  "instruction": "docs/work-orders/ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md",
+  "confirmedHead": "9acea7e2b04752af7e04f02e55b3ab359e6b0f97",
+  "priorAcceptedCommit": "7bb5de02a59ab78cd7aae6757dff33b6b20f0b88",
+  "history": {
+    "productFixes": 5,
+    "setupFixes": 18,
+    "setup18Applied": true,
+    "setup18Meaning": "個別承認の小JSON読取・既存resolver・ID/時計対応記録、一回の保存再読。製品変更なし"
+  },
+  "initialGitChanges": [],
+  "admission": {
+    "presentation": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "outlineChoice": null
+  },
+  "executedAt": "2026-10-02T14:52:43.868Z",
+  "finishedAt": "2026-10-02T14:52:43.979Z",
+  "sourceReferences": [
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--digest-execution-input.json",
+      "fileSha256": "735d6763afe6fcfabeb4c103871ee3a65368b96c9fa9df1a01f37717ace08f37",
+      "byteSize": 8540,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/digest-execution-input.json",
+      "schemaVersion": "digest-execution-input-artifact-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--digest-plan.json",
+      "fileSha256": "cd69dd7fccfab6b4d0f266e6dddf56d5eae4c670283cd7caf467b9fde2925ee3",
+      "byteSize": 6724,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/digest-plan.json",
+      "schemaVersion": "digest-plan-artifact-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-validation.json",
+      "fileSha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+      "byteSize": 224320,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-validation.json",
+      "schemaVersion": "new-material-retention-validation-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--machine-adoption.json",
+      "fileSha256": "624bfebeccbf0825c72bfc7a7ac3ed850408b4e9027c93b4c43dda1ed50fe15d",
+      "byteSize": 242559,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/machine-adoption.json",
+      "schemaVersion": "new-material-digest-execution-adoption-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--edit-plan.json",
+      "fileSha256": "cde0e6a292de011475b4d4cf3d0a418f4b839a1b9bf7eca5209e3e78e023caf6",
+      "byteSize": 53733,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/edit-plan.json",
+      "schemaVersion": "new-material-digest-edit-plan-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--clock-resolution.json",
+      "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8",
+      "byteSize": 3658,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/clock-resolution.json",
+      "schemaVersion": null
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT--transcript.json",
+      "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+      "byteSize": 6804193,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT/transcript.json",
+      "schemaVersion": null
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--utterances.json",
+      "fileSha256": "11de8ccaabe472cad61808763f0a149f041491e231cd72e135a52591f5fff087",
+      "byteSize": 1098428,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/utterances.json",
+      "schemaVersion": "distant-connection-common-utterance-artifact-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-plan.json",
+      "fileSha256": "d9a0bdb8e1f5659885f3b4b34d99ffb16cdb7fae6b12a05f08981182f1a23ff1",
+      "byteSize": 6954,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-plan.json",
+      "schemaVersion": "new-material-digest-execution-plan-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--binding-input.json",
+      "fileSha256": "b82c4e45a60be7b1eb103b32acd5efcf5232e6149fe36ab2a3a210e87d9f4ba3",
+      "byteSize": 11023,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/binding-input.json",
+      "schemaVersion": "normal-request-digest-preparation-binding-v002"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--production-intent.json",
+      "fileSha256": "0453a2dba7be8ac6d0fdaf37662befbca6db148f5864cc45b59dc14a8f228dca",
+      "byteSize": 977,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/production-intent.json",
+      "schemaVersion": "production-intent-plan-v0"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-inspection.json",
+      "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d",
+      "byteSize": 2744,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5/source-inspection.json",
+      "schemaVersion": "new-material-source-inspection-v001"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--consumption-binding.json",
+      "fileSha256": "29faf3f4091c53273da1c9ee416d78ae1847a525e68f8650c730ba0437fef6c2",
+      "byteSize": 5878,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/consumption-binding.json",
+      "schemaVersion": "normal-request-digest-consumption-binding-v002"
+    },
+    {
+      "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--manufacturing-values.json",
+      "fileSha256": "20b2341771f33183b0251390e688e9b35a52ca53428d0225bdfc01d7cee89947",
+      "byteSize": 884,
+      "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/manufacturing-values.json",
+      "schemaVersion": "presentation-base-media-build-job-v001"
+    },
+    {
+      "path": "runtime/artifacts/digest-structure-20260929-v001/structure-state.json",
+      "fileSha256": "ad68f21a63b7d669693e72f21df1bdc27edb3d696cff9b63e7439494d55d8801",
+      "byteSize": 167561,
+      "logicalPath": null,
+      "schemaVersion": "digest-structure-saved-state-v001"
+    },
+    {
+      "path": "runtime/artifacts/caption-readability-full-20260929-v001/candidate-drawing-evidence.json",
+      "fileSha256": "47daba62ab462c1945a2d4742a46604aecf359eb004cca92577636bcb7ce39e1",
+      "byteSize": 14946621,
+      "logicalPath": null,
+      "schemaVersion": "presentation-orchestration-drawing-evidence-candidate-v001"
+    },
+    {
+      "path": "runtime/artifacts/selection-structure-improvement-20260930-v001/local-input-v006.json",
+      "fileSha256": "dfeeb7287bf6ad76634618efde98145fb01fb856f30cb263da70fa2dae7b390b",
+      "byteSize": 9581,
+      "logicalPath": null,
+      "schemaVersion": "selection-improvement-local-input-v001"
+    },
+    {
+      "path": "runtime/artifacts/caption-palette-20260929-v001/palette-state.json",
+      "fileSha256": "db7b3f8de1fed1bef0da48a27646a9be88c7cdef16805223585bbd9eb989bef6",
+      "byteSize": 17569,
+      "logicalPath": null,
+      "schemaVersion": "caption-palette-state-v001"
+    },
+    {
+      "path": "runtime/artifacts/digest-structure-20260929-v001/drawing-evidence.json",
+      "fileSha256": "d6d83eb9cc3097413990ff526f496d08f58a9fb1bf48bed6ce1b0c7afb84e7cf",
+      "byteSize": 2269,
+      "logicalPath": null,
+      "schemaVersion": "digest-structure-drawing-evidence-v001"
+    },
+    {
+      "path": "runtime/artifacts/caption-palette-20260929-v001/drawing-evidence.json",
+      "fileSha256": "072f3018a64b143ed9ee5a5f474364c5074d5af049e31468d77175797f3e564a",
+      "byteSize": 829,
+      "logicalPath": null,
+      "schemaVersion": "caption-palette-drawing-evidence-v001"
+    },
+    {
+      "path": "runtime/artifacts/integration-preparation-20260930-v001/attempt-002/draft.json",
+      "fileSha256": "be5e76cb18e9a7cdde26f576a7e5d9c3b2275ae77888fc754f6501f17c362e41",
+      "byteSize": 1588317,
+      "logicalPath": null,
+      "schemaVersion": "digest-integration-preparation-v001"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "byteSize": 119064,
+      "logicalPath": null,
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001"
+    },
+    {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "byteSize": 11125,
+      "logicalPath": null,
+      "schemaVersion": "presentation-instruction-renderer-job-v002"
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+      "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+      "byteSize": 404,
+      "logicalPath": null,
+      "schemaVersion": "presentation-registry-trust-v001"
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+      "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+      "byteSize": 14291,
+      "logicalPath": null,
+      "schemaVersion": "presentation-preset-registry-v001"
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+      "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+      "byteSize": 2713,
+      "logicalPath": null,
+      "schemaVersion": null
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+      "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+      "byteSize": 88,
+      "logicalPath": null,
+      "schemaVersion": null
+    },
+    {
+      "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json",
+      "fileSha256": "04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc",
+      "byteSize": 5397,
+      "logicalPath": null,
+      "schemaVersion": "presentation-renderer-trust-v001"
+    }
+  ],
+  "implementations": [
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "fileSha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "fileSha256": "a6c6ff22cf3017a1393fc22578cb1cb9d92ee845636fff8769ec19e78117e842",
+      "consumptionLiveBinding": true
+    },
+    {
+      "path": "runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/run_new_material_digest_20260926.mts",
+      "fileSha256": "4704f828ab672fc4d5331f4c0c71b5fc64bb46c49a440aee9ad6edcf7144001e",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/candidate_digest_core_adapter_v001.mts",
+      "fileSha256": "87ad048c14a4c65a2cbc6c19937426c638a43213444b2fb109b5737de73866ba",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/presentation_orchestration_v001.mjs",
+      "fileSha256": "734c6563839f82b0de95175796874f4712de1901ea7559669c930ca72b25f944",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/presentation_auto_effects_palette_v001.mjs",
+      "fileSha256": "a2ded80d534afd80bf7e876db8794f92051cd44a6ce0cfdf357d47d853a5fe3b",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "tools/digest-quality/caption-readability-source.mjs",
+      "fileSha256": "8abe98417a71ccf19a79f1b63db09b3f8697380576b7d59951af48d1047af54b",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "tools/digest-quality/digest-structure-evidence.mjs",
+      "fileSha256": "1f7f4e5828332c8ddc1ede0f80283be7f6b792ddd6141f0f1d5238ab035eb945",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "tools/digest-quality/caption-palette-view.mjs",
+      "fileSha256": "75e3deaac5544e1830ee02cd8e06792393f169471a39c7b0aad6437e45c49a95",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "tools/digest-quality/integration-preparation.mjs",
+      "fileSha256": "894a3b5f2de5f12eed85c26b031d1dbe755fd5e4649c35ba2189d21263a29e85",
+      "consumptionLiveBinding": false
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "fileSha256": "92549531204385ecafb89939cea99af87021359aaa3183e523970142da7d12ff",
+      "consumptionLiveBinding": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_timeline_v004.mjs",
+      "fileSha256": "f5536332a7331e5acb01bf04e4207b07b117414cebacc5b2dd49203e493bff32",
+      "consumptionLiveBinding": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_contract_v002.mjs",
+      "fileSha256": "a81d583d877e7e8a5410831f4a18bca18be08c92d28d6349d9a089fb9368086c",
+      "consumptionLiveBinding": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_caption_contract_v003.mjs",
+      "fileSha256": "a090caf2b1939bbc226a306cadd580b887ce34f0a0436af96e4f94480c4b9292",
+      "consumptionLiveBinding": true
+    }
+  ],
+  "diagnostic": {
+    "path": "runtime/artifacts/digest-presentation-input-mapping-20261002-v001/attempt-001/input-correspondence.json",
+    "fileSha256": "e6b4b7e4662600b219742b5f5adb067d692f4da9d2262de57e75201cf967b64f",
+    "byteSize": 1053795,
+    "savedJsonReadbackCount": 1,
+    "byteEqual": true,
+    "priorStateUnchanged": true
+  },
+  "coverage": {
+    "parent": 7073,
+    "keep": 3613,
+    "drop": 3460,
+    "mapped": 3613,
+    "uniqueSegmentIds": 9,
+    "candidate0006Segments": 3,
+    "droppedIdsRestored": 0,
+    "gapsRestored": 0,
+    "finalFrame": 27691,
+    "finalSample": 40705770,
+    "perAtomOutputClock": "not-generated; raw ms is related to its saved segment clock only"
+  },
+  "segments": [
+    {
+      "candidateId": "candidate-0001",
+      "segmentId": "segment-0001",
+      "outputOrdinal": 1,
+      "blockOrdinal": 2,
+      "clock": {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 159770,
+        "sourceEndMs": 213077,
+        "sourceStartFrame30": 4793,
+        "sourceEndFrame30": 6392,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1599,
+        "audioSamples": {
+          "sourceStart": 7045710,
+          "sourceEnd": 9396240,
+          "outputStart": 0,
+          "outputEnd": 2350530
+        }
+      },
+      "reason": "夏にホラーを始める発話から噂への不安と前作の有能バイトの自信、「大丈夫でしょ」までを残す。後の役柄へつながる内容であり、配置準備を切ってもこの前提が伝わる。",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 68,
+          "side": "start",
+          "sourceMs": 159770,
+          "unitId": "source-fragment-68",
+          "timeOrigin": "saved-source-transcript"
+        },
+        "end": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 284,
+          "side": "end",
+          "sourceMs": 213077,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        }
+      },
+      "textFileSha256": "67281d487af056890fffd5427661a332f5a68d1c1248016746544f5da4d0a0b3",
+      "textCodePoints": 217,
+      "firstSourceSegmentId": 68,
+      "lastSourceSegmentId": 284,
+      "sourceSegmentCount": 217,
+      "detailField": "segments[0]"
+    },
+    {
+      "candidateId": "candidate-0002",
+      "segmentId": "segment-0002",
+      "outputOrdinal": 2,
+      "blockOrdinal": 1,
+      "clock": {
+        "segmentId": "segment-0002",
+        "sourceStartMs": 213077,
+        "sourceEndMs": 327084,
+        "sourceStartFrame30": 6392,
+        "sourceEndFrame30": 9813,
+        "outputStartFrame": 1599,
+        "outputEndFrame": 5020,
+        "audioSamples": {
+          "sourceStart": 9396240,
+          "sourceEnd": 14425110,
+          "outputStart": 2350530,
+          "outputEnd": 7379400
+        }
+      },
+      "reason": "犬との出会い、薬と手洗い、また撫でてしまう展開、帰宅後の症状、誘惑に勝てなかった結論、お守りの冗談とやってみようという戻りまでを保持する。",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 285,
+          "side": "start",
+          "sourceMs": 213077,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 942,
+          "side": "end",
+          "sourceMs": 327084,
+          "unitId": "source-fragment-942",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "b7c452e6a93ba3de0320d50cb3cdab4808be28cffa1e611f6b55055da2523f4b",
+      "textCodePoints": 658,
+      "firstSourceSegmentId": 285,
+      "lastSourceSegmentId": 942,
+      "sourceSegmentCount": 658,
+      "detailField": "segments[1]"
+    },
+    {
+      "candidateId": "candidate-0003",
+      "segmentId": "segment-0003",
+      "outputOrdinal": 3,
+      "blockOrdinal": 2,
+      "clock": {
+        "segmentId": "segment-0003",
+        "sourceStartMs": 355551,
+        "sourceEndMs": 379620,
+        "sourceStartFrame30": 10667,
+        "sourceEndFrame30": 11389,
+        "outputStartFrame": 5020,
+        "outputEndFrame": 5742,
+        "audioSamples": {
+          "sourceStart": 15680490,
+          "sourceEnd": 16741830,
+          "outputStart": 7379400,
+          "outputEnd": 8440740
+        }
+      },
+      "reason": "日本事故物件監視協会の名前、前作経験、画面が変わりお化けが出るのを報告する説明、「ちょっとやってみますか」までで以後の仕事を理解できる。",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 1129,
+          "side": "start",
+          "sourceMs": 355551,
+          "unitId": "source-fragment-1129",
+          "timeOrigin": "saved-source-transcript"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 1248,
+          "side": "end",
+          "sourceMs": 379620,
+          "unitId": "source-fragment-1248",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "08d416d95ecd5235ebe19b7571b676eb2917a437f6c8e648de1911c1446f64b8",
+      "textCodePoints": 120,
+      "firstSourceSegmentId": 1129,
+      "lastSourceSegmentId": 1248,
+      "sourceSegmentCount": 120,
+      "detailField": "segments[2]"
+    },
+    {
+      "candidateId": "candidate-0004",
+      "segmentId": "segment-0004",
+      "outputOrdinal": 4,
+      "blockOrdinal": 2,
+      "clock": {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 1993090,
+        "sourceEndMs": 2256057,
+        "sourceStartFrame30": 59793,
+        "sourceEndFrame30": 67682,
+        "outputStartFrame": 5742,
+        "outputEndFrame": 13631,
+        "audioSamples": {
+          "sourceStart": 87895710,
+          "sourceEnd": 99492540,
+          "outputStart": 8440740,
+          "outputEnd": 20037570
+        }
+      },
+      "reason": "花瓶を見落とした新入りへの問い、勤続15年の自信、観察、接近への叫び、ギャーではなく報告する責任、霊障弁当の冗談、金額とチェックを見たクリア確認まで保持。待ちと観察も怖がる反応の前提であり、文字の反復だけでは落とさない。",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "reaction",
+        "payoff"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 7689,
+          "side": "start",
+          "sourceMs": 1993090,
+          "unitId": "source-fragment-7689",
+          "timeOrigin": "saved-source-transcript"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 8721,
+          "side": "end",
+          "sourceMs": 2256057,
+          "unitId": "source-fragment-8721",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "bdc6b0d47a35f87e59293419401fc946a0a88e371060be526c75545b35c62382",
+      "textCodePoints": 1033,
+      "firstSourceSegmentId": 7689,
+      "lastSourceSegmentId": 8721,
+      "sourceSegmentCount": 1033,
+      "detailField": "segments[3]"
+    },
+    {
+      "candidateId": "candidate-0005",
+      "segmentId": "segment-0005",
+      "outputOrdinal": 5,
+      "blockOrdinal": 1,
+      "clock": {
+        "segmentId": "segment-0005",
+        "sourceStartMs": 5468987,
+        "sourceEndMs": 5675926,
+        "sourceStartFrame30": 164070,
+        "sourceEndFrame30": 170278,
+        "outputStartFrame": 13631,
+        "outputEndFrame": 19839,
+        "audioSamples": {
+          "sourceStart": 241182900,
+          "sourceEnd": 250308660,
+          "outputStart": 20037570,
+          "outputEnd": 29163330
+        }
+      },
+      "reason": "行ってきなという促しと今は行かない応答を残して、一人になる危険の話から呪怨と貞子を比較する。名前の言い直しを落とさず、動画時代に通用する結論まで一続きで保持する。前の同趣旨のトイレ談義は追加しない。",
+      "meaningRoles": [
+        "lead-in",
+        "development",
+        "reaction",
+        "payoff"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 18662,
+          "side": "start",
+          "sourceMs": 5468987,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        },
+        "end": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 19439,
+          "side": "end",
+          "sourceMs": 5675926,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        }
+      },
+      "textFileSha256": "452cfc6de81805a2d420c0517a818aa050a08b144da5a225eec302870970208f",
+      "textCodePoints": 778,
+      "firstSourceSegmentId": 18662,
+      "lastSourceSegmentId": 19439,
+      "sourceSegmentCount": 778,
+      "detailField": "segments[4]"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0006",
+      "outputOrdinal": 6,
+      "blockOrdinal": 1,
+      "clock": {
+        "segmentId": "segment-0006",
+        "sourceStartMs": 6394302,
+        "sourceEndMs": 6449886,
+        "sourceStartFrame30": 191829,
+        "sourceEndFrame30": 193497,
+        "outputStartFrame": 19839,
+        "outputEndFrame": 21507,
+        "audioSamples": {
+          "sourceStart": 281988630,
+          "sourceEnd": 284440590,
+          "outputStart": 29163330,
+          "outputEnd": 31615290
+        }
+      },
+      "reason": "全ステージが完了したという発話、特別手当を試す決定、ベテランへの自信と追加異変への問いを残す。以後の断念が追加挑戦だけの結果だと分かる。",
+      "meaningRoles": [
+        "lead-in",
+        "development"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 21936,
+          "side": "start",
+          "sourceMs": 6394302,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 22193,
+          "side": "end",
+          "sourceMs": 6449886,
+          "unitId": "source-fragment-22193",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "f99b8fea787206b5f82504e5653dcdd340f8d99bb3470b95ab6526d840bc3a87",
+      "textCodePoints": 258,
+      "firstSourceSegmentId": 21936,
+      "lastSourceSegmentId": 22193,
+      "sourceSegmentCount": 258,
+      "detailField": "segments[5]"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0007",
+      "outputOrdinal": 7,
+      "blockOrdinal": 3,
+      "clock": {
+        "segmentId": "segment-0007",
+        "sourceStartMs": 7566646,
+        "sourceEndMs": 7620361,
+        "sourceStartFrame30": 226999,
+        "sourceEndFrame30": 228611,
+        "outputStartFrame": 21507,
+        "outputEndFrame": 23119,
+        "audioSamples": {
+          "sourceStart": 333688530,
+          "sourceEnd": 336058170,
+          "outputStart": 31615290,
+          "outputEnd": 33984930
+        }
+      },
+      "reason": "布団が増え、異変が増える速度に追いつけず、報告しても絶えないと語る発話を残す。前提に対して追加挑戦の困難が具体化する。",
+      "meaningRoles": [
+        "development",
+        "reaction"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 25129,
+          "side": "start",
+          "sourceMs": 7566646,
+          "unitId": "source-fragment-25129",
+          "timeOrigin": "saved-source-transcript"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 25286,
+          "side": "end",
+          "sourceMs": 7620361,
+          "unitId": "source-fragment-25286",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "3dd41e7dfb76ddfe298c910718bca4a140eb3a79f3848b1cd9f4eeb22b04ca5a",
+      "textCodePoints": 158,
+      "firstSourceSegmentId": 25129,
+      "lastSourceSegmentId": 25286,
+      "sourceSegmentCount": 158,
+      "detailField": "segments[6]"
+    },
+    {
+      "candidateId": "candidate-0006",
+      "segmentId": "segment-0008",
+      "outputOrdinal": 8,
+      "blockOrdinal": 5,
+      "clock": {
+        "segmentId": "segment-0008",
+        "sourceStartMs": 7662774,
+        "sourceEndMs": 7751288,
+        "sourceStartFrame30": 229883,
+        "sourceEndFrame30": 232539,
+        "outputStartFrame": 23119,
+        "outputEndFrame": 25775,
+        "audioSamples": {
+          "sourceStart": 337928010,
+          "sourceEnd": 341832330,
+          "outputStart": 33984930,
+          "outputEnd": 37889250
+        }
+      },
+      "reason": "3時まで来たという終盤の確認、急げという焦り、ない・どこ・動いてる・見せんなよという反応を残す。ここで成功を断定せず、直後の断念と労いへつなげる。",
+      "meaningRoles": [
+        "development",
+        "reaction"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 25364,
+          "side": "start",
+          "sourceMs": 7662774,
+          "unitId": "source-fragment-25364",
+          "timeOrigin": "saved-source-transcript"
+        },
+        "end": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 25530,
+          "side": "end",
+          "sourceMs": 7751288,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        }
+      },
+      "textFileSha256": "c8da163a017d9a086462525f7d4193670a1edd3e00b264ff4bfc8ef86516bb9e",
+      "textCodePoints": 167,
+      "firstSourceSegmentId": 25364,
+      "lastSourceSegmentId": 25530,
+      "sourceSegmentCount": 167,
+      "detailField": "segments[7]"
+    },
+    {
+      "candidateId": "candidate-0007",
+      "segmentId": "segment-0009",
+      "outputOrdinal": 9,
+      "blockOrdinal": 1,
+      "clock": {
+        "segmentId": "segment-0009",
+        "sourceStartMs": 7759082,
+        "sourceEndMs": 7822947,
+        "sourceStartFrame30": 232772,
+        "sourceEndFrame30": 234688,
+        "outputStartFrame": 25775,
+        "outputEndFrame": 27691,
+        "audioSamples": {
+          "sourceStart": 342174840,
+          "sourceEnd": 344991360,
+          "outputStart": 37889250,
+          "outputEnd": 40705770
+        }
+      },
+      "reason": "結構発見できたという振り返り、特別手当は無理で諦めるという範囲、よう頑張った、退勤、最後のゲーム終了までを残す。単なる配信の挨拶を締めの代用にしない。",
+      "meaningRoles": [
+        "development",
+        "payoff",
+        "reaction"
+      ],
+      "cutBoundaryEvidence": {
+        "start": {
+          "status": "inherited-parent-edge",
+          "sourceSegmentId": 25531,
+          "side": "start",
+          "sourceMs": 7759082,
+          "observation": "旧候補外端を継承・音響補正未適用"
+        },
+        "end": {
+          "status": "resolved-acoustic-boundary",
+          "sourceSegmentId": 25754,
+          "side": "end",
+          "sourceMs": 7822947,
+          "unitId": "source-fragment-25754",
+          "timeOrigin": "saved-source-transcript"
+        }
+      },
+      "textFileSha256": "330c9bca7745b865fb4de83ba8b953dc13ae6a8a8fb321b65c0207fb298e8551",
+      "textCodePoints": 224,
+      "firstSourceSegmentId": 25531,
+      "lastSourceSegmentId": 25754,
+      "sourceSegmentCount": 224,
+      "detailField": "segments[8]"
+    }
+  ],
+  "reuseObservations": {
+    "old7BSelectedSourceCount": 2483,
+    "currentKeptIntersection": 2435,
+    "old7BNotKeptNow": 48,
+    "currentNotIn7B": 1178,
+    "old7ASourceCount": 4124,
+    "currentKeptIntersection7A": 2330,
+    "textAndRawMsMatches7A": 2330,
+    "semanticUtteranceIdentityMatches7A": 2330,
+    "old7ATranscriptShaMatches": true,
+    "old7AUtteranceBytesSame": false,
+    "localSemanticDecisionRanges": [
+      [
+        68,
+        284
+      ],
+      [
+        1129,
+        1248
+      ],
+      [
+        8583,
+        8721
+      ],
+      [
+        21936,
+        22193
+      ],
+      [
+        25129,
+        25286
+      ],
+      [
+        25364,
+        25754
+      ]
+    ],
+    "appliedOldCaptions": 0,
+    "appliedOldAnswers": 0,
+    "appliedColorRanges": 0,
+    "appliedMotionRanges": 0
+  },
+  "styleCandidate": {
+    "sourceTemplate": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/source-package-v001.json",
+      "fileSha256": "b291ac0fa3802ec030cae376c2cee3e68929b12552141ccdd5538bab022a1e69",
+      "byteSize": 119064,
+      "logicalPath": null,
+      "schemaVersion": "presentation-output-caption-cue-source-package-v001"
+    },
+    "rendererTemplate": {
+      "path": "evals/clip_composition/outputs/presentation/distant-connection-existing-caption-selection/candidate-doctor-disappearance-to-ogre-mother-v001/renderer-template-v002.json",
+      "fileSha256": "cfdb4c6e18e47cde8ea9fe2302d35993a7795ad804586adc36ff601c8ddfca5e",
+      "byteSize": 11125,
+      "logicalPath": null,
+      "schemaVersion": "presentation-instruction-renderer-job-v002"
+    },
+    "styleLimits": {
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerCue": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2"
+    },
+    "horizontalStyleInput": {
+      "format": "normal-landscape",
+      "screenLayoutId": null,
+      "presetBinding": {
+        "trustedRegistryBindings": {
+          "schemaVersion": "presentation-registry-trust-v001",
+          "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+          "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+          "canonicalSha256": "bfbbcb5c611313d368305e6e8d552ddcdaf41949ed8d8f074485c8ed0aa2d43e"
+        },
+        "presetRegistry": {
+          "schemaVersion": "presentation-preset-registry-v001",
+          "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+          "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+          "canonicalSha256": "5915d6aae47681c43ea202a20eee16cbf669abfe24fdc832f75fb127ad46dca4"
+        },
+        "presetValidationIndex": {
+          "schemaVersion": "normal-landscape-preset-registry-v001",
+          "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+          "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+          "canonicalSha256": "40609dbc63b7c2d1f4c2cd92ee22c493c08382c0d63c27ea06087535f5882067"
+        },
+        "materialValidationIndex": {
+          "schemaVersion": "presentation-material-registry-empty-v001",
+          "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+          "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+          "canonicalSha256": "3958ad2d21233342e49aedd29cbd337785a228e1063d1802b64e92dc1793d1fc"
+        },
+        "rendererTrust": {
+          "schemaVersion": "presentation-renderer-trust-v001",
+          "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json",
+          "fileSha256": "04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc",
+          "canonicalSha256": "9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2"
+        },
+        "presetId": "normal-landscape-readable-pop-v001"
+      },
+      "captionLayoutPolicy": {
+        "maxLogicalWidthPerLine": 36,
+        "maxLinesPerDisplayPage": 2,
+        "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+        "pageBreakPolicy": "split-at-source-atom-boundary-or-reject"
+      },
+      "cropPolicy": {
+        "mode": "identity"
+      },
+      "sceneTransitionPolicy": {
+        "mode": "straight-cut-only"
+      },
+      "audioPolicy": {
+        "mode": "preserve-source-only"
+      },
+      "materials": []
+    },
+    "resolvedStyle": {
+      "format": "normal-landscape",
+      "screenLayoutId": null,
+      "presetId": "normal-landscape-readable-pop-v001",
+      "visualStateId": "caption-core-v001",
+      "maxLogicalWidthPerLine": 36,
+      "maxLinesPerDisplayPage": 2,
+      "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+      "cropMode": "identity",
+      "sceneTransitionMode": "straight-cut-only",
+      "audioMode": "preserve-source-only"
+    },
+    "styleReferences": [
+      {
+        "role": "trustedRegistryBindings",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/trusted-registry-bindings.json",
+        "fileSha256": "b26db5c57aac5dd290e084d953350778b527c6eb21f66f62dc7431bf24482fff",
+        "byteSize": 404,
+        "logicalPath": null,
+        "schemaVersion": "presentation-registry-trust-v001"
+      },
+      {
+        "role": "presetRegistry",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8",
+        "byteSize": 14291,
+        "logicalPath": null,
+        "schemaVersion": "presentation-preset-registry-v001"
+      },
+      {
+        "role": "presetValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-validation-index.json",
+        "fileSha256": "d2665c7947564a56955bbc47de7d95d038c64487ea71b6cbc1a2cc61667c05a1",
+        "byteSize": 2713,
+        "logicalPath": null,
+        "schemaVersion": null
+      },
+      {
+        "role": "materialValidationIndex",
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+        "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e",
+        "byteSize": 88,
+        "logicalPath": null,
+        "schemaVersion": null
+      },
+      {
+        "role": "rendererTrust",
+        "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v001/trust.json",
+        "fileSha256": "04ec4971d078413b68c19869b0285130ec553f14601f45d27125738a7498eddc",
+        "byteSize": 5397,
+        "logicalPath": null,
+        "schemaVersion": "presentation-renderer-trust-v001"
+      }
+    ],
+    "rendererRegistryBindings": {
+      "styleProfileRegistry": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/preset-registry.json",
+        "fileSha256": "8e9b0a039c8a4c9edf2c66b1df343c1d892d4688ebc4886a9af322bd44a6e5a8"
+      },
+      "materialRegistry": {
+        "path": "evals/clip_composition/registries/presentation/normal-landscape-preset-registry-v001/material-validation-index.json",
+        "fileSha256": "98213035bc6e395b090d7cff2639d4bf707fb838b7df50cb51bc60ab95d4758e"
+      },
+      "fontLedgerAndRendererTrust": {
+        "path": "evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+        "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a",
+        "byteSize": 5397,
+        "jsonPointer": "/fontAssets",
+        "valueCanonicalSha256": "5c31322527905c8e82555fa4c62ce3c8574509a8abe30551774ebefdf2444e91",
+        "bytesShaCompared": true
+      }
+    }
+  },
+  "forbiddenOperations": {
+    "mediaRead": 0,
+    "mediaHash": 0,
+    "mediaCopy": 0,
+    "mediaPut": 0,
+    "runner": 0,
+    "backend": 0,
+    "consumer": 0,
+    "rendering": 0,
+    "newJudgment": 0,
+    "inferenceApi": 0
+  },
+  "inputMapping": [
+    {
+      "meaning": "制作目的",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--production-intent.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/production-intent.json",
+          "fileSha256": "0453a2dba7be8ac6d0fdaf37662befbca6db148f5864cc45b59dc14a8f228dca",
+          "field": "productionIntent"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--binding-input.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/binding-input.json",
+          "fileSha256": "b82c4e45a60be7b1eb103b32acd5efcf5232e6149fe36ab2a3a210e87d9f4ba3",
+          "field": "identity.approvedDraft.purpose"
+        }
+      ],
+      "consumer": "presentation_orchestration_v001.mjs#createOrchestrationJudgmentInputV001",
+      "targetFields": [
+        "evidence.productionPurpose"
+      ],
+      "missingOrCondition": "全文は供給可能。ただし現依頼は字幕演出を作らないと明記。新しい実判断の着工許可へ読み替えない。表示要求のtaskDescriptionにも既存目的・役割・条件を欠落なく伝える接続は未実装。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "採用根拠・順序",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--machine-adoption.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/machine-adoption.json",
+          "fileSha256": "624bfebeccbf0825c72bfc7a7ac3ed850408b4e9027c93b4c43dda1ed50fe15d",
+          "field": "selectedCandidates, adoptedCandidates, order"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-validation.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-validation.json",
+          "fileSha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+          "field": "segments.reason, meaningRoles, cutBoundaryEvidence"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001",
+      "targetFields": [
+        "parts[]",
+        "adoptionBinding"
+      ],
+      "missingOrCondition": "今回の9保持区間を使う。candidateIdだけでまとめずcandidateIdとsegmentIdで元断片列と順序を対応させる。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "本文と共通発話",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT--transcript.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_YchOWHe52hoa1T834AbZT/transcript.json",
+          "fileSha256": "6cf794b5bfc4cd1d84d99da2dc1a0788f515c529061e5958f53f8a6956782a8b",
+          "field": "segments[].{id,text,startMs,endMs}"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--utterances.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/utterances.json",
+          "fileSha256": "11de8ccaabe472cad61808763f0a149f041491e231cd72e135a52591f5fff087",
+          "field": "utterances[].{utteranceId,sourceSegmentIds}"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001",
+      "targetFields": [
+        "c.transcript",
+        "c.utterances",
+        "meaning.atomOccurrences[].{text,sourceSegmentId,semanticUtteranceId}"
+      ],
+      "missingOrCondition": "3613保持断片だけを供給できる。新しいcaption/atom/boundary IDは新要求の由来から作る工程が未接続。旧IDは移植しない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "保持区間の名前と元時計",
+      "classification": "not-connected",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--edit-plan.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/edit-plan.json",
+          "fileSha256": "cde0e6a292de011475b4d4cf3d0a418f4b839a1b9bf7eca5209e3e78e023caf6",
+          "field": "segments[].{segmentId,candidateId,sourceSegmentIds,sourceStartMs,sourceEndMs}"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001",
+      "targetFields": [
+        "parts[].timelineSegmentId",
+        "parts[].sourceInterval.{sourceStartMs,sourceEndMs}",
+        "meaning.atomOccurrences[].retainedSpans"
+      ],
+      "missingOrCondition": "通常保存のsegmentId→timelineSegmentId、平坦な元ms→sourceIntervalという機械的な対応が必要。既存partsの形とそのまま同じではない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "出力frame/sample時計",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--clock-resolution.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/clock-resolution.json",
+          "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8",
+          "field": "mappings[].{segmentId,outputStartFrame,outputEndFrame,audioSamples}"
+        }
+      ],
+      "consumer": "presentation_base_media_timeline_v004.mjs#mapPresentationSourceIntervalV002",
+      "targetFields": [
+        "timeline.segments, sourceFrameClock, audioClock"
+      ],
+      "missingOrCondition": "9区間の時計は供給可能。完成timeline/生成receiptではない。個々の字幕cue時計・接続後の時計は未生成。比例配分で作らない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "保存inspectionと元媒体参照",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5--source-inspection.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_0sJLSuMCrrFKYJnamJ2_5/source-inspection.json",
+          "fileSha256": "c6bd737b010b3d31712d04bcfd39207247a01baf9e511d9ed082f690aaec635d",
+          "field": "media, sourceVideoBinding"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--manufacturing-values.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/manufacturing-values.json",
+          "fileSha256": "20b2341771f33183b0251390e688e9b35a52ca53428d0225bdfc01d7cee89947",
+          "field": "sourceArtifact"
+        }
+      ],
+      "consumer": "adopted_media_manufacturing_v001.mts#buildAdoptedBaseMediaV001",
+      "targetFields": [
+        "manufacturingJob.sourceArtifact",
+        "projectAdoptedMediaRangesV001(editPlan, media)"
+      ],
+      "missingOrCondition": "入力参照とinspection JSONのみ照合。製造・媒体照合は今回実施しない。source-mediaは完成背景ではない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "背景media/timeline/生成manifest/検証receipt",
+      "classification": "not-manufactured",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--manufacturing-values.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/manufacturing-values.json",
+          "fileSha256": "20b2341771f33183b0251390e688e9b35a52ca53428d0225bdfc01d7cee89947",
+          "field": "outputDirectory (予定先)"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001",
+      "targetFields": [
+        "base.baseMedia",
+        "base.timeline",
+        "base.generationManifest",
+        "base.validationReceipt",
+        "sourcePackage.reconstructionMap.caseContexts[].baseMediaInput"
+      ],
+      "missingOrCondition": "今回9区間の4出力は未製造。clock-resolutionや元inspectionを代入不可。既存buildBaseAndDisplayRequestsは背景製造を先行するため今回呼べない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "字幕styleの入力と制限",
+      "classification": "reuse-candidate",
+      "sources": [
+        {
+          "reference": "styleCandidate.sourceTemplate",
+          "field": "promptInput.styleLimits, reconstructionMap.caseContexts[0].horizontalStyleInput/styleBindings/resolvedStyle"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001",
+      "targetFields": [
+        "c.captionStyleTemplate",
+        "input.styleLimits",
+        "caseContext.horizontalStyleInput/styleBindings/resolvedStyle"
+      ],
+      "missingOrCondition": "旧36論理幅/2行/既定文字幅規則は旧templateの値。144pxの全編styleとして採用せず、実測・style/trust版との対応が必要。今回新係数や規則は追加しない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "renderer template・font ledger",
+      "classification": "reuse-candidate",
+      "sources": [
+        {
+          "reference": "styleCandidate.rendererTemplate",
+          "field": "registryBindings, executionInputs, implementationBindings, runtimeProfile, approvedContractBindings"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#assembleAdoptedCaptionCoreV001",
+      "targetFields": [
+        "c.rendererTemplate",
+        "registryBindings.styleProfileRegistry/rendererTrust/fontLedger",
+        "executionInputs.lineLayoutRules"
+      ],
+      "missingOrCondition": "旧templateの保存bytesは読めるが、元job/承認/publicationを今計画へ移植しない。source template trust v001とrenderer template trust v002を同一視しない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "表示cue/行末の実回答",
+      "classification": "not-connected",
+      "sources": [],
+      "consumer": "caption-display-boundaries-v001.ts#runCaptionDisplayBoundariesV001 → validateDisplayForAdoptionV001",
+      "targetFields": [
+        "CaptionDisplayInputV001.captions[].boundaryCandidates",
+        "answer.captions[].cues",
+        "response.requestFileSha256"
+      ],
+      "missingOrCondition": "今回の表示要求・対応SHA・回答・検査結果は未生成。旧7A/局所147字幕は再利用候補のみ。新しい分割判断を今回行わない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "表示回答採用と保存再読",
+      "classification": "not-connected",
+      "sources": [],
+      "consumer": "validateDisplayForAdoptionV001 → readValidatedDisplayTracesV001 → assembleAdoptedCaptionCoreV001",
+      "targetFields": [
+        "同一requestの検査token",
+        "traces",
+        "coreAdoption",
+        "cueEndProjection/lineEndProjection/instruction"
+      ],
+      "missingOrCondition": "WeakMapの検査tokenをJSONで捏造しない。保存時は要求/回答/結果bytesとSHAを残し、同じvalidatorで再検査する必要がある。今回は未受理。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "演出の本文と文脈",
+      "classification": "not-connected",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--production-intent.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/production-intent.json",
+          "fileSha256": "0453a2dba7be8ac6d0fdaf37662befbca6db148f5864cc45b59dc14a8f228dca",
+          "field": "productionIntent"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-validation.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/retention-validation.json",
+          "fileSha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+          "field": "segments.meaningRoles, reason"
+        }
+      ],
+      "consumer": "presentation_orchestration_v001.mjs#createOrchestrationJudgmentInputV001",
+      "targetFields": [
+        "evidence.productionPurpose",
+        "captions[].captionId/text/startFrame/endFrameExclusive",
+        "contexts",
+        "observations"
+      ],
+      "missingOrCondition": "保存本文・採用理由は前提を供給できる。新caption IDsと完成字幕時計、観測根拠は未接続。旧18色範囲・アップ82frameは新captionと出力時計へ移植しない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "演出のnative入力・実回答・復元",
+      "classification": "not-connected",
+      "sources": [],
+      "consumer": "createOrchestrationContextV001 → createOrchestrationPaletteJudgmentInputV001 → fixOrchestrationPaletteJudgmentV001 → restoreOrchestrationPaletteJudgmentV001",
+      "targetFields": [
+        "planBytes/timelineBytes",
+        "captionContext",
+        "decisionInputBytes (presentation-focus-decision-input-v005)",
+        "playbackSampleRate/observationSampleRate",
+        "audioEvidence/audioCandidates",
+        "original/normalized reply bytes"
+      ],
+      "missingOrCondition": "今回の字幕normal plan、native decision binding、演出回答はない。保存consumer時計だけではnative audio evidenceを満たさない。旧307状態のbaseline/native bindingを今計画のものに見せない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "7A/7B/色の正当なreader",
+      "classification": "reuse-candidate",
+      "sources": [
+        {
+          "reference": "sourceReferences: candidate-drawing-evidence.json, structure drawing-evidence.json, palette drawing-evidence.json"
+        }
+      ],
+      "consumer": "restoreOrchestrationDrawingViewEvidenceV001 / readDigestStructureDrawingEvidenceV001 / readCaptionPaletteDrawingEvidenceV001",
+      "targetFields": [
+        "source/state/evidenceの実bytesとSHA",
+        "sourceEvidenceRef",
+        "stateRef",
+        "projection/meaning/savedResolution"
+      ],
+      "missingOrCondition": "入口と実保存JSONを静的照合。後二readerは媒体hashへ進むので今回起動していない。今回の対応記録を旧完成reader受理へ拡大しない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "統合readerと縁/アップ",
+      "classification": "human-or-permission-dependent",
+      "sources": [
+        {
+          "reference": "sourceReferences: integration-preparation/attempt-002/draft.json",
+          "field": "outlineChoice, input.refs"
+        }
+      ],
+      "consumer": "integration-preparation.mjs#readIntegrationPreparationV001",
+      "targetFields": [
+        "completionRef",
+        "colorBindings",
+        "reaction/background refs",
+        "outlineChoice"
+      ],
+      "missingOrCondition": "縁A=8/4は技術入力、選択null、縁B21論理不合格を保持。統合readerは媒体/画像へ進むので呼ばない。局所アップの人間選択は保留。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "正規の所有者と論理参照",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--digest-plan.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/digest-plan.json",
+          "fileSha256": "cd69dd7fccfab6b4d0f266e6dddf56d5eae4c670283cd7caf467b9fde2925ee3",
+          "field": "requestDraftId, requestId, dataBindings"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--consumption-binding.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/consumption-binding.json",
+          "fileSha256": "29faf3f4091c53273da1c9ee416d78ae1847a525e68f8650c730ba0437fef6c2",
+          "field": "requestId, planFileRefBinding, outputs"
+        }
+      ],
+      "consumer": "packages/shared/src/digest-plan-artifacts-v001.ts#digestArtifactFileNameV001/digestProducerRequestIdsV001",
+      "targetFields": [
+        "draft/request依存鎖",
+        "artifacts/<draft>/<producer>/<file> → <producer>--<file>"
+      ],
+      "missingOrCondition": "今回JSONの実bytesへ正規resolverで対応。旧readBound(ROOT+binding.path)や固定ARTIFACTSのcallerは通常store用の読取/保存境界が未接続。alias/旧承認偽装は使わない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "保存実装版",
+      "classification": "available",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--consumption-binding.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/consumption-binding.json",
+          "fileSha256": "29faf3f4091c53273da1c9ee416d78ae1847a525e68f8650c730ba0437fef6c2",
+          "field": "implementations"
+        },
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-plan.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/selection-plan.json",
+          "fileSha256": "d9a0bdb8e1f5659885f3b4b34d99ffb16cdb7fae6b12a05f08981182f1a23ff1",
+          "field": "implementationBindings"
+        }
+      ],
+      "consumer": "通常計画/消費の既存再構築比較と旧live実装検査",
+      "targetFields": [
+        "実implementation SHA",
+        "new source package provenance"
+      ],
+      "missingOrCondition": "消費に束縛された5実装SHAは現行一致。今回製品変更なし。将来既存製品を変えるなら新要求/保存物は新実装SHAで作り、旧保存SHAを付け替えない。",
+      "actuallyConsumedThisWork": false
+    },
+    {
+      "meaning": "許可・品質・admission",
+      "classification": "human-or-permission-dependent",
+      "sources": [
+        {
+          "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--binding-input.json",
+          "logicalPath": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L/binding-input.json",
+          "fileSha256": "b82c4e45a60be7b1eb103b32acd5efcf5232e6149fe36ab2a3a210e87d9f4ba3",
+          "field": "identity.approvedDraft, identity.command"
+        },
+        {
+          "reference": "execution",
+          "field": "admission"
+        }
+      ],
+      "consumer": "evals/clip_composition/adopted_media_manufacturing_v001.mts#buildAdoptedCaptionInputsV001 / evals/clip_composition/adopted_media_manufacturing_v001.mts#assembleAdoptedCaptionCoreV001",
+      "targetFields": [
+        "provenance.approvedContractBindings",
+        "rendererJob.approvedContractBindings",
+        "admission"
+      ],
+      "missingOrCondition": "正常な4工程の承認は字幕/動画許可ではない。binding-inputには旧製造が参照するauthorization.recordIdもない。偽recordIdで埋めない。presentation not-connected、executionPermission not-approved、humanQuality pending。ID9-PD-01/02未承認。",
+      "actuallyConsumedThisWork": false
+    }
+  ],
+  "nextConnectionProposal": {
+    "status": "proposal-only; not-implemented; requires next explicit instruction",
+    "purpose": "通常保存の保持本文を、新しい表示判断の意味入力と9要求へ渡す最初の接続。背景製造とsource package作成はその後の別依存として明示する。",
+    "files": [
+      {
+        "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+        "function": "buildAdoptedCaptionJudgmentInputsV001 (提案)",
+        "change": "既存buildAdoptedCaptionInputsV001の本文/保持atom/9group/表示要求を組む部分を小さい純粋関数へ抽出し、既存側もそれを呼ぶ。baseMediaInputを必要とするsource package構築/validatorは元の入口へ残す。媒体・schema・validatorの複製や緩和なし。"
+      },
+      {
+        "path": "runner/src/digest-caption-input-preparation-v001.ts",
+        "function": "prepareDigestCaptionJudgmentInputsV001 (提案)",
+        "change": "通常draft/owner/依存鎖の保存JSONを既存resolverで読む限定境界。選択済み9partをsegmentId→timelineSegmentId、sourceStartMs/EndMs→sourceIntervalへ対応させる。本文/STT/共通発話/元時計・style参照・許可を検査し、上記純粋関数の出力を通常論理参照で保存。固定旧context/ARTIFACTSを使わない。"
+      }
+    ],
+    "requiredInputs": [
+      "今回machine-adoption/edit/retention/transcript/utterances/planの実bytesと参照",
+      "承認された表示判断用の目的・styleLimits/style/renderer参照（144px既回答を保ち正式styleや縁選択を偽装しない）",
+      "新要求に対応するplan/provenance/実装SHA・保存先",
+      "新しい字幕判断準備の明示許可"
+    ],
+    "firstOutputs": [
+      "元断片を保存したmeaning input",
+      "9区間を保つ実表示要求と各SHA（実回答は後続許可範囲）"
+    ],
+    "notFirstOutputs": [
+      "baseMedia/timeline/generationManifest/validationReceipt",
+      "完成source package/renderer job",
+      "caption cue/行末回答",
+      "演出/native判断",
+      "画像/動画"
+    ],
+    "remainingDependencies": [
+      "source package/assembleへ進む前に正当な背景4参照・製造receipt・動画実行許可が必要",
+      "assembleAdoptedCaptionCoreV001の既存readBoundはROOT基準。通常storeからのtimeline/style読取・publication境界も別途明示接続が必要",
+      "通常queue工程/API契約へ接続する場合は今回案の二pathだけで既に完了したとは扱わず、新指示に対象を含める"
+    ],
+    "implementationImpact": {
+      "changedExistingPath": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "currentSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f",
+      "currentConsumptionFiveBindingsContainThisPath": false,
+      "currentSelectionNineteenBindingsContainThisPath": false,
+      "rule": "変更後の新準備artifactはその実装SHAを新規に束縛。旧成果でこのpathをlive束縛するreaderは旧SHA差で拒否するため、旧artifactを再承認/付替え/再生成しない。今回の5/19既存bindings自体は変更しない。"
+    },
+    "whyMinimum": "本文を準備する処理と完成背景に束縛する処理が現在同じ関数に同居するため、仮の背景で通す案を避けて既存計算部分だけを分離する。判断・render・新queueの再設計へ広げない。"
+  },
+  "oldReuseConditions": [
+    "元素材/transcript bytesのSHA、元断片ID列・本文・元msが一致すること",
+    "cue/行末の境界が新要求の保持atom列を欠損/重複なく覆い、落とした断片や空白を復活させないこと",
+    "出力frame/sampleと接続projectionの時計が一致すること。元ms一致だけでは足りない",
+    "style/renderer/trust/font ledger/実装版/承認範囲が対応すること",
+    "新要求のSHAを含む真正な再使用根拠または新回答を保存し、旧request SHAだけを付け替えないこと"
+  ],
+  "humanResponses": {
+    "font144": "既存局所肯定を保持、全編style正式変更には広げない",
+    "split": "読む必要がある文章でなかったら、という条件付き肯定を保持",
+    "cyan": "9/28の水色肯定を保持",
+    "color": "他配色/強調・全編品質の未回答は残す",
+    "outlineA": "8/4技術入力",
+    "outlineB": "21論理不合格、今回修正しない",
+    "outlineChoice": null,
+    "zoom": "旧固定82frameの技術入力と人間未回答を分離",
+    "pending": [
+      "ID9-PD-01",
+      "ID9-PD-02",
+      "人間品質"
+    ]
+  },
+  "verification": {
+    "helperSyntaxCheckExit": 0,
+    "helperProcessExit": 0,
+    "savedJsonReadbackCount": 1,
+    "meaningJudgmentPerformed": false,
+    "actualPresentationConsumerAdmission": false,
+    "normalConsumerRerun": false,
+    "productChanges": 0,
+    "newMediaBytes": 0,
+    "newSmallDiagnosticBytes": 1053795,
+    "previousRuntimeWritten": false
+  }
+}

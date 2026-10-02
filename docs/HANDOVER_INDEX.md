@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v042
+更新日：2026-10-03（JST） / revision：handover-index-20261002-v042（Codex2入力対応checkpoint追記）
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトには固定入口の写しを置く。
 
-**最新更新：7bb5de02a59ab78cd7aae6757dff33b6b20f0b88の実判断付き計画一件を相談役accept。12候補・7採用・9保持、通常4工程succeeded、時計passed、別process reader exit0、API/store一致・state不変。次は同じ保存計画と既存字幕・演出入口の入力対応を確認する限定読取準備だけ。新指示[ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md](work-orders/ZEV_DIGEST_PRESENTATION_INPUT_MAPPING_20261002_v001.md)、保存321fa0fb8aedd503497870c72f7ed9e1f12750ec。字幕/演出の新回答・生成、動画・本番工事は許可していない。製品5／設営17保持、必要な小mapping補助の作成・実行時だけ設営18を個別計上。前件の稼働終了は報告済み、次指示の受領・適用・稼働は未確認。**
+**最新更新：7bb5de02の実判断付き計画acceptと入力対応指示をCodex2専用Edgeで全文受領。main 9acea7e2へ同期し、個別承認の設営18を実施。9区間・3613保持断片・18入力項目の対応、不足、旧成果の再利用条件、最初の二path接続案を[report](reports/digest-presentation-input-mapping-20261002/README.md)に保存した。小補助exit0、新診断約1.01MiBの一回再読bytes一致・元state不変。製品5／設営18。製品変更・字幕演出の新回答・製造・媒体作用は0。今回入力対応の相談役監査は未受領、通常commit/push・直接報告へ進む。新しい実装/製造へは着工しない。**
 
 ## 0. 最初に読む
 
@@ -25,7 +25,7 @@ ZEVは素材と制作意図から、内容・構成・字幕・必要な演出�
 - 相談役：全体の残課題・優先順位・作業範囲・GitHub現物監査・指示と正本保存。
 - Codex：指示内の実装・実行・検証・保存・通常commit/push・直接報告。人間品質を代理採用しない。
 
-本人の「独断で決めれる程度なら自動で承認して」はAGENTS条件内の相談役個別判断委任。一般上限・累積・強制停止・Codex自己承認権は変更しない。v005の製品5／設営15、実判断運転の設営16と親directory一行修正17を履歴保持。現累積は製品5／設営17。
+本人の「独断で決めれる程度なら自動で承認して」はAGENTS条件内の相談役個別判断委任。一般上限・累積・強制停止・Codex自己承認権は変更しない。v005の製品5／設営15、実判断運転の設営16と親directory一行修正17を履歴保持。入力対応正本§6の小JSON補助作成/実行を設営18として個別計上。現累積は製品5／設営18。
 
 人間確認は[既存台帳](HUMAN_REVIEW_PENDING.md)へ蓄積。未回答を採用にせず、独立作業は進める。済んだ15分レビュー、全字幕採点、同じ質問を再要求しない。
 
@@ -69,7 +69,9 @@ v005のlocal/upload・分離root・receiver-only・MP4/inspection未提供・異
 
 成果はdocs/reports/digest-presentation-input-mapping-20261002/のREADME.md、mapping.json、必要時map-inputs.mts。補助作成・実行時だけ設営18として個別計上。小JSON/既存コード読取・対応記録・一回の小再読に限定。製品adapter、新queue、内容再選定、表示/色/motion新回答、媒体read/hash/copy/PUT、backend/runner、STT/inspection/ffprobe/render/native QCは起動しない。presentation=not-connectedを維持する。
 
-**前件はaccept済み。次指示の受領・設営18適用・実行は未確認。** 同じCodex2セッションで返信全文を受領して指定範囲だけ続行し、本人中継・受理だけの再commitを挟まない。
+**前件acceptと次指示の返信全文は同じCodex2で受領済み。入力対応作成・設営18適用・小確認は実施済み。今回の監査受理は未受領。** [mapping](reports/digest-presentation-input-mapping-20261002/mapping.json)に実path/SHA・現行関数/入力field・保持3613/drop3460被覆・9区間frame/sampleを保存。詳細は新しいignored診断JSON（1,053,795bytes、SHA e6b4b7e4662600b219742b5f5adb067d692f4da9d2262de57e75201cf967b64f）。本文cue/演出判断はしていない。
+
+旧7Bとの共通2435断片/旧末尾48除外/今回1178新規と、旧7Aの2330断片の本文・元ms一致を機械照合。版・表示境界・時計・style・承認が異なるため旧字幕/色/アップは再利用候補に留めた。背景media/timeline/manifest/receiptと今回表示/演出回答は未製造/未接続。最初の提案は既存本文準備を背景束縛から分離し、通常resolverで9表示要求へ渡す二path案。提案だけ保存し、製品code/API/queue/renderer/媒体は変更していない。通常commit/push・専用Edge直接報告へ進む。本人中継・受理だけの再commitは挟まない。
 
 ## 4. 必読資料
 
