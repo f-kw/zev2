@@ -1,6 +1,6 @@
 {
   "schemaVersion": "digest-caption-style-compatibility-evidence-v001",
-  "status": "stopped-helper-scope-markdown-json",
+  "status": "stopped-existing-node-package-resolution",
   "receivedAt": "2026-10-02T18:23:11.306021+00:00",
   "session": "Codex2",
   "head": "2626106bd8b2f1b68a729aaae3c2ceea189d6d16",
@@ -11,8 +11,12 @@
   "history": {
     "product": 6,
     "setupBefore": 25,
-    "setupApplied": 26,
-    "approvedSetupWhenHelperCreated": 26
+    "setupApplied": 27,
+    "approvedSetupWhenHelperCreated": 26,
+    "appliedSequence": [
+      26,
+      27
+    ]
   },
   "scope": "Existing saved 144px A8/4 Normal technical candidate; unchanged current text/lines/clock; document-free existing layout inspection only",
   "admission": {
@@ -46,5 +50,39 @@
       "scope": "only scope Markdown read and new output destination; no judgment/geometry/product change",
       "nextSetupIfApproved": 27
     }
+  },
+  "repairApproval": {
+    "path": "docs/work-orders/ZEV_DIGEST_CAPTION_STYLE_COMPATIBILITY_20261003_v001_SCOPE_READ_FIX.md",
+    "fileSha256": "6b1baef36a8922810fa24923a9c3764507c21454e6d9e95244d5914d05bcdeed",
+    "receivedHead": "b459aabf98c290a68242c38f9433b4c2cba16406",
+    "receivedAt": "2026-10-02T18:45:35.679542+00:00",
+    "fullReplyRead": true,
+    "setup": 27
+  },
+  "attempt": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002",
+  "oldFailureBindings": [
+    {
+      "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-001/failure.json",
+      "sizeBytes": 847,
+      "fileSha256": "4873fc061c7bb502e8906f78733b0ac3b759d27047cfa83f70a640fb457fd829"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-001/evidence-snapshot.json",
+      "sizeBytes": 2184,
+      "fileSha256": "9b412cade3d01443ab945a353eac4d55a3fd879f5d67943bf0cd0436a13a6823"
+    }
+  ],
+  "failure2": {
+    "exitCode": 1,
+    "stage": "existing-renderer-import-before-cue-diagnostic",
+    "exception": "MODULE_NOT_FOUND: react from evals/clip_composition/presentation_renderer_entry_v001.tsx",
+    "helperSha256": "1f346a9dcf1752e765c54938118330d6147defb02efa26c7cb9de2b8b13970a8",
+    "typecheckExitCode": 0,
+    "cuesDiagnosed": 0,
+    "completedOutputs": 0,
+    "oldInputsWritten": 0,
+    "mediaOrFontBinaryActions": 0,
+    "occurredAt": "2026-10-02T18:46:35.858838+00:00",
+    "proposal": "Use NODE_PATH set only for this child process to the existing runner/node_modules; no installation, symlink, product edits or module stub. Preserve attempt-002 and use attempt-003 with history28 if individually approved."
   }
 }

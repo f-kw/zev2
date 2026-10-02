@@ -9,3 +9,8 @@
 比較用Aの候補はruntime/artifacts/caption-outline-comparison-20260929-v001/attempt-003/verification.jsonのraster[tag=0-A,label=0].props。144px、border8/glow4、safe area左右4上下40、layout horizontal margin0を一つの束から確認。初期7Aの4/4を混ぜず、フォント台帳は元preset-registry参照から宣言一致だけを確認する予定。現在本文・改行・時計を既存Node推定幅経路へ渡す診断は未実施。
 
 presentation=not-connected、executionPermission=not-approved、humanQuality=pending、outlineChoice=null、ID9-PD-01/02未承認。新要求／回答・媒体生成・縁採用は行わない。
+
+2026-10-03再開checkpoint：b459aabfのSCOPE_READ_FIX全文受領、設営27として正本のbyte読取一行＋OUT attempt-002＋累積記録のみ反映。初回失敗は不変。親正本SHA4e244e34…を維持し、追補を別承認に保存。診断未実行。
+
+
+再開結果：設営27の型検査exit0、正本byte/SHA読取を通過。既存renderer importでReactを解決できずMODULE_NOT_FOUND、run exit1／cue診断0。旧attempt-002を新停止証拠として保持。React/Remotionはrunnerの既存依存として存在するため、対象childだけNODE_PATHをrunner/node_modulesへ指定する案を調査し、設営28として個別GPT_DECISIONへ返す。製品・node_modules・既存renderer・検査規則を変更せず、インストール／symlink／stubは作らない。修正未適用・再実行なし。

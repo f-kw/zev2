@@ -5,7 +5,7 @@ import {readFile, writeFile, mkdir, access} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const OUT = 'runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-001';
+const OUT = 'runtime/artifacts/digest-caption-style-compatibility-20261003-v001/attempt-002';
 const REPORT = 'docs/reports/digest-caption-style-compatibility-20261003';
 type Obj = Record<string, unknown>;
 type Binding = {path: string; fileSha256: string; sizeBytes: number};
@@ -44,7 +44,7 @@ async function main() {
   catch (e) { if (!e || typeof e !== 'object' || !('code' in e) || e.code !== 'ENOENT') throw e; }
   const started = performance.now();
   const evidence = obj(JSON.parse(await readFile(path.join(ROOT, REPORT, 'evidence.json'), 'utf8')));
-  await ref(evidence.workOrder);
+  const scope = obj(evidence.workOrder); await bytes(str(scope.path), str(scope.fileSha256));
   const map = await json('runtime/artifacts/digest-caption-plan-timing-20261003-v001/attempt-001/cue-time-map.json', '72eab2201c0bb3e918aabf314ec3c0613f61ef4641a20402db5e7316282a2761');
   const timing = await json('runtime/artifacts/digest-caption-plan-timing-20261003-v001/attempt-001/manifest.json', '36f41a965c891aa5cf35c00c81b2aaf171284a1941d9d9d20a9c64532db44179');
   same(obj(timing.outputBinding).fileSha256, observed.get('runtime/artifacts/digest-caption-plan-timing-20261003-v001/attempt-001/cue-time-map.json')?.fileSha256);
@@ -152,7 +152,7 @@ async function main() {
   same(sha(reread), outputBinding.fileSha256); same(reread.length, outputBinding.sizeBytes); same(JSON.parse(reread.toString()), output);
   const readbackMs = performance.now() - rereadStart;
   for (const b of observed.values()) { const now = await readFile(path.join(ROOT, b.path)); same(now.length, b.sizeBytes); same(sha(now), b.fileSha256); }
-  const manifest = {schemaVersion: 'digest-caption-style-compatibility-bundle-v001', scopeBinding: evidence.workOrder, outputBinding, summary, inputAndImplementationBindings: [...observed.values()], oldInputsUnchanged: true, readback: {count: 1, objectEqual: true, bytesAndShaEqual: true, readbackMs}, history: {product: 6, setup: 26}, admission, elapsed: {diagnosticMs, totalBeforeManifestMs: performance.now() - started}, effects: {mediaAndFontBinaryRead: 0, mediaCopies: 0, rendering: 0, rejudgment: 0, requestOrResponseChanges: 0, productChanges: 0, apiCalls: 0}};
+  const manifest = {schemaVersion: 'digest-caption-style-compatibility-bundle-v001', scopeBinding: evidence.workOrder, outputBinding, summary, inputAndImplementationBindings: [...observed.values()], oldInputsUnchanged: true, readback: {count: 1, objectEqual: true, bytesAndShaEqual: true, readbackMs}, history: {product: 6, setup: 27}, admission, elapsed: {diagnosticMs, totalBeforeManifestMs: performance.now() - started}, effects: {mediaAndFontBinaryRead: 0, mediaCopies: 0, rendering: 0, rejudgment: 0, requestOrResponseChanges: 0, productChanges: 0, apiCalls: 0}};
   const manifestBinding = await save(OUT + '/manifest.json', manifest);
   console.log(JSON.stringify({status: output.status, outputBinding, manifestBinding, summary, observedInputs: observed.size, diagnosticMs, readbackMs}));
 }

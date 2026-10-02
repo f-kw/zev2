@@ -145,3 +145,7 @@ main・担当のみ明示stage・Git操作直列化。他者変更をreset/stash
 
 報告：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・144px技術候補と表示回答の適合。
 診断後も新要求/実回答・背景製造・正式style確定・動画へ自動着工しない。
+
+Codex2 設営27受領・適用checkpoint（2026-10-03）：b459aabfの追補全文と専用Edgeの確定返信を受領。小補助の正本Markdownをbyte/SHA読取へ修正、OUTのみattempt-002、manifest履歴27へ追従。親scopeは不変・追補を別記。製品6／設営27、旧attempt-001のrun1/診断0は保持。現在は変更後型・診断前。
+
+Codex2 停止checkpoint：設営27の型0・正本byte/SHA読取通過後、evalsの既存renderer importがReactを解決できずMODULE_NOT_FOUND／実run1。診断0・旧入力変更0・媒体作用0。attempt-002証拠保全。対象childだけ既存runner/node_modulesをNODE_PATHへ渡す起動案を設営28候補として相談役へ返す。自己承認・製品変更・install/stubはしない。
