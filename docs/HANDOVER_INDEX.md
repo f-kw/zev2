@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-02（JST） / revision：handover-index-20261002-v040
+更新日：2026-10-02（JST） / revision：handover-index-20261002-v041
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトには固定入口の写しを置く。
 
-**最新更新：v005の技術完了は維持。前の次作業案を本人が「未調整なんで止めた」と申告した後、「新しい指示にして」を受領。制作目的、既存stdinでの実回答、source JSON＋inspectionのlocal一系列、一コピーの容量条件、完了条件を具体化した[新指示](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md)を発行した。指示保存83c06014a3b39147c5907b751619447866d4a194。初回は本人の手貼りでCodex2を起動する。受領・稼働は未確認。前案の貼付を遡及して承認にせず、前案をそのまま再開しない。**
+**最新更新：Codex2が7e0de670の新指示を受領し、設営16の薄い補助を適用。f1d716243ded9c6a783404ffc27a4b84ff209e6fで親directory不足によるENOENT・exit1を報告。通常API・runner・媒体作用は開始前。相談役はrun-local.mtsと失敗証拠を照合し、attempt mkdir直前に親だけをmkdir({recursive:true})する一行を設営17として個別承認した。attempt自身のrecursive:falseと既存拒否、失敗履歴、製品5／設営16は保持し、17は適用時に計上。再開正本は[親directory修正](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md)、保存9ecf3ae3893ab0c9c8d06783f3837720c51d4815。容量再実測後に同じ実判断計画一件へ戻る。設営17受領・適用・実再開は未確認。v005の技術完了は不変。**
 
 ## 0. 最初に読む
 
@@ -25,7 +25,7 @@ ZEVは素材と制作意図から、内容・構成・字幕・必要な演出�
 - 相談役：残課題・優先順位・作業範囲・GitHub現物監査・指示と正本保存。
 - Codex：指示内の実装・実行・検証・保存・通常commit/push・直接報告。人間品質を代理採用しない。
 
-本人の「独断で決めれる程度なら自動で承認して」はAGENTSの条件内で相談役が個別判断する委任。一般上限・累積履歴・強制停止やCodex自己承認権は変更しない。v005の最終累積は製品5／設営15。新指示の薄い実行補助を実際に作る場合だけ設営16として個別計上する。
+本人の「独断で決めれる程度なら自動で承認して」はAGENTSの条件内で相談役が個別判断する委任。一般上限・累積履歴・強制停止やCodex自己承認権は変更しない。v005の最終累積は製品5／設営15。新指示の薄い実行補助は設営16として適用済み。親directory不足修正を設営17として個別承認し、適用時に計上する。
 
 必要な人間確認は[既存台帳](HUMAN_REVIEW_PENDING.md)へ蓄積。未回答を採用にせず、独立作業は進める。既回答・15分初見レビュー・全字幕採点を再要求しない。
 
@@ -48,7 +48,8 @@ Codex2のv005終了・accept返信受領・Git cleanは本人提示報告で受�
 
 ## 3. 今回の確定作業と再開範囲
 
-**正本：[ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md)**
+**親正本：[ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md)**
+**再開正本：[親directory修正・設営17](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md)**
 
 一件の目的：通常依頼からCodexの実判断を既存3Skillへ戻し、採用区間・構成・時計を持つ計画を通常保存して再読する。
 
@@ -60,17 +61,28 @@ Codex2のv005終了・accept返信受領・Git cleanは本人提示報告で受�
 - 計画/検証completeと既存consumerの別process再読まで。動画・字幕演出は今回は作らない。
 - 書込み対象は新指示指定の小driver/reader、report/evidenceと隔離runtime。製品code変更は含めない。
 
-前の提案は[停止を記録した検討文書](../相談役/方針/2026-10-02_v005完了後_状況整理と次作業案_v001.md)として保持する。本人の旧「キックした」を承認へ遡及変換しない。今回の新しい手貼り指示受領から始める。受領・実再開・旧貼付後の差分は保存時点で未確認。
+前の提案は[停止を記録した検討文書](../相談役/方針/2026-10-02_v005完了後_状況整理と次作業案_v001.md)として保持する。本人の旧「キックした」を承認へ遡及変換しない。今回の新しい手貼り指示受領から始める。初回指示保存時点では受領・旧貼付後の差分は未確認だったが、今回f1d71624の報告で新指示受領と旧差分/processなしを確認した。
+
+### 3.1 f1d71624の初回停止と設営17
+
+[実コード](reports/request-intent-real-judgment-20261002/run-local.mts)、[失敗証拠](reports/request-intent-real-judgment-20261002/evidence.json)、[主report](reports/request-intent-real-judgment-20261002/README.md)を照合。固定runtimeの親directoryが未作成で、attemptのmkdir(runtime,{recursive:false})がENOENT。保存証拠はexit1・stateCreated=false・mediaActionStarted=false。通常系列や実判断は未開始。Mac上の相談役再実行ではない。
+
+許可する実処理差分はその直前の `await mkdir(path.dirname(runtime), {recursive:true});` 一行。固定workspace内の親だけを作り、attempt側のrecursive:false、EEXIST拒否を維持する。attempt-001の不存在を再確認できれば同番号を新規作成し、存在時は削除・上書きせず相談役へ返す。
+
+旧evidence/実行codeは固定Git版f1d716243ded9c6a783404ffc27a4b84ff209e6fで保持。初回startedAt/error/stopは失敗履歴として残す。今回の累積17・受領SHA・再開時刻への記録追従は許可し、失敗を成功へ付け替えない。製品5／設営16を維持し、設営17は適用時に計上する。一般上限・強制停止・承認意味は変更しない。
+
+報告の空き17,751,695,360 bytesを現在値として流用しない。既存preflightと大容量作用前の再測定を通過したら、通常登録→段階別の実回答→計画/検証complete→別process再読まで同じセッションで続行する。旧全試験、v005、動画の再実行はしない。設営17の受領・適用・再稼働・完了は指示発行時点で未確認。
 
 ## 4. 今回読む根拠
 
 | 資料 | 意味 |
 |---|---|
-| [新指示全文](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md) | 唯一の今回実行指示。purpose、実回答、source/容量、許可path、終点 |
+| [親directory修正](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001_PARENT_DIRECTORY_FIX.md)、[失敗証拠](reports/request-intent-real-judgment-20261002/evidence.json) | 今回の設営17個別承認・一行差分・失敗保持・再開位置 |
+| [新指示全文](work-orders/ZEV_DIGEST_REAL_JUDGMENT_LOCAL_20261002_v001.md) | 今回一件のpurpose、実回答、source/容量、許可path、終点 |
 | [v005 §13](work-orders/ZEV_REQUEST_INTENT_CONNECTION_20261001_v005.md) | 前工事の最終acceptと承認外 |
 | [通常接続report](reports/request-intent-connection-20261001/README.md) | 実local系列・所有者・保存・再読の参照。旧testを起動しない |
 | [構成改善report](reports/selection-structure-improvement-20260930/README.md)、[案](reports/selection-structure-improvement-20260930/proposal-v001.json)、[独立点検](reports/selection-structure-improvement-20260930/independent-review.md) | 実判断の根拠、比較理由、採用区間と未観測 |
-| [9/28一次レビュー](reports/new-material-digest-human-review-20260928/README.md)、[9/29回答](reports/caption-readability-splitting-20260928/human-feedback-20260929-v001.md) | 導入・説明・締め・除外要求、144px・条件付き分割、縁未選択 |
+| [9/28一次レビュー](reports/new-material-digest-human-review-20260928/README.md)、[9/29回答](reports/caption-readability-splitting-20260929/human-feedback-20260929-v001.md) | 導入・説明・締め・除外要求、144px・条件付き分割、縁未選択 |
 | [人間台帳](HUMAN_REVIEW_PENDING.md)、[開発計画](../相談役/方針/ZEV_開発計画.md) | 完了・回答待ち・別作業を分ける |
 
 現行実装の具体経路は `runner/src/index.ts`、`digest-plan-preparation-v001.ts`、`digest-plan-consumption-v001.ts`、`workflow-step-builders.ts`、既存 `judgeThroughStdinV001`。新指示はその製品変更を許可しない。
