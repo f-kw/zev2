@@ -20,7 +20,7 @@
 
 15分初稿レビュー、構成改善v001の局所検証、一件後修正/Reset、旧9:47案の1080p低メモリ製造も既存完了範囲を維持する。
 
-## 3. 次の一件 — 表示回答の計画frame時計対応
+## 3. 現在の一件 — 表示回答の計画frame時計対応・診断完成
 
 **正本：[ZEV_DIGEST_CAPTION_PLAN_TIMING_20261003_v001.md](work-orders/ZEV_DIGEST_CAPTION_PLAN_TIMING_20261003_v001.md)、保存31554429dc977723dd06a93fb3bbb7fdaeb4e824。**
 
@@ -56,4 +56,10 @@ presentation=not-connected／executionPermission=not-approved／humanQuality=pen
 
 main・担当のみ明示stage、他者変更保全、Git操作直列化。fda455c4のpush・Git clean・対象process残存0はCodex報告と保存記録。相談役のMac直接観測ではない。
 
-表示候補のacceptと次指示は発行済み。新指示受領・設営25適用・計画時計診断の実行/完成は未確認。報告名：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・表示回答の計画時計対応。今回完了から背景製造・最終style確定・演出/動画へ自動着工しない。
+Codex2は482245d3で正本と確定返信全文を受領、設営25適用。218表示単位の計画frame対応・保存再読一致まで診断完成し、最終監査へ提出する。報告名：Codex2 AUDIT_ONLY＋NEXT_REQUEST｜9の後続・表示回答の計画時計対応。今回完了から背景製造・最終style確定・演出/動画へ自動着工しない。
+
+
+Codex2受領checkpoint（2026-10-03 JST）：482245d3へ他者変更を保持して同期し、計画時計正本/CURRENT_GOAL/HANDOVER v049と専用Edge確定返信を全文受領。前件表示候補fda455c4のacceptは維持。今回診断の保存inspectionには60/1・722,162元frame・offset 0ms、9区間の保存mappingがある。既存境界関数とmapper算術を使う小補助を準備中。媒体/内容再判断/描画0、設営25は適用時に記録する。
+
+
+Codex2診断完了checkpoint（2026-10-03 JST）：設営25、製品6。9区間/218表示単位/289行/3,613断片の本文/行末/所属/順序を維持して全cue対応、unmapped0。既存境界関数で保存mapping一致、元60/1・722,162frame・offset0msはinspection参照。元27,691frame/40,705,770sample不変。型/run exit0、新JSONの一回再読object/bytes/SHA一致、入力/実装95件不変、対象process0。対応JSON SHA 72eab2201c0bb3e918aabf314ec3c0613f61ef4641a20402db5e7316282a2761、manifest SHA 36f41a965c891aa5cf35c00c81b2aaf171284a1941d9d9d20a9c64532db44179。3file/1,199,438bytes、媒体/再判断0。8〜526frame/空白15件1,220frame/重なり0は観測のみ。[report](reports/digest-caption-plan-timing-20261003/README.md)。担当commit/push・直接監査報告へ進む。正式背景/style/ROOT読取/動画許可と人間品質は未接続・未承認のまま。

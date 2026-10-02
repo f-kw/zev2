@@ -4,7 +4,7 @@
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-**最新更新：fda455c46a89318e063af79fdfb33753fd50de8dの保存9表示回答候補を相談役accept。attempt-004の一行末訂正・全9既存検査・別process再読が成立し、必須追加修正なし。3,613atom/218表示単位/289行、製品6/設営24を保持。次は、回答を再判断せず所属9区間の計画frame時計へ対応付ける媒体なし診断一件。正本は[計画時計対応](work-orders/ZEV_DIGEST_CAPTION_PLAN_TIMING_20261003_v001.md)、保存31554429dc977723dd06a93fb3bbb7fdaeb4e824。完成背景・最終style・正式renderer入力を偽装しない。補助適用時だけ設営25。新指示の受領・適用・実行は未確認。**
+**最新更新：fda455c46a89318e063af79fdfb33753fd50de8dの保存9表示回答候補を相談役accept。attempt-004の一行末訂正・全9既存検査・別process再読が成立し、必須追加修正なし。3,613atom/218表示単位/289行、製品6/設営24を保持。次は、回答を再判断せず所属9区間の計画frame時計へ対応付ける媒体なし診断一件。正本は[計画時計対応](work-orders/ZEV_DIGEST_CAPTION_PLAN_TIMING_20261003_v001.md)、保存31554429dc977723dd06a93fb3bbb7fdaeb4e824。完成背景・最終style・正式renderer入力を偽装しない。Codex2は482245d3で正本と確定返信全文を受領、設営25適用。218表示単位の計画frame対応/小JSON保存再読一致まで診断完成、未対応0。最終監査へ提出する。**
 
 ## 0. 最初に読む
 
@@ -126,6 +126,12 @@ upload006の3実体、MP4007の1実体、実判断の1実体4,803,412,827bytes�
 
 main、担当のみ明示stage、Git操作直列化。他者変更をreset/stash/削除/stageせず、branch/worktree/force pushを自己判断で作らない。Codex1起動・受理だけの独立commitは不要。
 
-fda455c4の完了・push/Git clean/対象process残存0はCodex報告と保存証拠。相談役のMac直接観測ではない。表示候補の最終acceptと次診断指示は発行済み、新指示受領・設営25適用・計画時計診断の実行/完成は未確認。旧未調整案の停止や当時の貼付を承認へ遡及変換しない。
+fda455c4の完了・push/Git clean/対象process残存0はCodex報告と保存証拠。相談役のMac直接観測ではない。表示候補の最終acceptを維持し、Codex2は設営25を適用、計画時計診断/保存再読まで確認した。旧未調整案の停止や当時の貼付を承認へ遡及変換しない。
 
 方針・指示・完了・中断は同じターンで正本保存。自動監視/非同期作業を装わない。今回候補は閉じ、次の診断が終わっても背景製造・最終style確定・演出/動画へ自動着工しない。
+
+
+Codex2受領checkpoint（2026-10-03 JST）：482245d3へ他者変更を保持して同期し、計画時計正本/CURRENT_GOAL/HANDOVER v049と専用Edge確定返信を全文受領。前件表示候補fda455c4のacceptは維持。今回診断の保存inspectionには60/1・722,162元frame・offset 0ms、9区間の保存mappingがある。既存境界関数とmapper算術を使う小補助を準備中。媒体/内容再判断/描画0、設営25は適用時に記録する。
+
+
+Codex2診断完了checkpoint（2026-10-03 JST）：元9mappingの境界が既存関数と一致。全218cue/289行/3,613atomを本文/行末/順序不変で計画frameへ対応、unmapped0。型/run exit0、保存再読一回object/bytes/SHA一致、読んだ入力/実装95件不変、process0。新manifest SHA 36f41a965c891aa5cf35c00c81b2aaf171284a1941d9d9d20a9c64532db44179。製品6/設営25、媒体/内容再判断/描画0。3file/1,199,438bytes。最短8/最長526frame、空白15件1,220frame/重なり0は品質合否にしない。[report](reports/digest-caption-plan-timing-20261003/README.md)。担当のみcommit/push後、専用Edgeへ最終監査・NEXT_REQUESTを直接送る。正式背景/style/ROOT後段/動画許可は残件。
