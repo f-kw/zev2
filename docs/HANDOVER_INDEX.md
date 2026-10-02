@@ -1,10 +1,10 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v056
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v057
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-**最新更新：86875908579d4edf96efdc2117d382b8191c3169の正式後段接続・限定製造の二文書案を相談役accept。文書作業は完了、必須の追加診断なし。次は一素材・15分23秒案・243字幕のNormal候補一本について、限定接続実装・候補専用trust・安全容量確定後の実製造をまとめた本人判断一件。decision: human_decision。正本は[FORMAL_HANDOFF_DECISION](work-orders/ZEV_DIGEST_FORMAL_HANDOFF_DECISION_20261003_v001.md)、初回保存1ee54141a02451e2d8a03b5e9b14e2d6cf589fbf。現在空き13,411,098,624bytesは製造条件を満たさず、保存先/容量authorityは未確定。製品6/設営29を維持。新実装・候補trust有効化・媒体生成・設営30は未許可。本人回答、Codexの本返信受領/待機移行、Mac現在processは未確認。**
+**最新更新：Codexの複数session向けwork logを正本化。中央logへの逐次appendは行わず、各sessionが第一完成・GPT/HUMAN停止・handoff・終了直前に、指示・判断・主要作業・検証・cleanup・Git・次状態を `docs/work-logs/YYYY-MM/` の専用fileへまとめる。月directoryでrotationし、1 summaryが64 KiB超ならpart分割。正本は[CODEX_SESSION_WORK_LOG_POLICY_v001](policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md)。標準終了順は証拠固定→cleanup→own process終了→session work log→正本更新→commit/push→相談役報告→次指示受領。現在の一計画製造human_decision待ち、製品6/設営29、未承認adapter/trust/媒体/SSD等の境界は不変。**
 
 ## 0. 最初に読む
 
