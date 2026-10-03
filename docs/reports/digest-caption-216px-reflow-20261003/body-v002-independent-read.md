@@ -1,0 +1,19 @@
+独立読み取り結果：v002は最終QC失敗。完成・最終QC合格として受理できない。
+
+最終確認：2026-10-03T15:17:11.368875+00:00。対象実装SHAは7b6e039ddd9b771d9822623181b0e95ad8ad3829。対象保存先は/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002。この確認は既存証拠と現物の読み取りだけで、追加描画、製造、QCの再実行、repo/SSD/Git変更をしていない。
+
+372字幕・668行・3613atom・9区間の本文/順序/元ID/時計、216px・左右108px設定、旧base4参照と新出力の対応は前回14:48 UTCの独立metadata確認で一致した。合成は132単位、27691frameを連続して一度ずつ処理したという既存receiptがある。旧baseの40705770sample束縛も維持されている。これは完成媒体QC合格の代用ではない。
+
+合成済みMP4の現物hashは14:57:31 UTCに読み取りで確認済み。598323447bytes、SHA256=9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56。旧base動画は639776321bytes、SHA256=3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38で旧束縛と一致した。新MP4はwork/publish内の未受理合成物として残り、正式renderディレクトリへのrename/publicationとresult.json作成は行われていない。QCの参照は既存work/scratchの実pathのままである。
+
+2026-10-03 15:01:37.931 UTCに正式workerがexit1で終了した。renderer-resultはinner exit2/process_failed/stage execution。最初の字幕の代表frame58（1.933333秒）でencoded-omission-v2のencode/decode pipelineが失敗した。encoder exit187、decoder exit183、encoder出力frame0、no packets。既存worker.logにはswscalerのResource temporarily unavailableが16864件記録されている。caption-001のomitted.png/completed.pngはどちらも存在せず、比較できた完成frameは0。226.808秒のQC失敗記録がある。動画に字幕が実際に欠けたと判定した失敗ではなく、QC処理自体を実行できなかった失敗である。
+
+monitor記録の全process RSS最大は14182334464bytes、16GiB上限未満。summaryとshutdownのremainingRunningは空、shutdown.remainingも空。今回ここから新しいps確認や停止はしていない。rendererのlock/workは安全保持されている。
+
+372枚の実PNGを今回再読し、全て保存済みnative alpha検査のPNG hashと一致した。保存されたalpha boundsでは最小左125px、最小右134px、最小上417px、最小下74pxで、左右108px/上下40pxの違反は0。縁/glow込みの既存実alpha boundsの読み取りであり、全alpha検査を新たに実行した結果ではない。最終背景上の可読性や全glyph目視の合格にはしない。
+
+既存1920×1080 PNGの6枚を原寸で目視確認した記録は維持する。指定本文/改行と一致し、明らかな欠字、代替glyph、端の切れ、行重なりを認めなかった。ただし372枚すべての目視、完成背景上の読みやすさ、全尺15:23.033の実視聴、12f/15f/19f表示の可読性は未評価。
+
+既存ffprobe/countとaudio-payloadコマンドはexit0記録があるが、観測stdoutの数値は保存されていないため、今回の独立報告では実MP4の27691frame/40705770sampleの観測値を捏造しない。最終QCと完成媒体の正式合格は未成立。
+
+詳細の証拠path/bytes/SHA256、各PNGの読み取り結果、前回のmetadata照合と6枚の目視記録は同名JSONに保存した。次に動く担当はroot。並列処理抑制設定の限定接続と固定v003正式全入口の案は別メモで示す。

@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v066
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v067
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-03 15:27 UTC（全尺合成は保存、比較検査の並列制御を限定復旧）
+
+v002正式製造は13:57:58〜15:01:37 UTC、1時間3分39.837秒で失敗終了。全372字幕画像/668行は生成・画像検査済み、41分59.334秒。全27,691frameの合成132単位は13分47.923秒で完了し、598,323,447B/SHA9eea47beのMP4をSSDへ保存・再読。元9区間/3,613atom/40,705,770sampleを保持。動画の寸法・音声・frame数の検査処理はexit0だが、最初の完成字幕比較でimage変換のResource temporarily unavailableが生じ、encoder187/decoder183・encodedFrames0。技術最終QC不合格、正式result/atomic publishなし。画像だけで実背景/全尺見心地/短表示読了性/音声聴取を合格にしない。
+
+[実失敗の30raw参照と372PNG](reports/digest-caption-216px-reflow-20261003/encoded-qc-failure-evidence.json)、[独立現物読取](reports/digest-caption-216px-reflow-20261003/body-v002-independent-read.md)、[制作負担](reports/digest-caption-216px-reflow-20261003/body-v002-production-burden.md)を保持。peak tree RSS14,182,334,464B、最小guest98,039,128,064B/内蔵13,287,858,176B、pressure1。停止は安全閾値超過ではなく正式workerエラー。monitor remaining=[]、15:13:21 UTCの実psでもown controller77499/PGID77704残存0。旧base4/旧v001/v002、font/range/clock/許可/失敗、QC途中入力、全PNG・mask・repeatを全KEEP、今回削除0。
+
+同じ一本の通常復旧判断に従い、Coreで資格確認済みstorageContextがあるbranchだけに既存serializePngAndFilters:trueを渡す。任意root・一般trust/default・QCmethod/閾値を変更せず、既存PNG decoder threads1/complex filter threads1だけ有効にする。Normal encoded-v2には正式QC-only checkpointが無いため新契約は作らず、固定v003専用childで同じ正式全入口を実行する。旧出力を上書きせず、v002失敗/終了404実参照と旧base/current-code/同manifest/grant/device、新owner・未使用rootを束縛する。残5実装不変、Core literal+1flag逆変換は旧codeへbyte一致。コードcheckpoint c67b7632、変更はadapter/Core2pathのみ。重複する字幕/合成処理時間も今回負担へ計上する。
+
+15:21:39 UTC事前検査passed/372推定layout、型検査exit0、既存encoded-omission tests8/8、Core clone/別root/plan不一致8拒否。[独立差分確認](reports/digest-caption-216px-reflow-20261003/body-v003-connection-review.md)も不整合0。新v003 permit/描画/QCはこの記録時点未開始、成功保証なし。状態作業中、最終確認2026-10-03 15:27 UTC、次担当このMac実装者。排他leaseを検証〜起動まで保持し、18拒否・actual qualification・fresh code/input/3disk/resourcesを直前確認後、同216px/左右108px/可変設定/元音声の正式描画/合成/全372 QCへ進む。人間品質pending/outlineChoice=null、同じ復旧の返事待ちへ戻さない。pushだけ別の本人回答待ち、拒否後再試行/代行0。
 
 ## 最新現在地 — 2026-10-03 13:56 UTC（字幕入口の読込修正、同一本の限定復旧を続行）
 

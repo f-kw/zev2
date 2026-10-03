@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "digest-216-v003-serialized-qc-connection-readonly-review-v001",
+  "readAt": "2026-10-03T15:24:02.842373+00:00",
+  "status": "no-blocking-issue-found-by-read-only-review",
+  "headAtReview": "c67b7632460d865a2404c344fe3188a3f7411e8b",
+  "manufacturingStartedByReviewer": false,
+  "codeHashes": {
+    "runner/src/digest-formal-handoff-v001.ts": "cab89540191433e9f7a70b51dc7b73678d0b06369dfd634b7dd8dd3b04ea8b37",
+    "evals/clip_composition/adopted_media_manufacturing_v001.mts": "06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265"
+  },
+  "evidenceBundle": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/encoded-qc-failure-evidence.json",
+    "sizeBytes": 147008,
+    "sha256": "65ffb659d1a8ef24612dc1fa7b4f89a5ec82e3151632a700e899d3aeb36b3b43",
+    "rawReferences": 30,
+    "uniqueOverlayReferences": 372,
+    "verifiedReferencesIncludingVideoAndPreviousPermit": 404,
+    "totalBytesRead": 706932704,
+    "violations": [],
+    "embeddedSummaryOwnedShutdownMatchActual": {
+      "summary": true,
+      "owned": true,
+      "shutdown": true
+    }
+  },
+  "coreExactReverse": {
+    "toOriginalE37361Matches": true,
+    "toPrevious7b6eMatches": true,
+    "allowedChangesFrom7b6e": [
+      "fixed child literal v002→v003",
+      "qualified storage context branch serializePngAndFilters:true"
+    ],
+    "contextAbsentBehavior": "identical branch/options; no-context uses prior default false"
+  },
+  "otherFiveCurrentImplementationPaths": [
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "matchesPreviousBytes": true,
+      "sha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "matchesPreviousPermit": true
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "matchesPreviousBytes": true,
+      "sha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "matchesPreviousPermit": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "matchesPreviousBytes": true,
+      "sha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "matchesPreviousPermit": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "matchesPreviousBytes": true,
+      "sha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "matchesPreviousPermit": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "matchesPreviousBytes": true,
+      "sha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "matchesPreviousPermit": true
+    }
+  ],
+  "scope": {
+    "trackedImplementationPathsChanged": 2,
+    "addedEvidencePath": "docs/reports/digest-caption-216px-reflow-20261003/encoded-qc-failure-evidence.json",
+    "adapterNewChanges": [
+      "exact private v003 root",
+      "147008byte failure evidence literal sha",
+      "read-only stable oldvideo/372PNG/30rawref qualification",
+      "previous7b6e code/manifest/approval/storage binding checks",
+      "oldPGID77704 no-live process check in formal qualifier",
+      "Core exact-reversal includes only literal+flag",
+      "preserve fresh owner/new root empty/exclusive publication gates"
+    ],
+    "noGeneralNewTrustOrQcOnlyContract": true,
+    "oldV002RenderAndResultRequiredAbsent": true,
+    "oldV002ArtifactsPreserved": "existing 30 refs +372 actualPNG +composite video reread and matched exact hashes"
+  },
+  "qcMeaning": {
+    "method": "encoded-omission-v2",
+    "samplesExpected": 372,
+    "survivorsPerSample": 371,
+    "fullFrames": 27691,
+    "contentClockPropsThresholdUnchanged": true,
+    "filterAndPngOnlyThreadControl": true,
+    "counterfactualGenerationFullClockFromFrame0": "unchanged",
+    "finalPublicationRequiresFinalQcPassed": "unchanged"
+  },
+  "bindingSeparation": {
+    "oldBase": "continuation.base is built from original OUT/source-package baseMediaInput, exact base4 hash read and qualified",
+    "newArtifacts": "context.outputRoot is private v003; generated publication requires prefix v003/ and Core plan.outputRoot equality",
+    "originalSourceFontCode": "repo resolution/actual SHA unchanged",
+    "currentSourceAndStyleBinding": "fresh current implementation hashes are required; old current metadata hashes are not valid for new attempt"
+  },
+  "limits": [
+    "new owner/permit/v003 root/current-device/resource actual qualification not executed by this reviewer",
+    "no tests/typecheck/manufacture/QC run by reviewer; parent existing test stdout read separately only",
+    "existing true flag reduces parallelism but does not guarantee 371-input encoder succeeds",
+    "v002 remains failed-final-QC; all human video/readability quality is not evaluated"
+  ],
+  "reviewerActions": [
+    "code/diff/evidence read only",
+    "existing rawref/PNG/video hash reads",
+    "workspace report writes"
+  ],
+  "violations": []
+}

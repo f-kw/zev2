@@ -1,0 +1,585 @@
+{
+  "schemaVersion": "digest-v002-final-independent-qc-read-v001",
+  "readAt": "2026-10-03T15:17:11.368875+00:00",
+  "status": "failed-final-qc",
+  "outputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002",
+  "implementationShaExpected": "7b6e039ddd9b771d9822623181b0e95ad8ad3829",
+  "metadataReadback": {
+    "status": "passed",
+    "violations": [],
+    "cues": 372,
+    "lines": 668,
+    "uniqueAtoms": 3613,
+    "groups": 9,
+    "endFrameExclusive": 27691,
+    "audioSamples": 40705770,
+    "fontSizePx": 216,
+    "safeAreaPx": {
+      "left": 108,
+      "right": 108,
+      "top": 40,
+      "bottom": 40
+    },
+    "admissionChecks": [
+      {
+        "checkId": "instruction-artifact",
+        "status": "passed"
+      },
+      {
+        "checkId": "cue-end-projection",
+        "status": "passed"
+      },
+      {
+        "checkId": "semantic-line-end-projection",
+        "status": "passed"
+      },
+      {
+        "checkId": "crop-applied-base-media",
+        "status": "passed"
+      },
+      {
+        "checkId": "canvas-format",
+        "status": "passed"
+      },
+      {
+        "checkId": "style-profile-registry",
+        "status": "passed"
+      },
+      {
+        "checkId": "material-registry",
+        "status": "passed"
+      },
+      {
+        "checkId": "font-ledger",
+        "status": "passed"
+      },
+      {
+        "checkId": "renderer-trust",
+        "status": "passed"
+      },
+      {
+        "checkId": "renderer-implementation",
+        "status": "passed"
+      },
+      {
+        "checkId": "renderer-execution-inputs",
+        "status": "passed"
+      }
+    ],
+    "oldBaseFourReferencesEqual": true,
+    "baseJsonActualHashReadback": [
+      {
+        "role": "timeline",
+        "actual": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+          "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+          "sizeBytes": 2986
+        },
+        "logical": {
+          "schemaVersion": "presentation-base-media-timeline-v003",
+          "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+          "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+          "canonicalSha256": "c3cf28468a1bafcd529c7436a377b3401aebea6bb04d1431d096a3d4fc0d68a9"
+        }
+      },
+      {
+        "role": "generationManifest",
+        "actual": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+          "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+          "sizeBytes": 14476
+        },
+        "logical": {
+          "schemaVersion": "presentation-base-media-generation-manifest-v003",
+          "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+          "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+          "canonicalSha256": "d3623791d233e4099ec20f27155add3a42bc1a0f8b0ed43711dbec95740b9669"
+        }
+      },
+      {
+        "role": "validationReceipt",
+        "actual": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+          "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+          "sizeBytes": 2725
+        },
+        "logical": {
+          "schemaVersion": "digest-formal-base-validation-v001",
+          "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+          "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+          "canonicalSha256": "9d7f45e415077f728fa391e6e99b5d61a87c96d23a2831f99d55a1dff5cf103d"
+        }
+      }
+    ]
+  },
+  "baseFourReferences": {
+    "baseMedia": {
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+      "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+      "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+      "canonicalSha256": "c3cf28468a1bafcd529c7436a377b3401aebea6bb04d1431d096a3d4fc0d68a9"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+      "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+      "canonicalSha256": "d3623791d233e4099ec20f27155add3a42bc1a0f8b0ed43711dbec95740b9669"
+    },
+    "validationReceipt": {
+      "schemaVersion": "digest-formal-base-validation-v001",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+      "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+      "canonicalSha256": "9d7f45e415077f728fa391e6e99b5d61a87c96d23a2831f99d55a1dff5cf103d"
+    }
+  },
+  "existingImageCount": 372,
+  "finalTechnicalQc": {
+    "status": "not-passed",
+    "actualRendererResult": {
+      "schemaVersion": "digest-formal-render-execution-v001",
+      "rendererJobBinding": {
+        "schemaVersion": "presentation-instruction-renderer-job-v002",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/renderer-job.json",
+        "fileSha256": "1c62d4d80b7c5fbb4d6b3463de714d2491e8cd3dda2464f82138f46cadad2366",
+        "canonicalSha256": "35b15dc140188e30ebf7a8802e41adf71927b212017d36fd91e97bfdaba6425d"
+      },
+      "exitCode": 2,
+      "result": {
+        "exitCode": 2,
+        "failure": {
+          "schemaVersion": "presentation-render-failure-v002",
+          "status": "process_failed",
+          "stage": "execution",
+          "message": "encoded counterfactual frame pipeline did not complete successfully",
+          "cleanupWarnings": [
+            {
+              "code": "RENDER_OUTPUT_LOCK_RETAINED_FOR_SAFETY",
+              "path": "../../../../Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002.lock",
+              "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+            },
+            {
+              "code": "RENDER_OUTPUT_WORK_RETAINED_FOR_SAFETY",
+              "path": "../../../../Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf",
+              "reason": "automatic path-based cleanup is disabled to avoid deleting a replaced external directory"
+            }
+          ]
+        }
+      }
+    },
+    "error": "encoded counterfactual frame pipeline did not complete successfully",
+    "failedQcMethod": "encoded-omission-v2",
+    "failedSampleOrdinal": 1,
+    "representativeFrame": 58,
+    "representativeTimeSeconds": 1.9333333333333333,
+    "expectedFrameCount": 27691,
+    "sampleAttempted": 1,
+    "sampleCompleted": 0,
+    "firstCompletedFrameExists": false,
+    "firstOmittedFrameExists": false,
+    "qcWallClockMs": 226808.27829100005,
+    "all372CompletedFrameQc": "not-completed"
+  },
+  "finalMP4Hash": {
+    "status": "staging-composite-verified-not-published",
+    "hashesFromEarlierActualReads": [
+      {
+        "role": "composite-staging-output",
+        "pathAtRead": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/presentation-rendered-v002.mp4",
+        "fileSha256": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+        "sizeBytes": 598323447,
+        "stableDuringRead": true,
+        "expectedHash": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+        "matchesReceiptOrOldBinding": true,
+        "readAt": "2026-10-03T14:57:31.465990+00:00"
+      },
+      {
+        "role": "old-base-video",
+        "pathAtRead": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+        "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+        "sizeBytes": 639776321,
+        "stableDuringRead": true,
+        "expectedHash": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+        "matchesReceiptOrOldBinding": true,
+        "readAt": "2026-10-03T14:57:31.742490+00:00"
+      }
+    ],
+    "officialRenderDirectoryExists": false,
+    "formalResultExists": false,
+    "renameStatus": "no-final-publication-or-rename; all existing QC and video paths remain physical work/scratch paths"
+  },
+  "actualInkMargin": {
+    "status": "persisted-native-alpha-bounds-read-with-actual-PNG-hash-readback",
+    "all372ActualPngHashesMatch": true,
+    "count": 372,
+    "totalPngBytes": 83467465,
+    "minimumLeftMarginPx": 125,
+    "minimumRightMarginPx": 134,
+    "minimumTopMarginPx": 417,
+    "minimumBottomMarginPx": 74,
+    "requiredMarginsPx": {
+      "left": 108,
+      "right": 108,
+      "top": 40,
+      "bottom": 40
+    },
+    "violations": [],
+    "limits": "全PNGは既存alpha検査値と現物hashを照合。alpha検査の再実行・全glyph目視・全行maskの独立再採点は行っていない。"
+  },
+  "humanQuality": {
+    "status": "not-evaluated",
+    "limitedActualStaticOverlayViews": 6,
+    "full372GlyphVisualReview": "not-performed",
+    "finalBackgroundReadability": "not-viewed",
+    "whole15min23secVideo": "not-watched",
+    "short12_15_19FrameReadability": "not-evaluated"
+  },
+  "sourceBindings": [
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/renderer-job.json",
+      "fileSha256": "1c62d4d80b7c5fbb4d6b3463de714d2491e8cd3dda2464f82138f46cadad2366",
+      "sizeBytes": 10618
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/core-plan.json",
+      "fileSha256": "e6a13262054ef61d673e749561f306b58a43c83f75f410dadd545c14f62ca073",
+      "sizeBytes": 14122
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/source-package.json",
+      "fileSha256": "e1deff99d6abe97a074447b3db5f70a7cb1cd3c97188877ed6376238e76b28ff",
+      "sizeBytes": 1772855
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/instruction.json",
+      "fileSha256": "e193ece01ac2077984e89772b0d49988c078d01f492ffda204681589852405ee",
+      "sizeBytes": 620472
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/line-layout.json",
+      "fileSha256": "4bc300a7d0f1cf12ac21676101a235bcbb6f35d29b3f681b6238d8428f197254",
+      "sizeBytes": 443020
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/admission-receipt.json",
+      "fileSha256": "8995c5d34d8dac44faf5e2ec7325e72bb94a22547966252e1833ad39f5e4d612",
+      "sizeBytes": 15911
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/candidate-style/preset-registry.json",
+      "fileSha256": "9ed62af47ada96096e9ab7a94abcbb33303dc6b718355f6dc923ab6cfdf4ea2a",
+      "sizeBytes": 14343
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/candidate-style/trust.json",
+      "fileSha256": "cfe8584f27383a4c717da3f397410fb84642edca80f663118a78362657e23f34",
+      "sizeBytes": 5440
+    }
+  ],
+  "limitedVisualOverlayRead": [
+    {
+      "ordinal": 2,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000002",
+      "lines": [
+        "ホラーゲーム",
+        "とかやろうかな"
+      ],
+      "displayFrames": 43,
+      "startSeconds": 3.9,
+      "endSeconds": 5.333333333333333,
+      "viewedAt": "2026-10-03T14:52:17.490121+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/02-37c6fc57b3e7.png",
+      "fileSha256": "d17188a4c49b00344e3b55056ed01fa47478e3c20d23a407006c4b67f11d4ae3",
+      "sizeBytes": 259516,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    },
+    {
+      "ordinal": 3,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000003",
+      "lines": [
+        "と思った",
+        "んですけど"
+      ],
+      "displayFrames": 84,
+      "startSeconds": 5.333333333333333,
+      "endSeconds": 8.133333333333333,
+      "viewedAt": "2026-10-03T14:52:17.490622+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/03-7eae45e403e4.png",
+      "fileSha256": "65a92ae8f3dc2fb79cad9cc4baad4f57d469c801e080e7fa79457a6d60a16f81",
+      "sizeBytes": 221552,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    },
+    {
+      "ordinal": 312,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000312",
+      "lines": [
+        "特別手当は最初",
+        "から異変出てる?"
+      ],
+      "displayFrames": 56,
+      "startSeconds": 715.0333333333333,
+      "endSeconds": 716.9,
+      "viewedAt": "2026-10-03T14:52:17.491018+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/312-10662a1b6709.png",
+      "fileSha256": "d6902d114b71e4947b5f6cf1ea1b98db6f851e668e5382704fb7aa3ba8420d7c",
+      "sizeBytes": 289375,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    },
+    {
+      "ordinal": 299,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000299",
+      "lines": [
+        "皆さんどうも"
+      ],
+      "displayFrames": 12,
+      "startSeconds": 686.7333333333333,
+      "endSeconds": 687.1333333333333,
+      "viewedAt": "2026-10-03T14:52:17.491404+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/299-cc39fe547573.png",
+      "fileSha256": "b99723c26d847006aa464c6764aaee4f42014b93ea2dafb542c33348324b4be5",
+      "sizeBytes": 164929,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    },
+    {
+      "ordinal": 344,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000344",
+      "lines": [
+        "ドアが広い"
+      ],
+      "displayFrames": 15,
+      "startSeconds": 835.0333333333333,
+      "endSeconds": 835.5333333333333,
+      "viewedAt": "2026-10-03T14:52:17.491782+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/344-ba70dd439054.png",
+      "fileSha256": "7300b7db91bb7ff806b1306e8840e85992f26ba52ed3ae5767424a621b57f050",
+      "sizeBytes": 149142,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    },
+    {
+      "ordinal": 350,
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000350",
+      "lines": [
+        "いやでもまあ"
+      ],
+      "displayFrames": 19,
+      "startSeconds": 863.2333333333333,
+      "endSeconds": 863.8666666666667,
+      "viewedAt": "2026-10-03T14:52:17.492125+00:00",
+      "viewDetail": "original 1920x1080 overlay PNG",
+      "stagingFileAtView": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/350-08ee7b9b4cb9.png",
+      "fileSha256": "ad0def7e26ba76ee1d6a72d226dd62640f8f02b3564da99e234a75acb0ac0934",
+      "sizeBytes": 163257,
+      "visualObservation": "指定本文/改行と一致。明らかな欠字・代替glyph・端の切れ・行重なりなし。透明overlayの原寸静止確認に限る。",
+      "temporalReadability": "not-evaluated",
+      "finalBackgroundReadability": "not-yet-viewed"
+    }
+  ],
+  "completedCompositeReceipt": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/low-memory-composite.json",
+    "fileSha256": "2bad5459022ccaaf671a523b2c8d07d4ff747b082230ee00c91b7b8f321286f3",
+    "status": "completed",
+    "scope": {
+      "startFrame": 0,
+      "endFrameExclusive": 27691,
+      "frameCount": 27691
+    },
+    "segments": 132,
+    "frameCoverage": "complete-contiguous-once",
+    "output": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/presentation-rendered-v002.mp4",
+      "bytes": 598323447,
+      "fileSha256": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56"
+    },
+    "rawYuvStorage": "pipe-only",
+    "rawYuvBytes": 86130086400
+  },
+  "actualVideoHashesBeforePublication": [
+    {
+      "role": "composite-staging-output",
+      "pathAtRead": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/presentation-rendered-v002.mp4",
+      "fileSha256": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+      "sizeBytes": 598323447,
+      "stableDuringRead": true,
+      "expectedHash": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+      "matchesReceiptOrOldBinding": true,
+      "readAt": "2026-10-03T14:57:31.465990+00:00"
+    },
+    {
+      "role": "old-base-video",
+      "pathAtRead": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+      "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+      "sizeBytes": 639776321,
+      "stableDuringRead": true,
+      "expectedHash": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+      "matchesReceiptOrOldBinding": true,
+      "readAt": "2026-10-03T14:57:31.742490+00:00"
+    }
+  ],
+  "failurePipelineRead": [
+    {
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000001",
+      "representativeFrame": 58,
+      "encodedFrames": 0,
+      "targetDecodedBeforeQuit": false,
+      "encoderExit": 187,
+      "decoderExit": 183,
+      "encoderSignal": null,
+      "decoderSignal": null,
+      "scalerResourceUnavailableMessages": 16864,
+      "encoderNoPackets": true,
+      "decoderInvalidInput": true,
+      "encoderStderrSha256": "3befb5e11c9f95cb9e92e22402e1dcb8da2f1fc995683e13dd2c927645891785",
+      "decoderStderrSha256": "15131a08ed7867659b5f9f54c4b241302f849c40904c9b0811c482727409b5f5",
+      "pipeErrors": []
+    }
+  ],
+  "monitorRead": {
+    "status": "interrupted",
+    "exitCode": 1,
+    "endedAtUtc": "2026-10-03T15:01:37.931846+00:00",
+    "seconds": 3819.8373358249664,
+    "observedTreePeakBytes": 14182334464,
+    "rssGuardBytes": 17179869184,
+    "guardExceededInSummary": false,
+    "remainingRunning": [],
+    "shutdownRemaining": [],
+    "shutdownRemainingRunning": [],
+    "interpretation": "記録上は正式worker失敗終了、残存processなし。新しいps検査やprocess操作はしていない。"
+  },
+  "inputManifestAtFailureRead": {
+    "refs": 377,
+    "beforeAfterEqual": true,
+    "serializePngAndFilters": false,
+    "retainedCaptionsInFirstSample": 371
+  },
+  "finalFailureEvidence": [
+    {
+      "role": "renderer-result",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/renderer-result.json",
+      "fileSha256": "c57925f30f5bd1a4a0d2667ecd1110117a049aaf5ad54e88ccc8fdefdfdcde11",
+      "sizeBytes": 1555
+    },
+    {
+      "role": "monitor-summary",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/monitor/summary.json",
+      "fileSha256": "c9c8bc2059c6b8a94e15f5d47c537e0e2f43b0adb5773ace0030bc4fbfadd59a",
+      "sizeBytes": 1504
+    },
+    {
+      "role": "group-shutdown",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/monitor/group-shutdown.json",
+      "fileSha256": "46efb63f3892b6b5d473d332439f76d93eb090f7253f2dea4dbb46530a4682f2",
+      "sizeBytes": 801
+    },
+    {
+      "role": "owned-group",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/monitor/owned-group.json",
+      "fileSha256": "9ca15e645294ad2f9becc1ae025fe7906ac06f8965f74b1f7d2357d02da09c8c",
+      "sizeBytes": 2211
+    },
+    {
+      "role": "worker-log",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/monitor/worker.log",
+      "fileSha256": "a74bd7606127e20682da09442e391cfd46e468d929b43189d8d4172b47176757",
+      "sizeBytes": 3194082
+    },
+    {
+      "role": "encoded-omission-failure",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/encoded-omission-v002-l3ZK2U/failure.json",
+      "fileSha256": "1c6563841ad2ebc12a2d76cec38b953e21e77f818308f027b54c7cd641c5e530",
+      "sizeBytes": 6147920
+    },
+    {
+      "role": "encoded-logical-inputs",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/encoded-omission-v002-l3ZK2U/logical-inputs.json",
+      "fileSha256": "818b6b7b0b675e1994d2054e0120e03992de603db49ec092a5d2be03cccae938",
+      "sizeBytes": 4726085
+    },
+    {
+      "role": "first-counterfactual-input",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/encoded-omission-v002-l3ZK2U/caption-001/counterfactual-input.json",
+      "fileSha256": "30a513647d39d42e657fa0d1e64a775b7d50777b12b2ce44627720be6700715d",
+      "sizeBytes": 206689
+    },
+    {
+      "role": "low-memory-composite",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/low-memory-composite.json",
+      "fileSha256": "2bad5459022ccaaf671a523b2c8d07d4ff747b082230ee00c91b7b8f321286f3",
+      "sizeBytes": 535581
+    }
+  ],
+  "actualOverlayReadbackSummary": {
+    "rowsRead": 372,
+    "allMatched": true,
+    "rowSummarySha256": "2620c113ff52b8cddc1b196380785595ae8b483415c16d8d7b9785ac0030fc74",
+    "rowSummaryHashMeaning": "今回メモリ内で作った372現物読み取りrowのJSONのhash。正式receipt/hashとして流用不可。全rowファイルは作成していない。",
+    "extrema": {
+      "leftMargin": {
+        "ordinal": 101,
+        "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000101",
+        "fileSha256": "d9636e424c638a9714057e5dd1fd67458c29967706a0b7e3b57526be9af8d2cc",
+        "sizeBytes": 189489,
+        "stableDuringRead": true,
+        "matchesSavedNativeInspection": true,
+        "leftMargin": 125,
+        "rightMargin": 145,
+        "topMargin": 747,
+        "bottomMargin": 105
+      },
+      "rightMargin": {
+        "ordinal": 266,
+        "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000266",
+        "fileSha256": "a861f85018c3b8bc717dc4d0842cd3937371623c0a9a2d5cf7e57b3ced096706",
+        "sizeBytes": 270350,
+        "stableDuringRead": true,
+        "matchesSavedNativeInspection": true,
+        "leftMargin": 133,
+        "rightMargin": 134,
+        "topMargin": 423,
+        "bottomMargin": 110
+      },
+      "topMargin": {
+        "ordinal": 83,
+        "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000083",
+        "fileSha256": "a57514c0cb11c60cacdcad37fc5ba3fca96939560b22bbbba11873f9fc99f914",
+        "sizeBytes": 230067,
+        "stableDuringRead": true,
+        "matchesSavedNativeInspection": true,
+        "leftMargin": 326,
+        "rightMargin": 301,
+        "topMargin": 417,
+        "bottomMargin": 111
+      },
+      "bottomMargin": {
+        "ordinal": 199,
+        "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000199",
+        "fileSha256": "12ab3aefa88e0d9ea88edef8bb32c2b6c0dc1a51bec3d70e5e5147459c3214d7",
+        "sizeBytes": 212797,
+        "stableDuringRead": true,
+        "matchesSavedNativeInspection": true,
+        "leftMargin": 217,
+        "rightMargin": 226,
+        "topMargin": 423,
+        "bottomMargin": 74
+      }
+    }
+  }
+}
