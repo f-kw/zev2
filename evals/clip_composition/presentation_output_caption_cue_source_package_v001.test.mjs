@@ -1134,7 +1134,7 @@ test('ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard'
   prove(t, PROOFS.ZCQ001[15], validatePresentationOutputCaptionCueSourceJobV001(wrongPath).status, 'rejected');
   const wrongLoader = clone(fixture.job); wrongLoader.runtimeProfile.tsx.path = '/tmp/loader.mjs';
   prove(t, PROOFS.ZCQ001[16], validatePresentationOutputCaptionCueSourceJobV001(wrongLoader).status, 'rejected');
-  assert.deepEqual(Object.keys(sourceNamespace).sort(), ['buildPresentationOutputCaptionCueSourcePackageV001', 'decodePresentationOutputCaptionCueSourceJobV001', 'executePresentationOutputCaptionCueSourceJobV001', 'validatePresentationOutputCaptionCueSourceJobV001', 'validatePresentationOutputCaptionCueSourcePackageV001'].sort());
+  assert.deepEqual(Object.keys(sourceNamespace).sort(), ['buildPresentationOutputCaptionCueSourcePackageV001', 'decodePresentationOutputCaptionCueSourceJobV001', 'executePresentationOutputCaptionCueSourceJobV001', 'qualifyDigestFormalSourcePackageTaskV001', 'validatePresentationOutputCaptionCueSourceJobV001', 'validatePresentationOutputCaptionCueSourcePackageV001'].sort());
   const usage = await runCli();
   assert.deepEqual([usage.code, usage.stdout.length, usage.stderr.toString('utf8')], [2, 0, 'usage: presentation_output_caption_cue_source_package_v001.mjs <job-path>\n']);
   prove(
@@ -1248,6 +1248,7 @@ test('ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard'
   }, {
     imports: {
       specifiers: [
+        '../../runner/src/digest-formal-handoff-v001.js',
         './presentation_output_style_resolver_v001.ts',
         './presentation_caption_semantic_source_package_v001.mjs',
         './presentation_a_meaning_information_package_v002.mjs',
@@ -1869,3 +1870,56 @@ test('ZCQ006 source package bytes and binding provenance are deterministic', asy
   });
 });
 }
+
+// Candidate-only capability regression. Original legacy tests above remain unchanged.
+test('saved Digest candidate task requires real qualified input and unchanged source-package object', async () => {
+  const code = `
+    import assert from 'node:assert/strict';
+    import {readFile} from 'node:fs/promises';
+    const adapter = await import('./runner/src/digest-formal-handoff-v001.ts');
+    const validator = await import('./evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs');
+    const inputs = await adapter.readDigestFormal216HandoffInputsV002();
+    assert.equal(inputs.manifest.summary.newCues, 372);
+    assert.equal(inputs.meaning.atomOccurrences.length, 3613);
+    assert.equal(validator.validatePresentationOutputCaptionCueSourcePackageV001(inputs.styleTemplate).status, 'passed');
+    const admitted = await adapter.buildDigestFormalSourcePackagePreflightV001(inputs);
+    assert.equal(admitted.promptInput.captions[0].boundaryCandidates.length, 3613);
+    assert.equal(validator.validatePresentationOutputCaptionCueSourcePackageV001(admitted).status, 'passed');
+    const copy = structuredClone(admitted);
+    assert.equal(validator.validatePresentationOutputCaptionCueSourcePackageV001(copy).status, 'rejected');
+    await assert.rejects(validator.qualifyDigestFormalSourcePackageTaskV001(copy, inputs), /QUALIFIED_DIGEST_SOURCE_PACKAGE_REQUIRED/);
+    await assert.rejects(validator.qualifyDigestFormalSourcePackageTaskV001(admitted, structuredClone(inputs)), /QUALIFIED_216_FORMAL_INPUTS_REQUIRED/);
+    const mutations = [
+      x => x.promptInput.captions[0].boundaryCandidates = [...x.promptInput.captions[0].boundaryCandidates].reverse(),
+      x => x.promptInput.captions[0].boundaryCandidates = [{...x.promptInput.captions[0].boundaryCandidates[0], text:'altered'}, ...x.promptInput.captions[0].boundaryCandidates.slice(1)],
+      x => x.promptInput.captions[0].boundaryCandidates = [{...x.promptInput.captions[0].boundaryCandidates[0], boundaryId:'other-id'}, ...x.promptInput.captions[0].boundaryCandidates.slice(1)],
+      x => x.packageId = 'different-plan-source-package',
+      x => x.promptInput.taskDescription = 'arbitrary task',
+      x => x.promptInput.taskDescription = inputs.originalAcceptedInputs.requests[0].input.taskDescription,
+      x => x.promptInput.styleLimits.maxLogicalWidthPerLine = 999,
+      x => x.promptInput.styleLimits.maxLinesPerCue = 99,
+      x => x.reconstructionMap.meaningPackageBindings[0].fileSha256 = '0'.repeat(64),
+      x => x.provenance.approvedContractBindings = [],
+      x => x.provenance.implementationBindings[0].fileSha256 = '0'.repeat(64),
+    ];
+    for (const mutate of mutations) {
+      const source = await adapter.buildDigestFormalSourcePackagePreflightV001(inputs); mutate(source);
+      assert.equal(validator.validatePresentationOutputCaptionCueSourcePackageV001(source).status, 'rejected');
+      await assert.rejects(validator.qualifyDigestFormalSourcePackageTaskV001(source, inputs), /QUALIFIED_DIGEST_SOURCE_PACKAGE_MUTATED/);
+    }
+    const old = await adapter.readDigestFormalHandoffInputsV001();
+    await assert.rejects(adapter.buildDigestFormalSourcePackagePreflightV001(old), /QUALIFIED_216_FORMAL_INPUTS_REQUIRED/);
+    const b = inputs.manifestBinding, bytes = await readFile(b.path);
+    assert.deepEqual(await adapter.decodeDigestFormalBoundJsonBytesV001(b, bytes), inputs.manifest);
+    await assert.rejects(adapter.decodeDigestFormalBoundJsonBytesV001(b, Buffer.concat([bytes, Buffer.from(' ')])), /FORMAL_BOUND_ACTUAL_BYTES_MISMATCH/);
+    console.log('qualified-digest-capability-and-bound-byte-rejections-passed');
+  `;
+  const child = spawn(NODE, ['--import', TSX, '--input-type=module', '-e', code], {
+    cwd: ROOT, env: {...process.env, NODE_PATH: path.join(ROOT, 'runner/node_modules')}, stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  const stdout = [], stderr = [];
+  child.stdout.on('data', chunk => stdout.push(chunk)); child.stderr.on('data', chunk => stderr.push(chunk));
+  const exitCode = await new Promise((resolve, reject) => {child.once('error', reject); child.once('close', resolve);});
+  assert.equal(exitCode, 0, Buffer.concat(stderr).toString('utf8'));
+  assert.equal(Buffer.concat(stdout).toString('utf8').trim(), 'qualified-digest-capability-and-bound-byte-rejections-passed');
+});

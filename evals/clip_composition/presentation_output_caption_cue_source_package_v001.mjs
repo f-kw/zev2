@@ -411,6 +411,28 @@ const finalPackageValidationResult = violations => Object.freeze(violations.leng
   ? {status: 'passed', violations: Object.freeze([])}
   : {status: 'rejected', violations: Object.freeze(violations)});
 
+// Qualification of one saved Digest candidate; JSON bindings alone never grant this capability.
+const qualifiedDigestCandidateTasks = new WeakMap();
+export async function qualifyDigestFormalSourcePackageTaskV001(value, qualifiedInputs) {
+  const adapter = await import('../../runner/src/digest-formal-handoff-v001.js');
+  // The adapter must verify its private formal216 WeakSet and the complete saved
+  // manifest/rules/config/user records, atom membership, limits and provenance.
+  const authorization = await adapter.assertQualifiedDigestFormalSourcePackageTaskV001(value, qualifiedInputs);
+  if (!authorization || typeof authorization.taskDescription !== 'string'
+    || value?.promptInput?.taskDescription !== authorization.taskDescription) {
+    throw new TypeError('DIGEST_CANDIDATE_TASK_QUALIFICATION_REQUIRED');
+  }
+  const digest = sha256(canonicalBytes(value));
+  qualifiedDigestCandidateTasks.set(value, Object.freeze({digest, taskDescription: authorization.taskDescription}));
+  return Object.freeze({status: 'qualified-saved-digest-candidate-task', sourcePackageCanonicalSha256: digest});
+}
+const isQualifiedDigestCandidateTask = value => {
+  const permission = qualifiedDigestCandidateTasks.get(value);
+  return permission !== undefined
+    && value.promptInput.taskDescription === permission.taskDescription
+    && sha256(canonicalBytes(value)) === permission.digest;
+};
+
 export function validatePresentationOutputCaptionCueSourcePackageV001(value) {
   const violations = [];
   const add = (pointer, rule) => violations.push(finalPackageViolation(pointer, rule));
@@ -429,7 +451,9 @@ export function validatePresentationOutputCaptionCueSourcePackageV001(value) {
     if (value.promptInput.schemaVersion !== PROMPT_SCHEMA) {
       add('/promptInput/schemaVersion', 'schema-version');
     }
-    if (value.promptInput.taskDescription !== TASK_DESCRIPTION) {
+    if (qualifiedDigestCandidateTasks.has(value)
+      ? !isQualifiedDigestCandidateTask(value)
+      : value.promptInput.taskDescription !== TASK_DESCRIPTION) {
       add('/promptInput/taskDescription', 'task-description');
     }
     if (!dense(value.promptInput.captions) || value.promptInput.captions.length === 0) {

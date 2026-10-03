@@ -2,6 +2,19 @@
 
 更新日：2026-10-03（JST）
 
+## 最新の製造前checkpoint — 2026-10-03 11:19 UTC
+
+本人10:30:45 UTC「これでいこう」で見本2枚の216px・左右半文字余白を今回一本に採用し、10:31:17 UTC「システムとしては固定じゃなくて可変にして」を受領した。既存入力の文字サイズ/余白設定から導出し、今回値216px/左右108px/幅15/最大2行を保存する。一般default/trustの変更や全字幕・動画の品質採用ではない。[本人記録と今回報告](reports/digest-caption-216px-reflow-20261003/README.md)を参照。
+
+新attempt-002の実判断9件、正式reader/trace/correspondence再読、372件の推定配置とsource能力検査が成立。旧243cue/390行を372cue/668行へ再配置し、3,613atom/9区間/本文/元ID/順序/原時計/元音声/27,691frame/40,705,770sampleを維持した。manifest SHA `784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444`。8frame以下の孤立表示の観測0、最短12frame。12frame/15frame等の実可読性は未評価。
+
+旧固定TASKが新要求を拒否したため、親相談役の10:54 UTC限定承認（[記録](reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json)は10:56:15 UTC）でsource package接続1pathを追加し、実装範囲は既存6＋1の7path、test別。旧TASK/旧readerと既存検査を保持し、旧TASKへの書換えを含む10改ざん、偽資格、clone、別計画、実bytes/hash不整合を拒否した。11:14:34 UTCの正式repo事前検査・11:14 UTCの型検査はpassed。既存source package suiteは7/7 passed・exit0。
+
+APFSは10:25 UTCの4KB限定probeで保存/再読/保護を確認し、11:15:40 UTCにUUID/device/imageとguest空き99,665,981,440bytes、host空き2,000,257,286,144bytes、内蔵空き13,602,562,048bytes、pressure1を再確認して開始条件passed。小probeは速度/全工程保証ではない。製造用許可転記record v002を作成済み。動画製造/全字幕の実glyph/動画QC/全実視聴は未実施、production prefix未作成。
+
+状態は作業中、最終確認11:19 UTC、次担当はこのMacの実装者。checkpoint実装SHA/permit/出力rootの一致後、今回のNormal一本と既存QCへ進む。同じ216px条件の本人再承認は不要。humanQuality=pending、outlineChoice=null、一般本適用/新素材/API費用/公開/旧成果削除の境界を維持する。以下の10:16以前の未再mount・人間待ち・未承認記載は当時の履歴。
+
+
 ## 最新本人指示と216px再配置 — 2026-10-03 10:16 UTC
 
 本人09:52 UTC「フォントは１.５倍くらい」「左右には半文字分くらい」「それで進めて」に基づき、今回candidateだけ216px/実ink左右各108px以上・最大2行への再配置を実行中。必要なcue/行境界・候補表示規則/追跡/検査変更と、成立後の同じ15:23.033 Normal一本/既存QCが承認済み。本文/元ID/3613atom/9区間/元音声/27691frame/40705770sampleを保持、意味編集/一般style/trust/default/新素材/費用/公開/旧成果削除なし。

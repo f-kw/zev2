@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "digest-caption-216px-repo-preflight-evidence-v001",
+  "checkedAt": "2026-10-03T11:23:31.551486+00:00",
+  "implementation": [
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "625158cdbec04766123c924aea18133a66e090c78fa9e1a3d242ea157e15ed82",
+      "sizeBytes": 97259
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "44f9227d165bfda6f0ea0697ab9ab41e08c1acd8a29b517fe6f39d6e4a929baa",
+      "sizeBytes": 27241
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "sizeBytes": 32427
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "sizeBytes": 152882
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "fileSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "sizeBytes": 19439
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "sizeBytes": 27733
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "sizeBytes": 60151
+    }
+  ],
+  "sourceCapability": {
+    "legacyPackage": "passed",
+    "actualNewReader": {
+      "groups": 9,
+      "cues": 372,
+      "atoms": 3613
+    },
+    "actualAggregateSourcePackage": "passed",
+    "cloneReject": true,
+    "fakeOpaqueBundleReject": true,
+    "arbitraryTaskReject": true,
+    "mutationCases": 10,
+    "oldBundleReject": true,
+    "actualBoundBytes": 41646,
+    "byteWhitespaceTamperReject": true,
+    "boundSizeSchemaCanonicalRejects": 3,
+    "preflight": {
+      "status": "passed",
+      "fontBytes": "passed",
+      "runtimeBindings": "passed",
+      "layouts": 372,
+      "sourcePackageTask": "passed",
+      "actualGlyph": "not-yet-checked"
+    },
+    "media": 0
+  },
+  "formalPreflight": {
+    "schemaVersion": "digest-formal-cheap-preflight-v001",
+    "status": "passed",
+    "sourcePackageTask": {
+      "status": "passed",
+      "violations": []
+    },
+    "mediaReady": true,
+    "checkedAt": "2026-10-03T11:14:34.162Z",
+    "clocks": {
+      "frames": 27691,
+      "audioSamples": 40705770
+    },
+    "exactSavedInputs": true,
+    "fontBytes": "passed",
+    "runtimeBindings": "passed",
+    "estimatedLayouts": 372,
+    "candidateRulesBinding": {
+      "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/candidate-rules.json",
+      "fileSha256": "cc11b610b88834227e8d55ffe64e61f01f8cf654a243dc32c872549e8956c781",
+      "sizeBytes": 3858
+    },
+    "typographySettingsBinding": {
+      "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/typography-settings.json",
+      "fileSha256": "8a56a965065b697d33cce969b140b322b065380109561461586a9dd69afe30ba",
+      "sizeBytes": 3803
+    },
+    "derivedTypographyValues": {
+      "schemaVersion": "digest-typography-derived-values-v001",
+      "fontSizePx": 216,
+      "horizontalMarginPx": 108,
+      "horizontalSafeMarginRatio": 0.05625,
+      "maxLogicalWidthPerLine": 15,
+      "maxLinesPerCue": 2,
+      "canvasWidthPx": 1920,
+      "borderWidthPx": 8,
+      "glowWidthPx": 4,
+      "textSafePaddingPx": 9,
+      "strokeExtentPx": 12,
+      "availableTextWidthPx": 1662,
+      "logicalWidthUnitPx": 108
+    },
+    "actualGlyph": "not-yet-checked",
+    "toolBinaryDiagnostics": {
+      "node": {
+        "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      "ffmpeg": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "ffprobe": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      }
+    },
+    "manifestBinding": {
+      "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json",
+      "fileSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444"
+    },
+    "summary": {
+      "groups": 9,
+      "oldCues": 243,
+      "fixedOldCues": 25,
+      "variableOldCues": 218,
+      "newCues": 372,
+      "newLines": 668,
+      "atoms": 3613,
+      "minDisplayFrames": 12,
+      "maxDisplayFrames": 513,
+      "originalClockSummary": {
+        "groups": 9,
+        "cues": 218,
+        "lines": 289,
+        "atoms": 3613,
+        "unmapped": 0,
+        "originalPlanEndFrame": 27691,
+        "originalPlanEndSample": 40705770
+      }
+    }
+  },
+  "sourceSuite": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "exitCode": 0,
+    "outputSha256": "81b292deb6524293a84c4e13300b0905f64fa5d5ad91cd54c75e86910a4af2e5"
+  },
+  "typeCheck": {
+    "exitCode": 0,
+    "outputSha256": "77c8a2a7607b52805b0c255fab54b2da0c69416a4f6687c43dc7655a57ca16c4"
+  },
+  "storage": {
+    "checkedAt": "2026-10-03T11:15:40.941677+00:00",
+    "host": {
+      "path": "/Volumes/KIOXIA",
+      "device": 16777238,
+      "uuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+      "filesystem": "exfat",
+      "deviceNode": "/dev/disk4s2",
+      "freeBytes": 2000257286144
+    },
+    "guest": {
+      "path": "/Volumes/ZEV-Digest-20261003-01",
+      "device": 16777243,
+      "uuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "filesystem": "apfs",
+      "deviceNode": "/dev/disk6s1",
+      "freeBytes": 99665981440
+    },
+    "internalAvailableBytes": 13602562048,
+    "pressure": 1,
+    "productionPrefixExists": false,
+    "storage": {
+      "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+      "hostRoot": "/Volumes/KIOXIA",
+      "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+      "guestVolumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "hostVolumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+      "imageMaximumBytes": 100000000000,
+      "hostMetadataReserveBytes": 6254231552,
+      "internalRoot": "/Users/kawafmm/workspace/zev2",
+      "guestDevice": 16777243,
+      "hostDevice": 16777238
+    }
+  },
+  "probe": {
+    "checkedAt": "2026-10-03T10:25:22.133002+00:00",
+    "operations": {
+      "writeFsyncReadHash": true,
+      "wxEEXIST": true,
+      "hardlinkIdentity": true,
+      "protectedPublishEEXIST": true,
+      "chmod444WriteRejected": true,
+      "ownRenameReadback": true
+    },
+    "uid": 501,
+    "status": "passed",
+    "host": {
+      "DeviceIdentifier": "disk4s2",
+      "DeviceNode": "/dev/disk4s2",
+      "VolumeUUID": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+      "DiskUUID": "49CE429C-DA91-4CFC-8268-81CF4F27B2CC",
+      "FilesystemType": "exfat",
+      "MountPoint": "/Volumes/KIOXIA",
+      "TotalSize": 2000353230848,
+      "GlobalPermissionsEnabled": false,
+      "WritableVolume": true,
+      "path": "/Volumes/KIOXIA",
+      "st_dev": 16777238,
+      "freeBytes": 2000256761856
+    },
+    "guest": {
+      "DeviceIdentifier": "disk6s1",
+      "DeviceNode": "/dev/disk6s1",
+      "VolumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "DiskUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "FilesystemType": "apfs",
+      "MountPoint": "/Volumes/ZEV-Digest-20261003-01",
+      "TotalSize": 99789791232,
+      "GlobalPermissionsEnabled": true,
+      "WritableVolume": true,
+      "path": "/Volumes/ZEV-Digest-20261003-01",
+      "st_dev": 16777243,
+      "freeBytes": 99665981440
+    },
+    "internal": {
+      "DeviceIdentifier": "disk3s5",
+      "DeviceNode": "/dev/disk3s5",
+      "VolumeUUID": "757B95FF-B689-4A11-8473-45F8BC36991C",
+      "DiskUUID": "757B95FF-B689-4A11-8473-45F8BC36991C",
+      "FilesystemType": "apfs",
+      "MountPoint": "/System/Volumes/Data",
+      "TotalSize": 994662584320,
+      "GlobalPermissionsEnabled": true,
+      "WritableVolume": true,
+      "path": "/Users/kawafmm/workspace/zev2",
+      "st_dev": 16777234,
+      "freeBytes": 12996415488
+    },
+    "image": {
+      "path": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+      "virtualBytes": 99999547392,
+      "capBytes": 100000000000,
+      "metadataSha256": "ac0464e8b3cebef0fc0d1e73bd039d9d52db2041c5de355d2f34bb70ea94c9cd",
+      "attachedImageAndGuestMatched": true
+    },
+    "productionPrefixExists": false,
+    "payloadSha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+    "probeDirectoryRemains": false,
+    "limits": "4KB bounded probe; not sustained performance or full manufacture guarantee"
+  },
+  "mediaGeneration": 0,
+  "actualGlyph": "not-yet-checked",
+  "technicalVideoQc": "not-run",
+  "humanVideoQuality": "not-evaluated",
+  "outlineChoice": null,
+  "supervisorTests": {
+    "python": "/opt/homebrew/bin/python3",
+    "tests": 8,
+    "passed": 8,
+    "exitCode": 0,
+    "outputSha256": "4baa4817ffe72a1b7acff05ded8bcfc32f8dd3696f492d2bff0caecef6bed6b5",
+    "separateApplePythonRun": {
+      "tests": 8,
+      "passed": 7,
+      "failed": 1,
+      "case": "test_body_refreshes_pressure_before_reply",
+      "actualPressure": 1,
+      "expectedPressure": 2,
+      "outputSha256": "c362d7c00290d90afbbd1988b290a7bdedab97763c7b9bb38a6cf4b6c4864bd0",
+      "reason": "Apple Python monotonic starts near process zero; initial periodic sample skipped until 1s. Old resume mock expected call3 at body; actual fresh body is call2. Homebrew monotonic uses uptime and tested production runtime passes. Body refresh is present in both; deterministic verification pending."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-03T10:25:22.133002+00:00",
+  "operations": {
+    "writeFsyncReadHash": true,
+    "wxEEXIST": true,
+    "hardlinkIdentity": true,
+    "protectedPublishEEXIST": true,
+    "chmod444WriteRejected": true,
+    "ownRenameReadback": true
+  },
+  "uid": 501,
+  "status": "passed",
+  "host": {
+    "DeviceIdentifier": "disk4s2",
+    "DeviceNode": "/dev/disk4s2",
+    "VolumeUUID": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "DiskUUID": "49CE429C-DA91-4CFC-8268-81CF4F27B2CC",
+    "FilesystemType": "exfat",
+    "MountPoint": "/Volumes/KIOXIA",
+    "TotalSize": 2000353230848,
+    "GlobalPermissionsEnabled": false,
+    "WritableVolume": true,
+    "path": "/Volumes/KIOXIA",
+    "st_dev": 16777238,
+    "freeBytes": 2000256761856
+  },
+  "guest": {
+    "DeviceIdentifier": "disk6s1",
+    "DeviceNode": "/dev/disk6s1",
+    "VolumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "DiskUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "FilesystemType": "apfs",
+    "MountPoint": "/Volumes/ZEV-Digest-20261003-01",
+    "TotalSize": 99789791232,
+    "GlobalPermissionsEnabled": true,
+    "WritableVolume": true,
+    "path": "/Volumes/ZEV-Digest-20261003-01",
+    "st_dev": 16777243,
+    "freeBytes": 99665981440
+  },
+  "internal": {
+    "DeviceIdentifier": "disk3s5",
+    "DeviceNode": "/dev/disk3s5",
+    "VolumeUUID": "757B95FF-B689-4A11-8473-45F8BC36991C",
+    "DiskUUID": "757B95FF-B689-4A11-8473-45F8BC36991C",
+    "FilesystemType": "apfs",
+    "MountPoint": "/System/Volumes/Data",
+    "TotalSize": 994662584320,
+    "GlobalPermissionsEnabled": true,
+    "WritableVolume": true,
+    "path": "/Users/kawafmm/workspace/zev2",
+    "st_dev": 16777234,
+    "freeBytes": 12996415488
+  },
+  "image": {
+    "path": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+    "virtualBytes": 99999547392,
+    "capBytes": 100000000000,
+    "metadataSha256": "ac0464e8b3cebef0fc0d1e73bd039d9d52db2041c5de355d2f34bb70ea94c9cd",
+    "attachedImageAndGuestMatched": true
+  },
+  "productionPrefixExists": false,
+  "payloadSha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+  "probeDirectoryRemains": false,
+  "limits": "4KB bounded probe; not sustained performance or full manufacture guarantee"
+}

@@ -58,20 +58,25 @@ export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,ran
     pngPaths:kept,range,graphSha256:createHash('sha256').update(graph).digest('hex')};
 }
 
-/** One expressly permitted 144px Normal candidate. Admission and saved-plan
+/** One expressly permitted Normal candidate with saved typography settings. Admission and saved-plan
  * bindings remain the caller's responsibility; this entry refuses ranges,
  * finite effects, missing/reordered records, and the former fixed plan. */
 export async function runFormalLowMemoryCompositeV001(input){
   assert(input&&typeof input==='object'&&!Array.isArray(input));
-  const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','outputPath','ffmpegPath',
+  const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','expectedOverlayCount','outputPath','ffmpegPath',
     'maxFrames','processObserver','resourceCheck'];
   assert(Object.keys(input).every(key=>allowed.includes(key)),'unsupported formal composite options');
-  const {baseMediaPath,plan,overlayRecords,expectedFrameCount,outputPath,ffmpegPath,
+  const {baseMediaPath,plan,overlayRecords,expectedFrameCount,expectedOverlayCount,outputPath,ffmpegPath,
     maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck}=input;
   assert.equal(process.env.ZEV_FULL_SUPERVISED,'1','SUPERVISOR_REQUIRED');
   assert.equal(expectedFrameCount,27691,'only the permitted complete plan');
   assert.equal(plan.canvas.width,1920);assert.equal(plan.canvas.height,1080);assert.equal(plan.canvas.fps,30);
-  assert.equal(plan.elements.length,243);assert.equal(overlayRecords.length,plan.elements.length);
+  // The qualified adapter obtains this count from the explicitly bound new
+  // candidate manifest. Never substitute the old 243-cue candidate or infer a
+  // permit from whichever records reached this function.
+  assert(Number.isSafeInteger(expectedOverlayCount)&&expectedOverlayCount>0
+    &&expectedOverlayCount<=expectedFrameCount,'approved candidate overlay count required');
+  assert.equal(plan.elements.length,expectedOverlayCount);assert.equal(overlayRecords.length,expectedOverlayCount);
   assert(Number.isSafeInteger(maxFrames)&&maxFrames>0&&maxFrames<=DEFAULT_MAX_FRAMES);
   for(const value of [baseMediaPath,outputPath,ffmpegPath])assert(typeof value==='string'&&path.isAbsolute(value));
   assert.notEqual(path.resolve(baseMediaPath),path.resolve(outputPath));
@@ -109,7 +114,7 @@ export async function runFormalLowMemoryCompositeV001(input){
   const allocationBytes=Math.min(maxFrames,expectedFrameCount)*FRAME_BYTES;
   return processObserver.observeOperation({observationLabel:'formal-low-memory-composite',
     operationKind:'sequential-stream-composite',input:{baseMediaPath,expectedFrameCount,outputPath,
-      ffmpegPath,maxFrames,encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
+      ffmpegPath,maxFrames,expectedOverlayCount,encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
     await resourceCheck({stage:'body',newBytes:allocationBytes});
     const create=(args,stdio)=>{
       // No detached child: both streams remain in the supervisor-owned PGID.
@@ -161,7 +166,7 @@ export async function runFormalLowMemoryCompositeV001(input){
       for(let index=1;index<segments.length;index++)
         assert.equal(segments[index-1].range.endFrameExclusive,segments[index].range.startFrame);
       return {schemaVersion:'digest-formal-low-memory-composite-v001',status:'completed',
-        scope:{startFrame:0,endFrameExclusive:expectedFrameCount,frameCount:expectedFrameCount},maxFrames,
+        scope:{startFrame:0,endFrameExclusive:expectedFrameCount,frameCount:expectedFrameCount},maxFrames,expectedOverlayCount,
         segments,maximumCaptions:Math.max(...segments.map(s=>s.captionCount)),
         maximumStates:Math.max(...segments.map(s=>s.stateCount)),
         maximumInputs:Math.max(...segments.map(s=>s.inputCount)),maximumProcesses:2,

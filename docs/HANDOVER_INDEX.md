@@ -1,8 +1,28 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v061
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v062
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新checkpoint：216px再配置と製造前接続 — 2026-10-03 11:19 UTC
+
+本人10:30:45 UTC「これでいこう」で今回一本の216px/左右半文字余白を採用。10:31:17 UTCの可変化指示により、既存入力設定から文字サイズ/余白/使用可能幅を導出し、今回設定と導出値を保存する。2PNGの採用は全字幕・完成動画の品質採用ではない。humanQuality=pending、outlineChoice=null。
+
+新attempt-002の実判断9件/正式reader/trace/時計再読と、11:14:34 UTCの372推定配置/font bytes/runtime/source package検査がpassed。旧243cue/390行→372cue/668行、3,613atom/9区間/本文/元ID/順序/原音声/27,691frame/40,705,770sampleは不変。manifest `784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444`。8frame以下の孤立表示観測0、最短12frameで実可読性は未評価。
+
+親相談役10:54 UTCの必要なsource接続承認で実装範囲は6＋1=7path、test別。旧TASKと旧readerを保持し、旧TASKへの書換えを含む10改ざん/偽資格/clone/別計画/実bytes不整合を拒否。11:14 UTC型検査passed、既存source package suiteは7/7 passed・exit0。一般ROOT/trust/default/publisherの変更、検査免除、旧成果の再判断はない。
+
+APFSは10:25 UTCに4KB probe passed。11:15:40 UTC再読でguest99,665,981,440bytes/host2,000,257,286,144bytes/内蔵13,602,562,048bytes、pressure1、UUID/device/image一致、開始条件passed。速度や全工程の保証ではない。動画/全glyph/動画QC/全実視聴0、production prefix未作成。状態は作業中、最終確認11:19 UTC、次担当Mac実装者。実装SHA/permit/出力root束縛を確認し、同じ承認済みNormal一本へ続行する。
+
+| 最新根拠 | 読む目的 |
+|---|---|
+| [今回report](reports/digest-caption-216px-reflow-20261003/README.md) | 2PNG採用・必要修正・初回準備負担・未評価 |
+| [09:52指示](reports/digest-caption-216px-reflow-20261003/authorization-record.json)、[10:30採用](reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json)、[10:31可変化](reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json) | 本人指示の時刻・範囲を分ける |
+| [source接続判断](reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json) | 追加1pathと拒否/保護条件 |
+| `runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json`、`readback.json` | 9実判断・旧参照・全量・元時計と再読 |
+
+以下の10:16以前の待機/未再mount/未承認は保存時点の履歴。既受理の144px候補やv005等を未完へ戻さず、旧レビュー/全字幕採点/旧相談役との往復試験を再開しない。
+
 
 ## 最新本人指示と216px再配置 — 2026-10-03 10:16 UTC
 

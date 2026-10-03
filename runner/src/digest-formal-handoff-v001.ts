@@ -16,8 +16,11 @@ const OUT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
 const GUEST = '/Volumes/ZEV-Digest-20261003-01';
 const HOST = '/Volumes/KIOXIA';
 const IMAGE = HOST + '/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle';
-const MANIFEST = 'runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json';
-const MANIFEST_SHA = '04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41';
+const MANIFEST = 'runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json';
+const MANIFEST_SHA = '784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444'; // Actual saved and read-back candidate, not an execution permit
+const ACCEPTED_START_MAIN = 'becf6f69e67fc1afb0c910268a540fcc7f0179c4';
+const TYPOGRAPHY_CONFIGURATION_SHA = 'a7e228fe5814b32cb168e737bcc23b7f287d43f3ee852546172e3c56ab6c67bf';
+const TYPOGRAPHY_CONFIGURATION_PATH = 'docs/reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json';
 const IMPLEMENTATIONS = Object.freeze([
   'runner/src/digest-formal-handoff-v001.ts',
   'evals/clip_composition/adopted_media_manufacturing_v001.mts',
@@ -25,9 +28,11 @@ const IMPLEMENTATIONS = Object.freeze([
   'evals/clip_composition/render_presentation_v002.mjs',
   'tools/digest-quality/original-resolution-low-memory-composite.mjs',
   'tools/digest-quality/original-resolution-full-supervisor-v002.py',
+  'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
 ]);
 const contexts = new WeakSet<object>();
 const sourceBundles = new WeakSet<object>();
+const formal216Bundles = new WeakSet<object>();
 const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
 const load = (p: string): Promise<any> => import(pathToFileURL(path.join(ROOT, p)).href);
 function safe(p: string) {
@@ -51,7 +56,24 @@ export async function assertQualifiedDigestStorageContextV001(context: unknown):
   await (context as Json).assertCurrent();
 }
 
-async function storage(permitPath: string, permit: Json, m: any) {
+/** A byte parser, never a permission or source-package capability. */
+export async function decodeDigestFormalBoundJsonBytesV001(binding: Json, bytes: Buffer): Promise<Json> {
+  assert(Buffer.isBuffer(bytes)); safe(binding.path);
+  assert(/^[0-9a-f]{64}$/u.test(binding.fileSha256));
+  assert.equal(sha(bytes), binding.fileSha256, 'FORMAL_BOUND_ACTUAL_BYTES_MISMATCH');
+  if (binding.sizeBytes !== undefined) assert.equal(bytes.length, binding.sizeBytes, 'FORMAL_BOUND_SIZE_MISMATCH');
+  const value = JSON.parse(bytes.toString()); assert(value && typeof value === 'object' && !Array.isArray(value));
+  if (binding.schemaVersion !== undefined) assert.equal(value.schemaVersion, binding.schemaVersion, 'FORMAL_BOUND_SCHEMA_MISMATCH');
+  if (binding.canonicalSha256 !== undefined) {
+    const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+    assert.equal(m.canonicalSha(value), binding.canonicalSha256, 'FORMAL_BOUND_CANONICAL_MISMATCH');
+  }
+  return value;
+}
+
+async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  assert(typeof MANIFEST_SHA === 'string' && /^[0-9a-f]{64}$/u.test(MANIFEST_SHA), 'FORMAL_216_MANIFEST_SHA_NOT_BOUND');
   assert.equal(permit.status, 'verified-formal-handoff-v001');
   assert.equal(permit.bindings.planId, PLAN); assert.equal(permit.bindings.logicalPrefix, OUT);
   assert.equal(permit.bindings.commandPermitPath, permitPath);
@@ -60,18 +82,22 @@ async function storage(permitPath: string, permit: Json, m: any) {
   const s = permit.storage;
   assert.equal(s.guestRoot, GUEST); assert.equal(s.hostRoot, HOST); assert.equal(s.imagePath, IMAGE);
   assert.equal(s.guestVolumeUuid, '7212F3BB-32FB-4F02-A71C-E570421FF2E0');
-  assert.equal(s.guestDevice, 16777243);
+  assert(Number.isSafeInteger(s.guestDevice) && s.guestDevice > 0, 'OBSERVED_GUEST_DEVICE_REQUIRED');
   assert.equal(s.hostVolumeUuid, '0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1');
-  assert.equal(s.hostDevice, 16777238);
+  assert(Number.isSafeInteger(s.hostDevice) && s.hostDevice > 0 && s.hostDevice !== s.guestDevice, 'OBSERVED_HOST_DEVICE_REQUIRED');
   assert.equal(s.imageMaximumBytes, 100000000000); assert.equal(s.hostMetadataReserveBytes, 6254231552);
   assert.equal(s.internalRoot, ROOT);
   assert.deepEqual(permit.implementation.map((b: Json) => path.relative(ROOT, b.path)), IMPLEMENTATIONS);
   const approvalBytes = await readFile(permit.bindings.approvalRecord.path);
   assert.equal(sha(approvalBytes), permit.bindings.approvalRecord.fileSha256);
   const approval = JSON.parse(approvalBytes.toString());
-  assert.equal(approval.schemaVersion, 'digest-formal-user-manufacturing-authorization-v001');
-  assert.deepEqual(approval.userApproval, {at: '2026-10-03T07:06:03Z', text: 'いいよ',
-    proposalAt: '2026-10-03T06:57:06Z', sourceThreadId: '01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6'});
+  assert.equal(approval.schemaVersion, 'digest-formal-user-manufacturing-authorization-v002');
+  assert.deepEqual(approval.userApproval, {atMinuteUtc: '2026-10-03T09:52Z', messageId: 'Sentinel_1e76075a886c8191aa441b21201f9b00',
+    text: '調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて',
+    sourceThreadId: '01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6'});
+  assert.deepEqual(approval.candidateConditions, {fontSizePx: 216, actualInkMarginPx: 108, maxLogicalWidthPerLine: 15,
+    maxLinesPerCue: 2, horizontalSafeMarginRatio: 0.05625, layoutRulesChanged: true});
+  assert.equal(approval.originalCandidateManifestSha256, DIGEST_HANDOFF_MANIFEST_BINDING_V001.fileSha256);
   assert.equal(approval.planManifestSha256, MANIFEST_SHA); assert.equal(approval.planId, PLAN);
   assert.equal(approval.outputRoot, OUT); assert.deepEqual(approval.implementationPaths, IMPLEMENTATIONS);
   assert.deepEqual(approval.storage, s); assert.equal(approval.normalCandidates, 1);
@@ -79,10 +105,24 @@ async function storage(permitPath: string, permit: Json, m: any) {
   assert.deepEqual(approval.guard, {startBytes: 50000000000, reserveBytes: 12000000000,
     maximumRssBytes: 17179869184, maximumPressure: 1, observationIntervalSeconds: 1,
     nextUnitPlusReserve: true, stopOwnProcessGroup: true, restartOnReconnect: false});
+  for (const [key, relative] of [['originalManufacturingAuthorizationBinding', 'docs/reports/digest-formal-apfs-preflight-20261003/authorization-record.json'],
+    ['captionAuthorizationBinding', AUTH216.path],
+    ['typographyAdoptionBinding', 'docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json'],
+    ['typographyConfigurationBinding', TYPOGRAPHY_CONFIGURATION_PATH],
+    ['sourceConnectionDecisionBinding', SOURCE_CONNECTION_DECISION.path]]) {
+    const binding = approval[key]; assert([relative, path.join(ROOT, relative)].includes(binding.path));
+    assert(/^[0-9a-f]{64}$/u.test(binding.fileSha256)); const bytes = await readFile(path.join(ROOT, relative));
+    assert.equal(sha(bytes), binding.fileSha256, 'SUPPORTING_AUTHORIZATION_CHANGED');
+    if (binding.sizeBytes !== undefined) assert.equal(bytes.length, binding.sizeBytes);
+    if (key === 'captionAuthorizationBinding') assert.equal(binding.fileSha256, AUTH216.fileSha256);
+    if (key === 'typographyConfigurationBinding') {assert.equal(binding.fileSha256, TYPOGRAPHY_CONFIGURATION_SHA); assert.equal(bytes.length, 1832);}
+    if (key === 'typographyAdoptionBinding') {assert.equal(binding.fileSha256, 'f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884'); assert.equal(bytes.length, 1451);}
+    if (key === 'sourceConnectionDecisionBinding') {assert.equal(binding.fileSha256, SOURCE_CONNECTION_DECISION.fileSha256); assert.equal(bytes.length, SOURCE_CONNECTION_DECISION.sizeBytes);}
+  }
   assert.equal(process.version, 'v20.19.6', 'FORMAL_NODE_VERSION_REQUIRED');
   assert.equal(process.execPath, '/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node');
   assert(!Object.hasOwn(process.env, 'NODE_OPTIONS'));
-  assert.equal(approval.acceptedMain, 'f2ef22148e7e81d7057a3907f21cc3dbe256742b');
+  assert.equal(approval.acceptedMain, ACCEPTED_START_MAIN);
   assert.equal(process.env.ZEV_FULL_SUPERVISED, '1', 'SUPERVISOR_REQUIRED');
   assert.equal((await exec('git', ['rev-parse', 'HEAD'], {cwd: ROOT})).stdout.trim(), permit.bindings.implementationSha);
   assert.equal((await exec('git', ['status', '--porcelain=v1'], {cwd: ROOT})).stdout, '', 'CLEAN_IMPLEMENTATION_REQUIRED');
@@ -96,6 +136,8 @@ async function storage(permitPath: string, permit: Json, m: any) {
   const identity = {ino: imageStat.ino, dev: imageStat.dev, infoSha: sha(imageInfo)};
   const permitSha = sha(await readFile(permitPath));
   let lastCheck = 0, resourceId = 0;
+  let publishedSourcePackageSha: string | undefined;
+  let observedGuestNode: string | undefined, observedHostNode: string | undefined;
   async function current(force = false) {
     if (!force && Date.now() - lastCheck < 900) return;
     assert.equal(sha(await readFile(permitPath)), permitSha, 'PERMIT_CHANGED');
@@ -104,11 +146,18 @@ async function storage(permitPath: string, permit: Json, m: any) {
     assert.equal((await exec('git', ['status', '--porcelain=v1'], {cwd: ROOT})).stdout, '', 'IMPLEMENTATION_CHANGED');
     for (const binding of permit.implementation) assert.equal(await m.fileSha(binding.path), binding.fileSha256);
     const [g, h, is] = await Promise.all([disk(GUEST), disk(HOST), lstat(IMAGE)]);
-    assert.equal(g.VolumeUUID, s.guestVolumeUuid); assert.equal(g.DeviceNode, '/dev/disk6s1');
+    assert.equal(g.VolumeUUID, s.guestVolumeUuid); assert(/^\/dev\/disk[0-9]+s[0-9]+$/u.test(g.DeviceNode));
+    if (observedGuestNode === undefined) observedGuestNode = g.DeviceNode; else assert.equal(g.DeviceNode, observedGuestNode);
     assert.equal(g.FilesystemType, 'apfs'); assert.equal(g.GlobalPermissionsEnabled, true);
     assert.equal(g.WritableVolume, true); assert.equal(h.VolumeUUID, s.hostVolumeUuid);
-    assert.equal(h.DeviceNode, '/dev/disk4s2'); assert.equal(h.FilesystemType, 'exfat');
-    assert.equal((await lstat(GUEST)).dev, 16777243); assert.equal((await lstat(HOST)).dev, 16777238);
+    assert(/^\/dev\/disk[0-9]+s[0-9]+$/u.test(h.DeviceNode));
+    if (observedHostNode === undefined) observedHostNode = h.DeviceNode; else assert.equal(h.DeviceNode, observedHostNode);
+    assert.equal(h.FilesystemType, 'exfat');
+    assert.equal((await lstat(GUEST)).dev, s.guestDevice); assert.equal((await lstat(HOST)).dev, s.hostDevice);
+    const mounted = JSON.parse((await exec('/usr/bin/python3', ['-c',
+      'import json,plistlib,subprocess;print(json.dumps(plistlib.loads(subprocess.check_output(["/usr/bin/hdiutil","info","-plist"]))))'])).stdout);
+    const matching = mounted.images.filter((image: Json) => image['image-path'] === IMAGE); assert.equal(matching.length, 1);
+    assert(matching[0]['system-entities'].some((entity: Json) => entity['dev-entry'] === g.DeviceNode), 'GUEST_BACKING_IMAGE_CHANGED');
     assert.equal(is.ino, identity.ino); assert.equal(is.dev, identity.dev); assert(!is.isSymbolicLink());
     assert.equal(await realpath(GUEST), GUEST); assert.equal(await realpath(HOST), HOST);
     assert.equal(await realpath(IMAGE), IMAGE); assert.equal(sha(await readFile(IMAGE + '/Info.plist')), identity.infoSha);
@@ -120,20 +169,40 @@ async function storage(permitPath: string, permit: Json, m: any) {
   await current(true);
   const generatedRoot = path.join(GUEST, OUT), tempDirectory = generatedRoot + '/temp';
   const resolve = (p: string) => path.join(generated(p) ? GUEST : ROOT, p);
-  async function readJson(p: string) {
+  async function readActualBytes(p: string): Promise<Buffer> {
     await current(); const root = generated(p) ? GUEST : ROOT;
     const stable = await load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
-    return JSON.parse((await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: p})).toString());
+    return stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: p});
+  }
+  async function qualifyReadValue(p: string, bytes: Buffer, value: Json) {
+    if (p === OUT + '/source-package.json') {
+      assert(publishedSourcePackageSha && sha(bytes) === publishedSourcePackageSha, 'FORMAL_SOURCE_PACKAGE_READBACK_CHANGED');
+      await registerDigestFormalSourcePackageV001(value, inputs, 'manufacturing', context);
+    }
+    return value;
+  }
+  async function readJson(p: string) {
+    const bytes = await readActualBytes(p);
+    return qualifyReadValue(p, bytes, JSON.parse(bytes.toString()));
   }
   async function readBound(binding: Json) {
-    const value = await readJson(binding.path);
-    assert.deepEqual(m.bind(binding.path, value), binding, 'FORMAL_BOUND_BYTES_MISMATCH'); return value;
+    const bytes = await readActualBytes(binding.path);
+    const value = await decodeDigestFormalBoundJsonBytesV001(binding, bytes);
+    return qualifyReadValue(binding.path, bytes, value);
   }
   async function publish(p: string, value: Json) {
     assert(generated(p) && p !== OUT, 'FORMAL_GENERATED_PREFIX_REQUIRED'); await current(true);
     const target = resolve(p), parent = path.dirname(target);
     await mkdir(parent, {recursive: true}); assert.equal(await realpath(parent), parent);
-    const bytes: Buffer = m.formal(value); await writeFile(target, bytes, {flag: 'wx'});
+    const bytes: Buffer = m.formal(value);
+    if (p === OUT + '/source-package.json') {
+      const record = qualifiedSourcePackages.get(value);
+      assert(record && record.inputs === inputs && record.mode === 'manufacturing' && record.context === context
+        && record.bodySha256 === sha(bytes), 'FORMAL_QUALIFIED_SOURCE_PACKAGE_PUBLICATION_REQUIRED');
+      await assertQualifiedDigestFormalSourcePackageTaskV001(value, inputs);
+      publishedSourcePackageSha = sha(bytes);
+    }
+    await writeFile(target, bytes, {flag: 'wx'});
     await chmod(target, 0o444); const observed = await readJson(p);
     assert.deepEqual(m.formal(observed), bytes); return m.bind(p, value);
   }
@@ -160,10 +229,11 @@ async function storage(permitPath: string, permit: Json, m: any) {
       assert(args.outputPath.startsWith(generatedRoot + '/'));
       const composite = await load('tools/digest-quality/original-resolution-low-memory-composite.mjs');
       const evidence = await composite.runFormalLowMemoryCompositeV001({baseMediaPath: args.baseMediaPath,
-        plan: args.plan, overlayRecords: args.overlayRecords, expectedFrameCount: args.expectedFrameCount,
+        plan: args.plan, overlayRecords: args.overlayRecords, expectedFrameCount: args.expectedFrameCount, expectedOverlayCount: inputs.manifest.summary.newCues,
         outputPath: args.outputPath, ffmpegPath: args.ffmpegPath, processObserver: args.processObserver, resourceCheck});
-      await publish(OUT + '/low-memory-composite.json', evidence);
-      return evidence;
+      const result = {...evidence, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues};
+      await publish(OUT + '/low-memory-composite.json', result);
+      return result;
     }});
   contexts.add(context); return {context, approval};
 }
@@ -411,17 +481,449 @@ export async function readDigestFormalHandoffInputsV001(workspaceRoot: string = 
 }
 
 
+export type DigestTypographySettingsV001 = {
+  fontSizePx: number;
+  horizontalMargin: {unit: 'font-character' | 'px'; value: number};
+  maxLinesPerCue: number;
+};
+export type DigestTypographyGeometryV001 = {
+  canvasWidthPx: number; borderWidthPx: number; glowWidthPx: number; textSafePaddingRatio: number;
+};
+/** Same stroke and inner padding as buildExactTextModel; this estimates capacity, not actual glyph ink. */
+export function resolveDigestTypographySettingsV001(settings: DigestTypographySettingsV001,
+  geometry: DigestTypographyGeometryV001 = {canvasWidthPx: 1920, borderWidthPx: 8, glowWidthPx: 4, textSafePaddingRatio: 0.04}) {
+  assert(settings && typeof settings === 'object' && !Array.isArray(settings));
+  assert.deepEqual(Object.keys(settings).sort(), ['fontSizePx', 'horizontalMargin', 'maxLinesPerCue']);
+  assert(Number.isFinite(settings.fontSizePx) && settings.fontSizePx >= 12, 'TYPOGRAPHY_FONT_SIZE_INVALID');
+  assert(settings.horizontalMargin && typeof settings.horizontalMargin === 'object' && !Array.isArray(settings.horizontalMargin));
+  assert.deepEqual(Object.keys(settings.horizontalMargin).sort(), ['unit', 'value']);
+  assert(['font-character', 'px'].includes(settings.horizontalMargin.unit)
+    && Number.isFinite(settings.horizontalMargin.value) && settings.horizontalMargin.value >= 0, 'TYPOGRAPHY_MARGIN_INVALID');
+  assert(Number.isSafeInteger(settings.maxLinesPerCue) && settings.maxLinesPerCue > 0 && settings.maxLinesPerCue <= 99, 'TYPOGRAPHY_LINE_LIMIT_INVALID');
+  assert(geometry && typeof geometry === 'object' && !Array.isArray(geometry));
+  assert.deepEqual(Object.keys(geometry).sort(), ['borderWidthPx', 'canvasWidthPx', 'glowWidthPx', 'textSafePaddingRatio']);
+  assert(Number.isFinite(geometry.canvasWidthPx) && geometry.canvasWidthPx > 0);
+  assert([geometry.borderWidthPx, geometry.glowWidthPx, geometry.textSafePaddingRatio].every(value => Number.isFinite(value) && value >= 0));
+  assert(geometry.textSafePaddingRatio <= 1);
+  const fontSizePx = settings.fontSizePx;
+  const horizontalMarginPx = settings.horizontalMargin.unit === 'font-character'
+    ? fontSizePx * settings.horizontalMargin.value : settings.horizontalMargin.value;
+  const strokeExtentPx = Math.max(geometry.glowWidthPx * 2 + geometry.borderWidthPx * 2, geometry.borderWidthPx * 2) / 2;
+  const textSafePaddingPx = Math.max(2, Math.ceil(fontSizePx * geometry.textSafePaddingRatio));
+  const availableTextWidthPx = geometry.canvasWidthPx - horizontalMarginPx * 2 - strokeExtentPx * 2 - textSafePaddingPx * 2;
+  const logicalWidthUnitPx = fontSizePx / 2;
+  const maxLogicalWidthPerLine = Math.floor(availableTextWidthPx / logicalWidthUnitPx);
+  assert(Number.isSafeInteger(maxLogicalWidthPerLine) && maxLogicalWidthPerLine > 0, 'TYPOGRAPHY_NO_TEXT_CAPACITY');
+  return Object.freeze({schemaVersion: 'digest-typography-derived-values-v001', fontSizePx, horizontalMarginPx,
+    horizontalSafeMarginRatio: horizontalMarginPx / geometry.canvasWidthPx, maxLogicalWidthPerLine,
+    maxLinesPerCue: settings.maxLinesPerCue, canvasWidthPx: geometry.canvasWidthPx, borderWidthPx: geometry.borderWidthPx,
+    glowWidthPx: geometry.glowWidthPx, textSafePaddingPx, strokeExtentPx, availableTextWidthPx, logicalWidthUnitPx});
+}
+function typographyGeometryFromProps(props: Json): DigestTypographyGeometryV001 {
+  return {canvasWidthPx: props.canvas.width, borderWidthPx: props.visualState.textStyle.borderWidthPx,
+    glowWidthPx: props.visualState.textStyle.glowWidthPx, textSafePaddingRatio: props.layoutRules.textSafePaddingRatio};
+}
+
+/** The old public reader remains the qualification for already accepted source owners. */
+export type DigestFormal216HandoffInputsV002 = DigestFormalHandoffInputsV001 & {
+  originalAcceptedInputs: DigestFormalHandoffInputsV001;
+  captionPreparation: Json;
+  candidateRules: Json;
+  candidateAuthorization: Json;
+  checkedAt: string;
+};
+const CAPTION216 = 'digest-caption-216px-reflow-20261003-v001';
+const PREFIX216 = 'runtime/artifacts/' + CAPTION216 + '/attempt-002';
+const AUTH216 = Object.freeze({path: 'docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json',
+  fileSha256: '8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419', sizeBytes: 2430});
+const PREP216 = Object.freeze({path: PREFIX216 + '/preparation.json',
+  fileSha256: 'b37b61268332d2deec85fa68c5ddd34cfd94dd5c997f42f10d917e2569a4528c'});
+const PROPS216 = Object.freeze({path: PREFIX216 + '/candidate-props.json',
+  fileSha256: '4eb6b6b6b2e924b05e241df37b9904f8d71fe432da59247160b165191ff06052', sizeBytes: 5744});
+const SOURCE_CONNECTION_DECISION = Object.freeze({path: 'docs/reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json',
+  fileSha256: '8255c2579b072ddb2bf339fd56f179e87b97154bc763aecd44f04a199cd71a40', sizeBytes: 1668});
+const RULES216 = Object.freeze({path: PREFIX216 + '/candidate-rules.json',
+  fileSha256: 'cc11b610b88834227e8d55ffe64e61f01f8cf654a243dc32c872549e8956c781', sizeBytes: 3858});
+const TIMING216 = ['sourceStartMs', 'sourceEndMs', 'sourceStartFrame30', 'sourceEndFrame30', 'startFrame', 'endFrameExclusive', 'displayFrameCount'];
+const timing216 = (row: Json) => Object.fromEntries(TIMING216.map(key => [key, row[key]]));
+
+function approvedDigestCandidateLayoutRules(candidate: Json, baseline: Json, typographyValues: Json) {
+  assert.equal(candidate.horizontalSafeMarginRatio, typographyValues.horizontalSafeMarginRatio, 'CANDIDATE_MARGIN_CHANGED');
+  const restored = structuredClone(candidate); restored.horizontalSafeMarginRatio = baseline.horizontalSafeMarginRatio;
+  assert.deepEqual(restored, baseline, 'CANDIDATE_216_GENERAL_LAYOUT_DELTA');
+  return structuredClone(candidate);
+}
+
+/** Reconstructs saved capabilities; never calls the model or repeats the accepted judgment. */
+export async function readDigestFormal216HandoffInputsV002(workspaceRoot: string = ROOT): Promise<Json> {
+  assert(typeof MANIFEST_SHA === 'string' && /^[0-9a-f]{64}$/u.test(MANIFEST_SHA), 'FORMAL_216_MANIFEST_SHA_NOT_BOUND');
+  const source = await readDigestFormalHandoffInputsV001(workspaceRoot), root = source.workspaceRoot;
+  const [wire, stable, display, clock, indexer, entry, inspector] = await Promise.all([
+    load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts'),
+    load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs'),
+    load('evals/clip_composition/adopted_media_manufacturing_v001.mts'),
+    load('evals/clip_composition/presentation_base_media_timeline_v004.mjs'),
+    load('evals/clip_composition/presentation_renderer_text_layout_v001.mjs'),
+    load('evals/clip_composition/presentation_renderer_entry_v001.tsx'),
+    load('evals/clip_composition/inspect_presentation_render_layout_v001.ts'),
+  ]);
+  const read = async (binding: Json) => {
+    safe(binding.path); assert(binding.path.endsWith('.json') && /^[0-9a-f]{64}$/u.test(binding.fileSha256), 'FORMAL_216_BINDING_INVALID');
+    const bytes: Buffer = await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: binding.path});
+    assert.equal(sha(bytes), binding.fileSha256, 'FORMAL_216_INPUT_SHA_CHANGED');
+    if (binding.sizeBytes !== undefined) assert.equal(bytes.length, binding.sizeBytes, 'FORMAL_216_INPUT_SIZE_CHANGED');
+    const value = JSON.parse(bytes.toString()); assert(value && typeof value === 'object' && !Array.isArray(value));
+    if (binding.schemaVersion !== undefined) assert.equal(value.schemaVersion, binding.schemaVersion);
+    if (binding.canonicalSha256 !== undefined) assert.equal(wire.canonicalSha(value), binding.canonicalSha256);
+    return value;
+  };
+  const manifestBinding = {path: MANIFEST, fileSha256: MANIFEST_SHA}, manifest = await read(manifestBinding);
+  assert.equal(manifest.schemaVersion, 'digest-caption-216px-reflow-candidate-bundle-v001');
+  assert(typeof TYPOGRAPHY_CONFIGURATION_SHA === 'string' && /^[0-9a-f]{64}$/u.test(TYPOGRAPHY_CONFIGURATION_SHA), 'TYPOGRAPHY_CONFIGURATION_SHA_NOT_BOUND');
+  assert.equal(manifest.typographySettingsBinding.path, PREFIX216 + '/typography-settings.json');
+  const typography = await read(manifest.typographySettingsBinding);
+  assert.equal(typography.schemaVersion, 'digest-caption-typography-settings-v001');
+  assert.deepEqual(typography.settings, {fontSizePx: 216, horizontalMargin: {unit: 'font-character', value: 0.5}, maxLinesPerCue: 2});
+  assert.equal(typography.sourceUserConfigurationBinding.path, TYPOGRAPHY_CONFIGURATION_PATH);
+  assert.equal(typography.sourceUserConfigurationBinding.fileSha256, TYPOGRAPHY_CONFIGURATION_SHA);
+  const typographyConfiguration = await read(typography.sourceUserConfigurationBinding);
+  assert.equal(typographyConfiguration.schemaVersion, 'digest-configurable-typography-user-instruction-v001');
+  assert.deepEqual(typographyConfiguration.settings, typography.settings);
+  assert.deepEqual(typographyConfiguration.userInstruction, {at: '2026-10-03T10:31:17Z',
+    messageId: 'Sentinel_2ea1725c97f481918275d6ab0335fff7', text: 'システムとしては固定じゃなくて可変にして'});
+  assert.deepEqual(typographyConfiguration.originalScopeBinding, AUTH216);
+  assert.deepEqual(typographyConfiguration.selectedAppearanceBinding, {path: 'docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json',
+    fileSha256: 'f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884', sizeBytes: 1451});
+  const appearance = await read(typographyConfiguration.selectedAppearanceBinding);
+  assert.deepEqual(appearance.adoptedForThisOnePlan, {fontSizePx: 216, minimumActualInkHorizontalMarginPx: 108});
+  assert.equal(appearance.allCaptionsAndFinalVideoQuality, 'pending');
+  const typographyValues = resolveDigestTypographySettingsV001(typography.settings, typographyGeometryFromProps(source.manifest.technicalCandidate.props));
+  assert.deepEqual(typography.derived, typographyValues); assert.deepEqual(manifest.derivedTypographyValues, typographyValues);
+  assert.equal(typography.existingInputsUnchanged, true);
+  assert.deepEqual(typography.preparationBinding, manifest.preparationBinding);
+  assert.deepEqual(typography.candidatePropsBinding, PROPS216); assert.deepEqual(typography.candidateRulesBinding, RULES216);
+  assert.deepEqual(manifest.sourceManifestBinding, source.manifestBinding);
+  assert.deepEqual(manifest.sourceCorrespondenceBinding, source.manifest.correspondenceBinding);
+  assert.deepEqual(manifest.meaningBinding, source.manifest.meaningBinding); assert.deepEqual(await read(manifest.meaningBinding), source.meaning);
+  assert.deepEqual(manifest.mapBinding, source.manifest.mapBinding); assert.deepEqual(await read(manifest.mapBinding), source.cueTimeMap);
+  assert.deepEqual(manifest.originalClockBinding, source.normalExecution.clockResolutionBinding);
+  assert.deepEqual(manifest.authorizationBinding, AUTH216); assert.deepEqual(manifest.scopeBinding, AUTH216);
+  const authorization = await read(AUTH216);
+  const sourceConnectionDecision = await read(SOURCE_CONNECTION_DECISION);
+  assert.equal(sourceConnectionDecision.schemaVersion, 'digest-caption-source-connection-technical-decision-v001');
+  assert.equal(sourceConnectionDecision.implementationScopeAddition, IMPLEMENTATIONS.at(-1));
+  assert.equal(sourceConnectionDecision.newAuthorityGranted, false); assert.equal(sourceConnectionDecision.validatorExemptions, 0);
+  assert.equal(authorization.schemaVersion, 'digest-caption-216px-user-instruction-v001');
+  assert.deepEqual(authorization.sourceCandidateManifest, source.manifestBinding);
+  assert.equal(manifest.preparationBinding.path, PREP216.path); assert.equal(manifest.preparationBinding.fileSha256, PREP216.fileSha256);
+  const preparation = await read(manifest.preparationBinding); assert.deepEqual(await read(PREP216), preparation);
+  assert.equal(preparation.schemaVersion, 'digest-caption-216px-reflow-preparation-v001');
+  assert.equal(preparation.status, 'prepared-awaiting-actual-model-answers'); assert.deepEqual(preparation.authorizationBinding, AUTH216);
+  assert.deepEqual(preparation.originalManifestBinding, source.manifestBinding);
+  assert.deepEqual(preparation.originalMeaningBinding, source.manifest.meaningBinding);
+  assert.deepEqual(preparation.originalCorrespondenceBinding, source.manifest.correspondenceBinding);
+  assert.deepEqual(preparation.originalMapBinding, source.manifest.mapBinding);
+  assert.deepEqual(preparation.preserved, {groups: 9, atoms: 3613, frames: 27691, samples: 40705770});
+  assert.deepEqual(preparation.effects, {judgments: 0, media: 0, api: 0});
+  assert.deepEqual(preparation.propsBinding, PROPS216); assert.deepEqual(preparation.candidateRulesBinding, RULES216);
+  assert.deepEqual(manifest.candidateRulesBinding, RULES216);
+  const rules = await read(RULES216), propsRecord = await read(PROPS216);
+  assert.equal(rules.schemaVersion, 'digest-caption-216px-candidate-rules-v001');
+  assert.equal(rules.candidatePlanId, CAPTION216); assert.equal(rules.attempt, 'attempt-002');
+  assert.deepEqual(rules.authorizationBinding, AUTH216); assert.deepEqual(rules.sourceManifestBinding, source.manifestBinding);
+  assert.equal(rules.oldTaskDescription, source.requests[0].input.taskDescription);
+  assert.equal(rules.candidateOnly, true); assert.equal(rules.generalStylesOrDefaultsChanged, false);
+  assert.equal(rules.originalMeaningOwnerAndClockUnchanged, true); assert.equal(rules.judgments, 0);
+  assert.equal(rules.validatorExemptions, 0); assert.equal(rules.newTrust, false);
+  assert.deepEqual(rules.oldCueOuterBoundaryPolicy, {previous: 'conservative-helper-provisional-preservation', current: 'not-required',
+    previousWasUserAuthorizationCondition: false, sameRetainedGroupBoundaryRepositionAllowed: true});
+  assert.equal(rules.rules.maxLogicalWidthPerLine, typographyValues.maxLogicalWidthPerLine); assert.equal(rules.rules.maxLinesPerCue, typographyValues.maxLinesPerCue);
+  assert.equal(propsRecord.schemaVersion, 'digest-caption-216px-candidate-props-v001');
+  assert.deepEqual(propsRecord.sourcePropsBinding, source.manifest.technicalCandidate.source);
+  assert.deepEqual(propsRecord.sourceManifestBinding, source.manifestBinding); assert.deepEqual(propsRecord.authorizationBinding, AUTH216);
+  assert.equal(propsRecord.layoutRulesChanged, true); assert.equal(propsRecord.actualInkMargin, 'not-yet-measured');
+  assert.equal(propsRecord.humanQuality, 'pending');
+  assert.deepEqual(propsRecord.changedFields, {fontSizePx: {from: 144, to: 216}, canvasSafeLeftPx: {from: 4, to: 108},
+    canvasSafeRightPx: {from: 4, to: 108}, horizontalSafeMarginRatio: {from: 0, to: 0.05625}});
+  const expectedProps = structuredClone(source.manifest.technicalCandidate.props);
+  expectedProps.visualState.textStyle.fontSizePx = typographyValues.fontSizePx; expectedProps.canvas.safeAreaPx.left = typographyValues.horizontalMarginPx;
+  expectedProps.canvas.safeAreaPx.right = typographyValues.horizontalMarginPx; expectedProps.layoutRules.horizontalSafeMarginRatio = typographyValues.horizontalSafeMarginRatio;
+  assert.deepEqual(propsRecord.props, expectedProps, 'FORMAL_216_PROPS_SCOPE_CHANGED');
+  const oldCandidate = source.manifest.technicalCandidate;
+  assert.deepEqual(manifest.technicalCandidate, {source: PROPS216, field: 'props', props: expectedProps,
+    sourcePropsBinding: oldCandidate.source, fontLedgerBinding: oldCandidate.fontLedgerBinding, declaredFont: oldCandidate.declaredFont,
+    fontBytesReadOrVerified: false, formalStyleAdopted: false, layoutRulesChanged: true,
+    minimumActualInkHorizontalMarginPx: typographyValues.horizontalMarginPx, actualGlyphOrInkMargin: 'not-yet-measured'});
+  const limits = {...structuredClone(source.requests[0].input.styleLimits), maxLogicalWidthPerLine: typographyValues.maxLogicalWidthPerLine, maxLinesPerCue: typographyValues.maxLinesPerCue};
+  assert.deepEqual(manifest.newStyleLimits, limits); assert.deepEqual(preparation.styleLimits, limits);
+  const groups: Json[] = source.meaning.orderedCandidates, atoms: Json[] = source.meaning.atomOccurrences;
+  const atomById = new Map<string, Json>(atoms.map(atom => [atom.atomOccurrenceId, atom]));
+  const atomTiming = (group: Json, mapping: Json, ids: string[]) => {
+    assert(ids.length); const spans = ids.map(id => {const atom = atomById.get(id); assert(atom); assert.equal(atom.retainedSpans.length, 1);
+      const span = atom.retainedSpans[0]; assert.equal(span.timelineSegmentId, group.timelineSegmentId);
+      assert(span.sourceStartMs < span.sourceEndMs); return span;});
+    assert(spans.every((span, i) => !i || (span.sourceStartMs >= spans[i - 1].sourceStartMs && span.sourceEndMs >= spans[i - 1].sourceEndMs)));
+    const sourceStartMs = spans[0].sourceStartMs, sourceEndMs = spans.at(-1)!.sourceEndMs;
+    assert(sourceStartMs >= mapping.sourceStartMs && sourceEndMs <= mapping.sourceEndMs);
+    const frameClock = source.cueTimeMap.sourceFrameClock;
+    const sourceStartFrame30 = clock.frameBoundaryWithVideoOffsetV001(sourceStartMs, frameClock.videoPresentationOffsetMs);
+    const sourceEndFrame30 = clock.sourceEndFrameBoundaryWithVideoOffsetV001(sourceEndMs, frameClock);
+    const startFrame = mapping.outputStartFrame + sourceStartFrame30 - mapping.sourceStartFrame30;
+    const endFrameExclusive = mapping.outputStartFrame + sourceEndFrame30 - mapping.sourceStartFrame30;
+    assert(Number.isSafeInteger(sourceStartFrame30) && Number.isSafeInteger(sourceEndFrame30)
+      && sourceStartFrame30 >= mapping.sourceStartFrame30 && sourceEndFrame30 <= mapping.sourceEndFrame30
+      && startFrame >= mapping.outputStartFrame && endFrameExclusive <= mapping.outputEndFrame, 'FORMAL_216_CLOCK_OUTSIDE_SOURCE');
+    return {sourceStartMs, sourceEndMs, sourceStartFrame30, sourceEndFrame30, startFrame, endFrameExclusive, displayFrameCount: endFrameExclusive - startFrame};
+  };
+  assert.equal(preparation.requests.length, 9); assert.equal(manifest.responses.length, 9);
+  assert.deepEqual(typography.requestBindings, preparation.requests);
+  const requests: Json[] = [], responses: Json[] = [], results: Json[] = [], tokens: object[] = [], groupedRows: Json[] = [], groupedChanges: Json[] = [];
+  for (const [i, receipt] of (manifest.responses as Json[]).entries()) {
+    assert.equal(receipt.ordinal, i + 1); assert.deepEqual(receipt.oldRequestBinding, source.manifest.responses[i].requestBinding);
+    assert.deepEqual(receipt.requestBinding, preparation.requests[i]);
+    for (const [key, name] of [['requestBinding', 'request'], ['responseBinding', 'response'], ['resultBinding', 'result'],
+      ['traceBinding', 'trace'], ['correspondenceBinding', 'correspondence']])
+      assert.equal(receipt[key].path, PREFIX216 + '/' + name + '-' + String(i + 1).padStart(4, '0') + '.json');
+    const request = await read(receipt.requestBinding), response = await read(receipt.responseBinding), result = await read(receipt.resultBinding);
+    assert.equal(request.requestId, CAPTION216 + '-attempt-002-display-' + (i + 1));
+    assert.deepEqual(request.input.styleLimits, limits); assert.equal(request.input.taskDescription, rules.newTaskDescription);
+    assert.equal(request.inputCanonicalSha256, wire.canonicalSha(request.input));
+    const restored = structuredClone(request), oldRequest = source.requests[i]; restored.requestId = oldRequest.requestId;
+    restored.input.styleLimits = structuredClone(oldRequest.input.styleLimits); restored.input.taskDescription = oldRequest.input.taskDescription;
+    restored.inputCanonicalSha256 = oldRequest.inputCanonicalSha256; assert.deepEqual(restored, oldRequest, 'FORMAL_216_REQUEST_SCOPE_CHANGED');
+    const actual = receipt.actualAnswerSourceBinding; assert(path.isAbsolute(actual.path) && /^[0-9a-f]{64}$/u.test(actual.fileSha256));
+    const actualStat = await lstat(actual.path); assert(actualStat.isFile() && !actualStat.isSymbolicLink() && await realpath(actual.path) === actual.path);
+    const actualBytes = await readFile(actual.path); assert.equal(sha(actualBytes), actual.fileSha256); assert.equal(actualBytes.length, actual.sizeBytes);
+    assert.deepEqual(JSON.parse(actualBytes.toString()), response, 'FORMAL_216_ACTUAL_ANSWER_CHANGED');
+    assert.equal(receipt.judgmentNote, response.judgmentNote);
+    const token = display.validateDisplayForAdoptionV001(request, response, result, 'digest-caption-judgment-display-response-v001');
+    const trace = display.readValidatedDisplayTracesV001([request], [token]);
+    assert.deepEqual(await read(receipt.traceBinding), {schemaVersion: 'digest-caption-216px-reflow-trace-v001', traces: trace});
+    const perGroup = await read(receipt.correspondenceBinding); assert.equal(perGroup.schemaVersion, 'digest-caption-216px-reflow-correspondence-v001');
+    const rows: Json[] = perGroup.rows, group = groups[i], cap = request.input.captions[0], boundaries: Json[] = cap.boundaryCandidates;
+    const indices = new Map<string, number>(boundaries.map((boundary, j) => [boundary.boundaryId, j]));
+    assert.equal(boundaries.length, group.atomOccurrenceIds.length); assert.equal(indices.size, boundaries.length);
+    assert.equal(rows.length, trace[0].cues.length); assert.equal(rows.length, receipt.cueCount);
+    assert.equal(rows.reduce((n, row) => n + row.lines.length, 0), receipt.lineCount);
+    assert.equal(rows.reduce((n, row) => n + row.atomOccurrenceIds.length, 0), receipt.atomCount);
+    const oldRows: Json[] = source.correspondence.rows.filter((row: Json) => row.groupOrdinal === i + 1), oldByAtom = new Map<string, Json>();
+    oldRows.forEach(old => old.atomOccurrenceIds.forEach((id: string) => {assert(!oldByAtom.has(id)); oldByAtom.set(id, old);}));
+    const mapping = source.originalClock.mappings[i]; assert.equal(mapping.segmentId, group.timelineSegmentId);
+    let previousEnd = -1, previousFrameEnd = mapping.outputStartFrame;
+    for (const [j, row] of rows.entries()) {
+      const cue = trace[0].cues[j], end = indices.get(cue.cueEndBoundaryId); assert(end !== undefined && end > previousEnd);
+      const ids = group.atomOccurrenceIds.slice(previousEnd + 1, end + 1), rowAtoms = ids.map((id: string) => {const atom = atomById.get(id); assert(atom); return atom;});
+      const oldCueOrdinals: number[] = []; for (const id of ids) {const old = oldByAtom.get(id); assert(old); if (oldCueOrdinals.at(-1) !== old.cueOrdinal) oldCueOrdinals.push(old.cueOrdinal);}
+      assert.equal(row.groupOrdinal, i + 1); assert.equal(row.cueOrdinal, j + 1); assert(!Object.hasOwn(row, 'oldCueOrdinal'));
+      assert.deepEqual(row.oldCueOrdinals, oldCueOrdinals); assert.equal(row.candidateId, group.candidateId);
+      assert.equal(row.timelineSegmentId, group.timelineSegmentId); assert.equal(row.captionId, cap.captionId);
+      assert.equal(row.cueEndBoundaryId, cue.cueEndBoundaryId); assert.deepEqual(row.lineEndBoundaryIds, cue.lineEndBoundaryIds);
+      assert.deepEqual(row.atomOccurrenceIds, ids); assert.deepEqual(row.sourceSegmentIds, rowAtoms.map((atom: Json) => atom.sourceSegmentId));
+      assert.deepEqual(row.semanticUtteranceIds, [...new Set(rowAtoms.map((atom: Json) => atom.semanticUtteranceId))]);
+      let previousLine = previousEnd;
+      const lines = cue.lineEndBoundaryIds.map((id: string) => {const lineEnd = indices.get(id); assert(lineEnd !== undefined && lineEnd > previousLine && lineEnd <= end);
+        const lineIds = group.atomOccurrenceIds.slice(previousLine + 1, lineEnd + 1);
+        const line = {lineEndBoundaryId: id, text: boundaries.slice(previousLine + 1, lineEnd + 1).map(boundary => boundary.text).join(''),
+          atomOccurrenceIds: lineIds, sourceSegmentIds: lineIds.map((aid: string) => {const atom = atomById.get(aid); assert(atom); return atom.sourceSegmentId;})};
+        previousLine = lineEnd; return line;});
+      assert.equal(previousLine, end); assert.deepEqual(row.lines, lines);
+      assert.deepEqual(timing216(row), atomTiming(group, mapping, ids), 'FORMAL_216_CUE_CLOCK_CHANGED');
+      assert(Number.isSafeInteger(row.startFrame) && Number.isSafeInteger(row.endFrameExclusive)
+        && row.startFrame >= previousFrameEnd && row.endFrameExclusive > row.startFrame, 'FORMAL_216_CUE_OVERLAP_OR_EMPTY');
+      const indexed = indexer.indexExplicitLinesV001(lines.map((line: Json) => line.text)); assert.equal(indexed.status, 'passed');
+      assert.equal(indexed.sourceText, rowAtoms.map((atom: Json) => atom.text).join(''));
+      const props = {...structuredClone(expectedProps), instructionId: CAPTION216 + '-attempt-002-geometry-' + (i + 1) + '-' + (j + 1),
+        text: indexed.sourceText, indexedLines: indexed.indexedLines};
+      assert.deepEqual(row.exactTextModel, entry.buildExactTextModel(props), 'FORMAL_216_EXACT_TEXT_MODEL_CHANGED');
+      const geometry = inspector.inspectPresentationRenderLayoutV001({canvas: props.canvas, overlays: [props]});
+      assert.equal(geometry.status, 'passed'); assert.deepEqual(geometry.violations, []); assert.deepEqual(row.geometry, geometry);
+      previousEnd = end; previousFrameEnd = row.endFrameExclusive;
+    }
+    assert.equal(previousEnd, boundaries.length - 1); assert.deepEqual(rows.flatMap(row => row.atomOccurrenceIds), group.atomOccurrenceIds);
+    const expectedChanges = oldRows.map(old => {
+      const oldSet = new Set<string>(old.atomOccurrenceIds);
+      const intersections = rows.flatMap(row => {const shared: string[] = row.atomOccurrenceIds.filter((id: string) => oldSet.has(id));
+        return shared.length ? [{newCueOrdinal: row.cueOrdinal, atomOccurrenceIds: shared, newCueTiming: timing216(row),
+          intersectionTiming: atomTiming(group, mapping, shared)}] : [];});
+      assert.deepEqual(intersections.flatMap(intersection => intersection.atomOccurrenceIds), old.atomOccurrenceIds);
+      const children = intersections.map(intersection => rows[intersection.newCueOrdinal - 1]);
+      const fixed = children.length === 1 && wire.same(children[0].atomOccurrenceIds, old.atomOccurrenceIds)
+        && wire.same(children[0].lineEndBoundaryIds, old.lineEndBoundaryIds);
+      if (fixed) for (const key of ['cueEndBoundaryId', 'lineEndBoundaryIds', 'atomOccurrenceIds', 'sourceSegmentIds', 'semanticUtteranceIds', 'lines', ...TIMING216])
+        assert.deepEqual(children[0][key], old[key], 'FORMAL_216_FIXED_CUE_CHANGED');
+      return {oldRequestBinding: source.manifest.responses[i].requestBinding, oldCueOrdinal: old.cueOrdinal, timelineSegmentId: old.timelineSegmentId,
+        oldCueEndBoundaryId: old.cueEndBoundaryId, oldAtomOccurrenceIds: old.atomOccurrenceIds, oldLineEndBoundaryIds: old.lineEndBoundaryIds,
+        oldCueTiming: timing216(old), fixed, newCueOrdinals: intersections.map(intersection => intersection.newCueOrdinal),
+        newLineEndBoundaryIds: children.map(row => row.lineEndBoundaryIds), intersections};
+    });
+    assert.deepEqual(perGroup.changes, expectedChanges, 'FORMAL_216_INTERSECTIONS_CHANGED');
+    for (const row of rows) assert.deepEqual(expectedChanges.flatMap(change => change.intersections
+      .filter(intersection => intersection.newCueOrdinal === row.cueOrdinal).flatMap(intersection => intersection.atomOccurrenceIds)), row.atomOccurrenceIds);
+    assert.equal(receipt.fixedOldCues, expectedChanges.filter(change => change.fixed).length);
+    assert.equal(receipt.variableOldCues, expectedChanges.filter(change => !change.fixed).length);
+    requests.push(request); responses.push(response); results.push(result); tokens.push(token); groupedRows.push(...rows); groupedChanges.push(...expectedChanges);
+  }
+  assert.equal(groupedChanges.length, 243); assert.deepEqual(groupedRows.flatMap(row => row.atomOccurrenceIds), atoms.map(atom => atom.atomOccurrenceId));
+  const traces = display.readValidatedDisplayTracesV001(requests, tokens);
+  assert.equal(manifest.tracesBinding.path, PREFIX216 + '/traces.json'); assert.equal(manifest.correspondenceBinding.path, PREFIX216 + '/correspondence.json');
+  assert.deepEqual(await read(manifest.tracesBinding), {schemaVersion: 'digest-caption-216px-reflow-traces-v001', traces});
+  const correspondence = await read(manifest.correspondenceBinding);
+  assert.deepEqual(correspondence, {schemaVersion: 'digest-caption-216px-reflow-correspondence-v001', rows: groupedRows, changes: groupedChanges});
+  const summary = {groups: 9, oldCues: 243, fixedOldCues: groupedChanges.filter(change => change.fixed).length,
+    variableOldCues: groupedChanges.filter(change => !change.fixed).length, newCues: groupedRows.length,
+    newLines: groupedRows.reduce((n, row) => n + row.lines.length, 0), atoms: atoms.length,
+    minDisplayFrames: Math.min(...groupedRows.map(row => row.displayFrameCount)), maxDisplayFrames: Math.max(...groupedRows.map(row => row.displayFrameCount)),
+    originalClockSummary: source.cueTimeMap.summary};
+  assert.deepEqual(manifest.summary, summary); assert(Number.isSafeInteger(summary.newCues) && summary.newCues > 0 && summary.newCues <= 27691);
+  assert.deepEqual(manifest.admission, {presentation: 'not-connected', executionPermission: 'authorized-for-one-normal-after-technical-checks', humanQuality: 'pending', outlineChoice: null});
+  assert.deepEqual(manifest.effects, {skillInvocations: 9, actualAnswerFiles: 9, mediaFontBinary: 0, rendering: 0, productChanges: 0, apiCostUsd: 0});
+  const aggregateView = {...structuredClone(source.aggregateView), styleLimits: limits, taskDescription: rules.newTaskDescription};
+  const output = {...source, originalAcceptedInputs: source, manifestBinding, manifest, requests, responses, results, traces, correspondence,
+    captionPreparation: preparation, candidateRules: rules, candidateAuthorization: authorization,
+    aggregateView, sourceConnectionDecision, sourceConnectionDecisionBinding: SOURCE_CONNECTION_DECISION, typographySettings: typography.settings, typographyValues, typographyConfiguration,
+    typographySettingsBinding: manifest.typographySettingsBinding, checkedAt: new Date().toISOString()};
+  function freeze(v: any) {if (v !== null && typeof v === 'object' && !Object.isFrozen(v)) {Object.values(v).forEach(freeze); Object.freeze(v);}}
+  freeze(output); sourceBundles.add(output); formal216Bundles.add(output); return output;
+}
+
+
+type QualifiedSourcePackageRecord = {inputs: Json; bodySha256: string; mode: 'preflight' | 'manufacturing'; context?: Json};
+const qualifiedSourcePackages = new WeakMap<object, QualifiedSourcePackageRecord>();
+
+async function registerDigestFormalSourcePackageV001(value: Json, inputs: Json,
+  mode: 'preflight' | 'manufacturing', context?: Json) {
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  if (mode === 'manufacturing') await assertQualifiedDigestStorageContextV001(context);
+  const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  assert(!qualifiedSourcePackages.has(value), 'SOURCE_PACKAGE_ALREADY_REGISTERED');
+  qualifiedSourcePackages.set(value, {inputs, bodySha256: sha(m.formal(value)), mode, context});
+  const validator = await load('evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs');
+  await validator.qualifyDigestFormalSourcePackageTaskV001(value, inputs);
+}
+
+/** Private creation and original-byte qualification are both necessary; JSON bindings cannot manufacture a capability. */
+export async function assertQualifiedDigestFormalSourcePackageTaskV001(value: Json, inputs: Json) {
+  assert(inputs !== null && typeof inputs === 'object' && formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  assert(value !== null && typeof value === 'object', 'QUALIFIED_DIGEST_SOURCE_PACKAGE_REQUIRED');
+  const record = qualifiedSourcePackages.get(value);
+  assert(record && record.inputs === inputs, 'QUALIFIED_DIGEST_SOURCE_PACKAGE_REQUIRED');
+  const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  assert.equal(sha(m.formal(value)), record.bodySha256, 'QUALIFIED_DIGEST_SOURCE_PACKAGE_MUTATED');
+  assert.deepEqual(inputs.manifestBinding, {path: MANIFEST, fileSha256: MANIFEST_SHA});
+  for (const binding of [inputs.manifestBinding, inputs.manifest.candidateRulesBinding, inputs.manifest.authorizationBinding,
+    inputs.typographySettingsBinding, inputs.sourceConnectionDecisionBinding, {path: TYPOGRAPHY_CONFIGURATION_PATH, fileSha256: TYPOGRAPHY_CONFIGURATION_SHA},
+    {path: 'docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json',
+      fileSha256: 'f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884'}, inputs.manifest.meaningBinding]) {
+    assert.equal(await m.fileSha(path.join(ROOT, safe(binding.path))), binding.fileSha256, 'QUALIFIED_DIGEST_SOURCE_ORIGINAL_HASH_CHANGED');
+  }
+  assert.equal(value.schemaVersion, inputs.styleTemplate.schemaVersion);
+  assert.equal(value.packageId, PLAN + '-source-package');
+  assert.equal(value.promptInput.taskDescription, inputs.candidateRules.newTaskDescription);
+  assert.deepEqual(value.promptInput.styleLimits, inputs.requests[0].input.styleLimits);
+  const captionId = inputs.aggregateView.inputCaptionId;
+  const boundaries = inputs.requests.flatMap((request: Json) => request.input.captions[0].boundaryCandidates);
+  assert.deepEqual(value.promptInput.captions, [{captionId, boundaryCandidates: boundaries}]);
+  assert.equal(boundaries.length, 3613); assert.equal(inputs.correspondence.rows.length, inputs.manifest.summary.newCues);
+  const atoms = inputs.meaning.atomOccurrences;
+  assert.deepEqual(value.reconstructionMap.captions, [{captionId, meaningPackageOrdinal: 1,
+    semanticCaptionId: inputs.meaning.captions[0].captionId, atomOccurrenceIds: atoms.map((atom: Json) => atom.atomOccurrenceId),
+    boundaries: boundaries.map((boundary: Json, i: number) => ({boundaryId: boundary.boundaryId, ordinal: i + 1,
+      afterAtomOccurrenceId: atoms[i].atomOccurrenceId}))}]);
+  assert.equal(value.reconstructionMap.caseContexts.length, 1);
+  const expectedMeaningBinding = record.mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind(OUT + '/meaning-input.json', inputs.meaning);
+  assert.deepEqual(value.reconstructionMap.meaningPackageBindings, [expectedMeaningBinding]);
+  const cc = value.reconstructionMap.caseContexts[0]; assert.deepEqual(cc.meaningPackageBinding, expectedMeaningBinding); assert.equal(cc.caseId, PLAN); assert.equal(cc.inputCaptionId, captionId);
+  assert.equal(cc.horizontalStyleInput.captionLayoutPolicy.maxLogicalWidthPerLine, inputs.typographyValues.maxLogicalWidthPerLine);
+  assert.equal(cc.horizontalStyleInput.captionLayoutPolicy.maxLinesPerDisplayPage, inputs.typographyValues.maxLinesPerCue);
+  assert.equal(cc.resolvedStyle.maxLogicalWidthPerLine, inputs.typographyValues.maxLogicalWidthPerLine);
+  assert.equal(cc.resolvedStyle.maxLinesPerDisplayPage, inputs.typographyValues.maxLinesPerCue);
+  assert.equal(cc.resolvedStyle.cropMode, 'identity'); assert.equal(cc.resolvedStyle.sceneTransitionMode, 'straight-cut-only');
+  assert.equal(cc.resolvedStyle.audioMode, 'preserve-source-only');
+  for (const binding of [inputs.manifestBinding, inputs.manifest.candidateRulesBinding, inputs.manifest.authorizationBinding,
+    inputs.typographySettingsBinding, inputs.sourceConnectionDecisionBinding, {path: TYPOGRAPHY_CONFIGURATION_PATH, fileSha256: TYPOGRAPHY_CONFIGURATION_SHA}])
+    assert(value.provenance.approvedContractBindings.some((actual: Json) => actual.path === binding.path && actual.fileSha256 === binding.fileSha256),
+      'QUALIFIED_DIGEST_SOURCE_PROVENANCE_CHANGED');
+  assert.deepEqual(value.provenance.implementationBindings.map((binding: Json) => binding.path), IMPLEMENTATIONS);
+  for (const binding of value.provenance.implementationBindings)
+    assert.equal(await m.fileSha(path.join(ROOT, safe(binding.path))), binding.fileSha256, 'QUALIFIED_DIGEST_IMPLEMENTATION_HASH_CHANGED');
+  if (record.mode === 'manufacturing') {
+    await assertQualifiedDigestStorageContextV001(record.context);
+    assert.equal(value.provenance.sourcePackageJobBinding.path, OUT + '/core-plan.json');
+    const plan = await record.context!.readBound(value.provenance.sourcePackageJobBinding);
+    assert.equal(plan.planId, PLAN); assert.equal(plan.outputRoot, OUT); assert.deepEqual(plan.acceptedManifestBinding, inputs.manifestBinding);
+    assert(value.provenance.approvedContractBindings.some((binding: Json) => m.same(binding, plan.authorization)), 'FORMAL_SOURCE_APPROVAL_BINDING_CHANGED');
+    assert.deepEqual(plan.typographySettingsBinding, inputs.typographySettingsBinding);
+    assert.deepEqual(plan.derivedTypographyValues, inputs.typographyValues);
+    for (const binding of [cc.meaningPackageBinding, ...Object.values(cc.styleBindings), ...Object.values(cc.baseMediaInput)] as Json[])
+      assert(binding.path.startsWith(OUT + '/') || binding.path === inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings.materialValidationIndex.path);
+  } else {
+    assert.equal(record.mode, 'preflight');
+    assert.deepEqual(cc.baseMediaInput, inputs.styleTemplate.reconstructionMap.caseContexts[0].baseMediaInput);
+    assert.deepEqual(cc.styleBindings, inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings);
+    assert.equal(cc.meaningPackageBinding.path, inputs.manifest.meaningBinding.path);
+    assert.equal(cc.meaningPackageBinding.fileSha256, inputs.manifest.meaningBinding.fileSha256);
+    assert.equal(value.provenance.sourcePackageJobBinding.path, MANIFEST);
+    assert.equal(value.provenance.sourcePackageJobBinding.fileSha256, MANIFEST_SHA);
+    for (const binding of [cc.meaningPackageBinding, ...Object.values(cc.styleBindings), ...Object.values(cc.baseMediaInput)] as Json[])
+      assert.equal(await m.fileSha(path.join(ROOT, safe(binding.path))), binding.fileSha256, 'PREFLIGHT_EXISTING_REFERENCE_HASH_CHANGED');
+  }
+  return Object.freeze({taskDescription: inputs.candidateRules.newTaskDescription,
+    manifestBinding: inputs.manifestBinding, candidateRulesBinding: inputs.manifest.candidateRulesBinding,
+    bodySha256: record.bodySha256, mode: record.mode});
+}
+
+async function buildDigestFormalSourcePackageV001(inputs: Json, c: Json, base: Json, style: Json,
+  mode: 'preflight' | 'manufacturing', context?: Json) {
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  const atoms = inputs.meaning.atomOccurrences, boundaries = inputs.requests.flatMap((request: Json) => request.input.captions[0].boundaryCandidates);
+  const inputCaptionId = inputs.aggregateView.inputCaptionId, sourcePackage = structuredClone(inputs.styleTemplate);
+  sourcePackage.packageId = PLAN + '-source-package';
+  sourcePackage.promptInput = {...structuredClone(inputs.requests[0].input), captions: [{captionId: inputCaptionId, boundaryCandidates: boundaries}]};
+  const meaningBinding = mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind(OUT + '/meaning-input.json', inputs.meaning);
+  const cc = structuredClone(sourcePackage.reconstructionMap.caseContexts[0]);
+  cc.caseId = PLAN; cc.inputCaptionId = inputCaptionId; cc.meaningPackageBinding = meaningBinding; cc.baseMediaInput = base;
+  cc.styleBindings = style.bindings; cc.horizontalStyleInput.presetBinding = {...style.bindings, presetId: cc.resolvedStyle.presetId};
+  cc.horizontalStyleInput.captionLayoutPolicy.maxLogicalWidthPerLine = inputs.typographyValues.maxLogicalWidthPerLine;
+  cc.resolvedStyle.maxLogicalWidthPerLine = inputs.typographyValues.maxLogicalWidthPerLine;
+  cc.horizontalStyleInput.captionLayoutPolicy.maxLinesPerDisplayPage = inputs.typographyValues.maxLinesPerCue;
+  cc.resolvedStyle.maxLinesPerDisplayPage = inputs.typographyValues.maxLinesPerCue;
+  sourcePackage.reconstructionMap = {meaningPackageBindings: [meaningBinding], captions: [{captionId: inputCaptionId,
+    meaningPackageOrdinal: 1, semanticCaptionId: inputs.meaning.captions[0].captionId,
+    atomOccurrenceIds: atoms.map((atom: Json) => atom.atomOccurrenceId),
+    boundaries: boundaries.map((boundary: Json, i: number) => {assert.equal(boundary.text, atoms[i].text);
+      return {boundaryId: boundary.boundaryId, ordinal: i + 1, afterAtomOccurrenceId: atoms[i].atomOccurrenceId};})}], caseContexts: [cc]};
+  const implementationBindings = mode === 'preflight' ? await Promise.all(IMPLEMENTATIONS.map(async p => ({path: p, fileSha256: await m.fileSha(path.join(ROOT, p))}))) : c.plan.implementationBindings;
+  sourcePackage.provenance = {sourcePackageJobBinding: c.planBinding,
+    implementationBindings: implementationBindings.map((binding: Json, i: number) => ({role: 'formal-handoff-' + (i + 1), ...binding})),
+    approvedContractBindings: [c.plan.authorization, inputs.manifestBinding, inputs.manifest.candidateRulesBinding,
+      inputs.manifest.authorizationBinding, inputs.typographySettingsBinding, inputs.sourceConnectionDecisionBinding,
+      {path: TYPOGRAPHY_CONFIGURATION_PATH, fileSha256: TYPOGRAPHY_CONFIGURATION_SHA}]};
+  await registerDigestFormalSourcePackageV001(sourcePackage, inputs, mode, context);
+  return sourcePackage;
+}
+
+/** Uses the actual qualified Digest text/atoms, real saved JSON bindings, and no generated media receipt. */
+export async function buildDigestFormalSourcePackagePreflightV001(inputs: Json) {
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  const original = inputs.styleTemplate.reconstructionMap.caseContexts[0];
+  return buildDigestFormalSourcePackageV001(inputs, {planBinding: m.bind(MANIFEST, inputs.manifest), plan: {authorization: AUTH216}},
+    original.baseMediaInput, {bindings: original.styleBindings}, 'preflight');
+}
+
 async function candidateStyle(context: Json, inputs: Json, m: any) {
   const old = inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings;
   const registry = await m.readBound(old.presetRegistry), baseline = await m.readBound(old.rendererTrust);
   assert.equal(m.canonicalSha(baseline), '9d5ffe631033dc594c917649e2529899e303f3cb8a7d7b1b65ea0d26b7c645f2');
   const preset = structuredClone(registry);
   const profile = preset.presets.find((p: Json) => p.presetId === 'normal-landscape-readable-pop-v001');
-  assert(profile); profile.maxLogicalWidth = 26; profile.maxLines = 2;
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
+  assert(profile); profile.maxLogicalWidth = inputs.typographyValues.maxLogicalWidthPerLine; profile.maxLines = inputs.typographyValues.maxLinesPerCue;
   const at = profile.visualStates.findIndex((v: Json) => v.stateId === 'caption-core-v001'); assert(at >= 0);
   profile.visualStates[at] = structuredClone(inputs.manifest.technicalCandidate.props.visualState);
   preset.canvas = structuredClone(inputs.manifest.technicalCandidate.props.canvas);
-  assert.deepEqual(profile.visualStates[at].textStyle, {fontAssetId: 'line-seed-jp-extra-bold-v001', fontSizePx: 144,
+  assert.deepEqual(profile.visualStates[at].textStyle, {fontAssetId: 'line-seed-jp-extra-bold-v001', fontSizePx: inputs.typographyValues.fontSizePx,
     fontColor: '#FFFDF8', borderColor: '#2F4F4F', borderWidthPx: 8, lineSpacingPercent: 150,
     glowColor: '#2F4F4F', glowWidthPx: 4, glowOpacityPercent: 82});
   const root = OUT + '/candidate-style/';
@@ -436,7 +938,9 @@ async function candidateStyle(context: Json, inputs: Json, m: any) {
   registryTrust.presetValidationIndexSha256 = validation.canonicalSha256;
   const registryTrustBinding = await context.publish(root + 'trusted-registry-bindings.json', registryTrust);
   const trust = await m.readBound(inputs.rendererTemplate.registryBindings.rendererTrust);
-  assert.deepEqual(trust.layoutRules, baseline.layoutRules, 'NO_GENERAL_LAYOUT_RULE_CHANGE');
+  assert.deepEqual(trust.layoutRules, baseline.layoutRules, 'BASELINE_LAYOUT_RULES_CHANGED');
+  const candidateRules = approvedDigestCandidateLayoutRules(inputs.manifest.technicalCandidate.props.layoutRules, baseline.layoutRules, inputs.typographyValues);
+  trust.layoutRules = candidateRules;
   trust.presetRegistry = {registryVersion: preset.registryVersion, path: registryBinding.path,
     fileSha256: registryBinding.fileSha256, canonicalSha256: registryBinding.canonicalSha256};
   trust.registryBinding = registryTrustBinding;
@@ -454,7 +958,10 @@ async function candidateStyle(context: Json, inputs: Json, m: any) {
   for (const b of trust.fontAssets) assert.equal(await m.fileSha(path.join(ROOT, safe(b.path))), b.fileSha256);
   await context.publish(OUT + '/candidate-style-delta.json', {schemaVersion: 'digest-formal-candidate-style-delta-v001',
     baselineTrustBinding: old.rendererTrust, acceptedMain: 'f2ef22148e7e81d7057a3907f21cc3dbe256742b',
-    dependencyDelta, profileWidth: 26, visualCapabilityWidth: 36, layoutRulesChanged: false,
+    dependencyDelta, profileWidth: inputs.typographyValues.maxLogicalWidthPerLine, visualCapabilityWidth: 36, layoutRulesChanged: true,
+    typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues,
+    layoutRulesDelta: {horizontalSafeMarginRatio: {from: baseline.layoutRules.horizontalSafeMarginRatio, to: inputs.typographyValues.horizontalSafeMarginRatio}},
+    candidateRulesBinding: inputs.manifest.candidateRulesBinding, candidateAuthorizationBinding: inputs.manifest.authorizationBinding,
     technicalCandidatePropsBinding: inputs.manifest.technicalCandidate.source, humanQuality: 'pending'});
   const trustBinding = await context.publish(root + 'trust.json', trust);
   const bindings = {trustedRegistryBindings: registryTrustBinding, presetRegistry: registryBinding,
@@ -468,30 +975,12 @@ async function candidateStyle(context: Json, inputs: Json, m: any) {
 }
 
 export async function prepareDigestFormalCandidateCoreV001(inputs: Json, c: Json, base: Json, style: Json, context: Json) {
-  assert(sourceBundles.has(inputs), 'QUALIFIED_SAVED_INPUTS_REQUIRED');
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
   await assertQualifiedDigestStorageContextV001(context);
   const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
   const core = await load('evals/clip_composition/adopted_media_manufacturing_v001.mts');
-  const meaning = inputs.meaning, atoms = meaning.atomOccurrences;
-  const boundaries = inputs.requests.flatMap((r: Json) => r.input.captions[0].boundaryCandidates);
-  assert.equal(boundaries.length, 3613); assert.equal(atoms.length, boundaries.length);
-  const inputCaptionId = 'digest-caption-input-preparation-20261003-v001-input-caption';
-  const sourcePackage = structuredClone(inputs.styleTemplate);
-  sourcePackage.packageId = PLAN + '-source-package';
-  sourcePackage.promptInput = {...structuredClone(inputs.requests[0].input), captions: [{captionId: inputCaptionId, boundaryCandidates: boundaries}]};
-  const meaningBinding = m.bind(OUT + '/meaning-input.json', meaning);
-  const cc = structuredClone(sourcePackage.reconstructionMap.caseContexts[0]);
-  cc.caseId = PLAN; cc.inputCaptionId = inputCaptionId; cc.meaningPackageBinding = meaningBinding; cc.baseMediaInput = base;
-  cc.styleBindings = style.bindings; cc.horizontalStyleInput.presetBinding = {...style.bindings, presetId: cc.resolvedStyle.presetId};
-  cc.horizontalStyleInput.captionLayoutPolicy.maxLogicalWidthPerLine = 26; cc.resolvedStyle.maxLogicalWidthPerLine = 26;
-  sourcePackage.reconstructionMap = {meaningPackageBindings: [meaningBinding],
-    captions: [{captionId: inputCaptionId, meaningPackageOrdinal: 1, semanticCaptionId: (meaning.captions as Json[])[0].captionId,
-      atomOccurrenceIds: atoms.map((a: Json) => a.atomOccurrenceId), boundaries: boundaries.map((b: Json, i: number) => {
-        assert.equal(b.text, atoms[i].text); return {boundaryId: b.boundaryId, ordinal: i + 1, afterAtomOccurrenceId: atoms[i].atomOccurrenceId};
-      })}], caseContexts: [cc]};
-  sourcePackage.provenance = {sourcePackageJobBinding: c.planBinding,
-    implementationBindings: c.plan.implementationBindings.map((b: Json, i: number) => ({role: 'formal-handoff-' + (i + 1), ...b})),
-    approvedContractBindings: [c.plan.authorization]};
+  const meaning = inputs.meaning;
+  const sourcePackage = await buildDigestFormalSourcePackageV001(inputs, c, base, style, 'manufacturing', context);
   const validator = await load('evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs');
   m.pass(validator.validatePresentationOutputCaptionCueSourcePackageV001(sourcePackage), 'SAVED_SOURCE_PACKAGE_INVALID');
   const adoption = {schemaVersion: 'digest-formal-caption-adoption-v001', artifactId: PLAN + '-caption-adoption',
@@ -503,7 +992,7 @@ export async function prepareDigestFormalCandidateCoreV001(inputs: Json, c: Json
 
 /** Cheap formal references/runtime/font/estimated layout checks. No media copy or decision. */
 export async function inspectDigestFormalPreflightV001(inputs: Json) {
-  assert(sourceBundles.has(inputs));
+  assert(formal216Bundles.has(inputs), 'QUALIFIED_216_FORMAL_INPUTS_REQUIRED');
   const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
   const base = await load('evals/clip_composition/presentation_base_media_build_v003.mjs');
   const timeline = await load('evals/clip_composition/presentation_base_media_timeline_v004.mjs');
@@ -512,14 +1001,18 @@ export async function inspectDigestFormalPreflightV001(inputs: Json) {
   const caller = await load('evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts');
   await caller.observePresentationRendererRuntimeBindingsV001(inputs.rendererTemplate.runtimeBindings);
   const trust = await m.readBound(inputs.rendererTemplate.registryBindings.rendererTrust);
+  const sourceValidator = await load('evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs');
+  const taskFixture = await buildDigestFormalSourcePackagePreflightV001(inputs);
+  const sourcePackageTask = sourceValidator.validatePresentationOutputCaptionCueSourcePackageV001(taskFixture);
   for (const binding of trust.fontAssets) assert.equal(await m.fileSha(path.join(ROOT, safe(binding.path))), binding.fileSha256);
   const entry = await load('evals/clip_composition/presentation_renderer_entry_v001.tsx');
   const inspector = await load('evals/clip_composition/inspect_presentation_render_layout_v001.ts');
   const indexer = await load('evals/clip_composition/presentation_renderer_text_layout_v001.mjs');
+  const candidateLayoutRules = approvedDigestCandidateLayoutRules(inputs.manifest.technicalCandidate.props.layoutRules, trust.layoutRules, inputs.typographyValues);
   for (const row of inputs.correspondence.rows) {
     const indexed = indexer.indexExplicitLinesV001(row.lines.map((line: Json) => line.text));
     assert.equal(indexed.status, 'passed');
-    const props = {...structuredClone(inputs.manifest.technicalCandidate.props), layoutRules: trust.layoutRules,
+    const props = {...structuredClone(inputs.manifest.technicalCandidate.props), layoutRules: candidateLayoutRules,
       instructionId: PLAN + '-preflight-' + row.groupOrdinal + '-' + row.cueOrdinal,
       text: indexed.sourceText, indexedLines: indexed.indexedLines};
     entry.buildExactTextModel(props);
@@ -527,18 +1020,21 @@ export async function inspectDigestFormalPreflightV001(inputs: Json) {
     assert.equal(result.status, 'passed', 'ESTIMATED_LAYOUT_REJECTED group=' + row.groupOrdinal +
       ' cue=' + row.cueOrdinal + ' frame=' + row.startFrame + ' detail=' + JSON.stringify(result.violations));
   }
-  return {schemaVersion: 'digest-formal-cheap-preflight-v001', status: 'passed', checkedAt: new Date().toISOString(),
+  return {schemaVersion: 'digest-formal-cheap-preflight-v001', status: sourcePackageTask.status === 'passed' ? 'passed' : 'blocked',
+    sourcePackageTask, mediaReady: sourcePackageTask.status === 'passed', checkedAt: new Date().toISOString(),
     clocks: {frames: 27691, audioSamples: 40705770}, exactSavedInputs: true, fontBytes: 'passed',
-    runtimeBindings: 'passed', estimatedLayouts: 243, actualGlyph: 'not-yet-checked',
+    runtimeBindings: 'passed', estimatedLayouts: inputs.manifest.summary.newCues, candidateRulesBinding: inputs.manifest.candidateRulesBinding, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues, actualGlyph: 'not-yet-checked',
     toolBinaryDiagnostics: await base.inspectPresentationBaseMediaToolBinaryDiagnosticsV001()};
 }
 
 export async function runDigestFormalCandidateV001(permitPath: string) {
   const began = Date.now(), permit = JSON.parse(await readFile(permitPath, 'utf8'));
   const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
-  const inputs = await readDigestFormalHandoffInputsV001();
+  const inputs = await readDigestFormal216HandoffInputsV002();
   const preflight = await inspectDigestFormalPreflightV001(inputs);
-  const {context, approval} = await storage(permitPath, permit, m);
+  assert.equal(preflight.sourcePackageTask.status, 'passed', 'FORMAL_CAPTION_TASK_UNSUPPORTED ' + JSON.stringify(preflight.sourcePackageTask));
+  assert.equal(preflight.mediaReady, true, 'FORMAL_CAPTION_TASK_UNSUPPORTED');
+  const {context, approval} = await storage(permitPath, permit, m, inputs);
   await absent(context.resolve(OUT + '/core-plan.json'));
   assert((await readdir(context.generatedRoot)).every(name => ['monitor', 'temp'].includes(name)), 'UNEXPECTED_GENERATED_ROOT_CONTENT');
   assert.equal(await realpath(context.generatedRoot), context.generatedRoot);
@@ -551,7 +1047,7 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
   const style = await candidateStyle(context, inputs, m);
   const plan = {schemaVersion: 'digest-formal-candidate-core-plan-v001', planId: PLAN, outputRoot: OUT,
     authorization: authorizationBinding, implementationBindings: permit.implementation.map((b: Json) => ({path: path.relative(ROOT, b.path), fileSha256: b.fileSha256})),
-    acceptedManifestBinding: inputs.manifestBinding, originalNormalOwners: inputs.handoff.normalOwners,
+    acceptedManifestBinding: inputs.manifestBinding, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues, originalNormalOwners: inputs.handoff.normalOwners,
     request: {sourceVideo: inputs.normalPlan.sourceVideoBinding, transcript: inputs.normalPlan.transcriptBinding,
       utterances: inputs.normalPlan.utteranceBinding}};
   const planBinding = await context.publish(OUT + '/core-plan.json', plan);
@@ -586,7 +1082,7 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
   const artifacts = await prepareDigestFormalCandidateCoreV001(inputs, c, base, style, context);
   // New formal identifiers remain bound to the original cue clocks and lines.
   const instructions = artifacts.instruction.instructions;
-  assert.equal(instructions.length, 243);
+  assert.equal(instructions.length, inputs.manifest.summary.newCues);
   const correspondence = inputs.correspondence.rows;
   instructions.forEach((v: Json, i: number) => {
     const row = correspondence[i]; assert.equal(v.outputTime.startFrame, row.startFrame);
@@ -598,7 +1094,7 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
   const renderStarted = Date.now();
   const result = await core.renderAdoptedVideoV001(c, artifactBindings, 'digest-formal-render-execution-v001', context);
   const receipt = {schemaVersion: 'digest-formal-manufacturing-result-v001', status: 'completed', planBinding,
-    invocationBinding: invocation, result, timing: {initialPreparationMs: baseStarted - began, baseMediaMs: baseMs,
+    invocationBinding: invocation, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues, result, timing: {initialPreparationMs: baseStarted - began, baseMediaMs: baseMs,
       renderAndQcMs: Date.now() - renderStarted, totalMs: Date.now() - began},
     implementationSha: permit.bindings.implementationSha, technicalQc: 'passed',
     humanQuality: 'not-evaluated', outlineChoice: null, originalJudgmentReruns: 0, completedAt: new Date().toISOString()};
@@ -611,6 +1107,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       const v = await readDigestFormalHandoffInputsV001();
       process.stdout.write(JSON.stringify({status: 'saved-inputs-qualified', groups: v.traces.length,
         cues: v.correspondence.rows.length, atoms: v.meaning.atomOccurrences.length}) + '\n');
+    } else if (process.argv.length === 3 && process.argv[2] === '--216-inputs-only') {
+      const v = await readDigestFormal216HandoffInputsV002();
+      process.stdout.write(JSON.stringify({status: '216-saved-inputs-qualified', checkedAt: v.checkedAt, groups: v.traces.length,
+        cues: v.correspondence.rows.length, atoms: v.meaning.atomOccurrences.length, manifestBinding: v.manifestBinding}) + '\n');
     } else {
       assert.equal(process.argv.length, 4); assert.equal(process.argv[2], '--permit');
       const result = await runDigestFormalCandidateV001(path.resolve(process.argv[3]));

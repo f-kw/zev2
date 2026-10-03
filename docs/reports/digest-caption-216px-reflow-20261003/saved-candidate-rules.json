@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "digest-caption-216px-candidate-rules-v001",
+  "candidatePlanId": "digest-caption-216px-reflow-20261003-v001",
+  "attempt": "attempt-002",
+  "authorizationBinding": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json",
+    "fileSha256": "8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419",
+    "sizeBytes": 2430
+  },
+  "sourceManifestBinding": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+    "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41"
+  },
+  "oldTaskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+  "newTaskDescription": "各captionの境界片を記載順に一度ずつ全量使用してください。cueは、直前から続く発話がそれだけで意味を読める短いまとまりになり、その末尾で発話の意味が一区切りつくように、cue終端を提示されたboundaryIdから選んでください。cue終端を意味の基準で先に決め、そのcueが一行に収まらない場合だけ行末を提示されたboundaryIdから選んでください。cue終端は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。行末は語、固有名詞、反復語の文字途中に置かないでください。長い一続きの文節は、同じcueの中で読みやすく表示するため、構成語の境目、または助詞・助動詞の境目に限って改行してよいものとします。必要な行末候補が複数ある場合は、二行の幅が大きく偏らない候補を選んでください。各cueはstyleLimits.maxLinesPerCue以下とし、一行に収まるcueを改行しないでください。最後のcueはcaption最後のboundaryIdで終えてください。本文、境界片、ID、順序を変更しないでください。",
+  "candidateOnly": true,
+  "generalStylesOrDefaultsChanged": false,
+  "originalMeaningOwnerAndClockUnchanged": true,
+  "oldCueOuterBoundaryPolicy": {
+    "previous": "conservative-helper-provisional-preservation",
+    "current": "not-required",
+    "previousWasUserAuthorizationCondition": false,
+    "sameRetainedGroupBoundaryRepositionAllowed": true
+  },
+  "rules": {
+    "cueEnds": "meaning-complete; do not split a word, proper noun, repeated word, or a continuous phrase",
+    "lineEnds": "do not split a word, proper noun, or repeated word in the middle of its characters; a long continuous phrase may wrap only at constituent-word or particle/auxiliary boundaries within the same cue",
+    "useAllBoundariesExactlyOnceInOrder": true,
+    "oneLineCueNotWrapped": true,
+    "twoLineWidthImbalanceMinimized": true,
+    "noTextRewriteIdChangeOrTimeExtension": true,
+    "maxLogicalWidthPerLine": 15,
+    "maxLinesPerCue": 2
+  },
+  "judgments": 0,
+  "validatorExemptions": 0,
+  "newTrust": false
+}

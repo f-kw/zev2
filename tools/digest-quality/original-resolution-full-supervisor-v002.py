@@ -112,10 +112,11 @@ def run_resume(directory,command,resume_permit):
 # These limits and two devices belong to the expressly approved single run.
 # They are not defaults for another plan or an alternate storage location.
 FORMAL_REPO = str(Path(__file__).resolve().parents[2])
-FORMAL_MANIFEST = '04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41'
+FORMAL_MANIFEST = '784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444'  # Saved/read-back actual candidate, not an execution permit
+FORMAL_MANIFEST_PATH = 'runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json'
 FORMAL_STORAGE = dict(guestRoot='/Volumes/ZEV-Digest-20261003-01',
-    guestVolumeUuid='7212F3BB-32FB-4F02-A71C-E570421FF2E0',guestDevice=16777243,
-    hostRoot='/Volumes/KIOXIA',hostVolumeUuid='0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1',hostDevice=16777238,
+    guestVolumeUuid='7212F3BB-32FB-4F02-A71C-E570421FF2E0',
+    hostRoot='/Volumes/KIOXIA',hostVolumeUuid='0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1',
     imagePath='/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle',
     imageMaximumBytes=100_000_000_000,hostMetadataReserveBytes=6_254_231_552,internalRoot=FORMAL_REPO)
 FORMAL_CODE = ['runner/src/digest-formal-handoff-v001.ts',
@@ -123,7 +124,8 @@ FORMAL_CODE = ['runner/src/digest-formal-handoff-v001.ts',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
     'evals/clip_composition/render_presentation_v002.mjs',
     'tools/digest-quality/original-resolution-low-memory-composite.mjs',
-    'tools/digest-quality/original-resolution-full-supervisor-v002.py']
+    'tools/digest-quality/original-resolution-full-supervisor-v002.py',
+    'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs']
 
 def verified_file(ref):
     path=Path(ref['path']);assert path.is_absolute() and path.is_file() and not path.is_symlink(),'bound file missing or symlink'
@@ -131,6 +133,45 @@ def verified_file(ref):
     assert re.fullmatch('[0-9a-f]{64}',ref['fileSha256']),'invalid bound SHA'
     assert hashlib.sha256(path.read_bytes()).hexdigest()==ref['fileSha256'],'formal bound file changed: '+str(path)
     return path
+
+def verified_repo_authorization(ref,relative_path):
+    assert ref['path'] in (relative_path,FORMAL_REPO+'/'+relative_path),'different supporting authorization path'
+    return verified_file({**ref,'path':FORMAL_REPO+'/'+relative_path})
+
+def validate_216_authorization(approval):
+    assert isinstance(FORMAL_MANIFEST,str) and re.fullmatch('[0-9a-f]{64}',FORMAL_MANIFEST),'216px manifest actual SHA not yet bound'
+    assert approval['schemaVersion']=='digest-formal-user-manufacturing-authorization-v002','new 216px authorization required'
+    assert approval['userApproval']==dict(atMinuteUtc='2026-10-03T09:52Z',
+        messageId='Sentinel_1e76075a886c8191aa441b21201f9b00',
+        text='調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて',
+        sourceThreadId='01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6'),'different 216px user approval'
+    assert approval['candidateConditions']==dict(fontSizePx=216,actualInkMarginPx=108,
+        maxLogicalWidthPerLine=15,maxLinesPerCue=2,horizontalSafeMarginRatio=.05625,layoutRulesChanged=True),'different 216px conditions'
+    assert approval['originalCandidateManifestSha256']=='04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41','original candidate history changed'
+    assert approval['planManifestSha256']==FORMAL_MANIFEST,'216px authorization manifest changed'
+    assert approval['planId']=='digest-formal-handoff-20261003-v001','different 216px authorization plan'
+    assert approval['outputRoot']=='runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001','different 216px authorization output prefix'
+    assert approval['implementationPaths']==FORMAL_CODE,'216px authorization implementation paths changed'
+    assert approval['acceptedMain']=='becf6f69e67fc1afb0c910268a540fcc7f0179c4','different accepted 216px start commit'
+    assert approval['normalCandidates']==1 and approval['humanQuality']=='pending' and approval['outlineChoice'] is None,'different candidate quality scope'
+    assert approval['guard']==dict(startBytes=50_000_000_000,reserveBytes=12_000_000_000,
+        maximumRssBytes=17_179_869_184,maximumPressure=1,observationIntervalSeconds=1,
+        nextUnitPlusReserve=True,stopOwnProcessGroup=True,restartOnReconnect=False),'216px safety conditions changed'
+    verified_repo_authorization(approval['originalManufacturingAuthorizationBinding'],
+        'docs/reports/digest-formal-apfs-preflight-20261003/authorization-record.json')
+    verified_repo_authorization(approval['captionAuthorizationBinding'],
+        'docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json')
+
+    for key,relative,expected_sha,size in (
+        ('typographyAdoptionBinding','docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json',
+         'f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884',1451),
+        ('typographyConfigurationBinding','docs/reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json',
+         'a7e228fe5814b32cb168e737bcc23b7f287d43f3ee852546172e3c56ab6c67bf',1832),
+        ('sourceConnectionDecisionBinding','docs/reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json',
+         '8255c2579b072ddb2bf339fd56f179e87b97154bc763aecd44f04a199cd71a40',1668)):
+        binding=approval[key]
+        assert binding['fileSha256']==expected_sha and binding.get('sizeBytes')==size,'different typography authorization record'
+        verified_repo_authorization(binding,relative)
 
 def validate_formal_permit(permit,directory,command):
     assert permit['status']=='verified-formal-handoff-v001','new formal permit required'
@@ -140,17 +181,23 @@ def validate_formal_permit(permit,directory,command):
     assert len(command)==6 and Path(command[0]).is_absolute() and Path(command[0]).is_file(),'invalid formal node command'
     assert command[1:]==['--import',FORMAL_REPO+'/runner/node_modules/tsx/dist/loader.mjs',
         FORMAL_REPO+'/runner/src/digest-formal-handoff-v001.ts','--permit',permit['bindings']['commandPermitPath']],'formal entry command changed'
-    assert permit['storage']==FORMAL_STORAGE,'formal storage binding changed'
+    storage=permit['storage'];devices={key:storage.get(key) for key in ('guestDevice','hostDevice')}
+    assert all(type(value) is int and value>0 for value in devices.values()),'observed storage device binding missing'
+    assert devices['guestDevice']!=devices['hostDevice'],'guest and host must remain separate devices'
+    assert {key:value for key,value in storage.items() if key not in devices}==FORMAL_STORAGE,'formal storage binding changed'
     bindings=permit['bindings'];prefix=bindings['logicalPrefix']
     assert prefix=='runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001','different formal logical prefix'
     assert not prefix.endswith('/') and all(p not in ('','..','.') for p in prefix.split('/')),'invalid formal prefix components'
     output_root=Path(FORMAL_STORAGE['guestRoot'])/prefix
     assert output_root in Path(directory).parents,'monitor is not inside the approved output prefix'
     assert str(Path(directory).parent.resolve())==str(Path(directory).parent),'monitor parent is symlink or absent'
-    assert bindings['planManifest']['fileSha256']==FORMAL_MANIFEST,'different candidate manifest'
+    assert isinstance(FORMAL_MANIFEST,str) and re.fullmatch('[0-9a-f]{64}',FORMAL_MANIFEST),'216px manifest actual SHA not yet bound'
+    assert bindings['planManifest']['fileSha256']==FORMAL_MANIFEST,'different 216px candidate manifest'
     manifest=verified_file(bindings['planManifest']);approval=verified_file(bindings['approvalRecord'])
-    assert str(manifest)==FORMAL_REPO+'/runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json','different manifest path'
+    assert str(manifest)==FORMAL_REPO+'/'+FORMAL_MANIFEST_PATH,'different 216px manifest path'
     assert Path(FORMAL_REPO) in approval.parents,'approval must remain repository bound'
+    authorization=json.loads(approval.read_text());validate_216_authorization(authorization)
+    assert authorization['storage']==storage,'216px authorization storage changed'
     assert bindings['planId']=='digest-formal-handoff-20261003-v001','different formal plan ID'
     head=subprocess.check_output(['git','-C',FORMAL_REPO,'rev-parse','HEAD'],text=True).strip()
     assert re.fullmatch('[0-9a-f]{40}',bindings['implementationSha']) and head==bindings['implementationSha'],'implementation commit changed'
