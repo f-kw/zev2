@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "digest-caption-216px-user-instruction-v001",
+  "recordId": "digest-caption-216px-half-character-margin-20261003-v001",
+  "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+  "userInstruction": {
+    "atMinuteUtc": "2026-10-03T09:52Z",
+    "messageId": "Sentinel_1e76075a886c8191aa441b21201f9b00",
+    "text": "調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて",
+    "advisorInterpretation": "今の見本の約1.5倍、文字サイズ216pxを基準にして、左右それぞれに半文字分ほどの余白を取ります。大きくすると一度に入る文字数が減るので、言葉を欠かさず、読みやすい位置で字幕を区切り直して進めます。"
+  },
+  "scope": {
+    "oneSavedPlanOnly": true,
+    "fontSizePx": 216,
+    "minimumActualInkHorizontalMarginPx": 108,
+    "candidateCanvasSafeAreaPx": {"left": 108, "right": 108, "top": 40, "bottom": 40},
+    "candidateHorizontalSafeMarginRatio": 0.05625,
+    "maxLogicalWidthPerLine": 15,
+    "maxLinesPerCue": 2,
+    "logicalWidthDerivation": "floor((1920 - 108*2 - 24 - ceil(216*0.04)*2) / (216/2)) = 15; actual glyph bounds are checked separately",
+    "borderWidthPx": 8,
+    "glowWidthPx": 4,
+    "textAndSourceIdsUnchanged": true,
+    "retainedVideoSegments": 9,
+    "retainedAtoms": 3613,
+    "frameCount": 27691,
+    "sampleCount": 40705770,
+    "sequenceAndOriginalAudioUnchanged": true,
+    "candidateReflowAndNecessaryCueBoundariesAuthorized": true,
+    "technicalChecksThenOneNormalVideoAuthorized": true,
+    "sameAppearanceReapprovalRequired": false,
+    "generalStylesOrDefaultsChanged": false,
+    "semanticRewritingAuthorized": false,
+    "newMediaOrPaidApiAuthorized": false,
+    "newEffectsOrPublicationAuthorized": false,
+    "oldAcceptedArtifactDeletionAuthorized": false,
+    "guard": {"startBytes": 50000000000, "reserveBytes": 12000000000, "maximumRssBytes": 17179869184, "maximumPressure": 1, "observationIntervalSeconds": 1, "nextUnitPlusReserve": true, "stopOwnProcessGroup": true, "restartOnReconnect": false}
+  },
+  "sourceCandidateManifest": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+    "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41"
+  },
+  "humanQuality": "pending",
+  "outlineChoice": null
+}

@@ -1,0 +1,849 @@
+{
+  "schemaVersion": "digest-216-early-two-preview-evidence-v001",
+  "startedAt": "2026-10-03T10:07:57.403Z",
+  "completedAt": "2026-10-03T10:08:03.061Z",
+  "authorizationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json",
+    "fileSha256": "8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419",
+    "sizeBytes": 2430
+  },
+  "authorization": {
+    "schemaVersion": "digest-caption-216px-user-instruction-v001",
+    "recordId": "digest-caption-216px-half-character-margin-20261003-v001",
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "userInstruction": {
+      "atMinuteUtc": "2026-10-03T09:52Z",
+      "messageId": "Sentinel_1e76075a886c8191aa441b21201f9b00",
+      "text": "調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて",
+      "advisorInterpretation": "今の見本の約1.5倍、文字サイズ216pxを基準にして、左右それぞれに半文字分ほどの余白を取ります。大きくすると一度に入る文字数が減るので、言葉を欠かさず、読みやすい位置で字幕を区切り直して進めます。"
+    },
+    "scope": {
+      "oneSavedPlanOnly": true,
+      "fontSizePx": 216,
+      "minimumActualInkHorizontalMarginPx": 108,
+      "candidateCanvasSafeAreaPx": {
+        "left": 108,
+        "right": 108,
+        "top": 40,
+        "bottom": 40
+      },
+      "candidateHorizontalSafeMarginRatio": 0.05625,
+      "maxLogicalWidthPerLine": 15,
+      "maxLinesPerCue": 2,
+      "logicalWidthDerivation": "floor((1920 - 108*2 - 24 - ceil(216*0.04)*2) / (216/2)) = 15; actual glyph bounds are checked separately",
+      "borderWidthPx": 8,
+      "glowWidthPx": 4,
+      "textAndSourceIdsUnchanged": true,
+      "retainedVideoSegments": 9,
+      "retainedAtoms": 3613,
+      "frameCount": 27691,
+      "sampleCount": 40705770,
+      "sequenceAndOriginalAudioUnchanged": true,
+      "candidateReflowAndNecessaryCueBoundariesAuthorized": true,
+      "technicalChecksThenOneNormalVideoAuthorized": true,
+      "sameAppearanceReapprovalRequired": false,
+      "generalStylesOrDefaultsChanged": false,
+      "semanticRewritingAuthorized": false,
+      "newMediaOrPaidApiAuthorized": false,
+      "newEffectsOrPublicationAuthorized": false,
+      "oldAcceptedArtifactDeletionAuthorized": false,
+      "guard": {
+        "startBytes": 50000000000,
+        "reserveBytes": 12000000000,
+        "maximumRssBytes": 17179869184,
+        "maximumPressure": 1,
+        "observationIntervalSeconds": 1,
+        "nextUnitPlusReserve": true,
+        "stopOwnProcessGroup": true,
+        "restartOnReconnect": false
+      }
+    },
+    "sourceCandidateManifest": {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+      "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41"
+    },
+    "humanQuality": "pending",
+    "outlineChoice": null
+  },
+  "implementationHead": "5e4cc1d814755bac64773b8f9a0f124948400030",
+  "initialGitStatus": "?? docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json\n",
+  "sourceManifestBinding": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+    "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41"
+  },
+  "sourceCorrespondenceBinding": {
+    "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence.json",
+    "fileSha256": "950f1edf9ea2a6f4ae8b1b2991d78b1c706bbaf2bf8877d04dcf66df15ed98f5",
+    "sizeBytes": 2045952
+  },
+  "sourceMeaningBinding": {
+    "path": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/meaning-input.json",
+    "fileSha256": "6e16d247d36f841783d59badc4c4a3f35c8cf4739b6acae29baccc32a7d061a3"
+  },
+  "originalClockBinding": {
+    "path": "artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa/clock-resolution.json",
+    "fileSha256": "a2392d2edeca5630017da88effd8be2671f91991f88211977295517a55c7d6f8"
+  },
+  "formalBaselineTrust": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/registries/presentation/presentation-renderer-trust-v002/trust.json",
+    "fileSha256": "6e21352ff105e3b77acc351625fed22ff97486fb21d0ce9ee5b1821750a9047a",
+    "sizeBytes": 5397
+  },
+  "font": {
+    "path": "/Users/kawafmm/workspace/zev2/runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+    "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+    "sizeBytes": 4106788
+  },
+  "runtime": [
+    {
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c",
+      "sizeBytes": 88501744
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/@remotion/cli/remotion-cli.js",
+      "fileSha256": "a10a711f052487d302dcf52dc08729c84c4deca0dc41c5b708edd1a7b7b48bfa",
+      "sizeBytes": 225
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "fileSha256": "b469d05c698ccf9f4ae3dc43fb194fbdcf56f9da1fc46dcc19f2bf9fe2aa20b8",
+      "sizeBytes": 159972320
+    },
+    {
+      "path": "/opt/homebrew/bin/magick",
+      "fileSha256": "78311032c39a3192ad4ed34ffdf6aab60e21b8e635005f9398095d73c9bd7a29",
+      "sizeBytes": 69952
+    }
+  ],
+  "implementationBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "sizeBytes": 152882
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+      "sizeBytes": 28811
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "fileSha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "sizeBytes": 5139
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385",
+      "sizeBytes": 14071
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+      "sizeBytes": 2144
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d",
+      "sizeBytes": 8755
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "a7268c9b7e3e67907239f47367a49b338a977714114ded833586f938b1c01f0f",
+      "sizeBytes": 45197
+    }
+  ],
+  "renderCount": 2,
+  "rendererPath": "existing overlay adapter renderStill only",
+  "background": {
+    "kind": "neutral",
+    "color": "#404040",
+    "sourceVideoBackground": false
+  },
+  "outputStorage": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001",
+    "temporaryDirectory": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/temporary",
+    "initialFreeBytes": 13030150144,
+    "bundleCache": false
+  },
+  "rows": [
+    {
+      "groupOrdinal": 1,
+      "sourceOldCueOrdinal": 2,
+      "sampleIsProspectiveChild": true,
+      "formalReflowSaved": false,
+      "startFrame": 117,
+      "endFrameExclusive": 160,
+      "startSeconds": 3.9,
+      "endSeconds": 5.333333333333333,
+      "sourceStartMs": 163653,
+      "sourceEndMs": 165114,
+      "sourceStartFrame30": 4910,
+      "sourceEndFrame30": 4953,
+      "sourceClockMapping": {
+        "segmentId": "segment-0001",
+        "sourceStartMs": 159770,
+        "sourceEndMs": 213077,
+        "sourceStartFrame30": 4793,
+        "sourceEndFrame30": 6392,
+        "outputStartFrame": 0,
+        "outputEndFrame": 1599,
+        "audioSamples": {
+          "sourceStart": 7045710,
+          "sourceEnd": 9396240,
+          "outputStart": 0,
+          "outputEnd": 2350530
+        }
+      },
+      "oldCueOuterRange": {
+        "startFrame": 117,
+        "endFrameExclusive": 244
+      },
+      "lines": [
+        "ホラーゲーム",
+        "とかやろうかな"
+      ],
+      "logicalWidths": [
+        12,
+        14
+      ],
+      "atomOccurrenceIds": [
+        "digest-caption-input-preparation-20261003-v001-atom-000011",
+        "digest-caption-input-preparation-20261003-v001-atom-000012",
+        "digest-caption-input-preparation-20261003-v001-atom-000013",
+        "digest-caption-input-preparation-20261003-v001-atom-000014",
+        "digest-caption-input-preparation-20261003-v001-atom-000015",
+        "digest-caption-input-preparation-20261003-v001-atom-000016",
+        "digest-caption-input-preparation-20261003-v001-atom-000017",
+        "digest-caption-input-preparation-20261003-v001-atom-000018",
+        "digest-caption-input-preparation-20261003-v001-atom-000019",
+        "digest-caption-input-preparation-20261003-v001-atom-000020",
+        "digest-caption-input-preparation-20261003-v001-atom-000021",
+        "digest-caption-input-preparation-20261003-v001-atom-000022",
+        "digest-caption-input-preparation-20261003-v001-atom-000023"
+      ],
+      "sourceSegmentIds": [
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90
+      ],
+      "renderedAtomCount": 13,
+      "oldCueAtomCount": 22,
+      "wholeOldCueCovered": false,
+      "omittedOldCueAtomIds": [
+        "digest-caption-input-preparation-20261003-v001-atom-000024",
+        "digest-caption-input-preparation-20261003-v001-atom-000025",
+        "digest-caption-input-preparation-20261003-v001-atom-000026",
+        "digest-caption-input-preparation-20261003-v001-atom-000027",
+        "digest-caption-input-preparation-20261003-v001-atom-000028",
+        "digest-caption-input-preparation-20261003-v001-atom-000029",
+        "digest-caption-input-preparation-20261003-v001-atom-000030",
+        "digest-caption-input-preparation-20261003-v001-atom-000031",
+        "digest-caption-input-preparation-20261003-v001-atom-000032"
+      ],
+      "omittedOldCueText": "と思ったんですけど",
+      "previewProps": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/01_two_lines_003.900s.preview-props.json",
+        "fileSha256": "916355e149b7fa856fa4b450378355cdd5cbffec4715ebfc163230fb6ed1948e",
+        "sizeBytes": 4426
+      },
+      "appearanceChangedFields": [
+        {
+          "path": "visualState.textStyle.fontSizePx",
+          "before": 144,
+          "after": 216
+        },
+        {
+          "path": "canvas.safeAreaPx.left",
+          "before": 4,
+          "after": 108
+        },
+        {
+          "path": "canvas.safeAreaPx.right",
+          "before": 4,
+          "after": 108
+        },
+        {
+          "path": "layoutRules.horizontalSafeMarginRatio",
+          "before": 0.04,
+          "after": 0.05625
+        }
+      ],
+      "allOtherAppearancePropsUnchanged": true,
+      "estimated": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "digest-216-early-preview-1-2",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 300,
+                "top": 358.2,
+                "right": 1620,
+                "bottom": 598.2
+              },
+              {
+                "left": 192,
+                "top": 682.2,
+                "right": 1728,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 349.2,
+              "left": 183,
+              "width": 1554,
+              "height": 626
+            }
+          }
+        ],
+        "violations": []
+      },
+      "actualAlpha": {
+        "instructionId": "digest-216-early-preview-1-2",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 220,
+          "top": 419,
+          "right": 1702,
+          "bottom": 972,
+          "width": 1482,
+          "height": 553
+        },
+        "lineCount": 2,
+        "lineRects": [
+          {
+            "left": 300,
+            "top": 358.2,
+            "right": 1620,
+            "bottom": 598.2
+          },
+          {
+            "left": 192,
+            "top": 682.2,
+            "right": 1728,
+            "bottom": 922.2
+          }
+        ],
+        "lineAlphaBounds": [],
+        "visibilityComparisonBasis": null,
+        "representativeFrame": null,
+        "changedPixelsAgainstInstructionOmittedFrame": null,
+        "appliedOverlayPropsCanonicalSha256": null,
+        "overlayFile": null,
+        "overlaySha256": null
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "text": "ホラーゲーム",
+          "left": 311,
+          "top": 419,
+          "right": 1595,
+          "bottom": 648,
+          "width": 1284,
+          "height": 229,
+          "leftMarginPx": 311,
+          "rightMarginPx": 325
+        },
+        {
+          "lineIndex": 1,
+          "text": "とかやろうかな",
+          "left": 220,
+          "top": 749,
+          "right": 1702,
+          "bottom": 972,
+          "width": 1482,
+          "height": 223,
+          "leftMarginPx": 220,
+          "rightMarginPx": 218
+        }
+      ],
+      "actualLeftMarginPx": 220,
+      "actualRightMarginPx": 218,
+      "transparentLineGapPx": 101,
+      "outerCanvasEdgeAlphaPixels": 0,
+      "unsafeAlphaPixels": 0,
+      "actualInkMarginsPassed": true,
+      "overlay": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/01_two_lines_003.900s.overlay.png",
+        "fileSha256": "d17188a4c49b00344e3b55056ed01fa47478e3c20d23a407006c4b67f11d4ae3",
+        "sizeBytes": 259516
+      },
+      "neutralPreview": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/01_two_lines_003.900s.neutral-preview.png",
+        "fileSha256": "09c5402fa627e53813500f66bcfe9a38d9c6952251c2391e342450aaca23dfe1",
+        "sizeBytes": 301383
+      },
+      "actualVideoBackground": false,
+      "visualQuality": "native-resolution view_image inspection: specified text present; no obvious glyph loss, clipping or line overlap; neutral background only"
+    },
+    {
+      "groupOrdinal": 4,
+      "sourceOldCueOrdinal": 17,
+      "sampleIsProspectiveChild": true,
+      "formalReflowSaved": false,
+      "startFrame": 7306,
+      "endFrameExclusive": 7423,
+      "startSeconds": 243.53333333333333,
+      "endSeconds": 247.43333333333334,
+      "sourceStartMs": 2045220,
+      "sourceEndMs": 2049123,
+      "sourceStartFrame30": 61357,
+      "sourceEndFrame30": 61474,
+      "sourceClockMapping": {
+        "segmentId": "segment-0004",
+        "sourceStartMs": 1993090,
+        "sourceEndMs": 2256057,
+        "sourceStartFrame30": 59793,
+        "sourceEndFrame30": 67682,
+        "outputStartFrame": 5742,
+        "outputEndFrame": 13631,
+        "audioSamples": {
+          "sourceStart": 87895710,
+          "sourceEnd": 99492540,
+          "outputStart": 8440740,
+          "outputEnd": 20037570
+        }
+      },
+      "oldCueOuterRange": {
+        "startFrame": 7306,
+        "endFrameExclusive": 7423
+      },
+      "lines": [
+        "あなたみたいな",
+        "新入りがねぇ"
+      ],
+      "logicalWidths": [
+        14,
+        12
+      ],
+      "atomOccurrenceIds": [
+        "digest-caption-input-preparation-20261003-v001-atom-001206",
+        "digest-caption-input-preparation-20261003-v001-atom-001207",
+        "digest-caption-input-preparation-20261003-v001-atom-001208",
+        "digest-caption-input-preparation-20261003-v001-atom-001209",
+        "digest-caption-input-preparation-20261003-v001-atom-001210",
+        "digest-caption-input-preparation-20261003-v001-atom-001211",
+        "digest-caption-input-preparation-20261003-v001-atom-001212",
+        "digest-caption-input-preparation-20261003-v001-atom-001213",
+        "digest-caption-input-preparation-20261003-v001-atom-001214",
+        "digest-caption-input-preparation-20261003-v001-atom-001215",
+        "digest-caption-input-preparation-20261003-v001-atom-001216",
+        "digest-caption-input-preparation-20261003-v001-atom-001217",
+        "digest-caption-input-preparation-20261003-v001-atom-001218"
+      ],
+      "sourceSegmentIds": [
+        7899,
+        7900,
+        7901,
+        7902,
+        7903,
+        7904,
+        7905,
+        7906,
+        7907,
+        7908,
+        7909,
+        7910,
+        7911
+      ],
+      "renderedAtomCount": 13,
+      "oldCueAtomCount": 13,
+      "wholeOldCueCovered": true,
+      "omittedOldCueAtomIds": [],
+      "omittedOldCueText": "",
+      "previewProps": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/02_two_lines_243.533s.preview-props.json",
+        "fileSha256": "90f6b1be43e889eed095f68ce5c305fcaa2a0219d713c889b7a25ac5f5022427",
+        "sizeBytes": 4427
+      },
+      "appearanceChangedFields": [
+        {
+          "path": "visualState.textStyle.fontSizePx",
+          "before": 144,
+          "after": 216
+        },
+        {
+          "path": "canvas.safeAreaPx.left",
+          "before": 4,
+          "after": 108
+        },
+        {
+          "path": "canvas.safeAreaPx.right",
+          "before": 4,
+          "after": 108
+        },
+        {
+          "path": "layoutRules.horizontalSafeMarginRatio",
+          "before": 0.04,
+          "after": 0.05625
+        }
+      ],
+      "allOtherAppearancePropsUnchanged": true,
+      "estimated": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "digest-216-early-preview-4-17",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 192,
+                "top": 358.2,
+                "right": 1728,
+                "bottom": 598.2
+              },
+              {
+                "left": 300,
+                "top": 682.2,
+                "right": 1620,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 349.2,
+              "left": 183,
+              "width": 1554,
+              "height": 626
+            }
+          }
+        ],
+        "violations": []
+      },
+      "actualAlpha": {
+        "instructionId": "digest-216-early-preview-4-17",
+        "alphaMax": 1,
+        "alphaBounds": {
+          "left": 207,
+          "top": 429,
+          "right": 1713,
+          "bottom": 975,
+          "width": 1506,
+          "height": 546
+        },
+        "lineCount": 2,
+        "lineRects": [
+          {
+            "left": 192,
+            "top": 358.2,
+            "right": 1728,
+            "bottom": 598.2
+          },
+          {
+            "left": 300,
+            "top": 682.2,
+            "right": 1620,
+            "bottom": 922.2
+          }
+        ],
+        "lineAlphaBounds": [],
+        "visibilityComparisonBasis": null,
+        "representativeFrame": null,
+        "changedPixelsAgainstInstructionOmittedFrame": null,
+        "appliedOverlayPropsCanonicalSha256": null,
+        "overlayFile": null,
+        "overlaySha256": null
+      },
+      "lineAlphaBounds": [
+        {
+          "lineIndex": 0,
+          "text": "あなたみたいな",
+          "left": 207,
+          "top": 429,
+          "right": 1713,
+          "bottom": 649,
+          "width": 1506,
+          "height": 220,
+          "leftMarginPx": 207,
+          "rightMarginPx": 207
+        },
+        {
+          "lineIndex": 1,
+          "text": "新入りがねぇ",
+          "left": 301,
+          "top": 746,
+          "right": 1592,
+          "bottom": 975,
+          "width": 1291,
+          "height": 229,
+          "leftMarginPx": 301,
+          "rightMarginPx": 328
+        }
+      ],
+      "actualLeftMarginPx": 207,
+      "actualRightMarginPx": 207,
+      "transparentLineGapPx": 97,
+      "outerCanvasEdgeAlphaPixels": 0,
+      "unsafeAlphaPixels": 0,
+      "actualInkMarginsPassed": true,
+      "overlay": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/02_two_lines_243.533s.overlay.png",
+        "fileSha256": "3484819fd9a097afef3d9bd369b33e7f4e4916725bb6a2000b29137f1bf704cd",
+        "sizeBytes": 325593
+      },
+      "neutralPreview": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/02_two_lines_243.533s.neutral-preview.png",
+        "fileSha256": "15d054b79dc9c26fdca39c7dbaf78344c76077628337f38d9f3ede4fdd3320b6",
+        "sizeBytes": 389430
+      },
+      "actualVideoBackground": false,
+      "visualQuality": "native-resolution view_image inspection: specified text present; no obvious glyph loss, clipping or line overlap; neutral background only"
+    }
+  ],
+  "performance": {
+    "records": [
+      {
+        "sequence": 1,
+        "label": "overlay-still",
+        "startedAt": "2026-10-03T10:07:57.407Z",
+        "endedAt": "2026-10-03T10:07:59.795Z",
+        "childMilliseconds": 2388.030167,
+        "evidenceWriteMilliseconds": 0.6852920000001177,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 2,
+        "label": "preview-1-2-alpha",
+        "startedAt": "2026-10-03T10:07:59.796Z",
+        "endedAt": "2026-10-03T10:07:59.893Z",
+        "childMilliseconds": 96.38320799999974,
+        "evidenceWriteMilliseconds": 0.5315839999998389,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 3,
+        "label": "preview-1-2-bounds",
+        "startedAt": "2026-10-03T10:07:59.894Z",
+        "endedAt": "2026-10-03T10:08:00.033Z",
+        "childMilliseconds": 139.24779200000012,
+        "evidenceWriteMilliseconds": 0.6031659999998737,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 4,
+        "label": "png-dimensions",
+        "startedAt": "2026-10-03T10:08:00.034Z",
+        "endedAt": "2026-10-03T10:08:00.059Z",
+        "childMilliseconds": 25.203625000000102,
+        "evidenceWriteMilliseconds": 0.49920799999972587,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 5,
+        "label": "complete-png-alpha-row-inspection",
+        "startedAt": "2026-10-03T10:08:00.060Z",
+        "endedAt": "2026-10-03T10:08:00.137Z",
+        "childMilliseconds": 76.62954100000024,
+        "evidenceWriteMilliseconds": 0.6828749999999673,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 6,
+        "label": "neutral-preview-composite",
+        "startedAt": "2026-10-03T10:08:00.153Z",
+        "endedAt": "2026-10-03T10:08:00.282Z",
+        "childMilliseconds": 129.07858299999998,
+        "evidenceWriteMilliseconds": 0.48012500000004366,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 7,
+        "label": "overlay-still",
+        "startedAt": "2026-10-03T10:08:00.285Z",
+        "endedAt": "2026-10-03T10:08:02.592Z",
+        "childMilliseconds": 2307.4495419999994,
+        "evidenceWriteMilliseconds": 0.554707999999664,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 8,
+        "label": "preview-4-17-alpha",
+        "startedAt": "2026-10-03T10:08:02.593Z",
+        "endedAt": "2026-10-03T10:08:02.681Z",
+        "childMilliseconds": 88.01708300000064,
+        "evidenceWriteMilliseconds": 0.4059580000002825,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 9,
+        "label": "preview-4-17-bounds",
+        "startedAt": "2026-10-03T10:08:02.682Z",
+        "endedAt": "2026-10-03T10:08:02.817Z",
+        "childMilliseconds": 134.4611670000004,
+        "evidenceWriteMilliseconds": 0.47858400000041,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 10,
+        "label": "png-dimensions",
+        "startedAt": "2026-10-03T10:08:02.818Z",
+        "endedAt": "2026-10-03T10:08:02.840Z",
+        "childMilliseconds": 22.531207999999424,
+        "evidenceWriteMilliseconds": 0.4148329999998168,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 11,
+        "label": "complete-png-alpha-row-inspection",
+        "startedAt": "2026-10-03T10:08:02.841Z",
+        "endedAt": "2026-10-03T10:08:02.909Z",
+        "childMilliseconds": 68.27916600000026,
+        "evidenceWriteMilliseconds": 0.5321670000002996,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      },
+      {
+        "sequence": 12,
+        "label": "neutral-preview-composite",
+        "startedAt": "2026-10-03T10:08:02.928Z",
+        "endedAt": "2026-10-03T10:08:03.058Z",
+        "childMilliseconds": 130.1828749999995,
+        "evidenceWriteMilliseconds": 0.5037499999998545,
+        "code": 0,
+        "signal": null,
+        "spawnFailed": false
+      }
+    ],
+    "byLabel": {
+      "overlay-still": {
+        "processCount": 2,
+        "childMilliseconds": 4695.479708999999,
+        "evidenceWriteMilliseconds": 1.2399999999997817
+      },
+      "preview-1-2-alpha": {
+        "processCount": 1,
+        "childMilliseconds": 96.38320799999974,
+        "evidenceWriteMilliseconds": 0.5315839999998389
+      },
+      "preview-1-2-bounds": {
+        "processCount": 1,
+        "childMilliseconds": 139.24779200000012,
+        "evidenceWriteMilliseconds": 0.6031659999998737
+      },
+      "png-dimensions": {
+        "processCount": 2,
+        "childMilliseconds": 47.734832999999526,
+        "evidenceWriteMilliseconds": 0.9140409999995427
+      },
+      "complete-png-alpha-row-inspection": {
+        "processCount": 2,
+        "childMilliseconds": 144.9087070000005,
+        "evidenceWriteMilliseconds": 1.2150420000002669
+      },
+      "neutral-preview-composite": {
+        "processCount": 2,
+        "childMilliseconds": 259.2614579999995,
+        "evidenceWriteMilliseconds": 0.9838749999998981
+      },
+      "preview-4-17-alpha": {
+        "processCount": 1,
+        "childMilliseconds": 88.01708300000064,
+        "evidenceWriteMilliseconds": 0.4059580000002825
+      },
+      "preview-4-17-bounds": {
+        "processCount": 1,
+        "childMilliseconds": 134.4611670000004,
+        "evidenceWriteMilliseconds": 0.47858400000041
+      }
+    },
+    "operations": [],
+    "byOperationLabel": {},
+    "meaning": "child and renderer API wall times are separate; nested renderer totals must not be added together"
+  },
+  "wallMilliseconds": 5657.371166999999,
+  "boundaries": {
+    "repoImplementationChanges": 0,
+    "trustActivation": false,
+    "fullVideoManufacturing": 0,
+    "newReflowSaved": false,
+    "allCaptionGlyphPass": false,
+    "extraLineMaskOrRepeatRender": 0,
+    "actualVideoReadability": "unassessed",
+    "fullLengthQuality": "unassessed",
+    "humanQuality": "pending"
+  },
+  "imageInspection": {
+    "status": "performed",
+    "checkedAt": "2026-10-03T10:10:24.957930+00:00",
+    "method": "view_image original resolution, both 1920x1080 neutral-preview PNGs",
+    "observed": "指定文字と改行を両方確認。明らかな文字欠け、canvas端の切れ、行重なりは見当たらない。実映像背景と全尺品質は未確認。",
+    "humanQuality": "pending"
+  },
+  "readback": {
+    "checkedAt": "2026-10-03T10:10:24.957930+00:00",
+    "allPreviewPngAndPropsByteShaEqual": true,
+    "authorizationShaUnchanged": true
+  },
+  "processClosure": {
+    "checkedAt": "2026-10-03T10:10:24.957930+00:00",
+    "method": "scoped read-only ps check after normal child exits",
+    "ownTemporaryRootRendererRemaining": 0,
+    "othersStopped": 0
+  },
+  "cleanup": {
+    "at": "2026-10-03T10:10:24.957930+00:00",
+    "deletedDirectory": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-216-early-preview-20261003-v001/temporary",
+    "filesRemoved": 0,
+    "fileBytesRemoved": 0,
+    "kept": "two transparent overlays, two neutral display PNGs, props, audit observations and evidence"
+  }
+}
