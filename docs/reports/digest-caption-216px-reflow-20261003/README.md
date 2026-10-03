@@ -1,3 +1,13 @@
+## 最新現在地 — 2026-10-03 13:41 UTC（同じ一本の限定復旧を実装、正式描画の直前）
+
+親相談役はbody-continuation案の続行を判断済み。Coreにも旧root固定があることを実関数の拒否で確認し、追加の通常接続修正も同じ本人依頼の範囲で続行可と明示された。ファイル数を本人の制限と解釈せず、adapterとCoreの2pathを限定修正、コードcheckpoint87601ca8。Coreは承認済みattempt-001内の固定body-continuation-v001だけ追加し、opaque資格・plan/root一致・生成prefix・旧新hash検査を維持。[判断と限定差分](digest-caption-216px-reflow-20261003/body-connection-consultant-decision.json)。一般ROOT/trust/default/安全条件の変更、旧成果上書き、別製造権限はない。
+
+旧ベース4原本と停止記録31fileは13:26 UTC独立実hash再読一致、13:27:51 UTC旧PGID58723残存0。旧ベース639,776,321B/SHA3c16357c・9区間・27,691frame/40,705,770sample・6QCpassedはKEEP。新しく組み直すplan/source/style/372字幕/結果だけ専用子領域に保存し、旧新コードと由来を別記録で束縛する。正式Core assemble→renderを維持し、字幕・音声・完成QCまで確認する。
+
+13:33:54 UTC正式事前検査passed（372推定配置/font/runtime/source・本文時計保持）、Coreの別root/clone/plan不一致8拒否、既存source suite7/7・最終型検査exit0。実glyph/字幕動画/最終QC/人間品質は未評価。この時点の新lease/permit/描画は未開始。開始前に専用rootの排他leaseを取得し、そのownerを検証から監視起動まで継続、実停止資格の拒否テスト・コード/入力/3device/pressureを直前再確認する。失敗時に大容量生成を始めない。
+
+状態作業中、最終確認2026-10-03 13:41 UTC、次担当このMac実装者。216px・左右108px・最大2行・可変設定、同じ一本と元音声は保持。完了Normal0、humanQuality=pending、outlineChoice=null。pushは本人回答待ち、要求1/実行0/拒否後再試行0/代行0。remoteは13:24 UTC読取becf6f69。下記12:58の相談役待ちは当時の履歴。
+
 # 216px字幕・可変設定・正式製造の進行記録
 
 ## 正式製造の実結果と次判断 — 2026-10-03 12:58 UTC

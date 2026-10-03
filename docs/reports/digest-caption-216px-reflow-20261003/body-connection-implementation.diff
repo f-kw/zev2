@@ -1,0 +1,403 @@
+diff --git a/evals/clip_composition/adopted_media_manufacturing_v001.mts b/evals/clip_composition/adopted_media_manufacturing_v001.mts
+index c38027ff..67eedcae 100644
+--- a/evals/clip_composition/adopted_media_manufacturing_v001.mts
++++ b/evals/clip_composition/adopted_media_manufacturing_v001.mts
+@@ -59,7 +59,8 @@ const DIGEST_STORAGE_OUTPUT_ROOT = 'runtime/artifacts/digest-formal-handoff-2026
+ async function adoptedStorageV001(c: Json, storageContext?: Json) {
+   if (storageContext === undefined) return {abs, publish, readBound, readJson,
+     assertCurrent: async () => {}};
+-  if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
++  if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
++    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v001')
+     || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
+   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
+   await assertQualifiedDigestStorageContextV001(storageContext);
+diff --git a/runner/src/digest-formal-handoff-v001.ts b/runner/src/digest-formal-handoff-v001.ts
+index c7476ddd..21c664d5 100644
+--- a/runner/src/digest-formal-handoff-v001.ts
++++ b/runner/src/digest-formal-handoff-v001.ts
+@@ -1,5 +1,6 @@
+ /** One expressly approved saved Digest. This is not a general storage or trust override. */
+ import assert from 'node:assert/strict';
++import {createReadStream} from 'node:fs';
+ import {readFile, writeFile, mkdir, lstat, realpath, statfs, chmod, readdir} from 'node:fs/promises';
+ import {execFile} from 'node:child_process';
+ import {promisify} from 'node:util';
+@@ -13,6 +14,7 @@ const exec = promisify(execFile);
+ const ROOT = '/Users/kawafmm/workspace/zev2';
+ const PLAN = 'digest-formal-handoff-20261003-v001';
+ const OUT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
++const BODY_OUT = OUT + '/body-continuation-v001';
+ const GUEST = '/Volumes/ZEV-Digest-20261003-01';
+ const HOST = '/Volumes/KIOXIA';
+ const IMAGE = HOST + '/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle';
+@@ -143,6 +145,11 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+   async function current(force = false) {
+     if (!force && Date.now() - lastCheck < 900) return;
+     assert.equal(sha(await readFile(permitPath)), permitSha, 'PERMIT_CHANGED');
++    if (Object.hasOwn(permit, 'bodyContinuation')) {
++      assert.equal(permit.bodyContinuation.ownerBinding.path, path.join(GUEST, BODY_OUT, 'ownership.json'));
++      await readDigestFormalEntryEvidenceBytesV001(permit.bodyContinuation.ownerBinding);
++      process.kill(process.ppid, 0);
++    }
+     assert.equal(sha(await readFile(permit.bindings.approvalRecord.path)), permit.bindings.approvalRecord.fileSha256, 'AUTHORIZATION_CHANGED');
+     assert.equal((await exec('git', ['rev-parse', 'HEAD'], {cwd: ROOT})).stdout.trim(), permit.bindings.implementationSha);
+     assert.equal((await exec('git', ['status', '--porcelain=v1'], {cwd: ROOT})).stdout, '', 'IMPLEMENTATION_CHANGED');
+@@ -169,7 +176,20 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+     lastCheck = Date.now();
+   }
+   await current(true);
+-  const generatedRoot = path.join(GUEST, OUT), tempDirectory = generatedRoot + '/temp';
++  const continuation = Object.hasOwn(permit, 'bodyContinuation')
++    ? await inspectDigestFormalBodyContinuationV001(permit) : undefined;
++  const outputRoot = continuation === undefined ? OUT : BODY_OUT;
++  const generatedRoot = path.join(GUEST, outputRoot), tempDirectory = generatedRoot + '/temp';
++  if (continuation !== undefined) {
++    const owner = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(permit.bodyContinuation.ownerBinding)).toString());
++    assert.equal(owner.controllerPid, process.ppid, 'BODY_CONTINUATION_CONTROLLER_CHANGED');
++    const controller = (await exec('/bin/ps', ['-p', String(process.ppid), '-o', 'args='])).stdout;
++    assert(controller.includes(ROOT + '/tools/digest-quality/original-resolution-full-supervisor-v002.py')
++      && controller.includes(permitPath), 'BODY_CONTINUATION_SUPERVISOR_OWNER_REQUIRED');
++    const owned = JSON.parse(await readFile(permit.monitorDirectory + '/owned-group.json', 'utf8'));
++    assert.equal(owned.parentPid, process.pid); assert.equal(owned.group, process.pid);
++    assert.deepEqual(owned.command, permit.command); assert.deepEqual(owned.bindings, permit.bindings);
++  }
+   const resolve = (p: string) => path.join(generated(p) ? GUEST : ROOT, p);
+   async function readActualBytes(p: string): Promise<Buffer> {
+     await current(); const root = generated(p) ? GUEST : ROOT;
+@@ -177,7 +197,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+     return stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: p});
+   }
+   async function qualifyReadValue(p: string, bytes: Buffer, value: Json) {
+-    if (p === OUT + '/source-package.json') {
++    if (p === outputRoot + '/source-package.json') {
+       assert(publishedSourcePackageSha && sha(bytes) === publishedSourcePackageSha, 'FORMAL_SOURCE_PACKAGE_READBACK_CHANGED');
+       await registerDigestFormalSourcePackageV001(value, inputs, 'manufacturing', context);
+     }
+@@ -193,11 +213,11 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+     return qualifyReadValue(binding.path, bytes, value);
+   }
+   async function publish(p: string, value: Json) {
+-    assert(generated(p) && p !== OUT, 'FORMAL_GENERATED_PREFIX_REQUIRED'); await current(true);
++    assert(generated(p) && p.startsWith(outputRoot + '/'), 'FORMAL_GENERATED_PREFIX_REQUIRED'); await current(true);
+     const target = resolve(p), parent = path.dirname(target);
+     await mkdir(parent, {recursive: true}); assert.equal(await realpath(parent), parent);
+     const bytes: Buffer = m.formal(value);
+-    if (p === OUT + '/source-package.json') {
++    if (p === outputRoot + '/source-package.json') {
+       const record = qualifiedSourcePackages.get(value);
+       assert(record && record.inputs === inputs && record.mode === 'manufacturing' && record.context === context
+         && record.bodySha256 === sha(bytes), 'FORMAL_QUALIFIED_SOURCE_PACKAGE_PUBLICATION_REQUIRED');
+@@ -224,7 +244,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+     const response = JSON.parse(reply); assert.equal(response.id, id, 'SUPERVISOR_REPLY_ID_MISMATCH');
+     assert(response.sample && response.sample.guest && response.sample.host, 'SUPERVISOR_REPLY_INVALID');
+   }
+-  const context = Object.freeze({outputRoot: OUT, storageRoot: GUEST, generatedRoot, tempDirectory,
++  const context = Object.freeze({outputRoot, continuation, storageRoot: GUEST, generatedRoot, tempDirectory,
+     resolve, assertCurrent: current, publish, readBound, readJson, resourceCheck,
+     composeMedia: async (args: Json) => {
+       await current(true); assert.equal(args.expectedFrameCount, 27691);
+@@ -234,7 +254,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
+         plan: args.plan, overlayRecords: args.overlayRecords, expectedFrameCount: args.expectedFrameCount, expectedOverlayCount: inputs.manifest.summary.newCues,
+         outputPath: args.outputPath, ffmpegPath: args.ffmpegPath, processObserver: args.processObserver, resourceCheck});
+       const result = {...evidence, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues};
+-      await publish(OUT + '/low-memory-composite.json', result);
++      await publish(outputRoot + '/low-memory-composite.json', result);
+       return result;
+     }});
+   contexts.add(context); return {context, approval};
+@@ -832,7 +852,7 @@ export async function assertQualifiedDigestFormalSourcePackageTaskV001(value: Js
+     boundaries: boundaries.map((boundary: Json, i: number) => ({boundaryId: boundary.boundaryId, ordinal: i + 1,
+       afterAtomOccurrenceId: atoms[i].atomOccurrenceId}))}]);
+   assert.equal(value.reconstructionMap.caseContexts.length, 1);
+-  const expectedMeaningBinding = record.mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind(OUT + '/meaning-input.json', inputs.meaning);
++  const expectedMeaningBinding = record.mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind((record.context!.outputRoot) + '/meaning-input.json', inputs.meaning);
+   assert.deepEqual(value.reconstructionMap.meaningPackageBindings, [expectedMeaningBinding]);
+   const cc = value.reconstructionMap.caseContexts[0]; assert.deepEqual(cc.meaningPackageBinding, expectedMeaningBinding); assert.equal(cc.caseId, PLAN); assert.equal(cc.inputCaptionId, captionId);
+   assert.equal(cc.horizontalStyleInput.captionLayoutPolicy.maxLogicalWidthPerLine, inputs.typographyValues.maxLogicalWidthPerLine);
+@@ -850,14 +870,16 @@ export async function assertQualifiedDigestFormalSourcePackageTaskV001(value: Js
+     assert.equal(await m.fileSha(path.join(ROOT, safe(binding.path))), binding.fileSha256, 'QUALIFIED_DIGEST_IMPLEMENTATION_HASH_CHANGED');
+   if (record.mode === 'manufacturing') {
+     await assertQualifiedDigestStorageContextV001(record.context);
+-    assert.equal(value.provenance.sourcePackageJobBinding.path, OUT + '/core-plan.json');
++    assert.equal(value.provenance.sourcePackageJobBinding.path, record.context!.outputRoot + '/core-plan.json');
+     const plan = await record.context!.readBound(value.provenance.sourcePackageJobBinding);
+-    assert.equal(plan.planId, PLAN); assert.equal(plan.outputRoot, OUT); assert.deepEqual(plan.acceptedManifestBinding, inputs.manifestBinding);
++    assert.equal(plan.planId, PLAN); assert.equal(plan.outputRoot, record.context!.outputRoot); assert.deepEqual(plan.acceptedManifestBinding, inputs.manifestBinding);
+     assert(value.provenance.approvedContractBindings.some((binding: Json) => m.same(binding, plan.authorization)), 'FORMAL_SOURCE_APPROVAL_BINDING_CHANGED');
+     assert.deepEqual(plan.typographySettingsBinding, inputs.typographySettingsBinding);
+     assert.deepEqual(plan.derivedTypographyValues, inputs.typographyValues);
+     for (const binding of [cc.meaningPackageBinding, ...Object.values(cc.styleBindings), ...Object.values(cc.baseMediaInput)] as Json[])
+-      assert(binding.path.startsWith(OUT + '/') || binding.path === inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings.materialValidationIndex.path);
++      assert(binding.path.startsWith(record.context!.outputRoot + '/')
++        || (record.context!.continuation !== undefined && Object.values(record.context!.continuation.base).some((base: any) => m.same(base, binding)))
++        || binding.path === inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings.materialValidationIndex.path);
+   } else {
+     assert.equal(record.mode, 'preflight');
+     assert.deepEqual(cc.baseMediaInput, inputs.styleTemplate.reconstructionMap.caseContexts[0].baseMediaInput);
+@@ -882,7 +904,7 @@ async function buildDigestFormalSourcePackageV001(inputs: Json, c: Json, base: J
+   const inputCaptionId = inputs.aggregateView.inputCaptionId, sourcePackage = structuredClone(inputs.styleTemplate);
+   sourcePackage.packageId = PLAN + '-source-package';
+   sourcePackage.promptInput = {...structuredClone(inputs.requests[0].input), captions: [{captionId: inputCaptionId, boundaryCandidates: boundaries}]};
+-  const meaningBinding = mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind(OUT + '/meaning-input.json', inputs.meaning);
++  const meaningBinding = mode === 'preflight' ? m.bind(inputs.manifest.meaningBinding.path, inputs.meaning) : m.bind(context!.outputRoot + '/meaning-input.json', inputs.meaning);
+   const cc = structuredClone(sourcePackage.reconstructionMap.caseContexts[0]);
+   cc.caseId = PLAN; cc.inputCaptionId = inputCaptionId; cc.meaningPackageBinding = meaningBinding; cc.baseMediaInput = base;
+   cc.styleBindings = style.bindings; cc.horizontalStyleInput.presetBinding = {...style.bindings, presetId: cc.resolvedStyle.presetId};
+@@ -928,7 +950,7 @@ async function candidateStyle(context: Json, inputs: Json, m: any) {
+   assert.deepEqual(profile.visualStates[at].textStyle, {fontAssetId: 'line-seed-jp-extra-bold-v001', fontSizePx: inputs.typographyValues.fontSizePx,
+     fontColor: '#FFFDF8', borderColor: '#2F4F4F', borderWidthPx: 8, lineSpacingPercent: 150,
+     glowColor: '#2F4F4F', glowWidthPx: 4, glowOpacityPercent: 82});
+-  const root = OUT + '/candidate-style/';
++  const root = context.outputRoot + '/candidate-style/';
+   const registryBinding = await context.publish(root + 'preset-registry.json', preset);
+   const validationBytes = await readFile(path.join(ROOT, safe(old.presetValidationIndex.path)));
+   assert.equal(sha(validationBytes), old.presetValidationIndex.fileSha256);
+@@ -958,7 +980,7 @@ async function candidateStyle(context: Json, inputs: Json, m: any) {
+     b.fileSha256 = actual;
+   }
+   for (const b of trust.fontAssets) assert.equal(await m.fileSha(path.join(ROOT, safe(b.path))), b.fileSha256);
+-  await context.publish(OUT + '/candidate-style-delta.json', {schemaVersion: 'digest-formal-candidate-style-delta-v001',
++  await context.publish(context.outputRoot + '/candidate-style-delta.json', {schemaVersion: 'digest-formal-candidate-style-delta-v001',
+     baselineTrustBinding: old.rendererTrust, acceptedMain: 'f2ef22148e7e81d7057a3907f21cc3dbe256742b',
+     dependencyDelta, profileWidth: inputs.typographyValues.maxLogicalWidthPerLine, visualCapabilityWidth: 36, layoutRulesChanged: true,
+     typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues,
+@@ -1154,6 +1176,144 @@ export async function inspectDigestFormalEntryRetryEvidenceV001(permit: Json, ge
+     originalSummaryBinding: ENTRY_EVALUATION_FAILURE_BINDINGS_V001.summaryBinding, manufacturingAuthorizationRequired: true});
+ }
+ 
++
++const BODY_FAILURE_BINDINGS_V001: Json = Object.freeze({
++  "previousPermitBinding": {
++    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-retry-permit.json",
++    "fileSha256": "c8eabe20604009d58a5f96a07810cea68e277c03f2ff69b7c8158bef1a9b99ff",
++    "sizeBytes": 5464
++  },
++  "failureEvidenceBinding": {
++    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/body-timeout-evidence.json",
++    "fileSha256": "be594a57246ff43b4d4e6c4ce22ca25db1a2a77d9396a7c5b6577b845cd29b13",
++    "sizeBytes": 7900
++  },
++  "workerLogBinding": {
++    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor-retry-entry-v001/worker.log",
++    "fileSha256": "ccae1042a551ad7236a02eba03b7ccba5c819b21c52cf5a752b4130d8ee8df3b",
++    "sizeBytes": 376
++  },
++  "resourceBinding": {
++    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor-retry-entry-v001/resource.jsonl",
++    "fileSha256": "4e938bedbd5eca322653d05e6ac1ec60e138a617fa4ead06a41d168a4dc1ab73",
++    "sizeBytes": 2144624
++  },
++  "baseMediaBinding": {
++    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
++    "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
++    "sizeBytes": 639776321
++  }
++});
++for (const binding of Object.values(BODY_FAILURE_BINDINGS_V001)) Object.freeze(binding);
++
++/** Actual retained base bytes, never a substitute or a large in-memory copy. */
++async function verifyDigestFormalBodyVideoV001(binding: Json) {
++  const before = await lstat(binding.path, {bigint: true});
++  assert(before.isFile() && !before.isSymbolicLink()); assert.equal(await realpath(binding.path), binding.path);
++  const hash = createHash('sha256'); let bytes = 0;
++  for await (const chunk of createReadStream(binding.path)) {hash.update(chunk); bytes += chunk.length;}
++  const after = await lstat(binding.path, {bigint: true});
++  for (const key of ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs'] as const) assert.equal(before[key], after[key], 'BODY_BASE_UNSTABLE');
++  assert.equal(bytes, binding.sizeBytes, 'BODY_BASE_SIZE_CHANGED');
++  assert.equal(hash.digest('hex'), binding.fileSha256, 'BODY_BASE_BYTES_CHANGED');
++}
++
++/** Eligibility only for the recorded body timeout of this already approved single plan. */
++export async function inspectDigestFormalBodyContinuationV001(permit: Json): Promise<Json> {
++  const proof = permit.bodyContinuation;
++  assert(proof && typeof proof === 'object' && !Array.isArray(proof), 'BODY_CONTINUATION_EVIDENCE_REQUIRED');
++  assert.deepEqual(Object.keys(proof).sort(), ['schemaVersion', 'ownerBinding', ...Object.keys(BODY_FAILURE_BINDINGS_V001)].sort(), 'BODY_CONTINUATION_EXACT_FIELDS');
++  assert.equal(proof.schemaVersion, 'digest-formal-body-continuation-v001');
++  assert(!Object.hasOwn(permit, 'entryRetry'), 'BODY_CONTINUATION_NOT_ENTRY_RETRY');
++  const oldRoot = path.join(GUEST, OUT), newRoot = path.join(GUEST, BODY_OUT);
++  assert.equal(permit.status, 'verified-formal-handoff-v001');
++  assert.equal(permit.bindings.planId, PLAN); assert.equal(permit.bindings.logicalPrefix, OUT);
++  assert.equal(permit.monitorDirectory, newRoot + '/monitor', 'BODY_CONTINUATION_FIXED_CHILD_REQUIRED');
++  const observed: Json = {};
++  for (const [role, expected] of Object.entries(BODY_FAILURE_BINDINGS_V001) as [string, Json][]) {
++    assert.deepEqual(proof[role], expected, 'BODY_CONTINUATION_BINDING_CHANGED: ' + role);
++    if (role === 'baseMediaBinding') {await verifyDigestFormalBodyVideoV001(expected); continue;}
++    const bytes = await readDigestFormalEntryEvidenceBytesV001(expected);
++    observed[role] = ['workerLogBinding', 'resourceBinding'].includes(role) ? bytes : JSON.parse(bytes.toString());
++  }
++  const previous = observed.previousPermitBinding, evidence = observed.failureEvidenceBinding;
++  assert.equal(previous.bindings.implementationSha, 'e37361ca38c9e89507ebb2d40b616cad886a5d79');
++  assert.equal(previous.monitorDirectory, oldRoot + '/monitor-retry-entry-v001');
++  assert.equal(evidence.schemaVersion, 'digest-formal-body-timeout-final-evidence-v001');
++  assert.equal(evidence.outputRoot, oldRoot); assert.equal(evidence.baseValidation, 'passed');
++  assert.equal(evidence.subtitleRendering, 'not-started'); assert.equal(evidence.finalComposite, 'not-started');
++  for (const [name, ref] of Object.entries(evidence.bindings) as [string, Json][]) {
++    safe(name); await readDigestFormalEntryEvidenceBytesV001({path: oldRoot + '/' + name, ...ref});
++  }
++  const summary = JSON.parse(await readFile(oldRoot + '/monitor-retry-entry-v001/summary.json', 'utf8'));
++  const shutdown = JSON.parse(await readFile(oldRoot + '/monitor-retry-entry-v001/group-shutdown.json', 'utf8'));
++  const owned = JSON.parse(await readFile(oldRoot + '/monitor-retry-entry-v001/owned-group.json', 'utf8'));
++  assert.deepEqual(summary, evidence.summary); assert.deepEqual(shutdown, evidence.shutdown);
++  assert.equal(summary.status, 'interrupted'); assert.equal(summary.reason, 'formal worker nonzero exit');
++  assert.equal(summary.stage, 'body'); assert.equal(summary.exitCode, -15); assert.deepEqual(summary.remainingRunning, []);
++  assert.deepEqual(summary.command, previous.command); assert.equal(summary.formalPermit, previous.bindings.commandPermitPath);
++  assert.deepEqual(owned.command, previous.command); assert.deepEqual(owned.bindings, previous.bindings);
++  assert.deepEqual(owned.storage, previous.storage); assert.equal(owned.permitFile, previous.bindings.commandPermitPath);
++  assert.equal(owned.group, 58723); assert.equal(owned.parentPid, owned.group); assert.equal(shutdown.group, owned.group);
++  assert.deepEqual(shutdown.remaining, []); assert.deepEqual(shutdown.remainingRunning, []);
++  const processes = (await exec('/bin/ps', ['-axo', 'pid=,pgid=,stat=,args='])).stdout;
++  assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(owned.group) && !row[2]?.startsWith('Z');}), 'BODY_PREVIOUS_OWNER_LIVE');
++  assert(observed.workerLogBinding.toString().includes('SUPERVISOR_REPLY_TIMEOUT'), 'BODY_EXACT_TIMEOUT_REQUIRED');
++  const resources = observed.resourceBinding.toString().trim().split('\n').map((line: string) => JSON.parse(line));
++  assert(resources.some((sample: Json) => sample.phase === 'before-body' && sample.pressure === 1), 'BODY_BEFORE_BODY_SAMPLE_REQUIRED');
++  for (const key of ['planId', 'logicalPrefix', 'planManifest', 'approvalRecord']) assert.deepEqual(permit.bindings[key], previous.bindings[key], 'BODY_PREVIOUS_GRANT_OR_INPUT_CHANGED');
++  assert.deepEqual(permit.storage, previous.storage, 'BODY_STORAGE_CHANGED');
++  assert.deepEqual(permit.command.slice(0, -1), previous.command.slice(0, -1), 'BODY_ENTRY_CHANGED');
++  assert.equal(permit.command.at(-1), permit.bindings.commandPermitPath);
++  assert.deepEqual(permit.implementation.map((ref: Json) => ref.path), previous.implementation.map((ref: Json) => ref.path), 'BODY_IMPLEMENTATION_PATHS_CHANGED');
++  const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
++  for (let i = 0; i < IMPLEMENTATIONS.length; i++) {
++    const oldCode = (await exec('git', ['show', previous.bindings.implementationSha + ':' + IMPLEMENTATIONS[i]], {cwd: ROOT, encoding: 'buffer', maxBuffer: 4000000})).stdout as Buffer;
++    assert.equal(sha(oldCode), previous.implementation[i].fileSha256, 'BODY_OLD_IMPLEMENTATION_CHANGED');
++    assert.equal(await m.fileSha(permit.implementation[i].path), permit.implementation[i].fileSha256, 'BODY_CURRENT_IMPLEMENTATION_CHANGED');
++    if (i >= 2) assert.equal(permit.implementation[i].fileSha256, previous.implementation[i].fileSha256, 'BODY_UNCHANGED_IMPLEMENTATION_CHANGED');
++    if (i === 1) {
++      const currentCode = await readFile(permit.implementation[i].path, 'utf8');
++      assert.equal(currentCode.replace("if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT\n    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v001')", "if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT"), oldCode.toString(), 'BODY_CORE_EXACT_CONNECTION_DIFF_REQUIRED');
++    }
++  }
++  for (const name of ['render', 'renderer-result.json', 'admission-receipt.json', 'line-layout.json', 'result.json', 'low-memory-composite.json']) await absent(oldRoot + '/' + name);
++  assert.deepEqual(await readdir(oldRoot + '/temp'), [], 'BODY_PREVIOUS_TEMP_NOT_EMPTY');
++  assert.equal(await realpath(newRoot), newRoot); assert.equal(await realpath(newRoot + '/temp'), newRoot + '/temp');
++  assert.deepEqual(await readdir(newRoot + '/temp'), [], 'BODY_NEW_TEMP_NOT_EMPTY');
++  const entries = await readdir(newRoot);
++  assert(entries.includes('ownership.json') && entries.includes('temp') && entries.every(name => ['ownership.json', 'temp', 'monitor'].includes(name)), 'BODY_NEW_ROOT_ALREADY_USED');
++  assert.equal(proof.ownerBinding.path, newRoot + '/ownership.json', 'BODY_OWNER_PATH_CHANGED');
++  const owner = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(proof.ownerBinding)).toString());
++  assert.deepEqual(Object.keys(owner).sort(), ['schemaVersion', 'ownerId', 'createdAt', 'controllerPid', 'implementationSha', 'commandPermitPath', 'outputRoot', 'manifestSha256'].sort(), 'BODY_OWNER_EXACT_FIELDS');
++  assert.equal(owner.schemaVersion, 'digest-formal-body-exclusive-owner-v001'); assert(/^[0-9a-f-]{36}$/u.test(owner.ownerId));
++  assert.equal(owner.outputRoot, BODY_OUT); assert.equal(owner.manifestSha256, MANIFEST_SHA);
++  assert.equal(owner.implementationSha, permit.bindings.implementationSha); assert.equal(owner.commandPermitPath, permit.bindings.commandPermitPath);
++  assert(Number.isSafeInteger(owner.controllerPid) && owner.controllerPid > 0); process.kill(owner.controllerPid, 0);
++  assert(Number.isFinite(Date.parse(owner.createdAt)) && Date.now() - Date.parse(owner.createdAt) >= 0 && Date.now() - Date.parse(owner.createdAt) < 600000, 'BODY_OWNER_NOT_FRESH');
++  const baseManifest = JSON.parse(await readFile(oldRoot + '/base-media/generation-manifest.json', 'utf8'));
++  const receipt = JSON.parse(await readFile(oldRoot + '/base-media/validation-receipt.json', 'utf8'));
++  assert.equal(receipt.status, 'passed'); assert.equal(receipt.outputs.baseMedia.path, OUT + '/base-media/base-media.mp4');
++  assert.equal(receipt.outputs.baseMedia.fileSha256, BODY_FAILURE_BINDINGS_V001.baseMediaBinding.fileSha256);
++  const oldPackage = JSON.parse(await readFile(oldRoot + '/source-package.json', 'utf8'));
++  const base = oldPackage.reconstructionMap.caseContexts[0].baseMediaInput;
++  assert.deepEqual(Object.keys(base).sort(), ['baseMedia', 'timeline', 'generationManifest', 'validationReceipt'].sort());
++  for (const ref of Object.values(base) as Json[]) {
++    assert(ref.path.startsWith(OUT + '/base-media/'));
++    const expected = ref.path.endsWith('.mp4') ? BODY_FAILURE_BINDINGS_V001.baseMediaBinding : {...evidence.bindings[ref.path.slice(OUT.length + 1)], path: oldRoot + ref.path.slice(OUT.length)};
++    assert.equal(ref.fileSha256, expected.fileSha256); if (ref.sizeBytes !== undefined) assert.equal(ref.sizeBytes, expected.sizeBytes);
++  }
++  assert.equal(baseManifest.outputs.baseMedia.frameCount, 27691, 'BODY_BASE_FRAME_COUNT_CHANGED');
++  assert.equal(baseManifest.audio.encodeInput.sampleCount, 40705770, 'BODY_BASE_SAMPLE_COUNT_CHANGED');
++  assert.equal(baseManifest.segments.length, 9, 'BODY_BASE_SEGMENTS_CHANGED');
++  const qualification = {status: 'qualified-specific-stopped-body', outputRoot: BODY_OUT, base,
++    previousImplementationSha: previous.bindings.implementationSha, previousImplementationBindings: previous.implementation,
++    currentImplementationSha: permit.bindings.implementationSha, currentImplementationBindings: permit.implementation,
++    previousEvidence: structuredClone(proof), oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
++  function freeze(value: any) {if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);}}
++  freeze(qualification); return qualification;
++}
++
+ export async function runDigestFormalCandidateV001(permitPath: string) {
+   const began = Date.now(), permit = JSON.parse(await readFile(permitPath, 'utf8'));
+   const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+@@ -1162,32 +1322,34 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
+   assert.equal(preflight.sourcePackageTask.status, 'passed', 'FORMAL_CAPTION_TASK_UNSUPPORTED ' + JSON.stringify(preflight.sourcePackageTask));
+   assert.equal(preflight.mediaReady, true, 'FORMAL_CAPTION_TASK_UNSUPPORTED');
+   const {context, approval} = await storage(permitPath, permit, m, inputs);
+-  await absent(context.resolve(OUT + '/core-plan.json'));
+-  const allowedRootEntries = permit.monitorDirectory === context.generatedRoot + '/monitor' && !Object.hasOwn(permit, 'entryRetry')
++  const outputRoot = context.outputRoot;
++  await absent(context.resolve(outputRoot + '/core-plan.json'));
++  const allowedRootEntries = context.continuation !== undefined ? ['ownership.json', 'temp', 'monitor'] : permit.monitorDirectory === context.generatedRoot + '/monitor' && !Object.hasOwn(permit, 'entryRetry')
+     ? ['monitor', 'temp'] : (await inspectDigestFormalEntryRetryEvidenceV001(permit, context.generatedRoot)).allowedRootEntries;
+   assert((await readdir(context.generatedRoot)).every(name => allowedRootEntries.includes(name)), 'UNEXPECTED_GENERATED_ROOT_CONTENT');
+   assert.equal(await realpath(permit.monitorDirectory), permit.monitorDirectory, 'FORMAL_MONITOR_NOT_OWNED');
+   assert.equal(await realpath(context.generatedRoot), context.generatedRoot);
+   assert.equal(await realpath(context.tempDirectory), context.tempDirectory); Object.assign(process.env, {TMPDIR: context.tempDirectory, TMP: context.tempDirectory,
+     TEMP: context.tempDirectory, MAGICK_TEMPORARY_PATH: context.tempDirectory});
+-  await context.publish(OUT + '/cheap-preflight.json', preflight);
+-  await context.publish(OUT + '/authorization.json', approval);
+-  const authorizationBinding = m.bind(OUT + '/authorization.json', approval);
+-  await context.publish(OUT + '/storage-permit.json', {schemaVersion: 'digest-formal-storage-permit-v001', ...permit});
++  await context.publish(outputRoot + '/cheap-preflight.json', preflight);
++  await context.publish(outputRoot + '/authorization.json', approval);
++  const authorizationBinding = m.bind(outputRoot + '/authorization.json', approval);
++  await context.publish(outputRoot + '/storage-permit.json', {schemaVersion: 'digest-formal-storage-permit-v001', ...permit});
+   const style = await candidateStyle(context, inputs, m);
+-  const plan = {schemaVersion: 'digest-formal-candidate-core-plan-v001', planId: PLAN, outputRoot: OUT,
++  const plan = {schemaVersion: 'digest-formal-candidate-core-plan-v001', planId: PLAN, outputRoot,
+     authorization: authorizationBinding, implementationBindings: permit.implementation.map((b: Json) => ({path: path.relative(ROOT, b.path), fileSha256: b.fileSha256})),
+     acceptedManifestBinding: inputs.manifestBinding, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues, originalNormalOwners: inputs.handoff.normalOwners,
+     request: {sourceVideo: inputs.normalPlan.sourceVideoBinding, transcript: inputs.normalPlan.transcriptBinding,
+       utterances: inputs.normalPlan.utteranceBinding}};
+-  const planBinding = await context.publish(OUT + '/core-plan.json', plan);
++  if (context.continuation !== undefined) Object.assign(plan, {continuation: context.continuation});
++  const planBinding = await context.publish(outputRoot + '/core-plan.json', plan);
+   const c = {plan, planBinding, authorization: approval, rendererTemplate: style.rendererTemplate};
+   const adoption = inputs.adoption, edit = inputs.edit;
+-  await context.publish(OUT + '/machine-adoption.json', adoption); await context.publish(OUT + '/edit-plan.json', edit);
++  await context.publish(outputRoot + '/machine-adoption.json', adoption); await context.publish(outputRoot + '/edit-plan.json', edit);
+   const job = structuredClone(inputs.manufacturing);
+   job.jobId = PLAN + '-base'; job.sourceArtifact.path = inputs.sourcePhysicalPath;
+-  job.assemblyDecision = {path: OUT + '/machine-adoption.json', fileSha256: m.bind(OUT + '/machine-adoption.json', adoption).fileSha256};
+-  job.outputDirectory = OUT + '/base-media';
++  job.assemblyDecision = {path: outputRoot + '/machine-adoption.json', fileSha256: m.bind(outputRoot + '/machine-adoption.json', adoption).fileSha256};
++  job.outputDirectory = outputRoot + '/base-media';
+   const core = await load('evals/clip_composition/adopted_media_manufacturing_v001.mts');
+   const baseModule = await load('evals/clip_composition/presentation_base_media_build_v003.mjs');
+   m.pass(baseModule.validatePresentationBaseMediaBuildJobV001(job), 'FORMAL_DERIVED_JOB_INVALID');
+@@ -1195,19 +1357,21 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
+   assert.equal(mapping.mappings.at(-1).outputEndFrame, 27691);
+   assert.equal(mapping.mappings.at(-1).audioSamples.outputEnd, 40705770);
+   assert.deepEqual(mapping.mappings, inputs.clock.mappings, 'SAVED_CLOCK_MISMATCH');
+-  const jobBinding = await context.publish(OUT + '/manufacturing-job.json', job);
+-  const invocation = await context.publish(OUT + '/core-invocation.json', {schemaVersion: 'digest-formal-core-invocation-v001',
++  const jobBinding = await context.publish(outputRoot + '/manufacturing-job.json', job);
++  const invocation = await context.publish(outputRoot + '/core-invocation.json', {schemaVersion: 'digest-formal-core-invocation-v001',
+     planBinding, jobBinding, authorizationBinding, acceptedManifestBinding: inputs.manifestBinding,
+     sourceLogicalBinding: inputs.handoff.manufacturingProposal.material.logicalBinding,
+     sourcePhysicalBinding: {path: inputs.sourcePhysicalPath, fileSha256: job.sourceArtifact.fileSha256},
+     normalReferences: inputs.handoff.normalReferenceMap, storagePermitFileSha256: sha(await readFile(permitPath)),
+-    candidateStyleBindings: style.bindings, implementationSha: permit.bindings.implementationSha});
++    candidateStyleBindings: style.bindings, implementationSha: permit.bindings.implementationSha,
++    ...(context.continuation === undefined ? {} : {continuation: context.continuation,
++      baseAction: 'reuse-verified-immutable-base', manufacturingJobExecuted: false})});
+   // JSON/owner/clock/style/font checks precede the first large copy.
+   assert.equal(await m.fileSha(path.join(ROOT, safe(inputs.sourcePhysicalPath))), job.sourceArtifact.fileSha256);
+-  await context.resourceCheck({stage: 'start', newBytes: 22800000000});
++  await context.resourceCheck({stage: 'start', newBytes: context.continuation === undefined ? 22800000000 : 22900000000});
+   const baseStarted = Date.now();
+-  const base = await core.buildAdoptedBaseMediaV001(c, adoption, edit, job, jobBinding, invocation,
+-    {inspection: 'digest-formal-source-inspection-v001', receipt: 'digest-formal-base-validation-v001'}, context);
++  const base = context.continuation === undefined ? await core.buildAdoptedBaseMediaV001(c, adoption, edit, job, jobBinding, invocation,
++    {inspection: 'digest-formal-source-inspection-v001', receipt: 'digest-formal-base-validation-v001'}, context) : context.continuation.base;
+   const baseMs = Date.now() - baseStarted;
+   const artifacts = await prepareDigestFormalCandidateCoreV001(inputs, c, base, style, context);
+   // New formal identifiers remain bound to the original cue clocks and lines.
+@@ -1219,7 +1383,7 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
+     assert.equal(v.outputTime.endFrameExclusive, row.endFrameExclusive);
+   });
+   const artifactBindings: Json = {};
+-  for (const [key, name] of Object.entries(core.CORE_FILES) as [string, string][]) artifactBindings[key] = await context.publish(OUT + '/' + name, artifacts[key]);
++  for (const [key, name] of Object.entries(core.CORE_FILES) as [string, string][]) artifactBindings[key] = await context.publish(outputRoot + '/' + name, artifacts[key]);
+   await context.resourceCheck({stage: 'body', newBytes: 22900000000});
+   const renderStarted = Date.now();
+   const result = await core.renderAdoptedVideoV001(c, artifactBindings, 'digest-formal-render-execution-v001', context);
+@@ -1227,8 +1391,9 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
+     invocationBinding: invocation, typographySettingsBinding: inputs.typographySettingsBinding, derivedTypographyValues: inputs.typographyValues, result, timing: {initialPreparationMs: baseStarted - began, baseMediaMs: baseMs,
+       renderAndQcMs: Date.now() - renderStarted, totalMs: Date.now() - began},
+     implementationSha: permit.bindings.implementationSha, technicalQc: 'passed',
++    ...(context.continuation === undefined ? {} : {continuation: context.continuation, baseMediaReused: true}),
+     humanQuality: 'not-evaluated', outlineChoice: null, originalJudgmentReruns: 0, completedAt: new Date().toISOString()};
+-  await context.publish(OUT + '/result.json', receipt); return receipt;
++  await context.publish(outputRoot + '/result.json', receipt); return receipt;
+ }
+ 
+ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

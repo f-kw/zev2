@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "digest-formal-body-connection-consultant-decision-v001",
+  "recordedAt": "2026-10-03T13:43:10.703721+00:00",
+  "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+  "decisionKind": "scope-clarification-for-current-human-request",
+  "decision": "continue-existing-single-plan-with-fixed-child-root",
+  "instruction": "共通処理側の通常の接続修正が必要なら、対象と最小差分、元の保存先検査をどう保つかを報告したうえで、同じ承認済みroot内の専用子領域への厳密な受け渡しに限定して検証・続行できます。旧成果物や記録の上書き、一般の保存先制限の解除、ハッシュ検査免除、安全条件の緩和は不可です。",
+  "implementationSha": "87601ca85e592ec180cc058428e8a4789e756df7",
+  "changedImplementationPaths": [
+    "runner/src/digest-formal-handoff-v001.ts",
+    "evals/clip_composition/adopted_media_manufacturing_v001.mts"
+  ],
+  "coreChange": "Add only fixed attempt-001/body-continuation-v001 literal to existing root equality gate, retaining opaque qualification, plan/root equality and generated-prefix checks.",
+  "unchangedImplementationPaths": 5,
+  "originalManufacturingApproval": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-retry-record.json",
+    "fileSha256": "fc44ac5ed29a62255ce4d4d4ad042d4720ff0348b9ac1641e296c29dcddc45b1"
+  },
+  "newManufacturingGrant": false,
+  "pushAuthorized": false,
+  "status": "implemented-and-preflight-checked-before-lease-and-production"
+}

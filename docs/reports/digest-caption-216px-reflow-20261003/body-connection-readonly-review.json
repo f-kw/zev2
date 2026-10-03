@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "digest-body-continuation-readonly-implementation-review-v001",
+  "readAt": "2026-10-03T13:38:28.564862+00:00",
+  "head": "cc9bdaa362f641d4fa4669b8a24d811c35e052e1",
+  "uncommittedPaths": [
+    "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+    "runner/src/digest-formal-handoff-v001.ts"
+  ],
+  "scope": "独立read-only code/diff/binding読取。repo編集・実装export実行・テスト・製造・process操作なし。",
+  "sourceBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "7e77679a6ae58f2ac7bfc6b5d6bb618ed98530645f11c62ea00099ba5793cf78",
+      "sizeBytes": 122848
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "457b3eb84a2dcd2d00106a56fcb52a4333a4b087d4c345b7a26c9274680af927",
+      "sizeBytes": 27335
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "sizeBytes": 32427
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "sizeBytes": 152882
+    }
+  ],
+  "coreExactReverseMatchesOld": true,
+  "unchangedFiveImplementationBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "previousSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "currentSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "equal": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "previousSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "currentSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "equal": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "previousSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "currentSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "equal": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "previousSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "currentSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "equal": true
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "previousSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "currentSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "equal": true
+    }
+  ],
+  "oldSourcePackageReadback": {
+    "binding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/source-package.json",
+      "fileSha256": "417a159eb4a3dc301e465f59e07ec23b3858c03def9d863b11be379e7bd7507d",
+      "sizeBytes": 1772579
+    },
+    "matchesFailureEvidence": true
+  },
+  "baseFourReferences": {
+    "baseMedia": {
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+      "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+      "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+      "canonicalSha256": "c3cf28468a1bafcd529c7436a377b3401aebea6bb04d1431d096a3d4fc0d68a9"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+      "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+      "canonicalSha256": "d3623791d233e4099ec20f27155add3a42bc1a0f8b0ed43711dbec95740b9669"
+    },
+    "validationReceipt": {
+      "schemaVersion": "digest-formal-base-validation-v001",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+      "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+      "canonicalSha256": "9d7f45e415077f728fa391e6e99b5d61a87c96d23a2831f99d55a1dff5cf103d"
+    }
+  },
+  "smallBaseBindingReadback": [
+    {
+      "role": "timeline",
+      "logicalBinding": {
+        "schemaVersion": "presentation-base-media-timeline-v003",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+        "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+        "canonicalSha256": "c3cf28468a1bafcd529c7436a377b3401aebea6bb04d1431d096a3d4fc0d68a9"
+      },
+      "actualBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+        "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+        "sizeBytes": 2986
+      },
+      "matchesBinding": true,
+      "matchesFailureEvidence": true
+    },
+    {
+      "role": "generationManifest",
+      "logicalBinding": {
+        "schemaVersion": "presentation-base-media-generation-manifest-v003",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+        "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+        "canonicalSha256": "d3623791d233e4099ec20f27155add3a42bc1a0f8b0ed43711dbec95740b9669"
+      },
+      "actualBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+        "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+        "sizeBytes": 14476
+      },
+      "matchesBinding": true,
+      "matchesFailureEvidence": true
+    },
+    {
+      "role": "validationReceipt",
+      "logicalBinding": {
+        "schemaVersion": "digest-formal-base-validation-v001",
+        "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+        "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+        "canonicalSha256": "9d7f45e415077f728fa391e6e99b5d61a87c96d23a2831f99d55a1dff5cf103d"
+      },
+      "actualBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+        "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+        "sizeBytes": 2725
+      },
+      "matchesBinding": true,
+      "matchesFailureEvidence": true
+    }
+  ],
+  "videoReadScope": "639,776,321 byte MP4は今回metadata/保存済hash参照だけ。再hash/decode無し。adapter実入口はstreaming hashし、renderer file callerもbytes/hashを読む。",
+  "findings": [],
+  "conclusions": [
+    "Core変更は旧e373実装へexact reverseで完全一致。固定child以外のCore変更なし。",
+    "他5実装pathのactual hashは旧permitと一致。",
+    "新sourcefactory/資格readbackはcontext.outputRootを使い、旧base4refsのみcontinuation.base完全一致で受付。",
+    "Core assembleは渡された旧base4refsを維持し、新c.plan.outputRootへすべての生成binding/publicationを作る。",
+    "renderer callerのNEWOUT generated prefixとOLDOUT base input参照は整合。caller/renderer変更不要。",
+    "旧sourcePackageの再qualificationをしない。旧JSONはbase4refsを読むためだけに使い、fresh sourcePackageはcurrent7hashとNEWOUT planへ束縛。"
+  ],
+  "executionNotVerified": [
+    "新permit/controller ownershipの実成立",
+    "commit後clean/currentSHA binding",
+    "fresh device別start50GB/reserve12GB/RSS/pressure/next-unit",
+    "正式実行結果・372実glyph・完成動画・必須QC・実視聴品質"
+  ]
+}
