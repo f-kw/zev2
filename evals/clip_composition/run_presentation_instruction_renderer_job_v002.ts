@@ -3,7 +3,7 @@
 import {createHash} from 'node:crypto';
 import {lstat, readFile, realpath, writeFile} from 'node:fs/promises';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import type {AutoPresentationInput} from '../../packages/shared/src/auto-presentation.js';
@@ -68,7 +68,7 @@ export type DigestRendererStorageContextV001 = Readonly<{
 const qualifyStorageContext = async (storageContext: DigestRendererStorageContextV001 | undefined) => {
   if (storageContext === undefined) return;
   const {assertQualifiedDigestStorageContextV001} = await import(
-    '../../runner/src/digest-formal-handoff-v001.js'
+    pathToFileURL(path.resolve(MODULE_DIRECTORY, '../../runner/src/digest-formal-handoff-v001.ts')).href
   );
   await assertQualifiedDigestStorageContextV001(storageContext);
 };

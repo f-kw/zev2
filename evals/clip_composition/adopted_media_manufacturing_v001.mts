@@ -60,7 +60,7 @@ async function adoptedStorageV001(c: Json, storageContext?: Json) {
   if (storageContext === undefined) return {abs, publish, readBound, readJson,
     assertCurrent: async () => {}};
   if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
-    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v001')
+    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v002')
     || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
   await assertQualifiedDigestStorageContextV001(storageContext);
