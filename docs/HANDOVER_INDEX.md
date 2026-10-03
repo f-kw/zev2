@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v065
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v066
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-03 13:56 UTC（字幕入口の読込修正、同一本の限定復旧を続行）
+
+13:44:07 UTCの旧base/停止資格16拒否＋実原本資格はpassed。13:44:08 UTCに同owner76685を保持したまま正式監視を起動、guest99,002,552,320B/host1,989,609,521,152B/内蔵13,519,220,736B/pressure1を別測定し開始条件passed。id1/2監視応答は受領でき、旧ベースを再生成せず新metadataを保存した。
+
+13:44:26 UTC、callerの相対dynamic importがtsxのdata URLから解決できず、正式描画前にexit1。18.101秒・peakRSS601,260,032B・own PGID76778 remainingRunning=[]。13:48:55 UTCに今回専用27実file/hashと残存0を固定。新媒体0、admission/line-layout/render/QC0。旧baseとv001停止/metadataは全KEEP。[実失敗](reports/digest-caption-216px-reflow-20261003/renderer-import-failure-evidence.json)。
+
+親の同承認済みroot内の通常接続修正続行判断に従い、callerの2行をabsolute file URLへ変更し、実関数が本物のopaque資格検査へ到達してcloneを拒否することを確認した。loader/一般trust/資格免除なし。旧callerへ2行をexact reverseすると完全一致し、旧新hashを両保持、残4実装の不変検査は維持。v001を上書きせず固定body-continuation-v002へ新current-code source/plan/字幕/結果を作る。修正3pathは既存7path内、code checkpoint489cf254。旧失敗27refもv002資格へ束縛。13:53:09 UTC正式preflight passed/372layout、Core8拒否、typecheck exit0。
+
+状態作業中、最終確認2026-10-03 13:56 UTC、次担当このMac実装者。v002の排他lease→実資格拒否検査→fresh入力/code/device/resource→既存正式renderer/composite/最終QCまで同sessionで続ける。新v002 permit/描画はこの記録時点未開始。完成Normal0、全glyph/動画品質未評価。216px/左右108px/可変設定/本文時計元音声/元grantを保持し、同じ限定復旧の親返事待ちへ戻さない。pushは別の本人回答待ち、再試行/代行0。下記v001直前の記載はその時点の履歴。
 
 ## 最新現在地 — 2026-10-03 13:41 UTC（同じ一本の限定復旧を実装、正式描画の直前）
 

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "digest-formal-body-qualification-tests-v001",
+  "checkedAt": "2026-10-03T13:44:07.982Z",
+  "refusals": [
+    {
+      "name": "wrong-plan",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'other'\n- 'digest-formal-handoff-20261003-v001'"
+    },
+    {
+      "name": "wrong-approved-root",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001-other'\n- 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001'"
+    },
+    {
+      "name": "arbitrary-child",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_FIXED_CHILD_REQUIRED\n+ actual - expected\n\n+ '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/other/monitor'\n- '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/monitor'"
+    },
+    {
+      "name": "entry-retry-mixed",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_NOT_ENTRY_RETRY"
+    },
+    {
+      "name": "earlier-failure-instead",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_BINDING_CHANGED: previousPermitBinding\n+ actual - expected\n\n  {\n    fileSha256: 'c8eabe20604009d58a5f96a07810cea68e277c03f2ff69b7c8158bef1a9b99ff',\n+   path: '/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json',\n-   path: '/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-retry-permit.json',\n    sizeBytes: 5464\n  }"
+    },
+    {
+      "name": "changed-video-sha",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_BINDING_CHANGED: baseMediaBinding\n+ actual - expected\n\n  {\n+   fileSha256: '0000000000000000000000000000000000000000000000000000000000000000',\n-   fileSha256: '3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38',\n    path: '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4',\n    sizeBytes: 639776321\n  }"
+    },
+    {
+      "name": "changed-failure-record",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_BINDING_CHANGED: failureEvidenceBinding\n+ actual - expected\n\n  {\n+   fileSha256: '0000000000000000000000000000000000000000000000000000000000000000',\n-   fileSha256: 'be594a57246ff43b4d4e6c4ce22ca25db1a2a77d9396a7c5b6577b845cd29b13',\n    path: '/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/body-timeout-evidence.json',\n    sizeBytes: 7900\n  }"
+    },
+    {
+      "name": "changed-timeout-log",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_BINDING_CHANGED: workerLogBinding\n+ actual - expected\n\n  {\n+   fileSha256: '0000000000000000000000000000000000000000000000000000000000000000',\n-   fileSha256: 'ccae1042a551ad7236a02eba03b7ccba5c819b21c52cf5a752b4130d8ee8df3b',\n    path: '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor-retry-entry-v001/worker.log',\n    sizeBytes: 376\n  }"
+    },
+    {
+      "name": "unbound-new-fields",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CONTINUATION_EXACT_FIELDS\n+ actual - expected ... Lines skipped\n\n  [\n+   'allowMissing',\n    'baseMediaBinding',\n...\n    'schemaVersion',\n    'workerLogBinding'\n  ]"
+    },
+    {
+      "name": "changed-approved-device",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_STORAGE_CHANGED\n+ actual - expected ... Lines skipped\n\n  {\n+   guestDevice: 16777244,\n-   guestDevice: 16777243,\n    guestRoot: '/Volumes/ZEV-Digest-20261003-01',\n...\n    imagePath: '/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle',\n    internalRoot: '/Users/kawafmm/workspace/zev2'\n  }"
+    },
+    {
+      "name": "changed-approval",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_PREVIOUS_GRANT_OR_INPUT_CHANGED\n+ actual - expected\n\n  {\n+   fileSha256: '0000000000000000000000000000000000000000000000000000000000000000',\n-   fileSha256: 'fc44ac5ed29a62255ce4d4d4ad042d4720ff0348b9ac1641e296c29dcddc45b1',\n    path: '/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-retry-record.json',\n    sizeBytes: 4095\n  }"
+    },
+    {
+      "name": "changed-candidate-clock-source",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_PREVIOUS_GRANT_OR_INPUT_CHANGED\n+ actual - expected\n\n  {\n+   fileSha256: '0000000000000000000000000000000000000000000000000000000000000000',\n-   fileSha256: '784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444',\n    path: '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json',\n    sizeBytes: 41646\n  }"
+    },
+    {
+      "name": "changed-current-code",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CURRENT_IMPLEMENTATION_CHANGED\n+ actual - expected\n\n+ '7e77679a6ae58f2ac7bfc6b5d6bb618ed98530645f11c62ea00099ba5793cf78'\n- '0000000000000000000000000000000000000000000000000000000000000000'"
+    },
+    {
+      "name": "changed-unchanged-code",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_CURRENT_IMPLEMENTATION_CHANGED\n+ actual - expected\n\n+ '63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85'\n- '0000000000000000000000000000000000000000000000000000000000000000'"
+    },
+    {
+      "name": "changed-owner-path",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: BODY_OWNER_PATH_CHANGED\n+ actual - expected\n\n+ '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/ownership.json.other'\n- '/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/ownership.json'"
+    },
+    {
+      "name": "changed-owner-bytes",
+      "passed": true,
+      "observed": "AssertionError [ERR_ASSERTION]: ENTRY_RETRY_ACTUAL_BYTES_CHANGED\n+ actual - expected\n\n+ '41f8b1c35e7da8821bd5234971fdb14fc68cbaac30af8e7c9be8ed9489901103'\n- '0000000000000000000000000000000000000000000000000000000000000000'"
+    }
+  ],
+  "valid": {
+    "status": "qualified-specific-stopped-body",
+    "outputRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001",
+    "previousImplementationSha": "e37361ca38c9e89507ebb2d40b616cad886a5d79",
+    "currentImplementationSha": "e8e80af06efe1332a152eda68003558948517bdf"
+  },
+  "mediaStarted": 0
+}

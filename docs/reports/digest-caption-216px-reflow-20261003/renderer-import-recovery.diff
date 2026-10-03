@@ -1,0 +1,140 @@
+diff --git a/evals/clip_composition/adopted_media_manufacturing_v001.mts b/evals/clip_composition/adopted_media_manufacturing_v001.mts
+index 67eedcae..84bae809 100644
+--- a/evals/clip_composition/adopted_media_manufacturing_v001.mts
++++ b/evals/clip_composition/adopted_media_manufacturing_v001.mts
+@@ -60,7 +60,7 @@ async function adoptedStorageV001(c: Json, storageContext?: Json) {
+   if (storageContext === undefined) return {abs, publish, readBound, readJson,
+     assertCurrent: async () => {}};
+   if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
+-    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v001')
++    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v002')
+     || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
+   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
+   await assertQualifiedDigestStorageContextV001(storageContext);
+diff --git a/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts b/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts
+index 245d7694..f18c30b4 100644
+--- a/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts
++++ b/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts
+@@ -3,7 +3,7 @@
+ import {createHash} from 'node:crypto';
+ import {lstat, readFile, realpath, writeFile} from 'node:fs/promises';
+ import path from 'node:path';
+-import {fileURLToPath} from 'node:url';
++import {fileURLToPath, pathToFileURL} from 'node:url';
+ 
+ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+ import type {AutoPresentationInput} from '../../packages/shared/src/auto-presentation.js';
+@@ -68,7 +68,7 @@ export type DigestRendererStorageContextV001 = Readonly<{
+ const qualifyStorageContext = async (storageContext: DigestRendererStorageContextV001 | undefined) => {
+   if (storageContext === undefined) return;
+   const {assertQualifiedDigestStorageContextV001} = await import(
+-    '../../runner/src/digest-formal-handoff-v001.js'
++    pathToFileURL(path.resolve(MODULE_DIRECTORY, '../../runner/src/digest-formal-handoff-v001.ts')).href
+   );
+   await assertQualifiedDigestStorageContextV001(storageContext);
+ };
+diff --git a/runner/src/digest-formal-handoff-v001.ts b/runner/src/digest-formal-handoff-v001.ts
+index 21c664d5..045a6f19 100644
+--- a/runner/src/digest-formal-handoff-v001.ts
++++ b/runner/src/digest-formal-handoff-v001.ts
+@@ -14,7 +14,7 @@ const exec = promisify(execFile);
+ const ROOT = '/Users/kawafmm/workspace/zev2';
+ const PLAN = 'digest-formal-handoff-20261003-v001';
+ const OUT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
+-const BODY_OUT = OUT + '/body-continuation-v001';
++const BODY_OUT = OUT + '/body-continuation-v002';
+ const GUEST = '/Volumes/ZEV-Digest-20261003-01';
+ const HOST = '/Volumes/KIOXIA';
+ const IMAGE = HOST + '/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle';
+@@ -1202,6 +1202,11 @@ const BODY_FAILURE_BINDINGS_V001: Json = Object.freeze({
+     "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+     "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+     "sizeBytes": 639776321
++  },
++  "rendererImportFailureBinding": {
++    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/renderer-import-failure-evidence.json",
++    "fileSha256": "e2acdf88998d88029d91564522d3d1f56ad6ce910545f9b2d3e754942e5a6c91",
++    "sizeBytes": 13907
+   }
+ });
+ for (const binding of Object.values(BODY_FAILURE_BINDINGS_V001)) Object.freeze(binding);
+@@ -1223,7 +1228,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
+   const proof = permit.bodyContinuation;
+   assert(proof && typeof proof === 'object' && !Array.isArray(proof), 'BODY_CONTINUATION_EVIDENCE_REQUIRED');
+   assert.deepEqual(Object.keys(proof).sort(), ['schemaVersion', 'ownerBinding', ...Object.keys(BODY_FAILURE_BINDINGS_V001)].sort(), 'BODY_CONTINUATION_EXACT_FIELDS');
+-  assert.equal(proof.schemaVersion, 'digest-formal-body-continuation-v001');
++  assert.equal(proof.schemaVersion, 'digest-formal-body-continuation-v002');
+   assert(!Object.hasOwn(permit, 'entryRetry'), 'BODY_CONTINUATION_NOT_ENTRY_RETRY');
+   const oldRoot = path.join(GUEST, OUT), newRoot = path.join(GUEST, BODY_OUT);
+   assert.equal(permit.status, 'verified-formal-handoff-v001');
+@@ -1239,6 +1244,33 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
+   const previous = observed.previousPermitBinding, evidence = observed.failureEvidenceBinding;
+   assert.equal(previous.bindings.implementationSha, 'e37361ca38c9e89507ebb2d40b616cad886a5d79');
+   assert.equal(previous.monitorDirectory, oldRoot + '/monitor-retry-entry-v001');
++  const importFailure = observed.rendererImportFailureBinding;
++  const importRoot = oldRoot + '/body-continuation-v001';
++  assert.equal(importFailure.schemaVersion, 'digest-formal-renderer-import-failure-evidence-v001');
++  assert.equal(importFailure.outputRoot, importRoot); assert.equal(importFailure.implementationSha, 'e8e80af06efe1332a152eda68003558948517bdf');
++  assert.equal(importFailure.mediaStarted, 0); assert.equal(importFailure.subtitleRendering, 'not-started');
++  for (const [name, ref] of Object.entries(importFailure.bindings) as [string, Json][]) {
++    safe(name); assert.equal(ref.path, importRoot + '/' + name); await readDigestFormalEntryEvidenceBytesV001(ref);
++  }
++  const importPermit = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(importFailure.previousPermitBinding)).toString());
++  assert.equal(importPermit.bindings.implementationSha, importFailure.implementationSha);
++  assert.equal(importPermit.monitorDirectory, importRoot + '/monitor');
++  assert.deepEqual(importFailure.summary.command, importPermit.command); assert.deepEqual(importFailure.owned.bindings, importPermit.bindings);
++  assert.deepEqual(importFailure.owned.command, importPermit.command); assert.equal(importFailure.owned.group, importFailure.owned.parentPid);
++  assert.equal(importFailure.shutdown.group, importFailure.owned.group);
++  assert.equal(importFailure.summary.status, 'interrupted'); assert.equal(importFailure.summary.stage, 'body'); assert.equal(importFailure.summary.exitCode, 1);
++  assert.deepEqual(importFailure.summary.remainingRunning, []); assert.deepEqual(importFailure.shutdown.remainingRunning, []); assert.deepEqual(importFailure.shutdown.remaining, []);
++  for (const key of ['planId', 'logicalPrefix', 'planManifest', 'approvalRecord']) assert.deepEqual(importPermit.bindings[key], previous.bindings[key], 'BODY_IMPORT_FAILURE_GRANT_CHANGED');
++  assert.deepEqual(importPermit.storage, previous.storage);
++  const importLog = await readFile(importRoot + '/monitor/worker.log', 'utf8');
++  assert(importLog.includes('ERR_UNSUPPORTED_RESOLVE_REQUEST') && importLog.includes('run_presentation_instruction_renderer_job_v002.ts') && importLog.includes('data:text/javascript,'), 'BODY_EXACT_IMPORT_FAILURE_REQUIRED');
++  for (const name of ['render', 'renderer-result.json', 'admission-receipt.json', 'line-layout.json', 'result.json', 'low-memory-composite.json']) await absent(importRoot + '/' + name);
++  assert.deepEqual(await readdir(importRoot + '/temp'), []);
++  for (let i = 0; i < IMPLEMENTATIONS.length; i++) {
++    const code = (await exec('git', ['show', importPermit.bindings.implementationSha + ':' + IMPLEMENTATIONS[i]], {cwd: ROOT, encoding: 'buffer', maxBuffer: 4000000})).stdout as Buffer;
++    assert.equal(sha(code), importPermit.implementation[i].fileSha256, 'BODY_IMPORT_FAILURE_CODE_CHANGED');
++  }
++
+   assert.equal(evidence.schemaVersion, 'digest-formal-body-timeout-final-evidence-v001');
+   assert.equal(evidence.outputRoot, oldRoot); assert.equal(evidence.baseValidation, 'passed');
+   assert.equal(evidence.subtitleRendering, 'not-started'); assert.equal(evidence.finalComposite, 'not-started');
+@@ -1258,6 +1290,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
+   assert.deepEqual(shutdown.remaining, []); assert.deepEqual(shutdown.remainingRunning, []);
+   const processes = (await exec('/bin/ps', ['-axo', 'pid=,pgid=,stat=,args='])).stdout;
+   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(owned.group) && !row[2]?.startsWith('Z');}), 'BODY_PREVIOUS_OWNER_LIVE');
++  assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(importFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_IMPORT_FAILURE_OWNER_LIVE');
+   assert(observed.workerLogBinding.toString().includes('SUPERVISOR_REPLY_TIMEOUT'), 'BODY_EXACT_TIMEOUT_REQUIRED');
+   const resources = observed.resourceBinding.toString().trim().split('\n').map((line: string) => JSON.parse(line));
+   assert(resources.some((sample: Json) => sample.phase === 'before-body' && sample.pressure === 1), 'BODY_BEFORE_BODY_SAMPLE_REQUIRED');
+@@ -1271,10 +1304,17 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
+     const oldCode = (await exec('git', ['show', previous.bindings.implementationSha + ':' + IMPLEMENTATIONS[i]], {cwd: ROOT, encoding: 'buffer', maxBuffer: 4000000})).stdout as Buffer;
+     assert.equal(sha(oldCode), previous.implementation[i].fileSha256, 'BODY_OLD_IMPLEMENTATION_CHANGED');
+     assert.equal(await m.fileSha(permit.implementation[i].path), permit.implementation[i].fileSha256, 'BODY_CURRENT_IMPLEMENTATION_CHANGED');
+-    if (i >= 2) assert.equal(permit.implementation[i].fileSha256, previous.implementation[i].fileSha256, 'BODY_UNCHANGED_IMPLEMENTATION_CHANGED');
++    if (i >= 3) assert.equal(permit.implementation[i].fileSha256, previous.implementation[i].fileSha256, 'BODY_UNCHANGED_IMPLEMENTATION_CHANGED');
+     if (i === 1) {
+       const currentCode = await readFile(permit.implementation[i].path, 'utf8');
+-      assert.equal(currentCode.replace("if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT\n    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v001')", "if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT"), oldCode.toString(), 'BODY_CORE_EXACT_CONNECTION_DIFF_REQUIRED');
++      assert.equal(currentCode.replace("if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT\n    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v002')", "if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT"), oldCode.toString(), 'BODY_CORE_EXACT_CONNECTION_DIFF_REQUIRED');
++    }
++
++    if (i === 2) {
++      const currentCode = await readFile(permit.implementation[i].path, 'utf8');
++      const reversed = currentCode.replace("import {fileURLToPath, pathToFileURL} from 'node:url';", "import {fileURLToPath} from 'node:url';")
++        .replace("pathToFileURL(path.resolve(MODULE_DIRECTORY, '../../runner/src/digest-formal-handoff-v001.ts')).href", "'../../runner/src/digest-formal-handoff-v001.js'");
++      assert.equal(reversed, oldCode.toString(), 'BODY_CALLER_EXACT_IMPORT_DIFF_REQUIRED');
+     }
+   }
+   for (const name of ['render', 'renderer-result.json', 'admission-receipt.json', 'line-layout.json', 'result.json', 'low-memory-composite.json']) await absent(oldRoot + '/' + name);
+@@ -1309,7 +1349,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
+   const qualification = {status: 'qualified-specific-stopped-body', outputRoot: BODY_OUT, base,
+     previousImplementationSha: previous.bindings.implementationSha, previousImplementationBindings: previous.implementation,
+     currentImplementationSha: permit.bindings.implementationSha, currentImplementationBindings: permit.implementation,
+-    previousEvidence: structuredClone(proof), oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
++    previousEvidence: structuredClone(proof), importFailureImplementationSha: importFailure.implementationSha, importFailureImplementationBindings: importPermit.implementation, oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
+   function freeze(value: any) {if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);}}
+   freeze(qualification); return qualification;
+ }

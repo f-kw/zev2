@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-03T13:53:08.658Z",
+  "cases": [
+    {
+      "entry": "assemble",
+      "name": "old-clone",
+      "expected": "QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "observed": "AssertionError [ERR_ASSERTION]: QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "passed": true
+    },
+    {
+      "entry": "assemble",
+      "name": "fixed-child-clone",
+      "expected": "QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "observed": "AssertionError [ERR_ASSERTION]: QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "passed": true
+    },
+    {
+      "entry": "assemble",
+      "name": "arbitrary-child",
+      "expected": "CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "observed": "Error: DIGEST_SKILL_E2E: CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "passed": true
+    },
+    {
+      "entry": "assemble",
+      "name": "wrong-plan-root",
+      "expected": "CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "observed": "Error: DIGEST_SKILL_E2E: CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "passed": true
+    },
+    {
+      "entry": "render",
+      "name": "old-clone",
+      "expected": "QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "observed": "AssertionError [ERR_ASSERTION]: QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "passed": true
+    },
+    {
+      "entry": "render",
+      "name": "fixed-child-clone",
+      "expected": "QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "observed": "AssertionError [ERR_ASSERTION]: QUALIFIED_DIGEST_STORAGE_REQUIRED",
+      "passed": true
+    },
+    {
+      "entry": "render",
+      "name": "arbitrary-child",
+      "expected": "CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "observed": "Error: DIGEST_SKILL_E2E: CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "passed": true
+    },
+    {
+      "entry": "render",
+      "name": "wrong-plan-root",
+      "expected": "CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "observed": "Error: DIGEST_SKILL_E2E: CORE_STORAGE_OUTPUT_ROOT_MISMATCH",
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "mediaStarted": 0
+}

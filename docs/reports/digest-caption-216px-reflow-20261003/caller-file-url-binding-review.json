@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "digest-caller-file-url-fix-binding-review-v001",
+  "readAt": "2026-10-03T13:49:59.859769+00:00",
+  "head": "e8e80af06efe1332a152eda68003558948517bdf",
+  "scope": "read-only code/trust/result; no repository edit/loader execution/render/test/process action",
+  "callerPath": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+  "trustDependenciesContainCaller": false,
+  "trustDependencyCount": 8,
+  "oldAndV1TrustDependencyListsIdentical": true,
+  "trustRendererDependencies": [
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "fileSha256": "ad5a822a71c1a967951952bb0dc7ceae4374682ae049768d66beb779dfb91385"
+    },
+    {
+      "path": "runner/src/remotion/components/TelopText.tsx",
+      "fileSha256": "05dba9a74152232702f22514660d17e79e20f6767cf791390bd91dcc78f66ad7"
+    },
+    {
+      "path": "runner/src/remotion/utils/telop-font.ts",
+      "fileSha256": "fa2cb9c4c767e43006d77fa1aa8a0b6f1757b4059551ffc413d5c7fdf5cd441c"
+    },
+    {
+      "path": "runner/src/telop/telop-render-model.ts",
+      "fileSha256": "d4b2604699de7df6675be8da46531cf0e417ae21b5d76f1f994cad252f59212a"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "fileSha256": "3f136f17e6a1bf860aec4aa82b59de1c6f078499f860bf2d65fef82eaf66ff2d"
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "fileSha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a"
+    },
+    {
+      "path": "runner/src/shared/telop-glow.ts",
+      "fileSha256": "bfad6788f7ccfdc721839a53b4552f18bb713ac1a26c3d2469096697d33b79f8"
+    }
+  ],
+  "callerRendererImplementationBinding": [
+    {
+      "role": "instruction-renderer-runner-v002",
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15"
+    }
+  ],
+  "existingBlocker": {
+    "file": "runner/src/digest-formal-handoff-v001.ts",
+    "condition": "i>=2 current implementation hash must equal previous hash",
+    "callerIndex": 2,
+    "rejection": "BODY_UNCHANGED_IMPLEMENTATION_CHANGED"
+  },
+  "bindingConditions": [
+    "caller only exact two-line reverse matches old bytes; keep both historical/current hashes",
+    "indices3..6 unchanged; Core only approved fixed-child connection",
+    "fresh fixed child; v001 results/logs/20metadata preserved; no wx bypass",
+    "new permit/core-plan/source/renderer-job bind current implementation SHA and file bytes",
+    "same adapter WeakSet identity/current qualification; no opacity bypass",
+    "eight f2ef rendererDependencies and font checks unchanged"
+  ],
+  "v1StoppedEntry": {
+    "startedAt": "2026-10-03T13:44:08.703265+00:00",
+    "endedAt": "2026-10-03T13:44:26.804190+00:00",
+    "seconds": 18.100924968719482,
+    "exitCode": 1,
+    "remainingRunning": [],
+    "errorCode": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+    "resourceReplies": "parent reports ids1/2 successful; no media produced"
+  },
+  "sourceBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "7e77679a6ae58f2ac7bfc6b5d6bb618ed98530645f11c62ea00099ba5793cf78",
+      "sizeBytes": 122848
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "sizeBytes": 32427
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/candidate-style/trust.json",
+      "fileSha256": "f2dddc1e9206bebd5aed0ebce03496d205792cac4b0ce7a0edcb0517dca88c62",
+      "sizeBytes": 5440
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/candidate-style/trust.json",
+      "fileSha256": "5022d14a708aebce897b2aa1b88bc691595e00eb185b8eeb2c5ec952ce07c18b",
+      "sizeBytes": 5394
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/renderer-job.json",
+      "fileSha256": "ee6116f751d0016bb0d996da5aa5bb8104281967ad8b43b46f53e02829a3fc76",
+      "sizeBytes": 10618
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/monitor/summary.json",
+      "fileSha256": "2336ce3be98e195ff0f01723437ee451c833fc89d086536ade09f4daa3aa1f90",
+      "sizeBytes": 1477
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v001/monitor/worker.log",
+      "fileSha256": "4d867a8bac4104117417deef98fdc3d80800546e03f1dba00a0e6b9dbd1dd165",
+      "sizeBytes": 38564
+    }
+  ],
+  "reportBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-body-continuation-prefix-review/caller-file-url-fix-binding-review.md",
+    "fileSha256": "ef238ed6fcc25417e7939ff61c80a672e4387ccf4c6c494c73c0e89a1f0e0b6a",
+    "sizeBytes": 3479
+  }
+}
