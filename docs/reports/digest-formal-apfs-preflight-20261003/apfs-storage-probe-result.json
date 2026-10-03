@@ -1,0 +1,364 @@
+{
+  "startedAt": "2026-10-03T07:17:03.252033+00:00",
+  "uid": 501,
+  "imageCapBytes": 100000000000,
+  "requestedVirtualBytes": 99999547392,
+  "hostRoot": "/Volumes/KIOXIA",
+  "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+  "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+  "operations": {
+    "writeFsyncReadHash": true,
+    "exclusiveCreateExistingRejected": true,
+    "hardLink": true,
+    "hardLinkExistingEEXISTContentUnchanged": true,
+    "chmod444NonRootWriteOpenRejected": true,
+    "detachAttachReadback": true,
+    "reattachNonRootWriteOpenRejected": true
+  },
+  "commands": [
+    {
+      "arguments": [
+        "diskutil",
+        "info",
+        "-plist",
+        "/Volumes/KIOXIA"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "hdiutil",
+        "create",
+        "-sectors",
+        "195311616",
+        "-type",
+        "SPARSEBUNDLE",
+        "-fs",
+        "APFS",
+        "-volname",
+        "ZEV-Digest-20261003-01",
+        "-nospotlight",
+        "-plist",
+        "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "hdiutil",
+        "imageinfo",
+        "-plist",
+        "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "hdiutil",
+        "attach",
+        "-owners",
+        "on",
+        "-mountpoint",
+        "/Volumes/ZEV-Digest-20261003-01",
+        "-noautoopen",
+        "-nobrowse",
+        "-plist",
+        "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "diskutil",
+        "info",
+        "-plist",
+        "/Volumes/ZEV-Digest-20261003-01"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "diskutil",
+        "info",
+        "-plist",
+        "/Volumes/ZEV-Digest-20261003-01"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "hdiutil",
+        "detach",
+        "/dev/disk6s1"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "hdiutil",
+        "attach",
+        "-owners",
+        "on",
+        "-mountpoint",
+        "/Volumes/ZEV-Digest-20261003-01",
+        "-noautoopen",
+        "-nobrowse",
+        "-plist",
+        "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "diskutil",
+        "info",
+        "-plist",
+        "/Volumes/ZEV-Digest-20261003-01"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    }
+  ],
+  "status": "passed",
+  "phase": "passed-cleanup-guest-mounted",
+  "recordedAt": "2026-10-03T07:18:46.740811+00:00",
+  "host": {
+    "DeviceIdentifier": "disk4s2",
+    "DeviceNode": "/dev/disk4s2",
+    "VolumeUUID": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "DiskUUID": "49CE429C-DA91-4CFC-8268-81CF4F27B2CC",
+    "FilesystemType": "exfat",
+    "FilesystemName": "ExFAT",
+    "MountPoint": "/Volumes/KIOXIA",
+    "TotalSize": 2000353230848,
+    "VolumeFreeSpace": null,
+    "Owners": null,
+    "ReadOnlyVolume": null
+  },
+  "hostDevice": 16777238,
+  "hostFreeBytesBefore": 2000299753472,
+  "hostRequiredBytes": 118254231552,
+  "imageInfo": {
+    "Backing Store Information": {
+      "Class Name": "CBundleBackingStore",
+      "Name": "digest-100GB.sparsebundle",
+      "URL": "file:///Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle/"
+    },
+    "Checksum Type": "なし",
+    "Checksum Value": "",
+    "Class Name": "CSparseBundleDiskImage",
+    "Format": "UDSB",
+    "Format Description": "スパース",
+    "Properties": {
+      "Checksummed": false,
+      "Compressed": "no",
+      "Encrypted": false,
+      "Kernel Compatible": false,
+      "Partitioned": false,
+      "Software License Agreement": false
+    },
+    "Segments": [
+      "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle"
+    ],
+    "Size Information": {
+      "Compressed Bytes": 99999547392,
+      "Compressed Ratio": 1.0,
+      "Sector Count": 195311616,
+      "Total Bytes": 99999547392,
+      "Total Empty Bytes": 99999547392,
+      "Total Non-Empty Bytes": 0
+    },
+    "partitions": {
+      "block-size": 512,
+      "burnable": false,
+      "partition-scheme": "GUID",
+      "partitions": [
+        {
+          "partition-hint": "MBR",
+          "partition-length": 1,
+          "partition-name": "Protective Master Boot Record",
+          "partition-start": 0,
+          "partition-synthesized": true
+        },
+        {
+          "partition-hint": "Primary GPT Header",
+          "partition-length": 1,
+          "partition-name": "GPT Header",
+          "partition-start": 1,
+          "partition-synthesized": true
+        },
+        {
+          "partition-hint": "Primary GPT Table",
+          "partition-length": 32,
+          "partition-name": "GPT Partition Data",
+          "partition-start": 2,
+          "partition-synthesized": true
+        },
+        {
+          "partition-hint": "Apple_Free",
+          "partition-length": 6,
+          "partition-name": "",
+          "partition-start": 34,
+          "partition-synthesized": true
+        },
+        {
+          "partition-UUID": "C68E58A7-397B-4D83-A4DF-CEFA7539B7C1",
+          "partition-filesystems": {
+            "FAT32": "EFI"
+          },
+          "partition-hint": "C12A7328-F81F-11D2-BA4B-00A0C93EC93B",
+          "partition-hint-UUID": "C12A7328-F81F-11D2-BA4B-00A0C93EC93B",
+          "partition-length": 409600,
+          "partition-name": "EFI System Partition",
+          "partition-number": 1,
+          "partition-start": 40
+        },
+        {
+          "partition-UUID": "CA79B361-CC25-443E-9639-557B0CC45A82",
+          "partition-filesystems": {
+            "APFS": "Untitled"
+          },
+          "partition-hint": "Apple_APFS",
+          "partition-hint-UUID": "7C3457EF-0000-11AA-AA11-00306543ECAC",
+          "partition-length": 194901936,
+          "partition-name": "disk image",
+          "partition-number": 2,
+          "partition-start": 409640
+        },
+        {
+          "partition-hint": "Apple_Free",
+          "partition-length": 7,
+          "partition-name": "",
+          "partition-start": 195311576,
+          "partition-synthesized": true
+        },
+        {
+          "partition-hint": "Backup GPT Table",
+          "partition-length": 32,
+          "partition-name": "GPT Partition Data",
+          "partition-start": 195311583,
+          "partition-synthesized": true
+        },
+        {
+          "partition-hint": "Backup GPT Header",
+          "partition-length": 1,
+          "partition-name": "GPT Header",
+          "partition-start": 195311615,
+          "partition-synthesized": true
+        }
+      ]
+    }
+  },
+  "firstAttach": {
+    "system-entities": [
+      {
+        "content-hint": "EFI",
+        "dev-entry": "/dev/disk5s1",
+        "potentially-mountable": true,
+        "unmapped-content-hint": "C12A7328-F81F-11D2-BA4B-00A0C93EC93B",
+        "volume-kind": "msdos"
+      },
+      {
+        "content-hint": "41504653-0000-11AA-AA11-00306543ECAC",
+        "dev-entry": "/dev/disk6s1",
+        "mount-point": "/Volumes/ZEV-Digest-20261003-01",
+        "potentially-mountable": true,
+        "unmapped-content-hint": "41504653-0000-11AA-AA11-00306543ECAC",
+        "volume-kind": "apfs"
+      },
+      {
+        "content-hint": "Apple_APFS",
+        "dev-entry": "/dev/disk5s2",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "7C3457EF-0000-11AA-AA11-00306543ECAC"
+      },
+      {
+        "content-hint": "EF57347C-0000-11AA-AA11-00306543ECAC",
+        "dev-entry": "/dev/disk6",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "EF57347C-0000-11AA-AA11-00306543ECAC"
+      },
+      {
+        "content-hint": "GUID_partition_scheme",
+        "dev-entry": "/dev/disk5",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "GUID_partition_scheme"
+      }
+    ]
+  },
+  "setupCorrection": "diskutil actual keys GlobalPermissionsEnabled and WritableVolume; initial stop occurred before probe file write",
+  "firstAttemptError": "RuntimeError: guest APFS/ownership/mount properties not qualified",
+  "firstGuest": {
+    "DeviceIdentifier": "disk6s1",
+    "DeviceNode": "/dev/disk6s1",
+    "VolumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "DiskUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "FilesystemType": "apfs",
+    "MountPoint": "/Volumes/ZEV-Digest-20261003-01",
+    "TotalSize": 99789791232,
+    "GlobalPermissionsEnabled": true,
+    "WritableVolume": true
+  },
+  "firstGuestDevice": 16777243,
+  "guestFreeBytesBefore": 99665981440,
+  "payloadSha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+  "sourceMode": "0o444",
+  "secondAttach": {
+    "system-entities": [
+      {
+        "content-hint": "EFI",
+        "dev-entry": "/dev/disk5s1",
+        "potentially-mountable": true,
+        "unmapped-content-hint": "C12A7328-F81F-11D2-BA4B-00A0C93EC93B",
+        "volume-kind": "msdos"
+      },
+      {
+        "content-hint": "41504653-0000-11AA-AA11-00306543ECAC",
+        "dev-entry": "/dev/disk6s1",
+        "mount-point": "/Volumes/ZEV-Digest-20261003-01",
+        "potentially-mountable": true,
+        "unmapped-content-hint": "41504653-0000-11AA-AA11-00306543ECAC",
+        "volume-kind": "apfs"
+      },
+      {
+        "content-hint": "Apple_APFS",
+        "dev-entry": "/dev/disk5s2",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "7C3457EF-0000-11AA-AA11-00306543ECAC"
+      },
+      {
+        "content-hint": "EF57347C-0000-11AA-AA11-00306543ECAC",
+        "dev-entry": "/dev/disk6",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "EF57347C-0000-11AA-AA11-00306543ECAC"
+      },
+      {
+        "content-hint": "GUID_partition_scheme",
+        "dev-entry": "/dev/disk5",
+        "potentially-mountable": false,
+        "unmapped-content-hint": "GUID_partition_scheme"
+      }
+    ]
+  },
+  "finalGuest": {
+    "DeviceIdentifier": "disk6s1",
+    "DeviceNode": "/dev/disk6s1",
+    "VolumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "DiskUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "FilesystemType": "apfs",
+    "MountPoint": "/Volumes/ZEV-Digest-20261003-01",
+    "TotalSize": 99789791232,
+    "GlobalPermissionsEnabled": true,
+    "WritableVolume": true
+  },
+  "finalGuestDevice": 16777243,
+  "probeDirectoryRemains": false
+}

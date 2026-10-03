@@ -1,5 +1,5 @@
 """Same-material resume supervisor. Keeps the original bound supervisor unchanged."""
-import os, sys, json, time, signal, selectors, subprocess, importlib.util, hashlib
+import os, sys, json, time, signal, selectors, subprocess, importlib.util, hashlib, plistlib, stat, re
 from pathlib import Path
 _spec=importlib.util.spec_from_file_location('original_monitor',Path(__file__).with_name('original-resolution-full-supervisor.py'))
 old=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(old)
@@ -48,7 +48,7 @@ def shutdown(p,report):
     if result['remainingRunning']:raise RuntimeError('owned process group still running after SIGKILL')
     return result
 
-def run(directory,command,resume_permit):
+def run_resume(directory,command,resume_permit):
     os.mkdir(directory);started=time.time();p=None;reason=None;stage=None;samples=0;peak=0;parent_peak=0;minimum=None;stopped=None;sel=None
     def record(s):
         nonlocal samples,peak,parent_peak,minimum
@@ -108,6 +108,190 @@ def run(directory,command,resume_permit):
             result=dict(status='completed' if p and p.returncode==0 and not reason else 'interrupted',reason=reason,stage=stage,command=command,resumePermit=resume_permit,startedAt=started,endedAt=time.time(),seconds=time.time()-started,exitCode=p.returncode if p else None,samples=samples,observedTreePeakBytes=peak,observedParentPeakBytes=parent_peak,minimumAvailableBytes=minimum,remainingRunning=stopped['remainingRunning'] if stopped else None,sampleIntervalSeconds=1,limits=dict(initialRunStartBytes=old.START,reserveBytes=old.RESERVE,treeRssBytes=old.RSS),scope='same run resume, original start verified; owned process group; sampled peaks')
             Path(directory+'/summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
     return 0 if result['status']=='completed' else 1
+
+# These limits and two devices belong to the expressly approved single run.
+# They are not defaults for another plan or an alternate storage location.
+FORMAL_REPO = str(Path(__file__).resolve().parents[2])
+FORMAL_MANIFEST = '04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41'
+FORMAL_STORAGE = dict(guestRoot='/Volumes/ZEV-Digest-20261003-01',
+    guestVolumeUuid='7212F3BB-32FB-4F02-A71C-E570421FF2E0',guestDevice=16777243,
+    hostRoot='/Volumes/KIOXIA',hostVolumeUuid='0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1',hostDevice=16777238,
+    imagePath='/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle',
+    imageMaximumBytes=100_000_000_000,hostMetadataReserveBytes=6_254_231_552,internalRoot=FORMAL_REPO)
+FORMAL_CODE = ['runner/src/digest-formal-handoff-v001.ts',
+    'evals/clip_composition/adopted_media_manufacturing_v001.mts',
+    'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
+    'evals/clip_composition/render_presentation_v002.mjs',
+    'tools/digest-quality/original-resolution-low-memory-composite.mjs',
+    'tools/digest-quality/original-resolution-full-supervisor-v002.py']
+
+def verified_file(ref):
+    path=Path(ref['path']);assert path.is_absolute() and path.is_file() and not path.is_symlink(),'bound file missing or symlink'
+    assert str(path.resolve())==str(path),'bound file realpath changed'
+    assert re.fullmatch('[0-9a-f]{64}',ref['fileSha256']),'invalid bound SHA'
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==ref['fileSha256'],'formal bound file changed: '+str(path)
+    return path
+
+def validate_formal_permit(permit,directory,command):
+    assert permit['status']=='verified-formal-handoff-v001','new formal permit required'
+    assert os.geteuid()!=0,'formal run requires nonroot UID'
+    assert os.path.abspath(directory)==permit['monitorDirectory'],'formal monitor destination changed'
+    assert command==permit['command'],'formal command changed'
+    assert len(command)==6 and Path(command[0]).is_absolute() and Path(command[0]).is_file(),'invalid formal node command'
+    assert command[1:]==['--import',FORMAL_REPO+'/runner/node_modules/tsx/dist/loader.mjs',
+        FORMAL_REPO+'/runner/src/digest-formal-handoff-v001.ts','--permit',permit['bindings']['commandPermitPath']],'formal entry command changed'
+    assert permit['storage']==FORMAL_STORAGE,'formal storage binding changed'
+    bindings=permit['bindings'];prefix=bindings['logicalPrefix']
+    assert prefix=='runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001','different formal logical prefix'
+    assert not prefix.endswith('/') and all(p not in ('','..','.') for p in prefix.split('/')),'invalid formal prefix components'
+    output_root=Path(FORMAL_STORAGE['guestRoot'])/prefix
+    assert output_root in Path(directory).parents,'monitor is not inside the approved output prefix'
+    assert str(Path(directory).parent.resolve())==str(Path(directory).parent),'monitor parent is symlink or absent'
+    assert bindings['planManifest']['fileSha256']==FORMAL_MANIFEST,'different candidate manifest'
+    manifest=verified_file(bindings['planManifest']);approval=verified_file(bindings['approvalRecord'])
+    assert str(manifest)==FORMAL_REPO+'/runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json','different manifest path'
+    assert Path(FORMAL_REPO) in approval.parents,'approval must remain repository bound'
+    assert bindings['planId']=='digest-formal-handoff-20261003-v001','different formal plan ID'
+    head=subprocess.check_output(['git','-C',FORMAL_REPO,'rev-parse','HEAD'],text=True).strip()
+    assert re.fullmatch('[0-9a-f]{40}',bindings['implementationSha']) and head==bindings['implementationSha'],'implementation commit changed'
+    implementation=permit['implementation']
+    assert len(implementation)==len(FORMAL_CODE),'formal implementation path count changed'
+    assert sorted(r['path'] for r in implementation)==sorted(FORMAL_REPO+'/'+p for p in FORMAL_CODE),'formal implementation path set changed'
+    for ref in implementation:verified_file(ref)
+    storage=permit['storage'];image=Path(storage['imagePath']);metadata=image/'Info.plist'
+    assert image.is_dir() and not image.is_symlink() and str(image.resolve())==str(image),'image missing or relocated'
+    image_stat=image.stat();info=plistlib.loads(metadata.read_bytes())
+    assert info['diskimage-bundle-type']=='com.apple.diskimage.sparsebundle','different backing image type'
+    assert isinstance(info['size'],int) and 0<info['size']<=storage['imageMaximumBytes'],'image exceeds approved maximum'
+    return dict(imageInode=image_stat.st_ino,imageDevice=image_stat.st_dev,
+        imageMetadataSha256=hashlib.sha256(metadata.read_bytes()).hexdigest(),imageLogicalBytes=info['size'])
+
+def volume_identity(root,uuid,device,filesystem):
+    actual=os.lstat(root)
+    assert stat.S_ISDIR(actual.st_mode) and not stat.S_ISLNK(actual.st_mode),'volume root missing or symlink: '+root
+    assert os.path.realpath(root)==root and actual.st_dev==device,'volume device or root changed: '+root
+    info=plistlib.loads(subprocess.check_output(['diskutil','info','-plist',root]))
+    assert info.get('VolumeUUID','').upper()==uuid and info.get('MountPoint')==root,'volume UUID or mount changed: '+root
+    assert info.get('FilesystemType','').lower()==filesystem,'volume filesystem changed: '+root
+    return dict(root=root,volumeUuid=uuid,device=device,deviceNode=info['DeviceNode'],filesystem=filesystem)
+
+def observe_formal(group,permit,image_identity):
+    storage=permit['storage'];guest=volume_identity(storage['guestRoot'],storage['guestVolumeUuid'],storage['guestDevice'],'apfs')
+    host=volume_identity(storage['hostRoot'],storage['hostVolumeUuid'],storage['hostDevice'],'exfat')
+    image=Path(storage['imagePath']);actual=image.lstat()
+    assert stat.S_ISDIR(actual.st_mode) and str(image.resolve())==str(image),'backing image disappeared or became symlink'
+    assert actual.st_ino==image_identity['imageInode'] and actual.st_dev==image_identity['imageDevice']==storage['hostDevice'],'backing image identity changed'
+    assert hashlib.sha256((image/'Info.plist').read_bytes()).hexdigest()==image_identity['imageMetadataSha256'],'image capacity metadata changed'
+    images=plistlib.loads(subprocess.check_output(['hdiutil','info','-plist']))['images']
+    attached=[row for row in images if row.get('image-path')==str(image)]
+    assert len(attached)==1 and any(row.get('mount-point')==guest['root'] and row.get('dev-entry')==guest['deviceNode'] for row in attached[0]['system-entities']),'guest is not the bound backing image'
+    # Measure only this newly-created bundle, never scan other SSD contents.
+    allocated=int(subprocess.check_output(['du','-sk',str(image)],text=True).split()[0])*1024
+    assert allocated>=0,'image allocation observation failed'
+    sample=observe_group(group,guest['root']) if group else old.observe(0,guest['root'])
+    def available(root):
+        fs=os.statvfs(root);return fs.f_bavail*fs.f_frsize
+    remaining=max(0,storage['imageMaximumBytes']-min(allocated,storage['imageMaximumBytes']))
+    sample.update(guest=guest,host=host,imagePath=str(image),imageAllocatedBytes=allocated,
+        imageRemainingGrowthBytes=remaining,hostAvailableBytes=available(host['root']),
+        hostRequiredBytes=remaining+old.RESERVE+storage['hostMetadataReserveBytes'],
+        hostStartRequiredBytes=storage['imageMaximumBytes']+old.RESERVE+storage['hostMetadataReserveBytes'],
+        internalAvailableBytes=available(storage['internalRoot']),internalRoot=storage['internalRoot'])
+    return sample
+
+def formal_decision(sample,new_bytes=0,starting=False):
+    if type(new_bytes) is not int or new_bytes<0:return 'invalid next allocation'
+    reason=old.decision(sample,new_bytes,starting)
+    if reason:return reason
+    host_required=(FORMAL_STORAGE['imageMaximumBytes']+old.RESERVE+FORMAL_STORAGE['hostMetadataReserveBytes']) if starting else sample['hostRequiredBytes']
+    if sample['hostAvailableBytes']<host_required:return 'host image growth plus reserve and metadata will not fit'
+    if sample['internalAvailableBytes']<=old.RESERVE:return 'internal OS disk reached approved reserve'
+    return None
+
+def run_formal(directory,command,permit_file):
+    # Exclusive directory is the one-time claim. No resume or fallback branch.
+    permit=json.loads(Path(permit_file).read_text())
+    assert os.path.abspath(permit_file)==permit['bindings']['commandPermitPath'],'formal permit path changed'
+    image_identity=validate_formal_permit(permit,directory,command)
+    os.mkdir(directory);started=time.time();p=None;reason=None;stage=None;stopped=None;sel=None
+    samples=0;peak=0;parent_peak=0;minimum=None;host_minimum=None;internal_minimum=None
+    def record(sample):
+        nonlocal samples,peak,parent_peak,minimum,host_minimum,internal_minimum
+        samples+=1;peak=max(peak,sample['treeRssBytes']);parent_peak=max(parent_peak,sample['parentRssBytes'])
+        minimum=min(minimum if minimum is not None else sample['availableBytes'],sample['availableBytes'])
+        host_minimum=min(host_minimum if host_minimum is not None else sample['hostAvailableBytes'],sample['hostAvailableBytes'])
+        internal_minimum=min(internal_minimum if internal_minimum is not None else sample['internalAvailableBytes'],sample['internalAvailableBytes'])
+        observations.write(json.dumps(sample)+'\n');observations.flush()
+    with open(directory+'/resource.jsonl','x') as observations,open(directory+'/worker.log','xb') as log:
+        try:
+            initial=observe_formal(0,permit,image_identity);initial['phase']='formal-start';record(initial)
+            reason=formal_decision(initial,starting=True)
+            if reason:raise RuntimeError(reason)
+            p=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=log,start_new_session=True,
+                env={**os.environ,'ZEV_FULL_SUPERVISED':'1','ZEV_FORMAL_HANDOFF_PERMIT':os.path.abspath(permit_file)})
+            Path(directory+'/owned-group.json').write_text(json.dumps(dict(group=p.pid,parentPid=p.pid,
+                spawnedAt=time.time(),command=command,permitFile=permit_file,bindings=permit['bindings'],
+                storage=permit['storage'],imageIdentity=image_identity),indent=2)+'\n')
+            sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ);buffer=b'';last=0
+            while p.poll() is None:
+                if time.monotonic()-last>=1:
+                    sample=observe_formal(p.pid,permit,image_identity);record(sample);last=time.monotonic()
+                    reason=formal_decision(sample)
+                    if reason:raise RuntimeError(reason)
+                for key,_ in sel.select(max(0,1-(time.monotonic()-last))):
+                    chunk=os.read(key.fd,65536)
+                    if not chunk:
+                        sel.unregister(key.fileobj)
+                        if p.poll() is None:raise RuntimeError('formal worker supervision communication disconnected')
+                        continue
+                    log.write(chunk);log.flush();buffer+=chunk
+                    while b'\n' in buffer:
+                        line,buffer=buffer.split(b'\n',1)
+                        if not line.startswith(b'@@RESOURCE_CHECK '):continue
+                        request=json.loads(line[len(b'@@RESOURCE_CHECK '):]);stage=request['stage']
+                        assert type(request['id']) is int and request['id']>0 and isinstance(stage,str) and stage,'invalid formal resource request'
+                        # Refresh UUID/device, all disks and pressure before every
+                        # next-unit acknowledgement; old samples are not permits.
+                        current=observe_formal(p.pid,permit,image_identity);current['phase']='before-'+stage;record(current);last=time.monotonic()
+                        reason=formal_decision(current,request['newBytes'])
+                        if reason:raise RuntimeError(reason)
+                        p.stdin.write((json.dumps(dict(id=request['id'],sample=current))+'\n').encode());p.stdin.flush()
+            p.wait();reason=None if p.returncode==0 else 'formal worker nonzero exit'
+            if any(not row['state'].startswith('Z') for row in members(p.pid)):reason=reason or 'formal worker exited with live descendants'
+            final=observe_formal(0,permit,image_identity);final['phase']='formal-final';record(final)
+            reason=reason or formal_decision(final)
+        except BaseException as error:reason=str(error) or type(error).__name__
+        finally:
+            if p:
+                try:stopped=shutdown(p,directory+'/group-shutdown.json')
+                except BaseException as error:
+                    reason=(reason or '')+'; shutdown failure: '+str(error)
+                    try:os.killpg(p.pid,signal.SIGKILL)
+                    except ProcessLookupError:pass
+                    try:p.wait(timeout=5)
+                    except subprocess.TimeoutExpired:reason+='; parent termination unverified'
+                    Path(directory+'/shutdown-error.json').write_text(json.dumps(dict(group=p.pid,at=time.time(),error=str(error),remainingRunning=None),indent=2)+'\n')
+                finally:
+                    if p.stdin:p.stdin.close()
+                    if p.stdout:p.stdout.close()
+            if sel:sel.close()
+            result=dict(status='completed' if p and p.returncode==0 and not reason else 'interrupted',reason=reason,
+                stage=stage,command=command,formalPermit=permit_file,startedAt=started,endedAt=time.time(),
+                seconds=time.time()-started,exitCode=p.returncode if p else None,samples=samples,
+                observedTreePeakBytes=peak,observedParentPeakBytes=parent_peak,minimumGuestAvailableBytes=minimum,
+                minimumHostAvailableBytes=host_minimum,minimumInternalAvailableBytes=internal_minimum,
+                remainingRunning=stopped['remainingRunning'] if stopped else None,sampleIntervalSeconds=1,
+                limits=dict(startBytes=old.START,reserveBytes=old.RESERVE,treeRssBytes=old.RSS,
+                    imageMaximumBytes=FORMAL_STORAGE['imageMaximumBytes'],hostMetadataReserveBytes=FORMAL_STORAGE['hostMetadataReserveBytes']),
+                imageIdentity=image_identity,scope='one new formal plan; three disks measured separately; owned PGID; no automatic resume')
+            Path(directory+'/summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
+    return 0 if result['status']=='completed' else 1
+
+def run(directory,command,permit_file):
+    permit=json.loads(Path(permit_file).read_text())
+    if permit.get('status')=='verified-formal-handoff-v001':return run_formal(directory,command,permit_file)
+    if permit.get('status')=='verified-same-run-resume':return run_resume(directory,command,permit_file)
+    raise RuntimeError('unknown supervisor permit status; no fallback')
 if __name__=='__main__':
     def cancelled(signum,frame):raise RuntimeError('supervisor interrupted by signal '+str(signum))
     signal.signal(signal.SIGTERM,cancelled)

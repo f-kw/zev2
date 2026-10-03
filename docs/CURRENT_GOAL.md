@@ -2,11 +2,15 @@
 
 更新日：2026-10-03（JST）
 
-## 最新個別指示と停止 — 2026-10-03 06:49 UTC
+## 最新個別指示と停止 — 2026-10-03 07:44 UTC
 
-本人の06:33:44 UTC「OK 必要な作業をしてくれ」に基づく今回一件の条件付き製造指示を委任taskが受領。SSD途中物対応の確認で、候補4technical＋監視外の `adopted_media_manufacturing_v001.mts` へ保存/再読context配線が必須と判明し、指示どおり製造前に停止した。`/Volumes/KIOXIA` はExFAT、hard link ENOTSUP、chmod0444のwrite保護も不成立。4096byte自作probeは整理済み。実装/trust/媒体生成0。次は相談役が追加Core pathの限定scopeと保護を満たす保存領域を具体化する。
+本人07:06:03 UTC「いいよ」で、SSD上に新100GB以下APFS image、指定6pathの保存先対応、保存済み一計画のNormal一本/既存QCを承認。07:18:46 UTCの小probeでは保存/再読/排他/hard link/chmod write拒否/通常再mount後の保護が成立した。旧ExFAT保護不足はこの方式で解消する必要条件を満たした。一般ROOT/trust/defaultは不変。
 
-[今回の停止報告](reports/digest-ssd-storage-preflight-20261003/README.md)・[session log](work-logs/2026-10/2026-10-03T0649_Codex-SSD_ID9-storage-preflight_745c81c1.md)を正本の現在地とする。以降の本人回答未受領/SSD未確認は今回指示前の保存履歴。製品6/設営29、既受理成果、人間品質pending、outlineChoice=null、一般本適用の境界は維持する。正式製造record/出力rootは未作成。
+6pathの実装候補と元owner/9traces/243cue/390行/3613atom/27691frame/40705770sampleを確認したが、正式margin0.04では32/243字幕が推定画面幅を超える。保存候補はmargin0でNode領域検査済みだった。first完成3.900秒、正式rendererから全32件を再構成しても結果一致。glyph/媒体生成/技術動画QC/実視聴は未実施、production prefix/候補trust未生成。動画生成前に停止。
+
+[今回報告](reports/digest-formal-apfs-preflight-20261003/README.md)、[許可転記](reports/digest-formal-apfs-preflight-20261003/authorization-record.json)、[session log](work-logs/2026-10/2026-10-03T0707_Codex_APFS_ID9-formal-preflight_f2ef2214.md)を最新現在地とする。次はmona/相談役が今回candidate-only horizontalSafeMarginRatio=0の具体差分とpreview/必要な本人承認を判断。無断の数値変更、一般trust変更、検査免除、旧成果再判断はしない。
+
+自probe整理済み、guest refs0を確認して07:47:03 UTC通常detach、image保持。SSD全体はejectしていない。製造process0/自test残存0。他者変更/停止0。製品6/設営29、旧accept、人間品質pending/outlineChoice=nullを維持。以下の本人回答未受領/SSD未確認は指示前の保存履歴。
 
 ## 1. 復元と履歴
 
@@ -36,31 +40,17 @@
 
 旧15分レビュー、構成改善v001、一件後修正/Reset、旧9:47案1080p低メモリ製造は完了範囲を保持。相談役はGitHub保存コード・証拠を監査し、Mac全runtime再実行・glyph/映像確認を行っていない。最短8/最長526frame・空白15件1,220frameは観測で見心地合格ではない。
 
-## 3. 現在の一件 — 製造の本人判断待ち
+## 3. 現在の一件 — 正式描画条件の判断待ち
 
-**decision: human_decision。文書作業は完了。追加helper・診断・実装は指示しない。**
+一件の実装/製造scopeは承認済み。保存方式の小試験と6path候補を保存した。正式な一本は未生成。次に動く担当はmona/相談役、実装者は停止。
 
-現在の許可依頼は、保存済み一素材・15分23秒案・243字幕を144px/A8/4・Normal確認用動画一本へ接続するための限定実装、候補専用の信頼設定、保存先/安全容量確定後の実製造をまとめた一件。本人回答は未受領。質問と作用範囲は[判断正本§4](work-orders/ZEV_DIGEST_FORMAL_HANDOFF_DECISION_20261003_v001.md)へ蓄積した。ID9-PD-02関連の一計画製造であり、ID9-PD-01一般本適用とは分ける。
+144px/A8/4/26/2・元9区間/243cueを正式trustの横余白4％へ接続すると32件が推定配置不合格になる。元候補の横余白0へ合わせる場合も「元trust layoutRules不変」を超える具体的変更として扱い、小previewと必要な本人承認を受けてから有効化する。次工程で許可されたら同imageを現実のmount/device/UUID/空きへ読み直し、コードSHA・許可・出力prefix・製造recordを再束縛する。再接続で自動再開しない。
 
-### 技術方針
-
-元owner/依存/resolver/SHA、保存意味/ID・9traceを維持する一計画adapterと既存Coreを使う。新9要求を作り直さない。低メモリは既存有限分割・renderer graph・逐次producer/連続encoderを利用し、compose段とcaller伝達だけを限定接続する方向。
-
-提案4technical pathは新runner/src/digest-formal-handoff-v001.ts、既存original-resolution-low-memory-composite.mjs、render_presentation_v002.mjs、run_presentation_instruction_renderer_job_v002.ts。監視案はoriginal-resolution-full-supervisor-v002.py。今回これらの変更や凍結解除は許可しない。承認後の正本で箇所と検証を確定する。
-
-一般style resolverは固定trust canonical SHA/pathを検査する。候補contextも実行可能な候補を決める権限を持つため、単なる設営修正として有効化しない。推奨は本人承認の一計画に限定した入口で、baseline実SHA・許可差分・plan・code・root・製造recordを一致させる方式。一般root変更、自動fallback、STYLE_LIMIT_MISMATCH・font/runtime/code/admission/QCの免除はしない。未実装のため候補入口の成功は未認定。
-
-### 実作用と容量
-
-提案にはsource snapshot copy/chmod/hash、source再inspection、映像/音声grid/PCM/AAC、字幕PNG/glyph/既存QC、今回作成workだけの成功後整理が含まれる。旧inspection/削除0の許可では開始しない。旧成果削除、新API/費用・新素材/STT・演出追加・本番/公開は含めない。
-
-metadata観測2026-10-02T20:03:59.334588+00:00、device16777234、空き13,411,098,624bytes。snapshot4,803,412,827＋source-grid4,246,331,392＋encodePCM325,646,160＝既知9,375,390,379bytesに未知圧縮物が加わる。12GBreserve込みの既知部分だけでも21,375,390,379bytesで観測空きを超える。**現deviceで製造開始不可。**
-
-旧50GB開始/12GBreserve/16GiB親子RSS/pressure1/1秒観測/next-unit+reserve/PGID停止は今回への再承認案で、まだ有効化しない。50GBで成功を保証せず実行時監視が必要。保存先は未確定、SSDは未確認。外部root・symlink・削除で勝手に容量を作らない。本人許可後も実path/device/空き・一時物の保存先・ROOT参照の整合が揃うまで媒体は動かさない。
+許可implementationは新adapter、Core adopted_media_manufacturing_v001.mts、renderer caller/render、低メモリcomposite、監視v002の六path。一般style resolver/ROOT/trust/default/publisher/unused overlay sessionは変更しない。font/runtime/code/admission/QC免除なし。50GB開始/12GBreserve/16GiB RSS/pressure1/1秒/next-unit+reserve/own PGID停止、hostとguestと内蔵の別監視を今回scopeだけに実装した。guest小IO成功を全工程成功へ扱わない。
 
 ## 4. 人間回答・未承認事項
 
-presentation=not-connected／executionPermission=not-approved／humanQuality=pending／outlineChoice=null、ID9-PD-01/02未承認。144px方向・条件付き分割・水色/カラフル方向肯定を保持。A8/4は技術入力で縁選択ではない。26条件を実glyph・見心地・正式styleの採用にしない。
+presentation=not-connected／executionPermission=one-saved-plan-scope-approved-but-stopped-before-media／humanQuality=pending／outlineChoice=null。ID9-PD-01一般本適用は未承認、今回一計画のscopeだけ承認済み。144px方向・条件付き分割・水色/カラフル方向肯定を保持。A8/4は技術入力で縁選択ではない。26条件を実glyph・見心地・正式styleの採用にしない。
 
 B8/12の21論理不合格、強調変更B未肯定、LightCoralの技術不合格と好みの区別、アップのHUD/自動選択/品質、R1〜R3修正版7点・鬼武者Q3-2未回答を既存台帳へ維持。旧10回答・15分レビューは済み。旧307状態/18色/82frameアップを一括移植しない。完成背景四参照・正式後段・演出・動画・人間品質・本番/公開は別の未完了/未承認。
 

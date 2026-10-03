@@ -54,6 +54,25 @@ const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const clone = value => structuredClone(value);
 
+/** Only the one-plan adapter can mint this opaque storage authority. */
+export type DigestRendererStorageContextV001 = Readonly<{
+  outputRoot: string;
+  storageRoot: string;
+  generatedRoot: string;
+  tempDirectory: string;
+  resolve: (logicalPath: string) => string;
+  assertCurrent: () => Promise<void>;
+  composeMedia: (input: Record<string, unknown>) => Promise<unknown>;
+}>;
+
+const qualifyStorageContext = async (storageContext: DigestRendererStorageContextV001 | undefined) => {
+  if (storageContext === undefined) return;
+  const {assertQualifiedDigestStorageContextV001} = await import(
+    '../../runner/src/digest-formal-handoff-v001.js'
+  );
+  await assertQualifiedDigestStorageContextV001(storageContext);
+};
+
 export const PRESENTATION_INSTRUCTION_RENDERER_IMPLEMENTATION_ROLE_PATHS_V002 = Object.freeze([
   ['instruction-renderer-runner-v002',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts'],
@@ -117,6 +136,19 @@ const workspaceAbsolute = (workspaceRoot, relativePath) => {
   return absolute;
 };
 
+const referencedAbsolute = (workspaceRoot, relativePath, storageContext = undefined as
+  DigestRendererStorageContextV001 | undefined) => storageContext === undefined
+  ? workspaceAbsolute(workspaceRoot, relativePath) : storageContext.resolve(relativePath);
+
+const generatedAbsolute = (workspaceRoot, logicalPath, storageContext = undefined as
+  DigestRendererStorageContextV001 | undefined) => {
+  if (storageContext !== undefined && !(logicalPath === storageContext.outputRoot
+    || logicalPath.startsWith(`${storageContext.outputRoot}/`))) {
+    throw new Error('digest-generated-prefix-mismatch');
+  }
+  return referencedAbsolute(workspaceRoot, logicalPath, storageContext);
+};
+
 const stableFileBytes = async filePath => {
   const firstResolved = await realpath(filePath);
   const before = await lstat(firstResolved, {bigint: true});
@@ -141,8 +173,9 @@ const observeJsonBinding = async (
   binding,
   decoder = null,
   schemaField = 'schemaVersion',
+  storageContext = undefined as DigestRendererStorageContextV001 | undefined,
 ) => {
-  const observed = await stableFileBytes(workspaceAbsolute(workspaceRoot, binding.path));
+  const observed = await stableFileBytes(referencedAbsolute(workspaceRoot, binding.path, storageContext));
   if (observed.fileSha256 !== binding.fileSha256) throw new Error('json-file-binding-mismatch');
   const decoded = decoder === null
     ? (() => {
@@ -158,8 +191,9 @@ const observeJsonBinding = async (
   return Object.freeze({...observed, value: decoded.value});
 };
 
-const observeByteBinding = async (workspaceRoot, binding) => {
-  const observed = await stableFileBytes(workspaceAbsolute(workspaceRoot, binding.path));
+const observeByteBinding = async (workspaceRoot, binding, storageContext = undefined as
+  DigestRendererStorageContextV001 | undefined) => {
+  const observed = await stableFileBytes(referencedAbsolute(workspaceRoot, binding.path, storageContext));
   if (observed.fileSha256 !== binding.fileSha256) throw new Error('byte-binding-mismatch');
   return observed;
 };
@@ -285,10 +319,11 @@ export function buildPresentationInstructionCommonCorePlanV001({
   });
 }
 
-const outputUnused = async (workspaceRoot, job) => {
+const outputUnused = async (workspaceRoot, job, storageContext = undefined as
+  DigestRendererStorageContextV001 | undefined) => {
   for (const relativePath of Object.values(job.publication)) {
     try {
-      await lstat(workspaceAbsolute(workspaceRoot, relativePath));
+      await lstat(generatedAbsolute(workspaceRoot, relativePath, storageContext));
       return false;
     } catch (error) {
       if (error?.code !== 'ENOENT') throw error;
@@ -297,11 +332,14 @@ const outputUnused = async (workspaceRoot, job) => {
   return true;
 };
 
-const publishLineLayout = async ({workspaceRoot, outputPath, layout}) => {
-  const absolute = workspaceAbsolute(workspaceRoot, outputPath);
+const publishLineLayout = async ({workspaceRoot, outputPath, layout,
+  storageContext = undefined as DigestRendererStorageContextV001 | undefined}) => {
+  await qualifyStorageContext(storageContext);
+  const absolute = generatedAbsolute(workspaceRoot, outputPath, storageContext);
   const bytes = serializePresentationRendererLineLayoutV002(layout);
   await writeFile(absolute, bytes, {flag: 'wx', mode: 0o444});
   const reread = await stableFileBytes(absolute);
+  await qualifyStorageContext(storageContext);
   const decoded = decodePresentationRendererLineLayoutV002(reread.bytes);
   if (!reread.bytes.equals(bytes) || decoded.status !== 'decoded' || !same(decoded.value, layout)) {
     throw new Error('line-layout-publication-mismatch');
@@ -334,7 +372,18 @@ export async function executePresentationInstructionRendererJobV002({
   serializePngAndFilters = false,
   autoPresentation = undefined as AutoPresentationInput | undefined,
   suppliedOverlayAdapter = undefined as ReturnType<typeof buildPresentationRendererOverlayAdapterV001> | undefined,
+  storageContext = undefined as DigestRendererStorageContextV001 | undefined,
 }) {
+  await qualifyStorageContext(storageContext);
+  if (storageContext !== undefined && (Object.keys(capabilities).length !== 0
+    || suppliedOverlayAdapter !== undefined || autoPresentation !== undefined)) {
+    throw new TypeError('Digest storage requires the bound Normal file renderer');
+  }
+  if (storageContext !== undefined) {
+    for (const outputPath of Object.values(job.publication ?? {})) {
+      generatedAbsolute(workspaceRoot, outputPath, storageContext);
+    }
+  }
   const admission = inspectPresentationRendererAdmissionV002({
     job,
     instructionArtifact,
@@ -366,11 +415,12 @@ export async function executePresentationInstructionRendererJobV002({
   const publishReceipt = capabilities.publishReceipt
     ?? publishPresentationRendererAdmissionReceiptNoReplaceV002;
   const receiptPublication = await publishReceipt({
-    workspaceRoot,
+    workspaceRoot: storageContext?.storageRoot ?? workspaceRoot,
     stagingPath: receiptStagingPath,
     outputPath: job.publication.admissionReceiptPath,
     receipt: receiptBuilt.receipt,
   });
+  await qualifyStorageContext(storageContext);
   if (receiptPublication.status !== 'published') {
     return {exitCode: 1, result: receiptPublication};
   }
@@ -413,6 +463,7 @@ export async function executePresentationInstructionRendererJobV002({
     workspaceRoot,
     outputPath: job.publication.lineLayoutPath,
     layout: layoutBuilt.layout,
+    ...(storageContext === undefined ? {} : {storageContext}),
   });
   const common = buildPresentationInstructionCommonCorePlanV001({
     job,
@@ -432,10 +483,10 @@ export async function executePresentationInstructionRendererJobV002({
     })
     : undefined;
   const draw = await executeDraw({
-    outputDirectory: workspaceAbsolute(workspaceRoot, job.publication.renderOutputRoot),
+    outputDirectory: generatedAbsolute(workspaceRoot, job.publication.renderOutputRoot, storageContext),
     plan: common.plan,
     presetRegistry: styleProfileRegistry,
-    baseMediaPath: workspaceAbsolute(workspaceRoot, job.cropAppliedBaseMedia.baseMedia.path),
+    baseMediaPath: referencedAbsolute(workspaceRoot, job.cropAppliedBaseMedia.baseMedia.path, storageContext),
     baseMediaInspection: {media: renderMediaInspection},
     expectedFrameCount: mediaInspection.frameCount,
     evaluateQc: input => evaluatePresentationRendererQcWithProfileV001(input, {
@@ -457,6 +508,7 @@ export async function executePresentationInstructionRendererJobV002({
     ...(autoPresentation === undefined ? {} : {autoPresentation}),
     counterfactualQcMethod: autoPresentation === undefined ? 'encoded-omission-v2' : 'exact-replay-native-v1',
     processObserver,
+    ...(storageContext === undefined ? {} : {storageContext}),
   });
   if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {
     return {exitCode: draw.exitCode === 1 ? 1 : 2, result: draw};
@@ -490,14 +542,20 @@ export async function executePresentationInstructionRendererJobV002({
 export async function runPresentationInstructionRendererJobFileV002(
   jobPath,
   {workspaceRoot = DEFAULT_WORKSPACE_ROOT, serializePngAndFilters = false,
-    overlayAdapter, autoPresentationFiles}: {workspaceRoot?: string; serializePngAndFilters?: boolean;
+    overlayAdapter, autoPresentationFiles, storageContext}: {workspaceRoot?: string; serializePngAndFilters?: boolean;
       autoPresentationFiles?: {baselinePath: string; decisionInputPath: string;
         autoProposalPath?: string; overridesPath?: string};
-      overlayAdapter?: ReturnType<typeof buildPresentationRendererOverlayAdapterV001>} = {},
+      overlayAdapter?: ReturnType<typeof buildPresentationRendererOverlayAdapterV001>;
+      storageContext?: DigestRendererStorageContextV001} = {},
 ) {
+  await qualifyStorageContext(storageContext);
+  if (storageContext !== undefined && (overlayAdapter !== undefined || autoPresentationFiles !== undefined)) {
+    throw new TypeError('Digest storage requires the bound Normal file renderer');
+  }
   const root = await realpath(workspaceRoot);
-  const relativeJobPath = path.isAbsolute(jobPath) ? path.relative(root, jobPath) : jobPath;
-  const jobObserved = await stableFileBytes(workspaceAbsolute(root, relativeJobPath));
+  const relativeJobPath = path.isAbsolute(jobPath)
+    ? path.relative(storageContext?.storageRoot ?? root, jobPath) : jobPath;
+  const jobObserved = await stableFileBytes(generatedAbsolute(root, relativeJobPath, storageContext));
   const decodedJob = decodePresentationInstructionRendererJobV002(jobObserved.bytes);
   if (decodedJob.status !== 'decoded') {
     return {exitCode: 1, result: failure('RENDER_ADMISSION_INPUT_INVALID', 'job-read')};
@@ -553,20 +611,23 @@ export async function runPresentationInstructionRendererJobFileV002(
     root,
     job.instructionArtifactBinding,
     decodePresentationInstructionArtifactV002,
+    'schemaVersion', storageContext,
   );
   const meaning = await observeJsonBinding(
     root,
     instruction.value.sourceBindings.meaningInformationPackage,
+    null, 'schemaVersion', storageContext,
   );
   const timeline = instruction.value.sourceBindings.timeline === null
-    ? await observeJsonBinding(root, job.cropAppliedBaseMedia.timeline)
-    : await observeJsonBinding(root, instruction.value.sourceBindings.timeline);
+    ? await observeJsonBinding(root, job.cropAppliedBaseMedia.timeline, null, 'schemaVersion', storageContext)
+    : await observeJsonBinding(root, instruction.value.sourceBindings.timeline, null, 'schemaVersion', storageContext);
   const projection = instruction.value.sourceBindings.cueEndProjection === null
     ? null
     : await observeJsonBinding(
       root,
       instruction.value.sourceBindings.cueEndProjection,
       decodePresentationCueEndProjectionV001,
+      'schemaVersion', storageContext,
     );
   const lineEndProjection = job.lineEndProjectionBinding === null
     ? null
@@ -574,19 +635,20 @@ export async function runPresentationInstructionRendererJobFileV002(
       root,
       job.lineEndProjectionBinding,
       decodePresentationSemanticLineEndProjectionV001,
+      'schemaVersion', storageContext,
     );
   const lineEndSourcePackage = lineEndProjection === null
     ? null
-    : await observeJsonBinding(root, lineEndProjection.value.sourcePackageBinding);
+    : await observeJsonBinding(root, lineEndProjection.value.sourcePackageBinding, null, 'schemaVersion', storageContext);
   const [style, material, trust] = await Promise.all([
-    observeJsonBinding(root, job.registryBindings.styleProfileRegistry),
+    observeJsonBinding(root, job.registryBindings.styleProfileRegistry, null, 'schemaVersion', storageContext),
     observeJsonBinding(root, job.registryBindings.materialRegistry, null, 'registryVersion'),
-    observeJsonBinding(root, job.registryBindings.rendererTrust),
+    observeJsonBinding(root, job.registryBindings.rendererTrust, null, 'schemaVersion', storageContext),
   ]);
   await Promise.all([
-    observeByteBinding(root, job.cropAppliedBaseMedia.baseMedia),
-    observeJsonBinding(root, job.cropAppliedBaseMedia.generationManifest),
-    observeJsonBinding(root, job.cropAppliedBaseMedia.validationReceipt),
+    observeByteBinding(root, job.cropAppliedBaseMedia.baseMedia, storageContext),
+    observeJsonBinding(root, job.cropAppliedBaseMedia.generationManifest, null, 'schemaVersion', storageContext),
+    observeJsonBinding(root, job.cropAppliedBaseMedia.validationReceipt, null, 'schemaVersion', storageContext),
     ...job.approvedContractBindings.map(row => observeByteBinding(root, row)),
   ]);
   const observedImplementationBindings = await Promise.all(
@@ -598,12 +660,26 @@ export async function runPresentationInstructionRendererJobFileV002(
   const observedRuntimeBindings = await observePresentationRendererRuntimeBindingsV001(
     job.runtimeBindings,
   );
-  const processObserver = createPresentationRendererProcessObserverV001({
+  const originalProcessObserver = createPresentationRendererProcessObserverV001({
     observationDirectory: path.join(
       path.dirname(jobObserved.resolvedPath),
       'process-observations',
       job.attemptId,
     ),
+  });
+  const processObserver = storageContext === undefined ? originalProcessObserver : Object.freeze({
+    ...originalProcessObserver,
+    run: async (command, args, options = {} as {env?: NodeJS.ProcessEnv}) => {
+      await qualifyStorageContext(storageContext);
+      const result = await originalProcessObserver.run(command, args, {
+        ...options,
+        env: {...process.env, ...options.env, TMPDIR: storageContext.tempDirectory,
+          TMP: storageContext.tempDirectory, TEMP: storageContext.tempDirectory,
+          MAGICK_TEMPORARY_PATH: storageContext.tempDirectory},
+      });
+      await qualifyStorageContext(storageContext);
+      return result;
+    },
   });
   const fontAssetInspections = await Promise.all(trust.value.fontAssets.map(async row => ({
     path: row.path,
@@ -616,7 +692,7 @@ export async function runPresentationInstructionRendererJobFileV002(
     })),
   );
   const media = await inspectRenderedMediaWithToolsV001(
-    workspaceAbsolute(root, job.cropAppliedBaseMedia.baseMedia.path),
+    referencedAbsolute(root, job.cropAppliedBaseMedia.baseMedia.path, storageContext),
     {
       ffmpegPath: job.runtimeBindings.ffmpeg.path,
       ffprobePath: job.runtimeBindings.ffprobe.path,
@@ -652,11 +728,12 @@ export async function runPresentationInstructionRendererJobFileV002(
     rendererDependencyInspections,
     observedRuntimeBindings,
     observedImplementationBindings,
-    outputPathsUnused: await outputUnused(root, job),
+    outputPathsUnused: await outputUnused(root, job, storageContext),
     processObserver,
     serializePngAndFilters,
     autoPresentation,
     suppliedOverlayAdapter: overlayAdapter,
+    storageContext,
   });
   if (autoPresentation !== undefined && outcome.exitCode === 0) {
     return {...outcome, result: Object.freeze({...outcome.result, autoPresentationSourceFiles})};

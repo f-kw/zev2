@@ -1,0 +1,2730 @@
+{
+  "checkedAt": "2026-10-03T07:44:01.155Z",
+  "checked": 243,
+  "formalFailed": 32,
+  "originalPropsFailed": 0,
+  "formalLayoutRules": {
+    "layoutRuleVersion": "normal-landscape-render-layout-v001",
+    "fontWeight": 800,
+    "minimumFontSizePx": 12,
+    "textSafePaddingRatio": 0.04,
+    "horizontalSafeMarginRatio": 0.04,
+    "verticalSafeMarginRatio": 0.02,
+    "fallbackTextAreaRatio": 0.98,
+    "lowerThirdAnchorPercent": 67,
+    "renderScale": 1,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+    "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+    "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+    "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+    "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+    "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+  },
+  "originalLayoutRules": {
+    "layoutRuleVersion": "normal-landscape-render-layout-v001",
+    "fontWeight": 800,
+    "minimumFontSizePx": 12,
+    "textSafePaddingRatio": 0.04,
+    "horizontalSafeMarginRatio": 0,
+    "verticalSafeMarginRatio": 0.02,
+    "fallbackTextAreaRatio": 0.98,
+    "lowerThirdAnchorPercent": 67,
+    "renderScale": 1,
+    "characterWidthRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "borderStrokeWidthRule": "2 * max(0, borderWidthPx)",
+    "glowStrokeWidthRule": "2 * max(0, glowWidthPx) + 2 * max(0, borderWidthPx)",
+    "marginRule": "max(glowStrokeWidth, borderStrokeWidth) / 2",
+    "safePaddingRule": "max(2, ceil(fontSizePx * textSafePaddingRatio))",
+    "placementClampRule": "clamp full alpha bounds inside canvas safe margins",
+    "humanReapprovalRule": "Any numeric or formula change requires a new rendered preview and human approval before a new trust and renderer version may be activated."
+  },
+  "failed": [
+    {
+      "group": 1,
+      "cue": 2,
+      "startFrame": 117,
+      "endFrame": 244,
+      "atSeconds": 3.9,
+      "lines": [
+        "ホラーゲームとかやろうかな",
+        "と思ったんですけど"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-1-2",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 371,
+                "top": 772.2,
+                "right": 1691,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-1-2",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 371,
+                  "top": 772.2,
+                  "right": 1691,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 1,
+      "cue": 4,
+      "startFrame": 303,
+      "endFrame": 491,
+      "atSeconds": 10.1,
+      "lines": [
+        "すごいこのゲームで",
+        "心霊現象が実際に怒ってると"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-1-4",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 371,
+                "top": 556.2,
+                "right": 1691,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-1-4",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 371,
+                  "top": 556.2,
+                  "right": 1691,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 2,
+      "startFrame": 1662,
+      "endFrame": 1750,
+      "atSeconds": 55.4,
+      "lines": [
+        "ノエちゃん家で",
+        "ドッグセラピー受けたんで。"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-2",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 515,
+                "top": 556.2,
+                "right": 1547,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-2",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 515,
+                  "top": 556.2,
+                  "right": 1547,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 11,
+      "startFrame": 2324,
+      "endFrame": 2481,
+      "atSeconds": 77.46666666666667,
+      "lines": [
+        "マリンの足に絡みついてきて",
+        "撫でざるを得なかったんで"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-11",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 155,
+                "top": 772.2,
+                "right": 1907,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-11",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 155,
+                  "top": 772.2,
+                  "right": 1907,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 12,
+      "startFrame": 2481,
+      "endFrame": 2522,
+      "atSeconds": 82.7,
+      "lines": [
+        "一旦",
+        "撫でさせてもらったんですよ"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-12",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 875,
+                "top": 556.2,
+                "right": 1187,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-12",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 875,
+                  "top": 556.2,
+                  "right": 1187,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 23,
+      "startFrame": 3406,
+      "endFrame": 3537,
+      "atSeconds": 113.53333333333333,
+      "lines": [
+        "で帰ってきてから",
+        "むちゃむちゃアレルギー出て"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-23",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 443,
+                "top": 556.2,
+                "right": 1619,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-23",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 443,
+                  "top": 556.2,
+                  "right": 1619,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 24,
+      "startFrame": 3537,
+      "endFrame": 3648,
+      "atSeconds": 117.9,
+      "lines": [
+        "家の中いるときは薬効いてて",
+        "全然大丈夫だったんですけど"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-24",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-24",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 25,
+      "startFrame": 3648,
+      "endFrame": 3722,
+      "atSeconds": 121.6,
+      "lines": [
+        "帰ってから",
+        "むちゃむちゃアレルギー出て"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-25",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 659,
+                "top": 556.2,
+                "right": 1403,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-25",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 659,
+                  "top": 556.2,
+                  "right": 1403,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 30,
+      "startFrame": 3992,
+      "endFrame": 4097,
+      "atSeconds": 133.06666666666666,
+      "lines": [
+        "鼻が詰まるみたいな",
+        "風邪みたいになるんですけど"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-30",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 371,
+                "top": 556.2,
+                "right": 1691,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-30",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 371,
+                  "top": 556.2,
+                  "right": 1691,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 32,
+      "startFrame": 4166,
+      "endFrame": 4253,
+      "atSeconds": 138.86666666666667,
+      "lines": [
+        "下向くと鼻水が",
+        "だーって垂れてくるみたいな"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-32",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 515,
+                "top": 556.2,
+                "right": 1547,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-32",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 515,
+                  "top": 556.2,
+                  "right": 1547,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 33,
+      "startFrame": 4253,
+      "endFrame": 4371,
+      "atSeconds": 141.76666666666668,
+      "lines": [
+        "ズタボロになりながら",
+        "今日も肌がボロボロですけど"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-33",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 299,
+                "top": 556.2,
+                "right": 1763,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-33",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 299,
+                  "top": 556.2,
+                  "right": 1763,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 2,
+      "cue": 40,
+      "startFrame": 4745,
+      "endFrame": 4836,
+      "atSeconds": 158.16666666666666,
+      "lines": [
+        "たぶんワンチョムがマリンを",
+        "守ってくれると思う"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-2-40",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 371,
+                "top": 772.2,
+                "right": 1691,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-2-40",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 371,
+                  "top": 772.2,
+                  "right": 1691,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 4,
+      "cue": 4,
+      "startFrame": 5954,
+      "endFrame": 6060,
+      "atSeconds": 198.46666666666667,
+      "lines": [
+        "こんな",
+        "でかくなかったかもしんない"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-4-4",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 803,
+                "top": 556.2,
+                "right": 1259,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-4-4",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 803,
+                  "top": 556.2,
+                  "right": 1259,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 4,
+      "cue": 17,
+      "startFrame": 7306,
+      "endFrame": 7423,
+      "atSeconds": 243.53333333333333,
+      "lines": [
+        "あなたみたいな新入りがねぇ"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-4-17",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-4-17",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 4,
+      "cue": 31,
+      "startFrame": 9324,
+      "endFrame": 9545,
+      "atSeconds": 310.8,
+      "lines": [
+        "窓が割れるくらいのことしか",
+        "起こらないんですよね"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-4-31",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 299,
+                "top": 772.2,
+                "right": 1763,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-4-31",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 299,
+                  "top": 772.2,
+                  "right": 1763,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 4,
+      "cue": 47,
+      "startFrame": 10989,
+      "endFrame": 11165,
+      "atSeconds": 366.3,
+      "lines": [
+        "めくれすぎだった、もともと"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-4-47",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-4-47",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 4,
+      "cue": 49,
+      "startFrame": 11253,
+      "endFrame": 11294,
+      "atSeconds": 375.1,
+      "lines": [
+        "間違いがあってもいいんです"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-4-49",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-4-49",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 5,
+      "startFrame": 13826,
+      "endFrame": 13904,
+      "atSeconds": 460.8666666666667,
+      "lines": [
+        "お前素人の判断なんだってば"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-5",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-5",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 11,
+      "startFrame": 14468,
+      "endFrame": 14587,
+      "atSeconds": 482.26666666666665,
+      "lines": [
+        "一人になって一人になったら",
+        "過去の餌食でしょ"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-11",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 443,
+                "top": 772.2,
+                "right": 1619,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-11",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 443,
+                  "top": 772.2,
+                  "right": 1619,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 16,
+      "startFrame": 15054,
+      "endFrame": 15358,
+      "atSeconds": 501.8,
+      "lines": [
+        "強すぎるからね強いんだよな",
+        "ジュオンのお化け"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-16",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 443,
+                "top": 772.2,
+                "right": 1619,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-16",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 443,
+                  "top": 772.2,
+                  "right": 1619,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 23,
+      "startFrame": 16448,
+      "endFrame": 16615,
+      "atSeconds": 548.2666666666667,
+      "lines": [
+        "だけどカヤコは関係ない人も"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-23",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-23",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 31,
+      "startFrame": 17852,
+      "endFrame": 18003,
+      "atSeconds": 595.0666666666667,
+      "lines": [
+        "いや、かやこんちは口コミで",
+        "あの家やばいですってなって"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-31",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-31",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 5,
+      "cue": 38,
+      "startFrame": 18698,
+      "endFrame": 18783,
+      "atSeconds": 623.2666666666667,
+      "lines": [
+        "みたいなのも出てきてたから"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-5-38",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-5-38",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 6,
+      "cue": 3,
+      "startFrame": 20054,
+      "endFrame": 20225,
+      "atSeconds": 668.4666666666667,
+      "lines": [
+        "はい、皆さん無事にマリンは",
+        "完了できたようです"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-6-3",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 556.2,
+                "right": 1979,
+                "bottom": 724.2
+              },
+              {
+                "left": 371,
+                "top": 772.2,
+                "right": 1691,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-6-3",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 556.2,
+                  "right": 1979,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 371,
+                  "top": 772.2,
+                  "right": 1691,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 6,
+      "cue": 6,
+      "startFrame": 20367,
+      "endFrame": 20472,
+      "atSeconds": 678.9,
+      "lines": [
+        "やってみようちょっと試しに"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-6-6",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-6-6",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 6,
+      "cue": 12,
+      "startFrame": 20948,
+      "endFrame": 21039,
+      "atSeconds": 698.2666666666667,
+      "lines": [
+        "これさ、見つけた以上も",
+        "だって出てきちゃうんだよね"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-6-12",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 227,
+                "top": 556.2,
+                "right": 1835,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-6-12",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 227,
+                  "top": 556.2,
+                  "right": 1835,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 6,
+      "cue": 14,
+      "startFrame": 21173,
+      "endFrame": 21311,
+      "atSeconds": 705.7666666666667,
+      "lines": [
+        "見つけてないやつが",
+        "出てきてくれるならいいけど"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-6-14",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 371,
+                "top": 556.2,
+                "right": 1691,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-6-14",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 371,
+                  "top": 556.2,
+                  "right": 1691,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 6,
+      "cue": 15,
+      "startFrame": 21311,
+      "endFrame": 21451,
+      "atSeconds": 710.3666666666667,
+      "lines": [
+        "見つけてないやつが",
+        "出てきちゃうとなりましたら"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-6-15",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 371,
+                "top": 556.2,
+                "right": 1691,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-6-15",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 371,
+                  "top": 556.2,
+                  "right": 1691,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 7,
+      "cue": 7,
+      "startFrame": 22503,
+      "endFrame": 22637,
+      "atSeconds": 750.1,
+      "lines": [
+        "あ、目玉目玉目玉目玉やばい"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-7-7",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-7-7",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 8,
+      "cue": 3,
+      "startFrame": 23526,
+      "endFrame": 23861,
+      "atSeconds": 784.2,
+      "lines": [
+        "絶対なんかなってるよねこれ"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-8-3",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-8-3",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 9,
+      "cue": 3,
+      "startFrame": 25956,
+      "endFrame": 26043,
+      "atSeconds": 865.2,
+      "lines": [
+        "結構",
+        "発見できたんじゃないですか"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-9-3",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 875,
+                "top": 556.2,
+                "right": 1187,
+                "bottom": 724.2
+              },
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 550.2,
+              "left": 77,
+              "width": 1908,
+              "height": 425
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-9-3",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 550.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 875,
+                  "top": 556.2,
+                  "right": 1187,
+                  "bottom": 724.2
+                },
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "group": 9,
+      "cue": 8,
+      "startFrame": 26458,
+      "endFrame": 26592,
+      "atSeconds": 881.9333333333333,
+      "lines": [
+        "はいということで気持ちいい"
+      ],
+      "result": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 4,
+            "right": 4,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "saved-check-9-8",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 83,
+                "top": 772.2,
+                "right": 1979,
+                "bottom": 940.2
+              }
+            ],
+            "wrapper": {
+              "top": 766.2,
+              "left": 77,
+              "width": 1908,
+              "height": 209
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "saved-check-9-8",
+            "details": {
+              "bounds": {
+                "left": 77,
+                "top": 766.2,
+                "right": 1985,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 83,
+                  "top": 772.2,
+                  "right": 1979,
+                  "bottom": 940.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 4,
+                "right": 4,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

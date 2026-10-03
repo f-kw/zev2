@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "digest-formal-apfs-preflight-evidence-v001",
+  "recordedAt": "2026-10-03T07:52:42.416660+00:00",
+  "receivedMain": "f2ef22148e7e81d7057a3907f21cc3dbe256742b",
+  "status": "stopped-before-manufacturing",
+  "implementation": [
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "96601c65885f963fed71e51a9cb1f1b0ff5f43575509628422f1914058d5ab2e",
+      "sizeBytes": 48737
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "44f9227d165bfda6f0ea0697ab9ab41e08c1acd8a29b517fe6f39d6e4a929baa",
+      "sizeBytes": 27241
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "b8583db01c63de55a49d21c37ad276fb0eef96e740dc57ad99c9aea46fa39b15",
+      "sizeBytes": 32427
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "sizeBytes": 152882
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "fileSha256": "fbd24f9444efea703076a1ec268326fbdd11f83de4ada4691cbabc6ab204b06b",
+      "sizeBytes": 18929
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "539a018ef26fa430a355105885eed8cbf5b71f0650a07a1813ca0fd6ae089323",
+      "sizeBytes": 23293
+    }
+  ],
+  "storage": {
+    "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+    "guestVolumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "guestDevice": 16777243,
+    "hostRoot": "/Volumes/KIOXIA",
+    "hostVolumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "hostDevice": 16777238,
+    "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+    "imageMaximumBytes": 100000000000,
+    "hostMetadataReserveBytes": 6254231552,
+    "internalRoot": "/Users/kawafmm/workspace/zev2"
+  },
+  "storageResult": "small own APFS IO/protection/remount probe passed; full manufacturing storage integration unexecuted",
+  "inputChecks": {
+    "normalOwnerAndReferenceClosure": "passed with existing public saved preparation reader",
+    "savedTraceTokens": "9 actual tokens reconstructed; judgments0",
+    "cues": 243,
+    "lines": 390,
+    "atoms": 3613,
+    "frames": 27691,
+    "samples": 40705770,
+    "clockProjection": "exact saved mapping equality"
+  },
+  "tests": {
+    "rendererAndCallerRegression": 22,
+    "unmintedContextRendererAndCallerRejects": 2,
+    "coreWrongContextRejects": 6,
+    "adapterUnmintedContextRejects": 3,
+    "adapterInputDeepFrozen": true,
+    "runnerTypecheck": "passed with Node20.19.6",
+    "newComposite": {
+      "frameCoverage": 27691,
+      "segments": 132,
+      "refusalCases": 9,
+      "rawYuvStorage": "pipe-only",
+      "mediaStarted": 0
+    },
+    "supervisor": {
+      "existingTests": 8,
+      "resourceBoundaryCases": 7,
+      "harmlessProtocolAndFailureRuns": 3,
+      "remainingOwnProcesses": 0
+    },
+    "oldCompositeTests": {
+      "passed": 1,
+      "rejectedByOldFrozenRendererSha": 2,
+      "oldEvidenceModified": false
+    },
+    "syntaxAndDiffChecks": "passed"
+  },
+  "formalPreflight": {
+    "checkedAt": "2026-10-03T07:44:01.155Z",
+    "checked": 243,
+    "failures": 32,
+    "controlOriginalPropsFailures": 0,
+    "first": {
+      "group": 1,
+      "cue": 2,
+      "startFrame": 117,
+      "endFrameExclusive": 244,
+      "startSeconds": 3.9,
+      "endSeconds": 8.133333333333333,
+      "wrapperLeft": 77,
+      "wrapperWidth": 1908,
+      "wrapperRight": 1985,
+      "canvasWidth": 1920
+    },
+    "cause": "formal horizontalSafeMarginRatio0.04 vs accepted candidate diagnostic props0",
+    "formalRendererBuildPropsReconstruction": "all32 failure results deepEqual; not field/safe-area false-positive",
+    "actualGlyph": "unexecuted",
+    "completedVideo": "not-created",
+    "technicalVideoQc": "unexecuted",
+    "humanWatchQuality": "unexecuted"
+  },
+  "runtime": {
+    "formalNode": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "formalToolVersions": "matched expected Node20.19.6/ffmpeg8.0.1/ffprobe8.0.1",
+    "fontBinarySha": "matched actual font bytes",
+    "initialShellNode": "v23.7.0; not used for manufacturing",
+    "historicalRendererTrustDependencySha": "4 stale declarations found; candidate-only adapter binds unchanged accepted-main bytes; no shared trust modified; candidate files not published"
+  },
+  "effects": {
+    "sourceMediaContentRead": false,
+    "largeSourceCopy": false,
+    "productionRootCreated": false,
+    "candidateRuntimeTrustCreated": false,
+    "manufacturedVideos": 0,
+    "sourceDecisionsRerun": 0
+  },
+  "cleanup": {
+    "probeOwnFilesRemoved": true,
+    "guestOpenRefsBeforeDetach": 0,
+    "normalDetachReturnCode": 0,
+    "bundleRetained": true,
+    "hostSsdEjected": false,
+    "mediaProcessesStarted": 0
+  },
+  "burden": {
+    "userDecisionsSinceLatestApproval": 0,
+    "preparation": "about40minutes from07:07 to07:47UTC including APFS setup/limited implementation/cheap checks; media processing0",
+    "inputReaderWallMs": 955,
+    "allLayoutCheckWallMs": 671,
+    "forcedHumanSubtitleRescoring": false
+  },
+  "nextOwner": "mona/advisor: decide specific candidate-only horizontal margin treatment, then obtain any required explicit numeric-rule/preview approval; implementer remains stopped"
+}

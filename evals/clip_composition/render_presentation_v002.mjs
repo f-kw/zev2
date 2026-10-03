@@ -290,10 +290,20 @@ const pathIsWithin = (rootPath, candidatePath) => {
     || (relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative));
 };
 
-const resolvePresentationOutputDirectory = (value) => {
+const qualifyDigestStorageContextV001 = async (storageContext) => {
+  if (storageContext === undefined) return;
+  const {assertQualifiedDigestStorageContextV001} = await import(
+    '../../runner/src/digest-formal-handoff-v001.js'
+  );
+  await assertQualifiedDigestStorageContextV001(storageContext);
+};
+
+const resolvePresentationOutputDirectory = (value, storageContext = undefined) => {
   if (!isNonEmptyString(value)) return null;
-  const absolutePath = resolveJobPath(value);
-  return pathIsWithin(PRESENTATION_OUTPUT_ROOT, absolutePath) ? absolutePath : null;
+  const absolutePath = storageContext === undefined ? resolveJobPath(value)
+    : path.isAbsolute(value) ? path.resolve(value) : storageContext.resolve(value);
+  return pathIsWithin(storageContext?.generatedRoot ?? PRESENTATION_OUTPUT_ROOT, absolutePath)
+    ? absolutePath : null;
 };
 
 const unsafeOutputDirectoryError = () => {
@@ -351,7 +361,14 @@ const inspectExistingDirectoryChainNoSymlinkV002 = async (rootPath, targetPath) 
 };
 
 /** 最終出力directory自体は作らず、親までをsymlinkなしの実directoryへ固定する。 */
-const ensurePresentationOutputParentV002 = async (absolutePath) => {
+const ensurePresentationOutputParentV002 = async (absolutePath, storageContext = undefined) => {
+  if (storageContext !== undefined) {
+    await qualifyDigestStorageContextV001(storageContext);
+    if (!pathIsWithin(storageContext.generatedRoot, absolutePath)
+      || absolutePath === storageContext.generatedRoot) throw unsafeOutputDirectoryError();
+    await inspectExistingDirectoryChainNoSymlinkV002(storageContext.storageRoot, storageContext.generatedRoot);
+    return ensureDirectoryChainNoSymlinkV002(storageContext.generatedRoot, path.dirname(absolutePath));
+  }
   if (!pathIsWithin(PRESENTATION_OUTPUT_ROOT, absolutePath)) throw unsafeOutputDirectoryError();
   await ensureDirectoryChainNoSymlinkV002(WORKSPACE_ROOT, PRESENTATION_OUTPUT_ROOT);
   const [realWorkspace, realPresentationRoot] = await Promise.all([
@@ -1351,13 +1368,15 @@ const assertReservationOwnershipV002 = async (reservation) => {
  * 最終出力先を作らず、同じ親directory内の所有lockだけを原子的に確保する。
  * 既存出力・他実行のlock・symlinkはいずれも削除せず停止する。
  */
-export const acquirePresentationOutputReservationV002 = async (outputDirectoryInput) => {
-  const outputDirectory = resolvePresentationOutputDirectory(outputDirectoryInput);
+export const acquirePresentationOutputReservationV002 = async (outputDirectoryInput,
+  {storageContext} = {}) => {
+  await qualifyDigestStorageContextV001(storageContext);
+  const outputDirectory = resolvePresentationOutputDirectory(outputDirectoryInput, storageContext);
   if (outputDirectory === null) throw unsafeOutputDirectoryError();
-  const outputParent = await ensurePresentationOutputParentV002(outputDirectory);
+  const outputParent = await ensurePresentationOutputParentV002(outputDirectory, storageContext);
   const [workspaceRealPath, presentationRootRealPath, outputParentRealPath] = await Promise.all([
-    realpath(WORKSPACE_ROOT),
-    realpath(PRESENTATION_OUTPUT_ROOT),
+    realpath(storageContext?.storageRoot ?? WORKSPACE_ROOT),
+    realpath(storageContext?.generatedRoot ?? PRESENTATION_OUTPUT_ROOT),
     realpath(outputParent),
   ]);
   if (await lstatOrNull(outputDirectory)) {
@@ -1391,6 +1410,7 @@ export const acquirePresentationOutputReservationV002 = async (outputDirectoryIn
     workspaceRealPath,
     presentationRootRealPath,
     outputParentRealPath,
+    ...(storageContext === undefined ? {} : {storageContext}),
   };
   let ownerWritten = false;
   try {
@@ -1562,16 +1582,20 @@ const validateStagedSuccessArtifactsV002 = async (
 };
 
 const validateReservationBaseTopologyV002 = async (reservation) => {
+  const storageContext = reservation.storageContext;
+  await qualifyDigestStorageContextV001(storageContext);
+  const root = storageContext?.storageRoot ?? WORKSPACE_ROOT;
+  const presentationOutputRoot = storageContext?.generatedRoot ?? PRESENTATION_OUTPUT_ROOT;
   const workspace = await inspectExistingDirectoryChainNoSymlinkV002(
-    WORKSPACE_ROOT,
-    WORKSPACE_ROOT,
+    root,
+    root,
   );
   const presentationRoot = await inspectExistingDirectoryChainNoSymlinkV002(
-    WORKSPACE_ROOT,
-    PRESENTATION_OUTPUT_ROOT,
+    root,
+    presentationOutputRoot,
   );
   const outputParent = await inspectExistingDirectoryChainNoSymlinkV002(
-    PRESENTATION_OUTPUT_ROOT,
+    presentationOutputRoot,
     reservation.outputParent,
   );
   if (
@@ -2096,10 +2120,21 @@ export async function executeValidatedPresentationDrawAndQcV001({
   onProgress = () => {},
   nativeQcExecutionControl,
   onBeforeNativeCheckpoint,
+  storageContext = undefined,
   baseTimeline,
   runCounterfactualQc = true,
   counterfactualQcMethod,
 }) {
+  await qualifyDigestStorageContextV001(storageContext);
+  if (storageContext !== undefined && (autoPresentation !== undefined || effects !== undefined
+    || orchestrationDrawingView !== undefined || renderRange !== null || !runCounterfactualQc)) {
+    throw new TypeError('Digest storage only permits the bound complete Normal render with QC');
+  }
+  if (storageContext !== undefined && (typeof storageContext.composeMedia !== 'function'
+    || !path.isAbsolute(storageContext.tempDirectory ?? '') || !isObject(processObserver)
+    || typeof processObserver.run !== 'function')) {
+    throw new TypeError('Digest storage requires its bound compositor, temporary directory and process observer');
+  }
   if (typeof runCounterfactualQc !== 'boolean') throw new TypeError('counterfactual QC control must be boolean');
   if (runCounterfactualQc && ![PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001].includes(counterfactualQcMethod)) {
@@ -2234,7 +2269,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
   }
   let reservation;
   try {
-    reservation = await acquirePresentationOutputReservationV002(outputDirectory);
+    reservation = await acquirePresentationOutputReservationV002(outputDirectory,
+      storageContext === undefined ? {} : {storageContext});
   } catch (error) {
     if (error?.code === 'UNSAFE_PRESENTATION_OUTPUT_DIRECTORY') {
       return contractFailure([
@@ -2523,7 +2559,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
 
     await onProgress({phase: 'composite', frames: expectedFrameCount});
     const workVideo = path.join(stagingDirectory, artifactNames.video);
-    await composePresentationMediaV001({
+    await qualifyDigestStorageContextV001(storageContext);
+    const composeMedia = storageContext === undefined ? composePresentationMediaV001 : storageContext.composeMedia;
+    await composeMedia({
       baseMediaPath,
       plan,
       overlayRecords,
@@ -2538,6 +2576,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       timelineAudio,
       audioMediaPath, renderRange,
     });
+    await qualifyDigestStorageContextV001(storageContext);
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
       ffmpegPath: toolPaths.ffmpegPath,

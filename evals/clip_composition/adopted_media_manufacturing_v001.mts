@@ -53,6 +53,26 @@ const exec = promisify(execFile);
 const out = (c: Json, p: string) => `${c.plan.outputRoot}/${p}`;
 const abs = (p: string) => path.join(ROOT, p);
 const clone = <T>(v: T): T => structuredClone(v);
+const DIGEST_STORAGE_OUTPUT_ROOT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
+
+/** Only the qualified one-plan adapter may resolve generated artifacts outside the repository. */
+async function adoptedStorageV001(c: Json, storageContext?: Json) {
+  if (storageContext === undefined) return {abs, publish, readBound, readJson,
+    assertCurrent: async () => {}};
+  if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
+    || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
+  const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
+  await assertQualifiedDigestStorageContextV001(storageContext);
+  const generated = (p: string) => {
+    if (typeof p !== 'string' || !p.startsWith(`${storageContext.outputRoot}/`)) fail('CORE_STORAGE_GENERATED_PATH_MISMATCH');
+    return storageContext.resolve(p);
+  };
+  return {abs: generated,
+    publish: (p: string, value: Json) => storageContext.publish(p, value),
+    readBound: (binding: Json) => storageContext.readBound(binding),
+    readJson: (p: string) => storageContext.readJson(p),
+    assertCurrent: () => storageContext.assertCurrent()};
+}
 
 export function projectAdoptedMediaRangesV001(editPlan: Json, media: Json) {
   const segments = editPlan.segments.map((r: Json) => ({sourceStartMs: r.sourceStartMs, sourceEndMs: r.sourceEndMs}));
@@ -63,10 +83,14 @@ export function projectAdoptedMediaRangesV001(editPlan: Json, media: Json) {
 
 /** 用途側が再構築した採用根拠を受け、既存Coreの決定的製造だけを実行する。 */
 export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPlan: Json,
-  manufacturingJob: Json, jb: Json, invocationBinding: Json, schemas: {inspection: string; receipt: string}) {
+  manufacturingJob: Json, jb: Json, invocationBinding: Json, schemas: {inspection: string; receipt: string},
+  storageContext?: Json) {
+  const storage = await adoptedStorageV001(c, storageContext);
   const ad = bind(out(c, 'machine-adoption.json'), adoption);
   const ep = bind(out(c, 'edit-plan.json'), editPlan);
   const source = manufacturingJob.sourceArtifact;
+  if (storageContext !== undefined && (source.path === storageContext.outputRoot
+    || source.path.startsWith(`${storageContext.outputRoot}/`))) fail('CORE_STORAGE_SOURCE_PREFIX_MISMATCH');
   const observedTools = await inspectTools();
   if (!same(observedTools, expectedTools)) fail('CORE_TOOL_PROFILE_MISMATCH');
   const binaryDiagnostics = await inspectBinaries();
@@ -74,14 +98,15 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
     if (await fileSha(abs(v.path)) !== v.fileSha256) fail('CORE_TRUSTED_SOURCE_CHANGED');
   }
   const base = out(c, 'base-media'), work = out(c, 'base-media-work');
-  await mkdir(abs(base), {recursive: false});
-  await mkdir(abs(work), {recursive: false});
-  const sourceSnapshot = abs(`${work}/source-snapshot.mp4`);
+  await storage.assertCurrent();
+  await mkdir(storage.abs(base), {recursive: false});
+  await mkdir(storage.abs(work), {recursive: false});
+  const sourceSnapshot = storage.abs(`${work}/source-snapshot.mp4`);
   await copyFile(abs(source.path), sourceSnapshot);
   await chmod(sourceSnapshot, 0o444);
   if (await fileSha(sourceSnapshot) !== source.fileSha256) fail('SOURCE_SNAPSHOT_MISMATCH');
   const media = await inspectSource(sourceSnapshot);
-  await publish(out(c, 'source-media-inspection.json'), {
+  await storage.publish(out(c, 'source-media-inspection.json'), {
     schemaVersion: schemas.inspection, sourceVideoBinding: c.plan.request.sourceVideo,
     observedTools, binaryDiagnostics, media,
   });
@@ -89,9 +114,12 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
   const mappings = validated.mappings;
   const buildHash = canonicalSha({invocationBinding, sourceSha256: source.fileSha256, mappings});
   const buildId = `base-media-build-${buildHash.slice(0, 24)}`;
-  const intermediate = abs(`${work}/video-only.mp4`), basePath = abs(`${base}/base-media.mp4`);
+  const intermediate = storage.abs(`${work}/video-only.mp4`), basePath = storage.abs(`${base}/base-media.mp4`);
+  await storage.assertCurrent();
   const videoBuild = await buildVideo(sourceSnapshot, intermediate, media.fps, mappings);
-  const audioData = await buildAudio(sourceSnapshot, abs(work), media.audioClock, mappings);
+  await storage.assertCurrent();
+  const audioData = await buildAudio(sourceSnapshot, storage.abs(work), media.audioClock, mappings);
+  await storage.assertCurrent();
   const audioMux = await mux(intermediate, basePath, media.audioClock, audioData);
   const inspected = await inspectOutput(basePath, mappings.at(-1).outputEndFrame, media.audioClock, audioData);
   const baseHash = await fileSha(basePath);
@@ -107,7 +135,7 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
       fileSha256: baseHash, frameRate: '30/1', expectedFrameCount: mappings.at(-1).outputEndFrame},
     segments: mappings.map(({audioSamples, ...v}: Json) => v),
   };
-  const tb = await publish(`${base}/timeline.json`, timeline);
+  const tb = await storage.publish(`${base}/timeline.json`, timeline);
   const replacements = new Map([[sourceSnapshot, '<SOURCE_MEDIA>'], [intermediate, '<TEMP_VIDEO>'],
     [audioData.sourceGridPath, '<SOURCE_GRID>'], [audioData.encodePath, '<ENCODE_PCM>'], [basePath, '<BASE_MEDIA>']]);
   const normalized = (args: string[]) => args.map(a => replacements.get(a) ?? a);
@@ -153,7 +181,7 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
   };
   pass(validateManifest(manifest), 'CORE_MANIFEST_INVALID');
   timelineQc(timeline, manifest, {fileSha256: baseHash, frameCount: inspected.frameCount, timelineFileSha256: tb.fileSha256});
-  const mb = await publish(`${base}/generation-manifest.json`, manifest);
+  const mb = await storage.publish(`${base}/generation-manifest.json`, manifest);
   const receipt = {schemaVersion: schemas.receipt, status: 'passed',
     coreInvocationBinding: invocationBinding, machineAdoptionBinding: ad, editPlanBinding: ep,
     checks: {machineAdoptionReconstruction: 'passed', sourceSnapshotSha: 'passed', formalRangeProjection: 'passed',
@@ -166,9 +194,10 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
   };
   pass(validateHashGraph({timeline, manifest, report: receipt, baseMediaFileSha256: baseHash,
     timelineFileSha256: tb.fileSha256, manifestFileSha256: mb.fileSha256}), 'CORE_HASH_GRAPH_INVALID');
-  const rb = await publish(`${base}/validation-receipt.json`, receipt);
+  const rb = await storage.publish(`${base}/validation-receipt.json`, receipt);
   // この呼出が作った一時PCM・source copyだけを処分する。元媒体・正式成果物には作用しない。
-  await rm(abs(work), {recursive: true});
+  await storage.assertCurrent();
+  await rm(storage.abs(work), {recursive: true});
   return {baseMedia: receipt.outputs.baseMedia, timeline: tb, generationManifest: mb, validationReceipt: rb};
 }
 
@@ -284,7 +313,8 @@ export function readValidatedDisplayTracesV001(requests: Json[], tokens: object[
 }
 
 export async function assembleAdoptedCaptionCoreV001(c: Json, input: Json, base: Json,
-  coreAdoption: Json, traces: Json[]) {
+  coreAdoption: Json, traces: Json[], storageContext?: Json) {
+  const storage = await adoptedStorageV001(c, storageContext);
   const sourcePackage = input.sourcePackage;
   const sourceBinding = bind(out(c, 'source-package.json'), sourcePackage);
   const producer = bind(out(c, 'caption-adoption.json'), coreAdoption);
@@ -302,15 +332,15 @@ export async function assembleAdoptedCaptionCoreV001(c: Json, input: Json, base:
     cueEndProjectionBinding: cb, sourceSelectionDigest: digest, producerJobBinding: producer,
     sourcePackage, selection, cueEndProjection: cue}), 'LINE_INVALID').projection;
   const lb = lineBinding({path: out(c, 'line-end-projection.json'), projection: line});
-  const timeline = await readBound(base.timeline);
+  const timeline = await storage.readBound(base.timeline);
   const instruction = pass(instructionArtifact({artifactId: `${c.plan.planId}-instruction`, sourceCaseId: c.plan.planId,
     meaningInformationPackageBinding: bind(out(c, 'meaning-input.json'), input.meaning), timelineBinding: base.timeline,
     cueEndProjectionBinding: cb, producerJobBinding: producer,
     styleProfileId: sourcePackage.reconstructionMap.caseContexts[0].resolvedStyle.presetId,
     meaningPackage: input.meaning, timeline, cueEndProjection: cue}), 'INSTRUCTION_INVALID').artifact;
   const ib = instructionBinding({path: out(c, 'instruction.json'), artifact: instruction});
-  const style = await readBound(c.rendererTemplate.registryBindings.styleProfileRegistry);
-  const trust = await readBound(c.rendererTemplate.registryBindings.rendererTrust);
+  const style = await storage.readBound(c.rendererTemplate.registryBindings.styleProfileRegistry);
+  const trust = await storage.readBound(c.rendererTemplate.registryBindings.rendererTrust);
   const resolved = pass(appearance({instructionArtifact: instruction, styleProfileRegistry: style,
     visualStateId: c.rendererTemplate.executionInputs.visualStateId}), 'STYLE_INVALID');
   const maxLogicalWidth = resolved.profile.maxLogicalWidth ?? resolved.visualState.layout?.maxCharsPerLine;
@@ -340,14 +370,18 @@ export const CORE_FILES = Object.freeze({meaning: 'meaning-input.json', sourcePa
   captionAdoption: 'caption-adoption.json', selection: 'selection.json', cueEndProjection: 'cue-end-projection.json',
   lineEndProjection: 'line-end-projection.json', instruction: 'instruction.json', rendererJob: 'renderer-job.json'});
 
-export async function renderAdoptedVideoV001(c: Json, artifacts: Json, executionSchema: string) {
-  const result = await render(artifacts.rendererJob.path, {workspaceRoot: ROOT});
-  const execution = await publish(out(c, 'renderer-result.json'), {
+export async function renderAdoptedVideoV001(c: Json, artifacts: Json, executionSchema: string,
+  storageContext?: Json) {
+  const storage = await adoptedStorageV001(c, storageContext);
+  const result = await render(artifacts.rendererJob.path, {workspaceRoot: ROOT,
+    ...(storageContext === undefined ? {} : {storageContext})});
+  const execution = await storage.publish(out(c, 'renderer-result.json'), {
     schemaVersion: executionSchema, rendererJobBinding: artifacts.rendererJob,
     exitCode: result.exitCode, result: result.result});
   if (result.exitCode !== 0 || result.result?.status !== 'completed' || result.result?.qc?.status !== 'passed') fail('RENDER_OR_QC_FAILED');
   const videoPath = out(c, 'render/presentation-rendered-v002.mp4');
-  return {execution, admission: bind(out(c, 'admission-receipt.json'), await readJson(out(c, 'admission-receipt.json'))),
-    lineLayout: bind(out(c, 'line-layout.json'), await readJson(out(c, 'line-layout.json'))),
-    qc: 'passed', video: {path: videoPath, fileSha256: await fileSha(abs(videoPath))}};
+  await storage.assertCurrent();
+  return {execution, admission: bind(out(c, 'admission-receipt.json'), await storage.readJson(out(c, 'admission-receipt.json'))),
+    lineLayout: bind(out(c, 'line-layout.json'), await storage.readJson(out(c, 'line-layout.json'))),
+    qc: 'passed', video: {path: videoPath, fileSha256: await fileSha(storage.abs(videoPath))}};
 }

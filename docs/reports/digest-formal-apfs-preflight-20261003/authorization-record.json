@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "digest-formal-user-manufacturing-authorization-v001",
+  "recordId": "digest-formal-user-grant-20261003T070603-v001",
+  "origin": "Explicit human approval transcribed in delegated Mac instruction from the existing mona conversation; not a production/QC receipt",
+  "userApproval": {
+    "at": "2026-10-03T07:06:03Z",
+    "text": "いいよ",
+    "proposalAt": "2026-10-03T06:57:06Z",
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6"
+  },
+  "previousApproval": {
+    "at": "2026-10-03T06:33:44Z",
+    "text": "OK 必要な作業をしてくれ"
+  },
+  "status": "scope-approved; manufacturing-not-started; formal-layout-decision-pending",
+  "planManifestSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41",
+  "planId": "digest-formal-handoff-20261003-v001",
+  "outputRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+  "implementationPaths": [
+    "runner/src/digest-formal-handoff-v001.ts",
+    "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+    "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+    "evals/clip_composition/render_presentation_v002.mjs",
+    "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+    "tools/digest-quality/original-resolution-full-supervisor-v002.py"
+  ],
+  "acceptedMain": "f2ef22148e7e81d7057a3907f21cc3dbe256742b",
+  "storage": {
+    "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+    "guestVolumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "guestDevice": 16777243,
+    "hostRoot": "/Volumes/KIOXIA",
+    "hostVolumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "hostDevice": 16777238,
+    "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+    "imageMaximumBytes": 100000000000,
+    "hostMetadataReserveBytes": 6254231552,
+    "internalRoot": "/Users/kawafmm/workspace/zev2"
+  },
+  "normalCandidates": 1,
+  "humanQuality": "pending",
+  "outlineChoice": null,
+  "guard": {
+    "startBytes": 50000000000,
+    "reserveBytes": 12000000000,
+    "maximumRssBytes": 17179869184,
+    "maximumPressure": 1,
+    "observationIntervalSeconds": 1,
+    "nextUnitPlusReserve": true,
+    "stopOwnProcessGroup": true,
+    "restartOnReconnect": false
+  },
+  "effects": [
+    "new max100GB APFS sparsebundle on unchanged ExFAT SSD",
+    "small own storage/protection/re-read/remount probe",
+    "only the six enumerated implementation paths",
+    "one saved 9-range/243-cue Normal candidate, existing QC and own temporary cleanup after references/storage/clock/font safety checks"
+  ],
+  "notAuthorized": [
+    "general trust/default/root changes",
+    "layoutRules numeric/formula changes without separate specific decision",
+    "new material/STT/API expense/effects",
+    "old accepted artifact replay or deletion",
+    "automatic resume on reconnect",
+    "public release"
+  ],
+  "currentExecution": {
+    "imageCreated": true,
+    "storageProbePassed": true,
+    "guestNormallyDetached": true,
+    "productionOutputRootCreated": false,
+    "mediaGenerationCount": 0,
+    "manufacturingReceipt": null,
+    "layoutPreflight": "32/243 estimated safe-area failures; stop before media"
+  },
+  "freshRunRequirement": "Guest was detached normally. A future authorized run must re-observe mount/device/UUID/image and bind its permit to actual code SHA; this historical identity is not a restart permit."
+}

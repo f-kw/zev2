@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {mkdir} from 'node:fs/promises';
+import {mkdir,lstat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {buildPresentationCompositeArgumentsV001} from '../../evals/clip_composition/render_presentation_v002.mjs';
@@ -31,13 +31,14 @@ export function partitionFramesV001(start,end,maxFrames=DEFAULT_MAX_FRAMES){
 
 /** Keep the original graph byte for byte except numeric PNG input indexes.
  * The renderer emits no filter reference for a finite state unused in a range. */
-export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,range,fullFrameCount,maxFrames}){
+export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,range,fullFrameCount,maxFrames,
+  graphFullFrameCount=FULL_FRAMES}){
   assert(range.startFrame>=scopeStart&&range.endFrameExclusive<=scopeStart+fullFrameCount);
   assert(range.endFrameExclusive-range.startFrame<=maxFrames);
   const active=records.filter(r=>r.element.startFrame<range.endFrameExclusive&&r.element.endFrameExclusive>range.startFrame);
   const original=buildPresentationCompositeArgumentsV001({baseMediaPath,plan,overlayRecords:active,
     expectedFrameCount:range.endFrameExclusive-range.startFrame,serializePngAndFilters:true,
-    renderRange:{...range,fullFrameCount:FULL_FRAMES}});
+    renderRange:{...range,fullFrameCount:graphFullFrameCount}});
   const graphIndex=original.indexOf('-filter_complex'),originalGraph=original[graphIndex+1];
   const inputs=[];
   for(let i=0;i<graphIndex;i++)if(original[i]==='-i')inputs.push(original[i+1]);
@@ -55,6 +56,119 @@ export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,ran
     '-c:v','rawvideo','-pix_fmt','yuv420p','-f','rawvideo','pipe:1');
   return {args,captionCount:active.length,stateCount:kept.length,inputCount:kept.length+1,
     pngPaths:kept,range,graphSha256:createHash('sha256').update(graph).digest('hex')};
+}
+
+/** One expressly permitted 144px Normal candidate. Admission and saved-plan
+ * bindings remain the caller's responsibility; this entry refuses ranges,
+ * finite effects, missing/reordered records, and the former fixed plan. */
+export async function runFormalLowMemoryCompositeV001(input){
+  assert(input&&typeof input==='object'&&!Array.isArray(input));
+  const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','outputPath','ffmpegPath',
+    'maxFrames','processObserver','resourceCheck'];
+  assert(Object.keys(input).every(key=>allowed.includes(key)),'unsupported formal composite options');
+  const {baseMediaPath,plan,overlayRecords,expectedFrameCount,outputPath,ffmpegPath,
+    maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck}=input;
+  assert.equal(process.env.ZEV_FULL_SUPERVISED,'1','SUPERVISOR_REQUIRED');
+  assert.equal(expectedFrameCount,27691,'only the permitted complete plan');
+  assert.equal(plan.canvas.width,1920);assert.equal(plan.canvas.height,1080);assert.equal(plan.canvas.fps,30);
+  assert.equal(plan.elements.length,243);assert.equal(overlayRecords.length,plan.elements.length);
+  assert(Number.isSafeInteger(maxFrames)&&maxFrames>0&&maxFrames<=DEFAULT_MAX_FRAMES);
+  for(const value of [baseMediaPath,outputPath,ffmpegPath])assert(typeof value==='string'&&path.isAbsolute(value));
+  assert.notEqual(path.resolve(baseMediaPath),path.resolve(outputPath));
+  assert.equal(typeof resourceCheck,'function','formal resource gate is required');
+  assert.equal(typeof processObserver?.observeOperation,'function','formal operation observer is required');
+  const ids=new Set();
+  for(const [index,record] of overlayRecords.entries()){
+    assert.deepEqual(record.element,plan.elements[index],'record order or saved element changed');
+    const element=record.element;
+    assert(typeof element.instructionId==='string'&&!ids.has(element.instructionId));ids.add(element.instructionId);
+    assert(Number.isSafeInteger(element.startFrame)&&element.startFrame>=0
+      &&Number.isSafeInteger(element.endFrameExclusive)&&element.endFrameExclusive>element.startFrame
+      &&element.endFrameExclusive<=expectedFrameCount);
+    assert.equal(element.displayFrameCount,element.endFrameExclusive-element.startFrame);
+    assert(!Object.hasOwn(element,'presentationMotion')&&!Object.hasOwn(element,'presentationPulse')
+      &&!Object.hasOwn(record,'motionStates')&&!Object.hasOwn(record,'pulseStates'),'only Normal records');
+    assert(typeof record.pngPath==='string'&&path.isAbsolute(record.pngPath));
+  }
+  try{await lstat(outputPath);assert.fail('formal output already exists');}
+  catch(error){if(error.code!=='ENOENT')throw error;}
+  const ranges=[];
+  for(let at=0;at<expectedFrameCount;at+=maxFrames)
+    ranges.push({startFrame:at,endFrameExclusive:Math.min(at+maxFrames,expectedFrameCount)});
+  const commands=ranges.map(range=>producerArgumentsV001({baseMediaPath,plan,records:overlayRecords,
+    scopeStart:0,range,fullFrameCount:expectedFrameCount,graphFullFrameCount:expectedFrameCount,maxFrames}));
+  assert.equal(commands.reduce((n,c)=>n+c.range.endFrameExclusive-c.range.startFrame,0),expectedFrameCount);
+  const encoderArgs=['-hide_banner','-loglevel','error','-n','-f','rawvideo','-pixel_format','yuv420p',
+    '-video_size','1920x1080','-framerate','30','-i','pipe:0','-i',baseMediaPath,
+    '-map','0:v:0','-map','1:a:0','-vf','setsar=1/1','-frames:v',String(expectedFrameCount),
+    '-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-c:a','copy',
+    '-movie_timescale','30','-movflags','+faststart',outputPath];
+  // YUV travels through pipes only. Before each finite unit, conservatively
+  // reserve its uncompressed bytes for encoded growth; the supervisor also
+  // watches actual free space each second. No full raw-YUV file is allocated.
+  const allocationBytes=Math.min(maxFrames,expectedFrameCount)*FRAME_BYTES;
+  return processObserver.observeOperation({observationLabel:'formal-low-memory-composite',
+    operationKind:'sequential-stream-composite',input:{baseMediaPath,expectedFrameCount,outputPath,
+      ffmpegPath,maxFrames,encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
+    await resourceCheck({stage:'body',newBytes:allocationBytes});
+    const create=(args,stdio)=>{
+      // No detached child: both streams remain in the supervisor-owned PGID.
+      const child=spawn(ffmpegPath,args,{stdio,detached:false});const errors=[],stderr=[];
+      child.stderr.on('data',block=>stderr.push(block));child.on('error',error=>errors.push(String(error.message)));
+      const closed=new Promise(resolve=>child.once('close',(code,signal)=>resolve({code,signal,errors,
+        stderr:Buffer.concat(stderr).toString('utf8')})));
+      return {child,closed};
+    };
+    const encoder=create(encoderArgs,['pipe','ignore','pipe']);
+    let encoderInputError=null;encoder.child.stdin.on('error',error=>{encoderInputError=error;});
+    const digest=createHash('sha256');let bytes=0;const segments=[];let active=null;
+    const closeOwn=async stream=>{
+      if(!stream)return;
+      if(stream.child.exitCode===null&&stream.child.signalCode===null)stream.child.kill('SIGKILL');
+      await stream.closed;
+    };
+    try{
+      for(const command of commands){
+        const nextFrames=command.range.endFrameExclusive-command.range.startFrame;
+        await resourceCheck({stage:'composite-range',newBytes:nextFrames*FRAME_BYTES});
+        if(encoderInputError)throw encoderInputError;
+        assert.equal(encoder.child.exitCode,null,'encoder exited before all frames');
+        active=create(command.args,['ignore','pipe','pipe']);let segmentBytes=0;
+        for await(const block of active.child.stdout){
+          segmentBytes+=block.length;bytes+=block.length;digest.update(block);
+          assert(segmentBytes<=(command.range.endFrameExclusive-command.range.startFrame)*FRAME_BYTES);
+          if(encoderInputError)throw encoderInputError;
+          if(!encoder.child.stdin.write(block))await new Promise((resolve,reject)=>{
+            const clean=()=>{encoder.child.stdin.off('drain',drained);encoder.child.stdin.off('error',failed);
+              encoder.child.off('close',ended);};
+            const drained=()=>{clean();resolve();};const failed=error=>{clean();reject(error);};
+            const ended=()=>{clean();reject(new Error('encoder closed during stream write'));};
+            encoder.child.stdin.once('drain',drained);encoder.child.stdin.once('error',failed);
+            encoder.child.once('close',ended);
+          });
+        }
+        const result=await active.closed;active=null;
+        assert.equal(result.code,0,`formal producer failed: ${result.stderr}`);
+        assert.equal(result.signal,null);assert.deepEqual(result.errors,[]);
+        assert.equal(segmentBytes,(command.range.endFrameExclusive-command.range.startFrame)*FRAME_BYTES);
+        segments.push({...command,bytes:segmentBytes,exitCode:result.code,signal:result.signal});
+      }
+      encoder.child.stdin.end();const result=await encoder.closed;
+      assert.equal(result.code,0,`formal encoder failed: ${result.stderr}`);
+      assert.equal(result.signal,null);assert.deepEqual(result.errors,[]);
+      if(encoderInputError)throw encoderInputError;
+      assert.equal(bytes,expectedFrameCount*FRAME_BYTES);
+      for(let index=1;index<segments.length;index++)
+        assert.equal(segments[index-1].range.endFrameExclusive,segments[index].range.startFrame);
+      return {schemaVersion:'digest-formal-low-memory-composite-v001',status:'completed',
+        scope:{startFrame:0,endFrameExclusive:expectedFrameCount,frameCount:expectedFrameCount},maxFrames,
+        segments,maximumCaptions:Math.max(...segments.map(s=>s.captionCount)),
+        maximumStates:Math.max(...segments.map(s=>s.stateCount)),
+        maximumInputs:Math.max(...segments.map(s=>s.inputCount)),maximumProcesses:2,
+        rawYuvStorage:'pipe-only',rawYuvBytes:bytes,rawYuvSha256:digest.digest('hex'),
+        frameBytes:FRAME_BYTES,frameCoverage:'complete-contiguous-once',encoderArgs,output:await bind(outputPath)};
+    }catch(error){await closeOwn(active);await closeOwn(encoder);throw error;}
+  });
 }
 
 function start(ffmpeg,args,stdio){

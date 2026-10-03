@@ -1,12 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v058
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v059
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-**最新更新：本人06:33:44 UTCの条件付き一件製造指示を委任taskが受領。SSD保存先確認で、候補4technical＋監視外のadopted_media_manufacturing_v001.mtsへの保存/再読context配線が必要と判明し、指示どおり実装/製造前に停止。KIOXIA/ExFATはhard link ENOTSUP、chmod0444のwrite保護も不成立。自作4096byte probeは整理済み。次は相談役が追加Core pathの限定scopeと、保護を満たす実保存領域を具体化する。製品6/設営29、既受理候補/計画、人間品質/outlineChoiceは不変。**
+**最新更新：本人07:06:03 UTC「いいよ」の一件承認に基づく新max100GB APFS保存領域の小IO/再読/保護/再mount試験は合格。指定6pathの実装候補を保存した。正式描画前の07:44 UTC確認で、元候補margin0と正式trust0.04の差により32/243字幕が推定画面幅を超え、動画生成前に停止。元owner/9実traces/243cue/390行/3613atom/27691frame/40705770sampleは一致、判断再実行0。**
 
-2026-10-03 06:49 UTC現在地：[SSD保存先の停止報告](reports/digest-ssd-storage-preflight-20261003/README.md)。以下のhuman_decision/SSD未確認は今回指示前の履歴。実製造record・出力root・候補trustは未作成、媒体生成0。shell一時切断後のrepo読取は復旧したが、Codex2の最終task再読は失敗し現在状態未確認。
+[現在報告](reports/digest-formal-apfs-preflight-20261003/README.md)・[許可転記](reports/digest-formal-apfs-preflight-20261003/authorization-record.json)・[session log](work-logs/2026-10/2026-10-03T0707_Codex_APFS_ID9-formal-preflight_f2ef2214.md)。正式一本/技術動画QC/glyph/実視聴は未実施。次担当mona/相談役が候補だけ横余白0とする具体差分、preview/必要な本人承認を判断。一般ROOT/trust/default変更/検査免除/旧成果再判断なし。自probe整理済み、07:47 UTC新guestのみ通常detach、image保持、SSD全体ejectなし。再接続で自動再開しない。
+
+以前の本人回答未受領/SSD未確認/実装0は指示前の履歴。製品6/設営29、旧accept、人間品質pending/outlineChoice=nullを保持する。
 
 ## 0. 最初に読む
 
