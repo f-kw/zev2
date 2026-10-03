@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "digest-actual-video-representative-observation-v001",
+  "reviewedAtUtc": "2026-10-03T23:40:32.468876+00:00",
+  "reviewMethod": "view_image originalで完成MP4から抽出した6中心フレームと最短cue前後6フレームを実際に表示し確認。映像を通常速度で連続再生した視聴ではない。",
+  "videoBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/ZEV_Digest_15m23s_216px_20261003.mp4",
+    "fileSha256": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+    "sizeBytes": 598323447
+  },
+  "observedSamples": [
+    {
+      "ordinal": 2,
+      "purpose": "accepted-preview-1",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000002",
+      "text": "ホラーゲームとかやろうかな",
+      "lines": [
+        "ホラーゲーム",
+        "とかやろうかな"
+      ],
+      "startFrame": 117,
+      "endFrameExclusive": 160,
+      "displayFrames": 43,
+      "startSeconds": 3.9,
+      "displaySeconds": 1.4333333333333333,
+      "representativeFrame": 138,
+      "representativeSeconds": 4.6,
+      "savedOverlayAlphaBounds": {
+        "left": 220,
+        "top": 419,
+        "right": 1702,
+        "bottom": 972,
+        "width": 1482,
+        "height": 553
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-002-center-frame-00138.png",
+        "fileSha256": "f6635a81936ba9f319655c7a23cf74c6959b91989458cbf8dd59d4794fb0147b",
+        "sizeBytes": 805528
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "00:04.600。暗いゲームタイトル背景で2行が揃って表示。確認したフレームでは文字の欠け・端切れなし。"
+    },
+    {
+      "ordinal": 125,
+      "purpose": "accepted-preview-2",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000125",
+      "text": "あなたみたいな新入りがねぇ",
+      "lines": [
+        "あなたみたいな",
+        "新入りがねぇ"
+      ],
+      "startFrame": 7306,
+      "endFrameExclusive": 7423,
+      "displayFrames": 117,
+      "startSeconds": 243.53333333333333,
+      "displaySeconds": 3.9,
+      "representativeFrame": 7364,
+      "representativeSeconds": 245.46666666666667,
+      "savedOverlayAlphaBounds": {
+        "left": 207,
+        "top": 429,
+        "right": 1713,
+        "bottom": 975,
+        "width": 1506,
+        "height": 546
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-125-center-frame-07364.png",
+        "fileSha256": "f9cbb69a78fe7d52aabff0faedf488c9bee8ebe8b2593b6fa41c005bdcb1c033",
+        "sizeBytes": 1890846
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "04:05.467。明るい室内背景で2行の白文字と濃い縁が見える。確認したフレームでは文字の欠け・端切れなし。"
+    },
+    {
+      "ordinal": 201,
+      "purpose": "long-two-lines",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000201",
+      "text": "クリアってこと?クリアってこと?",
+      "lines": [
+        "クリアってこと?",
+        "クリアってこと?"
+      ],
+      "startFrame": 13257,
+      "endFrameExclusive": 13303,
+      "displayFrames": 46,
+      "startSeconds": 441.9,
+      "displaySeconds": 1.5333333333333334,
+      "representativeFrame": 13280,
+      "representativeSeconds": 442.6666666666667,
+      "savedOverlayAlphaBounds": {
+        "left": 138,
+        "top": 434,
+        "right": 1773,
+        "bottom": 970,
+        "width": 1635,
+        "height": 536
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-201-center-frame-13280.png",
+        "fileSha256": "4b5045a2e8a1c252ee353499d580dcfdbb2d10afe2e96e7691aaf54896f84189",
+        "sizeBytes": 971348
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "07:22.667。幅上限に近い2行とも全字が表示され、行間と左右端が確認できる。白いゲームUI上でも縁が見える。字幕が背景UIの一部を覆うことは観察したが、背景UI非重複を今回採用条件には追加しない。"
+    },
+    {
+      "ordinal": 101,
+      "purpose": "closest-left-edge",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000101",
+      "text": "花瓶あったっけ?",
+      "lines": [
+        "花瓶あったっけ?"
+      ],
+      "startFrame": 5742,
+      "endFrameExclusive": 5776,
+      "displayFrames": 34,
+      "startSeconds": 191.4,
+      "displaySeconds": 1.1333333333333333,
+      "representativeFrame": 5759,
+      "representativeSeconds": 191.96666666666667,
+      "savedOverlayAlphaBounds": {
+        "left": 125,
+        "top": 747,
+        "right": 1775,
+        "bottom": 975,
+        "width": 1650,
+        "height": 228
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-101-center-frame-05759.png",
+        "fileSha256": "1f6293c80dab99b1148b07529f2cf70ef9e10748c8b6b76eb99e1316e6ad606a",
+        "sizeBytes": 2003554
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "03:11.967。左端に最も近い保存値の1行を実映像上で確認。句末?まで表示され、確認したフレームでは端切れなし。"
+    },
+    {
+      "ordinal": 266,
+      "purpose": "closest-right-edge",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000266",
+      "text": "誰も見なくなったもののね?",
+      "lines": [
+        "誰も見なく",
+        "なったもののね?"
+      ],
+      "startFrame": 18169,
+      "endFrameExclusive": 18366,
+      "displayFrames": 197,
+      "startSeconds": 605.6333333333333,
+      "displaySeconds": 6.566666666666666,
+      "representativeFrame": 18267,
+      "representativeSeconds": 608.9,
+      "savedOverlayAlphaBounds": {
+        "left": 133,
+        "top": 423,
+        "right": 1786,
+        "bottom": 970,
+        "width": 1653,
+        "height": 547
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-266-center-frame-18267.png",
+        "fileSha256": "88ea9a84232a61592e7caef774e0f8039a1fd21de1d6b8abca9d5d630fc557f7",
+        "sizeBytes": 1569569
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "10:08.900。右端に最も近い保存値の2行を暗い室内背景で確認。句末?と縁が表示され、確認したフレームでは端切れなし。"
+    },
+    {
+      "ordinal": 299,
+      "purpose": "shortest-caption",
+      "instructionId": "digest-formal-handoff-20261003-v001-instruction-instruction-000299",
+      "text": "皆さんどうも",
+      "lines": [
+        "皆さんどうも"
+      ],
+      "startFrame": 20602,
+      "endFrameExclusive": 20614,
+      "displayFrames": 12,
+      "startSeconds": 686.7333333333333,
+      "displaySeconds": 0.4,
+      "representativeFrame": 20608,
+      "representativeSeconds": 686.9333333333333,
+      "savedOverlayAlphaBounds": {
+        "left": 304,
+        "top": 742,
+        "right": 1593,
+        "bottom": 971,
+        "width": 1289,
+        "height": 229
+      },
+      "frameBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-center-frame-20608.png",
+        "fileSha256": "dc6cb00c660c091b412640bc4fdae41fec1b01ac089fb6ffb1624642a390eb05",
+        "sizeBytes": 1458796
+      },
+      "visualReview": "actual-video-frame-observed",
+      "observation": "11:26.933。最短0.4秒の字幕の中央で「皆さんどうも」全字が表示。前後6フレームの順序では前cue→このcueのフェード→次cueが保存時計と一致。通常速度で0.4秒以内に読み切れるかは未確認。"
+    }
+  ],
+  "shortCaptionSequence": [
+    {
+      "frame": 20601,
+      "seconds": 686.7,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20601-frame-20601.png",
+        "fileSha256": "b39d7907b69472545a5cf05950749d05a6ca1930179f4f55fa6f549a7bb33b51",
+        "sizeBytes": 1484261
+      }
+    },
+    {
+      "frame": 20602,
+      "seconds": 686.7333333333333,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20602-frame-20602.png",
+        "fileSha256": "1a9a3d20b48345276bc3ea05725cd0806fad0814a23085312043f2f5caf6a012",
+        "sizeBytes": 1485777
+      }
+    },
+    {
+      "frame": 20605,
+      "seconds": 686.8333333333334,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20605-frame-20605.png",
+        "fileSha256": "ee377cbaa76d2b4e592170366355ddd524c3e2c420b9db3ed199a12e0d80486b",
+        "sizeBytes": 1483656
+      }
+    },
+    {
+      "frame": 20608,
+      "seconds": 686.9333333333333,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20608-frame-20608.png",
+        "fileSha256": "dc6cb00c660c091b412640bc4fdae41fec1b01ac089fb6ffb1624642a390eb05",
+        "sizeBytes": 1458796
+      }
+    },
+    {
+      "frame": 20613,
+      "seconds": 687.1,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20613-frame-20613.png",
+        "fileSha256": "901dbdb0692b998bdf07e8de38173f92d037114d774436bf86fc78b494aeda2f",
+        "sizeBytes": 1481263
+      }
+    },
+    {
+      "frame": 20614,
+      "seconds": 687.1333333333333,
+      "binding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/representative-finish-v001/samples/cue-299-sequence-20614-frame-20614.png",
+        "fileSha256": "85e881c531099cab0d32d2848090cdf000f5046177d68004fb943c10ee2df4da",
+        "sizeBytes": 1461409
+      }
+    }
+  ],
+  "sequenceObservation": "20601: #298「ありがとう／ございます」の薄い退出。20602: #299「皆さんどうも」の薄い入場。20605/20608: 同字幕の中央表示。20613: 同字幕の薄い退出。20614: #300「ありがとう／ございます」の薄い入場。別IDの隣接cue本文は保存計画上同じであり、重複誤描画と断定しない。",
+  "sampledClippingOrMissingGlyphFound": false,
+  "all372VisuallyReviewed": false,
+  "fullVideoWatched": false,
+  "audioListened": false,
+  "unconfirmed": [
+    "通常速度での最短0.4秒字幕の読了性",
+    "全編の構成・テンポ・音声との自然なつながり",
+    "音声の実聴取品質",
+    "人間の最終品質採用・縁の好み"
+  ]
+}
