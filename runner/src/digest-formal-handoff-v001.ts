@@ -92,6 +92,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
   assert.equal(sha(approvalBytes), permit.bindings.approvalRecord.fileSha256);
   const approval = JSON.parse(approvalBytes.toString());
   assert.equal(approval.schemaVersion, 'digest-formal-user-manufacturing-authorization-v002');
+  assert.equal(approval.recordId, ORIGINAL_MANUFACTURING_GRANT_ID_V001, 'FORMAL_ORIGINAL_MANUFACTURING_GRANT_ID_REQUIRED');
   assert.deepEqual(approval.userApproval, {atMinuteUtc: '2026-10-03T09:52Z', messageId: 'Sentinel_1e76075a886c8191aa441b21201f9b00',
     text: '調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて',
     sourceThreadId: '01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6'});
@@ -114,6 +115,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
     assert(/^[0-9a-f]{64}$/u.test(binding.fileSha256)); const bytes = await readFile(path.join(ROOT, relative));
     assert.equal(sha(bytes), binding.fileSha256, 'SUPPORTING_AUTHORIZATION_CHANGED');
     if (binding.sizeBytes !== undefined) assert.equal(bytes.length, binding.sizeBytes);
+    if (key === 'originalManufacturingAuthorizationBinding') assert.equal(JSON.parse(bytes.toString()).recordId, approval.recordId, 'FORMAL_ORIGINAL_GRANT_RECORD_ID_CHANGED');
     if (key === 'captionAuthorizationBinding') assert.equal(binding.fileSha256, AUTH216.fileSha256);
     if (key === 'typographyConfigurationBinding') {assert.equal(binding.fileSha256, TYPOGRAPHY_CONFIGURATION_SHA); assert.equal(bytes.length, 1832);}
     if (key === 'typographyAdoptionBinding') {assert.equal(binding.fileSha256, 'f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884'); assert.equal(bytes.length, 1451);}
@@ -1027,6 +1029,131 @@ export async function inspectDigestFormalPreflightV001(inputs: Json) {
     toolBinaryDiagnostics: await base.inspectPresentationBaseMediaToolBinaryDiagnosticsV001()};
 }
 
+const ORIGINAL_MANUFACTURING_GRANT_ID_V001 = 'digest-formal-user-grant-20261003T070603-v001';
+const PREVIOUS_MANUFACTURING_RECORD_BINDING_V001 = Object.freeze({
+  path: ROOT + '/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-record.json',
+  fileSha256: '3d2519e4f7366ef4b919d49672eb0405ee126398442abac9021482cc6cbe71c5', sizeBytes: 3742,
+});
+
+/** Metadata equality only; the caller must still read both actual bound records. */
+export function assertDigestFormalRetryAuthorizationMetadataV001(previous: Json, candidate: Json, previousBinding: Json): void {
+  assert.deepEqual(previousBinding, PREVIOUS_MANUFACTURING_RECORD_BINDING_V001, 'ENTRY_RETRY_PREVIOUS_APPROVAL_BINDING_CHANGED');
+  assert(!Object.hasOwn(previous, 'recordId') && !Object.hasOwn(previous, 'previousManufacturingRecordBinding'), 'ENTRY_RETRY_UNEXPECTED_PREVIOUS_METADATA');
+  assert.deepEqual(Object.keys(candidate).sort(), [...Object.keys(previous), 'recordId', 'previousManufacturingRecordBinding'].sort(), 'ENTRY_RETRY_APPROVAL_EXACT_FIELDS');
+  assert.equal(candidate.recordId, ORIGINAL_MANUFACTURING_GRANT_ID_V001, 'ENTRY_RETRY_ORIGINAL_GRANT_ID_CHANGED');
+  assert.deepEqual(candidate.previousManufacturingRecordBinding, previousBinding, 'ENTRY_RETRY_PREVIOUS_APPROVAL_CHANGED');
+  assert(typeof candidate.recordedAt === 'string' && /^2026-10-03T[0-9:.]+(?:Z|\+00:00)$/u.test(candidate.recordedAt)
+    && Number.isFinite(Date.parse(candidate.recordedAt)) && Date.parse(candidate.recordedAt) > Date.parse(previous.recordedAt), 'ENTRY_RETRY_RECORDED_AT_INVALID');
+  const previousBody = {...previous}, candidateBody = {...candidate};
+  delete previousBody.recordedAt; delete candidateBody.recordedAt; delete candidateBody.recordId; delete candidateBody.previousManufacturingRecordBinding;
+  assert.deepEqual(candidateBody, previousBody, 'ENTRY_RETRY_APPROVAL_SCOPE_CHANGED');
+}
+
+async function readDigestFormalEntryEvidenceBytesV001(binding: Json): Promise<Buffer> {
+  assert(/^[0-9a-f]{64}$/u.test(binding.fileSha256) && Number.isSafeInteger(binding.sizeBytes) && binding.sizeBytes >= 0);
+  const before = await lstat(binding.path, {bigint: true});
+  assert(before.isFile() && !before.isSymbolicLink(), 'ENTRY_RETRY_FILE_TYPE_CHANGED');
+  assert.equal(await realpath(binding.path), binding.path, 'ENTRY_RETRY_REALPATH_CHANGED');
+  const bytes = await readFile(binding.path), after = await lstat(binding.path, {bigint: true});
+  for (const key of ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs'] as const) assert.equal(after[key], before[key], 'ENTRY_RETRY_FILE_UNSTABLE');
+  assert.equal(sha(bytes), binding.fileSha256, 'ENTRY_RETRY_ACTUAL_BYTES_CHANGED');
+  assert.equal(bytes.length, binding.sizeBytes, 'ENTRY_RETRY_ACTUAL_SIZE_CHANGED');
+  return bytes;
+}
+
+const ENTRY_EVALUATION_FAILURE_BINDINGS_V001 = Object.freeze({
+  "originalPermitBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json",
+    "fileSha256": "7cbe0ba3c7068052bd076da9437a2ad6416ef3aa3240b0b644d8546d56e26f62",
+    "sizeBytes": 3689
+  },
+  "summaryBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/summary.json",
+    "fileSha256": "82a0b3a4cb6e2e929d239f1c3ae5c2a49186967e93269b1348d5c7fe06a1a17d",
+    "sizeBytes": 1468
+  },
+  "ownedGroupBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/owned-group.json",
+    "fileSha256": "e1e9149b7a38261ca7f385d778d4c1b1a798751844dc6b8c45f444e2e68ae983",
+    "sizeBytes": 2178
+  },
+  "shutdownBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/group-shutdown.json",
+    "fileSha256": "327dd123337d55e8452ca26259aa82ab7d1d32de8fa321e2295a48937f138cab",
+    "sizeBytes": 799
+  },
+  "resourceBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/resource.jsonl",
+    "fileSha256": "efa68a568c6be1fe79dd5a05fc0a5ec289162d7c7023f5f893c78e3c47e8d749",
+    "sizeBytes": 2838
+  },
+  "workerLogBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/worker.log",
+    "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sizeBytes": 0
+  }
+});
+
+for (const binding of Object.values(ENTRY_EVALUATION_FAILURE_BINDINGS_V001)) Object.freeze(binding);
+
+/** Read-only eligibility for the sole pre-media ESM entry failure. This is not a manufacturing grant. */
+export async function inspectDigestFormalEntryRetryEvidenceV001(permit: Json, generatedRoot: string): Promise<Json> {
+  assert.equal(generatedRoot, path.join(GUEST, OUT), 'ENTRY_RETRY_OUTPUT_ROOT_CHANGED');
+  assert.equal(permit.status, 'verified-formal-handoff-v001');
+  assert.equal(permit.bindings.planId, PLAN); assert.equal(permit.bindings.logicalPrefix, OUT);
+  assert.equal(permit.monitorDirectory, generatedRoot + '/monitor-retry-entry-v001', 'ENTRY_RETRY_MONITOR_CHANGED');
+  const proof = permit.entryRetry;
+  assert(proof && typeof proof === 'object' && !Array.isArray(proof), 'ENTRY_RETRY_EVIDENCE_REQUIRED');
+  assert.deepEqual(Object.keys(proof).sort(), ['schemaVersion', ...Object.keys(ENTRY_EVALUATION_FAILURE_BINDINGS_V001)].sort(), 'ENTRY_RETRY_EXACT_FIELDS');
+  assert.equal(proof.schemaVersion, 'digest-formal-entry-retry-v001');
+  const observed: Json = {};
+  for (const [role, expected] of Object.entries(ENTRY_EVALUATION_FAILURE_BINDINGS_V001)) {
+    assert.deepEqual(proof[role], expected, 'ENTRY_RETRY_BINDING_CHANGED: ' + role);
+    const bytes = await readDigestFormalEntryEvidenceBytesV001(expected);
+    observed[role] = role === 'workerLogBinding' || role === 'resourceBinding' ? bytes : JSON.parse(bytes.toString());
+  }
+  const previous = observed.originalPermitBinding, summary = observed.summaryBinding;
+  const owned = observed.ownedGroupBinding, shutdown = observed.shutdownBinding;
+  assert.equal(previous.status, 'verified-formal-handoff-v001');
+  assert.equal(previous.monitorDirectory, generatedRoot + '/monitor');
+  assert.equal(previous.bindings.implementationSha, 'c49915309107a62bf019bf6c3be0d3884466bc61');
+  assert.equal(previous.bindings.commandPermitPath, ENTRY_EVALUATION_FAILURE_BINDINGS_V001.originalPermitBinding.path);
+  assert.equal(previous.command.at(-1), previous.bindings.commandPermitPath);
+  for (const key of ['planId', 'logicalPrefix', 'planManifest']) assert.deepEqual(permit.bindings[key], previous.bindings[key], 'ENTRY_RETRY_PLAN_CHANGED');
+  assert.deepEqual(previous.bindings.approvalRecord, PREVIOUS_MANUFACTURING_RECORD_BINDING_V001, 'ENTRY_RETRY_PREVIOUS_APPROVAL_BINDING_CHANGED');
+  const nextApprovalBinding = permit.bindings.approvalRecord;
+  assert.deepEqual(Object.keys(nextApprovalBinding).sort(), ['path', 'fileSha256', 'sizeBytes'].sort(), 'ENTRY_RETRY_APPROVAL_BINDING_EXACT_FIELDS');
+  assert.equal(nextApprovalBinding.path, ROOT + '/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-retry-record.json', 'ENTRY_RETRY_NEW_APPROVAL_PATH_CHANGED');
+  const previousApproval = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(previous.bindings.approvalRecord)).toString());
+  const nextApproval = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(nextApprovalBinding)).toString());
+  assertDigestFormalRetryAuthorizationMetadataV001(previousApproval, nextApproval, previous.bindings.approvalRecord);
+  assert.deepEqual(permit.storage, previous.storage, 'ENTRY_RETRY_STORAGE_CHANGED');
+  assert.deepEqual(permit.command.slice(0, -1), previous.command.slice(0, -1), 'ENTRY_RETRY_COMMAND_CHANGED');
+  assert.equal(permit.command.at(-1), permit.bindings.commandPermitPath);
+  assert.deepEqual(permit.implementation.map((item: Json) => item.path), previous.implementation.map((item: Json) => item.path), 'ENTRY_RETRY_IMPLEMENTATION_PATHS_CHANGED');
+  assert.equal(summary.status, 'interrupted'); assert.equal(summary.reason, 'formal worker nonzero exit');
+  assert.equal(summary.exitCode, 13); assert.equal(summary.stage, null); assert.deepEqual(summary.remainingRunning, []);
+  assert.deepEqual(summary.command, previous.command); assert.equal(summary.formalPermit, previous.bindings.commandPermitPath);
+  assert.deepEqual(owned.command, previous.command); assert.deepEqual(owned.bindings, previous.bindings);
+  assert.deepEqual(owned.storage, previous.storage); assert.equal(owned.permitFile, previous.bindings.commandPermitPath);
+  assert.equal(owned.group, owned.parentPid); assert.equal(owned.group, shutdown.group);
+  assert.deepEqual(summary.imageIdentity, owned.imageIdentity); assert.deepEqual(shutdown.remaining, []); assert.deepEqual(shutdown.remainingRunning, []);
+  assert.equal(observed.workerLogBinding.length, 0);
+  const oldMonitor = generatedRoot + '/monitor';
+  assert.equal(await realpath(oldMonitor), oldMonitor);
+  assert.deepEqual((await readdir(oldMonitor)).sort(), ['group-shutdown.json', 'owned-group.json', 'resource.jsonl', 'summary.json', 'worker.log']);
+  assert.deepEqual(await readdir(generatedRoot + '/temp'), [], 'ENTRY_RETRY_TEMP_NOT_EMPTY');
+  const allowedRootEntries = ['monitor', 'monitor-retry-entry-v001', 'temp'];
+  const rootEntries = await readdir(generatedRoot);
+  assert(rootEntries.includes('monitor') && rootEntries.includes('temp') && rootEntries.every(name => allowedRootEntries.includes(name)), 'ENTRY_RETRY_PRE_MEDIA_ROOT_CHANGED');
+  for (const name of rootEntries) {
+    const absolute = generatedRoot + '/' + name, info = await lstat(absolute);
+    assert(info.isDirectory() && !info.isSymbolicLink()); assert.equal(await realpath(absolute), absolute);
+  }
+  return Object.freeze({status: 'qualified-specific-pre-media-entry-failure', allowedRootEntries: Object.freeze(allowedRootEntries),
+    originalSummaryBinding: ENTRY_EVALUATION_FAILURE_BINDINGS_V001.summaryBinding, manufacturingAuthorizationRequired: true});
+}
+
 export async function runDigestFormalCandidateV001(permitPath: string) {
   const began = Date.now(), permit = JSON.parse(await readFile(permitPath, 'utf8'));
   const m = await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
@@ -1036,7 +1163,10 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
   assert.equal(preflight.mediaReady, true, 'FORMAL_CAPTION_TASK_UNSUPPORTED');
   const {context, approval} = await storage(permitPath, permit, m, inputs);
   await absent(context.resolve(OUT + '/core-plan.json'));
-  assert((await readdir(context.generatedRoot)).every(name => ['monitor', 'temp'].includes(name)), 'UNEXPECTED_GENERATED_ROOT_CONTENT');
+  const allowedRootEntries = permit.monitorDirectory === context.generatedRoot + '/monitor' && !Object.hasOwn(permit, 'entryRetry')
+    ? ['monitor', 'temp'] : (await inspectDigestFormalEntryRetryEvidenceV001(permit, context.generatedRoot)).allowedRootEntries;
+  assert((await readdir(context.generatedRoot)).every(name => allowedRootEntries.includes(name)), 'UNEXPECTED_GENERATED_ROOT_CONTENT');
+  assert.equal(await realpath(permit.monitorDirectory), permit.monitorDirectory, 'FORMAL_MONITOR_NOT_OWNED');
   assert.equal(await realpath(context.generatedRoot), context.generatedRoot);
   assert.equal(await realpath(context.tempDirectory), context.tempDirectory); Object.assign(process.env, {TMPDIR: context.tempDirectory, TMP: context.tempDirectory,
     TEMP: context.tempDirectory, MAGICK_TEMPORARY_PATH: context.tempDirectory});
@@ -1102,6 +1232,8 @@ export async function runDigestFormalCandidateV001(permitPath: string) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  // Complete ESM evaluation before qualification dynamically imports this module.
+  void (async () => {
   try {
     if (process.argv.length === 3 && process.argv[2] === '--inputs-only') {
       const v = await readDigestFormalHandoffInputsV001();
@@ -1117,4 +1249,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       process.stdout.write(JSON.stringify({event: 'completed', result}) + '\n');
     }
   } catch (error) {process.stderr.write(String((error as Error).stack) + '\n'); process.exitCode = 1;}
+  })();
 }

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "digest-formal-user-manufacturing-authorization-v002",
+  "recordedAt": "2026-10-03T11:41:55.428994+00:00",
+  "userApproval": {
+    "atMinuteUtc": "2026-10-03T09:52Z",
+    "messageId": "Sentinel_1e76075a886c8191aa441b21201f9b00",
+    "text": "調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて",
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6"
+  },
+  "candidateConditions": {
+    "fontSizePx": 216,
+    "actualInkMarginPx": 108,
+    "maxLogicalWidthPerLine": 15,
+    "maxLinesPerCue": 2,
+    "horizontalSafeMarginRatio": 0.05625,
+    "layoutRulesChanged": true
+  },
+  "originalCandidateManifestSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41",
+  "planManifestSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+  "planId": "digest-formal-handoff-20261003-v001",
+  "outputRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+  "acceptedMain": "becf6f69e67fc1afb0c910268a540fcc7f0179c4",
+  "implementationPaths": [
+    "runner/src/digest-formal-handoff-v001.ts",
+    "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+    "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+    "evals/clip_composition/render_presentation_v002.mjs",
+    "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+    "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+    "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs"
+  ],
+  "storage": {
+    "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+    "hostRoot": "/Volumes/KIOXIA",
+    "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+    "guestVolumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+    "hostVolumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "imageMaximumBytes": 100000000000,
+    "hostMetadataReserveBytes": 6254231552,
+    "internalRoot": "/Users/kawafmm/workspace/zev2",
+    "guestDevice": 16777243,
+    "hostDevice": 16777238
+  },
+  "normalCandidates": 1,
+  "humanQuality": "pending",
+  "outlineChoice": null,
+  "guard": {
+    "startBytes": 50000000000,
+    "reserveBytes": 12000000000,
+    "maximumRssBytes": 17179869184,
+    "maximumPressure": 1,
+    "observationIntervalSeconds": 1,
+    "nextUnitPlusReserve": true,
+    "stopOwnProcessGroup": true,
+    "restartOnReconnect": false
+  },
+  "originalManufacturingAuthorizationBinding": {
+    "path": "docs/reports/digest-formal-apfs-preflight-20261003/authorization-record.json",
+    "fileSha256": "73311c462a7da04b2986ba3192be4bf8cea88a383b99a91c4e1229d1b6fc222f",
+    "sizeBytes": 3422
+  },
+  "captionAuthorizationBinding": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json",
+    "fileSha256": "8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419",
+    "sizeBytes": 2430
+  },
+  "typographyAdoptionBinding": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json",
+    "fileSha256": "f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884",
+    "sizeBytes": 1451
+  },
+  "typographyConfigurationBinding": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json",
+    "fileSha256": "a7e228fe5814b32cb168e737bcc23b7f287d43f3ee852546172e3c56ab6c67bf",
+    "sizeBytes": 1832
+  },
+  "sourceConnectionDecisionBinding": {
+    "path": "docs/reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json",
+    "fileSha256": "8255c2579b072ddb2bf339fd56f179e87b97154bc763aecd44f04a199cd71a40",
+    "sizeBytes": 1668
+  },
+  "recordId": "digest-formal-user-grant-20261003T070603-v001",
+  "previousManufacturingRecordBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-record.json",
+    "fileSha256": "3d2519e4f7366ef4b919d49672eb0405ee126398442abac9021482cc6cbe71c5",
+    "sizeBytes": 3742
+  }
+}

@@ -1,5 +1,17 @@
 # 216px字幕・可変設定・正式製造の進行記録
 
+## 正式入口の回復 — 2026-10-03 11:49 UTC
+
+11:27:01 UTCの正式開始は入口の自己import待ちで2.219秒後exit13。source/Core/媒体は生成0、旧監視記録・permitを保持し、own PGID残存0。入口のtop-level awaitだけをasync IIFEへ移し、正式事前検査と同じ自己importの初期化を完了させた。実repoの空permit試験で事前検査後の許可拒否へ到達しexit1、型検査exit0。
+
+親の回復続行指示に基づき、同manifest/同出力root/同SSD/同7実装path/同一本の許可で、専用のexclusive `monitor-retry-entry-v001` を使う。今回の旧停止6原本の実SHA/size、exit13、stageなし、媒体なし、残存0と一致する場合だけ資格化。一般fallback/自動再開ではない。31拒否例と実原本再読が合格。
+
+元v002転記のrecordId欠落を大容量生成前に発見し、原07:06の実grant IDを新転記へ引き継いだ。旧recordを不変保持し、追加recordId/実recordedAt/旧record実bindingの3メタ情報だけを認め、他の許可本文・条件・計画・保存先・安全条件は全等値。架空receipt/承認の作成ではない。新転記SHA fc44ac5ed29a62255ce4d4d4ad042d4720ff0348b9ac1641e296c29dcddc45b1、4095B。
+
+[旧停止証拠](entry-failure-evidence.json)、[修正と拒否検査](entry-repair-evidence.json)、[親判断](entry-repair-decision-record.json)、[転記補正](manufacturing-authorization-retry-record.json)。Apple Pythonの旧resumeテスト1失敗はmonotonic開始値と観測回数mockの順序差。両時計条件でbody直前再観測・異常時に返信せず停止する決定論mockを確認し、[診断](supervisor-clock-diagnostic.json)へ保持。正式処理は8/8合格したHomebrew Pythonを使う。
+
+`git push origin main` は自動承認審査に共有main書込み許可未確認として拒否された。対象c4991530、宛先github.com:f-kw/zev2.git main。証拠付き再試行/別手段の送信0、保留。[記録](push-blocker-record.json)。ローカル検証と承認済み製造は独立継続する。全glyph/製造/QC/実視聴はまだ未完了、normal動画0、humanQuality=pending/outlineChoice=null。
+
 ## 製造前の監査用checkpoint — 2026-10-03 11:19 UTC
 
 今回の字幕再配置は、元の243cue/390行から372cue/668行へ進んだ。9区間・3,613atom・本文・元ID・発話順・元音声・27,691frame・40,705,770sampleを保った。保存済みの新要求に対する実判断9件と正式readerによる再読が成立し、11:14:34 UTCの正式入口の軽い事前検査では372件の推定配置、font bytes、runtime、source packageが合格した。動画はまだ製造していない。全字幕の実描画、実際の文字端と余白の検査、動画の技術QC、全体を続けて見た品質は未確認。

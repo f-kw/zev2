@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "digest-checkpoint-push-blocker-v001",
+  "reportedAt": "2026-10-03T11:34:14.790108+00:00",
+  "workingDirectory": "/Users/kawafmm/workspace/zev2",
+  "command": "git push origin main",
+  "remote": "origin",
+  "destination": "github.com:f-kw/zev2.git",
+  "branch": "main",
+  "localCommit": "c49915309107a62bf019bf6c3be0d3884466bc61",
+  "attempts": 1,
+  "commandExecuted": false,
+  "autoReview": "rejected",
+  "reason": "A normal push to the shared main branch is a persistent external side effect; delegation says not to push when authorization is unclear, and reviewer interpreted prior approval as local checkpoint commit only.",
+  "evidenceAttachedRetry": false,
+  "alternativeSend": false,
+  "status": "held-pending-explicit-authorization",
+  "localWorkContinues": true
+}

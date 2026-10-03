@@ -1,0 +1,132 @@
+{
+  "checkedAtUtc": "2026-10-03T11:45:34.094220+00:00",
+  "files": {
+    "216-entry-fixed-digest-formal-handoff-v001.ts": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-digest-formal-handoff-v001.ts",
+      "fileSha256": "31fefb40a61e8100e27a7e5c9e296ca3a491623e21146d3c6d57e462cf539750",
+      "sizeBytes": 108073
+    },
+    "216-entry-fixed-digest-formal-handoff-v001.mts": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-digest-formal-handoff-v001.mts",
+      "fileSha256": "31fefb40a61e8100e27a7e5c9e296ca3a491623e21146d3c6d57e462cf539750",
+      "sizeBytes": 108073
+    },
+    "216-entry-retry-real-bindings.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-retry-real-bindings.json",
+      "fileSha256": "ea949e6f1ab28df4b9a2e76920e6f5e90949bf3ac285e4b2c3199dc6d46a0381",
+      "sizeBytes": 1658
+    },
+    "216-entry-retry-evidence-check.stdout.txt": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-retry-evidence-check.stdout.txt",
+      "fileSha256": "17fd36ef3008639f0e5e21d1fb1efd7bbff133b193093093c1c74897bd0064af",
+      "sizeBytes": 379
+    },
+    "216-entry-fixed-no-media.stderr.txt": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-no-media.stderr.txt",
+      "fileSha256": "c9dc504ad58733c9dce20c1ef58710e62af6d48bac258c649e2cd2dd64763bc2",
+      "sizeBytes": 610
+    },
+    "216-entry-retry-evidence-repo-check.mts": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-retry-evidence-repo-check.mts",
+      "fileSha256": "6cded2fe6c904345eb41932be0b7cc4832a929fd92571c578ca4417c92984cf1",
+      "sizeBytes": 7491
+    }
+  },
+  "originalCodeSha256": "625158cdbec04766123c924aea18133a66e090c78fa9e1a3d242ea157e15ed82",
+  "originalActualEntryEmptyPermit": {
+    "exitCode": 13,
+    "stdoutBytes": 0,
+    "stderrBytes": 0
+  },
+  "fixedWorkspaceSelfIdentityEntryEmptyPermit": {
+    "exitCode": 1,
+    "stdoutBytes": 0,
+    "stderr": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'verified-formal-handoff-v001'\n    at storage (/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-digest-formal-handoff-v001.mts:77:10)\n    at runDigestFormalCandidateV001 (/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-digest-formal-handoff-v001.mts:1164:37)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async <anonymous> (/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-entry-fixed-digest-formal-handoff-v001.mts:1248:22)\n"
+  },
+  "historicalRetryEligibility": {
+    "checkedAtUtc": "2026-10-03T11:44:40.991Z",
+    "historicalEligibility": "qualified-specific-pre-media-entry-failure",
+    "actualOldRawFileBindings": 6,
+    "actualOldAndNewApprovalBytes": true,
+    "originalGrantIdPreserved": true,
+    "negativeCases": 31,
+    "actualByteTamperMockRejected": true,
+    "stagedNewRecordPathAlias": true,
+    "eligibilityOnly": true,
+    "realChildProcesses": 0,
+    "media": 0,
+    "persistedFilesChanged": 0
+  },
+  "limits": "workspace .mts same bytes and test-only two import aliases; root direct repo CLI and final typecheck remain required; no manufacturing, disk writes, process signals or retry executed",
+  "retryPermitTopLevel": "entryRetry",
+  "retryPermitEvidence": {
+    "schemaVersion": "digest-formal-entry-retry-v001",
+    "originalPermitBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json",
+      "fileSha256": "7cbe0ba3c7068052bd076da9437a2ad6416ef3aa3240b0b644d8546d56e26f62",
+      "sizeBytes": 3689
+    },
+    "summaryBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/summary.json",
+      "fileSha256": "82a0b3a4cb6e2e929d239f1c3ae5c2a49186967e93269b1348d5c7fe06a1a17d",
+      "sizeBytes": 1468
+    },
+    "ownedGroupBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/owned-group.json",
+      "fileSha256": "e1e9149b7a38261ca7f385d778d4c1b1a798751844dc6b8c45f444e2e68ae983",
+      "sizeBytes": 2178
+    },
+    "shutdownBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/group-shutdown.json",
+      "fileSha256": "327dd123337d55e8452ca26259aa82ab7d1d32de8fa321e2295a48937f138cab",
+      "sizeBytes": 799
+    },
+    "resourceBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/resource.jsonl",
+      "fileSha256": "efa68a568c6be1fe79dd5a05fc0a5ec289162d7c7023f5f893c78e3c47e8d749",
+      "sizeBytes": 2838
+    },
+    "workerLogBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/worker.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sizeBytes": 0
+    }
+  },
+  "newActualStagedManufacturingRecord": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-manufacturing-authorization-retry-record.json",
+    "fileSha256": "fc44ac5ed29a62255ce4d4d4ad042d4720ff0348b9ac1641e296c29dcddc45b1",
+    "sizeBytes": 4095
+  },
+  "newRecordId": "digest-formal-user-grant-20261003T070603-v001",
+  "newRecordDeltaFields": [
+    "recordId",
+    "recordedAt",
+    "previousManufacturingRecordBinding"
+  ],
+  "actualRepoRetryChecks": {
+    "checkedAtUtc": "2026-10-03T11:46:47.563Z",
+    "historicalEligibility": "qualified-specific-pre-media-entry-failure",
+    "actualOldRawFileBindings": 6,
+    "actualOldAndNewApprovalBytes": true,
+    "originalGrantIdPreserved": true,
+    "negativeCases": 31,
+    "actualByteTamperMockRejected": true,
+    "stagedNewRecordPathAlias": false,
+    "eligibilityOnly": true,
+    "realChildProcesses": 0,
+    "media": 0,
+    "persistedFilesChanged": 0
+  },
+  "actualRepoEmptyPermitEntry": {
+    "exitCode": 1,
+    "expectedRejection": true,
+    "stderrSha256": "8ed2f1a30d5ea23da46ceb88a0ef39bc2e3a0687d95279b8b35d37daac53b922",
+    "sourcePreflightCompletedBeforeStorage": true,
+    "media": 0
+  },
+  "actualRepoTypeCheck": {
+    "exitCode": 0,
+    "stdoutSha256": "77c8a2a7607b52805b0c255fab54b2da0c69416a4f6687c43dc7655a57ca16c4"
+  },
+  "savedAt": "2026-10-03T11:49:56.743008+00:00"
+}

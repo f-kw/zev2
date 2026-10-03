@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "digest-formal-entry-failure-evidence-v001",
+  "observedAt": "2026-10-03T11:33:03.811010+00:00",
+  "outputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+  "files": [
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/summary.json",
+      "fileSha256": "82a0b3a4cb6e2e929d239f1c3ae5c2a49186967e93269b1348d5c7fe06a1a17d",
+      "sizeBytes": 1468
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/owned-group.json",
+      "fileSha256": "e1e9149b7a38261ca7f385d778d4c1b1a798751844dc6b8c45f444e2e68ae983",
+      "sizeBytes": 2178
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/group-shutdown.json",
+      "fileSha256": "327dd123337d55e8452ca26259aa82ab7d1d32de8fa321e2295a48937f138cab",
+      "sizeBytes": 799
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/resource.jsonl",
+      "fileSha256": "efa68a568c6be1fe79dd5a05fc0a5ec289162d7c7023f5f893c78e3c47e8d749",
+      "sizeBytes": 2838
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/monitor/worker.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sizeBytes": 0
+    }
+  ],
+  "summary": {
+    "status": "interrupted",
+    "reason": "formal worker nonzero exit",
+    "stage": null,
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--import",
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+      "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+      "--permit",
+      "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json"
+    ],
+    "formalPermit": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json",
+    "startedAt": 1791026821.255883,
+    "endedAt": 1791026823.475339,
+    "seconds": 2.2194571495056152,
+    "exitCode": 13,
+    "samples": 3,
+    "observedTreePeakBytes": 199704576,
+    "observedParentPeakBytes": 199704576,
+    "minimumGuestAvailableBytes": 99665965056,
+    "minimumHostAvailableBytes": 2000256761856,
+    "minimumInternalAvailableBytes": 13581922304,
+    "remainingRunning": [],
+    "sampleIntervalSeconds": 1,
+    "limits": {
+      "startBytes": 50000000000,
+      "reserveBytes": 12000000000,
+      "treeRssBytes": 17179869184,
+      "imageMaximumBytes": 100000000000,
+      "hostMetadataReserveBytes": 6254231552
+    },
+    "imageIdentity": {
+      "imageInode": 175,
+      "imageDevice": 16777238,
+      "imageMetadataSha256": "ac0464e8b3cebef0fc0d1e73bd039d9d52db2041c5de355d2f34bb70ea94c9cd",
+      "imageLogicalBytes": 99999547392
+    },
+    "scope": "one new formal plan; three disks measured separately; owned PGID; no automatic resume"
+  },
+  "ownedGroup": {
+    "group": 58056,
+    "parentPid": 58056,
+    "spawnedAt": 1791026821.681212,
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--import",
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+      "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+      "--permit",
+      "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json"
+    ],
+    "permitFile": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json",
+    "bindings": {
+      "commandPermitPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-manufacturing-permit.json",
+      "planId": "digest-formal-handoff-20261003-v001",
+      "logicalPrefix": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+      "planManifest": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json",
+        "fileSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+        "sizeBytes": 41646
+      },
+      "approvalRecord": {
+        "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-record.json",
+        "fileSha256": "3d2519e4f7366ef4b919d49672eb0405ee126398442abac9021482cc6cbe71c5",
+        "sizeBytes": 3742
+      },
+      "implementationSha": "c49915309107a62bf019bf6c3be0d3884466bc61"
+    },
+    "storage": {
+      "guestRoot": "/Volumes/ZEV-Digest-20261003-01",
+      "hostRoot": "/Volumes/KIOXIA",
+      "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+      "guestVolumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "hostVolumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+      "imageMaximumBytes": 100000000000,
+      "hostMetadataReserveBytes": 6254231552,
+      "internalRoot": "/Users/kawafmm/workspace/zev2",
+      "guestDevice": 16777243,
+      "hostDevice": 16777238
+    },
+    "imageIdentity": {
+      "imageInode": 175,
+      "imageDevice": 16777238,
+      "imageMetadataSha256": "ac0464e8b3cebef0fc0d1e73bd039d9d52db2041c5de355d2f34bb70ea94c9cd",
+      "imageLogicalBytes": 99999547392
+    }
+  },
+  "artifactNames": [
+    "monitor",
+    "temp"
+  ],
+  "mediaProduced": false,
+  "corePackagePublished": false,
+  "productionWorkerLogBytes": 0,
+  "technicalDiagnosis": "Direct CLI top-level await calls source qualifier, which dynamically imports the still-evaluating same entry module; exit13 reproduced without media. Async IIFE completes module initialization before self-import.",
+  "candidateManifestSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+  "normalVideosProduced": 0
+}

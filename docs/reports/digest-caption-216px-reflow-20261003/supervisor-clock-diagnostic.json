@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "supervisor-clock-diagnostic-v001",
+  "checkedAtUtc": "2026-10-03T11:29:20Z",
+  "actualCodePath": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+  "actualCodeSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+  "scope": "actual unchanged legacy run_resume, mocked edges; no formal media or real storage proof",
+  "cases": [
+    {
+      "clockOrigin": 0.01212,
+      "pressureMode": "existing-call-count",
+      "observations": [
+        {
+          "ordinal": 1,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 2,
+          "phase": "immediately-before-body",
+          "pressure": 1
+        },
+        {
+          "ordinal": 3,
+          "phase": "periodic-or-start",
+          "pressure": 2
+        }
+      ],
+      "bodyObservedAgain": true,
+      "repliesSent": 1,
+      "stoppedFor": "OS memory pressure warning/critical or unknown",
+      "mockRemainingRunning": [],
+      "realChildProcessesLaunched": 0,
+      "realSignalsSent": 0
+    },
+    {
+      "clockOrigin": 288118.095322333,
+      "pressureMode": "existing-call-count",
+      "observations": [
+        {
+          "ordinal": 1,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 2,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 3,
+          "phase": "immediately-before-body",
+          "pressure": 2
+        }
+      ],
+      "bodyObservedAgain": true,
+      "repliesSent": 0,
+      "stoppedFor": "OS memory pressure warning/critical or unknown",
+      "mockRemainingRunning": [],
+      "realChildProcessesLaunched": 0,
+      "realSignalsSent": 0
+    },
+    {
+      "clockOrigin": 0.01212,
+      "pressureMode": "body-boundary-pressure",
+      "observations": [
+        {
+          "ordinal": 1,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 2,
+          "phase": "immediately-before-body",
+          "pressure": 2
+        }
+      ],
+      "bodyObservedAgain": true,
+      "repliesSent": 0,
+      "stoppedFor": "OS memory pressure warning/critical or unknown",
+      "mockRemainingRunning": [],
+      "realChildProcessesLaunched": 0,
+      "realSignalsSent": 0
+    },
+    {
+      "clockOrigin": 288118.095322333,
+      "pressureMode": "body-boundary-pressure",
+      "observations": [
+        {
+          "ordinal": 1,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 2,
+          "phase": "periodic-or-start",
+          "pressure": 1
+        },
+        {
+          "ordinal": 3,
+          "phase": "immediately-before-body",
+          "pressure": 2
+        }
+      ],
+      "bodyObservedAgain": true,
+      "repliesSent": 0,
+      "stoppedFor": "OS memory pressure warning/critical or unknown",
+      "mockRemainingRunning": [],
+      "realChildProcessesLaunched": 0,
+      "realSignalsSent": 0
+    }
+  ]
+}

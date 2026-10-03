@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "digest-formal-entry-repair-technical-decision-v001",
+  "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+  "recordedAt": "2026-10-03T11:35:54.719150+00:00",
+  "instruction": "開始直後の自己読み込み待ちは今回実装の回復可能な不具合として、既存の本人指示の範囲で原因修正と必要テストを進めてください。失敗記録は保持し、別経路で検査を避けず正式入口から再実行します。自動承認審査で拒否されたGitHub pushについては、正確なコマンド/宛先branch/コミット、拒否理由、既に証拠付き再試行をしたかを報告してください。拒否されたpushは保留のまま、別の手段で代行したり回避したりしないでください。現在のローカル検証や許可済み製造で独立して進められる部分は続けてください。",
+  "scope": "Same saved candidate, same approved output root, one video. Repair CLI initialization; preserve failed monitor evidence; use exclusive monitor for explicit corrected formal execution.",
+  "push": "held; no alternate route or retry",
+  "generalDefaultsChanged": false,
+  "newManufacturingAuthority": false
+}

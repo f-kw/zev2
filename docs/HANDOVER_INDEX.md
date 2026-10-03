@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v062
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v063
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-03 11:49 UTC
+
+11:27 UTCの正式入口は自己import待ちで媒体生成前にexit13、2.219秒、own PGID残存0。親の回復続行指示に基づき入口を限定修正、実repo空permit試験で事前検査完了→正しい許可拒否、31拒否例/旧停止実原本照合と型検査passed。元承認IDの転記欠落も事前補正し、旧転記不変/3メタ情報以外全等値を検査した。
+
+同じmanifest784775c6/同approved output root/216px/半文字108px/7実装path/Normal一本を、exclusive監視記録のみ新しくして再実行する。旧失敗記録を消さず、一般fallback/自動再開/新製造権限を作らない。[今回の回復と証拠](reports/digest-caption-216px-reflow-20261003/README.md)。全glyph/動画QC/実視聴は未、媒体0。状態作業中、次担当Mac実装者。
+
+GitHub pushは自動承認審査で共有mainへの許可未確認として拒否。ローカルc4991530は固定済み、remoteはbecf6f69。拒否後の再試行/代行0、pushを保留して許可済みの独立製造を継続する。以下の11:23以前はその時点の履歴。
 
 ## 最新checkpoint：216px再配置と製造前接続 — 2026-10-03 11:19 UTC
 
