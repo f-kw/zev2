@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "digest-formal-body-continuation-proposal-v001",
+  "status": "proposal-not-implemented-awaiting-consultant-decision",
+  "recordedAt": "2026-10-03T12:58:29.756967+00:00",
+  "fixedPlan": "digest-formal-handoff-20261003-v001",
+  "approvedOutputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001",
+  "candidateManifestSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+  "existingBase": {
+    "video": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+      "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38",
+      "sizeBytes": 639776321
+    },
+    "receipt": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/validation-receipt.json",
+      "fileSha256": "4547042edfb87bce56bd9c56b0aaf746ea76c692774e9caa31a8e254a54edbdf",
+      "sizeBytes": 2725
+    },
+    "timeline": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+      "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+      "sizeBytes": 2986
+    },
+    "manifest": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+      "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+      "sizeBytes": 14476
+    },
+    "implementationSha": "e37361ca38c9e89507ebb2d40b616cad886a5d79"
+  },
+  "blockers": [
+    "Existing entry recovery only qualifies the immutable exit13 pre-media failure, not this body timeout.",
+    "Saved source-package/core-plan bind the old adapter hash; the repaired adapter must not be admitted by skipping implementation hash checks."
+  ],
+  "recommendation": "One strict formal continuation for this exact stopped body boundary, reuse the actually verified base, publish freshly derived code-bound caption artifacts in a dedicated child directory under the same approved root.",
+  "proposedChanges": [
+    "Adapter: qualify exact failure summary/worker log/permit/ownership/shutdown/base receipt/timeline/manifest/video bytes; require body timeout, no renderer output, no residual process, same plan/candidate/approval/device, and exact old implementation plus only the reviewed two-line repair.",
+    "Adapter: create fresh qualified context/source package/core plan/job/instructions for a fixed dedicated child prefix; retain prior artifacts byte-for-byte, bind current implementation SHA, keep original manifest/body/IDs/9 traces/clocks/settings/audio unchanged.",
+    "Continue via existing formal renderer and existing QC only after fresh three-device/pressure/RSS/next-unit admission; retain 50GB start,12GB reserve,16GiB tree RSS,owned PGID shutdown and no automatic resume.",
+    "Reject clones, wrong plan/root/device, changed receipt/video/approval/input/clock/settings/code, preexisting render output and live ownership. Do not implement a general resume, trust change, hash exemption or alternate short manufacture."
+  ],
+  "expectedImplementationScope": "Adapter path within existing seven; tests/evidence separately. Confirm actual smallest diff before proceeding; if another implementation path or broader contract is required, return its exact reason/diff and stop.",
+  "notDone": [
+    "No continuation entry or new permit created",
+    "No rendering/composite/QC restarted",
+    "No old failure, base receipt or approval overwritten",
+    "No new user typography/SSD/video approval presumed",
+    "No push retried"
+  ]
+}

@@ -1,0 +1,525 @@
+{
+  "checkedAtUtc": "2026-10-03T12:47:46.480687+00:00",
+  "nodeVersion": "v20.19.6",
+  "pythonExecutable": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "pythonVersion": "3.14.7",
+  "sourceEvidence": {
+    "actualRepositorySource": "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+    "actualRepositorySourceSha256": "31fefb40a61e8100e27a7e5c9e296ca3a491623e21146d3c6d57e462cf539750",
+    "fixedCandidateSha256": "8f7d80c2ae7767440c9b7eb0e8483e27eb9d2be3c5ae2061f9cb9d196a1589ec",
+    "onlyProductionChanges": [
+      "resume stdin after adding each data listener",
+      "destroy stdin only in formal CLI IIFE finally on success or error"
+    ],
+    "allOtherProductionBytesIdentical": true,
+    "timeoutCleanupPauseChanged": false,
+    "exportedFunctionDoesNotDestroyStdin": true,
+    "onlyFixtureChanges": [
+      "extract actual reply transport code",
+      "remove two TypeScript annotations",
+      "reduce reply timeout 10000ms to 250ms",
+      "use equivalent tiny CLI try/catch/finally to perform two requests",
+      "unref watchdog only cleans up defective comparison modes"
+    ]
+  },
+  "fixtureSha256": "28a49090d2360f23d0e56d4bd5d9ad42872a98ab7dcd3588b21afa020431d077",
+  "cases": [
+    {
+      "label": "original-two-written-replies",
+      "mode": "original",
+      "replyMode": "both",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "original"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 682.7,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 26.2
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "elapsedMs": 27.009
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "first-reply-accepted",
+          "at": 1791031666522,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "failed",
+          "at": 1791031666773,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_TIMEOUT"
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": true,
+      "parentClosedOwnPipeForCleanup": true,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "resume-only-two-written-replies",
+      "mode": "resume-only",
+      "replyMode": "both",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "resume-only"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1541.625,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 37.479
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "elapsedMs": 38.565
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "first-reply-accepted",
+          "at": 1791031667217,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "second-reply-accepted",
+          "at": 1791031667217,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "completed",
+          "at": 1791031667217,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "fixture-only-watchdog-destroy",
+          "at": 1791031668717,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "resume-and-cli-finally-two-written-replies",
+      "mode": "fixed",
+      "replyMode": "both",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "fixed"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 40.505,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 36.81
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "elapsedMs": 37.864
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "first-reply-accepted",
+          "at": 1791031668758,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "second-reply-accepted",
+          "at": 1791031668758,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "completed",
+          "at": 1791031668758,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "cli-own-pipe-destroyed",
+          "at": 1791031668758,
+          "paused": true,
+          "flowing": false,
+          "destroyed": true,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "resume-only-missing-second-reply",
+      "mode": "resume-only",
+      "replyMode": "first-only",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "resume-only"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 705.913,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 29.444
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "first-reply-accepted",
+          "at": 1791031668791,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "failed",
+          "at": 1791031669042,
+          "paused": false,
+          "flowing": true,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_TIMEOUT"
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": true,
+      "parentClosedOwnPipeForCleanup": true,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "fixed-missing-second-reply",
+      "mode": "fixed",
+      "replyMode": "first-only",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "fixed"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 293.715,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        },
+        {
+          "id": 2,
+          "stage": "body",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 38.745
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "first-reply-accepted",
+          "at": 1791031669506,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0
+        },
+        {
+          "event": "failed",
+          "at": 1791031669757,
+          "paused": false,
+          "flowing": true,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_TIMEOUT"
+        },
+        {
+          "event": "cli-own-pipe-destroyed",
+          "at": 1791031669758,
+          "paused": false,
+          "flowing": true,
+          "destroyed": true,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "fixed-missing-first-reply",
+      "mode": "fixed",
+      "replyMode": "none",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "fixed"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 293.962,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [],
+      "workerNotes": [
+        {
+          "event": "failed",
+          "at": 1791031670050,
+          "paused": false,
+          "flowing": true,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_TIMEOUT"
+        },
+        {
+          "event": "cli-own-pipe-destroyed",
+          "at": 1791031670050,
+          "paused": false,
+          "flowing": true,
+          "destroyed": true,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "fixed-wrong-reply-id",
+      "mode": "fixed",
+      "replyMode": "wrong-id",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "fixed"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 40.956,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 101,
+          "stage": "start",
+          "elapsedMs": 37.02
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "failed",
+          "at": 1791031670093,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_ID_MISMATCH\n\n101 !== 1\n"
+        },
+        {
+          "event": "cli-own-pipe-destroyed",
+          "at": 1791031670094,
+          "paused": true,
+          "flowing": false,
+          "destroyed": true,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    },
+    {
+      "label": "fixed-invalid-reply-sample",
+      "mode": "fixed",
+      "replyMode": "invalid-sample",
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe.mjs",
+        "fixed"
+      ],
+      "exitCode": 1,
+      "elapsedMs": 33.147,
+      "requests": [
+        {
+          "id": 1,
+          "stage": "start",
+          "newBytes": 0
+        }
+      ],
+      "repliesWrittenAndFlushed": [
+        {
+          "id": 1,
+          "stage": "start",
+          "elapsedMs": 30.146
+        }
+      ],
+      "workerNotes": [
+        {
+          "event": "failed",
+          "at": 1791031670127,
+          "paused": true,
+          "flowing": false,
+          "destroyed": false,
+          "dataListeners": 0,
+          "reason": "SUPERVISOR_REPLY_INVALID"
+        },
+        {
+          "event": "cli-own-pipe-destroyed",
+          "at": 1791031670127,
+          "paused": true,
+          "flowing": false,
+          "destroyed": true,
+          "dataListeners": 0
+        }
+      ],
+      "remainedAliveWithParentStdinOpenAfterError": false,
+      "parentClosedOwnPipeForCleanup": false,
+      "processSignalsSent": 0,
+      "ownProcessExited": true
+    }
+  ],
+  "scope": "transport-only, tiny real owned subprocess pipes, no manufacturing permit, media, disk guards or production process action",
+  "processSignalsSent": 0,
+  "mediaGenerated": 0,
+  "completedAtUtc": "2026-10-03T12:49:08.265643+00:00",
+  "candidateImplementation": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-reply-fixed-digest-formal-handoff-v001.ts",
+    "fileSha256": "8f7d80c2ae7767440c9b7eb0e8483e27eb9d2be3c5ae2061f9cb9d196a1589ec",
+    "sizeBytes": 108132
+  },
+  "allOtherProductionBytesIdentical": true,
+  "exactChangedLines": [
+    "resourceCheck: listener attachment now followed by process.stdin.resume()",
+    "formal CLI IIFE: existing catch now followed by finally {process.stdin.destroy();}"
+  ],
+  "onlyFormalCliDestroysPipe": true,
+  "timeoutCleanupPauseNotChanged": true,
+  "testsAllPassed": 8,
+  "fixedCasesNaturalExitWithoutParentEofOrWatchdog": 5,
+  "readonlyProductionFailureObservation": {
+    "implementationSha": "e37361ca38c9e89507ebb2d40b616cad886a5d79",
+    "checkedBodySampleAtUtc": "2026-10-03T12:30:48.393919+00:00",
+    "pressure": 1,
+    "guestAvailableBytes": 99002601472,
+    "internalAvailableBytes": 13539430400,
+    "treeRssBytes": 306790400,
+    "formalDecisionBody22900000000Bytes": null,
+    "summaryStatus": "interrupted",
+    "summaryStage": "body",
+    "summaryExitCode": -15,
+    "summaryRemainingRunning": []
+  },
+  "formalContinuationImplemented": false,
+  "qualificationWarning": "The fixed-entry retry proof only qualifies the first exit13/media0 failure. The body failure and old source-package implementation bindings remain rejected for reuse under changed adapter code. No proof/guard exemption is included."
+}

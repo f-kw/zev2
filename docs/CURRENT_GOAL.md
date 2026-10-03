@@ -2,6 +2,18 @@
 
 更新日：2026-10-03（JST）
 
+## 最新現在地 — 2026-10-03 12:58 UTC（ベースQC合格後の通信停止）
+
+11:52 UTCに正式再実行。元素材全時計検査約27分、9区間の15:23.033ベース動画をSSD内へ保存し、元素材hash/区間投影/映像/音声/timeline/採用再構成の6項目passed。27,691frame/40,705,770sample、ベース639,776,321B/SHA3c16357c。原本実再読一致。[結果と今回停止](reports/digest-caption-216px-reflow-20261003/README.md)。字幕描画・合成・完成QCはまだ未開始、完成Normal0。
+
+12:30:48 UTCのbody直前安全確認はpassedだが、2回目の監視返信を読む際にstdin再開がなくtimeout（12:32 UTC検出）。12:34:58 UTCに今回own PGIDだけ終了、remainingRunning=[]。stdin再開/正式CLI finallyのpipe閉鎖2行を56db0980へ修正固定、小通信8条件比較/修正版5条件の自然終了・拒否、型検査exit0、12:50:00 UTC正式事前検査passed。権限/hash/容量/RSS/pressure検査は不変。
+
+Coreがsnapshot/PCM等9,991,882,378Bを検査記録固定後に整理、guest空き約99GBへ回復。backing image実体約10.7GBは自動compactせずKEEP。保存先はsnapshot/PCM/ベース/JSONまで実走確認、背景/字幕PNG/完成QCまでの成立は未確認。
+
+状態は相談役待ち、最終確認2026-10-03 12:58 UTC、次担当mona/親相談役。[限定正式継続案](reports/digest-caption-216px-reflow-20261003/body-continuation-proposal.json)の判断が必要。旧exit13専用資格と旧adapter SHA束縛を勝手に流用せず、新コード束縛の派生artifact/専用child prefixと検査済base原本参照を資格化してから既存renderer/QCへ進む。継続実装/新permit/描画再開0。本人の216px/半文字/可変設定/同一本承認は維持し、同条件の再承認や過去レビュー全採点を求めない。humanQuality=pending/outlineChoice=null。
+
+remote mainは12:53 UTC確認becf6f69。共有mainへのpushは自動承認審査で許可未確認として拒否されたため保留。要求1/実行0/拒否後再試行0/代行0。local修正と記録を固定する。以下11:49以前の作業中・媒体0は当時の履歴。
+
 ## 最新現在地 — 2026-10-03 11:49 UTC
 
 11:27 UTCの正式入口は自己import待ちで媒体生成前にexit13、2.219秒、own PGID残存0。親の回復続行指示に基づき入口を限定修正、実repo空permit試験で事前検査完了→正しい許可拒否、31拒否例/旧停止実原本照合と型検査passed。元承認IDの転記欠落も事前補正し、旧転記不変/3メタ情報以外全等値を検査した。

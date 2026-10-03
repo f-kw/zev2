@@ -1,5 +1,25 @@
 # 216px字幕・可変設定・正式製造の進行記録
 
+## 正式製造の実結果と次判断 — 2026-10-03 12:58 UTC
+
+SSD保存は実ベース工程まで成立した。約4.8GBのsnapshot、約4.2GBのsource-grid PCM、約0.33GBのencode PCM、映像途中物、ベースMP4/時計/検査JSONを専用APFSで保存・再読し、Coreの正式検査がpassed。背景/字幕PNG/完成QCへはまだ進んでいないため、全工程の成功とはしない。
+
+ベース動画は15:23.033、1920×1080/30fps/27,691frame、音声40,705,770sample、639,776,321B、SHA `3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38`。実保存先は `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4`。[元時計・実再読](base-retained-readback.json)、[base検査正本の写し](base-validation-receipt.json)、[generation](base-generation-manifest.json)、[timeline](base-timeline.json)。字幕付き完成動画ではない。
+
+11:52:04 UTC開始、元素材3時間20分全体の時計検査は約27分。12:19:46 UTCからベース映像/音声/検査へ進み、12:30:48 UTCに字幕工程直前のfresh安全確認まで合格した。[元素材検査と区別](source-inspection-completed-observation.json)。その後、今回追加した通信処理が2回目の返信を読めずtimeoutした（12:32 UTC確認）。描画/合成/完成QCは0、12:34:58 UTCにown PGIDだけ終了。監視総42分54.7秒は失敗後の待機を含むので、一本完成の処理時間にはしない。[失敗原本binding/summary](body-timeout-evidence.json)。最大tree RSS1.220GB、guest最少89.000GB、internal最少13.526GB、pressure1、安全停止条件の不成立ではない。
+
+修正はadapter内2行、`stdin.resume()`と正式CLI終了時`stdin.destroy()`。元の成功時pause/10秒timeout/応答ID/sample/hash/guardは不変。小通信8条件比較（修正版5条件）ではparent側pipe開放のまま成功exit0、返信欠落/不正ID/sampleはexit1、自然退出。fixtureだけ250ms timeout。[実試験](supervisor-reply-probe-evidence.json)、[最小diff](supervisor-reply-fix.diff)、[統合証拠](body-reply-fix-evidence.json)、[正式事前検査](reply-fix-formal-preflight.json)。12:50:00 UTCで372推定/font/runtime/source passed、type-check exit0。全glyph未確認、実製造での修正後動作未検証。修正実装checkpoint `56db098029900e70951844633cf973d6f6b4e525`。
+
+途中物合計9,991,882,378Bはbase検査固定後にCoreが自動整理済み。guest空き約89→99GBへ戻り、own worker/監視残存0。backing sparsebundleは自動縮小されずhost約10.7GBを保持。正式base4参照、旧と今回monitor、許可/owner/派生JSON、元216候補/実回答/trace/2PNGとimageをKEEPする。新renderer scratchはまだない。既存SSD/旧成果/元素材整理0、image compact0。
+
+次は相談役判断。現入口の再試行資格は旧exit13/media0専用で本body失敗を通せない。旧source packageにはe373のadapter hashが入り、修正後にそのまま使う案はhash検査に拒否される。[具体的な正式継続案](body-continuation-proposal.json)は、今回失敗原本＋検査済ベース実bytesだけを資格化し、同承認root内の専用child prefixに新コード束縛の派生source/package/jobを作って既存renderer/QCへ続けるもの。一般trust/ROOT/hash検査を免除せず、想定adapter1path＋tests。実差分が外へ広がるなら理由と最小差分を返して停止。現在は提案だけ、継続entry/新permit/再走0。本人の同じ字体/SSD/一本承認を再要求しない。
+
+remote mainは12:53 UTCでbecf6f69。`git push origin main`（github.com:f-kw/zev2.git main、当時c4991530）は自動承認審査で共有mainへの許可未確認として拒否され、親指示で保留。要求1/実行0/拒否後再試行0/代行0。[push記録](push-blocker-record.json)。ローカル記録のみ固定する。[このサイクルのsession log](../../work-logs/2026-10/2026-10-03T1258_Codex-SSD_ID9-formal-body-stop_56db0980.md)。
+
+技術成立はベース工程まで。実装の小通信修正は検査合格だが、字幕PNG/完成QC/全実視聴/短表示の読了性は未。12frame等の時計、humanQuality=pending、outlineChoice=null、本人の2PNG条件採用の範囲を保持する。
+
+---
+
 ## 正式入口の回復 — 2026-10-03 11:49 UTC
 
 11:27:01 UTCの正式開始は入口の自己import待ちで2.219秒後exit13。source/Core/媒体は生成0、旧監視記録・permitを保持し、own PGID残存0。入口のtop-level awaitだけをasync IIFEへ移し、正式事前検査と同じ自己importの初期化を完了させた。実repoの空permit試験で事前検査後の許可拒否へ到達しexit1、型検査exit0。

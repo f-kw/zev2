@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "digest-formal-body-reply-fix-evidence-v001",
+  "checkedAt": "2026-10-03T12:58:29.756967+00:00",
+  "implementationHead": "56db098029900e70951844633cf973d6f6b4e525",
+  "sourceBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+    "fileSha256": "8f7d80c2ae7767440c9b7eb0e8483e27eb9d2be3c5ae2061f9cb9d196a1589ec",
+    "sizeBytes": 108132
+  },
+  "changes": [
+    "resourceCheck resumes stdin after installing each reply listener",
+    "formal CLI finally destroys its own stdin pipe on success or failure"
+  ],
+  "checks": {
+    "realCommunicationComparisonCases": 8,
+    "fixedVariantCases": 5,
+    "typeCheckExitCode": 0,
+    "formalPreflight": "passed",
+    "estimatedLayouts": 372,
+    "actualGlyph": "not-yet-checked",
+    "timeoutMsProduction": 10000,
+    "timeoutMsFixture": 250,
+    "sourceHashAndResourceGuardsUnchanged": true
+  },
+  "evidence": {
+    "probe": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-supervisor-reply-probe-evidence.json",
+      "fileSha256": "d17001d9263ac38b0684fc16bc845be7b784a168217f973268f098797c74a09e",
+      "sizeBytes": 14740
+    },
+    "typeCheckOutput": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-reply-fix-typecheck.stdout.txt",
+      "fileSha256": "77c8a2a7607b52805b0c255fab54b2da0c69416a4f6687c43dc7655a57ca16c4",
+      "sizeBytes": 285
+    },
+    "preflight": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-reply-fix-formal-preflight.json",
+      "fileSha256": "8206fbd5b449753010fba210b48a418a1bcd59a74edbd47029aa06e080aed8be",
+      "sizeBytes": 2627
+    }
+  },
+  "manufacturingResumePerformed": false,
+  "remainingProductionProcesses": []
+}

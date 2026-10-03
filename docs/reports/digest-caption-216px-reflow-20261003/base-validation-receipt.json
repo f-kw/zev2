@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "digest-formal-base-validation-v001",
+  "status": "passed",
+  "coreInvocationBinding": {
+    "schemaVersion": "digest-formal-core-invocation-v001",
+    "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/core-invocation.json",
+    "fileSha256": "7a6faa88bb1e137a64b0378ac9a1836272a84de223ba09afcab8eeb0e810a2be",
+    "canonicalSha256": "dd068e60ef1ca28a32a58f1ca8a61b3242f91247601dafff670917f178f63294"
+  },
+  "machineAdoptionBinding": {
+    "schemaVersion": "new-material-digest-execution-adoption-v001",
+    "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/machine-adoption.json",
+    "fileSha256": "624bfebeccbf0825c72bfc7a7ac3ed850408b4e9027c93b4c43dda1ed50fe15d",
+    "canonicalSha256": "7aefd9d2f7c7dc78be45d092e7771bc6e8ffcdc23e5856ba02630a9659a79e53"
+  },
+  "editPlanBinding": {
+    "schemaVersion": "new-material-digest-edit-plan-v001",
+    "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/edit-plan.json",
+    "fileSha256": "cde0e6a292de011475b4d4cf3d0a418f4b839a1b9bf7eca5209e3e78e023caf6",
+    "canonicalSha256": "bec7a268b4650b7d853bf5dc9e687485d079304440a3bbacb9a9b39081695211"
+  },
+  "checks": {
+    "machineAdoptionReconstruction": "passed",
+    "sourceSnapshotSha": "passed",
+    "formalRangeProjection": "passed",
+    "videoQc": "passed",
+    "audioQc": "passed",
+    "timelineQc": "passed"
+  },
+  "individualCandidateHumanApproval": "not-performed",
+  "humanQuality": "not-evaluated",
+  "outputs": {
+    "baseMedia": {
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/base-media.mp4",
+      "fileSha256": "3c16357caee723c7ebd9ef2f0d78c3e4752b9255913a825dec7e04e3b8291b38"
+    },
+    "timeline": {
+      "schemaVersion": "presentation-base-media-timeline-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/timeline.json",
+      "fileSha256": "f1b795ee449a386ccb7589fded360d1966898f208dd6fa2c62c149895d29f80f",
+      "canonicalSha256": "c3cf28468a1bafcd529c7436a377b3401aebea6bb04d1431d096a3d4fc0d68a9"
+    },
+    "generationManifest": {
+      "schemaVersion": "presentation-base-media-generation-manifest-v003",
+      "path": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/base-media/generation-manifest.json",
+      "fileSha256": "e67f4cfa30be039a3b724a9af9dd596b9c246a9b1d324e46f138fed80bf57f2d",
+      "canonicalSha256": "d3623791d233e4099ec20f27155add3a42bc1a0f8b0ed43711dbec95740b9669"
+    }
+  },
+  "decodedFramePayloadSha256": "1c337dd3db0242be2beb47485734667ef456e28da55a059b9fd9d0647408b23f",
+  "encodeInputPayloadSha256": "9e959c2ca4ac6b4536195ed70828cd1665f69dae27a889e358bce1ac459d81de"
+}
