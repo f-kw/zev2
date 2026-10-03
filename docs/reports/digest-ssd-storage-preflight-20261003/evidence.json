@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "zev-digest-ssd-storage-preflight-observation-v001",
+  "recordedAt": "2026-10-03T06:49:39.615718+00:00",
+  "sourceHead": "745c81c1d66312af0138b0e0b4362a590622ccab",
+  "status": "stopped-scope-storage",
+  "notManufacturingPermissionOrReceipt": true,
+  "sourceBindings": [
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "bytes": 25159,
+      "fileSha256": "d51415f7d223ce885bf2f208f66d06d295ffd3c2fc708ef26955ed14929a4f2f"
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "bytes": 29454,
+      "fileSha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "bytes": 28184,
+      "fileSha256": "47cb1e5e4562913943c844b6087831375b246d114561aee53d51e00423140eb9"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "bytes": 150414,
+      "fileSha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs",
+      "bytes": 31374,
+      "fileSha256": "04bab61032904638964b2c1101b7e12ce02ecdbf898e4eac5637ac9d2e46a4ee"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "bytes": 10704,
+      "fileSha256": "e6b66091372a981c724a2aee62ea5ce483d6984debf5fa3ac48aba5191008899"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "bytes": 8260,
+      "fileSha256": "a4a6b5325793b42009f2250edb462469ef5f5daa441c5bfe4a1a2ef573da9439"
+    }
+  ],
+  "candidateBindings": [
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/manifest.json",
+      "bytes": 45985,
+      "fileSha256": "04ad8b3f019d6afed4038f376e101d15e155cc7822a2527b46fcfbd5b5041e41"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/correspondence.json",
+      "bytes": 2045952,
+      "fileSha256": "950f1edf9ea2a6f4ae8b1b2991d78b1c706bbaf2bf8877d04dcf66df15ed98f5"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/traces.json",
+      "bytes": 957794,
+      "fileSha256": "479107679f236221b198c59a0fef95495dbb5ecb1a75df922a700f6fb8b482b6"
+    },
+    {
+      "path": "runtime/artifacts/digest-caption-144px-reflow-20261003-v001/attempt-001/readback.json",
+      "bytes": 618,
+      "fileSha256": "e23018520f8bebe0d0827cdf1482c81e731c1b7e156e3fcd2a6fc1c4908ff158"
+    }
+  ],
+  "ssdProbe": {
+    "checkedAt": "2026-10-03T06:43:44.455884+00:00",
+    "volume": "/Volumes/KIOXIA",
+    "probeRoot": "/Volumes/KIOXIA/zev2-digest-storage-probe-959517fe8b45416696cc84a22b20f360",
+    "operations": {
+      "writeReadHash": true,
+      "exclusiveCreateRejectsExisting": true,
+      "sameDirectoryRenameReadback": true,
+      "chmod444RejectsWriteOpen": false,
+      "protectedReadback": true,
+      "hardLink": {
+        "status": "failed",
+        "errno": 45,
+        "code": "ENOTSUP",
+        "message": "[Errno 45] Operation not supported: '/Volumes/KIOXIA/zev2-digest-storage-probe-959517fe8b45416696cc84a22b20f360/published.bin' -> '/Volumes/KIOXIA/zev2-digest-storage-probe-959517fe8b45416696cc84a22b20f360/linked.bin'"
+      }
+    },
+    "kind": "4096-byte-filesystem-probe-only",
+    "mediaGenerated": false,
+    "device": 16777238,
+    "freeBytesBefore": 2000300277760,
+    "payloadSha256": "c8f5d0341d54d951a71b136e6e2afcb14d11ed8489a7ae126a8fee0df6ecf193",
+    "modeAfterChmod444": "0o700",
+    "cleanupErrors": [],
+    "probeRootRemains": false,
+    "freeBytesAfter": 2000300277760
+  },
+  "ssdMetadata": {
+    "mount": "/Volumes/KIOXIA",
+    "deviceNode": "/dev/disk4s2",
+    "filesystem": "ExFAT",
+    "volumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+    "partitionUuid": "49CE429C-DA91-4CFC-8268-81CF4F27B2CC",
+    "freeBytesObserved20261003T064414Z": 2000299753472
+  },
+  "repoFreeBytesObserved20261003T064414Z": 12763258880,
+  "mediaGenerated": false,
+  "implementationEdited": false,
+  "finalTaskStateRead": "unavailable-transport-closed; initial Codex2 idle",
+  "parentVisibleMessage": "rejected-by-automatic-approval-review; not-sent",
+  "remainingBlockers": [
+    "additional-core-path-required",
+    "ExFAT-hardlink-unsupported",
+    "ExFAT-chmod444-write-protection-not-established"
+  ]
+}

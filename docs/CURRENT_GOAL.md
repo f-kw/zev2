@@ -2,6 +2,12 @@
 
 更新日：2026-10-03（JST）
 
+## 最新個別指示と停止 — 2026-10-03 06:49 UTC
+
+本人の06:33:44 UTC「OK 必要な作業をしてくれ」に基づく今回一件の条件付き製造指示を委任taskが受領。SSD途中物対応の確認で、候補4technical＋監視外の `adopted_media_manufacturing_v001.mts` へ保存/再読context配線が必須と判明し、指示どおり製造前に停止した。`/Volumes/KIOXIA` はExFAT、hard link ENOTSUP、chmod0444のwrite保護も不成立。4096byte自作probeは整理済み。実装/trust/媒体生成0。次は相談役が追加Core pathの限定scopeと保護を満たす保存領域を具体化する。
+
+[今回の停止報告](reports/digest-ssd-storage-preflight-20261003/README.md)・[session log](work-logs/2026-10/2026-10-03T0649_Codex-SSD_ID9-storage-preflight_745c81c1.md)を正本の現在地とする。以降の本人回答未受領/SSD未確認は今回指示前の保存履歴。製品6/設営29、既受理成果、人間品質pending、outlineChoice=null、一般本適用の境界は維持する。正式製造record/出力rootは未作成。
+
 ## 1. 復元と履歴
 
 プロジェクトZEV_START_HERE.mdを全文読み、GitHub mainの現在HEADと同一SHAのHANDOVER_INDEX、現行正本を読む。発行・受領・適用・実行・技術受理・人間採用を分ける。

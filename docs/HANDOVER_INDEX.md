@@ -1,10 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v057
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v058
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-**最新更新：Codexの複数session向けwork logを正本化。中央logへの逐次appendは行わず、各sessionが第一完成・GPT/HUMAN停止・handoff・終了直前に、指示・判断・主要作業・検証・cleanup・Git・次状態を `docs/work-logs/YYYY-MM/` の専用fileへまとめる。月directoryでrotationし、1 summaryが64 KiB超ならpart分割。正本は[CODEX_SESSION_WORK_LOG_POLICY_v001](policies/CODEX_SESSION_WORK_LOG_POLICY_v001.md)。標準終了順は証拠固定→cleanup→own process終了→session work log→正本更新→commit/push→相談役報告→次指示受領。現在の一計画製造human_decision待ち、製品6/設営29、未承認adapter/trust/媒体/SSD等の境界は不変。**
+**最新更新：本人06:33:44 UTCの条件付き一件製造指示を委任taskが受領。SSD保存先確認で、候補4technical＋監視外のadopted_media_manufacturing_v001.mtsへの保存/再読context配線が必要と判明し、指示どおり実装/製造前に停止。KIOXIA/ExFATはhard link ENOTSUP、chmod0444のwrite保護も不成立。自作4096byte probeは整理済み。次は相談役が追加Core pathの限定scopeと、保護を満たす実保存領域を具体化する。製品6/設営29、既受理候補/計画、人間品質/outlineChoiceは不変。**
+
+2026-10-03 06:49 UTC現在地：[SSD保存先の停止報告](reports/digest-ssd-storage-preflight-20261003/README.md)。以下のhuman_decision/SSD未確認は今回指示前の履歴。実製造record・出力root・候補trustは未作成、媒体生成0。shell一時切断後のrepo読取は復旧したが、Codex2の最終task再読は失敗し現在状態未確認。
 
 ## 0. 最初に読む
 
