@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "digest-216-v003-clean-entry-retry-readonly-review-v001",
+  "readAt": "2026-10-03T15:43:56.241566+00:00",
+  "status": "no-blocking-issue-found-in-limited-retry-connection",
+  "headAtReview": "901346a3ea58ddc1eb16a19756e0cffbdd657d97",
+  "gitStatusAtRead": [],
+  "executionReadiness": "current code/evidence not yet committed; launcher and formal entry retain CLEAN gate",
+  "evidenceBundle": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/clean-entry-failure-evidence.json",
+    "sha256": "9a64d026520ef4211d2158bb98f17d3aebd25a9f1ac43de2673719dca8c485ec",
+    "sizeBytes": 7953,
+    "expectedHash": "9a64d026520ef4211d2158bb98f17d3aebd25a9f1ac43de2673719dca8c485ec",
+    "oldSixAndPermitActualReads": [
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/ownership.json",
+        "sha256": "a10d92b6092188a25be9fa6343b874228d049d9b1cd5a3f28810643021e0a6da",
+        "sizeBytes": 579,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor/summary.json",
+        "sha256": "ea72a2de411c4ea5075fb5234caa92682bb3083d3dea3406e3841dbe941aa305",
+        "sizeBytes": 1485,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor/group-shutdown.json",
+        "sha256": "faea8f2d16b86e0203458f310ac8ab38d32a330c77d8100b3ca684590e6afa82",
+        "sizeBytes": 800,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor/owned-group.json",
+        "sha256": "3fb80c3652ac2268bd59d94444209f876958fb8946fa9f474e7dc337d1f08ce5",
+        "sizeBytes": 2211,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor/worker.log",
+        "sha256": "9112bca3ae1145f08ec61ec035cbbf9dc3967d2ccf5fc8da077beda5e3c6fa12",
+        "sizeBytes": 537,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor/resource.jsonl",
+        "sha256": "77b5095b8f3ae2fb230786c3ab73d022b27741155b92e7e5d7d3cb62447f569d",
+        "sizeBytes": 3819,
+        "matchesSaved": true
+      },
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-formal-body-continuation-v003-permit.json",
+        "sha256": "2b23d8371bba648a18ed8ac950c2175e4797b9caaee6fc8f47b2319cacbf149f",
+        "sizeBytes": 6118,
+        "matchesSaved": true
+      }
+    ],
+    "embeddedSummaryOwnedShutdownEqualActual": {
+      "summary": true,
+      "owned": true,
+      "shutdown": true
+    },
+    "elapsedSeconds": 2.6656241416931152,
+    "mediaStarted": 0,
+    "outputsStarted": 0,
+    "cleanupBytesHistoricalEvidence": 67141,
+    "cacheFilesCurrentlyAbsent": true
+  },
+  "oldSevenCodeHashReadback": [
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "oldGitSha256": "cab89540191433e9f7a70b51dc7b73678d0b06369dfd634b7dd8dd3b04ea8b37",
+      "oldPermitSha256": "cab89540191433e9f7a70b51dc7b73678d0b06369dfd634b7dd8dd3b04ea8b37",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "oldGitSha256": "06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265",
+      "oldPermitSha256": "06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "oldGitSha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "oldPermitSha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "oldGitSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "oldPermitSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "oldGitSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "oldPermitSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "oldGitSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "oldPermitSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "matchesOldPermit": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "oldGitSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "oldPermitSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "matchesOldPermit": true
+    }
+  ],
+  "currentSevenCodeReadback": [
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "currentSha256": "2f2c1b11c2243ff1dbae240d21b40e01a74ba9707f2a41b8f0a18e7b60fd16a6",
+      "matchesOld742Bytes": false
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "currentSha256": "06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265",
+      "matchesOld742Bytes": true
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "currentSha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "matchesOld742Bytes": true
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "currentSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "matchesOld742Bytes": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "currentSha256": "865212f26f86bb98b02e99868746d0b36a50afc36fc4245e29ad95dc97e61b06",
+      "matchesOld742Bytes": true
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "currentSha256": "26e5b1bf07d8569c4fcf4f052196d0f9e0cc3bc59d472278a280b53992baffff",
+      "matchesOld742Bytes": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "currentSha256": "63cf81684d038321096eedb4fb22bb45626dda257fd57f6c008d1b7f11d0ee85",
+      "matchesOld742Bytes": true
+    }
+  ],
+  "fixedSameRoot": "runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003",
+  "existingRootRead": {
+    "entries": [
+      "monitor",
+      "ownership.json",
+      "temp"
+    ],
+    "tempEntries": [],
+    "mediaMetadataAbsent": {
+      "core-plan.json": true,
+      "source-package.json": true,
+      "renderer-job.json": true,
+      "render": true,
+      "renderer-result.json": true,
+      "admission-receipt.json": true,
+      "line-layout.json": true,
+      "result.json": true,
+      "low-memory-composite.json": true
+    },
+    "retryOwnerCurrentlyExists": false,
+    "retryMonitorCurrentlyExists": false
+  },
+  "manifestAndApprovalReadback": [
+    {
+      "role": "manifest",
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/manifest.json",
+      "sha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+      "matchesPreviousPermit": true
+    },
+    {
+      "role": "approval",
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/manufacturing-authorization-retry-record.json",
+      "sha256": "fc44ac5ed29a62255ce4d4d4ad042d4720ff0348b9ac1641e296c29dcddc45b1",
+      "matchesPreviousPermit": true
+    }
+  ],
+  "freshExclusiveGates": {
+    "helperBeforeWrites": "requires original root exact entries monitor/ownership.json/temp and empty temp; new monitor absent",
+    "ownerAndPermit": "both open x + fsync + chmod0444; unique retry path/permit path no overwrite",
+    "leaseContinuity": "controller own PID in owner; remains alive during all qualification/start-observation; execve retains PID into supervisor",
+    "ownerBindings": "exact fresh owner path/hash/current impl/permit/output/manifest; age<600000ms/live controller; actual worker asserts owner.controllerPid===ppid and own PGID/command/bindings",
+    "monitorClaim": "unchanged supervisor os.mkdir(newmonitor) exclusive create; prior monitor stays immutable",
+    "oldStoppedGate": "formal qualifier checks recorded 38281 exit +ps no non-zombie prior PGID; existing older owner stop checks kept",
+    "bodyUnusedGate": "all media metadata absent, temp empty, only exact original/retry ownership/monitor/temp entries allowed",
+    "storageAndCurrentGate": "old permit grant/storage/manifest/code strict comparisons and all current input/UUID/device/image/resource checks unchanged"
+  },
+  "bytecodePrevention": {
+    "launcherFirstStatements": "import sys; sys.dont_write_bytecode=True before local importlib load",
+    "spawnEnvironment": "PYTHONDONTWRITEBYTECODE=1 passed to node and execve supervisor",
+    "pythonDashB": "parent instructed -B launcher; static helper itself also suppresses bytecode; reviewer executes only python -B read-only scripts",
+    "mediaGenerationByReviewer": false
+  },
+  "qcUnchanged": {
+    "coreHash": "06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265",
+    "serializePngAndFiltersQualifiedDigest": true,
+    "NormalMethod": "encoded-omission-v2",
+    "plannedCaptions": 372,
+    "survivorsPerSample": 371,
+    "expectedFrames": 27691,
+    "sourceSamples": 40705770,
+    "newQcOnlyContract": false,
+    "newTrustOrThresholdChange": false,
+    "otherSixImplementationPathsMatchPrevious742": true
+  },
+  "helpersReviewed": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-launch-body-continuation-v003-clean-entry-retry.py",
+      "sha256": "e4743b40afd66bb89019cd2f9d8738ef2dd8717a89faca8afd06bbd822b41840",
+      "sizeBytes": 4472
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-build-clean-entry-retry.py",
+      "sha256": "84b25fe3f5a764d590b20582b88c6c2c094db2a03408d487cbaed80afa91d631",
+      "sizeBytes": 7559
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-body-v003-clean-entry-qualification-tests.mts",
+      "sha256": "35003332f8439398a26293855c36e1c160d9aa72b2c973180b7b5802c219d9f6",
+      "sizeBytes": 3113
+    }
+  ],
+  "noExecutionPerformed": [
+    "no new permit/owner/monitor created by reviewer",
+    "no repo/SSD edits",
+    "no process operations or new ps/lsof by reviewer",
+    "no tests/typecheck/render/QC started"
+  ],
+  "remainingChecks": [
+    "root commits actual adapter/evidence and retains clean tree before launcher",
+    "fresh owner/permit/monitor exclusivity/device/resource/qualified valid checks occur at actual start",
+    "actual encoded-v2 completion and human quality still pending; v002 remains failed-final-qc"
+  ],
+  "violations": []
+}

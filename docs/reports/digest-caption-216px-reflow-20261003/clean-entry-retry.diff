@@ -1,0 +1,100 @@
+--- a/runner/src/digest-formal-handoff-v001.ts
++++ b/runner/src/digest-formal-handoff-v001.ts
+@@ -146,7 +146,7 @@
+     if (!force && Date.now() - lastCheck < 900) return;
+     assert.equal(sha(await readFile(permitPath)), permitSha, 'PERMIT_CHANGED');
+     if (Object.hasOwn(permit, 'bodyContinuation')) {
+-      assert.equal(permit.bodyContinuation.ownerBinding.path, path.join(GUEST, BODY_OUT, 'ownership.json'));
++      assert.equal(permit.bodyContinuation.ownerBinding.path, path.join(GUEST, BODY_OUT, 'ownership-retry-clean-v001.json'));
+       await readDigestFormalEntryEvidenceBytesV001(permit.bodyContinuation.ownerBinding);
+       process.kill(process.ppid, 0);
+     }
+@@ -1212,6 +1212,11 @@
+     "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/encoded-qc-failure-evidence.json",
+     "fileSha256": "65ffb659d1a8ef24612dc1fa7b4f89a5ec82e3151632a700e899d3aeb36b3b43",
+     "sizeBytes": 147008
++  },
++  "cleanEntryFailureBinding": {
++    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/clean-entry-failure-evidence.json",
++    "fileSha256": "9a64d026520ef4211d2158bb98f17d3aebd25a9f1ac43de2673719dca8c485ec",
++    "sizeBytes": 7953
+   }
+ });
+ for (const binding of Object.values(BODY_FAILURE_BINDINGS_V001)) Object.freeze(binding);
+@@ -1238,7 +1243,7 @@
+   const oldRoot = path.join(GUEST, OUT), newRoot = path.join(GUEST, BODY_OUT);
+   assert.equal(permit.status, 'verified-formal-handoff-v001');
+   assert.equal(permit.bindings.planId, PLAN); assert.equal(permit.bindings.logicalPrefix, OUT);
+-  assert.equal(permit.monitorDirectory, newRoot + '/monitor', 'BODY_CONTINUATION_FIXED_CHILD_REQUIRED');
++  assert.equal(permit.monitorDirectory, newRoot + '/monitor-retry-clean-v001', 'BODY_CONTINUATION_FIXED_CHILD_REQUIRED');
+   const observed: Json = {};
+   for (const [role, expected] of Object.entries(BODY_FAILURE_BINDINGS_V001) as [string, Json][]) {
+     assert.deepEqual(proof[role], expected, 'BODY_CONTINUATION_BINDING_CHANGED: ' + role);
+@@ -1249,6 +1254,30 @@
+   const previous = observed.previousPermitBinding, evidence = observed.failureEvidenceBinding;
+   assert.equal(previous.bindings.implementationSha, 'e37361ca38c9e89507ebb2d40b616cad886a5d79');
+   assert.equal(previous.monitorDirectory, oldRoot + '/monitor-retry-entry-v001');
++  const cleanFailure = observed.cleanEntryFailureBinding;
++  assert.equal(cleanFailure.schemaVersion, 'digest-formal-clean-entry-failure-evidence-v001');
++  assert.equal(cleanFailure.outputRoot, newRoot); assert.equal(cleanFailure.implementationSha, '742dd96bb3b125ef80e278f7c323485f8b8d26b2');
++  assert.equal(cleanFailure.mediaStarted, 0); assert.equal(cleanFailure.outputsStarted, 0);
++  for (const [name, ref] of Object.entries(cleanFailure.bindings) as [string, Json][]) {
++    safe(name); assert.equal(ref.path, newRoot + '/' + name); await readDigestFormalEntryEvidenceBytesV001(ref);
++  }
++  const cleanPermit = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(cleanFailure.previousPermitBinding)).toString());
++  assert.equal(cleanPermit.bindings.implementationSha, cleanFailure.implementationSha);
++  assert.equal(cleanPermit.monitorDirectory, newRoot + '/monitor');
++  for (const key of ['planId', 'logicalPrefix', 'planManifest', 'approvalRecord']) assert.deepEqual(cleanPermit.bindings[key], previous.bindings[key], 'BODY_CLEAN_ENTRY_GRANT_CHANGED');
++  assert.deepEqual(cleanPermit.storage, previous.storage);
++  assert.deepEqual(cleanFailure.summary.command, cleanPermit.command); assert.deepEqual(cleanFailure.owned.command, cleanPermit.command);
++  assert.deepEqual(cleanFailure.owned.bindings, cleanPermit.bindings); assert.equal(cleanFailure.owned.group, 38281);
++  assert.equal(cleanFailure.owned.parentPid, cleanFailure.owned.group); assert.equal(cleanFailure.shutdown.group, cleanFailure.owned.group);
++  assert.equal(cleanFailure.summary.status, 'interrupted'); assert.equal(cleanFailure.summary.exitCode, 1); assert.equal(cleanFailure.summary.stage, null);
++  assert.deepEqual(cleanFailure.summary.remainingRunning, []); assert.deepEqual(cleanFailure.shutdown.remainingRunning, []); assert.deepEqual(cleanFailure.shutdown.remaining, []);
++  assert((await readFile(newRoot + '/monitor/worker.log', 'utf8')).includes('CLEAN_IMPLEMENTATION_REQUIRED'), 'BODY_EXACT_CLEAN_ENTRY_FAILURE_REQUIRED');
++  for (const name of ['core-plan.json', 'source-package.json', 'renderer-job.json', 'render', 'renderer-result.json', 'admission-receipt.json', 'line-layout.json', 'result.json', 'low-memory-composite.json']) await absent(newRoot + '/' + name);
++  for (let i = 0; i < IMPLEMENTATIONS.length; i++) {
++    const code = (await exec('git', ['show', cleanPermit.bindings.implementationSha + ':' + IMPLEMENTATIONS[i]], {cwd: ROOT, encoding: 'buffer', maxBuffer: 4000000})).stdout as Buffer;
++    assert.equal(sha(code), cleanPermit.implementation[i].fileSha256, 'BODY_CLEAN_ENTRY_CODE_CHANGED');
++  }
++
+   const qcFailure = observed.encodedQcFailureBinding;
+   const qcRoot = oldRoot + '/body-continuation-v002';
+   assert.equal(qcFailure.schemaVersion, 'digest-formal-encoded-qc-failure-evidence-v001');
+@@ -1333,6 +1362,7 @@
+   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(owned.group) && !row[2]?.startsWith('Z');}), 'BODY_PREVIOUS_OWNER_LIVE');
+   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(importFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_IMPORT_FAILURE_OWNER_LIVE');
+   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(qcFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_QC_FAILURE_OWNER_LIVE');
++  assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(cleanFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_CLEAN_ENTRY_OWNER_LIVE');
+   assert(observed.workerLogBinding.toString().includes('SUPERVISOR_REPLY_TIMEOUT'), 'BODY_EXACT_TIMEOUT_REQUIRED');
+   const resources = observed.resourceBinding.toString().trim().split('\n').map((line: string) => JSON.parse(line));
+   assert(resources.some((sample: Json) => sample.phase === 'before-body' && sample.pressure === 1), 'BODY_BEFORE_BODY_SAMPLE_REQUIRED');
+@@ -1364,8 +1394,8 @@
+   assert.equal(await realpath(newRoot), newRoot); assert.equal(await realpath(newRoot + '/temp'), newRoot + '/temp');
+   assert.deepEqual(await readdir(newRoot + '/temp'), [], 'BODY_NEW_TEMP_NOT_EMPTY');
+   const entries = await readdir(newRoot);
+-  assert(entries.includes('ownership.json') && entries.includes('temp') && entries.every(name => ['ownership.json', 'temp', 'monitor'].includes(name)), 'BODY_NEW_ROOT_ALREADY_USED');
+-  assert.equal(proof.ownerBinding.path, newRoot + '/ownership.json', 'BODY_OWNER_PATH_CHANGED');
++  assert(entries.includes('ownership.json') && entries.includes('temp') && entries.every(name => ['ownership.json', 'ownership-retry-clean-v001.json', 'temp', 'monitor', 'monitor-retry-clean-v001'].includes(name)), 'BODY_NEW_ROOT_ALREADY_USED');
++  assert.equal(proof.ownerBinding.path, newRoot + '/ownership-retry-clean-v001.json', 'BODY_OWNER_PATH_CHANGED');
+   const owner = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(proof.ownerBinding)).toString());
+   assert.deepEqual(Object.keys(owner).sort(), ['schemaVersion', 'ownerId', 'createdAt', 'controllerPid', 'implementationSha', 'commandPermitPath', 'outputRoot', 'manifestSha256'].sort(), 'BODY_OWNER_EXACT_FIELDS');
+   assert.equal(owner.schemaVersion, 'digest-formal-body-exclusive-owner-v001'); assert(/^[0-9a-f-]{36}$/u.test(owner.ownerId));
+@@ -1391,7 +1421,7 @@
+   const qualification = {status: 'qualified-specific-stopped-body', outputRoot: BODY_OUT, base,
+     previousImplementationSha: previous.bindings.implementationSha, previousImplementationBindings: previous.implementation,
+     currentImplementationSha: permit.bindings.implementationSha, currentImplementationBindings: permit.implementation,
+-    previousEvidence: structuredClone(proof), importFailureImplementationSha: importFailure.implementationSha, importFailureImplementationBindings: importPermit.implementation, qcFailureImplementationSha: qcFailure.implementationSha, qcFailureImplementationBindings: qcPermit.implementation, oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
++    previousEvidence: structuredClone(proof), importFailureImplementationSha: importFailure.implementationSha, importFailureImplementationBindings: importPermit.implementation, qcFailureImplementationSha: qcFailure.implementationSha, qcFailureImplementationBindings: qcPermit.implementation, cleanEntryFailureImplementationSha: cleanFailure.implementationSha, cleanEntryFailureImplementationBindings: cleanPermit.implementation, oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
+   function freeze(value: any) {if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);}}
+   freeze(qualification); return qualification;
+ }
+@@ -1406,7 +1436,7 @@
+   const {context, approval} = await storage(permitPath, permit, m, inputs);
+   const outputRoot = context.outputRoot;
+   await absent(context.resolve(outputRoot + '/core-plan.json'));
+-  const allowedRootEntries = context.continuation !== undefined ? ['ownership.json', 'temp', 'monitor'] : permit.monitorDirectory === context.generatedRoot + '/monitor' && !Object.hasOwn(permit, 'entryRetry')
++  const allowedRootEntries = context.continuation !== undefined ? ['ownership.json', 'ownership-retry-clean-v001.json', 'temp', 'monitor', 'monitor-retry-clean-v001'] : permit.monitorDirectory === context.generatedRoot + '/monitor' && !Object.hasOwn(permit, 'entryRetry')
+     ? ['monitor', 'temp'] : (await inspectDigestFormalEntryRetryEvidenceV001(permit, context.generatedRoot)).allowedRootEntries;
+   assert((await readdir(context.generatedRoot)).every(name => allowedRootEntries.includes(name)), 'UNEXPECTED_GENERATED_ROOT_CONTENT');
+   assert.equal(await realpath(permit.monitorDirectory), permit.monitorDirectory, 'FORMAL_MONITOR_NOT_OWNED');

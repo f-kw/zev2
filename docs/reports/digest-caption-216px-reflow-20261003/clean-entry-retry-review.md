@@ -1,0 +1,19 @@
+限定clean-entry再試行の独立読み取りreview：接続に明確な阻害は認めなかった。確認時刻 2026-10-03T15:43:56.241566+00:00。同じv003を使い、旧失敗記録を残したままfresh owner/monitor/permitを別名で作る案である。新製造・tests・process操作・repo/SSD変更を、このreviewerは行っていない。
+
+現adapter SHA256は2f2c1b11c2243ff1dbae240d21b40e01a74ba9707f2a41b8f0a18e7b60fd16a6で提示値に一致。差分は専用adapter1pathと固定7953byteのfailure evidence保存だけ。Core SHA256は06c9bbfd542b5d9a653a6745599228cb6b530f9a9d388483c2c8ca3362260265のまま。Coreを含む残6実装pathは直前742dd96bb3b125ef80e278f7c323485f8b8d26b2 bytesと一致した。
+
+固定失敗bundleはSHA256=9a64d026520ef4211d2158bb98f17d3aebd25a9f1ac43de2673719dca8c485ec、7953bytes。旧ownershipと旧monitor5filesの6rawref、および旧permitを現物再読し全hash/サイズ一致。埋込みsummary/owned/shutdownも実JSONと一致。旧7実装codeはgit742から読み旧permitの7hashと一致した。manifest/approvalの現物hashも旧permitと一致した。
+
+この失敗は2026-10-03 15:29:39.738 UTCに2.665624秒で終了し、stage=null/exit1/媒体0/出力0。旧worker.logにはCLEAN_IMPLEMENTATION_REQUIREDがある。own pyc2個の67141bytesは削除前のhash/サイズをbundleに保持し、現在その2pathは存在しない。過去のps/lsof確認と旧PGID38281残存0は保存記録として読むに留め、新しいprocess検査や停止は実行していない。
+
+現v003には旧monitor・旧ownership.json・空tempだけ。core-plan/source-package/renderer-job/render/renderer-result/admission/line-layout/result/compositeは全て不存在だった。同じ保存先を再利用するが、製造途中の媒体やmetadataを再開する意味ではない。旧ownership/monitorを上書きする処理は無い。
+
+launcherはoriginal3entry/空tempを検査し、ownership-retry-clean-v001.jsonとfresh permitをopen('x')で排他的作成、fsyncして0444にする。旧permit pathは使わない。新monitor-retry-clean-v001は既存supervisorのos.mkdirで排他的作成する。同じrootを他のlauncherが先に占有すればopen x/unused確認で拒否する。leaseは作成→資格検査→device/resource確認→execまで残り、controller PIDはexecveで維持される。正式workerはその親PID・新owner hash・own PGID/command/bindingsを照合する。
+
+adapterはexact新owner/newmonitor名、旧失敗6refs、媒体metadata不存在、旧owner終了、fresh owner age/hash、old/new code・same grant/storage/manifestを照合する。既存root no-replace publication、opaque資格、oldbase4参照と新v003 artifactの分離、UUID/device/image、内外reserve、RSS/pressure検査は維持されている。allowlist追加はこの固定再試行名2つだけで、任意prefixや一般resumeに広げていない。
+
+helperは最初にsys.dont_write_bytecode=Trueを設定してからlocal moduleをimportし、PYTHONDONTWRITEBYTECODE=1をnodeとexec先supervisorへ渡す。parentの-B起動指示も併用する。新helperがrepoへpycを再作成しないための修正であり、CLEAN gateを無効化する変更ではない。
+
+QCは既存Normal encoded-omission-v2、372samples、毎回371survivors、全27691frame、40705770sample束縛、qualified Digest serialize=true、既存合格条件のまま。新QC-only契約/新trust/閾値緩和/短計画/診断renderは導入されていない。
+
+現在のGitはadapter変更とfailure evidence untrackedを含むため、その状態ではlauncher/正式entryのCLEAN gateが拒否する。rootが実装と証拠をcheckpointへ固定してcleanを確認する必要がある。新owner/permit/device/resourceの実資格・実製造・最終QCは今後の正式entry結果で確認する。今回read-only reviewはそれらの合格や起動許可を代用しない。

@@ -2,6 +2,16 @@
 
 更新日：2026-10-03（JST）
 
+## 最新現在地 — 2026-10-03 15:46 UTC（媒体前の起動キャッシュ停止を修正、同じ全尺を続行）
+
+15:29:36 UTCにv003資格18拒否＋実原本資格passed、guest98,039,123,968B/host1,989,503,090,688B/内蔵13,313,675,264B/pressure1を別計測し開始条件passed。監視は15:29:37〜39 UTCの2.666秒で媒体前停止。起動用Pythonのimportが作ったown pyc2件でGit untrackedとなり、既存CLEAN_IMPLEMENTATION_REQUIREDが拒否した。core/source/job/描画/合成/QC0、実装者の起動方法の問題である。old v002合成MP4・全PNG・失敗は全KEEP、技術QC不合格のまま。[実停止と整理記録](reports/digest-caption-216px-reflow-20261003/clean-entry-failure-evidence.json)。
+
+15:35 UTCの実ps/lsofでown controller37963/PGID38281とpyc使用者なしを確認、実hash/時刻を固定後、今回生成したpyc2だけ計67,141Bと空cache dirを整理。旧成果は削除0。起動helperに最初のimport前からsys.dont_write_bytecode=True、-Bと既存envのno-bytecode指定を使う。一般Python設定変更なし。
+
+同じv003に旧ownership/monitorを残し、fresh ownership-retry-clean-v001.jsonとmonitor-retry-clean-v001を排他新規作成する限定retryをadapterに追加。実停止6raw/旧permit/旧code742/媒体metadata不存在/旧owner終了/同manifest・grant・3device・fresh leaseを束縛する。Core/残6path、正式QC/全372字幕/元時計/旧base4と並列制御trueは不変。新QC-only/trust/default/閾値緩和/旧file上書きなし。コード901346a3、型検査exit0、[独立再読](reports/digest-caption-216px-reflow-20261003/clean-entry-retry-review.md)で7ref/旧7code/現残6不変一致。
+
+状態作業中、最終確認2026-10-03 15:46 UTC、次担当このMac実装者。新retry permit/媒体はこの記録時点未開始。19拒否・実資格・fresh code/入力/device/資源を新owner維持の下で通過後、同じ正式入口で再描画/合成/全372完成QCへ進む。初回と重複時間を分け、humanQualitypending/outlineChoicenullと別のpush本人回答待ちを維持する。同じ通常復旧の再許可待ちは挟まない。
+
 ## 最新現在地 — 2026-10-03 15:27 UTC（全尺合成は保存、比較検査の並列制御を限定復旧）
 
 v002正式製造は13:57:58〜15:01:37 UTC、1時間3分39.837秒で失敗終了。全372字幕画像/668行は生成・画像検査済み、41分59.334秒。全27,691frameの合成132単位は13分47.923秒で完了し、598,323,447B/SHA9eea47beのMP4をSSDへ保存・再読。元9区間/3,613atom/40,705,770sampleを保持。動画の寸法・音声・frame数の検査処理はexit0だが、最初の完成字幕比較でimage変換のResource temporarily unavailableが生じ、encoder187/decoder183・encodedFrames0。技術最終QC不合格、正式result/atomic publishなし。画像だけで実背景/全尺見心地/短表示読了性/音声聴取を合格にしない。
