@@ -1,10 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-03（JST） / revision：handover-index-20261003-v059
+更新日：2026-10-03（JST） / revision：handover-index-20261003-v060
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-**最新更新：本人07:06:03 UTC「いいよ」の一件承認に基づく新max100GB APFS保存領域の小IO/再読/保護/再mount試験は合格。指定6pathの実装候補を保存した。正式描画前の07:44 UTC確認で、元候補margin0と正式trust0.04の差により32/243字幕が推定画面幅を超え、動画生成前に停止。元owner/9実traces/243cue/390行/3613atom/27691frame/40705770sampleは一致、判断再実行0。**
+**最新更新：本人09:00:50 UTCの2枚限定承認に基づき、09:14 UTCに横余白だけ.04→0の未採用見本を既存rendererで描画。144px/縁8/光彩4/本文/改行/位置不変、2枚のPNG alpha/safeArea/行位置/原寸表示を確認。無地背景なので動画の読みやすさ・全尺品質・本人採用は未評価。動画/候補trust適用0。**
+
+[2枚と今回報告](reports/digest-horizontal-margin-preview-20261003/README.md)・[証拠](reports/digest-horizontal-margin-preview-20261003/evidence.json)・[session log](work-logs/2026-10/2026-10-03T0902_Codex_ID9-two-margin-preview_d91f9c0f.md)。Library保存はこのMac向け接続に必要機能がなく保存前に失敗、ID未発行。親monaが2枚を届けた後「文字サイズと改行はそのままで、この左右の配置で今回一本を進めてよいか」を本人へ一問確認。実装者は人間待ち、自renderer残存0、APFS再mountなし。
+
+以下は前工程の記録。
+
+**前工程：本人07:06:03 UTC「いいよ」の一件承認に基づく新max100GB APFS保存領域の小IO/再読/保護/再mount試験は合格。指定6pathの実装候補を保存した。正式描画前の07:44 UTC確認で、元候補margin0と正式trust0.04の差により32/243字幕が推定画面幅を超え、動画生成前に停止。元owner/9実traces/243cue/390行/3613atom/27691frame/40705770sampleは一致、判断再実行0。**
 
 [現在報告](reports/digest-formal-apfs-preflight-20261003/README.md)・[許可転記](reports/digest-formal-apfs-preflight-20261003/authorization-record.json)・[session log](work-logs/2026-10/2026-10-03T0707_Codex_APFS_ID9-formal-preflight_f2ef2214.md)。正式一本/技術動画QC/glyph/実視聴は未実施。次担当mona/相談役が候補だけ横余白0とする具体差分、preview/必要な本人承認を判断。一般ROOT/trust/default変更/検査免除/旧成果再判断なし。自probe整理済み、07:47 UTC新guestのみ通常detach、image保持、SSD全体ejectなし。再接続で自動再開しない。
 
