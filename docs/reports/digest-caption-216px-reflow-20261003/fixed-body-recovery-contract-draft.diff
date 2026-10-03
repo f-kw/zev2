@@ -1,0 +1,238 @@
+# REVIEW ONLY. Not applied or executed. NOT an implementation permit.
+# The explicit DRAFT_ONLY throws below intentionally prevent this draft from
+# becoming an executable recovery route without the real fixed-proof qualifier.
+# No unknown SHA/receipt is represented as accepted. Hunk line numbers are current
+# source anchors; context, not these approximate numbers, defines the proposal.
+
+--- a/runner/src/digest-formal-handoff-v001.ts
++++ b/runner/src/digest-formal-handoff-v001.ts
+@@ storage context mint / fixed BODY_OUT qualification
++// Fixed v004 only, with a fresh lease/permit and preserved V2/V3 failures.
++// Store a deeply frozen recovery view in a private WeakMap keyed by the existing
++// qualified context. Do not parse an arbitrary user-supplied recovery descriptor.
++const savedBodyRecoveries = new WeakMap<object, Json>();
++// Proposed view fields, all derived from actually verified fixed V2 bytes:
++// schemaVersion, fixedPlanId, failedRoot, oldImplementationSha,
++// commonPlanCanonicalSha256, expectedFrameCount, originalBaseMediaRef,
++// completedMediaRef, originalRecords, layoutInspection,
++// records[{savedRecord,pngRef,repeatRef,lineMaskRefs[{lineIndex,...fileRef}]}],
++// proofRef (failure/source/job/style/trust/font/runtime/draw-request/timing refs).
++// context.savedBodyRecovery exposes only an immutable fixed-plan marker;
++// the full view is returned only by the qualified reader below.
++
++export async function readQualifiedDigestSavedBodyRecoveryV001(context: unknown): Promise<Json> {
++  await assertQualifiedDigestStorageContextV001(context);
++  // Actual implementation must re-read the exact frozen evidence refs, old code,
++  // ownership termination, old and current grant/manifest/storage, fresh v004
++  // lease, physical device/UUID, all masks/repeats and original successful draw
++  // requests. It must reject missing/extra fields and every unequal binding.
++  // It must retain current qualified context/source/font/code protections.
++  throw new Error('DRAFT_ONLY_FIXED_RECOVERY_QUALIFIER_NOT_IMPLEMENTED');
++}
++
++export async function verifyQualifiedDigestSavedBodyRecoveryPublicationV001(
++  context: unknown, receipt: Json, phase: 'before-commit' | 'after-commit',
++): Promise<void> {
++  await assertQualifiedDigestStorageContextV001(context);
++  // Actual implementation must require the exact 373 old->new mappings from the
++  // qualified view and the owned new reservation/work topology. Before commit,
++  // re-read source+staging refs; after commit re-read source+published refs.
++  // Match hashes/sizes and inode/device/realpath stability. No arbitrary roots.
++  throw new Error('DRAFT_ONLY_FIXED_COPY_PUBLICATION_QUALIFIER_NOT_IMPLEMENTED');
++}
++
++// Existing storage() registers this fixed view only after real qualification;
++// exposes fixed marker on the frozen context; accepts only v004 generated root.
++// Existing current() rechecks permit/code/lease/storage throughout inspection.
++// Existing exactreverse gates: Core adds only v004 literal to current baseline;
++// caller reverses only import/type/dispatch/copy-check/result additions;
++// renderer reverses only copyFile import and this one wrapper block.
++// low-memory compositor / supervisor / source-package remain byte-identical.
++// Never relax i>=3 wholesale. Keep old7b6e and current7 bindings separately.
+
+--- a/evals/clip_composition/adopted_media_manufacturing_v001.mts
++++ b/evals/clip_composition/adopted_media_manufacturing_v001.mts
+@@ -62,3 +62,4 @@
+   if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
+-    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v003')
++    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v003'
++    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v004')
+     || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
+
+--- a/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts
++++ b/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts
+@@ renderer imports
+   executeValidatedPresentationDrawAndQcV001,
++  executeQualifiedDigestSavedBodyQcV001,
+@@ DigestRendererStorageContextV001
++  savedBodyRecovery?: Readonly<{
++    schemaVersion: 'digest-specific-saved-body-recovery-v001';
++    fixedPlanId: 'digest-formal-handoff-20261003-v001';
++  }>;
+@@ executePresentationInstructionRendererJobV002 after existing admission/line-layout/plan
+-  const executeDraw = capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;
++  const recovering = storageContext?.savedBodyRecovery !== undefined;
++  const executeDraw = capabilities.executeDraw ?? (recovering
++    ? executeQualifiedDigestSavedBodyQcV001 : executeValidatedPresentationDrawAndQcV001);
+@@ existing draw success before existing commit
++  if (recovering) {
++    const {verifyQualifiedDigestSavedBodyRecoveryPublicationV001} = await import(
++      pathToFileURL(path.resolve(MODULE_DIRECTORY, '../../runner/src/digest-formal-handoff-v001.ts')).href
++    );
++    await verifyQualifiedDigestSavedBodyRecoveryPublicationV001(storageContext,
++      draw.recoveryPublication, 'before-commit');
++  }
+   const publication = await (capabilities.commitDraw ?? commitValidatedPresentationArtifactsV002)({
+     stagingDirectory: draw.stagingDirectory,
+     outputDirectory: draw.outputDirectory,
+     reservation: draw.reservation,
+   });
++  if (recovering) {
++    const {verifyQualifiedDigestSavedBodyRecoveryPublicationV001} = await import(
++      pathToFileURL(path.resolve(MODULE_DIRECTORY, '../../runner/src/digest-formal-handoff-v001.ts')).href
++    );
++    await verifyQualifiedDigestSavedBodyRecoveryPublicationV001(storageContext,
++      draw.recoveryPublication, 'after-commit');
++  }
+@@ existing completed result (after publication)
+       publication,
++      ...(recovering ? {savedBodyRecovery: draw.recoveryPublication} : {}),
+
+--- a/evals/clip_composition/render_presentation_v002.mjs
++++ b/evals/clip_composition/render_presentation_v002.mjs
+@@ node:fs/promises imports
+-import {access, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, writeFile} from 'node:fs/promises';
++import {access, copyFile, chmod, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, writeFile} from 'node:fs/promises';
+@@ node:url imports
+-import {fileURLToPath} from 'node:url';
++import {fileURLToPath, pathToFileURL} from 'node:url';
+@@ before private finishPresentationDrawAndQcV001; existing executeDraw/resume/finish unmodified
++/** One fixed Digest failed-QC body only; never an arbitrary Normal resume API. */
++export async function executeQualifiedDigestSavedBodyQcV001({
++  outputDirectory, plan, presetRegistry, baseMediaPath, baseMediaInspection,
++  expectedFrameCount, evaluateQc, overlayAdapter, toolPaths, processObserver,
++  serializePngAndFilters, counterfactualQcMethod, storageContext,
++}) {
++  // Review artifact only. Remove only after the real qualifier and technical
++  // decision have been implemented, reviewed, rejected-input tested and bound.
++  throw new Error('DRAFT_ONLY_NEW_NORMAL_RECOVERY_ENTRY_NOT_AUTHORIZED_OR_IMPLEMENTED');
++
++  await qualifyDigestStorageContextV001(storageContext);
++  const {readQualifiedDigestSavedBodyRecoveryV001} = await import(
++    pathToFileURL(path.resolve(MODULE_DIRECTORY,
++      '../../runner/src/digest-formal-handoff-v001.ts')).href
++  );
++  const saved = await readQualifiedDigestSavedBodyRecoveryV001(storageContext);
++  const requireFixed = (condition, reason) => {if (!condition) throw new TypeError(reason);};
++  requireFixed(storageContext.outputRoot ===
++    'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v004'
++    && outputDirectory === path.join(storageContext.generatedRoot, 'render'), 'fixed new output differs');
++  requireFixed(serializePngAndFilters === true && counterfactualQcMethod ===
++    PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002, 'full existing encoded QC is required');
++  requireFixed(expectedFrameCount === 27691 && expectedFrameCount === saved.expectedFrameCount
++    && sha256Canonical(plan) === saved.commonPlanCanonicalSha256
++    && plan.elements.length === 372 && saved.records.length === 372
++    && baseMediaPath === saved.originalBaseMediaRef.path, 'saved body plan or source differs');
++  requireFixed(plan.elements.every(element => !Object.hasOwn(element, 'presentationPulse')
++    && !Object.hasOwn(element, 'presentationMotion') && element.visualState.background === null
++    && element.visualState.position.preset === 'bottom-center'), 'only the saved Normal body is allowed');
++  requireFixed(saved.layoutInspection.status === 'passed'
++    && saved.layoutInspection.violations.length === 0
++    && saved.layoutInspection.items.length === 372, 'saved qualified layout differs');
++  const reservation = await acquirePresentationOutputReservationV002(outputDirectory, {storageContext});
++  const workDirectory = await mkdtemp(path.join(reservation.outputParent,
++    `.${path.basename(outputDirectory)}.presentation-renderer-v002-work-`));
++  const stagingDirectory = path.join(workDirectory, 'publish');
++  const scratchDirectory = path.join(workDirectory, 'scratch');
++  await mkdir(path.join(stagingDirectory, PRESENTATION_RENDERER_OUTPUT_NAMES.overlays), {recursive: true});
++  await mkdir(scratchDirectory);
++  await validateReservationWorkTopologyV002(reservation, workDirectory);
++  const cleanupWarnings = retainedCleanupDiagnosticsV002({reservation, workDirectory});
++  const copies = [];
++  const copyVerified = async (ref, relativePath) => {
++    const target = path.join(stagingDirectory, relativePath);
++    await qualifyDigestStorageContextV001(storageContext);
++    const before = await lstat(ref.path, {bigint: true});
++    requireFixed(before.isFile() && !before.isSymbolicLink()
++      && await realpath(ref.path) === ref.path && Number(before.size) === ref.sizeBytes
++      && await fileSha256V002(ref.path) === ref.fileSha256, 'old actual artifact differs');
++    await copyFile(ref.path, target, fsConstants.COPYFILE_EXCL);
++    await chmod(target, 0o444); // New copy only. Never chmod/hardlink the old original.
++    const after = await lstat(ref.path, {bigint: true});
++    for (const field of ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs']) {
++      requireFixed(before[field] === after[field], 'old source changed while copied');
++    }
++    requireFixed(await fileSha256V002(target) === ref.fileSha256
++      && (await lstat(target)).size === ref.sizeBytes, 'copied bytes differ');
++    copies.push({qcSource: ref, stagingPath: target,
++      publishedPath: path.join(outputDirectory, relativePath), relativePath,
++      fileSha256: ref.fileSha256, sizeBytes: ref.sizeBytes});
++  };
++  try {
++    const overlayRecords = [];
++    for (const [index, bound] of saved.records.entries()) {
++      const old = bound.savedRecord, element = plan.elements[index];
++      const props = overlayAdapter.buildProps(element, plan, presetRegistry);
++      requireFixed(canonicalJson(element) === canonicalJson(old.element)
++        && canonicalJson(props) === canonicalJson(old.props), 'exact old element or props differs');
++      requireFixed(validateOverlayDeterminismV002(bound.pngRef.fileSha256,
++        bound.repeatRef.fileSha256, element.instructionId).status === 'passed', 'old repeat differs');
++      const layout = saved.layoutInspection.items[index];
++      requireFixed(layout.instructionId === element.instructionId
++        && bound.lineMaskRefs.length === element.indexedLines.length, 'line proof coverage differs');
++      const lineAlphaBounds = [];
++      for (const [lineOrdinal, mask] of bound.lineMaskRefs.entries()) {
++        requireFixed(mask.lineIndex === element.indexedLines[lineOrdinal].lineIndex, 'line index differs');
++        const inspection = await inspectOverlayPngWithToolV001({instructionId: element.instructionId,
++          pngPath: mask.path, imageMagickPath: toolPaths.imageMagickPath, processObserver,
++          observationLabelPrefix: 'overlay-line-inspection'});
++        if (inspection.alphaBounds) lineAlphaBounds.push({lineIndex: mask.lineIndex, ...inspection.alphaBounds});
++      }
++      const relativePath = path.posix.join(PRESENTATION_RENDERER_OUTPUT_NAMES.overlays,
++        path.basename(bound.pngRef.path));
++      await copyVerified(bound.pngRef, relativePath);
++      const inspection = await inspectOverlayPngWithToolV001({instructionId: element.instructionId,
++        pngPath: bound.pngRef.path, imageMagickPath: toolPaths.imageMagickPath, processObserver,
++        observationLabelPrefix: 'overlay-final-inspection', lineRects: layout.lineRects,
++        lineAlphaBounds, appliedOverlayPropsCanonicalSha256: sha256Canonical(props),
++        overlayFile: relativePath, overlaySha256: bound.pngRef.fileSha256});
++      // Keep QC paths at the retained original actual files so atomic publication
++      // cannot invalidate the absolute paths in hashed encoded-QC evidence.
++      overlayRecords.push({element, props, fileStem: old.fileStem, pngPath: bound.pngRef.path,
++        pngSha256: bound.pngRef.fileSha256, inspection});
++    }
++    await copyVerified(saved.completedMediaRef, PRESENTATION_RENDERER_OUTPUT_NAMES.video);
++    const applicationResults = buildPresentationRenderApplicationResultsV002(overlayRecords);
++    const baseExpectedAudio = baseMediaInspection.media.audio
++      ? {present: true, ...baseMediaInspection.media.audio} : {present: false};
++    const layoutQc = evaluateQc({plan, applicationResults,
++      overlayInspections: overlayRecords.map(record => record.inspection),
++      mediaInspection: baseMediaInspection.media, expectedAudio: baseExpectedAudio,
++      canvas: plan.canvas, requireFinalVisibility: false});
++    if (layoutQc.status !== 'passed') return createPresentationRendererFailureAfterWorkV001({
++      violations: layoutQc.violations, stage: 'overlay-preflight', nested: layoutQc,
++      cleanupWarnings, scratchDirectory});
++    const workVideo = saved.completedMediaRef.path;
++    const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
++      ffprobePath: toolPaths.ffprobePath, ffmpegPath: toolPaths.ffmpegPath,
++      processObserver, observationLabelPrefix: 'output-media-inspection'});
++    if (outputMedia.video) outputMedia.video.frameCount = await inspectFrameCountWithToolV001(
++      workVideo, toolPaths.ffprobePath, 'post-render-qc', processObserver, 'output-frame-count');
++    await readQualifiedDigestSavedBodyRecoveryV001(storageContext);
++    const draw = await finishPresentationDrawAndQcV001({state: {
++      outputDirectory, reservation, workDirectory, stagingDirectory, scratchDirectory, cleanupWarnings,
++      overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio: baseExpectedAudio,
++      outputMedia, workVideo, plan, expectedFrameCount, presentationTimeline: null,
++      timelineAudio: null, baseMediaPath, serializePngAndFilters: true,
++      runCounterfactualQc: true, counterfactualQcMethod: PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
++      audioMediaPath: null, renderRange: null}, presetRegistry, overlayAdapter, toolPaths,
++      processObserver, evaluateQc, onProgress: () => {}});
++    if (draw.exitCode !== 0) return draw;
++    await readQualifiedDigestSavedBodyRecoveryV001(storageContext);
++    return {...draw, recoveryPublication: {schemaVersion: 'digest-specific-saved-body-publication-v001',
++      recoveryProofRef: saved.proofRef, oldImplementationSha: saved.oldImplementationSha,
++      currentImplementationSha: saved.currentImplementationSha,
++      oldResultsPreserved: true, originalJudgmentReruns: 0,
++      bodyPngDraws: 0, bodyComposites: 0, copies}};
++  } catch (error) {return processFailure('saved-body-qc-continuation', error, cleanupWarnings);}
++}

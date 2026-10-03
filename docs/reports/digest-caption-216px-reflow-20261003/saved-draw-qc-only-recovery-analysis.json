@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "digest-v002-saved-draw-qc-only-recovery-analysis-v001",
+  "checkedAt": "2026-10-03T16:25:56.744594+00:00",
+  "repoHead": "c57b9ebe8a806568c47737b5e3d4379870dc65b2",
+  "originImplementationSha": "7b6e039ddd9b771d9822623181b0e95ad8ad3829",
+  "scope": "V2指定root/固定workだけの読取。新媒体・probe・QC実行・repo/SSD書込・削除・移動なし。workspace報告のみ。",
+  "conclusion": "元PNG372枚/全尺動画/計画の再利用はデータ面で成立する見込み。完成finish stateをそのまま読めるcheckpointはなく、missing inspection/mediaを既存読取検査で補い、今回固定失敗だけの正式QC-only入口を追加する必要がある。既存compose限定を越えるため、本調査は実装/実行をしない。",
+  "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002",
+  "sourceWork": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf",
+  "sourceFailureEvidence": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-encoded-qc-failure-evidence.json",
+    "fileSha256": "65ffb659d1a8ef24612dc1fa7b4f89a5ec82e3151632a700e899d3aeb36b3b43",
+    "sizeBytes": 147008
+  },
+  "metadataBindings": [
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/encoded-omission-v002-l3ZK2U/logical-inputs.json",
+      "fileSha256": "818b6b7b0b675e1994d2054e0120e03992de603db49ec092a5d2be03cccae938",
+      "sizeBytes": 4726085,
+      "matchesPriorFailureBinding": true
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/encoded-omission-v002-l3ZK2U/failure.json",
+      "fileSha256": "1c6563841ad2ebc12a2d76cec38b953e21e77f818308f027b54c7cd641c5e530",
+      "sizeBytes": 6147920,
+      "matchesPriorFailureBinding": true
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/layout-input.json",
+      "fileSha256": "aa8ac204b4025e9d779977f387514de587adb805d9885d94697bc0a64b5fd8f2",
+      "sizeBytes": 1993578,
+      "matchesPriorFailureBinding": null
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/scratch/layout-output.json",
+      "fileSha256": "842075b1720a831278d87ca8f6db800cd2ac4f18a5deb283ec23effe7082d6ea",
+      "sizeBytes": 195083,
+      "matchesPriorFailureBinding": null
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/renderer-job.json",
+      "fileSha256": "1c62d4d80b7c5fbb4d6b3463de714d2491e8cd3dda2464f82138f46cadad2366",
+      "sizeBytes": 10618,
+      "matchesPriorFailureBinding": true
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/line-layout.json",
+      "fileSha256": "4bc300a7d0f1cf12ac21676101a235bcbb6f35d29b3f681b6238d8428f197254",
+      "sizeBytes": 443020,
+      "matchesPriorFailureBinding": true
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/admission-receipt.json",
+      "fileSha256": "8995c5d34d8dac44faf5e2ec7325e72bb94a22547966252e1833ad39f5e4d612",
+      "sizeBytes": 15911,
+      "matchesPriorFailureBinding": true
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/low-memory-composite.json",
+      "fileSha256": "2bad5459022ccaaf671a523b2c8d07d4ff747b082230ee00c91b7b8f321286f3",
+      "sizeBytes": 535581,
+      "matchesPriorFailureBinding": true
+    }
+  ],
+  "verifiedNow": {
+    "planCanonicalSha256": "42d3054bcd91fe290491661122f750d385dea84b9f837e1f3b8cd180ea6edea3",
+    "originPlanCanonicalSha256": "42d3054bcd91fe290491661122f750d385dea84b9f837e1f3b8cd180ea6edea3",
+    "planReconstructionHashExact": true,
+    "planReconstructionSources": [
+      "renderer-job.executionInputs.format",
+      "scratch/layout-input.canvas",
+      "candidate-style/trust.layoutRules",
+      "logical-inputs.records[].element"
+    ],
+    "recordCount": 372,
+    "lineCount": 668,
+    "layoutInputPropsAllEqualSavedRecords": true,
+    "layoutOutputStatus": "passed",
+    "layoutOutputViolations": 0,
+    "layoutOutputItems": 372,
+    "elementPropsInspectionIdsAllEqual": true,
+    "savedPropsCanonicalShaAllExact": true,
+    "overlayBindingsOrderPathShaExact": true,
+    "overlayStatsAllSizeRegularNoSymlink": true,
+    "repeatImages": 372,
+    "lineMasks": 668,
+    "calibrationImages": 0,
+    "normalOnly": true,
+    "presentationTimeline": null,
+    "timelineAudio": null,
+    "sourceSerializePngAndFilters": false
+  },
+  "physicalHashVerificationStatus": {
+    "videoBindingFromPreviouslyVerifiedFailureEvidence": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v002/.render.presentation-renderer-v002-work-ZwvMgf/publish/presentation-rendered-v002.mp4",
+      "fileSha256": "9eea47be93c94cbe7c8b307642d0eb943fc2985445e607af65ff9133ab12ac56",
+      "sizeBytes": 598323447
+    },
+    "videoCurrentStatBytes": 598323447,
+    "videoShaRecomputedNow": false,
+    "overlayShaRecomputedNow": false,
+    "overlayBindingsOrigin": "旧failure evidenceは録画scriptで元372PNGとvideoの実SHAを検証済み。今回はその実bindingを参照し、372件のpath/order/SHA対応と現regular-file/sizeを確認。原本の全byte再hashはしていない。",
+    "smallJsonShaRecomputedNow": true,
+    "newUnboundMetadata": "layout-input/outputは旧failure bundleに未束縛。現原本の実SHA/sizeを今回計算したが旧時点のSHAを捏造していない。",
+    "requiredAtOfficialUse": "正式reuse資格確認で元372PNG/videoの実SHAを固定bindingと照合し、前後device/inode/size/mtime/realpath/非symlink/変更なしを検査。現statだけで正式再利用合格にしない。"
+  },
+  "reconstructionTable": [
+    {
+      "field": "plan",
+      "available": "元records[].element＋job.format＋layout-input.canvas＋trust.layoutRulesで元計画SHA42d3054b...に実一致。",
+      "exportSource": "run_presentation_instruction_renderer_job_v002.ts buildPresentationInstructionCommonCorePlanV001（246–321）。正式復帰時は元instruction/line-layout/style/trustから公開builderでも再構築し、同SHA/全elementに一致させる。"
+    },
+    {
+      "field": "overlayRecords",
+      "available": "保存された372element/props/fileStem/pngPath/pngSha256/inspection(alphaBounds,propsSHA,overlaySHA,ID)。props216px/左右108/原本文・原clockは変更しない。",
+      "missing": "元alphaMax/lineCount/lineRects/lineAlphaBoundsはphysicalSnapshotから脱落。groupIndex/physicalRecordsの一時情報はNormalでは最終APIに不要。",
+      "restore": "lineCount/lineRectsはlayout-outputのID順itemsから採る。alphaMax/full alphaBoundsは固定元PNGをinspectOverlayPngWithToolV001で再読。lineAlphaBoundsは保存668行maskを同inspect exportで再読。",
+      "caveat": "行mask/repeatは旧failure bundleで個別SHA束縛されていない。過去command/operation成功記録と新検査の出所を明示し、現在の実bindingを新復帰記録へ保存する。元時点の完全inspectionを読んだと偽らない。全体PNGの元SHAと新観測alphaBoundsの一致も確認。"
+    },
+    {
+      "field": "applicationResults",
+      "available": "元recordsのelement/props/path/hashがあるので決定的に再構築可能。",
+      "exportSource": "render_presentation_v002.mjs buildPresentationRenderApplicationResultsV002（1303）/buildPresentationRenderApplicationResults（1256）。再描画不要。"
+    },
+    {
+      "field": "layout",
+      "available": "scratch/layout-input/output実保存。input372props全等値。output passed/0/372itemsにlineRects/lineCount/wrapper。正式line-layout.jsonも保存。",
+      "missing": "full original lineAlphaBoundsのstdout値は未保存。layout-outputはglyph alpha測定の代わりではない。"
+    },
+    {
+      "field": "baseExpectedAudio/completedExpectedAudio",
+      "available": "Normal、timelineAudio=null、分離audioなし。expectedAudioは元baseの検査結果から作る。旧base manifestにAAC/44100Hz/packetPayloadSHA e33d4f...が保存される。",
+      "missing": "元runtime media.audio objectの全文は保存されていない。admission receiptはbindingのみ。",
+      "restore": "presentation_renderer_qc_v002.mjs inspectRenderedMediaWithToolsV001（933）で元baseを再読し、baseExpectedAudio={present:true,...actual.media.audio}、completedExpectedAudio=同値を新実検査として保存。元manifest時計/packet hashへ照合。"
+    },
+    {
+      "field": "outputMedia",
+      "available": "low-memory-composite completed/原598,323,447BのvideoSHA・27691frame全被覆。出力ffprobe/audio-payload/frame-countはexit0の実process記録。",
+      "missing": "process observerはstdoutをdiskへ保存しないので当時outputMediaの数値objectはない。exit0だけで全format合格としない。",
+      "restore": "inspectRenderedMediaWithToolsV001＋render_presentation_v002.mjs inspectFrameCountWithToolV001（566）で保存動画を再読。再合成不要。",
+      "exportSource": "元draw2580–2588と同じ検査関数を使い、返却objectを新実bindingに保存。"
+    },
+    {
+      "field": "QC",
+      "available": "旧encoded-omission-v2は1sample開始、completedFrame0、sampleにencoded/omitted/completed合格値なし。",
+      "missing": "before-native-checkpoint.json/post-render-qc-failure.json/completed-frame-qc-failure.jsonは不在。元full finish state/saved formal resume checkpointはない。",
+      "restore": "presentation_encoded_omission_qc_v002.mjs inspectPresentationEncodedOmissionQcV002（321）を新QC directoryへ正式実行し、全372sample/inspection/actualSHAを新保存。旧1sampleを合格へ流用しない。"
+    },
+    {
+      "field": "final gate",
+      "available": "finishPresentationDrawAndQcV001（2739）→既存evaluatePresentationRendererQcWithProfileV001/profile v002で全被覆/形式/音声/可視性検査。",
+      "missing": "finishはprivate。既存resumeValidatedPresentationDrawAndQcV001はorchestration+combined QC+passed exactReplay専用で今回encodedに合わない（2655–2714）。",
+      "restore": "新specific opaque qualificationを受けるQC-only wrapperから既存finish/evaluatorを呼ぶ最小入口が必要。一般checkpoint受理や検査免除は加えない。"
+    }
+  ],
+  "codeOriginComparison": [
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "originFileSha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "currentFileSha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "originFileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "currentFileSha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "originFileSha256": "a7268c9b7e3e67907239f47367a49b338a977714114ded833586f938b1c01f0f",
+      "currentFileSha256": "a7268c9b7e3e67907239f47367a49b338a977714114ded833586f938b1c01f0f",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_encoded_omission_qc_v002.mjs",
+      "originFileSha256": "61708daed8de8bd6426bdda619a2797e8ef0021c90ded9b7a3742049ec238f7d",
+      "currentFileSha256": "61708daed8de8bd6426bdda619a2797e8ef0021c90ded9b7a3742049ec238f7d",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_process_observation_v001.mjs",
+      "originFileSha256": "7e27a80f17eab80af008c8fc225c0c61f363624eb6b7e3f251c5c9854cad898c",
+      "currentFileSha256": "7e27a80f17eab80af008c8fc225c0c61f363624eb6b7e3f251c5c9854cad898c",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_line_layout_rule_v002.mjs",
+      "originFileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6",
+      "currentFileSha256": "7b9926fe8391b324f002276a1ea7c0dfb83e9cb848d8ab85393ab61d91d08af6",
+      "originEqualsCurrent": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "originFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+      "currentFileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e",
+      "originEqualsCurrent": true
+    }
+  ],
+  "formalRecoveryAuthorityRequired": {
+    "type": "この固定V2失敗だけのopaque/private資格＋current implementation SHA gate。汎用resume/trust/default/fallbackではない。",
+    "fixedInputs": [
+      "旧failure evidence実SHA65ffb659.../147008B",
+      "原code7b6e039ddd9b771d9822623181b0e95ad8ad3829",
+      "元plan SHA42d3054b...",
+      "元manifest784775...",
+      "原372PNG/video bindings・旧admission/layout/source/owner/permit束"
+    ],
+    "freshBindings": "追加実装のcurrent SHA/変更path実SHA、明示QC-only許可、exclusive新owner/PGID/出力root/コピー対応/新媒体検査/QC方法と実execution control変更を実bytesで保存。架空receipt/hashを使わない。",
+    "scope": "許されるのは原本文/props/font/時計/9区間/372PNG/full videoを維持し、保存物の読取補完、encoded比較QCと同じ最終gate、専用新出力への保存再読。新STT/描画/全尺合成/別計画へのfallbackなし。",
+    "minimumCodeChanges": "資格reader/復帰wrapper/正式呼出adapter・監督の限定分岐と成果publication束縛が必要。具体pathはrenderer_contextの入口調査と統合して親が判断。本調査から新contractを実装していない。"
+  },
+  "copyAndPublicationProtection": [
+    "V2元publish/scratch/owner/失敗receiptはKEEP。元stagingをrenameして公開するとV2原本を移すため不可。旧lockを新ownerに書換えたり、旧resultを成功に上書きしない。",
+    "正式新ownerの専用root/stagingへ元MP4と372PNGを排他copy。copy先hash/size=原bindingを保存再読し、APFS実device/realpath/非symlinkを確認、copy先をchmod444。原本のpermissionは変更しない。hardlink+chmodは原inodeにも作用するので原本保護のため避ける。",
+    "新recordのpngPath/completedMediaPathだけをcopy先へ写す場合、元records/plan/propsのoriginSHAとpath projection対応を別に保存。元logical-inputsの実SHAを新path内容へ流用しない。新QC context/input/output refsとSHAはすべて実生成値。",
+    "全QC passedと既存final gate通過後、新owned staging→新renderのpublicationを既存安全renameで行う。新完成video SHAは元videoSHAと同一として束縛し、最終resultにoriginal rendering implementationとcurrent QC implementationを別々に記録。",
+    "失敗時は新QCと元V2の証拠両方を保持し、製造済みbodyを条件なく再描画へ戻さない。"
+  ],
+  "rejectChecksNeeded": [
+    "fake/clone capability",
+    "wrong failure/root/plan/manifest/codeSHA",
+    "372欠落/追加/順序変更/props/text/時計/PNG/videoSHA変更",
+    "元oldreceiptをcurrentcode製造成功と誤表示",
+    "old原本write/rename/permission change",
+    "unsafe copy/出力既存/owner/PID不一致",
+    "all372 QC未完・方法変更・検査免除・再合成呼出"
+  ],
+  "completionStatus": "調査のみ完了。正式QC-only復帰入口/新許可/currentSHA/copy保存検査は未実装・未実行。技術QCは旧failed、実視聴品質は未確認。"
+}

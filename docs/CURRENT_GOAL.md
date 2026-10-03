@@ -1,6 +1,22 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
-更新日：2026-10-03（JST）
+更新日：2026-10-04（JST）
+
+## 最新現在地 — 2026-10-03 16:30 UTC（保存済み動画から最終検査へ戻る限定案を相談役へ）
+
+SSDへの途中物・全字幕・全尺合成の保存と再読は成立した。V2の372PNG/668行mask/15:23.033 MP4はKEEP、技術最終QCは未合格。全尺MP4は598,323,447B/SHA9eea47be。16時台の再読で404原本参照・372repeat・旧7code/現7code・同manifest/grant/3deviceが一致、原本は変更していない。実全尺視聴・音声聴取・短表示の読了品質は未確認、humanQualitypending/outlineChoicenullを維持する。[原本再照合](reports/digest-caption-216px-reflow-20261003/qc-reuse-prerequisites-read.json)。
+
+V3の新ownerによる19拒否/実原本資格は15:50:13 UTC passed。15:50:14.212〜15:51:51.304 UTCの97.092秒でlayout CLIの通信起動エラーに止まった。CLEAN/監視返信は解消、PNG/合成/完成QC0。144byteのIPC名が104byte幅で切詰められ、旧実socket body-cに衝突することをsource/statから確認。own controller38699/PGID39127はmonitorと実psで残存0。[43raw実失敗](reports/digest-caption-216px-reflow-20261003/layout-ipc-failure-evidence.json)。同じSSD tempを保つcwd=今回root/TMPDIR=tempの小probeでは29byte socketの作成/実device確認/own socket整理が成功、既存372件layoutを実CLIで0.263秒/exit0/passed、新媒体0。[小probe](reports/digest-caption-216px-reflow-20261003/layout-relative-ipc-probe-evidence.json)。製品コードへのSocket修正は未適用であり、probeを全工程保証にしない。
+
+最新の親指示に従い、再描画/再合成を当然の前提とせず、保存済みPNG/MP4から比較検査だけを回復する最小経路を調査した。計画canonicalSHA42d3054bが元失敗contextに一致、372primary/372repeat/668mask計1412旧描画request+timingのprops/path/exit0由来を確認。失敗snapshotが省いたalphaMax/行alpha/media/audio測定値は保存物を既存inspectorで再検査すれば補える。[データ調査](reports/digest-caption-216px-reflow-20261003/saved-draw-qc-only-recovery-analysis.md)。再生成が不可避という根拠は見つかっていない。
+
+ただし現行Normalには正式QC-only再開入口がない。既存before-nativeはorchestration/combined QC/合格replay専用で、今回失敗をその形へ偽装できない。推奨差分はadapter/Core/caller/rendererの4pathで、固定失敗・同許可・旧新codeのopaque回復資格、fresh固定child、保存物の実再検査、373原本→新確定byte対応、既存finish→encoded-v2全372→最終gate→atomic確定の接続のみ。QC method/閾値/font/時計/一般ROOT/trust/default/安全条件不変。旧原本をQC入力に保持し、copy先を新成果としてhash対応で束縛する。DECISIONのcompose限定を越える保存済みNormal状態の正式復帰境界について、具体案を親へ返す。[限定変更案](reports/digest-caption-216px-reflow-20261003/qc-reuse-next-step.md)。実装未適用/新permitなし/新描画合成なし。ファイル数や同一本の製造許可を新たな本人待ちにする判断ではない。
+
+制作負担はV2全体1時間3分39.837秒、字幕＋画像検査41分59.334秒、合成13分47.923秒。再利用で約55分47秒の重複を避けられる可能性があるが、比較QCの成功所要時間は未計測。初回SSD/設定準備、元素材検査約27分、ベース生成QC約11分、復旧を通常一本の処理へ混ぜず、人間active時間は未計測とする。
+
+状態：相談役待ち。最終確認：2026-10-03 16:30 UTC。次担当：親のmona/相談役（この特定Normal復帰入口の限定技術判断）、その判断後にMac実装者。本人の既存製造承認は維持。旧V2/V3・元素材・base4・全PNG/repeat/mask/失敗/監視/imageはKEEP。新小socketだけ整理、旧socket削除0、旧成果削除0、own製造残存0。local実装SHA c57b9ebe、今回新実装変更0。remote mainは16時台読取becf6f69、Codex2はread_threadでnotLoaded/最終turncompleted03:53（全runtime idleの証明にしない）。GitHub pushは既存の本人回答待ち、要求1/実行0/拒否後再試行0/代行0。監視の成功をメイン会話モデルの正常稼働の証明にしない。
+
+非適用の[具体差分draft](reports/digest-caption-216px-reflow-20261003/fixed-body-recovery-contract-draft.diff)と[境界調査](reports/digest-caption-216px-reflow-20261003/fixed-body-recovery-contract-draft.md)も固定した。実SHA/資格の未実装部をDRAFT_ONLY throwで塞ぎ、実行可能な承認やreceiptとはしていない。新importはabsolute .ts file URLに統合補正し、既知の相対import停止を再導入しない。新入口判断のための資料であり、検査免除や製品実装済みの証明ではない。
 
 ## 最新現在地 — 2026-10-03 15:46 UTC（媒体前の起動キャッシュ停止を修正、同じ全尺を続行）
 

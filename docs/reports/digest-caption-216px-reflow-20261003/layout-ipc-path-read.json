@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "digest-216-layout-ipc-path-readonly-analysis-v001",
+  "readAt": "2026-10-03T16:07:45.270643+00:00",
+  "status": "limited-caller-connection-fix-plausible-no-probe-executed",
+  "headAtRead": "c57b9ebe8a806568c47737b5e3d4379870dc65b2",
+  "gitStatusAtRead": [],
+  "failure": {
+    "summaryExit": 1,
+    "summaryStage": "body",
+    "endedAtUtc": "2026-10-03T15:51:51.304444+00:00",
+    "elapsedSeconds": 97.09236192703247,
+    "layoutChildMilliseconds": 60.233416999995825,
+    "layoutChildExit": 1,
+    "message": "layout inspector produced no result",
+    "childListenError": "EADDRINUSE",
+    "requestedSocketPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/temp/tsx-501/40094.pipe",
+    "requestedSocketUtf8Bytes": 144,
+    "layoutInputOverlays": 372,
+    "layoutOutputExists": false,
+    "oldAdmissionAndLineLayoutExists": [
+      true,
+      true
+    ]
+  },
+  "exactTruncatedPrefixLstat": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-c",
+    "prefixBytes": 104,
+    "modeOct": "0o140755",
+    "socket": true,
+    "symlink": false,
+    "inode": 163,
+    "device": 16777243,
+    "bytes": 0,
+    "mtimeNs": 1791035973803987098,
+    "mtimeUtc": "2026-10-03T13:59:33.803987+00:00",
+    "prefix103Exists": false,
+    "ownership": "not established by lstat; parent separately verifying own residual socket/holders before any cleanup",
+    "actions": "lstat only; no unlink/listen/connect/probe/lsof"
+  },
+  "pathCause": {
+    "localDarwinSunPathCapacity": 104,
+    "localNodeVersion": "20.19.6",
+    "localUvVersion": "1.46.0",
+    "libuvLegacyBindBehavior": "uv_pipe_bind delegates bind2 flags0; long path namelen is cut to sun_path sizeof before bind. Original full pipe_fname is retained for later unlink.",
+    "observedPrefixCollision": "all descendant body-continuation/PID suffixes occur after 104th byte; same prefix body-c was present as socket, explaining collision plausibly",
+    "qualification": "source+length+observed actual socket support the cause, but exact creator/process ownership and successful relative IPC are not independently executed"
+  },
+  "samePhysicalTempProposal": {
+    "relativeTmpdir": "temp",
+    "newLayoutChildCwd": "qualified storageContext.generatedRoot",
+    "physicalTempUnchanged": "path.resolve(generatedRoot, temp) === storageContext.tempDirectory",
+    "relativeIpcExample": "temp/tsx-501/40094.pipe",
+    "relativeIpcUtf8Bytes": 23,
+    "nodeOsTmpdirBehavior": "Node20.19.6 tmpdir reads TMPDIR first and returns value without path.resolve, so temp remains relative",
+    "tsxBehavior": "installed temporary-directory module joins os.tmpdir and tsx-UID; get-pipe-path joins PID.pipe; child inherited cwd maps both server/client/cache/cleanup to same qualified SSD directory",
+    "otherChildren": "retain absolute TMPDIR/TMP/TEMP/MAGICK_TEMPORARY_PATH and existing cwd"
+  },
+  "minimumChanges": [
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "location": "existing qualified Digest processObserver wrapper around lines670-682",
+      "change": "only label layout-inspection dispatch, require command===job.runtimeBindings.tsx.path, absolute exact inspector path, args length3, absolute same-scratch layout-input/output paths under generatedRoot; after existing opaque qualify set cwd=generatedRoot and final TMPDIR=temp; preserve NODE_PATH and all other options/env/temp variables; after-run qualify remains",
+      "whyHere": "renderer request options env is currently overwritten by wrapper final TMPDIR=storageContext.tempDirectory; renderer-only change cannot work",
+      "types": "wrapper options currently declares only env; add cwd?:string/observationLabel?:string for scoped branch access",
+      "protect": "realpath generatedRoot/tempDirectory and same physical temp equality; input/output stay absolute and qualified paths; no arbitrary cwd/tmp option or callback"
+    },
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "location": "caller exact-reversal/current implementation qualification + next retry failure binding",
+      "change": "record this source change and fresh actual caller hash in current7 implementation bindings; strict old caller reversal currently permits only earlier2line fileURL fix, so explicitly qualify the new exact wrapper diff too; preserve othercode hashes/input/grant/storage/base and retain current v003 failure evidence",
+      "whyHere": "without exact qualification update valid new caller is rejected before media; current v003 contains metadata/lock/work so old fresh-entry gates reject automatic reexecution"
+    }
+  ],
+  "noOtherRuntimeChangesNeededByRead": {
+    "layoutCli": true,
+    "renderer": true,
+    "genericProcessObserver": true,
+    "commonRoot": true,
+    "genericTrustDefault": true,
+    "fontCodeClockPropsAndLayoutQc": true,
+    "meaning": "no changes to those paths required by source reading; this is not a tested end-to-end result"
+  },
+  "cwdDependencies": {
+    "cliIO": "input/output are explicit absolute command args; no process.chdir or process.cwd calls in layout CLI",
+    "moduleImports": "relative source imports resolve relative to existing code files, not cwd; existing NODE_PATH remains renderer node_modules",
+    "font": "layout uses buildExactTextModel→measureTextLine; Node has no document so estimated glyph dimensions branch; no font file is opened by cwd in this CLI. Actual Remotion font load/glyph checks remain later unchanged.",
+    "tsxTsconfig": "no tsconfig.json exists in current repo cwd ancestors or proposed generatedRoot ancestors; do not introduce different tsconfig/alias/config for this fix",
+    "scope": "props/layoutRules/safeArea supplied exact saved layout-input and existing inspector logic unchanged"
+  },
+  "guardsRetained": [
+    "opaque WeakSet storage qualification before and after child",
+    "absolute code/runtime/input/output and hash binding",
+    "current generatedRoot and exact same existing SSD temp, no symlink/newroot",
+    "all current reserve/pressure/RSS/device/image/owner checks",
+    "Normal encoded-omission-v2 full372 samples/371 survivors/all27691frames and40705770samples",
+    "no layoutResult forgery/validatedLayoutInspection shortcut/admission exemption/QC threshold change"
+  ],
+  "remainingBlockers": [
+    "new caller file source diff requires exact adapter qualification and fresh implementation binding; not limited to adapter alone",
+    "this report authorizes no newroot/retry/manufacture. Existing v003 metadata/lock/work must remain preserved; next formal retry placement/qualification is parent decision",
+    "successful relative Unix IPC behavior and no residual sidefiles not tested; parent is checking own residual socket/holders"
+  ],
+  "sources": [
+    {
+      "title": "Node20.19.6 net IPC docs",
+      "url": "https://nodejs.org/download/release/v20.19.6/docs/api/net.html#identifying-paths-for-ipc-connections",
+      "supports": "OS-dependent pathname limit and persistence after crash; docs typical103 macOS differs from this installed libuv104-byte code/lstat observation"
+    },
+    {
+      "title": "libuv1.46.0 src/unix/pipe.c",
+      "url": "https://raw.githubusercontent.com/libuv/libuv/v1.46.0/src/unix/pipe.c",
+      "supports": "legacybind truncation and full original path retained/unlinked"
+    },
+    {
+      "title": "Node20.19.6 lib/os.js",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v20.19.6/lib/os.js",
+      "supports": "Unix tmpdir getenv order and return without absolute normalization"
+    },
+    {
+      "title": "Node20.19.6 src/pipe_wrap.cc",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v20.19.6/src/pipe_wrap.cc",
+      "supports": "Node pipe binding implementation source"
+    }
+  ],
+  "actualEvidenceRefs": [
+    {
+      "role": "renderer-result",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/renderer-result.json",
+      "sha256": "98119fc198834e9d49d406f6417ce8a3082c75364a04d86c248491eb478ae41b",
+      "bytes": 1523
+    },
+    {
+      "role": "layout-child-request",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/process-observations/digest-formal-handoff-20261003-v001/0003-layout-inspection/request.json",
+      "sha256": "77f912049c606441ea8528a1b600b208f9460f07264be3554646e732ce7c581f",
+      "bytes": 906
+    },
+    {
+      "role": "layout-child-stderr",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/process-observations/digest-formal-handoff-20261003-v001/0003-layout-inspection/stderr.txt",
+      "sha256": "1277a53644c89776dc32c6f3f2615be67753ab0a177b63e91fe0649587c2dfa3",
+      "bytes": 1100
+    },
+    {
+      "role": "layout-child-timing",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/process-observations/digest-formal-handoff-20261003-v001/0003-layout-inspection/timing.json",
+      "sha256": "9726b38bb1b20eb66f08b458988d165c2f0f0eadf3d8a249d0e332b3001c6900",
+      "bytes": 285
+    },
+    {
+      "role": "worker-summary",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/monitor-retry-clean-v001/summary.json",
+      "sha256": "c9eb1167db67ae34bc41773f6151d3c238bb4bab8821bd9a7664de23aa8af450",
+      "bytes": 1526
+    },
+    {
+      "role": "layout-input",
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001/body-continuation-v003/.render.presentation-renderer-v002-work-Kuf6JP/scratch/layout-input.json",
+      "sha256": "aa8ac204b4025e9d779977f387514de587adb805d9885d94697bc0a64b5fd8f2",
+      "bytes": 1993578
+    },
+    {
+      "role": "caller-source",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "sha256": "88f6cb2f5ba3dd6292bf80a15aa7e0313aaab84c58b917224e08b3e53fae0cae",
+      "bytes": 32494
+    },
+    {
+      "role": "renderer-source",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "sha256": "58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9",
+      "bytes": 152882
+    },
+    {
+      "role": "layout-cli-source",
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "sha256": "3079a6a015c0df36c85756a301ad9b9031325259bb240b8a858bfe23f2d2794c",
+      "bytes": 5139
+    },
+    {
+      "role": "text-metrics-source",
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/telop/text-metrics.ts",
+      "sha256": "6fe78a6b478d61a169ec724e6c9336fdfcbf00cfa7ddee7cbbb5fbc19d87478a",
+      "bytes": 2144
+    },
+    {
+      "role": "tsx-temp-directory-source",
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/temporary-directory-BDDVQOvU.mjs",
+      "sha256": "918e7718e0579ae7d800c3dc9fc6c27626102198463bbb4051e40b2dbcf932b5",
+      "bytes": 151
+    },
+    {
+      "role": "tsx-pipe-path-source",
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/get-pipe-path-_tAJyU_v.mjs",
+      "sha256": "559be651995cc7188166ca09af99ea08b9b1453767e42fff203b53fa1a403217",
+      "bytes": 368
+    },
+    {
+      "role": "tsx-cli-source",
+      "path": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/cli.mjs",
+      "sha256": "5c916fa6ecad44aedbb01ca5815536d00ea07de6b73eeb9443d317326b0218d8",
+      "bytes": 120402
+    },
+    {
+      "role": "darwin-unix-socket-header",
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/un.h",
+      "sha256": "a733cb89955ef81312f4bc3a42002c6cc873e27381eb43656c7158ef9a433c24",
+      "bytes": 4671
+    },
+    {
+      "role": "node-uv-version-header",
+      "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/include/node/uv/version.h",
+      "sha256": "a1056680ae56c59df0ad43f75a20b1b993bdc05c6ddca87b656c5b20da195680",
+      "bytes": 1831
+    }
+  ],
+  "prohibitedActionsNotPerformed": [
+    "repo/Git/SSD mutation",
+    "socket creation/listen/connect/probe or cleanup",
+    "new renderer/media/QC/test execution",
+    "newroot/symlink/general trust contract creation",
+    "process stop/other task messages"
+  ]
+}
