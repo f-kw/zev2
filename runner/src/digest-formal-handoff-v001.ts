@@ -219,7 +219,7 @@ async function storage(permitPath: string, permit: Json, m: any, inputs: Json) {
       let buffer = '';
       const got = (chunk: Buffer) => {buffer += chunk.toString(); if (!buffer.includes('\n')) return;
         clearTimeout(timer); process.stdin.off('data', got); process.stdin.pause(); accept(buffer.trim());};
-      process.stdin.on('data', got);
+      process.stdin.on('data', got); process.stdin.resume();
     });
     const response = JSON.parse(reply); assert.equal(response.id, id, 'SUPERVISOR_REPLY_ID_MISMATCH');
     assert(response.sample && response.sample.guest && response.sample.host, 'SUPERVISOR_REPLY_INVALID');
@@ -1248,6 +1248,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       const result = await runDigestFormalCandidateV001(path.resolve(process.argv[3]));
       process.stdout.write(JSON.stringify({event: 'completed', result}) + '\n');
     }
-  } catch (error) {process.stderr.write(String((error as Error).stack) + '\n'); process.exitCode = 1;}
+  } catch (error) {process.stderr.write(String((error as Error).stack) + '\n'); process.exitCode = 1;} finally {process.stdin.destroy();}
   })();
 }
