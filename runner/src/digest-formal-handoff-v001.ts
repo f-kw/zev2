@@ -14,7 +14,7 @@ const exec = promisify(execFile);
 const ROOT = '/Users/kawafmm/workspace/zev2';
 const PLAN = 'digest-formal-handoff-20261003-v001';
 const OUT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
-const BODY_OUT = OUT + '/body-continuation-v002';
+const BODY_OUT = OUT + '/body-continuation-v003';
 const GUEST = '/Volumes/ZEV-Digest-20261003-01';
 const HOST = '/Volumes/KIOXIA';
 const IMAGE = HOST + '/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle';
@@ -1207,6 +1207,11 @@ const BODY_FAILURE_BINDINGS_V001: Json = Object.freeze({
     "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/renderer-import-failure-evidence.json",
     "fileSha256": "e2acdf88998d88029d91564522d3d1f56ad6ce910545f9b2d3e754942e5a6c91",
     "sizeBytes": 13907
+  },
+  "encodedQcFailureBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/encoded-qc-failure-evidence.json",
+    "fileSha256": "65ffb659d1a8ef24612dc1fa7b4f89a5ec82e3151632a700e899d3aeb36b3b43",
+    "sizeBytes": 147008
   }
 });
 for (const binding of Object.values(BODY_FAILURE_BINDINGS_V001)) Object.freeze(binding);
@@ -1228,7 +1233,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
   const proof = permit.bodyContinuation;
   assert(proof && typeof proof === 'object' && !Array.isArray(proof), 'BODY_CONTINUATION_EVIDENCE_REQUIRED');
   assert.deepEqual(Object.keys(proof).sort(), ['schemaVersion', 'ownerBinding', ...Object.keys(BODY_FAILURE_BINDINGS_V001)].sort(), 'BODY_CONTINUATION_EXACT_FIELDS');
-  assert.equal(proof.schemaVersion, 'digest-formal-body-continuation-v002');
+  assert.equal(proof.schemaVersion, 'digest-formal-body-continuation-v003');
   assert(!Object.hasOwn(permit, 'entryRetry'), 'BODY_CONTINUATION_NOT_ENTRY_RETRY');
   const oldRoot = path.join(GUEST, OUT), newRoot = path.join(GUEST, BODY_OUT);
   assert.equal(permit.status, 'verified-formal-handoff-v001');
@@ -1244,6 +1249,42 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
   const previous = observed.previousPermitBinding, evidence = observed.failureEvidenceBinding;
   assert.equal(previous.bindings.implementationSha, 'e37361ca38c9e89507ebb2d40b616cad886a5d79');
   assert.equal(previous.monitorDirectory, oldRoot + '/monitor-retry-entry-v001');
+  const qcFailure = observed.encodedQcFailureBinding;
+  const qcRoot = oldRoot + '/body-continuation-v002';
+  assert.equal(qcFailure.schemaVersion, 'digest-formal-encoded-qc-failure-evidence-v001');
+  assert.equal(qcFailure.outputRoot, qcRoot); assert.equal(qcFailure.implementationSha, '7b6e039ddd9b771d9822623181b0e95ad8ad3829');
+  assert.equal(qcFailure.technicalQc, 'failed'); assert.equal(qcFailure.serializePngAndFilters, false);
+  assert.equal(qcFailure.qcMethod, 'encoded-omission-v2'); assert.equal(qcFailure.sampleCount, 1); assert.equal(qcFailure.completedFrameCount, 0);
+  for (const [name, ref] of Object.entries(qcFailure.bindings) as [string, Json][]) {
+    safe(name); assert.equal(ref.path, qcRoot + '/' + name); await readDigestFormalEntryEvidenceBytesV001(ref);
+  }
+  await verifyDigestFormalBodyVideoV001(qcFailure.videoBinding);
+  const qcComposite = JSON.parse(await readFile(qcRoot + '/low-memory-composite.json', 'utf8'));
+  assert.equal(qcComposite.status, 'completed'); assert.equal(qcComposite.scope.frameCount, 27691);
+  assert.equal(qcComposite.output.path, qcFailure.videoBinding.path); assert.equal(qcComposite.output.fileSha256, qcFailure.videoBinding.fileSha256);
+  assert.equal(qcComposite.output.bytes, qcFailure.videoBinding.sizeBytes);
+  assert.equal(qcFailure.overlayBindings.length, 372);
+  for (const ref of qcFailure.overlayBindings as Json[]) {
+    assert(ref.path.startsWith(qcRoot + '/.render.presentation-renderer-v002-work-ZwvMgf/publish/overlays/'));
+    await readDigestFormalEntryEvidenceBytesV001(ref);
+  }
+  const qcPermit = JSON.parse((await readDigestFormalEntryEvidenceBytesV001(qcFailure.previousPermitBinding)).toString());
+  assert.equal(qcPermit.bindings.implementationSha, qcFailure.implementationSha);
+  assert.equal(qcPermit.monitorDirectory, qcRoot + '/monitor');
+  for (const key of ['planId', 'logicalPrefix', 'planManifest', 'approvalRecord']) assert.deepEqual(qcPermit.bindings[key], previous.bindings[key], 'BODY_QC_FAILURE_GRANT_CHANGED');
+  assert.deepEqual(qcPermit.storage, previous.storage);
+  assert.deepEqual(qcFailure.summary.command, qcPermit.command); assert.deepEqual(qcFailure.owned.command, qcPermit.command);
+  assert.deepEqual(qcFailure.owned.bindings, qcPermit.bindings); assert.equal(qcFailure.owned.group, 77704);
+  assert.equal(qcFailure.owned.parentPid, qcFailure.owned.group); assert.equal(qcFailure.shutdown.group, qcFailure.owned.group);
+  assert.equal(qcFailure.summary.status, 'interrupted'); assert.equal(qcFailure.summary.reason, 'formal worker nonzero exit'); assert.equal(qcFailure.summary.exitCode, 1);
+  assert.deepEqual(qcFailure.summary.remainingRunning, []); assert.deepEqual(qcFailure.shutdown.remainingRunning, []); assert.deepEqual(qcFailure.shutdown.remaining, []);
+  assert.equal(qcFailure.rendererFailure.status, 'process_failed'); assert.equal(qcFailure.rendererFailure.message, 'encoded counterfactual frame pipeline did not complete successfully');
+  await absent(qcRoot + '/result.json'); await absent(qcRoot + '/render');
+  for (let i = 0; i < IMPLEMENTATIONS.length; i++) {
+    const code = (await exec('git', ['show', qcPermit.bindings.implementationSha + ':' + IMPLEMENTATIONS[i]], {cwd: ROOT, encoding: 'buffer', maxBuffer: 4000000})).stdout as Buffer;
+    assert.equal(sha(code), qcPermit.implementation[i].fileSha256, 'BODY_QC_FAILURE_CODE_CHANGED');
+  }
+
   const importFailure = observed.rendererImportFailureBinding;
   const importRoot = oldRoot + '/body-continuation-v001';
   assert.equal(importFailure.schemaVersion, 'digest-formal-renderer-import-failure-evidence-v001');
@@ -1291,6 +1332,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
   const processes = (await exec('/bin/ps', ['-axo', 'pid=,pgid=,stat=,args='])).stdout;
   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(owned.group) && !row[2]?.startsWith('Z');}), 'BODY_PREVIOUS_OWNER_LIVE');
   assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(importFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_IMPORT_FAILURE_OWNER_LIVE');
+  assert(!processes.split('\n').some(line => {const row = line.trim().split(/\s+/u); return row[1] === String(qcFailure.owned.group) && !row[2]?.startsWith('Z');}), 'BODY_QC_FAILURE_OWNER_LIVE');
   assert(observed.workerLogBinding.toString().includes('SUPERVISOR_REPLY_TIMEOUT'), 'BODY_EXACT_TIMEOUT_REQUIRED');
   const resources = observed.resourceBinding.toString().trim().split('\n').map((line: string) => JSON.parse(line));
   assert(resources.some((sample: Json) => sample.phase === 'before-body' && sample.pressure === 1), 'BODY_BEFORE_BODY_SAMPLE_REQUIRED');
@@ -1307,7 +1349,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
     if (i >= 3) assert.equal(permit.implementation[i].fileSha256, previous.implementation[i].fileSha256, 'BODY_UNCHANGED_IMPLEMENTATION_CHANGED');
     if (i === 1) {
       const currentCode = await readFile(permit.implementation[i].path, 'utf8');
-      assert.equal(currentCode.replace("if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT\n    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v002')", "if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT"), oldCode.toString(), 'BODY_CORE_EXACT_CONNECTION_DIFF_REQUIRED');
+      assert.equal(currentCode.replace("if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT\n    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v003')", "if (storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT").replace("{storageContext, serializePngAndFilters: true}", "{storageContext}"), oldCode.toString(), 'BODY_CORE_EXACT_CONNECTION_DIFF_REQUIRED');
     }
 
     if (i === 2) {
@@ -1349,7 +1391,7 @@ export async function inspectDigestFormalBodyContinuationV001(permit: Json): Pro
   const qualification = {status: 'qualified-specific-stopped-body', outputRoot: BODY_OUT, base,
     previousImplementationSha: previous.bindings.implementationSha, previousImplementationBindings: previous.implementation,
     currentImplementationSha: permit.bindings.implementationSha, currentImplementationBindings: permit.implementation,
-    previousEvidence: structuredClone(proof), importFailureImplementationSha: importFailure.implementationSha, importFailureImplementationBindings: importPermit.implementation, oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
+    previousEvidence: structuredClone(proof), importFailureImplementationSha: importFailure.implementationSha, importFailureImplementationBindings: importPermit.implementation, qcFailureImplementationSha: qcFailure.implementationSha, qcFailureImplementationBindings: qcPermit.implementation, oldResultsPreserved: true, manufacturingAuthorizationRequired: true};
   function freeze(value: any) {if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);}}
   freeze(qualification); return qualification;
 }

@@ -60,7 +60,7 @@ async function adoptedStorageV001(c: Json, storageContext?: Json) {
   if (storageContext === undefined) return {abs, publish, readBound, readJson,
     assertCurrent: async () => {}};
   if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
-    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v002')
+    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v003')
     || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
   await assertQualifiedDigestStorageContextV001(storageContext);
@@ -375,7 +375,7 @@ export async function renderAdoptedVideoV001(c: Json, artifacts: Json, execution
   storageContext?: Json) {
   const storage = await adoptedStorageV001(c, storageContext);
   const result = await render(artifacts.rendererJob.path, {workspaceRoot: ROOT,
-    ...(storageContext === undefined ? {} : {storageContext})});
+    ...(storageContext === undefined ? {} : {storageContext, serializePngAndFilters: true})});
   const execution = await storage.publish(out(c, 'renderer-result.json'), {
     schemaVersion: executionSchema, rendererJobBinding: artifacts.rendererJob,
     exitCode: result.exitCode, result: result.result});
