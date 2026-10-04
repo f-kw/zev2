@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-04（JST） / revision：handover-index-20261004-v078
+更新日：2026-10-04（JST） / revision：handover-index-20261004-v079
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-04 14:17 UTC（保存済み一本を正式保存へ復帰、字幕問題で完成未成立）
+
+親の明示継続範囲でmodule同一化と特定保存失敗の限定復帰を製品6path/回帰4pathに実装し、main8c3a20b5へ固定。旧job/auth/code/停止owner/全原本・plan/本文/clockを実再資格し、未使用兄弟rootへ651primaryと同byte MP4を保存、3386画像工具＋媒体5が全exit0。37,619frame/20:53.966667/617257203B/SHA6434a56b、全字幕規則・配置・媒体・元AAC保持はpassed、正式technical/pending/result保存と別process getは成功。描画/再合成/元判断再実行0。[成果・実時間・不足根拠](reports/digest-new-material-SJvP9jhEdyI-20261004/specific-recovery-result-v001.md)。
+
+旧同byte8画像の実観察を新plan/job/媒体へ束縛し、465「世界が終わる」0.1秒と571「お!」1frameをissue-found登録。6 acceptedは静止画字形/画面内だけで、重なり・配置再検討・速度/音声未評価を保持。14:05:32UTC、既存finalizeはRECORD_CONFIRMATION_NOT_PASSED/exit1で完了確定を拒否した。8PNG/record保存、completed receipt無し。getは元pendingを返す現仕様なので、get pending＋問題record＋正式完成未成立を併記。full画面比較not-executed、全編/音声/人間品質not-evaluated。
+
+無料LANの元20秒再照合は旧120msと矛盾する1242msの機械根拠を得たが、隣接字幕との重なりと末尾score0が残る。音声input非対応で実聴取不能、本文/clock変更0。最小fadeと次回代表native検査案は準備済み未適用、651新描画/新合成/追加診断0。復帰19分08.869秒、監視peakRSS1,985,871,872B、735sampleの実gap中央値1.558625秒/最大1.730923秒。新paid API0。重複own scratch652JSONを正式証拠と全数照合して1,793,523B整理、旧原本/lock/成果KEEP。
+
+状態：相談役待ち。最終確認：2026-10-04T14:10:46.538906+00:00。own製造/record残存0、lease無し、guest92,701,454,336B/host1,989,498,372,096B/内蔵12,533,846,016Bを別測定。次担当：親monaが該当発話と隣接時計を整合できる追加根拠か限定訂正基準を決め、その指示を受ける同じMac実装者。旧レビュー/全字幕採点を本人へ再要求しない。[今回session log](work-logs/2026-10/2026-10-04T1417_Codex-SSD_ID9-saved-digest-recovery_8c3a20b5.md)。main文書反映の実SHA/cleanは最終報告で確定。以下13:33は実行前の履歴。
 
 ## 最新現在地 — 2026-10-04 13:33 UTC（保存済み一本の限定復帰を実装し、実行へ）
 

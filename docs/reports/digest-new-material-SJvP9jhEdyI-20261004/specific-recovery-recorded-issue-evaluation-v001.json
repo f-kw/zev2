@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "specific-recovery-recorded-issue-evaluation-v001",
+  "checkedAt": "2026-10-04T14:11:52.180Z",
+  "technicalEvidenceBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-technical-evidence-v001.json",
+    "fileSha256": "84c573cb3feadaf88cf2c5581aece7c5e34860d6bed49f73a88d45e53d126de5",
+    "sizeBytes": 8838883
+  },
+  "recordBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-confirmation.json",
+    "fileSha256": "345d91531ef14110db58e63728c317982c586e3ce6ff24d0c066e33020d79682",
+    "sizeBytes": 12403
+  },
+  "pendingBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/result.json",
+    "fileSha256": "e3ef085b7ca32d706df6cd7b064375aca0b9e25f05166f494befb2a20006c695",
+    "sizeBytes": 19340
+  },
+  "evaluation": {
+    "schemaVersion": "digest-representative-completion-v001",
+    "status": "failed",
+    "complete": false,
+    "mode": "representative-plus-rules-v001",
+    "policy": {
+      "schemaVersion": "digest-representative-verification-policy-v001",
+      "mode": "representative-plus-rules-v001",
+      "representativeInstructionIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651"
+      ],
+      "permittedMethods": [
+        "still-frame",
+        "text-clock-context"
+      ],
+      "confirmationRecordPath": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-confirmation.json"
+    },
+    "bindings": {
+      "planId": "digest-SJvP9jhEdyI-20261004-v001",
+      "outputRoot": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001",
+      "approvedJobBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/job.json",
+        "fileSha256": "7dc17b7c583f4fa9195dce1b2a607c1efd33ee831a9914b7eddf94d946dd111c",
+        "sizeBytes": 17224
+      },
+      "authorizationBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/authorization.json",
+        "fileSha256": "1fdf08f5b246afb8b016b3dd6d068fcda3198d6a8db0d062df0a9da693c9bc53",
+        "sizeBytes": 15495
+      },
+      "manifestBinding": {
+        "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/manifest.json",
+        "fileSha256": "8da924bda9639478570a10d06dd0bab3573dede572250cd2d3ab9f045e0640dc",
+        "sizeBytes": 82500
+      },
+      "typographySettingsBinding": {
+        "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/typography-settings.json",
+        "fileSha256": "7d875401f37d0c5bc0fc9c420e360bed3915e546d5c85976c2c40a7ebecc303d",
+        "sizeBytes": 8951
+      },
+      "rendererPlanCanonicalSha256": "761fc2ef0d4d7b95540986c1847282fa7442e0a81cb1380ca53f5d96a75a3068",
+      "completedMedia": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/render/presentation-rendered-v002.mp4",
+        "fileSha256": "6434a56b40e66212c5dd910638c33b73b53029d733592b0b77ca6aa03d4f18b8",
+        "sizeBytes": 617257203
+      }
+    },
+    "representativeRecordBinding": {
+      "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-confirmation.json",
+      "fileSha256": "345d91531ef14110db58e63728c317982c586e3ce6ff24d0c066e33020d79682",
+      "sizeBytes": 12403
+    },
+    "checks": {
+      "wholeRules": {
+        "status": "passed",
+        "scope": "all-planned-instructions; existing normal input and overlay rules"
+      },
+      "media": {
+        "status": "passed",
+        "scope": "existing completed-media inspection"
+      },
+      "audioPreservation": {
+        "status": "passed",
+        "scope": "original AAC packet payload"
+      },
+      "representatives": {
+        "status": "failed",
+        "count": 8
+      },
+      "fullVisibility": {
+        "status": "not-executed",
+        "scope": "no counterfactual or completed-frame comparison"
+      }
+    },
+    "observations": {
+      "representativeMethods": {
+        "still-frame": {
+          "status": "performed",
+          "count": 8
+        },
+        "text-clock-context": {
+          "status": "not-evaluated",
+          "count": 0
+        },
+        "video-playback": {
+          "status": "not-evaluated",
+          "count": 0
+        }
+      },
+      "wholeVideoPlayback": "not-evaluated",
+      "audioListening": "not-evaluated",
+      "humanQualityAdoption": "not-evaluated"
+    },
+    "representatives": [
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+        "startFrame": 0,
+        "endFrameExclusive": 23,
+        "observedAtFrame": 11,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-01-cue-000001-frame-000011.png",
+          "fileSha256": "fd65815b7f2b6e5966c6aca5a9c3504b5db59a19e5e511b431936549e2cb169f",
+          "sizeBytes": 411188
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: どうなって／んだよ\n文字欠けの観測: false\n表示: 白字・濃い縁の二行。黒い元画面と右下の出演者が見える。\n重なり: この場面の黒い背景では、ゲーム内の文章との重なりは確認できない。\n元の所見分類: static-glyph-observed\n限界・未評価: 23frame。通常速度・音声・全体の流れは未評価。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+        "startFrame": 4876,
+        "endFrameExclusive": 4930,
+        "observedAtFrame": 4902,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-02-cue-000093-frame-004902.png",
+          "fileSha256": "ae81dcf8b1b19462f5909b89aef623cd710eb1f5083cc186a62f248ec602335c",
+          "sizeBytes": 1147815
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 骨あるやつ／食いたいっすね!\n文字欠けの観測: false\n表示: 白字の二行が画面内に収まり、長い行の文字も欠けていない。\n重なり: 下段の大きな字幕が、元ゲームの赤い台詞枠の本文を覆っている。\n元の所見分類: static-glyph-observed-with-layout-review-needed\n限界・未評価: 54frame。動く映像で台詞枠を読めるかは未評価。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+        "startFrame": 21692,
+        "endFrameExclusive": 21716,
+        "observedAtFrame": 21703,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-03-cue-000400-frame-021703.png",
+          "fileSha256": "8b834f4eb63fdc15f2ca28d0b9508f9229c6a263a39bb7f36b604981a5d01fe7",
+          "sizeBytes": 1227143
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: デスビッグ／デイム\n文字欠けの観測: false\n表示: 白字の二行。濁点も見える。\n重なり: 上段が画面中央の敵の顔を横切り、下段が元台詞枠を覆う。元画面の名前表示は「デス BIG DEMON」。\n元の所見分類: static-glyph-observed-with-layout-review-needed\n限界・未評価: 24frame。原音声の発話・文字起こしとの一致は聴取できていない。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "startFrame": 24988,
+        "endFrameExclusive": 24991,
+        "observedAtFrame": 24989,
+        "method": "still-frame",
+        "result": "issue-found",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-04-cue-000465-frame-024989.png",
+          "fileSha256": "86f01417057804e32932023173c2fd9cf387b618363a6a7f1f27ee3828ce5580",
+          "sizeBytes": 1728522
+        },
+        "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 世界が終わる\n文字欠けの観測: false\n表示: 一行の6文字が薄い半透明で、元ゲームの白い文章が透けて見える。\n重なり: 元ゲームの台詞にも「ここで奴を食い止めなければ…世界が終わる」が見える。字幕は台詞枠と重なる。\n元の所見分類: issue-found\n限界・未評価: 3frame=0.1秒。重要な前振りを追加字幕で読み取る時間が足りない。元ゲーム台詞や音声が意味を補えるか、元台詞の継続表示、実発話時刻は未確認。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+        "startFrame": 30327,
+        "endFrameExclusive": 30970,
+        "observedAtFrame": 30648,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-05-cue-000545-frame-030648.png",
+          "fileSha256": "58ef8b2c1279d139f5ee3a33946eaa79d9fc45786040a2c5adf6a5a28f233ddd",
+          "sizeBytes": 1771590
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: お前も殺しに／来てたやん\n文字欠けの観測: false\n表示: 白字の二行で全字が見える。\n重なり: 元ゲームの台詞枠と中央の人物の体の一部を大きな字幕が覆っている。\n元の所見分類: static-glyph-observed-with-layout-review-needed\n限界・未評価: 643frame=約21.433秒。表示が長いことと発話の自然さの関係は音声・通常再生で未評価。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "startFrame": 32576,
+        "endFrameExclusive": 32577,
+        "observedAtFrame": 32576,
+        "method": "still-frame",
+        "result": "issue-found",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-06-cue-000571-frame-032576.png",
+          "fileSha256": "91195d8defacfd6fa0aa167a690d8a3ebadd3eb7fa7dce3fb0ce907a219b84a7",
+          "sizeBytes": 1431571
+        },
+        "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: お!\n文字欠けの観測: false\n表示: 一行の「お!」が非常に薄い半透明で表示されている。\n重なり: 元ゲームの台詞枠の前に重なる。\n元の所見分類: issue-found-local\n限界・未評価: 1frame=約0.033秒。驚きの具体内容は次の字幕にあるため、この合いの手を読み逃す意味の損失は小さい。前字幕との結合案は未適用、通常速度での見え方は未視聴。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+        "startFrame": 33069,
+        "endFrameExclusive": 33090,
+        "observedAtFrame": 33079,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-07-cue-000583-frame-033079.png",
+          "fileSha256": "d6bc4982fcbebf0a3df537057e18143286c32be29a09266c1013fb173fd53b02",
+          "sizeBytes": 1310397
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 観光地カモハネ／パネルの桃太郎\n文字欠けの観測: false\n表示: 白字の長い二行が画面内に収まり、文字の欠けは見つからない。\n重なり: 二行字幕がゲームの台詞枠と中央のキャラクターの体の一部を覆う。\n元の所見分類: static-glyph-observed-with-layout-review-needed\n限界・未評価: 21frame=0.7秒。元画面の表記との違いを音声で確認していない。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651",
+        "startFrame": 37387,
+        "endFrameExclusive": 37619,
+        "observedAtFrame": 37502,
+        "method": "still-frame",
+        "result": "accepted",
+        "evidenceBinding": {
+          "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-08-cue-000651-frame-037502.png",
+          "fileSha256": "4b51f52d4419c00abe06a684d8ad87c0db534e70a4580fe94e541ae9cefcf64d",
+          "sizeBytes": 1664442
+        },
+        "note": "acceptedは、親が12:21 UTCに見た静止画の字形と画面内表示だけの限定確認。重なり・配置の採用や動画全体の品質合格ではない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 最後あんのか／と思ったわ!\n文字欠けの観測: false\n表示: 白字の二行。末尾の記号まで画面内で見える。\n重なり: 元ゲームのタイトル画面のメニュー部分に重なっている。\n元の所見分類: static-glyph-observed-with-layout-review-needed\n限界・未評価: 232frame。末尾までの通常再生・音声・全編構成は未評価。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+      }
+    ],
+    "violations": [
+      {
+        "code": "REPRESENTATIVE_CONFIRMED_ISSUE",
+        "relatedIds": [
+          "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465"
+        ],
+        "details": {
+          "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 世界が終わる\n文字欠けの観測: false\n表示: 一行の6文字が薄い半透明で、元ゲームの白い文章が透けて見える。\n重なり: 元ゲームの台詞にも「ここで奴を食い止めなければ…世界が終わる」が見える。字幕は台詞枠と重なる。\n元の所見分類: issue-found\n限界・未評価: 3frame=0.1秒。重要な前振りを追加字幕で読み取る時間が足りない。元ゲーム台詞や音声が意味を補えるか、元台詞の継続表示、実発話時刻は未確認。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+        }
+      },
+      {
+        "code": "REPRESENTATIVE_CONFIRMED_ISSUE",
+        "relatedIds": [
+          "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571"
+        ],
+        "details": {
+          "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: お!\n文字欠けの観測: false\n表示: 一行の「お!」が非常に薄い半透明で表示されている。\n重なり: 元ゲームの台詞枠の前に重なる。\n元の所見分類: issue-found-local\n限界・未評価: 1frame=約0.033秒。驚きの具体内容は次の字幕にあるため、この合いの手を読み逃す意味の損失は小さい。前字幕との結合案は未適用、通常速度での見え方は未視聴。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+        }
+      }
+    ],
+    "existingRuleEvidence": {
+      "instructionApplication": {
+        "status": "passed"
+      },
+      "mediaEvidence": {
+        "observed": {
+          "durationMs": 1253967,
+          "video": {
+            "codecName": "h264",
+            "width": 1920,
+            "height": 1080,
+            "fps": 30,
+            "frameCount": 37619
+          },
+          "audio": {
+            "codecName": "aac",
+            "sampleRate": 44100,
+            "channelLayout": "stereo",
+            "durationMs": 1253966.667,
+            "packetPayloadSha256": "7cd5355fcd5dfd8eb8c64cef41eb3a20e78b0223ba62a2c40aad6c99c5941117"
+          }
+        },
+        "expectedAudio": {
+          "present": true,
+          "codecName": "aac",
+          "sampleRate": 44100,
+          "channelLayout": "stereo",
+          "durationMs": 1253966.667,
+          "packetPayloadSha256": "7cd5355fcd5dfd8eb8c64cef41eb3a20e78b0223ba62a2c40aad6c99c5941117"
+        },
+        "expectedFrameCount": 37619
+      },
+      "violations": []
+    }
+  },
+  "existingRulesStatus": "passed",
+  "scope": "Pure replay of existing rule evaluator over hash-bound actual published technical numbers and registered observations; no new media, image draw, tool inspection, private result qualification or completion receipt."
+}

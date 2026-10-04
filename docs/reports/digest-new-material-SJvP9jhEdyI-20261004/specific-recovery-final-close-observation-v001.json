@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "specific-recovery-final-close-observation-v001",
+  "checkedAt": "2026-10-04T14:10:46.538906+00:00",
+  "steps": {
+    "get-before-observation-v001": {
+      "startedAt": 1791122309.930049,
+      "endedAt": 1791122316.626561,
+      "seconds": 6.69651198387146,
+      "exitCode": 0,
+      "status": "confirmation-pending",
+      "remainingRunning": [],
+      "ownProcessGroup": 69660,
+      "stderr": null
+    },
+    "finalize-issue-record-v001": {
+      "startedAt": 1791122691.082796,
+      "endedAt": 1791122732.540786,
+      "seconds": 41.45798993110657,
+      "exitCode": 1,
+      "status": null,
+      "remainingRunning": [],
+      "ownProcessGroup": 69867,
+      "stderr": "AssertionError [ERR_ASSERTION]: RECORD_CONFIRMATION_NOT_PASSED\n+ actual - expected\n\n+ 'failed'\n- 'passed-representative'\n    at finalizeApprovedDigestJobRecordV001 (/Users/kawafmm/workspace/zev2/runner/src/digest-approved-record-finalize-v001.ts:320:12)\n    at async cli (/Users/kawafmm/workspace/zev2/runner/src/digest-approved-record-finalize-v001.ts:357:46)\n"
+    },
+    "get-after-issue-record-v001": {
+      "startedAt": 1791122766.142853,
+      "endedAt": 1791122772.976526,
+      "seconds": 6.833673000335693,
+      "exitCode": 0,
+      "status": "confirmation-pending",
+      "remainingRunning": [],
+      "ownProcessGroup": 70522,
+      "stderr": null
+    },
+    "get-after-cleanup-v001": {
+      "startedAt": 1791122973.0251021,
+      "endedAt": 1791122979.743095,
+      "seconds": 6.717992782592773,
+      "exitCode": 0,
+      "status": "confirmation-pending",
+      "remainingRunning": [],
+      "ownProcessGroup": 70685,
+      "stderr": null
+    }
+  },
+  "remainingOwnProcesses": [],
+  "volumes": {
+    "guest": {
+      "path": "/Volumes/ZEV-Digest-20261003-01",
+      "freeBytes": 92701454336,
+      "device": 16777243,
+      "uuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0"
+    },
+    "host": {
+      "path": "/Volumes/KIOXIA",
+      "freeBytes": 1989498372096,
+      "device": 16777238,
+      "uuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1"
+    },
+    "internal": {
+      "path": "/Users/kawafmm/workspace/zev2",
+      "freeBytes": 12533846016,
+      "device": 16777234,
+      "uuid": "CBD5A285-2C2B-4C29-AC22-B1203674F3A4"
+    }
+  },
+  "recordBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-confirmation.json",
+    "sizeBytes": 12403,
+    "fileSha256": "345d91531ef14110db58e63728c317982c586e3ce6ff24d0c066e33020d79682"
+  },
+  "representativeIssues": [
+    {
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+      "startFrame": 24988,
+      "endFrameExclusive": 24991,
+      "observedAtFrame": 24989,
+      "method": "still-frame",
+      "result": "issue-found",
+      "evidenceBinding": {
+        "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-04-cue-000465-frame-024989.png",
+        "fileSha256": "86f01417057804e32932023173c2fd9cf387b618363a6a7f1f27ee3828ce5580",
+        "sizeBytes": 1728522
+      },
+      "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: 世界が終わる\n文字欠けの観測: false\n表示: 一行の6文字が薄い半透明で、元ゲームの白い文章が透けて見える。\n重なり: 元ゲームの台詞にも「ここで奴を食い止めなければ…世界が終わる」が見える。字幕は台詞枠と重なる。\n元の所見分類: issue-found\n限界・未評価: 3frame=0.1秒。重要な前振りを追加字幕で読み取る時間が足りない。元ゲーム台詞や音声が意味を補えるか、元台詞の継続表示、実発話時刻は未確認。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+    },
+    {
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+      "startFrame": 32576,
+      "endFrameExclusive": 32577,
+      "observedAtFrame": 32576,
+      "method": "still-frame",
+      "result": "issue-found",
+      "evidenceBinding": {
+        "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-evidence/representative-06-cue-000571-frame-032576.png",
+        "fileSha256": "91195d8defacfd6fa0aa167a690d8a3ebadd3eb7fa7dce3fb0ce907a219b84a7",
+        "sizeBytes": 1431571
+      },
+      "note": "issue-found。親の静止画実観察で問題を確認。修正・採用はしていない。\n実観察時刻: 2026-10-04T12:21:46.569245+00:00\n字形: お!\n文字欠けの観測: false\n表示: 一行の「お!」が非常に薄い半透明で表示されている。\n重なり: 元ゲームの台詞枠の前に重なる。\n元の所見分類: issue-found-local\n限界・未評価: 1frame=約0.033秒。驚きの具体内容は次の字幕にあるため、この合いの手を読み逃す意味の損失は小さい。前字幕との結合案は未適用、通常速度での見え方は未視聴。\n全編通常再生、原音声の聴取、字幕速度、全体品質の採用は未評価。"
+    }
+  ],
+  "evidenceCount": 8,
+  "completedReceiptExists": false,
+  "savedRegistrationReceiptExists": false,
+  "finalizationLeaseExists": false,
+  "cleanup": 1793523,
+  "head": "8c3a20b5c895215359e0b0fb8d734cf37bddd45d",
+  "gitStatus": ""
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "specific-recovery-actual-supervisor-call-v001",
+  "mode": "prepare",
+  "startedAt": "2026-10-04T13:37:46.789001+00:00",
+  "endedAt": "2026-10-04T13:37:47.475296+00:00",
+  "seconds": 0.686065167,
+  "exitCode": 0,
+  "supervisorPid": 38289,
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+    "--prepare-job",
+    "--job-file",
+    "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/job.json",
+    "--authorization-file",
+    "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/authorization.json",
+    "--approved-job-sha256",
+    "7dc17b7c583f4fa9195dce1b2a607c1efd33ee831a9914b7eddf94d946dd111c",
+    "--authorization-sha256",
+    "1fdf08f5b246afb8b016b3dd6d068fcda3198d6a8db0d062df0a9da693c9bc53",
+    "--node-path",
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+  ],
+  "jobBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/job.json",
+    "fileSha256": "7dc17b7c583f4fa9195dce1b2a607c1efd33ee831a9914b7eddf94d946dd111c",
+    "sizeBytes": 17224
+  },
+  "authorizationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-recovery-v001/authorization.json",
+    "fileSha256": "1fdf08f5b246afb8b016b3dd6d068fcda3198d6a8db0d062df0a9da693c9bc53",
+    "sizeBytes": 15495
+  },
+  "stdoutPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/specific-recovery-prepare-v001.stdout.txt",
+  "stderrPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/specific-recovery-prepare-v001.stderr.txt"
+}
