@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "new-material-preparation-evidence-v001",
+  "observedAt": "2026-10-04T06:24:36.004588+00:00",
+  "status": "source-preparation-complete-formal-pipeline-blocked",
+  "baseHead": "7193c53372efc1106dc89f77cbf1c5d1d3f8ff85",
+  "sourceMetadata": {
+    "observedAt": "2026-10-04T05:37:54.542543+00:00",
+    "id": "SJvP9jhEdyI",
+    "title": "【！？】『デス桃太郎』やる！！！！！！！！！！！！！！！！！！ぺこ！【ホロライブ/兎田ぺこら】",
+    "duration": 3290,
+    "upload_date": "20261002",
+    "release_timestamp": 1790942475,
+    "channel": "Pekora Ch. 兎田ぺこら",
+    "channel_id": "UC1DCedRgGHBdm81E1llLhOQ",
+    "webpage_url": "https://www.youtube.com/watch?v=SJvP9jhEdyI",
+    "availability": "public",
+    "live_status": "was_live",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "format_id": "399+140",
+    "filesize": null,
+    "filesize_approx": 1015142524
+  },
+  "source": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+    "sizeBytes": 1016332396,
+    "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+    "device": 16777243
+  },
+  "downloadAttempts": [
+    {
+      "status": "interrupted",
+      "reason": "yt-dlp exited 1",
+      "command": [
+        "/usr/local/bin/yt-dlp",
+        "--no-playlist",
+        "--merge-output-format",
+        "mp4",
+        "-f",
+        "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/best",
+        "-o",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v001/source-video.mp4",
+        "https://www.youtube.com/watch?v=SJvP9jhEdyI"
+      ],
+      "endedAt": "2026-10-04T05:42:23.981438+00:00",
+      "seconds": 5.707311625010334,
+      "exitCode": 1,
+      "observedPeakRssBytes": 100061184,
+      "sampleCount": 4,
+      "finalStorage": {
+        "guest": {
+          "path": "/Volumes/ZEV-Digest-20261003-01",
+          "device": 16777243,
+          "availableBytes": 97419919360
+        },
+        "host": {
+          "path": "/Volumes/KIOXIA",
+          "device": 16777238,
+          "availableBytes": 1989503090688
+        },
+        "internal": {
+          "path": "/Users/kawafmm/workspace/zev2",
+          "device": 16777234,
+          "availableBytes": 13067255808
+        }
+      },
+      "remainingRunning": []
+    },
+    {
+      "status": "downloaded",
+      "reason": null,
+      "command": [
+        "/usr/local/Cellar/yt-dlp/2026.6.9/libexec/bin/python",
+        "-B",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/official-downloader-20260819/yt-dlp",
+        "--no-playlist",
+        "--merge-output-format",
+        "mp4",
+        "-f",
+        "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/best",
+        "-o",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+        "https://www.youtube.com/watch?v=SJvP9jhEdyI"
+      ],
+      "endedAt": "2026-10-04T05:56:28.848676+00:00",
+      "seconds": 537.5803738749819,
+      "exitCode": 0,
+      "observedPeakRssBytes": 293335040,
+      "sampleCount": 387,
+      "finalStorage": {
+        "guest": {
+          "path": "/Volumes/ZEV-Digest-20261003-01",
+          "device": 16777243,
+          "availableBytes": 96383873024
+        },
+        "host": {
+          "path": "/Volumes/KIOXIA",
+          "device": 16777238,
+          "availableBytes": 1989501517824
+        },
+        "internal": {
+          "path": "/Users/kawafmm/workspace/zev2",
+          "device": 16777234,
+          "availableBytes": 13034663936
+        }
+      },
+      "remainingRunning": [],
+      "media": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+        "sizeBytes": 1016332396,
+        "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1"
+      }
+    }
+  ],
+  "sourceInspection": {
+    "status": "passed",
+    "completedAt": "2026-10-04T06:07:31.897Z",
+    "seconds": 565.448,
+    "source": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+      "sizeBytes": 1016332396,
+      "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1"
+    },
+    "inspectionBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-v001/source-media-inspection.json",
+      "fileSha256": "97ecbff86185ead665323fd9dc6a83ebd6ae4383933d9e5fc584a083e24168ea",
+      "sizeBytes": 2789
+    },
+    "decodedFrameCount": 197406,
+    "logicalFrameCount": 98703,
+    "sourceAudioGridSamples": 145096704
+  },
+  "inspection": {
+    "schemaVersion": "new-material-source-inspection-v001",
+    "sourceVideoBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+      "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1"
+    },
+    "observedTools": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "binaryDiagnostics": {
+      "node": {
+        "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      "ffmpeg": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "ffprobe": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      }
+    },
+    "media": {
+      "source": {
+        "streamConfiguration": {
+          "videoCount": 1,
+          "audioCount": 1,
+          "videoStreamIndex": 0,
+          "audioStreamIndex": 1
+        },
+        "video": {
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "60/1",
+          "timeBase": "1/15360",
+          "decodedFrameCount": 197406,
+          "firstPts": 0,
+          "lastPts": 50535680,
+          "ptsStep": 256,
+          "containerStartTimeMs": 0,
+          "presentationOffsetMs": 0,
+          "clockAuthority": "container-zero-video-stream-offset-v001",
+          "rotation": 0
+        },
+        "audio": {
+          "present": true,
+          "codec": "aac",
+          "sampleRate": 44100,
+          "channels": 2,
+          "channelLayout": "stereo",
+          "timeBase": "1/44100",
+          "firstDecodedPts": 0,
+          "lastDecodedPts": 145095680,
+          "presentationClock": {
+            "authority": "stream-and-packet-v001",
+            "endSample": 145096704,
+            "streamEndSample": 145096704,
+            "packetEndSample": 145096704,
+            "skipSamples": 0,
+            "discardPadding": 0
+          }
+        }
+      },
+      "fps": 60,
+      "decodedFrameCount": 197406,
+      "logicalFrameCount": 98703,
+      "videoClock": {
+        "containerStartTimeMs": 0,
+        "streamTimeBase": "1/15360",
+        "firstPts": 0,
+        "lastPts": 50535680,
+        "ptsStep": 256,
+        "presentationOffsetMs": 0
+      },
+      "audioClock": {
+        "sampleRate": 44100,
+        "channels": 2,
+        "channelLayout": "stereo",
+        "spans": [],
+        "sourceGridSampleCount": 145096704,
+        "sourceGridMappingEndSample": 145096704,
+        "decodedTailPaddingSampleCount": 0
+      }
+    }
+  },
+  "sourceInspectionSupervision": {
+    "status": "completed",
+    "endedAt": "2026-10-04T06:07:33.002452+00:00",
+    "seconds": 567.176015666977,
+    "exitCode": 0,
+    "reason": null,
+    "samples": 429,
+    "observedPeakRssBytes": 224477184,
+    "remainingRunning": [],
+    "finalStorage": {
+      "guest": {
+        "path": "/Volumes/ZEV-Digest-20261003-01",
+        "device": 16777243,
+        "availableBytes": 96383000576
+      },
+      "host": {
+        "path": "/Volumes/KIOXIA",
+        "device": 16777238,
+        "availableBytes": 1989502566400
+      },
+      "internal": {
+        "path": "/Users/kawafmm/workspace/zev2",
+        "device": 16777234,
+        "availableBytes": 12999663616
+      }
+    },
+    "command": [
+      "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "--import",
+      "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+      "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-source-inspection-v001.mts",
+      "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-input-v001.json"
+    ]
+  },
+  "stt": {
+    "execution": {
+      "status": "completed",
+      "jobId": "46b021574c1e455cbde89e2e81824d6a",
+      "completedAt": "2026-10-04T06:17:50.497Z",
+      "seconds": 993.201,
+      "inputSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+      "inputBytes": 1016332396,
+      "sourceUri": "https://www.youtube.com/watch?v=SJvP9jhEdyI",
+      "durationSec": 3290.1746875,
+      "output": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/zev-result.json",
+      "paidApiCalls": 0
+    },
+    "job": {
+      "id": "46b021574c1e455cbde89e2e81824d6a",
+      "state": "completed",
+      "input": {
+        "bytes": 1016332396,
+        "originalFilename": "source-video.mp4",
+        "sha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1"
+      },
+      "registeredAt": "2026-10-04T06:01:58.498001+00:00",
+      "startedAt": "2026-10-04T06:01:58.602937+00:00",
+      "endedAt": "2026-10-04T06:17:47.022136+00:00",
+      "model": "large-v3",
+      "pipeline": {
+        "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+        "language": "ja",
+        "mklThreads": 1,
+        "modelRevisions": {
+          "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478",
+          "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+          "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee"
+        },
+        "ompThreads": 1,
+        "packages": {
+          "ctranslate2": "4.7.1",
+          "faster-whisper": "1.2.1",
+          "nltk": "3.9.4",
+          "numpy": "2.4.3",
+          "pyannote-audio": "4.0.4",
+          "torch": "2.8.0+cu128",
+          "torchaudio": "2.8.0+cu128",
+          "transformers": "4.57.6",
+          "whisperx": "3.8.4"
+        },
+        "returnCharAlignments": true,
+        "settings": {
+          "alignDevice": "cpu",
+          "batchSize": 16,
+          "computeType": "float16",
+          "device": "cuda",
+          "diarizationDevice": "cpu",
+          "enableDiarization": false,
+          "minDiarizationAudioSeconds": 1,
+          "model": "large-v3",
+          "numSpeakers": null,
+          "offline": true,
+          "speakerCoverageThreshold": 0.7,
+          "speakerMarginThreshold": 0.15,
+          "vadMethod": "silero"
+        },
+        "sourceSha256": {
+          "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+          "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+        },
+        "version": "zev-full-stt-1"
+      },
+      "schemaVersion": 1,
+      "resultIdentity": "e83a877286e0c937f32a55b476c182a7328b4ab0d461598829dd423740791866"
+    },
+    "normalization": {
+      "schemaVersion": "new-material-transcript-normalization-readback-v001",
+      "status": "passed",
+      "observedAt": "2026-10-04T06:19:20.429Z",
+      "jobId": "46b021574c1e455cbde89e2e81824d6a",
+      "sourceUri": "https://www.youtube.com/watch?v=SJvP9jhEdyI",
+      "input": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/zev-result.json",
+        "sizeBytes": 1694949,
+        "fileSha256": "a1cd1c4295e9572a7aefcddfcd8da514345a28ec368f17c541733a0b208f28b8"
+      },
+      "output": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/normalized-source-transcript.json",
+        "sizeBytes": 1489253,
+        "fileSha256": "c082654ab253534b457d0ccf4a0256f71eb22cd35b4572144a5e174fc4ffe407"
+      },
+      "normalization": "existing normalizeGpuSttResponse; assertTranscriptArtifact before and after save",
+      "durationSec": 3290.1746875,
+      "segmentCount": 9789,
+      "speechUnitGroupCount": 9789,
+      "firstStartMs": 178894,
+      "lastEndMs": 3156538,
+      "normalWorkflowRequestCreated": false,
+      "manufacturingGrantCreated": false,
+      "transcriptTextComparedWithAudio": false
+    },
+    "normalizedReadback": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/normalized-source-transcript.json",
+      "sizeBytes": 1489253,
+      "fileSha256": "c082654ab253534b457d0ccf4a0256f71eb22cd35b4572144a5e174fc4ffe407",
+      "device": 16777243
+    },
+    "timingReadback": {
+      "observedAt": "2026-10-04T06:24:35.571204+00:00",
+      "segmentCount": 9789,
+      "uniqueIdCount": 9789,
+      "invalidRangeCount": 0,
+      "outsideSourceCount": 0,
+      "textAudioCompared": false
+    },
+    "supervision": {
+      "status": "completed",
+      "endedAt": "2026-10-04T06:17:51.347375+00:00",
+      "seconds": 994.6796797920251,
+      "exitCode": 0,
+      "reason": null,
+      "samples": 720,
+      "observedPeakRssBytes": 1155448832,
+      "remainingRunning": [],
+      "finalStorage": {
+        "guest": {
+          "path": "/Volumes/ZEV-Digest-20261003-01",
+          "device": 16777243,
+          "availableBytes": 96377376768
+        },
+        "host": {
+          "path": "/Volumes/KIOXIA",
+          "device": 16777238,
+          "availableBytes": 1989501517824
+        },
+        "internal": {
+          "path": "/Users/kawafmm/workspace/zev2",
+          "device": 16777234,
+          "availableBytes": 13067608064
+        }
+      },
+      "command": [
+        "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "--import",
+        "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-stt-worker-v001.mts",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-input-v001.json"
+      ]
+    }
+  },
+  "disks": {
+    "internal": {
+      "path": "/Users/kawafmm/workspace/zev2",
+      "device": 16777234,
+      "volumeUUID": "CBD5A285-2C2B-4C29-AC22-B1203674F3A4",
+      "deviceIdentifier": "disk3s1s1",
+      "filesystem": "apfs",
+      "availableBytes": 13028868096
+    },
+    "guest": {
+      "path": "/Volumes/ZEV-Digest-20261003-01",
+      "device": 16777243,
+      "volumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+      "deviceIdentifier": "disk6s1",
+      "filesystem": "apfs",
+      "availableBytes": 96375971840
+    },
+    "host": {
+      "path": "/Volumes/KIOXIA",
+      "device": 16777238,
+      "volumeUUID": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+      "deviceIdentifier": "disk4s2",
+      "filesystem": "exfat",
+      "availableBytes": 1989503090688
+    }
+  },
+  "storageRequirement": {
+    "reserveBytes": 12000000000,
+    "sourceCopiesOnInternal": 2,
+    "sourceBytes": 1016332396,
+    "minimumInternalBytesExcludingSmallJson": 14032664792,
+    "internalShortfallBytes": 1003796696
+  },
+  "cloneProbe": {
+    "schemaVersion": "digest-source-clone-small-probe-v001",
+    "startedAt": "2026-10-04T06:04:02.252Z",
+    "node": {
+      "version": "v20.19.6",
+      "execPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node"
+    },
+    "probeDirectory": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001",
+    "sourceBytes": 1048576,
+    "reserveBytes": "12000000000",
+    "operations": [
+      {
+        "name": "normal-ficlone",
+        "flags": 3,
+        "destination": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/normal-ficlone.bin",
+        "startedAt": "2026-10-04T06:04:02.258Z",
+        "status": "succeeded",
+        "actual": {
+          "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/normal-ficlone.bin",
+          "dev": "16777234",
+          "ino": "98266717",
+          "sizeBytes": 1048576,
+          "allocatedBlocks": "2048",
+          "fileSha256": "6b04fa78841fc61d1274577f5e0b69ac0ae5de7dc29572f47bad3e525ea930d5"
+        },
+        "finishedAt": "2026-10-04T06:04:02.260Z"
+      },
+      {
+        "name": "forced-ficlone",
+        "flags": 5,
+        "destination": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/forced-ficlone.bin",
+        "startedAt": "2026-10-04T06:04:02.260Z",
+        "status": "failed",
+        "error": {
+          "code": "ENOSYS",
+          "errno": -78,
+          "message": "ENOSYS: function not implemented, copyfile '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/source-random-1MiB.bin' -> '/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/forced-ficlone.bin'"
+        },
+        "destinationExists": false,
+        "finishedAt": "2026-10-04T06:04:02.261Z"
+      }
+    ],
+    "observations": [
+      {
+        "stage": "before-any-write",
+        "observedAt": "2026-10-04T06:04:02.254Z",
+        "availableBytes": "13014519808",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "after-source",
+        "observedAt": "2026-10-04T06:04:02.258Z",
+        "availableBytes": "13013467136",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "before-normal-ficlone",
+        "observedAt": "2026-10-04T06:04:02.258Z",
+        "availableBytes": "13013467136",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "after-normal-ficlone",
+        "observedAt": "2026-10-04T06:04:02.260Z",
+        "availableBytes": "13012418560",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "before-forced-ficlone",
+        "observedAt": "2026-10-04T06:04:02.260Z",
+        "availableBytes": "13012418560",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "after-forced-ficlone",
+        "observedAt": "2026-10-04T06:04:02.261Z",
+        "availableBytes": "13012418560",
+        "filesystemType": "26"
+      },
+      {
+        "stage": "after-cleanup",
+        "observedAt": "2026-10-04T06:04:02.262Z",
+        "availableBytes": "13014515712",
+        "filesystemType": "26"
+      }
+    ],
+    "cleanup": {
+      "removedFiles": [
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/normal-ficlone.bin",
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/source-random-1MiB.bin"
+      ],
+      "removedDirectories": [
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001",
+        "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001"
+      ],
+      "retained": []
+    },
+    "limitations": [
+      "One random 1MiB file only; not a test of the actual 1016332396-byte MP4.",
+      "COPYFILE_FICLONE permits ordinary-copy fallback, so its success alone does not prove cloning.",
+      "No sustained throughput, future free-space, or entire manufacturing guarantee is claimed."
+    ],
+    "source": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/clone-probe-v001/source-random-1MiB.bin",
+      "dev": "16777234",
+      "ino": "98266716",
+      "sizeBytes": 1048576,
+      "allocatedBlocks": "2048",
+      "fileSha256": "6b04fa78841fc61d1274577f5e0b69ac0ae5de7dc29572f47bad3e525ea930d5"
+    },
+    "sourceUnchanged": true,
+    "status": "probe-observations-complete",
+    "finishedAt": "2026-10-04T06:04:02.262Z"
+  },
+  "ownProcessReadback": {
+    "observedAt": "2026-10-04T06:24:36.029275+00:00",
+    "queriedPids": [
+      60995,
+      61000,
+      61190,
+      61195,
+      63765,
+      63769,
+      64683,
+      64687
+    ],
+    "psExitCode": 1,
+    "remaining": []
+  },
+  "stageState": {
+    "normalDraftCreated": false,
+    "plannerStarted": false,
+    "digestPlanCreated": false,
+    "manufacturingJobCreated": false,
+    "manufacturingPermitCreated": false,
+    "digestRendered": false,
+    "representativeChecksStarted": false,
+    "finalizeStarted": false
+  },
+  "approvalMetadata": {
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "userText": "新しい動画でやって　[https://www.youtube.com/watch?v=SJvP9jhEdyI](https://www.youtube.com/watch?v=SJvP9jhEdyI)",
+    "userAtMinute": "2026-10-04T05:29:00Z",
+    "timestampPrecision": "minute, as supplied by parent",
+    "messageId": "Sentinel_24d44e15c2e48191a4d4aefe81a99466",
+    "instructionScopeAccepted": true,
+    "permissionReconfirmationNeeded": false,
+    "metadataStatus": "resolved by actual parent supplement received in this same execution cycle; no fabricated or reused old ID"
+  },
+  "limits": {
+    "sourceClockIsDigestClock": false,
+    "sourceSttTextComparedToActualAudio": false,
+    "storySelectionQualityReviewed": false,
+    "newVideoQualityReviewed": false,
+    "testsRunForProductCodeChange": false,
+    "productCodeChanged": false,
+    "paidApiCalls": 0,
+    "wholeCostMeasured": false,
+    "oldMediaDeleted": false
+  },
+  "retainedEvidenceBindings": [
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v001/result.json",
+      "sizeBytes": 1017,
+      "fileSha256": "486dc21f58068a23c8e81d9f037e0df7ec37fa6a9d3e2b7cabae6c0df2f8517b",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v001/group-shutdown.json",
+      "sizeBytes": 800,
+      "fileSha256": "024e023cbfa15dd97c409447b367140b317ac8ac94da9cf429d0fa0cd63ce444",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/result.json",
+      "sizeBytes": 1443,
+      "fileSha256": "8245d6c6d8990871cb0c53f3cb6db3a6d0cf852d61b931105b82278e3408d733",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/ffprobe.json",
+      "sizeBytes": 3524,
+      "fileSha256": "65446ece0bd42943968f203ddf88348a2a7d11b397c7324bc8ab64c44ca9e710",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/group-shutdown.json",
+      "sizeBytes": 799,
+      "fileSha256": "20a29a877d862eea50eb89c34a36867dff539e7864255b6a7c9eb2bfe2381e28",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-v001/result.json",
+      "sizeBytes": 752,
+      "fileSha256": "5c75b495ffe3721fd7b401e0d990317f7f2d0522da3fd6890c302f50479165e0",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-v001/source-media-inspection.json",
+      "sizeBytes": 2789,
+      "fileSha256": "97ecbff86185ead665323fd9dc6a83ebd6ae4383933d9e5fc584a083e24168ea",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-supervision-v001/summary.json",
+      "sizeBytes": 1024,
+      "fileSha256": "17855ea5a1acbc7d269c8fa253e7be5121d09510a75fa59316274225e32bbfcd",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-inspection-supervision-v001/group-shutdown.json",
+      "sizeBytes": 799,
+      "fileSha256": "bd2cdf3570e5024b7b0fcef00622981f3930b365a0e1a88b22be635b40279824",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/execution.json",
+      "sizeBytes": 500,
+      "fileSha256": "6d41762c4cada56517dc8ad04ed193ff37ba44238602950131945573d4f7c6da",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/normalization-readback.json",
+      "sizeBytes": 1154,
+      "fileSha256": "ad0ad621e27e46efd4ad0f1319c13cd02ab23ce7499fd637dbf6148c2ba303c0",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/zev-result.json",
+      "sizeBytes": 1694949,
+      "fileSha256": "a1cd1c4295e9572a7aefcddfcd8da514345a28ec368f17c541733a0b208f28b8",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/normalized-source-transcript.json",
+      "sizeBytes": 1489253,
+      "fileSha256": "c082654ab253534b457d0ccf4a0256f71eb22cd35b4572144a5e174fc4ffe407",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-attempt-v001/gpu-stt-46b021574c1e455cbde89e2e81824d6a.response.json",
+      "sizeBytes": 3617791,
+      "fileSha256": "f4790f44534ccedbfb641c3eba7c1473818dccc339e879c7c6372809eda9eab6",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-supervision-v001/summary.json",
+      "sizeBytes": 1005,
+      "fileSha256": "7cf3356041aae53b9409a6e9f100f5cbf8ece95165ee4577773dd38feed9a0f1",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-supervision-v001/group-shutdown.json",
+      "sizeBytes": 800,
+      "fileSha256": "0fdd8e69d189499383610c8e951af1c75cd1a6e768b4fa262ec0c4629a61f5ec",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/official-downloader-20260819/acquisition.json",
+      "sizeBytes": 648,
+      "fileSha256": "cd9bb1a639f1f97387e26b1247e2a864b152e35a82e3f48bef819f90b44c9c98",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/official-downloader-20260819/SHA2-256SUMS",
+      "sizeBytes": 1595,
+      "fileSha256": "a63701f30755cb4d9317950d69703e9d751d490cb1b7059e1bb501a353fe7dcb",
+      "device": 16777243
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/official-downloader-20260819/yt-dlp",
+      "sizeBytes": 3072469,
+      "fileSha256": "1fa6733c37ea6fb51c99ad8fe785e7b7e5f3246c9b980230329d4fb72ed8d4d6",
+      "device": 16777243
+    }
+  ],
+  "scratchHelperBindings": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/acquire-SJvP9jhEdyI-20261004.py",
+      "sizeBytes": 4667,
+      "fileSha256": "293b30f77b15423feecac1e3ed9aebc5957227aa38d3f52de419a0fdfc446e30",
+      "device": 16777234
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/acquire-SJvP9jhEdyI-20261004-v002.py",
+      "sizeBytes": 4824,
+      "fileSha256": "1c8494791f9a19ea1d2b79fa0b912cb6ea083d87daa680bc5d726eeb7ca775e5",
+      "device": 16777234
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-source-inspection-v001.mts",
+      "sizeBytes": 3551,
+      "fileSha256": "11a6b50f3e8f1afd58969262423ef27793e815da4265b6bc22b9552f39b5dd0a",
+      "device": 16777234
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-stt-worker-v001.mts",
+      "sizeBytes": 2645,
+      "fileSha256": "d9218410633b4191e855dc32a0fd9855f99b0d64be806d92eae956f655b5721e",
+      "device": 16777234
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-preparation-supervisor-v001.py",
+      "sizeBytes": 3898,
+      "fileSha256": "8803a23875205732b70e9574fea5b4d05e53b5cf6c1382774d1208dc698bd655",
+      "device": 16777234
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-normalize-transcript-v001.mts",
+      "sizeBytes": 2798,
+      "fileSha256": "2b30575ab64f04830742815d430fe5bb1c04c5427eaccf13f91c4d19176be80d",
+      "device": 16777234
+    }
+  ],
+  "formalToolsAndFonts": {
+    "at": "2026-10-04T05:53:41.135Z",
+    "expected": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "observed": {
+      "nodeVersion": "v20.19.6",
+      "ffmpegVersion": "ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers",
+      "ffprobeVersion": "ffprobe version 8.0.1 Copyright (c) 2007-2025 the FFmpeg developers"
+    },
+    "diagnostics": {
+      "node": {
+        "resolvedPath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+        "fileSha256": "de4f3b493b15e7a0ee311f6a2c6dbf93858052f5802aa91cfafa2c57e9d6bc5c"
+      },
+      "ffmpeg": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "fileSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798"
+      },
+      "ffprobe": {
+        "resolvedPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffprobe",
+        "fileSha256": "dcb242647fedaa21618f7048c5f2982e584fdfbcfca098553b3121d1a5d509d9"
+      }
+    },
+    "matched": true,
+    "fontAssets": [
+      {
+        "path": "runner/public/font/LINESeedJP_A_OTF_Eb.otf",
+        "fileSha256": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+        "matched": true,
+        "sizeBytes": 4106788
+      },
+      {
+        "path": "runner/public/font/ShipporiMincho-Bold.ttf",
+        "fileSha256": "be85eeed197f573a8d8dcb26634787179574f3ff179afef077ecfb8d81daa20f",
+        "matched": true,
+        "sizeBytes": 18846492
+      }
+    ]
+  },
+  "evidenceHelperFailedAttempts": [
+    {
+      "atMinute": "2026-10-04T06:21Z",
+      "exitCode": 1,
+      "error": "diskutil info -plist on repository directory returned exit 1",
+      "correction": "query actual internal mount / instead; media/STT not repeated",
+      "scope": "scratch evidence collection only"
+    }
+  ]
+}

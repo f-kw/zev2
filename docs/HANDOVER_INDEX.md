@@ -1,8 +1,20 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-04（JST） / revision：handover-index-20261004-v074
+更新日：2026-10-04（JST） / revision：handover-index-20261004-v075
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-04 06:24 UTC（新素材の準備完了、保存接続の相談役判断待ち）
+
+本人05:29 UTC「新しい動画でやって」への親mona指示で、[SJvP9jhEdyI](https://www.youtube.com/watch?v=SJvP9jhEdyI)の約54分50秒・1080p60素材を今回SSDへ取得した。403は公式専用downloaderと既存同Pythonで回復し、元clock検査と既存LAN GPUの文字起こしが成功。1,016,332,396B/SHA907de6d0、9,789時間付き断片の保存再読/構造/ID/時刻検査passed。実指示ID `Sentinel_24d44e15c2e48191a4d4aefe81a99466` は親の補足で解消し、追加本人回答待ちなし。[素材・処理時間・未評価](reports/digest-new-material-SJvP9jhEdyI-20261004/README.md)。
+
+通常経路の元素材2copy+12GB reserveは最低14,032,664,792B、2026-10-04T06:24:36.004588+00:00の内蔵空き13,028,868,096Bでは成立しない。1MiB実probeのnormal FICLONEはcopy分の空きを消費し、FORCEはENOSYS。別deviceの空きを合算せず、媒体をrepoに偽装しない。新normal draft/plan/job/grant/大copy/描画合成は0。推奨は通常JSONをbyte同一repo snapshotし、元素材一個だけ実SSD場所へ束縛して資格読取する6path/概算140〜250行の限定接続。一般ROOT/trust/default/Python/renderer/QC変更不要の見込みだが、保存配置とCore読取契約の追加なので自己実装せず親へGPT_DECISION。[未適用の対象・条件・検証案](reports/digest-new-material-SJvP9jhEdyI-20261004/guest-source-connection-draft.md)。
+
+状態：相談役待ち。最終確認：2026-10-04T06:24:36.004588+00:00。次担当：親monaのこの一媒体限定差分の技術判断、その後同じMac実装者。新素材指示の実IDを旧許可で代用しない。人間の追加採点を求めず、新planは内容に従い旧15:23/9区間/代表6件を固定しない。採用文字設定は入力。実音声本文照合、構成、実glyph、動画QC、実視聴/音声/人間品質は未評価。素材準備の成功をDigest完成にしない。
+
+取得8分57.580秒、元clock9分25.448秒、STT16分33.201秒（並行あり）。新paid API0、product code変更0、own監視と8PID/PGID残存0。自作probe2file/2emptydir整理、旧削除0、新元動画/STT/clock/証拠/tool KEEP。SSDguest空き96,375,971,840B、host1,989,503,090,688B。main入力実装SHA7193c533、今回記録のcommit/remote/cleanは最終報告で確定。[session log](work-logs/2026-10/2026-10-04T0624_Codex-SSD_ID9-new-material-SJvP9jhEdyI_7193c533.md)。
+
+以下は各時点の履歴。旧04:53の通常接続と旧15:23動画は完了のまま。新素材の保存接続判断待ちと混同せず、旧作業を再開しない。
 
 ## 最新現在地 — 2026-10-04 04:53 UTC（確認待ちから通常結果の完了取得まで完了）
 

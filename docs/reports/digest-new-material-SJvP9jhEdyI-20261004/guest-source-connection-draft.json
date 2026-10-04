@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "digest-one-source-guest-read-connection-draft-v001",
+  "status": "DRAFT_NOT_APPLIED_NOT_EXECUTED",
+  "observedAt": "2026-10-04T06:19:34.028601+00:00",
+  "currentHead": "7193c53372efc1106dc89f77cbf1c5d1d3f8ff85",
+  "sourceId": "SJvP9jhEdyI",
+  "parentObservedBlocker": {
+    "probeAt": "2026-10-04T06:04:00Z",
+    "normalFlags3": "success but 1048576B actual allocation; full copy",
+    "forceFlags5": "ENOSYS errno -78",
+    "internalAvailableBytes": 13014675456,
+    "sourceActualBytes": 1016332396,
+    "internalReserveBytes": 12000000000,
+    "oneCopyDeficitBytes": 1656940,
+    "twoCopiesPlusReserveBytes": 14032664792,
+    "historicalOnly": true
+  },
+  "recommendedOption": "Reuse existing preparation manifest binding; explicit single media placement inside that manifest; no additional job.inputs key",
+  "newMediaMappingDraft": {
+    "physicalPath": "must derive the actual approved normal source URI; no placeholder execution",
+    "bytesVerified": false,
+    "placement": "normal-declared-guest-source-v001",
+    "sizeBytes": "must equal actual normal sourceOrigin.byteSize",
+    "otherMappings": "existing repository JSON physical mapping, bytesVerified true, unchanged"
+  },
+  "preparationPrerequisite": "Normal source registration sourceURI must name a real companion owned by the current source producer inside the current normal artifactRoot. If the current downloaded source is outside, parent may separately approve/materialize an own guest hardlink or byte-identical copy before fixing the fresh draft URI. This proposal does not perform it and does not permit arbitrary guest paths. Actual equivalence must be evidenced; new media rendering unnecessary.",
+  "snapshotContract": [
+    "Copy only the exact normal JSON closure and state snapshot, byte-for-byte with source/target hash/size and unchanged owner IDs/URI/canonical data",
+    "Exclude exactly the declared media binding from JSON snapshot and record its real external placement explicitly",
+    "All JSON references remain real repository files; no source file is declared present there",
+    "Do not call original normal media-consuming readback against a JSON-only mirror; use existing caption reconstruction which intentionally skips declared media bytes"
+  ],
+  "sourceCalibration": [
+    "normal draft sourceURI == prepare/run_stt/plan/execution targetURI == transcript sourceURI == original preparation sourceOrigin.declaredSourceUri == media mapping absolute URI",
+    "one normal source logical binding, sourceOrigin SHA/size, sourceInspection source hash, new mappings and current candidate original clock equal",
+    "media absolute path strictly within job.storage.guestRoot, outside generated outputRoot, no symlink ancestors, regular file, actual guest device",
+    "qualified job/auth independent SHA and actual messageId, new current implementation/code/Node/owner/controller/permit",
+    "actual current guest/host UUID/device/backing image and guard before any formal media read/copy; stream hash/stat stable and source-snapshot hash same"
+  ],
+  "changes": [
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "functions": [
+        "prepare registration-media branch",
+        "readByte / sourceVideo construction"
+      ],
+      "estimatedLines": [
+        25,
+        50
+      ],
+      "responsibility": "Only the approved sourceURI companion in the current normal artifactRoot and current source producer may be read as guest media. Use its actual normal logical binding, safeFile/hash/size; do not create or claim a repository media copy. Keep existing repository branch unchanged.",
+      "currentBinding": {
+        "fileSha256": "5100d8649c9151b831ce3174db40899e4ac229b0b4fde026d9b2bbe7b5eb6072",
+        "sizeBytes": 26918
+      }
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "functions": [
+        "consume manufacturing sourceArtifact.sourceProvenance"
+      ],
+      "estimatedLines": [
+        5,
+        10
+      ],
+      "responsibility": "Derive normal-approved-guest-media-v001 only for the same explicitly declared guest source branch; otherwise retain existing-repository-media. Save this honest provenance in the normal manufacturing record, do not silently rewrite it in the body runner.",
+      "currentBinding": {
+        "fileSha256": "a6c6ff22cf3017a1393fc22578cb1cb9d92ee845636fff8769ec19e78117e842",
+        "sizeBytes": 15235
+      }
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "functions": [
+        "reconstruct manifest.logicalToPhysical media entry"
+      ],
+      "estimatedLines": [
+        20,
+        35
+      ],
+      "responsibility": "All declared JSON remains a real repository snapshot. Exactly one media entry gets physicalPath equal to the original approved sourceURI, bytesVerified false, explicit placement discriminator, and actual normal-origin size metadata; no fabricated repository media path.",
+      "currentBinding": {
+        "fileSha256": "a9c6ede906e548ad94596cb83fc70e1c38480b94b2b6c057516a61c55c02d23e",
+        "sizeBytes": 23966
+      }
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.ts",
+      "functions": [
+        "readApprovedDigestInputsV001 physical media selection",
+        "qualifiedInputs record"
+      ],
+      "estimatedLines": [
+        45,
+        75
+      ],
+      "responsibility": "Treat external placement only for normalPlan.sourceVideoBinding. Calibrate SHA/size/sourceURI/owners/draft/transcript/inspection and guest containment against qualified job.storage. Normal JSON remains qualified.readBinding in the repository; mint no arbitrary resolver or callback.",
+      "currentBinding": {
+        "fileSha256": "afb5a4ec6decf5b575ed3e32e6059913c363e325eea8f3226f07a6c3b5dd1494",
+        "sizeBytes": 33054
+      }
+    },
+    {
+      "path": "runner/src/digest-approved-job-runner-v001.ts",
+      "functions": [
+        "createStorage",
+        "runApprovedDigestJobV001 source hash/stat/budget"
+      ],
+      "estimatedLines": [
+        35,
+        60
+      ],
+      "responsibility": "Mint a fixed resolveApprovedDigestSourceV001(sourceArtifact) in the existing opaque frozen context; it accepts only the already calibrated one source and checks current guest UUID/device/backing image, realpath/no symlink/file identity, hash and size. Replace the two repository-only source hash/stat reads with this exact source resolution; all generated/JSON resolution stays unchanged.",
+      "currentBinding": {
+        "fileSha256": "887490f66d6386c3a36a93768391307acfa4e1871ac2b92d9daa52e33bda3f32",
+        "sizeBytes": 31516
+      }
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "functions": [
+        "adoptedStorageV001",
+        "buildAdoptedBaseMediaV001 source copy"
+      ],
+      "estimatedLines": [
+        10,
+        20
+      ],
+      "responsibility": "Only the existing qualified approved-job context may supply that exact source. Resolve the one input before copy to owned guest source-snapshot.mp4; retain chmod/hash/current storage checks, full source inspection, clocks, PCM/audio/frame QC, own cleanup and all formal publication.",
+      "currentBinding": {
+        "fileSha256": "5882cdd62de1e8377a03529c81ea2113df184cce55a7a9c1f2e585ca56bd0de5",
+        "sizeBytes": 30717
+      }
+    }
+  ],
+  "estimatedImplementationLines": [
+    140,
+    250
+  ],
+  "unchanged": [
+    "job.inputs exact five fields",
+    "common job/authorization schema and validators",
+    "Python supervisor/prepare/launch/finalize/get and guards",
+    "general ROOT/default/trust/resolvers",
+    "shared Digest logical-reference schemas",
+    "renderer caller and render engine formal Normal entry",
+    "QC methods/thresholds/representative policy and record-only completion",
+    "source texts/IDs/clock/order/normal approvals/old accepted artifacts"
+  ],
+  "comparisonAdditionalInputOption": {
+    "input": "optional explicit job.inputs.sourceMediaBinding with absolute path/SHA/size",
+    "additionalPaths": [
+      "runner/src/digest-approved-job-v001.ts",
+      "tools/digest-quality/original-resolution-full-supervisor-v002.py"
+    ],
+    "approxAdditionalLines": [
+      40,
+      80
+    ],
+    "drawbacks": "Changes exact input contract and four fixed-input binding loops; distinct external-binding handling needed. No need if existing preparation manifest already binds exact placement.",
+    "stillNewStorageContract": true
+  },
+  "validationPlan": {
+    "fixtureFamilies": 2,
+    "cases": 8,
+    "families": [
+      "existing repository source branch on current bindings",
+      "one-source approved guest source + real JSON-only repository snapshot"
+    ],
+    "casesList": [
+      "repository branch outputs/mapping remain unchanged",
+      "guest read/source snapshot path matches exact declared file; no repository MP4 exists or copy",
+      "companion wrong producer/URI/path rejected before provider",
+      "changed source bytes/size rejected",
+      "symlink/outside guest/generated-output source rejected",
+      "guest device/UUID/image mismatch rejected",
+      "snapshot/normal owner/manifest/clock substitution or second external media rejected",
+      "opaque clone/callback and source swap after qualification rejected; existing representative pending/finalize/get remains intact"
+    ],
+    "execution": "not run; small byte/path fixtures and existing suites only after parent contract approval; no new diagnostic media required"
+  },
+  "authorityBoundary": "A one-source physical placement and Core input-reading contract extension, not merely a normal copy bug fix. Parent technical judgment required before any repository application. No new general trust, root, fallback, QC exemption or source manufacturing permission.",
+  "remainingEssentialInput": "Storage placement/input-read contract scope needs parent technical judgment; actual user messageId has now been supplied. No new human answer is pending.",
+  "effects": {
+    "repoEdits": 0,
+    "gitMutations": 0,
+    "mediaCopiesOrGeneration": 0,
+    "apiCalls": 0,
+    "testsOrProbes": 0
+  },
+  "latestRootEvidence": {
+    "observedAt": "2026-10-04T06:24:36.004588+00:00",
+    "disks": {
+      "internal": {
+        "path": "/Users/kawafmm/workspace/zev2",
+        "device": 16777234,
+        "volumeUUID": "CBD5A285-2C2B-4C29-AC22-B1203674F3A4",
+        "deviceIdentifier": "disk3s1s1",
+        "filesystem": "apfs",
+        "availableBytes": 13028868096
+      },
+      "guest": {
+        "path": "/Volumes/ZEV-Digest-20261003-01",
+        "device": 16777243,
+        "volumeUUID": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+        "deviceIdentifier": "disk6s1",
+        "filesystem": "apfs",
+        "availableBytes": 96375971840
+      },
+      "host": {
+        "path": "/Volumes/KIOXIA",
+        "device": 16777238,
+        "volumeUUID": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+        "deviceIdentifier": "disk4s2",
+        "filesystem": "exfat",
+        "availableBytes": 1989503090688
+      }
+    },
+    "storageRequirement": {
+      "reserveBytes": 12000000000,
+      "sourceCopiesOnInternal": 2,
+      "sourceBytes": 1016332396,
+      "minimumInternalBytesExcludingSmallJson": 14032664792,
+      "internalShortfallBytes": 1003796696
+    }
+  },
+  "actualUserInstruction": {
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "userText": "新しい動画でやって　[https://www.youtube.com/watch?v=SJvP9jhEdyI](https://www.youtube.com/watch?v=SJvP9jhEdyI)",
+    "userAtMinute": "2026-10-04T05:29:00Z",
+    "timestampPrecision": "minute, as supplied by parent",
+    "messageId": "Sentinel_24d44e15c2e48191a4d4aefe81a99466",
+    "instructionScopeAccepted": true,
+    "permissionReconfirmationNeeded": false,
+    "metadataStatus": "resolved by actual parent supplement received in this same execution cycle; no fabricated or reused old ID"
+  }
+}
