@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-04（JST） / revision：handover-index-20261004-v079
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v080
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-04 14:59 UTC（短字幕fadeと代表検査の3path接続を完了、発話境界回答待ち）
+
+親の明示継続指示で次回用の短字幕濃さとnative代表検査を製品3path・回帰6pathへ実装。全primary実alpha/bounds/ID/時計/設定/媒体/元音声、全必要calibrationと補正後maskを維持し、opaque実policyからrepeat/maskを選ぶ。現計画では651primary＋8repeat＋14mask、未実施643repeat/1028maskを正直に記録。coverageをplan/policy/job/auth/codeへ束縛し、technical/pending/get/record-only/completed読取まで保持。一般trust/default/Core/監視/保存先・browser共有・汎用cache変更0。[実装・検証・不足根拠](reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-implementation-result-v001.md)。
+
+実小FFmpegで1frame100％、3frame50→100→50％、7frame以上の旧byte/clockとrange phase保持。関連129件中127成功、旧固定rendererSHA2件の入口拒否は変更前にも同じ不一致があるとSHA読取確認し、免除しない。型/構文/diff成功、設営補正4回/独立reviewの実修正と失敗履歴を保持。新651描画/本番合成/時計変更/追加音声診断/API0、旧正式MP4と問題record保持。新動画品質・全視聴/音声/人間採用は未評価。
+
+状態：人間待ち（原38:35〜38:55中の該当一文の発話開始/終了の回答）。独立実装は完了。最終実読取2026-10-04T14:52:57.890600+00:00、own製造process0、main/remote3940cb6e一致、正式MP4の実stat保持。次担当：親monaが本人回答から隣接と整合する最小訂正を決め、その指示を同じMac実装者が実施。次の製造前に新code/依存/入力/出力/ownerを正式jobへ束縛し、旧8c資格へ免除しない。本人14:54/14:55/14:57 UTCの時間・文字数/余白・計算優先の分析依頼を受領。[時間/試験台帳](reports/digest-new-material-SJvP9jhEdyI-20261004/production-time-and-test-ledger-v001.md)へ既存数値を整理。[保存済み幅分析](reports/digest-new-material-SJvP9jhEdyI-20261004/calculation-vs-native-inspection-analysis-v001.md)ではASCIIなし901行は計算箱以内、英字最大+237px。通常日本語を計算中心・上限/未知/比例幅等を例外にする候補を渡し、全primary測定との重複も明示。有限sampleの一般保証/新閾値/今回コード変更/追加試験0。[session log](work-logs/2026-10/2026-10-04T1459_Codex-SSD_ID9-short-fade-native-sampling_3940cb6e.md)。以下14:17の未適用案は今回実装前の履歴。
 
 ## 最新現在地 — 2026-10-04 14:17 UTC（保存済み一本を正式保存へ復帰、字幕問題で完成未成立）
 

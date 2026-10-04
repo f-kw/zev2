@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "digest-short-fade-and-native-sampling-implementation-result-v001",
+  "checkedAt": "2026-10-04T14:59:03.950748+00:00",
+  "baseHead": "3940cb6e015248fce8ae22bfbf5149f623e11510",
+  "status": "limited implementation complete; source-utterance timing human answer pending",
+  "productPaths": [
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830",
+      "sizeBytes": 167214
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "39b2dcb042a705cf8adee457c509b6aef5f31b96ccdfc74f3d18132ce214a161",
+      "sizeBytes": 59624
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_completion_v001.mjs",
+      "fileSha256": "babcda0b0d129bacc049d2e0e756bcd2eb9afdf0e34713db4540f79e4e80a831",
+      "sizeBytes": 46709
+    }
+  ],
+  "testPaths": [
+    {
+      "path": "evals/clip_composition/presentation_short_caption_opacity_v001.test.mjs",
+      "fileSha256": "62eccd3b74567327a634f0d5e9cb28fdb013d8897c85b75ccaafdd2b5f1aa467",
+      "sizeBytes": 3645
+    },
+    {
+      "path": "evals/clip_composition/digest_native_sampling_renderer_v001.test.mjs",
+      "fileSha256": "36b6844f00e9f3f354c2ac06339c2ae62921defa4738afc3f24b0a15de532d28",
+      "sizeBytes": 8764
+    },
+    {
+      "path": "evals/clip_composition/digest_native_sampling_qc_v001.test.mjs",
+      "fileSha256": "28561ddf3948ca5e6605939dddb345eb83babdf13b606bbdbec704dd65622ea7",
+      "sizeBytes": 13532
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_native_coverage_v001.test.mjs",
+      "fileSha256": "f156c869e5425d2c6fcd8a586f9857c3a7ce4baf9dff26dce94ee252a00f7ee3",
+      "sizeBytes": 19448
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_renderer_v001.test.mjs",
+      "fileSha256": "9b4e4785eee3ceea43144e5e5d3022219bd5f632b895c6f66a143a9aab624b5d",
+      "sizeBytes": 13611
+    },
+    {
+      "path": "evals/clip_composition/presentation_composite_fade_localization_v001.test.mjs",
+      "fileSha256": "3857fc829fc928df9e00b159fdb440683bb2ab993674229996c88a2151d66fba",
+      "sizeBytes": 13910
+    }
+  ],
+  "evidenceBindings": [
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/native-sampling-static-planning-v001.json",
+      "fileSha256": "2b96c58ed602e2cbc6015f2648aa27cb88a56fa05c7785076b776d790fc448c3",
+      "sizeBytes": 13253
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/historical-renderer-fixture-rejection-v001.json",
+      "fileSha256": "63ad87ddd45d2087208eeda7e46ac7242266bc54411b0a62f7b5bc8205d913e3",
+      "sizeBytes": 817
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-integration-verification-v001.json",
+      "fileSha256": "680017c90dc088147118010f0227cbb175b0a82b8efbc82e627b3be37d645e7c",
+      "sizeBytes": 1520
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-types-verification-v001.json",
+      "fileSha256": "63ba60177813391832325785a69fae1631075d030cf69cb294377419fea4187a",
+      "sizeBytes": 1331
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-syntax-verification-v001.json",
+      "fileSha256": "d47fe4531cde346b85352e8667e92b73b3e805baec8d3f4354cd66543a7f1796",
+      "sizeBytes": 2355
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-close-read-observation-v001.json",
+      "fileSha256": "aefb140a1752d864801276cc2df9ee91f9cc40f3a947bcd169253e1ee79296db",
+      "sizeBytes": 981
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/specific-native-sampling-integration-review-v001.md",
+      "fileSha256": "d924135c3ea795eba869aaa5a546ebac64a18aceaec82dceb9c5e130181e68f3",
+      "sizeBytes": 3639
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/specific-native-sampling-integration-review-v001.json",
+      "fileSha256": "d75f05a69b1e969da14b2fb47e682551dca0d095d9e4972959b738c41596f18c",
+      "sizeBytes": 5651
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/digest-native-coverage-shared-implementation-v001.md",
+      "fileSha256": "4d8d3b2b3ce3a07b95657a41da56b31b2894a427064fb798c1b951dd0907a1f1",
+      "sizeBytes": 2954
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/digest-native-coverage-shared-implementation-v001.json",
+      "fileSha256": "ee623e06c34e0e8e94424d0a496e760f468e490cf91aa21919032d974be37c2d",
+      "sizeBytes": 5425
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/digest-native-sampling-qc-verification-v001.json",
+      "fileSha256": "3c6a0d46837a8c94a20fed136dd73658c98a0ef0617f496aabd8f4fc235854a8",
+      "sizeBytes": 3669
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-regression-v001.tap",
+      "fileSha256": "2737ed5ceae8c3f62c3b77f8c38058472ecd59c99766b676e9593469656762ca",
+      "sizeBytes": 28606
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/root-opacity-fixture-history-v001.json",
+      "fileSha256": "2c948c047a14dc06891e1ada0acc57e87a96f54df6b493f5c7a739c369e7a097",
+      "sizeBytes": 1227
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/production-time-and-test-ledger-v001.md",
+      "fileSha256": "a23de1b5ab49b1ccdc769e0f1ac93a4a0d471a2aade668284dbc87127f3b057f",
+      "sizeBytes": 12815
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/production-time-and-test-ledger-v001.json",
+      "fileSha256": "8710fb54c1f3c66ca3aa7dab5196cc04896e8c27e4a4f5572a5aa1915b15b64d",
+      "sizeBytes": 20171
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/calculation-vs-native-inspection-analysis-v001.md",
+      "fileSha256": "ffc17efe8ee12856d6639494640b2971405569d8f43ee4acd227087b879cf6d0",
+      "sizeBytes": 9267
+    },
+    {
+      "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/calculation-vs-native-inspection-analysis-v001.json",
+      "fileSha256": "7ffa2248d838163ba25f3f15e2fde579278574ae2f24a2a859fe305786e4fc57",
+      "sizeBytes": 11298
+    }
+  ],
+  "regression": {
+    "total": 129,
+    "passed": 127,
+    "failed": 2,
+    "skipped": 0,
+    "historicalFixedRendererHashRejections": 2,
+    "newDedicatedAndAffectedConnectionTestsFailed": 0,
+    "integrationRunSeconds": 5.473755,
+    "setupCorrections": {
+      "root": 1,
+      "sharedAgent": 3,
+      "total": 4
+    },
+    "independentReview": "no unresolved major finding; exact current 3 bindings matched"
+  },
+  "typeChecks": {
+    "runner": "passed",
+    "remotion": "passed"
+  },
+  "syntaxChecks": "passed",
+  "gitDiffCheck": "source/docs/nonraw artifacts passed; exact raw TAP diagnostic blank lines 607/634 excluded only from whitespace rule, no test or product waiver",
+  "newMedia": {
+    "full651Draws": 0,
+    "productionComposites": 0,
+    "audioDiagnoses": 0,
+    "paidApi": 0,
+    "clockChanges": 0
+  },
+  "quality": {
+    "existingVideo": "unchanged; not newly viewed in this scope",
+    "newVideo": "not-created",
+    "wholePlayback": "not-evaluated",
+    "audioListening": "not-evaluated",
+    "humanQualityAdoption": "not-evaluated"
+  },
+  "futureJob": "requires new actual implementation SHA/dependency bindings and fresh bound output/owner before any approved manufacture; prior recovery job cannot be silently reused",
+  "nextOwner": "parent mona receives human approximate utterance start/end for original 38:35-38:55 and decides minimal clock correction; same Mac implementation owner follows that instruction",
+  "timingAnalysisRequest": {
+    "receivedAt": "2026-10-04T14:54:00+00:00",
+    "precision": "minute",
+    "messageId": "Sentinel_d36230b2e0a88191978583d5b0f1c054",
+    "newBenchmarksOrTestsForAnalysis": 0
+  },
+  "timingAnalysisRequests": [
+    {
+      "receivedAt": "2026-10-04T14:54:00+00:00",
+      "precision": "minute",
+      "messageId": "Sentinel_d36230b2e0a88191978583d5b0f1c054",
+      "scope": "time and test burden"
+    },
+    {
+      "receivedAt": "2026-10-04T14:55:00+00:00",
+      "precision": "minute",
+      "messageId": "Sentinel_4fa2c5b5d6988191a65190b493ea1559",
+      "scope": "character/logical width and margin instead of unnecessary actual image checks"
+    },
+    {
+      "receivedAt": "2026-10-04T14:57:00+00:00",
+      "precision": "minute",
+      "messageId": "Sentinel_7e4b6edc6d448191874f556ba4e3fb31",
+      "scope": "calculate derivable properties; measure only real raster/codec/I/O boundaries"
+    }
+  ],
+  "calculationAnalysisRecordedAt": "2026-10-04T15:16:56.102855+00:00"
+}

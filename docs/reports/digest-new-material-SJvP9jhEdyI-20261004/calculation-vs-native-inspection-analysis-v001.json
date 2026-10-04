@@ -1,0 +1,329 @@
+{
+  "schemaVersion": "calculation-vs-native-inspection-analysis-v001",
+  "checkedAt": "2026-10-04T15:12:23.005427+00:00",
+  "source": {
+    "technicalBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-technical-evidence-v001.json",
+      "fileSha256": "84c573cb3feadaf88cf2c5581aece7c5e34860d6bed49f73a88d45e53d126de5",
+      "sizeBytes": 8838883
+    },
+    "actualRawShaAndSizeVerified": true,
+    "auditPath": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/specific-recovery-actual-result-evidence-v001.json",
+    "auditCheckedAt": "2026-10-04T14:01:55.772858+00:00",
+    "sourceType": "saved numeric metadata; no PNG/MP4 opened"
+  },
+  "fixedScope": {
+    "canvasWidthPx": 1920,
+    "canvasHeightPx": 1080,
+    "fps": 30,
+    "fontAssetId": "line-seed-jp-extra-bold-v001",
+    "fontFileName": "LINESeedJP_A_OTF_Eb.otf",
+    "fontFamilyName": "zev-renderer-line-seed-jp-extra-bold-v001",
+    "fontWeight": 800,
+    "fontSizePx": 216,
+    "borderWidthPx": 8,
+    "glowWidthPx": 4,
+    "horizontalMarginPx": 108,
+    "maxLinesPerCue": 2,
+    "lineSpacingPercent": 150,
+    "positionPreset": "bottom-center",
+    "offsetXPercent": 0,
+    "offsetYPercent": -6,
+    "background": null,
+    "styleVariantCount": 1,
+    "fontByteShaDeclaredInExistingTrust": "4f20353d5ba41012fb8eaaa653d2ac46f80d63880301a6590765897bbdfedbfb",
+    "fontBytesNotRehashedInThisAnalysis": true
+  },
+  "calculation": {
+    "characterWeightRule": "U+0000..U+00FF=1; other Unicode code point=2",
+    "logicalUnitPx": 108,
+    "strokeExtentPx": 12,
+    "safePaddingPx": 9,
+    "availableTextWidthPx": 1662,
+    "maxLogicalWidthPerLine": 15,
+    "textWidthAtLogical15Px": 1620,
+    "strokeBoxAtLogical15Px": 1644,
+    "wrapperAtLogical15Px": 1662,
+    "centeredStrokeBoxMarginAtLogical15Px": 138,
+    "additionalMarginAbove108AtLogical15Px": 30,
+    "unusedTextWidthAtLogical15Px": 42,
+    "textWidthAtLogical14Px": 1512,
+    "strokeBoxAtLogical14Px": 1536,
+    "wrapperAtLogical14Px": 1554,
+    "centeredStrokeBoxMarginAtLogical14Px": 192,
+    "additionalMarginAbove108AtLogical14Px": 84,
+    "japaneseOnlyCodePointsAtLogical14": 7,
+    "linePitchPx": 324,
+    "estimatedLineRectHeightPx": 240,
+    "estimatedTwoLineGapPx": 84,
+    "nodeNoDocumentUsesEstimate": true,
+    "browserMeasurementUsesMaxOfEstimateAdvanceAndGlyphMetrics": true
+  },
+  "savedNumericPopulation": {
+    "cues": 651,
+    "lines": 1042,
+    "oneLineCues": 260,
+    "twoLineCues": 391,
+    "allLogicalWidthsLe15": true,
+    "allCueLinesLe2": true,
+    "allPrimaryAlphaMaxOne": true,
+    "primaryBoundsEqualUnionOfLineAlphaBoundsCount": 651,
+    "logical14Lines": 165,
+    "logical15Lines": 17,
+    "minimumMarginsPx": {
+      "left": 125,
+      "right": 134,
+      "top": 418,
+      "bottom": 104
+    },
+    "minimumHorizontalSurplusAbove108Px": {
+      "left": 17,
+      "right": 26
+    },
+    "minimumActualTwoLineGapPx": 90,
+    "actualLineInkHeightPx": {
+      "min": 198,
+      "max": 234
+    },
+    "allPrimaryCount": 651,
+    "allLineMaskCount": 1042
+  },
+  "errorDefinition": {
+    "widthDifferencePx": "actual line ink width - (logical width*108 + 24)",
+    "leftOutwardErrorPx": "predicted lineRects.left - actual lineAlphaBounds.left",
+    "rightOutwardErrorPx": "actual lineAlphaBounds.right - predicted lineRects.right",
+    "bottomOutwardErrorPx": "actual lineAlphaBounds.bottom - predicted lineRects.bottom; not a wrapper escape"
+  },
+  "finiteObservedErrors": {
+    "allLines": {
+      "count": 1042,
+      "widthDifferencePxMin": -208,
+      "widthDifferencePxMax": 237,
+      "widthPositiveCount": 42,
+      "leftOutwardPxMax": 124,
+      "rightOutwardPxMax": 113,
+      "bottomOutwardPxMax": 54.8
+    },
+    "noU0000To00ff": {
+      "count": 901,
+      "widthDifferencePxMin": -208,
+      "widthDifferencePxMax": -1,
+      "leftOutwardPxMax": 0,
+      "rightOutwardPxMax": -1
+    },
+    "asciiLettersPresent": {
+      "count": 8,
+      "widthDifferencePxMax": 237,
+      "leftOutwardPxMax": 124,
+      "rightOutwardPxMax": 113
+    },
+    "asciiDigitsWithoutLetters": {
+      "count": 8,
+      "widthDifferencePxMax": 79,
+      "leftOutwardPxMax": 40,
+      "rightOutwardPxMax": 39
+    },
+    "asciiPunctuationWithoutAlphanumeric": {
+      "count": 125,
+      "widthDifferencePxMax": 28,
+      "leftOutwardPxMax": 14,
+      "rightOutwardPxMax": 17
+    },
+    "asciiDigitsIncludingLetters": {
+      "count": 9,
+      "widthDifferencePxMax": 96
+    },
+    "logical15": {
+      "count": 17,
+      "widthDifferencePxMax": 15,
+      "leftOutwardPxMax": 13,
+      "rightOutwardPxMax": 4
+    },
+    "logical14": {
+      "count": 165,
+      "widthDifferencePxMax": 96,
+      "leftOutwardPxMax": 59,
+      "rightOutwardPxMax": 37
+    },
+    "classesMayOverlapUnlessWithoutExplicitlyNamed": true
+  },
+  "examples": [
+    {
+      "cueOrdinal": 486,
+      "lineIndex": 1,
+      "text": "の好きなBGM",
+      "logicalWidth": 11,
+      "estimatedTextWidthPx": 1188,
+      "predictedStrokeBoxWidthPx": 1212,
+      "actualInkWidthPx": 1449,
+      "widthDifferencePx": 237,
+      "leftOutwardPx": 124,
+      "rightOutwardPx": 113,
+      "actualLeftMarginPx": 230,
+      "actualRightMarginPx": 241
+    },
+    {
+      "cueOrdinal": 303,
+      "text": "OK、あー",
+      "logicalWidth": 8,
+      "widthDifferencePx": 139,
+      "leftOutwardPx": 74,
+      "rightOutwardPx": 65
+    },
+    {
+      "cueOrdinal": 189,
+      "text": "FイコールPV1と",
+      "logicalWidth": 14,
+      "widthDifferencePx": 96,
+      "leftOutwardPx": 59,
+      "rightOutwardPx": 37
+    },
+    {
+      "cueOrdinal": 127,
+      "text": "平成28年",
+      "logicalWidth": 8,
+      "widthDifferencePx": 79,
+      "leftOutwardPx": 40,
+      "rightOutwardPx": 39
+    },
+    {
+      "cueOrdinal": 300,
+      "text": "え?えぇ!??",
+      "logicalWidth": 10,
+      "widthDifferencePx": 28,
+      "leftOutwardPx": 11,
+      "rightOutwardPx": 17
+    },
+    {
+      "cueOrdinal": 188,
+      "text": "浮力をFに置くと",
+      "logicalWidth": 15,
+      "actualLeftMarginPx": 125,
+      "actualRightMarginPx": 165
+    },
+    {
+      "cueOrdinal": 533,
+      "text": "毛黒かったっけ?",
+      "logicalWidth": 15,
+      "actualInkWidthPx": 1659,
+      "widthDifferencePx": 15,
+      "actualLeftMarginPx": 127,
+      "actualRightMarginPx": 134
+    }
+  ],
+  "shortDuration": {
+    "clockRule": "positive integer frames; no current numeric normal-speed-reading gate",
+    "conversion": "durationSeconds=(endFrameExclusive-startFrame)/30; CPS=visible code-point count/durationSeconds",
+    "examples": [
+      {
+        "cueOrdinal": 571,
+        "text": "お!",
+        "startFrame": 32576,
+        "endFrameExclusive": 32577,
+        "frames": 1,
+        "seconds": 0.03333333333333333,
+        "visibleCodePoints": 2,
+        "charactersPerSecond": 60
+      },
+      {
+        "cueOrdinal": 465,
+        "text": "世界が終わる",
+        "startFrame": 24988,
+        "endFrameExclusive": 24991,
+        "frames": 3,
+        "seconds": 0.1,
+        "visibleCodePoints": 6,
+        "charactersPerSecond": 60
+      }
+    ],
+    "descriptiveCountsNotAcceptanceThresholds": {
+      "under4Frames": 19,
+      "under8Frames": 62,
+      "under15Frames": 188,
+      "under30Frames": 350
+    },
+    "separateDecisions": [
+      "geometric fit by logical width/line count",
+      "positive clock and original-source provenance",
+      "time to read and narrative importance/neighboring cue context; semantic review needed"
+    ],
+    "noNewMinimumDurationOrCpsGate": true
+  },
+  "overlapAndResidual": {
+    "overlap": [
+      "line count and ordinary rectangular safe-area constraints",
+      "known fixed-style vertical separation and text-box placement"
+    ],
+    "notEquivalent": [
+      "primary nonempty alpha and actual drawing failure",
+      "font/glyph activation or missing/substituted glyph",
+      "actual ink overhang and proportional width",
+      "background contrast and completed-video visibility",
+      "normal-speed readability and semantic boundary quality"
+    ],
+    "existingImageInspectionCount": 3386,
+    "arithmeticExistingInspectionProcesses": {
+      "primaryAlphaAndBounds": 1302,
+      "maskAlphaAndBounds": 2084
+    },
+    "timeSavingNotMeasured": true,
+    "primaryInspectionLimit": "Nonempty alpha/bounds are not per-character glyph identification; a partially missing glyph need not make a primary empty."
+  },
+  "proposalAssessment": {
+    "conclusion": "supports calculation-first ordinary fixed-style captions plus explicit near-limit/proportional/symbol exceptions and representatives; does not prove universal geometric or quality safety",
+    "ordinaryCandidate": "known same font/style Japanese text with conservative logical width and geometric margin; 7 ordinary Japanese code points correspond to logical14, not a newly adopted hard threshold",
+    "exceptionCandidates": [
+      "near-capacity lines, especially logical15",
+      "ASCII letters/digits and proportional-width strings",
+      "unseen symbols, emoji, combining marks, variation selectors, mixed scripts or unknown font coverage",
+      "changed font/size/weight/stroke/glow/margins/line spacing/position/background",
+      "top-band/panel calibration; Pulse/Motion; transformations/effects"
+    ],
+    "currentImplementationAllPrimaryPreserved": true,
+    "scopeOrGateChangeNotPerformed": true
+  },
+  "codeReferences": [
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "line": 518,
+      "finding": "capacity resolver explicitly estimates capacity, not actual glyph ink; formulas at535-546"
+    },
+    {
+      "path": "runner/src/telop/telop-line-break.ts",
+      "line": 6,
+      "finding": "U+0000..U+00FF weight1, others2"
+    },
+    {
+      "path": "runner/src/telop/text-metrics.ts",
+      "line": 8,
+      "finding": "logical estimate; document absence returns estimate; browser adds actual metrics at44-61"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "line": 245,
+      "finding": "stroke/padding, actual browser font metrics, wrapper placement; font load at486"
+    },
+    {
+      "path": "evals/clip_composition/inspect_presentation_render_layout_v001.ts",
+      "line": 33,
+      "finding": "computed lineRects, line count/overlap/safe-area"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "line": 470,
+      "finding": "actual alpha/bounds/masks vs computed rectangles"
+    },
+    {
+      "path": "evals/clip_composition/presentation_renderer_text_layout_v001.mjs",
+      "line": 345,
+      "finding": "frame rounding and positive duration, not reading-time guarantee"
+    }
+  ],
+  "limits": [
+    "Maximum observed error is finite population metadata, not a bound for new strings or fonts.",
+    "901 no-ASCII lines are not every possible Japanese/Unicode string.",
+    "Absolute geometry and observed width error are distinguished; vertical ink may extend below lineRect while remaining inside wrapper/safe area.",
+    "No PNG/MP4 opened, no new glyph inspection, benchmark, test, media/process/API/Git/repo/SSD mutation.",
+    "No completed-video/full-playback/audio-listening/human-quality claim is made by this analysis."
+  ]
+}

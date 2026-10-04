@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "digest-native-sampling-independent-read-review-v001",
+  "checkedAt": "2026-10-04T14:48:12.761293+00:00",
+  "repositoryHead": "3940cb6e015248fce8ae22bfbf5149f623e11510",
+  "codeBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830",
+      "sizeBytes": 167214,
+      "lineRefs": {
+        "const fadeWidth =": [
+          1079
+        ],
+        "const nativeEntries =": [
+          2401
+        ],
+        "const needsRepeat =": [
+          2460
+        ],
+        "for (const line of needsLineMasks": [
+          2479
+        ],
+        "nativeSelection.requiredPlacementInstructionIds.includes": [
+          2508
+        ],
+        "const nativeCoverage = nativeSelection": [
+          2590
+        ],
+        "nativeCoverage = null": [
+          2912
+        ],
+        "async function finishPresentationDrawAndQcV001": [
+          2904
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "fileSha256": "39b2dcb042a705cf8adee457c509b6aef5f31b96ccdfc74f3d18132ce214a161",
+      "sizeBytes": 59624,
+      "lineRefs": {
+        "const digestNativeInspectionScopes =": [
+          101
+        ],
+        "const lineMasksRequired =": [
+          487
+        ],
+        "export function deriveDigestNativeInspectionSelectionV001": [
+          973
+        ],
+        "export function validateDigestNativeSamplingCoverageV001": [
+          1004
+        ],
+        "export function evaluateDigestRepresentativeRendererQcV001": [
+          1096
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_representative_completion_v001.mjs",
+      "fileSha256": "babcda0b0d129bacc049d2e0e756bcd2eb9afdf0e34713db4540f79e4e80a831",
+      "sizeBytes": 46709,
+      "lineRefs": {
+        "function savedNativeCoverage": [
+          24
+        ],
+        "applicationResults:structuredClone(applicationResults)": [
+          151
+        ],
+        "export async function finishApprovedDigestRepresentativeCompletionV001": [
+          167
+        ],
+        "const nativeCoverage=draw.nativeCoverage": [
+          245
+        ],
+        "applicationResults=v.existingRuleEvidence.applicationResults": [
+          364
+        ],
+        "const nativeCoverage=t.nativeCoverage": [
+          423
+        ],
+        "export async function requalifyApprovedDigestRecordedRepresentativeV001": [
+          453
+        ]
+      }
+    }
+  ],
+  "scope": "three production path integration; no test or media run",
+  "findings": [
+    {
+      "id": "special-representative-mask-scope",
+      "status": "resolved-in-code",
+      "finding": "Renderer originally preferred representative scope when a cue was also a required placement.",
+      "resolution": "Required placement now has precedence, matching the validator."
+    },
+    {
+      "id": "initial-completed-application-source",
+      "status": "resolved-in-code",
+      "finding": "Normal caller execution result has no applicationResults; the initial completed reader originally tried to use it.",
+      "resolution": "Actual finish applicationResults are now cloned into sampled existingRuleEvidence and read from there. Caller/Core changes are not required."
+    }
+  ],
+  "confirmedDesign": [
+    "All primary generation and actual alpha/bounds inspections remain; no unselected primary is relabeled as inspected without the actual existing inspector.",
+    "Repeat drawing is selected only; line masks are the derived union of representatives and required top-band/panel placement.",
+    "All special placement calibration, props correction and post-correction line masks remain, even for unselected cues.",
+    "Coverage pins plan/policy canonical hashes and actual qualified job/authorization/implementation bindings; masks include actual SHA and six-field bounds matched to inspections.",
+    "Separate sampled QC uses an inaccessible internal WeakSet scope and distinct passed-representative-rules / passed-representative visibility statuses. Generic full exports retain missing-mask rejection.",
+    "Coverage, all primary metadata and application results persist into verification/technical evidence and are reconstructed in pending/get/record-only finalization.",
+    "Missing coverage with sampling status or evidence is rejected; absence of native coverage otherwise uses the legacy full strict route.",
+    "Private qualification, published media/PNG actual byte checking, original audio checks and fullVisibility not-executed remain.",
+    "Short fade width is min(4,ceil(displayFrames/2)); positive clock is required, and seven or more frames retain the four-frame expression. Existing video bytes and receipts are not changed.",
+    "Legacy saved-work resume has no new coverage and retains full strict mask reinspection; it does not automatically select the new 8/14 mode."
+  ],
+  "outsideThreeProductionPathsRequired": false,
+  "remainingMajorReadReviewBlockers": [],
+  "notEvaluated": [
+    "Own tests: none; other agents reported targeted results but this review does not claim to have rerun them.",
+    "Actual full manufacture, 651 draws, composite, audio diagnostic or existing video quality: none.",
+    "Actual new private context sampling finish/pending/get/finalize across processes.",
+    "Performance or production resource sample gaps."
+  ],
+  "actionsPerformed": {
+    "repositoryWrites": 0,
+    "ssdWrites": 0,
+    "gitMutations": 0,
+    "mediaProcessing": 0,
+    "tests": 0
+  }
+}

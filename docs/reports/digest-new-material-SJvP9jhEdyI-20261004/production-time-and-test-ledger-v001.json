@@ -1,0 +1,542 @@
+{
+  "schemaVersion": "digest-production-time-test-ledger-v001",
+  "checkedAt": "2026-10-04T15:05:22.565970+00:00",
+  "scope": "existing logs and numeric records only; no new tests or benchmarks for analysis",
+  "rows": [
+    {
+      "category": "source-download",
+      "source": "preparation-evidence.json:downloadAttempts[1]",
+      "durationSeconds": 537.5803738749819,
+      "endedAt": "2026-10-04T05:56:28.848676+00:00",
+      "count": 1,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "source-clock-inspection",
+      "source": "preparation-evidence.json:sourceInspection",
+      "durationSeconds": 565.448,
+      "endedAt": "2026-10-04T06:07:31.897Z",
+      "decodedFrames": 197406,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "STT-client",
+      "source": "preparation-evidence.json:stt.execution",
+      "durationSeconds": 993.201,
+      "endedAt": "2026-10-04T06:17:50.497Z",
+      "includeInOverallSum": false,
+      "overlaps": "source clock inspection; server interval nested"
+    },
+    {
+      "category": "normal-planning",
+      "source": "manufacture-result-v001.md:table",
+      "durationSeconds": 1375.45,
+      "judgmentWaitSecondsNested": 1370.741,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "caption-preparation-and-adoption",
+      "source": "manufacture-result-v001.md:table",
+      "durationSeconds": 1603.606,
+      "includesParallelJudgments": true,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "original-manufacture",
+      "source": "manufacture-result-evidence-v001.json:manufacturing",
+      "startedAt": "2026-10-04T08:37:15.299181+00:00",
+      "endedAt": "2026-10-04T11:54:57.305726+00:00",
+      "durationSeconds": 11862.006545066833,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "native-draw-and-inspection",
+      "source": "manufacture-result-evidence-v001.json:native",
+      "startedAt": "2026-10-04T08:59:51.240+00:00",
+      "endedAt": "2026-10-04T11:29:25.819+00:00",
+      "durationSeconds": 8974.579,
+      "nestedIn": "original-manufacture",
+      "includeInOverallSum": false
+    },
+    {
+      "category": "composite",
+      "source": "manufacture-result-evidence-v001.json:composite",
+      "durationSeconds": 1320.55,
+      "ranges": 180,
+      "frames": 37619,
+      "nestedIn": "original-manufacture",
+      "includeInOverallSum": false
+    },
+    {
+      "category": "saved-work-recovery",
+      "source": "specific-recovery-actual-result-evidence-v001.json:timing",
+      "actualTiming": {
+        "initialPreparationMs": 7564,
+        "baseMediaMs": 527,
+        "renderAndQcMs": 1134303,
+        "totalMs": 1146120
+      },
+      "durationSeconds": 1148.869,
+      "draws": 0,
+      "newComposites": 0,
+      "imageToolChildren": 3386,
+      "mediaToolChildren": 5,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "issue-registration-and-finalize",
+      "source": "specific-recovery-finalize-issue-record-v001.operation.json",
+      "startedAt": "2026-10-04T14:04:51.083+00:00",
+      "endedAt": "2026-10-04T14:05:32.541+00:00",
+      "durationSeconds": 41.458,
+      "result": "issue record saved; correct quality refusal",
+      "includeInOverallSum": false
+    },
+    {
+      "category": "current-limited-implementation-and-regression",
+      "source": "fade-native-implementation-result-v001.md and run logs",
+      "knownPriorCheckpointAt": "2026-10-04T14:20:13.947763+00:00",
+      "reportAt": "2026-10-04T14:59:03.950748+00:00",
+      "completeWorkStartOrEndNotPreciselyMeasured": true,
+      "humanWorkSeconds": null,
+      "includeInOverallSum": false
+    },
+    {
+      "category": "current-final-integration-suite",
+      "source": "fade-native-integration-verification-v001.json",
+      "startedAt": "2026-10-04T14:50:15.577925+00:00",
+      "endedAt": "2026-10-04T14:50:21.051680+00:00",
+      "durationSeconds": 5.473755,
+      "testCount": 129,
+      "passed": 127,
+      "historicalFixedHashRefused": 2,
+      "nestedIn": "current-limited-implementation-and-regression",
+      "includeInOverallSum": false
+    }
+  ],
+  "rules": [
+    "Do not add nested or overlapping windows",
+    "STT client/server are same work in different clocks; do not sum",
+    "monotonic duration and UTC endpoints are not human work duration",
+    "model/tool/implementation elapsed work is not user labor",
+    "judgment wait is included in planning elapsed, not a separate additive charge",
+    "no overall full-project total fabricated because phase boundaries/overlap are incomplete"
+  ],
+  "productionNativeCounts": {
+    "seconds": 8974.579,
+    "primaryPngs": 651,
+    "repeatedPngs": 651,
+    "lineMasks": 1042,
+    "remotionDraws": 2344,
+    "imageMagickChildren": 3386,
+    "successfulChildExits": 5730
+  },
+  "nextRunStaticCounts": {
+    "schemaVersion": "digest-native-sampling-static-planning-v001",
+    "checkedAt": "2026-10-04T14:46:51.116Z",
+    "status": "planning-only; no new draw or video",
+    "actualSourceBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-technical-evidence-v001.json",
+      "fileSha256": "84c573cb3feadaf88cf2c5581aece7c5e34860d6bed49f73a88d45e53d126de5",
+      "sizeBytes": 8838883,
+      "identity": [
+        16777243,
+        584870,
+        8838883,
+        1791122233791615700,
+        1791122233791815200
+      ]
+    },
+    "rendererPlanCanonicalSha256": "761fc2ef0d4d7b95540986c1847282fa7442e0a81cb1380ca53f5d96a75a3068",
+    "policy": {
+      "schemaVersion": "digest-representative-verification-policy-v001",
+      "mode": "representative-plus-rules-v001",
+      "representativeInstructionIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651"
+      ],
+      "permittedMethods": [
+        "still-frame",
+        "text-clock-context"
+      ],
+      "confirmationRecordPath": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-recovery-v001/representative-confirmation.json"
+    },
+    "selection": {
+      "representativeInstructionIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651"
+      ],
+      "requiredPlacementInstructionIds": [],
+      "lineMaskInstructionIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+        "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651"
+      ]
+    },
+    "primaryCount": 651,
+    "repeatCount": 8,
+    "lineMaskCount": 14,
+    "repeatNotExecutedCount": 643,
+    "lineMaskNotExecutedCount": 1028,
+    "necessaryPlacementCount": 0,
+    "plannedRemotionDrawCount": 673,
+    "plannedImageMagickChildCount": 1330,
+    "plannedTotalDrawAndImageInspectionChildren": 2003,
+    "fadeChangedCount": 50,
+    "fadeChanged": [
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000008",
+        "startFrame": 139,
+        "endFrameExclusive": 144,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000049",
+        "startFrame": 2981,
+        "endFrameExclusive": 2985,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000095",
+        "startFrame": 4952,
+        "endFrameExclusive": 4957,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000109",
+        "startFrame": 5460,
+        "endFrameExclusive": 5466,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000139",
+        "startFrame": 6973,
+        "endFrameExclusive": 6979,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000176",
+        "startFrame": 8870,
+        "endFrameExclusive": 8873,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000183",
+        "startFrame": 9217,
+        "endFrameExclusive": 9222,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000203",
+        "startFrame": 10170,
+        "endFrameExclusive": 10172,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000284",
+        "startFrame": 14743,
+        "endFrameExclusive": 14749,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000304",
+        "startFrame": 16243,
+        "endFrameExclusive": 16247,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000310",
+        "startFrame": 16466,
+        "endFrameExclusive": 16468,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000312",
+        "startFrame": 16477,
+        "endFrameExclusive": 16479,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000344",
+        "startFrame": 18944,
+        "endFrameExclusive": 18949,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000352",
+        "startFrame": 19161,
+        "endFrameExclusive": 19163,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000365",
+        "startFrame": 19967,
+        "endFrameExclusive": 19970,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000367",
+        "startFrame": 19980,
+        "endFrameExclusive": 19982,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000388",
+        "startFrame": 21145,
+        "endFrameExclusive": 21150,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000397",
+        "startFrame": 21624,
+        "endFrameExclusive": 21628,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000416",
+        "startFrame": 22570,
+        "endFrameExclusive": 22575,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000463",
+        "startFrame": 24980,
+        "endFrameExclusive": 24983,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000464",
+        "startFrame": 24983,
+        "endFrameExclusive": 24988,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+        "startFrame": 24988,
+        "endFrameExclusive": 24991,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000466",
+        "startFrame": 24991,
+        "endFrameExclusive": 24993,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000476",
+        "startFrame": 25286,
+        "endFrameExclusive": 25289,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000478",
+        "startFrame": 25296,
+        "endFrameExclusive": 25299,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000487",
+        "startFrame": 25982,
+        "endFrameExclusive": 25988,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000491",
+        "startFrame": 26285,
+        "endFrameExclusive": 26288,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000492",
+        "startFrame": 26288,
+        "endFrameExclusive": 26292,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000493",
+        "startFrame": 26292,
+        "endFrameExclusive": 26298,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000494",
+        "startFrame": 26298,
+        "endFrameExclusive": 26304,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000508",
+        "startFrame": 27572,
+        "endFrameExclusive": 27577,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000514",
+        "startFrame": 27830,
+        "endFrameExclusive": 27834,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000515",
+        "startFrame": 27834,
+        "endFrameExclusive": 27838,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000516",
+        "startFrame": 27838,
+        "endFrameExclusive": 27842,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000517",
+        "startFrame": 27842,
+        "endFrameExclusive": 27848,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000523",
+        "startFrame": 29048,
+        "endFrameExclusive": 29051,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000527",
+        "startFrame": 29198,
+        "endFrameExclusive": 29202,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000562",
+        "startFrame": 31698,
+        "endFrameExclusive": 31704,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+        "startFrame": 32576,
+        "endFrameExclusive": 32577,
+        "displayFrameCount": 1
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000576",
+        "startFrame": 32858,
+        "endFrameExclusive": 32860,
+        "displayFrameCount": 2
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000582",
+        "startFrame": 33065,
+        "endFrameExclusive": 33069,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000596",
+        "startFrame": 33861,
+        "endFrameExclusive": 33867,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000599",
+        "startFrame": 33959,
+        "endFrameExclusive": 33962,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000603",
+        "startFrame": 34012,
+        "endFrameExclusive": 34015,
+        "displayFrameCount": 3
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000612",
+        "startFrame": 34738,
+        "endFrameExclusive": 34742,
+        "displayFrameCount": 4
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000615",
+        "startFrame": 35522,
+        "endFrameExclusive": 35528,
+        "displayFrameCount": 6
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000626",
+        "startFrame": 36038,
+        "endFrameExclusive": 36043,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000627",
+        "startFrame": 36043,
+        "endFrameExclusive": 36048,
+        "displayFrameCount": 5
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000629",
+        "startFrame": 36058,
+        "endFrameExclusive": 36059,
+        "displayFrameCount": 1
+      },
+      {
+        "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000650",
+        "startFrame": 37382,
+        "endFrameExclusive": 37387,
+        "displayFrameCount": 5
+      }
+    ],
+    "clockCorrection": "not-applied; awaiting source utterance boundaries",
+    "limitations": [
+      "counts derived from existing saved plan before any clock correction",
+      "no glyph/whole production/native speed/new video quality claim",
+      "old MP4 remains unchanged"
+    ]
+  },
+  "setupCorrections": {
+    "root": 1,
+    "sharedAgent": 3,
+    "total": 4
+  },
+  "testRepetition": [
+    "stage-specific tests plus final integration intentionally repeated affected tests after code/fixture connection changes",
+    "shared fixture repeated old8 alongside7new in three correction rounds; future reruns can target only failing reader until stable",
+    "legacy fixed-renderer tests rejected before producer; repeating them without changing the bound historical implementation yields no new evidence"
+  ],
+  "owner": "parent mona consolidates final action priorities and residual risks; current implementation retains all primary inspections",
+  "calculationEvidence": {
+    "markdown": "calculation-vs-native-inspection-analysis-v001.md",
+    "json": "calculation-vs-native-inspection-analysis-v001.json",
+    "existingOnly": true,
+    "font": "LINESeedJP_A_OTF_Eb",
+    "asciiFreeLineCount": 901,
+    "asciiFreeObservedMaximumWidthErrorPx": -1,
+    "lettersObservedMaximumWidthErrorPx": 237,
+    "digitsWithoutLettersObservedMaximumWidthErrorPx": 79,
+    "symbolsWithoutLettersOrDigitsObservedMaximumWidthErrorPx": 28,
+    "minimumObservedHorizontalMarginsPx": {
+      "left": 125,
+      "right": 134
+    },
+    "requestedHorizontalMarginPx": 108,
+    "generalGuarantee": false,
+    "newTests": 0,
+    "newThresholds": 0
+  }
+}

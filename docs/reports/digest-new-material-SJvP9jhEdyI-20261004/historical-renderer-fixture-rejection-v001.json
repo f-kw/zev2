@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "historical-renderer-fixture-rejection-v001",
+  "checkedAt": "2026-10-04T14:51:34.120122+00:00",
+  "baselineSha": "3940cb6e015248fce8ae22bfbf5149f623e11510",
+  "historicalFixtureRequiredRendererSha256": "3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4",
+  "baselineRendererSha256": "8090b68772a6fca4e116729d2285f0ad258957755461bbe9b2aec9240a52a1fe",
+  "currentRendererSha256": "7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830",
+  "actualFailedTestCount": 2,
+  "reason": "two original-resolution fixed-fixture tests refuse changed renderer before producer; baseline bytes also differ from same required SHA; no binding rewritten or waiver",
+  "limitations": "baseline hash compared; baseline suite was not rerun; does not prove overall historical fixture pass"
+}

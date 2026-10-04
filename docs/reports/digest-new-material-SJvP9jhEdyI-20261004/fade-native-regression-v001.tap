@@ -1,0 +1,700 @@
+TAP version 13
+# Subtest: selection is explicit, Normal-only, and retains every top-band/panel placement mask
+ok 1 - selection is explicit, Normal-only, and retains every top-band/panel placement mask
+  ---
+  duration_ms: 1.870833
+  ...
+# Subtest: selection rejects unknown sample
+ok 2 - selection rejects unknown sample
+  ---
+  duration_ms: 0.405625
+  ...
+# Subtest: selection rejects duplicate sample
+ok 3 - selection rejects duplicate sample
+  ---
+  duration_ms: 0.29175
+  ...
+# Subtest: selection rejects Pulse
+ok 4 - selection rejects Pulse
+  ---
+  duration_ms: 0.251416
+  ...
+# Subtest: selection rejects Motion
+ok 5 - selection rejects Motion
+  ---
+  duration_ms: 0.274709
+  ...
+# Subtest: coverage records performed and unperformed native work without claiming full inspection
+ok 6 - coverage records performed and unperformed native work without claiming full inspection
+  ---
+  duration_ms: 0.75625
+  ...
+# Subtest: coverage and representative QC reject substituted job
+ok 7 - coverage and representative QC reject substituted job
+  ---
+  duration_ms: 0.586292
+  ...
+# Subtest: coverage and representative QC reject substituted authorization
+ok 8 - coverage and representative QC reject substituted authorization
+  ---
+  duration_ms: 0.360916
+  ...
+# Subtest: coverage and representative QC reject substituted implementation
+ok 9 - coverage and representative QC reject substituted implementation
+  ---
+  duration_ms: 0.460209
+  ...
+# Subtest: coverage and representative QC reject substituted plan clock
+ok 10 - coverage and representative QC reject substituted plan clock
+  ---
+  duration_ms: 0.503875
+  ...
+# Subtest: coverage and representative QC reject substituted policy
+ok 11 - coverage and representative QC reject substituted policy
+  ---
+  duration_ms: 0.400375
+  ...
+# Subtest: coverage and representative QC reject missing primary
+ok 12 - coverage and representative QC reject missing primary
+  ---
+  duration_ms: 0.336625
+  ...
+# Subtest: coverage and representative QC reject mismatched primary SHA
+ok 13 - coverage and representative QC reject mismatched primary SHA
+  ---
+  duration_ms: 1.82175
+  ...
+# Subtest: coverage and representative QC reject missing selected repeat
+ok 14 - coverage and representative QC reject missing selected repeat
+  ---
+  duration_ms: 0.466167
+  ...
+# Subtest: coverage and representative QC reject failed selected repeat
+ok 15 - coverage and representative QC reject failed selected repeat
+  ---
+  duration_ms: 0.356667
+  ...
+# Subtest: coverage and representative QC reject missing selected mask
+ok 16 - coverage and representative QC reject missing selected mask
+  ---
+  duration_ms: 0.63475
+  ...
+# Subtest: coverage and representative QC reject mask SHA detached from inspection
+ok 17 - coverage and representative QC reject mask SHA detached from inspection
+  ---
+  duration_ms: 0.505208
+  ...
+# Subtest: coverage and representative QC reject mask bounds detached from inspection
+ok 18 - coverage and representative QC reject mask bounds detached from inspection
+  ---
+  duration_ms: 0.526917
+  ...
+# Subtest: coverage and representative QC reject missing special calibration
+ok 19 - coverage and representative QC reject missing special calibration
+  ---
+  duration_ms: 0.758541
+  ...
+# Subtest: coverage and representative QC reject missing post-correction special mask
+ok 20 - coverage and representative QC reject missing post-correction special mask
+  ---
+  duration_ms: 0.526791
+  ...
+# Subtest: coverage and representative QC reject undeclared unselected masks
+ok 21 - coverage and representative QC reject undeclared unselected masks
+  ---
+  duration_ms: 0.466333
+  ...
+# Subtest: coverage and representative QC reject unperformed repeat with fabricated SHA
+ok 22 - coverage and representative QC reject unperformed repeat with fabricated SHA
+  ---
+  duration_ms: 0.455292
+  ...
+# Subtest: the separate evaluator preserves all primary rules and explicitly reports sampled visibility
+ok 23 - the separate evaluator preserves all primary rules and explicitly reports sampled visibility
+  ---
+  duration_ms: 3.036458
+  ...
+# Subtest: all primary/media rules still reject empty unselected primary alpha
+ok 24 - all primary/media rules still reject empty unselected primary alpha
+  ---
+  duration_ms: 0.517458
+  ...
+# Subtest: all primary/media rules still reject unsafe unselected primary bounds
+ok 25 - all primary/media rules still reject unsafe unselected primary bounds
+  ---
+  duration_ms: 0.637375
+  ...
+# Subtest: all primary/media rules still reject unselected primary nonfinite bounds
+ok 26 - all primary/media rules still reject unselected primary nonfinite bounds
+  ---
+  duration_ms: 0.408709
+  ...
+# Subtest: all primary/media rules still reject unselected props mismatch
+ok 27 - all primary/media rules still reject unselected props mismatch
+  ---
+  duration_ms: 0.635
+  ...
+# Subtest: all primary/media rules still reject changed application clock reference
+ok 28 - all primary/media rules still reject changed application clock reference
+  ---
+  duration_ms: 0.442042
+  ...
+# Subtest: all primary/media rules still reject missing unselected application
+ok 29 - all primary/media rules still reject missing unselected application
+  ---
+  duration_ms: 0.402666
+  ...
+# Subtest: all primary/media rules still reject wrong video frame count
+ok 30 - all primary/media rules still reject wrong video frame count
+  ---
+  duration_ms: 0.455833
+  ...
+# Subtest: all primary/media rules still reject missing original audio
+ok 31 - all primary/media rules still reject missing original audio
+  ---
+  duration_ms: 1.024166
+  ...
+# Subtest: all primary/media rules still reject changed original audio packets
+ok 32 - all primary/media rules still reject changed original audio packets
+  ---
+  duration_ms: 0.566583
+  ...
+# Subtest: all primary/media rules still reject missing original audio expectation
+ok 33 - all primary/media rules still reject missing original audio expectation
+  ---
+  duration_ms: 0.41925
+  ...
+# Subtest: all primary/media rules still reject unbound canvas
+ok 34 - all primary/media rules still reject unbound canvas
+  ---
+  duration_ms: 0.323166
+  ...
+# Subtest: all primary/media rules still reject non-hash props in application and inspection
+ok 35 - all primary/media rules still reject non-hash props in application and inspection
+  ---
+  duration_ms: 0.31525
+  ...
+# Subtest: the full QC exports reject missing unselected masks even with caller sampling flags
+ok 36 - the full QC exports reject missing unselected masks even with caller sampling flags
+  ---
+  duration_ms: 1.377208
+  ...
+# Subtest: full QC still passes its complete mask input and requires full completed-frame evidence by default
+ok 37 - full QC still passes its complete mask input and requires full completed-frame evidence by default
+  ---
+  duration_ms: 0.348
+  ...
+# Subtest: three primary inspections remain; selected two repeat/three mask; other cue has no unnecessary draw
+ok 38 - three primary inspections remain; selected two repeat/three mask; other cue has no unnecessary draw
+  ---
+  duration_ms: 1.948042
+  ...
+# Subtest: necessary unselected placement calibration and corrected masks remain; repeat remains unexecuted
+ok 39 - necessary unselected placement calibration and corrected masks remain; repeat remains unexecuted
+  ---
+  duration_ms: 0.765125
+  ...
+# Subtest: no private policy preserves all repeats/masks; selected repeat mismatch stops before downstream work
+ok 40 - no private policy preserves all repeats/masks; selected repeat mismatch stops before downstream work
+  ---
+  duration_ms: 0.456625
+  ...
+# Subtest: actual layout preflight forwards complete clock, policy and exact job/code coverage
+ok 41 - actual layout preflight forwards complete clock, policy and exact job/code coverage
+  ---
+  duration_ms: 0.976667
+  ...
+# Subtest: normal representative structural result separates every scope without full-QC passed
+ok 42 - normal representative structural result separates every scope without full-QC passed
+  ---
+  duration_ms: 3.187083
+  ...
+# Subtest: missing post-generation record is confirmation-pending and cannot complete
+ok 43 - missing post-generation record is confirmation-pending and cannot complete
+  ---
+  duration_ms: 0.215708
+  ...
+# Subtest: different completed bytes, plan, manifest, settings, grant or original renderer plan are rejected
+ok 44 - different completed bytes, plan, manifest, settings, grant or original renderer plan are rejected
+  ---
+  duration_ms: 2.048208
+  ...
+# Subtest: incorrect position, method, missing sample and foreign evidence are rejected
+ok 45 - incorrect position, method, missing sample and foreign evidence are rejected
+  ---
+  duration_ms: 1.043583
+  ...
+# Subtest: real rule/media/audio failures reject even with an absent confirmation record
+ok 46 - real rule/media/audio failures reject even with an absent confirmation record
+  ---
+  duration_ms: 0.275958
+  ...
+# Subtest: a found representative issue rejects and unviewed scope cannot be converted to human adoption
+ok 47 - a found representative issue rejects and unviewed scope cannot be converted to human adoption
+  ---
+  duration_ms: 0.5165
+  ...
+# Subtest: start policy requires only intended selection/method/path and rejects an unborn MP4 SHA or public waiver
+ok 48 - start policy requires only intended selection/method/path and rejects an unborn MP4 SHA or public waiver
+  ---
+  duration_ms: 3.7185
+  ...
+# Subtest: pure evaluation or a JSON copy never grants publication and absent policy keeps the previous mode
+ok 49 - pure evaluation or a JSON copy never grants publication and absent policy keeps the previous mode
+  ---
+  duration_ms: 1.414083
+  ...
+# Subtest: new sampled rules retain all-primary/actual native scope and cannot claim unperformed full QC
+ok 50 - new sampled rules retain all-primary/actual native scope and cannot claim unperformed full QC
+  ---
+  duration_ms: 3.902208
+  ...
+# Subtest: pure completion rejects substituted bindings, omitted coverage, failed repeat/mask and altered counts
+ok 51 - pure completion rejects substituted bindings, omitted coverage, failed repeat/mask and altered counts
+  ---
+  duration_ms: 5.752
+  ...
+# Subtest: actual factory -> technical save -> pending get/readback -> record-only requalification preserves coverage
+ok 52 - actual factory -> technical save -> pending get/readback -> record-only requalification preserves coverage
+  ---
+  duration_ms: 7.734083
+  ...
+# Subtest: technical persistence rejects draw/verification coverage loss before publishing any technical bytes
+ok 53 - technical persistence rejects draw/verification coverage loss before publishing any technical bytes
+  ---
+  duration_ms: 2.297459
+  ...
+# Subtest: pending reader refuses different or missing technical coverage even with a newly anchored JSON receipt
+ok 54 - pending reader refuses different or missing technical coverage even with a newly anchored JSON receipt
+  ---
+  duration_ms: 6.083167
+  ...
+# Subtest: completed reader accepts actual caller shape without applicationResults and rechecks stored coverage/current primary bytes
+ok 55 - completed reader accepts actual caller shape without applicationResults and rechecks stored coverage/current primary bytes
+  ---
+  duration_ms: 4.570542
+  ...
+# Subtest: recorded native coverage cannot disappear into historical full mode
+ok 56 - recorded native coverage cannot disappear into historical full mode
+  ---
+  duration_ms: 4.413167
+  ...
+# Subtest: representative policy selects internal mode, verifies selection before reservation and retains public flag rejection
+ok 57 - representative policy selects internal mode, verifies selection before reservation and retains public flag rejection
+  ---
+  duration_ms: 1.797417
+  ...
+# Subtest: selection failure stops before image/output work
+ok 58 - selection failure stops before image/output work
+  ---
+  duration_ms: 0.342208
+  ...
+# Subtest: absent private policy preserves explicit full-QC method and old public behavior
+ok 59 - absent private policy preserves explicit full-QC method and old public behavior
+  ---
+  duration_ms: 0.202667
+  ...
+# Subtest: passed-representative keeps explicit result, whole-visibility unperformed and owned video without full QC
+ok 60 - passed-representative keeps explicit result, whole-visibility unperformed and owned video without full QC
+  ---
+  duration_ms: 0.366042
+  ...
+# Subtest: confirmation-pending keeps explicit result, whole-visibility unperformed and owned video without full QC
+ok 61 - confirmation-pending keeps explicit result, whole-visibility unperformed and owned video without full QC
+  ---
+  duration_ms: 0.206542
+  ...
+# Subtest: failed representative result retains failure evidence instead of publishing full-QC passed
+ok 62 - failed representative result retains failure evidence instead of publishing full-QC passed
+  ---
+  duration_ms: 0.13725
+  ...
+# Subtest: legacy passed status or contradictory representative state cannot pass the representative finish
+ok 63 - legacy passed status or contradictory representative state cannot pass the representative finish
+  ---
+  duration_ms: 0.30875
+  ...
+# Subtest: unconfigured full mode still executes complete-frame QC and requires final visibility
+ok 64 - unconfigured full mode still executes complete-frame QC and requires final visibility
+  ---
+  duration_ms: 0.983375
+  ...
+# Subtest: actual public renderer rejects a JSON-shaped fake approved storage context at opaque qualification
+ok 65 - actual public renderer rejects a JSON-shaped fake approved storage context at opaque qualification
+  ---
+  duration_ms: 223.834875
+  ...
+# Subtest: actual finish forwards sampled coverage into private completion and returned draw
+ok 66 - actual finish forwards sampled coverage into private completion and returned draw
+  ---
+  duration_ms: 0.321833
+  ...
+# Subtest: fixed old compositor matches Normal, partial Color, Panel, lengths 7–9, gaps and simultaneous translucent layers
+ok 67 - fixed old compositor matches Normal, partial Color, Panel, lengths 7–9, gaps and simultaneous translucent layers
+  ---
+  duration_ms: 645.850375
+  ...
+# Subtest: fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+ok 68 - fixed old compositor matches every Pulse, Bounce and Shake state through range cuts and fade boundaries
+  ---
+  duration_ms: 1701.006125
+  ...
+# Subtest: the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+ok 69 - the unchanged byte oracle detects position, alpha loss, motion bounds, timing, layer order and source PNG faults
+  ---
+  duration_ms: 526.920125
+  ...
+# Subtest: resumed final proof retains the ordinary native semantics but uses a distinct two-execution integrity method
+    # Subtest: shared evidence survives key order changes and separate-process final readback
+    ok 1 - shared evidence survives key order changes and separate-process final readback
+      ---
+      duration_ms: 95.318583
+      ...
+    # Subtest: missing old boundary point
+    ok 2 - missing old boundary point
+      ---
+      duration_ms: 2.580791
+      ...
+    # Subtest: duplicate boundary point
+    ok 3 - duplicate boundary point
+      ---
+      duration_ms: 3.254208
+      ...
+    # Subtest: reordered points
+    ok 4 - reordered points
+      ---
+      duration_ms: 3.308125
+      ...
+    # Subtest: old prefix count changed
+    ok 5 - old prefix count changed
+      ---
+      duration_ms: 3.355084
+      ...
+    # Subtest: suffix starts after gap
+    ok 6 - suffix starts after gap
+      ---
+      duration_ms: 2.595541
+      ...
+    # Subtest: suffix overlaps prefix
+    ok 7 - suffix overlaps prefix
+      ---
+      duration_ms: 3.900791
+      ...
+    # Subtest: segment order swapped
+    ok 8 - segment order swapped
+      ---
+      duration_ms: 2.722542
+      ...
+    # Subtest: reference roots swapped
+    ok 9 - reference roots swapped
+      ---
+      duration_ms: 3.821708
+      ...
+    # Subtest: uncompleted old partial mixed into suffix
+    ok 10 - uncompleted old partial mixed into suffix
+      ---
+      duration_ms: 5.261958
+      ...
+    # Subtest: source interrupt SHA changed
+    ok 11 - source interrupt SHA changed
+      ---
+      duration_ms: 3.588292
+      ...
+    # Subtest: receipt SHA changed
+    ok 12 - receipt SHA changed
+      ---
+      duration_ms: 3.142375
+      ...
+    # Subtest: saved old process changed
+    ok 13 - saved old process changed
+      ---
+      duration_ms: 3.549375
+      ...
+    # Subtest: suffix process failed
+    ok 14 - suffix process failed
+      ---
+      duration_ms: 4.302875
+      ...
+    # Subtest: suffix cancelled
+    ok 15 - suffix cancelled
+      ---
+      duration_ms: 4.403458
+      ...
+    # Subtest: unexpected extra process
+    ok 16 - unexpected extra process
+      ---
+      duration_ms: 4.083
+      ...
+    # Subtest: argument changed with matching new argument hash
+    ok 17 - argument changed with matching new argument hash
+      ---
+      duration_ms: 4.106042
+      ...
+    # Subtest: layer recipe changed
+    ok 18 - layer recipe changed
+      ---
+      duration_ms: 3.3335
+      ...
+    # Subtest: materializer observation missing
+    ok 19 - materializer observation missing
+      ---
+      duration_ms: 3.090083
+      ...
+    # Subtest: materializer raw hash changed
+    ok 20 - materializer raw hash changed
+      ---
+      duration_ms: 3.609541
+      ...
+    # Subtest: materializer contradictory extra dimensions
+    ok 21 - materializer contradictory extra dimensions
+      ---
+      duration_ms: 2.915916
+      ...
+    # Subtest: materializer contradictory extra raw expectation
+    ok 22 - materializer contradictory extra raw expectation
+      ---
+      duration_ms: 4.275959
+      ...
+    # Subtest: materializer wrong pixel format
+    ok 23 - materializer wrong pixel format
+      ---
+      duration_ms: 3.469917
+      ...
+    # Subtest: materializer extra process
+    ok 24 - materializer extra process
+      ---
+      duration_ms: 3.672042
+      ...
+    # Subtest: materializer generated command changed
+    ok 25 - materializer generated command changed
+      ---
+      duration_ms: 4.157375
+      ...
+    # Subtest: replay incomplete
+    ok 26 - replay incomplete
+      ---
+      duration_ms: 4.051417
+      ...
+    # Subtest: old combined schema disguised
+    ok 27 - old combined schema disguised
+      ---
+      duration_ms: 1.127667
+      ...
+    # Subtest: basis differs in one caption
+    ok 28 - basis differs in one caption
+      ---
+      duration_ms: 2.961875
+      ...
+    # Subtest: native result reports impossible pass
+    ok 29 - native result reports impossible pass
+      ---
+      duration_ms: 5.928125
+      ...
+    # Subtest: layout safe area fails
+    ok 30 - layout safe area fails
+      ---
+      duration_ms: 3.75725
+      ...
+    # Subtest: media frame count differs
+    ok 31 - media frame count differs
+      ---
+      duration_ms: 3.354542
+      ...
+    # Subtest: global proof absent despite caller false
+    ok 32 - global proof absent despite caller false
+      ---
+      duration_ms: 0.820291
+      ...
+    # Subtest: empty inspections
+    ok 33 - empty inspections
+      ---
+      duration_ms: 2.325542
+      ...
+    # Subtest: layout-only success cannot be final success
+    ok 34 - layout-only success cannot be final success
+      ---
+      duration_ms: 1.023958
+      ...
+    1..34
+ok 70 - resumed final proof retains the ordinary native semantics but uses a distinct two-execution integrity method
+  ---
+  duration_ms: 1828.069166
+  ...
+# Subtest: pulse keeps every ordinary state check and cannot bypass full resumed integrity
+ok 71 - pulse keeps every ordinary state check and cannot bypass full resumed integrity
+  ---
+  duration_ms: 4.255125
+  ...
+# Subtest: bounce keeps every ordinary state check and cannot bypass full resumed integrity
+ok 72 - bounce keeps every ordinary state check and cannot bypass full resumed integrity
+  ---
+  duration_ms: 3.05325
+  ...
+# Subtest: shake keeps every ordinary state check and cannot bypass full resumed integrity
+ok 73 - shake keeps every ordinary state check and cannot bypass full resumed integrity
+  ---
+  duration_ms: 2.206083
+  ...
+# Subtest: shared and separately read common evidence retain every standalone native decision
+ok 74 - shared and separately read common evidence retain every standalone native decision
+  ---
+  duration_ms: 16.284209
+  ...
+# Subtest: a valid preceding caption cannot hide changed common evidence or local observations
+ok 75 - a valid preceding caption cannot hide changed common evidence or local observations
+  ---
+  duration_ms: 24.864625
+  ...
+# Subtest: native unique-minimum failure remains failed with the same violation after common reuse
+ok 76 - native unique-minimum failure remains failed with the same violation after common reuse
+  ---
+  duration_ms: 3.5615
+  ...
+# Subtest: a later call revalidates mutated common inputs without trusting the earlier result
+ok 77 - a later call revalidates mutated common inputs without trusting the earlier result
+  ---
+  duration_ms: 4.38
+  ...
+# Subtest: combined snapshot detaches inputs while preserving common and sample sharing across local/global evidence
+ok 78 - combined snapshot detaches inputs while preserving common and sample sharing across local/global evidence
+  ---
+  duration_ms: 3.388583
+  ...
+# Subtest: renderer QC snapshot preserves shared evidence across captions and whole-video proof without aliasing its input
+ok 79 - renderer QC snapshot preserves shared evidence across captions and whole-video proof without aliasing its input
+  ---
+  duration_ms: 3.272125
+  ...
+# Subtest: the production post-render rejection preserves failed observations on disk and emits a small CLI report
+ok 80 - the production post-render rejection preserves failed observations on disk and emits a small CLI report
+  ---
+  duration_ms: 62.217042
+  ...
+# Subtest: exception evidence is preserved separately and neither duplicate-save nor missing-directory errors restore the huge inline graph
+ok 81 - exception evidence is preserved separately and neither duplicate-save nor missing-directory errors restore the huge inline graph
+  ---
+  duration_ms: 2.438167
+  ...
+# Subtest: a missing saved evidence file is rejected by the reader
+ok 82 - a missing saved evidence file is rejected by the reader
+  ---
+  duration_ms: 0.834625
+  ...
+# Subtest: actual 8px FFmpeg alpha reaches 100% for 1/2/3-frame captions and keeps 8-frame fade
+ok 83 - actual 8px FFmpeg alpha reaches 100% for 1/2/3-frame captions and keeps 8-frame fade
+  ---
+  duration_ms: 232.425208
+  ...
+# Subtest: invalid length and clock disagreeing with declared duration stop before composing
+ok 84 - invalid length and clock disagreeing with declared duration stop before composing
+  ---
+  duration_ms: 0.645833
+  ...
+# Subtest: the whole display clock is covered exactly once in finite sequential ranges
+ok 85 - the whole display clock is covered exactly once in finite sequential ranges
+  ---
+  duration_ms: 0.876625
+  ...
+# Subtest: an actual black separator frame runs with background input and no PNG input
+not ok 86 - an actual black separator frame runs with background input and no PNG input
+  ---
+  duration_ms: 2705.327166
+  location: '/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    source artifact changed: /Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs
+    + actual - expected
+    
+    + '7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830'
+    - '3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4'
+  actual: '7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830'
+  operator: 'strictEqual'
+  stack: |-
+    verifyDigestStructureFileV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/digest-structure-evidence.mjs:22:10)
+    async originalLocalInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-local.mjs:50:144)
+    async originalRepresentativeInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-representatives.mjs:38:66)
+    async fullPreparationInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-preparation.mjs:20:59)
+    async loadExecutionInputV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution-input.mjs:26:145)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.test.mjs:20:11)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: a motion interval opens only states referenced by its clipped renderer graph
+not ok 87 - a motion interval opens only states referenced by its clipped renderer graph
+  ---
+  duration_ms: 2610.314292
+  location: '/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    source artifact changed: /Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs
+    + actual - expected
+    
+    + '7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830'
+    - '3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4'
+  actual: '7e5689338e711e99e9119f7f516891326b4b032aad1d136541fbb99bca627830'
+  operator: 'strictEqual'
+  stack: |-
+    verifyDigestStructureFileV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/digest-structure-evidence.mjs:22:10)
+    async originalLocalInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-local.mjs:50:144)
+    async originalRepresentativeInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-representatives.mjs:38:66)
+    async fullPreparationInputsV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-preparation.mjs:20:59)
+    async loadExecutionInputV001 (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-execution-input.mjs:26:145)
+    async TestContext.<anonymous> (file:///Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.test.mjs:32:11)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: formal planning accepts explicit different complete clocks without starting media children
+ok 88 - formal planning accepts explicit different complete clocks without starting media children
+  ---
+  duration_ms: 7.225708
+  ...
+# Subtest: formal planning refuses absent, invalid and byte-overflow complete clocks
+ok 89 - formal planning refuses absent, invalid and byte-overflow complete clocks
+  ---
+  duration_ms: 2.076375
+  ...
+# Subtest: formal planning refuses omitted or mismatched approved overlay counts and records
+ok 90 - formal planning refuses omitted or mismatched approved overlay counts and records
+  ---
+  duration_ms: 1.627208
+  ...
+# Subtest: formal planning refuses changed record clocks, order, duplicate IDs and finite effects
+ok 91 - formal planning refuses changed record clocks, order, duplicate IDs and finite effects
+  ---
+  duration_ms: 5.397917
+  ...
+# Subtest: formal planning retains the finite-unit cap and requires process and resource observers
+ok 92 - formal planning retains the finite-unit cap and requires process and resource observers
+  ---
+  duration_ms: 1.432458
+  ...
+# Subtest: formal planning never replaces an existing output
+ok 93 - formal planning never replaces an existing output
+  ---
+  duration_ms: 1.047625
+  ...
+# Subtest: formal planning requires the existing supervisor environment
+ok 94 - formal planning requires the existing supervisor environment
+  ---
+  duration_ms: 0.134375
+  ...
+# Subtest: legacy producer retains its default full clock, clipped phase and background-only gap
+ok 95 - legacy producer retains its default full clock, clipped phase and background-only gap
+  ---
+  duration_ms: 0.205375
+  ...
+1..95
+# tests 129
+# suites 0
+# pass 127
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5444.708541

@@ -45,6 +45,8 @@ function gate(api, observations = {}) {
     PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002: oldQcMethod,
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001: integrityMethod,
     resolvePresentationEffectsV001: input => ({plan: input.plan, expectedFrameCount: input.expectedFrameCount, presentationTimeline: null}),
+    deriveDigestNativeInspectionSelectionV001: () => ({representativeInstructionIds: ['caption-a'],
+      requiredPlacementInstructionIds: [], lineMaskInstructionIds: ['caption-a']}),
   });
 }
 const gateArgs = overrides => ({plan, expectedFrameCount: 45, validatedLayoutInspection: {}, ...overrides});
@@ -120,6 +122,7 @@ for (const status of ['passed-representative', 'confirmation-pending']) {
       assert.equal(args.workVideo, saved.workVideo); assert.equal(args.outputMedia, saved.outputMedia);
       assert.equal(args.expectedFrameCount, 45); assert.equal(args.expectedAudio, saved.completedExpectedAudio);
       assert.equal(args.overlayRecords, saved.overlayRecords); assert.equal(args.applicationResults, saved.applicationResults);
+      assert.equal(args.nativeCoverage, saved.nativeCoverage ?? null);
       return verification;
     }}, observed);
     const result = await run(finishArgs(saved, () => assert.fail('representative result cannot invoke legacy final QC')));
@@ -165,4 +168,17 @@ test('actual public renderer rejects a JSON-shaped fake approved storage context
   const result = await promisify(execFile)(process.execPath, ['--import', path.join(workspaceRoot, 'runner/node_modules/tsx/dist/loader.mjs'), '--input-type=module', '-e', input],
     {cwd: workspaceRoot, timeout: 30_000, maxBuffer: 64_000});
   assert.match(result.stdout, /opaque context rejected/);
+});
+
+
+test('actual finish forwards sampled coverage into private completion and returned draw', async () => {
+  const nativeCoverage = {schemaVersion: 'test-only-coverage', entries: [{instructionId: 'caption-a'}]};
+  const saved = state({verificationPolicy: policy, storageContext: testContext(), nativeCoverage});
+  const run = finish({finishApprovedDigestRepresentativeCompletionV001: async args => {
+    assert.equal(args.nativeCoverage, nativeCoverage);
+    return {status: 'confirmation-pending', nativeCoverage};
+  }});
+  const result = await run(finishArgs(saved, () => assert.fail('cannot switch to full QC')));
+  assert.equal(result.nativeCoverage, nativeCoverage);
+  assert.equal(result.verification.nativeCoverage, nativeCoverage);
 });

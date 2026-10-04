@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "root-opacity-fixture-tool-transcript-history-v001",
+  "source": "existing tool transcript; manually summarized, not claimed raw stdout",
+  "initialRun": {
+    "startedAt": null,
+    "timeNotRecorded": true,
+    "scope": "renderer sampling + old representative control flow + fade oracle + opacity fixture",
+    "tests": 17,
+    "passed": 16,
+    "failed": 1,
+    "durationMilliseconds": 2787.574125,
+    "failedCase": "3-frame alpha observation expected [127,255,127] but observed [127,127,127]",
+    "cause": "isolated caption branch starts at nonzero PTS; default FFmpeg output synchronized by duplicating first frame before middle caption frame",
+    "productionCorrection": false
+  },
+  "fixtureCorrection": {
+    "count": 1,
+    "change": "output -fps_mode passthrough for isolated caption branch; preserves actual caption frame timestamps without added synchronization duplicates"
+  },
+  "afterCorrection": {
+    "tests": 2,
+    "passed": 2,
+    "failed": 0,
+    "durationMilliseconds": 259.870625
+  },
+  "finalAggregate": {
+    "tests": 129,
+    "passed": 127,
+    "failed": 2,
+    "opacityPassed": true,
+    "twoFailures": "unrelated historic input SHA refusals"
+  },
+  "newTestsForAnalysis": 0
+}

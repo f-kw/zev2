@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "digest-native-sampling-qc-verification-v001",
+  "checkedAt": "2026-10-04T14:44:52.498485+00:00",
+  "tests": {
+    "total": 37,
+    "passed": 37,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "syntaxCheck": {
+    "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "exitCode": 0
+  },
+  "implementationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+    "fileSha256": "39b2dcb042a705cf8adee457c509b6aef5f31b96ccdfc74f3d18132ce214a161",
+    "sizeBytes": 59624
+  },
+  "testBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_native_sampling_qc_v001.test.mjs",
+    "fileSha256": "28561ddf3948ca5e6605939dddb345eb83babdf13b606bbdbec704dd65622ea7",
+    "sizeBytes": 13532
+  },
+  "tapBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-native-sampling-qc-tests-v002.tap",
+    "fileSha256": "79411f799500d11b2f80cd864f9a2dd3138f333bc96353dbd4a7a2de7f112453",
+    "sizeBytes": 6958
+  },
+  "command": [
+    "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules",
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+    "--test",
+    "evals/clip_composition/digest_native_sampling_qc_v001.test.mjs"
+  ],
+  "api": {
+    "selection": "deriveDigestNativeInspectionSelectionV001(plan, policy)",
+    "coverage": "validateDigestNativeSamplingCoverageV001({plan,policy,coverage,overlayInspections,bindings})",
+    "qc": "evaluateDigestRepresentativeRendererQcV001(input,{policy,nativeCoverage,expectedBindings})",
+    "expectedBindingKeys": [
+      "approvedJobBinding",
+      "authorizationBinding",
+      "implementationSha"
+    ],
+    "resultSchema": "digest-representative-renderer-qc-v001",
+    "passedStatus": "passed-representative-rules",
+    "layoutStatus": "passed-representative",
+    "samplingScope": "representative-plus-required-placement"
+  },
+  "preservedFullQc": [
+    "evaluatePresentationRendererQcV002",
+    "evaluatePresentationReviewRendererQcV003",
+    "evaluatePresentationVerticalReviewRendererQcV001",
+    "evaluatePresentationRendererQcWithProfileV001"
+  ],
+  "coverage": {
+    "selectedRepeat": "performed actualSHA must equal all-primary inspectionSHA",
+    "lineMasks": "policy representatives union all top-band/panel; required-placement scope wins",
+    "calibration": "all top-band/panel exact actual count/index/SHA/bounds",
+    "unselected": "status not-executed; no fabricated SHA/masks or inspection bounds",
+    "primary": "all actual alpha and bounds; ID/clock/props/hash; media format/frames; original audio packet preservation",
+    "summary": "separate actual instruction/mask counts and nonexecuted instruction/mask counts"
+  },
+  "limits": [
+    "Pure JSON structural fixtures only; no production opaque authority or physical measurement is minted.",
+    "No pixels/media tools, drawing, composite, SSD reads/writes, media generation, Git operations or other product edits.",
+    "Representative visibility does not become all-caption/full-frame verification or human quality adoption.",
+    "Owner/private job and file-current qualification remain the upstream renderer/shared responsibilities."
+  ],
+  "mutations": {
+    "ownedProductPaths": [
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_qc_v002.mjs"
+    ],
+    "ownedTestPaths": [
+      "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_native_sampling_qc_v001.test.mjs"
+    ],
+    "otherProductPaths": 0,
+    "git": 0,
+    "ssd": 0,
+    "media": 0
+  }
+}

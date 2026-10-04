@@ -55,6 +55,8 @@ import {
 import {
   getPresentationRendererQcViolationCodesV001,
   evaluatePresentationRendererQcV002,
+  evaluateDigestRepresentativeRendererQcV001,
+  deriveDigestNativeInspectionSelectionV001,
   fileSha256V002,
   inspectOverlayPngV002,
   inspectOverlayPngWithToolV001,
@@ -1064,13 +1066,21 @@ export const buildPresentationCompositeArgumentsV001 = ({
     const visibleStart = Math.max(element.startFrame, origin);
     const visibleEnd = Math.min(element.endFrameExclusive, renderRange?.endFrameExclusive ?? expectedFrameCount);
     if (visibleEnd <= visibleStart) throw new TypeError('inactive caption entered range compositor');
+    if (!Number.isSafeInteger(element.displayFrameCount) || element.displayFrameCount < 1
+      || !Number.isSafeInteger(element.startFrame) || element.startFrame < 0
+      || !Number.isSafeInteger(element.endFrameExclusive)
+      || element.endFrameExclusive - element.startFrame !== element.displayFrameCount) {
+      throw new TypeError('caption display length must match its positive integer frame clock');
+    }
     const phaseOffset = visibleStart - element.startFrame;
     const phase = phaseOffset === 0 ? 'N' : `(N+${phaseOffset})`;
-    const alpha = `alpha(X,Y)*min(1,min((${phase}+1)/4,(${element.displayFrameCount}-${phase})/4))`;
-    // The original four-frame envelope is exactly one on this interior.
-    // Keep its absolute caption phase through range cuts and finite-state joins.
+    // Short captions reach full opacity without changing their display clock.
+    // Seven or more frames retain the exact original four-frame expression.
+    const fadeWidth = Math.min(4, Math.ceil(element.displayFrameCount / 2));
+    const alpha = `alpha(X,Y)*min(1,min((${phase}+1)/${fadeWidth},(${element.displayFrameCount}-${phase})/${fadeWidth}))`;
+    // Preserve absolute caption phase through range cuts and finite-state joins.
     const fadePhase = phaseOffset === 0 ? 'n' : `(n+${phaseOffset})`;
-    const fadeOnly = `lt(${fadePhase},3)+gt(${fadePhase},${element.displayFrameCount - 4})`;
+    const fadeOnly = `lt(${fadePhase},${fadeWidth - 1})+gt(${fadePhase},${element.displayFrameCount - fadeWidth})`;
     if (Object.hasOwn(element, 'presentationPulse') || Object.hasOwn(element, 'presentationMotion')) {
       const motion = Object.hasOwn(element, 'presentationMotion');
       const program = motion ? getPresentationCaptionMotionProgramV001({element, canvas: plan.canvas})
@@ -2211,9 +2221,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
     autoPresentationResolution = automatic.resolution;
     autoPresentationInputs = structuredClone(autoPresentation);
   }
+  let nativeSelection = null;
   if (verificationPolicy !== null) {
     const completion = await import('./digest_representative_completion_v001.mjs');
     completion.validateDigestRepresentativeSelectionV001(verificationPolicy, resolved.plan);
+    nativeSelection = deriveDigestNativeInspectionSelectionV001(resolved.plan, verificationPolicy);
   }
   if (effectiveCounterfactualQc && counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
     if (resolved.plan.canvas?.fps !== 30) throw new TypeError('combined QC requires the existing 30fps native profile');
@@ -2386,6 +2398,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       }
     }
     const physicalRecords = [];
+    const nativeEntries = [];
     for (const [index, drawState] of drawStates.entries()) {
       const {element, groupIndex, state} = drawState;
       const baseName =
@@ -2443,24 +2456,27 @@ export async function executeValidatedPresentationDrawAndQcV001({
           }),
         };
       }
+      const isRepresentative = nativeSelection?.representativeInstructionIds.includes(element.instructionId) ?? false;
+      const needsRepeat = nativeSelection === null || isRepresentative;
+      const needsLineMasks = nativeSelection === null
+        || nativeSelection.lineMaskInstructionIds.includes(element.instructionId);
       await overlayAdapter.renderStill(overlayProps[index], pngPath);
-      await overlayAdapter.renderStill(overlayProps[index], repeatPath, {series: 'repeat'});
-      const [pngSha256, repeatSha256] = await Promise.all([
-        fileSha256V002(pngPath),
-        fileSha256V002(repeatPath),
-      ]);
-      const determinism = validateOverlayDeterminismV002(
-        pngSha256,
-        repeatSha256,
-        element.instructionId,
-      );
-      if (determinism.status !== 'passed') {
-        return failAfterWork(determinism.violations, 'overlay-determinism');
+      const pngSha256 = await fileSha256V002(pngPath);
+      let repeatEvidence = {status: 'not-executed'};
+      if (needsRepeat) {
+        await overlayAdapter.renderStill(overlayProps[index], repeatPath, {series: 'repeat'});
+        const repeatSha256 = await fileSha256V002(repeatPath);
+        const determinism = validateOverlayDeterminismV002(pngSha256, repeatSha256, element.instructionId);
+        if (determinism.status !== 'passed') {
+          return failAfterWork(determinism.violations, 'overlay-determinism');
+        }
+        repeatEvidence = {status: 'performed', sha256: repeatSha256};
       }
 
       const lineRects = layoutItem?.lineRects ?? [];
       const lineAlphaBounds = [];
-      for (const line of element.indexedLines) {
+      const diagnosticMasks = [];
+      for (const line of needsLineMasks ? element.indexedLines : []) {
         const lineMaskPath = path.join(
           scratchDirectory,
           'frames',
@@ -2478,9 +2494,23 @@ export async function executeValidatedPresentationDrawAndQcV001({
           processObserver,
           observationLabelPrefix: 'overlay-line-inspection',
         });
+        diagnosticMasks.push({lineIndex: line.lineIndex, pngSha256: await fileSha256V002(lineMaskPath),
+          alphaBounds: lineInspection.alphaBounds});
         if (lineInspection.alphaBounds) {
-          lineAlphaBounds.push({lineIndex: line.lineIndex, ...lineInspection.alphaBounds});
+          lineAlphaBounds.push({lineIndex: line.lineIndex, ...lineInspection.alphaBounds,
+            pngSha256: diagnosticMasks[diagnosticMasks.length - 1].pngSha256});
         }
+      }
+      if (nativeSelection !== null) {
+        nativeEntries.push({instructionId: element.instructionId, primarySha256: pngSha256,
+          repeat: repeatEvidence,
+          lineMasks: needsLineMasks ? {status: 'performed',
+            scope: nativeSelection.requiredPlacementInstructionIds.includes(element.instructionId)
+              ? 'required-placement' : 'representative', masks: diagnosticMasks}
+            : {status: 'not-executed'},
+          calibration: visibleCenterCalibration === undefined ? {status: 'not-executed'} : {status: 'performed',
+            masks: visibleCenterCalibration.lineMasks.map(({lineIndex, pngSha256: maskSha, alphaBounds}) =>
+              ({lineIndex, pngSha256: maskSha, alphaBounds}))}});
       }
       const inspection = await inspectOverlayPngWithToolV001({
         instructionId: element.instructionId,
@@ -2494,6 +2524,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
         overlayFile: path.posix.join(artifactNames.overlays, path.basename(pngPath)),
         overlaySha256: pngSha256,
       });
+      if (nativeSelection !== null && visibleCenterCalibration !== undefined) {
+        inspection.visibleCenterCalibration = {lineMasks: nativeEntries[nativeEntries.length - 1].calibration.masks};
+      }
       if (state !== undefined) {
         const isMotion = Object.hasOwn(plan.elements[groupIndex], 'presentationMotion');
         const dimensions = await runPresentationRendererChildProcessV001(toolPaths.imageMagickPath,
@@ -2554,16 +2587,32 @@ export async function executeValidatedPresentationDrawAndQcV001({
     const completedExpectedAudio = separateAudioInspection?.audio
       ? {present: true, ...separateAudioInspection.audio}
       : baseExpectedAudio;
-    const layoutQc = evaluateQc({
+    const nativeCoverage = nativeSelection === null ? null : {
+      schemaVersion: 'digest-native-sampling-coverage-v001',
+      rendererPlanCanonicalSha256: sha256Canonical(plan), policyCanonicalSha256: sha256Canonical(verificationPolicy),
+      approvedJobBinding: structuredClone(storageContext.approvedJob.jobBinding),
+      authorizationBinding: structuredClone(storageContext.approvedJob.authorizationBinding),
+      implementationSha: storageContext.approvedJob.job.implementation.sha, entries: nativeEntries,
+    };
+    const nativeExpectedBindings = nativeCoverage === null ? null : {
+      approvedJobBinding: storageContext.approvedJob.jobBinding,
+      authorizationBinding: storageContext.approvedJob.authorizationBinding,
+      implementationSha: storageContext.approvedJob.job.implementation.sha,
+    };
+    const layoutQcInput = {
       plan,
+      ...(nativeCoverage === null ? {} : {expectedFrameCount}),
       applicationResults,
       overlayInspections: overlayRecords.map((record) => record.inspection),
       mediaInspection: baseMediaInspection.media,
       expectedAudio: baseExpectedAudio,
       canvas: plan.canvas,
       requireFinalVisibility: false,
-    });
-    if (layoutQc.status !== 'passed') {
+    };
+    const layoutQc = nativeCoverage === null ? evaluateQc(layoutQcInput)
+      : evaluateDigestRepresentativeRendererQcV001(layoutQcInput,
+        {policy: verificationPolicy, nativeCoverage, expectedBindings: nativeExpectedBindings});
+    if (layoutQc.status !== (nativeCoverage === null ? 'passed' : 'passed-representative-rules')) {
       return failAfterWork(layoutQc.violations, 'overlay-preflight', layoutQc);
     }
 
@@ -2609,7 +2658,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
         autoPresentationResolution, autoPresentationInputs, autoPresentation,
         runCounterfactualQc: effectiveCounterfactualQc,
-        ...(verificationPolicy === null ? {} : {verificationPolicy, storageContext, verificationMode: verificationPolicy.mode}),
+        ...(verificationPolicy === null ? {} : {verificationPolicy, storageContext, nativeCoverage, verificationMode: verificationPolicy.mode}),
         counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange,
         ...(orchestrationDrawingView === undefined ? {} : {
           orchestrationInput: exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView)})},
@@ -2859,7 +2908,8 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
     overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio, outputMedia, workVideo,
     plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
     autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
-    counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange, verificationPolicy = null, storageContext} = state;
+    counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange, verificationPolicy = null, storageContext,
+    nativeCoverage = null} = state;
   const failAfterWork = (violations, stage, nested) => createPresentationRendererFailureAfterWorkV001({
     violations, stage, nested, cleanupWarnings, scratchDirectory});
     let completedFrameQc;
@@ -2871,7 +2921,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       const completion = await import('./digest_representative_completion_v001.mjs');
       verification = await completion.finishApprovedDigestRepresentativeCompletionV001({storageContext, plan,
         workVideo, applicationResults, overlayRecords, outputMedia, expectedAudio: completedExpectedAudio,
-        expectedFrameCount, evaluateQc});
+        expectedFrameCount, evaluateQc, nativeCoverage});
       if (!['passed-representative', 'confirmation-pending', 'failed'].includes(verification?.status)) {
         throw new TypeError('approved Digest representative verification returned an invalid status');
       }
@@ -2942,7 +2992,8 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       completedExpectedAudio,
       outputMedia,
       finalQc,
-      ...(verification === undefined ? {} : {verification, verificationMode: verificationPolicy.mode}),
+      ...(verification === undefined ? {} : {verification, verificationMode: verificationPolicy.mode,
+        ...(nativeCoverage === null ? {} : {nativeCoverage})}),
       workVideo,
       resolvedPlan: plan,
       ...(autoPresentation === undefined ? {} : {

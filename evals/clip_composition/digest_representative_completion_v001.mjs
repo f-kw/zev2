@@ -6,6 +6,8 @@ import {lstat, readFile, realpath} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
+import {evaluateDigestRepresentativeRendererQcV001, validateDigestNativeSamplingCoverageV001}
+  from './presentation_renderer_qc_v002.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const qualifiedResults=new WeakMap();
@@ -19,6 +21,15 @@ const object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value)
 function exact(value,keys,label){assert(object(value),label);assert.deepEqual(Object.keys(value).sort(),[...keys].sort(),label);}
 function freeze(value){if(object(value)||Array.isArray(value)){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
 function relative(value){assert(typeof value==='string'&&/^[A-Za-z0-9._\-/]+$/u.test(value)&&!value.startsWith('/')&&!value.split('/').some(p=>['','.','..'].includes(p)),'REPRESENTATIVE_PATH_INVALID');return value;}
+function savedNativeCoverage(verification){
+  const coverage=verification.nativeCoverage??null;
+  if(coverage===null){
+    assert.equal(verification.checks?.nativeSampling,undefined,'RECORDED_NATIVE_COVERAGE_REQUIRED');
+    assert.equal(verification.existingRuleEvidence?.nativeSampling,undefined,'RECORDED_NATIVE_COVERAGE_REQUIRED');
+    assert.notEqual(verification.existingRuleEvidence?.status,'passed-representative-rules','RECORDED_NATIVE_COVERAGE_REQUIRED');
+  }
+  return coverage;
+}
 function binding(value){assert(object(value)&&typeof value.path==='string'&&HASH.test(value.fileSha256),'REPRESENTATIVE_BINDING_INVALID');
   assert(Number.isSafeInteger(value.sizeBytes)&&value.sizeBytes>0,'REPRESENTATIVE_BINDING_SIZE_REQUIRED');}
 
@@ -64,12 +75,31 @@ function frameInterval(element){
 }
 
 /** Pure structural evaluation does not mint a result capability or publish media. */
-export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,representativeRecord=null,representativeRecordBinding=null}){
+export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage=null,overlayInspections=null,applicationResults=null,representativeRecord=null,representativeRecordBinding=null}){
   validateDigestRepresentativeVerificationPolicyV001(policy,bindings.outputRoot);validateDigestRepresentativeSelectionV001(policy,plan);
   binding(bindings.completedMedia);assert(HASH.test(bindings.rendererPlanCanonicalSha256));
   const violations=[];
-  const wholeRulesPassed=ruleQc?.status==='passed'&&ruleQc?.checks?.instructionApplication?.status==='passed'
-    &&ruleQc?.checks?.layoutAndVisibility?.status==='passed'&&ruleQc?.instructionCount===plan.elements.length;
+  let nativeSampling=null;
+  if(nativeCoverage===null&&ruleQc?.checks?.nativeSampling!==undefined)violations.push({code:'REPRESENTATIVE_NATIVE_COVERAGE_REQUIRED'});
+  if(nativeCoverage!==null){try{
+    const checked=validateDigestNativeSamplingCoverageV001({plan,policy,coverage:nativeCoverage,overlayInspections,
+      bindings:{approvedJobBinding:bindings.approvedJobBinding,authorizationBinding:bindings.authorizationBinding,implementationSha:bindings.implementationSha}});
+    assert.equal(checked.status,'passed','REPRESENTATIVE_NATIVE_COVERAGE_INVALID');
+    assert.equal(ruleQc?.status,'passed-representative-rules','REPRESENTATIVE_NATIVE_RULE_METHOD_REQUIRED');
+    const sampling=ruleQc?.checks?.nativeSampling;assert.equal(sampling?.status,'passed','REPRESENTATIVE_NATIVE_SAMPLING_FAILED');
+    assert.equal(sampling.scope,'representative-plus-required-placement','REPRESENTATIVE_NATIVE_SCOPE_CHANGED');
+    assert(Array.isArray(applicationResults)&&applicationResults.length===plan.elements.length,'REPRESENTATIVE_NATIVE_APPLICATIONS_REQUIRED');
+    assert.deepEqual(applicationResults.map(r=>r.instructionId),plan.elements.map(e=>e.instructionId),'REPRESENTATIVE_NATIVE_APPLICATION_ORDER');
+    assert.deepEqual(sampling.coverage,nativeCoverage,'REPRESENTATIVE_NATIVE_RULE_COVERAGE_CHANGED');
+    assert.deepEqual(sampling.summary,checked.summary,'REPRESENTATIVE_NATIVE_RULE_COUNTS_CHANGED');
+    nativeSampling=structuredClone(sampling);
+  }catch(error){violations.push({code:'REPRESENTATIVE_NATIVE_COVERAGE_INVALID',details:{reason:error.message}});}}
+  const historicalRulesPassed=nativeCoverage===null&&ruleQc?.status==='passed'&&ruleQc?.checks?.instructionApplication?.status==='passed'
+    &&ruleQc?.checks?.layoutAndVisibility?.status==='passed';
+  const sampledRulesPassed=nativeCoverage!==null&&nativeSampling!==null&&ruleQc?.status==='passed-representative-rules'
+    &&ruleQc?.checks?.instructionApplication?.status==='passed'&&ruleQc?.checks?.allPrimaryRules?.status==='passed'
+    &&ruleQc?.checks?.layoutAndVisibility?.status==='passed-representative';
+  const wholeRulesPassed=(historicalRulesPassed||sampledRulesPassed)&&ruleQc?.instructionCount===plan.elements.length;
   const mediaPassed=ruleQc?.checks?.media?.status==='passed';
   if(!wholeRulesPassed||!mediaPassed||ruleQc?.violations?.length!==0)violations.push({code:'REPRESENTATIVE_RULE_OR_MEDIA_FAILED',details:{originalViolations:ruleQc?.violations??null}});
   const actual=ruleQc?.mediaEvidence?.observed?.audio,expected=ruleQc?.mediaEvidence?.expectedAudio;
@@ -108,13 +138,18 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
   const status=violations.length>0?'failed':pending?'confirmation-pending':'passed-representative';
   return freeze({schemaVersion:schema,status,complete:status==='passed-representative',mode:policy.mode,policy:structuredClone(policy),
     bindings:structuredClone(bindings),representativeRecordBinding:representativeRecordBinding?structuredClone(representativeRecordBinding):null,
-    checks:{wholeRules:{status:wholeRulesPassed?'passed':'failed',scope:'all-planned-instructions; existing normal input and overlay rules'},
+    ...(nativeCoverage===null?{}:{nativeCoverage:structuredClone(nativeCoverage)}),
+    checks:{wholeRules:{status:wholeRulesPassed?'passed':'failed',scope:nativeCoverage===null?'all-planned-instructions; existing normal input and overlay rules':'all primary input/alpha/bounds rules; native repeat/masks only selected representatives and required placement'},
+      ...(nativeCoverage===null?{}:{nativeSampling:nativeSampling??{status:'failed',scope:'representative-plus-required-placement',coverage:structuredClone(nativeCoverage)}}),
       media:{status:mediaPassed?'passed':'failed',scope:'existing completed-media inspection'},audioPreservation:{status:audioPassed?'passed':'failed',scope:'original AAC packet payload'},
       representatives:{status:status==='passed-representative'?'passed':status==='confirmation-pending'?'pending':'failed',count:representatives.length},
       fullVisibility:{status:'not-executed',scope:'no counterfactual or completed-frame comparison'}},
     observations:{representativeMethods:Object.fromEntries(METHODS.map(m=>[m,{status:representatives.some(r=>r.method===m)?'performed':'not-evaluated',count:representatives.filter(r=>r.method===m).length}])),
       wholeVideoPlayback:'not-evaluated',audioListening:'not-evaluated',humanQualityAdoption:'not-evaluated'},representatives,violations,
-    existingRuleEvidence:{instructionApplication:structuredClone(ruleQc?.checks?.instructionApplication??null),
+    existingRuleEvidence:{...(nativeCoverage===null?{}:{status:ruleQc?.status,
+        allPrimaryRules:structuredClone(ruleQc?.checks?.allPrimaryRules??null),layoutAndVisibility:structuredClone(ruleQc?.checks?.layoutAndVisibility??null),
+        nativeSampling:structuredClone(ruleQc?.checks?.nativeSampling??null),overlayInspections:structuredClone(overlayInspections),applicationResults:structuredClone(applicationResults)}),
+      instructionApplication:structuredClone(ruleQc?.checks?.instructionApplication??null),
       mediaEvidence:structuredClone(ruleQc?.mediaEvidence??null),violations:structuredClone(ruleQc?.violations??null)}});
 }
 
@@ -129,24 +164,26 @@ async function stableBinding(file,logicalPath=file){
 function owned(context,file){assert(path.isAbsolute(file)&&file.startsWith(context.generatedRoot+'/'),'REPRESENTATIVE_OWNED_MEDIA_REQUIRED');}
 async function verifyReference(context,ref){binding(ref);assert(relative(ref.path).startsWith(context.outputRoot+'/'),'REPRESENTATIVE_REFERENCE_ROOT');const actual=await stableBinding(context.resolve(ref.path),ref.path);assert.deepEqual(actual,ref,'REPRESENTATIVE_REFERENCE_BYTES_CHANGED');}
 
-export async function finishApprovedDigestRepresentativeCompletionV001({storageContext,plan,workVideo,applicationResults,overlayRecords,outputMedia,expectedAudio,expectedFrameCount}){
+export async function finishApprovedDigestRepresentativeCompletionV001({storageContext,plan,workVideo,applicationResults,overlayRecords,outputMedia,expectedAudio,expectedFrameCount,nativeCoverage=null}){
   const policy=await resolveApprovedDigestVerificationPolicyV001(storageContext);assert(policy,'QUALIFIED_REPRESENTATIVE_POLICY_REQUIRED');
   if(storageContext.scope==='digest-record-only-finalization-v001'){
     await assertApprovedDigestPendingVerificationV001(storageContext.pending);
     const saved=storageContext.pending.technicalEvidence;
-    for(const [actual,expected] of [[plan,saved.plan],[applicationResults,saved.applicationResults],[outputMedia,saved.outputMedia],[expectedAudio,saved.expectedAudio],[expectedFrameCount,saved.expectedFrameCount]])assert.deepEqual(actual,expected,'RECORD_ONLY_TECHNICAL_INPUT_SUBSTITUTION');
+    for(const [actual,expected] of [[plan,saved.plan],[applicationResults,saved.applicationResults],[outputMedia,saved.outputMedia],[expectedAudio,saved.expectedAudio],[expectedFrameCount,saved.expectedFrameCount],[nativeCoverage,saved.nativeCoverage??null]])assert.deepEqual(actual,expected,'RECORD_ONLY_TECHNICAL_INPUT_SUBSTITUTION');
     assert.deepEqual(overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),saved.overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),'RECORD_ONLY_OVERLAY_SUBSTITUTION');
   }
   validateDigestRepresentativeSelectionV001(policy,plan);owned(storageContext,workVideo);
   const q=storageContext.approvedJob;assert.equal(expectedFrameCount,q.job.expected.frames,'REPRESENTATIVE_FRAME_BINDING_MISMATCH');
   assert.equal(plan.elements.length,q.job.expected.cues,'REPRESENTATIVE_CUE_BINDING_MISMATCH');
   const {evaluatePresentationRendererQcV002}=await import('./presentation_renderer_qc_v002.mjs');
-  const ruleQc=evaluatePresentationRendererQcV002({plan,applicationResults,overlayInspections:overlayRecords.map(r=>r.inspection),
-    mediaInspection:outputMedia,expectedAudio,expectedFrameCount,canvas:plan.canvas,requireFinalVisibility:false});
+  const overlayInspections=overlayRecords.map(r=>r.inspection),expectedBindings={approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha};
+  const qcInput={plan,applicationResults,overlayInspections,mediaInspection:outputMedia,expectedAudio,expectedFrameCount,canvas:plan.canvas,requireFinalVisibility:false};
+  const ruleQc=nativeCoverage===null?evaluatePresentationRendererQcV002(qcInput)
+    :evaluateDigestRepresentativeRendererQcV001(qcInput,{policy,nativeCoverage,expectedBindings});
   const completedMedia=await stableBinding(workVideo);
   const bindings={planId:q.job.planId,outputRoot:q.job.outputRoot,approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,
     manifestBinding:q.job.inputs.candidateManifestBinding,typographySettingsBinding:q.job.inputs.typographySettingsBinding,
-    rendererPlanCanonicalSha256:canonicalSha(plan),completedMedia};
+    rendererPlanCanonicalSha256:canonicalSha(plan),completedMedia,...(nativeCoverage===null?{}:{implementationSha:q.job.implementation.sha})};
   let representativeRecord=null,representativeRecordBinding=null,recordReadError=null;
   try{
     representativeRecordBinding=await stableBinding(storageContext.resolve(policy.confirmationRecordPath),policy.confirmationRecordPath);
@@ -154,15 +191,15 @@ export async function finishApprovedDigestRepresentativeCompletionV001({storageC
     representativeRecord=JSON.parse(bytes.toString());
   }catch(error){if(error.code!=='ENOENT')recordReadError=error;}
   let result;
-  if(recordReadError){result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,representativeRecord:{invalidRecord:recordReadError.message},representativeRecordBinding});}
-  else result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,representativeRecord,representativeRecordBinding});
+  if(recordReadError){result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,representativeRecord:{invalidRecord:recordReadError.message},representativeRecordBinding});}
+  else result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,representativeRecord,representativeRecordBinding});
   if(result.status==='passed-representative'){
     for(const item of result.representatives)await verifyReference(storageContext,item.evidenceBinding);
     await verifyReference(storageContext,representativeRecordBinding);
   }
   await resolveApprovedDigestVerificationPolicyV001(storageContext);
   qualifiedResults.set(result,{storageContext,qualified:q,recordBinding:representativeRecordBinding,
-    evidenceBindings:result.representatives.map(item=>item.evidenceBinding),completedMedia});
+    evidenceBindings:result.representatives.map(item=>item.evidenceBinding),completedMedia,plan,overlayInspections});
   return result;
 }
 
@@ -172,6 +209,12 @@ export async function assertQualifiedDigestRepresentativeCompletionV001(result,s
   assert(['passed-representative','confirmation-pending'].includes(result.status),'REPRESENTATIVE_COMPLETION_REJECTED');
   const policy=await resolveApprovedDigestVerificationPolicyV001(storageContext);assert.deepEqual(policy,result.policy,'REPRESENTATIVE_CURRENT_POLICY_CHANGED');
   assert.equal(storageContext.approvedJob,saved.qualified,'REPRESENTATIVE_CURRENT_JOB_CHANGED');
+  if(result.nativeCoverage!==undefined){
+    const q=storageContext.approvedJob;assert.equal(result.bindings.implementationSha,q.job.implementation.sha,'REPRESENTATIVE_CURRENT_IMPLEMENTATION_CHANGED');
+    const checked=validateDigestNativeSamplingCoverageV001({plan:saved.plan,policy,coverage:result.nativeCoverage,overlayInspections:saved.overlayInspections,
+      bindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha}});
+    assert.equal(checked.status,'passed','REPRESENTATIVE_CURRENT_NATIVE_COVERAGE_CHANGED');assert.deepEqual(checked.summary,result.checks.nativeSampling.summary,'REPRESENTATIVE_CURRENT_NATIVE_COUNTS_CHANGED');
+  }
   owned(storageContext,completedMediaPath);const actual=await stableBinding(completedMediaPath);
   assert.equal(actual.fileSha256,saved.completedMedia.fileSha256,'REPRESENTATIVE_COMPLETED_MEDIA_CHANGED');assert.equal(actual.sizeBytes,saved.completedMedia.sizeBytes,'REPRESENTATIVE_COMPLETED_MEDIA_CHANGED');
   if(saved.recordBinding)await verifyReference(storageContext,saved.recordBinding);
@@ -199,6 +242,7 @@ export async function persistApprovedDigestRepresentativePendingEvidenceV001({dr
   const plan=draw.resolvedPlan;
   assert.equal(canonicalSha(plan),verification.bindings.rendererPlanCanonicalSha256,'PENDING_RENDER_PLAN_CHANGED');
   assert.equal(draw.applicationResults.length,plan.elements.length);assert.equal(draw.overlayRecords.length,plan.elements.length);
+  const nativeCoverage=draw.nativeCoverage??null;assert.deepEqual(nativeCoverage,savedNativeCoverage(verification),'PENDING_NATIVE_COVERAGE_CHANGED');
   const publishedMediaBinding=await stableBinding(publishedMediaPath,out+'/render/presentation-rendered-v002.mp4');
   const overlayRecords=[];
   for(const [index,r] of draw.overlayRecords.entries()){
@@ -217,7 +261,7 @@ export async function persistApprovedDigestRepresentativePendingEvidenceV001({dr
     typographySettingsBinding:q.job.inputs.typographySettingsBinding,implementationSha:q.job.implementation.sha,
     verificationPolicy:q.job.verificationPolicy,publishedMediaBinding,rendererPlanCanonicalSha256:canonicalSha(plan),
     plan,applicationResults:draw.applicationResults,overlayRecords,outputMedia:draw.outputMedia,
-    expectedAudio:draw.completedExpectedAudio,expectedFrameCount:q.job.expected.frames};
+    expectedAudio:draw.completedExpectedAudio,expectedFrameCount:q.job.expected.frames,...(nativeCoverage===null?{}:{nativeCoverage:structuredClone(nativeCoverage)})};
   const file=out+'/representative-technical-evidence-v001.json';await storageContext.publish(file,evidence);
   const technicalEvidenceBinding=await stableBinding(storageContext.resolve(file),file);
   await storageContext.readBound(technicalEvidenceBinding);
@@ -309,10 +353,28 @@ export async function readApprovedDigestInitialCompletedReceiptV001({qualified:q
     for(const item of v.representatives)await verifySaved(q,item.evidenceBinding);
     // The original QC is read under the independent receipt anchor. Re-evaluate
     // only the confirmation record's IDs/clocks/methods/media/evidence structure.
-    const rules={status:v.existingRuleEvidence.violations?.length===0?'passed':'failed',instructionCount:plan.elements.length,
-      checks:{instructionApplication:v.existingRuleEvidence.instructionApplication,layoutAndVisibility:{status:v.checks.wholeRules.status},media:{status:v.checks.media.status}},
-      mediaEvidence:v.existingRuleEvidence.mediaEvidence,violations:v.existingRuleEvidence.violations};
-    const checked=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan,ruleQc:rules,
+    const nativeCoverage=savedNativeCoverage(v);
+    let rules;
+    if(nativeCoverage===null){
+      rules={status:v.existingRuleEvidence.violations?.length===0?'passed':'failed',instructionCount:plan.elements.length,
+        checks:{instructionApplication:v.existingRuleEvidence.instructionApplication,layoutAndVisibility:{status:v.checks.wholeRules.status},media:{status:v.checks.media.status}},
+        mediaEvidence:v.existingRuleEvidence.mediaEvidence,violations:v.existingRuleEvidence.violations};
+    }else{
+      assert.equal(v.bindings.implementationSha,q.job.implementation.sha,'COMPLETED_NATIVE_IMPLEMENTATION_CHANGED');
+      const overlayInspections=v.existingRuleEvidence.overlayInspections,applicationResults=v.existingRuleEvidence.applicationResults;
+      assert(Array.isArray(overlayInspections)&&Array.isArray(applicationResults)&&overlayInspections.length===plan.elements.length&&applicationResults.length===plan.elements.length,'COMPLETED_NATIVE_INPUTS_REQUIRED');
+      for(const [index,app] of applicationResults.entries()){
+        const inspected=overlayInspections[index];assert.equal(app.instructionId,plan.elements[index].instructionId);assert.equal(inspected.instructionId,app.instructionId);
+        assert(relative(app.overlayFile).startsWith('overlays/'),'COMPLETED_NATIVE_PRIMARY_PATH');
+        const actual=await stableBinding(generatedPath(q,q.job.outputRoot+'/render/'+app.overlayFile));
+        assert.equal(actual.fileSha256,app.overlaySha256,'COMPLETED_NATIVE_PRIMARY_CHANGED');assert.equal(actual.fileSha256,inspected.overlaySha256,'COMPLETED_NATIVE_PRIMARY_CHANGED');
+      }
+      rules=evaluateDigestRepresentativeRendererQcV001({plan,applicationResults,overlayInspections,mediaInspection:v.existingRuleEvidence.mediaEvidence.observed,
+        expectedAudio:v.existingRuleEvidence.mediaEvidence.expectedAudio,expectedFrameCount:q.job.expected.frames,canvas:plan.canvas,requireFinalVisibility:false},
+        {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha}});
+      assert.deepEqual(rules.checks.nativeSampling,v.checks.nativeSampling,'COMPLETED_NATIVE_SAMPLING_CHANGED');
+    }
+    const checked=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan,ruleQc:rules,nativeCoverage,overlayInspections:v.existingRuleEvidence.overlayInspections??null,applicationResults:v.existingRuleEvidence.applicationResults??null,
       representativeRecord:record,representativeRecordBinding:v.representativeRecordBinding});
     assert.equal(checked.status,'passed-representative','COMPLETED_CONFIRMATION_RECORD_CHANGED');assert.deepEqual(checked.representatives,v.representatives);
     assert.deepEqual(checked.observations,v.observations);assert.equal(p.result.counterfactualQcExecuted,false);
@@ -358,6 +420,8 @@ export async function readApprovedDigestPendingVerificationV001({qualified:q,pen
   assert.equal(t.expectedFrameCount,q.job.expected.frames);assert.equal(t.plan.elements.length,q.job.expected.cues);validateDigestRepresentativeSelectionV001(q.job.verificationPolicy,t.plan);
   assert.equal(canonicalSha(t.plan),t.rendererPlanCanonicalSha256,'PENDING_PLAN_CANONICAL_CHANGED');assert.equal(t.rendererPlanCanonicalSha256,v.bindings.rendererPlanCanonicalSha256);
   assert.equal(t.overlayRecords.length,t.plan.elements.length);assert.equal(t.applicationResults.length,t.plan.elements.length);
+  const nativeCoverage=t.nativeCoverage??null;assert.deepEqual(nativeCoverage,savedNativeCoverage(v),'PENDING_NATIVE_COVERAGE_SUBSTITUTION');
+  if(nativeCoverage!==null)assert.equal(v.bindings.implementationSha,q.job.implementation.sha,'PENDING_NATIVE_IMPLEMENTATION_CHANGED');
   await verifySaved(q,publishedMediaBinding);
   for(const [index,r] of t.overlayRecords.entries()){
     exact(r,['element','inspection','pngBinding'],'PENDING_OVERLAY_FIELDS');assert.deepEqual(r.element,t.plan.elements[index]);
@@ -366,9 +430,12 @@ export async function readApprovedDigestPendingVerificationV001({qualified:q,pen
     assert.equal(app.overlaySha256,r.pngBinding.fileSha256);assert.equal(r.inspection.overlaySha256,r.pngBinding.fileSha256);await verifySaved(q,r.pngBinding);
   }
   const {evaluatePresentationRendererQcV002}=await import('./presentation_renderer_qc_v002.mjs');
-  const rules=evaluatePresentationRendererQcV002({plan:t.plan,applicationResults:t.applicationResults,overlayInspections:t.overlayRecords.map(r=>r.inspection),
-    mediaInspection:t.outputMedia,expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,canvas:t.plan.canvas,requireFinalVisibility:false});
-  const rebuilt=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan:t.plan,ruleQc:rules});
+  const overlayInspections=t.overlayRecords.map(r=>r.inspection),qcInput={plan:t.plan,applicationResults:t.applicationResults,overlayInspections,
+    mediaInspection:t.outputMedia,expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,canvas:t.plan.canvas,requireFinalVisibility:false};
+  const rules=nativeCoverage===null?evaluatePresentationRendererQcV002(qcInput):evaluateDigestRepresentativeRendererQcV001(qcInput,
+    {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha}});
+  const rebuilt=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan:t.plan,ruleQc:rules,nativeCoverage,overlayInspections,applicationResults:t.applicationResults});
+  if(nativeCoverage!==null)assert.deepEqual(rebuilt.checks.nativeSampling,v.checks.nativeSampling,'PENDING_NATIVE_SAMPLING_CHANGED');
   assert.equal(rebuilt.status,'confirmation-pending','PENDING_RULE_OR_MEDIA_REVALIDATION_FAILED');
   // Original validation observations are rederived above; no saved status authorizes finalization.
   const pending=freeze({qualified:q,pendingReceiptBinding:structuredClone(pendingReceiptBinding),pendingReceipt:p,
@@ -392,6 +459,6 @@ export async function requalifyApprovedDigestRecordedRepresentativeV001({pending
   const result=await finishApprovedDigestRepresentativeCompletionV001({storageContext:recordContext,plan:t.plan,
     workVideo:generatedPath(pending.qualified,pending.publishedMediaBinding.path),applicationResults:t.applicationResults,
     overlayRecords:t.overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),outputMedia:t.outputMedia,
-    expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount});
+    expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,nativeCoverage:t.nativeCoverage??null});
   await assertApprovedDigestPendingVerificationV001(pending);return result;
 }

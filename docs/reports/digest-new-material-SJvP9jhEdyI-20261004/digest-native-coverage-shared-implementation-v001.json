@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "digest-native-coverage-shared-implementation-evidence-v001",
+  "checkedAt": "2026-10-04T14:53:05.072795+00:00",
+  "ownedBindings": [
+    {
+      "path": "evals/clip_composition/digest_representative_completion_v001.mjs",
+      "fileSha256": "babcda0b0d129bacc049d2e0e756bcd2eb9afdf0e34713db4540f79e4e80a831",
+      "sizeBytes": 46709
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_native_coverage_v001.test.mjs",
+      "fileSha256": "f156c869e5425d2c6fcd8a586f9857c3a7ce4baf9dff26dce94ee252a00f7ee3",
+      "sizeBytes": 19448
+    }
+  ],
+  "branch": "main",
+  "head": "3940cb6e015248fce8ae22bfbf5149f623e11510",
+  "gitStatusShort": " M evals/clip_composition/digest_representative_completion_v001.mjs\n M evals/clip_composition/digest_representative_renderer_v001.test.mjs\n M evals/clip_composition/presentation_composite_fade_localization_v001.test.mjs\n M evals/clip_composition/presentation_renderer_qc_v002.mjs\n M evals/clip_composition/render_presentation_v002.mjs\n?? evals/clip_composition/digest_native_sampling_qc_v001.test.mjs\n?? evals/clip_composition/digest_native_sampling_renderer_v001.test.mjs\n?? evals/clip_composition/digest_representative_native_coverage_v001.test.mjs\n?? evals/clip_composition/presentation_short_caption_opacity_v001.test.mjs\n",
+  "untrackedCount": 4,
+  "gitMutations": 0,
+  "stageCommitPush": "not executed; parent integration owns Git",
+  "nodeRuntime": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+  "nodeVersion": "20.19.6",
+  "syntaxChecks": {
+    "product": 0,
+    "dedicatedTest": 0
+  },
+  "finalTestCommand": "node --test evals/clip_composition/digest_representative_completion_v001.test.mjs evals/clip_composition/digest_representative_native_coverage_v001.test.mjs",
+  "testRuns": [
+    {
+      "scope": "old pure completion",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "exitCode": 0
+    },
+    {
+      "scope": "initial dedicated shared fixture",
+      "tests": 7,
+      "pass": 4,
+      "fail": 3,
+      "exitCode": 1,
+      "failures": [
+        "tamper mutated both shared expected and actual binding",
+        "completed core fixture schema missing",
+        "tamper attempted on frozen original"
+      ]
+    },
+    {
+      "scope": "after fixture correction 1",
+      "tests": 15,
+      "pass": 14,
+      "fail": 1,
+      "exitCode": 1,
+      "failure": "completed-reader fixture object helper absent"
+    },
+    {
+      "scope": "after fixture correction 2",
+      "tests": 15,
+      "pass": 14,
+      "fail": 1,
+      "exitCode": 1,
+      "failure": "completed-reader fixture policy validator absent; q.authorization was also added before next run"
+    },
+    {
+      "scope": "after fixture correction 3",
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "exitCode": 0
+    },
+    {
+      "scope": "final after completed-reader loss/failed-repeat/grant-negative cases",
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "exitCode": 0,
+      "durationMsFromNodeSummary": 104.174042
+    }
+  ],
+  "fixtureCorrections": {
+    "count": 3,
+    "reasons": [
+      [
+        "tamper mutated both shared expected and actual binding",
+        "completed core fixture schema missing",
+        "tamper attempted on frozen original"
+      ],
+      "completed-reader fixture object helper absent",
+      "completed-reader fixture policy validator absent; q.authorization was also added before next run"
+    ],
+    "limit": 5,
+    "rootOpacityCorrection": "separate root-owned record; not counted here"
+  },
+  "implementationCorrection": {
+    "count": 1,
+    "reason": "Parent/independent review identified caller execution result does not retain applicationResults; store actual finish input in sampled existingRuleEvidence and read there. No caller change."
+  },
+  "verifiedScopes": [
+    "actual shared factory body to technical persistence to pending reader to record-only requalification under in-memory test environment",
+    "completed reader actual caller shape lacking applicationResults; saved actual-input closure used instead",
+    "completed coverage-loss/failed-selected-repeat/grant-substitution reject",
+    "current unselected-primary bytes change rejects completed read",
+    "technical draw/verification coverage mismatch rejects before technical publish",
+    "historical old pure shape remains unchanged (8 tests)"
+  ],
+  "testBoundary": "Actual shared function bodies and production pure QC evaluated with synthetic in-memory bound bytes and explicit environment/opaque qualification stubs. No production capability minted and no physical mount/media operations.",
+  "preserved": [
+    "all primary alpha/bounds/application rules",
+    "representative repeat/masks and all required placement masks/calibration",
+    "same strict plan/policy/job/auth/current implementation coverage binding",
+    "full historical path remains full QC; missing coverage cannot be fallback passed",
+    "fullVisibility not-executed and human quality/playback/audio listening unassessed"
+  ],
+  "notExecuted": [
+    "real manufacture",
+    "651 draw",
+    "composite",
+    "actual SSD reading or writes",
+    "full media QC replay",
+    "physical record-only/get integration (root suite pending)"
+  ],
+  "scope": [
+    "owned one product module",
+    "owned one dedicated test"
+  ],
+  "productOtherPathsEditedByThisAgent": 0,
+  "mediaManufacture": 0,
+  "mediaDecode": 0,
+  "api": 0
+}

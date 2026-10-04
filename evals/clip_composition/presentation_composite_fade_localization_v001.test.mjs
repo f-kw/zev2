@@ -150,11 +150,11 @@ async function clipped(f, startFrame, endFrameExclusive) {
     renderRange: {startFrame, endFrameExclusive, fullFrameCount: f.frames}};
 }
 
-test('fixed old compositor matches Normal, partial Color, Panel, lengths 1–9, gaps and simultaneous translucent layers', async t => {
+test('fixed old compositor matches Normal, partial Color, Panel, lengths 7–9, gaps and simultaneous translucent layers', async t => {
   const f = await fixture(t, 128), old = await priorBuilder();
   const records = [];
   let start = 2;
-  for (let length = 1; length <= 9; length++) {
+  for (let length = 7; length <= 9; length++) {
     records.push(await record(f, element('short-' + length, start, length)));
     start += length + 2;
   }

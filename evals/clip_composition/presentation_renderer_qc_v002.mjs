@@ -97,6 +97,9 @@ const overlap = (left, right) => ({
 const timeOverlap = (left, right) => Math.min(left.endFrameExclusive, right.endFrameExclusive)
   - Math.max(left.startFrame, right.startFrame);
 
+// Only the dedicated coverage-validated evaluator can create this internal scope.
+const digestNativeInspectionScopes = new WeakSet();
+
 const QC_OUTPUT_PROFILE_V002 = Object.freeze({
   schemaVersion: PRESENTATION_RENDERER_QC_SCHEMA_VERSION,
   planFile: 'presentation-render-plan-v002.json',
@@ -122,7 +125,7 @@ function evaluatePresentationRendererQc({
   requireFinalVisibility = true,
   completedFrameQcEvidence,
   currentCompletedMediaRef,
-}, outputProfile) {
+}, outputProfile, nativeInspectionScope = null) {
   const violations = [];
   const combinedMethod = completedFrameQcEvidence?.method === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001;
   const omissionMethod = completedFrameQcEvidence?.method === PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002;
@@ -481,8 +484,10 @@ function evaluatePresentationRendererQc({
     const lineAlphaBounds = Array.isArray(inspection.lineAlphaBounds)
       ? inspection.lineAlphaBounds
       : [];
+    const lineMasksRequired = !digestNativeInspectionScopes.has(nativeInspectionScope)
+      || nativeInspectionScope.lineMaskInstructionIds.has(element.instructionId);
     const lineAlphaBoundsInvalid = (
-      lineAlphaBounds.length !== element.indexedLines.length
+      (lineMasksRequired && lineAlphaBounds.length !== element.indexedLines.length)
       || lineAlphaBounds.some((entry, index) => (
         entry?.lineIndex !== index
         || ![entry.left, entry.top, entry.right, entry.bottom].every(Number.isFinite)
@@ -941,4 +946,201 @@ export async function fileSha256V002(filePath) {
   const hash = createHash('sha256');
   for await (const chunk of createReadStream(filePath)) hash.update(chunk);
   return hash.digest('hex');
+}
+
+const DIGEST_NATIVE_COVERAGE_SCHEMA_V001 = 'digest-native-sampling-coverage-v001';
+const nativeHash = value => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value);
+const nativeSame = (a, b) => sha256Canonical(a) === sha256Canonical(b);
+const nativeRequire = (condition, label) => {if (!condition) throw new TypeError(label);};
+const nativeExact = (value, keys, label) => nativeRequire(isObject(value)
+  && nativeSame(Object.keys(value).sort(), [...keys].sort()), label);
+const nativeRelative = value => typeof value === 'string' && /^[A-Za-z0-9._\-/]+$/u.test(value)
+  && !value.startsWith('/') && !value.split('/').some(part => ['', '.', '..'].includes(part));
+function nativeBinding(value) {
+  nativeExact(value, ['path', 'fileSha256', 'sizeBytes'], 'DIGEST_NATIVE_BINDING_FIELDS');
+  nativeRequire(isNonEmptyString(value.path) && nativeHash(value.fileSha256)
+    && Number.isSafeInteger(value.sizeBytes) && value.sizeBytes > 0, 'DIGEST_NATIVE_BINDING_INVALID');
+}
+function nativeBounds(value) {
+  nativeExact(value, ['left', 'top', 'right', 'bottom', 'width', 'height'], 'DIGEST_NATIVE_BOUNDS_FIELDS');
+  nativeRequire(Object.values(value).every(Number.isFinite) && value.left >= 0 && value.top >= 0
+    && value.right > value.left && value.bottom > value.top
+    && value.width === value.right - value.left && value.height === value.bottom - value.top,
+  'DIGEST_NATIVE_BOUNDS_INVALID');
+}
+
+/** This selects native inspections; it does not qualify a caller or grant rendering authority. */
+export function deriveDigestNativeInspectionSelectionV001(plan, policy) {
+  nativeExact(policy, ['schemaVersion', 'mode', 'representativeInstructionIds', 'permittedMethods', 'confirmationRecordPath'],
+    'DIGEST_NATIVE_POLICY_FIELDS');
+  nativeRequire(policy.schemaVersion === 'digest-representative-verification-policy-v001'
+    && policy.mode === 'representative-plus-rules-v001', 'DIGEST_NATIVE_POLICY_MODE');
+  for (const field of ['representativeInstructionIds', 'permittedMethods']) {
+    nativeRequire(Array.isArray(policy[field]) && policy[field].length > 0
+      && policy[field].every(value => typeof value === 'string' && value.trim().length > 0)
+      && new Set(policy[field]).size === policy[field].length, 'DIGEST_NATIVE_POLICY_SELECTION');
+  }
+  nativeRequire(policy.permittedMethods.every(method => ['still-frame', 'text-clock-context', 'video-playback'].includes(method))
+    && nativeRelative(policy.confirmationRecordPath) && policy.confirmationRecordPath.endsWith('.json'),
+  'DIGEST_NATIVE_POLICY_INVALID');
+  nativeRequire(Array.isArray(plan?.elements) && plan.elements.length > 0, 'DIGEST_NATIVE_NORMAL_PLAN_REQUIRED');
+  const ids = plan.elements.map(element => element?.instructionId);
+  nativeRequire(ids.every(isNonEmptyString) && new Set(ids).size === ids.length, 'DIGEST_NATIVE_PLAN_IDS');
+  nativeRequire(plan.elements.every(element => !Object.hasOwn(element, 'presentationPulse')
+    && !Object.hasOwn(element, 'presentationMotion')), 'DIGEST_NATIVE_NORMAL_ONLY');
+  nativeRequire(policy.representativeInstructionIds.every(id => ids.includes(id)), 'DIGEST_NATIVE_SELECTION_NOT_IN_PLAN');
+  const representative = new Set(policy.representativeInstructionIds);
+  const placement = new Set(plan.elements.filter(element => element.visualState?.position?.preset === 'top-band'
+    || isPresentationPanelBackgroundV002(element.visualState?.background)).map(element => element.instructionId));
+  return {
+    representativeInstructionIds: [...policy.representativeInstructionIds],
+    requiredPlacementInstructionIds: ids.filter(id => placement.has(id)),
+    lineMaskInstructionIds: ids.filter(id => representative.has(id) || placement.has(id)),
+  };
+}
+
+/** Pure coverage validation binds recorded measurements to all primary inspections.
+ * It never substitutes for actual file hashes or the upstream opaque job qualification. */
+export function validateDigestNativeSamplingCoverageV001({plan, policy, coverage, overlayInspections, bindings}) {
+  let selection = null;
+  try {
+    selection = deriveDigestNativeInspectionSelectionV001(plan, policy);
+    nativeExact(bindings, ['approvedJobBinding', 'authorizationBinding', 'implementationSha'], 'DIGEST_NATIVE_EXPECTED_BINDINGS_FIELDS');
+    nativeBinding(bindings.approvedJobBinding); nativeBinding(bindings.authorizationBinding);
+    nativeRequire(typeof bindings.implementationSha === 'string' && /^[a-f0-9]{40}$/u.test(bindings.implementationSha),
+      'DIGEST_NATIVE_IMPLEMENTATION_SHA');
+    nativeExact(coverage, ['schemaVersion', 'rendererPlanCanonicalSha256', 'policyCanonicalSha256',
+      'approvedJobBinding', 'authorizationBinding', 'implementationSha', 'entries'], 'DIGEST_NATIVE_COVERAGE_FIELDS');
+    nativeRequire(coverage.schemaVersion === DIGEST_NATIVE_COVERAGE_SCHEMA_V001
+      && coverage.rendererPlanCanonicalSha256 === sha256Canonical(plan)
+      && coverage.policyCanonicalSha256 === sha256Canonical(policy), 'DIGEST_NATIVE_PLAN_POLICY_BINDING');
+    for (const key of Object.keys(bindings)) nativeRequire(nativeSame(coverage[key], bindings[key]), 'DIGEST_NATIVE_JOB_BINDING');
+    nativeRequire(Array.isArray(coverage.entries) && coverage.entries.length === plan.elements.length
+      && Array.isArray(overlayInspections) && overlayInspections.length === plan.elements.length,
+    'DIGEST_NATIVE_PRIMARY_COVERAGE');
+    const representative = new Set(selection.representativeInstructionIds);
+    const placement = new Set(selection.requiredPlacementInstructionIds);
+    const lineMasks = new Set(selection.lineMaskInstructionIds);
+    let lineMaskCount = 0, calibrationMaskCount = 0;
+    function validateMasks(masks, actual, element, calibration = false) {
+      nativeRequire(Array.isArray(element.indexedLines) && element.indexedLines.length > 0
+        && Array.isArray(masks) && Array.isArray(actual) && masks.length === element.indexedLines.length
+        && actual.length === masks.length, 'DIGEST_NATIVE_MASK_COUNT');
+      for (const [index, mask] of masks.entries()) {
+        nativeExact(mask, ['lineIndex', 'pngSha256', 'alphaBounds'], 'DIGEST_NATIVE_MASK_FIELDS');
+        nativeRequire(mask.lineIndex === index && element.indexedLines[index].lineIndex === index
+          && nativeHash(mask.pngSha256), 'DIGEST_NATIVE_MASK_ID_HASH');
+        nativeBounds(mask.alphaBounds);
+        const observed = actual[index];
+        nativeRequire(observed?.lineIndex === index && observed.pngSha256 === mask.pngSha256, 'DIGEST_NATIVE_MASK_INSPECTION_HASH');
+        const bounds = calibration ? observed.alphaBounds : Object.fromEntries(
+          ['left', 'top', 'right', 'bottom', 'width', 'height'].map(key => [key, observed[key]]));
+        nativeRequire(nativeSame(mask.alphaBounds, bounds), 'DIGEST_NATIVE_MASK_INSPECTION_BOUNDS');
+      }
+    }
+    for (const [index, element] of plan.elements.entries()) {
+      const entry = coverage.entries[index], inspection = overlayInspections[index];
+      nativeExact(entry, ['instructionId', 'primarySha256', 'repeat', 'lineMasks', 'calibration'], 'DIGEST_NATIVE_ENTRY_FIELDS');
+      nativeRequire(entry.instructionId === element.instructionId && inspection?.instructionId === element.instructionId
+        && nativeHash(entry.primarySha256) && entry.primarySha256 === inspection.overlaySha256,
+      'DIGEST_NATIVE_PRIMARY_ID_HASH');
+      if (representative.has(element.instructionId)) {
+        nativeExact(entry.repeat, ['status', 'sha256'], 'DIGEST_NATIVE_REPEAT_FIELDS');
+        nativeRequire(entry.repeat.status === 'performed' && entry.repeat.sha256 === entry.primarySha256,
+          'DIGEST_NATIVE_SELECTED_REPEAT_REQUIRED');
+      } else {
+        nativeExact(entry.repeat, ['status'], 'DIGEST_NATIVE_UNSELECTED_REPEAT_FIELDS');
+        nativeRequire(entry.repeat.status === 'not-executed', 'DIGEST_NATIVE_UNSELECTED_REPEAT_STATUS');
+      }
+      if (lineMasks.has(element.instructionId)) {
+        nativeExact(entry.lineMasks, ['status', 'scope', 'masks'], 'DIGEST_NATIVE_LINE_MASK_FIELDS');
+        nativeRequire(entry.lineMasks.status === 'performed' && entry.lineMasks.scope
+          === (placement.has(element.instructionId) ? 'required-placement' : 'representative'), 'DIGEST_NATIVE_LINE_MASK_SCOPE');
+        validateMasks(entry.lineMasks.masks, inspection.lineAlphaBounds, element);
+        lineMaskCount += entry.lineMasks.masks.length;
+      } else {
+        nativeExact(entry.lineMasks, ['status'], 'DIGEST_NATIVE_UNSELECTED_MASK_FIELDS');
+        nativeRequire(entry.lineMasks.status === 'not-executed' && Array.isArray(inspection.lineAlphaBounds)
+          && inspection.lineAlphaBounds.length === 0, 'DIGEST_NATIVE_UNSELECTED_MASK_NOT_EXECUTED');
+      }
+      if (placement.has(element.instructionId)) {
+        nativeExact(entry.calibration, ['status', 'masks'], 'DIGEST_NATIVE_CALIBRATION_FIELDS');
+        nativeRequire(entry.calibration.status === 'performed', 'DIGEST_NATIVE_CALIBRATION_REQUIRED');
+        nativeExact(inspection.visibleCenterCalibration, ['lineMasks'], 'DIGEST_NATIVE_CALIBRATION_INSPECTION');
+        validateMasks(entry.calibration.masks, inspection.visibleCenterCalibration.lineMasks, element, true);
+        calibrationMaskCount += entry.calibration.masks.length;
+      } else {
+        nativeExact(entry.calibration, ['status'], 'DIGEST_NATIVE_UNSELECTED_CALIBRATION_FIELDS');
+        nativeRequire(entry.calibration.status === 'not-executed' && !Object.hasOwn(inspection, 'visibleCenterCalibration'),
+          'DIGEST_NATIVE_UNSELECTED_CALIBRATION_NOT_EXECUTED');
+      }
+    }
+    return {status: 'passed', violations: [], selection, summary: {
+      scope: 'representative-plus-required-placement', totalInstructions: plan.elements.length,
+      primaryInspectionCount: plan.elements.length,
+      repeatInspectionCount: representative.size, repeatNotExecutedCount: plan.elements.length - representative.size,
+      lineMaskInstructionCount: lineMasks.size, lineMaskCount,
+      lineMaskNotExecutedInstructionCount: plan.elements.length - lineMasks.size,
+      lineMaskNotExecutedCount: plan.elements.filter(element => !lineMasks.has(element.instructionId))
+        .reduce((count, element) => count + element.indexedLines.length, 0),
+      calibrationInstructionCount: placement.size, calibrationMaskCount,
+      calibrationNotExecutedInstructionCount: plan.elements.length - placement.size,
+    }};
+  } catch (error) {
+    return {status: 'failed', violations: [makeViolation('NATIVE_FRAME_QC_INVALID', [],
+      {nativeSamplingReason: error.message})], selection, summary: null};
+  }
+}
+
+/** Separate Normal representative entry. Public full-QC entries cannot access its internal scope. */
+export function evaluateDigestRepresentativeRendererQcV001(input, {policy, nativeCoverage, expectedBindings} = {}) {
+  const coverage = validateDigestNativeSamplingCoverageV001({plan: input?.plan, policy, coverage: nativeCoverage,
+    overlayInspections: input?.overlayInspections, bindings: expectedBindings});
+  let ordinary = null, violations = [...coverage.violations];
+  if (coverage.status === 'passed') {
+    const scope = Object.freeze({lineMaskInstructionIds: new Set(coverage.selection.lineMaskInstructionIds)});
+    digestNativeInspectionScopes.add(scope);
+    try {
+      nativeRequire(nativeSame(input.canvas, input.plan.canvas), 'DIGEST_NATIVE_CANVAS_BINDING');
+      nativeRequire(input.expectedAudio?.present === false || (input.expectedAudio?.present === true
+        && isNonEmptyString(input.expectedAudio.codecName) && nativeHash(input.expectedAudio.packetPayloadSha256)
+        && input.expectedAudio.mode !== 'timeline-insertions'), 'DIGEST_NATIVE_ORIGINAL_AUDIO_REQUIRED');
+      for (const element of input.plan.elements) {
+        nativeRequire(Number.isSafeInteger(element.startFrame) && Number.isSafeInteger(element.endFrameExclusive)
+          && element.startFrame >= 0 && element.endFrameExclusive > element.startFrame
+          && Number.isSafeInteger(input.expectedFrameCount) && element.endFrameExclusive <= input.expectedFrameCount,
+        'DIGEST_NATIVE_LOGICAL_CLOCK_INVALID');
+        const inspection = input.overlayInspections.find(row => row.instructionId === element.instructionId);
+        nativeBounds(inspection.alphaBounds);
+        nativeRequire(Number.isFinite(inspection.alphaMax) && inspection.alphaMax > 0
+          && inspection.lineCount === element.indexedLines.length
+          && nativeHash(inspection.appliedOverlayPropsCanonicalSha256), 'DIGEST_NATIVE_PRIMARY_ALPHA_OR_LINE_COUNT');
+      }
+      ordinary = evaluatePresentationRendererQc({...input, requireFinalVisibility: false}, QC_OUTPUT_PROFILE_V002, scope);
+      violations.push(...ordinary.violations);
+    } catch (error) {
+      violations.push(makeViolation('NATIVE_FRAME_QC_INVALID', [], {nativeSamplingReason: error.message}));
+    }
+  }
+  sortViolations(violations);
+  const sampling = {status: coverage.status, scope: 'representative-plus-required-placement',
+    coverage: nativeCoverage ?? null, summary: coverage.summary};
+  return structuredClone({
+    schemaVersion: 'digest-representative-renderer-qc-v001',
+    status: violations.length === 0 ? 'passed-representative-rules' : 'failed',
+    instructionCount: input?.plan?.elements?.length ?? 0,
+    checks: {
+      instructionApplication: ordinary?.checks.instructionApplication ?? {status: 'failed'},
+      allPrimaryRules: {status: violations.length === 0 ? 'passed' : 'failed',
+        scope: 'all-primary-alpha-bounds; logical-IDs-clocks-props-hashes; media-and-original-audio'},
+      layoutAndVisibility: {status: violations.length === 0 ? 'passed-representative' : 'failed',
+        scope: 'all-primary-bounds; representative-and-required-placement-line-masks; no-full-frame-comparison'},
+      media: ordinary?.checks.media ?? {status: 'failed'},
+      nativeSampling: sampling,
+    },
+    instructionEvidence: ordinary?.instructionEvidence ?? [],
+    mediaEvidence: ordinary?.mediaEvidence ?? {observed: input?.mediaInspection ?? null,
+      expectedAudio: input?.expectedAudio ?? null, expectedFrameCount: input?.expectedFrameCount ?? null},
+    violations,
+  });
 }
