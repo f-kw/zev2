@@ -1,0 +1,324 @@
+{
+  "schemaVersion": "new-material-caption-source-boundary-assessment-v001",
+  "checkedAt": "2026-10-04T07:52:33.901Z",
+  "currentSettings": {
+    "fontSizePx": 216,
+    "horizontalMargin": {
+      "unit": "font-character",
+      "value": 0.5
+    },
+    "maxLinesPerCue": 2
+  },
+  "currentDerivedValues": {
+    "schemaVersion": "digest-typography-derived-values-v001",
+    "fontSizePx": 216,
+    "horizontalMarginPx": 108,
+    "horizontalSafeMarginRatio": 0.05625,
+    "maxLogicalWidthPerLine": 15,
+    "maxLinesPerCue": 2,
+    "canvasWidthPx": 1920,
+    "borderWidthPx": 8,
+    "glowWidthPx": 4,
+    "textSafePaddingPx": 9,
+    "strokeExtentPx": 12,
+    "availableTextWidthPx": 1662,
+    "logicalWidthUnitPx": 108
+  },
+  "affectedGroups": [
+    26,
+    31
+  ],
+  "cases": [
+    {
+      "ordinal": 26,
+      "text": "デスビッグデイム",
+      "lines": [
+        "デスビッグ",
+        "デイム"
+      ],
+      "screenText": "デス BIG DEMON",
+      "screenSeconds": 2214.5,
+      "image": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/caption-blocker-source-evidence-v001/name-source-2214.5.png",
+      "expectedImageSha": "f9de826faa2390536f53dc18063e7f39b064dd9fa400c658ef4ae0a3ab22bf54",
+      "reasoning": "Actual game label visibly contains spaces between デス / BIG / DEMON. Wrap at the BIG/DEMON constituent-word boundary represented by ビッグ/デイム in the unchanged STT text; do not assert that デイム is an accurate transcription.",
+      "imageBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/caption-blocker-source-evidence-v001/name-source-2214.5.png",
+        "fileSha256": "f9de826faa2390536f53dc18063e7f39b064dd9fa400c658ef4ae0a3ab22bf54",
+        "sizeBytes": 1156458
+      },
+      "firstBoundaryId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-boundary-003417",
+      "lastBoundaryId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-boundary-003424",
+      "sourceStartMs": 2214159,
+      "sourceEndMs": 2214959,
+      "plannedOutputStartFrame": 21692,
+      "plannedOutputEndFrameExclusive": 21716,
+      "logicalWidths": [
+        10,
+        6
+      ],
+      "unsplitLogicalGeometry": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "source-assessment-26",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 117,
+                "top": 682.2,
+                "right": 1869,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 673.2,
+              "left": 108,
+              "width": 1770,
+              "height": 302
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "source-assessment-26",
+            "details": {
+              "bounds": {
+                "left": 108,
+                "top": 673.2,
+                "right": 1878,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 117,
+                  "top": 682.2,
+                  "right": 1869,
+                  "bottom": 922.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 108,
+                "right": 108,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      },
+      "proposedLogicalGeometry": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "source-assessment-26",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 408,
+                "top": 358.2,
+                "right": 1512,
+                "bottom": 598.2
+              },
+              {
+                "left": 624,
+                "top": 682.2,
+                "right": 1296,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 349.2,
+              "left": 399,
+              "width": 1122,
+              "height": 626
+            }
+          }
+        ],
+        "violations": []
+      },
+      "rootActuallyViewedOriginalResolutionSourceStill": true,
+      "actualAudioListened": false,
+      "formalCaptionGlyphMeasured": false,
+      "sourceTranscriptionUnchanged": true,
+      "settingsUnchanged": true
+    },
+    {
+      "ordinal": 31,
+      "text": "観光地カモハネパネルの桃太郎",
+      "lines": [
+        "観光地カモハネ",
+        "パネルの桃太郎"
+      ],
+      "screenText": "観光地顔はめパネル桃太郎",
+      "screenSeconds": 2643.5,
+      "image": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/caption-blocker-source-evidence-v002/compound-source-2643.5.png",
+      "expectedImageSha": "e8e7aefe80a41bf7b02bc3bda499972edcc8012e205fab0ac152998c9fd7b223",
+      "reasoning": "Actual panel-character image and label identify パネル as a constituent noun. Preserve the original STT カモハネ and の, and wrap immediately before the existing whole word パネル within the same cue. Screen text is evidence of constituents, not an authorization to correct the STT.",
+      "imageBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/caption-blocker-source-evidence-v002/compound-source-2643.5.png",
+        "fileSha256": "e8e7aefe80a41bf7b02bc3bda499972edcc8012e205fab0ac152998c9fd7b223",
+        "sizeBytes": 1329761
+      },
+      "firstBoundaryId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-boundary-004880",
+      "lastBoundaryId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-boundary-004893",
+      "sourceStartMs": 2643355,
+      "sourceEndMs": 2644075,
+      "plannedOutputStartFrame": 33069,
+      "plannedOutputEndFrameExclusive": 33090,
+      "logicalWidths": [
+        14,
+        14
+      ],
+      "unsplitLogicalGeometry": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "failed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "source-assessment-31",
+            "stateId": "caption-core-v001",
+            "lineCount": 1,
+            "lineRects": [
+              {
+                "left": 117,
+                "top": 682.2,
+                "right": 3165,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 673.2,
+              "left": 108,
+              "width": 3066,
+              "height": 302
+            }
+          }
+        ],
+        "violations": [
+          {
+            "code": "LAYOUT_SAFE_AREA_VIOLATION",
+            "instructionId": "source-assessment-31",
+            "details": {
+              "bounds": {
+                "left": 108,
+                "top": 673.2,
+                "right": 3174,
+                "bottom": 975.2
+              },
+              "lineRects": [
+                {
+                  "left": 117,
+                  "top": 682.2,
+                  "right": 3165,
+                  "bottom": 922.2
+                }
+              ],
+              "safeAreaPx": {
+                "left": 108,
+                "right": 108,
+                "top": 40,
+                "bottom": 40
+              },
+              "geometryPolicy": "full-overlay-safe-area"
+            }
+          }
+        ]
+      },
+      "proposedLogicalGeometry": {
+        "schemaVersion": "presentation-render-layout-inspection-v001",
+        "status": "passed",
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "fps": 30,
+          "safeAreaPx": {
+            "left": 108,
+            "right": 108,
+            "top": 40,
+            "bottom": 40
+          }
+        },
+        "items": [
+          {
+            "instructionId": "source-assessment-31",
+            "stateId": "caption-core-v001",
+            "lineCount": 2,
+            "lineRects": [
+              {
+                "left": 192,
+                "top": 358.2,
+                "right": 1728,
+                "bottom": 598.2
+              },
+              {
+                "left": 192,
+                "top": 682.2,
+                "right": 1728,
+                "bottom": 922.2
+              }
+            ],
+            "wrapper": {
+              "top": 349.2,
+              "left": 183,
+              "width": 1554,
+              "height": 626
+            }
+          }
+        ],
+        "violations": []
+      },
+      "rootActuallyViewedOriginalResolutionSourceStill": true,
+      "actualAudioListened": false,
+      "formalCaptionGlyphMeasured": false,
+      "sourceTranscriptionUnchanged": true,
+      "settingsUnchanged": true
+    }
+  ],
+  "correction": "The earlier blocker treated all constituent-word boundaries inside a compound name as prohibited. Existing task and historical accepted correspondence permit same-cue constituent-word wrapping; actual source images now supply specific word-boundary evidence.",
+  "recommended": "Keep 216px and the original transcript, atom IDs and clocks. Change only these two actual group boundary answers at verified constituent-word boundaries, then run existing full input/clock/layout qualification. Do not adopt 208px as the default remedy.",
+  "wholeBundleAccepted": false,
+  "approvedJobCreated": false,
+  "manufacturingStarted": false,
+  "actualGlyphAndMediaQc": "not-yet-executed",
+  "sourceAudio": "local excerpts preserved; not listened to in this environment",
+  "newSttOrPaidApiCalls": 0,
+  "originalBlockerRecords": "retained; not overwritten"
+}

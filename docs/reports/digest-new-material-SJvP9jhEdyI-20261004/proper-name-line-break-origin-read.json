@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "proper-name-line-break-origin-read-v001",
+  "checkedAt": "2026-10-04T07:49:10.381054+00:00",
+  "scope": "Limited read of named 216 records, work-order sections, fixed task/skill source and one exact saved precedent; no other subtitle regrading.",
+  "findings": [
+    {
+      "kind": "actual-user-instruction",
+      "at": "2026-10-03T09:52Z",
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json",
+      "quote": "調査したんだけど、フォントは１.５倍くらいが良い。左右には半文字分くらいのスペースが必要。それで進めて",
+      "conclusion": "No explicit proper-name internal line-break prohibition. Reflow scope is advisor interpretation recorded separately."
+    },
+    {
+      "kind": "actual-user-adoption",
+      "at": "2026-10-03T10:30:45Z",
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json",
+      "quote": "これでいこう",
+      "conclusion": "Adopts selected 216px/108px previews for that plan; not all captions/finished-video quality and not an explicit naming rule."
+    },
+    {
+      "kind": "actual-user-configurability",
+      "at": "2026-10-03T10:31:17Z",
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json",
+      "quote": "システムとしては固定じゃなくて可変にして",
+      "conclusion": "Configuration input requirement; no explicit naming or lexical-boundary directive."
+    },
+    {
+      "kind": "old-formal-prompt-contract",
+      "source": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "line": 18,
+      "quote": "cue終端と行末は、語、固有名詞、反復語、読みとして一続きの文節の途中に置かないでください。",
+      "conclusion": "Already present at 2026-08-16 commit. This is the saved formal prompt, not a newly quoted 216 user message."
+    },
+    {
+      "kind": "generic-skill-shape",
+      "source": "/Users/kawafmm/workspace/zev2/runner/src/skills/caption-display-boundaries-v001.ts",
+      "lines": [
+        55,
+        87
+      ],
+      "conclusion": "Accepts nonempty taskDescription and validates input/output shape. No built-in proper-name dictionary or semantic detection; naming constraint is supplied by task/prompt."
+    },
+    {
+      "kind": "implementer-candidate-task",
+      "source": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/reflow216-attempt002.mts",
+      "line": 20,
+      "quote": "行末は語、固有名詞、反復語の文字途中に置かないでください。長い一続きの文節は、同じcueの中で読みやすく表示するため、構成語の境目、または助詞・助動詞の境目に限って改行してよいものとします。",
+      "conclusion": "Implementer-authored candidate task separates cue-ending constraints from permitted line wrapping; saved candidate-rules records old/new full tasks."
+    },
+    {
+      "kind": "advisor-technical-decision",
+      "source": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json",
+      "at": "2026-10-03T10:56:15Z",
+      "quote": "本人の可変設定・今回の字幕調整の指示を実現するために必要な接続修正です。",
+      "conclusion": "Allows bounded source-package connection and preserves text/ID/boundary/order/width/line/hash validation. Does not grant new manufacturing authority or create arbitrary name-character exceptions."
+    },
+    {
+      "kind": "work-order-scope",
+      "sources": [
+        "/Users/kawafmm/workspace/zev2/docs/work-orders/ZEV_DIGEST_FORMAL_HANDOFF_DECISION_20261003_v001.md",
+        "/Users/kawafmm/workspace/zev2/docs/work-orders/ZEV_DIGEST_FORMAL_HANDOFF_PLAN_20261003_v001.md"
+      ],
+      "conclusion": "Reviewed current-input and original handoff sections preserve approved values, source IDs/clock/validation and avoid rejudging accepted captions; these sections contain no explicit actual-user name-internal line-break quotation."
+    }
+  ],
+  "interpretation": {
+    "absoluteCompoundNameBanEstablished": false,
+    "wordInternalCharacterBanRemains": true,
+    "sameCueConstituentBoundaryJudgmentRemains": true,
+    "meaning": "The record does not define every character boundary inside any compound name as forbidden. Nor does it explicitly exempt all proper nouns. Actual constituent-word boundaries must be justified semantically within the same cue, without splitting an indivisible word or changing text/time. Saved compound-name precedent supports a bounded interpretive space, not a general exception."
+  },
+  "savedCompoundNamePrecedent": {
+    "groupOrdinal": 3,
+    "cueOrdinal": 1,
+    "lines": [
+      "日本事故物件",
+      "監視協会"
+    ],
+    "lineEndBoundaryIds": [
+      "digest-caption-input-preparation-20261003-v001-input-caption-boundary-000881",
+      "digest-caption-input-preparation-20261003-v001-input-caption-boundary-000885"
+    ],
+    "cueEndBoundaryId": "digest-caption-input-preparation-20261003-v001-input-caption-boundary-000885",
+    "startFrame": 5020,
+    "endFrameExclusive": 5095,
+    "bindings": {
+      "requestBinding": {
+        "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/request-0003.json",
+        "fileSha256": "4c05fcd26ad75847619f88a7cb4df7c183b6b1b76e3ff7b2db5fd787a02c3232",
+        "sizeBytes": 21826,
+        "physicalPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/request-0003.json",
+        "actualRawBytesVerified": true
+      },
+      "responseBinding": {
+        "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/response-0003.json",
+        "fileSha256": "50fe8362306aff7e379b9c203bc90098a7fd04d1b31ac005806f7cd156cef64f",
+        "sizeBytes": 5597,
+        "physicalPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/response-0003.json",
+        "actualRawBytesVerified": true
+      },
+      "resultBinding": {
+        "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/result-0003.json",
+        "fileSha256": "2607ec1aa7d8786e77ee852dd2793ecb18f641c0e081314a64a9c5befe8d39ba",
+        "sizeBytes": 4447,
+        "physicalPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/result-0003.json",
+        "actualRawBytesVerified": true
+      },
+      "traceBinding": {
+        "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/trace-0003.json",
+        "fileSha256": "b6cb34b1f05556ba334d91471532022e123345ff11ec9f3d285e739ea22c6b40",
+        "sizeBytes": 40230,
+        "physicalPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/trace-0003.json",
+        "actualRawBytesVerified": true
+      },
+      "correspondenceBinding": {
+        "path": "runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/correspondence-0003.json",
+        "fileSha256": "c856effe6cd88924a75b4e8b2e29720587bb290203ef3ea6d2533593757f03e5",
+        "sizeBytes": 105229,
+        "physicalPath": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-caption-216px-reflow-20261003-v001/attempt-002/correspondence-0003.json",
+        "actualRawBytesVerified": true
+      }
+    },
+    "judgmentExcerpt": "日本事故物件／監視協会は名前の意味構成を同cueで二行表示し名称は無変更。",
+    "limit": "Saved technical/semantic candidate precedent only. It is not a user endorsement of every name wrap or a new general exception."
+  },
+  "historicalSource": {
+    "commit": "84222296e8810a1675fc9bbab0ac444dce146980",
+    "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+    "fileSha256": "954f4ed77638c5ff5ffc837bc67014220ebf6d9611e349aade10a7c0bebf8d70",
+    "sizeBytes": 58665,
+    "authorTime": "2026-08-16T14:06:57+09:00",
+    "commitTitle": "caption-quality-v002: human-approved 2026-08-16",
+    "limit": "Commit title is not the original user quotation approving each phrase."
+  },
+  "sources": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/216-scope-authorization.json",
+      "fileSha256": "8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419",
+      "sizeBytes": 2430
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/authorization-record.json",
+      "fileSha256": "8884e977e5761be373c04daceacd993671e263b15565fcfaace80db31142e419",
+      "sizeBytes": 2430
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/typography-adoption-record.json",
+      "fileSha256": "f0e1466475034e396478d7bfb3fef716050f0d17c6d53ab174bd1fc1666b3884",
+      "sizeBytes": 1451
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/typography-settings-user-record.json",
+      "fileSha256": "a7e228fe5814b32cb168e737bcc23b7f287d43f3ee852546172e3c56ab6c67bf",
+      "sizeBytes": 1832
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/saved-candidate-rules.json",
+      "fileSha256": "cc11b610b88834227e8d55ffe64e61f01f8cf654a243dc32c872549e8956c781",
+      "sizeBytes": 3858
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/reflow216-attempt002.mts",
+      "fileSha256": "b2116443db9da8f6ab860715060455bc47a92dac635701b2fb6d968790d05288",
+      "sizeBytes": 41573
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/skills/caption-display-boundaries-v001.ts",
+      "fileSha256": "39e0a2bbea05b558fdb81cb2e48fbacd06d0e052a23dd21ab2b5f1c4bed702b3",
+      "sizeBytes": 5704
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "7225a3f874e523600cb82f1a93c1e4e5084bdff36594220a7731ffd5830c7cbb",
+      "sizeBytes": 61030
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/source-connection-decision-record.json",
+      "fileSha256": "8255c2579b072ddb2bf339fd56f179e87b97154bc763aecd44f04a199cd71a40",
+      "sizeBytes": 1668
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/README.md",
+      "fileSha256": "2b140333425102e73c37fd29395b2d53530c8958278e15dcb97ff0dd56aa614d",
+      "sizeBytes": 32983
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/work-orders/ZEV_DIGEST_FORMAL_HANDOFF_DECISION_20261003_v001.md",
+      "fileSha256": "685790717321cfe43364aceb78ca5cfcf41aaec9d43c3677ac18ae29232e69e7",
+      "sizeBytes": 19011
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/work-orders/ZEV_DIGEST_FORMAL_HANDOFF_PLAN_20261003_v001.md",
+      "fileSha256": "6281c4c41b1cc6f1418d2f7af63ac6a9179c3e2fa6e1672edac6f6e9c2619149",
+      "sizeBytes": 20030
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/saved-manifest.json",
+      "fileSha256": "784775c621913ba263057671b580b34082a349e007b8c155ed4bb0bafe351444",
+      "sizeBytes": 41646
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/docs/reports/digest-caption-216px-reflow-20261003/saved-readback.json",
+      "fileSha256": "23334730f3aaef36650a5c4889a94a81fd443eb80d92af8eb6cdfed3c55b680b",
+      "sizeBytes": 1386
+    }
+  ],
+  "currentName": {
+    "text": "デスビッグデイム",
+    "origin": "Supplied by parent; source audio and screen not compared in this review.",
+    "sttSpellingVerified": false,
+    "wordConstituencyVerified": false,
+    "selectedFontSizePx": 216,
+    "textPreserved": true,
+    "authorityOrDefaultChanged": false
+  },
+  "effects": {
+    "workspaceReportOnly": true,
+    "repoChanges": 0,
+    "ssdChanges": 0,
+    "codeChanges": 0,
+    "gitMutation": 0,
+    "media": 0,
+    "api": 0,
+    "otherSubtitleRegrading": 0
+  }
+}
