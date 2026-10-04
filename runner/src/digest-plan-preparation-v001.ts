@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile, writeFile, mkdir, rename, lstat, realpath, copyFile} from 'node:fs/promises';
 import path from 'node:path';
 import {constants} from 'node:fs';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {findById, isAgentRequestReady, type AgentRequest, type Zev2State, type FileRef, getFileRefKindForRequest, getOutputTypeForRequest, assertDigestArtifactV001, digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001, assertDigestPlanReferenceClosureV001, type DigestPlanArtifactV001} from '@zev2/shared';
 import type {TranscriptArtifact} from './workflow-artifacts.js';
 import {resolveLocalSourcePath} from './steps/source-video.js';
@@ -56,6 +56,47 @@ async function safeFile(root: string, name: string) {
   const info = await lstat(absolute);
   assert(info.isFile() && !info.isSymbolicLink() && await realpath(absolute) === absolute, 'DIGEST_REFERENCE_INVALID');
   return absolute;
+}
+export const NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001 = 'normal-declared-guest-source-v001';
+/** Only an explicit local URI can name the one producer-owned guest companion. */
+export function resolveNormalDigestDeclaredGuestSourcePathV001(sourceUri: string): string {
+  assert(typeof sourceUri === 'string' && sourceUri.length && !sourceUri.includes('\\'), 'DIGEST_GUEST_SOURCE_URI_INVALID');
+  let absolute: string;
+  if (sourceUri.startsWith('file://')) {
+    const url = new URL(sourceUri);
+    assert(url.protocol === 'file:' && (!url.hostname || url.hostname === 'localhost')
+      && !url.search && !url.hash, 'DIGEST_GUEST_SOURCE_URI_INVALID');
+    absolute = fileURLToPath(url);
+  } else {assert(path.isAbsolute(sourceUri), 'DIGEST_GUEST_SOURCE_URI_INVALID'); absolute = sourceUri;}
+  assert(absolute === path.resolve(absolute), 'DIGEST_GUEST_SOURCE_URI_INVALID');
+  return absolute;
+}
+/** Byte-qualified normal JSONs must prove that only the declared source URI changed. */
+export function assertNormalDigestSourceProvenanceV001(value: Json, expected: {
+  draftId: string; sourceRequestId: string; sttRequestId: string; sourceOrigin: Json;
+  transcriptBinding: ByteBinding; transcript: unknown; originalTranscript: unknown; rawGpu: unknown;
+}) {
+  assert(exact(value,['schemaVersion','draftId','sourceRequestId','sttRequestId','originalSourceUri','declaredSourceUri',
+    'sourceFileSha256','sourceSizeBytes','originalTranscriptBinding','rawGpuBinding','normalTranscriptBinding'])
+    && value.schemaVersion === 'normal-transcript-source-uri-provenance-v001','DIGEST_SOURCE_PROVENANCE_INVALID');
+  for(const key of ['draftId','sourceRequestId','sttRequestId'] as const) assert.equal(value[key],expected[key],'DIGEST_SOURCE_PROVENANCE_OWNER_CHANGED');
+  assert.equal(value.declaredSourceUri,expected.sourceOrigin.declaredSourceUri,'DIGEST_SOURCE_PROVENANCE_URI_CHANGED');
+  assert.equal(value.sourceFileSha256,expected.sourceOrigin.fileSha256,'DIGEST_SOURCE_PROVENANCE_SHA_CHANGED');
+  assert.equal(value.sourceSizeBytes,expected.sourceOrigin.byteSize,'DIGEST_SOURCE_PROVENANCE_SIZE_CHANGED');
+  assert.deepEqual(value.normalTranscriptBinding,expected.transcriptBinding,'DIGEST_SOURCE_PROVENANCE_TRANSCRIPT_CHANGED');
+  for(const key of ['originalTranscriptBinding','rawGpuBinding','normalTranscriptBinding']) {
+    const b=value[key];assert(exact(b,['path','fileSha256']) && /^[0-9a-f]{64}$/u.test(b.fileSha256),'DIGEST_SOURCE_PROVENANCE_BINDING_INVALID');
+    digestArtifactFileNameV001(b.path,expected.draftId,[expected.sttRequestId]);
+    assert(b.path.endsWith('.json'),'DIGEST_SOURCE_PROVENANCE_JSON_REQUIRED');
+  }
+  assert(new Set([value.originalTranscriptBinding.path,value.rawGpuBinding.path,value.normalTranscriptBinding.path]).size === 3,'DIGEST_SOURCE_PROVENANCE_REFERENCE_DUPLICATE');
+  assert(typeof value.originalSourceUri === 'string' && value.originalSourceUri.length
+    && plain(expected.originalTranscript) && plain(expected.rawGpu),'DIGEST_SOURCE_PROVENANCE_ORIGINAL_INVALID');
+  assert(plain(expected.rawGpu.input),'DIGEST_SOURCE_PROVENANCE_RAW_INPUT_INVALID');
+  assert.equal(expected.rawGpu.input.sha256,value.sourceFileSha256,'DIGEST_SOURCE_PROVENANCE_RAW_SHA_CHANGED');
+  assert.equal(expected.rawGpu.input.bytes,value.sourceSizeBytes,'DIGEST_SOURCE_PROVENANCE_RAW_SIZE_CHANGED');
+  assert.equal(expected.originalTranscript.sourceUri,value.originalSourceUri,'DIGEST_SOURCE_PROVENANCE_ORIGINAL_URI_CHANGED');
+  assert.deepEqual({...expected.originalTranscript,sourceUri:value.declaredSourceUri},expected.transcript,'DIGEST_SOURCE_PROVENANCE_BODY_CHANGED');
 }
 export function digestDataPathV001(artifactRoot: string, draftId: string, logicalPath: string) {
   const file = digestArtifactFileNameV001(logicalPath, draftId);
@@ -156,24 +197,51 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   if(registration) assert(registration.kind === 'source_video' && registration.sourceUri === input.request.target.sourceUri
     && registration.purpose === input.request.input.purpose,'DIGEST_SOURCE_REGISTRATION_CHANGED');
   let sourceVideo: ByteBinding, sourceOrigin: Json;
-  if(prior && !execution) {
+  if(prior && !execution && prior.identity.sourceOrigin.placement === undefined) {
     sourceVideo=prior.identity.sourceVideo;sourceOrigin=prior.identity.sourceOrigin;await readByte(sourceVideo);
   } else {
     const media = registration ? resolveLocalSourcePath(registration.sourceUri,root) : dataPath(sourceRegistration.path);
     assert(media,'DIGEST_SOURCE_MEDIA_UNRESOLVED');
-    if(registration) await safeFile(root,relative(root,media));
+    const repoRelative = path.relative(root,media);
+    const guestCompanion = Boolean(registration && (path.isAbsolute(repoRelative)
+      || repoRelative === '..' || repoRelative.startsWith(`..${path.sep}`)));
+    const companion = `artifacts/${input.request.requestDraftId}/${approved.video.id}/source-video.mp4`;
+    if(guestCompanion) {
+      assert.equal(media,resolveNormalDigestDeclaredGuestSourcePathV001(registration.sourceUri),'DIGEST_GUEST_SOURCE_URI_INVALID');
+      assert.equal(media,dataPath(companion),'DIGEST_GUEST_SOURCE_COMPANION_MISMATCH');
+      assert(registration.sourceInspectionBinding,'DIGEST_GUEST_INSPECTION_REQUIRED');
+      if(registration.localPath !== undefined) assert.equal(registration.localPath,media,'DIGEST_GUEST_SOURCE_LOCAL_PATH_CHANGED');
+      await safeFile(artifactRoot,relative(artifactRoot,media));
+    } else if(registration) await safeFile(root,relative(root,media));
     else await safeFile(artifactRoot,relative(artifactRoot,media));
-    const sourceSha = await fileSha(media), size = (await lstat(media)).size;
+    const before = await lstat(media), sourceSha = await fileSha(media), after = await lstat(media);
+    assert(before.ino === after.ino && before.dev === after.dev && before.size === after.size
+      && before.mtimeMs === after.mtimeMs && before.ctimeMs === after.ctimeMs,'DIGEST_SOURCE_CHANGED_DURING_HASH');
+    const size = after.size;
     sourceOrigin={registration:sourceRegistration,mode:registration?'json-reference':'video-bytes',
-      declaredSourceUri:input.request.target.sourceUri,byteSize:size,fileSha256:sourceSha};
-    sourceVideo=registration ? {path:file('source-media.mp4'),fileSha256:sourceSha} : sourceRegistration;
-
+      declaredSourceUri:input.request.target.sourceUri,byteSize:size,fileSha256:sourceSha,
+      ...(guestCompanion ? {placement:NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001} : {})};
+    sourceVideo=guestCompanion ? {path:companion,fileSha256:sourceSha}
+      : registration ? {path:file('source-media.mp4'),fileSha256:sourceSha} : sourceRegistration;
   }
+  const provenanceBindings: ByteBinding[] = [];
+  if(sourceOrigin.placement === NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001) {
+    const provenanceBinding=registration.normalSourceProvenanceBinding;
+    assert(provenanceBinding && provenanceBinding.path.startsWith(`artifacts/${input.request.requestDraftId}/${approved.stt.id}/`)
+      && provenanceBinding.path.endsWith('.json'),'DIGEST_GUEST_SOURCE_PROVENANCE_REQUIRED');
+    const provenance=JSON.parse(await readFile(await readByte(provenanceBinding),'utf8'));
+    const originalTranscript=JSON.parse(await readFile(await readByte(provenance.originalTranscriptBinding),'utf8'));
+    const rawGpu=JSON.parse(await readFile(await readByte(provenance.rawGpuBinding),'utf8'));
+    assertNormalDigestSourceProvenanceV001(provenance,{draftId:input.request.requestDraftId,sourceRequestId:approved.video.id,
+      sttRequestId:approved.stt.id,sourceOrigin,transcriptBinding,transcript,originalTranscript,rawGpu});
+    sourceOrigin.provenanceBinding=provenanceBinding;
+    provenanceBindings.push(provenanceBinding,provenance.originalTranscriptBinding,provenance.rawGpuBinding);
+  } else assert(registration?.normalSourceProvenanceBinding === undefined,'DIGEST_SOURCE_PROVENANCE_PLACEMENT_INVALID');
   const sourceInspection = registration?.sourceInspectionBinding ?? null;
   if(sourceInspection) {const inspected=JSON.parse(await readFile(await readByte(sourceInspection),'utf8'));
     assert(inspected.schemaVersion === 'new-material-source-inspection-v001'
       && inspected.sourceVideoBinding?.fileSha256 === sourceVideo.fileSha256,'DIGEST_INSPECTION_SOURCE_MISMATCH');}
-    if(registration && execution) {
+    if(registration && execution && sourceOrigin.placement === undefined) {
       assert(execution,'DIGEST_READ_ONLY_SOURCE_MISSING');
       await mkdir(directory,{recursive:true});assert.equal(await realpath(directory),directory,'DIGEST_OUTPUT_REFERENCE_INVALID');
       try {await readByte(sourceVideo);} catch(e) {if((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e;
@@ -337,7 +405,7 @@ async function prepare(deps: DigestPlanPreparationDependenciesV001, input: Input
   record.status = 'complete'; await update();
   const preparationBinding = bind(file('preparation-binding.json'),record);
   const all = [sourceRegistration,sourceVideo,transcriptBinding,utteranceBinding,...Object.values(record.artifacts) as Binding[],preparationBinding,
-    ...(sourceInspection?[sourceInspection]:[])];
+    ...(sourceInspection?[sourceInspection]:[]),...provenanceBindings];
   const dataBindings = [...new Map(all.map(b => [b.path,{path:b.path,fileSha256:b.fileSha256}])).values()];
   const artifact: DigestPlanArtifactV001 = {schemaVersion:'digest-plan-artifact-v001',kind:'digest_plan_json',
     requestDraftId:input.request.requestDraftId,requestId:input.request.id,approvedRequestBinding:authorization,

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "normal-guest-source-three-path-implementation-evidence-v001",
+  "status": "implemented-targeted-checks-passed",
+  "checkedAt": "2026-10-04T06:58:25.382736+00:00",
+  "branch": "main",
+  "head": "0b00eeb7150385db333cf0be144306fafacd97b0",
+  "files": [
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "fileSha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "sizeBytes": 33158
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "fileSha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "sizeBytes": 15417
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "fileSha256": "95b6c64065cf63d51f700decba84d6fc6f9a4be5f47b368e8a39be116014949d",
+      "sizeBytes": 28301
+    }
+  ],
+  "numstat": "41\t3\trunner/src/digest-caption-input-preparation-v001.ts\n3\t2\trunner/src/digest-plan-consumption-v001.ts\n77\t9\trunner/src/digest-plan-preparation-v001.ts\n",
+  "testEvidence": "new-material-guest-source-normal-connection-evidence-v003.json",
+  "tests": {
+    "targeted": 24,
+    "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "typecheckExit": 0,
+    "diffCheckExit": 0,
+    "sharedLogicalClosure": "passed pure fixture; provenance binding missing and foreign producer rejected"
+  },
+  "interface": {
+    "placement": "normal-declared-guest-source-v001",
+    "sourceOriginGuestExtraKeys": [
+      "placement",
+      "provenanceBinding"
+    ],
+    "manifestMediaExtraKeys": [
+      "placement",
+      "sizeBytes"
+    ],
+    "manifestMediaPhysicalPath": "actual canonical absolute guest source path",
+    "bytesVerified": false,
+    "sourceProvenance": "normal-approved-guest-media-v001",
+    "provenanceSchema": "normal-transcript-source-uri-provenance-v001",
+    "additionalDataBindings": [
+      "STT producer provenance JSON",
+      "original normalized transcript JSON",
+      "raw GPU result JSON"
+    ]
+  },
+  "gitStatus": " M evals/clip_composition/adopted_media_manufacturing_v001.mts\n M runner/src/digest-approved-inputs-v001.ts\n M runner/src/digest-approved-job-runner-v001.ts\n M runner/src/digest-caption-input-preparation-v001.ts\n M runner/src/digest-plan-consumption-v001.ts\n M runner/src/digest-plan-preparation-v001.ts\n?? evals/clip_composition/digest_approved_source_snapshot_v001.test.mts\n",
+  "ownRepoTestFiles": 0,
+  "gitMutations": 0,
+  "productionMediaCopyOrGeneration": 0,
+  "newInferenceOrApiOrStt": 0,
+  "remaining": [
+    "actual newly completed normal-plan caption reconstruction",
+    "downstream approved-job guest/device/Node/code qualification and formal manufacturing",
+    "parent integration/commit"
+  ],
+  "limitations": [
+    "tiny fixtures are not real media or APFS/device qualification",
+    "first provider throws; no selection/retention adoption generated",
+    "pure closure fixture is not an accepted production plan"
+  ]
+}

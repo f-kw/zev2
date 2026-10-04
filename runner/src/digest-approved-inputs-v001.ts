@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFile, lstat, realpath} from 'node:fs/promises';
 import path from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {pathToFileURL, fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {readPreparedDigestCaptionJudgmentInputsV001} from './digest-caption-input-preparation-v001.js';
 import {assertQualifiedDigestApprovedJobV001} from './digest-approved-job-v001.js';
@@ -30,6 +30,72 @@ const load = async (root: string, file: string) => {const ns = await import(path
 const freeze = (value: any) => {if (value && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);} return value;};
 const TIMING = ['sourceStartMs', 'sourceEndMs', 'sourceStartFrame30', 'sourceEndFrame30', 'startFrame', 'endFrameExclusive', 'displayFrameCount'];
 const timing = (value: Json) => Object.fromEntries(TIMING.map(key => [key, value[key]]));
+
+function declaredLocalPath(uri: unknown): string | null {
+  assert(typeof uri === 'string' && uri.length && !uri.includes('\0') && !uri.includes('\\'), 'APPROVED_DIGEST_SOURCE_URI_INVALID');
+  const value = uri.startsWith('file:') ? fileURLToPath(uri) : path.isAbsolute(uri) ? uri : null;
+  if (value !== null) assert(path.isAbsolute(value) && path.normalize(value) === value && !value.includes('\0'), 'APPROVED_DIGEST_SOURCE_PATH_INVALID');
+  return value;
+}
+const sameSourceUri = (left: unknown, right: unknown) => {
+  const a = declaredLocalPath(left), b = declaredLocalPath(right);
+  assert(a !== null || b === null, 'APPROVED_DIGEST_SOURCE_URI_CHANGED');
+  assert.equal(a ?? left, b ?? right, 'APPROVED_DIGEST_SOURCE_URI_CHANGED');
+};
+
+/** Pure metadata projection. Its return value is not a source or storage capability. */
+export function deriveApprovedDigestSourceDeclarationV001(value: Json): Json {
+  const {workspaceRoot, storage, normalState, normalPlan, normalPreparation, manufacturing,
+    inspection, sourcePhysicalBinding, sourceLogicalBinding, normalOwners, transcript, registration} = value;
+  const identity = object(normalPreparation.identity), origin = object(identity.sourceOrigin);
+  const drafts = list(normalState.requestDrafts).filter(d => d.id === normalOwners.requestDraftId);
+  assert.equal(drafts.length, 1, 'APPROVED_DIGEST_SOURCE_DRAFT_UNRESOLVED'); const draft = drafts[0];
+  assert.equal(identity.requestDraftId, draft.id, 'APPROVED_DIGEST_SOURCE_OWNER_CHANGED');
+  assert.equal(identity.requestId, normalOwners.planRequestId, 'APPROVED_DIGEST_SOURCE_OWNER_CHANGED');
+  same(identity.sourceVideo, sourceLogicalBinding); same(normalPlan.sourceVideoBinding, sourceLogicalBinding);
+  same(identity.sourceRegistration, origin.registration);
+  assert.equal(identity.dependencyReferences.video.sha256, origin.registration.fileSha256, 'APPROVED_DIGEST_SOURCE_REGISTRATION_CHANGED');
+  assert.equal(origin.fileSha256, sourceLogicalBinding.fileSha256, 'APPROVED_DIGEST_SOURCE_SHA_CHANGED');
+  assert(/^[0-9a-f]{64}$/u.test(origin.fileSha256));
+  assert(Number.isSafeInteger(origin.byteSize) && origin.byteSize > 0, 'APPROVED_DIGEST_SOURCE_SIZE_REQUIRED');
+  sameSourceUri(origin.declaredSourceUri, draft.source.uri); sameSourceUri(origin.declaredSourceUri, identity.sourceUri);
+  sameSourceUri(origin.declaredSourceUri, transcript.sourceUri);
+  const requests = list(normalState.agentRequests).filter(r => r.requestDraftId === draft.id);
+  assert(requests.length >= 4, 'APPROVED_DIGEST_SOURCE_REQUESTS_MISSING');
+  for (const request of requests) sameSourceUri(origin.declaredSourceUri, object(request.target).sourceUri);
+  for (const id of [normalOwners.planRequestId, normalOwners.executionRequestId])
+    assert.equal(requests.filter(r => r.id === id).length, 1, 'APPROVED_DIGEST_SOURCE_OWNER_CHANGED');
+  const artifact = object(manufacturing.sourceArtifact);
+  same(Object.keys(artifact).sort(), ['sourceProvenance', 'sourceRef', 'sourceUri', 'path', 'fileSha256'].sort());
+  assert.equal(artifact.path, sourceLogicalBinding.path, 'APPROVED_DIGEST_SOURCE_LOGICAL_PATH_CHANGED');
+  assert.equal(artifact.fileSha256, origin.fileSha256, 'APPROVED_DIGEST_SOURCE_SHA_CHANGED');
+  assert.equal(artifact.sourceRef, identity.dependencyReferences.video.id, 'APPROVED_DIGEST_SOURCE_OWNER_CHANGED');
+  sameSourceUri(artifact.sourceUri, origin.declaredSourceUri);
+  assert.equal(inspection.sourceVideoBinding.fileSha256, origin.fileSha256, 'APPROVED_DIGEST_SOURCE_INSPECTION_CHANGED');
+  assert.equal(sourcePhysicalBinding.fileSha256, origin.fileSha256, 'APPROVED_DIGEST_SOURCE_SHA_CHANGED');
+  assert.equal(sourcePhysicalBinding.bytesVerified, false, 'APPROVED_DIGEST_SOURCE_MEDIA_REFERENCE_CHANGED');
+  const guest = origin.placement !== undefined || sourcePhysicalBinding.placement !== undefined;
+  let physicalPath: string;
+  if (guest) {
+    assert.equal(origin.placement, 'normal-declared-guest-source-v001', 'APPROVED_DIGEST_SOURCE_PLACEMENT_CHANGED');
+    assert.equal(sourcePhysicalBinding.placement, origin.placement, 'APPROVED_DIGEST_SOURCE_PLACEMENT_CHANGED');
+    assert.equal(origin.mode, 'json-reference', 'APPROVED_DIGEST_SOURCE_ORIGIN_MODE_CHANGED');
+    const declared = declaredLocalPath(origin.declaredSourceUri); assert(declared, 'APPROVED_DIGEST_SOURCE_LOCAL_URI_REQUIRED');
+    assert(declared.startsWith(storage.guestRoot + '/'), 'APPROVED_DIGEST_SOURCE_GUEST_PREFIX_REQUIRED');
+    assert.equal(sourcePhysicalBinding.path, declared, 'APPROVED_DIGEST_SOURCE_DECLARED_PATH_CHANGED');
+    assert.equal(sourcePhysicalBinding.sizeBytes, origin.byteSize, 'APPROVED_DIGEST_SOURCE_SIZE_CHANGED');
+    assert(registration && registration.kind === 'source_video', 'APPROVED_DIGEST_SOURCE_REGISTRATION_REQUIRED');
+    sameSourceUri(registration.sourceUri, origin.declaredSourceUri);
+    assert.equal(registration.purpose, draft.purpose, 'APPROVED_DIGEST_SOURCE_REGISTRATION_CHANGED');
+    if (registration.localPath !== undefined) sameSourceUri(registration.localPath, declared);
+    physicalPath = declared;
+  } else {
+    physicalPath = path.join(workspaceRoot, safe(sourcePhysicalBinding.path));
+  }
+  return freeze({placement: guest ? origin.placement : 'repository-source-v001', physicalPath,
+    sizeBytes: origin.byteSize, fileSha256: origin.fileSha256, logicalBinding: clone(sourceLogicalBinding),
+    sourceArtifact: clone(artifact), normalOwners: clone(normalOwners)});
+}
 
 export async function assertApprovedDigestInputsV001(inputs: unknown, qualified: ApprovedDigestQualifiedJobV001): Promise<void> {
   await assertQualifiedDigestApprovedJobV001(qualified);
@@ -68,6 +134,10 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     const matches = list(preparation.logicalToPhysical).filter(item => item.path === binding.path);
     assert.equal(matches.length, 1, 'APPROVED_DIGEST_PHYSICAL_REFERENCE_UNRESOLVED'); const found = matches[0];
     assert.equal(found.fileSha256, binding.fileSha256, 'APPROVED_DIGEST_PHYSICAL_SHA_CHANGED');
+    if (binding.path === normalPlan.sourceVideoBinding.path && found.placement !== undefined) {
+      assert.equal(found.placement, 'normal-declared-guest-source-v001', 'APPROVED_DIGEST_SOURCE_PLACEMENT_CHANGED');
+      return {...binding, path: found.physicalPath, bytesVerified: found.bytesVerified, placement: found.placement, sizeBytes: found.sizeBytes};
+    }
     return {...binding, path: safe(found.physicalPath), bytesVerified: found.bytesVerified};
   };
   const readLogical = (binding: Json) => {const found = physical(object(binding));
@@ -75,6 +145,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     const {bytesVerified: _, ...plain} = found; return read(plain);};
   const normalState = await read(preparation.stateBinding);
   const normalPlan = await read(bySha(params.expected.planSha256)), normalExecution = await read(bySha(params.expected.executionSha256));
+  const normalPreparation = await readLogical(normalPlan.preparationBinding), transcript = await readLogical(normalPlan.transcriptBinding);
   const consumption = await readLogical(normalExecution.consumptionBinding);
   const adoption = await readLogical(consumption.outputs['machine-adoption.json']), edit = await readLogical(normalExecution.editPlanBinding);
   const manufacturing = await readLogical(normalExecution.manufacturingInputBinding), clock = await readLogical(normalExecution.clockResolutionBinding);
@@ -204,14 +275,35 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   if (typography.requestBindings !== undefined) same(typography.requestBindings, receipts.map(receipt => receipt.requestBinding));
   const draft = normalState.requestDrafts.find((value: Json) => value.id === params.expected.requestDraftId); assert(draft);
   const normalOwners = {requestDraftId: draft.id, planRequestId: params.expected.planRequestId, executionRequestId: params.expected.executionRequestId};
+  const origin = object(normalPreparation.identity.sourceOrigin);
+  const registration = origin.placement === undefined ? undefined : await readLogical(origin.registration);
+  if (origin.provenanceBinding !== undefined || registration?.normalSourceProvenanceBinding !== undefined) {
+    same(origin.provenanceBinding, registration?.normalSourceProvenanceBinding);
+    const provenance = await readLogical(object(origin.provenanceBinding));
+    const originalTranscript = await readLogical(object(provenance.originalTranscriptBinding));
+    const rawGpu = await readLogical(object(provenance.rawGpuBinding));
+    same(provenance.normalTranscriptBinding, normalPlan.transcriptBinding);
+    const savedNormalTranscript = await readLogical(object(provenance.normalTranscriptBinding)); same(savedNormalTranscript, transcript);
+    const planRequest = normalState.agentRequests.find((r:Json) => r.id === normalOwners.planRequestId);
+    const sttRequest = normalState.agentRequests.find((r:Json) => r.id === planRequest?.dependsOnAgentRequestId);
+    const sourceRequest = normalState.agentRequests.find((r:Json) => r.id === sttRequest?.dependsOnAgentRequestId);
+    assert(sttRequest?.type === 'run_stt' && sourceRequest?.type === 'prepare_video', 'APPROVED_DIGEST_SOURCE_OWNER_CHANGED');
+    const normal = await load(root, 'runner/src/digest-plan-preparation-v001.ts');
+    normal.assertNormalDigestSourceProvenanceV001(provenance, {draftId: normalOwners.requestDraftId,
+      sourceRequestId: sourceRequest.id, sttRequestId: sttRequest.id, sourceOrigin: origin,
+      transcriptBinding: normalPlan.transcriptBinding, transcript, originalTranscript, rawGpu});
+  }
+  const sourceDeclaration = deriveApprovedDigestSourceDeclarationV001({workspaceRoot: root, storage: job.storage, normalState,
+    normalPlan, normalPreparation, manufacturing, inspection, sourcePhysicalBinding, sourceLogicalBinding: normalPlan.sourceVideoBinding,
+    normalOwners, transcript, registration});
   const aggregateView = {caseId: job.planId, inputCaptionId: preparation.preparationId + '-input-caption',
     semanticCaptionId: meaning.captions[0].captionId, boundaryCandidates: requests.flatMap(request => request.input.captions[0].boundaryCandidates),
     atomOccurrenceIds: atoms.map(atom => atom.atomOccurrenceId), styleLimits: clone(requests[0].input.styleLimits), taskDescription: rules.newTaskDescription};
   const value = {workspaceRoot: root, manifestBinding: clone(specs.candidateManifestBinding), manifest, preparation,
     preparationManifestBinding: clone(specs.preparationManifestBinding), meaning, requests, responses, results, traces, correspondence,
-    normalState, normalPlan, normalExecution, adoption, edit, manufacturing, inspection, clock, styleTemplate, rendererTemplate,
+    normalState, normalPlan, normalExecution, normalPreparation, adoption, edit, manufacturing, inspection, clock, styleTemplate, rendererTemplate,
     sourcePhysicalPath: sourcePhysicalBinding.path, sourcePhysicalBinding, sourceLogicalBinding: normalPlan.sourceVideoBinding,
-    normalOwners, normalReferenceMap: clone(preparation.logicalToPhysical), aggregateView, candidateRules: rules,
+    normalOwners, normalReferenceMap: clone(preparation.logicalToPhysical), sourceDeclaration, aggregateView, candidateRules: rules,
     typographySettings: typography.settings, typographyValues, typographySettingsBinding: clone(specs.typographySettingsBinding),
     authorizationBinding: clone(qualified.authorizationBinding), jobBinding: clone(qualified.jobBinding)};
   await qualified.assertCurrent(); freeze(value); qualifiedInputs.set(value, {qualified, bodySha256: sha(wire.formal(value)), bindings: [...observed.values()]}); return value;

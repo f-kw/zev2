@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile, writeFile, mkdir, lstat, realpath} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {readPreparedDigestPlanV001, registeredDigestDependencyV001, digestDataPathV001, type DigestPlanPreparationDependenciesV001} from './digest-plan-preparation-v001.js';
+import {readPreparedDigestPlanV001, registeredDigestDependencyV001, digestDataPathV001, NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001, type DigestPlanPreparationDependenciesV001} from './digest-plan-preparation-v001.js';
 import {assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactPathFromUriV001, digestArtifactFileNameV001, digestProducerRequestIdsV001, findById, type AgentRequest, type Zev2State, type DigestExecutionInputArtifactV001} from '@zev2/shared';
 import type {TranscriptArtifact} from './workflow-artifacts.js';
 
@@ -148,7 +148,8 @@ async function consume(deps: DigestPlanConsumptionDependenciesV001, input: Input
   const manufacturing = {schemaVersion: 'presentation-base-media-build-job-v001',
     jobId: `${input.request.id}-manufacturing-values`,
     assemblyDecision: {path: adoptionBinding.path, fileSha256: adoptionBinding.fileSha256},
-    sourceArtifact: {sourceProvenance: 'existing-repository-media', sourceRef: preparation.identity.sourceId,
+    sourceArtifact: {sourceProvenance: preparation.identity.sourceOrigin.placement === NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001
+      ? 'normal-approved-guest-media-v001' : 'existing-repository-media', sourceRef: preparation.identity.sourceId,
       sourceUri: preparation.identity.sourceUri, ...preparation.identity.sourceVideo},
     outputDirectory: file('base-media')};
   const admittedJob = consumer.validatePresentationBaseMediaBuildJobV001(manufacturing);

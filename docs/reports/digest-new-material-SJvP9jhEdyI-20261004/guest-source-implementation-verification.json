@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "new-material-guest-source-implementation-verification-v001",
+  "checkedAt": "2026-10-04T07:02:57.513986+00:00",
+  "files": [
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "fileSha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "sizeBytes": 33158
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "fileSha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "sizeBytes": 15417
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "fileSha256": "95b6c64065cf63d51f700decba84d6fc6f9a4be5f47b368e8a39be116014949d",
+      "sizeBytes": 28301
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.ts",
+      "fileSha256": "89e528ebc818b9e7a6c309d78c758c7a60e4fc332c86f846baa884fac6ca069c",
+      "sizeBytes": 41000
+    },
+    {
+      "path": "runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "f8f96c00ad0ed4215ba19d08b2989790f3854ce7719866817d7c60582ab9972e",
+      "sizeBytes": 35485
+    },
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "b0c580dc3bd1837a1d545ee224658e0795242dd38eeb24f374cc23eb0ae29f74",
+      "sizeBytes": 33032
+    },
+    {
+      "path": "evals/clip_composition/digest_approved_source_snapshot_v001.test.mts",
+      "fileSha256": "bcd0c0a53c5bff4400f1b9b907389e53dd7c01fd48236d214ed526035c45f658",
+      "sizeBytes": 13760
+    }
+  ],
+  "productionPaths": 6,
+  "additionalTestPaths": 1,
+  "approval": "parent mona approves 0b00eeb7 six-path one-source connection and continued normal new plan/manufacture; actual 05:29 user instruction Sentinel_24d44e15c2e48191a4d4aefe81a99466",
+  "targeted": {
+    "normalPreparationAndLineage": 24,
+    "privateSourceDeclarationAndRead": 9,
+    "CoreSmallSnapshot": 11,
+    "passed": 44
+  },
+  "regressions": {
+    "jobRepresentativeRecordOnlyWithCoreSuite": 36,
+    "CoreIncludedInTargeted": 11,
+    "uniqueTotalWithTargeted": 69
+  },
+  "typechecks": {
+    "runnerAndRemotionAndSharedBuild": "exit0 formal Node20.19.6"
+  },
+  "historicalSavedInputRegression": {
+    "passed": 6,
+    "failed": 1,
+    "failure": "CAPTION_PREPARATION_SHA_MISMATCH old normal preparation implementation binding 5100d8649c9151b831ce3174db40899e4ac229b0b4fde026d9b2bbe7b5eb6072 versus current 5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+    "meaning": "old frozen plan correctly refuses changed implementation; old records preserved; actual fresh new plan qualification still required"
+  },
+  "rootSetupAttempts": [
+    {
+      "kind": "sandbox write restriction",
+      "result": "shared build and runtime fixture refused in sandbox; successful scoped auto-review escalation, no auto-review rejection"
+    },
+    {
+      "kind": "test dependency environment",
+      "result": "react lookup failed without known formal NODE_PATH; corrected runner/node_modules; then old frozen binding rejected as above"
+    }
+  ],
+  "storageCorrection": "The old proposed unchanged route used manual guest-to-repo source copy plus normal-preparation source-media copy on internal volume. Core source snapshot was already on approved guest. The 14,032,664,792B two-internal-copy plus 12GB reserve estimate described that proposed route; previous attribution to Core was wrong. New route has guest companion and guest Core snapshot, no repo media copy.",
+  "limitations": [
+    "small fixtures do not prove sustained SSD throughput or full manufacture",
+    "Core qualification positive includes test-only loader model; production fake/clone refusal is real",
+    "new actual normal plan/caption reconstruction/qualified 1GB source/prepare launch pending",
+    "video quality and actual glyph yet unevaluated"
+  ]
+}

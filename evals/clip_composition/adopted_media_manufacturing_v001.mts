@@ -1,4 +1,5 @@
 import {mkdir, copyFile, chmod, readFile, rm} from 'node:fs/promises';
+import {constants} from 'node:fs';
 import path from 'node:path';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -61,10 +62,21 @@ const clone = <T>(v: T): T => structuredClone(v);
 /** Only a qualified, explicitly approved plan may resolve generated artifacts outside the repository. */
 async function adoptedStorageV001(c: Json, storageContext?: Json) {
   if (storageContext === undefined) return {abs, publish, readBound, readJson,
-    assertCurrent: async () => {}};
+    assertCurrent: async () => {}, resolveApprovedSource: undefined};
   if (c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
   await assertQualifiedDigestStorageContextV001(storageContext, c.plan);
+  let resolveApprovedSource: ((sourceArtifact: Json) => Promise<Json>) | undefined;
+  if (storageContext.approvedJob !== undefined) {
+    const {assertQualifiedApprovedDigestStorageContextV001} = await import('../../runner/src/digest-approved-job-runner-v001.js');
+    await assertQualifiedApprovedDigestStorageContextV001(storageContext, c.plan);
+    if (!Object.isFrozen(storageContext) || typeof storageContext.resolveApprovedDigestSourceV001 !== 'function') {
+      fail('CORE_QUALIFIED_SOURCE_RESOLVER_REQUIRED');
+    }
+    resolveApprovedSource = (sourceArtifact: Json) => storageContext.resolveApprovedDigestSourceV001(sourceArtifact);
+  } else if (storageContext.resolveApprovedDigestSourceV001 !== undefined) {
+    fail('CORE_SOURCE_RESOLVER_REQUIRES_APPROVED_JOB');
+  }
   const generated = (p: string) => {
     if (typeof p !== 'string' || !p.startsWith(`${storageContext.outputRoot}/`)) fail('CORE_STORAGE_GENERATED_PATH_MISMATCH');
     return storageContext.resolve(p);
@@ -73,7 +85,7 @@ async function adoptedStorageV001(c: Json, storageContext?: Json) {
     publish: (p: string, value: Json) => storageContext.publish(p, value),
     readBound: (binding: Json) => storageContext.readBound(binding),
     readJson: (p: string) => storageContext.readJson(p),
-    assertCurrent: () => storageContext.assertCurrent()};
+    assertCurrent: () => storageContext.assertCurrent(), resolveApprovedSource};
 }
 
 export function projectAdoptedMediaRangesV001(editPlan: Json, media: Json) {
@@ -93,6 +105,20 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
   const source = manufacturingJob.sourceArtifact;
   if (storageContext !== undefined && (source.path === storageContext.outputRoot
     || source.path.startsWith(`${storageContext.outputRoot}/`))) fail('CORE_STORAGE_SOURCE_PREFIX_MISMATCH');
+  const approvedSource = storage.resolveApprovedSource === undefined ? undefined
+    : await storage.resolveApprovedSource(source);
+  if (storage.resolveApprovedSource !== undefined) {
+    if (approvedSource === undefined) fail('CORE_APPROVED_SOURCE_IDENTITY_INVALID');
+    const identity = approvedSource.identity;
+    if (!keys(approvedSource, ['physicalPath', 'identity', 'assertCurrent'])
+      || !Object.isFrozen(approvedSource) || !Object.isFrozen(identity)
+      || !path.isAbsolute(approvedSource.physicalPath) || path.normalize(approvedSource.physicalPath) !== approvedSource.physicalPath
+      || typeof approvedSource.assertCurrent !== 'function'
+      || !keys(identity, ['dev', 'ino', 'sizeBytes', 'mtimeNs', 'ctimeNs', 'fileSha256'])
+      || !['dev', 'ino', 'mtimeNs', 'ctimeNs'].every(key => typeof identity[key] === 'string' && /^[0-9]+$/u.test(identity[key]))
+      || !Number.isSafeInteger(identity.sizeBytes) || identity.sizeBytes <= 0
+      || identity.fileSha256 !== source.fileSha256) fail('CORE_APPROVED_SOURCE_IDENTITY_INVALID');
+  }
   const observedTools = await inspectTools();
   if (!same(observedTools, expectedTools)) fail('CORE_TOOL_PROFILE_MISMATCH');
   const binaryDiagnostics = await inspectBinaries();
@@ -104,9 +130,14 @@ export async function buildAdoptedBaseMediaV001(c: Json, adoption: Json, editPla
   await mkdir(storage.abs(base), {recursive: false});
   await mkdir(storage.abs(work), {recursive: false});
   const sourceSnapshot = storage.abs(`${work}/source-snapshot.mp4`);
-  await copyFile(abs(source.path), sourceSnapshot);
-  await chmod(sourceSnapshot, 0o444);
+  if (approvedSource !== undefined) await approvedSource.assertCurrent();
+  await storage.assertCurrent();
+  await copyFile(approvedSource?.physicalPath ?? abs(source.path), sourceSnapshot, approvedSource === undefined ? 0 : constants.COPYFILE_EXCL);
+  if (approvedSource === undefined) await chmod(sourceSnapshot, 0o444);
+  else await approvedSource.assertCurrent();
+  await storage.assertCurrent();
   if (await fileSha(sourceSnapshot) !== source.fileSha256) fail('SOURCE_SNAPSHOT_MISMATCH');
+  if (approvedSource !== undefined) await chmod(sourceSnapshot, 0o444);
   const media = await inspectSource(sourceSnapshot);
   await storage.publish(out(c, 'source-media-inspection.json'), {
     schemaVersion: schemas.inspection, sourceVideoBinding: c.plan.request.sourceVideo,

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "digest-approved-source-ssd-read-implementation-check-v001",
+  "checkedAt": "2026-10-04T07:01:15.366359+00:00",
+  "startingHeadFromParent": "0b00eeb7",
+  "ownedImplementationBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-inputs-v001.ts",
+      "fileSha256": "89e528ebc818b9e7a6c309d78c758c7a60e4fc332c86f846baa884fac6ca069c",
+      "sizeBytes": 41000
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "f8f96c00ad0ed4215ba19d08b2989790f3854ce7719866817d7c60582ab9972e",
+      "sizeBytes": 35485
+    }
+  ],
+  "sourceInterface": {
+    "contextMethod": "resolveApprovedDigestSourceV001(sourceArtifact)",
+    "publicQualifiedEntry": "resolveQualifiedApprovedDigestSourceV001(context, sourceArtifact)",
+    "return": [
+      "physicalPath",
+      "identity",
+      "assertCurrent"
+    ],
+    "identity": [
+      "dev (decimal string)",
+      "ino (decimal string)",
+      "sizeBytes (number)",
+      "mtimeNs (decimal string)",
+      "ctimeNs (decimal string)",
+      "fileSha256"
+    ],
+    "qualification": "actual private frozen approved-job storage context, current real job/code/Node/owner/guest-volume/image, frozen qualified inputs, exact original five-field sourceArtifact",
+    "fileChecks": "declared single source only; canonical path/root, no symlink in file or parents, regular file, actual device, exact byte size, streamed SHA, stable ino/dev/size/mtimeNs/ctimeNs; copy boundaries recheck same immutable pin"
+  },
+  "inputChecks": [
+    "normal preparation identity/sourceOrigin/source registration and declared guest placement agree with media map",
+    "normal draft, all its request target URIs, transcript URI, source ID/ref, logical path, file hash and size agree",
+    "provenance record and original/GPU/normal companion JSON read through unchanged logical repo binding route",
+    "existing normal public provenance validator checks exact record/owners/URIs/three logical refs/raw input source SHA and bytes; original versus normal transcript differs only at sourceUri",
+    "existing clock/mapping/body/atom checks maintained"
+  ],
+  "unchanged": [
+    "job inputs schema",
+    "general ROOT",
+    "JSON readBound/readJson",
+    "publish and generated path resolution",
+    "normal source logical artifact body",
+    "source clock and captions"
+  ],
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "durationMs": 212.710875,
+    "logBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-approved-source-ssd-tests-20261004.tap",
+      "fileSha256": "b5ee883ad193e632cd603cfc0aded542e671f51d5e3c6726362b2db28d03e7a2",
+      "sizeBytes": 2296
+    },
+    "testBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-approved-source-ssd-v001.test.mts",
+      "fileSha256": "656f03e01fb8a3ccba3e5e28f527f9eec8bdba9015d33225814955547d6bfff0",
+      "sizeBytes": 10351
+    },
+    "scope": "pure metadata/provenance validation and actual private-entry fake-context rejection; 1KiB filesystem unit observer tests exported from a temporary test copy only",
+    "limits": "Filesystem unit positive uses a test-only current callback and actual small files/dev/stat/hash; it does not mint a private job/storage/source capability or verify the actual 1GB SSD material."
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "command": "Node20.19.6 runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit",
+    "logBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-approved-source-ssd-tsc-20261004.log",
+      "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sizeBytes": 0
+    }
+  },
+  "cleanup": {
+    "remainingOwnUnitDirectories": [],
+    "testGeneratedSourceBytesPerFixture": 1024,
+    "removedOnlyOwnTemporaryDirectories": true
+  },
+  "capacityByVolume": {
+    "internal": {
+      "largeSourceCopies": 0,
+      "inputs": "repository JSON snapshots, normal plan/transcript/provenance/mapping/candidate/settings records; sizes must use actual record stats",
+      "sourceRead": "stream hash/stat only; no full media readFile or media write in these two paths",
+      "correction": "The previous scratch plan would manually copy the SSD media into repo and normal prepare would make a second repo media copy. Core snapshot was already guest; attributing the second internal copy to Core was incorrect."
+    },
+    "guest": {
+      "sourceOriginal": "retained declared source (root reported actual 1016332396 bytes)",
+      "normalPreparationMediaCopyBytes": 0,
+      "coreSnapshot": "one owned snapshot on guest; same source bytes checked before/after copying and output SHA before media processing",
+      "otherOutputs": "source grid/video/PCM, base output, overlays, composition, QC and temp in existing guest output root; their actual clock/unit size and explicit budgets govern capacity",
+      "minimumBaseFormula": "sourceBytes + 2*((sourceGridSampleCount + expected.audioSamples)*channels*4)",
+      "formulaPurpose": "exact source snapshot and explicit uncompressed audio buffers only; compressed video/image/JSON allocations require separate actual-size/budget estimates and live next-unit-plus-reserve checks"
+    },
+    "host": "sparsebundle backing growth plus explicit hostMetadataReserveBytes; do not add host free bytes to guest/internal free bytes"
+  },
+  "actions": {
+    "repoEditsOnly": [
+      "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-inputs-v001.ts",
+      "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts"
+    ],
+    "gitCommands": 0,
+    "mediaManufacturing": 0,
+    "apiCalls": 0,
+    "ssdMediaReadsOrWrites": 0,
+    "oldMediaHashOrDeletion": 0,
+    "otherProcessOperations": 0
+  },
+  "remaining": [
+    "Parent to qualify the real newly saved normal input bundle and actual production owner/storage/source context.",
+    "No actual video generation or full-engine/hardware success is claimed by these tests."
+  ]
+}

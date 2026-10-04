@@ -5,6 +5,8 @@ import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
+import {createReadStream} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {readQualifiedDigestApprovedJobV001, assertQualifiedDigestApprovedJobV001,
   digestJobSha256V001 as sha, digestJobRelativePathV001 as safe, type Json} from './digest-approved-job-v001.js';
 import {readApprovedDigestInputsV001, assertApprovedDigestInputsV001, prepareApprovedDigestCaptionCoreV001,
@@ -12,6 +14,9 @@ import {readApprovedDigestInputsV001, assertApprovedDigestInputsV001, prepareApp
 import type {ApprovedDigestQualifiedJobV001} from './digest-approved-inputs-v001.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const exec = promisify(execFile), contexts = new WeakMap<object, Json>();
+const frozen = (v:any):any => {if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(frozen);Object.freeze(v);}return v;};
+export type ApprovedDigestSourceIdentityV001 = Readonly<{dev:string;ino:string;sizeBytes:number;mtimeNs:string;ctimeNs:string;fileSha256:string}>;
+export type ApprovedDigestResolvedSourceV001 = Readonly<{physicalPath:string;identity:ApprovedDigestSourceIdentityV001;assertCurrent:()=>Promise<void>}>;
 const load = (p: string): Promise<any> => import(pathToFileURL(path.join(ROOT, safe(p))).href);
 async function boundAbsolute(binding: Json): Promise<Buffer> {
   assert(binding && path.isAbsolute(binding.path) && path.normalize(binding.path) === binding.path && /^[0-9a-f]{64}$/u.test(binding.fileSha256));
@@ -37,6 +42,48 @@ export async function assertQualifiedApprovedDigestStorageContextV001(context: u
     assert.deepEqual(plan.verificationPolicy, record.qualified.job.verificationPolicy,'APPROVED_CORE_VERIFICATION_POLICY_MISMATCH');
   }
   await (context as Json).assertCurrent();
+}
+
+async function observeDeclaredSource(context:Json,declaration:Json):Promise<ApprovedDigestSourceIdentityV001> {
+  await context.assertCurrent();
+  const q=context.approvedJob,absolute=declaration.physicalPath;
+  const sourceRoot=declaration.placement==='normal-declared-guest-source-v001'?q.job.storage.guestRoot:ROOT;
+  assert(path.isAbsolute(absolute)&&path.normalize(absolute)===absolute&&absolute.startsWith(sourceRoot+'/'),'APPROVED_JOB_SOURCE_PREFIX_CHANGED');
+  const rootStat=await lstat(sourceRoot,{bigint:true});
+  const expectedDevice=declaration.placement==='normal-declared-guest-source-v001'?BigInt(q.job.storage.guestDevice):rootStat.dev;
+  for(let p=path.dirname(absolute);;p=path.dirname(p)) {
+    const st=await lstat(p,{bigint:true});assert(st.isDirectory()&&!st.isSymbolicLink()&&st.dev===expectedDevice,'APPROVED_JOB_SOURCE_PARENT_CHANGED');
+    if(p===sourceRoot)break;assert(p.startsWith(sourceRoot+'/'),'APPROVED_JOB_SOURCE_PREFIX_CHANGED');
+  }
+  assert.equal(await realpath(absolute),absolute,'APPROVED_JOB_SOURCE_REALPATH_CHANGED');
+  const before=await lstat(absolute,{bigint:true});
+  assert(before.isFile()&&!before.isSymbolicLink()&&before.dev===expectedDevice,'APPROVED_JOB_SOURCE_FILE_OR_DEVICE_CHANGED');
+  assert.equal(before.size,BigInt(declaration.sizeBytes),'APPROVED_JOB_SOURCE_SIZE_CHANGED');
+  const digest=createHash('sha256');let bytes=0;
+  for await(const chunk of createReadStream(absolute)) {digest.update(chunk);bytes+=chunk.length;assert(bytes<=declaration.sizeBytes,'APPROVED_JOB_SOURCE_SIZE_CHANGED');}
+  const after=await lstat(absolute,{bigint:true});
+  assert(after.isFile()&&!after.isSymbolicLink()&&await realpath(absolute)===absolute,'APPROVED_JOB_SOURCE_REALPATH_CHANGED');
+  for(const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(before[key],after[key],'APPROVED_JOB_SOURCE_IDENTITY_CHANGED');
+  assert.equal(bytes,declaration.sizeBytes,'APPROVED_JOB_SOURCE_SIZE_CHANGED');
+  const fileSha256=digest.digest('hex');assert.equal(fileSha256,declaration.fileSha256,'APPROVED_JOB_SOURCE_BYTES_CHANGED');
+  await context.assertCurrent();
+  return Object.freeze({dev:String(after.dev),ino:String(after.ino),sizeBytes:bytes,mtimeNs:String(after.mtimeNs),ctimeNs:String(after.ctimeNs),fileSha256});
+}
+
+/** The public entry checks the actual private context; caller callbacks never qualify. */
+export async function resolveQualifiedApprovedDigestSourceV001(context:unknown,sourceArtifact:Json):Promise<ApprovedDigestResolvedSourceV001> {
+  await assertQualifiedApprovedDigestStorageContextV001(context);
+  const record=contexts.get(context as object)!,owned=context as Json;
+  await assertApprovedDigestInputsV001(record.inputs,record.qualified);
+  const declared=record.inputs.sourceDeclaration;
+  assert.deepEqual(sourceArtifact,declared.sourceArtifact,'APPROVED_JOB_SOURCE_ARTIFACT_CHANGED');
+  const artifact=frozen(structuredClone(sourceArtifact)),identity=await observeDeclaredSource(owned,declared);
+  const assertCurrent=async()=>{
+    await assertQualifiedApprovedDigestStorageContextV001(owned);
+    assert.deepEqual(artifact,record.inputs.manufacturing.sourceArtifact,'APPROVED_JOB_SOURCE_ARTIFACT_CHANGED');
+    assert.deepEqual(await observeDeclaredSource(owned,declared),identity,'APPROVED_JOB_SOURCE_IDENTITY_CHANGED');
+  };
+  return Object.freeze({physicalPath:declared.physicalPath,identity,assertCurrent});
 }
 async function createStorage(permitPath: string, permitBytes: Buffer, permit: Json, qualified: ApprovedDigestQualifiedJobV001, inputs: Json, m: any) {
   await assertApprovedDigestInputsV001(inputs, qualified);
@@ -164,6 +211,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   }
   const context=Object.freeze({outputRoot,planId:job.planId,approvedJob:qualified,storageRoot:s.guestRoot,generatedRoot,tempDirectory:generatedRoot+'/temp',
     resolve,assertCurrent:current,publish,readJson,readBound,resourceCheck,
+    resolveApprovedDigestSourceV001:(artifact:Json)=>resolveQualifiedApprovedDigestSourceV001(context,artifact),
     composeMedia:async(args:Json)=>{await current();assert.equal(args.expectedFrameCount,job.expected.frames,'APPROVED_JOB_COMPOSE_CLOCK_MISMATCH');
       assert(args.outputPath.startsWith(generatedRoot+'/')); const compositor=await load('tools/digest-quality/original-resolution-low-memory-composite.mjs');
       const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,plan:args.plan,
@@ -264,20 +312,20 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
     request:{sourceVideo:inputs.normalPlan.sourceVideoBinding,transcript:inputs.normalPlan.transcriptBinding,utterances:inputs.normalPlan.utteranceBinding}};
   const planBinding=await context.publish(out+'/core-plan.json',plan),c={plan,planBinding,authorization:qualified.authorization,rendererTemplate:style.rendererTemplate};
   await context.publish(out+'/machine-adoption.json',inputs.adoption);await context.publish(out+'/edit-plan.json',inputs.edit);
-  const manufacturing=structuredClone(inputs.manufacturing);manufacturing.jobId=job.planId+'-base';manufacturing.sourceArtifact.path=inputs.sourcePhysicalPath;
+  const manufacturing=structuredClone(inputs.manufacturing);manufacturing.jobId=job.planId+'-base';
   manufacturing.assemblyDecision=m.bind(out+'/machine-adoption.json',inputs.adoption);manufacturing.outputDirectory=out+'/base-media';
   const core=await load('evals/clip_composition/adopted_media_manufacturing_v001.mts');
   m.pass(baseModule.validatePresentationBaseMediaBuildJobV001(manufacturing),'APPROVED_JOB_MANUFACTURING_INVALID');
   const mappings=core.projectAdoptedMediaRangesV001(inputs.edit,inputs.inspection.media);
   assert.equal(mappings.mappings.at(-1).outputEndFrame,job.expected.frames);assert.equal(mappings.mappings.at(-1).audioSamples.outputEnd,job.expected.audioSamples);
   assert.deepEqual(mappings.mappings,inputs.clock.mappings,'APPROVED_JOB_ORIGINAL_CLOCK_CHANGED');
-  assert.equal(await m.fileSha(path.join(ROOT,safe(inputs.sourcePhysicalPath))),manufacturing.sourceArtifact.fileSha256,'APPROVED_JOB_SOURCE_BYTES_CHANGED');
+  const source=await context.resolveApprovedDigestSourceV001(manufacturing.sourceArtifact);
+  assert.equal(source.identity.fileSha256,manufacturing.sourceArtifact.fileSha256,'APPROVED_JOB_SOURCE_BYTES_CHANGED');
   const jobBinding=await context.publish(out+'/manufacturing-job.json',manufacturing);
   const invocation=await context.publish(out+'/core-invocation.json',{schemaVersion:'digest-approved-core-invocation-v001',
     approvedJobBinding:qualified.jobBinding,authorizationBinding:qualified.authorizationBinding,planBinding,jobBinding,
     acceptedManifestBinding:job.inputs.candidateManifestBinding,storagePermitFileSha256:sha(permitBytes),implementationSha:job.implementation.sha});
-  const sourceStat=await lstat(path.join(ROOT,inputs.sourcePhysicalPath));
-  const minimumBaseBytes=estimateApprovedDigestBaseAllocationV001(sourceStat.size,inputs.inspection.media,job.expected);
+  const minimumBaseBytes=estimateApprovedDigestBaseAllocationV001(source.identity.sizeBytes,inputs.inspection.media,job.expected);
   assert(job.allocationBudget.baseBuildBytes>=minimumBaseBytes,'APPROVED_JOB_BASE_BUDGET_BELOW_INPUTS');
   await context.resourceCheck({stage:'start',newBytes:job.allocationBudget.baseBuildBytes});
   const baseStarted=Date.now(); const base=await core.buildAdoptedBaseMediaV001(c,inputs.adoption,inputs.edit,manufacturing,jobBinding,invocation,

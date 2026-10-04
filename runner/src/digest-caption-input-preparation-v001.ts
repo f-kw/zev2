@@ -5,7 +5,7 @@ import {pathToFileURL} from 'node:url';
 import {assertApprovedAgentRequestInput, assertDigestArtifactV001, assertDigestPlanReferenceClosureV001,
   digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001,
   type Zev2State, type DigestByteBindingV001, type DigestJsonBindingV001} from '@zev2/shared';
-import {registeredDigestDependencyV001} from './digest-plan-preparation-v001.js';
+import {registeredDigestDependencyV001, NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001, resolveNormalDigestDeclaredGuestSourcePathV001, assertNormalDigestSourceProvenanceV001} from './digest-plan-preparation-v001.js';
 import {assertDistantConnectionCommonUtteranceArtifactV001,
   validateDistantConnectionCommonUtteranceArtifactAgainstTranscriptBytesV001} from './distant-connection-common-utterance-artifact-v001.js';
 import {assertCaptionDisplayInputV001} from './skills/caption-display-boundaries-v001.js';
@@ -186,6 +186,43 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
   assert.deepEqual(dependencyReferences, {video: sourceRef, transcript: transcriptRef}, 'CAPTION_PREPARATION_DEPENDENCY_REFERENCE_CHANGED');
   assert.equal(digestArtifactPathFromUriV001(transcriptRef.uri, draftId, sttRequest.id), plan.transcriptBinding.path, 'CAPTION_PREPARATION_TRANSCRIPT_REFERENCE_CHANGED');
   assert.equal(transcriptRef.sha256, plan.transcriptBinding.fileSha256, 'CAPTION_PREPARATION_TRANSCRIPT_REFERENCE_CHANGED');
+  const sourceOrigin = record(identity.sourceOrigin);
+  const guestSource = sourceOrigin.placement === NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001;
+  let guestPhysicalPath: string | undefined;
+  if(guestSource) {
+    assert.equal(sourceOrigin.mode,'json-reference','CAPTION_PREPARATION_GUEST_ORIGIN_INVALID');
+    assert.equal(sourceOrigin.declaredSourceUri,draft.source.uri,'CAPTION_PREPARATION_GUEST_SOURCE_CHANGED');
+    for(const id of producers) assert.equal(state.agentRequests.find(r => r.id === id)?.target.sourceUri,draft.source.uri,'CAPTION_PREPARATION_GUEST_SOURCE_CHANGED');
+    const expectedSource = `artifacts/${draftId}/${sourceRequest.id}/source-video.mp4`;
+    assert.equal(plan.sourceVideoBinding.path,expectedSource,'CAPTION_PREPARATION_GUEST_PRODUCER_CHANGED');
+    assert.equal(sourceOrigin.fileSha256,plan.sourceVideoBinding.fileSha256,'CAPTION_PREPARATION_GUEST_SOURCE_CHANGED');
+    assert(Number.isSafeInteger(sourceOrigin.byteSize) && Number(sourceOrigin.byteSize) > 0,'CAPTION_PREPARATION_GUEST_SIZE_INVALID');
+    const logicalRegistration = digestArtifactPathFromUriV001(sourceRef.uri,draftId,sourceRequest.id);
+    assert.deepEqual(identity.sourceRegistration,{path:logicalRegistration,fileSha256:sourceRef.sha256},'CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    assert.deepEqual(sourceOrigin.registration,identity.sourceRegistration,'CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    const registration = get({path:logicalRegistration,fileSha256:sourceRef.sha256});
+    assert.equal(registration.kind,'source_video','CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    assert.equal(registration.sourceUri,draft.source.uri,'CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    assert.equal(registration.purpose,draft.purpose,'CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    assert.deepEqual(registration.sourceInspectionBinding,identity.sourceInspection,'CAPTION_PREPARATION_GUEST_INSPECTION_CHANGED');
+    assert.deepEqual(identity.sourceInspection,execution.sourceInspectionBinding,'CAPTION_PREPARATION_GUEST_INSPECTION_CHANGED');
+    const provenanceBinding=record(sourceOrigin.provenanceBinding);
+    assert.deepEqual(registration.normalSourceProvenanceBinding,provenanceBinding,'CAPTION_PREPARATION_GUEST_PROVENANCE_CHANGED');
+    const provenancePath=text(provenanceBinding.path),provenanceSha=text(provenanceBinding.fileSha256);
+    digestArtifactFileNameV001(provenancePath,draftId,[sttRequest.id]);
+    assert(provenancePath.endsWith('.json'),'CAPTION_PREPARATION_GUEST_PROVENANCE_CHANGED');
+    const provenance=get({path:provenancePath,fileSha256:provenanceSha});
+    const provenanceJson=(v:unknown) => {const b=record(v);return get({path:text(b.path),fileSha256:text(b.fileSha256)});};
+    assertNormalDigestSourceProvenanceV001(provenance,{draftId,sourceRequestId:sourceRequest.id,sttRequestId:sttRequest.id,
+      sourceOrigin,transcriptBinding:plan.transcriptBinding,transcript,
+      originalTranscript:provenanceJson(provenance.originalTranscriptBinding),rawGpu:provenanceJson(provenance.rawGpuBinding)});
+    guestPhysicalPath = resolveNormalDigestDeclaredGuestSourcePathV001(text(sourceOrigin.declaredSourceUri));
+    if(registration.localPath !== undefined) assert.equal(registration.localPath,guestPhysicalPath,'CAPTION_PREPARATION_GUEST_REGISTRATION_CHANGED');
+    assert.equal(path.basename(guestPhysicalPath),digestArtifactFileNameV001(expectedSource,draftId,[sourceRequest.id]),'CAPTION_PREPARATION_GUEST_PRODUCER_CHANGED');
+    assert.equal(path.basename(path.dirname(guestPhysicalPath)),draftId,'CAPTION_PREPARATION_GUEST_PRODUCER_CHANGED');
+    assert.equal(path.basename(path.dirname(path.dirname(guestPhysicalPath))),'artifacts','CAPTION_PREPARATION_GUEST_PRODUCER_CHANGED');
+    assert.equal(execution.dataBindings.filter(b => b.path === expectedSource).length,1,'CAPTION_PREPARATION_GUEST_SOURCE_COUNT_INVALID');
+  } else assert(sourceOrigin.placement === undefined,'CAPTION_PREPARATION_GUEST_PLACEMENT_INVALID');
   for (const b of [...records(identity.implementations), ...records(consumption.implementations)])
     await read({path: text(b.path), fileSha256: text(b.fileSha256)}, false);
   const outputBindings = record(consumption.outputs), adoptionBinding = outputBindings['machine-adoption.json'];
@@ -234,8 +271,9 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
     scopeBinding: p.scopeBinding, originalPurpose: draft.purpose, originalPurposeBinding: plan.approvedRequestBinding,
     stateBinding: p.stateBinding, expected: p.expected, styleTemplateBinding: p.styleTemplateBinding,
     implementations, inputReferences: Array.from(observed.values()),
-    logicalToPhysical: execution.dataBindings.map(b => ({...b, physicalPath: physical(b.path),
-      bytesVerified: b.path !== plan.sourceVideoBinding.path})),
+    logicalToPhysical: execution.dataBindings.map(b => guestSource && b.path === plan.sourceVideoBinding.path
+      ? {...b,physicalPath:guestPhysicalPath!,bytesVerified:false,placement:NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001,sizeBytes:sourceOrigin.byteSize}
+      : {...b,physicalPath:physical(b.path),bytesVerified:b.path !== plan.sourceVideoBinding.path}),
     admission: {...execution.admission, outlineChoice: null}, originalClockBinding: execution.clockResolutionBinding,
     outputs: outputs.map(o => ({fileName: o.name, ...m.formal.bind(`${relative(root, p.outputRoot)}/${o.name}`, o.value)}))};
   return {m, root, manifest, outputs, meaning, requests, segments, droppedIds};

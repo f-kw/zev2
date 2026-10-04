@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "digest-approved-source-core-verification-v001",
+  "checkedAtUtc": "2026-10-04T06:52:54.108167+00:00",
+  "implementationAndTestBindings": [
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "b0c580dc3bd1837a1d545ee224658e0795242dd38eeb24f374cc23eb0ae29f74",
+      "sizeBytes": 33032
+    },
+    {
+      "path": "evals/clip_composition/digest_approved_source_snapshot_v001.test.mts",
+      "fileSha256": "bcd0c0a53c5bff4400f1b9b907389e53dd7c01fd48236d214ed526035c45f658",
+      "sizeBytes": 13760
+    }
+  ],
+  "tests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "command": "ZEV_SOURCE_SNAPSHOT_TEST_REPO=/Users/kawafmm/workspace/zev2 /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import /Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs --test digest_approved_source_snapshot_v001.test.mts",
+    "tapBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/20261004-ssd-source-Core-tests-final.tap",
+      "fileSha256": "bbb93e789e5a2229a0eda4d25eb39080ece67c2b1398b7bca91a308582d304c7",
+      "sizeBytes": 2193
+    },
+    "positiveScope": "test-only ESM-loader qualification model plus actual production Core, small real FS copy/chmod/inode/streamhash; not real job/storage/owner/node/device qualification positive",
+    "realPrivateRefusal": "unmodified production private validator rejects caller-created frozen context and its clone before any caller resolver",
+    "cases": [
+      "qualified-model one source copy before probe",
+      "legacy repo source path",
+      "fake context",
+      "clone context",
+      "different source",
+      "undefined resolver return without fallback",
+      "wrong identity source hash",
+      "source modified before copy",
+      "source inode replaced after copy with same bytes",
+      "snapshot byte mismatch",
+      "actual production private context refusal"
+    ]
+  },
+  "fixtureSetupCorrections": [
+    "non-file loader parent URL guard",
+    "temporary path realpath canonicalization prevents duplicate test-only WeakMap modules",
+    "legacy fixture output parent directory creation"
+  ],
+  "diffCheckExitCode": 0,
+  "ownRemainingFixturePaths": [],
+  "limits": [
+    "No actual SSD source media copied or inspected; small synthetic nonplayable bytes only.",
+    "No FFmpeg or source probe beyond deliberate test sentinel; no STT, download, API or manufacture.",
+    "Current-code/Node/owner/guest UUID/device/image and stable source resolver qualification are storage_scope ownership; integration tests/typechecks are parent responsibility.",
+    "No Git stage/commit/push or old artifact cleanup."
+  ]
+}

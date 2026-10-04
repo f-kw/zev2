@@ -2,6 +2,14 @@
 
 更新日：2026-10-04（JST）
 
+## 最新現在地 — 2026-10-04 07:02 UTC（SSD一素材接続を実装・検査し、新動画の通常計画へ続行）
+
+親monaが0b00eeb7の6path案を承認し、新素材一本の正常plan/製造まで続行を指示。製品6pathと必須Core test一個を実装した。元STT URL原本を保持し、別normal transcriptはsourceUri以外の全文/ID/時計一致とGPU inputSHA/size/producer来歴を検査。private実job contextだけが一素材をstream hash/安定statで資格読取し、CoreのSSD snapshot前後一致を確認する。一般ROOT/trust/default/shared/Python/renderer/QC変更0。[限定実装と保存先説明の訂正](reports/digest-new-material-SJvP9jhEdyI-20261004/guest-source-implementation.md)。
+
+対象44件・重複除去後関連69件成功、正式Node20のrunner/Remotion/shared build成功。旧保存plan試験は6成功/1拒否（旧正常準備の実装SHAと今回変更の不一致）。旧証拠を書換えず、新実planで資格を確認する。過去の「Core snapshotが内蔵二つ目copy」は誤記。旧無変更案の二つはmanual repo sourceとnormal source-mediaであり、Core snapshotは既にguest。新案はguest companion+guest snapshotとrepo JSONのみ、reserveは別device判定。
+
+状態：作業中。最終実装検査：2026-10-04T07:02:57.513986+00:00。次担当：同じMac実装者が、今回実指示ID・内容から新正常plan/字幕/manifest/job/grantを作り、prepare/launch→代表確認→finalize→getへ進める。追加本人回答待ちなし。現在この記録時点の新plan/製造は未実施。旧完了動画・旧許可・旧件数を流用しない。実glyph/媒体QC/視聴品質は未評価。以下06:24の相談役待ちはこの承認で解消した履歴。
+
 ## 最新現在地 — 2026-10-04 06:24 UTC（新素材の準備完了、保存接続の相談役判断待ち）
 
 本人05:29 UTC「新しい動画でやって」への親mona指示で、[SJvP9jhEdyI](https://www.youtube.com/watch?v=SJvP9jhEdyI)の約54分50秒・1080p60素材を今回SSDへ取得した。403は公式専用downloaderと既存同Pythonで回復し、元clock検査と既存LAN GPUの文字起こしが成功。1,016,332,396B/SHA907de6d0、9,789時間付き断片の保存再読/構造/ID/時刻検査passed。実指示ID `Sentinel_24d44e15c2e48191a4d4aefe81a99466` は親の補足で解消し、追加本人回答待ちなし。[素材・処理時間・未評価](reports/digest-new-material-SJvP9jhEdyI-20261004/README.md)。
