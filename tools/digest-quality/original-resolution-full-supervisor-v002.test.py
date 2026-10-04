@@ -23,7 +23,7 @@ class ShutdownTest(unittest.TestCase):
     return dict(at=time.time(),availableBytes=m.old.START,pressure=2 if ready.exists() else 1,memoryBytes=0,parentRssBytes=0,treeRssBytes=0,processes=[])
    try:
     m.old.observe=observation
-    rc=m.run(d+'/run',command,str(permit))
+    rc=m.run(d+'/run',command,str(permit),legacy_recovery_only=True)
     self.assertEqual(rc,1);summary=json.loads(Path(d+'/run/summary.json').read_text());self.assertEqual(summary['remainingRunning'],[]);self.assertIn('pressure',summary['reason']);self.assertIsNone(outsider.poll())
    finally:m.old.observe=original;outsider.terminate();outsider.wait()
  def fault(self,kind):
@@ -40,7 +40,7 @@ class ShutdownTest(unittest.TestCase):
     return dict(at=time.time(),availableBytes=m.old.START,pressure=1,memoryBytes=0,parentRssBytes=0,treeRssBytes=0,processes=[])
    try:
     m.old.observe=observation
-    self.assertEqual(m.run(d+'/run',command,str(permit)),1)
+    self.assertEqual(m.run(d+'/run',command,str(permit),legacy_recovery_only=True),1)
     summary=json.loads(Path(d+'/run/summary.json').read_text());self.assertEqual(summary['remainingRunning'],[]);self.assertEqual(summary['status'],'interrupted')
     self.assertTrue(Path(d+'/run/owned-group.json').exists())
     cleanup=json.loads(Path(d+'/run/group-shutdown.json').read_text());self.assertTrue(any(e['action']=='SIGTERM-survivors' for e in cleanup['events']))
@@ -59,7 +59,7 @@ class ShutdownTest(unittest.TestCase):
     calls+=1
     return dict(at=time.time(),availableBytes=m.old.START,pressure=2 if calls>=3 else 1,memoryBytes=0,parentRssBytes=0,treeRssBytes=0,processes=[])
    try:
-    m.old.observe=observation;self.assertEqual(m.run(d+'/run',command,str(permit)),1)
+    m.old.observe=observation;self.assertEqual(m.run(d+'/run',command,str(permit),legacy_recovery_only=True),1)
     rows=[json.loads(x) for x in Path(d+'/run/resource.jsonl').read_text().splitlines()]
     body=[x for x in rows if x.get('phase')=='immediately-before-body'];self.assertEqual(len(body),1);self.assertEqual(body[0]['pressure'],2)
    finally:m.old.observe=original

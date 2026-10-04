@@ -1,6 +1,7 @@
-"""Same-material resume supervisor. Keeps the original bound supervisor unchanged."""
+"""Explicitly approved Digest jobs and isolated legacy recovery supervision."""
 import os, sys, json, time, signal, selectors, subprocess, importlib.util, hashlib, plistlib, stat, re
 from pathlib import Path
+sys.dont_write_bytecode = True
 _spec=importlib.util.spec_from_file_location('original_monitor',Path(__file__).with_name('original-resolution-full-supervisor.py'))
 old=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(old)
 
@@ -213,6 +214,441 @@ def validate_formal_permit(permit,directory,command):
     return dict(imageInode=image_stat.st_ino,imageDevice=image_stat.st_dev,
         imageMetadataSha256=hashlib.sha256(metadata.read_bytes()).hexdigest(),imageLogicalBytes=info['size'])
 
+# Normal approved jobs deliberately share no legacy video/approval/failure values.
+APPROVED_GUARD = dict(startBytes=50_000_000_000, reserveBytes=12_000_000_000,
+    maximumRssBytes=17_179_869_184, maximumPressure=1, observationIntervalSeconds=1,
+    nextUnitPlusReserve=True, stopOwnProcessGroup=True, restartOnReconnect=False)
+APPROVED_INPUT_KEYS = {'preparationParameters', 'preparationManifestBinding',
+    'candidateManifestBinding', 'typographySettingsBinding', 'rendererTemplateBinding'}
+APPROVED_STORAGE_KEYS = {'guestRoot', 'guestVolumeUuid', 'guestDevice', 'hostRoot',
+    'hostVolumeUuid', 'hostDevice', 'imagePath', 'imageMaximumBytes',
+    'hostMetadataReserveBytes', 'internalRoot'}
+APPROVED_EXPECTED_KEYS = {'frames', 'audioSamples', 'groups', 'atoms', 'cues'}
+APPROVED_WORKER = 'runner/src/digest-approved-job-runner-v001.ts'
+APPROVED_CODE = ['runner/src/digest-approved-job-v001.ts', APPROVED_WORKER,
+    'runner/src/digest-approved-inputs-v001.ts', 'runner/src/digest-formal-handoff-v001.ts',
+    'evals/clip_composition/adopted_media_manufacturing_v001.mts',
+    'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
+    'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
+    'evals/clip_composition/render_presentation_v002.mjs',
+    'tools/digest-quality/original-resolution-low-memory-composite.mjs',
+    'tools/digest-quality/original-resolution-full-supervisor-v002.py']
+JS_SAFE_INTEGER = (1 << 53) - 1
+
+def positive_integer(value):
+    return type(value) is int and 0 < value <= JS_SAFE_INTEGER
+
+def required(condition, reason):
+    if not condition:
+        raise ValueError(reason)
+
+def exact_keys(value, keys, label):
+    required(type(value) is dict and set(value) == set(keys), label + ' exact fields required')
+
+def valid_sha(value, length=64):
+    return type(value) is str and re.fullmatch('[0-9a-f]{' + str(length) + '}', value) is not None
+
+def safe_relative(value):
+    return type(value) is str and re.fullmatch('[A-Za-z0-9._/-]+', value) is not None \
+        and not value.startswith('/') and all(part not in ('', '.', '..') for part in value.split('/'))
+
+def absolute_path(value):
+    return type(value) is str and os.path.isabs(value) and os.path.normpath(value) == value \
+        and '\x00' not in value and '\\' not in value
+
+def validate_binding(ref, absolute=False, require_size=False):
+    required(type(ref) is dict and {'path', 'fileSha256'} <= set(ref)
+        and set(ref) <= {'path', 'fileSha256', 'sizeBytes', 'schemaVersion', 'canonicalSha256'}, 'invalid binding fields')
+    required(absolute_path(ref['path']) if absolute else safe_relative(ref['path']), 'invalid binding path')
+    required(valid_sha(ref['fileSha256']), 'invalid binding SHA')
+    if require_size:
+        required('sizeBytes' in ref, 'bound size required')
+    if 'sizeBytes' in ref:
+        required(positive_integer(ref['sizeBytes']), 'invalid bound size')
+    if 'schemaVersion' in ref:
+        required(type(ref['schemaVersion']) is str and bool(ref['schemaVersion']), 'invalid bound schema')
+    if 'canonicalSha256' in ref:
+        required(valid_sha(ref['canonicalSha256']), 'invalid canonical SHA')
+
+def absolute_repo_binding(ref):
+    validate_binding(ref)
+    return {**ref, 'path': str(Path(FORMAL_REPO) / ref['path'])}
+
+def stable_bound_bytes(ref):
+    validate_binding(ref, absolute=True)
+    target = Path(ref['path'])
+    before = target.lstat()
+    required(stat.S_ISREG(before.st_mode) and not stat.S_ISLNK(before.st_mode)
+        and str(target.resolve()) == str(target), 'bound file missing, relocated or symlink')
+    data = target.read_bytes()
+    after = target.lstat()
+    required(all(getattr(before, key) == getattr(after, key)
+        for key in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'bound file changed during read')
+    required(hashlib.sha256(data).hexdigest() == ref['fileSha256'], 'bound SHA changed: ' + str(target))
+    if 'sizeBytes' in ref:
+        required(len(data) == ref['sizeBytes'], 'bound size changed: ' + str(target))
+    return data
+
+def stable_bound_json(ref):
+    data = stable_bound_bytes(ref)
+    value = json.loads(data)
+    if 'schemaVersion' in ref:
+        required(type(value) is dict and value.get('schemaVersion') == ref['schemaVersion'], 'bound schema changed')
+    return value
+
+def validate_approved_job_config(job, authorization):
+    exact_keys(job, {'schemaVersion', 'planId', 'outputRoot', 'inputs', 'storage',
+        'expected', 'implementation', 'guard', 'allocationBudget'}, 'approved job')
+    required(job['schemaVersion'] == 'digest-approved-job-v001', 'approved job schema required')
+    required(type(job['planId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', job['planId']), 'invalid approved plan ID')
+    required(safe_relative(job['outputRoot']) and job['outputRoot'].startswith('runtime/artifacts/') and len(job['outputRoot'].split('/')) >= 4, 'invalid approved output root')
+    exact_keys(job['inputs'], APPROVED_INPUT_KEYS, 'approved inputs')
+    required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
+    for name in APPROVED_INPUT_KEYS - {'preparationParameters'}:
+        validate_binding(job['inputs'][name])
+    exact_keys(job['expected'], APPROVED_EXPECTED_KEYS, 'approved expected counts')
+    required(all(positive_integer(value) for value in job['expected'].values()), 'expected counts must be positive integers')
+    exact_keys(job['allocationBudget'], {'baseBuildBytes', 'rendererPreparationBytes'}, 'approved allocation budget')
+    required(all(positive_integer(value) for value in job['allocationBudget'].values()), 'explicit positive allocation budgets required')
+    exact_keys(job['guard'], APPROVED_GUARD, 'approved guard')
+    required(all(type(job['guard'][key]) is type(value) and job['guard'][key] == value
+        for key, value in APPROVED_GUARD.items()), 'approved safety limits cannot change')
+    storage = job['storage']
+    exact_keys(storage, APPROVED_STORAGE_KEYS, 'approved storage')
+    required(all(absolute_path(storage[key]) and storage[key] != '/'
+        for key in ('guestRoot', 'hostRoot', 'imagePath', 'internalRoot')), 'invalid approved storage paths')
+    required(storage['internalRoot'] == FORMAL_REPO, 'internal observation must remain at the repository filesystem')
+    required(storage['guestRoot'].startswith('/Volumes/') and storage['hostRoot'].startswith('/Volumes/')
+        and storage['guestRoot'] != storage['hostRoot']
+        and not Path(storage['guestRoot']).is_relative_to(Path(storage['hostRoot']))
+        and not Path(storage['hostRoot']).is_relative_to(Path(storage['guestRoot'])), 'separate guest/host roots required')
+    required(Path(storage['imagePath']).is_relative_to(Path(storage['hostRoot']))
+        and storage['imagePath'].endswith('.sparsebundle'), 'backing image must stay inside approved host root')
+    required(all(positive_integer(storage[key])
+        for key in ('guestDevice', 'hostDevice', 'imageMaximumBytes')), 'positive observed storage integers required')
+    required(storage['guestDevice'] != storage['hostDevice'], 'separate observed guest/host devices required')
+    required(positive_integer(storage['hostMetadataReserveBytes']) and storage['imageMaximumBytes'] > job['guard']['startBytes'], 'invalid image capacity or metadata reserve')
+    required(all(type(storage[key]) is str and re.fullmatch('[0-9A-F]{8}(?:-[0-9A-F]{4}){3}-[0-9A-F]{12}', storage[key])
+        for key in ('guestVolumeUuid', 'hostVolumeUuid')), 'observed volume UUID required')
+    exact_keys(job['implementation'], {'sha', 'bindings', 'nodeBinding'}, 'approved implementation')
+    validate_binding(job['implementation']['nodeBinding'], absolute=True)
+    required(Path(job['implementation']['nodeBinding']['path']).name == 'node', 'approved Node executable basename required')
+    required(valid_sha(job['implementation']['sha'], 40), 'approved implementation commit required')
+    bindings = job['implementation']['bindings']
+    required(type(bindings) is list and bool(bindings), 'approved implementation bindings required')
+    for ref in bindings:
+        validate_binding(ref)
+    paths = [ref['path'] for ref in bindings]
+    required(len(set(paths)) == len(paths) and set(APPROVED_CODE) <= set(paths),
+        'unique complete approved implementation bindings required')
+    exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
+        'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
+        'implementation', 'normalCandidates'}, 'approved authorization')
+    required(authorization['schemaVersion'] == 'digest-approved-job-authorization-v001', 'approved authorization schema required')
+    required(type(authorization['recordId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', authorization['recordId']), 'authorization record ID required')
+    exact_keys(authorization['userApproval'], {'at', 'messageId', 'text', 'sourceThreadId'}, 'user approval')
+    required(all(type(value) is str and bool(value.strip()) for value in authorization['userApproval'].values()), 'real user approval fields required')
+    from datetime import datetime
+    try:
+        timestamp = datetime.fromisoformat(authorization['userApproval']['at'].replace('Z', '+00:00'))
+    except ValueError:
+        raise ValueError('user approval timestamp must include a timezone') from None
+    required(timestamp.tzinfo is not None and re.search(r'(?:Z|\+00:00)$', authorization['userApproval']['at']), 'user approval UTC timezone required')
+    required(authorization['actions'] == ['manufacture-one-approved-plan']
+        and type(authorization['normalCandidates']) is int and authorization['normalCandidates'] == 1,
+        'one explicitly approved manufacture action required')
+    validate_binding(authorization['jobBinding'], absolute=True, require_size=True)
+    for key in ('planId', 'outputRoot', 'storage', 'guard', 'implementation'):
+        required(authorization[key] == job[key], 'authorization/job mismatch: ' + key)
+    required(authorization['manifestBinding'] == job['inputs']['candidateManifestBinding'], 'authorized manifest differs')
+    required(authorization['typographySettingsBinding'] == job['inputs']['typographySettingsBinding'], 'authorized settings differ')
+    return job
+
+def approved_image_identity(storage):
+    image = Path(storage['imagePath'])
+    actual = image.lstat()
+    required(stat.S_ISDIR(actual.st_mode) and not stat.S_ISLNK(actual.st_mode)
+        and str(image.resolve()) == str(image), 'approved backing image missing or relocated')
+    required(actual.st_dev == storage['hostDevice'], 'approved backing image host device differs')
+    info_path = image / 'Info.plist'
+    before = info_path.lstat()
+    required(stat.S_ISREG(before.st_mode) and not stat.S_ISLNK(before.st_mode)
+        and str(info_path.resolve()) == str(info_path), 'approved image metadata missing or symlink')
+    raw = info_path.read_bytes()
+    after = info_path.lstat()
+    required(all(getattr(before, key) == getattr(after, key)
+        for key in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'image metadata changed during read')
+    info = plistlib.loads(raw)
+    required(info['diskimage-bundle-type'] == 'com.apple.diskimage.sparsebundle'
+        and type(info['size']) is int and 0 < info['size'] <= storage['imageMaximumBytes'], 'approved image capacity/type differs')
+    return dict(imageInode=actual.st_ino, imageDevice=actual.st_dev,
+        imageMetadataSha256=hashlib.sha256(raw).hexdigest(), imageLogicalBytes=info['size'])
+
+def validate_approved_job_permit(permit, directory, command, permit_file,
+    approved_job_sha256, authorization_sha256):
+    required(valid_sha(approved_job_sha256) and valid_sha(authorization_sha256), 'independent approved job and authorization SHA anchors required')
+    exact_keys(permit, {'schemaVersion', 'status', 'jobBinding', 'authorizationBinding', 'bindings',
+        'storage', 'implementation', 'monitorDirectory', 'command', 'ownerBinding'}, 'approved command permit')
+    required(permit['schemaVersion'] == 'digest-approved-job-command-permit-v001'
+        and permit['status'] == 'verified-approved-digest-job-v001', 'normal approved command permit required')
+    required(os.geteuid() != 0 and 'NODE_OPTIONS' not in os.environ, 'approved job requires nonroot UID and no NODE_OPTIONS')
+    for key in ('jobBinding', 'authorizationBinding', 'ownerBinding'):
+        validate_binding(permit[key], absolute=True, require_size=True)
+    required(all(Path(FORMAL_REPO) in Path(permit[key]['path']).parents for key in ('jobBinding', 'authorizationBinding')),
+        'approved job/authorization must remain repository bound')
+    required(permit['jobBinding']['fileSha256'] == approved_job_sha256
+        and permit['authorizationBinding']['fileSha256'] == authorization_sha256, 'independent approval anchor mismatch')
+    job = stable_bound_json(permit['jobBinding'])
+    authorization = stable_bound_json(permit['authorizationBinding'])
+    validate_approved_job_config(job, authorization)
+    required(authorization['jobBinding'] == permit['jobBinding'], 'authorization must bind these exact job bytes')
+    bindings = permit['bindings']
+    exact_keys(bindings, {'planId', 'logicalPrefix', 'planManifest', 'approvalRecord',
+        'implementationSha', 'commandPermitPath'}, 'approved runtime bindings')
+    required(absolute_path(permit_file) and bindings['commandPermitPath'] == permit_file, 'approved permit path differs')
+    required(bindings['planId'] == job['planId'] and bindings['logicalPrefix'] == job['outputRoot']
+        and bindings['implementationSha'] == job['implementation']['sha'], 'approved runtime job bindings differ')
+    required(bindings['planManifest'] == absolute_repo_binding(job['inputs']['candidateManifestBinding'])
+        and bindings['approvalRecord'] == permit['authorizationBinding'], 'approved runtime authorization or manifest differs')
+    required(permit['storage'] == job['storage'], 'approved runtime storage differs')
+    expected_implementation = [absolute_repo_binding(ref) for ref in job['implementation']['bindings']]
+    required(permit['implementation'] == expected_implementation, 'approved runtime implementation bindings differ')
+    required(type(command) is list and len(command) == 10 and absolute_path(command[0])
+        and Path(command[0]).is_file() and not Path(command[0]).is_symlink(), 'approved Node command required')
+    required(command[0] == job['implementation']['nodeBinding']['path'], 'approved Node command path differs')
+    node_identity = bound_node_identity(job['implementation']['nodeBinding'])
+    required(command == permit['command'] and command[1:] == ['--import',
+        FORMAL_REPO + '/runner/node_modules/tsx/dist/loader.mjs', FORMAL_REPO + '/' + APPROVED_WORKER,
+        '--permit', permit_file, '--job-sha256', approved_job_sha256,
+        '--authorization-sha256', authorization_sha256], 'approved worker command/anchors differ')
+    root = Path(job['storage']['guestRoot']) / job['outputRoot']
+    required(absolute_path(directory) and directory == permit['monitorDirectory']
+        and directory == str(root / 'monitor'), 'approved monitor must be this output root monitor')
+    required(str(Path(directory).parent.resolve()) == str(Path(directory).parent)
+        and Path(directory).parent.is_dir(), 'approved monitor parent missing or symlink')
+    required(permit['ownerBinding']['path'] == str(root / 'ownership.json'), 'approved exclusive owner path differs')
+    owner = stable_bound_json(permit['ownerBinding'])
+    exact_keys(owner, {'schemaVersion', 'exclusiveOwnerId', 'createdAt', 'controllerPid',
+        'jobSha256', 'authorizationSha256', 'outputRoot', 'commandPermitPath', 'implementationSha'}, 'approved exclusive owner')
+    required(owner['schemaVersion'] == 'digest-approved-job-exclusive-owner-v001', 'normal exclusive owner schema required')
+    required(type(owner) is dict and owner.get('controllerPid') == os.getpid()
+        and type(owner.get('controllerPid')) is int, 'approved owner must be this supervisor')
+    required(type(owner.get('exclusiveOwnerId')) is str
+        and re.fullmatch('[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}', owner['exclusiveOwnerId']), 'approved exclusive owner UUID required')
+    for key, expected in (('jobSha256', approved_job_sha256), ('authorizationSha256', authorization_sha256),
+        ('outputRoot', job['outputRoot']), ('commandPermitPath', permit_file), ('implementationSha', job['implementation']['sha'])):
+        required(owner.get(key) == expected, 'approved exclusive owner binding differs: ' + key)
+    from datetime import datetime
+    required(type(owner['createdAt']) is str and re.search(r'(?:Z|\+00:00)$', owner['createdAt']), 'owner UTC creation time required')
+    created = datetime.fromisoformat(owner['createdAt'].replace('Z', '+00:00'))
+    age = time.time() - created.timestamp()
+    required(0 <= age < 600, 'approved exclusive owner is not fresh')
+    for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
+        stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+    image_identity = approved_image_identity(job['storage'])
+    permit_raw = Path(permit_file).read_bytes()
+    permit_ref = dict(path=permit_file, fileSha256=hashlib.sha256(permit_raw).hexdigest(), sizeBytes=len(permit_raw))
+    required(stable_bound_json(permit_ref) == permit, 'approved permit changed during qualification')
+    anchor_identities = [bound_file_identity(ref) for ref in
+        (permit_ref, permit['jobBinding'], permit['authorizationBinding'], permit['ownerBinding'])]
+    def revalidate():
+        for identity in anchor_identities:
+            verify_file_identity(identity)
+        stable_bound_bytes(permit_ref)
+        stable_bound_bytes(permit['jobBinding'])
+        stable_bound_bytes(permit['authorizationBinding'])
+        stable_bound_bytes(permit['ownerBinding'])
+        os.kill(owner['controllerPid'], 0)
+        verify_node_identity(node_identity)
+        required(subprocess.check_output(['git', '-C', FORMAL_REPO, 'rev-parse', 'HEAD'], text=True).strip()
+            == job['implementation']['sha'], 'approved implementation HEAD changed')
+        required(subprocess.check_output(['git', '-C', FORMAL_REPO, 'status', '--porcelain=v1'], text=True) == '',
+            'approved implementation must remain clean')
+        for ref in expected_implementation:
+            stable_bound_bytes(ref)
+    revalidate()
+    return dict(job=job, authorization=authorization, imageIdentity=image_identity,
+        guard=job['guard'], revalidate=revalidate, observedNodeIdentity=node_identity)
+
+
+def bound_file_identity(ref):
+    validate_binding(ref, absolute=True)
+    target = Path(ref['path']); actual = target.lstat()
+    required(stat.S_ISREG(actual.st_mode) and not stat.S_ISLNK(actual.st_mode)
+        and str(target.resolve()) == str(target), 'approved anchor file type or realpath differs')
+    return dict(path=str(target), device=actual.st_dev, inode=actual.st_ino,
+        sizeBytes=actual.st_size, mtimeNs=actual.st_mtime_ns, ctimeNs=actual.st_ctime_ns)
+
+def verify_file_identity(identity):
+    target = Path(identity['path']); actual = target.lstat()
+    required(stat.S_ISREG(actual.st_mode) and not stat.S_ISLNK(actual.st_mode)
+        and str(target.resolve()) == str(target), 'approved anchor file path or type changed')
+    for key, field in (('device', 'st_dev'), ('inode', 'st_ino'), ('sizeBytes', 'st_size'),
+        ('mtimeNs', 'st_mtime_ns'), ('ctimeNs', 'st_ctime_ns')):
+        required(getattr(actual, field) == identity[key], 'approved anchor file identity changed: ' + key)
+
+def bound_node_identity(ref):
+    validate_binding(ref, absolute=True)
+    target = Path(ref['path'])
+    before = target.lstat()
+    required(stat.S_ISREG(before.st_mode) and not stat.S_ISLNK(before.st_mode)
+        and str(target.resolve()) == str(target), 'approved Node missing, relocated or symlink')
+    digest = hashlib.sha256()
+    with target.open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    after = target.lstat()
+    required(all(getattr(before, key) == getattr(after, key)
+        for key in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'approved Node changed during read')
+    required(digest.hexdigest() == ref['fileSha256'], 'approved Node SHA differs')
+    if 'sizeBytes' in ref:
+        required(before.st_size == ref['sizeBytes'], 'approved Node size differs')
+    return dict(path=str(target), fileSha256=ref['fileSha256'], device=before.st_dev,
+        inode=before.st_ino, sizeBytes=before.st_size, mtimeNs=before.st_mtime_ns, ctimeNs=before.st_ctime_ns)
+
+def verify_node_identity(identity):
+    target = Path(identity['path'])
+    actual = target.lstat()
+    required(stat.S_ISREG(actual.st_mode) and not stat.S_ISLNK(actual.st_mode)
+        and str(target.resolve()) == str(target), 'running approved Node path changed')
+    for key, field in (('device', 'st_dev'), ('inode', 'st_ino'), ('sizeBytes', 'st_size'),
+        ('mtimeNs', 'st_mtime_ns'), ('ctimeNs', 'st_ctime_ns')):
+        required(getattr(actual, field) == identity[key], 'running approved Node identity changed: ' + key)
+
+def approved_current_implementation(job):
+    required(subprocess.check_output(['git', '-C', FORMAL_REPO, 'rev-parse', 'HEAD'], text=True).strip()
+        == job['implementation']['sha'], 'approved implementation HEAD changed')
+    required(subprocess.check_output(['git', '-C', FORMAL_REPO, 'status', '--porcelain=v1'], text=True) == '',
+        'approved implementation must remain clean')
+    for ref in job['implementation']['bindings']:
+        stable_bound_bytes(absolute_repo_binding(ref))
+
+def read_approved_job_files(job_file, authorization_file, approved_job_sha256, authorization_sha256):
+    required(valid_sha(approved_job_sha256) and valid_sha(authorization_sha256),
+        'independent approved job and authorization SHA anchors required')
+    refs = []
+    for filename, anchor in ((job_file, approved_job_sha256), (authorization_file, authorization_sha256)):
+        required(absolute_path(filename) and Path(FORMAL_REPO) in Path(filename).parents,
+            'approved job/authorization must be repository-bound absolute files')
+        refs.append(dict(path=filename, fileSha256=anchor, sizeBytes=Path(filename).lstat().st_size))
+    job_ref, authorization_ref = refs
+    job, authorization = stable_bound_json(job_ref), stable_bound_json(authorization_ref)
+    validate_approved_job_config(job, authorization)
+    required(authorization['jobBinding'] == job_ref, 'authorization binds different job bytes')
+    for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
+        stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+    approved_current_implementation(job)
+    return dict(job=job, authorization=authorization, jobBinding=job_ref, authorizationBinding=authorization_ref)
+
+def inspect_output_ancestors(root, storage, allow_missing=False):
+    guest = Path(storage['guestRoot'])
+    required(Path(root).is_relative_to(guest), 'approved output is outside guest root')
+    chain = [guest]
+    relative = Path(root).relative_to(guest)
+    for part in relative.parts:
+        chain.append(chain[-1] / part)
+    missing = False
+    for target in chain:
+        if missing:
+            continue
+        try:
+            actual = target.lstat()
+        except FileNotFoundError:
+            required(allow_missing, 'approved output ancestor is missing')
+            missing = True
+            continue
+        required(stat.S_ISDIR(actual.st_mode) and not stat.S_ISLNK(actual.st_mode)
+            and str(target.resolve()) == str(target) and actual.st_dev == storage['guestDevice'],
+            'approved output ancestor type, device or realpath differs: ' + str(target))
+
+def prepare_approved_job(job_file, authorization_file, approved_job_sha256, authorization_sha256, node_path):
+    """Read-only readiness for an already supplied grant; grants no new permission."""
+    required(os.geteuid() != 0 and 'NODE_OPTIONS' not in os.environ, 'normal job requires nonroot and no NODE_OPTIONS')
+    configured = read_approved_job_files(job_file, authorization_file, approved_job_sha256, authorization_sha256)
+    job = configured['job']
+    required(absolute_path(node_path) and node_path == job['implementation']['nodeBinding']['path'], 'explicit approved Node path differs')
+    node_identity = bound_node_identity(job['implementation']['nodeBinding'])
+    image_identity = approved_image_identity(job['storage'])
+    root = Path(job['storage']['guestRoot']) / job['outputRoot']
+    inspect_output_ancestors(root.parent, job['storage'], allow_missing=True)
+    try:
+        root.lstat()
+    except FileNotFoundError:
+        pass
+    else:
+        raise ValueError('approved output root already exists; no reuse or overwrite')
+    observation_permit = dict(storage=job['storage'], _approvedGuard=job['guard'])
+    sample = observe_formal(0, observation_permit, image_identity)
+    largest_unit = max(job['allocationBudget'].values())
+    reason = formal_decision(sample, largest_unit, starting=True, guard=job['guard'])
+    required(reason is None, reason or 'approved launch resources unavailable')
+    return {**configured, 'status': 'ready-for-explicit-approved-job-launch-v001',
+        'outputDirectory': str(root), 'observedNodeIdentity': node_identity, 'imageIdentity': image_identity,
+        'initialResourceSample': sample, 'manufacturePermissionGranted': False,
+        'permissionMeaning': 'Validates the explicitly supplied approval bindings; grants no new permission.',
+        'processesStarted': 0, 'rootClaimed': False}
+
+def launch_approved_job(job_file, authorization_file, approved_job_sha256, authorization_sha256, node_path):
+    """Explicit launch, exclusive claim, self-owned lease, then the normal supervisor."""
+    from datetime import datetime, timezone
+    from uuid import uuid4
+    configured = prepare_approved_job(job_file, authorization_file, approved_job_sha256, authorization_sha256, node_path)
+    job = configured['job']; storage = job['storage']; root = Path(configured['outputDirectory'])
+    guest = Path(storage['guestRoot'])
+    # Only the approved output's parent chain is visited or created. Existing SSD
+    # content is never scanned, moved or removed. Existing roots are never reused.
+    target = guest
+    for part in root.parent.relative_to(guest).parts:
+        target = target / part
+        try:
+            target.mkdir(mode=0o700)
+        except FileExistsError:
+            pass
+        inspect_output_ancestors(target, storage)
+    inspect_output_ancestors(root.parent, storage)
+    guest_now = volume_identity(storage['guestRoot'],storage['guestVolumeUuid'],storage['guestDevice'],'apfs')
+    host_now = volume_identity(storage['hostRoot'],storage['hostVolumeUuid'],storage['hostDevice'],'exfat')
+    required(guest_now['writable'] is True and guest_now['permissionsEnabled'] is True
+        and host_now['writable'] is True, 'approved device permissions changed before claim')
+    verify_node_identity(configured['observedNodeIdentity'])
+    root.mkdir(mode=0o700)  # The exclusive, non-reusable one-time claim.
+    try:
+        inspect_output_ancestors(root, storage)
+        (root / 'temp').mkdir(mode=0o700)
+        permit_file = root / 'command-permit.json'
+        owner_file = root / 'ownership.json'
+        owner = dict(schemaVersion='digest-approved-job-exclusive-owner-v001', exclusiveOwnerId=str(uuid4()),
+            createdAt=datetime.now(timezone.utc).isoformat(), controllerPid=os.getpid(),
+            jobSha256=approved_job_sha256, authorizationSha256=authorization_sha256, outputRoot=job['outputRoot'],
+            commandPermitPath=str(permit_file), implementationSha=job['implementation']['sha'])
+        def publish_json(path, value):
+            data = (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
+            with path.open('xb') as stream:
+                stream.write(data); stream.flush(); os.fsync(stream.fileno())
+            path.chmod(0o444)
+            ref = dict(path=str(path), fileSha256=hashlib.sha256(data).hexdigest(), sizeBytes=len(data))
+            stable_bound_bytes(ref)
+            return ref
+        owner_ref = publish_json(owner_file, owner)
+        command = [node_path, '--import', FORMAL_REPO + '/runner/node_modules/tsx/dist/loader.mjs',
+            FORMAL_REPO + '/' + APPROVED_WORKER, '--permit', str(permit_file), '--job-sha256', approved_job_sha256,
+            '--authorization-sha256', authorization_sha256]
+        permit = dict(schemaVersion='digest-approved-job-command-permit-v001', status='verified-approved-digest-job-v001',
+            jobBinding=configured['jobBinding'], authorizationBinding=configured['authorizationBinding'],
+            bindings=dict(planId=job['planId'], logicalPrefix=job['outputRoot'],
+                planManifest=absolute_repo_binding(job['inputs']['candidateManifestBinding']),
+                approvalRecord=configured['authorizationBinding'], implementationSha=job['implementation']['sha'],
+                commandPermitPath=str(permit_file)), storage=storage,
+            implementation=[absolute_repo_binding(ref) for ref in job['implementation']['bindings']],
+            monitorDirectory=str(root / 'monitor'), command=command, ownerBinding=owner_ref)
+        publish_json(permit_file, permit)
+        return run(str(root / 'monitor'), command, str(permit_file), approved_job_sha256, authorization_sha256)
+    except BaseException as error:
+        # A partial claim is evidence, never an automatic retry/overwrite permit.
+        raise RuntimeError('Approved launch failed; exclusive claim retained without reuse: '
+            + str(root) + '; ' + str(error)) from error
+
+
 def volume_identity(root,uuid,device,filesystem):
     actual=os.lstat(root)
     assert stat.S_ISDIR(actual.st_mode) and not stat.S_ISLNK(actual.st_mode),'volume root missing or symlink: '+root
@@ -220,11 +656,15 @@ def volume_identity(root,uuid,device,filesystem):
     info=plistlib.loads(subprocess.check_output(['diskutil','info','-plist',root]))
     assert info.get('VolumeUUID','').upper()==uuid and info.get('MountPoint')==root,'volume UUID or mount changed: '+root
     assert info.get('FilesystemType','').lower()==filesystem,'volume filesystem changed: '+root
-    return dict(root=root,volumeUuid=uuid,device=device,deviceNode=info['DeviceNode'],filesystem=filesystem)
+    return dict(root=root,volumeUuid=uuid,device=device,deviceNode=info['DeviceNode'],filesystem=filesystem,
+        writable=info.get('WritableVolume'),permissionsEnabled=info.get('GlobalPermissionsEnabled'))
 
 def observe_formal(group,permit,image_identity):
-    storage=permit['storage'];guest=volume_identity(storage['guestRoot'],storage['guestVolumeUuid'],storage['guestDevice'],'apfs')
+    storage=permit['storage'];guard=permit.get('_approvedGuard',APPROVED_GUARD);guest=volume_identity(storage['guestRoot'],storage['guestVolumeUuid'],storage['guestDevice'],'apfs')
     host=volume_identity(storage['hostRoot'],storage['hostVolumeUuid'],storage['hostDevice'],'exfat')
+    if '_approvedGuard' in permit:
+        required(guest['writable'] is True and host['writable'] is True and guest['permissionsEnabled'] is True,
+            'approved guest/host must be writable and APFS permissions enabled')
     image=Path(storage['imagePath']);actual=image.lstat()
     assert stat.S_ISDIR(actual.st_mode) and str(image.resolve())==str(image),'backing image disappeared or became symlink'
     assert actual.st_ino==image_identity['imageInode'] and actual.st_dev==image_identity['imageDevice']==storage['hostDevice'],'backing image identity changed'
@@ -241,25 +681,39 @@ def observe_formal(group,permit,image_identity):
     remaining=max(0,storage['imageMaximumBytes']-min(allocated,storage['imageMaximumBytes']))
     sample.update(guest=guest,host=host,imagePath=str(image),imageAllocatedBytes=allocated,
         imageRemainingGrowthBytes=remaining,hostAvailableBytes=available(host['root']),
-        hostRequiredBytes=remaining+old.RESERVE+storage['hostMetadataReserveBytes'],
-        hostStartRequiredBytes=storage['imageMaximumBytes']+old.RESERVE+storage['hostMetadataReserveBytes'],
+        hostRequiredBytes=remaining+guard['reserveBytes']+storage['hostMetadataReserveBytes'],
+        hostStartRequiredBytes=storage['imageMaximumBytes']+guard['reserveBytes']+storage['hostMetadataReserveBytes'],
         internalAvailableBytes=available(storage['internalRoot']),internalRoot=storage['internalRoot'])
     return sample
 
-def formal_decision(sample,new_bytes=0,starting=False):
+def formal_decision(sample,new_bytes=0,starting=False,guard=None):
+    guard=APPROVED_GUARD if guard is None else guard
     if type(new_bytes) is not int or new_bytes<0:return 'invalid next allocation'
-    reason=old.decision(sample,new_bytes,starting)
-    if reason:return reason
-    host_required=(FORMAL_STORAGE['imageMaximumBytes']+old.RESERVE+FORMAL_STORAGE['hostMetadataReserveBytes']) if starting else sample['hostRequiredBytes']
+    if sample['pressure']!=guard['maximumPressure']:return 'OS memory pressure warning/critical or unknown'
+    if sample['treeRssBytes']>=guard['maximumRssBytes']:return 'parent/child RSS reached approved boundary'
+    if sample['availableBytes']<=guard['reserveBytes']:return 'disk reached approved reserve'
+    if starting and sample['availableBytes']<guard['startBytes']:return 'insufficient start space'
+    if sample['availableBytes']<guard['reserveBytes']+new_bytes:return 'next unit plus reserve will not fit'
+    host_required=sample['hostStartRequiredBytes'] if starting else sample['hostRequiredBytes']
     if sample['hostAvailableBytes']<host_required:return 'host image growth plus reserve and metadata will not fit'
-    if sample['internalAvailableBytes']<=old.RESERVE:return 'internal OS disk reached approved reserve'
+    if sample['internalAvailableBytes']<=guard['reserveBytes']:return 'internal OS disk reached approved reserve'
     return None
 
-def run_formal(directory,command,permit_file):
+def run_formal(directory,command,permit_file,approved_job_sha256=None,authorization_sha256=None):
     # Exclusive directory is the one-time claim. No resume or fallback branch.
     permit=json.loads(Path(permit_file).read_text())
-    assert os.path.abspath(permit_file)==permit['bindings']['commandPermitPath'],'formal permit path changed'
-    image_identity=validate_formal_permit(permit,directory,command)
+    normal=permit.get('status')=='verified-approved-digest-job-v001'
+    if normal:
+        approved=validate_approved_job_permit(permit,directory,command,permit_file,approved_job_sha256,authorization_sha256)
+        image_identity=approved['imageIdentity'];guard=approved['guard']
+        observation_permit={**permit,'_approvedGuard':guard}
+    else:
+        assert os.path.abspath(permit_file)==permit['bindings']['commandPermitPath'],'formal permit path changed'
+        image_identity=validate_formal_permit(permit,directory,command);guard=APPROVED_GUARD
+        observation_permit=permit
+    def observe(group):
+        if normal:approved['revalidate']()
+        return observe_formal(group,observation_permit,image_identity)
     os.mkdir(directory);started=time.time();p=None;reason=None;stage=None;stopped=None;sel=None
     samples=0;peak=0;parent_peak=0;minimum=None;host_minimum=None;internal_minimum=None
     def record(sample):
@@ -271,19 +725,24 @@ def run_formal(directory,command,permit_file):
         observations.write(json.dumps(sample)+'\n');observations.flush()
     with open(directory+'/resource.jsonl','x') as observations,open(directory+'/worker.log','xb') as log:
         try:
-            initial=observe_formal(0,permit,image_identity);initial['phase']='formal-start';record(initial)
-            reason=formal_decision(initial,starting=True)
+            initial=observe(0);initial['phase']='formal-start';record(initial)
+            reason=formal_decision(initial,starting=True,guard=guard)
             if reason:raise RuntimeError(reason)
             p=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=log,start_new_session=True,
-                env={**os.environ,'ZEV_FULL_SUPERVISED':'1','ZEV_FORMAL_HANDOFF_PERMIT':os.path.abspath(permit_file)})
+                env={**os.environ,'ZEV_FULL_SUPERVISED':'1',**(dict(ZEV_APPROVED_JOB_PERMIT=permit_file,
+                    ZEV_APPROVED_JOB_SHA256=approved_job_sha256,ZEV_APPROVED_AUTHORIZATION_SHA256=authorization_sha256,
+                    NODE_PATH=str(Path(FORMAL_REPO)/'runner/node_modules'))
+                    if normal else dict(ZEV_FORMAL_HANDOFF_PERMIT=os.path.abspath(permit_file)))})
             Path(directory+'/owned-group.json').write_text(json.dumps(dict(group=p.pid,parentPid=p.pid,
                 spawnedAt=time.time(),command=command,permitFile=permit_file,bindings=permit['bindings'],
-                storage=permit['storage'],imageIdentity=image_identity),indent=2)+'\n')
+                storage=permit['storage'],imageIdentity=image_identity,
+                **(dict(jobBinding=permit['jobBinding'],authorizationBinding=permit['authorizationBinding'],
+                    ownerBinding=permit['ownerBinding'],observedNodeIdentity=approved.get('observedNodeIdentity')) if normal else {})),indent=2)+'\n')
             sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ);buffer=b'';last=0
             while p.poll() is None:
                 if time.monotonic()-last>=1:
-                    sample=observe_formal(p.pid,permit,image_identity);record(sample);last=time.monotonic()
-                    reason=formal_decision(sample)
+                    sample=observe(p.pid);record(sample);last=time.monotonic()
+                    reason=formal_decision(sample,guard=guard)
                     if reason:raise RuntimeError(reason)
                 for key,_ in sel.select(max(0,1-(time.monotonic()-last))):
                     chunk=os.read(key.fd,65536)
@@ -299,14 +758,14 @@ def run_formal(directory,command,permit_file):
                         assert type(request['id']) is int and request['id']>0 and isinstance(stage,str) and stage,'invalid formal resource request'
                         # Refresh UUID/device, all disks and pressure before every
                         # next-unit acknowledgement; old samples are not permits.
-                        current=observe_formal(p.pid,permit,image_identity);current['phase']='before-'+stage;record(current);last=time.monotonic()
-                        reason=formal_decision(current,request['newBytes'])
+                        current=observe(p.pid);current['phase']='before-'+stage;record(current);last=time.monotonic()
+                        reason=formal_decision(current,request['newBytes'],guard=guard)
                         if reason:raise RuntimeError(reason)
                         p.stdin.write((json.dumps(dict(id=request['id'],sample=current))+'\n').encode());p.stdin.flush()
             p.wait();reason=None if p.returncode==0 else 'formal worker nonzero exit'
             if any(not row['state'].startswith('Z') for row in members(p.pid)):reason=reason or 'formal worker exited with live descendants'
-            final=observe_formal(0,permit,image_identity);final['phase']='formal-final';record(final)
-            reason=reason or formal_decision(final)
+            final=observe(0);final['phase']='formal-final';record(final)
+            reason=reason or formal_decision(final,guard=guard)
         except BaseException as error:reason=str(error) or type(error).__name__
         finally:
             if p:
@@ -327,19 +786,55 @@ def run_formal(directory,command,permit_file):
                 seconds=time.time()-started,exitCode=p.returncode if p else None,samples=samples,
                 observedTreePeakBytes=peak,observedParentPeakBytes=parent_peak,minimumGuestAvailableBytes=minimum,
                 minimumHostAvailableBytes=host_minimum,minimumInternalAvailableBytes=internal_minimum,
-                remainingRunning=stopped['remainingRunning'] if stopped else None,sampleIntervalSeconds=1,
-                limits=dict(startBytes=old.START,reserveBytes=old.RESERVE,treeRssBytes=old.RSS,
-                    imageMaximumBytes=FORMAL_STORAGE['imageMaximumBytes'],hostMetadataReserveBytes=FORMAL_STORAGE['hostMetadataReserveBytes']),
-                imageIdentity=image_identity,scope='one new formal plan; three disks measured separately; owned PGID; no automatic resume')
+                remainingRunning=stopped['remainingRunning'] if stopped else None,sampleIntervalSeconds=guard['observationIntervalSeconds'],
+                limits=dict(startBytes=guard['startBytes'],reserveBytes=guard['reserveBytes'],treeRssBytes=guard['maximumRssBytes'],
+                    imageMaximumBytes=permit['storage']['imageMaximumBytes'],hostMetadataReserveBytes=permit['storage']['hostMetadataReserveBytes']),
+                imageIdentity=image_identity,scope='one approved job; three disks measured separately; owned PGID; no automatic resume' if normal else 'legacy recovery only; three disks measured separately; owned PGID',
+                **(dict(jobBinding=permit['jobBinding'],authorizationBinding=permit['authorizationBinding'],
+                    ownerBinding=permit['ownerBinding'],guard=guard,observedNodeIdentity=approved.get('observedNodeIdentity')) if normal else {}))
             Path(directory+'/summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
     return 0 if result['status']=='completed' else 1
 
-def run(directory,command,permit_file):
+def run(directory,command,permit_file,approved_job_sha256=None,authorization_sha256=None,legacy_recovery_only=False):
     permit=json.loads(Path(permit_file).read_text())
+    if permit.get('status')=='verified-approved-digest-job-v001':
+        required(not legacy_recovery_only, 'normal approved jobs cannot use legacy recovery mode')
+        return run_formal(directory,command,permit_file,approved_job_sha256,authorization_sha256)
+    required(legacy_recovery_only and approved_job_sha256 is None and authorization_sha256 is None,
+        'old permits require explicit legacy-recovery-only mode; no fallback')
     if permit.get('status')=='verified-formal-handoff-v001':return run_formal(directory,command,permit_file)
     if permit.get('status')=='verified-same-run-resume':return run_resume(directory,command,permit_file)
     raise RuntimeError('unknown supervisor permit status; no fallback')
+
+def main(argv=None):
+    import argparse
+    parser=argparse.ArgumentParser(description='Validate an explicitly supplied Digest grant, launch once, or explicitly recover legacy work.')
+    parser.add_argument('--approved-job-sha256')
+    parser.add_argument('--authorization-sha256')
+    parser.add_argument('--legacy-recovery-only',action='store_true')
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--prepare-job',action='store_true',help='Read-only readiness check; grants no new permission and starts no worker.')
+    mode.add_argument('--launch-job',action='store_true',help='Explicitly claim the approved fresh output and supervise one worker.')
+    parser.add_argument('--job-file')
+    parser.add_argument('--authorization-file')
+    parser.add_argument('--node-path')
+    parser.add_argument('directory',nargs='?')
+    parser.add_argument('permit',nargs='?')
+    parser.add_argument('command',nargs=argparse.REMAINDER)
+    args=parser.parse_args(argv)
+    if args.prepare_job or args.launch_job:
+        required(not args.legacy_recovery_only and args.directory is None and args.permit is None and not args.command,
+            'approved launcher cannot use legacy or direct-command arguments')
+        operation=launch_approved_job if args.launch_job else prepare_approved_job
+        result=operation(args.job_file,args.authorization_file,args.approved_job_sha256,args.authorization_sha256,args.node_path)
+        if args.prepare_job:print(json.dumps(result),flush=True);return 0
+        return result
+    required(args.job_file is None and args.authorization_file is None and args.node_path is None,
+        'job-file and node-path options require explicit prepare or launch mode')
+    required(args.directory is not None and args.permit is not None and bool(args.command), 'supervised directory, permit and command required')
+    return run(args.directory,args.command,args.permit,args.approved_job_sha256,args.authorization_sha256,args.legacy_recovery_only)
+
 if __name__=='__main__':
     def cancelled(signum,frame):raise RuntimeError('supervisor interrupted by signal '+str(signum))
     signal.signal(signal.SIGTERM,cancelled)
-    sys.exit(run(sys.argv[1],sys.argv[3:],sys.argv[2]))
+    sys.exit(main())

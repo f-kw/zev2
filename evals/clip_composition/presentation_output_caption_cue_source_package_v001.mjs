@@ -426,6 +426,18 @@ export async function qualifyDigestFormalSourcePackageTaskV001(value, qualifiedI
   qualifiedDigestCandidateTasks.set(value, Object.freeze({digest, taskDescription: authorization.taskDescription}));
   return Object.freeze({status: 'qualified-saved-digest-candidate-task', sourcePackageCanonicalSha256: digest});
 }
+/** Independent approved-job qualification; the legacy default task stays unchanged. */
+export async function qualifyApprovedDigestSourcePackageTaskV001(value, qualifiedInputs) {
+  const adapter = await import('../../runner/src/digest-approved-inputs-v001.js');
+  const authorization = await adapter.assertQualifiedApprovedDigestSourcePackageTaskV001(value, qualifiedInputs);
+  if (!authorization || typeof authorization.taskDescription !== 'string'
+    || value?.promptInput?.taskDescription !== authorization.taskDescription) {
+    throw new TypeError('APPROVED_DIGEST_TASK_QUALIFICATION_REQUIRED');
+  }
+  const digest = sha256(canonicalBytes(value));
+  qualifiedDigestCandidateTasks.set(value, Object.freeze({digest, taskDescription: authorization.taskDescription}));
+  return Object.freeze({status: 'qualified-approved-digest-task', sourcePackageCanonicalSha256: digest});
+}
 const isQualifiedDigestCandidateTask = value => {
   const permission = qualifiedDigestCandidateTasks.get(value);
   return permission !== undefined

@@ -1,4 +1,4 @@
-/** Finite, sequential YUV compositor for the fixed original-resolution Digest.
+/** Finite, sequential YUV compositor for original-resolution Digest media.
  * The existing renderer owns all overlay expressions; this module only scopes
  * its inputs and replaces its per-range encoder with one continuous encoder. */
 import assert from 'node:assert/strict';
@@ -13,6 +13,7 @@ import {bindDigestStructureFileV001 as bind,verifyDigestStructureFileV001 as ver
 
 const self=fileURLToPath(import.meta.url);
 const FRAME_BYTES=1920*1080*3/2;
+// Historical saved-trial clock only; the formal entry never uses this default.
 export const FULL_FRAMES=17613;
 export const DEFAULT_MAX_FRAMES=210; // The existing seven-second trial length.
 const FULL_BACKGROUND=path.join(EXECUTION_AREA,'full-production-001/background/background.nut');
@@ -60,7 +61,8 @@ export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,ran
 
 /** One expressly permitted Normal candidate with saved typography settings. Admission and saved-plan
  * bindings remain the caller's responsibility; this entry refuses ranges,
- * finite effects, missing/reordered records, and the former fixed plan. */
+ * finite effects and missing/reordered records. The complete output clock must
+ * be explicitly supplied by that caller; it is never inferred from captions. */
 export async function runFormalLowMemoryCompositeV001(input){
   assert(input&&typeof input==='object'&&!Array.isArray(input));
   const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','expectedOverlayCount','outputPath','ffmpegPath',
@@ -69,11 +71,14 @@ export async function runFormalLowMemoryCompositeV001(input){
   const {baseMediaPath,plan,overlayRecords,expectedFrameCount,expectedOverlayCount,outputPath,ffmpegPath,
     maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck}=input;
   assert.equal(process.env.ZEV_FULL_SUPERVISED,'1','SUPERVISOR_REQUIRED');
-  assert.equal(expectedFrameCount,27691,'only the permitted complete plan');
+  assert(Number.isSafeInteger(expectedFrameCount)&&expectedFrameCount>0
+    &&Number.isSafeInteger(expectedFrameCount*FRAME_BYTES),'explicit complete frame clock required');
+  assert(plan&&typeof plan==='object'&&!Array.isArray(plan)
+    &&plan.canvas&&Array.isArray(plan.elements)&&Array.isArray(overlayRecords),'complete Normal plan and records required');
   assert.equal(plan.canvas.width,1920);assert.equal(plan.canvas.height,1080);assert.equal(plan.canvas.fps,30);
-  // The qualified adapter obtains this count from the explicitly bound new
-  // candidate manifest. Never substitute the old 243-cue candidate or infer a
-  // permit from whichever records reached this function.
+  // The qualified caller obtains counts from the explicitly admitted plan.
+  // Never infer its complete clock, overlay count or permission from whichever
+  // records reached this function.
   assert(Number.isSafeInteger(expectedOverlayCount)&&expectedOverlayCount>0
     &&expectedOverlayCount<=expectedFrameCount,'approved candidate overlay count required');
   assert.equal(plan.elements.length,expectedOverlayCount);assert.equal(overlayRecords.length,expectedOverlayCount);
@@ -182,6 +187,7 @@ function start(ffmpeg,args,stdio){
   return {child,closed};
 }
 
+/** History-only saved trial; next-video callers use the explicit formal entry. */
 export async function runLowMemoryCompositeV001({x,background,audioRef,outputPath,maxFrames=DEFAULT_MAX_FRAMES,
   repeat=false,backgroundStartFrame=x.interval.start,backgroundFrameCount=x.interval.frameCount}){
   assert.equal(x.plan.canvas.fps,30);

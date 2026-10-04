@@ -56,6 +56,7 @@ const clone = value => structuredClone(value);
 
 /** Only the one-plan adapter can mint this opaque storage authority. */
 export type DigestRendererStorageContextV001 = Readonly<{
+  approvedJob?: unknown;
   outputRoot: string;
   storageRoot: string;
   generatedRoot: string;
@@ -669,12 +670,19 @@ export async function runPresentationInstructionRendererJobFileV002(
   });
   const processObserver = storageContext === undefined ? originalProcessObserver : Object.freeze({
     ...originalProcessObserver,
-    run: async (command, args, options = {} as {env?: NodeJS.ProcessEnv}) => {
+    run: async (command, args, options = {} as {env?: NodeJS.ProcessEnv; cwd?: string}) => {
       await qualifyStorageContext(storageContext);
-      const result = await originalProcessObserver.run(command, args, {
+      // tsx uses TMPDIR in its Unix socket name. Keep the same owned directory
+      // while avoiding a volume/plan dependent absolute socket name.
+      const normalLayoutCli = storageContext.approvedJob !== undefined && command === job.runtimeBindings.tsx.path;
+      const cliTemp = normalLayoutCli ? path.relative(storageContext.generatedRoot, storageContext.tempDirectory) : storageContext.tempDirectory;
+      if (normalLayoutCli && cliTemp !== 'temp') throw new Error('approved-layout-temp-mismatch');
+      const result = await originalProcessObserver.run(normalLayoutCli ? process.execPath : command,
+        normalLayoutCli ? [command, ...args] : args, {
         ...options,
-        env: {...process.env, ...options.env, TMPDIR: storageContext.tempDirectory,
-          TMP: storageContext.tempDirectory, TEMP: storageContext.tempDirectory,
+        ...(normalLayoutCli ? {cwd: storageContext.generatedRoot} : {}),
+        env: {...process.env, ...options.env, TMPDIR: cliTemp,
+          TMP: cliTemp, TEMP: cliTemp,
           MAGICK_TEMPORARY_PATH: storageContext.tempDirectory},
       });
       await qualifyStorageContext(storageContext);

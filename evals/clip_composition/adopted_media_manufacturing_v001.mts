@@ -53,17 +53,13 @@ const exec = promisify(execFile);
 const out = (c: Json, p: string) => `${c.plan.outputRoot}/${p}`;
 const abs = (p: string) => path.join(ROOT, p);
 const clone = <T>(v: T): T => structuredClone(v);
-const DIGEST_STORAGE_OUTPUT_ROOT = 'runtime/artifacts/digest-formal-handoff-20261003-v001/attempt-001';
-
-/** Only the qualified one-plan adapter may resolve generated artifacts outside the repository. */
+/** Only a qualified, explicitly approved plan may resolve generated artifacts outside the repository. */
 async function adoptedStorageV001(c: Json, storageContext?: Json) {
   if (storageContext === undefined) return {abs, publish, readBound, readJson,
     assertCurrent: async () => {}};
-  if ((storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT
-    && storageContext.outputRoot !== DIGEST_STORAGE_OUTPUT_ROOT + '/body-continuation-v003')
-    || c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
+  if (c.plan.outputRoot !== storageContext.outputRoot) fail('CORE_STORAGE_OUTPUT_ROOT_MISMATCH');
   const {assertQualifiedDigestStorageContextV001} = await import('../../runner/src/digest-formal-handoff-v001.js');
-  await assertQualifiedDigestStorageContextV001(storageContext);
+  await assertQualifiedDigestStorageContextV001(storageContext, c.plan);
   const generated = (p: string) => {
     if (typeof p !== 'string' || !p.startsWith(`${storageContext.outputRoot}/`)) fail('CORE_STORAGE_GENERATED_PATH_MISMATCH');
     return storageContext.resolve(p);

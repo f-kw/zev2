@@ -1,0 +1,419 @@
+{
+  "checkedAt": "2026-10-04T03:08:04.327705+00:00",
+  "baseHead": "794335194417f5f70f2063edfd6d213636959c7f",
+  "files": [
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "27dc139f2eea1b5638de0fd5a4a28fde6a68cb0670a66193ac6c7015726a6f8e",
+      "sizeBytes": 27117
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+      "fileSha256": "7225a3f874e523600cb82f1a93c1e4e5084bdff36594220a7731ffd5830c7cbb",
+      "sizeBytes": 61030
+    },
+    {
+      "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+      "fileSha256": "154e6c4a44cd859f796c4531fafba31837ea7cfb766296eeca5e7a9e7c9f1b1e",
+      "sizeBytes": 100358
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "caff11ae6c20fb99a24dee3d88927728c05c1e4ec05ec0eb146401423b42a154",
+      "sizeBytes": 33138
+    },
+    {
+      "path": "runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "37c1699721c5b1a60fb4e06d8eed119a000dac4123a4f14f289ccd5767c79e6b",
+      "sizeBytes": 134501
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "fadabe2b3f2786e11ad7498f289f6333ab39d4cde58de11939681689d7a011fd",
+      "sizeBytes": 62543
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.test.py",
+      "fileSha256": "47fe24ccbd5262957ba0284e375fc4245c6e7e2862867bb6b217f5a5c78ecc0a",
+      "sizeBytes": 5493
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "fileSha256": "1b15e3f4d247b0af5c85c4d9a6d9d65f9d443d7075d8a494d34a97bb6d8efdf5",
+      "sizeBytes": 19944
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-low-memory-composite.test.mjs",
+      "fileSha256": "d1aae4d3340f08a2e7b822b6e2af09dab49f0d8f86cc6fec9d086864cab0599d",
+      "sizeBytes": 9726
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.test.ts",
+      "fileSha256": "718e018ed52b24fc7dd01f2520474b4c033167aa5b689415e41696c0d3e1c421",
+      "sizeBytes": 13715
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.ts",
+      "fileSha256": "afb5a4ec6decf5b575ed3e32e6059913c363e325eea8f3226f07a6c3b5dd1494",
+      "sizeBytes": 33054
+    },
+    {
+      "path": "runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "3d7b255b1ae6594d68ab7869fdf543471cf88ee9fa3ea79e4d2d56e4cc0f3042",
+      "sizeBytes": 29231
+    },
+    {
+      "path": "runner/src/digest-approved-job-v001.test.ts",
+      "fileSha256": "d1c9595a0a463f299a6cbaf653035232d7d6677d9a43e28cda9de65db46e81b4",
+      "sizeBytes": 7142
+    },
+    {
+      "path": "runner/src/digest-approved-job-v001.ts",
+      "fileSha256": "82f878d67c3ad198e83fab2f892898cb552fd813217b1816803fbd866e9684bf",
+      "sizeBytes": 14188
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py",
+      "fileSha256": "0fa0e4326b38272a1a573dca46b646f549b7979c3479e33bd9d510cb2400561f",
+      "sizeBytes": 28144
+    }
+  ],
+  "compositor": {
+    "schemaVersion": "compositor-change-verification-note-v001",
+    "checkedAtUtc": "2026-10-04T02:25:18Z",
+    "baseCommit": "794335194417f5f70f2063edfd6d213636959c7f",
+    "files": [
+      {
+        "path": "tools/digest-quality/original-resolution-low-memory-composite.mjs",
+        "fileSha256": "1b15e3f4d247b0af5c85c4d9a6d9d65f9d443d7075d8a494d34a97bb6d8efdf5",
+        "sizeBytes": 19944
+      },
+      {
+        "path": "tools/digest-quality/original-resolution-low-memory-composite.test.mjs",
+        "fileSha256": "d1aae4d3340f08a2e7b822b6e2af09dab49f0d8f86cc6fec9d086864cab0599d",
+        "sizeBytes": 9726
+      }
+    ],
+    "apiChanged": false,
+    "callerRequirement": "expectedFrameCount must come from and equal the approved saved plan clock; expectedOverlayCount must come from the same admitted plan",
+    "change": "replace complete-frame 27691 equality with positive safe integer and exact raw-byte count check; retain record/clock/count/Normal/format/resource/PGID/stream invariants",
+    "syntaxChecks": "passed Node20 for both files",
+    "diffWhitespaceCheck": "passed",
+    "selectedSuite": {
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --test --test-name-pattern='formal planning|legacy producer|whole display clock' tools/digest-quality/original-resolution-low-memory-composite.test.mjs",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 2,
+      "skippedMeaning": "pre-existing saved-artifact qualifications tested separately and still fail"
+    },
+    "fullSuite": {
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --test tools/digest-quality/original-resolution-low-memory-composite.test.mjs",
+      "exitCode": 1,
+      "passed": 9,
+      "failed": 2,
+      "baselineBeforeChange": {
+        "passed": 1,
+        "failed": 2
+      },
+      "knownFailure": "legacy representative tests refuse frozen renderer SHA 3322cc6c496606f18654dabc43a88eedcdef65cfe9693925d3b9f32505fda9d4 vs current 58631f6c2698592ca6166652bc859309cb88100ed41ecd382358b94decf67ff9; frozen records were not changed"
+    },
+    "planningClocksTested": [
+      1,
+      211,
+      421,
+      17613,
+      27691,
+      32000
+    ],
+    "productionCallbacksExecutedByTests": 0,
+    "ffmpegChildrenStarted": 0,
+    "mediaGenerated": 0,
+    "gitMutations": 0,
+    "otherPathsEdited": 0,
+    "workingTreeNote": "two owned modified paths plus parent-owned untracked runner/src/digest-approved-job-v001.ts; untouched by this agent",
+    "legacyImplementationBodyComparison": {
+      "partitionFramesV001": {
+        "bodyUnchanged": true,
+        "bodySha256": "03f75b4b1dc4d8fcdb3196dcc760fef97c17b37a2568d9d146c77ffdcde188aa"
+      },
+      "producerArgumentsV001": {
+        "bodyUnchanged": true,
+        "bodySha256": "d12a1112f77887ca57613d91a918bb11fc773b4af46aa61348674c2202260dbf"
+      },
+      "runLowMemoryCompositeV001": {
+        "bodyUnchanged": true,
+        "bodySha256": "271e74be7d08a21bfa69f13e338ca050e1cb85da54ebb533ba43c9289c6d6b5a"
+      },
+      "runSavedTrialV001": {
+        "bodyUnchanged": true,
+        "bodySha256": "e270698514ece5e8b8aab931bca5cd3cbe699cf1093f2cfd38e19f05bff48861"
+      },
+      "planFullLowMemoryV001": {
+        "bodyUnchanged": true,
+        "bodySha256": "4566d40a9c20d087aadd855fc913d5ded88475699eb686dd75dfd45c44799d96"
+      }
+    }
+  },
+  "inputs": {
+    "checkedAt": "2026-10-04T02:56:56.041406+00:00",
+    "head": "794335194417f5f70f2063edfd6d213636959c7f",
+    "branch": "main",
+    "ownFiles": [
+      {
+        "path": "runner/src/digest-approved-inputs-v001.ts",
+        "fileSha256": "afb5a4ec6decf5b575ed3e32e6059913c363e325eea8f3226f07a6c3b5dd1494",
+        "sizeBytes": 33054
+      },
+      {
+        "path": "runner/src/digest-approved-inputs-v001.test.ts",
+        "fileSha256": "718e018ed52b24fc7dd01f2520474b4c033167aa5b689415e41696c0d3e1c421",
+        "sizeBytes": 13715
+      },
+      {
+        "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs",
+        "fileSha256": "7225a3f874e523600cb82f1a93c1e4e5084bdff36594220a7731ffd5830c7cbb",
+        "sizeBytes": 61030
+      },
+      {
+        "path": "evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "fileSha256": "154e6c4a44cd859f796c4531fafba31837ea7cfb766296eeca5e7a9e7c9f1b1e",
+        "sizeBytes": 100358
+      }
+    ],
+    "remainingFixtureDirectories": [],
+    "status": " M evals/clip_composition/adopted_media_manufacturing_v001.mts\n M evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs\n M evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs\n M evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts\n M runner/src/digest-formal-handoff-v001.ts\n M tools/digest-quality/original-resolution-full-supervisor-v002.py\n M tools/digest-quality/original-resolution-full-supervisor-v002.test.py\n M tools/digest-quality/original-resolution-low-memory-composite.mjs\n M tools/digest-quality/original-resolution-low-memory-composite.test.mjs\n?? runner/src/digest-approved-inputs-v001.test.ts\n?? runner/src/digest-approved-inputs-v001.ts\n?? runner/src/digest-approved-job-runner-v001.ts\n?? runner/src/digest-approved-job-v001.test.ts\n?? runner/src/digest-approved-job-v001.ts\n?? tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py\n",
+    "reportWrittenAt": "2026-10-04T03:00:13.232097+00:00",
+    "scope": {
+      "implementation": "generic approved input qualification and source package bridge",
+      "mediaGenerated": false,
+      "manufacturingStarted": false,
+      "ssdChanged": false,
+      "originalPreparedDataChanged": false,
+      "judgmentsRerun": false,
+      "gitMutationPerformed": false
+    },
+    "verification": [
+      {
+        "name": "self-contained approved-input tests",
+        "command": "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/src/digest-approved-inputs-v001.test.ts",
+        "exitCode": 0,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "runner TypeScript",
+        "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit",
+        "exitCode": 0
+      },
+      {
+        "name": "existing source selected regressions",
+        "command": "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import ./runner/node_modules/tsx/dist/loader.mjs --test --test-name-pattern='ZCQ002|ZCQ003|ZCQ004|saved Digest candidate task' evals/clip_composition/presentation_output_caption_cue_source_package_v001.test.mjs",
+        "exitCode": 0,
+        "passed": 4,
+        "failed": 0,
+        "skippedBySelection": 3
+      }
+    ],
+    "actualSavedInputQualification": {
+      "groups": 9,
+      "cues": 372,
+      "atoms": 3613,
+      "frames": 27691,
+      "audioSamples": 40705770,
+      "syntheticGrant": true,
+      "humanProductionApprovalRepresented": false,
+      "pureSourceStructureValidated": true,
+      "originalRegistryIndexesModified": false
+    },
+    "negativeChecks": [
+      "caller-made or cloned qualified job",
+      "caller-made or cloned inputs",
+      "forged source qualification fields",
+      "source readback with caller bytes and fake storage context",
+      "arbitrary unregistered taskDescription",
+      "external factory options mutation cannot retarget minted control bindings",
+      "original minted job bytes changed by appended whitespace rejects assertCurrent"
+    ],
+    "remainingVerification": [
+      "Positive source publication/readback using a real qualified production storage context was not executed.",
+      "No real media manufacturing or video quality verification was performed.",
+      "The complete existing source publication/foundation suite was not rerun; selected structural/task regressions passed."
+    ]
+  },
+  "supervisor": {
+    "schemaVersion": "zev-normal-approved-job-supervisor-implementation-report-v001",
+    "verifiedAt": "2026-10-04T03:02:50.143373Z",
+    "repositoryHeadRead": "794335194417f5f70f2063edfd6d213636959c7f",
+    "status": "implemented-and-fixture-verified-not-production-launched",
+    "changedFiles": [
+      {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+        "sizeBytes": 62543,
+        "fileSha256": "fadabe2b3f2786e11ad7498f289f6333ab39d4cde58de11939681689d7a011fd"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py",
+        "sizeBytes": 28144,
+        "fileSha256": "0fa0e4326b38272a1a573dca46b646f549b7979c3479e33bd9d510cb2400561f"
+      },
+      {
+        "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.test.py",
+        "sizeBytes": 5493,
+        "fileSha256": "47fe24ccbd5262957ba0284e375fc4245c6e7e2862867bb6b217f5a5c78ecc0a"
+      }
+    ],
+    "scopes": {
+      "supervisor": true,
+      "newApprovedJobTest": true,
+      "existingTestSixLegacyCallsOnly": true,
+      "gitMutation": false,
+      "mediaManufactured": false,
+      "ssdChanged": false
+    },
+    "tests": [
+      {
+        "name": "approved-job suite including fixed NODE_PATH",
+        "passed": 28,
+        "total": 28,
+        "seconds": 0.337,
+        "sourceState": "final implementation",
+        "evidence": {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-supervisor-approved-job-tests.stdout.txt",
+          "sizeBytes": 5344,
+          "fileSha256": "4d3ad323a4edc39b0d6de5952a3901ec7da918c5a216614ace91c176af30574e"
+        }
+      },
+      {
+        "name": "existing own-PGID and shutdown suite",
+        "passed": 8,
+        "total": 8,
+        "seconds": 35.07,
+        "sourceState": "before final normal-only NODE_PATH connection; legacy branch unchanged",
+        "evidence": {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-supervisor-existing-tests.stdout.txt",
+          "sizeBytes": 7534,
+          "fileSha256": "ecfa3d9d310c0040e58d67d1e732cb94a58d2c158fbc245f62c184499ceae9fe"
+        }
+      },
+      {
+        "name": "compile three delegated Python files",
+        "status": "passed",
+        "writesBytecode": false
+      },
+      {
+        "name": "git diff --check delegated tracked files",
+        "status": "passed"
+      },
+      {
+        "name": "CLI help",
+        "status": "passed"
+      }
+    ],
+    "capabilities": {
+      "prepareReadOnly": true,
+      "prepareGrantsPermission": false,
+      "launchExplicit": true,
+      "launchClaimsFreshRootOnly": true,
+      "partialClaimsRetained": true,
+      "independentJobAndAuthorizationAnchors": true,
+      "actualControlBindings": true,
+      "actualNodeBinding": true,
+      "nodeRuntimeMetadataPin": true,
+      "ownerRuntimeMetadataPin": true,
+      "normalNodePath": "repository/runner/node_modules fixed; arbitrary caller NODE_PATH overridden",
+      "nodeOptionsRejected": true,
+      "oldVideoApprovalUsedByNormal": false,
+      "legacyRecoveryRequiresExplicitFlag": true,
+      "restartOnReconnect": false,
+      "ownedProcessGroupShutdown": true
+    },
+    "evidence": [
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-supervisor-approved-job-tests.stdout.txt",
+        "sizeBytes": 5344,
+        "fileSha256": "4d3ad323a4edc39b0d6de5952a3901ec7da918c5a216614ace91c176af30574e"
+      },
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-supervisor-existing-tests.stdout.txt",
+        "sizeBytes": 7534,
+        "fileSha256": "ecfa3d9d310c0040e58d67d1e732cb94a58d2c158fbc245f62c184499ceae9fe"
+      },
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-approved-job-supervisor-implementation.diff",
+        "sizeBytes": 77126,
+        "fileSha256": "7e868493dfc0d93e3e0db9519738a48a879c37a6bf8a9ce7d3d63b587a93fbc1"
+      }
+    ],
+    "unverified": [
+      "No actual new approved production job launched",
+      "No new production SSD/root claim made",
+      "No full source/font/admission/render/QC or production resource use verified in this delegated work",
+      "Parent integration and commit remain outside delegated file scope"
+    ]
+  },
+  "layoutCli": {
+    "checkedAt": "2026-10-04T03:05:51.453627+00:00",
+    "scope": "tiny normal tsx IPC/environment connection probe; no media or production authority",
+    "absoluteTempPathLength": 156,
+    "relativeTmpdir": "temp",
+    "nodePath": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "",
+    "layoutStatus": "passed",
+    "overlayCount": 0,
+    "mediaGenerated": 0,
+    "originalInputsModified": 0,
+    "callerSha256": "caff11ae6c20fb99a24dee3d88927728c05c1e4ec05ec0eb146401423b42a154",
+    "ownedTemporaryDirectory": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/normal-layout-ipc-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-urlq65sw",
+    "cleanupVerified": true
+  },
+  "rootChecks": [
+    {
+      "name": "explicit job configuration / rejection / typography / allocation / opaque qualification",
+      "passed": 6,
+      "failed": 0,
+      "exitCode": 0,
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/src/digest-approved-job-v001.test.ts"
+    },
+    {
+      "name": "runner and Remotion typechecks",
+      "exitCode": 0,
+      "command": "node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit; node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.remotion.json --noEmit"
+    }
+  ],
+  "independentReview": {
+    "scope": "two generic job modules, Core adapter and source qualification connection",
+    "found": 2,
+    "resolved": 2,
+    "remainingMajorIssues": 0,
+    "findings": [
+      "pick compositor allowed arguments explicitly",
+      "snapshot externally supplied control bindings for every reread"
+    ]
+  },
+  "manufacturingStarted": false,
+  "mediaGenerated": 0,
+  "limits": [
+    "Real production owner/storage publication and complete new-job manufacture were not executed.",
+    "Representative completion is not yet connected to the unchanged Normal full-QC gate.",
+    "Two legacy saved-compositor fixtures failed before this change due to their frozen renderer SHA; their records remain unchanged."
+  ],
+  "finalChecks": {
+    "checkedAt": "2026-10-04T03:19:02.840015+00:00",
+    "runnerTypecheck": {
+      "exitCode": 0,
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit"
+    },
+    "remotionTypecheck": {
+      "exitCode": 0,
+      "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.remotion.json --noEmit"
+    },
+    "diffCheck": {
+      "exitCode": 0,
+      "command": "git diff --check"
+    }
+  }
+}

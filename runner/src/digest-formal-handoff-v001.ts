@@ -53,9 +53,13 @@ async function disk(root: string) {
 }
 
 /** Opaque qualification, never a caller-supplied resolver or compositor. */
-export async function assertQualifiedDigestStorageContextV001(context: unknown): Promise<void> {
-  assert(context !== null && typeof context === 'object' && contexts.has(context), 'QUALIFIED_DIGEST_STORAGE_REQUIRED');
-  await (context as Json).assertCurrent();
+export async function assertQualifiedDigestStorageContextV001(context: unknown, plan?: Json): Promise<void> {
+  if (context !== null && typeof context === 'object' && contexts.has(context)) {
+    await (context as Json).assertCurrent(); return;
+  }
+  const {assertQualifiedApprovedDigestStorageContextV001} = await import(pathToFileURL(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'digest-approved-job-runner-v001.ts')).href);
+  await assertQualifiedApprovedDigestStorageContextV001(context, plan);
 }
 
 /** A byte parser, never a permission or source-package capability. */

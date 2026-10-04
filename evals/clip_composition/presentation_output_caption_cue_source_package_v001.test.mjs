@@ -1134,7 +1134,7 @@ test('ZCQ001 source job schema, fixed loader, bound import graph, and CLI guard'
   prove(t, PROOFS.ZCQ001[15], validatePresentationOutputCaptionCueSourceJobV001(wrongPath).status, 'rejected');
   const wrongLoader = clone(fixture.job); wrongLoader.runtimeProfile.tsx.path = '/tmp/loader.mjs';
   prove(t, PROOFS.ZCQ001[16], validatePresentationOutputCaptionCueSourceJobV001(wrongLoader).status, 'rejected');
-  assert.deepEqual(Object.keys(sourceNamespace).sort(), ['buildPresentationOutputCaptionCueSourcePackageV001', 'decodePresentationOutputCaptionCueSourceJobV001', 'executePresentationOutputCaptionCueSourceJobV001', 'qualifyDigestFormalSourcePackageTaskV001', 'validatePresentationOutputCaptionCueSourceJobV001', 'validatePresentationOutputCaptionCueSourcePackageV001'].sort());
+  assert.deepEqual(Object.keys(sourceNamespace).sort(), ['buildPresentationOutputCaptionCueSourcePackageV001', 'decodePresentationOutputCaptionCueSourceJobV001', 'executePresentationOutputCaptionCueSourceJobV001', 'qualifyApprovedDigestSourcePackageTaskV001', 'qualifyDigestFormalSourcePackageTaskV001', 'validatePresentationOutputCaptionCueSourceJobV001', 'validatePresentationOutputCaptionCueSourcePackageV001'].sort());
   const usage = await runCli();
   assert.deepEqual([usage.code, usage.stdout.length, usage.stderr.toString('utf8')], [2, 0, 'usage: presentation_output_caption_cue_source_package_v001.mjs <job-path>\n']);
   prove(
