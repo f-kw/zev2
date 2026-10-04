@@ -389,9 +389,14 @@ export async function buildApprovedDigestSourcePackageV001(inputs: Json, qualifi
   same(await context.readBound(c.plan.authorization), qualified.authorization);
   const inputsPrefix = qualified.job.outputRoot + '/';
   same(Object.keys(base).sort(), ['baseMedia', 'generationManifest', 'timeline', 'validationReceipt']);
-  assert(base.baseMedia && /^[0-9a-f]{64}$/u.test(base.baseMedia.fileSha256) && base.baseMedia.path.startsWith(inputsPrefix), 'APPROVED_DIGEST_BASE_ROOT_CHANGED');
+  const currentBaseRoot = Object.values(base).every((b: Json) => b.path.startsWith(inputsPrefix));
+  if (!currentBaseRoot) {
+    const recovery = await load(qualified.workspaceRoot, 'runner/src/digest-approved-job-runner-v001.ts');
+    await recovery.assertQualifiedApprovedDigestRecoveryBaseV001(context, base);
+  }
+  assert(base.baseMedia && /^[0-9a-f]{64}$/u.test(base.baseMedia.fileSha256), 'APPROVED_DIGEST_BASE_ROOT_CHANGED');
   for (const binding of [base.timeline, base.generationManifest, base.validationReceipt]) {
-    wire.assertBinding(binding); assert(binding.path.startsWith(inputsPrefix), 'APPROVED_DIGEST_BASE_ROOT_CHANGED'); await context.readBound(binding);
+    wire.assertBinding(binding); await context.readBound(binding);
   }
   const receipt = await context.readBound(base.validationReceipt); assert.equal(receipt.status, 'passed');
   same(receipt.outputs.baseMedia, base.baseMedia); same(receipt.outputs.timeline, base.timeline); same(receipt.outputs.generationManifest, base.generationManifest);

@@ -148,6 +148,81 @@ class ApprovedJobTest(unittest.TestCase):
         authorization['verificationPolicy'] = copy.deepcopy(job['verificationPolicy'])
         return job, authorization
 
+
+    def recovery_config(self):
+        job, authorization = self.policy_config()
+        job['recoveryBinding'] = dict(path='inputs/specific-saved-recovery.json', fileSha256='d' * 64, sizeBytes=123)
+        authorization['recoveryBinding'] = copy.deepcopy(job['recoveryBinding'])
+        return job, authorization
+
+    def test_recovery_binding_is_optional_and_exactly_authorized_for_representative_job(self):
+        self.assertIs(m.validate_approved_job_config(self.job, self.authorization), self.job)
+        job, authorization = self.recovery_config()
+        self.assertIs(m.validate_approved_job_config(job, authorization), job)
+
+    def test_recovery_binding_presence_or_byte_substitution_is_rejected(self):
+        for field in ('job-only', 'authorization-only', 'path', 'fileSha256', 'sizeBytes'):
+            job, authorization = self.recovery_config()
+            if field == 'job-only': del authorization['recoveryBinding']
+            elif field == 'authorization-only': del job['recoveryBinding']
+            elif field == 'path': authorization['recoveryBinding']['path'] = 'inputs/other.json'
+            elif field == 'fileSha256': authorization['recoveryBinding']['fileSha256'] = 'e' * 64
+            else: authorization['recoveryBinding']['sizeBytes'] += 1
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'recovery binding (presence )?mismatch'):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_recovery_binding_rejects_invalid_relative_byte_contract(self):
+        base = dict(path='inputs/recovery.json', fileSha256='d' * 64, sizeBytes=123)
+        cases = [None, {}, {**base, 'path': '/tmp/recovery.json'}, {**base, 'path': '../recovery.json'},
+            {**base, 'path': 'inputs//recovery.json'}, {**base, 'fileSha256': 'invalid'},
+            {key: value for key, value in base.items() if key != 'sizeBytes'},
+            *[{**base, 'sizeBytes': value} for value in (0, -1, 1.5, True)],
+            {**base, 'schemaVersion': 'unbound-extra'}]
+        for ref in cases:
+            job, authorization = self.recovery_config()
+            job['recoveryBinding'] = ref
+            authorization['recoveryBinding'] = copy.deepcopy(ref)
+            with self.subTest(binding=ref), self.assertRaises(ValueError):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_recovery_authorization_size_cannot_use_bool_or_float_equality(self):
+        for value in (True, 1.0):
+            job, authorization = self.recovery_config()
+            job['recoveryBinding']['sizeBytes'] = 1
+            authorization['recoveryBinding']['sizeBytes'] = value
+            with self.subTest(size=value), self.assertRaisesRegex(ValueError, 'invalid bound size'):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_recovery_binding_requires_representative_policy_and_original_safety(self):
+        for variant in ('absent', 'full-qc', 'weak-guard'):
+            job, authorization = self.recovery_config()
+            if variant == 'absent':
+                del job['verificationPolicy']; del authorization['verificationPolicy']
+            elif variant == 'full-qc':
+                job['verificationPolicy']['mode'] = 'full-qc'
+                authorization['verificationPolicy']['mode'] = 'full-qc'
+            else:
+                job['guard']['reserveBytes'] = 1
+            with self.subTest(variant=variant), self.assertRaises(ValueError):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_recovery_job_file_entry_keeps_independent_actual_control_bytes(self):
+        job, authorization = self.recovery_config()
+        self.job_file.write_text(json.dumps(job))
+        authorization['jobBinding'] = bind(self.job_file)
+        self.auth_file.write_text(json.dumps(authorization))
+        def fixture_git(args, **kwargs):
+            if args[-2:] == ['rev-parse', 'HEAD']: return self.head + '\n'
+            if args[-2:] == ['status', '--porcelain=v1']: return ''
+            raise AssertionError('unexpected fixture subprocess: ' + repr(args))
+        with mock.patch.object(m.subprocess, 'check_output', side_effect=fixture_git):
+            configured = m.read_approved_job_files(str(self.job_file), str(self.auth_file),
+                bind(self.job_file)['fileSha256'], bind(self.auth_file)['fileSha256'])
+        self.assertEqual(configured['job']['recoveryBinding'], configured['authorization']['recoveryBinding'])
+        with self.assertRaisesRegex(ValueError, 'bound SHA changed'):
+            m.read_approved_job_files(str(self.job_file), str(self.auth_file), 'f' * 64,
+                bind(self.auth_file)['fileSha256'])
+
     def test_verification_policy_accepts_one_or_several_representatives(self):
         for ids, methods in ((['instruction-A'], ['still-frame']),
             (['A', 'B', 'C', 'D'], ['still-frame', 'text-clock-context', 'video-playback'])):

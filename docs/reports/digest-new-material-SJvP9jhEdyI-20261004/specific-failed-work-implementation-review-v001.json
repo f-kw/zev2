@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "digest-specific-failed-work-implementation-read-review-v001",
+  "checkedAt": "2026-10-04T13:23:08.141526+00:00",
+  "repositoryHead": "68df5d7afde60b3b8e938b71ad19678289cb5ba1",
+  "scope": "read-only pre-freeze six-production-path snapshot",
+  "codeBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-v001.ts",
+      "fileSha256": "48927f7734c127b1ab52866a1a9fbcbbf0fe86a0ceef3c8a1c1477e9dc14f01b",
+      "sizeBytes": 15846,
+      "lineRefs": {
+        "const hasRecovery =": [
+          63
+        ],
+        "APPROVED_AUTHORIZATION_RECOVERY_BINDING_MISMATCH": [
+          108
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "82e94c8456807826955b0e1b7b9f9a4fdc6192c0d746f7aeec11b79a576a7f1e",
+      "sizeBytes": 77064,
+      "lineRefs": {
+        "exact_keys(job['recoveryBinding']": [
+          333
+        ],
+        "authorization/job recovery binding mismatch": [
+          387
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "8ae322c664e5403805852592d3b556a4d52be21bc40deeabd85cb57ad6b8d4e4",
+      "sizeBytes": 52012,
+      "lineRefs": {
+        "const oldReference =": [
+          177
+        ],
+        "async function current() {": [
+          169
+        ],
+        "RECOVERY_FRESH_SIBLING_ROOT_REQUIRED": [
+          265
+        ],
+        "async function readSpecificDigestFailedWorkV001": [
+          275
+        ],
+        "const failedWorkContexts =": [
+          240
+        ],
+        "export async function readQualifiedApprovedDigestFailedWorkV001": [
+          414
+        ],
+        "export async function assertQualifiedApprovedDigestRecoveryBaseV001": [
+          419
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-inputs-v001.ts",
+      "fileSha256": "5d5776ceeef39144ae9161b0afb63187981c98ed374ef1eed4514887786fd037",
+      "sizeBytes": 41185,
+      "lineRefs": {
+        "const currentBaseRoot =": [
+          392
+        ],
+        "await recovery.assertQualifiedApprovedDigestRecoveryBaseV001": [
+          395
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "da6b1b865f5bb70674f1a04b96aa492a282794ef2285a5cb780b608c082f39d8",
+      "sizeBytes": 38567,
+      "lineRefs": {
+        "export const readDigestRepresentativeCompletionModuleV001": [
+          49
+        ],
+        "const savedRecovery =": [
+          524
+        ],
+        "const completion = await qualifyPresentationInstructionRendererCompletionV002": [
+          562
+        ],
+        "const committed = await": [
+          566
+        ],
+        "const publishedVerification = await": [
+          589
+        ],
+        "const pendingEvidence = await": [
+          601
+        ]
+      }
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "8090b68772a6fca4e116729d2285f0ad258957755461bbe9b2aec9240a52a1fe",
+      "sizeBytes": 163371,
+      "lineRefs": {
+        "export async function resumeApprovedDigestFailedDrawAndQcV001": [
+          2733
+        ],
+        "saved full plan/body/IDs/clocks/appearance differs": [
+          2740
+        ],
+        "saved native props differ": [
+          2749
+        ],
+        "async function copyBound": [
+          2761
+        ],
+        "observationLabelPrefix:'recovery-existing-line-mask-inspection'": [
+          2791
+        ],
+        "observationLabelPrefix:'recovery-existing-primary-inspection'": [
+          2798
+        ],
+        "recovery-existing-output-media": [
+          2811
+        ],
+        "return finishPresentationDrawAndQcV001": [
+          2825
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "new-output-root-containment",
+      "status": "resolved-in-read-code",
+      "before": "Different old root plus plan prefix accepted a descendant old root.",
+      "after": "Different root plus equal POSIX dirname requires an actual sibling.",
+      "requiredTest": "Reject old root, its child, ancestor and a different plan root; accept fresh sibling.",
+      "lineRef": 265
+    }
+  ],
+  "confirmedDesign": [
+    "Current normal job and independently anchored authorization remain privately qualified.",
+    "Exact captured recovery descriptor SHA/size binds actual old job, authorization, implementation, stop owner, PNG/mask and media bytes.",
+    "Only real context in private WeakMap returns the frozen saved view; recovery base requires the same object.",
+    "Historical origin bytes and bindings remain origins; fresh metadata uses current job, authorization and implementation.",
+    "Full reconstructed renderer plan and all native props must equal saved originals before copying.",
+    "New owned reservation/stage copies use COPYFILE_EXCL and verify source and destination actual SHA, size, regular file, realpath and guest device.",
+    "Native PNG/mask/media inspection is actually reacquired; no redraw or recomposite is performed by this entry.",
+    "Private representative finish, atomic publication, published media rebinding, immutable technical evidence and pending receipt feed existing Core/shared/get contracts.",
+    "Native draws 0, composite runs 0, actual reinspection and historical origins are recorded separately; full visibility remains not-executed.",
+    "900ms current-check coalescing applies only when recovery is qualified; ordinary normal currentRaw remains unchanged.",
+    "Python supervision remains on the existing one-second design cadence."
+  ],
+  "notEvaluated": [
+    "Actual recovery launch/copy/native numeric inspection/private finish/pending/get success.",
+    "Actual supervisor sample gaps during recovery.",
+    "Playback, audio listening, representative image quality or whole-video human quality.",
+    "Root-announced additional next-unit reserve checks before the forthcoming freeze."
+  ],
+  "actionsPerformed": {
+    "repositoryWrites": 0,
+    "ssdWrites": 0,
+    "gitMutations": 0,
+    "mediaDecodeOrInspectionRuns": 0,
+    "productionRuns": 0,
+    "processOperations": 0,
+    "testRuns": 0
+  },
+  "remainingMajorReviewBlockers": []
+}

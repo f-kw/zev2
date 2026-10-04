@@ -322,12 +322,18 @@ def validate_verification_policy(policy, output_root):
 def validate_approved_job_config(job, authorization):
     exact_keys(job, {'schemaVersion', 'planId', 'outputRoot', 'inputs', 'storage',
         'expected', 'implementation', 'guard', 'allocationBudget'}
-        | ({'verificationPolicy'} if type(job) is dict and 'verificationPolicy' in job else set()), 'approved job')
+        | ({'verificationPolicy'} if type(job) is dict and 'verificationPolicy' in job else set())
+        | ({'recoveryBinding'} if type(job) is dict and 'recoveryBinding' in job else set()), 'approved job')
     required(job['schemaVersion'] == 'digest-approved-job-v001', 'approved job schema required')
     required(type(job['planId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', job['planId']), 'invalid approved plan ID')
     required(safe_relative(job['outputRoot']) and job['outputRoot'].startswith('runtime/artifacts/') and len(job['outputRoot'].split('/')) >= 4, 'invalid approved output root')
     if 'verificationPolicy' in job:
         validate_verification_policy(job['verificationPolicy'], job['outputRoot'])
+    if 'recoveryBinding' in job:
+        exact_keys(job['recoveryBinding'], {'path', 'fileSha256', 'sizeBytes'}, 'approved recovery byte binding')
+        validate_binding(job['recoveryBinding'], require_size=True)
+        required(job.get('verificationPolicy', {}).get('mode') == 'representative-plus-rules-v001',
+            'approved recovery requires representative verification policy')
     exact_keys(job['inputs'], APPROVED_INPUT_KEYS, 'approved inputs')
     required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
     for name in APPROVED_INPUT_KEYS - {'preparationParameters'}:
@@ -370,7 +376,15 @@ def validate_approved_job_config(job, authorization):
     exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
         'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
         'implementation', 'normalCandidates'}
-        | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set()), 'approved authorization')
+        | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set())
+        | ({'recoveryBinding'} if type(authorization) is dict and 'recoveryBinding' in authorization else set()), 'approved authorization')
+    required(('recoveryBinding' in authorization) == ('recoveryBinding' in job),
+        'authorization/job recovery binding presence mismatch')
+    if 'recoveryBinding' in job:
+        exact_keys(authorization['recoveryBinding'], {'path', 'fileSha256', 'sizeBytes'}, 'authorized recovery byte binding')
+        validate_binding(authorization['recoveryBinding'], require_size=True)
+        required(authorization['recoveryBinding'] == job['recoveryBinding'],
+            'authorization/job recovery binding mismatch')
     required(('verificationPolicy' in authorization) == ('verificationPolicy' in job),
         'authorization/job verification policy presence mismatch')
     if 'verificationPolicy' in job:

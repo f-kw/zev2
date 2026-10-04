@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "specific-failed-work-recovery-implementation-checkpoint-v001",
+  "checkedAt": "2026-10-04T13:33:42.894746+00:00",
+  "baseHead": "68df5d7afde60b3b8e938b71ad19678289cb5ba1",
+  "productionBindings": [
+    {
+      "path": "runner/src/digest-approved-job-v001.ts",
+      "sizeBytes": 15846,
+      "fileSha256": "48927f7734c127b1ab52866a1a9fbcbbf0fe86a0ceef3c8a1c1477e9dc14f01b"
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "sizeBytes": 77064,
+      "fileSha256": "82e94c8456807826955b0e1b7b9f9a4fdc6192c0d746f7aeec11b79a576a7f1e"
+    },
+    {
+      "path": "runner/src/digest-approved-job-runner-v001.ts",
+      "sizeBytes": 52012,
+      "fileSha256": "8ae322c664e5403805852592d3b556a4d52be21bc40deeabd85cb57ad6b8d4e4"
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.ts",
+      "sizeBytes": 41185,
+      "fileSha256": "5d5776ceeef39144ae9161b0afb63187981c98ed374ef1eed4514887786fd037"
+    },
+    {
+      "path": "evals/clip_composition/render_presentation_v002.mjs",
+      "sizeBytes": 163371,
+      "fileSha256": "8090b68772a6fca4e116729d2285f0ad258957755461bbe9b2aec9240a52a1fe"
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "sizeBytes": 38567,
+      "fileSha256": "da6b1b865f5bb70674f1a04b96aa492a282794ef2285a5cb780b608c082f39d8"
+    }
+  ],
+  "tests": {
+    "realNode20TsxCombined": {
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0
+    },
+    "jobConfiguration": {
+      "passed": 14,
+      "exitCode": 0
+    },
+    "supervisor": {
+      "passed": 49,
+      "exitCode": 0
+    },
+    "runnerTypecheck": {
+      "exitCode": 0
+    },
+    "remotionTypecheck": {
+      "exitCode": 0
+    },
+    "rendererSyntax": {
+      "exitCode": 0
+    },
+    "diffCheck": {
+      "exitCode": 0,
+      "scope": "all other staged paths; original byte-bound test-runs JSON excluded for one EOF blank line"
+    },
+    "oldInputFixture": {
+      "passed": 6,
+      "rejected": 1,
+      "reason": "Historical preparation implementation SHA differs; old receipt preserved; not waived."
+    }
+  },
+  "realRecovery": "not-yet-run",
+  "nativeDraws": 0,
+  "compositeRuns": 0,
+  "quality": "not-evaluated",
+  "independentReviewScope": "read snapshot before per-copy separate-disk reserve addition; sibling-root issue fixed and regression covered"
+}

@@ -68,6 +68,47 @@ test('base allocation uses explicit source size and source/target audio clocks',
   assert.throws(()=>estimateApprovedDigestBaseAllocationV001(1,{...media,audioClock:{sampleRate:44100,channels:2}},{audioSamples:1}));
 });
 
+
+function recoveryFixture() {
+  const f=fixture();
+  f.job.verificationPolicy={schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',
+    representativeInstructionIds:['one'],permittedMethods:['still-frame'],confirmationRecordPath:f.job.outputRoot+'/confirmation.json'};
+  f.authorization.verificationPolicy=structuredClone(f.job.verificationPolicy);
+  f.job.recoveryBinding={...binding('runtime/artifacts/test-only/saved-recovery.json'),sizeBytes:123};
+  f.authorization.recoveryBinding=structuredClone(f.job.recoveryBinding);
+  return f;
+}
+test('recovery byte binding is optional for ordinary jobs and identical in the representative authorization',()=>{
+  const ordinary=fixture();assert.equal(validate(ordinary.job,ordinary.authorization,ordinary.options).status,'validated-configuration');
+  const f=recoveryFixture();assert.equal(validate(f.job,f.authorization,f.options).status,'validated-configuration');
+});
+test('recovery binding cannot be present in one record only or substituted in authorization',()=>{
+  for(const change of [(f:any)=>delete f.job.recoveryBinding,(f:any)=>delete f.authorization.recoveryBinding,
+    (f:any)=>f.authorization.recoveryBinding.path='runtime/artifacts/test-only/other.json',
+    (f:any)=>f.authorization.recoveryBinding.fileSha256='b'.repeat(64),(f:any)=>f.authorization.recoveryBinding.sizeBytes++]) {
+    const f=recoveryFixture();change(f);assert.throws(()=>validate(f.job,f.authorization,f.options));
+  }
+});
+test('recovery requires an exact safe repository-relative byte binding and positive size',()=>{
+  for(const value of [null,{}, {path:'/tmp/recovery.json',fileSha256:'a'.repeat(64),sizeBytes:1},
+    {path:'../recovery.json',fileSha256:'a'.repeat(64),sizeBytes:1},
+    {path:'runtime//recovery.json',fileSha256:'a'.repeat(64),sizeBytes:1},
+    {path:'runtime/recovery.json',fileSha256:'bad',sizeBytes:1},
+    {path:'runtime/recovery.json',fileSha256:'a'.repeat(64)},
+    ...[0,-1,1.5,true].map(sizeBytes=>({path:'runtime/recovery.json',fileSha256:'a'.repeat(64),sizeBytes})),
+    {path:'runtime/recovery.json',fileSha256:'a'.repeat(64),sizeBytes:1,schemaVersion:'unbound-extra'}]) {
+    const f=recoveryFixture();f.job.recoveryBinding=value;f.authorization.recoveryBinding=structuredClone(value);
+    assert.throws(()=>validate(f.job,f.authorization,f.options));
+  }
+});
+test('recovery cannot select full QC or weaken independent anchors and safety',()=>{
+  for(const change of [(f:any)=>{delete f.job.verificationPolicy;delete f.authorization.verificationPolicy;},
+    (f:any)=>{f.job.verificationPolicy.mode='full-qc';f.authorization.verificationPolicy.mode='full-qc';},
+    (f:any)=>f.options.trustedAuthorizationSha256='b'.repeat(64),(f:any)=>f.job.guard.reserveBytes=1]) {
+    const f=recoveryFixture();change(f);assert.throws(()=>validate(f.job,f.authorization,f.options));
+  }
+});
+
 test('representative policy is bound to both independent authorization and a future confirmation path',()=>{
   for(const ids of [['one'],['one','two']]) {
     const f=fixture(),p={schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',

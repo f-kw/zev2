@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "digest-approved-specific-failed-work-tests-evidence-v001",
+  "checkedAt": "2026-10-04T13:22:25.556825+00:00",
+  "tests": {
+    "total": 32,
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "command": [
+    "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules",
+    "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+    "--import",
+    "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+    "--test",
+    "runner/src/digest-approved-failed-work-v001.test.ts"
+  ],
+  "cwd": "/Users/kawafmm/workspace/zev2",
+  "testBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-failed-work-v001.test.ts",
+    "fileSha256": "16e6ee1640422b3078dbfa8dada9cc95c4a6cec8b2e72571c58d6ed7fb982de6",
+    "sizeBytes": 7946
+  },
+  "tapBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-approved-failed-work-v001-tests.tap",
+    "fileSha256": "7fa9b82e12a3d314f6255eca00f9e61a7e2e04c98995021547b06d4d4b94be2f",
+    "sizeBytes": 6182
+  },
+  "descriptorFixtureBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/specific-failed-work-recovery-input-v001.json",
+    "fileSha256": "84370d9611ed428f2bdcdf83321ea3c91c2e1f82edd56c96d420de0cb00eb349",
+    "sizeBytes": 1010509
+  },
+  "implementationBindingsCapturedAfterRun": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "8ae322c664e5403805852592d3b556a4d52be21bc40deeabd85cb57ad6b8d4e4",
+      "sizeBytes": 52012
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-formal-handoff-v001.ts",
+      "fileSha256": "37c1699721c5b1a60fb4e06d8eed119a000dac4123a4f14f289ccd5767c79e6b",
+      "sizeBytes": 134501
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "fileSha256": "e9d726ce2b79bed5ead1b0494844ee11f7488ca34a498f797c0fcedba69d9408",
+      "sizeBytes": 162914
+    }
+  ],
+  "coverage": {
+    "pureCapturedShape": 1,
+    "pureSubstitutionNegatives": 22,
+    "opaqueEntryNegatives": 9,
+    "opaqueEntries": [
+      "readQualifiedApprovedDigestFailedWorkV001",
+      "assertQualifiedApprovedDigestRecoveryBaseV001",
+      "resumeApprovedDigestFailedDrawAndQcV001"
+    ],
+    "forgedVariants": [
+      "caller",
+      "JSON data replica",
+      "frozen JSON data replica"
+    ],
+    "freshOutputNegatives": [
+      "old root reused",
+      "old root child",
+      "old root ancestor",
+      "different parent"
+    ],
+    "earlyRejectionEvidence": "Required private-storage assertion error; origin callbacks and poisoned base/plan/tool getters untouched; renderer destination absent before and after."
+  },
+  "limits": [
+    "Pure structural success does not mint production recovery authority.",
+    "Replicas are not clones of an actually minted private context; genuine context creation is intentionally not exercised.",
+    "Saved videoBinding SHA substitution is tested; actual original media bytes and source SHA are not rehashed by these unit tests.",
+    "No manufacturing, rendering, ffmpeg/QC process, SSD write, old-file mutation, Git mutation or production product edit."
+  ],
+  "mutations": {
+    "repositoryOwnedTestFiles": [
+      "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-failed-work-v001.test.ts"
+    ],
+    "productionCode": 0,
+    "media": 0,
+    "ssd": 0,
+    "git": 0,
+    "cleanupRequired": false
+  }
+}

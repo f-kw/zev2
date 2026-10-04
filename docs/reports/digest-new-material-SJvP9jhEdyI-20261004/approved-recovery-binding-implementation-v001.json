@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "approved-recovery-binding-implementation-evidence-v001",
+  "checkedAt": "2026-10-04T13:10:42.780379+00:00",
+  "outcome": "implemented scoped job/authorization recoveryBinding validation; targeted regressions passed",
+  "paths": [
+    "runner/src/digest-approved-job-v001.ts",
+    "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+    "runner/src/digest-approved-job-v001.test.ts",
+    "tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py"
+  ],
+  "bindingContract": {
+    "optional": true,
+    "exactKeys": [
+      "path",
+      "fileSha256",
+      "sizeBytes"
+    ],
+    "path": "safe repository-relative path only",
+    "sha": "lowercase64hex",
+    "size": "positive safe integer; boolean/float rejected",
+    "authorization": "both absent or both present and identical",
+    "policy": "representative-plus-rules-v001 mandatory when recoveryBinding present",
+    "descriptorQualification": "not granted by this validator; root private runner factory must bind the old specific actual failure and real descriptor bytes"
+  },
+  "unchanged": [
+    "ordinary approved job without recoveryBinding",
+    "independent job/authorization actual SHA anchors",
+    "required implementation/current HEAD/clean checks",
+    "storage volume/device/image qualification",
+    "fresh owner/worker command",
+    "50GB/12GB/16GiB/pressure1/1second and ownPGID safety",
+    "fresh root and exclusive prepare/launch behavior",
+    "legacy explicit gate and no fallback"
+  ],
+  "tests": {
+    "typescript": {
+      "passed": 14,
+      "failed": 0,
+      "exitCode": 0,
+      "runtime": "Node20.19.6 with existing tsx loader"
+    },
+    "python": {
+      "passed": 49,
+      "failed": 0,
+      "exitCode": 0,
+      "bytecodeDisabled": true
+    },
+    "diffCheck": {
+      "exitCode": 0,
+      "output": ""
+    },
+    "initialFailuresResolved": [
+      "new test fixture lacked fake-repo HEAD/clean setup; fixed limited git response mock while real input/code bytes continue verified",
+      "new rejection expectation aligned with actual bound SHA changed error",
+      "three pre-existing process supervision cases require ps permission unavailable in sandbox; rerun authorized test environment passed",
+      "additional authorization bool/float size equality check covered"
+    ],
+    "actualRunEvidence": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/approved-recovery-binding-test-runs-v001.json",
+      "sizeBytes": 13269,
+      "fileSha256": "a90daa464da92d8f89132ff5f6f957d64a6e20456a6a58377bec708bbfe4b055"
+    }
+  },
+  "git": {
+    "branch": "main",
+    "head": "68df5d7afde60b3b8e938b71ad19678289cb5ba1",
+    "statusShort": " M evals/clip_composition/digest_representative_publication_v001.test.mts\n M evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts\n M runner/src/digest-approved-inputs-v001.ts\n M runner/src/digest-approved-job-runner-v001.ts\n M runner/src/digest-approved-job-v001.test.ts\n M runner/src/digest-approved-job-v001.ts\n M tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py\n M tools/digest-quality/original-resolution-full-supervisor-v002.py\n",
+    "untrackedCount": 0,
+    "stageCommitPush": "not performed; parent integration owns Git",
+    "otherModifiedPaths": "existing caller/publication test changes from parent protected"
+  },
+  "diffNumstat": "41\t0\trunner/src/digest-approved-job-v001.test.ts\n13\t2\trunner/src/digest-approved-job-v001.ts\n75\t0\ttools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py\n16\t2\ttools/digest-quality/original-resolution-full-supervisor-v002.py\n",
+  "actualCodeBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-v001.ts",
+      "sizeBytes": 15846,
+      "fileSha256": "48927f7734c127b1ab52866a1a9fbcbbf0fe86a0ceef3c8a1c1477e9dc14f01b"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "sizeBytes": 77064,
+      "fileSha256": "82e94c8456807826955b0e1b7b9f9a4fdc6192c0d746f7aeec11b79a576a7f1e"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-v001.test.ts",
+      "sizeBytes": 15079,
+      "fileSha256": "a84f3349a94a7de90d070cb29fa7c709f4931ae857166f15bf0f7434f7af1a46"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py",
+      "sizeBytes": 50853,
+      "fileSha256": "c23beab531bc3a6e12c9956d38c047d0df842edad927d7fbd502e9c9efbe7cb5"
+    }
+  ],
+  "notPerformed": [
+    "descriptor-specific old failure qualification",
+    "full integrated typecheck",
+    "real prepare/launch owner or SSD root creation",
+    "media manufacture/recovery/QC",
+    "Git mutation"
+  ]
+}

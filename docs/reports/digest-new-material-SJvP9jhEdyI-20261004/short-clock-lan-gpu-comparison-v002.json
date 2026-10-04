@@ -1,0 +1,1956 @@
+{
+  "schemaVersion": "digest-short-clock-lan-gpu-evidence-v002",
+  "readAtUtc": "2026-10-04T13:01:42.265665+00:00",
+  "provider": {
+    "baseUrl": "http://192.168.1.7:8000/",
+    "health": {
+      "ok": true,
+      "apiAlive": true,
+      "workerActive": true,
+      "storage": {
+        "accessible": true,
+        "readWrite": true,
+        "freeBytes": 1832819666944
+      },
+      "gpu": {
+        "available": true,
+        "deviceCount": 1,
+        "name": "NVIDIA GeForce RTX 4090",
+        "runtimeVersion": "12.8",
+        "checkedAt": "2026-10-04T12:48:23.087168+00:00",
+        "check": "CUDA initialization and one-element tensor; no STT model loaded",
+        "cached": true,
+        "probeIntervalSeconds": 300,
+        "ageSeconds": 179.2,
+        "fresh": true
+      },
+      "apiPid": 21000,
+      "model": "large-v3",
+      "bindAddress": "0.0.0.0",
+      "port": 8000,
+      "device": "cuda",
+      "alignDevice": "cpu",
+      "computeType": "float16",
+      "diarizationEnabled": true,
+      "diarizationDevice": "cpu",
+      "vadMethod": "silero",
+      "mode": "asynchronous-full-input",
+      "pipelineVersion": "zev-full-stt-1"
+    },
+    "pipelineIdenticalToOriginalSavedRaw": true,
+    "pipeline": {
+      "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+      "language": "ja",
+      "mklThreads": 1,
+      "modelRevisions": {
+        "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478",
+        "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+        "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee"
+      },
+      "ompThreads": 1,
+      "packages": {
+        "ctranslate2": "4.7.1",
+        "faster-whisper": "1.2.1",
+        "nltk": "3.9.4",
+        "numpy": "2.4.3",
+        "pyannote-audio": "4.0.4",
+        "torch": "2.8.0+cu128",
+        "torchaudio": "2.8.0+cu128",
+        "transformers": "4.57.6",
+        "whisperx": "3.8.4"
+      },
+      "returnCharAlignments": true,
+      "settings": {
+        "alignDevice": "cpu",
+        "batchSize": 16,
+        "computeType": "float16",
+        "device": "cuda",
+        "diarizationDevice": "cpu",
+        "enableDiarization": false,
+        "minDiarizationAudioSeconds": 1.0,
+        "model": "large-v3",
+        "numSpeakers": null,
+        "offline": true,
+        "speakerCoverageThreshold": 0.7,
+        "speakerMarginThreshold": 0.15,
+        "vadMethod": "silero"
+      },
+      "sourceSha256": {
+        "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+        "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+      },
+      "version": "zev-full-stt-1"
+    },
+    "jobId": "d2a616390c404c8d8fe50cc52b44dca9",
+    "receipt": {
+      "job": {
+        "schemaVersion": 1,
+        "id": "d2a616390c404c8d8fe50cc52b44dca9",
+        "state": "queued",
+        "registeredAt": "2026-10-04T12:55:10.373291+00:00",
+        "startedAt": null,
+        "endedAt": null,
+        "input": {
+          "originalFilename": "source-38m35s-to-38m55s.wav",
+          "sha256": "60775f282a63c384fcf996aeb24a7636fb0aafa8daf8d10f82d8d17afa999149",
+          "bytes": 640078
+        },
+        "model": "large-v3",
+        "pipeline": {
+          "version": "zev-full-stt-1",
+          "settings": {
+            "model": "large-v3",
+            "device": "cuda",
+            "computeType": "float16",
+            "alignDevice": "cpu",
+            "diarizationDevice": "cpu",
+            "enableDiarization": false,
+            "vadMethod": "silero",
+            "numSpeakers": null,
+            "speakerCoverageThreshold": 0.7,
+            "speakerMarginThreshold": 0.15,
+            "minDiarizationAudioSeconds": 1,
+            "batchSize": 16,
+            "offline": true
+          },
+          "language": "ja",
+          "packages": {
+            "whisperx": "3.8.4",
+            "faster-whisper": "1.2.1",
+            "ctranslate2": "4.7.1",
+            "torch": "2.8.0+cu128",
+            "torchaudio": "2.8.0+cu128",
+            "pyannote-audio": "4.0.4",
+            "transformers": "4.57.6",
+            "numpy": "2.4.3",
+            "nltk": "3.9.4"
+          },
+          "modelRevisions": {
+            "models--jonatasgrosman--wav2vec2-large-xlsr-53-japanese": "cf031e020336460d15a417eba710bbc5bb43be9a",
+            "models--pyannote--speaker-diarization-community-1": "3533c8cf8e369892e6b79ff1bf80f7b0286a54ee",
+            "models--Systran--faster-whisper-large-v3": "edaa852ec7e145841d8ffdb056a99866b5f0a478"
+          },
+          "sourceSha256": {
+            "main.py": "bb80827908401762dfe9d1040659550d8a5c7d83e203a28165b8d4d523a14bfd",
+            "stt_pipeline.py": "9fbf3c0c07f23324ce305edfc1c2970cdd63a36301874ecba5510eb322445dbe"
+          },
+          "ffmpeg": "ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+          "returnCharAlignments": true,
+          "ompThreads": 1,
+          "mklThreads": 1
+        },
+        "resultIdentity": "6f4176c0395898a0d2cbe70d642f9081d7953d5511b43bf13cad6bd2ea13e3a8",
+        "error": null
+      },
+      "reused": false,
+      "deduplicated": false,
+      "registrationSeconds": 0.0103,
+      "statusUrl": "/jobs/d2a616390c404c8d8fe50cc52b44dca9",
+      "resultUrl": "/jobs/d2a616390c404c8d8fe50cc52b44dca9/result",
+      "transcriptUrl": "/jobs/d2a616390c404c8d8fe50cc52b44dca9/transcript"
+    },
+    "inputBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/source-38m35s-to-38m55s.wav",
+      "fileSha256": "60775f282a63c384fcf996aeb24a7636fb0aafa8daf8d10f82d8d17afa999149",
+      "sizeBytes": 640078
+    },
+    "newPaidApiOrSubscription": 0,
+    "powerAndExistingEquipmentCosts": "not-measured"
+  },
+  "sourceAndExecution": {
+    "status": "completed-machine-retranscription",
+    "startedAt": "2026-10-04T12:55:07.636995+00:00",
+    "endedAt": "2026-10-04T12:55:36.435860+00:00",
+    "seconds": 28.7984651249717,
+    "sourceBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+      "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+      "sizeBytes": 1016332396
+    },
+    "sourceIdentityBeforeAndAfter": {
+      "device": 16777243,
+      "inode": 211926,
+      "sizeBytes": 1016332396,
+      "mtimeNs": 1791093353610668420,
+      "ctimeNs": 1791093387392749404
+    },
+    "sourceUnchanged": true,
+    "audioBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/source-38m35s-to-38m55s.wav",
+      "fileSha256": "60775f282a63c384fcf996aeb24a7636fb0aafa8daf8d10f82d8d17afa999149",
+      "sizeBytes": 640078
+    },
+    "absoluteSourceOffsetMs": 2315000,
+    "sourceRangeMs": [
+      2315000,
+      2335000
+    ],
+    "lanJob": {
+      "status": "completed",
+      "jobId": "d2a616390c404c8d8fe50cc52b44dca9",
+      "completedAt": "2026-10-04T12:55:35.554Z",
+      "seconds": 25.927,
+      "inputSha256": "60775f282a63c384fcf996aeb24a7636fb0aafa8daf8d10f82d8d17afa999149",
+      "inputBytes": 640078,
+      "sourceUri": "file:///Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/source-38m35s-to-38m55s.wav",
+      "durationSec": 20,
+      "output": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-job/zev-result.json",
+      "paidApiCalls": 0
+    },
+    "runs": [
+      {
+        "label": "extract-20-second-audio",
+        "command": [
+          "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+          "-nostdin",
+          "-n",
+          "-v",
+          "error",
+          "-threads",
+          "1",
+          "-ss",
+          "2315",
+          "-i",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+          "-t",
+          "20",
+          "-map",
+          "0:a:0",
+          "-vn",
+          "-sn",
+          "-ac",
+          "1",
+          "-ar",
+          "16000",
+          "-c:a",
+          "pcm_s16le",
+          "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/source-38m35s-to-38m55s.wav"
+        ],
+        "seconds": 1.2607617499888875,
+        "exitCode": 0,
+        "remainingRunning": []
+      },
+      {
+        "label": "existing-LAN-GPU-one-job",
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "--import",
+          "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+          "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-stt-worker-v001.mts",
+          "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-input.json"
+        ],
+        "seconds": 26.396747582999524,
+        "exitCode": 0,
+        "remainingRunning": []
+      }
+    ],
+    "remainingRunning": [],
+    "resourceSamples": 32,
+    "maximumObservedSampleGapSeconds": 1.28710100002354,
+    "observedOwnTreePeakBytes": 205570048,
+    "newPaidApiCalls": 0,
+    "newMaterial": 0,
+    "repoGitOrOriginalClockChanges": 0,
+    "listening": "not-evaluated",
+    "correctness": "not-established-by-machine-result"
+  },
+  "bindings": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/controller.py",
+      "fileSha256": "8627df65ce6c66a16ff8f3ad8d0dd15c96d78f4d76f42e3f8192b49fd7eb0678",
+      "sizeBytes": 8239
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/source-and-method-before.json",
+      "fileSha256": "4f7fcb457a9b8795bc1feacf4c61f1240a376e37ac91b83a1b0bacfc788369e3",
+      "sizeBytes": 2889
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/audio-extraction.json",
+      "fileSha256": "611324f5a53b8a89032c59dba0f47974a9d40773f2bd4fd9881850dafc43cdad",
+      "sizeBytes": 1445
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-input.json",
+      "fileSha256": "db8e5ac27872d65bf69d59df5eaca8e558525d29911719ca05554b5525c3cf9f",
+      "sizeBytes": 767
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/execution-v002.json",
+      "fileSha256": "bd9f0a9a3ab3ac4ae2d23ae53a3b013845684bf8f49e3a8b6199531146057d9a",
+      "sizeBytes": 3311
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/health-before.raw.json",
+      "fileSha256": "5cd3fb900d668f6c4aaf5b756589cd1e7ff12944813299bbe9549e7dbb84ba61",
+      "sizeBytes": 683
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/health-observation.json",
+      "fileSha256": "e5e819a22f978a7094cfbc64a58230942ff6ac03065ad8ddc2081b4495a5a604",
+      "sizeBytes": 1192
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-job/gpu-stt-job.json",
+      "fileSha256": "cb4c28d4ac2d52d49e5b79edc69da9e8ceb31f88de65b0eb8fd9aad7a3a8645a",
+      "sizeBytes": 2934
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-job/gpu-stt-status.json",
+      "fileSha256": "22d4e0e1db25740933c765e5c8e127e07d23dd1f262493369b8e4b1fcd2858d9",
+      "sizeBytes": 2582
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-job/zev-result.json",
+      "fileSha256": "9605eab41b4c54ba2f8e815e511131d0c67aee2e05183546410c264d96b453fa",
+      "sizeBytes": 10529
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/lan-job/gpu-stt-d2a616390c404c8d8fe50cc52b44dca9.response.json",
+      "fileSha256": "1ff54dd80a810a50bb1832bc3fd5a38db75058b6b9d399ab859f915308fd6999",
+      "sizeBytes": 24612
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/normal-snapshot/artifacts/draft_ef398a8dd5e241a3952ea152619fa67b/agent_75c283aaf7764f31bb292d2a30769364--raw-gpu-response.json",
+      "fileSha256": "f4790f44534ccedbfb641c3eba7c1473818dccc339e879c7c6372809eda9eab6",
+      "sizeBytes": 3617791
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/correspondence.json",
+      "fileSha256": "0d0c2a297fce1e60620da006030ddf12fce27421cf2467ed1f50250a797c9712",
+      "sizeBytes": 3373055
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/extract-20-second-audio-shutdown.json",
+      "fileSha256": "25b4b166425fd2867b26ff104d6e6ef0d9e79affb50beea93d0df30225fc09ce",
+      "sizeBytes": 799
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-lan-gpu-v002/existing-LAN-GPU-one-job-shutdown.json",
+      "fileSha256": "38da2e767c5707a276c2f7b513b84b2e55ba18a6c63680258c7ad40664aa7ef0",
+      "sizeBytes": 800
+    }
+  ],
+  "newAllCharacterClockAbsolute": [
+    {
+      "char": "こ",
+      "start": 4.514,
+      "end": 7.738,
+      "score": 0.994,
+      "absoluteStartMs": 2319514,
+      "absoluteEndMs": 2322738
+    },
+    {
+      "char": "こ",
+      "start": 7.738,
+      "end": 7.758,
+      "score": 0.0,
+      "absoluteStartMs": 2322738,
+      "absoluteEndMs": 2322758
+    },
+    {
+      "char": "で",
+      "start": 7.758,
+      "end": 7.778,
+      "score": 0.0,
+      "absoluteStartMs": 2322758,
+      "absoluteEndMs": 2322778
+    },
+    {
+      "char": "奴",
+      "start": 7.778,
+      "end": 8.018,
+      "score": 0.917,
+      "absoluteStartMs": 2322778,
+      "absoluteEndMs": 2323018
+    },
+    {
+      "char": "を",
+      "start": 8.018,
+      "end": 8.058,
+      "score": 0.5,
+      "absoluteStartMs": 2323018,
+      "absoluteEndMs": 2323058
+    },
+    {
+      "char": "食",
+      "start": 8.058,
+      "end": 8.219,
+      "score": 0.875,
+      "absoluteStartMs": 2323058,
+      "absoluteEndMs": 2323219
+    },
+    {
+      "char": "い",
+      "start": 8.219,
+      "end": 8.419,
+      "score": 0.9,
+      "absoluteStartMs": 2323219,
+      "absoluteEndMs": 2323419
+    },
+    {
+      "char": "止",
+      "start": 8.419,
+      "end": 8.439,
+      "score": 0.0,
+      "absoluteStartMs": 2323419,
+      "absoluteEndMs": 2323439
+    },
+    {
+      "char": "め",
+      "start": 8.439,
+      "end": 8.599,
+      "score": 0.875,
+      "absoluteStartMs": 2323439,
+      "absoluteEndMs": 2323599
+    },
+    {
+      "char": "な",
+      "start": 8.599,
+      "end": 8.619,
+      "score": 0.0,
+      "absoluteStartMs": 2323599,
+      "absoluteEndMs": 2323619
+    },
+    {
+      "char": "け",
+      "start": 8.619,
+      "end": 8.639,
+      "score": 0.0,
+      "absoluteStartMs": 2323619,
+      "absoluteEndMs": 2323639
+    },
+    {
+      "char": "れ",
+      "start": 8.639,
+      "end": 8.819,
+      "score": 0.889,
+      "absoluteStartMs": 2323639,
+      "absoluteEndMs": 2323819
+    },
+    {
+      "char": "ば",
+      "start": 8.819,
+      "end": 8.839,
+      "score": 0.0,
+      "absoluteStartMs": 2323819,
+      "absoluteEndMs": 2323839
+    },
+    {
+      "char": "世",
+      "start": 8.839,
+      "end": 9.38,
+      "score": 0.963,
+      "absoluteStartMs": 2323839,
+      "absoluteEndMs": 2324380
+    },
+    {
+      "char": "界",
+      "start": 9.38,
+      "end": 10.001,
+      "score": 0.968,
+      "absoluteStartMs": 2324380,
+      "absoluteEndMs": 2325001
+    },
+    {
+      "char": "が",
+      "start": 10.001,
+      "end": 10.021,
+      "score": 0.0,
+      "absoluteStartMs": 2325001,
+      "absoluteEndMs": 2325021
+    },
+    {
+      "char": "終",
+      "start": 10.021,
+      "end": 10.041,
+      "score": 0.0,
+      "absoluteStartMs": 2325021,
+      "absoluteEndMs": 2325041
+    },
+    {
+      "char": "わ",
+      "start": 10.041,
+      "end": 10.061,
+      "score": 0.0,
+      "absoluteStartMs": 2325041,
+      "absoluteEndMs": 2325061
+    },
+    {
+      "char": "る",
+      "start": 10.061,
+      "end": 10.081,
+      "score": 0.0,
+      "absoluteStartMs": 2325061,
+      "absoluteEndMs": 2325081
+    },
+    {
+      "char": "な",
+      "start": 10.081,
+      "end": 10.101,
+      "score": 0.0,
+      "absoluteStartMs": 2325081,
+      "absoluteEndMs": 2325101
+    },
+    {
+      "char": "ん",
+      "start": 10.101,
+      "end": 10.121,
+      "score": 0.0,
+      "absoluteStartMs": 2325101,
+      "absoluteEndMs": 2325121
+    },
+    {
+      "char": "か",
+      "start": 10.121,
+      "end": 10.141,
+      "score": 0.0,
+      "absoluteStartMs": 2325121,
+      "absoluteEndMs": 2325141
+    },
+    {
+      "char": "い",
+      "start": 10.141,
+      "end": 10.161,
+      "score": 0.0,
+      "absoluteStartMs": 2325141,
+      "absoluteEndMs": 2325161
+    },
+    {
+      "char": "い",
+      "start": 10.161,
+      "end": 10.181,
+      "score": 0.0,
+      "absoluteStartMs": 2325161,
+      "absoluteEndMs": 2325181
+    },
+    {
+      "char": "雰",
+      "start": 10.181,
+      "end": 10.201,
+      "score": 0.0,
+      "absoluteStartMs": 2325181,
+      "absoluteEndMs": 2325201
+    },
+    {
+      "char": "囲",
+      "start": 10.201,
+      "end": 10.221,
+      "score": 0.0,
+      "absoluteStartMs": 2325201,
+      "absoluteEndMs": 2325221
+    },
+    {
+      "char": "気",
+      "start": 10.221,
+      "end": 10.241,
+      "score": 0.0,
+      "absoluteStartMs": 2325221,
+      "absoluteEndMs": 2325241
+    },
+    {
+      "char": "に",
+      "start": 10.241,
+      "end": 10.261,
+      "score": 0.0,
+      "absoluteStartMs": 2325241,
+      "absoluteEndMs": 2325261
+    },
+    {
+      "char": "し",
+      "start": 10.261,
+      "end": 10.321,
+      "score": 0.667,
+      "absoluteStartMs": 2325261,
+      "absoluteEndMs": 2325321
+    },
+    {
+      "char": "な",
+      "start": 10.321,
+      "end": 10.441,
+      "score": 0.833,
+      "absoluteStartMs": 2325321,
+      "absoluteEndMs": 2325441
+    },
+    {
+      "char": "い",
+      "start": 10.441,
+      "end": 10.461,
+      "score": 0.003,
+      "absoluteStartMs": 2325441,
+      "absoluteEndMs": 2325461
+    },
+    {
+      "char": "で",
+      "start": 10.461,
+      "end": 10.481,
+      "score": 0.0,
+      "absoluteStartMs": 2325461,
+      "absoluteEndMs": 2325481
+    },
+    {
+      "char": "い",
+      "start": 10.481,
+      "end": 10.501,
+      "score": 0.001,
+      "absoluteStartMs": 2325481,
+      "absoluteEndMs": 2325501
+    },
+    {
+      "char": "い",
+      "start": 10.501,
+      "end": 10.662,
+      "score": 0.875,
+      "absoluteStartMs": 2325501,
+      "absoluteEndMs": 2325662
+    },
+    {
+      "char": "雰",
+      "start": 10.662,
+      "end": 10.682,
+      "score": 0.0,
+      "absoluteStartMs": 2325662,
+      "absoluteEndMs": 2325682
+    },
+    {
+      "char": "囲",
+      "start": 10.682,
+      "end": 10.802,
+      "score": 0.833,
+      "absoluteStartMs": 2325682,
+      "absoluteEndMs": 2325802
+    },
+    {
+      "char": "気",
+      "start": 10.802,
+      "end": 10.822,
+      "score": 0.0,
+      "absoluteStartMs": 2325802,
+      "absoluteEndMs": 2325822
+    },
+    {
+      "char": "に",
+      "start": 10.822,
+      "end": 12.864,
+      "score": 0.99,
+      "absoluteStartMs": 2325822,
+      "absoluteEndMs": 2327864
+    },
+    {
+      "char": "す",
+      "start": 12.864,
+      "end": 13.025,
+      "score": 0.875,
+      "absoluteStartMs": 2327864,
+      "absoluteEndMs": 2328025
+    },
+    {
+      "char": "べ",
+      "start": 13.025,
+      "end": 13.145,
+      "score": 0.833,
+      "absoluteStartMs": 2328025,
+      "absoluteEndMs": 2328145
+    },
+    {
+      "char": "て",
+      "start": 13.145,
+      "end": 13.165,
+      "score": 0.0,
+      "absoluteStartMs": 2328145,
+      "absoluteEndMs": 2328165
+    },
+    {
+      "char": "の",
+      "start": 13.165,
+      "end": 13.185,
+      "score": 0.0,
+      "absoluteStartMs": 2328165,
+      "absoluteEndMs": 2328185
+    },
+    {
+      "char": "力",
+      "start": 13.185,
+      "end": 13.205,
+      "score": 0.0,
+      "absoluteStartMs": 2328185,
+      "absoluteEndMs": 2328205
+    },
+    {
+      "char": "を",
+      "start": 13.205,
+      "end": 13.225,
+      "score": 0.0,
+      "absoluteStartMs": 2328205,
+      "absoluteEndMs": 2328225
+    },
+    {
+      "char": "合",
+      "start": 13.225,
+      "end": 13.245,
+      "score": 0.0,
+      "absoluteStartMs": 2328225,
+      "absoluteEndMs": 2328245
+    },
+    {
+      "char": "わ",
+      "start": 13.245,
+      "end": 13.705,
+      "score": 0.957,
+      "absoluteStartMs": 2328245,
+      "absoluteEndMs": 2328705
+    },
+    {
+      "char": "せ",
+      "start": 13.705,
+      "end": 13.866,
+      "score": 0.875,
+      "absoluteStartMs": 2328705,
+      "absoluteEndMs": 2328866
+    },
+    {
+      "char": "て",
+      "start": 13.866,
+      "end": 14.306,
+      "score": 0.955,
+      "absoluteStartMs": 2328866,
+      "absoluteEndMs": 2329306
+    },
+    {
+      "char": "奴",
+      "start": 14.306,
+      "end": 14.326,
+      "score": 0.0,
+      "absoluteStartMs": 2329306,
+      "absoluteEndMs": 2329326
+    },
+    {
+      "char": "を",
+      "start": 14.326,
+      "end": 14.607,
+      "score": 0.929,
+      "absoluteStartMs": 2329326,
+      "absoluteEndMs": 2329607
+    },
+    {
+      "char": "倒",
+      "start": 14.607,
+      "end": 14.627,
+      "score": 0.0,
+      "absoluteStartMs": 2329607,
+      "absoluteEndMs": 2329627
+    },
+    {
+      "char": "す",
+      "start": 14.627,
+      "end": 14.947,
+      "score": 0.937,
+      "absoluteStartMs": 2329627,
+      "absoluteEndMs": 2329947
+    },
+    {
+      "char": "の",
+      "start": 14.947,
+      "end": 14.967,
+      "score": 0.0,
+      "absoluteStartMs": 2329947,
+      "absoluteEndMs": 2329967
+    },
+    {
+      "char": "だ",
+      "start": 14.967,
+      "end": 15.328,
+      "score": 0.944,
+      "absoluteStartMs": 2329967,
+      "absoluteEndMs": 2330328
+    },
+    {
+      "char": "お",
+      "start": 15.328,
+      "end": 16.369,
+      "score": 0.981,
+      "absoluteStartMs": 2330328,
+      "absoluteEndMs": 2331369
+    },
+    {
+      "char": "ば",
+      "start": 16.369,
+      "end": 16.389,
+      "score": 0.0,
+      "absoluteStartMs": 2331369,
+      "absoluteEndMs": 2331389
+    },
+    {
+      "char": "あ",
+      "start": 16.389,
+      "end": 16.409,
+      "score": 0.0,
+      "absoluteStartMs": 2331389,
+      "absoluteEndMs": 2331409
+    },
+    {
+      "char": "ち",
+      "start": 16.409,
+      "end": 16.429,
+      "score": 0.0,
+      "absoluteStartMs": 2331409,
+      "absoluteEndMs": 2331429
+    },
+    {
+      "char": "ゃ",
+      "start": 16.429,
+      "end": 16.629,
+      "score": 0.9,
+      "absoluteStartMs": 2331429,
+      "absoluteEndMs": 2331629
+    },
+    {
+      "char": "ん",
+      "start": 16.629,
+      "end": 16.649,
+      "score": 0.0,
+      "absoluteStartMs": 2331629,
+      "absoluteEndMs": 2331649
+    },
+    {
+      "char": "が",
+      "start": 16.649,
+      "end": 16.669,
+      "score": 0.0,
+      "absoluteStartMs": 2331649,
+      "absoluteEndMs": 2331669
+    },
+    {
+      "char": "封",
+      "start": 16.669,
+      "end": 16.689,
+      "score": 0.0,
+      "absoluteStartMs": 2331669,
+      "absoluteEndMs": 2331689
+    },
+    {
+      "char": "印",
+      "start": 16.689,
+      "end": 16.709,
+      "score": 0.0,
+      "absoluteStartMs": 2331689,
+      "absoluteEndMs": 2331709
+    }
+  ],
+  "criticalPhrase": {
+    "original": {
+      "text": "ここで奴を食い止めなければ世界が終わる",
+      "startMs": 2325025,
+      "endMs": 2325405,
+      "durationMs": 380,
+      "characters": [
+        {
+          "char": "こ",
+          "start": 2325.025,
+          "end": 2325.045,
+          "score": 0.0,
+          "absoluteStartMs": 2325025,
+          "absoluteEndMs": 2325045
+        },
+        {
+          "char": "こ",
+          "start": 2325.045,
+          "end": 2325.065,
+          "score": 0.0,
+          "absoluteStartMs": 2325045,
+          "absoluteEndMs": 2325065
+        },
+        {
+          "char": "で",
+          "start": 2325.065,
+          "end": 2325.085,
+          "score": 0.0,
+          "absoluteStartMs": 2325065,
+          "absoluteEndMs": 2325085
+        },
+        {
+          "char": "奴",
+          "start": 2325.085,
+          "end": 2325.105,
+          "score": 0.0,
+          "absoluteStartMs": 2325085,
+          "absoluteEndMs": 2325105
+        },
+        {
+          "char": "を",
+          "start": 2325.105,
+          "end": 2325.125,
+          "score": 0.0,
+          "absoluteStartMs": 2325105,
+          "absoluteEndMs": 2325125
+        },
+        {
+          "char": "食",
+          "start": 2325.125,
+          "end": 2325.145,
+          "score": 0.0,
+          "absoluteStartMs": 2325125,
+          "absoluteEndMs": 2325145
+        },
+        {
+          "char": "い",
+          "start": 2325.145,
+          "end": 2325.165,
+          "score": 0.0,
+          "absoluteStartMs": 2325145,
+          "absoluteEndMs": 2325165
+        },
+        {
+          "char": "止",
+          "start": 2325.165,
+          "end": 2325.185,
+          "score": 0.0,
+          "absoluteStartMs": 2325165,
+          "absoluteEndMs": 2325185
+        },
+        {
+          "char": "め",
+          "start": 2325.185,
+          "end": 2325.205,
+          "score": 0.0,
+          "absoluteStartMs": 2325185,
+          "absoluteEndMs": 2325205
+        },
+        {
+          "char": "な",
+          "start": 2325.205,
+          "end": 2325.225,
+          "score": 0.0,
+          "absoluteStartMs": 2325205,
+          "absoluteEndMs": 2325225
+        },
+        {
+          "char": "け",
+          "start": 2325.225,
+          "end": 2325.245,
+          "score": 0.0,
+          "absoluteStartMs": 2325225,
+          "absoluteEndMs": 2325245
+        },
+        {
+          "char": "れ",
+          "start": 2325.245,
+          "end": 2325.265,
+          "score": 0.0,
+          "absoluteStartMs": 2325245,
+          "absoluteEndMs": 2325265
+        },
+        {
+          "char": "ば",
+          "start": 2325.265,
+          "end": 2325.285,
+          "score": 0.0,
+          "absoluteStartMs": 2325265,
+          "absoluteEndMs": 2325285
+        },
+        {
+          "char": "世",
+          "start": 2325.285,
+          "end": 2325.305,
+          "score": 0.0,
+          "absoluteStartMs": 2325285,
+          "absoluteEndMs": 2325305
+        },
+        {
+          "char": "界",
+          "start": 2325.305,
+          "end": 2325.325,
+          "score": 0.0,
+          "absoluteStartMs": 2325305,
+          "absoluteEndMs": 2325325
+        },
+        {
+          "char": "が",
+          "start": 2325.325,
+          "end": 2325.345,
+          "score": 0.0,
+          "absoluteStartMs": 2325325,
+          "absoluteEndMs": 2325345
+        },
+        {
+          "char": "終",
+          "start": 2325.345,
+          "end": 2325.365,
+          "score": 0.0,
+          "absoluteStartMs": 2325345,
+          "absoluteEndMs": 2325365
+        },
+        {
+          "char": "わ",
+          "start": 2325.365,
+          "end": 2325.385,
+          "score": 0.0,
+          "absoluteStartMs": 2325365,
+          "absoluteEndMs": 2325385
+        },
+        {
+          "char": "る",
+          "start": 2325.385,
+          "end": 2325.405,
+          "score": 0.0,
+          "absoluteStartMs": 2325385,
+          "absoluteEndMs": 2325405
+        }
+      ]
+    },
+    "new": {
+      "text": "ここで奴を食い止めなければ世界が終わる",
+      "startMs": 2319514,
+      "endMs": 2325081,
+      "durationMs": 5567,
+      "characters": [
+        {
+          "char": "こ",
+          "start": 4.514,
+          "end": 7.738,
+          "score": 0.994,
+          "absoluteStartMs": 2319514,
+          "absoluteEndMs": 2322738
+        },
+        {
+          "char": "こ",
+          "start": 7.738,
+          "end": 7.758,
+          "score": 0.0,
+          "absoluteStartMs": 2322738,
+          "absoluteEndMs": 2322758
+        },
+        {
+          "char": "で",
+          "start": 7.758,
+          "end": 7.778,
+          "score": 0.0,
+          "absoluteStartMs": 2322758,
+          "absoluteEndMs": 2322778
+        },
+        {
+          "char": "奴",
+          "start": 7.778,
+          "end": 8.018,
+          "score": 0.917,
+          "absoluteStartMs": 2322778,
+          "absoluteEndMs": 2323018
+        },
+        {
+          "char": "を",
+          "start": 8.018,
+          "end": 8.058,
+          "score": 0.5,
+          "absoluteStartMs": 2323018,
+          "absoluteEndMs": 2323058
+        },
+        {
+          "char": "食",
+          "start": 8.058,
+          "end": 8.219,
+          "score": 0.875,
+          "absoluteStartMs": 2323058,
+          "absoluteEndMs": 2323219
+        },
+        {
+          "char": "い",
+          "start": 8.219,
+          "end": 8.419,
+          "score": 0.9,
+          "absoluteStartMs": 2323219,
+          "absoluteEndMs": 2323419
+        },
+        {
+          "char": "止",
+          "start": 8.419,
+          "end": 8.439,
+          "score": 0.0,
+          "absoluteStartMs": 2323419,
+          "absoluteEndMs": 2323439
+        },
+        {
+          "char": "め",
+          "start": 8.439,
+          "end": 8.599,
+          "score": 0.875,
+          "absoluteStartMs": 2323439,
+          "absoluteEndMs": 2323599
+        },
+        {
+          "char": "な",
+          "start": 8.599,
+          "end": 8.619,
+          "score": 0.0,
+          "absoluteStartMs": 2323599,
+          "absoluteEndMs": 2323619
+        },
+        {
+          "char": "け",
+          "start": 8.619,
+          "end": 8.639,
+          "score": 0.0,
+          "absoluteStartMs": 2323619,
+          "absoluteEndMs": 2323639
+        },
+        {
+          "char": "れ",
+          "start": 8.639,
+          "end": 8.819,
+          "score": 0.889,
+          "absoluteStartMs": 2323639,
+          "absoluteEndMs": 2323819
+        },
+        {
+          "char": "ば",
+          "start": 8.819,
+          "end": 8.839,
+          "score": 0.0,
+          "absoluteStartMs": 2323819,
+          "absoluteEndMs": 2323839
+        },
+        {
+          "char": "世",
+          "start": 8.839,
+          "end": 9.38,
+          "score": 0.963,
+          "absoluteStartMs": 2323839,
+          "absoluteEndMs": 2324380
+        },
+        {
+          "char": "界",
+          "start": 9.38,
+          "end": 10.001,
+          "score": 0.968,
+          "absoluteStartMs": 2324380,
+          "absoluteEndMs": 2325001
+        },
+        {
+          "char": "が",
+          "start": 10.001,
+          "end": 10.021,
+          "score": 0.0,
+          "absoluteStartMs": 2325001,
+          "absoluteEndMs": 2325021
+        },
+        {
+          "char": "終",
+          "start": 10.021,
+          "end": 10.041,
+          "score": 0.0,
+          "absoluteStartMs": 2325021,
+          "absoluteEndMs": 2325041
+        },
+        {
+          "char": "わ",
+          "start": 10.041,
+          "end": 10.061,
+          "score": 0.0,
+          "absoluteStartMs": 2325041,
+          "absoluteEndMs": 2325061
+        },
+        {
+          "char": "る",
+          "start": 10.061,
+          "end": 10.081,
+          "score": 0.0,
+          "absoluteStartMs": 2325061,
+          "absoluteEndMs": 2325081
+        }
+      ]
+    }
+  },
+  "phraseComparisons": [
+    {
+      "originalGlobalCue": 463,
+      "text": "ここで奴を",
+      "originalStt": {
+        "text": "ここで奴を",
+        "startMs": 2325025,
+        "endMs": 2325125,
+        "durationMs": 100,
+        "characters": [
+          {
+            "char": "こ",
+            "start": 2325.025,
+            "end": 2325.045,
+            "score": 0.0,
+            "absoluteStartMs": 2325025,
+            "absoluteEndMs": 2325045
+          },
+          {
+            "char": "こ",
+            "start": 2325.045,
+            "end": 2325.065,
+            "score": 0.0,
+            "absoluteStartMs": 2325045,
+            "absoluteEndMs": 2325065
+          },
+          {
+            "char": "で",
+            "start": 2325.065,
+            "end": 2325.085,
+            "score": 0.0,
+            "absoluteStartMs": 2325065,
+            "absoluteEndMs": 2325085
+          },
+          {
+            "char": "奴",
+            "start": 2325.085,
+            "end": 2325.105,
+            "score": 0.0,
+            "absoluteStartMs": 2325085,
+            "absoluteEndMs": 2325105
+          },
+          {
+            "char": "を",
+            "start": 2325.105,
+            "end": 2325.125,
+            "score": 0.0,
+            "absoluteStartMs": 2325105,
+            "absoluteEndMs": 2325125
+          }
+        ]
+      },
+      "newStt": {
+        "text": "ここで奴を",
+        "startMs": 2319514,
+        "endMs": 2323058,
+        "durationMs": 3544,
+        "characters": [
+          {
+            "char": "こ",
+            "start": 4.514,
+            "end": 7.738,
+            "score": 0.994,
+            "absoluteStartMs": 2319514,
+            "absoluteEndMs": 2322738
+          },
+          {
+            "char": "こ",
+            "start": 7.738,
+            "end": 7.758,
+            "score": 0.0,
+            "absoluteStartMs": 2322738,
+            "absoluteEndMs": 2322758
+          },
+          {
+            "char": "で",
+            "start": 7.758,
+            "end": 7.778,
+            "score": 0.0,
+            "absoluteStartMs": 2322758,
+            "absoluteEndMs": 2322778
+          },
+          {
+            "char": "奴",
+            "start": 7.778,
+            "end": 8.018,
+            "score": 0.917,
+            "absoluteStartMs": 2322778,
+            "absoluteEndMs": 2323018
+          },
+          {
+            "char": "を",
+            "start": 8.018,
+            "end": 8.058,
+            "score": 0.5,
+            "absoluteStartMs": 2323018,
+            "absoluteEndMs": 2323058
+          }
+        ]
+      },
+      "originalActualCueFrameRange": [
+        24980,
+        24983
+      ],
+      "newDerivedOutputFrameRange": [
+        24814,
+        24921
+      ],
+      "newDerivedFrameCount": 107,
+      "frameDerivation": "existing 30fps endpoint rounding; source offset0; group28 output24112-source68883; arithmetic only, no formal adoption"
+    },
+    {
+      "originalGlobalCue": 464,
+      "text": "食い止めなければ",
+      "originalStt": {
+        "text": "食い止めなければ",
+        "startMs": 2325125,
+        "endMs": 2325285,
+        "durationMs": 160,
+        "characters": [
+          {
+            "char": "食",
+            "start": 2325.125,
+            "end": 2325.145,
+            "score": 0.0,
+            "absoluteStartMs": 2325125,
+            "absoluteEndMs": 2325145
+          },
+          {
+            "char": "い",
+            "start": 2325.145,
+            "end": 2325.165,
+            "score": 0.0,
+            "absoluteStartMs": 2325145,
+            "absoluteEndMs": 2325165
+          },
+          {
+            "char": "止",
+            "start": 2325.165,
+            "end": 2325.185,
+            "score": 0.0,
+            "absoluteStartMs": 2325165,
+            "absoluteEndMs": 2325185
+          },
+          {
+            "char": "め",
+            "start": 2325.185,
+            "end": 2325.205,
+            "score": 0.0,
+            "absoluteStartMs": 2325185,
+            "absoluteEndMs": 2325205
+          },
+          {
+            "char": "な",
+            "start": 2325.205,
+            "end": 2325.225,
+            "score": 0.0,
+            "absoluteStartMs": 2325205,
+            "absoluteEndMs": 2325225
+          },
+          {
+            "char": "け",
+            "start": 2325.225,
+            "end": 2325.245,
+            "score": 0.0,
+            "absoluteStartMs": 2325225,
+            "absoluteEndMs": 2325245
+          },
+          {
+            "char": "れ",
+            "start": 2325.245,
+            "end": 2325.265,
+            "score": 0.0,
+            "absoluteStartMs": 2325245,
+            "absoluteEndMs": 2325265
+          },
+          {
+            "char": "ば",
+            "start": 2325.265,
+            "end": 2325.285,
+            "score": 0.0,
+            "absoluteStartMs": 2325265,
+            "absoluteEndMs": 2325285
+          }
+        ]
+      },
+      "newStt": {
+        "text": "食い止めなければ",
+        "startMs": 2323058,
+        "endMs": 2323839,
+        "durationMs": 781,
+        "characters": [
+          {
+            "char": "食",
+            "start": 8.058,
+            "end": 8.219,
+            "score": 0.875,
+            "absoluteStartMs": 2323058,
+            "absoluteEndMs": 2323219
+          },
+          {
+            "char": "い",
+            "start": 8.219,
+            "end": 8.419,
+            "score": 0.9,
+            "absoluteStartMs": 2323219,
+            "absoluteEndMs": 2323419
+          },
+          {
+            "char": "止",
+            "start": 8.419,
+            "end": 8.439,
+            "score": 0.0,
+            "absoluteStartMs": 2323419,
+            "absoluteEndMs": 2323439
+          },
+          {
+            "char": "め",
+            "start": 8.439,
+            "end": 8.599,
+            "score": 0.875,
+            "absoluteStartMs": 2323439,
+            "absoluteEndMs": 2323599
+          },
+          {
+            "char": "な",
+            "start": 8.599,
+            "end": 8.619,
+            "score": 0.0,
+            "absoluteStartMs": 2323599,
+            "absoluteEndMs": 2323619
+          },
+          {
+            "char": "け",
+            "start": 8.619,
+            "end": 8.639,
+            "score": 0.0,
+            "absoluteStartMs": 2323619,
+            "absoluteEndMs": 2323639
+          },
+          {
+            "char": "れ",
+            "start": 8.639,
+            "end": 8.819,
+            "score": 0.889,
+            "absoluteStartMs": 2323639,
+            "absoluteEndMs": 2323819
+          },
+          {
+            "char": "ば",
+            "start": 8.819,
+            "end": 8.839,
+            "score": 0.0,
+            "absoluteStartMs": 2323819,
+            "absoluteEndMs": 2323839
+          }
+        ]
+      },
+      "originalActualCueFrameRange": [
+        24983,
+        24988
+      ],
+      "newDerivedOutputFrameRange": [
+        24921,
+        24944
+      ],
+      "newDerivedFrameCount": 23,
+      "frameDerivation": "existing 30fps endpoint rounding; source offset0; group28 output24112-source68883; arithmetic only, no formal adoption"
+    },
+    {
+      "originalGlobalCue": 465,
+      "text": "世界が終わる",
+      "originalStt": {
+        "text": "世界が終わる",
+        "startMs": 2325285,
+        "endMs": 2325405,
+        "durationMs": 120,
+        "characters": [
+          {
+            "char": "世",
+            "start": 2325.285,
+            "end": 2325.305,
+            "score": 0.0,
+            "absoluteStartMs": 2325285,
+            "absoluteEndMs": 2325305
+          },
+          {
+            "char": "界",
+            "start": 2325.305,
+            "end": 2325.325,
+            "score": 0.0,
+            "absoluteStartMs": 2325305,
+            "absoluteEndMs": 2325325
+          },
+          {
+            "char": "が",
+            "start": 2325.325,
+            "end": 2325.345,
+            "score": 0.0,
+            "absoluteStartMs": 2325325,
+            "absoluteEndMs": 2325345
+          },
+          {
+            "char": "終",
+            "start": 2325.345,
+            "end": 2325.365,
+            "score": 0.0,
+            "absoluteStartMs": 2325345,
+            "absoluteEndMs": 2325365
+          },
+          {
+            "char": "わ",
+            "start": 2325.365,
+            "end": 2325.385,
+            "score": 0.0,
+            "absoluteStartMs": 2325365,
+            "absoluteEndMs": 2325385
+          },
+          {
+            "char": "る",
+            "start": 2325.385,
+            "end": 2325.405,
+            "score": 0.0,
+            "absoluteStartMs": 2325385,
+            "absoluteEndMs": 2325405
+          }
+        ]
+      },
+      "newStt": {
+        "text": "世界が終わる",
+        "startMs": 2323839,
+        "endMs": 2325081,
+        "durationMs": 1242,
+        "characters": [
+          {
+            "char": "世",
+            "start": 8.839,
+            "end": 9.38,
+            "score": 0.963,
+            "absoluteStartMs": 2323839,
+            "absoluteEndMs": 2324380
+          },
+          {
+            "char": "界",
+            "start": 9.38,
+            "end": 10.001,
+            "score": 0.968,
+            "absoluteStartMs": 2324380,
+            "absoluteEndMs": 2325001
+          },
+          {
+            "char": "が",
+            "start": 10.001,
+            "end": 10.021,
+            "score": 0.0,
+            "absoluteStartMs": 2325001,
+            "absoluteEndMs": 2325021
+          },
+          {
+            "char": "終",
+            "start": 10.021,
+            "end": 10.041,
+            "score": 0.0,
+            "absoluteStartMs": 2325021,
+            "absoluteEndMs": 2325041
+          },
+          {
+            "char": "わ",
+            "start": 10.041,
+            "end": 10.061,
+            "score": 0.0,
+            "absoluteStartMs": 2325041,
+            "absoluteEndMs": 2325061
+          },
+          {
+            "char": "る",
+            "start": 10.061,
+            "end": 10.081,
+            "score": 0.0,
+            "absoluteStartMs": 2325061,
+            "absoluteEndMs": 2325081
+          }
+        ]
+      },
+      "originalActualCueFrameRange": [
+        24988,
+        24991
+      ],
+      "newDerivedOutputFrameRange": [
+        24944,
+        24981
+      ],
+      "newDerivedFrameCount": 37,
+      "frameDerivation": "existing 30fps endpoint rounding; source offset0; group28 output24112-source68883; arithmetic only, no formal adoption"
+    },
+    {
+      "originalGlobalCue": 466,
+      "text": "なんか",
+      "originalStt": {
+        "text": "なんか",
+        "startMs": 2325405,
+        "endMs": 2325465,
+        "durationMs": 60,
+        "characters": [
+          {
+            "char": "な",
+            "start": 2325.405,
+            "end": 2325.425,
+            "score": 0.0,
+            "absoluteStartMs": 2325405,
+            "absoluteEndMs": 2325425
+          },
+          {
+            "char": "ん",
+            "start": 2325.425,
+            "end": 2325.445,
+            "score": 0.0,
+            "absoluteStartMs": 2325425,
+            "absoluteEndMs": 2325445
+          },
+          {
+            "char": "か",
+            "start": 2325.445,
+            "end": 2325.465,
+            "score": 0.0,
+            "absoluteStartMs": 2325445,
+            "absoluteEndMs": 2325465
+          }
+        ]
+      },
+      "newStt": {
+        "text": "なんか",
+        "startMs": 2325081,
+        "endMs": 2325141,
+        "durationMs": 60,
+        "characters": [
+          {
+            "char": "な",
+            "start": 10.081,
+            "end": 10.101,
+            "score": 0.0,
+            "absoluteStartMs": 2325081,
+            "absoluteEndMs": 2325101
+          },
+          {
+            "char": "ん",
+            "start": 10.101,
+            "end": 10.121,
+            "score": 0.0,
+            "absoluteStartMs": 2325101,
+            "absoluteEndMs": 2325121
+          },
+          {
+            "char": "か",
+            "start": 10.121,
+            "end": 10.141,
+            "score": 0.0,
+            "absoluteStartMs": 2325121,
+            "absoluteEndMs": 2325141
+          }
+        ]
+      },
+      "originalActualCueFrameRange": [
+        24991,
+        24993
+      ],
+      "newDerivedOutputFrameRange": [
+        24981,
+        24983
+      ],
+      "newDerivedFrameCount": 2,
+      "frameDerivation": "existing 30fps endpoint rounding; source offset0; group28 output24112-source68883; arithmetic only, no formal adoption"
+    },
+    {
+      "originalGlobalCue": 467,
+      "text": "いい雰囲気にしないで",
+      "originalStt": {
+        "text": "いい雰囲気にしないで",
+        "startMs": 2325465,
+        "endMs": 2325826,
+        "durationMs": 361,
+        "characters": [
+          {
+            "char": "い",
+            "start": 2325.465,
+            "end": 2325.485,
+            "score": 0.0,
+            "absoluteStartMs": 2325465,
+            "absoluteEndMs": 2325485
+          },
+          {
+            "char": "い",
+            "start": 2325.485,
+            "end": 2325.505,
+            "score": 0.0,
+            "absoluteStartMs": 2325485,
+            "absoluteEndMs": 2325505
+          },
+          {
+            "char": "雰",
+            "start": 2325.505,
+            "end": 2325.525,
+            "score": 0.0,
+            "absoluteStartMs": 2325505,
+            "absoluteEndMs": 2325525
+          },
+          {
+            "char": "囲",
+            "start": 2325.525,
+            "end": 2325.686,
+            "score": 0.875,
+            "absoluteStartMs": 2325525,
+            "absoluteEndMs": 2325686
+          },
+          {
+            "char": "気",
+            "start": 2325.686,
+            "end": 2325.706,
+            "score": 0.0,
+            "absoluteStartMs": 2325686,
+            "absoluteEndMs": 2325706
+          },
+          {
+            "char": "に",
+            "start": 2325.706,
+            "end": 2325.726,
+            "score": 0.0,
+            "absoluteStartMs": 2325706,
+            "absoluteEndMs": 2325726
+          },
+          {
+            "char": "し",
+            "start": 2325.726,
+            "end": 2325.766,
+            "score": 0.5,
+            "absoluteStartMs": 2325726,
+            "absoluteEndMs": 2325766
+          },
+          {
+            "char": "な",
+            "start": 2325.766,
+            "end": 2325.786,
+            "score": 0.0,
+            "absoluteStartMs": 2325766,
+            "absoluteEndMs": 2325786
+          },
+          {
+            "char": "い",
+            "start": 2325.786,
+            "end": 2325.806,
+            "score": 0.0,
+            "absoluteStartMs": 2325786,
+            "absoluteEndMs": 2325806
+          },
+          {
+            "char": "で",
+            "start": 2325.806,
+            "end": 2325.826,
+            "score": 0.0,
+            "absoluteStartMs": 2325806,
+            "absoluteEndMs": 2325826
+          }
+        ]
+      },
+      "newStt": {
+        "text": "いい雰囲気にしないで",
+        "startMs": 2325141,
+        "endMs": 2325481,
+        "durationMs": 340,
+        "characters": [
+          {
+            "char": "い",
+            "start": 10.141,
+            "end": 10.161,
+            "score": 0.0,
+            "absoluteStartMs": 2325141,
+            "absoluteEndMs": 2325161
+          },
+          {
+            "char": "い",
+            "start": 10.161,
+            "end": 10.181,
+            "score": 0.0,
+            "absoluteStartMs": 2325161,
+            "absoluteEndMs": 2325181
+          },
+          {
+            "char": "雰",
+            "start": 10.181,
+            "end": 10.201,
+            "score": 0.0,
+            "absoluteStartMs": 2325181,
+            "absoluteEndMs": 2325201
+          },
+          {
+            "char": "囲",
+            "start": 10.201,
+            "end": 10.221,
+            "score": 0.0,
+            "absoluteStartMs": 2325201,
+            "absoluteEndMs": 2325221
+          },
+          {
+            "char": "気",
+            "start": 10.221,
+            "end": 10.241,
+            "score": 0.0,
+            "absoluteStartMs": 2325221,
+            "absoluteEndMs": 2325241
+          },
+          {
+            "char": "に",
+            "start": 10.241,
+            "end": 10.261,
+            "score": 0.0,
+            "absoluteStartMs": 2325241,
+            "absoluteEndMs": 2325261
+          },
+          {
+            "char": "し",
+            "start": 10.261,
+            "end": 10.321,
+            "score": 0.667,
+            "absoluteStartMs": 2325261,
+            "absoluteEndMs": 2325321
+          },
+          {
+            "char": "な",
+            "start": 10.321,
+            "end": 10.441,
+            "score": 0.833,
+            "absoluteStartMs": 2325321,
+            "absoluteEndMs": 2325441
+          },
+          {
+            "char": "い",
+            "start": 10.441,
+            "end": 10.461,
+            "score": 0.003,
+            "absoluteStartMs": 2325441,
+            "absoluteEndMs": 2325461
+          },
+          {
+            "char": "で",
+            "start": 10.461,
+            "end": 10.481,
+            "score": 0.0,
+            "absoluteStartMs": 2325461,
+            "absoluteEndMs": 2325481
+          }
+        ]
+      },
+      "originalActualCueFrameRange": [
+        24993,
+        25004
+      ],
+      "newDerivedOutputFrameRange": [
+        24983,
+        24993
+      ],
+      "newDerivedFrameCount": 10,
+      "frameDerivation": "existing 30fps endpoint rounding; source offset0; group28 output24112-source68883; arithmetic only, no formal adoption"
+    }
+  ],
+  "overlapsIfOnlyCue465ClockReplaced": [
+    {
+      "originalGlobalCue": 461,
+      "text": "お前たち…",
+      "originalFrameRange": [
+        24938,
+        24945
+      ],
+      "intersectionFrameRange": [
+        24944,
+        24945
+      ]
+    },
+    {
+      "originalGlobalCue": 462,
+      "text": "頼んだぞ…",
+      "originalFrameRange": [
+        24945,
+        24980
+      ],
+      "intersectionFrameRange": [
+        24945,
+        24980
+      ]
+    },
+    {
+      "originalGlobalCue": 463,
+      "text": "ここで奴を",
+      "originalFrameRange": [
+        24980,
+        24983
+      ],
+      "intersectionFrameRange": [
+        24980,
+        24981
+      ]
+    }
+  ],
+  "limits": {
+    "exactCriticalPhraseTextMatch": true,
+    "all19OldRawCharsScore0And20ms": true,
+    "newNonzeroScores": [
+      {
+        "char": "こ",
+        "absoluteStartMs": 2319514,
+        "absoluteEndMs": 2322738,
+        "score": 0.994
+      },
+      {
+        "char": "奴",
+        "absoluteStartMs": 2322778,
+        "absoluteEndMs": 2323018,
+        "score": 0.917
+      },
+      {
+        "char": "を",
+        "absoluteStartMs": 2323018,
+        "absoluteEndMs": 2323058,
+        "score": 0.5
+      },
+      {
+        "char": "食",
+        "absoluteStartMs": 2323058,
+        "absoluteEndMs": 2323219,
+        "score": 0.875
+      },
+      {
+        "char": "い",
+        "absoluteStartMs": 2323219,
+        "absoluteEndMs": 2323419,
+        "score": 0.9
+      },
+      {
+        "char": "め",
+        "absoluteStartMs": 2323439,
+        "absoluteEndMs": 2323599,
+        "score": 0.875
+      },
+      {
+        "char": "れ",
+        "absoluteStartMs": 2323639,
+        "absoluteEndMs": 2323819,
+        "score": 0.889
+      },
+      {
+        "char": "世",
+        "absoluteStartMs": 2323839,
+        "absoluteEndMs": 2324380,
+        "score": 0.963
+      },
+      {
+        "char": "界",
+        "absoluteStartMs": 2324380,
+        "absoluteEndMs": 2325001,
+        "score": 0.968
+      }
+    ],
+    "newEndingFourCharsStill20msScore0": true,
+    "newFirstKoSpanMs": 3224,
+    "priorUtteranceMissing": [
+      "お前らもその武器で戦えばいいじゃん!",
+      "お前たち…",
+      "頼んだぞ…"
+    ],
+    "actualNewText": "ここで奴を食い止めなければ世界が終わるなんかいい雰囲気にしないでいい雰囲気にすべての力を合わせて奴を倒すのだおばあちゃんが封印",
+    "bodyDifferences": [
+      "前振りの発話が新ASRにはない",
+      "原の!等の句読点が新ASRで欠ける",
+      "原「全て」に対し新「すべて」"
+    ],
+    "newWholeGroupReplacementPermitted": false,
+    "auditoryConfirmation": false,
+    "correctnessConfirmed": false
+  },
+  "assessment": {
+    "old120msClockConfidence": "旧全score0/20ms時計をそのまま根拠にした短表示は、新同pipeline結果と強く矛盾する。",
+    "localCorrectionEvidence": "危機の19文字全文を変更せず、特に世/界の高scoreアンカーで局所派生訂正候補を裏付ける機械根拠は得られた。",
+    "adoptableClockEvidence": "465単独をそのまま差し替えるだけの根拠は不足。元461/462/463との重複と前文のASR欠落、末尾が終わるのscore0が残る。",
+    "correctness": "機械再推定であり聴取・正解・品質の確定ではない。",
+    "minimalNextScope": "group28の該当連続発話280と前後の実本文/既存atomを保持し、訂正clockの隣接順序/重複を明示的に解消できる派生案に限定。新ASR欠落部分の原本文を削除したり、新ASRの「すべて」へ置換しない。",
+    "notDone": [
+      "原STT/normal/atom/時計の上書き",
+      "repo/Git/一般設定変更",
+      "全尺STT/新素材取得",
+      "有料API",
+      "人間による聴取",
+      "表示clockの正式受理/製造/QC"
+    ],
+    "cue571": "対象区間外のため新根拠なし、変更なし"
+  }
+}

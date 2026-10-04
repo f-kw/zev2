@@ -7,6 +7,7 @@ import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {
   projectPresentationInstructionRendererCompletionV002 as projectDraw,
   qualifyPresentationInstructionRendererCompletionV002 as qualifyDraw,
+  readDigestRepresentativeCompletionModuleV001,
 } from './run_presentation_instruction_renderer_job_v002.ts';
 import {
   projectAdoptedRendererCompletionV001 as projectCore,
@@ -18,6 +19,20 @@ import {
   persistApprovedDigestRepresentativePendingEvidenceV001,
   evaluateDigestRepresentativeCompletionV001,
 } from './digest_representative_completion_v001.mjs';
+
+test('Node20 tsx caller reads the native renderer qualification module instance', async () => {
+  const native = await import(new URL('./digest_representative_completion_v001.mjs', import.meta.url).href);
+  const caller = await readDigestRepresentativeCompletionModuleV001();
+  for (const name of [
+    'resolveApprovedDigestVerificationPolicyV001',
+    'assertQualifiedDigestRepresentativeCompletionV001',
+    'rebindPublishedDigestRepresentativeCompletionV001',
+    'persistApprovedDigestRepresentativePendingEvidenceV001',
+  ]) assert.equal(caller[name], native[name], name + ' must share native module/private authority');
+  await assert.rejects(caller.assertQualifiedDigestRepresentativeCompletionV001(
+    Object.freeze({status: 'confirmation-pending'}), undefined, '/tmp/no-media-authority'),
+  /QUALIFIED_REPRESENTATIVE_COMPLETION_REQUIRED/);
+});
 
 // Small synthetic result shapes exercise the production projections only.
 // They carry no private authority, grant, owner/device, media, or publication.
@@ -193,7 +208,14 @@ function runActualPublication(value: any, published: any, observations: any, ove
       assert.equal(args.publishedMediaPath, published.bindings.completedMedia.path);return {technicalEvidenceBinding: technical, publishedMediaBinding: media};
     }, ...overrides,
   };
-  return {run: compile('async function() {\n' + publicationCallerSource.slice(start, end).trim(), dependencies), media, technical};
+  const representativeOperations = {
+    assertQualifiedDigestRepresentativeCompletionV001: dependencies.assertQualifiedDigestRepresentativeCompletionV001,
+    rebindPublishedDigestRepresentativeCompletionV001: dependencies.rebindPublishedDigestRepresentativeCompletionV001,
+    persistApprovedDigestRepresentativePendingEvidenceV001: dependencies.persistApprovedDigestRepresentativePendingEvidenceV001,
+  };
+  return {run: compile('async function() {\n' + publicationCallerSource.slice(start, end).trim(), {
+    ...dependencies, readDigestRepresentativeCompletionModuleV001: async () => representativeOperations,
+  }), media, technical};
 }
 function runActualCore(result: any, context: any, observations: any) {
   const start = publicationCoreSource.indexOf('export async function qualifyAdoptedRendererCompletionV001(');

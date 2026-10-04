@@ -1,0 +1,594 @@
+{
+  "schemaVersion": "digest-fade-native-sampling-readonly-proposal-v002",
+  "readAt": "2026-10-04T12:57:42.133513+00:00",
+  "status": "proposal-only; unapplied and unexecuted",
+  "currentSavedRecovery": "unchanged; neither proposal is injected into current saved composite recovery",
+  "currentScope": "static source/saved metadata reading only; scratch written; no product/Git/SSD/process/media/QC changes",
+  "fade": {
+    "formula": "D=min(4,max(1,ceil(F/2))); a(n,F)=min(1,(n+1)/D,(F-n)/D)",
+    "phase": "absolute cue phase N+phaseOffset and n+phaseOffset retained across range cuts",
+    "enable": "lt(phase,D-1)+gt(phase,F-D)",
+    "examples": [
+      {
+        "displayFrameCount": 1,
+        "effectiveFadeFrames": 1,
+        "timeOpacitySequence": [
+          1
+        ],
+        "fullOpacityFrameCount": 1
+      },
+      {
+        "displayFrameCount": 2,
+        "effectiveFadeFrames": 1,
+        "timeOpacitySequence": [
+          1,
+          1
+        ],
+        "fullOpacityFrameCount": 2
+      },
+      {
+        "displayFrameCount": 3,
+        "effectiveFadeFrames": 2,
+        "timeOpacitySequence": [
+          0.5,
+          1,
+          0.5
+        ],
+        "fullOpacityFrameCount": 1
+      },
+      {
+        "displayFrameCount": 4,
+        "effectiveFadeFrames": 2,
+        "timeOpacitySequence": [
+          0.5,
+          1,
+          1,
+          0.5
+        ],
+        "fullOpacityFrameCount": 2
+      },
+      {
+        "displayFrameCount": 5,
+        "effectiveFadeFrames": 3,
+        "timeOpacitySequence": [
+          0.3333333333333333,
+          0.6666666666666666,
+          1,
+          0.6666666666666666,
+          0.3333333333333333
+        ],
+        "fullOpacityFrameCount": 1
+      },
+      {
+        "displayFrameCount": 6,
+        "effectiveFadeFrames": 3,
+        "timeOpacitySequence": [
+          0.3333333333333333,
+          0.6666666666666666,
+          1,
+          1,
+          0.6666666666666666,
+          0.3333333333333333
+        ],
+        "fullOpacityFrameCount": 2
+      },
+      {
+        "displayFrameCount": 7,
+        "effectiveFadeFrames": 4,
+        "timeOpacitySequence": [
+          0.25,
+          0.5,
+          0.75,
+          1,
+          0.75,
+          0.5,
+          0.25
+        ],
+        "fullOpacityFrameCount": 1
+      },
+      {
+        "displayFrameCount": 8,
+        "effectiveFadeFrames": 4,
+        "timeOpacitySequence": [
+          0.25,
+          0.5,
+          0.75,
+          1,
+          1,
+          0.75,
+          0.5,
+          0.25
+        ],
+        "fullOpacityFrameCount": 2
+      }
+    ],
+    "affectedCueCount": 50,
+    "unaffectedCueCount": 601,
+    "affectedRangeCount": 35,
+    "affectedRangeFrames": 7350,
+    "affectedRanges": [
+      {
+        "rangeOrdinal": 1,
+        "startFrame": 0,
+        "endFrameExclusive": 210,
+        "cueOrdinals": [
+          8
+        ]
+      },
+      {
+        "rangeOrdinal": 15,
+        "startFrame": 2940,
+        "endFrameExclusive": 3150,
+        "cueOrdinals": [
+          49
+        ]
+      },
+      {
+        "rangeOrdinal": 24,
+        "startFrame": 4830,
+        "endFrameExclusive": 5040,
+        "cueOrdinals": [
+          95
+        ]
+      },
+      {
+        "rangeOrdinal": 27,
+        "startFrame": 5460,
+        "endFrameExclusive": 5670,
+        "cueOrdinals": [
+          109
+        ]
+      },
+      {
+        "rangeOrdinal": 34,
+        "startFrame": 6930,
+        "endFrameExclusive": 7140,
+        "cueOrdinals": [
+          139
+        ]
+      },
+      {
+        "rangeOrdinal": 43,
+        "startFrame": 8820,
+        "endFrameExclusive": 9030,
+        "cueOrdinals": [
+          176
+        ]
+      },
+      {
+        "rangeOrdinal": 44,
+        "startFrame": 9030,
+        "endFrameExclusive": 9240,
+        "cueOrdinals": [
+          183
+        ]
+      },
+      {
+        "rangeOrdinal": 49,
+        "startFrame": 10080,
+        "endFrameExclusive": 10290,
+        "cueOrdinals": [
+          203
+        ]
+      },
+      {
+        "rangeOrdinal": 71,
+        "startFrame": 14700,
+        "endFrameExclusive": 14910,
+        "cueOrdinals": [
+          284
+        ]
+      },
+      {
+        "rangeOrdinal": 78,
+        "startFrame": 16170,
+        "endFrameExclusive": 16380,
+        "cueOrdinals": [
+          304
+        ]
+      },
+      {
+        "rangeOrdinal": 79,
+        "startFrame": 16380,
+        "endFrameExclusive": 16590,
+        "cueOrdinals": [
+          310,
+          312
+        ]
+      },
+      {
+        "rangeOrdinal": 91,
+        "startFrame": 18900,
+        "endFrameExclusive": 19110,
+        "cueOrdinals": [
+          344
+        ]
+      },
+      {
+        "rangeOrdinal": 92,
+        "startFrame": 19110,
+        "endFrameExclusive": 19320,
+        "cueOrdinals": [
+          352
+        ]
+      },
+      {
+        "rangeOrdinal": 96,
+        "startFrame": 19950,
+        "endFrameExclusive": 20160,
+        "cueOrdinals": [
+          365,
+          367
+        ]
+      },
+      {
+        "rangeOrdinal": 101,
+        "startFrame": 21000,
+        "endFrameExclusive": 21210,
+        "cueOrdinals": [
+          388
+        ]
+      },
+      {
+        "rangeOrdinal": 103,
+        "startFrame": 21420,
+        "endFrameExclusive": 21630,
+        "cueOrdinals": [
+          397
+        ]
+      },
+      {
+        "rangeOrdinal": 108,
+        "startFrame": 22470,
+        "endFrameExclusive": 22680,
+        "cueOrdinals": [
+          416
+        ]
+      },
+      {
+        "rangeOrdinal": 119,
+        "startFrame": 24780,
+        "endFrameExclusive": 24990,
+        "cueOrdinals": [
+          463,
+          464,
+          465
+        ]
+      },
+      {
+        "rangeOrdinal": 120,
+        "startFrame": 24990,
+        "endFrameExclusive": 25200,
+        "cueOrdinals": [
+          465,
+          466
+        ]
+      },
+      {
+        "rangeOrdinal": 121,
+        "startFrame": 25200,
+        "endFrameExclusive": 25410,
+        "cueOrdinals": [
+          476,
+          478
+        ]
+      },
+      {
+        "rangeOrdinal": 124,
+        "startFrame": 25830,
+        "endFrameExclusive": 26040,
+        "cueOrdinals": [
+          487
+        ]
+      },
+      {
+        "rangeOrdinal": 126,
+        "startFrame": 26250,
+        "endFrameExclusive": 26460,
+        "cueOrdinals": [
+          491,
+          492,
+          493,
+          494
+        ]
+      },
+      {
+        "rangeOrdinal": 132,
+        "startFrame": 27510,
+        "endFrameExclusive": 27720,
+        "cueOrdinals": [
+          508
+        ]
+      },
+      {
+        "rangeOrdinal": 133,
+        "startFrame": 27720,
+        "endFrameExclusive": 27930,
+        "cueOrdinals": [
+          514,
+          515,
+          516,
+          517
+        ]
+      },
+      {
+        "rangeOrdinal": 139,
+        "startFrame": 28980,
+        "endFrameExclusive": 29190,
+        "cueOrdinals": [
+          523
+        ]
+      },
+      {
+        "rangeOrdinal": 140,
+        "startFrame": 29190,
+        "endFrameExclusive": 29400,
+        "cueOrdinals": [
+          527
+        ]
+      },
+      {
+        "rangeOrdinal": 151,
+        "startFrame": 31500,
+        "endFrameExclusive": 31710,
+        "cueOrdinals": [
+          562
+        ]
+      },
+      {
+        "rangeOrdinal": 156,
+        "startFrame": 32550,
+        "endFrameExclusive": 32760,
+        "cueOrdinals": [
+          571
+        ]
+      },
+      {
+        "rangeOrdinal": 157,
+        "startFrame": 32760,
+        "endFrameExclusive": 32970,
+        "cueOrdinals": [
+          576
+        ]
+      },
+      {
+        "rangeOrdinal": 158,
+        "startFrame": 32970,
+        "endFrameExclusive": 33180,
+        "cueOrdinals": [
+          582
+        ]
+      },
+      {
+        "rangeOrdinal": 162,
+        "startFrame": 33810,
+        "endFrameExclusive": 34020,
+        "cueOrdinals": [
+          596,
+          599,
+          603
+        ]
+      },
+      {
+        "rangeOrdinal": 166,
+        "startFrame": 34650,
+        "endFrameExclusive": 34860,
+        "cueOrdinals": [
+          612
+        ]
+      },
+      {
+        "rangeOrdinal": 170,
+        "startFrame": 35490,
+        "endFrameExclusive": 35700,
+        "cueOrdinals": [
+          615
+        ]
+      },
+      {
+        "rangeOrdinal": 172,
+        "startFrame": 35910,
+        "endFrameExclusive": 36120,
+        "cueOrdinals": [
+          626,
+          627,
+          629
+        ]
+      },
+      {
+        "rangeOrdinal": 179,
+        "startFrame": 37380,
+        "endFrameExclusive": 37590,
+        "cueOrdinals": [
+          650
+        ]
+      }
+    ],
+    "primaryPngReusable": true,
+    "pngReuseConditions": [
+      "same actual PNG/props/font/style/canvas/placement/glyph SHA and original ID/clock bindings qualified",
+      "opacity envelope changes only FFmpeg graph; overlay Remotion component has no timed caption fade",
+      "216px/108px/max2lines/position/colors/border/glow not changed",
+      "retain old work/MP4/logs; new output SHA and comparison evidence required after any authorized recomposition"
+    ],
+    "formalMinimalRecomposition": "current formal path generates all 180 finite producers into one continuous encoder; no saved raw YUV or independently encoded range media. Recompose complete37619frame MP4 in fresh owned output; do not claim35-range patch is existing formal path.",
+    "algorithmPath": "evals/clip_composition/render_presentation_v002.mjs:buildPresentationCompositeArgumentsV001 approximately1066-1073",
+    "algorithmDeltaEstimateLines": "8-15; D replaces fixed4 and enable thresholds",
+    "lowMemoryAlgorithmChangeRequired": false,
+    "defaultScopeBoundary": "Changing existing builder in place affects every future caller using that implementation, including full-QC replay. It is a versioned behavior change. Do not reuse old job/trust/code SHA to pretend old formula. If parent requires only one candidate branch and preservation of old default, add fixed scoped builder/qualified compose dispatch instead; do not infer or silently fallback.",
+    "freshBindingsRequired": [
+      "new implementation actualSHA and code/renderer-dependency binding",
+      "new graphSHA/receipt/MP4SHA after authorized recomposition",
+      "representative evidence tied to new completed media; old composite samples do not certify new MP4"
+    ],
+    "noReadabilityClaim": "F=1 is still33.333ms; F=3 is100ms. Reaching full opacity does not establish readable duration or change clocks."
+  },
+  "nativeSampling": {
+    "selectionSource": "resolveApprovedDigestVerificationPolicyV001 opaque approved context and exact job/authorization policy; existing selectedIds, not an unbound public flag",
+    "selectedIds": [
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+      "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651"
+    ],
+    "primaryCountUnchanged": 651,
+    "repeatCountProposed": 8,
+    "lineMaskCountProposed": 14,
+    "repeatNotExecutedCount": 643,
+    "lineMaskNotExecutedCount": 1028,
+    "currentMandatoryCalibrationCount": 0,
+    "calibrationRule": "Keep original top-band/panel visible-center calibration before sampling branch, with real props correction/hash evidence. Never relabel calibration-derived geometry as a measured post-correction line mask. For any future special-layout plan needing unprovided per-line actual proof, qualify explicit calibration-aware rule or reject that unsupported sampled case; no silent full fallback or exemption.",
+    "allPrimaryChecksRetained": [
+      "all primary still rendering and font/glyph readiness",
+      "all physical primary PNG SHA/props SHA/ID/order/clock bindings",
+      "all primary real alphaMax/alphaBounds and108px canvas safety checks",
+      "whole-plan layout inspector, logical indexedLines/max2/layout rects/temporal spatial geometry",
+      "all applicationResults and plan element completeness/uniqueness",
+      "all required placement calibration",
+      "completed media/frame and original audio packet payload preservation",
+      "all disk/memory/pressure/own process and atomic no-replace gates"
+    ],
+    "checksSampledOnly": [
+      "native repeat byte determinism",
+      "isolated per-line actual alpha safety and positive intersection checks"
+    ],
+    "existingBlocker": "evals/clip_composition/presentation_renderer_qc_v002.mjs:485-499 requires measured lineAlphaBounds for every element even when requireFinalVisibility=false; skip loop alone fails OVERLAY_ALPHA_EMPTY",
+    "productChanges": [
+      {
+        "path": "evals/clip_composition/render_presentation_v002.mjs",
+        "functions": [
+          "executeValidatedPresentationDrawAndQcV001 native loop",
+          "overlay-preflight evaluateQc dispatch"
+        ],
+        "minimumResponsibility": "primary/calibration unconditional; repeat and diagnostic line-mask only selected; selected errors fatal; real per-instruction check status and coverage stored; approved representative evaluator only for this mode",
+        "approximateChangedLines": "60-100"
+      },
+      {
+        "path": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "functions": [
+          "private evaluatePresentationRendererQc",
+          "new explicit representative-native scoped evaluator wrapper"
+        ],
+        "minimumResponsibility": "keep ordinary evaluator/full behavior; all application/primary/layout/media checks stay; measured line checks only exact selected scope; unselected line evidence explicit not-executed, no fabricated bounds; report scope/counts",
+        "approximateChangedLines": "60-100"
+      },
+      {
+        "path": "evals/clip_composition/digest_representative_completion_v001.mjs",
+        "functions": [
+          "finishApprovedDigestRepresentativeCompletionV001",
+          "evaluateDigestRepresentativeCompletionV001",
+          "persistApprovedDigestRepresentativePendingEvidenceV001",
+          "readApprovedDigestPendingVerificationV001"
+        ],
+        "minimumResponsibility": "opaque policy/plan selection qualifies scope; wholeRules covers actual all-primary/logical checks only; sampled native checks separate; pending evidence retains scope; get/finalize rebuild same coverage against original code/policy, reject loss or substitution",
+        "approximateChangedLines": "50-100"
+      }
+    ],
+    "callerCoreAndPythonSchemaExpectedChanges": "no selection field added to job/authorization policy; existing implementation/dependency SHA bindings must include changed QC/module. Additional code changes only if actual receipt reader strips new inspection coverage; do not assert before review.",
+    "coverageEvidenceProposal": {
+      "schemaVersion": "digest-native-inspection-coverage-v001",
+      "bindingKeys": [
+        "rendererPlanCanonicalSha256",
+        "verificationPolicyCanonicalSha256",
+        "approvedJobBinding",
+        "implementationSha"
+      ],
+      "alwaysAll": [
+        "primaryPng",
+        "primaryAlpha",
+        "layoutLogical",
+        "applicationBindings"
+      ],
+      "sampled": [
+        "repeatDeterminism",
+        "lineMaskPixelGeometry"
+      ],
+      "selectedInstructionIds": "exact approved policy order",
+      "perUnselectedRepeat": "status not-executed; no repeatSha256",
+      "perUnselectedLineMask": "status not-executed; no measured line bounds",
+      "counts": "actual generated/inspected counts, never pre-filled passed",
+      "fullVisibility": "existing not-executed",
+      "qualityObservation": "wholeVideoPlayback/audioListening/humanQualityAdoption remain not-evaluated unless supported distinct evidence"
+    },
+    "futureCountEstimateNoCalibration": {
+      "remotionPrimary": 651,
+      "remotionRepeat": 8,
+      "remotionLineMask": 14,
+      "remotionTotal": 673,
+      "imageMagickPrimary": 1302,
+      "imageMagickLineMask": 28,
+      "childTotal": 2003,
+      "historicalChildTotal": 5730,
+      "omittedChildTotal": 3727,
+      "noSpeedupEstimate": true
+    },
+    "meaningfulFutureRegressionCases": [
+      "policy absent: prior all-repeat/all-line-mask full-QC counts and failures unchanged",
+      "qualified selected8: all651 primary,8repeat,14line-mask; unselected643/1028 explicitly not-executed",
+      "foreign/JSON context, duplicate or unknown selectedID, changed policy/auth/code rejected before drawing",
+      "selected repeat mismatch/line unsafe/line overlap still fails",
+      "unselected missing primary or empty alpha/out-of-safearea/changed props/missing ID still fails",
+      "whole-plan layout collision/maxlines still fails independent of sampling",
+      "all required visible-center calibration still executes and unsafe unsupported special-layout scope rejects",
+      "pending/finalize/get round trip keeps exact native coverage; cannot claim all measured line checks or full QC passed",
+      "audio/frame/hash substitution and actual representative issue still reject"
+    ],
+    "existingTestsToExtend": [
+      "evals/clip_composition/digest_representative_renderer_v001.test.mjs",
+      "evals/clip_composition/digest_representative_completion_v001.test.mjs",
+      "tools/digest-quality/original-resolution-low-memory-composite.test.mjs"
+    ],
+    "testsNotRun": true
+  },
+  "actualBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "sizeBytes": 155104,
+      "fileSha256": "afba874fb4da702c2041b8f064532943c2c1b0b79278f136c34327f52cbbac0f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "sizeBytes": 19944,
+      "fileSha256": "1b15e3f4d247b0af5c85c4d9a6d9d65f9d443d7075d8a494d34a97bb6d8efdf5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_qc_v002.mjs",
+      "sizeBytes": 45197,
+      "fileSha256": "a7268c9b7e3e67907239f47367a49b338a977714114ded833586f938b1c01f0f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_representative_completion_v001.mjs",
+      "sizeBytes": 38878,
+      "fileSha256": "533411b661435343e38b369dcc014c800e4c4151451174070c8ede1cdc134046"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/presentation_renderer_entry_v001.tsx",
+      "sizeBytes": 28811,
+      "fileSha256": "96b10289383499d44d1276e933c04bc7cc26749cf8fc23ea9379d51f1bc42c1e"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5734-formal-low-memory-composite/request.json",
+      "sizeBytes": 820381,
+      "fileSha256": "66e08603d0c202572dc5b3998cd396146f63e2eed80b3dc67142a22ea12cf86c"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/scratch/layout-input.json",
+      "sizeBytes": 3195711,
+      "fileSha256": "6a8cf8bded37e6cd9a1d40b9d33c348ea770a0f78f64c16b78996ace22c9353b"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-caption-opacity-readonly-v001.json",
+      "sizeBytes": 31785,
+      "fileSha256": "c017be54a20d8478f05bba12f968b541d43cdc34d05c0ec7cb8b21d87495cefb"
+    }
+  ],
+  "limits": [
+    "static proposed arithmetic is not completed-media inspection",
+    "future native sampling reduces measured line/determinism coverage and must be recorded as contract scope change, not all-native passed",
+    "this is separate next-iteration work; current saved recovery remains exact old render/opacity/native proof"
+  ]
+}

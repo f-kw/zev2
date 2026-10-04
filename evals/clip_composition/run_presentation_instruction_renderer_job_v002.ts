@@ -38,18 +38,17 @@ import {
   buildPresentationRendererOverlayAdapterV001,
   commitValidatedPresentationArtifactsV002,
   executeValidatedPresentationDrawAndQcV001,
+  resumeApprovedDigestFailedDrawAndQcV001,
 } from './render_presentation_v002.mjs';
 import {
   createPresentationRendererProcessObserverV001,
 } from './presentation_renderer_process_observation_v001.mjs';
-import {
-  resolveApprovedDigestVerificationPolicyV001,
-  assertQualifiedDigestRepresentativeCompletionV001,
-  rebindPublishedDigestRepresentativeCompletionV001,
-  persistApprovedDigestRepresentativePendingEvidenceV001,
-} from './digest_representative_completion_v001.mjs';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
+// Use the same native ESM instance as the renderer's representative qualification.
+export const readDigestRepresentativeCompletionModuleV001 = () => import(
+  pathToFileURL(path.resolve(MODULE_DIRECTORY, 'digest_representative_completion_v001.mjs')).href
+);
 const DEFAULT_WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
 const SHA256 = /^[0-9a-f]{64}$/u;
 const WORKSPACE_PATH = /^(?!\/)(?!\.\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\\)(?!.*\/\/)[^\0]+$/u;
@@ -107,8 +106,12 @@ export async function qualifyPresentationInstructionRendererCompletionV002(draw,
   const completion = projectPresentationInstructionRendererCompletionV002(draw);
   if (completion === null) return null;
   await qualifyStorageContext(storageContext);
-  const policy = storageContext === undefined ? null
-    : await resolveApprovedDigestVerificationPolicyV001(storageContext);
+  if (storageContext === undefined) return completion.representative ? null : completion;
+  const {
+    resolveApprovedDigestVerificationPolicyV001,
+    assertQualifiedDigestRepresentativeCompletionV001,
+  } = await readDigestRepresentativeCompletionModuleV001();
+  const policy = await resolveApprovedDigestVerificationPolicyV001(storageContext);
   if (policy === null) return completion.representative ? null : completion;
   if (!completion.representative || draw.verificationMode !== policy.mode) return null;
   await assertQualifiedDigestRepresentativeCompletionV001(
@@ -518,7 +521,9 @@ export async function executePresentationInstructionRendererJobV002({
     rendererTrust,
   });
   if (common.status !== 'built') return {exitCode: 1, result: common};
-  const executeDraw = capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;
+  const savedRecovery = (storageContext?.approvedJob as Record<string, any> | undefined)?.job?.recoveryBinding !== undefined;
+  const executeDraw = savedRecovery ? resumeApprovedDigestFailedDrawAndQcV001
+    : capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;
   const overlayAdapter = capabilities.executeDraw === undefined
     ? suppliedOverlayAdapter ?? buildPresentationRendererOverlayAdapterV001({
       remotionPath: receiptBuilt.receipt.runtimeBindings.remotion.path,
@@ -568,6 +573,11 @@ export async function executePresentationInstructionRendererJobV002({
   let technicalEvidenceBinding;
   let publishedMediaBinding;
   if (completion.representative) {
+    const {
+      assertQualifiedDigestRepresentativeCompletionV001,
+      rebindPublishedDigestRepresentativeCompletionV001,
+      persistApprovedDigestRepresentativePendingEvidenceV001,
+    } = await readDigestRepresentativeCompletionModuleV001();
     if (committed.status !== 'published'
       || committed.outputDirectory !== draw.outputDirectory) {
       throw new TypeError('Representative media publication did not preserve the owned output');

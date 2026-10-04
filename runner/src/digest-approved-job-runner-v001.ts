@@ -7,7 +7,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {createReadStream} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {readQualifiedDigestApprovedJobV001, assertQualifiedDigestApprovedJobV001,
+import {readQualifiedDigestApprovedJobV001, assertQualifiedDigestApprovedJobV001, validateDigestApprovedJobConfigurationV001,
   digestJobSha256V001 as sha, digestJobRelativePathV001 as safe, type Json} from './digest-approved-job-v001.js';
 import {readApprovedDigestInputsV001, assertApprovedDigestInputsV001, prepareApprovedDigestCaptionCoreV001,
   assertQualifiedApprovedDigestSourcePackageTaskV001, qualifyApprovedDigestSourcePackageReadbackV001} from './digest-approved-inputs-v001.js';
@@ -88,6 +88,7 @@ export async function resolveQualifiedApprovedDigestSourceV001(context:unknown,s
 async function createStorage(permitPath: string, permitBytes: Buffer, permit: Json, qualified: ApprovedDigestQualifiedJobV001, inputs: Json, m: any) {
   await assertApprovedDigestInputsV001(inputs, qualified);
   const job = qualified.job, s = job.storage, outputRoot = job.outputRoot, generatedRoot = path.join(s.guestRoot, outputRoot);
+  const recovery = job.recoveryBinding === undefined ? null : await readSpecificDigestFailedWorkV001(qualified);
   assert.equal(permit.schemaVersion, 'digest-approved-job-command-permit-v001'); assert.equal(permit.status, 'verified-approved-digest-job-v001');
   assert.deepEqual(Object.keys(permit).sort(), ['schemaVersion','status','jobBinding','authorizationBinding','bindings','storage','implementation','monitorDirectory','command','ownerBinding'].sort());
   assert.deepEqual(permit.jobBinding, qualified.jobBinding); assert.deepEqual(permit.authorizationBinding, qualified.authorizationBinding);
@@ -136,8 +137,9 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   assert(nodeIdentity.isFile()&&!nodeIdentity.isSymbolicLink());assert.equal(await m.fileSha(process.execPath),job.implementation.nodeBinding.fileSha256,'APPROVED_JOB_NODE_BYTES_CHANGED');
   if(job.implementation.nodeBinding.sizeBytes!==undefined) assert.equal(Number(nodeIdentity.size),job.implementation.nodeBinding.sizeBytes);
   let resourceId=0; let publishedSourcePackageSha: string|undefined;
-  async function current() {
+  async function currentRaw() {
     await assertQualifiedDigestApprovedJobV001(qualified);
+    if (recovery !== null) await recovery.assertCurrent();
     for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding'])
       await qualified.readBinding(job.inputs[key]);
     const nodeNow=await lstat(process.execPath,{bigint:true});
@@ -162,11 +164,21 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
     assert.equal(matches.length,1); assert(matches[0]['system-entities'].some((v:Json)=>v['dev-entry']===guest.DeviceNode&&v['mount-point']===s.guestRoot));
     for(const root of [s.guestRoot,s.internalRoot]) {const fs=await statfs(root); assert(fs.bavail*fs.bsize>job.guard.reserveBytes,'APPROVED_JOB_DISK_RESERVE');}
   }
+  let recoveryCheckAt = 0;
+  let recoveryCheck: Promise<void> | undefined;
+  async function current() {
+    if (recovery === null) return currentRaw();
+    if (recoveryCheck !== undefined) return recoveryCheck;
+    if (Date.now() - recoveryCheckAt < 900) return;
+    recoveryCheck = currentRaw();
+    try {await recoveryCheck; recoveryCheckAt = Date.now();} finally {recoveryCheck = undefined;}
+  }
   const generated=(p:string)=>{safe(p); return p===outputRoot||p.startsWith(outputRoot+'/');};
-  const resolve=(p:string)=>path.join(generated(p)?s.guestRoot:ROOT,p);
+  const oldReference = (p:string) => recovery !== null && recovery.pins.has(path.join(s.guestRoot,p));
+  const resolve=(p:string)=>path.join(generated(p)||oldReference(p)?s.guestRoot:ROOT,p);
   async function readJson(p:string) {
     await current(); const stable=await load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
-    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(p)?s.guestRoot:ROOT,relativePath:p});
+    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(p)||oldReference(p)?s.guestRoot:ROOT,relativePath:p});
     const value=JSON.parse(bytes.toString());
     if(p===outputRoot+'/source-package.json') {
       assert(publishedSourcePackageSha&&sha(bytes)===publishedSourcePackageSha,'APPROVED_SOURCE_PUBLICATION_CHANGED');
@@ -176,7 +188,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   }
   async function readBound(b:Json) {
     await current(); safe(b.path); const stable=await load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
-    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(b.path)?s.guestRoot:ROOT,relativePath:b.path});
+    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(b.path)||oldReference(b.path)?s.guestRoot:ROOT,relativePath:b.path});
     assert.equal(sha(bytes),b.fileSha256); if(b.sizeBytes!==undefined) assert.equal(bytes.length,b.sizeBytes);
     const value=JSON.parse(bytes.toString()); if(b.canonicalSha256!==undefined) assert.equal(m.canonicalSha(value),b.canonicalSha256);
     if(b.schemaVersion!==undefined) {
@@ -212,14 +224,201 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   const context=Object.freeze({outputRoot,planId:job.planId,approvedJob:qualified,storageRoot:s.guestRoot,generatedRoot,tempDirectory:generatedRoot+'/temp',
     resolve,assertCurrent:current,publish,readJson,readBound,resourceCheck,
     resolveApprovedDigestSourceV001:(artifact:Json)=>resolveQualifiedApprovedDigestSourceV001(context,artifact),
-    composeMedia:async(args:Json)=>{await current();assert.equal(args.expectedFrameCount,job.expected.frames,'APPROVED_JOB_COMPOSE_CLOCK_MISMATCH');
+    composeMedia:async(args:Json)=>{await current();assert(recovery === null, 'SPECIFIC_RECOVERY_CANNOT_COMPOSE_NEW_MEDIA');assert.equal(args.expectedFrameCount,job.expected.frames,'APPROVED_JOB_COMPOSE_CLOCK_MISMATCH');
       assert(args.outputPath.startsWith(generatedRoot+'/')); const compositor=await load('tools/digest-quality/original-resolution-low-memory-composite.mjs');
       const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,plan:args.plan,
         overlayRecords:args.overlayRecords,expectedFrameCount:args.expectedFrameCount,expectedOverlayCount:job.expected.cues,
         outputPath:args.outputPath,ffmpegPath:args.ffmpegPath,processObserver:args.processObserver,resourceCheck});
       const result={...evidence,approvedJobBinding:qualified.jobBinding,typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues};
       await publish(outputRoot+'/low-memory-composite.json',result);return result;}});
-  contexts.set(context,{qualified,inputs}); await current(); return context;
+  contexts.set(context,{qualified,inputs}); if (recovery !== null) failedWorkContexts.set(context,recovery);
+  await current(); return context;
+}
+
+// This entry is restricted to the one recorded representative-module failure.
+// Historical bytes are origins; they never qualify as current implementation.
+const failedWorkContexts = new WeakMap<object, Json>();
+const FAILED_WORK_CASE = Object.freeze({
+  planId: 'digest-SJvP9jhEdyI-20261004-v001',
+  outputRoot: 'runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003',
+  jobSha256: '74a234da2825f179ace510bfdd4bd12a1951a9cf5fd30adac55dd7f4000e8809',
+  authorizationSha256: '8458ac86fcfa77455c8d5a7d031f0155e838500629bb13287c479665317c6d61',
+  implementationSha: '2399aa61e245da2506e2487943a24414097852cd',
+  videoSha256: '6434a56b40e66212c5dd910638c33b73b53029d733592b0b77ca6aa03d4f18b8',
+  videoBytes: 617257203,
+  workName: '.render.presentation-renderer-v002-work-xnJorQ',
+});
+
+export function assertSpecificDigestFailedWorkDescriptorV001(value: Json, job: Json): void {
+  assert.equal(value.schemaVersion, 'digest-approved-specific-failed-work-recovery-v001');
+  assert.equal(job.recoveryBinding.fileSha256, '84370d9611ed428f2bdcdf83321ea3c91c2e1f82edd56c96d420de0cb00eb349', 'RECOVERY_CAPTURED_DESCRIPTOR_REQUIRED');
+  assert.equal(job.recoveryBinding.sizeBytes, 1010509, 'RECOVERY_CAPTURED_DESCRIPTOR_SIZE_REQUIRED');
+  assert.equal(value.planId, FAILED_WORK_CASE.planId);
+  assert.equal(value.oldOutputRoot, FAILED_WORK_CASE.outputRoot);
+  assert.equal(value.oldImplementationSha, FAILED_WORK_CASE.implementationSha);
+  assert.equal(value.failureCode, 'QUALIFIED_REPRESENTATIVE_COMPLETION_REQUIRED');
+  assert.equal(value.oldJobBinding.fileSha256, FAILED_WORK_CASE.jobSha256);
+  assert.equal(value.oldAuthorizationBinding.fileSha256, FAILED_WORK_CASE.authorizationSha256);
+  assert.equal(value.videoBinding.fileSha256, FAILED_WORK_CASE.videoSha256);
+  assert.equal(value.videoBinding.sizeBytes, FAILED_WORK_CASE.videoBytes);
+  assert.equal(job.planId, FAILED_WORK_CASE.planId);
+  assert(job.outputRoot !== value.oldOutputRoot && path.posix.dirname(job.outputRoot) === path.posix.dirname(value.oldOutputRoot), 'RECOVERY_FRESH_SIBLING_ROOT_REQUIRED');
+  assert.equal(job.expected.cues, 651); assert.equal(job.expected.frames, 37619);
+  assert(Array.isArray(value.primaryOverlays) && value.primaryOverlays.length === 651, 'RECOVERY_PRIMARY_COVERAGE_REQUIRED');
+  assert.equal(new Set(value.primaryOverlays.map((r: Json) => r.instructionId)).size, 651, 'RECOVERY_DUPLICATE_PRIMARY');
+  assert.equal(value.primaryOverlays.reduce((n: number, r: Json) => n + r.lineMaskBindings.length, 0), 1042, 'RECOVERY_LINE_MASK_COVERAGE_REQUIRED');
+  assert(Array.isArray(value.jsonBindings) && value.jsonBindings.length > 0);
+  assert.equal(new Set(value.jsonBindings.map((b: Json) => b.path)).size, value.jsonBindings.length, 'RECOVERY_DUPLICATE_JSON');
+  for (const b of value.jsonBindings) assert(safe(b.path).startsWith(value.oldOutputRoot + '/'), 'RECOVERY_OLD_REFERENCE_PREFIX_REQUIRED');
+}
+
+async function readSpecificDigestFailedWorkV001(qualified: ApprovedDigestQualifiedJobV001): Promise<Json> {
+  const job = qualified.job, descriptor = await qualified.readBinding(job.recoveryBinding);
+  assertSpecificDigestFailedWorkDescriptorV001(descriptor, job);
+  const oldRoot = path.join(job.storage.guestRoot, descriptor.oldOutputRoot);
+  const workRoot = path.join(oldRoot, FAILED_WORK_CASE.workName);
+  assert.equal(await realpath(oldRoot), oldRoot); assert.equal(await realpath(workRoot), workRoot);
+  const pins = new Map<string, Json>();
+  async function pin(b: Json, external = false): Promise<void> {
+    assert(path.isAbsolute(b.path) && path.normalize(b.path) === b.path && /^[a-f0-9]{64}$/u.test(b.fileSha256));
+    assert(Number.isSafeInteger(b.sizeBytes) && b.sizeBytes > 0);
+    assert(external || b.path.startsWith(oldRoot + '/'), 'RECOVERY_REFERENCE_OUTSIDE_OLD_WORK');
+    assert.equal(await realpath(b.path), b.path, 'RECOVERY_REFERENCE_SYMLINK');
+    const before = await lstat(b.path, {bigint: true});
+    assert(before.isFile() && !before.isSymbolicLink());
+    if (!external) assert.equal(before.dev, BigInt(job.storage.guestDevice));
+    assert.equal(before.size, BigInt(b.sizeBytes));
+    const first = createHash('sha256');
+    for await (const bytes of createReadStream(b.path)) first.update(bytes);
+    const after = await lstat(b.path, {bigint: true});
+    for (const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(after[key], before[key], 'RECOVERY_INPUT_CHANGED_WHILE_READING');
+    assert.equal(first.digest('hex'), b.fileSha256, 'RECOVERY_INPUT_BYTES_CHANGED');
+    pins.set(b.path, {binding: Object.freeze({...b}), identity: after});
+  }
+  await pin(descriptor.oldJobBinding, true); await pin(descriptor.oldAuthorizationBinding, true);
+  const oldJob = JSON.parse((await boundAbsolute(descriptor.oldJobBinding)).toString());
+  const oldAuthorization = JSON.parse((await boundAbsolute(descriptor.oldAuthorizationBinding)).toString());
+  validateDigestApprovedJobConfigurationV001(oldJob, oldAuthorization, {workspaceRoot: ROOT,
+    jobBinding: descriptor.oldJobBinding, authorizationBinding: descriptor.oldAuthorizationBinding,
+    trustedJobSha256: FAILED_WORK_CASE.jobSha256, trustedAuthorizationSha256: FAILED_WORK_CASE.authorizationSha256});
+  assert.equal(oldJob.implementation.sha, descriptor.oldImplementationSha);
+  for (const field of ['planId','inputs','expected','storage','guard']) assert.deepEqual(job[field], oldJob[field], 'RECOVERY_ORIGINAL_' + field + '_CHANGED');
+  for (const field of ['userApproval','actions','normalCandidates','humanQuality','outlineChoice'])
+    assert.deepEqual(qualified.authorization[field], oldAuthorization[field], 'RECOVERY_ORIGINAL_AUTHORIZATION_CHANGED');
+  const oldPolicy = {...oldJob.verificationPolicy, confirmationRecordPath: job.verificationPolicy.confirmationRecordPath};
+  assert.deepEqual(job.verificationPolicy, oldPolicy, 'RECOVERY_VERIFICATION_SELECTION_CHANGED');
+  for (const b of oldJob.implementation.bindings) {
+    const bytes = (await exec('git', ['show', oldJob.implementation.sha + ':' + safe(b.path)], {cwd: ROOT, encoding: 'buffer', maxBuffer: 8 * 1024 * 1024})).stdout;
+    assert.equal(sha(bytes), b.fileSha256, 'RECOVERY_HISTORICAL_IMPLEMENTATION_CHANGED');
+    if (b.sizeBytes !== undefined) assert.equal(bytes.length, b.sizeBytes);
+  }
+  const fixedFiles: Json = {
+    summaryBinding: oldRoot + '/monitor/summary.json', oldOwnershipBinding: oldRoot + '/ownership.json',
+    commandPermitBinding: oldRoot + '/command-permit.json', rendererLockOwnerBinding: oldRoot + '/.render.presentation-renderer-v002.lock/owner.json',
+    ownedGroupBinding: oldRoot + '/monitor/owned-group.json', lowMemoryBinding: oldRoot + '/low-memory-composite.json',
+    layoutInputBinding: workRoot + '/scratch/layout-input.json', layoutOutputBinding: workRoot + '/scratch/layout-output.json',
+    videoBinding: workRoot + '/publish/presentation-rendered-v002.mp4',
+  };
+  for (const [key, file] of Object.entries(fixedFiles)) {assert.equal(descriptor[key].path, file); await pin(descriptor[key]);}
+  for (const key of ['shutdownBinding','workerStderrBinding']) await pin(descriptor[key]);
+  const json = async (b: Json) => JSON.parse((await readFile(b.path)).toString());
+  const summary = await json(descriptor.summaryBinding), owner = await json(descriptor.oldOwnershipBinding);
+  const permit = await json(descriptor.commandPermitBinding), group = await json(descriptor.ownedGroupBinding);
+  const lock = await json(descriptor.rendererLockOwnerBinding), shutdown = await json(descriptor.shutdownBinding);
+  assert.equal(summary.reason, 'formal worker nonzero exit'); assert.equal(summary.exitCode, 1);
+  assert.deepEqual(summary.remainingRunning, []); assert.deepEqual(shutdown.remainingRunning ?? shutdown.remaining, []);
+  assert.deepEqual(summary.jobBinding, descriptor.oldJobBinding); assert.deepEqual(summary.authorizationBinding, descriptor.oldAuthorizationBinding);
+  assert.deepEqual(permit.jobBinding, descriptor.oldJobBinding); assert.deepEqual(permit.authorizationBinding, descriptor.oldAuthorizationBinding);
+  assert.deepEqual(permit.storage, job.storage); assert.equal(owner.outputRoot, descriptor.oldOutputRoot);
+  assert.equal(owner.jobSha256, FAILED_WORK_CASE.jobSha256); assert.equal(owner.authorizationSha256, FAILED_WORK_CASE.authorizationSha256);
+  assert.equal(owner.implementationSha, FAILED_WORK_CASE.implementationSha);
+  assert.equal(lock.outputDirectory, oldRoot + '/render'); assert.equal(lock.processId, group.parentPid);
+  const stderr = await readFile(descriptor.workerStderrBinding.path, 'utf8');
+  assert(stderr.includes(descriptor.failureCode) && stderr.includes('qualifyPresentationInstructionRendererCompletionV002'), 'RECOVERY_ACTUAL_FAILURE_REQUIRED');
+  const oldIds = new Set([owner.controllerPid, group.parentPid, group.group, lock.processId]);
+  async function assertStopped() {
+    const ps = (await exec('/bin/ps', ['-axo','pid=,pgid=,stat='])).stdout;
+    for (const line of ps.trim().split('\n')) {
+      const [pid, pgid, state] = line.trim().split(/\s+/u);
+      assert(state.startsWith('Z') || (!oldIds.has(Number(pid)) && !oldIds.has(Number(pgid))), 'RECOVERY_OLD_OWNER_STILL_RUNNING');
+    }
+  }
+  await assertStopped();
+  for (const missing of ['result.json','renderer-result.json','representative-technical-evidence-v001.json','render']) {
+    try {await lstat(path.join(oldRoot, missing)); assert.fail('RECOVERY_ALREADY_PUBLISHED');}
+    catch (error: any) {if (error.code !== 'ENOENT') throw error;}
+  }
+  const oldJson = new Map<string, Json>();
+  for (const b of descriptor.jsonBindings) {
+    const file = path.join(job.storage.guestRoot, b.path); await pin({...b, path: file});
+    const value = JSON.parse((await readFile(file)).toString());
+    if (b.schemaVersion !== undefined) assert.equal(value.schemaVersion, b.schemaVersion);
+    oldJson.set(b.path, value);
+  }
+  const oldRendererJob = oldJson.get(descriptor.oldOutputRoot + '/renderer-job.json'); assert(oldRendererJob);
+  const base = frozen(structuredClone(oldRendererJob.cropAppliedBaseMedia));
+  for (const b of Object.values(base) as Json[]) {
+    assert(b.path.startsWith(descriptor.oldOutputRoot + '/'));
+    if (!pins.has(path.join(job.storage.guestRoot, b.path))) {
+      const st = await lstat(path.join(job.storage.guestRoot, b.path));
+      await pin({...b, path: path.join(job.storage.guestRoot, b.path), sizeBytes: b.sizeBytes ?? st.size});
+    }
+  }
+  const instruction = oldJson.get(oldRendererJob.instructionArtifactBinding.path); assert(instruction);
+  const lineLayout = oldJson.get(descriptor.oldOutputRoot + '/line-layout.json'); assert(lineLayout);
+  const presetRegistry = oldJson.get(oldRendererJob.registryBindings.styleProfileRegistry.path); assert(presetRegistry);
+  const rendererTrust = oldJson.get(oldRendererJob.registryBindings.rendererTrust.path); assert(rendererTrust);
+  const renderer = await load('evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts');
+  const common = renderer.buildPresentationInstructionCommonCorePlanV001({job: oldRendererJob,
+    visualStateId: oldRendererJob.executionInputs.visualStateId, instructionArtifact: instruction,
+    lineLayout, styleProfileRegistry: presetRegistry, rendererTrust});
+  assert.equal(common.status, 'built');
+  const layoutInput = await json(descriptor.layoutInputBinding), layoutOutput = await json(descriptor.layoutOutputBinding);
+  assert.equal(layoutOutput.status, 'passed'); assert.deepEqual(layoutOutput.violations, []);
+  assert.equal(layoutOutput.items.length, job.expected.cues); assert.equal(layoutInput.overlays.length, job.expected.cues);
+  for (const [i, r] of descriptor.primaryOverlays.entries()) {
+    assert.equal(r.instructionId, common.plan.elements[i].instructionId);
+    const stem = String(i + 1).padStart(2,'0') + '-' + sha(r.instructionId).slice(0,12);
+    assert.equal(r.primaryBinding.path, workRoot + '/publish/overlays/' + stem + '.png');
+    assert.equal(r.repeatBinding.path, workRoot + '/scratch/frames/' + stem + '.repeat.png');
+    await pin(r.primaryBinding); await pin(r.repeatBinding);
+    assert.equal(r.primaryBinding.fileSha256, r.repeatBinding.fileSha256, 'RECOVERY_ORIGINAL_DETERMINISM_FAILED');
+    assert.equal(r.lineMaskBindings.length, common.plan.elements[i].indexedLines.length);
+    for (const [j, mask] of r.lineMaskBindings.entries()) {
+      assert.equal(mask.lineIndex, j); assert.equal(mask.binding.path, workRoot + '/scratch/frames/' + stem + '-line-' + String(j + 1).padStart(2,'0') + '.png');
+      await pin(mask.binding);
+    }
+    assert.equal(layoutOutput.items[i].instructionId, r.instructionId);
+  }
+  const composite = await json(descriptor.lowMemoryBinding);
+  assert.equal(composite.status, 'completed'); assert.deepEqual(composite.approvedJobBinding, descriptor.oldJobBinding);
+  assert.equal(composite.scope.frameCount, job.expected.frames);
+  assert.equal(composite.output.fileSha256, descriptor.videoBinding.fileSha256); assert.equal(composite.output.bytes ?? composite.output.sizeBytes, descriptor.videoBinding.sizeBytes);
+  let end = 0;
+  for (const segment of composite.segments) {assert.equal(segment.range.startFrame, end); assert.equal(segment.exitCode, 0); end = segment.range.endFrameExclusive;}
+  assert.equal(end, job.expected.frames);
+  const current = async () => {
+    await assertStopped();
+    for (const [file, record] of pins) {
+      const st = await lstat(file, {bigint:true});
+      for (const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(st[key], record.identity[key], 'RECOVERY_ORIGIN_IDENTITY_CHANGED');
+    }
+  };
+  await current();
+  const view = Object.freeze({descriptor: frozen(descriptor), base, plan: frozen(common.plan),
+    layoutInput: frozen(layoutInput), layoutOutput: frozen(layoutOutput)});
+  return Object.freeze({view, base, oldJson, pins, assertCurrent: current});
+}
+
+/** A caller object or clone cannot select saved files or create recovery authority. */
+export async function readQualifiedApprovedDigestFailedWorkV001(context: unknown): Promise<Json> {
+  await assertQualifiedApprovedDigestStorageContextV001(context);
+  const saved = failedWorkContexts.get(context as object); assert(saved, 'QUALIFIED_SPECIFIC_FAILED_WORK_REQUIRED');
+  return saved.view;
+}
+export async function assertQualifiedApprovedDigestRecoveryBaseV001(context: unknown, base: Json): Promise<void> {
+  const saved = await readQualifiedApprovedDigestFailedWorkV001(context);
+  assert.equal(base, saved.base, 'QUALIFIED_RECOVERY_BASE_SAME_OBJECT_REQUIRED');
 }
 
 async function candidateStyle(qualified:ApprovedDigestQualifiedJobV001, inputs:Json,context:Json,m:any) {
@@ -335,8 +534,9 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const minimumBaseBytes=estimateApprovedDigestBaseAllocationV001(source.identity.sizeBytes,inputs.inspection.media,job.expected);
   assert(job.allocationBudget.baseBuildBytes>=minimumBaseBytes,'APPROVED_JOB_BASE_BUDGET_BELOW_INPUTS');
   await context.resourceCheck({stage:'start',newBytes:job.allocationBudget.baseBuildBytes});
-  const baseStarted=Date.now(); const base=await core.buildAdoptedBaseMediaV001(c,inputs.adoption,inputs.edit,manufacturing,jobBinding,invocation,
-    {inspection:'digest-approved-source-inspection-v001',receipt:'digest-approved-base-validation-v001'},context);
+  const baseStarted=Date.now(); const recovered = job.recoveryBinding === undefined ? null : await readQualifiedApprovedDigestFailedWorkV001(context);
+  const base = recovered === null ? await core.buildAdoptedBaseMediaV001(c,inputs.adoption,inputs.edit,manufacturing,jobBinding,invocation,
+    {inspection:'digest-approved-source-inspection-v001',receipt:'digest-approved-base-validation-v001'},context) : recovered.base;
   const baseMs=Date.now()-baseStarted;const artifacts=await prepareApprovedDigestCaptionCoreV001(inputs,qualified,c,base,style,context);
   assert.equal(artifacts.instruction.instructions.length,job.expected.cues);
   artifacts.instruction.instructions.forEach((v:Json,i:number)=>{const row=inputs.correspondence.rows[i];assert.equal(v.outputTime.startFrame,row.startFrame);assert.equal(v.outputTime.endFrameExclusive,row.endFrameExclusive);});
@@ -352,6 +552,9 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
     timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,
       renderAndQcMs:Date.now()-renderStarted,totalMs:Date.now()-began},implementationSha:job.implementation.sha,
     humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,
+    ...(recovered === null ? {} : {recovery: {recoveryBinding:job.recoveryBinding, oldJobBinding:recovered.descriptor.oldJobBinding,
+      oldAuthorizationBinding:recovered.descriptor.oldAuthorizationBinding, originalComposite:recovered.descriptor.videoBinding,
+      baseMediaOrigin:recovered.base, nativeDraws:0, compositeRuns:0, technicalInspection:'actual-reinspection-of-saved-media-and-pngs'}}),
     ...(result.verification===undefined?{completedAt:new Date().toISOString()}:{recordedAt:new Date().toISOString(),completedAt:completion.status==='completed'?new Date().toISOString():null})};
   const saved=await context.publish(out+'/result.json',receipt),receiptBytes=await readFile(context.resolve(out+'/result.json'));
   const receiptBinding={path:out+'/result.json',fileSha256:sha(receiptBytes),sizeBytes:receiptBytes.length};

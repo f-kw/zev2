@@ -3,10 +3,10 @@ import {writePresentationQcEvidenceV001} from './presentation_qc_evidence_store_
 
 import {createHash, randomUUID} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {access, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, writeFile} from 'node:fs/promises';
+import {access, copyFile, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, statfs, writeFile} from 'node:fs/promises';
 import {constants as fsConstants} from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {createPresentationOverlayRenderSessionV001} from './presentation_overlay_render_session_v001.mjs';
 
@@ -2725,6 +2725,110 @@ export async function readPresentationBeforeNativeCheckpointV001({checkpointRef,
   await readVerifiedPresentationReplayV001({ref: saved.replayRef, plan: state.plan, records: state.overlayRecords,
     expectedFrameCount: state.expectedFrameCount, completedMediaPath: state.workVideo, renderRange: state.renderRange});
   return saved;
+}
+
+/** Reinspect only the already saved assets of one privately qualified failure.
+ * No native drawing, composite, old reservation mutation or passed-flag reuse.
+ */
+export async function resumeApprovedDigestFailedDrawAndQcV001({outputDirectory, plan,
+  presetRegistry, baseMediaPath, baseMediaInspection, expectedFrameCount,
+  overlayAdapter, toolPaths, processObserver = null, storageContext}) {
+  await qualifyDigestStorageContextV001(storageContext);
+  const runner = await import(pathToFileURL(path.join(WORKSPACE_ROOT,
+    'runner/src/digest-approved-job-runner-v001.ts')).href);
+  const saved = await runner.readQualifiedApprovedDigestFailedWorkV001(storageContext);
+  requireResume(sha256Canonical(plan) === sha256Canonical(saved.plan), 'saved full plan/body/IDs/clocks/appearance differs');
+  requireResume(expectedFrameCount === storageContext.approvedJob.job.expected.frames, 'expected frame count differs');
+  requireResume(baseMediaPath === storageContext.resolve(saved.base.baseMedia.path), 'saved base media differs');
+  requireResume(plan.elements.every(e => !Object.hasOwn(e,'presentationPulse') && !Object.hasOwn(e,'presentationMotion')
+    && e.visualState.position.preset === 'bottom-center' && e.visualState.background === null), 'specific Normal draw only');
+  const policy = await (await import('./digest_representative_completion_v001.mjs')).resolveApprovedDigestVerificationPolicyV001(storageContext);
+  requireResume(policy?.mode === 'representative-plus-rules-v001', 'representative mode required');
+  requireResume(outputDirectory === path.join(storageContext.generatedRoot,'render'), 'fresh canonical output required');
+  const props = plan.elements.map(element => overlayAdapter.buildProps(element, plan, presetRegistry));
+  requireResume(canonicalJson(props) === canonicalJson(saved.layoutInput.overlays), 'saved native props differ');
+  const copyBytes = saved.descriptor.videoBinding.sizeBytes
+    + saved.descriptor.primaryOverlays.reduce((n,r) => n + r.primaryBinding.sizeBytes,0);
+  await storageContext.resourceCheck({stage:'saved-failed-work-copy',newBytes:copyBytes});
+  const reservation = await acquirePresentationOutputReservationV002(outputDirectory,{storageContext});
+  const workDirectory = await mkdtemp(path.join(reservation.outputParent,
+    '.render.presentation-renderer-v002-work-'));
+  const stagingDirectory = path.join(workDirectory,'publish'), scratchDirectory = path.join(workDirectory,'scratch');
+  await mkdir(path.join(stagingDirectory,PRESENTATION_RENDERER_OUTPUT_NAMES.overlays),{recursive:true});
+  await mkdir(scratchDirectory);
+  await validateReservationWorkTopologyV002(reservation,workDirectory);
+  const cleanupWarnings = retainedCleanupDiagnosticsV002({reservation,workDirectory});
+  async function copyBound(ref,destination) {
+    await storageContext.assertCurrent();
+    const approved = storageContext.approvedJob.job;
+    for (const [root, nextBytes] of [[approved.storage.guestRoot,ref.sizeBytes],
+      [approved.storage.hostRoot,ref.sizeBytes+approved.storage.hostMetadataReserveBytes],
+      [approved.storage.internalRoot,0]]) {
+      const fs = await statfs(root);
+      requireResume(fs.bavail*fs.bsize >= nextBytes+approved.guard.reserveBytes,
+        'copy next-unit plus reserve failed on '+root);
+    }
+    requireResume(await fileSha256V002(ref.path) === ref.fileSha256, 'saved source bytes changed');
+    await copyFile(ref.path,destination,fsConstants.COPYFILE_EXCL);
+    const st = await lstat(destination);
+    requireResume(st.isFile() && !st.isSymbolicLink() && st.size === ref.sizeBytes,
+      'copied source size/type differs');
+    requireResume(await realpath(destination) === destination && st.dev === storageContext.approvedJob.job.storage.guestDevice,
+      'copied source topology differs');
+    requireResume(await fileSha256V002(destination) === ref.fileSha256, 'copied source bytes differ');
+    await storageContext.assertCurrent();
+  }
+  const overlayRecords = [];
+  for (const [index,source] of saved.descriptor.primaryOverlays.entries()) {
+    const element = plan.elements[index], layout = saved.layoutOutput.items[index];
+    const pngPath = path.join(stagingDirectory,PRESENTATION_RENDERER_OUTPUT_NAMES.overlays,
+      path.basename(source.primaryBinding.path));
+    await copyBound(source.primaryBinding,pngPath);
+    const lineAlphaBounds = [];
+    for (const mask of source.lineMaskBindings) {
+      const inspected = await inspectOverlayPngWithToolV001({instructionId:element.instructionId,
+        pngPath:mask.binding.path,imageMagickPath:toolPaths.imageMagickPath,processObserver,
+        observationLabelPrefix:'recovery-existing-line-mask-inspection'});
+      requireResume(inspected.alphaBounds !== null, 'saved line mask is empty');
+      lineAlphaBounds.push({lineIndex:mask.lineIndex,...inspected.alphaBounds});
+    }
+    const overlayFile = path.posix.join(PRESENTATION_RENDERER_OUTPUT_NAMES.overlays,path.basename(pngPath));
+    const inspection = await inspectOverlayPngWithToolV001({instructionId:element.instructionId,pngPath,
+      imageMagickPath:toolPaths.imageMagickPath,processObserver,
+      observationLabelPrefix:'recovery-existing-primary-inspection',lineRects:layout.lineRects,lineAlphaBounds,
+      appliedOverlayPropsCanonicalSha256:sha256Canonical(props[index]),overlayFile,
+      overlaySha256:source.primaryBinding.fileSha256});
+    overlayRecords.push({element,props:props[index],fileStem:path.basename(pngPath,'.png'),pngPath,
+      pngSha256:source.primaryBinding.fileSha256,inspection});
+    // Persist actual numbers as each cue finishes, so this continuation does
+    // not recreate the old loss of process-local inspection evidence.
+    await writeFile(path.join(scratchDirectory,String(index+1).padStart(4,'0')+'-actual-inspection.json'),
+      JSON.stringify({instructionId:element.instructionId,origin:source,inspection},null,2)+'\n',{flag:'wx'});
+  }
+  const workVideo = path.join(stagingDirectory,PRESENTATION_RENDERER_OUTPUT_NAMES.video);
+  await copyBound(saved.descriptor.videoBinding,workVideo);
+  const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo,{ffprobePath:toolPaths.ffprobePath,
+    ffmpegPath:toolPaths.ffmpegPath,processObserver,observationLabelPrefix:'recovery-existing-output-media'});
+  if (outputMedia.video) outputMedia.video.frameCount = await inspectFrameCountWithToolV001(workVideo,
+    toolPaths.ffprobePath,'post-render-qc',processObserver,'recovery-existing-output-frame-count');
+  await writeFile(path.join(scratchDirectory,'actual-output-media.json'),
+    JSON.stringify(outputMedia,null,2)+'\n',{flag:'wx'});
+  const baseExpectedAudio = baseMediaInspection.media.audio ? {present:true,...baseMediaInspection.media.audio} : {present:false};
+  const applicationResults = buildPresentationRenderApplicationResults(overlayRecords,PRESENTATION_RENDERER_OUTPUT_NAMES);
+  await storageContext.publish(storageContext.outputRoot+'/saved-failed-work-transfer-v001.json',{
+    schemaVersion:'digest-specific-saved-failed-work-transfer-v001',recoveryBinding:storageContext.approvedJob.job.recoveryBinding,
+    oldJobBinding:saved.descriptor.oldJobBinding,newJobBinding:storageContext.approvedJob.jobBinding,
+    originalVideo:saved.descriptor.videoBinding,copiedVideo:{path:workVideo,fileSha256:await fileSha256V002(workVideo),
+      sizeBytes:(await lstat(workVideo)).size},primaryCount:overlayRecords.length,
+    nativeDraws:0,compositeRuns:0,oldReservationChanged:false,inspections:'actual-saved-pngs-and-media',
+    rendererPlanCanonicalSha256:sha256Canonical(plan)});
+  return finishPresentationDrawAndQcV001({state:{outputDirectory,reservation,workDirectory,stagingDirectory,
+    scratchDirectory,cleanupWarnings,overlayRecords,applicationResults,baseExpectedAudio,
+    completedExpectedAudio:baseExpectedAudio,outputMedia,workVideo,plan,expectedFrameCount,
+    presentationTimeline:null,timelineAudio:null,baseMediaPath,serializePngAndFilters:false,
+    runCounterfactualQc:false,counterfactualQcMethod:'encoded-omission-v2',audioMediaPath:null,renderRange:null,
+    verificationPolicy:policy,storageContext},presetRegistry,overlayAdapter,toolPaths,processObserver,
+    evaluateQc:evaluatePresentationRendererQcV002,onProgress:()=>{}});
 }
 
 /** Resume native/final QC only; existing PNGs, completed body and exact replay are never drawn again. */

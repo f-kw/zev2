@@ -54,11 +54,19 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   assert.equal(jobBinding.fileSha256, trustedJobSha256, 'APPROVED_JOB_ANCHOR_MISMATCH');
   assert.equal(authorizationBinding.fileSha256, trustedAuthorizationSha256, 'APPROVED_AUTHORIZATION_ANCHOR_MISMATCH');
   exact(job, ['schemaVersion','planId','outputRoot','inputs','storage','expected','implementation','guard','allocationBudget',
-    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[])], 'APPROVED_JOB_EXACT_FIELDS');
+    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
+    ...(Object.hasOwn(job,'recoveryBinding')?['recoveryBinding']:[])], 'APPROVED_JOB_EXACT_FIELDS');
   assert.equal(job.schemaVersion, 'digest-approved-job-v001'); assert(ID.test(job.planId), 'APPROVED_JOB_PLAN_ID');
   const prefix = digestJobRelativePathV001(job.outputRoot);
   assert(prefix.startsWith('runtime/artifacts/') && prefix.split('/').length >= 4, 'APPROVED_JOB_OUTPUT_ROOT');
   if(Object.hasOwn(job,'verificationPolicy')) validateDigestRepresentativeVerificationPolicyV001(job.verificationPolicy,prefix);
+  const hasRecovery = Object.hasOwn(job,'recoveryBinding');
+  if (hasRecovery) {
+    exact(job.recoveryBinding,['path','fileSha256','sizeBytes'],'APPROVED_JOB_RECOVERY_BINDING_FIELDS');
+    validateDigestJobBindingV001(job.recoveryBinding);
+    positive(job.recoveryBinding.sizeBytes,'APPROVED_JOB_RECOVERY_BINDING_SIZE');
+    assert(job.verificationPolicy?.mode === 'representative-plus-rules-v001', 'APPROVED_JOB_RECOVERY_REPRESENTATIVE_POLICY_REQUIRED');
+  }
   exact(job.inputs, ['preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding'], 'APPROVED_JOB_INPUTS_REQUIRED');
   for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding']) validateDigestJobBindingV001(job.inputs[k]);
   assert(job.inputs.preparationParameters && typeof job.inputs.preparationParameters === 'object'
@@ -92,9 +100,12 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
     'evals/clip_composition/digest_representative_completion_v001.mjs','runner/src/digest-approved-record-finalize-v001.ts'])
     assert(job.implementation.bindings.some((b: Json) => b.path === required), 'APPROVED_JOB_MISSING_CODE_BINDING ' + required);
+  assert.equal(Object.hasOwn(authorization,'recoveryBinding'),hasRecovery,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_PRESENCE_MISMATCH');
   exact(authorization, ['schemaVersion','recordId','userApproval','actions','jobBinding','planId','manifestBinding',
     'typographySettingsBinding','outputRoot','storage','guard','implementation','normalCandidates',
-    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
+    ...(hasRecovery?['recoveryBinding']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+  if(hasRecovery) assert.deepEqual(authorization.recoveryBinding,job.recoveryBinding,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_MISMATCH');
   if(Object.hasOwn(job,'verificationPolicy')) assert.deepEqual(authorization.verificationPolicy,job.verificationPolicy,'APPROVED_AUTHORIZATION_VERIFICATION_POLICY_MISMATCH');
   assert.equal(authorization.schemaVersion, 'digest-approved-job-authorization-v001'); assert(ID.test(authorization.recordId));
   exact(authorization.userApproval, ['at','messageId','text','sourceThreadId'], 'APPROVED_USER_EVIDENCE_REQUIRED');

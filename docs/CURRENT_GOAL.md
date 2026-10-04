@@ -2,6 +2,14 @@
 
 更新日：2026-10-04（JST）
 
+## 最新現在地 — 2026-10-04 13:33 UTC（保存済み一本の限定復帰を実装し、実行へ）
+
+親monaの明示継続指示で、CJS/ESMの別module実体を統一し、今回の旧失敗成果だけを再資格する製品6path・回帰4pathを実装。元job/auth/code/実停止/閉じたowner/651primary/1042mask/原MP4と全plan/本文/時計を固定したdescriptorに限定し、未使用の兄弟rootへ実コピー・実数値再検査・既存private finishと正式公開を接続する。旧orig/lockを保護し、native再描画・新合成は0。[実装と検証範囲](reports/digest-new-material-SJvP9jhEdyI-20261004/specific-recovery-implementation-checkpoint-v001.md)。関連53件、job14件、Python49件、runner/Remotion型・構文・差分成功。旧input fixtureの準備SHA不一致1拒否は免除しない。
+
+無料LAN GPUで元音声20秒を一回再照合し、旧120msの時計に問題を疑う根拠を得た。ただし新時刻は隣接字幕と重なり、発話末尾も不確か。本文/時刻の正式変更0、実聴取未実施。短cueの100％fadeと次回native代表限定の最小案は未適用で準備済み。今回途中へ注入せず、全編/音声/人間品質は未評価。
+
+状態：作業中。最終確認：2026-10-04T13:33:42.894746+00:00。次担当：同じMac実装者がmain実装SHAを固定し、実job/独立authorization/保存先/容量をprepareして限定復帰を一度実行する。実復帰・pending/get/finalizeはこの時点で未実施。以下12:24の相談役待ちは親の継続指示で解消した履歴。
+
 ## 最新現在地 — 2026-10-04 12:24 UTC（新動画を合成・代表8枚確認、正式受け渡しで停止）
 
 今回専用SSDへ途中物も保存する6path接続で、新素材SJvP9jhEdyIの通常計画31区間・5450atom・651字幕を製造した。20分53.966667秒の合成MP4（617257203B/SHA6434a56b）がSSDの作業領域に保存され、停止後に実SHA/時計を前後照合して8代表画像を直接確認した。新字幕は216px/左右108px/2行、本文/ID/時計/元音声保持。旧完成動画の再製造0。[成果・制作負担・限界](reports/digest-new-material-SJvP9jhEdyI-20261004/manufacture-result-v001.md)。
