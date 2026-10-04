@@ -288,6 +288,14 @@ export function estimateApprovedDigestBaseAllocationV001(sourceBytes:number,medi
   const bytes=sourceBytes+pcm*2;
   assert(Number.isSafeInteger(bytes)&&bytes>0,'APPROVED_JOB_ALLOCATION_ESTIMATE_OVERFLOW');return bytes;
 }
+/** Project the actual published adoption reference to the existing two-field base-job contract. */
+export function projectApprovedDigestBaseMediaJobV001(input:Json,planId:string,outputRoot:string,adoptionBinding:Json):Json {
+  safe(outputRoot); assert.equal(adoptionBinding.path,outputRoot+'/machine-adoption.json');
+  assert(/^[0-9a-f]{64}$/u.test(adoptionBinding.fileSha256),'APPROVED_JOB_ADOPTION_BYTES_REQUIRED');
+  const job=structuredClone(input);job.jobId=planId+'-base';
+  job.assemblyDecision={path:adoptionBinding.path,fileSha256:adoptionBinding.fileSha256};
+  job.outputDirectory=outputRoot+'/base-media';return job;
+}
 export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,authorizationSha:string) {
   const began=Date.now();const permitBytes=await readFile(permitPath),permit=JSON.parse(permitBytes.toString());
   assert.equal(await realpath(permitPath),permitPath);
@@ -311,9 +319,8 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
     typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues,
     request:{sourceVideo:inputs.normalPlan.sourceVideoBinding,transcript:inputs.normalPlan.transcriptBinding,utterances:inputs.normalPlan.utteranceBinding}};
   const planBinding=await context.publish(out+'/core-plan.json',plan),c={plan,planBinding,authorization:qualified.authorization,rendererTemplate:style.rendererTemplate};
-  await context.publish(out+'/machine-adoption.json',inputs.adoption);await context.publish(out+'/edit-plan.json',inputs.edit);
-  const manufacturing=structuredClone(inputs.manufacturing);manufacturing.jobId=job.planId+'-base';
-  manufacturing.assemblyDecision=m.bind(out+'/machine-adoption.json',inputs.adoption);manufacturing.outputDirectory=out+'/base-media';
+  const adoptionBinding=await context.publish(out+'/machine-adoption.json',inputs.adoption);await context.publish(out+'/edit-plan.json',inputs.edit);
+  const manufacturing=projectApprovedDigestBaseMediaJobV001(inputs.manufacturing,job.planId,out,adoptionBinding);
   const core=await load('evals/clip_composition/adopted_media_manufacturing_v001.mts');
   m.pass(baseModule.validatePresentationBaseMediaBuildJobV001(manufacturing),'APPROVED_JOB_MANUFACTURING_INVALID');
   const mappings=core.projectAdoptedMediaRangesV001(inputs.edit,inputs.inspection.media);

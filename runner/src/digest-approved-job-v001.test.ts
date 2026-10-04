@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {DIGEST_APPROVED_JOB_GUARD_V001 as guard, validateDigestApprovedJobConfigurationV001 as validate,
   assertQualifiedDigestApprovedJobV001} from './digest-approved-job-v001.js';
-import {assertQualifiedApprovedDigestStorageContextV001, estimateApprovedDigestBaseAllocationV001, projectApprovedDigestManufacturingCompletionV001} from './digest-approved-job-runner-v001.js';
+import {assertQualifiedApprovedDigestStorageContextV001, estimateApprovedDigestBaseAllocationV001, projectApprovedDigestManufacturingCompletionV001, projectApprovedDigestBaseMediaJobV001} from './digest-approved-job-runner-v001.js';
 import {resolveDigestTypographySettingsV001} from './digest-formal-handoff-v001.js';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const binding=(p:string)=>({path:p,fileSha256:'a'.repeat(64)});
@@ -97,4 +97,26 @@ test('final manufacturing projection keeps pending incomplete, full visibility u
     assert.equal(result.verification,verification);assert.equal(result.technicalQc.fullVisibility.status,'not-executed');
     assert.throws(()=>projectApprovedDigestManufacturingCompletionV001({qc:status,complete:status!=='passed-representative',verification}));
   }
+});
+
+
+test('published adoption is projected to the unchanged base-job byte contract before media',async()=>{
+  const base=await import(pathToFileURL(path.join(ROOT,'evals/clip_composition/presentation_base_media_build_v003.mjs')).href);
+  const wire=await import(pathToFileURL(path.join(ROOT,'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts')).href);
+  const out='runtime/artifacts/test-only-published-adoption/attempt-001';
+  const adoption={schemaVersion:'test-only-adoption',artifactId:'test-only',decision:'fixture-only-no-permission'};
+  const published=wire.bind(out+'/machine-adoption.json',adoption);
+  const original={schemaVersion:base.PRESENTATION_BASE_MEDIA_BUILD_JOB_SCHEMA_VERSION,jobId:'test-only-original',
+    assemblyDecision:binding('runtime/artifacts/test-only/original.json'),
+    sourceArtifact:{sourceProvenance:'test-only',sourceRef:'test-only',sourceUri:'fixture:source',...binding('runtime/artifacts/test-only/source.mp4')},
+    outputDirectory:'runtime/artifacts/test-only/original-base'};
+  const before=structuredClone(original);
+  assert.equal(base.validatePresentationBaseMediaBuildJobV001({...original,assemblyDecision:published}).status,'failed');
+  const projected=projectApprovedDigestBaseMediaJobV001(original,'test-only',out,published);
+  assert.equal(base.validatePresentationBaseMediaBuildJobV001(projected).status,'passed');
+  assert.deepEqual(projected.assemblyDecision,{path:published.path,fileSha256:wire.sha(wire.formal(adoption))});
+  assert.deepEqual(projected.sourceArtifact,original.sourceArtifact);assert.deepEqual(original,before);
+  assert.throws(()=>projectApprovedDigestBaseMediaJobV001(original,'test-only',out,{...published,path:out+'/other.json'}));
+  assert.throws(()=>projectApprovedDigestBaseMediaJobV001(original,'test-only',out,{...published,fileSha256:'invalid'}));
+  assert.equal(base.validatePresentationBaseMediaBuildJobV001({...projected,assemblyDecision:{...projected.assemblyDecision,extra:true}}).status,'failed');
 });

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "new-material-assembly-byte-binding-fix-v001",
+  "checkedAt": "2026-10-04T08:35:01.321011+00:00",
+  "baseHead": "733c0b8e2ff82e3fc6b3cd36e192ff3446c21ba7",
+  "implementationPaths": [
+    "runner/src/digest-approved-job-runner-v001.ts"
+  ],
+  "testPaths": [
+    "runner/src/digest-approved-job-v001.test.ts"
+  ],
+  "failureEvidence": [
+    {
+      "root": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v001",
+      "summaryBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v001/monitor/summary.json",
+        "fileSha256": "07c97d0c0320d53fdecff2bdc28363ce699545686918651763c82082c21180d2",
+        "sizeBytes": 3156
+      },
+      "workerLogBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v001/monitor/worker.log",
+        "fileSha256": "e8613bcce28f98bcae94e6fa2004ce69d0e2b2788c109ed176b2eb2f69156f68",
+        "sizeBytes": 491
+      },
+      "startedAt": "2026-10-04T08:25:45.807437+00:00",
+      "endedAt": "2026-10-04T08:25:48.339527+00:00",
+      "seconds": 2.532089948654175,
+      "remainingRunning": [],
+      "mediaGenerated": false,
+      "status": "interrupted"
+    },
+    {
+      "root": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v002",
+      "summaryBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v002/monitor/summary.json",
+        "fileSha256": "0f1ebcdcb7adeeab0533fa0cfafdbf03427c60fdfb4a0856508d24391f202c57",
+        "sizeBytes": 3159
+      },
+      "workerLogBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v002/monitor/worker.log",
+        "fileSha256": "69a06aa6585068df2b8766a5b987f9117ff1a0877fad5949a50c4ae45f9d1442",
+        "sizeBytes": 668
+      },
+      "startedAt": "2026-10-04T08:28:16.832017+00:00",
+      "endedAt": "2026-10-04T08:28:30.310022+00:00",
+      "seconds": 13.478004932403564,
+      "remainingRunning": [],
+      "mediaGenerated": false,
+      "status": "interrupted"
+    }
+  ],
+  "rootCause": "normal entry assigned four-field formal binding to unchanged base assemblyDecision two-field byte contract",
+  "change": "retain actual publisher binding and project only path/fileSha256; preserve source, adoption payload, clock and strict base validator",
+  "validation": {
+    "regression": {
+      "passed": 10,
+      "failed": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-adoption-projection-regression-v002.tap",
+        "fileSha256": "2f24afb2eabca91f7e647827c7e9cf4cfd7f074c797e9163ab836ed1a72e0048",
+        "sizeBytes": 2527
+      }
+    },
+    "typeCheck": {
+      "exitCode": 0,
+      "scope": "shared build, runner noEmit, Remotion typecheck",
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-adoption-projection-typecheck-v002.log",
+        "fileSha256": "77c8a2a7607b52805b0c255fab54b2da0c69416a4f6687c43dc7655a57ca16c4",
+        "sizeBytes": 285
+      }
+    },
+    "diffCheck": {
+      "exitCode": 0
+    }
+  },
+  "captionManifestBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/manifest.json",
+    "fileSha256": "8da924bda9639478570a10d06dd0bab3573dede572250cd2d3ab9f045e0640dc",
+    "sizeBytes": 82500
+  },
+  "fontSizePx": 216,
+  "oldFailedRoots": "KEEP without reuse; immutable job/auth/owner/monitor unchanged",
+  "authorityChange": false,
+  "validatorChanged": false,
+  "newMaterialScopeExpanded": false,
+  "manufacturingStarted": false
+}
