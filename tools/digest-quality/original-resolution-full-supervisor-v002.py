@@ -24,9 +24,11 @@ def shutdown(p,report):
     def live():return [r for r in members(p.pid) if not r['state'].startswith('Z')]
     def capture(label):
         rows=members(p.pid);event=dict(at=time.time(),action=label,members=rows,treeRssBytes=sum(r['rssBytes'] for r in rows))
-        try:event['system']=old.observe(0,str(Path(report).parent))
+        try:event['system']=old.observe(0,str(Path(report).parent) if report is not None else FORMAL_REPO)
         except BaseException as e:event['systemObservationError']=str(e)
-        events.append(event);Path(report).write_text(json.dumps(dict(group=p.pid,events=events,remainingRunning=None),indent=2)+'\n');return rows
+        events.append(event)
+        if report is not None:Path(report).write_text(json.dumps(dict(group=p.pid,events=events,remainingRunning=None),indent=2)+'\n')
+        return rows
     capture('before-stop')
     if live():
         try:os.killpg(p.pid,signal.SIGTERM)
@@ -45,7 +47,7 @@ def shutdown(p,report):
     while live() and time.monotonic()<deadline:time.sleep(0.05)
     remaining=capture('after-stop')
     result=dict(group=p.pid,events=events,remaining=remaining,remainingRunning=[r for r in remaining if not r['state'].startswith('Z')])
-    Path(report).write_text(json.dumps(result,indent=2)+'\n')
+    if report is not None:Path(report).write_text(json.dumps(result,indent=2)+'\n')
     if result['remainingRunning']:raise RuntimeError('owned process group still running after SIGKILL')
     return result
 
@@ -225,7 +227,9 @@ APPROVED_STORAGE_KEYS = {'guestRoot', 'guestVolumeUuid', 'guestDevice', 'hostRoo
     'hostMetadataReserveBytes', 'internalRoot'}
 APPROVED_EXPECTED_KEYS = {'frames', 'audioSamples', 'groups', 'atoms', 'cues'}
 APPROVED_WORKER = 'runner/src/digest-approved-job-runner-v001.ts'
+APPROVED_RECORD_WORKER = 'runner/src/digest-approved-record-finalize-v001.ts'
 APPROVED_CODE = ['runner/src/digest-approved-job-v001.ts', APPROVED_WORKER,
+    APPROVED_RECORD_WORKER,
     'runner/src/digest-approved-inputs-v001.ts', 'runner/src/digest-formal-handoff-v001.ts',
     'evals/clip_composition/adopted_media_manufacturing_v001.mts',
     'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
@@ -677,6 +681,140 @@ def launch_approved_job(job_file, authorization_file, approved_job_sha256, autho
             + str(root) + '; ' + str(error)) from error
 
 
+def prepare_approved_record_job(job_file, authorization_file, approved_job_sha256, authorization_sha256,
+    pending_result_file, pending_result_file_sha256, pending_result_size_bytes, node_path=None,
+    registration_bundle_file=None, registration_bundle_sha256=None, registration_bundle_size_bytes=None,
+    finalize=False):
+    """Read-only environment qualification; only the fixed TS utility judges results."""
+    required(type(finalize) is bool, 'record-only operation mode required')
+    required(os.geteuid() != 0 and 'NODE_OPTIONS' not in os.environ, 'record-only requires nonroot and no NODE_OPTIONS')
+    configured = read_approved_job_files(job_file, authorization_file, approved_job_sha256, authorization_sha256)
+    job = configured['job']
+    if finalize:required('verificationPolicy' in job, 'record finalization requires the approved representative policy')
+    root = Path(job['storage']['guestRoot']) / job['outputRoot']
+    inspect_output_ancestors(root, job['storage'])
+    required(absolute_path(pending_result_file) and pending_result_file == str(root / 'result.json'),
+        'pending result must be this approved output root result.json')
+    pending_ref = dict(path=pending_result_file, fileSha256=pending_result_file_sha256, sizeBytes=pending_result_size_bytes)
+    validate_binding(pending_ref, absolute=True, require_size=True)
+    stable_bound_bytes(pending_ref)  # No status or QC interpretation in Python.
+    bundle_ref = None;bundle_available = False
+    if finalize:
+        bundle_ref = dict(path=registration_bundle_file, fileSha256=registration_bundle_sha256, sizeBytes=registration_bundle_size_bytes)
+        validate_binding(bundle_ref, absolute=True, require_size=True)
+        try:Path(bundle_ref['path']).lstat()
+        except FileNotFoundError:
+            # A completed same-bundle retry is qualified from the TS-owned
+            # stored bundle. Missing fresh input never qualifies in Python.
+            pass
+        else:
+            stable_bound_bytes(bundle_ref);bundle_available = True
+    else:
+        required(registration_bundle_file is None and registration_bundle_sha256 is None
+            and registration_bundle_size_bytes is None, 'get-result cannot register or finalize evidence')
+    approved_node = job['implementation']['nodeBinding']['path']
+    required(node_path is None or node_path == approved_node, 'explicit approved Node path differs')
+    node_identity = bound_node_identity(job['implementation']['nodeBinding'])
+    image_identity = approved_image_identity(job['storage'])
+    anchor_refs = [configured['jobBinding'], configured['authorizationBinding'], pending_ref] + ([bundle_ref] if bundle_available else [])
+    identities = [bound_file_identity(ref) for ref in anchor_refs]
+    def revalidate():
+        for identity in identities:verify_file_identity(identity)
+        for ref in anchor_refs:stable_bound_bytes(ref)
+        for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
+            stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+        verify_node_identity(node_identity)
+        approved_current_implementation(job)
+        inspect_output_ancestors(root, job['storage'])
+    mode = '--finalize-job' if finalize else '--get-job-result'
+    command = [approved_node, '--import', FORMAL_REPO + '/runner/node_modules/tsx/dist/loader.mjs',
+        FORMAL_REPO + '/' + APPROVED_RECORD_WORKER, mode,
+        '--job-file', job_file, '--authorization-file', authorization_file,
+        '--job-sha256', approved_job_sha256, '--authorization-sha256', authorization_sha256,
+        '--pending-result-file', pending_result_file, '--pending-result-file-sha256', pending_result_file_sha256,
+        '--pending-result-size-bytes', str(pending_result_size_bytes)]
+    if finalize:
+        command += ['--registration-bundle-file', registration_bundle_file,
+            '--registration-bundle-sha256', registration_bundle_sha256,
+            '--registration-bundle-size-bytes', str(registration_bundle_size_bytes)]
+    revalidate()
+    return {**configured, 'operationMode': mode, 'command': command, 'pendingResultBinding': pending_ref,
+        'registrationBundleBinding': bundle_ref, 'observedNodeIdentity': node_identity,
+        'imageIdentity': image_identity, 'revalidate': revalidate}
+
+def run_approved_record_worker(configured):
+    """One fixed read/finalize utility; no manufacture permit, owner, root or retry."""
+    job = configured['job']; guard = job['guard']; finalize = configured['operationMode'] == '--finalize-job'
+    permit = dict(storage=job['storage'], _approvedGuard=guard)
+    samples=[];started=time.time();p=None;sel=None;reason=None;stopped=None;stdout=bytearray();stderr=bytearray()
+    def observe(group, phase):
+        configured['revalidate']()
+        sample=observe_formal(group, permit, configured['imageIdentity']);sample['phase']=phase;samples.append(sample)
+        return sample
+    try:
+        initial=observe(0,'record-only-start')
+        reason=formal_decision(initial,new_bytes=0,starting=finalize,guard=guard)
+        if reason:raise RuntimeError(reason)
+        env={key:value for key,value in os.environ.items() if key not in {
+            'ZEV_FULL_SUPERVISED','ZEV_APPROVED_JOB_PERMIT','ZEV_APPROVED_JOB_SHA256',
+            'ZEV_APPROVED_AUTHORIZATION_SHA256','ZEV_FORMAL_HANDOFF_PERMIT','ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED'}}
+        env['NODE_PATH']=str(Path(FORMAL_REPO)/'runner/node_modules')
+        if finalize:env['ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED']='1'
+        p=subprocess.Popen(configured['command'],stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+            start_new_session=True,env=env)
+        sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ,'stdout');sel.register(p.stderr,selectors.EVENT_READ,'stderr');last=0
+        while p.poll() is None or sel.get_map():
+            if time.monotonic()-last>=guard['observationIntervalSeconds']:
+                current=observe(p.pid,'record-only-interval');last=time.monotonic()
+                reason=formal_decision(current,new_bytes=0,guard=guard)
+                if reason:raise RuntimeError(reason)
+            for key,_ in sel.select(max(0,guard['observationIntervalSeconds']-(time.monotonic()-last))):
+                chunk=os.read(key.fd,65536)
+                if not chunk:sel.unregister(key.fileobj)
+                elif key.data=='stdout':stdout.extend(chunk)
+                else:stderr.extend(chunk)
+            if p.poll() is not None and any(not row['state'].startswith('Z') for row in members(p.pid)):
+                raise RuntimeError('record-only utility exited with live descendants')
+        p.wait()
+        required(p.returncode==0,'record-only utility nonzero exit')
+        final=observe(0,'record-only-final');reason=formal_decision(final,new_bytes=0,guard=guard)
+        if reason:raise RuntimeError(reason)
+        # The trusted TS reader/transaction provides the result, not a Python
+        # interpretation of JSON passed/status. Preserve its event verbatim.
+        payload=json.loads(stdout.decode())
+        required(type(payload) is dict and 'result' in payload and 'event' in payload,
+            'fixed record-only utility returned no result envelope')
+    except BaseException as error:
+        reason=str(error) or type(error).__name__;payload=None
+    finally:
+        if p:
+            try:stopped=shutdown(p,None)
+            except BaseException as error:
+                reason=(reason or '')+'; shutdown failure: '+str(error)
+                try:os.killpg(p.pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+                try:p.wait(timeout=5)
+                except subprocess.TimeoutExpired:reason+='; parent termination unverified'
+            if p.stdout:p.stdout.close()
+            if p.stderr:p.stderr.close()
+        if sel:sel.close()
+    success=payload is not None and reason is None and stopped is not None and not stopped['remainingRunning']
+    summary=dict(schemaVersion='digest-approved-record-only-supervision-v001',status='worker-finished' if success else 'interrupted',
+        operation=configured['operationMode'],reason=reason,command=configured['command'],startedAt=started,endedAt=time.time(),
+        exitCode=p.returncode if p else None,ownProcessGroup=p.pid if p else None,remainingRunning=stopped['remainingRunning'] if stopped else None,
+        guard=guard,recordOnly=True,mediaGenerated=False,ownerCreatedBySupervisor=False,rootClaimedBySupervisor=False,
+        samples=len(samples),observedTreePeakBytes=max((s['treeRssBytes'] for s in samples),default=0),
+        minimumGuestAvailableBytes=min((s['availableBytes'] for s in samples),default=None),
+        jobBinding=configured['jobBinding'],authorizationBinding=configured['authorizationBinding'],
+        pendingResultBinding=configured['pendingResultBinding'],registrationBundleBinding=configured['registrationBundleBinding'])
+    result={**payload,'supervision':summary} if success else dict(event='record-only-interrupted',result=None,supervision=summary,
+        stderr=stderr.decode(errors='replace'))
+    print(json.dumps(result),flush=True)
+    return 0 if success else 1
+
+def operate_approved_record_job(*args, **kwargs):
+    return run_approved_record_worker(prepare_approved_record_job(*args, **kwargs))
+
 def volume_identity(root,uuid,device,filesystem):
     actual=os.lstat(root)
     assert stat.S_ISDIR(actual.st_mode) and not stat.S_ISLNK(actual.st_mode),'volume root missing or symlink: '+root
@@ -843,13 +981,31 @@ def main(argv=None):
     mode=parser.add_mutually_exclusive_group()
     mode.add_argument('--prepare-job',action='store_true',help='Read-only readiness check; grants no new permission and starts no worker.')
     mode.add_argument('--launch-job',action='store_true',help='Explicitly claim the approved fresh output and supervise one worker.')
+    mode.add_argument('--get-job-result',action='store_true',help='Use the fixed Node read-only result qualifier; no owner or manufacture.')
+    mode.add_argument('--finalize-job',action='store_true',help='Supervise only registration/finalization of this anchored pending result; no new media.')
     parser.add_argument('--job-file')
     parser.add_argument('--authorization-file')
     parser.add_argument('--node-path')
+    parser.add_argument('--pending-result-file')
+    parser.add_argument('--pending-result-file-sha256')
+    parser.add_argument('--pending-result-size-bytes',type=int)
+    parser.add_argument('--registration-bundle-file')
+    parser.add_argument('--registration-bundle-sha256')
+    parser.add_argument('--registration-bundle-size-bytes',type=int)
     parser.add_argument('directory',nargs='?')
     parser.add_argument('permit',nargs='?')
     parser.add_argument('command',nargs=argparse.REMAINDER)
     args=parser.parse_args(argv)
+    record_options=[args.pending_result_file,args.pending_result_file_sha256,args.pending_result_size_bytes,
+        args.registration_bundle_file,args.registration_bundle_sha256,args.registration_bundle_size_bytes]
+    if args.get_job_result or args.finalize_job:
+        required(not args.legacy_recovery_only and args.directory is None and args.permit is None and not args.command,
+            'record-only utility cannot use legacy or direct-command arguments')
+        return operate_approved_record_job(args.job_file,args.authorization_file,args.approved_job_sha256,args.authorization_sha256,
+            args.pending_result_file,args.pending_result_file_sha256,args.pending_result_size_bytes,node_path=args.node_path,
+            registration_bundle_file=args.registration_bundle_file,registration_bundle_sha256=args.registration_bundle_sha256,
+            registration_bundle_size_bytes=args.registration_bundle_size_bytes,finalize=args.finalize_job)
+    required(all(value is None for value in record_options), 'record-specific arguments require explicit get or finalize mode')
     if args.prepare_job or args.launch_job:
         required(not args.legacy_recovery_only and args.directory is None and args.permit is None and not args.command,
             'approved launcher cannot use legacy or direct-command arguments')

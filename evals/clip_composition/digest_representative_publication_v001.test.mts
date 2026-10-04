@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {
   projectPresentationInstructionRendererCompletionV002 as projectDraw,
   qualifyPresentationInstructionRendererCompletionV002 as qualifyDraw,
@@ -10,6 +14,8 @@ import {
 } from './adopted_media_manufacturing_v001.mts';
 import {
   assertQualifiedDigestRepresentativeCompletionV001,
+  rebindPublishedDigestRepresentativeCompletionV001,
+  persistApprovedDigestRepresentativePendingEvidenceV001,
   evaluateDigestRepresentativeCompletionV001,
 } from './digest_representative_completion_v001.mjs';
 
@@ -148,4 +154,115 @@ test('Core refuses successful-looking renderer status when the retained verifica
     qc: structuredClone(value.verification)}}), null);
   assert.equal(projectCore({...rendered(value), result: {...rendered(value).result,
     counterfactualQcExecuted: true}}), null);
+});
+
+
+// Execute the actual publication/control functions with explicit dependency
+// spies. These structural tests never mint a production capability or record.
+const publicationCallerSource = await readFile(process.env.ZEV_PENDING_CALLER_TEST_SOURCE
+  ?? new URL('./run_presentation_instruction_renderer_job_v002.ts', import.meta.url), 'utf8');
+const publicationCoreSource = await readFile(process.env.ZEV_PENDING_CORE_TEST_SOURCE
+  ?? new URL('./adopted_media_manufacturing_v001.mts', import.meta.url), 'utf8');
+const shapeSha = (value: any) => createHash('sha256').update(canonicalJson(value)).digest('hex');
+const compile = (text: string, dependencies: Record<string, any>) =>
+  Function(...Object.keys(dependencies), 'return (' + text + ');')(...Object.values(dependencies));
+function runActualPublication(value: any, published: any, observations: any, overrides: any = {}) {
+  const start = publicationCallerSource.indexOf('  const completion = await qualifyPresentationInstructionRendererCompletionV002(draw, storageContext);');
+  const end = publicationCallerSource.indexOf('\nexport async function runPresentationInstructionRendererJobFileV002(', start);
+  assert(start >= 0 && end > start);
+  const root = 'runtime/artifacts/test-only-representative';
+  const media = {path: root + '/render/presentation-rendered-v002.mp4', fileSha256: published.bindings.completedMedia.fileSha256,
+    sizeBytes: published.bindings.completedMedia.sizeBytes};
+  const technical = {path: root + '/representative-technical-evidence-v001.json', fileSha256: 'e'.repeat(64), sizeBytes: 7};
+  const dependencies = {
+    draw: value, storageContext: {outputRoot: root, testOnly: true}, capabilities: {},
+    job: {publication: {renderOutputRoot: root + '/render'}}, path, canonicalSha256: shapeSha, clone: structuredClone,
+    rendererJobBinding: {testOnly: true}, receiptBuilt: {receipt: {testOnly: true}}, receiptPublication: {testOnly: true},
+    layoutBuilt: {layout: {testOnly: true}}, lineLayoutPublication: {testOnly: true}, common: {plan: {testOnly: true}},
+    autoPresentation: undefined,
+    qualifyPresentationInstructionRendererCompletionV002: async () => projectDraw(value),
+    commitValidatedPresentationArtifactsV002: async () => {observations.commit++;return {status: 'published', outputDirectory: value.outputDirectory};},
+    assertQualifiedDigestRepresentativeCompletionV001: async (verification: any, _context: any, file: string) => {
+      observations.oldAssert++;assert.equal(verification, value.verification);assert.equal(file, value.outputDirectory + '/presentation-rendered-v002.mp4');
+    },
+    rebindPublishedDigestRepresentativeCompletionV001: async (verification: any, _context: any, file: string) => {
+      observations.rebind++;assert.equal(verification, value.verification);assert.equal(file, published.bindings.completedMedia.path);return published;
+    },
+    persistApprovedDigestRepresentativePendingEvidenceV001: async (args: any) => {
+      observations.persist++;assert.equal(args.draw, value);assert.equal(args.verification, published);
+      assert.equal(args.publishedMediaPath, published.bindings.completedMedia.path);return {technicalEvidenceBinding: technical, publishedMediaBinding: media};
+    }, ...overrides,
+  };
+  return {run: compile('async function() {\n' + publicationCallerSource.slice(start, end).trim(), dependencies), media, technical};
+}
+function runActualCore(result: any, context: any, observations: any) {
+  const start = publicationCoreSource.indexOf('export async function qualifyAdoptedRendererCompletionV001(');
+  const end = publicationCoreSource.indexOf('\nexport async function renderAdoptedVideoV001(', start);
+  assert(start >= 0 && end > start);
+  const text = publicationCoreSource.slice(start, end).trim()
+    .replace('export async function', 'async function')
+    .replace('result: Json', 'result').replace('storageContext?: Json', 'storageContext').replace('completedMediaPath?: string', 'completedMediaPath');
+  return compile(text, {
+    projectAdoptedRendererCompletionV001: projectCore,
+    resolveApprovedDigestVerificationPolicyV001: async () => ({testOnly: true}),
+    assertQualifiedDigestRepresentativeCompletionV001: async () => {observations.privateAssert++;},
+    path, same: (a: any, b: any) => shapeSha(a) === shapeSha(b),
+    keys: (value: any, expected: string[]) => value && typeof value === 'object'
+      && JSON.stringify(Object.keys(value).sort()) === JSON.stringify([...expected].sort()),
+    fail: (code: string) => {throw Error(code);},
+  })(result, context, result.result.publication.video.path);
+}
+
+for (const status of ['passed-representative', 'confirmation-pending']) {
+  test('published ' + status + ' replaces stage references and persists evidence only when pending', async () => {
+    const pure = representative(status), stage = '/tmp/test-only-no-output/publish/presentation-rendered-v002.mp4';
+    const original = {...pure, bindings: {...pure.bindings, completedMedia: {...pure.bindings.completedMedia, path: stage}}};
+    const value = {...draw(original), workVideo: stage, stagingDirectory: '/tmp/test-only-no-output/publish', outputDirectory: '/tmp/test-only-no-output/render', reservation: {testOnly: true}};
+    const published = {...original, bindings: {...original.bindings, completedMedia: {...original.bindings.completedMedia,
+      path: value.outputDirectory + '/presentation-rendered-v002.mp4'}}};
+    const observed = {commit: 0, rebind: 0, oldAssert: 0, persist: 0};
+    const actual = runActualPublication(value, published, observed);
+    const output = await actual.run();
+    assert.equal(output.exitCode, 0);assert.equal(output.result.qc, published);assert.equal(output.result.verification, published);
+    assert.equal(output.result.status, status === 'confirmation-pending' ? 'confirmation-pending' : 'completed');
+    assert.deepEqual(output.result.publishedMediaBinding, actual.media);assert(!output.result.publishedMediaBinding.path.startsWith('/'));
+    assert.equal(output.result.verification.bindings.completedMedia.path, value.outputDirectory + '/presentation-rendered-v002.mp4');
+    assert.equal(observed.commit, 1);assert.equal(observed.oldAssert, 1);assert.equal(observed.rebind, 1);
+    assert.equal(observed.persist, status === 'confirmation-pending' ? 1 : 0);
+    assert.equal(output.result.technicalEvidenceBinding, status === 'confirmation-pending' ? actual.technical : undefined);
+    assert.notEqual(output.result.verification.bindings.completedMedia.path, stage);
+    if (status === 'confirmation-pending') {
+      const coreObserved = {privateAssert: 0, read: 0};
+      const context = {outputRoot: 'runtime/artifacts/test-only-representative', readBound: async (binding: any) => {
+        coreObserved.read++;assert.deepEqual(binding, actual.technical);return {testOnly: true};
+      }};
+      assert.equal((await runActualCore(output, context, coreObserved)).status, 'confirmation-pending');
+      assert.equal(coreObserved.privateAssert, 1);assert.equal(coreObserved.read, 1);
+      for (const change of [
+        {publishedMediaBinding: {...actual.media, path: 'runtime/artifacts/other/render/video.mp4'}},
+        {publishedMediaBinding: {...actual.media, sizeBytes: actual.media.sizeBytes + 1}},
+        {technicalEvidenceBinding: undefined},
+        {technicalEvidenceBinding: {...actual.technical, path: 'runtime/artifacts/other/evidence.json'}},
+      ]) await assert.rejects(runActualCore({...output, result: {...output.result, ...change}}, context, {privateAssert: 0}));
+      await assert.rejects(runActualCore(output, {...context, readBound: async () => {throw Error('TEST_ONLY_RAW_SHA_CHANGED');}}, {privateAssert: 0}), /TEST_ONLY_RAW_SHA_CHANGED/);
+    }
+  });
+}
+
+test('publication rejects status upgrades and mismatched pending media returned by the persistence factory', async () => {
+  const original = representative('confirmation-pending'), value = {...draw(original), outputDirectory: '/tmp/test-only-no-output/render'};
+  const published = {...original, bindings: {...original.bindings, completedMedia: {...original.bindings.completedMedia,
+    path: value.outputDirectory + '/presentation-rendered-v002.mp4'}}};
+  const observed = () => ({commit: 0, rebind: 0, oldAssert: 0, persist: 0});
+  await assert.rejects(runActualPublication(value, {...published, status: 'passed-representative', complete: true}, observed()).run(), /changed its confirmation status/);
+  await assert.rejects(runActualPublication(value, published, observed(), {
+    persistApprovedDigestRepresentativePendingEvidenceV001: async () => ({publishedMediaBinding: {path: 'runtime/artifacts/other.mp4'}}),
+  }).run(), /changed its published media binding/);
+});
+
+test('rebind and pending persistence reject pure JSON results and fake contexts before record writes', async () => {
+  const verification = representative('confirmation-pending'), fakeContext: any = {outputRoot: 'runtime/artifacts/test-only', approvedJob: {testOnly: true}};
+  await assert.rejects(rebindPublishedDigestRepresentativeCompletionV001(verification, fakeContext, '/tmp/test-only-no-media.mp4'));
+  await assert.rejects(persistApprovedDigestRepresentativePendingEvidenceV001({draw: draw(verification), verification,
+    storageContext: fakeContext, publishedMediaPath: '/tmp/test-only-no-media.mp4'}));
 });

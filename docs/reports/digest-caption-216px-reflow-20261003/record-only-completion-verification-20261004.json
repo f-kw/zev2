@@ -1,0 +1,451 @@
+{
+  "schemaVersion": "digest-record-only-completion-verification-v001",
+  "checkedAt": "2026-10-04T04:53:53.509926+00:00",
+  "baseHead": "7cb3118d99b493d0f03c04af8af330e28875708c",
+  "files": [
+    {
+      "path": "evals/clip_composition/adopted_media_manufacturing_v001.mts",
+      "fileSha256": "5882cdd62de1e8377a03529c81ea2113df184cce55a7a9c1f2e585ca56bd0de5",
+      "sizeBytes": 30717
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_completion_v001.mjs",
+      "fileSha256": "533411b661435343e38b369dcc014c800e4c4151451174070c8ede1cdc134046",
+      "sizeBytes": 38878
+    },
+    {
+      "path": "evals/clip_composition/digest_representative_publication_v001.test.mts",
+      "fileSha256": "9f0452b0ff000c471a2f0eabe4b3f67972a5212c49614fbd6ced6d30daa5781d",
+      "sizeBytes": 19196
+    },
+    {
+      "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "fileSha256": "ef16c170d78e131c593420e58150d981d5fccafa47b43ff9f7f8c5967fbe76dc",
+      "sizeBytes": 37879
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.test.ts",
+      "fileSha256": "80b1ef4d7b106811c58341c8d81b3d77f48063f0fd6a441bb6461a02842f8a1d",
+      "sizeBytes": 13835
+    },
+    {
+      "path": "runner/src/digest-approved-job-runner-v001.ts",
+      "fileSha256": "887490f66d6386c3a36a93768391307acfa4e1871ac2b92d9daa52e33bda3f32",
+      "sizeBytes": 31516
+    },
+    {
+      "path": "runner/src/digest-approved-job-v001.test.ts",
+      "fileSha256": "2754a0b5bd5755b47ad1fcc24a5325efae1bd4191657881f0a61dcb112c23ef5",
+      "sizeBytes": 10127
+    },
+    {
+      "path": "runner/src/digest-approved-job-v001.ts",
+      "fileSha256": "9e2e2ef1e7b2ea1ee752c380b58976147bf5dfa1bca16451f67a0cc6760e7504",
+      "sizeBytes": 14995
+    },
+    {
+      "path": "runner/src/digest-approved-record-finalize-v001.ts",
+      "fileSha256": "5bc7b56635ccedc1de316a5e314c8e2b985d95f981c0c293f15a27e874a49216",
+      "sizeBytes": 34768
+    },
+    {
+      "path": "runner/src/digest-approved-record-finalize-v001.test.ts",
+      "fileSha256": "1b0d01678378b7657d0acb740fa8f730d2fb59fd5b5c60301f8eba3b9ce706a8",
+      "sizeBytes": 33549
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py",
+      "fileSha256": "def0a3d7025c045dcfd936eeda975c1e6e952cc264a0e187752468980d1987a2",
+      "sizeBytes": 46157
+    },
+    {
+      "path": "tools/digest-quality/original-resolution-full-supervisor-v002.py",
+      "fileSha256": "e0be0f31dfacef8e47e46ae00fb6836ceb688b1679a29d7abb648172064934a8",
+      "sizeBytes": 75948
+    }
+  ],
+  "rootChecks": {
+    "representativeRules": {
+      "passed": 8,
+      "failed": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-common-final-tests.log",
+        "fileSha256": "e2d4f951e709c8cf09d36f13744eb950e053a28540e764e9f7c83e25490cd912",
+        "sizeBytes": 1969
+      }
+    },
+    "jobAndGrant": {
+      "passed": 9,
+      "failed": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-job-tests.log",
+        "fileSha256": "c9d3850614bc98a560da52d41126892fe167b6a102b155404a6e707692783bdf",
+        "sizeBytes": 2300
+      }
+    },
+    "savedInputQualification": {
+      "passed": 7,
+      "failed": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-input-tests-authorized.log",
+        "fileSha256": "fe93a06e0107c109cde1db0fc3bf82c6b5475dae8c057bb54c51457fcd7f9408",
+        "sizeBytes": 1450
+      }
+    },
+    "runnerTypecheck": {
+      "exitCode": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-runner-final-typecheck-fixed.log",
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sizeBytes": 0
+      }
+    },
+    "remotionTypecheck": {
+      "exitCode": 0,
+      "evidenceBinding": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-remotion-final-typecheck.log",
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sizeBytes": 0
+      }
+    }
+  },
+  "childEvidence": {
+    "publication": {
+      "schemaVersion": "digest-pending-publication-connection-verification-v001",
+      "checkedAtUtc": "2026-10-04T04:18:32.244339+00:00",
+      "files": [
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+          "fileSha256": "ef16c170d78e131c593420e58150d981d5fccafa47b43ff9f7f8c5967fbe76dc",
+          "sizeBytes": 37879
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/adopted_media_manufacturing_v001.mts",
+          "fileSha256": "5882cdd62de1e8377a03529c81ea2113df184cce55a7a9c1f2e585ca56bd0de5",
+          "sizeBytes": 30717
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_representative_publication_v001.test.mts",
+          "fileSha256": "9f0452b0ff000c471a2f0eabe4b3f67972a5212c49614fbd6ced6d30daa5781d",
+          "sizeBytes": 19196
+        }
+      ],
+      "test": {
+        "command": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import ./runner/node_modules/tsx/dist/loader.mjs --test evals/clip_composition/digest_representative_publication_v001.test.mts",
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0
+      },
+      "checks": [
+        "private qualification before atomic media publication retained",
+        "published verification replaces stage references and keeps qc/verification object identity",
+        "logical actual MP4 binding is returned for representative results",
+        "technical-evidence JSON persisted only for pending results",
+        "pending technical raw binding/path/size and byte readback checked by Core",
+        "legacy full-QC result remains unchanged",
+        "contradictory status, foreign media/evidence, rawbyte readback failure and fake context are rejected"
+      ],
+      "productionMediaGenerated": 0,
+      "ffmpegChildrenStarted": 0,
+      "gitMutations": 0,
+      "limits": [
+        "Actual technical evidence persistence was not run against new video.",
+        "Record-only finalizer implementation and full typecheck are parent/other-agent work."
+      ]
+    },
+    "supervision": {
+      "schemaVersion": "zev-approved-record-only-supervisor-report-v001",
+      "verifiedAt": "2026-10-04T04:35:23.593415Z",
+      "status": "python-entry-implemented-and-targeted-fixture-tested",
+      "branch": "main",
+      "headRead": "7cb3118d99b493d0f03c04af8af330e28875708c",
+      "gitStatusRead": " M evals/clip_composition/adopted_media_manufacturing_v001.mts\n M evals/clip_composition/digest_representative_completion_v001.mjs\n M evals/clip_composition/digest_representative_publication_v001.test.mts\n M evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts\n M runner/src/digest-approved-inputs-v001.test.ts\n M runner/src/digest-approved-job-runner-v001.ts\n M runner/src/digest-approved-job-v001.test.ts\n M runner/src/digest-approved-job-v001.ts\n M tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py\n M tools/digest-quality/original-resolution-full-supervisor-v002.py\n?? runner/src/digest-approved-record-finalize-v001.ts\n",
+      "untrackedCountRead": 1,
+      "implementationFiles": [
+        {
+          "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py",
+          "fileSha256": "e0be0f31dfacef8e47e46ae00fb6836ceb688b1679a29d7abb648172064934a8",
+          "sizeBytes": 75948
+        },
+        {
+          "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py",
+          "fileSha256": "def0a3d7025c045dcfd936eeda975c1e6e952cc264a0e187752468980d1987a2",
+          "sizeBytes": 46157
+        }
+      ],
+      "fixedTsModuleRead": {
+        "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-record-finalize-v001.ts",
+        "fileSha256": "77673fc77f56cc28dcdf6df570b8b21c890349ad4af0071a4e657185e5279b44",
+        "sizeBytes": 31658
+      },
+      "tests": [
+        {
+          "name": "record input/CLI binding",
+          "passed": 8,
+          "total": 8,
+          "seconds": 0.053,
+          "sourceState": "before final get policy requirement refinement; changed existing case rechecked below",
+          "evidence": {
+            "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-supervisor-binding-tests.stdout.txt",
+            "fileSha256": "7c5eba5e790b3acc92996422685293b061106b91877849054679a26914b130ce",
+            "sizeBytes": 1406
+          }
+        },
+        {
+          "name": "record owned-PGID monitor",
+          "passed": 2,
+          "total": 2,
+          "seconds": 0.401,
+          "sourceState": "same monitor code; before input-only retry/path refinements",
+          "evidence": {
+            "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-supervisor-monitor-tests.stdout.txt",
+            "fileSha256": "829ae522cf55aa9bc3e7cd4c253958c03e238a8abfe58b9df8dc1cd535a72e16",
+            "sizeBytes": 428
+          }
+        },
+        {
+          "name": "existing reported shutdown",
+          "passed": 3,
+          "total": 3,
+          "seconds": 11.905,
+          "sourceState": "same shutdown code; before input-only retry/path refinements",
+          "evidence": {
+            "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-supervisor-existing-shutdown-tests.stdout.txt",
+            "fileSha256": "59c62bb00c2a14a8ae57c727533cc05bb04bf48c67c11fc1aa28227fe8e4ce95",
+            "sizeBytes": 1604
+          }
+        },
+        {
+          "name": "get initial-completed policy absence / finalize still requires policy",
+          "passed": 1,
+          "total": 1,
+          "seconds": 0.008,
+          "sourceState": "final implementation; existing case updated and rerun",
+          "evidence": {
+            "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-supervisor-initial-completed-get-test.stdout.txt",
+            "fileSha256": "42a621fab3b4969d749be5be11f882703e40a9ff93776a51b6050efa5ab50ff1",
+            "sizeBytes": 263
+          }
+        }
+      ],
+      "testTotals": {
+        "priorUniqueTestsPassed": 13,
+        "priorUniqueTestsRun": 13,
+        "updatedExistingCasePassed": 1,
+        "updatedExistingCaseRun": 1
+      },
+      "compilePassed": true,
+      "diffCheckPassed": true,
+      "limits": {
+        "startBytes": 50000000000,
+        "reserveBytes": 12000000000,
+        "maximumRssBytes": 17179869184,
+        "maximumPressure": 1,
+        "observationIntervalSeconds": 1,
+        "nextUnitPlusReserve": true,
+        "stopOwnProcessGroup": true,
+        "restartOnReconnect": false
+      },
+      "entryModes": {
+        "get": {
+          "fixedNodeReadOnlyQualifier": true,
+          "pythonStatusJudgment": false,
+          "largeStartGateApplied": false,
+          "nodeOwnerCreated": false,
+          "verificationPolicyRequired": false,
+          "initialFullOrRepresentativeCompletedReceipt": "delegated to the same fixed TS read-only qualifier; Python reads bound raw original receipt only"
+        },
+        "finalize": {
+          "fixedNodeRecordOnlyWorker": true,
+          "largeStartGateApplied": true,
+          "nextAllocationBytes": 0,
+          "supervisedEnvMarker": "ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED=1",
+          "officialSupervisorInvocation": "absolute script path",
+          "verificationPolicyRequired": true,
+          "ownerLeaseAndLock": "fresh UUID/PID/actual parentPID owner inside TS exclusive lock; TS manages acquisition/release",
+          "finalizationStorageDirectory": "approved outputRoot/record-finalization-v001 fixed directory",
+          "separateUuidOperationChildGenerated": false
+        }
+      },
+      "guards": {
+        "independentJobAuthorizationSha": true,
+        "independentPendingResultShaAndSize": true,
+        "pendingResultExactPath": "approved outputRoot/result.json",
+        "independentRegistrationBundleShaAndSize": true,
+        "actualNodeCodeJobAuthPendingAndStorageRevalidation": true,
+        "nodePathFixed": true,
+        "nodeOptionsRejected": true,
+        "normalManufacturingEnvRemoved": true
+      },
+      "retry": {
+        "originalBundleAbsentAtStart": "delegated only to fixed TS saved-bundle requalification; Python never declares completion",
+        "newMissingInput": "TS must reject before a new completion",
+        "existingBundlePresent": "Python actual bytes checked and pinned"
+      },
+      "unchanged": [
+        "normal prepare/launch output-root refusal",
+        "normal run_formal and worker command",
+        "public run/direct record-status rejection",
+        "legacy dispatcher and safety thresholds",
+        "old owner/permit/output bytes"
+      ],
+      "effects": {
+        "productionNodeUtilityStarted": false,
+        "mediaGenerated": false,
+        "ssdModified": false,
+        "productionOwnerLaunched": false,
+        "gitMutation": false,
+        "smallSyntheticPythonTransportProcessesOnly": true
+      },
+      "evidence": [
+        {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/record-only-supervisor-implementation.diff",
+          "fileSha256": "db7b7f9773a64f25e6b38a68135d6d24388cec1f3169808fdb497acc566cd01c",
+          "sizeBytes": 29137
+        }
+      ],
+      "remaining": [
+        "Root integration/commit and production job SHA binding",
+        "TS transaction and cross-process qualification tests belong to storage_scope",
+        "No real production get/finalize or completed full/representative receipt was executed by this agent"
+      ]
+    },
+    "recordFinalization": {
+      "schemaVersion": "digest-record-finalize-verification-report-v001",
+      "checkedAt": "2026-10-04T04:51:59.342756+00:00",
+      "repository": "/Users/kawafmm/workspace/zev2",
+      "head": "7cb3118d99b493d0f03c04af8af330e28875708c",
+      "codeAndTestBindings": [
+        {
+          "path": "runner/src/digest-approved-record-finalize-v001.ts",
+          "fileSha256": "5bc7b56635ccedc1de316a5e314c8e2b985d95f981c0c293f15a27e874a49216",
+          "sizeBytes": 34768
+        },
+        {
+          "path": "runner/src/digest-approved-record-finalize-v001.test.ts",
+          "fileSha256": "1b0d01678378b7657d0acb740fa8f730d2fb59fd5b5c60301f8eba3b9ce706a8",
+          "sizeBytes": 33549
+        }
+      ],
+      "result": "targeted-implementation-and-cross-process-fixture-passed",
+      "tests": {
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "exitCode": 0,
+        "durationMs": 22178.71225,
+        "command": "NODE_PATH=/Users/kawafmm/workspace/zev2/runner/node_modules /Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node --import ./runner/node_modules/tsx/dist/loader.mjs --test runner/src/digest-approved-record-finalize-v001.test.ts",
+        "logBinding": {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-record-finalize-tests-20261004.tap",
+          "fileSha256": "c8ccd68583713a91c1560aae6ebc8c00d9f6decf3946cfe77149916b28ae26d3",
+          "sizeBytes": 2147
+        },
+        "cases": [
+          "plain JSON/fake private context and mismatched independent pending anchors rejected",
+          "seed process exit -> separate register/requalification process -> separate readonly get; source files removed -> stored get and same retry succeed",
+          "media replacement, missing pending, independently rebound wrong plan and typography settings rejected",
+          "precommit failure leaves original pending bytes unchanged and removes own lock; same registration retry completes",
+          "concurrent registration rejected by actual exclusive mkdir while first process owns completion",
+          "different registration SHA and size cannot replace immutable completion",
+          "initially completed full result retrieved without writes; replaced media rejected",
+          "initially completed representative result retrieved without writes; replaced media rejected"
+        ]
+      },
+      "typecheck": {
+        "command": "node runner/node_modules/typescript/bin/tsc -p runner/tsconfig.json --noEmit",
+        "exitCode": 0,
+        "logPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-record-finalize-tsc-20261004.log"
+      },
+      "diffCheck": {
+        "command": "git diff --check",
+        "exitCode": 0
+      },
+      "cleanup": {
+        "ownFixturePrefix": "runtime/artifacts/test-record-finalize-",
+        "remainingDirectories": [],
+        "allSpawnedFixtureWorkersAwaited": true,
+        "ownLocksAndTempsRemovedByFinally": true
+      },
+      "fixtureScope": {
+        "media": "48-byte opaque synthetic nonplayable bytes; no real video generated or played",
+        "png": "saved tiny fixture PNG; synthetic overlay inspection, not actual whole-video quality evidence",
+        "hardwareVirtualization": "test-loader only maps UUID guest/host paths into own ignored fixture, models APFS/ExFAT device metadata, image metadata, available space, parent supervisor argv and clean Git status; no production flag or private authority injection",
+        "realChecks": "public private job factory; independently bound real JSON/code/Node hashes and actual HEAD; ordinary fs bytes/mode/UUID/PID/mkdir lock/hardlink; actual separate Node worker processes",
+        "failureInjection": "test-loader-only precommit link failure and concurrency barrier; absent from production module"
+      },
+      "productionBehavior": {
+        "originalPendingAndMediaOverwrite": false,
+        "mediaRendering": false,
+        "ffmpegOrRenderWorkerStarted": false,
+        "completedReceipt": "outputRoot/record-finalization-v001/completed-receipt.json (no overwrite)",
+        "savedRegistration": "outputRoot/record-finalization-v001/registration.json",
+        "getRevalidates": "actual qualified job/code/Node/storage, independent initial receipt, stored pending/technical/media/PNG/record/evidence; no owner/lock/write",
+        "retry": "same registration SHA+size only; original registration path may differ or be gone; different content rejected"
+      },
+      "limits": [
+        "No real approved production job/media or physical-device finalize run was performed.",
+        "Synthetic fixture success is not real video QC or human quality approval.",
+        "No SSD existing contents, old 15:23 media, Git stage/commit/push, external Codex messaging, or other process stop performed."
+      ],
+      "blockers": []
+    }
+  },
+  "totalUniquePassed": 56,
+  "counts": {
+    "common": 8,
+    "job": 9,
+    "savedInputs": 7,
+    "callerCore": 11,
+    "supervisor": 13,
+    "recordCrossProcess": 8
+  },
+  "initialFailures": [
+    {
+      "case": "savedInputs",
+      "passed": 6,
+      "failed": 1,
+      "reason": "sandbox EPERM at creation of the dedicated tiny fixture; repeated with authorized scoped filesystem access, 7/7 passed"
+    },
+    {
+      "case": "runner typecheck after adding test",
+      "exitCode": 2,
+      "reason": "fixture environment object lacked ProcessEnv type; test-only annotation corrected and typecheck passed"
+    },
+    {
+      "case": "cross-process loader",
+      "reason": "test-only fs shim lacked default export; stopped before production finalizer reached; corrected only the test shim"
+    },
+    {
+      "case": "initial completed representative fixture",
+      "passed": 7,
+      "failed": 1,
+      "reason": "fixture omitted emitted counterfactualQcExecuted:false; production rejection preserved, fixture corrected, final 8/8 passed"
+    }
+  ],
+  "independentReview": {
+    "scope": "shared/caller/Core/runner and finalizer Node, lease, atomic once, retry, get/current storage/code",
+    "majorRemainingIssue": false,
+    "resolved": [
+      "initial completed Normal result lookup",
+      "provided registration anchor check",
+      "host reserve plus metadata",
+      "protected registration namespaces",
+      "invocation plan/auth/code bindings"
+    ]
+  },
+  "effects": {
+    "newVideo": 0,
+    "oldVideoMigrationOrReinspection": 0,
+    "ffmpeg": 0,
+    "fullVisibilityQc": 0,
+    "newMaterialsOrSttOrApiFees": 0,
+    "oldResultOrMediaOverwrite": 0
+  },
+  "limits": [
+    "Cross-process tests use tiny non-playable media and synthetic inspection; volume/device/free-space, supervisor-parent and dirty observation are test-loader models.",
+    "Actual SHA, real private qualification, Node binary, filesystem mkdir/link/chmod/readback, UUID/PID and process boundaries are exercised.",
+    "No test-only authority or generalized trust switch is added to production.",
+    "No full production generation/publication, whole-video playback, audio listening or human quality adoption was performed.",
+    "Current code HEAD and all bound code bytes must still match the original job; old-job migration is not implemented."
+  ]
+}

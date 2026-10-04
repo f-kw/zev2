@@ -209,6 +209,12 @@ async function candidateStyle(qualified:ApprovedDigestQualifiedJobV001, inputs:J
   return {bindings,rendererTemplate,baselineBindings:old};
 }
 
+/** Standard Normal result lookup resolves any immutable record-only completion. */
+export async function getApprovedDigestJobResultV001(options:Json) {
+  const {readApprovedDigestJobResultV001}=await load('runner/src/digest-approved-record-finalize-v001.ts');
+  return readApprovedDigestJobResultV001(options);
+}
+
 /** Only projects an already qualified Core result; it grants no publication capability. */
 export function projectApprovedDigestManufacturingCompletionV001(result:Json) {
   if(result.verification===undefined) {assert.equal(result.qc,'passed','APPROVED_FULL_QC_REQUIRED');return {status:'completed',technicalQc:'passed'};}
@@ -285,11 +291,16 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const completion=projectApprovedDigestManufacturingCompletionV001(result);
   const receipt={schemaVersion:'digest-approved-manufacturing-result-v001',...completion,approvedJobBinding:qualified.jobBinding,
     authorizationBinding:qualified.authorizationBinding,planBinding,invocationBinding:invocation,typographySettingsBinding:inputs.typographySettingsBinding,
-    derivedTypographyValues:inputs.typographyValues,result,timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,
+    derivedTypographyValues:inputs.typographyValues,result,
+    ...(result.publishedMediaBinding===undefined?{}:{publishedMediaBinding:result.publishedMediaBinding}),
+    ...(result.technicalEvidenceBinding===undefined?{}:{technicalEvidenceBinding:result.technicalEvidenceBinding}),
+    timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,
       renderAndQcMs:Date.now()-renderStarted,totalMs:Date.now()-began},implementationSha:job.implementation.sha,
     humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,
     ...(result.verification===undefined?{completedAt:new Date().toISOString()}:{recordedAt:new Date().toISOString(),completedAt:completion.status==='completed'?new Date().toISOString():null})};
-  await context.publish(out+'/result.json',receipt);return receipt;
+  const saved=await context.publish(out+'/result.json',receipt),receiptBytes=await readFile(context.resolve(out+'/result.json'));
+  const receiptBinding={path:out+'/result.json',fileSha256:sha(receiptBytes),sizeBytes:receiptBytes.length};
+  assert.equal(saved.fileSha256,receiptBinding.fileSha256);return {...receipt,receiptBinding};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   void(async()=>{try {assert.equal(process.argv.length,8);assert.equal(process.argv[2],'--permit');assert.equal(process.argv[4],'--job-sha256');assert.equal(process.argv[6],'--authorization-sha256');

@@ -406,6 +406,23 @@ export async function qualifyAdoptedRendererCompletionV001(result: Json, storage
     !== completion.verification.bindings.completedMedia.fileSha256) {
     fail('CORE_REPRESENTATIVE_PUBLICATION_MISMATCH');
   }
+  const expectedPublishedMediaBinding = {path: `${storageContext.outputRoot}/render/presentation-rendered-v002.mp4`,
+    fileSha256: completion.verification.bindings.completedMedia.fileSha256,
+    sizeBytes: completion.verification.bindings.completedMedia.sizeBytes};
+  if (!same(result.result.publishedMediaBinding, expectedPublishedMediaBinding)) {
+    fail('CORE_REPRESENTATIVE_PUBLISHED_MEDIA_BINDING_MISMATCH');
+  }
+  if (completion.status === 'confirmation-pending') {
+    const technical = result.result.technicalEvidenceBinding;
+    if (!keys(technical, ['path', 'fileSha256', 'sizeBytes'])
+      || technical.path !== `${storageContext.outputRoot}/representative-technical-evidence-v001.json`
+      || !/^[0-9a-f]{64}$/u.test(technical.fileSha256)
+      || !Number.isSafeInteger(technical.sizeBytes) || technical.sizeBytes <= 0
+      || typeof storageContext.readBound !== 'function') {
+      fail('CORE_REPRESENTATIVE_TECHNICAL_EVIDENCE_BINDING_MISMATCH');
+    }
+    await storageContext.readBound(technical);
+  }
   return completion;
 }
 
@@ -425,6 +442,8 @@ export async function renderAdoptedVideoV001(c: Json, artifacts: Json, execution
     qc: completion.representative ? completion.verification.status : 'passed',
     ...(completion.representative ? {status: completion.status, complete: completion.complete,
       verification: completion.verification, verificationMode: result.result.verificationMode,
+      publishedMediaBinding: result.result.publishedMediaBinding,
+      ...(result.result.technicalEvidenceBinding === undefined ? {} : {technicalEvidenceBinding: result.result.technicalEvidenceBinding}),
       counterfactualQcExecuted: false} : {}),
     video: {path: videoPath, fileSha256: completion.representative
       ? result.result.publication.video.fileSha256 : await fileSha(storage.abs(videoPath))}};

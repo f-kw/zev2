@@ -2,6 +2,16 @@
 
 更新日：2026-10-04（JST）
 
+## 最新現在地 — 2026-10-04 04:53 UTC（確認待ちから通常結果の完了取得まで完了）
+
+親monaの最新指示に従い、record-only finalizeを今回の未完了部分として続行し、確認待ち保存→別processで記録登録/再資格→一度だけ確定→通常getで完了取得まで接続した。公開済み正規MP4/技術証拠を束縛し、元result.json/動画は変更せず別immutable完了receiptを作る。同じ登録の再送は同じ結果、別登録・同時実行・原本不整合は拒否。最初から完了したfull/代表結果も読める。[結果・正式入口・確認範囲](reports/digest-caption-216px-reflow-20261003/record-only-completion-20261004.md)。
+
+対象56件、runner/Remotion型・syntax・差分検査成功。跨process8件は実SHA/非公開資格/Node/小FS/排他mkdir/link/UUID/PIDを使う。volume/device/空き/監視親/dirty観測はtest-loaderモデルで、全面本番製造/速度/品質の成功証明にしない。試験設営の初回失敗と限定補正も保持。新動画/旧15:23の移行・再検査/FFmpeg/全件QC/旧代表と可読性再評価/新素材・API費用0。通常未使用root、実許可、元ID時計音声、一般ROOT/trust/default、容量メモリ監視停止は維持。record-onlyを製造permitへ流用しない。
+
+状態：今回の通常経路接続は工程全体で完了。次担当：親monaが成果・未評価を説明し、具体的な承認済み次計画がある場合は同じMac実装者へ渡す。次の通常一本ではprepare/launch→必要な代表記録→finalize→getを使い、初回準備/処理時間/人間介入を分ける。別動画や旧動画再製造を今回の完了に足さない。旧実装SHA/旧jobの移行免除も行わない。実全編視聴・音声聴取・人間品質採用は未評価のまま。[session log](work-logs/2026-10/2026-10-04T0453_Codex-SSD_ID9-record-only-completion_7cb3118d.md)。main反映の実SHA/remote一致/cleanは最終報告で確定する。
+
+以下は各時点の履歴。03:48の「record-onlyは次の独立残件」はこの続行指示と完了で解消した。
+
 ## 最新現在地 — 2026-10-04 03:48 UTC（代表方式の通常完了への限定接続を完了）
 
 親monaの次工程技術判断に従い、承認済みNormal jobの確認方式をrenderer→caller→Core→最終製造結果へ明示して接続した。生成前のpolicyと生成後の実MP4 SHAに結び付く代表記録を分離し、代表方式完了/確認待ち・未完了/実不具合拒否を区別する。全体ルール・媒体・元音声・代表確認・全件視認未実施、静止画/本文時計/代表再生と全編視聴/音声/人間採用未評価を別記する。[実装結果・検査・次の一手](reports/digest-caption-216px-reflow-20261003/representative-normal-completion-20261004.md)。

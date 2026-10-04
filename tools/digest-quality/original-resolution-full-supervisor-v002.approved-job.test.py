@@ -3,6 +3,7 @@ import sys
 sys.dont_write_bytecode = True
 import copy
 import hashlib
+import io
 import importlib.util
 import json
 import os
@@ -13,6 +14,7 @@ import time
 import unittest
 from datetime import datetime, timezone
 from unittest import mock
+from contextlib import redirect_stdout
 
 SOURCE = Path(__file__).with_name('original-resolution-full-supervisor-v002.py')
 spec = importlib.util.spec_from_file_location('approved_supervisor', SOURCE)
@@ -223,6 +225,128 @@ class ApprovedJobTest(unittest.TestCase):
         self.auth_file.write_text(json.dumps(changed))
         with self.assertRaisesRegex(ValueError, 'SHA'):
             self.qualify()
+
+    def record_fixture(self):
+        configured = dict(job=copy.deepcopy(self.job), authorization=copy.deepcopy(self.authorization))
+        configured['job']['verificationPolicy'] = self.verification_policy()
+        guest = self.repo / 'record-guest'
+        root = guest / self.job['outputRoot']
+        root.mkdir(parents=True)
+        configured['job']['storage']['guestRoot'] = str(guest)
+        configured['job']['storage']['guestDevice'] = root.stat().st_dev
+        configured['authorization']['verificationPolicy'] = configured['job']['verificationPolicy']
+        configured['authorization']['storage'] = configured['job']['storage']
+        self.job_file.write_text(json.dumps(configured['job']))
+        configured['jobBinding'] = bind(self.job_file)
+        configured['authorization']['jobBinding'] = configured['jobBinding']
+        self.auth_file.write_text(json.dumps(configured['authorization']))
+        configured['authorizationBinding'] = bind(self.auth_file)
+        pending = root / 'result.json'
+        pending.write_text('{"status":"untrusted-string-only","qc":"passed"}\n')
+        bundle = self.repo / 'registration.json'
+        bundle.write_text('{"fixtureOnly":true}\n')
+        return configured, bind(pending), bind(bundle)
+
+    def prepare_record(self, configured, pending, bundle=None, finalize=False, node_path=None):
+        with mock.patch.object(m, 'read_approved_job_files', return_value=configured) as read, \
+            mock.patch.object(m, 'approved_image_identity', return_value={}), \
+            mock.patch.object(m, 'inspect_output_ancestors'), \
+            mock.patch.object(m, 'approved_current_implementation'), \
+            mock.patch.object(m.os, 'geteuid', return_value=501):
+            # Qualification may read real tiny fixture bytes but cannot claim a
+            # production root/owner or interpret the pending JSON's QC string.
+            result = m.prepare_approved_record_job(str(self.job_file), str(self.auth_file),
+                configured['jobBinding']['fileSha256'], configured['authorizationBinding']['fileSha256'],
+                pending['path'], pending['fileSha256'], pending['sizeBytes'], node_path=node_path,
+                registration_bundle_file=bundle['path'] if bundle else None,
+                registration_bundle_sha256=bundle['fileSha256'] if bundle else None,
+                registration_bundle_size_bytes=bundle['sizeBytes'] if bundle else None, finalize=finalize)
+            read.assert_called_once_with(str(self.job_file), str(self.auth_file),
+                configured['jobBinding']['fileSha256'], configured['authorizationBinding']['fileSha256'])
+            return result
+
+    def test_record_get_uses_fixed_reader_without_python_qc_or_claim(self):
+        configured, pending, _ = self.record_fixture()
+        before = {str(p): p.read_bytes() for p in self.repo.rglob('*') if p.is_file()}
+        with mock.patch.object(Path, 'mkdir') as mkdir, mock.patch.object(m.subprocess, 'Popen') as spawn:
+            result = self.prepare_record(configured, pending)
+        self.assertEqual(result['operationMode'], '--get-job-result')
+        self.assertEqual(result['command'][3], str(self.repo / m.APPROVED_RECORD_WORKER))
+        self.assertEqual(result['command'][4], '--get-job-result')
+        self.assertEqual(result['command'][-6:], ['--pending-result-file', pending['path'],
+            '--pending-result-file-sha256', pending['fileSha256'], '--pending-result-size-bytes', str(pending['sizeBytes'])])
+        self.assertNotIn('result', result)
+        self.assertNotIn('ownerBinding', result)
+        self.assertEqual(before, {str(p): p.read_bytes() for p in self.repo.rglob('*') if p.is_file()})
+        mkdir.assert_not_called();spawn.assert_not_called()
+
+    def test_record_only_requires_actual_pending_anchors_and_this_root(self):
+        configured, pending, _ = self.record_fixture()
+        for changed in ({**pending, 'fileSha256': 'f' * 64}, {**pending, 'sizeBytes': pending['sizeBytes'] + 1},
+            {**pending, 'sizeBytes': True}, {**pending, 'path': str(self.repo / 'other.json')},
+            {**pending, 'path': str(Path(pending['path']).parent / 'other.json')}):
+            with self.subTest(binding=changed), self.assertRaises(ValueError):
+                self.prepare_record(configured, changed)
+
+    def test_record_finalize_requires_bundle_anchors_and_get_cannot_register(self):
+        configured, pending, bundle = self.record_fixture()
+        result = self.prepare_record(configured, pending, bundle, finalize=True)
+        self.assertEqual(result['command'][4], '--finalize-job')
+        self.assertEqual(result['command'][-6:], ['--registration-bundle-file', bundle['path'],
+            '--registration-bundle-sha256', bundle['fileSha256'], '--registration-bundle-size-bytes', str(bundle['sizeBytes'])])
+        with self.assertRaises(ValueError):self.prepare_record(configured, pending, finalize=True)
+        with self.assertRaisesRegex(ValueError, 'get-result'):self.prepare_record(configured, pending, bundle)
+        bundle['fileSha256'] = 'f' * 64
+        with self.assertRaisesRegex(ValueError, 'SHA'):self.prepare_record(configured, pending, bundle, finalize=True)
+
+    def test_completed_retry_can_defer_missing_original_bundle_to_fixed_ts_qualifier(self):
+        configured, pending, bundle = self.record_fixture()
+        Path(bundle['path']).unlink()
+        result = self.prepare_record(configured, pending, bundle, finalize=True)
+        self.assertEqual(result['registrationBundleBinding'], bundle)
+        self.assertEqual(result['command'][4], '--finalize-job')
+        self.assertNotIn('result', result)
+
+    def test_record_only_cannot_bypass_policy_node_or_new_worker_bindings(self):
+        configured, pending, _ = self.record_fixture()
+        with self.assertRaisesRegex(ValueError, 'Node path'):self.prepare_record(configured, pending, node_path='/unapproved/node')
+        del configured['job']['verificationPolicy']
+        del configured['authorization']['verificationPolicy']
+        self.job_file.write_text(json.dumps(configured['job']))
+        configured['jobBinding'] = bind(self.job_file)
+        configured['authorization']['jobBinding'] = configured['jobBinding']
+        self.auth_file.write_text(json.dumps(configured['authorization']))
+        configured['authorizationBinding'] = bind(self.auth_file)
+        result = self.prepare_record(configured, pending)
+        self.assertEqual(result['command'][4], '--get-job-result')
+        self.assertNotIn('result', result)
+        with self.assertRaisesRegex(ValueError, 'representative policy'):
+            self.prepare_record(configured, pending, finalize=True)
+        job = copy.deepcopy(self.job)
+        job['implementation']['bindings'] = [ref for ref in job['implementation']['bindings'] if ref['path'] != m.APPROVED_RECORD_WORKER]
+        authorization = copy.deepcopy(self.authorization)
+        authorization['implementation'] = job['implementation']
+        with self.assertRaisesRegex(ValueError, 'implementation'):m.validate_approved_job_config(job, authorization)
+
+    def test_record_only_cli_forwarding_is_separate_from_normal_or_direct_modes(self):
+        base = ['--job-file', str(self.job_file), '--authorization-file', str(self.auth_file),
+            '--approved-job-sha256', 'a' * 64, '--authorization-sha256', 'b' * 64,
+            '--pending-result-file', '/Volumes/fixture/result.json', '--pending-result-file-sha256', 'c' * 64,
+            '--pending-result-size-bytes', '101']
+        for mode in ('--get-job-result', '--finalize-job'):
+            with mock.patch.object(m, 'operate_approved_record_job', return_value=0) as operate:
+                self.assertEqual(m.main([mode] + base), 0)
+                self.assertEqual(operate.call_args.kwargs['finalize'], mode == '--finalize-job')
+                self.assertEqual(operate.call_args.args[-1], 101)
+        with self.assertRaisesRegex(ValueError, 'record-specific'):
+            m.main(['--prepare-job'] + base)
+        with self.assertRaisesRegex(ValueError, 'legacy or direct'):
+            m.main(['--get-job-result', '--legacy-recovery-only'] + base)
+        permit = self.repo / 'record-only-permit.json'
+        permit.write_text(json.dumps({'status': 'verified-approved-record-finalize-v001'}))
+        with mock.patch.object(m, 'run_formal') as run, self.assertRaises(ValueError):
+            m.run('/unused', ['unused'], str(permit), 'a' * 64, 'b' * 64)
+        run.assert_not_called()
 
     def test_requires_independent_job_and_authorization_anchors(self):
         for job_sha, auth_sha in ((False, 'd' * 64), ('d' * 64, False), ('d' * 64, 'e' * 64)):
@@ -553,6 +677,64 @@ class ApprovedRunTest(unittest.TestCase):
                 mock.patch.object(m.subprocess, 'Popen') as spawn, self.assertRaises(FileExistsError):
                 m.run(str(existing), ['unused'], str(permit), 'a' * 64, 'b' * 64)
             spawn.assert_not_called()
+
+
+class RecordOnlyRunTest(unittest.TestCase):
+    def fixture(self, finalize=False):
+        payload = dict(event='confirmation-pending', result=dict(status='confirmation-pending', complete=False,
+            note='Synthetic transport fixture; no actual completion or publication qualification.'))
+        command = [sys.executable, '-B', '-u', '-c', 'import json;print(' + repr(json.dumps(payload)) + ',flush=True)']
+        return dict(job=dict(guard=copy.deepcopy(m.APPROVED_GUARD), storage={}),
+            operationMode='--finalize-job' if finalize else '--get-job-result', command=command,
+            revalidate=lambda: None, imageIdentity={}, jobBinding={}, authorizationBinding={},
+            pendingResultBinding={}, registrationBundleBinding=None)
+
+    def sample(self, available=60_000_000_000):
+        return dict(at=time.time(), availableBytes=available, pressure=1, treeRssBytes=0, parentRssBytes=0,
+            hostAvailableBytes=200_000_000_000, hostRequiredBytes=20_000_000_000,
+            hostStartRequiredBytes=92_900_000_000, internalAvailableBytes=20_000_000_000)
+
+    def test_get_transports_node_pending_without_50gb_start_or_writes(self):
+        configured = self.fixture()
+        real_spawn = subprocess.Popen
+        stream = io.StringIO()
+        with mock.patch.object(m, 'observe_formal', return_value=self.sample(40_000_000_000)), \
+            mock.patch.object(m.old, 'observe', return_value={}), \
+            mock.patch.dict(m.os.environ, {'ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED': 'untrusted', 'NODE_PATH': '/unapproved'}), \
+            mock.patch.object(m.subprocess, 'Popen', side_effect=real_spawn) as spawn, \
+            mock.patch.object(Path, 'write_text') as write, redirect_stdout(stream):
+            self.assertEqual(m.run_approved_record_worker(configured), 0)
+        value = json.loads(stream.getvalue())
+        self.assertEqual(value['event'], 'confirmation-pending')
+        self.assertFalse(value['result']['complete'])
+        self.assertEqual(value['supervision']['status'], 'worker-finished')
+        self.assertEqual(value['supervision']['remainingRunning'], [])
+        self.assertFalse(value['supervision']['ownerCreatedBySupervisor'])
+        self.assertFalse(value['supervision']['rootClaimedBySupervisor'])
+        calls = [call for call in spawn.call_args_list if call.args and call.args[0] == configured['command']]
+        self.assertEqual(len(calls), 1)
+        self.assertNotIn('ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED', calls[0].kwargs['env'])
+        self.assertEqual(calls[0].kwargs['env']['NODE_PATH'], str(Path(m.FORMAL_REPO) / 'runner/node_modules'))
+        write.assert_not_called()
+
+    def test_finalize_keeps_50gb_start_and_supervised_marker_without_claim(self):
+        configured = self.fixture(finalize=True)
+        with mock.patch.object(m, 'observe_formal', return_value=self.sample(40_000_000_000)), \
+            mock.patch.object(m.subprocess, 'Popen') as spawn, redirect_stdout(io.StringIO()):
+            self.assertEqual(m.run_approved_record_worker(configured), 1)
+        spawn.assert_not_called()
+        real_spawn = subprocess.Popen
+        stream = io.StringIO()
+        with mock.patch.object(m, 'observe_formal', return_value=self.sample()), \
+            mock.patch.object(m.old, 'observe', return_value={}), \
+            mock.patch.object(m.subprocess, 'Popen', side_effect=real_spawn) as spawn, redirect_stdout(stream):
+            self.assertEqual(m.run_approved_record_worker(configured), 0)
+        calls = [call for call in spawn.call_args_list if call.args and call.args[0] == configured['command']]
+        self.assertEqual(calls[0].kwargs['env']['ZEV_APPROVED_RECORD_FINALIZE_SUPERVISED'], '1')
+        summary = json.loads(stream.getvalue())['supervision']
+        self.assertFalse(summary['mediaGenerated'])
+        self.assertFalse(summary['ownerCreatedBySupervisor'])
+        self.assertEqual(summary['guard'], m.APPROVED_GUARD)
 
 
 if __name__ == '__main__':

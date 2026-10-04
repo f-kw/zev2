@@ -45,6 +45,8 @@ import {
 import {
   resolveApprovedDigestVerificationPolicyV001,
   assertQualifiedDigestRepresentativeCompletionV001,
+  rebindPublishedDigestRepresentativeCompletionV001,
+  persistApprovedDigestRepresentativePendingEvidenceV001,
 } from './digest_representative_completion_v001.mjs';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
@@ -562,6 +564,9 @@ export async function executePresentationInstructionRendererJobV002({
     reservation: draw.reservation,
   });
   let publication = committed;
+  let finalCompletion = completion;
+  let technicalEvidenceBinding;
+  let publishedMediaBinding;
   if (completion.representative) {
     if (committed.status !== 'published'
       || committed.outputDirectory !== draw.outputDirectory) {
@@ -571,13 +576,33 @@ export async function executePresentationInstructionRendererJobV002({
     await assertQualifiedDigestRepresentativeCompletionV001(
       completion.verification, storageContext, completedMediaPath,
     );
+    const publishedVerification = await rebindPublishedDigestRepresentativeCompletionV001(
+      completion.verification, storageContext, completedMediaPath,
+    );
+    if (publishedVerification.status !== completion.verification.status
+      || publishedVerification.complete !== completion.complete) {
+      throw new TypeError('Representative publication changed its confirmation status');
+    }
+    finalCompletion = Object.freeze({...completion, qc: publishedVerification, verification: publishedVerification});
+    publishedMediaBinding = {path: path.posix.join(job.publication.renderOutputRoot, 'presentation-rendered-v002.mp4'),
+      fileSha256: publishedVerification.bindings.completedMedia.fileSha256,
+      sizeBytes: publishedVerification.bindings.completedMedia.sizeBytes};
+    if (finalCompletion.status === 'confirmation-pending') {
+      const pendingEvidence = await persistApprovedDigestRepresentativePendingEvidenceV001({
+        draw, verification: publishedVerification, storageContext, publishedMediaPath: completedMediaPath,
+      });
+      if (canonicalSha256(pendingEvidence.publishedMediaBinding) !== canonicalSha256(publishedMediaBinding)) {
+        throw new TypeError('Representative pending evidence changed its published media binding');
+      }
+      technicalEvidenceBinding = pendingEvidence.technicalEvidenceBinding;
+    }
     publication = {...committed, video: {path: completedMediaPath,
-      fileSha256: completion.verification.bindings.completedMedia.fileSha256}};
+      fileSha256: publishedVerification.bindings.completedMedia.fileSha256}};
   }
   return {
     exitCode: 0,
     result: Object.freeze({
-      status: completion.status,
+      status: finalCompletion.status,
       rendererJobBinding: clone(rendererJobBinding),
       receipt: receiptBuilt.receipt,
       receiptPublication,
@@ -589,9 +614,11 @@ export async function executePresentationInstructionRendererJobV002({
         autoPresentationResolution: draw.autoPresentationResolution,
         autoPresentationInputs: draw.autoPresentationInputs,
       }),
-      qc: draw.finalQc,
-      ...(completion.representative ? {complete: completion.complete,
-        verification: completion.verification, verificationMode: draw.verificationMode,
+      qc: finalCompletion.qc,
+      ...(finalCompletion.representative ? {complete: finalCompletion.complete,
+        verification: finalCompletion.verification, verificationMode: draw.verificationMode,
+        publishedMediaBinding,
+        ...(technicalEvidenceBinding === undefined ? {} : {technicalEvidenceBinding}),
         counterfactualQcExecuted: false} : {}),
       publication,
     }),
