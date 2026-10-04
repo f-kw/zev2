@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-04（JST） / revision：handover-index-20261004-v070
+更新日：2026-10-04（JST） / revision：handover-index-20261004-v071
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-04 01:35 UTC（受渡し操作と次回通常経路の検討を続行）
+
+本人01:22/01:23 UTCの「工程完了後に必ず次へ進める検討」に従い、完成済み一本の受渡しと次の一手を検討した。Finder選択表示操作exit0、選択状態の再読はAppleEvent timeoutで未確認。Libraryは正式接続の読取がTLSエラーで保存未成立/IDなし、旧prepare unavailableを保持し書込再試行・私的URLなし。再生/音声出力/新製造0。[受渡し・次工程の具体案](reports/digest-caption-216px-reflow-20261003/delivery-next-step-20261004.md)。
+
+今回一本は仕上げ済みだが、次の別一本を今回入口へ無変更で流す通常経路は未成立。計画/manifest/root/本人記録/尺の固定と、代表確認による仕上げが通常完了gateへ未接続であることを既存codeから確認。推奨は承認済み一件の入力と確認方式を通常後段へ渡す限定差分の確定。元ID時計/実許可/hash/排他・容量検査と既存合成算法を再利用し、旧失敗の個別復旧を毎回人間に管理させない。6代表静止確認と未視聴を分け、0.4秒1件から大改修/全件QCへ戻さない。
+
+工程完了時の必須次検討を[PLAN](work-orders/ZEV_DIGEST_FORMAL_HANDOFF_PLAN_20261003_v001.md)とDECISIONへ記録。次担当は親mona（限定接続の技術判断と具体的な着工範囲の確定）。必要な新着工/任せる範囲、新計画/素材/費用/公開は今回未実行。本人の既採用文字条件や代表確認方針を再承認待ちにしない。現在の検討作業は完了し、次工程の推奨と境界を明示した。新しい具体指示が届けば既承認範囲の作業を継続する。
+
+GitHub mainは本人00:25 UTC承認で00:33 UTCにa25df98eまで反映・13file内容一致、以前のpush HOLDは解消済み。下記旧HOLDは当時の履歴。このサイクルはdocs-only、新製品code/大量test/媒体変更0。[今回session log](work-logs/2026-10/2026-10-04T0135_Codex-SSD_ID9-delivery-next-step_a25df98e.md)。
 
 ## 最新現在地 — 2026-10-03 23:40 UTC（本人指定の代表確認方式で一本を仕上げ）
 
