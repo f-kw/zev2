@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {DIGEST_APPROVED_JOB_GUARD_V001 as guard, validateDigestApprovedJobConfigurationV001 as validate,
   assertQualifiedDigestApprovedJobV001} from './digest-approved-job-v001.js';
-import {assertQualifiedApprovedDigestStorageContextV001, estimateApprovedDigestBaseAllocationV001} from './digest-approved-job-runner-v001.js';
+import {assertQualifiedApprovedDigestStorageContextV001, estimateApprovedDigestBaseAllocationV001, projectApprovedDigestManufacturingCompletionV001} from './digest-approved-job-runner-v001.js';
 import {resolveDigestTypographySettingsV001} from './digest-formal-handoff-v001.js';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const binding=(p:string)=>({path:p,fileSha256:'a'.repeat(64)});
@@ -14,7 +14,7 @@ function fixture(frames=61,font=144) {
     'runner/src/digest-formal-handoff-v001.ts','evals/clip_composition/adopted_media_manufacturing_v001.mts',
     'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs','evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
     'evals/clip_composition/render_presentation_v002.mjs','tools/digest-quality/original-resolution-low-memory-composite.mjs',
-    'tools/digest-quality/original-resolution-full-supervisor-v002.py'];
+    'tools/digest-quality/original-resolution-full-supervisor-v002.py','evals/clip_composition/digest_representative_completion_v001.mjs'];
   const job:any={schemaVersion:'digest-approved-job-v001',planId:'test-only-'+frames+'-'+font,outputRoot:'runtime/artifacts/test-only-'+frames+'-'+font+'/attempt-001',
     inputs:{preparationParameters:{testOnly:true},preparationManifestBinding:binding('runtime/artifacts/test-only/preparation.json'),
       candidateManifestBinding:binding('runtime/artifacts/test-only/candidate.json'),typographySettingsBinding:binding('runtime/artifacts/test-only/font-'+font+'.json'),
@@ -66,4 +66,35 @@ test('base allocation uses explicit source size and source/target audio clocks',
   const longer=estimateApprovedDigestBaseAllocationV001(200_000_000,media,{audioSamples:1470*421});
   assert.equal(longer-short,100_000_000+(421-61)*1470*2*4*2);
   assert.throws(()=>estimateApprovedDigestBaseAllocationV001(1,{...media,audioClock:{sampleRate:44100,channels:2}},{audioSamples:1}));
+});
+
+test('representative policy is bound to both independent authorization and a future confirmation path',()=>{
+  for(const ids of [['one'],['one','two']]) {
+    const f=fixture(),p={schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',
+      representativeInstructionIds:ids,permittedMethods:['still-frame','text-clock-context'],confirmationRecordPath:f.job.outputRoot+'/confirmation.json'};
+    f.job.verificationPolicy=p;f.authorization.verificationPolicy=structuredClone(p);
+    assert.equal(validate(f.job,f.authorization,f.options).status,'validated-configuration');
+    assert.equal(f.job.verificationPolicy.completedMedia,undefined);
+    delete f.authorization.verificationPolicy;assert.throws(()=>validate(f.job,f.authorization,f.options));
+    f.authorization.verificationPolicy={...p,permittedMethods:['video-playback']};assert.throws(()=>validate(f.job,f.authorization,f.options));
+  }
+});
+test('confirmation policy cannot leak into an unapproved default or demand an unborn video hash',()=>{
+  const f=fixture();f.authorization.verificationPolicy={mode:'representative-plus-rules-v001'};
+  assert.throws(()=>validate(f.job,f.authorization,f.options));
+  delete f.authorization.verificationPolicy;
+  f.job.verificationPolicy={schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',
+    representativeInstructionIds:['one'],permittedMethods:['still-frame'],confirmationRecordPath:f.job.outputRoot+'/confirmation.json',completedMedia:{fileSha256:'f'.repeat(64)}};
+  f.authorization.verificationPolicy=structuredClone(f.job.verificationPolicy);assert.throws(()=>validate(f.job,f.authorization,f.options));
+});
+test('final manufacturing projection keeps pending incomplete, full visibility unexecuted and legacy unchanged',()=>{
+  assert.deepEqual(projectApprovedDigestManufacturingCompletionV001({qc:'passed'}),{status:'completed',technicalQc:'passed'});
+  const checks={wholeRules:{status:'passed'},media:{status:'passed'},audioPreservation:{status:'passed'},fullVisibility:{status:'not-executed'}};
+  for(const status of ['passed-representative','confirmation-pending']) {
+    const verification={schemaVersion:'digest-representative-completion-v001',status,mode:'representative-plus-rules-v001',checks};
+    const result=projectApprovedDigestManufacturingCompletionV001({qc:status,complete:status==='passed-representative',verification});
+    assert.equal(result.status,status==='passed-representative'?'completed':'confirmation-pending');
+    assert.equal(result.verification,verification);assert.equal(result.technicalQc.fullVisibility.status,'not-executed');
+    assert.throws(()=>projectApprovedDigestManufacturingCompletionV001({qc:status,complete:status!=='passed-representative',verification}));
+  }
 });

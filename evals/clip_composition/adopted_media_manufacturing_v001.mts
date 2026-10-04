@@ -46,7 +46,12 @@ import {validatePresentationInstructionRendererJobV002 as validateRendererJob}
 import {
   runPresentationInstructionRendererJobFileV002 as render,
   resolvePresentationRendererAppearanceV001 as appearance,
+  projectPresentationInstructionRendererCompletionV002,
 } from './run_presentation_instruction_renderer_job_v002.ts';
+import {
+  resolveApprovedDigestVerificationPolicyV001,
+  assertQualifiedDigestRepresentativeCompletionV001,
+} from './digest_representative_completion_v001.mjs';
 import {readBound, keys} from './run_candidate_discovery_digest_skill_e2e_v001.mts';
 
 const exec = promisify(execFile);
@@ -367,6 +372,43 @@ export const CORE_FILES = Object.freeze({meaning: 'meaning-input.json', sourcePa
   captionAdoption: 'caption-adoption.json', selection: 'selection.json', cueEndProjection: 'cue-end-projection.json',
   lineEndProjection: 'line-end-projection.json', instruction: 'instruction.json', rendererJob: 'renderer-job.json'});
 
+/** Result projection only; the qualification function below controls acceptance. */
+export function projectAdoptedRendererCompletionV001(result: Json) {
+  const rendered = result?.result;
+  const completion = projectPresentationInstructionRendererCompletionV002({
+    exitCode: result?.exitCode, finalQc: rendered?.qc, verification: rendered?.verification,
+    verificationMode: rendered?.verificationMode,
+    counterfactualQcExecuted: rendered?.counterfactualQcExecuted,
+  });
+  return completion !== null && rendered?.status === completion.status ? completion : null;
+}
+
+/** Core accepts representative results only through the same private result authority. */
+export async function qualifyAdoptedRendererCompletionV001(result: Json, storageContext?: Json,
+  completedMediaPath?: string) {
+  const completion = projectAdoptedRendererCompletionV001(result);
+  if (completion === null) fail('RENDER_OR_QC_FAILED');
+  const policy = storageContext === undefined ? null
+    : await resolveApprovedDigestVerificationPolicyV001(storageContext);
+  if (policy === null) {
+    if (completion.representative) fail('CORE_REPRESENTATIVE_POLICY_REQUIRED');
+    return completion;
+  }
+  if (!completion.representative) fail('CORE_REPRESENTATIVE_RESULT_REQUIRED');
+  if (typeof completedMediaPath !== 'string' || !path.isAbsolute(completedMediaPath)
+    || result.result.publication?.video?.path !== completedMediaPath) {
+    fail('CORE_REPRESENTATIVE_PUBLICATION_MISMATCH');
+  }
+  await assertQualifiedDigestRepresentativeCompletionV001(
+    completion.verification, storageContext, completedMediaPath,
+  );
+  if (result.result.publication.video.fileSha256
+    !== completion.verification.bindings.completedMedia.fileSha256) {
+    fail('CORE_REPRESENTATIVE_PUBLICATION_MISMATCH');
+  }
+  return completion;
+}
+
 export async function renderAdoptedVideoV001(c: Json, artifacts: Json, executionSchema: string,
   storageContext?: Json) {
   const storage = await adoptedStorageV001(c, storageContext);
@@ -375,10 +417,15 @@ export async function renderAdoptedVideoV001(c: Json, artifacts: Json, execution
   const execution = await storage.publish(out(c, 'renderer-result.json'), {
     schemaVersion: executionSchema, rendererJobBinding: artifacts.rendererJob,
     exitCode: result.exitCode, result: result.result});
-  if (result.exitCode !== 0 || result.result?.status !== 'completed' || result.result?.qc?.status !== 'passed') fail('RENDER_OR_QC_FAILED');
   const videoPath = out(c, 'render/presentation-rendered-v002.mp4');
+  const completion = await qualifyAdoptedRendererCompletionV001(result, storageContext, storage.abs(videoPath));
   await storage.assertCurrent();
   return {execution, admission: bind(out(c, 'admission-receipt.json'), await storage.readJson(out(c, 'admission-receipt.json'))),
     lineLayout: bind(out(c, 'line-layout.json'), await storage.readJson(out(c, 'line-layout.json'))),
-    qc: 'passed', video: {path: videoPath, fileSha256: await fileSha(storage.abs(videoPath))}};
+    qc: completion.representative ? completion.verification.status : 'passed',
+    ...(completion.representative ? {status: completion.status, complete: completion.complete,
+      verification: completion.verification, verificationMode: result.result.verificationMode,
+      counterfactualQcExecuted: false} : {}),
+    video: {path: videoPath, fileSha256: completion.representative
+      ? result.result.publication.video.fileSha256 : await fileSha(storage.abs(videoPath))}};
 }

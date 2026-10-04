@@ -42,6 +42,10 @@ import {
 import {
   createPresentationRendererProcessObserverV001,
 } from './presentation_renderer_process_observation_v001.mjs';
+import {
+  resolveApprovedDigestVerificationPolicyV001,
+  assertQualifiedDigestRepresentativeCompletionV001,
+} from './digest_representative_completion_v001.mjs';
 
 const MODULE_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_WORKSPACE_ROOT = path.resolve(MODULE_DIRECTORY, '../..');
@@ -73,6 +77,43 @@ const qualifyStorageContext = async (storageContext: DigestRendererStorageContex
   );
   await assertQualifiedDigestStorageContextV001(storageContext);
 };
+
+/** Result projection only. This function never grants permission to publish media. */
+export function projectPresentationInstructionRendererCompletionV002(draw) {
+  if (draw?.exitCode !== 0) return null;
+  if (draw.verification !== undefined) {
+    const verification = draw.verification;
+    if (!isObject(verification)
+      || draw.finalQc !== verification
+      || verification.schemaVersion !== 'digest-representative-completion-v001'
+      || !['passed-representative', 'confirmation-pending'].includes(verification.status)
+      || verification.complete !== (verification.status === 'passed-representative')
+      || draw.verificationMode !== 'representative-plus-rules-v001'
+      || draw.counterfactualQcExecuted !== false) return null;
+    return Object.freeze({status: verification.complete ? 'completed' : 'confirmation-pending',
+      complete: verification.complete, representative: true, qc: verification,
+      verification});
+  }
+  return draw.finalQc?.status === 'passed'
+    ? Object.freeze({status: 'completed', complete: true, representative: false, qc: draw.finalQc})
+    : null;
+}
+
+/** Publication gate: a representative-shaped JSON alone is never sufficient. */
+export async function qualifyPresentationInstructionRendererCompletionV002(draw,
+  storageContext?: DigestRendererStorageContextV001) {
+  const completion = projectPresentationInstructionRendererCompletionV002(draw);
+  if (completion === null) return null;
+  await qualifyStorageContext(storageContext);
+  const policy = storageContext === undefined ? null
+    : await resolveApprovedDigestVerificationPolicyV001(storageContext);
+  if (policy === null) return completion.representative ? null : completion;
+  if (!completion.representative || draw.verificationMode !== policy.mode) return null;
+  await assertQualifiedDigestRepresentativeCompletionV001(
+    completion.verification, storageContext, draw.workVideo,
+  );
+  return completion;
+}
 
 export const PRESENTATION_INSTRUCTION_RENDERER_IMPLEMENTATION_ROLE_PATHS_V002 = Object.freeze([
   ['instruction-renderer-runner-v002',
@@ -511,18 +552,32 @@ export async function executePresentationInstructionRendererJobV002({
     processObserver,
     ...(storageContext === undefined ? {} : {storageContext}),
   });
-  if (draw.exitCode !== 0 || draw.finalQc?.status !== 'passed') {
+  const completion = await qualifyPresentationInstructionRendererCompletionV002(draw, storageContext);
+  if (completion === null) {
     return {exitCode: draw.exitCode === 1 ? 1 : 2, result: draw};
   }
-  const publication = await (capabilities.commitDraw ?? commitValidatedPresentationArtifactsV002)({
+  const committed = await (capabilities.commitDraw ?? commitValidatedPresentationArtifactsV002)({
     stagingDirectory: draw.stagingDirectory,
     outputDirectory: draw.outputDirectory,
     reservation: draw.reservation,
   });
+  let publication = committed;
+  if (completion.representative) {
+    if (committed.status !== 'published'
+      || committed.outputDirectory !== draw.outputDirectory) {
+      throw new TypeError('Representative media publication did not preserve the owned output');
+    }
+    const completedMediaPath = path.join(committed.outputDirectory, 'presentation-rendered-v002.mp4');
+    await assertQualifiedDigestRepresentativeCompletionV001(
+      completion.verification, storageContext, completedMediaPath,
+    );
+    publication = {...committed, video: {path: completedMediaPath,
+      fileSha256: completion.verification.bindings.completedMedia.fileSha256}};
+  }
   return {
     exitCode: 0,
     result: Object.freeze({
-      status: 'completed',
+      status: completion.status,
       rendererJobBinding: clone(rendererJobBinding),
       receipt: receiptBuilt.receipt,
       receiptPublication,
@@ -535,6 +590,9 @@ export async function executePresentationInstructionRendererJobV002({
         autoPresentationInputs: draw.autoPresentationInputs,
       }),
       qc: draw.finalQc,
+      ...(completion.representative ? {complete: completion.complete,
+        verification: completion.verification, verificationMode: draw.verificationMode,
+        counterfactualQcExecuted: false} : {}),
       publication,
     }),
   };

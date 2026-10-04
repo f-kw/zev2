@@ -231,6 +231,7 @@ APPROVED_CODE = ['runner/src/digest-approved-job-v001.ts', APPROVED_WORKER,
     'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
     'evals/clip_composition/render_presentation_v002.mjs',
+    'evals/clip_composition/digest_representative_completion_v001.mjs',
     'tools/digest-quality/original-resolution-low-memory-composite.mjs',
     'tools/digest-quality/original-resolution-full-supervisor-v002.py']
 JS_SAFE_INTEGER = (1 << 53) - 1
@@ -296,12 +297,33 @@ def stable_bound_json(ref):
         required(type(value) is dict and value.get('schemaVersion') == ref['schemaVersion'], 'bound schema changed')
     return value
 
+def validate_verification_policy(policy, output_root):
+    exact_keys(policy, {'schemaVersion', 'mode', 'representativeInstructionIds',
+        'permittedMethods', 'confirmationRecordPath'}, 'representative verification policy')
+    required(policy['schemaVersion'] == 'digest-representative-verification-policy-v001'
+        and policy['mode'] == 'representative-plus-rules-v001', 'approved representative verification mode required')
+    ids = policy['representativeInstructionIds']
+    required(type(ids) is list and bool(ids) and all(type(value) is str and bool(value.strip()) for value in ids),
+        'nonempty representative instruction IDs required')
+    required(len(set(ids)) == len(ids), 'duplicate representative instruction IDs')
+    methods = policy['permittedMethods']
+    required(type(methods) is list and bool(methods)
+        and all(type(value) is str and value in {'still-frame', 'text-clock-context', 'video-playback'} for value in methods),
+        'supported nonempty representative verification methods required')
+    required(len(set(methods)) == len(methods), 'duplicate representative verification methods')
+    target = policy['confirmationRecordPath']
+    required(safe_relative(target) and target.startswith(output_root + '/') and target.endswith('.json'),
+        'confirmation record must be a safe relative JSON path inside the approved output root')
+
 def validate_approved_job_config(job, authorization):
     exact_keys(job, {'schemaVersion', 'planId', 'outputRoot', 'inputs', 'storage',
-        'expected', 'implementation', 'guard', 'allocationBudget'}, 'approved job')
+        'expected', 'implementation', 'guard', 'allocationBudget'}
+        | ({'verificationPolicy'} if type(job) is dict and 'verificationPolicy' in job else set()), 'approved job')
     required(job['schemaVersion'] == 'digest-approved-job-v001', 'approved job schema required')
     required(type(job['planId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', job['planId']), 'invalid approved plan ID')
     required(safe_relative(job['outputRoot']) and job['outputRoot'].startswith('runtime/artifacts/') and len(job['outputRoot'].split('/')) >= 4, 'invalid approved output root')
+    if 'verificationPolicy' in job:
+        validate_verification_policy(job['verificationPolicy'], job['outputRoot'])
     exact_keys(job['inputs'], APPROVED_INPUT_KEYS, 'approved inputs')
     required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
     for name in APPROVED_INPUT_KEYS - {'preparationParameters'}:
@@ -343,7 +365,13 @@ def validate_approved_job_config(job, authorization):
         'unique complete approved implementation bindings required')
     exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
         'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
-        'implementation', 'normalCandidates'}, 'approved authorization')
+        'implementation', 'normalCandidates'}
+        | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set()), 'approved authorization')
+    required(('verificationPolicy' in authorization) == ('verificationPolicy' in job),
+        'authorization/job verification policy presence mismatch')
+    if 'verificationPolicy' in job:
+        required(authorization['verificationPolicy'] == job['verificationPolicy'],
+            'authorization/job verification policy mismatch')
     required(authorization['schemaVersion'] == 'digest-approved-job-authorization-v001', 'approved authorization schema required')
     required(type(authorization['recordId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', authorization['recordId']), 'authorization record ID required')
     exact_keys(authorization['userApproval'], {'at', 'messageId', 'text', 'sourceThreadId'}, 'user approval')

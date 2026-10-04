@@ -2136,7 +2136,13 @@ export async function executeValidatedPresentationDrawAndQcV001({
     throw new TypeError('Digest storage requires its bound compositor, temporary directory and process observer');
   }
   if (typeof runCounterfactualQc !== 'boolean') throw new TypeError('counterfactual QC control must be boolean');
-  if (runCounterfactualQc && ![PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
+  // Public QC controls retain their existing meaning. Only an opaque, approved
+  // Digest job can choose its separately recorded representative verification.
+  const verificationPolicy = storageContext?.approvedJob === undefined ? null
+    : await (await import('./digest_representative_completion_v001.mjs'))
+      .resolveApprovedDigestVerificationPolicyV001(storageContext);
+  const effectiveCounterfactualQc = runCounterfactualQc && verificationPolicy === null;
+  if (effectiveCounterfactualQc && ![PRESENTATION_ENCODED_OMISSION_QC_METHOD_V002,
     PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001].includes(counterfactualQcMethod)) {
     throw new TypeError('final completed-frame QC requires an explicit corrected-omission or combined-replay method');
   }
@@ -2156,7 +2162,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       : {startFrame: renderRange.startFrame, endFrameExclusive: renderRange.endFrameExclusive});
     assertPresentationRenderRangeV001(renderRange, expectedFrameCount);
     if (canonicalJson(renderRange) !== canonicalJson(orchestrationScope.renderRange)) throw new TypeError('range full clock differs');
-    if (!runCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
+    if (!effectiveCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
       throw new TypeError('orchestration requires combined whole-video replay and native state QC');
     }
     if (validatedLayoutInspection !== null || baseTimeline !== undefined
@@ -2205,7 +2211,11 @@ export async function executeValidatedPresentationDrawAndQcV001({
     autoPresentationResolution = automatic.resolution;
     autoPresentationInputs = structuredClone(autoPresentation);
   }
-  if (runCounterfactualQc && counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
+  if (verificationPolicy !== null) {
+    const completion = await import('./digest_representative_completion_v001.mjs');
+    completion.validateDigestRepresentativeSelectionV001(verificationPolicy, resolved.plan);
+  }
+  if (effectiveCounterfactualQc && counterfactualQcMethod === PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
     if (resolved.plan.canvas?.fps !== 30) throw new TypeError('combined QC requires the existing 30fps native profile');
     buildPresentationNativeQcAlternativeElementsV001({baselinePlan: plan, plan: resolved.plan,
       autoPresentation, presentationTimeline: resolved.presentationTimeline, orchestrationDrawingView, renderRange});
@@ -2213,7 +2223,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
   for (const element of resolved.plan.elements) {
     if (Object.hasOwn(element, 'presentationMotion')) {
       getPresentationCaptionMotionProgramV001({element, canvas: resolved.plan.canvas});
-      if (!runCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
+      if (!effectiveCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
         throw new TypeError('Caption motion requires combined whole-video replay and native state QC');
       }
       if (validatedLayoutInspection !== null) {
@@ -2222,7 +2232,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
     }
     if (Object.hasOwn(element, 'presentationPulse')) {
       getPresentationPulseProgramV001({element, canvas: resolved.plan.canvas});
-      if (!runCounterfactualQc) throw new TypeError('Pulse requires completed-frame state identification QC');
+      if (!effectiveCounterfactualQc) throw new TypeError('Pulse requires completed-frame state identification QC');
       if (validatedLayoutInspection !== null) {
         throw new TypeError('Pulse selections require native layout inspection of all finite states');
       }
@@ -2597,7 +2607,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
       state: {outputDirectory, reservation, workDirectory, stagingDirectory, scratchDirectory, cleanupWarnings,
         overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio, outputMedia, workVideo,
         plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
-        autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
+        autoPresentationResolution, autoPresentationInputs, autoPresentation,
+        runCounterfactualQc: effectiveCounterfactualQc,
+        ...(verificationPolicy === null ? {} : {verificationPolicy, storageContext, verificationMode: verificationPolicy.mode}),
         counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange,
         ...(orchestrationDrawingView === undefined ? {} : {
           orchestrationInput: exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView)})},
@@ -2743,11 +2755,26 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
     overlayRecords, applicationResults, baseExpectedAudio, completedExpectedAudio, outputMedia, workVideo,
     plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
     autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
-    counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange} = state;
+    counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange, verificationPolicy = null, storageContext} = state;
   const failAfterWork = (violations, stage, nested) => createPresentationRendererFailureAfterWorkV001({
     violations, stage, nested, cleanupWarnings, scratchDirectory});
     let completedFrameQc;
-    if (runCounterfactualQc) {
+    let verification;
+    if (verificationPolicy !== null) {
+      if (runCounterfactualQc !== false || storageContext?.approvedJob === undefined) {
+        throw new TypeError('representative verification requires the approved Digest job and its explicit mode');
+      }
+      const completion = await import('./digest_representative_completion_v001.mjs');
+      verification = await completion.finishApprovedDigestRepresentativeCompletionV001({storageContext, plan,
+        workVideo, applicationResults, overlayRecords, outputMedia, expectedAudio: completedExpectedAudio,
+        expectedFrameCount, evaluateQc});
+      if (!['passed-representative', 'confirmation-pending', 'failed'].includes(verification?.status)) {
+        throw new TypeError('approved Digest representative verification returned an invalid status');
+      }
+      if (verification.status === 'failed') {
+        return failAfterWork(verification.violations ?? [], 'post-render-qc', verification);
+      }
+    } else if (runCounterfactualQc) {
       await onProgress({phase: 'range-qc', scope: orchestrationScope?.scope ?? null});
       completedFrameQc = await inspectPresentationCompletedFrameQcV001({
         plan, records: overlayRecords, baseMediaPath, completedMediaPath: workVideo,
@@ -2776,7 +2803,9 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       }
     }
 
-    const finalQc = evaluateQc({
+    // Representative completion keeps rule/media checks and unperformed whole
+    // visibility checks distinct; it must never be relabeled as legacy QC passed.
+    const finalQc = verification ?? evaluateQc({
       plan,
       applicationResults,
       overlayInspections: overlayRecords.map((record) => record.inspection),
@@ -2791,7 +2820,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       ...(runCounterfactualQc ? {currentCompletedMediaRef: {path: workVideo,
         fileSha256: await fileSha256V002(workVideo)}} : {}),
     });
-    if (finalQc.status !== 'passed') {
+    if (verification === undefined && finalQc.status !== 'passed') {
       return failAfterWork(finalQc.violations, 'post-render-qc', finalQc);
     }
 
@@ -2809,6 +2838,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       completedExpectedAudio,
       outputMedia,
       finalQc,
+      ...(verification === undefined ? {} : {verification, verificationMode: verificationPolicy.mode}),
       workVideo,
       resolvedPlan: plan,
       ...(autoPresentation === undefined ? {} : {

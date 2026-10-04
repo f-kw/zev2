@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-04（JST） / revision：handover-index-20261004-v072
+更新日：2026-10-04（JST） / revision：handover-index-20261004-v073
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-04 03:48 UTC（代表方式の通常完了への限定接続を完了）
+
+親monaの次工程技術判断に従い、承認済みNormal jobの確認方式をrenderer→caller→Core→最終製造結果へ明示して接続した。生成前のpolicyと生成後の実MP4 SHAに結び付く代表記録を分離し、代表方式完了/確認待ち・未完了/実不具合拒否を区別する。全体ルール・媒体・元音声・代表確認・全件視認未実施、静止画/本文時計/代表再生と全編視聴/音声/人間採用未評価を別記する。[実装結果・検査・次の一手](reports/digest-caption-216px-reflow-20261003/representative-normal-completion-20261004.md)。
+
+対象と関連回帰55件、runner/Remotion型検査、syntax/差分検査成功。実保存9区間/372字幕の入力資格も保持。初回の依存参照省略失敗と修正後成功を記録した。private資格の全面製造/公開正例は未実行。新動画/今回動画の再検査/旧6件/可読性再評価/全件QC/新素材/費用0。一般ROOT/trust/default/実許可/元ID時計/排他/容量メモリ停止は不変。監視workerのcompletedだけで動画完成とせず、receipt status/completeを使う。
+
+状態：今回の限定実装・対象検証は完了。次の具体的一手は、確認待ちでprocess終了した保存媒体を代表記録追加後に再描画せず確定する限定入口。現在は保存/確認待ち状態の伝達までで、このrecord-only再開入口は未実装。親monaが同許可・新owner・保存媒体/計画/記録の再束縛範囲を技術判断し、同じMac実装者へ具体指示を渡す。今回の完了だけをZEV製品全体の完了としない。[今回session log](work-logs/2026-10/2026-10-04T0348_Codex-SSD_ID9-representative-normal-completion_a3ebe68d.md)。main反映の実SHA/cleanは最終報告で確定する。
+
+以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-04 03:18 UTC（動画固有値の入力化と検証を完了）
 

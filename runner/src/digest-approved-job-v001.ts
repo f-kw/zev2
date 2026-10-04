@@ -7,6 +7,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {pathToFileURL} from 'node:url';
+const {validateDigestRepresentativeVerificationPolicyV001}=await import(pathToFileURL(path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../evals/clip_composition/digest_representative_completion_v001.mjs')).href);
 
 export type Json = Record<string, any>;
 export type DigestJobBindingV001 = {path: string; fileSha256: string; sizeBytes?: number; schemaVersion?: string; canonicalSha256?: string};
@@ -52,10 +53,12 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   assert(H.test(trustedJobSha256) && H.test(trustedAuthorizationSha256), 'INDEPENDENT_AUTHORIZATION_ANCHORS_REQUIRED');
   assert.equal(jobBinding.fileSha256, trustedJobSha256, 'APPROVED_JOB_ANCHOR_MISMATCH');
   assert.equal(authorizationBinding.fileSha256, trustedAuthorizationSha256, 'APPROVED_AUTHORIZATION_ANCHOR_MISMATCH');
-  exact(job, ['schemaVersion','planId','outputRoot','inputs','storage','expected','implementation','guard','allocationBudget'], 'APPROVED_JOB_EXACT_FIELDS');
+  exact(job, ['schemaVersion','planId','outputRoot','inputs','storage','expected','implementation','guard','allocationBudget',
+    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[])], 'APPROVED_JOB_EXACT_FIELDS');
   assert.equal(job.schemaVersion, 'digest-approved-job-v001'); assert(ID.test(job.planId), 'APPROVED_JOB_PLAN_ID');
   const prefix = digestJobRelativePathV001(job.outputRoot);
   assert(prefix.startsWith('runtime/artifacts/') && prefix.split('/').length >= 4, 'APPROVED_JOB_OUTPUT_ROOT');
+  if(Object.hasOwn(job,'verificationPolicy')) validateDigestRepresentativeVerificationPolicyV001(job.verificationPolicy,prefix);
   exact(job.inputs, ['preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding'], 'APPROVED_JOB_INPUTS_REQUIRED');
   for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding']) validateDigestJobBindingV001(job.inputs[k]);
   assert(job.inputs.preparationParameters && typeof job.inputs.preparationParameters === 'object'
@@ -86,10 +89,13 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     'runner/src/digest-approved-inputs-v001.ts','runner/src/digest-formal-handoff-v001.ts',
     'evals/clip_composition/adopted_media_manufacturing_v001.mts','evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts','evals/clip_composition/render_presentation_v002.mjs',
-    'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py'])
+    'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
+    'evals/clip_composition/digest_representative_completion_v001.mjs'])
     assert(job.implementation.bindings.some((b: Json) => b.path === required), 'APPROVED_JOB_MISSING_CODE_BINDING ' + required);
   exact(authorization, ['schemaVersion','recordId','userApproval','actions','jobBinding','planId','manifestBinding',
-    'typographySettingsBinding','outputRoot','storage','guard','implementation','normalCandidates'], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+    'typographySettingsBinding','outputRoot','storage','guard','implementation','normalCandidates',
+    ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+  if(Object.hasOwn(job,'verificationPolicy')) assert.deepEqual(authorization.verificationPolicy,job.verificationPolicy,'APPROVED_AUTHORIZATION_VERIFICATION_POLICY_MISMATCH');
   assert.equal(authorization.schemaVersion, 'digest-approved-job-authorization-v001'); assert(ID.test(authorization.recordId));
   exact(authorization.userApproval, ['at','messageId','text','sourceThreadId'], 'APPROVED_USER_EVIDENCE_REQUIRED');
   const user = authorization.userApproval;

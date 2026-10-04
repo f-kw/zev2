@@ -22,7 +22,7 @@ const implementationPaths = ['runner/src/digest-approved-job-v001.ts', 'runner/s
   'runner/src/digest-approved-inputs-v001.ts', 'runner/src/digest-formal-handoff-v001.ts',
   'evals/clip_composition/adopted_media_manufacturing_v001.mts', 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
   'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts', 'evals/clip_composition/render_presentation_v002.mjs',
-  'tools/digest-quality/original-resolution-low-memory-composite.mjs', 'tools/digest-quality/original-resolution-full-supervisor-v002.py'];
+  'tools/digest-quality/original-resolution-low-memory-composite.mjs', 'tools/digest-quality/original-resolution-full-supervisor-v002.py','evals/clip_composition/digest_representative_completion_v001.mjs'];
 
 /** Synthetic anchors exist only in this test. No user grant, owner, supervisor, or media operation is created. */
 async function fixture(action: (options: any) => Promise<void>) {

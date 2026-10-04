@@ -34,6 +34,7 @@ export async function assertQualifiedApprovedDigestStorageContextV001(context: u
     assert.deepEqual(plan.approvalRecordBinding, record.qualified.authorizationBinding);
     assert.deepEqual(plan.acceptedManifestBinding, record.qualified.job.inputs.candidateManifestBinding);
     assert.deepEqual(plan.typographySettingsBinding, record.qualified.job.inputs.typographySettingsBinding);
+    assert.deepEqual(plan.verificationPolicy, record.qualified.job.verificationPolicy,'APPROVED_CORE_VERIFICATION_POLICY_MISMATCH');
   }
   await (context as Json).assertCurrent();
 }
@@ -208,6 +209,18 @@ async function candidateStyle(qualified:ApprovedDigestQualifiedJobV001, inputs:J
   return {bindings,rendererTemplate,baselineBindings:old};
 }
 
+/** Only projects an already qualified Core result; it grants no publication capability. */
+export function projectApprovedDigestManufacturingCompletionV001(result:Json) {
+  if(result.verification===undefined) {assert.equal(result.qc,'passed','APPROVED_FULL_QC_REQUIRED');return {status:'completed',technicalQc:'passed'};}
+  const v=result.verification;
+  assert.equal(v.schemaVersion,'digest-representative-completion-v001');
+  assert(['passed-representative','confirmation-pending'].includes(v.status),'APPROVED_REPRESENTATIVE_QC_FAILED');
+  assert.equal(result.complete,v.status==='passed-representative','APPROVED_REPRESENTATIVE_COMPLETE_MISMATCH');
+  assert.equal(result.qc,v.status);assert.equal(v.checks.fullVisibility.status,'not-executed');
+  return {status:result.complete?'completed':'confirmation-pending',complete:result.complete,verification:v,
+    verificationMode:v.mode,technicalQc:{wholeRules:v.checks.wholeRules,media:v.checks.media,audioPreservation:v.checks.audioPreservation,fullVisibility:v.checks.fullVisibility}};
+}
+
 /** Allocation estimate comes from this source/clock, never the previous video's bytes. */
 export function estimateApprovedDigestBaseAllocationV001(sourceBytes:number,media:Json,expected:Json) {
   assert(Number.isSafeInteger(sourceBytes)&&sourceBytes>0); assert(Number.isSafeInteger(media.decodedFrameCount)&&media.decodedFrameCount>0);
@@ -238,6 +251,7 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const style=await candidateStyle(qualified,inputs,context,m),out=context.outputRoot;
   const authorizationBinding=await context.publish(out+'/authorization.json',qualified.authorization);
   const plan={schemaVersion:'digest-approved-candidate-core-plan-v001',planId:job.planId,outputRoot:out,
+    ...(job.verificationPolicy===undefined?{}:{verificationPolicy:job.verificationPolicy}),
     approvedJobBinding:qualified.jobBinding,approvalRecordBinding:qualified.authorizationBinding,authorization:authorizationBinding,
     implementationBindings:job.implementation.bindings,acceptedManifestBinding:job.inputs.candidateManifestBinding,
     typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues,
@@ -268,15 +282,17 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const artifactBindings:Json={};for(const [key,name] of Object.entries(core.CORE_FILES) as [string,string][]) artifactBindings[key]=await context.publish(out+'/'+name,artifacts[key]);
   await context.resourceCheck({stage:'body',newBytes:job.allocationBudget.rendererPreparationBytes}); const renderStarted=Date.now();
   const result=await core.renderAdoptedVideoV001(c,artifactBindings,'digest-approved-render-execution-v001',context);
-  const receipt={schemaVersion:'digest-approved-manufacturing-result-v001',status:'completed',approvedJobBinding:qualified.jobBinding,
+  const completion=projectApprovedDigestManufacturingCompletionV001(result);
+  const receipt={schemaVersion:'digest-approved-manufacturing-result-v001',...completion,approvedJobBinding:qualified.jobBinding,
     authorizationBinding:qualified.authorizationBinding,planBinding,invocationBinding:invocation,typographySettingsBinding:inputs.typographySettingsBinding,
     derivedTypographyValues:inputs.typographyValues,result,timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,
       renderAndQcMs:Date.now()-renderStarted,totalMs:Date.now()-began},implementationSha:job.implementation.sha,
-    technicalQc:'passed',humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,completedAt:new Date().toISOString()};
+    humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,
+    ...(result.verification===undefined?{completedAt:new Date().toISOString()}:{recordedAt:new Date().toISOString(),completedAt:completion.status==='completed'?new Date().toISOString():null})};
   await context.publish(out+'/result.json',receipt);return receipt;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   void(async()=>{try {assert.equal(process.argv.length,8);assert.equal(process.argv[2],'--permit');assert.equal(process.argv[4],'--job-sha256');assert.equal(process.argv[6],'--authorization-sha256');
-    const result=await runApprovedDigestJobV001(path.resolve(process.argv[3]),process.argv[5],process.argv[7]);process.stdout.write(JSON.stringify({event:'completed',result})+'\n');
+    const result=await runApprovedDigestJobV001(path.resolve(process.argv[3]),process.argv[5],process.argv[7]);process.stdout.write(JSON.stringify({event:result.status,result})+'\n');
   }catch(error){process.stderr.write(String((error as Error).stack)+'\n');process.exitCode=1;}finally{process.stdin.destroy();}})();
 }

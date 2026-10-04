@@ -133,6 +133,97 @@ class ApprovedJobTest(unittest.TestCase):
         self.assertEqual(result['job']['planId'], 'different-approved-plan')
         self.assertNotEqual(result['job']['storage']['imageMaximumBytes'], m.FORMAL_STORAGE['imageMaximumBytes'])
 
+    def verification_policy(self):
+        return dict(schemaVersion='digest-representative-verification-policy-v001',
+            mode='representative-plus-rules-v001', representativeInstructionIds=['instruction-A'],
+            permittedMethods=['still-frame', 'text-clock-context', 'video-playback'],
+            confirmationRecordPath=self.job['outputRoot'] + '/review/confirmation.json')
+
+    def policy_config(self, policy=None):
+        job = copy.deepcopy(self.job)
+        job['verificationPolicy'] = self.verification_policy() if policy is None else policy
+        authorization = copy.deepcopy(self.authorization)
+        authorization['verificationPolicy'] = copy.deepcopy(job['verificationPolicy'])
+        return job, authorization
+
+    def test_verification_policy_accepts_one_or_several_representatives(self):
+        for ids, methods in ((['instruction-A'], ['still-frame']),
+            (['A', 'B', 'C', 'D'], ['still-frame', 'text-clock-context', 'video-playback'])):
+            policy = self.verification_policy()
+            policy['representativeInstructionIds'] = ids
+            policy['permittedMethods'] = methods
+            job, authorization = self.policy_config(policy)
+            with self.subTest(ids=ids):
+                self.assertIs(m.validate_approved_job_config(job, authorization), job)
+        self.assertNotIn('verificationPolicy', m.validate_approved_job_config(self.job, self.authorization))
+
+    def test_verification_policy_requires_both_records_and_exact_agreement(self):
+        job, authorization = self.policy_config()
+        with self.assertRaisesRegex(ValueError, 'presence mismatch'):
+            m.validate_approved_job_config(job, self.authorization)
+        with self.assertRaisesRegex(ValueError, 'presence mismatch'):
+            m.validate_approved_job_config(self.job, authorization)
+        for field, value in (('representativeInstructionIds', ['instruction-B']),
+            ('permittedMethods', ['video-playback']),
+            ('confirmationRecordPath', self.job['outputRoot'] + '/another.json')):
+            changed = copy.deepcopy(authorization)
+            changed['verificationPolicy'][field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'policy mismatch'):
+                m.validate_approved_job_config(job, changed)
+
+    def test_verification_policy_rejects_other_modes_and_unbound_media_fields(self):
+        bad = [None, {}, {**self.verification_policy(), 'finalMp4Sha256': 'a' * 64},
+            {**self.verification_policy(), 'schemaVersion': 'unknown'},
+            {**self.verification_policy(), 'mode': 'skip-qc'}]
+        for policy in bad:
+            job, authorization = self.policy_config()
+            job['verificationPolicy'] = policy
+            authorization['verificationPolicy'] = copy.deepcopy(policy)
+            with self.subTest(policy=policy), self.assertRaises(ValueError):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_verification_policy_rejects_empty_duplicate_or_invalid_ids_and_methods(self):
+        cases = [('representativeInstructionIds', value) for value in
+            ([], [''], [' '], ['A', 'A'], [1], 'A')]
+        cases += [('permittedMethods', value) for value in
+            ([], ['still-frame', 'still-frame'], ['native-qc'], [1], 'still-frame')]
+        for field, value in cases:
+            policy = self.verification_policy()
+            policy[field] = value
+            job, authorization = self.policy_config(policy)
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_verification_policy_record_stays_inside_exact_output_root(self):
+        prefix = self.job['outputRoot']
+        for value in ('', '/tmp/confirmation.json', '../confirmation.json', prefix + '/../confirmation.json',
+            prefix + '/review//confirmation.json', prefix + '-other/confirmation.json',
+            'runtime/artifacts/other-plan/attempt-005/confirmation.json', prefix + '/confirmation.txt'):
+            policy = self.verification_policy()
+            policy['confirmationRecordPath'] = value
+            job, authorization = self.policy_config(policy)
+            with self.subTest(path=value), self.assertRaisesRegex(ValueError, 'safe relative JSON'):
+                m.validate_approved_job_config(job, authorization)
+
+    def test_representative_completion_module_is_required_and_byte_bound(self):
+        module = 'evals/clip_composition/digest_representative_completion_v001.mjs'
+        job, authorization = self.policy_config()
+        job['implementation']['bindings'] = [ref for ref in job['implementation']['bindings'] if ref['path'] != module]
+        authorization['implementation'] = copy.deepcopy(job['implementation'])
+        with self.assertRaisesRegex(ValueError, 'implementation'):
+            m.validate_approved_job_config(job, authorization)
+        source = self.repo / module
+        source.write_text('// changed representative completion implementation')
+        with self.assertRaisesRegex(ValueError, 'SHA'):
+            self.qualify()
+
+    def test_policy_change_cannot_reuse_the_bound_authorization_bytes(self):
+        changed = copy.deepcopy(self.authorization)
+        changed['verificationPolicy'] = self.verification_policy()
+        self.auth_file.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'SHA'):
+            self.qualify()
+
     def test_requires_independent_job_and_authorization_anchors(self):
         for job_sha, auth_sha in ((False, 'd' * 64), ('d' * 64, False), ('d' * 64, 'e' * 64)):
             with self.subTest(job_sha=job_sha, auth_sha=auth_sha), self.assertRaises(ValueError):
