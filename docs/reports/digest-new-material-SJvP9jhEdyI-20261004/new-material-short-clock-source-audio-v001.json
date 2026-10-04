@@ -1,0 +1,53 @@
+{
+  "sourceBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+    "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+    "sizeBytes": 1016332396
+  },
+  "sourceUnchanged": true,
+  "startSeconds": 2322.8,
+  "endSecondsExclusive": 2326.5,
+  "command": [
+    "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+    "-nostdin",
+    "-n",
+    "-v",
+    "error",
+    "-threads",
+    "1",
+    "-ss",
+    "2322.8",
+    "-i",
+    "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+    "-t",
+    "3.7",
+    "-map",
+    "0:a:0",
+    "-vn",
+    "-sn",
+    "-ac",
+    "1",
+    "-ar",
+    "16000",
+    "-c:a",
+    "pcm_s16le",
+    "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-source-audio-v001.wav"
+  ],
+  "startedAt": "2026-10-04T11:55:26.300290+00:00",
+  "endedAt": "2026-10-04T11:55:26.357411+00:00",
+  "exitCode": 0,
+  "ownProcessGroup": 35510,
+  "remainingRunning": [],
+  "audioBinding": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-source-audio-v001.wav",
+    "fileSha256": "8133dae9d058607352b76d1ff76289ecc561f7302904e4819858a6cb69914196",
+    "sizeBytes": 118478
+  },
+  "audioFrames": 59200,
+  "sampleRate": 16000,
+  "channels": 1,
+  "sourceListening": "not-evaluated",
+  "newStt": 0,
+  "api": 0,
+  "clockChanged": false
+}

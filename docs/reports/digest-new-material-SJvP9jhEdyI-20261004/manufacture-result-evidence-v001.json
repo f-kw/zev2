@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "digest-new-material-execution-summary-v001",
+  "evidencePreparedAt": "2026-10-04T12:34:34.321265+00:00",
+  "status": "stopped-before-formal-publication",
+  "monitorState": "consultant-wait",
+  "stateCheckedAt": "2026-10-04T12:24:03.291622+00:00",
+  "nextOwner": "parent mona",
+  "implementationSha": "2399aa61e245da2506e2487943a24414097852cd",
+  "sourceSelection": {
+    "url": "https://www.youtube.com/watch?v=SJvP9jhEdyI",
+    "instructionId": "Sentinel_24d44e15c2e48191a4d4aefe81a99466",
+    "confirmedAtMinute": "2026-10-04T05:29Z",
+    "precision": "minute"
+  },
+  "approvedJobBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-job-v003/job.json",
+    "fileSha256": "74a234da2825f179ace510bfdd4bd12a1951a9cf5fd30adac55dd7f4000e8809",
+    "sizeBytes": 16920
+  },
+  "authorizationBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-job-v003/authorization.json",
+    "fileSha256": "8458ac86fcfa77455c8d5a7d031f0155e838500629bb13287c479665317c6d61",
+    "sizeBytes": 15177
+  },
+  "candidateManifestBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/manifest.json",
+    "fileSha256": "8da924bda9639478570a10d06dd0bab3573dede572250cd2d3ab9f045e0640dc",
+    "sizeBytes": 82500
+  },
+  "typographySettingsBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/typography-settings.json",
+    "fileSha256": "7d875401f37d0c5bc0fc9c420e360bed3915e546d5c85976c2c40a7ebecc303d",
+    "sizeBytes": 8951
+  },
+  "expected": {
+    "frames": 37619,
+    "audioSamples": 55299930,
+    "groups": 31,
+    "atoms": 5450,
+    "cues": 651
+  },
+  "sourceMediaBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+    "fileSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+    "sizeBytes": 1016332396
+  },
+  "savedCompositeBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4",
+    "fileSha256": "6434a56b40e66212c5dd910638c33b73b53029d733592b0b77ca6aa03d4f18b8",
+    "sizeBytes": 617257203
+  },
+  "compositeRawShaVerifiedBeforeAndAfterObservation": true,
+  "stoppedManufactureSummaryBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/monitor/summary.json",
+    "fileSha256": "0b13a48b8f50fe3a7ea8ff9165c114818f8c2487a2c475107922d7888eee5bf4",
+    "sizeBytes": 3175
+  },
+  "manufacturing": {
+    "startedAt": "2026-10-04T08:37:15.299181+00:00",
+    "endedAt": "2026-10-04T11:54:57.305726+00:00",
+    "seconds": 11862.006545066833,
+    "exitCode": 1,
+    "reason": "formal worker nonzero exit",
+    "remainingRunning": [],
+    "observedTreePeakBytes": 2944958464,
+    "minimumGuestAvailableBytes": 91532627968,
+    "minimumInternalAvailableBytes": 12612014080
+  },
+  "native": {
+    "seconds": 8974.579,
+    "primaryPngs": 651,
+    "repeatedPngs": 651,
+    "lineMasks": 1042,
+    "remotionDraws": 2344,
+    "imageMagickChildren": 3386,
+    "successfulChildExits": 5730
+  },
+  "composite": {
+    "seconds": 1320.55,
+    "completedRanges": 180,
+    "expectedFrames": 37619,
+    "contiguousCoverage": true,
+    "rawYuvPipeOnlyBytes": 117010137600
+  },
+  "existingMediaInspection": {
+    "successfulChildExits": 3,
+    "childScopes": [
+      "ffprobe-media",
+      "audio-payload",
+      "video-frame-count"
+    ],
+    "numericStdoutPersisted": false,
+    "formalTechnicalEvidencePersisted": false
+  },
+  "independentRepresentativeObservation": {
+    "reportBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-eight-frame-actual-observation-v001.json",
+      "fileSha256": "ea570d25b82c87bc8e717ffef01bb5232bf3c22fd98757ad415438376c831be6",
+      "sizeBytes": 14831
+    },
+    "extractionEvidenceBinding": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/representative-stopped-composite-observation-v001/observation-evidence.json",
+      "fileSha256": "ce47eb9762c6f6fa29086a87240b778b77946484aeda6fa257c227a6e43a51fd",
+      "sizeBytes": 14059
+    },
+    "directlyViewedFrames": 8,
+    "wholeVideoPlayback": "not-evaluated",
+    "audioListening": "not-evaluated",
+    "humanQualityAdoption": "not-evaluated",
+    "formalRepresentativeRecordCreated": false,
+    "formalCompletedReceiptCreated": false
+  },
+  "opacityIssue": {
+    "appliedRule": "min(1,(n+1)/4,(F-n)/4)",
+    "cue465MiddleMultiplier": 0.5,
+    "cue571OnlyFrameMultiplier": 0.25,
+    "neverFullyOpaqueCues": 50,
+    "allCues": 651,
+    "staticRuleMeasurement": true,
+    "newPixelMeasurement": false
+  },
+  "sourceAudioCheck": {
+    "audioBinding": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-source-audio-v001.wav",
+      "fileSha256": "8133dae9d058607352b76d1ff76289ecc561f7302904e4819858a6cb69914196",
+      "sizeBytes": 118478
+    },
+    "sourceStartSeconds": 2322.8,
+    "sourceEndSecondsExclusive": 2326.5,
+    "sourceListening": "not-evaluated",
+    "audioTransportResponse": "audio content omitted because you do not support audio input",
+    "actualSpeechTimesKnown": false,
+    "sourceOrClockChanged": false,
+    "newStt": 0,
+    "api": 0
+  },
+  "validation": {
+    "sourceConnectionTargetTestsPassed": 44,
+    "sourceConnectionRelatedUniqueTestsPassed": 69,
+    "assemblyProjectionRegressionTestsPassed": 10,
+    "sourceConnectionAndProjectionTypechecksPassed": true,
+    "oldSavedPlanTestPassed": 6,
+    "oldSavedPlanTestCorrectlyRejected": 1,
+    "proposedCallerDiffApplied": false,
+    "proposedCallerDiffTypechecked": false,
+    "savedFailedWorkRecoveryImplemented": false
+  },
+  "cleanup": {
+    "checkedAt": "2026-10-04T12:24:03.291622+00:00",
+    "ownIdsChecked": [
+      35510,
+      35801,
+      35817,
+      35848,
+      82428,
+      82452
+    ],
+    "remainingRunning": [],
+    "storage": {
+      "guest": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001",
+        "device": 16777243,
+        "availableBytes": 93552009216
+      },
+      "host": {
+        "path": "/Volumes/KIOXIA",
+        "device": 16777238,
+        "availableBytes": 1989498896384
+      },
+      "internal": {
+        "path": "/Users/kawafmm/workspace/zev2",
+        "device": 16777234,
+        "availableBytes": 12565999616
+      }
+    },
+    "retainedWorkPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ",
+    "retainedPrimaryPngs": 651,
+    "retainedRepeatAndMaskPngs": 1693,
+    "baseMediaWorkExists": false,
+    "formalResultExists": false,
+    "formalTechnicalEvidenceExists": false,
+    "formalRenderDirectoryExists": false,
+    "ownStaleRendererLockRetained": true,
+    "manualDeletionBytes": 0,
+    "knownCoreAutomaticCleanupBytes": 3188666542,
+    "cleanup": "Own failed native/work/source/base/lock retained for audit and possible qualified recovery; no old deletion or compaction; automatic base scratch cleanup recorded separately."
+  },
+  "sourceEvidenceBindings": {
+    "new-material-representative-brand-failure-readonly-v001.md": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-representative-brand-failure-readonly-v001.md",
+      "fileSha256": "9ed19765f69a263b05bc211afaef5fa7d58647bfdd5845d2ac75b7a1541717c4",
+      "sizeBytes": 6192
+    },
+    "new-material-representative-brand-failure-readonly-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-representative-brand-failure-readonly-v001.json",
+      "fileSha256": "ce21000493838ca3b6c7855b42d294d9ce7f6de4bb2ecfedac44f9bb2ab08bcf",
+      "sizeBytes": 20918
+    },
+    "new-material-representative-brand-failure-readonly-v001.diff": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-representative-brand-failure-readonly-v001.diff",
+      "fileSha256": "db15d3c04ce4a871da55cb82db454346b32635af465c7482ccfb48dda835d07b",
+      "sizeBytes": 2595
+    },
+    "digest-new-material-short-cue-context-assessment-v002-20261004.md": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-new-material-short-cue-context-assessment-v002-20261004.md",
+      "fileSha256": "1dfedd485e27687c1fa81f75c5a8165e2714afb46d72ebf4cf9d329d2378af44",
+      "sizeBytes": 11852
+    },
+    "digest-new-material-short-cue-context-assessment-v002-20261004.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-new-material-short-cue-context-assessment-v002-20261004.json",
+      "fileSha256": "35e84a43a8cc0e0ae0abd1b183cf9e0c4b358cca3dc4ca7fcd4ccbf0822cd0d3",
+      "sizeBytes": 277836
+    },
+    "new-material-short-caption-opacity-readonly-v001.md": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-caption-opacity-readonly-v001.md",
+      "fileSha256": "8fdb4b16c970e9bf7131788c36ab53e576840afc1b151396f296560c63f67623",
+      "sizeBytes": 2767
+    },
+    "new-material-short-caption-opacity-readonly-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-caption-opacity-readonly-v001.json",
+      "fileSha256": "c017be54a20d8478f05bba12f968b541d43cdc34d05c0ec7cb8b21d87495cefb",
+      "sizeBytes": 31785
+    },
+    "new-material-render-speed-readonly-v001.md": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-render-speed-readonly-v001.md",
+      "fileSha256": "092e8df2ddf1958eb9a1898910f426560432e41203aca8bca085031baa1c3188",
+      "sizeBytes": 4297
+    },
+    "new-material-render-speed-readonly-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-render-speed-readonly-v001.json",
+      "fileSha256": "d0d4273f05b939647cb51a2d424fbd28d08a0608f01b52bfcc84a7482d6b2a4c",
+      "sizeBytes": 1444051
+    },
+    "new-material-eight-frame-actual-observation-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-eight-frame-actual-observation-v001.json",
+      "fileSha256": "ea570d25b82c87bc8e717ffef01bb5232bf3c22fd98757ad415438376c831be6",
+      "sizeBytes": 14831
+    },
+    "new-material-short-clock-source-audio-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-source-audio-v001.json",
+      "fileSha256": "e060fee90e5b750b29c35be3e4cf4e8a6c1c3ee60034f3c9f6aa599ff62b4fae",
+      "sizeBytes": 1496
+    },
+    "new-material-short-clock-audio-access-result-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-short-clock-audio-access-result-v001.json",
+      "fileSha256": "56287137accadd55b0b39b963d3dd4877b44fdfc7297f51e975482af827915da",
+      "sizeBytes": 1108
+    },
+    "new-material-final-close-observation-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-final-close-observation-v001.json",
+      "fileSha256": "b9dba1c56f1905a77e8c11de79278d78088278216016b8f5496786e508e4ae98",
+      "sizeBytes": 1317
+    },
+    "new-material-stopped-composite-observer-config-v001.json": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-material-stopped-composite-observer-config-v001.json",
+      "fileSha256": "eacb45ab7cb285c5df1a014abdba70a81db91e4571ac57d309e74f56a20c629a",
+      "sizeBytes": 3807
+    },
+    "observation-extraction-evidence-v001.json": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/representative-stopped-composite-observation-v001/observation-evidence.json",
+      "fileSha256": "ce47eb9762c6f6fa29086a87240b778b77946484aeda6fa257c227a6e43a51fd",
+      "sizeBytes": 14059
+    }
+  },
+  "qualificationLimit": "No formal pending result, technical evidence, registration, get or completed receipt was fabricated or created. Main model health is not inferred from this work."
+}

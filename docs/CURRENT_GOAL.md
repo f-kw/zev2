@@ -2,6 +2,20 @@
 
 更新日：2026-10-04（JST）
 
+## 最新現在地 — 2026-10-04 12:24 UTC（新動画を合成・代表8枚確認、正式受け渡しで停止）
+
+今回専用SSDへ途中物も保存する6path接続で、新素材SJvP9jhEdyIの通常計画31区間・5450atom・651字幕を製造した。20分53.966667秒の合成MP4（617257203B/SHA6434a56b）がSSDの作業領域に保存され、停止後に実SHA/時計を前後照合して8代表画像を直接確認した。新字幕は216px/左右108px/2行、本文/ID/時計/元音声保持。旧完成動画の再製造0。[成果・制作負担・限界](reports/digest-new-material-SJvP9jhEdyI-20261004/manufacture-result-v001.md)。
+
+2026-10-04T11:54:57.305726+00:00、QUALIFIED_REPRESENTATIVE_COMPLETION_REQUIREDで停止。合成180区間と後続媒体検査3childはexit0だが、callerのCJS読込とrendererのnative ESM読込が代表moduleを別実体にし、WeakMap資格を渡せなかった。実Node20/tsxで4export identity全falseを確認。最小caller4import統一差分は未適用。result/technical/pending/正式render未保存、finalize/get0。保存済み失敗workを正式再資格する入口は追加契約として親判断へ返す。新trust/fallback/再製造0。
+
+8枚でglyph欠け/画面外clipは見つからない。大きな二行字幕が元ゲーム台詞や顔を覆う場面はある。13:52.933の「世界が終わる」は3frame・0.1秒、中央50％alpha。18:05.867の「お!」は1frame・25％alpha。既存4frame fadeと保存時計を全体へ静的照合し、50/651字幕が100％に届かないと確認。重要な危機の前振りは字幕として対処が必要だが、原画面にも同文があり、音声や元台詞の継続表示による意味補完は未確認。全編/通常速度/音声/品質本採用は未評価。
+
+元音声38:42.8〜38:46.5を原本SHA照合して抽出したが、利用tool検索と実audio入力で音声input非対応が判明。実発話位置は不明。「原時計保持」は原資料保全であり、誤時刻の派生補正を禁止する意図ではない、との親指示を受領。次は実聴取を根拠に最小訂正を具体化する。新STT/API/時計変更0。次の描画前にはnative重複検査と繰返し資格確認の負担を代表方針へ整える必要がある。今回途中へ変更注入0。
+
+製造3時間17分42.006秒、native2時間29分34.579秒（2344描画＋3386画像子処理）、合成22分00.550秒。監視peakRSS2944958464B、最小guest91532627968B/内蔵12612014080B。停止は容量/メモリ超過ではなくworkerの資格受け渡しエラー。Coreの自分の基本途中物3188666542Bは自動整理済み。失敗work/全PNG/mask/source/base/owner/lock/logは監査と復旧用KEEP、旧削除0。12:24:03.291622 UTC実psでown残存0、空きguest93552009216B/host1989498896384B/内蔵12565999616Bを別観測。
+
+状態：相談役待ち。最終確認：2026-10-04T12:24:03.291622+00:00。次担当：親monaが限定復旧入口の範囲と音声確認の方法を判断し、その明示指示後に同じMac実装者。過去レビュー/全字幕採点の再要求なし。実装SHA2399aa61、記録commit/push/cleanは最終報告で確定。[session log](work-logs/2026-10/2026-10-04T1224_Codex-SSD_ID9-new-digest-SJvP9jhEdyI_2399aa61.md)。監視・この実行をメイン会話モデルの正常稼働証明にしない。以下07:02は当時の履歴。
+
 ## 最新現在地 — 2026-10-04 07:02 UTC（SSD一素材接続を実装・検査し、新動画の通常計画へ続行）
 
 親monaが0b00eeb7の6path案を承認し、新素材一本の正常plan/製造まで続行を指示。製品6pathと必須Core test一個を実装した。元STT URL原本を保持し、別normal transcriptはsourceUri以外の全文/ID/時計一致とGPU inputSHA/size/producer来歴を検査。private実job contextだけが一素材をstream hash/安定statで資格読取し、CoreのSSD snapshot前後一致を確認する。一般ROOT/trust/default/shared/Python/renderer/QC変更0。[限定実装と保存先説明の訂正](reports/digest-new-material-SJvP9jhEdyI-20261004/guest-source-implementation.md)。

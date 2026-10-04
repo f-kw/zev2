@@ -1,0 +1,1010 @@
+{
+  "schemaVersion": "digest-short-caption-time-opacity-readonly-analysis-v001",
+  "readAt": "2026-10-04T12:21:50.298315+00:00",
+  "outputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003",
+  "method": "one static arithmetic pass against saved complete 180 range graphs and 651 actual instruction display clocks; no media reading/decoding/render/QC/benchmark or modifications",
+  "rule": {
+    "equation": "a(n,F) = min(1, (n+1)/4, (F-n)/4), integer n=0..F-1",
+    "appliedAlpha": "input PNG alpha(X,Y) * a(n,F); multiplier is distinct from resulting encoded RGB",
+    "fixedFadeFrames": 4,
+    "enable": "lt(n,3)+gt(n,F-4); interior where disabled already has multiplier1",
+    "fullOpacityCondition": "F >= 7; integer phase3..F-4",
+    "fullOpacityFrameCount": "max(0,F-6)",
+    "sourceCodeLines": {
+      "renderer": "1066-1073,1102-1106",
+      "lowMemory": "producerArgumentsV001 graph-preserving call; formal displayFrameCount==end-start at line98"
+    }
+  },
+  "application": {
+    "cueCount": 651,
+    "rangeCount": 180,
+    "rangeCaptionAppearances": 810,
+    "all651SavedGraphRulesMatch": true,
+    "allCueFramesCoveredOnceAcrossRanges": true,
+    "phaseAcrossRangeBoundariesPreserved": true,
+    "fullyOpaqueAtLeastOnce": 601,
+    "neverFullyOpaque": 50,
+    "neverFullyOpaquePercent": 7.680491551459294,
+    "durationCounts": {
+      "1": 2,
+      "2": 7,
+      "3": 10,
+      "4": 10,
+      "5": 11,
+      "6": 10
+    },
+    "maximumOpacityCounts": {
+      "0.25": 9,
+      "0.5": 20,
+      "0.75": 21
+    },
+    "noRangeResetOrExtraClockCompression": "low-memory compositor uses exact admitted start/end; scoped ranges preserve caption phase; no independent duration shortening observed in saved graph"
+  },
+  "examples": [
+    {
+      "cueOrdinal": 465,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+      "text": "世界が終わる",
+      "startFrame": 24988,
+      "endFrameExclusive": 24991,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        119,
+        120
+      ],
+      "observedRepresentativeFrame": 24989,
+      "captionPhase": 1,
+      "timeOpacityMultiplierAtObservedFrame": 0.5,
+      "envelopeSequence": [
+        0.25,
+        0.5,
+        0.25
+      ],
+      "visualObservationSource": "parent directly viewed existing composite representative PNG; no viewing/decode by this analysis"
+    },
+    {
+      "cueOrdinal": 571,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+      "text": "お!",
+      "startFrame": 32576,
+      "endFrameExclusive": 32577,
+      "displayFrameCount": 1,
+      "displaySeconds": 0.03333333333333333,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        156
+      ],
+      "observedRepresentativeFrame": 32576,
+      "captionPhase": 0,
+      "timeOpacityMultiplierAtObservedFrame": 0.25,
+      "envelopeSequence": [
+        0.25
+      ],
+      "visualObservationSource": "parent directly viewed existing composite representative PNG; no viewing/decode by this analysis"
+    }
+  ],
+  "shortCues": [
+    {
+      "cueOrdinal": 8,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000008",
+      "text": "昔昔",
+      "startFrame": 139,
+      "endFrameExclusive": 144,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        1
+      ]
+    },
+    {
+      "cueOrdinal": 49,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000049",
+      "text": "第1回",
+      "startFrame": 2981,
+      "endFrameExclusive": 2985,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        15
+      ]
+    },
+    {
+      "cueOrdinal": 95,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000095",
+      "text": "もうやばい",
+      "startFrame": 4952,
+      "endFrameExclusive": 4957,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        24
+      ]
+    },
+    {
+      "cueOrdinal": 109,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000109",
+      "text": "未来から来たね",
+      "startFrame": 5460,
+      "endFrameExclusive": 5466,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        27
+      ]
+    },
+    {
+      "cueOrdinal": 139,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000139",
+      "text": "このデスジジババは",
+      "startFrame": 6973,
+      "endFrameExclusive": 6979,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        34
+      ]
+    },
+    {
+      "cueOrdinal": 176,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000176",
+      "text": "え、こ、",
+      "startFrame": 8870,
+      "endFrameExclusive": 8873,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        43
+      ]
+    },
+    {
+      "cueOrdinal": 183,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000183",
+      "text": "なにこれ",
+      "startFrame": 9217,
+      "endFrameExclusive": 9222,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        44
+      ]
+    },
+    {
+      "cueOrdinal": 203,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000203",
+      "text": "一体…",
+      "startFrame": 10170,
+      "endFrameExclusive": 10172,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        49
+      ]
+    },
+    {
+      "cueOrdinal": 284,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000284",
+      "text": "な、なんなんだよ",
+      "startFrame": 14743,
+      "endFrameExclusive": 14749,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        71
+      ]
+    },
+    {
+      "cueOrdinal": 304,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000304",
+      "text": "HP、",
+      "startFrame": 16243,
+      "endFrameExclusive": 16247,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        78
+      ]
+    },
+    {
+      "cueOrdinal": 310,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000310",
+      "text": "ここで",
+      "startFrame": 16466,
+      "endFrameExclusive": 16468,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        79
+      ]
+    },
+    {
+      "cueOrdinal": 312,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000312",
+      "text": "やべぇ",
+      "startFrame": 16477,
+      "endFrameExclusive": 16479,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        79
+      ]
+    },
+    {
+      "cueOrdinal": 344,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000344",
+      "text": "しかしある日",
+      "startFrame": 18944,
+      "endFrameExclusive": 18949,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        91
+      ]
+    },
+    {
+      "cueOrdinal": 352,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000352",
+      "text": "俺は",
+      "startFrame": 19161,
+      "endFrameExclusive": 19163,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        92
+      ]
+    },
+    {
+      "cueOrdinal": 365,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000365",
+      "text": "おめでとう!",
+      "startFrame": 19967,
+      "endFrameExclusive": 19970,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        96
+      ]
+    },
+    {
+      "cueOrdinal": 367,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000367",
+      "text": "結ばれ",
+      "startFrame": 19980,
+      "endFrameExclusive": 19982,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        96
+      ]
+    },
+    {
+      "cueOrdinal": 388,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000388",
+      "text": "そのシナリオの中に",
+      "startFrame": 21145,
+      "endFrameExclusive": 21150,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        101
+      ]
+    },
+    {
+      "cueOrdinal": 397,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000397",
+      "text": "来るぞ!",
+      "startFrame": 21624,
+      "endFrameExclusive": 21628,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        103
+      ]
+    },
+    {
+      "cueOrdinal": 416,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000416",
+      "text": "今までなあ",
+      "startFrame": 22570,
+      "endFrameExclusive": 22575,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        108
+      ]
+    },
+    {
+      "cueOrdinal": 463,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000463",
+      "text": "ここで奴を",
+      "startFrame": 24980,
+      "endFrameExclusive": 24983,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        119
+      ]
+    },
+    {
+      "cueOrdinal": 464,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000464",
+      "text": "食い止めなければ",
+      "startFrame": 24983,
+      "endFrameExclusive": 24988,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        119
+      ]
+    },
+    {
+      "cueOrdinal": 465,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+      "text": "世界が終わる",
+      "startFrame": 24988,
+      "endFrameExclusive": 24991,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        119,
+        120
+      ]
+    },
+    {
+      "cueOrdinal": 466,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000466",
+      "text": "なんか",
+      "startFrame": 24991,
+      "endFrameExclusive": 24993,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        120
+      ]
+    },
+    {
+      "cueOrdinal": 476,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000476",
+      "text": "よし行くぞ",
+      "startFrame": 25286,
+      "endFrameExclusive": 25289,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        121
+      ]
+    },
+    {
+      "cueOrdinal": 478,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000478",
+      "text": "なんか",
+      "startFrame": 25296,
+      "endFrameExclusive": 25299,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        121
+      ]
+    },
+    {
+      "cueOrdinal": 487,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000487",
+      "text": "なんだろ?",
+      "startFrame": 25982,
+      "endFrameExclusive": 25988,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        124
+      ]
+    },
+    {
+      "cueOrdinal": 491,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000491",
+      "text": "あーいい!",
+      "startFrame": 26285,
+      "endFrameExclusive": 26288,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        126
+      ]
+    },
+    {
+      "cueOrdinal": 492,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000492",
+      "text": "熱い熱い!",
+      "startFrame": 26288,
+      "endFrameExclusive": 26292,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        126
+      ]
+    },
+    {
+      "cueOrdinal": 493,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000493",
+      "text": "なにこれ?",
+      "startFrame": 26292,
+      "endFrameExclusive": 26298,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        126
+      ]
+    },
+    {
+      "cueOrdinal": 494,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000494",
+      "text": "なにこれすごーい!",
+      "startFrame": 26298,
+      "endFrameExclusive": 26304,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        126
+      ]
+    },
+    {
+      "cueOrdinal": 508,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000508",
+      "text": "デカいねん",
+      "startFrame": 27572,
+      "endFrameExclusive": 27577,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        132
+      ]
+    },
+    {
+      "cueOrdinal": 514,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000514",
+      "text": "気づいてんねん",
+      "startFrame": 27830,
+      "endFrameExclusive": 27834,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        133
+      ]
+    },
+    {
+      "cueOrdinal": 515,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000515",
+      "text": "あかんのねー",
+      "startFrame": 27834,
+      "endFrameExclusive": 27838,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        133
+      ]
+    },
+    {
+      "cueOrdinal": 516,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000516",
+      "text": "あらあいつ",
+      "startFrame": 27838,
+      "endFrameExclusive": 27842,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        133
+      ]
+    },
+    {
+      "cueOrdinal": 517,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000517",
+      "text": "後クビ後クビー",
+      "startFrame": 27842,
+      "endFrameExclusive": 27848,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        133
+      ]
+    },
+    {
+      "cueOrdinal": 523,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000523",
+      "text": "10点!",
+      "startFrame": 29048,
+      "endFrameExclusive": 29051,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        139
+      ]
+    },
+    {
+      "cueOrdinal": 527,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000527",
+      "text": "しかも狙え!",
+      "startFrame": 29198,
+      "endFrameExclusive": 29202,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        140
+      ]
+    },
+    {
+      "cueOrdinal": 562,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000562",
+      "text": "このまま",
+      "startFrame": 31698,
+      "endFrameExclusive": 31704,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        151
+      ]
+    },
+    {
+      "cueOrdinal": 571,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+      "text": "お!",
+      "startFrame": 32576,
+      "endFrameExclusive": 32577,
+      "displayFrameCount": 1,
+      "displaySeconds": 0.03333333333333333,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        156
+      ]
+    },
+    {
+      "cueOrdinal": 576,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000576",
+      "text": "おっと!",
+      "startFrame": 32858,
+      "endFrameExclusive": 32860,
+      "displayFrameCount": 2,
+      "displaySeconds": 0.06666666666666667,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        157
+      ]
+    },
+    {
+      "cueOrdinal": 582,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000582",
+      "text": "俺は",
+      "startFrame": 33065,
+      "endFrameExclusive": 33069,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        158
+      ]
+    },
+    {
+      "cueOrdinal": 596,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000596",
+      "text": "桃太郎は",
+      "startFrame": 33861,
+      "endFrameExclusive": 33867,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        162
+      ]
+    },
+    {
+      "cueOrdinal": 599,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000599",
+      "text": "おとなしく",
+      "startFrame": 33959,
+      "endFrameExclusive": 33962,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        162
+      ]
+    },
+    {
+      "cueOrdinal": 603,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000603",
+      "text": "まあどの道",
+      "startFrame": 34012,
+      "endFrameExclusive": 34015,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        162
+      ]
+    },
+    {
+      "cueOrdinal": 612,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000612",
+      "text": "俺の俺の名は",
+      "startFrame": 34738,
+      "endFrameExclusive": 34742,
+      "displayFrameCount": 4,
+      "displaySeconds": 0.13333333333333333,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        166
+      ]
+    },
+    {
+      "cueOrdinal": 615,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000615",
+      "text": "終わった",
+      "startFrame": 35522,
+      "endFrameExclusive": 35528,
+      "displayFrameCount": 6,
+      "displaySeconds": 0.2,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        170
+      ]
+    },
+    {
+      "cueOrdinal": 626,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000626",
+      "text": "10秒でいい感じに",
+      "startFrame": 36038,
+      "endFrameExclusive": 36043,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        172
+      ]
+    },
+    {
+      "cueOrdinal": 627,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000627",
+      "text": "締めてください",
+      "startFrame": 36043,
+      "endFrameExclusive": 36048,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        172
+      ]
+    },
+    {
+      "cueOrdinal": 629,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000629",
+      "text": "いや",
+      "startFrame": 36058,
+      "endFrameExclusive": 36059,
+      "displayFrameCount": 1,
+      "displaySeconds": 0.03333333333333333,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        172
+      ]
+    },
+    {
+      "cueOrdinal": 650,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000650",
+      "text": "びっくりした!",
+      "startFrame": 37382,
+      "endFrameExclusive": 37387,
+      "displayFrameCount": 5,
+      "displaySeconds": 0.16666666666666666,
+      "maximumTimeOpacityMultiplier": 0.75,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        179
+      ]
+    }
+  ],
+  "representatives": [
+    {
+      "cueOrdinal": 1,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000001",
+      "text": "どうなってんだよ",
+      "startFrame": 0,
+      "endFrameExclusive": 23,
+      "displayFrameCount": 23,
+      "displaySeconds": 0.7666666666666667,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 17,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        1
+      ]
+    },
+    {
+      "cueOrdinal": 93,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000093",
+      "text": "骨あるやつ食いたいっすね!",
+      "startFrame": 4876,
+      "endFrameExclusive": 4930,
+      "displayFrameCount": 54,
+      "displaySeconds": 1.8,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 48,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        24
+      ]
+    },
+    {
+      "cueOrdinal": 400,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000400",
+      "text": "デスビッグデイム",
+      "startFrame": 21692,
+      "endFrameExclusive": 21716,
+      "displayFrameCount": 24,
+      "displaySeconds": 0.8,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 18,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        104
+      ]
+    },
+    {
+      "cueOrdinal": 465,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000465",
+      "text": "世界が終わる",
+      "startFrame": 24988,
+      "endFrameExclusive": 24991,
+      "displayFrameCount": 3,
+      "displaySeconds": 0.1,
+      "maximumTimeOpacityMultiplier": 0.5,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        119,
+        120
+      ]
+    },
+    {
+      "cueOrdinal": 545,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000545",
+      "text": "お前も殺しに来てたやん",
+      "startFrame": 30327,
+      "endFrameExclusive": 30970,
+      "displayFrameCount": 643,
+      "displaySeconds": 21.433333333333334,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 637,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        145,
+        146,
+        147,
+        148
+      ]
+    },
+    {
+      "cueOrdinal": 571,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000571",
+      "text": "お!",
+      "startFrame": 32576,
+      "endFrameExclusive": 32577,
+      "displayFrameCount": 1,
+      "displaySeconds": 0.03333333333333333,
+      "maximumTimeOpacityMultiplier": 0.25,
+      "fullOpacityFrameCount": 0,
+      "everFullTimeOpacity": false,
+      "rangeOrdinals": [
+        156
+      ]
+    },
+    {
+      "cueOrdinal": 583,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000583",
+      "text": "観光地カモハネパネルの桃太郎",
+      "startFrame": 33069,
+      "endFrameExclusive": 33090,
+      "displayFrameCount": 21,
+      "displaySeconds": 0.7,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 15,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        158
+      ]
+    },
+    {
+      "cueOrdinal": 651,
+      "instructionId": "digest-SJvP9jhEdyI-20261004-v001-instruction-instruction-000651",
+      "text": "最後あんのかと思ったわ!",
+      "startFrame": 37387,
+      "endFrameExclusive": 37619,
+      "displayFrameCount": 232,
+      "displaySeconds": 7.733333333333333,
+      "maximumTimeOpacityMultiplier": 1,
+      "fullOpacityFrameCount": 226,
+      "everFullTimeOpacity": true,
+      "rangeOrdinals": [
+        179,
+        180
+      ]
+    }
+  ],
+  "actualBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-low-memory-composite.mjs",
+      "sizeBytes": 19944,
+      "fileSha256": "1b15e3f4d247b0af5c85c4d9a6d9d65f9d443d7075d8a494d34a97bb6d8efdf5"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "sizeBytes": 155104,
+      "fileSha256": "afba874fb4da702c2041b8f064532943c2c1b0b79278f136c34327f52cbbac0f"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5734-formal-low-memory-composite/request.json",
+      "sizeBytes": 820381,
+      "fileSha256": "66e08603d0c202572dc5b3998cd396146f63e2eed80b3dc67142a22ea12cf86c"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/instruction.json",
+      "sizeBytes": 966870,
+      "fileSha256": "ec342c666d1572df38488f2918703824f93ea3a2219e5c098ea64be41396a01c"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/low-memory-composite.json",
+      "sizeBytes": 805995,
+      "fileSha256": "5c4a16aa03a328ecffa1e2b9be02080c2bf9c381e28675a8d3bdd982acb86b4e"
+    }
+  ],
+  "unchangedCompositeBinding": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4",
+    "bytes": 617257203,
+    "fileSha256": "6434a56b40e66212c5dd910638c33b73b53029d733592b0b77ca6aa03d4f18b8"
+  },
+  "limitations": [
+    "Numeric time-opacity is exact saved filter arithmetic; encoded pixel alpha/RGB is not newly measured. PNG intrinsic alpha, compression and background affect displayed color.",
+    "Short display clocks are confirmed in actual instructions. This restricted pass does not diagnose STT/source timing assignment or determine a clock correction.",
+    "No actual audio playback: current transport does not support original audio input.",
+    "No quality threshold, new approval, code fix, timeline extension, or reuse/recovery contract is introduced."
+  ]
+}

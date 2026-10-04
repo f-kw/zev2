@@ -1,0 +1,421 @@
+{
+  "schemaVersion": "new-material-representative-brand-failure-readonly-report-v001",
+  "readAt": "2026-10-04T12:08:19.718053+00:00",
+  "scope": "read only actual failed manufacture-v003; scratch report and unapplied caller diff only",
+  "outputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003",
+  "workRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ",
+  "approvedJobBinding": {
+    "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-job-v003/job.json",
+    "fileSha256": "74a234da2825f179ace510bfdd4bd12a1951a9cf5fd30adac55dd7f4000e8809",
+    "sizeBytes": 16920
+  },
+  "implementationSha": "2399aa61e245da2506e2487943a24414097852cd",
+  "expected": {
+    "frames": 37619,
+    "audioSamples": 55299930,
+    "groups": 31,
+    "atoms": 5450,
+    "cues": 651
+  },
+  "status": {
+    "workerExitCode": 1,
+    "endedAt": "2026-10-04T11:54:57.305726+00:00",
+    "remainingRunning": [],
+    "formalPublication": "not executed",
+    "formalCompletion": "not established",
+    "representativeConfirmation": "not performed; record absent; expected pending if live path finished",
+    "counterfactualQcExecuted": false,
+    "quality": "whole-video viewing and representative confirmation unverified"
+  },
+  "cause": {
+    "code": "QUALIFIED_REPRESENTATIVE_COMPLETION_REQUIRED",
+    "callsite": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts:114",
+    "moduleGate": "evals/clip_composition/digest_representative_completion_v001.mjs:171",
+    "mechanism": "separate createRequire and native ESM module instances own separate module-local WeakMaps; renderer mints in native module; CJS-transformed caller checks other module instance",
+    "runtimeIdentityProbe": {
+      "performedOnce": true,
+      "authorization": "parent explicit one read-only runtime/loader identity probe",
+      "node": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+      "nodeVersion": "v20.19.6",
+      "loader": "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+      "TSX_DISABLE_CACHE": "1",
+      "exitCode": 0,
+      "sameFunctions": {
+        "resolveApprovedDigestVerificationPolicyV001": false,
+        "assertQualifiedDigestRepresentativeCompletionV001": false,
+        "rebindPublishedDigestRepresentativeCompletionV001": false,
+        "persistApprovedDigestRepresentativePendingEvidenceV001": false
+      },
+      "method": "createRequire(pathToFileURL(callerTS))(absolute module) versus await import(pathToFileURL(same absolute module).href); no private mint, cloning, media, or source-body access",
+      "evidenceSource": "actual tool stdout captured in this delegated conversation; not a pre-existing product artifact"
+    },
+    "workerErrorExcerpt": "ge\":\"composite-range\",\"newBytes\":653184000}\n@@RESOURCE_CHECK {\"id\":183,\"stage\":\"composite-range\",\"newBytes\":90201600}\nAssertionError [ERR_ASSERTION]: QUALIFIED_REPRESENTATIVE_COMPLETION_REQUIRED\n    at assertQualifiedDigestRepresentativeCompletionV001 (/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_representative_completion_v001.mjs:171:44)\n    at qualifyPresentationInstructionRendererCompletionV002 (data:text/javascript,%23!%2Fusr%2Fbin%2Fenv%20node%0A__filename%3D%22%2FUsers%2Fkawafmm%2Fworkspace%2Fzev2%2Fevals%2Fclip_composition%2Frun_presentation_instruction_renderer_job_v002.ts%22%3B(()%3D%3E%7Brequire%20%3D%20require(%22node%3Amodule%22).createRequire(%22file%3A%2F%2F%2FUsers%2Fkawafmm%2Fworkspace%2Fzev2%2Fevals%2Fclip_composition%2Frun_presentation_instruction_renderer_job_v002.ts%22)%3B%0Avar%20__create%3DObject.create%3Bvar%20__defProp%3DObject.defineProperty%3Bvar%",
+    "sourceReadChecks": [
+      "draw.finalQc === draw.verification and same storageContext retained; no JSON clone at this handoff",
+      "caller qualified representative projection reached gate after draw exitCode zero",
+      "assertion occurs before commitValidatedPresentationArtifactsV002; missing final result is consistent"
+    ],
+    "inferencesNotPersisted": [
+      "live whole-rule/media completion object was accepted far enough to reach caller brand gate; detailed values and qualified result were in memory, not saved"
+    ]
+  },
+  "existingChecks": {
+    "native": {
+      "startedAt": "2026-10-04T08:59:51.240Z",
+      "endedAt": "2026-10-04T11:29:25.819Z",
+      "wallSeconds": 8974.579,
+      "childProcessCount": 5730,
+      "labels": {
+        "overlay-still": 1302,
+        "overlay-line-mask": 1042,
+        "overlay-line-inspection-alpha": 1042,
+        "overlay-line-inspection-bounds": 1042,
+        "overlay-final-inspection-alpha": 651,
+        "overlay-final-inspection-bounds": 651
+      },
+      "allChildExitZero": true,
+      "totalChildSeconds": 2990.651661343981,
+      "primaryPngCount": 651,
+      "scratchPngCount": 1693,
+      "repeatPngCount": 651,
+      "lineMaskPngCount": 1042,
+      "countBasis": "overlay-still two per cue; overlay-line-mask one per explicit line; PNG counts are existing exact work directories"
+    },
+    "compositeOperation": {
+      "sequence": 5734,
+      "label": "formal-low-memory-composite",
+      "operationKind": "sequential-stream-composite",
+      "startedAt": "2026-10-04T11:29:27.473Z",
+      "endedAt": "2026-10-04T11:51:28.032Z",
+      "elapsedMilliseconds": 1320550.1429169998,
+      "status": "passed",
+      "failure": null,
+      "observationDirectory": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5734-formal-low-memory-composite"
+    },
+    "composite": {
+      "status": "completed",
+      "scope": {
+        "startFrame": 0,
+        "endFrameExclusive": 37619,
+        "frameCount": 37619
+      },
+      "expectedOverlayCount": 651,
+      "frameCoverage": "complete-contiguous-once",
+      "maximumProcesses": 2,
+      "rawYuvStorage": "pipe-only",
+      "output": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4",
+        "bytes": 617257203,
+        "fileSha256": "6434a56b40e66212c5dd910638c33b73b53029d733592b0b77ca6aa03d4f18b8"
+      },
+      "approvedJobBinding": {
+        "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-job-v003/job.json",
+        "fileSha256": "74a234da2825f179ace510bfdd4bd12a1951a9cf5fd30adac55dd7f4000e8809",
+        "sizeBytes": 16920
+      },
+      "typographySettingsBinding": {
+        "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/typography-settings.json",
+        "fileSha256": "7d875401f37d0c5bc0fc9c420e360bed3915e546d5c85976c2c40a7ebecc303d",
+        "sizeBytes": 8951
+      },
+      "derivedTypographyValues": {
+        "schemaVersion": "digest-typography-derived-values-v001",
+        "fontSizePx": 216,
+        "horizontalMarginPx": 108,
+        "horizontalSafeMarginRatio": 0.05625,
+        "maxLogicalWidthPerLine": 15,
+        "maxLinesPerCue": 2,
+        "canvasWidthPx": 1920,
+        "borderWidthPx": 8,
+        "glowWidthPx": 4,
+        "textSafePaddingPx": 9,
+        "strokeExtentPx": 12,
+        "availableTextWidthPx": 1662,
+        "logicalWidthUnitPx": 108
+      }
+    },
+    "compositeSegments": {
+      "count": 180,
+      "allExitZero": true
+    },
+    "finalMediaChildren": [
+      {
+        "request": {
+          "kind": "child-process",
+          "command": "/opt/homebrew/bin/ffprobe",
+          "args": [
+            "-v",
+            "error",
+            "-count_frames",
+            "-show_entries",
+            "format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,nb_read_frames,sample_rate,channels,channel_layout,duration",
+            "-of",
+            "json",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4"
+          ],
+          "cwd": "/Users/kawafmm/workspace/zev2",
+          "parentNode": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "parentNodeVersion": "v20.19.6",
+          "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        },
+        "timing": {
+          "sequence": 5735,
+          "label": "output-media-inspection-ffprobe",
+          "startedAt": "2026-10-04T11:51:30.133Z",
+          "endedAt": "2026-10-04T11:53:10.724Z",
+          "childMilliseconds": 100590.6469579991,
+          "evidenceWriteMilliseconds": 0.9837079998105764,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        "actualExitCodeText": "0",
+        "stderrSizeBytes": 0,
+        "stdoutSaved": false,
+        "timingBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5735-output-media-inspection-ffprobe/timing.json",
+          "sizeBytes": 301,
+          "fileSha256": "70914f62b5f32f6e28c666147832402d518d8a602757b92ea987f8da425f6bfb"
+        },
+        "requestBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5735-output-media-inspection-ffprobe/request.json",
+          "sizeBytes": 784,
+          "fileSha256": "277322aeae5d1fe1ee710efa74e48b7f4cf0ff9f8ae0658a88e0d5ea956bc0be"
+        }
+      },
+      {
+        "request": {
+          "kind": "child-process",
+          "command": "/opt/homebrew/bin/ffmpeg",
+          "args": [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4",
+            "-map",
+            "0:a:0",
+            "-c:a",
+            "copy",
+            "-f",
+            "data",
+            "-"
+          ],
+          "cwd": "/Users/kawafmm/workspace/zev2",
+          "parentNode": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "parentNodeVersion": "v20.19.6",
+          "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        },
+        "timing": {
+          "sequence": 5736,
+          "label": "output-media-inspection-audio-payload",
+          "startedAt": "2026-10-04T11:53:11.782Z",
+          "endedAt": "2026-10-04T11:53:11.940Z",
+          "childMilliseconds": 157.41645799949765,
+          "evidenceWriteMilliseconds": 3.635375000536442,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        "actualExitCodeText": "0",
+        "stderrSizeBytes": 0,
+        "stdoutSaved": false,
+        "timingBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5736-output-media-inspection-audio-payload/timing.json",
+          "sizeBytes": 307,
+          "fileSha256": "66f198076c1f1dd9433b9cdd2c2f4f964be9a83b56e4c8a470df45286b1dd135"
+        },
+        "requestBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5736-output-media-inspection-audio-payload/request.json",
+          "sizeBytes": 676,
+          "fileSha256": "eeffa32e231c821f1e277001f0a121d55efb239dd97e5749f7af8f588c8f5cd7"
+        }
+      },
+      {
+        "request": {
+          "kind": "child-process",
+          "command": "/opt/homebrew/bin/ffprobe",
+          "args": [
+            "-v",
+            "error",
+            "-count_frames",
+            "-select_streams",
+            "v:0",
+            "-show_entries",
+            "stream=nb_read_frames",
+            "-of",
+            "json",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/publish/presentation-rendered-v002.mp4"
+          ],
+          "cwd": "/Users/kawafmm/workspace/zev2",
+          "parentNode": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "parentNodeVersion": "v20.19.6",
+          "path": "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        },
+        "timing": {
+          "sequence": 5737,
+          "label": "output-frame-count",
+          "startedAt": "2026-10-04T11:53:12.968Z",
+          "endedAt": "2026-10-04T11:54:53.008Z",
+          "childMilliseconds": 100039.35208299942,
+          "evidenceWriteMilliseconds": 0.5304160006344318,
+          "code": 0,
+          "signal": null,
+          "spawnFailed": false
+        },
+        "actualExitCodeText": "0",
+        "stderrSizeBytes": 0,
+        "stdoutSaved": false,
+        "timingBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5737-output-frame-count/timing.json",
+          "sizeBytes": 289,
+          "fileSha256": "19676607bcdff33eb3a01e6faa1cb8ebc5c448ff4a0e9eaa0e89d3db1a89abd4"
+        },
+        "requestBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5737-output-frame-count/request.json",
+          "sizeBytes": 688,
+          "fileSha256": "c9cdf9c6df49c950c136dabac8cc0bb942b52d9fa3cf421d37c5c393b984a32a"
+        }
+      }
+    ],
+    "layout": {
+      "schemaVersion": "presentation-render-layout-inspection-v001",
+      "status": "passed",
+      "canvas": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "safeAreaPx": {
+          "left": 108,
+          "right": 108,
+          "top": 40,
+          "bottom": 40
+        }
+      },
+      "itemsCount": 651,
+      "violationCount": 0
+    }
+  },
+  "savedArtifacts": {
+    "videoStatSizeBytes": 617257203,
+    "videoShaSource": "existing actual low-memory-composite receipt; not rehashed by this task",
+    "missing": [
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/renderer-result.json",
+        "exists": false
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/result.json",
+        "exists": false
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/representative-technical-evidence-v001.json",
+        "exists": false
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/render",
+        "exists": false
+      },
+      {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/representative-confirmation.json",
+        "exists": false
+      }
+    ],
+    "keep": "original video, all primary/repeat/mask PNGs, source/base, inputs, layout, owner/locks, all logs and receipts"
+  },
+  "minimalUnappliedCallerFix": {
+    "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+    "fixedNativeFileUrlImport": true,
+    "fourExportsUnified": true,
+    "otherProductPathsChanged": 0,
+    "brandCurrentPolicyContextShaGuardsUnchanged": true,
+    "ordinaryNoContextResultSemanticsUnchanged": true,
+    "notExecutedOrTypechecked": true,
+    "requiredFutureChecks": [
+      "actual CJS caller plus native renderer mint/check identity integration",
+      "JSON clone/foreign context rejection",
+      "pending cannot become completed",
+      "existing full mode regression"
+    ]
+  },
+  "reuseBoundary": {
+    "dataPotentiallyReusable": true,
+    "currentFormalSavedStateResume": "not available for this failed state",
+    "callerImportFixAloneRecoversExitedState": false,
+    "existingFinalizeGetAvailableNow": false,
+    "missingPrerequisites": [
+      "canonical result.json independent pending anchor",
+      "saved representative-technical-evidence binding",
+      "canonical published media binding",
+      "process-local qualified completion and whole draw state"
+    ],
+    "minimumParentDecision": [
+      "strict one failed work descriptor bound to old real job/grant/code/owner-ended/physical SSD/input/settings/plan/IDs/clocks/651PNGs/1693masks/composite receipt",
+      "fresh exclusive ownership; preserve old locks and all outputs; protected new publication destination",
+      "reconstruct actual plan/applicationResults/overlay state from original bound data; re-read missing numeric alpha/media measurements using existing inspectors only if separately authorized",
+      "mint new representative result through same native module; original policy yields confirmation-pending until actual confirmation",
+      "existing commit atomic no-replace and pending persistence plus normal receipt; then existing representative finalize/get"
+    ],
+    "permissionBoundary": "formal saved-failed-work entry/state reconstruction is new contract; this read-only report does not authorize it",
+    "likelyResponsibilities": [
+      {
+        "path": "evals/clip_composition/render_presentation_v002.mjs",
+        "change": "narrow qualified saved-state finish entry; existing private finish is not public resume"
+      },
+      {
+        "path": "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+        "change": "native module fix; strict recovery draw handoff to existing publication and pending persistence"
+      },
+      {
+        "path": "runner/src/digest-approved-job-runner-v001.ts",
+        "change": "strict approved failed-work qualification, fresh owner and real receipt connection if such recovery is approved"
+      }
+    ],
+    "coreConditional": "Only if a fresh logical output child requires Core binding changes; do not promise a file count or silently redirect roots",
+    "lockConstraint": "current reserve rejects pre-existing lock; commit verifies owner token/output and physical topology. Cannot silently clear/reuse old lock or fabricate old reservation."
+  },
+  "supportingBindings": [
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts",
+      "sizeBytes": 37879,
+      "fileSha256": "ef16c170d78e131c593420e58150d981d5fccafa47b43ff9f7f8c5967fbe76dc"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs",
+      "sizeBytes": 155104,
+      "fileSha256": "afba874fb4da702c2041b8f064532943c2c1b0b79278f136c34327f52cbbac0f"
+    },
+    {
+      "path": "/Users/kawafmm/workspace/zev2/evals/clip_composition/digest_representative_completion_v001.mjs",
+      "sizeBytes": 38878,
+      "fileSha256": "533411b661435343e38b369dcc014c800e4c4151451174070c8ede1cdc134046"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/monitor/summary.json",
+      "sizeBytes": 3175,
+      "fileSha256": "0b13a48b8f50fe3a7ea8ff9165c114818f8c2487a2c475107922d7888eee5bf4"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/low-memory-composite.json",
+      "sizeBytes": 805995,
+      "fileSha256": "5c4a16aa03a328ecffa1e2b9be02080c2bf9c381e28675a8d3bdd982acb86b4e"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/.render.presentation-renderer-v002-work-xnJorQ/scratch/layout-output.json",
+      "sizeBytes": 324064,
+      "fileSha256": "af8463a4e1ec31abe17b36d3fd96e70e4a2f70cac808f83c5821f84f0528fadd"
+    },
+    {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003/process-observations/digest-SJvP9jhEdyI-20261004-v001/5734-formal-low-memory-composite/operation.json",
+      "sizeBytes": 501,
+      "fileSha256": "bcae9e285b4dd8b7fa8edcd683aabb38b43541a24f55899acb04bb0dc91d90ff"
+    }
+  ],
+  "unperformed": [
+    "product/repo/Git/SSD modification",
+    "render/composite/recovery launch",
+    "new media QC/decode/benchmark",
+    "whole-file media hash repeat",
+    "quality acceptance"
+  ]
+}
