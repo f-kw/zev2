@@ -189,11 +189,29 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   same(groups.flatMap(group => group.atomOccurrenceIds), originalAtoms.map(atom => atom.atomOccurrenceId));
   assert.equal(prepared.meaning.captions.length, 1);
   const manifest = await read(specs.candidateManifestBinding);
-  assert.equal(manifest.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_CURRENT_CANDIDATE_REQUIRED');
+  assert(['digest-caption-current-registration-candidate-bundle-v001', 'digest-caption-current-visibility-candidate-bundle-v001'].includes(manifest.schemaVersion), 'APPROVED_DIGEST_CURRENT_CANDIDATE_REQUIRED');
   for (const field of ['originalCandidateManifestBinding', 'displayMeaningBinding', 'displayAdjustmentBinding'])
     assert.equal(manifest[field], undefined, 'APPROVED_DIGEST_UNDECLARED_DISPLAY_ADJUSTMENT');
+  let visibilityAdoption: Json | null = null, migrated = manifest;
+  if (manifest.schemaVersion === 'digest-caption-current-visibility-candidate-bundle-v001') {
+    assert.equal(job.verificationPolicy?.mode, 'representative-plus-rules-v001', 'APPROVED_DIGEST_VISIBILITY_REPRESENTATIVE_POLICY_REQUIRED');
+    assert.equal(job.recoveryBinding, undefined, 'APPROVED_DIGEST_VISIBILITY_RECOVERY_FORBIDDEN');
+    for (const binding of [specs.candidateManifestBinding, object(manifest.visibilityAdoptionBinding)])
+      assert(Number.isSafeInteger(binding.sizeBytes) && binding.sizeBytes > 0, 'APPROVED_DIGEST_VISIBILITY_BINDING_SIZE_REQUIRED');
+    visibilityAdoption = await read(object(manifest.visibilityAdoptionBinding));
+    visibilityExact(visibilityAdoption, ['schemaVersion', 'mode', 'bindings', 'decisions', 'counts'], 'APPROVED_DIGEST_VISIBILITY_FIELDS');
+    assert.equal(visibilityAdoption.schemaVersion, 'digest-caption-visibility-adoption-v001');
+    assert.equal(visibilityAdoption.mode, 'explicit-cue-adoption-v001', 'APPROVED_DIGEST_EXPLICIT_VISIBILITY_REQUIRED');
+    visibilityExact(visibilityAdoption.bindings, ['originalCandidateManifestBinding', 'meaningBinding', 'correspondenceBinding', 'originalClockBinding', 'mapBinding'], 'APPROVED_DIGEST_VISIBILITY_BINDINGS');
+    migrated = await read(object(visibilityAdoption.bindings.originalCandidateManifestBinding));
+    assert.equal(migrated.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_VISIBILITY_ORIGINAL_REQUIRED');
+    const {visibilityAdoptionBinding: _, ...unchanged} = manifest;
+    unchanged.schemaVersion = migrated.schemaVersion;
+    same(unchanged, migrated);
+    for (const name of ['meaningBinding', 'correspondenceBinding', 'originalClockBinding', 'mapBinding'])
+      same(visibilityAdoption.bindings[name], migrated[name]);
+  } else assert.equal(manifest.visibilityAdoptionBinding, undefined, 'APPROVED_DIGEST_UNDECLARED_VISIBILITY');
   const meaning = await read(object(manifest.meaningBinding)); same(meaning, prepared.meaning);
-  const migrated = manifest;
   same(migrated.preparationManifestBinding, specs.preparationManifestBinding); same(migrated.meaningBinding, manifest.meaningBinding);
   same(manifest.registrationMigrationBinding, migrated.registrationMigrationBinding);
   const migrationProof = await read(object(migrated.registrationMigrationBinding));
@@ -337,6 +355,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   const correspondence = await read(object(manifest.correspondenceBinding)); same(correspondence.rows, rows);
   if (correspondence.changes !== undefined) same(correspondence.changes, perGroupChanges);
   assert.equal(rows.length, expected.cues); same(rows.flatMap(row => row.atomOccurrenceIds), atoms.map(atom => atom.atomOccurrenceId));
+  if (visibilityAdoption !== null) assertExplicitCaptionVisibilityAdoptionV001(visibilityAdoption, rows);
   const summary = object(manifest.summary); assert.equal(summary.groups, expected.groups); assert.equal(summary.atoms, expected.atoms); assert.equal(summary.newCues, expected.cues);
   assert.equal(summary.newLines, rows.reduce((n, row) => n + row.lines.length, 0));
   same(manifest.newStyleLimits, requests[0].input.styleLimits);
@@ -369,6 +388,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     atomOccurrenceIds: atoms.map(atom => atom.atomOccurrenceId), styleLimits: clone(requests[0].input.styleLimits), taskDescription: rules.newTaskDescription};
   const value = {workspaceRoot: root, inputRoot:specs.inputRoot,inputPrefix:specs.inputPrefix,registrationMigration:migrationProof, manifestBinding: clone(specs.candidateManifestBinding), manifest, preparation,
     preparationManifestBinding: clone(specs.preparationManifestBinding), meaning, requests, responses, results, traces, correspondence,
+    visibilityAdoption,
     normalState, normalPlan, normalExecution, normalPreparation, adoption, edit, manufacturing, inspection, clock, styleTemplate, rendererTemplate,
     sourcePhysicalPath: sourcePhysicalBinding.path, sourcePhysicalBinding, sourceLogicalBinding: normalPlan.sourceVideoBinding,
     normalOwners, normalReferenceMap: clone(preparation.logicalToPhysical), sourceDeclaration, aggregateView, candidateRules: rules,
@@ -444,7 +464,9 @@ export async function buildApprovedDigestSourcePackageValueV001(inputs: Json, qu
   value.provenance = {sourcePackageJobBinding: c.planBinding,
     implementationBindings: qualified.job.implementation.bindings.map((binding: Json, i: number) => ({role: 'approved-digest-' + (i + 1), path: binding.path, fileSha256: binding.fileSha256})),
     approvedContractBindings: [control(qualified.jobBinding), control(qualified.authorizationBinding), control(c.plan.authorization), inputs.manifestBinding,
-      inputs.preparationManifestBinding, inputs.manifest.candidateRulesBinding, inputs.typographySettingsBinding]};
+      inputs.preparationManifestBinding, inputs.manifest.candidateRulesBinding, inputs.typographySettingsBinding,
+      ...(inputs.visibilityAdoption === null ? [] : [inputs.manifest.visibilityAdoptionBinding,
+        inputs.visibilityAdoption.bindings.originalCandidateManifestBinding])]};
   return value;
 }
 
@@ -486,6 +508,59 @@ export async function buildApprovedDigestSourcePackageV001(inputs: Json, qualifi
   const validator = await load(qualified.workspaceRoot, 'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs');
   await validator.qualifyApprovedDigestSourcePackageTaskV001(sourcePackage, inputs);
   wire.pass(validator.validatePresentationOutputCaptionCueSourcePackageV001(sourcePackage), 'APPROVED_DIGEST_SOURCE_PACKAGE_INVALID'); return sourcePackage;
+}
+
+const VISIBILITY_CUE_FIELDS = ['groupOrdinal', 'cueOrdinal', 'candidateId', 'timelineSegmentId', 'captionId',
+  'cueEndBoundaryId', 'lineEndBoundaryIds', 'atomOccurrenceIds', 'sourceSegmentIds', 'semanticUtteranceIds', 'lines', ...TIMING];
+const visibilityCue = (row: Json) => Object.fromEntries(VISIBILITY_CUE_FIELDS.map(name => [name, clone(row[name])]));
+function visibilityExact(value: unknown, keys: string[], label: string): void {
+  assert(value && typeof value === 'object' && !Array.isArray(value), label);
+  assert.deepEqual(Object.keys(value).sort(), [...keys].sort(), label);
+}
+function assertExplicitCaptionVisibilityAdoptionV001(adoption: Json, rows: Json[]): void {
+  const decisions = list(adoption.decisions);
+  assert.equal(decisions.length, rows.length, 'APPROVED_DIGEST_VISIBILITY_CUE_COVERAGE');
+  for (const [index, entry] of decisions.entries()) {
+    visibilityExact(entry, ['cue', 'decision', 'reason'], 'APPROVED_DIGEST_VISIBILITY_DECISION_FIELDS');
+    same(entry.cue, visibilityCue(rows[index]));
+    assert(['show', 'suppress'].includes(entry.decision), 'APPROVED_DIGEST_VISIBILITY_DECISION_REQUIRED');
+    assert(typeof entry.reason === 'string' && entry.reason.trim().length > 0, 'APPROVED_DIGEST_VISIBILITY_REASON_REQUIRED');
+  }
+  visibilityExact(adoption.counts, ['totalCues', 'visibleCues', 'suppressedCues'], 'APPROVED_DIGEST_VISIBILITY_COUNTS_FIELDS');
+  const shown = decisions.filter(entry => entry.decision === 'show').length;
+  same(adoption.counts, {totalCues: rows.length, visibleCues: shown, suppressedCues: rows.length - shown});
+}
+
+/** Derive display decisions only from opaque, byte-qualified original inputs; never from caller options. */
+export async function buildApprovedDigestCaptionVisibilitySelectionV001(inputs: Json, qualified: ApprovedDigestQualifiedJobV001, plan: Json): Promise<Json | null> {
+  await assertApprovedDigestInputsV001(inputs, qualified);
+  const rows = list(inputs.correspondence.rows), elements = list(plan.elements);
+  assert.equal(elements.length, rows.length, 'APPROVED_DIGEST_VISIBILITY_PLAN_COVERAGE');
+  const ids = new Set<string>();
+  for (const [index, element] of elements.entries()) {
+    const row = rows[index];
+    assert(typeof element.instructionId === 'string' && element.instructionId.length > 0 && !ids.has(element.instructionId), 'APPROVED_DIGEST_VISIBILITY_INSTRUCTION_ID');
+    ids.add(element.instructionId);
+    for (const name of ['startFrame', 'endFrameExclusive', 'displayFrameCount']) same(element[name], row[name]);
+    same(element.text, row.lines.map((line: Json) => line.text).join(''));
+    same(element.targetProvenance?.sourceAtomIds, row.atomOccurrenceIds);
+    same(list(element.indexedLines).map(line => ({text: line.text, ids: line.sourceUnitIds})),
+      row.lines.map((line: Json) => ({text: line.text, ids: line.atomOccurrenceIds})));
+  }
+  if (inputs.visibilityAdoption === null) return null;
+  assertExplicitCaptionVisibilityAdoptionV001(inputs.visibilityAdoption, rows);
+  const wire = await load(qualified.workspaceRoot, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  const entries = elements.map((element, index) => ({instructionId: element.instructionId,
+    decision: inputs.visibilityAdoption.decisions[index].decision}));
+  const shown = entries.filter(entry => entry.decision === 'show').length;
+  return freeze({schemaVersion: 'digest-caption-visibility-selection-v001', mode: 'explicit-cue-adoption-v001',
+    adoptionBinding: clone(inputs.manifest.visibilityAdoptionBinding), manifestBinding: clone(inputs.manifestBinding),
+    rendererPlanCanonicalSha256: wire.canonicalSha(plan), entries,
+    counts: {totalInstructions: rows.length, shownInstructions: shown, suppressedInstructions: rows.length - shown}});
+}
+/** get/finalize re-read the same current manifest and complete original input closure. */
+export async function readApprovedDigestCaptionVisibilitySelectionV001(qualified: ApprovedDigestQualifiedJobV001, plan: Json): Promise<Json | null> {
+  return buildApprovedDigestCaptionVisibilitySelectionV001(await readApprovedDigestInputsV001(qualified), qualified, plan);
 }
 
 export async function prepareApprovedDigestCaptionCoreV001(inputs: Json, qualified: ApprovedDigestQualifiedJobV001,

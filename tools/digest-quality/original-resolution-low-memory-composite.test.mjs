@@ -2,7 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {partitionFramesV001,producerArgumentsV001,runFormalLowMemoryCompositeV001,FULL_FRAMES,DEFAULT_MAX_FRAMES} from './original-resolution-low-memory-composite.mjs';
 import {loadExecutionInputV001} from './original-resolution-execution-input.mjs';
-import {mkdtemp,writeFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,writeFile,readFile,statfs,rm} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {canonicalJson} from '../../evals/clip_composition/presentation_caption_contract_v002.mjs';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -45,6 +49,31 @@ const normalPlanFixture = frameCount => {
     displayFrameCount:frameCount};
   return {plan:{canvas:{width:1920,height:1080,fps:30},elements:[element]},
     overlayRecords:[{element:structuredClone(element),pngPath:'/tmp/planning-only-caption.png'}]};
+};
+const hash = value => createHash('sha256').update(value).digest('hex');
+const canonicalHash = value => hash(canonicalJson(value));
+// Structural selection fixtures confer no job or manufacturing authority.
+// Their binding bytes refer to actual small, test-only JSON bodies.
+const testJsonBinding = (fileName,body) => {
+  const bytes=Buffer.from(JSON.stringify(body,null,2)+'\n');
+  return {path:'runtime/artifacts/composite-visibility-test-v001/'+fileName,
+    fileSha256:hash(bytes),sizeBytes:bytes.length,schemaVersion:body.schemaVersion,canonicalSha256:canonicalHash(body)};
+};
+const visibilityFixture = (plan,decisions) => ({
+  schemaVersion:'digest-caption-visibility-selection-v001',mode:'explicit-cue-adoption-v001',
+  adoptionBinding:testJsonBinding('adoption.json',{schemaVersion:'test-only-caption-adoption',decisions}),
+  manifestBinding:testJsonBinding('manifest.json',{schemaVersion:'test-only-caption-manifest',elements:plan.elements}),
+  rendererPlanCanonicalSha256:canonicalHash(plan),
+  entries:plan.elements.map((element,index)=>({instructionId:element.instructionId,decision:decisions[index]})),
+  counts:{totalInstructions:plan.elements.length,shownInstructions:decisions.filter(value=>value==='show').length,
+    suppressedInstructions:decisions.filter(value=>value==='suppress').length},
+});
+const twoCaptionFixture = () => {
+  const elements=[{instructionId:'test-first',startFrame:0,endFrameExclusive:6,displayFrameCount:6},
+    {instructionId:'test-second',startFrame:6,endFrameExclusive:12,displayFrameCount:6}];
+  return {plan:{canvas:{width:1920,height:1080,fps:30},elements},
+    overlayRecords:elements.map(element=>({element:structuredClone(element),pngPath:'/tmp/test-only-overlay.png'})),
+    expectedFrameCount:12,expectedOverlayCount:2,maxFrames:5};
 };
 const withSupervision = async task => {
   const previous=process.env.ZEV_FULL_SUPERVISED;
@@ -165,4 +194,141 @@ test('legacy producer retains its default full clock, clipped phase and backgrou
   const separator=producerArgumentsV001({...input,range:{startFrame:30,endFrameExclusive:31}});
   assert.equal(separator.captionCount,0);assert.equal(separator.inputCount,1);
   assert.equal(separator.args[separator.args.indexOf('-filter_complex')+1],'[0:v]fps=30,format=yuv420p[video]');
+});
+
+test('explicit all-show produces the unchanged graph and AAC encoder arguments',async()=>{
+  const fixture=twoCaptionFixture();
+  const baseline=await formalPlanningOnly(fixture);
+  const selection=visibilityFixture(fixture.plan,['show','show']);
+  const actual=await formalPlanningOnly({...fixture,visibilitySelection:selection});
+  assert.equal(baseline.visibilityComposition,null);
+  assert.deepEqual(actual.encoderArgs.slice(0,-1),baseline.encoderArgs.slice(0,-1));
+  assert.deepEqual(actual.segments.map(row=>row.args),baseline.segments.map(row=>row.args));
+  assert.equal(actual.expectedOverlayCount,2);
+  assert.deepEqual(actual.visibilityComposition.shownInstructionIds,['test-first','test-second']);
+  assert.deepEqual(actual.visibilityComposition.suppressedInstructionIds,[]);
+});
+
+test('explicit suppression changes only overlay inputs and keeps every logical record and frame',async()=>{
+  const fixture=twoCaptionFixture();
+  for(const decisions of [['show','suppress'],['suppress','suppress']]){
+    const result=await formalPlanningOnly({...fixture,visibilitySelection:visibilityFixture(fixture.plan,decisions)});
+    const shown=fixture.plan.elements.filter((_element,index)=>decisions[index]==='show');
+    assert.equal(result.expectedOverlayCount,2);assert.equal(result.expectedFrameCount,12);
+    assert.deepEqual(result.visibilityComposition.shownInstructionIds,shown.map(element=>element.instructionId));
+    for(const segment of result.segments){
+      const ids=shown.filter(element=>element.startFrame<segment.range.endFrameExclusive
+        &&element.endFrameExclusive>segment.range.startFrame).map(element=>element.instructionId);
+      assert.deepEqual(segment.shownInstructionIds,ids);assert.equal(segment.captionCount,ids.length);
+      assert.equal(segment.args.filter(value=>value==='-i').length,ids.length+1);
+      if(ids.length===0)assert.equal(segment.args[segment.args.indexOf('-filter_complex')+1],
+        '[0:v]fps=30,format=yuv420p[video]');
+    }
+    assert.equal(result.segments.reduce((n,row)=>n+row.range.endFrameExclusive-row.range.startFrame,0),12);
+    assert.equal(result.encoderArgs[result.encoderArgs.indexOf('-c:a')+1],'copy');
+    assert.deepEqual(result.encoderArgs.slice(result.encoderArgs.indexOf('-map'),result.encoderArgs.indexOf('-vf')),
+      ['-map','0:v:0','-map','1:a:0']);
+  }
+});
+
+test('invalid decisions, mismatched plans, IDs and counts are rejected before children',async()=>{
+  const fixture=twoCaptionFixture(),selection=visibilityFixture(fixture.plan,['show','suppress']);
+  const mutations=[value=>value.entries.pop(),value=>value.entries.reverse(),
+    value=>value.entries[1].instructionId='unknown',value=>value.entries[1].instructionId='test-first',
+    value=>value.entries[0].decision='automatic',value=>value.counts.shownInstructions++,
+    value=>value.rendererPlanCanonicalSha256=hash('different plan'),value=>value.criteria={duration:6}];
+  for(const mutate of mutations){
+    const changed=structuredClone(selection);mutate(changed);
+    await assert.rejects(formalPlanningOnly({...fixture,visibilitySelection:changed}),/invalid caption visibility selection/);
+  }
+  await assert.rejects(formalPlanningOnly({...fixture,visibilitySelection:selection,
+    overlayRecords:fixture.overlayRecords.slice(0,1)}));
+});
+
+test('operation observation keeps its own snapshot when the caller decision object changes',async()=>{
+  const fixture=twoCaptionFixture(),selection=visibilityFixture(fixture.plan,['show','suppress']);
+  const original=structuredClone(selection);
+  const promise=formalPlanningOnly({...fixture,visibilitySelection:selection},args=>{
+    // This callback runs before selection validation, so no mutation here.
+    assert.equal(args.visibilitySelection,selection);
+  });
+  const result=await promise;
+  selection.entries[0].decision='suppress';
+  assert.deepEqual(result.visibilitySelection,original);
+});
+
+test('small actual composites preserve visible choices, 12-frame clock and every original AAC packet',async()=>{
+  const run=promisify(execFile),directory=await mkdtemp(path.join(os.tmpdir(),'zev-composite-visibility-native-'));
+  const ffmpeg='/opt/homebrew/bin/ffmpeg',ffprobe='/opt/homebrew/bin/ffprobe',magick='/opt/homebrew/bin/magick';
+  const execute=(command,args,options={})=>run(command,args,{maxBuffer:8*1024*1024,...options});
+  try{
+    const fixture=twoCaptionFixture(),base=path.join(directory,'base.mp4'),png=path.join(directory,'overlay.png');
+    await execute(ffmpeg,['-hide_banner','-loglevel','error','-nostdin','-n','-f','lavfi','-i',
+      "color=c=black:s=1920x1080:r=30:d=0.4,geq=lum='16+8*N':cb=128:cr=128",'-f','lavfi','-i','sine=frequency=440:sample_rate=44100:duration=0.4',
+      '-map','0:v:0','-map','1:a:0','-frames:v','12','-c:v','libx264','-preset','fast','-crf','20',
+      '-pix_fmt','yuv420p','-c:a','aac','-movie_timescale','30',base]);
+    await execute(magick,['-size','1920x1080','xc:none','-fill','white','-draw',
+      'rectangle 900,480 1020,600','PNG32:'+png]);
+    fixture.overlayRecords=fixture.overlayRecords.map(record=>({...record,pngPath:png}));
+    const audio=async file=>JSON.parse((await execute(ffprobe,['-v','error','-select_streams','a:0',
+      '-show_streams','-show_packets','-show_data_hash','sha256','-show_entries',
+      'stream=codec_name,sample_rate,time_base,duration_ts:packet=pts,dts,duration,size,data_hash,side_data_list',
+      '-of','json',file])).stdout);
+    const pixel=async(file,frame)=>(await execute(ffmpeg,['-v','error','-nostdin','-i',file,'-vf',
+      `select=eq(n\\,${frame}),crop=2:2:960:540`,'-frames:v','1','-pix_fmt','gray','-f','rawvideo','pipe:1'],
+      {encoding:null})).stdout;
+    const backgroundFrames=async file=>(await execute(ffmpeg,['-v','error','-nostdin','-i',file,'-vf',
+      'crop=2:2:100:100','-pix_fmt','gray','-f','rawvideo','pipe:1'],{encoding:null})).stdout;
+    const originalAudio=await audio(base),originalBackground=await backgroundFrames(base),results=[];
+    const originalSamples=await Promise.all([pixel(base,2),pixel(base,8)]);
+    assert.equal(originalBackground.length,12*4);
+    assert(new Set(originalBackground).size>4,'fixture must expose changing source frames');
+    for(const [name,decisions] of [['legacy',null],['all-show',['show','show']],
+      ['partial',['show','suppress']],['all-suppress',['suppress','suppress']]]){
+      const selection=decisions===null?null:visibilityFixture(fixture.plan,decisions);
+      // Bind actual test-only JSON bytes; these fixtures are not approval records.
+      if(selection!==null)for(const [fileName,body] of [
+        ['adoption.json',{schemaVersion:'test-only-caption-adoption',decisions}],
+        ['manifest.json',{schemaVersion:'test-only-caption-manifest',elements:fixture.plan.elements}]]){
+        const binding=fileName==='adoption.json'?selection.adoptionBinding:selection.manifestBinding;
+        binding.path='runtime/artifacts/composite-visibility-test-v001/'+name+'/'+fileName;
+        const file=path.join(directory,binding.path);await mkdir(path.dirname(file),{recursive:true});
+        await writeFile(file,JSON.stringify(body,null,2)+'\n',{flag:'wx'});
+        assert.equal(hash(await readFile(file)),binding.fileSha256);
+      }
+      const outputPath=path.join(directory,name+'.mp4');
+      const result=await withSupervision(()=>runFormalLowMemoryCompositeV001({...fixture,baseMediaPath:base,
+        outputPath,ffmpegPath:ffmpeg,visibilitySelection:selection,
+        resourceCheck:async({newBytes})=>{
+          const space=await statfs(directory);assert(space.bavail*space.bsize>12_000_000_000+newBytes);
+          assert(process.memoryUsage().rss<16*1024**3);
+        },processObserver:{observeOperation:async(_request,operation)=>operation()}}));
+      const media=JSON.parse((await execute(ffprobe,['-v','error','-select_streams','v:0','-count_frames',
+        '-show_entries','stream=width,height,r_frame_rate,nb_read_frames','-of','json',outputPath])).stdout).streams[0];
+      assert.equal(media.nb_read_frames,'12');assert.equal(media.r_frame_rate,'30/1');
+      assert.equal(media.width,1920);assert.equal(media.height,1080);
+      assert.deepEqual(await audio(outputPath),originalAudio,name+' original AAC packets or clock changed');
+      assert.equal(result.rawYuvBytes,12*1920*1080*3/2);assert.equal(result.frameCoverage,'complete-contiguous-once');
+      assert.equal(result.expectedOverlayCount,2);assert.equal(result.scope.frameCount,12);
+      const background=await backgroundFrames(outputPath);assert.equal(background.length,originalBackground.length);
+      assert([...background].every((value,index)=>Math.abs(value-originalBackground[index])<=2),
+        name+' source background frame content or order changed');
+      const samples=await Promise.all([pixel(outputPath,2),pixel(outputPath,8)]);
+      for(const [index,sample] of samples.entries()){
+        assert.equal(sample.length,4);const expected=decisions===null||decisions[index]==='show';
+        assert([...sample].every((value,pixelIndex)=>expected?value>=220
+          :Math.abs(value-originalSamples[index][pixelIndex])<=2),name+' visibility pixel mismatch');
+      }
+      results.push({name,rawYuvSha256:result.rawYuvSha256,outputSha256:result.output.fileSha256,
+        frames:Number(media.nb_read_frames),audioPacketCount:originalAudio.packets.length,
+        audioPacketPayloadSha256:hash(originalAudio.packets.map(packet=>packet.data_hash).join('\n')),
+        originalAudioPacketsAndClockIdentical:true,all12SourceBackgroundFramesInOrder:true,
+        backgroundPixelMaximumAllowedError:2,visibilityComposition:result.visibilityComposition,
+        pixelSamples:samples.map(sample=>[...sample])});
+    }
+    assert.equal(results[0].rawYuvSha256,results[1].rawYuvSha256,'all-show changed original composition');
+    assert.equal(results[0].outputSha256,results[1].outputSha256,'all-show changed encoded output bytes');
+    console.log('Synthetic visibility implementation evidence: '+JSON.stringify({frameCount:12,
+      manufacturing:false,wholeVideoListening:false,results}));
+  }finally{await rm(directory,{recursive:true,force:true});}
 });

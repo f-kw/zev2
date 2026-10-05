@@ -41,6 +41,8 @@ export function getPresentationRendererQcViolationCodesV001() { return [
   'CAPTION_MOTION_NATIVE_STATE_MISMATCH',
   'PULSE_FRAME_STATE_MISMATCH',
   'COMPLETED_FRAME_QC_INVALID',
+  'CAPTION_VISIBILITY_SELECTION_INVALID',
+  'CAPTION_VISIBILITY_COMPOSITION_INVALID',
 ]; }
 export const PRESENTATION_RENDERER_QC_VIOLATION_CODES = Object.freeze(
   getPresentationRendererQcViolationCodesV001());
@@ -1088,11 +1090,98 @@ export function validateDigestNativeSamplingCoverageV001({plan, policy, coverage
   }
 }
 
+/** Explicit qualified adoption selects composition only; every logical/native instruction is retained. */
+function visibilityBinding(value) {
+  nativeExact(value, ['path', 'fileSha256', 'sizeBytes',
+    ...(Object.hasOwn(value ?? {}, 'schemaVersion') ? ['schemaVersion'] : []),
+    ...(Object.hasOwn(value ?? {}, 'canonicalSha256') ? ['canonicalSha256'] : [])], 'DIGEST_VISIBILITY_BINDING_FIELDS');
+  nativeRequire(isNonEmptyString(value.path) && !value.path.startsWith('/')
+    && /^[A-Za-z0-9._\-/]+$/u.test(value.path) && !value.path.split('/').some(p => ['', '.', '..'].includes(p))
+    && nativeHash(value.fileSha256) && Number.isSafeInteger(value.sizeBytes) && value.sizeBytes > 0,
+  'DIGEST_VISIBILITY_BINDING_INVALID');
+  if (Object.hasOwn(value, 'schemaVersion')) nativeRequire(isNonEmptyString(value.schemaVersion), 'DIGEST_VISIBILITY_BINDING_SCHEMA');
+  if (Object.hasOwn(value, 'canonicalSha256')) nativeRequire(nativeHash(value.canonicalSha256), 'DIGEST_VISIBILITY_BINDING_CANONICAL');
+}
+
+export function validateDigestCaptionVisibilitySelectionV001({plan, selection, manifestBinding} = {}) {
+  try {
+    nativeRequire(Array.isArray(plan?.elements) && plan.elements.length > 0, 'DIGEST_VISIBILITY_PLAN_REQUIRED');
+    const ids = plan.elements.map(e => e.instructionId);
+    nativeRequire(ids.every(isNonEmptyString) && new Set(ids).size === ids.length, 'DIGEST_VISIBILITY_PLAN_IDS');
+    if (selection === null) return {status: 'passed', violations: [], shownInstructionIds: ids,
+      suppressedInstructionIds: [], counts: {totalInstructions: ids.length, shownInstructions: ids.length, suppressedInstructions: 0}};
+    nativeExact(selection, ['schemaVersion', 'mode', 'adoptionBinding', 'manifestBinding',
+      'rendererPlanCanonicalSha256', 'entries', 'counts'], 'DIGEST_VISIBILITY_SELECTION_FIELDS');
+    nativeRequire(selection.schemaVersion === 'digest-caption-visibility-selection-v001'
+      && selection.mode === 'explicit-cue-adoption-v001', 'DIGEST_VISIBILITY_SELECTION_MODE');
+    visibilityBinding(selection.adoptionBinding); visibilityBinding(selection.manifestBinding);
+    if (manifestBinding !== undefined) nativeRequire(nativeSame(selection.manifestBinding, manifestBinding), 'DIGEST_VISIBILITY_MANIFEST_CHANGED');
+    nativeRequire(nativeHash(selection.rendererPlanCanonicalSha256)
+      && selection.rendererPlanCanonicalSha256 === sha256Canonical(plan), 'DIGEST_VISIBILITY_PLAN_CHANGED');
+    nativeRequire(Array.isArray(selection.entries) && selection.entries.length === ids.length, 'DIGEST_VISIBILITY_COMPLETE_COVERAGE');
+    const shownInstructionIds = [], suppressedInstructionIds = [];
+    for (const [index, entry] of selection.entries.entries()) {
+      nativeExact(entry, ['instructionId', 'decision'], 'DIGEST_VISIBILITY_ENTRY_FIELDS');
+      nativeRequire(entry.instructionId === ids[index] && ['show', 'suppress'].includes(entry.decision), 'DIGEST_VISIBILITY_ENTRY_CHANGED');
+      (entry.decision === 'show' ? shownInstructionIds : suppressedInstructionIds).push(entry.instructionId);
+    }
+    const counts = {totalInstructions: ids.length, shownInstructions: shownInstructionIds.length,
+      suppressedInstructions: suppressedInstructionIds.length};
+    nativeExact(selection.counts, Object.keys(counts), 'DIGEST_VISIBILITY_COUNTS_FIELDS');
+    nativeRequire(nativeSame(selection.counts, counts), 'DIGEST_VISIBILITY_COUNTS_CHANGED');
+    return {status: 'passed', violations: [], shownInstructionIds, suppressedInstructionIds, counts};
+  } catch (error) {
+    return {status: 'failed', violations: [makeViolation('CAPTION_VISIBILITY_SELECTION_INVALID', [], {reason: error.message})],
+      shownInstructionIds: [], suppressedInstructionIds: [], counts: null};
+  }
+}
+
+export function validateDigestCaptionVisibilityCompositionV001({plan, selection, composition, expectedFrameCount} = {}) {
+  const selected = validateDigestCaptionVisibilitySelectionV001({plan, selection});
+  if (selected.status !== 'passed') return selected;
+  try {
+    if (selection === null) {
+      nativeRequire(composition === null, 'DIGEST_VISIBILITY_UNAPPROVED_COMPOSITION');
+      return selected;
+    }
+    nativeRequire(Number.isSafeInteger(expectedFrameCount) && expectedFrameCount > 0, 'DIGEST_VISIBILITY_FULL_CLOCK_REQUIRED');
+    nativeExact(composition, ['schemaVersion', 'selectionCanonicalSha256', 'rendererPlanCanonicalSha256',
+      'adoptionBinding', 'manifestBinding', 'shownInstructionIds', 'suppressedInstructionIds', 'counts', 'rangeEvidence'],
+    'DIGEST_VISIBILITY_COMPOSITION_FIELDS');
+    nativeRequire(composition.schemaVersion === 'digest-caption-visibility-composition-v001'
+      && composition.selectionCanonicalSha256 === sha256Canonical(selection)
+      && composition.rendererPlanCanonicalSha256 === sha256Canonical(plan), 'DIGEST_VISIBILITY_COMPOSITION_BINDINGS');
+    for (const key of ['adoptionBinding', 'manifestBinding']) nativeRequire(nativeSame(composition[key], selection[key]), 'DIGEST_VISIBILITY_COMPOSITION_ADOPTION');
+    for (const key of ['shownInstructionIds', 'suppressedInstructionIds', 'counts']) nativeRequire(nativeSame(composition[key], selected[key]), 'DIGEST_VISIBILITY_COMPOSITION_COUNTS');
+    nativeRequire(Array.isArray(composition.rangeEvidence) && composition.rangeEvidence.length > 0, 'DIGEST_VISIBILITY_RANGES_REQUIRED');
+    const shown = new Set(selected.shownInstructionIds); let end = 0;
+    for (const range of composition.rangeEvidence) {
+      nativeExact(range, ['startFrame', 'endFrameExclusive', 'shownInstructionIds', 'graphSha256'], 'DIGEST_VISIBILITY_RANGE_FIELDS');
+      nativeRequire(Number.isSafeInteger(range.startFrame) && range.startFrame === end
+        && Number.isSafeInteger(range.endFrameExclusive) && range.endFrameExclusive > range.startFrame
+        && range.endFrameExclusive <= expectedFrameCount && nativeHash(range.graphSha256), 'DIGEST_VISIBILITY_RANGE_CLOCK');
+      const expectedIds = plan.elements.filter(e => shown.has(e.instructionId)
+        && e.startFrame < range.endFrameExclusive && e.endFrameExclusive > range.startFrame).map(e => e.instructionId);
+      nativeRequire(nativeSame(range.shownInstructionIds, expectedIds), 'DIGEST_VISIBILITY_RANGE_SELECTION');
+      end = range.endFrameExclusive;
+    }
+    nativeRequire(end === expectedFrameCount, 'DIGEST_VISIBILITY_RANGE_COMPLETE_CLOCK');
+    return selected;
+  } catch (error) {
+    return {...selected, status: 'failed', violations: [makeViolation('CAPTION_VISIBILITY_COMPOSITION_INVALID', [], {reason: error.message})]};
+  }
+}
+
 /** Separate Normal representative entry. Public full-QC entries cannot access its internal scope. */
-export function evaluateDigestRepresentativeRendererQcV001(input, {policy, nativeCoverage, expectedBindings} = {}) {
+export function evaluateDigestRepresentativeRendererQcV001(input, {policy, nativeCoverage, expectedBindings,
+  visibilitySelection = null, visibilityComposition = null, requireVisibilityComposition = false} = {}) {
   const coverage = validateDigestNativeSamplingCoverageV001({plan: input?.plan, policy, coverage: nativeCoverage,
     overlayInspections: input?.overlayInspections, bindings: expectedBindings});
-  let ordinary = null, violations = [...coverage.violations];
+  const selected = validateDigestCaptionVisibilitySelectionV001({plan: input?.plan, selection: visibilitySelection});
+  const visibility = requireVisibilityComposition || visibilityComposition !== null
+    ? validateDigestCaptionVisibilityCompositionV001({plan: input?.plan, selection: visibilitySelection,
+      composition: visibilityComposition, expectedFrameCount: input?.expectedFrameCount}) : selected;
+  let ordinary = null, violations = [...coverage.violations, ...visibility.violations];
   if (coverage.status === 'passed') {
     const scope = Object.freeze({lineMaskInstructionIds: new Set(coverage.selection.lineMaskInstructionIds)});
     digestNativeInspectionScopes.add(scope);
@@ -1129,8 +1218,15 @@ export function evaluateDigestRepresentativeRendererQcV001(input, {policy, nativ
       instructionApplication: ordinary?.checks.instructionApplication ?? {status: 'failed'},
       allPrimaryRules: {status: violations.length === 0 ? 'passed' : 'failed',
         scope: 'all-primary-alpha-bounds; logical-IDs-clocks-props-hashes; media-and-original-audio'},
-      layoutAndVisibility: {status: violations.length === 0 ? 'passed-representative' : 'failed',
-        scope: 'all-primary-bounds; representative-and-required-placement-line-masks; no-full-frame-comparison'},
+      layoutAndVisibility: {status: violations.length === 0
+        ? (visibilitySelection === null ? 'passed-representative' : 'passed-primary-and-explicit-visibility') : 'failed',
+        scope: visibilitySelection === null
+          ? 'all-primary-bounds; representative-and-required-placement-line-masks; no-full-frame-comparison'
+          : 'all-primary-bounds; explicit composition show/suppress adoption; no completed-frame visibility or absence claim'},
+      ...(visibilitySelection === null ? {} : {visibilityAdoption: {
+        status: visibility.status === 'passed' ? (visibilityComposition === null ? 'qualified-selection' : 'passed') : 'failed',
+        scope: 'explicit-composition-selection; no full-frame absence verification',
+        selection: structuredClone(visibilitySelection), composition: structuredClone(visibilityComposition), counts: selected.counts}}),
       media: ordinary?.checks.media ?? {status: 'failed'},
       nativeSampling: sampling,
     },

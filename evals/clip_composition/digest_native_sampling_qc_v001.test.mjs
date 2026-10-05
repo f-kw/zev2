@@ -9,6 +9,8 @@ import {
   evaluatePresentationReviewRendererQcV003,
   evaluatePresentationVerticalReviewRendererQcV001,
   evaluatePresentationRendererQcWithProfileV001,
+  validateDigestCaptionVisibilitySelectionV001 as validateVisibility,
+  validateDigestCaptionVisibilityCompositionV001 as validateComposition,
 } from './presentation_renderer_qc_v002.mjs';
 import {getPresentationPanelPresetV002} from './presentation_panel_presets_v002.mjs';
 
@@ -166,4 +168,66 @@ test('full QC still passes its complete mask input and requires full completed-f
   const result = evaluatePresentationRendererQcV002({...f.input, requireFinalVisibility: true});
   assert.equal(result.status, 'failed');
   assert(result.violations.some(v => v.code === 'COMPLETED_FRAME_QC_INVALID'));
+});
+
+
+function visibilityFixture(f, decisions = ['show', 'suppress', 'show', 'show']) {
+  const bound = label => ({path: 'runtime/artifacts/test/' + label + '.json', fileSha256: hash(label), sizeBytes: 123});
+  const selection = {schemaVersion: 'digest-caption-visibility-selection-v001', mode: 'explicit-cue-adoption-v001',
+    adoptionBinding: bound('adoption'), manifestBinding: bound('manifest'), rendererPlanCanonicalSha256: hash(f.plan),
+    entries: f.plan.elements.map((e, i) => ({instructionId: e.instructionId, decision: decisions[i]})),
+    counts: {totalInstructions: 4, shownInstructions: decisions.filter(d => d === 'show').length, suppressedInstructions: decisions.filter(d => d === 'suppress').length}};
+  const shown = selection.entries.filter(e => e.decision === 'show').map(e => e.instructionId), suppressed = selection.entries.filter(e => e.decision === 'suppress').map(e => e.instructionId);
+  const composition = {schemaVersion: 'digest-caption-visibility-composition-v001', selectionCanonicalSha256: hash(selection),
+    rendererPlanCanonicalSha256: hash(f.plan), adoptionBinding: selection.adoptionBinding, manifestBinding: selection.manifestBinding,
+    shownInstructionIds: shown, suppressedInstructionIds: suppressed, counts: selection.counts,
+    rangeEvidence: [{startFrame: 0, endFrameExclusive: 60, shownInstructionIds: shown, graphSha256: hash('synthetic command')}]};
+  return {selection, composition};
+}
+const visibilityQc = (f, v, final = true) => representativeQc(f.input, {policy: f.policy, nativeCoverage: f.nativeCoverage,
+  expectedBindings: f.expectedBindings, visibilitySelection: v.selection, visibilityComposition: v.composition, requireVisibilityComposition: final});
+for (const decisions of [['show','suppress','show','show'], ['suppress','suppress','suppress','suppress']]) {
+  test('explicit adoption keeps every logical/primary rule with ' + decisions.filter(d => d === 'show').length + ' shown instructions', () => {
+    const f = fixture(), v = visibilityFixture(f, decisions), before = structuredClone(f), r = visibilityQc(f, v);
+    assert.equal(r.status, 'passed-representative-rules'); assert.equal(r.instructionCount, 4);
+    assert.equal(r.checks.allPrimaryRules.status, 'passed'); assert.equal(r.checks.nativeSampling.summary.primaryInspectionCount, 4);
+    assert.equal(r.checks.layoutAndVisibility.status, 'passed-primary-and-explicit-visibility');
+    assert.equal(r.checks.visibilityAdoption.status, 'passed'); assert.deepEqual(r.checks.visibilityAdoption.counts, v.selection.counts);
+    assert.match(r.checks.visibilityAdoption.scope, /no full-frame absence/); assert.deepEqual(f, before);
+    f.input.overlayInspections[1].alphaMax = 0; assert.equal(visibilityQc(f, v).status, 'failed', 'suppression does not exempt primary rules');
+  });
+}
+for (const [label, mutate] of [
+  ['missing decision', v => v.selection.entries.pop()],
+  ['reordered decisions', v => v.selection.entries.reverse()],
+  ['unknown decision', v => v.selection.entries[0].decision = 'automatic'],
+  ['wrong counts', v => v.selection.counts.shownInstructions++],
+  ['foreign plan', v => v.selection.rendererPlanCanonicalSha256 = hash('foreign plan')],
+  ['absolute adoption binding', v => v.selection.adoptionBinding.path = '/unapproved/adoption.json'],
+  ['binding extra fields', v => v.selection.adoptionBinding.fallback = true],
+  ['unapproved criteria', v => v.selection.criteria = {minimumFrames: 30}],
+]) test('explicit selection rejects ' + label, () => {
+  const f = fixture(), v = visibilityFixture(f); mutate(v);
+  assert.equal(validateVisibility({plan: f.plan, selection: v.selection}).status, 'failed'); assert.equal(visibilityQc(f, v).status, 'failed');
+});
+for (const [label, mutate] of [
+  ['hidden input', v => v.composition.rangeEvidence[0].shownInstructionIds.push('unselected-b')],
+  ['range gap', v => v.composition.rangeEvidence[0].startFrame = 1],
+  ['incomplete range', v => v.composition.rangeEvidence[0].endFrameExclusive--],
+  ['foreign adoption', v => v.composition.adoptionBinding = {...v.composition.adoptionBinding, fileSha256: hash('foreign')}],
+  ['wrong selection SHA', v => v.composition.selectionCanonicalSha256 = hash('foreign selection')],
+  ['fabricated suppressed count', v => v.composition.counts = {...v.composition.counts, suppressedInstructions: 0}],
+]) test('composition rejects ' + label, () => {
+  const f = fixture(), v = visibilityFixture(f); mutate(v);
+  assert.equal(validateComposition({plan: f.plan, selection: v.selection, composition: v.composition, expectedFrameCount: 60}).status, 'failed');
+  assert.equal(visibilityQc(f, v).status, 'failed');
+});
+test('selection preflight cannot stand in for final composition and null preserves the old scope', () => {
+  const f = fixture(), v = visibilityFixture(f), noReceipt = {...v, composition: null};
+  assert.equal(visibilityQc(f, noReceipt, false).checks.visibilityAdoption.status, 'qualified-selection');
+  assert.equal(visibilityQc(f, noReceipt, true).status, 'failed');
+  assert.equal(validateComposition({plan: f.plan, selection: null, composition: v.composition, expectedFrameCount: 60}).status, 'failed');
+  assert.equal(qc(f).checks.visibilityAdoption, undefined);
+  assert.equal(qc(f).checks.layoutAndVisibility.status, 'passed-representative');
+  assert.equal(validateVisibility({plan: f.plan, selection: v.selection, manifestBinding: {...v.selection.manifestBinding, fileSha256: hash('other manifest')}}).status, 'failed');
 });

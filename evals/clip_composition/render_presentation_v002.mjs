@@ -56,6 +56,7 @@ import {
   getPresentationRendererQcViolationCodesV001,
   evaluatePresentationRendererQcV002,
   evaluateDigestRepresentativeRendererQcV001,
+  validateDigestCaptionVisibilityCompositionV001,
   deriveDigestNativeInspectionSelectionV001,
   fileSha256V002,
   inspectOverlayPngV002,
@@ -2221,6 +2222,9 @@ export async function executeValidatedPresentationDrawAndQcV001({
     autoPresentationResolution = automatic.resolution;
     autoPresentationInputs = structuredClone(autoPresentation);
   }
+  const visibilitySelection = storageContext?.approvedJob === undefined ? null
+    : await (await import('./digest_representative_completion_v001.mjs'))
+      .resolveApprovedDigestCaptionVisibilitySelectionV001(storageContext, resolved.plan);
   let nativeSelection = null;
   if (verificationPolicy !== null) {
     const completion = await import('./digest_representative_completion_v001.mjs');
@@ -2611,7 +2615,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
     };
     const layoutQc = nativeCoverage === null ? evaluateQc(layoutQcInput)
       : evaluateDigestRepresentativeRendererQcV001(layoutQcInput,
-        {policy: verificationPolicy, nativeCoverage, expectedBindings: nativeExpectedBindings});
+        {policy: verificationPolicy, nativeCoverage, expectedBindings: nativeExpectedBindings, visibilitySelection});
     if (layoutQc.status !== (nativeCoverage === null ? 'passed' : 'passed-representative-rules')) {
       return failAfterWork(layoutQc.violations, 'overlay-preflight', layoutQc);
     }
@@ -2620,7 +2624,8 @@ export async function executeValidatedPresentationDrawAndQcV001({
     const workVideo = path.join(stagingDirectory, artifactNames.video);
     await qualifyDigestStorageContextV001(storageContext);
     const composeMedia = storageContext === undefined ? composePresentationMediaV001 : storageContext.composeMedia;
-    await composeMedia({
+    const composeResult = await composeMedia({
+      ...(visibilitySelection === null ? {} : {visibilitySelection}),
       baseMediaPath,
       plan,
       overlayRecords,
@@ -2635,6 +2640,12 @@ export async function executeValidatedPresentationDrawAndQcV001({
       timelineAudio,
       audioMediaPath, renderRange,
     });
+    const visibilityComposition = composeResult?.visibilityComposition ?? null;
+    if (storageContext?.approvedJob !== undefined) {
+      const visibilityQc = validateDigestCaptionVisibilityCompositionV001({plan, selection: visibilitySelection,
+        composition: visibilityComposition, expectedFrameCount});
+      if (visibilityQc.status !== 'passed') return failAfterWork(visibilityQc.violations, 'composite-visibility-adoption', visibilityQc);
+    }
     await qualifyDigestStorageContextV001(storageContext);
     const outputMedia = await inspectRenderedMediaWithToolsV001(workVideo, {
       ffprobePath: toolPaths.ffprobePath,
@@ -2659,6 +2670,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
         autoPresentationResolution, autoPresentationInputs, autoPresentation,
         runCounterfactualQc: effectiveCounterfactualQc,
         ...(verificationPolicy === null ? {} : {verificationPolicy, storageContext, nativeCoverage, verificationMode: verificationPolicy.mode}),
+        ...(visibilitySelection === null ? {} : {visibilitySelection, visibilityComposition}),
         counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange,
         ...(orchestrationDrawingView === undefined ? {} : {
           orchestrationInput: exportOrchestrationDrawingViewEvidenceV001(orchestrationDrawingView)})},
@@ -2909,7 +2921,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
     plan, expectedFrameCount, presentationTimeline, timelineAudio, baseMediaPath, serializePngAndFilters,
     autoPresentationResolution, autoPresentationInputs, autoPresentation, runCounterfactualQc,
     counterfactualQcMethod, orchestrationBackground, audioMediaPath, renderRange, verificationPolicy = null, storageContext,
-    nativeCoverage = null} = state;
+    nativeCoverage = null, visibilitySelection = null, visibilityComposition = null} = state;
   const failAfterWork = (violations, stage, nested) => createPresentationRendererFailureAfterWorkV001({
     violations, stage, nested, cleanupWarnings, scratchDirectory});
     let completedFrameQc;
@@ -2921,7 +2933,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       const completion = await import('./digest_representative_completion_v001.mjs');
       verification = await completion.finishApprovedDigestRepresentativeCompletionV001({storageContext, plan,
         workVideo, applicationResults, overlayRecords, outputMedia, expectedAudio: completedExpectedAudio,
-        expectedFrameCount, evaluateQc, nativeCoverage});
+        expectedFrameCount, evaluateQc, nativeCoverage, visibilitySelection, visibilityComposition});
       if (!['passed-representative', 'confirmation-pending', 'failed'].includes(verification?.status)) {
         throw new TypeError('approved Digest representative verification returned an invalid status');
       }
@@ -2994,6 +3006,7 @@ async function finishPresentationDrawAndQcV001({state, orchestrationDrawingView,
       finalQc,
       ...(verification === undefined ? {} : {verification, verificationMode: verificationPolicy.mode,
         ...(nativeCoverage === null ? {} : {nativeCoverage})}),
+      ...(visibilitySelection === null ? {} : {visibilitySelection, visibilityComposition}),
       workVideo,
       resolvedPlan: plan,
       ...(autoPresentation === undefined ? {} : {

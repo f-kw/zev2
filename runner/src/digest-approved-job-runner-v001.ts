@@ -10,6 +10,7 @@ import {createHash} from 'node:crypto';
 import {readQualifiedDigestApprovedJobV001, assertQualifiedDigestApprovedJobV001, validateDigestApprovedJobConfigurationV001,
   digestJobSha256V001 as sha, digestJobRelativePathV001 as safe, digestApprovedJobInputRootV001, type Json} from './digest-approved-job-v001.js';
 import {readApprovedDigestInputsV001, assertApprovedDigestInputsV001, prepareApprovedDigestCaptionCoreV001,
+  buildApprovedDigestCaptionVisibilitySelectionV001,
   assertQualifiedApprovedDigestSourcePackageTaskV001, qualifyApprovedDigestSourcePackageReadbackV001} from './digest-approved-inputs-v001.js';
 import type {ApprovedDigestQualifiedJobV001} from './digest-approved-inputs-v001.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -228,10 +229,13 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   }
   const context=Object.freeze({outputRoot,planId:job.planId,approvedJob:qualified,storageRoot:s.guestRoot,generatedRoot,tempDirectory:generatedRoot+'/temp',
     resolve,assertCurrent:current,publish,readJson,readBound,resourceCheck,
+    resolveCaptionVisibilitySelectionV001:async(plan:Json)=>{await current();return buildApprovedDigestCaptionVisibilitySelectionV001(inputs,qualified,plan);},
     resolveApprovedDigestSourceV001:(artifact:Json)=>resolveQualifiedApprovedDigestSourceV001(context,artifact),
     composeMedia:async(args:Json)=>{await current();assert(recovery === null, 'SPECIFIC_RECOVERY_CANNOT_COMPOSE_NEW_MEDIA');assert.equal(args.expectedFrameCount,job.expected.frames,'APPROVED_JOB_COMPOSE_CLOCK_MISMATCH');
       assert(args.outputPath.startsWith(generatedRoot+'/')); const compositor=await load('tools/digest-quality/original-resolution-low-memory-composite.mjs');
-      const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,plan:args.plan,
+      const visibilitySelection=await buildApprovedDigestCaptionVisibilitySelectionV001(inputs,qualified,args.plan);
+      assert.deepEqual(args.visibilitySelection??null,visibilitySelection,'APPROVED_JOB_COMPOSE_VISIBILITY_SUBSTITUTION');
+      const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,plan:args.plan,visibilitySelection,
         overlayRecords:args.overlayRecords,expectedFrameCount:args.expectedFrameCount,expectedOverlayCount:job.expected.cues,
         outputPath:args.outputPath,ffmpegPath:args.ffmpegPath,processObserver:args.processObserver,resourceCheck});
       const result={...evidence,approvedJobBinding:qualified.jobBinding,typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues};

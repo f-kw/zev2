@@ -8,6 +8,9 @@ import {mkdir,lstat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {buildPresentationCompositeArgumentsV001} from '../../evals/clip_composition/render_presentation_v002.mjs';
+import {canonicalJson} from '../../evals/clip_composition/presentation_caption_contract_v002.mjs';
+import {validateDigestCaptionVisibilitySelectionV001,validateDigestCaptionVisibilityCompositionV001}
+  from '../../evals/clip_composition/presentation_renderer_qc_v002.mjs';
 import {EXECUTION_AREA,json,loadExecutionInputV001,executionRecordsV001,exclusiveExecutionDirectoryV001} from './original-resolution-execution-input.mjs';
 import {bindDigestStructureFileV001 as bind,verifyDigestStructureFileV001 as verify,saveDigestStructureFileV001 as save} from './digest-structure-evidence.mjs';
 
@@ -17,6 +20,20 @@ const FRAME_BYTES=1920*1080*3/2;
 export const FULL_FRAMES=17613;
 export const DEFAULT_MAX_FRAMES=210; // The existing seven-second trial length.
 const FULL_BACKGROUND=path.join(EXECUTION_AREA,'full-production-001/background/background.nut');
+const canonicalSha256=value=>createHash('sha256').update(canonicalJson(value)).digest('hex');
+
+function visibilityCompositionV001(selection,segments){
+  if(selection===null)return null;
+  return {schemaVersion:'digest-caption-visibility-composition-v001',
+    selectionCanonicalSha256:canonicalSha256(selection),
+    rendererPlanCanonicalSha256:selection.rendererPlanCanonicalSha256,
+    adoptionBinding:selection.adoptionBinding,manifestBinding:selection.manifestBinding,
+    shownInstructionIds:selection.entries.filter(row=>row.decision==='show').map(row=>row.instructionId),
+    suppressedInstructionIds:selection.entries.filter(row=>row.decision==='suppress').map(row=>row.instructionId),
+    counts:selection.counts,
+    rangeEvidence:segments.map(segment=>({...segment.range,
+      shownInstructionIds:segment.shownInstructionIds,graphSha256:segment.graphSha256}))};
+}
 
 export function partitionFramesV001(start,end,maxFrames=DEFAULT_MAX_FRAMES){
   assert(Number.isInteger(start)&&Number.isInteger(end)&&start>=0&&end>start&&end<=FULL_FRAMES);
@@ -66,10 +83,10 @@ export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,ran
 export async function runFormalLowMemoryCompositeV001(input){
   assert(input&&typeof input==='object'&&!Array.isArray(input));
   const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','expectedOverlayCount','outputPath','ffmpegPath',
-    'maxFrames','processObserver','resourceCheck'];
+    'maxFrames','processObserver','resourceCheck','visibilitySelection'];
   assert(Object.keys(input).every(key=>allowed.includes(key)),'unsupported formal composite options');
   const {baseMediaPath,plan,overlayRecords,expectedFrameCount,expectedOverlayCount,outputPath,ffmpegPath,
-    maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck}=input;
+    maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck,visibilitySelection=null}=input;
   assert.equal(process.env.ZEV_FULL_SUPERVISED,'1','SUPERVISOR_REQUIRED');
   assert(Number.isSafeInteger(expectedFrameCount)&&expectedFrameCount>0
     &&Number.isSafeInteger(expectedFrameCount*FRAME_BYTES),'explicit complete frame clock required');
@@ -100,13 +117,28 @@ export async function runFormalLowMemoryCompositeV001(input){
       &&!Object.hasOwn(record,'motionStates')&&!Object.hasOwn(record,'pulseStates'),'only Normal records');
     assert(typeof record.pngPath==='string'&&path.isAbsolute(record.pngPath));
   }
+  // A qualified caller supplies adoption authority. Keep every logical record
+  // above, including suppressed captions; only the physical overlay inputs are
+  // selected here. Snapshot the explicit decisions before any asynchronous work.
+  const selection=visibilitySelection===null?null:structuredClone(visibilitySelection);
+  assert.equal(validateDigestCaptionVisibilitySelectionV001({plan,selection,
+    manifestBinding:selection?.manifestBinding}).status,'passed','invalid caption visibility selection');
+  const visibleRecords=selection===null?overlayRecords
+    :overlayRecords.filter((_record,index)=>selection.entries[index].decision==='show');
   try{await lstat(outputPath);assert.fail('formal output already exists');}
   catch(error){if(error.code!=='ENOENT')throw error;}
   const ranges=[];
   for(let at=0;at<expectedFrameCount;at+=maxFrames)
     ranges.push({startFrame:at,endFrameExclusive:Math.min(at+maxFrames,expectedFrameCount)});
-  const commands=ranges.map(range=>producerArgumentsV001({baseMediaPath,plan,records:overlayRecords,
-    scopeStart:0,range,fullFrameCount:expectedFrameCount,graphFullFrameCount:expectedFrameCount,maxFrames}));
+  const commands=ranges.map(range=>{
+    const command=producerArgumentsV001({baseMediaPath,plan,records:visibleRecords,
+      scopeStart:0,range,fullFrameCount:expectedFrameCount,graphFullFrameCount:expectedFrameCount,maxFrames});
+    if(selection===null)return command;
+    const shownInstructionIds=visibleRecords.filter(record=>record.element.startFrame<range.endFrameExclusive
+      &&record.element.endFrameExclusive>range.startFrame).map(record=>record.element.instructionId);
+    assert.equal(shownInstructionIds.length,command.captionCount);
+    return {...command,shownInstructionIds};
+  });
   assert.equal(commands.reduce((n,c)=>n+c.range.endFrameExclusive-c.range.startFrame,0),expectedFrameCount);
   const encoderArgs=['-hide_banner','-loglevel','error','-n','-f','rawvideo','-pixel_format','yuv420p',
     '-video_size','1920x1080','-framerate','30','-i','pipe:0','-i',baseMediaPath,
@@ -119,7 +151,9 @@ export async function runFormalLowMemoryCompositeV001(input){
   const allocationBytes=Math.min(maxFrames,expectedFrameCount)*FRAME_BYTES;
   return processObserver.observeOperation({observationLabel:'formal-low-memory-composite',
     operationKind:'sequential-stream-composite',input:{baseMediaPath,expectedFrameCount,outputPath,
-      ffmpegPath,maxFrames,expectedOverlayCount,encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
+      ffmpegPath,maxFrames,expectedOverlayCount,visibilitySelection:selection,
+      visibilityComposition:visibilityCompositionV001(selection,commands),
+      encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
     await resourceCheck({stage:'body',newBytes:allocationBytes});
     const create=(args,stdio)=>{
       // No detached child: both streams remain in the supervisor-owned PGID.
@@ -170,8 +204,12 @@ export async function runFormalLowMemoryCompositeV001(input){
       assert.equal(bytes,expectedFrameCount*FRAME_BYTES);
       for(let index=1;index<segments.length;index++)
         assert.equal(segments[index-1].range.endFrameExclusive,segments[index].range.startFrame);
+      const visibilityComposition=visibilityCompositionV001(selection,segments);
+      assert.equal(validateDigestCaptionVisibilityCompositionV001({plan,selection,composition:visibilityComposition,
+        expectedFrameCount}).status,'passed','invalid completed caption visibility composition');
       return {schemaVersion:'digest-formal-low-memory-composite-v001',status:'completed',
         scope:{startFrame:0,endFrameExclusive:expectedFrameCount,frameCount:expectedFrameCount},maxFrames,expectedOverlayCount,
+        visibilityComposition,
         segments,maximumCaptions:Math.max(...segments.map(s=>s.captionCount)),
         maximumStates:Math.max(...segments.map(s=>s.stateCount)),
         maximumInputs:Math.max(...segments.map(s=>s.inputCount)),maximumProcesses:2,

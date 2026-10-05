@@ -34,7 +34,7 @@ function gate(api, observations = {}) {
     + 'return {verificationPolicy, effectiveCounterfactualQc, plan, expectedFrameCount};\n}';
   return compileActualFunction(text, {
     qualifyDigestStorageContextV001: async () => {observations.qualifications = (observations.qualifications ?? 0) + 1;},
-    representativeModule: async () => api,
+    representativeModule: async () => ({resolveApprovedDigestCaptionVisibilitySelectionV001: async () => null, ...api}),
     path,
     isObject: value => value !== null && typeof value === 'object' && !Array.isArray(value),
     isNonEmptyString: value => typeof value === 'string' && value.length > 0,
@@ -58,7 +58,7 @@ function finish(api, observations = {}) {
   const end = source.indexOf('\nexport async function executePresentationRendererV002(', start);
   assert(start >= 0 && end > start);
   return compileActualFunction(source.slice(start, end).trim(), {
-    representativeModule: async () => api,
+    representativeModule: async () => ({resolveApprovedDigestCaptionVisibilitySelectionV001: async () => null, ...api}),
     createPresentationRendererFailureAfterWorkV001: input => ({exitCode: 1, ...input}),
     inspectPresentationCompletedFrameQcV001: async args => {
       observations.fullQcCalls = (observations.fullQcCalls ?? 0) + 1;
@@ -181,4 +181,35 @@ test('actual finish forwards sampled coverage into private completion and return
   const result = await run(finishArgs(saved, () => assert.fail('cannot switch to full QC')));
   assert.equal(result.nativeCoverage, nativeCoverage);
   assert.equal(result.verification.nativeCoverage, nativeCoverage);
+});
+
+
+test('actual finish forwards explicit show/suppress proof without a full-visibility claim', async () => {
+  const visibilitySelection = {schemaVersion: 'test-only-selection', entries: [{instructionId: 'caption-a', decision: 'suppress'}]};
+  const visibilityComposition = {schemaVersion: 'test-only-composition', suppressedInstructionIds: ['caption-a']};
+  const saved = state({verificationPolicy: policy, storageContext: testContext(), visibilitySelection, visibilityComposition});
+  const run = finish({finishApprovedDigestRepresentativeCompletionV001: async args => {
+    assert.equal(args.visibilitySelection, visibilitySelection); assert.equal(args.visibilityComposition, visibilityComposition);
+    return {status: 'confirmation-pending', visibilitySelection, visibilityComposition};
+  }});
+  const result = await run(finishArgs(saved, () => assert.fail('explicit adoption cannot invoke legacy full QC')));
+  assert.equal(result.visibilitySelection, visibilitySelection); assert.equal(result.visibilityComposition, visibilityComposition);
+  assert.equal(result.verification.status, 'confirmation-pending'); assert.equal(result.counterfactualQcExecuted, false);
+});
+
+
+test('actual post-composite Digest gate does not extend general empty-overlay or legacy storage paths', async () => {
+  const start = source.indexOf('    const visibilityComposition = composeResult?.visibilityComposition ?? null;');
+  const end = source.indexOf('    await qualifyDigestStorageContextV001(storageContext);', start);
+  assert(start >= 0 && end > start); let calls = 0;
+  const run = Function('validateDigestCaptionVisibilityCompositionV001',
+    'return function({composeResult,storageContext,plan,visibilitySelection,expectedFrameCount,failAfterWork}){' + source.slice(start,end) + 'return {visibilityComposition};}')(input => {
+      calls++; assert.equal(input.plan.elements.length, 0); return {status:'failed',violations:[{code:'test-only-empty-digest'}]};
+    });
+  const args = {composeResult:undefined,plan:{elements:[]},visibilitySelection:null,expectedFrameCount:1,
+    failAfterWork:(_v,stage)=>({exitCode:1,stage})};
+  assert.deepEqual(run(args), {visibilityComposition:null});
+  assert.deepEqual(run({...args,storageContext:{composeMedia(){}}}), {visibilityComposition:null});
+  assert.equal(calls,0,'non-approved paths cannot receive the new Digest gate');
+  assert.equal(run({...args,storageContext:{approvedJob:{}}}).stage,'composite-visibility-adoption'); assert.equal(calls,1);
 });

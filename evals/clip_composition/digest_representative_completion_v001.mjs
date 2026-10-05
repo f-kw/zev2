@@ -6,7 +6,8 @@ import {lstat, readFile, realpath} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {evaluateDigestRepresentativeRendererQcV001, validateDigestNativeSamplingCoverageV001}
+import {evaluateDigestRepresentativeRendererQcV001, validateDigestNativeSamplingCoverageV001,
+  validateDigestCaptionVisibilitySelectionV001, validateDigestCaptionVisibilityCompositionV001}
   from './presentation_renderer_qc_v002.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
@@ -68,6 +69,59 @@ export async function resolveApprovedDigestVerificationPolicyV001(storageContext
   return q.job.verificationPolicy;
 }
 
+function savedVisibilitySelection(verification){
+  const selection=verification.visibilitySelection??null;
+  if(selection===null){
+    for(const key of ['visibilityComposition','visibilityCompositionBinding'])assert.equal(verification[key],undefined,'RECORDED_VISIBILITY_SELECTION_REQUIRED');
+    assert.equal(verification.checks?.visibilityAdoption,undefined,'RECORDED_VISIBILITY_SELECTION_REQUIRED');
+    assert.equal(verification.existingRuleEvidence?.visibilityAdoption,undefined,'RECORDED_VISIBILITY_SELECTION_REQUIRED');
+  }
+  return selection;
+}
+async function readCurrentVisibility(q,plan){
+  const {readApprovedDigestCaptionVisibilitySelectionV001}=await import(pathToFileURL(path.join(ROOT,'runner/src/digest-approved-inputs-v001.ts')).href);
+  const selection=await readApprovedDigestCaptionVisibilitySelectionV001(q,plan);
+  assert.equal(validateDigestCaptionVisibilitySelectionV001({plan,selection,manifestBinding:q.job.inputs.candidateManifestBinding}).status,'passed','REPRESENTATIVE_CURRENT_VISIBILITY_INVALID');
+  return selection;
+}
+export async function resolveApprovedDigestCaptionVisibilitySelectionV001(storageContext,plan){
+  if(storageContext?.approvedJob===undefined)return null;
+  const policy=await resolveApprovedDigestVerificationPolicyV001(storageContext),q=storageContext.approvedJob;
+  const selection=storageContext.scope==='digest-record-only-finalization-v001'
+    ? await readCurrentVisibility(q,plan)
+    : await storageContext.resolveCaptionVisibilitySelectionV001(plan);
+  assert.equal(validateDigestCaptionVisibilitySelectionV001({plan,selection,manifestBinding:q.job.inputs.candidateManifestBinding}).status,'passed','REPRESENTATIVE_CURRENT_VISIBILITY_INVALID');
+  if(selection!==null){assert(policy,'REPRESENTATIVE_VISIBILITY_MODE_REQUIRED');assert.equal(q.job.recoveryBinding,undefined,'REPRESENTATIVE_VISIBILITY_SAVED_RECOVERY_FORBIDDEN');}
+  return selection;
+}
+async function verifyVisibilityComposition(q,plan,selection,composition,expectedFrameCount,expectedBinding=null){
+  const checked=validateDigestCaptionVisibilityCompositionV001({plan,selection,composition,expectedFrameCount});
+  assert.equal(checked.status,'passed','REPRESENTATIVE_VISIBILITY_COMPOSITION_INVALID');
+  if(selection===null){assert.equal(expectedBinding,null,'REPRESENTATIVE_UNAPPROVED_VISIBILITY_BINDING');return null;}
+  const logical=q.job.outputRoot+'/low-memory-composite.json';
+  if(expectedBinding!==null){binding(expectedBinding);assert.equal(expectedBinding.path,logical,'REPRESENTATIVE_COMPOSITION_CANONICAL_PATH');}
+  const ref=expectedBinding??await stableBinding(generatedPath(q,logical),logical),actual=await readSavedJson(q,ref);
+  assert.equal(actual.schemaVersion,'digest-formal-low-memory-composite-v001');assert.equal(actual.status,'completed');
+  assert.deepEqual(actual.visibilityComposition,composition,'REPRESENTATIVE_ACTUAL_COMPOSITION_CHANGED');
+  assert.equal(actual.expectedOverlayCount,plan.elements.length,'REPRESENTATIVE_COMPOSITION_LOGICAL_COUNT');
+  assert.deepEqual(actual.scope,{startFrame:0,endFrameExclusive:expectedFrameCount,frameCount:expectedFrameCount},'REPRESENTATIVE_COMPOSITION_COMPLETE_CLOCK');
+  assert(Array.isArray(actual.segments)&&actual.segments.length===composition.rangeEvidence.length,'REPRESENTATIVE_COMPOSITION_SEGMENTS_REQUIRED');
+  for(const [index,segment] of actual.segments.entries()){
+    const range=composition.rangeEvidence[index];
+    assert.deepEqual(segment.range,{startFrame:range.startFrame,endFrameExclusive:range.endFrameExclusive});
+    assert.deepEqual(segment.shownInstructionIds,range.shownInstructionIds,'REPRESENTATIVE_ACTUAL_COMPOSITION_SELECTION');
+    assert.equal(segment.graphSha256,range.graphSha256);assert.equal(segment.exitCode,0);assert.equal(segment.signal,null);
+    assert.equal(segment.captionCount,range.shownInstructionIds.length);assert.equal(segment.stateCount,range.shownInstructionIds.length);
+    assert.equal(segment.inputCount,range.shownInstructionIds.length+1);
+    assert(Array.isArray(segment.args),'REPRESENTATIVE_ACTUAL_COMPOSITION_ARGS');
+    assert.equal(segment.args.filter(value=>value==='-i').length,segment.inputCount);
+    const graphAt=segment.args.indexOf('-filter_complex');assert(graphAt>=0&&typeof segment.args[graphAt+1]==='string');
+    assert.equal(digest(segment.args[graphAt+1]),range.graphSha256,'REPRESENTATIVE_ACTUAL_COMPOSITION_GRAPH');
+    assert.equal(Number(segment.args[segment.args.indexOf('-frames:v')+1]),range.endFrameExclusive-range.startFrame);
+  }
+  return ref;
+}
+
 function frameInterval(element){
   const {startFrame,endFrameExclusive}=element;
   assert(Number.isSafeInteger(startFrame)&&Number.isSafeInteger(endFrameExclusive)&&startFrame>=0&&endFrameExclusive>startFrame,'REPRESENTATIVE_ELEMENT_CLOCK_REQUIRED');
@@ -75,10 +129,27 @@ function frameInterval(element){
 }
 
 /** Pure structural evaluation does not mint a result capability or publish media. */
-export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage=null,overlayInspections=null,applicationResults=null,representativeRecord=null,representativeRecordBinding=null}){
+export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage=null,overlayInspections=null,applicationResults=null,visibilitySelection=null,visibilityComposition=null,visibilityCompositionBinding=null,representativeRecord=null,representativeRecordBinding=null}){
   validateDigestRepresentativeVerificationPolicyV001(policy,bindings.outputRoot);validateDigestRepresentativeSelectionV001(policy,plan);
   binding(bindings.completedMedia);assert(HASH.test(bindings.rendererPlanCanonicalSha256));
   const violations=[];
+  const visibility=validateDigestCaptionVisibilityCompositionV001({plan,selection:visibilitySelection,
+    composition:visibilityComposition,expectedFrameCount:ruleQc?.mediaEvidence?.expectedFrameCount});
+  if(visibilitySelection!==null){try{
+    assert.equal(validateDigestCaptionVisibilitySelectionV001({plan,selection:visibilitySelection,manifestBinding:bindings.manifestBinding}).status,'passed');
+    assert.equal(visibility.status,'passed');assert(nativeCoverage!==null,'REPRESENTATIVE_VISIBILITY_NATIVE_EVIDENCE_REQUIRED');binding(visibilityCompositionBinding);
+    assert.equal(visibilityCompositionBinding.path,bindings.outputRoot+'/low-memory-composite.json');
+    assert.equal(bindings.visibilitySelectionCanonicalSha256,canonicalSha(visibilitySelection));
+    assert.deepEqual(bindings.visibilityAdoptionBinding,visibilitySelection.adoptionBinding);
+    assert.equal(ruleQc?.checks?.visibilityAdoption?.status,'passed');
+    assert.deepEqual(ruleQc.checks.visibilityAdoption.selection,visibilitySelection);
+    assert.deepEqual(ruleQc.checks.visibilityAdoption.composition,visibilityComposition);
+    assert.deepEqual(ruleQc.checks.visibilityAdoption.counts,visibility.counts);
+  }catch(error){violations.push({code:'REPRESENTATIVE_VISIBILITY_ADOPTION_INVALID',details:{reason:error.message}});}}
+  else if(visibility.status!=='passed'||visibilityCompositionBinding!==null||ruleQc?.checks?.visibilityAdoption!==undefined
+    ||bindings.visibilitySelectionCanonicalSha256!==undefined||bindings.visibilityAdoptionBinding!==undefined){
+    violations.push({code:'REPRESENTATIVE_VISIBILITY_SELECTION_REQUIRED'});
+  }
   let nativeSampling=null;
   if(nativeCoverage===null&&ruleQc?.checks?.nativeSampling!==undefined)violations.push({code:'REPRESENTATIVE_NATIVE_COVERAGE_REQUIRED'});
   if(nativeCoverage!==null){try{
@@ -98,7 +169,7 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
     &&ruleQc?.checks?.layoutAndVisibility?.status==='passed';
   const sampledRulesPassed=nativeCoverage!==null&&nativeSampling!==null&&ruleQc?.status==='passed-representative-rules'
     &&ruleQc?.checks?.instructionApplication?.status==='passed'&&ruleQc?.checks?.allPrimaryRules?.status==='passed'
-    &&ruleQc?.checks?.layoutAndVisibility?.status==='passed-representative';
+    &&ruleQc?.checks?.layoutAndVisibility?.status===(visibilitySelection===null?'passed-representative':'passed-primary-and-explicit-visibility');
   const wholeRulesPassed=(historicalRulesPassed||sampledRulesPassed)&&ruleQc?.instructionCount===plan.elements.length;
   const mediaPassed=ruleQc?.checks?.media?.status==='passed';
   if(!wholeRulesPassed||!mediaPassed||ruleQc?.violations?.length!==0)violations.push({code:'REPRESENTATIVE_RULE_OR_MEDIA_FAILED',details:{originalViolations:ruleQc?.violations??null}});
@@ -110,8 +181,10 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
   if(!pending){try{
     const r=representativeRecord;
     exact(r,['schemaVersion','planId','approvedJobBinding','authorizationBinding','manifestBinding','typographySettingsBinding',
-      'rendererPlanCanonicalSha256','completedMedia','confirmedAt','representatives','observations'],'REPRESENTATIVE_RECORD_FIELDS');
-    assert.equal(r.schemaVersion,'digest-representative-verification-record-v001');
+      'rendererPlanCanonicalSha256','completedMedia','confirmedAt','representatives','observations',
+      ...(visibilitySelection===null?[]:['visibilitySelectionCanonicalSha256'])],'REPRESENTATIVE_RECORD_FIELDS');
+    assert.equal(r.schemaVersion,visibilitySelection===null?'digest-representative-verification-record-v001':'digest-representative-verification-record-v002');
+    if(visibilitySelection!==null)assert.equal(r.visibilitySelectionCanonicalSha256,canonicalSha(visibilitySelection),'REPRESENTATIVE_RECORD_VISIBILITY_CHANGED');
     for(const key of ['planId','approvedJobBinding','authorizationBinding','manifestBinding','typographySettingsBinding','rendererPlanCanonicalSha256'])assert.deepEqual(r[key],bindings[key],'REPRESENTATIVE_RECORD_'+key+'_MISMATCH');
     exact(r.completedMedia,['fileSha256','sizeBytes'],'REPRESENTATIVE_RECORD_MEDIA_FIELDS');
     assert.equal(r.completedMedia.fileSha256,bindings.completedMedia.fileSha256,'REPRESENTATIVE_RECORD_MEDIA_SHA_MISMATCH');
@@ -122,12 +195,16 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
     for(const value of Object.values(r.observations))assert.equal(value,'not-evaluated','REPRESENTATIVE_UNSUPPORTED_ADOPTION_OR_WHOLE_VIEW');
     assert(Array.isArray(r.representatives)&&r.representatives.length===policy.representativeInstructionIds.length,'REPRESENTATIVE_RECORD_COVERAGE');
     representatives=r.representatives.map((item,index)=>{
-      exact(item,['instructionId','startFrame','endFrameExclusive','observedAtFrame','method','result','evidenceBinding','note'],'REPRESENTATIVE_SAMPLE_FIELDS');
+      exact(item,['instructionId','startFrame','endFrameExclusive','observedAtFrame','method','result','evidenceBinding','note',
+        ...(visibilitySelection===null?[]:['expectedVisibility'])],'REPRESENTATIVE_SAMPLE_FIELDS');
       assert.equal(item.instructionId,policy.representativeInstructionIds[index],'REPRESENTATIVE_SAMPLE_ID_MISMATCH');
       const element=plan.elements.find(e=>e.instructionId===item.instructionId),clock=frameInterval(element);
       assert.equal(item.startFrame,clock.startFrame,'REPRESENTATIVE_SAMPLE_CLOCK_MISMATCH');assert.equal(item.endFrameExclusive,clock.endFrameExclusive,'REPRESENTATIVE_SAMPLE_CLOCK_MISMATCH');
       assert(Number.isSafeInteger(item.observedAtFrame)&&item.observedAtFrame>=clock.startFrame&&item.observedAtFrame<clock.endFrameExclusive,'REPRESENTATIVE_SAMPLE_POSITION');
       assert(policy.permittedMethods.includes(item.method),'REPRESENTATIVE_SAMPLE_METHOD_MISMATCH');
+      if(visibilitySelection!==null){const disposition=visibilitySelection.entries.find(entry=>entry.instructionId===item.instructionId).decision;
+        assert.equal(item.expectedVisibility,disposition==='show'?'shown':'suppressed','REPRESENTATIVE_SAMPLE_VISIBILITY_CHANGED');
+        if(disposition==='suppress')assert(['still-frame','video-playback'].includes(item.method),'REPRESENTATIVE_SUPPRESSED_ACTUAL_OBSERVATION_REQUIRED');}
       assert(['accepted','issue-found'].includes(item.result),'REPRESENTATIVE_SAMPLE_RESULT');
       assert(typeof item.note==='string'&&item.note.trim().length>0,'REPRESENTATIVE_SAMPLE_DESCRIPTION');binding(item.evidenceBinding);
       assert(relative(item.evidenceBinding.path).startsWith(bindings.outputRoot+'/'),'REPRESENTATIVE_SAMPLE_EVIDENCE_ROOT');
@@ -139,8 +216,13 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
   return freeze({schemaVersion:schema,status,complete:status==='passed-representative',mode:policy.mode,policy:structuredClone(policy),
     bindings:structuredClone(bindings),representativeRecordBinding:representativeRecordBinding?structuredClone(representativeRecordBinding):null,
     ...(nativeCoverage===null?{}:{nativeCoverage:structuredClone(nativeCoverage)}),
+    ...(visibilitySelection===null?{}:{visibilitySelection:structuredClone(visibilitySelection),visibilityComposition:structuredClone(visibilityComposition),visibilityCompositionBinding:structuredClone(visibilityCompositionBinding)}),
     checks:{wholeRules:{status:wholeRulesPassed?'passed':'failed',scope:nativeCoverage===null?'all-planned-instructions; existing normal input and overlay rules':'all primary input/alpha/bounds rules; native repeat/masks only selected representatives and required placement'},
       ...(nativeCoverage===null?{}:{nativeSampling:nativeSampling??{status:'failed',scope:'representative-plus-required-placement',coverage:structuredClone(nativeCoverage)}}),
+      ...(visibilitySelection===null?{}:{visibilityAdoption:{status:visibility.status==='passed'&&!violations.some(v=>v.code==='REPRESENTATIVE_VISIBILITY_ADOPTION_INVALID')?'passed':'failed',
+        scope:'explicit composition selection; no full-frame absence verification',counts:visibility.counts,
+        shownRepresentativeCount:representatives.filter(r=>r.expectedVisibility==='shown').length,
+        suppressedRepresentativeCount:representatives.filter(r=>r.expectedVisibility==='suppressed').length}}),
       media:{status:mediaPassed?'passed':'failed',scope:'existing completed-media inspection'},audioPreservation:{status:audioPassed?'passed':'failed',scope:'original AAC packet payload'},
       representatives:{status:status==='passed-representative'?'passed':status==='confirmation-pending'?'pending':'failed',count:representatives.length},
       fullVisibility:{status:'not-executed',scope:'no counterfactual or completed-frame comparison'}},
@@ -149,6 +231,7 @@ export function evaluateDigestRepresentativeCompletionV001({policy,bindings,plan
     existingRuleEvidence:{...(nativeCoverage===null?{}:{status:ruleQc?.status,
         allPrimaryRules:structuredClone(ruleQc?.checks?.allPrimaryRules??null),layoutAndVisibility:structuredClone(ruleQc?.checks?.layoutAndVisibility??null),
         nativeSampling:structuredClone(ruleQc?.checks?.nativeSampling??null),overlayInspections:structuredClone(overlayInspections),applicationResults:structuredClone(applicationResults)}),
+      ...(visibilitySelection===null?{}:{visibilityAdoption:structuredClone(ruleQc?.checks?.visibilityAdoption??null)}),
       instructionApplication:structuredClone(ruleQc?.checks?.instructionApplication??null),
       mediaEvidence:structuredClone(ruleQc?.mediaEvidence??null),violations:structuredClone(ruleQc?.violations??null)}});
 }
@@ -164,12 +247,14 @@ async function stableBinding(file,logicalPath=file){
 function owned(context,file){assert(path.isAbsolute(file)&&file.startsWith(context.generatedRoot+'/'),'REPRESENTATIVE_OWNED_MEDIA_REQUIRED');}
 async function verifyReference(context,ref){binding(ref);assert(relative(ref.path).startsWith(context.outputRoot+'/'),'REPRESENTATIVE_REFERENCE_ROOT');const actual=await stableBinding(context.resolve(ref.path),ref.path);assert.deepEqual(actual,ref,'REPRESENTATIVE_REFERENCE_BYTES_CHANGED');}
 
-export async function finishApprovedDigestRepresentativeCompletionV001({storageContext,plan,workVideo,applicationResults,overlayRecords,outputMedia,expectedAudio,expectedFrameCount,nativeCoverage=null}){
+export async function finishApprovedDigestRepresentativeCompletionV001({storageContext,plan,workVideo,applicationResults,overlayRecords,outputMedia,expectedAudio,expectedFrameCount,nativeCoverage=null,visibilitySelection=null,visibilityComposition=null}){
   const policy=await resolveApprovedDigestVerificationPolicyV001(storageContext);assert(policy,'QUALIFIED_REPRESENTATIVE_POLICY_REQUIRED');
+  const currentVisibility=await resolveApprovedDigestCaptionVisibilitySelectionV001(storageContext,plan);
+  assert.deepEqual(visibilitySelection,currentVisibility,'REPRESENTATIVE_VISIBILITY_INPUT_SUBSTITUTION');
   if(storageContext.scope==='digest-record-only-finalization-v001'){
     await assertApprovedDigestPendingVerificationV001(storageContext.pending);
     const saved=storageContext.pending.technicalEvidence;
-    for(const [actual,expected] of [[plan,saved.plan],[applicationResults,saved.applicationResults],[outputMedia,saved.outputMedia],[expectedAudio,saved.expectedAudio],[expectedFrameCount,saved.expectedFrameCount],[nativeCoverage,saved.nativeCoverage??null]])assert.deepEqual(actual,expected,'RECORD_ONLY_TECHNICAL_INPUT_SUBSTITUTION');
+    for(const [actual,expected] of [[plan,saved.plan],[applicationResults,saved.applicationResults],[outputMedia,saved.outputMedia],[expectedAudio,saved.expectedAudio],[expectedFrameCount,saved.expectedFrameCount],[nativeCoverage,saved.nativeCoverage??null],[visibilitySelection,saved.visibilitySelection??null],[visibilityComposition,saved.visibilityComposition??null]])assert.deepEqual(actual,expected,'RECORD_ONLY_TECHNICAL_INPUT_SUBSTITUTION');
     assert.deepEqual(overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),saved.overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),'RECORD_ONLY_OVERLAY_SUBSTITUTION');
   }
   validateDigestRepresentativeSelectionV001(policy,plan);owned(storageContext,workVideo);
@@ -178,12 +263,16 @@ export async function finishApprovedDigestRepresentativeCompletionV001({storageC
   const {evaluatePresentationRendererQcV002}=await import('./presentation_renderer_qc_v002.mjs');
   const overlayInspections=overlayRecords.map(r=>r.inspection),expectedBindings={approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha};
   const qcInput={plan,applicationResults,overlayInspections,mediaInspection:outputMedia,expectedAudio,expectedFrameCount,canvas:plan.canvas,requireFinalVisibility:false};
+  if(visibilitySelection!==null)assert(nativeCoverage!==null,'REPRESENTATIVE_VISIBILITY_NATIVE_EVIDENCE_REQUIRED');
+  const visibilityCompositionBinding=await verifyVisibilityComposition(q,plan,visibilitySelection,visibilityComposition,expectedFrameCount,
+    storageContext.scope==='digest-record-only-finalization-v001' ? storageContext.pending.technicalEvidence.visibilityCompositionBinding??null : null);
   const ruleQc=nativeCoverage===null?evaluatePresentationRendererQcV002(qcInput)
-    :evaluateDigestRepresentativeRendererQcV001(qcInput,{policy,nativeCoverage,expectedBindings});
+    :evaluateDigestRepresentativeRendererQcV001(qcInput,{policy,nativeCoverage,expectedBindings,visibilitySelection,visibilityComposition,requireVisibilityComposition:true});
   const completedMedia=await stableBinding(workVideo);
   const bindings={planId:q.job.planId,outputRoot:q.job.outputRoot,approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,
     manifestBinding:q.job.inputs.candidateManifestBinding,typographySettingsBinding:q.job.inputs.typographySettingsBinding,
-    rendererPlanCanonicalSha256:canonicalSha(plan),completedMedia,...(nativeCoverage===null?{}:{implementationSha:q.job.implementation.sha})};
+    rendererPlanCanonicalSha256:canonicalSha(plan),completedMedia,...(nativeCoverage===null?{}:{implementationSha:q.job.implementation.sha}),
+    ...(visibilitySelection===null?{}:{visibilitySelectionCanonicalSha256:canonicalSha(visibilitySelection),visibilityAdoptionBinding:visibilitySelection.adoptionBinding})};
   let representativeRecord=null,representativeRecordBinding=null,recordReadError=null;
   try{
     representativeRecordBinding=await stableBinding(storageContext.resolve(policy.confirmationRecordPath),policy.confirmationRecordPath);
@@ -191,15 +280,15 @@ export async function finishApprovedDigestRepresentativeCompletionV001({storageC
     representativeRecord=JSON.parse(bytes.toString());
   }catch(error){if(error.code!=='ENOENT')recordReadError=error;}
   let result;
-  if(recordReadError){result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,representativeRecord:{invalidRecord:recordReadError.message},representativeRecordBinding});}
-  else result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,representativeRecord,representativeRecordBinding});
+  if(recordReadError){result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,visibilitySelection,visibilityComposition,visibilityCompositionBinding,representativeRecord:{invalidRecord:recordReadError.message},representativeRecordBinding});}
+  else result=evaluateDigestRepresentativeCompletionV001({policy,bindings,plan,ruleQc,nativeCoverage,overlayInspections,applicationResults,visibilitySelection,visibilityComposition,visibilityCompositionBinding,representativeRecord,representativeRecordBinding});
   if(result.status==='passed-representative'){
     for(const item of result.representatives)await verifyReference(storageContext,item.evidenceBinding);
     await verifyReference(storageContext,representativeRecordBinding);
   }
   await resolveApprovedDigestVerificationPolicyV001(storageContext);
   qualifiedResults.set(result,{storageContext,qualified:q,recordBinding:representativeRecordBinding,
-    evidenceBindings:result.representatives.map(item=>item.evidenceBinding),completedMedia,plan,overlayInspections});
+    evidenceBindings:result.representatives.map(item=>item.evidenceBinding),completedMedia,plan,overlayInspections,visibilitySelection,visibilityCompositionBinding});
   return result;
 }
 
@@ -209,6 +298,11 @@ export async function assertQualifiedDigestRepresentativeCompletionV001(result,s
   assert(['passed-representative','confirmation-pending'].includes(result.status),'REPRESENTATIVE_COMPLETION_REJECTED');
   const policy=await resolveApprovedDigestVerificationPolicyV001(storageContext);assert.deepEqual(policy,result.policy,'REPRESENTATIVE_CURRENT_POLICY_CHANGED');
   assert.equal(storageContext.approvedJob,saved.qualified,'REPRESENTATIVE_CURRENT_JOB_CHANGED');
+  const visibilitySelection=savedVisibilitySelection(result);
+  assert.deepEqual(await resolveApprovedDigestCaptionVisibilitySelectionV001(storageContext,saved.plan),visibilitySelection,'REPRESENTATIVE_CURRENT_VISIBILITY_CHANGED');
+  assert.deepEqual(visibilitySelection,saved.visibilitySelection,'REPRESENTATIVE_VISIBILITY_OBJECT_CHANGED');
+  await verifyVisibilityComposition(saved.qualified,saved.plan,visibilitySelection,result.visibilityComposition??null,
+    saved.qualified.job.expected.frames,saved.visibilityCompositionBinding);
   if(result.nativeCoverage!==undefined){
     const q=storageContext.approvedJob;assert.equal(result.bindings.implementationSha,q.job.implementation.sha,'REPRESENTATIVE_CURRENT_IMPLEMENTATION_CHANGED');
     const checked=validateDigestNativeSamplingCoverageV001({plan:saved.plan,policy,coverage:result.nativeCoverage,overlayInspections:saved.overlayInspections,
@@ -243,6 +337,8 @@ export async function persistApprovedDigestRepresentativePendingEvidenceV001({dr
   assert.equal(canonicalSha(plan),verification.bindings.rendererPlanCanonicalSha256,'PENDING_RENDER_PLAN_CHANGED');
   assert.equal(draw.applicationResults.length,plan.elements.length);assert.equal(draw.overlayRecords.length,plan.elements.length);
   const nativeCoverage=draw.nativeCoverage??null;assert.deepEqual(nativeCoverage,savedNativeCoverage(verification),'PENDING_NATIVE_COVERAGE_CHANGED');
+  const visibilitySelection=draw.visibilitySelection??null;assert.deepEqual(visibilitySelection,savedVisibilitySelection(verification),'PENDING_VISIBILITY_SELECTION_CHANGED');
+  assert.deepEqual(draw.visibilityComposition??null,verification.visibilityComposition??null,'PENDING_VISIBILITY_COMPOSITION_CHANGED');
   const publishedMediaBinding=await stableBinding(publishedMediaPath,out+'/render/presentation-rendered-v002.mp4');
   const overlayRecords=[];
   for(const [index,r] of draw.overlayRecords.entries()){
@@ -261,7 +357,9 @@ export async function persistApprovedDigestRepresentativePendingEvidenceV001({dr
     typographySettingsBinding:q.job.inputs.typographySettingsBinding,implementationSha:q.job.implementation.sha,
     verificationPolicy:q.job.verificationPolicy,publishedMediaBinding,rendererPlanCanonicalSha256:canonicalSha(plan),
     plan,applicationResults:draw.applicationResults,overlayRecords,outputMedia:draw.outputMedia,
-    expectedAudio:draw.completedExpectedAudio,expectedFrameCount:q.job.expected.frames,...(nativeCoverage===null?{}:{nativeCoverage:structuredClone(nativeCoverage)})};
+    expectedAudio:draw.completedExpectedAudio,expectedFrameCount:q.job.expected.frames,...(nativeCoverage===null?{}:{nativeCoverage:structuredClone(nativeCoverage)}),
+    ...(visibilitySelection===null?{}:{visibilitySelection:structuredClone(visibilitySelection),visibilityComposition:structuredClone(verification.visibilityComposition),
+      visibilityCompositionBinding:structuredClone(verification.visibilityCompositionBinding)})};
   const file=out+'/representative-technical-evidence-v001.json';await storageContext.publish(file,evidence);
   const technicalEvidenceBinding=await stableBinding(storageContext.resolve(file),file);
   await storageContext.readBound(technicalEvidenceBinding);
@@ -329,6 +427,8 @@ export async function readApprovedDigestInitialCompletedReceiptV001({qualified:q
   const media=await stableBinding(generatedPath(q,mediaPath),mediaPath);assert.equal(media.fileSha256,p.result.video.fileSha256,'COMPLETED_MEDIA_BYTES_CHANGED');
   assert.equal(execution.result.publication.status,'published');assert.equal(execution.result.publication.outputDirectory,path.dirname(generatedPath(q,mediaPath)));
   if(q.job.verificationPolicy===undefined){
+    const plan=execution.result.effectivePlan??execution.result.commonCorePlan;
+    assert.equal(await readCurrentVisibility(q,plan),null,'COMPLETED_FULL_MODE_VISIBILITY_FORBIDDEN');
     assert.equal(p.verification,undefined);assert.equal(p.result.verification,undefined);assert.notEqual(p.complete,false);
     assert.equal(p.technicalQc,'passed');assert.equal(p.result.qc,'passed');
     const qc=execution.result.qc;assert.equal(qc.schemaVersion,'presentation-render-qc-v002');assert.equal(qc.status,'passed');
@@ -353,7 +453,11 @@ export async function readApprovedDigestInitialCompletedReceiptV001({qualified:q
     for(const item of v.representatives)await verifySaved(q,item.evidenceBinding);
     // The original QC is read under the independent receipt anchor. Re-evaluate
     // only the confirmation record's IDs/clocks/methods/media/evidence structure.
-    const nativeCoverage=savedNativeCoverage(v);
+    const nativeCoverage=savedNativeCoverage(v),visibilitySelection=savedVisibilitySelection(v);
+    assert.deepEqual(await readCurrentVisibility(q,plan),visibilitySelection,'COMPLETED_VISIBILITY_ADOPTION_CHANGED');
+    const visibilityComposition=v.visibilityComposition??null,visibilityCompositionBinding=v.visibilityCompositionBinding??null;
+    await verifyVisibilityComposition(q,plan,visibilitySelection,visibilityComposition,q.job.expected.frames,visibilityCompositionBinding);
+    if(visibilitySelection!==null)assert(nativeCoverage!==null,'COMPLETED_VISIBILITY_NATIVE_EVIDENCE_REQUIRED');
     let rules;
     if(nativeCoverage===null){
       rules={status:v.existingRuleEvidence.violations?.length===0?'passed':'failed',instructionCount:plan.elements.length,
@@ -371,11 +475,13 @@ export async function readApprovedDigestInitialCompletedReceiptV001({qualified:q
       }
       rules=evaluateDigestRepresentativeRendererQcV001({plan,applicationResults,overlayInspections,mediaInspection:v.existingRuleEvidence.mediaEvidence.observed,
         expectedAudio:v.existingRuleEvidence.mediaEvidence.expectedAudio,expectedFrameCount:q.job.expected.frames,canvas:plan.canvas,requireFinalVisibility:false},
-        {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha}});
+        {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha},
+          visibilitySelection,visibilityComposition,requireVisibilityComposition:true});
       assert.deepEqual(rules.checks.nativeSampling,v.checks.nativeSampling,'COMPLETED_NATIVE_SAMPLING_CHANGED');
     }
-    const checked=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan,ruleQc:rules,nativeCoverage,overlayInspections:v.existingRuleEvidence.overlayInspections??null,applicationResults:v.existingRuleEvidence.applicationResults??null,
+    const checked=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan,ruleQc:rules,nativeCoverage,overlayInspections:v.existingRuleEvidence.overlayInspections??null,applicationResults:v.existingRuleEvidence.applicationResults??null,visibilitySelection,visibilityComposition,visibilityCompositionBinding,
       representativeRecord:record,representativeRecordBinding:v.representativeRecordBinding});
+    if(visibilitySelection!==null){assert.deepEqual(checked.checks.visibilityAdoption,v.checks.visibilityAdoption,'COMPLETED_VISIBILITY_COUNTS_CHANGED');assert.deepEqual(checked.existingRuleEvidence.visibilityAdoption,v.existingRuleEvidence.visibilityAdoption,'COMPLETED_VISIBILITY_RULE_EVIDENCE_CHANGED');}
     assert.equal(checked.status,'passed-representative','COMPLETED_CONFIRMATION_RECORD_CHANGED');assert.deepEqual(checked.representatives,v.representatives);
     assert.deepEqual(checked.observations,v.observations);assert.equal(p.result.counterfactualQcExecuted,false);
   }
@@ -421,6 +527,13 @@ export async function readApprovedDigestPendingVerificationV001({qualified:q,pen
   assert.equal(canonicalSha(t.plan),t.rendererPlanCanonicalSha256,'PENDING_PLAN_CANONICAL_CHANGED');assert.equal(t.rendererPlanCanonicalSha256,v.bindings.rendererPlanCanonicalSha256);
   assert.equal(t.overlayRecords.length,t.plan.elements.length);assert.equal(t.applicationResults.length,t.plan.elements.length);
   const nativeCoverage=t.nativeCoverage??null;assert.deepEqual(nativeCoverage,savedNativeCoverage(v),'PENDING_NATIVE_COVERAGE_SUBSTITUTION');
+  const visibilitySelection=t.visibilitySelection??null;assert.deepEqual(visibilitySelection,savedVisibilitySelection(v),'PENDING_VISIBILITY_SELECTION_SUBSTITUTION');
+  assert.deepEqual(await readCurrentVisibility(q,t.plan),visibilitySelection,'PENDING_CURRENT_VISIBILITY_CHANGED');
+  const visibilityComposition=t.visibilityComposition??null,visibilityCompositionBinding=t.visibilityCompositionBinding??null;
+  assert.deepEqual(visibilityComposition,v.visibilityComposition??null,'PENDING_VISIBILITY_COMPOSITION_SUBSTITUTION');
+  assert.deepEqual(visibilityCompositionBinding,v.visibilityCompositionBinding??null,'PENDING_VISIBILITY_BINDING_SUBSTITUTION');
+  await verifyVisibilityComposition(q,t.plan,visibilitySelection,visibilityComposition,t.expectedFrameCount,visibilityCompositionBinding);
+  if(visibilitySelection!==null)assert(nativeCoverage!==null,'PENDING_VISIBILITY_NATIVE_EVIDENCE_REQUIRED');
   if(nativeCoverage!==null)assert.equal(v.bindings.implementationSha,q.job.implementation.sha,'PENDING_NATIVE_IMPLEMENTATION_CHANGED');
   await verifySaved(q,publishedMediaBinding);
   for(const [index,r] of t.overlayRecords.entries()){
@@ -433,9 +546,11 @@ export async function readApprovedDigestPendingVerificationV001({qualified:q,pen
   const overlayInspections=t.overlayRecords.map(r=>r.inspection),qcInput={plan:t.plan,applicationResults:t.applicationResults,overlayInspections,
     mediaInspection:t.outputMedia,expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,canvas:t.plan.canvas,requireFinalVisibility:false};
   const rules=nativeCoverage===null?evaluatePresentationRendererQcV002(qcInput):evaluateDigestRepresentativeRendererQcV001(qcInput,
-    {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha}});
-  const rebuilt=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan:t.plan,ruleQc:rules,nativeCoverage,overlayInspections,applicationResults:t.applicationResults});
+    {policy:q.job.verificationPolicy,nativeCoverage,expectedBindings:{approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,implementationSha:q.job.implementation.sha},
+          visibilitySelection,visibilityComposition,requireVisibilityComposition:true});
+  const rebuilt=evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings:v.bindings,plan:t.plan,ruleQc:rules,nativeCoverage,overlayInspections,applicationResults:t.applicationResults,visibilitySelection,visibilityComposition,visibilityCompositionBinding});
   if(nativeCoverage!==null)assert.deepEqual(rebuilt.checks.nativeSampling,v.checks.nativeSampling,'PENDING_NATIVE_SAMPLING_CHANGED');
+  if(visibilitySelection!==null){assert.deepEqual(rebuilt.checks.visibilityAdoption,v.checks.visibilityAdoption,'PENDING_VISIBILITY_COUNTS_CHANGED');assert.deepEqual(rebuilt.existingRuleEvidence.visibilityAdoption,v.existingRuleEvidence.visibilityAdoption,'PENDING_VISIBILITY_RULE_EVIDENCE_CHANGED');}
   assert.equal(rebuilt.status,'confirmation-pending','PENDING_RULE_OR_MEDIA_REVALIDATION_FAILED');
   // Original validation observations are rederived above; no saved status authorizes finalization.
   const pending=freeze({qualified:q,pendingReceiptBinding:structuredClone(pendingReceiptBinding),pendingReceipt:p,
@@ -448,6 +563,9 @@ export async function readApprovedDigestPendingVerificationV001({qualified:q,pen
 export async function assertApprovedDigestPendingVerificationV001(pending){
   const saved=qualifiedPending.get(pending);assert(saved,'QUALIFIED_RECORDED_PENDING_REQUIRED');await assertPendingJob(saved.qualified);
   for(const ref of [saved.pendingReceiptBinding,saved.technicalEvidenceBinding,saved.publishedMediaBinding,...saved.pngBindings])await verifySaved(saved.qualified,ref);
+  const t=pending.technicalEvidence,selection=t.visibilitySelection??null;
+  assert.deepEqual(await readCurrentVisibility(saved.qualified,t.plan),selection,'PENDING_CURRENT_VISIBILITY_CHANGED');
+  await verifyVisibilityComposition(saved.qualified,t.plan,selection,t.visibilityComposition??null,t.expectedFrameCount,t.visibilityCompositionBinding??null);
 }
 
 export async function requalifyApprovedDigestRecordedRepresentativeV001({pending,recordContext}){
@@ -459,6 +577,7 @@ export async function requalifyApprovedDigestRecordedRepresentativeV001({pending
   const result=await finishApprovedDigestRepresentativeCompletionV001({storageContext:recordContext,plan:t.plan,
     workVideo:generatedPath(pending.qualified,pending.publishedMediaBinding.path),applicationResults:t.applicationResults,
     overlayRecords:t.overlayRecords.map(r=>({element:r.element,inspection:r.inspection})),outputMedia:t.outputMedia,
-    expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,nativeCoverage:t.nativeCoverage??null});
+    expectedAudio:t.expectedAudio,expectedFrameCount:t.expectedFrameCount,nativeCoverage:t.nativeCoverage??null,
+    visibilitySelection:t.visibilitySelection??null,visibilityComposition:t.visibilityComposition??null});
   await assertApprovedDigestPendingVerificationV001(pending);return result;
 }
