@@ -616,7 +616,7 @@
     },
     {
       "item": "If further observation is authorized, use the already saved 20-second audio with preserved preceding/following text in alignment only, then inspect exact neighboring positions and the final zero-score character",
-      "reason": "The 19-character isolated window improved raw timing but overlaps old neighboring captions. More ASR crop retries would change text again and are not proposed."
+      "reason": "The world candidate expanded from 120 ms to 984 ms, without proving correct synchrony. The full phrase candidate also overlaps old preceding captions. More ASR crop retries would change text again and are not proposed."
     },
     {
       "item": "Use the prepared 9-second cue571 audio and preserved question/interjection/reaction text in an explicitly authorized alignment-only call",
@@ -706,5 +706,102 @@
       "sha256": "53b239f5437017a9a5d90b8463a960f1a171302ff4cbd63ac9b8506383fd1203"
     }
   ],
-  "status": "One permitted alignment complete; useful candidate saved, quality and deployment parity unconfirmed; video application withheld"
+  "status": "One permitted alignment complete; useful candidate saved, quality and deployment parity unconfirmed; video application withheld",
+  "phraseCandidate": {
+    "text": "ここで奴を食い止めなければ世界が終わる",
+    "sourceStartMs": 2321943,
+    "sourceEndMs": 2325997,
+    "oldCueOverlaps": [
+      {
+        "globalCueOrdinal": 460,
+        "sourceStartMs": 2318820,
+        "sourceEndMs": 2323624,
+        "startFrame": 24794,
+        "endFrameExclusive": 24938,
+        "text": "戦えばいいじゃん!",
+        "overlapWithFullPhraseCandidateMs": 1681
+      },
+      {
+        "globalCueOrdinal": 461,
+        "sourceStartMs": 2323624,
+        "sourceEndMs": 2323864,
+        "startFrame": 24938,
+        "endFrameExclusive": 24945,
+        "text": "お前たち…",
+        "overlapWithFullPhraseCandidateMs": 240
+      },
+      {
+        "globalCueOrdinal": 462,
+        "sourceStartMs": 2323864,
+        "sourceEndMs": 2325025,
+        "startFrame": 24945,
+        "endFrameExclusive": 24980,
+        "text": "頼んだぞ…",
+        "overlapWithFullPhraseCandidateMs": 1161
+      },
+      {
+        "globalCueOrdinal": 463,
+        "sourceStartMs": 2325025,
+        "sourceEndMs": 2325125,
+        "startFrame": 24980,
+        "endFrameExclusive": 24983,
+        "text": "ここで奴を",
+        "overlapWithFullPhraseCandidateMs": 100
+      },
+      {
+        "globalCueOrdinal": 464,
+        "sourceStartMs": 2325125,
+        "sourceEndMs": 2325285,
+        "startFrame": 24983,
+        "endFrameExclusive": 24988,
+        "text": "食い止めなければ",
+        "overlapWithFullPhraseCandidateMs": 160
+      },
+      {
+        "globalCueOrdinal": 465,
+        "sourceStartMs": 2325285,
+        "sourceEndMs": 2325405,
+        "startFrame": 24988,
+        "endFrameExclusive": 24991,
+        "text": "世界が終わる",
+        "overlapWithFullPhraseCandidateMs": 120
+      },
+      {
+        "globalCueOrdinal": 466,
+        "sourceStartMs": 2325405,
+        "sourceEndMs": 2325465,
+        "startFrame": 24991,
+        "endFrameExclusive": 24993,
+        "text": "なんか",
+        "overlapWithFullPhraseCandidateMs": 60
+      },
+      {
+        "globalCueOrdinal": 467,
+        "sourceStartMs": 2325465,
+        "sourceEndMs": 2325846,
+        "startFrame": 24993,
+        "endFrameExclusive": 25004,
+        "text": "いい雰囲気にしないで!",
+        "overlapWithFullPhraseCandidateMs": 381
+      },
+      {
+        "globalCueOrdinal": 468,
+        "sourceStartMs": 2325846,
+        "sourceEndMs": 2326206,
+        "startFrame": 25004,
+        "endFrameExclusive": 25015,
+        "text": "いい雰囲気に!",
+        "overlapWithFullPhraseCandidateMs": 151
+      }
+    ],
+    "note": "New characters are internally ordered and nonoverlapping; that does not establish consistency with old neighboring cue clocks. Whole phrase overlaps old cues460 and461 as well as the world-only overlap list.",
+    "correctClockConfirmed": false,
+    "adopted": false
+  },
+  "independentResultReview": {
+    "scope": "sourceCharacters, input binding and observation report only",
+    "checks": "Original IDs, code-point positions, +2321000ms origin, counts, world984ms and overlaps agree",
+    "corrections": "Describe expanded candidate timing without claiming improvement; record whole-phrase preceding overlaps",
+    "extraInferenceOrNetworkRequests": 0
+  }
 }
