@@ -15,11 +15,11 @@ import type {InternalRetentionInputV001} from './skills/candidate-internal-reten
 type Obj = Record<string, unknown>;
 type Segment = {candidateId: string; segmentId: string; sourceSegmentIds: number[]; sourceStartMs: number; sourceEndMs: number};
 export type DigestCaptionPreparationParametersV001 = {
-  workspaceRoot: string; sourceRuntimeRoot: string; outputRoot: string; preparationId: string;
+  workspaceRoot: string; inputRoot: string; inputPrefix: string; sourceRuntimeRoot: string; outputRoot: string; preparationId: string;
   stateBinding: DigestByteBindingV001; scopeBinding: DigestByteBindingV001; styleTemplateBinding: DigestByteBindingV001;
   expected: {requestDraftId: string; planRequestId: string; executionRequestId: string; planSha256: string; executionSha256: string};
 };
-const SCHEMA = 'digest-caption-judgment-preparation-bundle-v001';
+const SCHEMA = 'digest-caption-input-preparation-v002';
 const PURPOSE = '確定済み保持本文を、既存表示Skillへ渡す要求として組み立てて保存する。表示境界の選択・回答・描画はまだ行わない';
 const IMPLEMENTATIONS = ['evals/clip_composition/adopted_caption_judgment_inputs_v001.mts',
   'runner/src/digest-caption-input-preparation-v001.ts', 'runner/src/skills/caption-display-boundaries-v001.ts',
@@ -49,13 +49,59 @@ async function modules(root: string) {
 
 /** JSON-only boundary: qualified normal owners/references, no media reader or queue effect. */
 async function reconstruct(p: DigestCaptionPreparationParametersV001) {
-  const root = await realpath(p.workspaceRoot), m = await modules(root);
+  assert(typeof p.inputRoot === 'string' && path.isAbsolute(p.inputRoot)
+    && path.resolve(p.inputRoot) === p.inputRoot, 'CAPTION_PREPARATION_INPUT_ROOT_REQUIRED');
+  const root = await realpath(p.workspaceRoot), inputRoot = await realpath(p.inputRoot);
+  assert.equal(inputRoot, p.inputRoot, 'CAPTION_PREPARATION_INPUT_ROOT_RELOCATED');
+  assert(inputRoot.startsWith('/Volumes/') && inputRoot !== root
+    && !inputRoot.startsWith(root + path.sep), 'CAPTION_PREPARATION_SSD_INPUT_ROOT_REQUIRED');
+  const inputRootIdentity = await lstat(inputRoot, {bigint: true});
+  assert(inputRootIdentity.isDirectory() && !inputRootIdentity.isSymbolicLink(), 'CAPTION_PREPARATION_INPUT_ROOT_INVALID');
+  const inputPrefix = text(p.inputPrefix);
+  assert(!inputPrefix.includes('\\') && !path.isAbsolute(inputPrefix)
+    && !inputPrefix.split('/').some(s => !s || s === '.' || s === '..')
+    && inputPrefix.startsWith('runtime/artifacts/') && inputPrefix.split('/').length >= 3,
+    'CAPTION_PREPARATION_INPUT_PREFIX_INVALID');
+  const inputPath = (name: string) => {
+    assert(typeof name === 'string' && !name.includes('\\') && !path.isAbsolute(name)
+      && !name.split('/').some(s => !s || s === '.' || s === '..')
+      && (name === inputPrefix || name.startsWith(inputPrefix + '/')),
+      'CAPTION_PREPARATION_INPUT_PREFIX_MISMATCH');
+    return name;
+  };
+  const inputRelative = (absolute: string) => inputPath(relative(inputRoot, absolute));
+  const assertInputRootCurrent = async () => {
+    const now = await lstat(inputRoot, {bigint: true});
+    assert(now.isDirectory() && !now.isSymbolicLink() && now.dev === inputRootIdentity.dev
+      && now.ino === inputRootIdentity.ino && await realpath(inputRoot) === inputRoot,
+      'CAPTION_PREPARATION_INPUT_ROOT_CHANGED');
+  };
+  const assertInputDirectory = async (absolute: string) => {
+    inputRelative(absolute); await assertInputRootCurrent();
+    const stat = await lstat(absolute, {bigint: true});
+    assert(stat.isDirectory() && !stat.isSymbolicLink() && stat.dev === inputRootIdentity.dev
+      && await realpath(absolute) === absolute, 'CAPTION_PREPARATION_INPUT_DIRECTORY_INVALID');
+  };
+  await assertInputDirectory(path.join(inputRoot, inputPrefix));
+  assert(path.isAbsolute(p.sourceRuntimeRoot) && path.resolve(p.sourceRuntimeRoot) === p.sourceRuntimeRoot,
+    'CAPTION_PREPARATION_SOURCE_RUNTIME_ROOT_INVALID');
+  await assertInputDirectory(p.sourceRuntimeRoot);
+  assert(path.isAbsolute(p.outputRoot) && path.resolve(p.outputRoot) === p.outputRoot,
+    'CAPTION_PREPARATION_OUTPUT_ROOT_INVALID');
+  inputRelative(p.outputRoot);
+  const m = await modules(root);
   const requireBinding: (v: unknown) => asserts v is DigestJsonBindingV001 = m.formal.assertBinding;
   const observed = new Map<string, DigestByteBindingV001>();
   const read = async (b: DigestByteBindingV001, isJson: boolean) => {
     assert(typeof b.path === 'string' && /^[0-9a-f]{64}$/u.test(b.fileSha256), 'CAPTION_PREPARATION_BINDING_INVALID');
     assert(!isJson || b.path.endsWith('.json'), 'CAPTION_PREPARATION_JSON_ONLY');
-    const bytes: Buffer = await m.stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: b.path});
+    if (isJson) {
+      inputPath(b.path); await assertInputRootCurrent();
+      assert.equal((await lstat(path.join(inputRoot, b.path), {bigint: true})).dev,
+        inputRootIdentity.dev, 'CAPTION_PREPARATION_INPUT_DEVICE_CHANGED');
+    }
+    const bytes: Buffer = await m.stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: isJson ? inputRoot : root, relativePath: b.path});
+    if (isJson) await assertInputRootCurrent();
     assert.equal(m.formal.sha(bytes), b.fileSha256, 'CAPTION_PREPARATION_SHA_MISMATCH');
     observed.set(b.path, {path: b.path, fileSha256: b.fileSha256});
     return bytes;
@@ -84,7 +130,7 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
   assert.equal(planRef.sha256, p.expected.planSha256, 'CAPTION_PREPARATION_PLAN_CHANGED');
   assert.equal(executionRef.sha256, p.expected.executionSha256, 'CAPTION_PREPARATION_EXECUTION_CHANGED');
   const artifactRoot = path.join(path.resolve(p.sourceRuntimeRoot), 'artifacts');
-  const physical = (logical: string) => relative(root, path.join(artifactRoot, draftId, digestArtifactFileNameV001(logical, draftId, producers)));
+  const physical = (logical: string) => inputRelative(path.join(artifactRoot, draftId, digestArtifactFileNameV001(logical, draftId, producers)));
   const logicalPlan = digestArtifactPathFromUriV001(planRef.uri, draftId, planRequest.id);
   const logicalExecution = digestArtifactPathFromUriV001(executionRef.uri, draftId, executionRequest.id);
   const planBytes = await read({path: physical(logicalPlan), fileSha256: planRef.sha256}, true);
@@ -251,7 +297,7 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
   const style = json(await read(p.styleTemplateBinding, true)), prompt = record(style.promptInput);
   assertCaptionDisplayInputV001(prompt);
   const droppedIds = records(resolved.candidates).flatMap(c => records(c.blocks).filter(b => b.action === 'drop').flatMap(b => ids(b.sourceSegmentIds)));
-  const meaningPath = `${relative(root, p.outputRoot)}/meaning-input.json`;
+  const meaningPath = `${inputRelative(p.outputRoot)}/meaning-input.json`;
   const built = m.builder.buildAdoptedCaptionJudgmentInputsV001({preparationId: p.preparationId, meaningPath,
     planBinding: {path: logicalPlan, fileSha256: planRef.sha256}, machineAdoptionBinding: adoptionBinding,
     transcriptBinding: plan.transcriptBinding, utteranceBinding: plan.utteranceBinding, sourceVideoBinding: plan.sourceVideoBinding,
@@ -267,7 +313,7 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
     const bytes: Buffer = await m.stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: root, relativePath: name});
     implementations.push({path: name, fileSha256: m.formal.sha(bytes)});
   }
-  const manifest = {schemaVersion: SCHEMA, preparationId: p.preparationId, status: 'prepared', preparationPurpose: PURPOSE,
+  const manifest = {schemaVersion: SCHEMA, inputRoot, inputPrefix, preparationId: p.preparationId, status: 'prepared', preparationPurpose: PURPOSE,
     scopeBinding: p.scopeBinding, originalPurpose: draft.purpose, originalPurposeBinding: plan.approvedRequestBinding,
     stateBinding: p.stateBinding, expected: p.expected, styleTemplateBinding: p.styleTemplateBinding,
     implementations, inputReferences: Array.from(observed.values()),
@@ -275,19 +321,21 @@ async function reconstruct(p: DigestCaptionPreparationParametersV001) {
       ? {...b,physicalPath:guestPhysicalPath!,bytesVerified:false,placement:NORMAL_DECLARED_GUEST_SOURCE_PLACEMENT_V001,sizeBytes:sourceOrigin.byteSize}
       : {...b,physicalPath:physical(b.path),bytesVerified:b.path !== plan.sourceVideoBinding.path}),
     admission: {...execution.admission, outlineChoice: null}, originalClockBinding: execution.clockResolutionBinding,
-    outputs: outputs.map(o => ({fileName: o.name, ...m.formal.bind(`${relative(root, p.outputRoot)}/${o.name}`, o.value)}))};
-  return {m, root, manifest, outputs, meaning, requests, segments, droppedIds};
+    outputs: outputs.map(o => ({fileName: o.name, ...m.formal.bind(`${inputRelative(p.outputRoot)}/${o.name}`, o.value)}))};
+  return {m, root, inputRoot, inputRelative, assertInputRootCurrent, assertInputDirectory, manifest, outputs, meaning, requests, segments, droppedIds};
 }
 
 /** Saves a new preparation bundle only after qualification; never modifies old request/state. */
 export async function prepareDigestCaptionJudgmentInputsV001(p: DigestCaptionPreparationParametersV001) {
   const r = await reconstruct(p), out = path.resolve(p.outputRoot), parent = path.dirname(out);
-  relative(r.root, out);
-  assert((await lstat(parent)).isDirectory() && await realpath(parent) === parent, 'CAPTION_PREPARATION_OUTPUT_PARENT_INVALID');
+  r.inputRelative(out);
+  await r.assertInputDirectory(parent);
   await mkdir(out); // no overwrite, no recursive new hierarchy
+  await r.assertInputDirectory(out);
   for (const o of r.outputs) await writeFile(path.join(out, o.name), r.m.formal.formal(o.value), {flag: 'wx'});
-  const manifestPath = `${relative(r.root, out)}/manifest.json`, bytes: Buffer = r.m.formal.formal(r.manifest);
+  const manifestPath = `${r.inputRelative(out)}/manifest.json`, bytes: Buffer = r.m.formal.formal(r.manifest);
   await writeFile(path.join(out, 'manifest.json'), bytes, {flag: 'wx'});
+  await r.assertInputDirectory(out);
   return {manifest: r.manifest, manifestBinding: {path: manifestPath, fileSha256: r.m.formal.sha(bytes)},
     meaning: r.meaning, requests: r.requests, segments: r.segments, droppedSourceSegmentIds: r.droppedIds};
 }
@@ -295,8 +343,16 @@ export async function prepareDigestCaptionJudgmentInputsV001(p: DigestCaptionPre
 /** Reconstructs from the original JSON references, then compares every persisted byte. No effects. */
 export async function readPreparedDigestCaptionJudgmentInputsV001(p: DigestCaptionPreparationParametersV001, manifestBinding: DigestByteBindingV001) {
   const r = await reconstruct(p);
-  assert.equal(manifestBinding.path, `${relative(r.root, p.outputRoot)}/manifest.json`, 'CAPTION_PREPARATION_MANIFEST_REFERENCE_CHANGED');
-  const read = async (name: string) => r.m.stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: r.root, relativePath: `${relative(r.root, p.outputRoot)}/${name}`});
+  assert.equal(manifestBinding.path, `${r.inputRelative(p.outputRoot)}/manifest.json`, 'CAPTION_PREPARATION_MANIFEST_REFERENCE_CHANGED');
+  await r.assertInputDirectory(p.outputRoot);
+  const read = async (name: string) => {
+    await r.assertInputRootCurrent();
+    const relativePath = `${r.inputRelative(p.outputRoot)}/${name}`;
+    assert.equal((await lstat(path.join(r.inputRoot, relativePath), {bigint: true})).dev,
+      (await lstat(r.inputRoot, {bigint: true})).dev, 'CAPTION_PREPARATION_INPUT_DEVICE_CHANGED');
+    const bytes = await r.m.stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot: r.inputRoot, relativePath});
+    await r.assertInputRootCurrent(); return bytes;
+  };
   const manifestBytes: Buffer = await read('manifest.json');
   assert.equal(r.m.formal.sha(manifestBytes), manifestBinding.fileSha256, 'CAPTION_PREPARATION_SAVED_SHA_MISMATCH');
   assert.equal(json(manifestBytes).schemaVersion, SCHEMA, 'CAPTION_PREPARATION_SAVED_VERSION_INVALID');

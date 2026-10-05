@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v091
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v092
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05T10:19:16.322888+00:00（本人承認済みの正式登録移行、製造前）
+
+本人「いいよ」Sentinel_cf8aca8c66e88191900cd3508db6ba22を親mona経由で受領。旧31回答と元素材/STT/計画/旧登録を保ち、新正式検証→現行準備・候補へ移す一件を実装中。本人投稿時刻は未提供、記録時刻と区別。旧互換分岐の自分の未commit3fileだけをSSD証拠確認後09:45:19 UTCに除外、reset/stash・他者変更0。旧証拠をKEEPし再採用しない。
+
+09:59:39 UTC、通常runner実claimの新validate_digest_plan agent_4fc1f99fe5054517970951d4f4e42481が完了。旧4要求/outputs/fileRefs不変。10:03:41 UTC、SSD42JSON/9,049,975Bスナップショットと現行準備v002保存・全byte再読成功、31区間/5450atom/31要求。旧新31回答の本文/ID/順序/時計/answer/判断理由一致と実原本対応を検査し、新登録baseline・表示調整候補をSSDへ保存。世界465/結合570各32frame、最終650cue/1041行/37619frame/55299930sample。新LLM/STT/素材取得/有料API0。
+
+最新形式のjob/auth v002・inputRoot/inputPrefix必須とし、JSONだけSSDの今回領域から読む。コード・scope文書・既存font/registryはrepo、一般Core ROOT/guard/trust変更0。製品6既存path＋新migration helper1、専用test1。旧形式の製造reader受理・Git旧コード救済分岐0。小検査は準備12件、Python27件、移行18件合格。移行の限定実装欠陥修正1件目は同候補複数keepの不要な一意条件のみ除去し、旧新groups一致とtimeline一意維持。独立レビューの旧actualAnswerSource参照は承認済み旧manifestが束縛した31実bindingだけへ限定し、新回答はSSD prefix/device必須。旧原本に新JSONを置かない。
+
+状態：作業中。次担当は同じMac実装者。独立レビュー追加blocking0・最新23契約検査/2型検査成功、clean実装固定→既存4control約39KB以下の承認済み内蔵例外を再束縛→正式入力/容量/実device検査→正式一本製造。製造owner/新出力root/描画/合成はまだ未開始。実glyph/新動画技術QC/通常速可読性/音声聴取/人間品質は未評価。旧3h17mを今回見積りとせず、実測で2時間以上と分かれば親へ根拠を報告する。[今回一件の契約](work-orders/ZEV_DIGEST_CURRENT_REGISTRATION_MIGRATION_20261005_v001.md)・[保存先と登録の証拠](reports/digest-new-material-SJvP9jhEdyI-20261004/current-registration-migration-preparation-v001.md)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 07:42 UTC（SSD退避で容量回復、制御JSONの保存例外回答待ち）
 

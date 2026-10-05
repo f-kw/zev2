@@ -8,6 +8,8 @@ import {readPreparedDigestCaptionJudgmentInputsV001} from './digest-caption-inpu
 import {assertQualifiedDigestApprovedJobV001} from './digest-approved-job-v001.js';
 import {resolveDigestTypographySettingsV001} from './digest-formal-handoff-v001.js';
 import {assertDigestCaptionDisplayAdjustmentV001} from './digest-caption-display-adjustment-v001.js';
+import {assertDigestCaptionRegistrationMigrationV001} from './digest-caption-registration-migration-v001.js';
+import {digestApprovedJobInputRootV001} from './digest-approved-job-v001.js';
 
 type Json = Record<string, any>;
 export type ApprovedDigestQualifiedJobV001 = {
@@ -15,7 +17,7 @@ export type ApprovedDigestQualifiedJobV001 = {
   readBinding: (binding: any) => Promise<Json>; assertCurrent: () => Promise<void>;
 };
 export type ApprovedDigestInputsV001 = Json;
-type InputRecord = {qualified: ApprovedDigestQualifiedJobV001; bodySha256: string; bindings: Json[]};
+type InputRecord = {qualified: ApprovedDigestQualifiedJobV001; bodySha256: string; bindings: Json[]; absoluteBindings: {binding:Json; originalAnswerBinding?:Json}[]};
 type SourceRecord = {inputs: Json; qualified: ApprovedDigestQualifiedJobV001; context: Json; bodySha256: string};
 const qualifiedInputs = new WeakMap<object, InputRecord>();
 const qualifiedSources = new WeakMap<object, SourceRecord>();
@@ -106,7 +108,23 @@ export async function assertApprovedDigestInputsV001(inputs: unknown, qualified:
   const wire = await load(qualified.workspaceRoot, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
   assert.equal(sha(wire.formal(inputs)), record.bodySha256, 'APPROVED_DIGEST_INPUTS_MUTATED');
   for (const binding of record.bindings) await qualified.readBinding(binding);
+  for (const entry of record.absoluteBindings) await readAbsoluteMigrationBytes(entry.binding, qualified, entry.originalAnswerBinding);
   await qualified.assertCurrent();
+}
+
+async function readAbsoluteMigrationBytes(binding: Json, qualified: ApprovedDigestQualifiedJobV001, originalAnswerBinding?: Json): Promise<Buffer> {
+  const file=binding.path;
+  assert(path.isAbsolute(file) && path.normalize(file)===file, 'APPROVED_DIGEST_MIGRATION_ABSOLUTE_PATH');
+  if(originalAnswerBinding !== undefined) same(binding,originalAnswerBinding);
+  else assert(file.startsWith(qualified.job.inputs.inputRoot+'/'+qualified.job.inputs.inputPrefix+'/'), 'APPROVED_DIGEST_CURRENT_ANSWER_SSD_PREFIX');
+  assert.equal(await realpath(file),file,'APPROVED_DIGEST_MIGRATION_SYMLINK');
+  const before=await lstat(file,{bigint:true});assert(before.isFile()&&!before.isSymbolicLink()&&before.nlink===1n);
+  if(originalAnswerBinding===undefined) assert.equal(before.dev,BigInt(qualified.job.storage.guestDevice),'APPROVED_DIGEST_CURRENT_ANSWER_DEVICE');
+  const first=await readFile(file),second=await readFile(file),after=await lstat(file,{bigint:true});
+  assert(first.equals(second),'APPROVED_DIGEST_MIGRATION_UNSTABLE_BYTES');
+  for(const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(after[key],before[key],'APPROVED_DIGEST_MIGRATION_UNSTABLE_IDENTITY');
+  assert.equal(sha(first),binding.fileSha256);if(binding.sizeBytes!==undefined)assert.equal(first.length,binding.sizeBytes);
+  return first;
 }
 
 /** Every source owner comes from the saved normal preparation, never a caller's handoff summary. */
@@ -114,10 +132,17 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   await assertQualifiedDigestApprovedJobV001(qualified);
   const root = await realpath(qualified.workspaceRoot), job = qualified.job, specs = object(job.inputs);
   const observed = new Map<string, Json>();
-  const read = async (binding: Json) => {const value = await qualified.readBinding(binding);
+  const readOrigin = async (binding: Json) => {const value = await qualified.readBinding(binding);
     observed.set(JSON.stringify(binding), clone(binding)); return value;};
+  const read = async (binding: Json) => {assert(binding.path.startsWith(specs.inputPrefix+'/'), 'APPROVED_DIGEST_CURRENT_JSON_SSD_PREFIX'); return readOrigin(binding);};
   const params = clone(object(specs.preparationParameters));
   assert.equal(await realpath(params.workspaceRoot), root, 'APPROVED_DIGEST_PREPARATION_ROOT_CHANGED');
+  assert.equal(params.inputRoot, specs.inputRoot, 'APPROVED_DIGEST_INPUT_ROOT_CHANGED');
+  assert.equal(params.inputPrefix, specs.inputPrefix, 'APPROVED_DIGEST_INPUT_PREFIX_CHANGED');
+  const inputPath = (p: string) => {safe(p); assert(p.startsWith(specs.inputPrefix + '/'), 'APPROVED_DIGEST_INPUT_PREFIX_REQUIRED'); return p;};
+  for (const p of [params.sourceRuntimeRoot, params.outputRoot]) {assert(path.isAbsolute(p)); inputPath(path.relative(specs.inputRoot,p));}
+  inputPath(params.stateBinding.path); inputPath(params.styleTemplateBinding.path);
+  const absoluteObserved = new Map<string, {binding:Json; originalAnswerBinding?:Json}>();
   const [wire, core, frameClock, indexer, entry, inspector] = await Promise.all([
     load(root, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts'),
     load(root, 'evals/clip_composition/adopted_media_manufacturing_v001.mts'),
@@ -139,7 +164,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
       assert.equal(found.placement, 'normal-declared-guest-source-v001', 'APPROVED_DIGEST_SOURCE_PLACEMENT_CHANGED');
       return {...binding, path: found.physicalPath, bytesVerified: found.bytesVerified, placement: found.placement, sizeBytes: found.sizeBytes};
     }
-    return {...binding, path: safe(found.physicalPath), bytesVerified: found.bytesVerified};
+    return {...binding, path: inputPath(found.physicalPath), bytesVerified: found.bytesVerified};
   };
   const readLogical = (binding: Json) => {const found = physical(object(binding));
     assert.equal(found.bytesVerified, true, 'APPROVED_DIGEST_JSON_REFERENCE_UNVERIFIED');
@@ -165,9 +190,51 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   same(groups.flatMap(group => group.atomOccurrenceIds), originalAtoms.map(atom => atom.atomOccurrenceId));
   assert.equal(prepared.meaning.captions.length, 1);
   const manifest = await read(specs.candidateManifestBinding);
-  assert(['digest-approved-caption-bundle-v001', 'digest-caption-216px-reflow-candidate-bundle-v001', 'digest-caption-144px-reflow-candidate-bundle-v001', 'digest-caption-display-adjustment-candidate-bundle-v001'].includes(manifest.schemaVersion), 'APPROVED_DIGEST_CANDIDATE_SCHEMA_UNSUPPORTED');
+  assert(['digest-caption-current-registration-candidate-bundle-v001', 'digest-caption-current-display-adjustment-candidate-bundle-v001'].includes(manifest.schemaVersion), 'APPROVED_DIGEST_CURRENT_CANDIDATE_REQUIRED');
   const originalMeaning = await read(object(manifest.meaningBinding)); same(originalMeaning, prepared.meaning);
   let meaning = originalMeaning, displayAdjustment: Json | undefined;
+  const migrated = manifest.schemaVersion === 'digest-caption-current-display-adjustment-candidate-bundle-v001'
+    ? await read(object(manifest.originalCandidateManifestBinding)) : manifest;
+  assert.equal(migrated.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_CURRENT_REGISTRATION_REQUIRED');
+  same(migrated.preparationManifestBinding, specs.preparationManifestBinding); same(migrated.meaningBinding, manifest.meaningBinding);
+  same(manifest.registrationMigrationBinding, migrated.registrationMigrationBinding);
+  const migrationProof = await read(object(migrated.registrationMigrationBinding));
+  same(migrationProof.bindings.approvalEvidenceBinding, specs.migrationApprovalEvidenceBinding);
+  const migrationApproval=await read(specs.migrationApprovalEvidenceBinding);
+  same(migrationApproval.originalCandidateManifestBinding,migrationProof.bindings.originalCandidateManifestBinding);
+  const originManifest=await readOrigin(object(migrationApproval.originalCandidateManifestBinding));
+  const originReceipts=list(originManifest.responses);assert.equal(originReceipts.length,31);
+  const migrationBound = async (binding: Json, originalAnswerBinding?:Json, originEvidence=false) => {
+    let bytes: Buffer;
+    if (path.isAbsolute(binding.path)) {
+      bytes = await readAbsoluteMigrationBytes(binding, qualified, originalAnswerBinding); absoluteObserved.set(JSON.stringify(binding),{binding:clone(binding),...(originalAnswerBinding===undefined?{}:{originalAnswerBinding:clone(originalAnswerBinding)})});
+    } else {
+      const value = await (originEvidence?readOrigin:read)(binding);
+      const stable = await load(root, 'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
+      bytes = await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:digestApprovedJobInputRootV001(job,binding.path,root),relativePath:binding.path});
+      assert.equal(sha(bytes),binding.fileSha256); same(JSON.parse(bytes.toString()),value);
+    }
+    return {binding,bytes};
+  };
+  const proofInputs: Json = {planId:job.planId, expectedApprovalEvidenceBinding:specs.migrationApprovalEvidenceBinding};
+  for (const [name, field] of Object.entries({approvalEvidence:'approvalEvidenceBinding',originalCandidate:'originalCandidateManifestBinding',
+    originalPreparation:'oldPreparationManifestBinding',preparation:'newPreparationManifestBinding',originalMeaning:'oldMeaningBinding',meaning:'newMeaningBinding',
+    originalExecution:'originalExecutionBinding',execution:'currentExecutionBinding',originalMachineAdoption:'originalMachineAdoptionBinding',machineAdoption:'currentMachineAdoptionBinding',
+    originalClock:'originalClockBinding',clock:'currentClockBinding'})) proofInputs[name]=await migrationBound(object(migrationProof.bindings[field]),undefined,name.startsWith('original'));
+  same(proofInputs.preparation.binding,specs.preparationManifestBinding); same(proofInputs.meaning.binding,manifest.meaningBinding);
+  same(JSON.parse(proofInputs.execution.bytes.toString()),normalExecution); same(JSON.parse(proofInputs.clock.bytes.toString()),clock);
+  const migratedReceipts=list(migrated.responses);
+  proofInputs.registrations=[];
+  for (const [i,row] of list(migrationProof.registrations).entries()) {
+    const registration: Json={ordinal:row.ordinal,original:{},current:{}};
+    for (const side of ['original','current']) for (const name of ['request','response','result','trace','actualAnswerSource']) {
+      const binding=object(row[side][name+'Binding']);
+      if(side==='current') same(binding,migratedReceipts[i][name+'Binding']);
+      registration[side][name]=await migrationBound(binding,side==='original'&&name==='actualAnswerSource'?object(originReceipts[i].actualAnswerSourceBinding):undefined,side==='original');
+    }
+    proofInputs.registrations.push(registration);
+  }
+  await assertDigestCaptionRegistrationMigrationV001({...proofInputs,proof:migrationProof} as any);
   const meaningOutput = preparation.outputs.find((binding: Json) => binding.fileName === 'meaning-input.json'); assert(meaningOutput);
   assert.equal(manifest.meaningBinding.path, meaningOutput.path); assert.equal(manifest.meaningBinding.fileSha256, meaningOutput.fileSha256);
   const map = await read(object(manifest.mapBinding));
@@ -177,7 +244,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   assert.equal(inspection.media.decodedFrameCount, map.sourceFrameClock.decodedFrameCount);
   assert.equal(inspection.media.source.video.presentationOffsetMs, map.sourceFrameClock.videoPresentationOffsetMs);
   // An adjusted display clock is an explicit, byte-bound input. Original normal/STT inputs remain exact.
-  if (manifest.schemaVersion === 'digest-caption-display-adjustment-candidate-bundle-v001') {
+  if (manifest.schemaVersion === 'digest-caption-current-display-adjustment-candidate-bundle-v001') {
     const helperPath = 'runner/src/digest-caption-display-adjustment-v001.ts';
     const helperBindings = list(job.implementation.bindings).filter(binding => binding.path === helperPath);
     assert.equal(helperBindings.length, 1, 'APPROVED_DIGEST_DISPLAY_HELPER_BINDING_REQUIRED');
@@ -185,8 +252,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     assert.equal(sha(helperBytes), helperBindings[0].fileSha256, 'APPROVED_DIGEST_DISPLAY_HELPER_SHA_CHANGED');
     const originalCandidateManifestBinding = object(manifest.originalCandidateManifestBinding);
     const originalManifest = await read(originalCandidateManifestBinding);
-    assert(['digest-approved-caption-bundle-v001', 'digest-caption-216px-reflow-candidate-bundle-v001',
-      'digest-caption-144px-reflow-candidate-bundle-v001'].includes(originalManifest.schemaVersion), 'APPROVED_DIGEST_DISPLAY_ORIGINAL_SCHEMA_REQUIRED');
+    assert.equal(originalManifest.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_DISPLAY_CURRENT_ORIGINAL_REQUIRED');
     same(originalManifest.meaningBinding, manifest.meaningBinding);
     same(originalManifest.preparationManifestBinding, specs.preparationManifestBinding);
     const originalCorrespondence = await read(object(originalManifest.correspondenceBinding));
@@ -332,7 +398,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   const aggregateView = {caseId: job.planId, inputCaptionId: preparation.preparationId + '-input-caption',
     semanticCaptionId: meaning.captions[0].captionId, boundaryCandidates: requests.flatMap(request => request.input.captions[0].boundaryCandidates),
     atomOccurrenceIds: atoms.map(atom => atom.atomOccurrenceId), styleLimits: clone(requests[0].input.styleLimits), taskDescription: rules.newTaskDescription};
-  const value = {workspaceRoot: root, manifestBinding: clone(specs.candidateManifestBinding), manifest, preparation,
+  const value = {workspaceRoot: root, inputRoot:specs.inputRoot,inputPrefix:specs.inputPrefix,registrationMigration:migrationProof, manifestBinding: clone(specs.candidateManifestBinding), manifest, preparation,
     preparationManifestBinding: clone(specs.preparationManifestBinding), meaning, requests, responses, results, traces, correspondence,
     ...(displayAdjustment === undefined ? {} : {originalMeaning, displayAdjustment}),
     normalState, normalPlan, normalExecution, normalPreparation, adoption, edit, manufacturing, inspection, clock, styleTemplate, rendererTemplate,
@@ -340,7 +406,7 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     normalOwners, normalReferenceMap: clone(preparation.logicalToPhysical), sourceDeclaration, aggregateView, candidateRules: rules,
     typographySettings: typography.settings, typographyValues, typographySettingsBinding: clone(specs.typographySettingsBinding),
     authorizationBinding: clone(qualified.authorizationBinding), jobBinding: clone(qualified.jobBinding)};
-  await qualified.assertCurrent(); freeze(value); qualifiedInputs.set(value, {qualified, bodySha256: sha(wire.formal(value)), bindings: [...observed.values()]}); return value;
+  await qualified.assertCurrent(); freeze(value); qualifiedInputs.set(value, {qualified, bodySha256: sha(wire.formal(value)), bindings: [...observed.values()],absoluteBindings:[...absoluteObserved.values()]}); return value;
 }
 
 async function assertContext(qualified: ApprovedDigestQualifiedJobV001, context: Json) {

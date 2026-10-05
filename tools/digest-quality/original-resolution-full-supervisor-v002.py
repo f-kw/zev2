@@ -220,8 +220,9 @@ def validate_formal_permit(permit,directory,command):
 APPROVED_GUARD = dict(startBytes=50_000_000_000, reserveBytes=12_000_000_000,
     maximumRssBytes=17_179_869_184, maximumPressure=1, observationIntervalSeconds=1,
     nextUnitPlusReserve=True, stopOwnProcessGroup=True, restartOnReconnect=False)
-APPROVED_INPUT_KEYS = {'preparationParameters', 'preparationManifestBinding',
-    'candidateManifestBinding', 'typographySettingsBinding', 'rendererTemplateBinding'}
+APPROVED_INPUT_BINDING_KEYS = {'preparationManifestBinding', 'candidateManifestBinding',
+    'typographySettingsBinding', 'rendererTemplateBinding', 'migrationApprovalEvidenceBinding'}
+APPROVED_INPUT_KEYS = APPROVED_INPUT_BINDING_KEYS | {'inputRoot', 'inputPrefix', 'preparationParameters'}
 APPROVED_STORAGE_KEYS = {'guestRoot', 'guestVolumeUuid', 'guestDevice', 'hostRoot',
     'hostVolumeUuid', 'hostDevice', 'imagePath', 'imageMaximumBytes',
     'hostMetadataReserveBytes', 'internalRoot'}
@@ -231,6 +232,7 @@ APPROVED_RECORD_WORKER = 'runner/src/digest-approved-record-finalize-v001.ts'
 APPROVED_CODE = ['runner/src/digest-approved-job-v001.ts', APPROVED_WORKER,
     APPROVED_RECORD_WORKER,
     'runner/src/digest-approved-inputs-v001.ts', 'runner/src/digest-formal-handoff-v001.ts',
+    'runner/src/digest-caption-registration-migration-v001.ts',
     'evals/clip_composition/adopted_media_manufacturing_v001.mts',
     'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
@@ -279,12 +281,33 @@ def absolute_repo_binding(ref):
     validate_binding(ref)
     return {**ref, 'path': str(Path(FORMAL_REPO) / ref['path'])}
 
-def stable_bound_bytes(ref):
+def absolute_input_binding(job, ref):
+    validate_binding(ref)
+    inputs = job['inputs']
+    required(absolute_path(inputs['inputRoot']) and inputs['inputRoot'] == job['storage']['guestRoot'],
+        'approved input root must remain the bound guest root')
+    required(inputs['inputPrefix'] == 'runtime/artifacts/' + job['planId'] + '/current-inputs-v001'
+        and safe_relative(inputs['inputPrefix']), 'approved current input prefix differs')
+    required(ref['path'].startswith(inputs['inputPrefix'] + '/'), 'approved input binding outside current input prefix')
+    return {**ref, 'path': str(Path(inputs['inputRoot']) / ref['path'])}
+
+def verify_approved_inputs(job):
+    storage = job['storage']
+    volume_identity(storage['guestRoot'], storage['guestVolumeUuid'], storage['guestDevice'], 'apfs')
+    for name in APPROVED_INPUT_BINDING_KEYS:
+        ref = absolute_input_binding(job, job['inputs'][name])
+        inspect_output_ancestors(Path(ref['path']).parent, storage)
+        stable_bound_bytes(ref, expected_device=storage['guestDevice'])
+        inspect_output_ancestors(Path(ref['path']).parent, storage)
+
+def stable_bound_bytes(ref, expected_device=None):
     validate_binding(ref, absolute=True)
     target = Path(ref['path'])
     before = target.lstat()
     required(stat.S_ISREG(before.st_mode) and not stat.S_ISLNK(before.st_mode)
         and str(target.resolve()) == str(target), 'bound file missing, relocated or symlink')
+    if expected_device is not None:
+        required(before.st_dev == expected_device, 'approved input file device differs')
     data = target.read_bytes()
     after = target.lstat()
     required(all(getattr(before, key) == getattr(after, key)
@@ -324,7 +347,7 @@ def validate_approved_job_config(job, authorization):
         'expected', 'implementation', 'guard', 'allocationBudget'}
         | ({'verificationPolicy'} if type(job) is dict and 'verificationPolicy' in job else set())
         | ({'recoveryBinding'} if type(job) is dict and 'recoveryBinding' in job else set()), 'approved job')
-    required(job['schemaVersion'] == 'digest-approved-job-v001', 'approved job schema required')
+    required(job['schemaVersion'] == 'digest-approved-job-v002', 'approved job schema required')
     required(type(job['planId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', job['planId']), 'invalid approved plan ID')
     required(safe_relative(job['outputRoot']) and job['outputRoot'].startswith('runtime/artifacts/') and len(job['outputRoot'].split('/')) >= 4, 'invalid approved output root')
     if 'verificationPolicy' in job:
@@ -336,8 +359,25 @@ def validate_approved_job_config(job, authorization):
             'approved recovery requires representative verification policy')
     exact_keys(job['inputs'], APPROVED_INPUT_KEYS, 'approved inputs')
     required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
-    for name in APPROVED_INPUT_KEYS - {'preparationParameters'}:
-        validate_binding(job['inputs'][name])
+    for name in APPROVED_INPUT_BINDING_KEYS:
+        absolute_input_binding(job, job['inputs'][name])
+    inputs = job['inputs']; parameters = inputs['preparationParameters']
+    required(parameters.get('inputRoot') == inputs['inputRoot']
+        and parameters.get('inputPrefix') == inputs['inputPrefix'], 'approved preparation input root or prefix differs')
+    required(parameters.get('workspaceRoot') == FORMAL_REPO, 'approved preparation code workspace differs')
+    current_input_root = str(Path(inputs['inputRoot']) / inputs['inputPrefix'])
+    for name in ('outputRoot', 'sourceRuntimeRoot'):
+        required(absolute_path(parameters.get(name)) and parameters[name].startswith(current_input_root + '/'),
+            'approved preparation path outside current input prefix: ' + name)
+    for name in ('stateBinding', 'styleTemplateBinding'):
+        ref = parameters.get(name)
+        validate_binding(ref)
+        required(ref['path'].endswith('.json'), 'approved preparation JSON binding required: ' + name)
+        absolute_input_binding(job, ref)
+    validate_binding(parameters.get('scopeBinding'))  # The approval document remains repository-bound bytes.
+    required(job['outputRoot'] != inputs['inputPrefix']
+        and not job['outputRoot'].startswith(inputs['inputPrefix'] + '/')
+        and not inputs['inputPrefix'].startswith(job['outputRoot'] + '/'), 'approved input/output roots overlap')
     exact_keys(job['expected'], APPROVED_EXPECTED_KEYS, 'approved expected counts')
     required(all(positive_integer(value) for value in job['expected'].values()), 'expected counts must be positive integers')
     exact_keys(job['allocationBudget'], {'baseBuildBytes', 'rendererPreparationBytes'}, 'approved allocation budget')
@@ -375,7 +415,7 @@ def validate_approved_job_config(job, authorization):
         'unique complete approved implementation bindings required')
     exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
         'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
-        'implementation', 'normalCandidates'}
+        'implementation', 'normalCandidates', 'migrationApprovalEvidenceBinding'}
         | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set())
         | ({'recoveryBinding'} if type(authorization) is dict and 'recoveryBinding' in authorization else set()), 'approved authorization')
     required(('recoveryBinding' in authorization) == ('recoveryBinding' in job),
@@ -390,7 +430,7 @@ def validate_approved_job_config(job, authorization):
     if 'verificationPolicy' in job:
         required(authorization['verificationPolicy'] == job['verificationPolicy'],
             'authorization/job verification policy mismatch')
-    required(authorization['schemaVersion'] == 'digest-approved-job-authorization-v001', 'approved authorization schema required')
+    required(authorization['schemaVersion'] == 'digest-approved-job-authorization-v002', 'approved authorization schema required')
     required(type(authorization['recordId']) is str and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]*', authorization['recordId']), 'authorization record ID required')
     exact_keys(authorization['userApproval'], {'at', 'messageId', 'text', 'sourceThreadId'}, 'user approval')
     required(all(type(value) is str and bool(value.strip()) for value in authorization['userApproval'].values()), 'real user approval fields required')
@@ -408,6 +448,8 @@ def validate_approved_job_config(job, authorization):
         required(authorization[key] == job[key], 'authorization/job mismatch: ' + key)
     required(authorization['manifestBinding'] == job['inputs']['candidateManifestBinding'], 'authorized manifest differs')
     required(authorization['typographySettingsBinding'] == job['inputs']['typographySettingsBinding'], 'authorized settings differ')
+    required(authorization['migrationApprovalEvidenceBinding'] == job['inputs']['migrationApprovalEvidenceBinding'],
+        'authorized migration approval evidence differs')
     return job
 
 def approved_image_identity(storage):
@@ -454,7 +496,7 @@ def validate_approved_job_permit(permit, directory, command, permit_file,
     required(absolute_path(permit_file) and bindings['commandPermitPath'] == permit_file, 'approved permit path differs')
     required(bindings['planId'] == job['planId'] and bindings['logicalPrefix'] == job['outputRoot']
         and bindings['implementationSha'] == job['implementation']['sha'], 'approved runtime job bindings differ')
-    required(bindings['planManifest'] == absolute_repo_binding(job['inputs']['candidateManifestBinding'])
+    required(bindings['planManifest'] == absolute_input_binding(job, job['inputs']['candidateManifestBinding'])
         and bindings['approvalRecord'] == permit['authorizationBinding'], 'approved runtime authorization or manifest differs')
     required(permit['storage'] == job['storage'], 'approved runtime storage differs')
     expected_implementation = [absolute_repo_binding(ref) for ref in job['implementation']['bindings']]
@@ -489,8 +531,7 @@ def validate_approved_job_permit(permit, directory, command, permit_file,
     created = datetime.fromisoformat(owner['createdAt'].replace('Z', '+00:00'))
     age = time.time() - created.timestamp()
     required(0 <= age < 600, 'approved exclusive owner is not fresh')
-    for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
-        stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+    verify_approved_inputs(job)
     image_identity = approved_image_identity(job['storage'])
     permit_raw = Path(permit_file).read_bytes()
     permit_ref = dict(path=permit_file, fileSha256=hashlib.sha256(permit_raw).hexdigest(), sizeBytes=len(permit_raw))
@@ -504,6 +545,7 @@ def validate_approved_job_permit(permit, directory, command, permit_file,
         stable_bound_bytes(permit['jobBinding'])
         stable_bound_bytes(permit['authorizationBinding'])
         stable_bound_bytes(permit['ownerBinding'])
+        verify_approved_inputs(job)
         os.kill(owner['controllerPid'], 0)
         verify_node_identity(node_identity)
         required(subprocess.check_output(['git', '-C', FORMAL_REPO, 'rev-parse', 'HEAD'], text=True).strip()
@@ -581,8 +623,7 @@ def read_approved_job_files(job_file, authorization_file, approved_job_sha256, a
     job, authorization = stable_bound_json(job_ref), stable_bound_json(authorization_ref)
     validate_approved_job_config(job, authorization)
     required(authorization['jobBinding'] == job_ref, 'authorization binds different job bytes')
-    for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
-        stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+    verify_approved_inputs(job)
     approved_current_implementation(job)
     return dict(job=job, authorization=authorization, jobBinding=job_ref, authorizationBinding=authorization_ref)
 
@@ -682,7 +723,7 @@ def launch_approved_job(job_file, authorization_file, approved_job_sha256, autho
         permit = dict(schemaVersion='digest-approved-job-command-permit-v001', status='verified-approved-digest-job-v001',
             jobBinding=configured['jobBinding'], authorizationBinding=configured['authorizationBinding'],
             bindings=dict(planId=job['planId'], logicalPrefix=job['outputRoot'],
-                planManifest=absolute_repo_binding(job['inputs']['candidateManifestBinding']),
+                planManifest=absolute_input_binding(job, job['inputs']['candidateManifestBinding']),
                 approvalRecord=configured['authorizationBinding'], implementationSha=job['implementation']['sha'],
                 commandPermitPath=str(permit_file)), storage=storage,
             implementation=[absolute_repo_binding(ref) for ref in job['implementation']['bindings']],
@@ -735,8 +776,7 @@ def prepare_approved_record_job(job_file, authorization_file, approved_job_sha25
     def revalidate():
         for identity in identities:verify_file_identity(identity)
         for ref in anchor_refs:stable_bound_bytes(ref)
-        for key in APPROVED_INPUT_KEYS - {'preparationParameters'}:
-            stable_bound_bytes(absolute_repo_binding(job['inputs'][key]))
+        verify_approved_inputs(job)
         verify_node_identity(node_identity)
         approved_current_implementation(job)
         inspect_output_ancestors(root, job['storage'])

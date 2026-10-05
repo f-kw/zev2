@@ -329,6 +329,7 @@ export async function readDigestFormalHandoffInputsV001(workspaceRoot: string = 
   const preparation = await read(DIGEST_HANDOFF_PREPARATION_BINDING_V001);
   assert.equal(manifest.schemaVersion, 'digest-caption-144px-reflow-candidate-bundle-v001');
   const qualified = await readPreparedDigestCaptionJudgmentInputsV001({workspaceRoot: root,
+    inputRoot: preparation.inputRoot, inputPrefix: preparation.inputPrefix,
     sourceRuntimeRoot: path.dirname(path.join(root, preparation.stateBinding.path)),
     outputRoot: path.dirname(path.join(root, DIGEST_HANDOFF_PREPARATION_BINDING_V001.path)),
     preparationId: preparation.preparationId, stateBinding: preparation.stateBinding,

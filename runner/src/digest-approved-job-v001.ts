@@ -56,7 +56,7 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   exact(job, ['schemaVersion','planId','outputRoot','inputs','storage','expected','implementation','guard','allocationBudget',
     ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
     ...(Object.hasOwn(job,'recoveryBinding')?['recoveryBinding']:[])], 'APPROVED_JOB_EXACT_FIELDS');
-  assert.equal(job.schemaVersion, 'digest-approved-job-v001'); assert(ID.test(job.planId), 'APPROVED_JOB_PLAN_ID');
+  assert.equal(job.schemaVersion, 'digest-approved-job-v002'); assert(ID.test(job.planId), 'APPROVED_JOB_PLAN_ID');
   const prefix = digestJobRelativePathV001(job.outputRoot);
   assert(prefix.startsWith('runtime/artifacts/') && prefix.split('/').length >= 4, 'APPROVED_JOB_OUTPUT_ROOT');
   if(Object.hasOwn(job,'verificationPolicy')) validateDigestRepresentativeVerificationPolicyV001(job.verificationPolicy,prefix);
@@ -67,10 +67,31 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     positive(job.recoveryBinding.sizeBytes,'APPROVED_JOB_RECOVERY_BINDING_SIZE');
     assert(job.verificationPolicy?.mode === 'representative-plus-rules-v001', 'APPROVED_JOB_RECOVERY_REPRESENTATIVE_POLICY_REQUIRED');
   }
-  exact(job.inputs, ['preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding'], 'APPROVED_JOB_INPUTS_REQUIRED');
-  for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding']) validateDigestJobBindingV001(job.inputs[k]);
+  exact(job.inputs, ['inputRoot','inputPrefix','preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'], 'APPROVED_JOB_INPUTS_REQUIRED');
+  absolute(job.inputs.inputRoot, 'APPROVED_JOB_INPUT_ROOT_REQUIRED');
+  assert.equal(job.inputs.inputRoot, job.storage.guestRoot, 'APPROVED_JOB_INPUT_ROOT_CHANGED');
+  assert.equal(digestJobRelativePathV001(job.inputs.inputPrefix), `runtime/artifacts/${job.planId}/current-inputs-v001`, 'APPROVED_JOB_INPUT_PREFIX_CHANGED');
+  assert(prefix !== job.inputs.inputPrefix && !prefix.startsWith(job.inputs.inputPrefix + '/') && !job.inputs.inputPrefix.startsWith(prefix + '/'), 'APPROVED_JOB_INPUT_OUTPUT_OVERLAP');
+  for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding']) {
+    validateDigestJobBindingV001(job.inputs[k]);
+    assert(job.inputs[k].path.startsWith(job.inputs.inputPrefix + '/'), 'APPROVED_JOB_INPUT_PREFIX_REQUIRED');
+  }
   assert(job.inputs.preparationParameters && typeof job.inputs.preparationParameters === 'object'
     && !Array.isArray(job.inputs.preparationParameters), 'APPROVED_JOB_PREPARATION_REQUIRED');
+  assert.equal(job.inputs.preparationParameters.inputRoot, job.inputs.inputRoot, 'APPROVED_JOB_PREPARATION_INPUT_ROOT_CHANGED');
+  assert.equal(job.inputs.preparationParameters.inputPrefix, job.inputs.inputPrefix, 'APPROVED_JOB_PREPARATION_INPUT_PREFIX_CHANGED');
+  const parameters = job.inputs.preparationParameters;
+  assert.equal(parameters.workspaceRoot, workspaceRoot, 'APPROVED_JOB_PREPARATION_CODE_ROOT_CHANGED');
+  for (const name of ['outputRoot','sourceRuntimeRoot']) {
+    absolute(parameters[name], 'APPROVED_JOB_PREPARATION_ABSOLUTE_PATH_REQUIRED');
+    assert(parameters[name].startsWith(job.inputs.inputRoot+'/'+job.inputs.inputPrefix+'/'), 'APPROVED_JOB_PREPARATION_PREFIX_REQUIRED');
+  }
+  for (const name of ['stateBinding','styleTemplateBinding']) {
+    validateDigestJobBindingV001(parameters[name]);
+    assert(parameters[name].path.endsWith('.json') && parameters[name].path.startsWith(job.inputs.inputPrefix+'/'), 'APPROVED_JOB_PREPARATION_JSON_PREFIX_REQUIRED');
+  }
+  validateDigestJobBindingV001(parameters.scopeBinding);
+
   exact(job.expected, ['frames','audioSamples','groups','atoms','cues'], 'APPROVED_JOB_EXPECTED_REQUIRED');
   for (const [k, v] of Object.entries(job.expected)) positive(v, 'APPROVED_JOB_EXPECTED_' + k);
   exact(job.allocationBudget, ['baseBuildBytes','rendererPreparationBytes'], 'APPROVED_JOB_ALLOCATION_BUDGET_REQUIRED');
@@ -95,6 +116,7 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   assert.equal(new Set(job.implementation.bindings.map((b: Json) => b.path)).size, job.implementation.bindings.length, 'APPROVED_JOB_DUPLICATE_CODE_BINDING');
   for (const required of ['runner/src/digest-approved-job-v001.ts','runner/src/digest-approved-job-runner-v001.ts',
     'runner/src/digest-approved-inputs-v001.ts','runner/src/digest-formal-handoff-v001.ts',
+    'runner/src/digest-caption-registration-migration-v001.ts',
     'evals/clip_composition/adopted_media_manufacturing_v001.mts','evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
     'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts','evals/clip_composition/render_presentation_v002.mjs',
     'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
@@ -102,12 +124,12 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     assert(job.implementation.bindings.some((b: Json) => b.path === required), 'APPROVED_JOB_MISSING_CODE_BINDING ' + required);
   assert.equal(Object.hasOwn(authorization,'recoveryBinding'),hasRecovery,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_PRESENCE_MISMATCH');
   exact(authorization, ['schemaVersion','recordId','userApproval','actions','jobBinding','planId','manifestBinding',
-    'typographySettingsBinding','outputRoot','storage','guard','implementation','normalCandidates',
+    'typographySettingsBinding','migrationApprovalEvidenceBinding','outputRoot','storage','guard','implementation','normalCandidates',
     ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
     ...(hasRecovery?['recoveryBinding']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
   if(hasRecovery) assert.deepEqual(authorization.recoveryBinding,job.recoveryBinding,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_MISMATCH');
   if(Object.hasOwn(job,'verificationPolicy')) assert.deepEqual(authorization.verificationPolicy,job.verificationPolicy,'APPROVED_AUTHORIZATION_VERIFICATION_POLICY_MISMATCH');
-  assert.equal(authorization.schemaVersion, 'digest-approved-job-authorization-v001'); assert(ID.test(authorization.recordId));
+  assert.equal(authorization.schemaVersion, 'digest-approved-job-authorization-v002'); assert(ID.test(authorization.recordId));
   exact(authorization.userApproval, ['at','messageId','text','sourceThreadId'], 'APPROVED_USER_EVIDENCE_REQUIRED');
   const user = authorization.userApproval;
   assert(typeof user.at === 'string' && Number.isFinite(Date.parse(user.at)) && /(?:Z|\+00:00)$/u.test(user.at), 'APPROVED_USER_TIME_REQUIRED');
@@ -117,6 +139,7 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   for (const k of ['planId','outputRoot','storage','guard','implementation']) assert.deepEqual(authorization[k], job[k], 'APPROVED_AUTHORIZATION_' + k + '_MISMATCH');
   assert.deepEqual(authorization.manifestBinding, job.inputs.candidateManifestBinding, 'APPROVED_AUTHORIZATION_MANIFEST_MISMATCH');
   assert.deepEqual(authorization.typographySettingsBinding, job.inputs.typographySettingsBinding, 'APPROVED_AUTHORIZATION_SETTINGS_MISMATCH');
+  assert.deepEqual(authorization.migrationApprovalEvidenceBinding, job.inputs.migrationApprovalEvidenceBinding, 'APPROVED_AUTHORIZATION_MIGRATION_EVIDENCE_MISMATCH');
   return Object.freeze({status: 'validated-configuration', planId: job.planId, expected: structuredClone(job.expected)});
 }
 
@@ -134,6 +157,20 @@ async function readBytes(binding: DigestJobBindingV001, root: string, absolutePa
   if (binding.sizeBytes !== undefined) assert.equal(first.length, binding.sizeBytes);
   return first;
 }
+export function digestApprovedJobInputRootV001(job: Json, relativePath: string, workspaceRoot: string): string {
+  digestJobRelativePathV001(relativePath);
+  return relativePath.startsWith(job.inputs.inputPrefix + '/') ? job.inputs.inputRoot : workspaceRoot;
+}
+async function assertInputDevice(job: Json, relativePath: string) {
+  const root = job.inputs.inputRoot;
+  assert.equal(await realpath(root), root, 'APPROVED_JOB_INPUT_ROOT_REALPATH_CHANGED');
+  for (let current = path.join(root, relativePath);; current = path.dirname(current)) {
+    const info = await lstat(current);
+    assert(!info.isSymbolicLink() && info.dev === job.storage.guestDevice, 'APPROVED_JOB_INPUT_DEVICE_OR_SYMLINK_CHANGED');
+    if (current === root) {assert(info.isDirectory()); break;}
+    assert(current.startsWith(root + '/'), 'APPROVED_JOB_INPUT_ESCAPED');
+  }
+}
 function freeze(value: any) {if (value && typeof value === 'object' && !Object.isFrozen(value)) {Object.values(value).forEach(freeze); Object.freeze(value);}}
 export async function readQualifiedDigestApprovedJobV001(externalOptions: Parameters<typeof validateDigestApprovedJobConfigurationV001>[2]) {
   // All future revalidation uses the same immutable anchors as the first read.
@@ -145,7 +182,10 @@ export async function readQualifiedDigestApprovedJobV001(externalOptions: Parame
   const job: Json = JSON.parse(jobBytes.toString()), authorization: Json = JSON.parse(approvalBytes.toString());
   validateDigestApprovedJobConfigurationV001(job, authorization, options);
   const readBinding = async (binding: DigestJobBindingV001): Promise<Json> => {
-    const bytes = await readBytes(binding, root), value = JSON.parse(bytes.toString());
+    const inputRoot = digestApprovedJobInputRootV001(job, binding.path, root);
+    if (inputRoot !== root) await assertInputDevice(job, binding.path);
+    const bytes = await readBytes(binding, inputRoot), value = JSON.parse(bytes.toString());
+    if (inputRoot !== root) await assertInputDevice(job, binding.path);
     assert(value && typeof value === 'object' && !Array.isArray(value));
     if (binding.schemaVersion !== undefined) assert.equal(value.schemaVersion, binding.schemaVersion);
     if (binding.canonicalSha256 !== undefined) {
@@ -162,9 +202,10 @@ export async function readQualifiedDigestApprovedJobV001(externalOptions: Parame
     }
     assert.equal((await exec('git', ['rev-parse','HEAD'], {cwd: root})).stdout.trim(), job.implementation.sha, 'APPROVED_JOB_IMPLEMENTATION_HEAD_CHANGED');
     for (const binding of job.implementation.bindings) await readBytes(binding, root);
+    await readBinding(job.inputs.migrationApprovalEvidenceBinding);
   };
   freeze(job); freeze(authorization);
-  const qualified = Object.freeze({job, authorization, jobBinding: Object.freeze({...options.jobBinding}),
+  const qualified = Object.freeze({job, authorization, inputRoot: job.inputs.inputRoot, inputPrefix: job.inputs.inputPrefix, jobBinding: Object.freeze({...options.jobBinding}),
     authorizationBinding: Object.freeze({...options.authorizationBinding}), workspaceRoot: root, readBinding, assertCurrent});
   qualifiedJobs.add(qualified); await assertCurrent(); return qualified;
 }

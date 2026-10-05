@@ -8,7 +8,7 @@ import {promisify} from 'node:util';
 import {createReadStream} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {readQualifiedDigestApprovedJobV001, assertQualifiedDigestApprovedJobV001, validateDigestApprovedJobConfigurationV001,
-  digestJobSha256V001 as sha, digestJobRelativePathV001 as safe, type Json} from './digest-approved-job-v001.js';
+  digestJobSha256V001 as sha, digestJobRelativePathV001 as safe, digestApprovedJobInputRootV001, type Json} from './digest-approved-job-v001.js';
 import {readApprovedDigestInputsV001, assertApprovedDigestInputsV001, prepareApprovedDigestCaptionCoreV001,
   assertQualifiedApprovedDigestSourcePackageTaskV001, qualifyApprovedDigestSourcePackageReadbackV001} from './digest-approved-inputs-v001.js';
 import type {ApprovedDigestQualifiedJobV001} from './digest-approved-inputs-v001.js';
@@ -98,7 +98,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   assert.deepEqual(permit.jobBinding, qualified.jobBinding); assert.deepEqual(permit.authorizationBinding, qualified.authorizationBinding);
   assert.deepEqual(permit.storage, s);
   assert.deepEqual(permit.bindings, {planId: job.planId,logicalPrefix: outputRoot,
-    planManifest: {...job.inputs.candidateManifestBinding,path: path.join(ROOT,job.inputs.candidateManifestBinding.path)},
+    planManifest: {...job.inputs.candidateManifestBinding,path: path.join(digestApprovedJobInputRootV001(job,job.inputs.candidateManifestBinding.path,ROOT),job.inputs.candidateManifestBinding.path)},
     approvalRecord: qualified.authorizationBinding,implementationSha: job.implementation.sha,commandPermitPath: permitPath});
   assert.deepEqual(permit.implementation, job.implementation.bindings.map((b: Json) => ({...b,path: path.join(ROOT,b.path)})));
   assert.equal(permit.monitorDirectory, generatedRoot + '/monitor'); assert.equal(permit.ownerBinding.path, generatedRoot + '/ownership.json');
@@ -144,7 +144,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   async function currentRaw() {
     await assertQualifiedDigestApprovedJobV001(qualified);
     if (recovery !== null) await recovery.assertCurrent();
-    for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding'])
+    for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'])
       await qualified.readBinding(job.inputs[key]);
     const nodeNow=await lstat(process.execPath,{bigint:true});
     for(const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(nodeNow[key],nodeIdentity[key],'APPROVED_JOB_NODE_IDENTITY_CHANGED');
@@ -179,10 +179,11 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   }
   const generated=(p:string)=>{safe(p); return p===outputRoot||p.startsWith(outputRoot+'/');};
   const oldReference = (p:string) => recovery !== null && recovery.pins.has(path.join(s.guestRoot,p));
-  const resolve=(p:string)=>path.join(generated(p)||oldReference(p)?s.guestRoot:ROOT,p);
+  const readRoot=(p:string)=>generated(p)||oldReference(p)?s.guestRoot:digestApprovedJobInputRootV001(job,p,ROOT);
+  const resolve=(p:string)=>path.join(readRoot(p),p);
   async function readJson(p:string) {
     await current(); const stable=await load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
-    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(p)||oldReference(p)?s.guestRoot:ROOT,relativePath:p});
+    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:readRoot(p),relativePath:p});
     const value=JSON.parse(bytes.toString());
     if(p===outputRoot+'/source-package.json') {
       assert(publishedSourcePackageSha&&sha(bytes)===publishedSourcePackageSha,'APPROVED_SOURCE_PUBLICATION_CHANGED');
@@ -192,7 +193,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   }
   async function readBound(b:Json) {
     await current(); safe(b.path); const stable=await load('evals/clip_composition/presentation_timeline_composition_decision_v001.mjs');
-    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:generated(b.path)||oldReference(b.path)?s.guestRoot:ROOT,relativePath:b.path});
+    const bytes=await stable.readPresentationMeaningWorkspaceFileStableV001({workspaceRoot:readRoot(b.path),relativePath:b.path});
     assert.equal(sha(bytes),b.fileSha256); if(b.sizeBytes!==undefined) assert.equal(bytes.length,b.sizeBytes);
     const value=JSON.parse(bytes.toString()); if(b.canonicalSha256!==undefined) assert.equal(m.canonicalSha(value),b.canonicalSha256);
     if(b.schemaVersion!==undefined) {
