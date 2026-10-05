@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "zev-oh-context-review-verification-v001",
+  "recordedAtUtc": "2026-10-05T03:53:48Z",
+  "baseHead": "36a1c8c7a9f5566a869fcf0e3feee7b74df36f6a",
+  "artifactPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/oh-context-review-20261005-v001/ZEV-お-前後映像比較.html",
+  "artifactBytes": 3895306,
+  "artifactSha256": "9fffb6784689b5cf387248a67b137cb135f784d68064d26829f8cbb34e14171e",
+  "build": {
+    "htmlPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/oh-context-review-20261005-v001/ZEV-お-前後映像比較.html",
+    "htmlBytes": 3895306,
+    "htmlSha256": "9fffb6784689b5cf387248a67b137cb135f784d68064d26829f8cbb34e14171e",
+    "clipPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/oh-context-review-20261005-v001/context-43m35s-44m00s.mp4",
+    "clipBytes": 2898814,
+    "clipSha256": "10f262ce16a78b1910fb0a09c273e1e2abe7ab62c53b0d2bbbb0f5fd66fb6ebe",
+    "sourceRangeSeconds": [
+      2615,
+      2640
+    ],
+    "sourceClockOriginSeconds": 2615,
+    "reviewVideo": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "frameCount": 750,
+      "durationSeconds": 25,
+      "audio": "AAC/44100Hz/stereo"
+    },
+    "oldQuestionFrames": [
+      327,
+      358
+    ],
+    "oldOhFrames": [
+      358,
+      359
+    ],
+    "mergedFrames": [
+      327,
+      359
+    ],
+    "reusedPlayerPath": "/Users/kawafmm/workspace/zev2/tools/point-review/player.mjs",
+    "playerSha256": "ccc973edba7765ad9bd3b06c11903e37dc850545aca8949c30b963ddec95e4b8",
+    "formalApplied": false,
+    "actualSpeechTimingConfirmed": false,
+    "externalRequests": 0
+  },
+  "browserVerification": {
+    "checkedAtUtc": "2026-10-05T03:50:59.096Z",
+    "browser": "Microsoft Edge headless, separate owned profile",
+    "checks": [
+      {
+        "name": "embedded video metadata and unmuted audio",
+        "observed": {
+          "duration": 25,
+          "width": 1280,
+          "height": 720,
+          "muted": false,
+          "volume": 1,
+          "readyState": 4,
+          "clock": "元動画 43:35.000"
+        }
+      },
+      {
+        "name": "old boundary frames",
+        "frames": [
+          326,
+          327,
+          357,
+          358,
+          359
+        ]
+      },
+      {
+        "name": "merged boundary frames",
+        "frames": [
+          326,
+          327,
+          357,
+          358,
+          359
+        ]
+      },
+      {
+        "name": "mode switch preserves media time and changes same-frame overlay",
+        "time": 11.933533
+      },
+      {
+        "name": "old real playback at 0.5 speed stops at requested boundary",
+        "oldOhActualVideoFrames": [
+          {
+            "mode": "old",
+            "frame": 358,
+            "caption": "お!"
+          },
+          {
+            "mode": "old",
+            "frame": 358,
+            "caption": "お!"
+          }
+        ],
+        "end": 19.75
+      },
+      {
+        "name": "merged real playback and common next reaction",
+        "observedFrameCount": 38,
+        "end": 19.75
+      },
+      {
+        "name": "full 25 second playback and audio decode",
+        "observed": {
+          "videoFrames": 2752,
+          "audioDecodedBytes": 1917282,
+          "muted": false,
+          "volume": 1,
+          "end": 25,
+          "caption": ""
+        }
+      },
+      {
+        "name": "rewind and single-frame steps"
+      },
+      {
+        "name": "separate identification and choice, position capture and copy",
+        "copyMessage": "回答をコピーしました。元の会話へ貼り付けられます。"
+      },
+      {
+        "name": "answer download matches text"
+      },
+      {
+        "name": "local answer reload retention"
+      },
+      {
+        "name": "mobile width has no horizontal overflow"
+      }
+    ],
+    "errors": [],
+    "externalPageRequests": 0,
+    "humanAnswerRecorded": false,
+    "actualMeaningIdentifiedByCodex": false,
+    "formalApplied": false
+  },
+  "sourceMetadataUnchanged": {
+    "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+    "bytes": 1016332396,
+    "mtime": 1791093353.6106684,
+    "device": 16777243,
+    "fullSourceRehashExecuted": false
+  },
+  "independentReadReview": {
+    "reviewer": "renderer_context",
+    "blockingIssues": 0,
+    "verified": [
+      "source clock +2615s",
+      "old question327–358/oh358–359/merged327–359/reaction359–512",
+      "audio on by default",
+      "mode switch preserves position",
+      "separate unanswered identification and choice",
+      "review-only scope"
+    ]
+  },
+  "attemptHistory": [
+    {
+      "attempt": 1,
+      "outcome": "old one-frame assertion failed",
+      "cause": "currentTime status and actual frame painting could compete; actual mediaTime also rounds to microseconds"
+    },
+    {
+      "attempt": 2,
+      "outcome": "paused boundary sample timed out",
+      "cause": "floor near frame358 from rounded 11.933333 timestamp fell to357"
+    },
+    {
+      "attempt": 3,
+      "outcome": "12 browser checks passed",
+      "fix": "actual video frame time owns live overlay; reject stale paused callbacks; 0.0001frame rounding allowance"
+    }
+  ],
+  "formalInputChanged": false,
+  "formalMovieChanged": false,
+  "newSttOrExternalApi": false,
+  "sourceRetimed": false,
+  "qualityAdopted": false,
+  "templatePath": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/oh-context-review-template-v001.html",
+  "externalMediaUpload": "not executed; automatic review rejected GitHub push containing embedded source video; local HTML KEEP; metadata and template only"
+}

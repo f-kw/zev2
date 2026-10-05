@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v085
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v086
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05 03:53 UTC（お! の前後映像付き確認HTMLを完成、保存HTMLの実動作確認済み）
+
+本人の専用HTML指示と監視一時停止承認に従い、原43:35〜44:00の25秒/音声付き映像を単体HTMLへ埋込。会話全文と対象目印、旧1frame分離/質問への32frame統合のoverlay切替、前後再生/対象前/速度/位置、識別と案の回答コピー/保存を用意。[HTMLをMacで開く](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/oh-context-review-20261005-v001/ZEV-お-前後映像比較.html) / [使い方と実確認](reports/digest-new-material-SJvP9jhEdyI-20261004/oh-context-review-result-v001.md)。
+
+既存playerを再利用、原時計は＋2615秒、旧/統合境界を計算。実更新競合/丸めの局所修正後、専用Edgeの実再生・音声decode・切替・回答操作等12確認成功、外部page request/エラー0、独立読取blocking0。精密音声同期/人間品質/正式適用は未確認、元素材/制作入力/字幕時計/正式動画変更0、新STT/API/課金/全尺製造0。本人の世界開始38:42秒台回答を保持し、再質問しない。読み取り/記録時刻 2026-10-05T03:53:48Z。
+
+状態：今回HTML作成・動作確認は完了。映像入りHTMLのGitHub pushは自動承認で拒否されたため未実行、完成HTMLはMacローカルにKEEPし、映像を含まないテンプレートと記録だけmainへ反映する。次担当親monaが本人へ渡し、文脈での対象識別と表示案を受ける。スティッキーズと監視再開は親管理、操作していない。今回のffmpeg/Node/専用ブラウザ終了、仮回答だけ整理、参照中のHTML/clip/証拠KEEP。[session log](work-logs/2026-10/2026-10-05T0353_Codex-SSD_ID9-oh-context-review_36a1c8c7.md)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 03:10 UTC（本人の42秒台確認を受領、短字幕の最小差分を引き継ぎ）
 
