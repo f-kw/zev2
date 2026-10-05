@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v089
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v090
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05 07:21 UTC（正式全尺更新の入力検査成功、内蔵空き不足で実開始前停止）
+
+親は本人の制作続行指示を受け、既存正式全尺更新を準備して実開始する方針を選択。局所入口の追加実装は行わない。新修正manifest、実装57path、650cue/1041行/5450atom/31group/37619frame/55299930sampleを新job/authへ束縛し、正式入力検査成功。世界465と結合570は各32frame/約1.067秒、代表464〜469・570〜571の対応一致。元入力/STT/ID/音声/旧不合格は保持。製品差分0。
+
+正式prepareは07:19:22 UTCに内蔵12GBreserveで拒否。最終容量読取2026-10-05T07:21:11.595246+00:00、内蔵11,964,096,512B、基準まで35,903,488B不足。guest約92.7GB/host約1.99TBと合算しない。新owner/permit/output root/描画/合成/媒体0。今回所有と確認できる回収可能な不要物は見つからず削除0、SSD既存内容走査/他process停止/保護値変更0。実glyph/動画QC/通常速可読性/音声聴取/人間品質は未評価。
+
+状態：相談役待ち（容量対処）。次担当親monaが安全に整理してよい内蔵fileを特定するか、基準超過後に同じMac実装者へ続行を渡す。製造承認を取り直す問題ではない。この文書checkpointでHEADが変わるため、再開前に当時のclean main/実bytesへ新controlを束縛し直し、device/resource/競合なしを正式経路で確認。[結果・根拠](reports/digest-new-material-SJvP9jhEdyI-20261004/short-caption-full-update-preparation-v001.md)・[session log](work-logs/2026-10/2026-10-05T0721_Codex-SSD_ID9-full-update-preparation_470d226a.md)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 06:42 UTC（短字幕表示調整を2path実装、局所実映像の入口は範囲外）
 

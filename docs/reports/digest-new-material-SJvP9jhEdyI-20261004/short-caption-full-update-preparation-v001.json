@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "digest-short-caption-full-update-preparation-result-v001",
+  "recordedAt": "2026-10-05T07:23:33.239510+00:00",
+  "preparedImplementationSha": "470d226a88cde9af17827a3bc5fa0b75392b0c01",
+  "status": "blocked-before-manufacture",
+  "nextOwner": "parent mona: resolve internal disk capacity within authorized cleanup; same Mac executor after explicit continuation",
+  "parentLatestUserMessageId": "Sentinel_27ac0b616adc81919e348a5bf437982a",
+  "jobBindings": {
+    "jobBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/job.json",
+      "fileSha256": "0b9ae278f83d6fdcd69721b821032b67683d85e0bef0f330dcc47588f56c277e",
+      "sizeBytes": 17156
+    },
+    "authorizationBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/authorization.json",
+      "fileSha256": "9700a806a37319cab2d83dfc6886143ee64d70a82c17e265d2802bcf46ac5334",
+      "sizeBytes": 15429
+    },
+    "continuationAuthorityBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/continuation-authority-evidence.json",
+      "fileSha256": "0e8f9a2b8365855a3eb6ffa5fb1b81617075b321f95b8bbf05f81e9b310ad916",
+      "sizeBytes": 2693
+    },
+    "preparationEvidenceBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/preparation-evidence.json",
+      "fileSha256": "cee1df346244b9b5600a7d29b32c5ca1970aa61ba7d800363867c3bb863bb3f3",
+      "sizeBytes": 3621
+    },
+    "outputRoot": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-display-v001",
+    "observedStorage": {
+      "guest": {
+        "path": "/Volumes/ZEV-Digest-20261003-01",
+        "device": 16777243,
+        "availableBytes": 92705968128
+      },
+      "host": {
+        "path": "/Volumes/KIOXIA",
+        "device": 16777238,
+        "availableBytes": 1989498896384
+      },
+      "internal": {
+        "path": "/Users/kawafmm/workspace/zev2",
+        "device": 16777234,
+        "availableBytes": 11954741248
+      }
+    },
+    "expected": {
+      "frames": 37619,
+      "audioSamples": 55299930,
+      "groups": 31,
+      "atoms": 5450,
+      "cues": 650
+    }
+  },
+  "readiness": {
+    "checkedAt": "2026-10-05T07:19:21.479337+00:00",
+    "jobBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/job.json",
+      "fileSha256": "0b9ae278f83d6fdcd69721b821032b67683d85e0bef0f330dcc47588f56c277e",
+      "sizeBytes": 17156
+    },
+    "authorizationBinding": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/authorization.json",
+      "fileSha256": "9700a806a37319cab2d83dfc6886143ee64d70a82c17e265d2802bcf46ac5334",
+      "sizeBytes": 15429
+    },
+    "processesStarted": 0,
+    "rootClaimed": false,
+    "status": "readiness-blocked",
+    "exceptionType": "ValueError",
+    "reason": "internal OS disk reached approved reserve",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 9, in <module>\n  File \"/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py\", line 630, in prepare_approved_job\n    required(reason is None, reason or 'approved launch resources unavailable')\n  File \"/Users/kawafmm/workspace/zev2/tools/digest-quality/original-resolution-full-supervisor-v002.py\", line 248, in required\n    raise ValueError(reason)\nValueError: internal OS disk reached approved reserve\n",
+    "finishedAt": "2026-10-05T07:19:22.190407+00:00"
+  },
+  "lastResourceAndOwnershipObservation": {
+    "checkedAt": "2026-10-05T07:21:11.595246+00:00",
+    "outputDirectory": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-display-v001",
+    "outputRootExists": false,
+    "ownerCreated": false,
+    "manufactureOrRenderWorkerStarted": false,
+    "internalAvailableBytes": 11964096512,
+    "reserveBytes": 12000000000,
+    "extraProductChanges": 0,
+    "oldInputsAndMediaPreserved": true,
+    "cleanupCandidates": "No file known to be both owned by this preparation and unnecessary with material recoverable capacity was found in the workspace metadata review. No existing SSD contents were scanned.",
+    "evidenceBindings": {
+      "display-adjusted-approved-job-v001-bindings.json": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/display-adjusted-approved-job-v001-bindings.json",
+        "fileSha256": "380968e877867f8e888b399b21dc777e8be699e1a3189f9e5b1501e2c972898b",
+        "sizeBytes": 1640
+      },
+      "display-adjusted-inputs-preflight-v001.json": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/display-adjusted-inputs-preflight-v001.json",
+        "fileSha256": "6b2752e4c67a616003b34d1a6ef975dbea6dfb7c928e96d6e88d8fb885090f55",
+        "sizeBytes": 234115
+      },
+      "display-adjusted-formal-readiness-v001.json": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/display-adjusted-formal-readiness-v001.json",
+        "fileSha256": "b1d6e7c60cfac65b888a5b37d3d155b870e5ae3667da4f5e8a2ccd2e187857ab",
+        "sizeBytes": 1382
+      }
+    }
+  },
+  "metadataQualification": {
+    "status": "qualified-metadata-only",
+    "planId": "digest-SJvP9jhEdyI-20261004-v001",
+    "expected": {
+      "frames": 37619,
+      "audioSamples": 55299930,
+      "groups": 31,
+      "atoms": 5450,
+      "cues": 650
+    },
+    "typography": {
+      "schemaVersion": "digest-typography-derived-values-v001",
+      "fontSizePx": 216,
+      "horizontalMarginPx": 108,
+      "horizontalSafeMarginRatio": 0.05625,
+      "maxLogicalWidthPerLine": 15,
+      "maxLinesPerCue": 2,
+      "canvasWidthPx": 1920,
+      "borderWidthPx": 8,
+      "glowWidthPx": 4,
+      "textSafePaddingPx": 9,
+      "strokeExtentPx": 12,
+      "availableTextWidthPx": 1662,
+      "logicalWidthUnitPx": 108
+    },
+    "sourceBytesHashed": false,
+    "storageOrSourceCapabilityMinted": false,
+    "ownerCreated": false,
+    "manufactureOrRenderWorkerStarted": false,
+    "representativeSelectionCheckedAgainstActualCueOrdinals": true
+  },
+  "resourceShortageBytes": 35903488,
+  "productChanges": 0,
+  "manufacturedVideos": 0,
+  "glyphInspection": "not-evaluated",
+  "technicalVideoQc": "not-evaluated",
+  "normalSpeedPlayback": "not-evaluated",
+  "audioListening": "not-evaluated",
+  "humanQualityAdoption": "not-evaluated",
+  "tests": "No new product changes; earlier helper26/reader11 and typechecks retained. Actual metadata qualification passed. Official prepare rejected resource reserve.",
+  "resumption": "Rebind fresh controls to the then-current clean main SHA before launch; this document checkpoint changes HEAD. Reconfirm devices/resources/absence of competing workers. Do not reuse an owner or lower reserve.",
+  "cleanup": "Deleted no files; retained inputs, outputs, original material, failed-QC evidence and small preparation evidence. No manufactured worker or output root exists."
+}
