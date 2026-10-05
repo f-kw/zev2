@@ -50,3 +50,5 @@
 成功後不要なbase-media作業snapshot/PCM/途中transcodeは既存Coreが整理。完成記録固定後に今回製造・記録呼出しの不要なcompiled JS cache93file/3,970,838Bだけを追加整理し、output/tempは空。元素材、600.5MBのbase媒体一式、完成MP4、650primary PNG、代表8PNG、約6.84MBのrepeat/mask/layout検査証拠、入力・新旧receipt・失敗ログは後続参照のためKEEP。旧成果/他者file/他者processの削除・停止0。製造/抽出/finalizer/get-resultのown process残存0。本人へ渡す動画配信だけは明示指示に従い稼働を保持する。
 
 12:43:27 UTCの空きはguest86,221,873,152B、host1,984,356,679,680B、内蔵16,482,254,848B。今回の実装と製造は終了し、次担当は親mona（完成URLと残る品質未評価を本人へ渡す）。人間品質待ちは異常や製造停止ではなく、追加製造を自動再開しない。正本/今回ログだけのcommit/pushと最終Git cleanを別に確認する。結果は [最終Git記録](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/current-display-final-git-v001.json) と最終報告に示す。
+
+2026-10-05T13:57:11.320588+00:00 追記：本人が序盤1分で大きな字幕ずれを実視聴報告。技術QC/静止画合格で否定しない。[短い2クリップHTMLと原因切り分け](short-display-review-and-sync-diagnosis-v001.md)を提供。全尺レビュー要求を終了し、品質採用は未成立。旧完成technical receiptは保持、同期修正/再製造は未実施。
