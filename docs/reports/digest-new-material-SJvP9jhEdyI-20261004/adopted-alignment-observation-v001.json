@@ -1,0 +1,710 @@
+{
+  "schemaVersion": "zev-adopted-alignment-observation-v001",
+  "readAtUtc": "2026-10-05T02:13:03.535553+00:00",
+  "scope": "Current STT implementation and LAN verification; one authorized adopted-text alignment; two target inputs prepared; no clock or video application",
+  "githubMain": {
+    "verifiedAtUtc": "2026-10-05T02:01:33.353209+00:00",
+    "remoteMain": "ad53ca78236b332714c8410e190baad9dbbf9aa2",
+    "committerDate": "2026-10-05T01:54:16Z",
+    "commitSubject": "Preserve STT alignment evidence and add adopted-text alignment jobs"
+  },
+  "implementationVerified": {
+    "sourceCheckpoint": "deep-copy ASR or adopted source before alignment; available via GET source even after downstream failure",
+    "textDiagnostics": "four-stage exact code-point differences and needs_review",
+    "scoreAndUntimedCharacters": "sourceCharacters retains every source character; score zero and missing null distinguished; old timed projection retained",
+    "adoptedTextRoute": "POST /align multipart file,language,segments; ASR and diarization bypassed; separate job identity contains adopted text/windows"
+  },
+  "tests": {
+    "userReportedPassCount": 34,
+    "rootExecutedTests": 0,
+    "interpretation": "Reported by user, not re-run or independently counted here; independent read review confirmed source branches"
+  },
+  "lanRead": [
+    {
+      "endpoint": "/health",
+      "readAtUtc": "2026-10-05T02:02:29.555265+00:00",
+      "httpStatus": 200,
+      "bytes": 681,
+      "sha256": "a46874b3f11e73865790021db068680818a97332b7bde9ff3412496331dfa3b3",
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/lan-health.json",
+      "body": {
+        "ok": true,
+        "apiAlive": true,
+        "workerActive": true,
+        "storage": {
+          "accessible": true,
+          "readWrite": true,
+          "freeBytes": 1835883106304
+        },
+        "gpu": {
+          "available": true,
+          "deviceCount": 1,
+          "name": "NVIDIA GeForce RTX 4090",
+          "runtimeVersion": "12.8",
+          "checkedAt": "2026-10-05T02:02:01.339587+00:00",
+          "check": "CUDA initialization and one-element tensor; no STT model loaded",
+          "cached": true,
+          "probeIntervalSeconds": 300,
+          "ageSeconds": 28.0,
+          "fresh": true
+        },
+        "apiPid": 1904,
+        "model": "large-v3",
+        "bindAddress": "0.0.0.0",
+        "port": 8000,
+        "device": "cuda",
+        "alignDevice": "cpu",
+        "computeType": "float16",
+        "diarizationEnabled": true,
+        "diarizationDevice": "cpu",
+        "vadMethod": "silero",
+        "mode": "asynchronous-full-input",
+        "pipelineVersion": "zev-full-stt-1"
+      }
+    },
+    {
+      "endpoint": "/openapi.json",
+      "readAtUtc": "2026-10-05T02:02:29.583406+00:00",
+      "httpStatus": 200,
+      "bytes": 5312,
+      "sha256": "bb7eda68ceec39180319c5168b9a39e6f281acc9dc0b568fbdb54dd476ff5a4d",
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/lan-openapi.json",
+      "paths": [
+        "/health",
+        "/jobs",
+        "/jobs/{job_id}",
+        "/align",
+        "/jobs/{job_id}/source",
+        "/jobs/{job_id}/result",
+        "/jobs/{job_id}/transcript",
+        "/transcribe"
+      ],
+      "version": "0.1.0"
+    }
+  ],
+  "execution": {
+    "operation": "align",
+    "requestCount": 1,
+    "startedAtUtc": "2026-10-05T02:06:56.048817+00:00",
+    "stage": "registered-binding-problem",
+    "noAutomaticRetry": true,
+    "requestSeconds": 0.5612674999865703,
+    "returnedAtUtc": "2026-10-05T02:06:56.610879+00:00",
+    "curlExit": 0,
+    "httpStatus": 202,
+    "jobId": "8dfba0072e044a1b8e973e46172f60d3",
+    "checks": {
+      "operationIsAlign": true,
+      "adoptedSegmentsExact": true,
+      "sourceHashesMatchCurrentGitHub": false,
+      "inputShaMatches": true,
+      "diarizationDisabled": true,
+      "offline": true
+    },
+    "pipelineSourceHashes": {
+      "main.py": "246da4411c8c0a22f566d400d511b8d6c698cf1bb36a10ba5886ae8cf837d013",
+      "stt_pipeline.py": "01906fdca06231c8ec7ba855b45ace4c325857884ca83456cc13d3c282a8bff3",
+      "stt_alignment.py": "e4963404bf308f724f9e99770abc0c7850f0d55b59f1668ad2083d1abfe1f8f9"
+    },
+    "pipelineSettings": {
+      "model": "large-v3",
+      "device": "cuda",
+      "computeType": "float16",
+      "alignDevice": "cpu",
+      "diarizationDevice": "cpu",
+      "enableDiarization": false,
+      "vadMethod": "silero",
+      "numSpeakers": null,
+      "speakerCoverageThreshold": 0.7,
+      "speakerMarginThreshold": 0.15,
+      "minDiarizationAudioSeconds": 1.0,
+      "batchSize": 16,
+      "offline": true
+    },
+    "state": "queued",
+    "statusUrl": "/jobs/8dfba0072e044a1b8e973e46172f60d3",
+    "resultUrl": "/jobs/8dfba0072e044a1b8e973e46172f60d3/result"
+  },
+  "completedJob": {
+    "id": "8dfba0072e044a1b8e973e46172f60d3",
+    "state": "completed",
+    "registeredAt": "2026-10-05T02:06:56.608220+00:00",
+    "startedAt": "2026-10-05T02:06:56.691169+00:00",
+    "endedAt": "2026-10-05T02:07:13.603347+00:00",
+    "resultSha256": "a5f229935d352d87ad0ffd3646aec6c12665d1a9ffa61cf27c824122fe53f919",
+    "metrics": {
+      "gpu": {
+        "meanUtilizationPercent": 7.4,
+        "name": "NVIDIA GeForce RTX 4090",
+        "peakMemoryMiB": 479,
+        "peakUtilizationPercent": 11,
+        "sampleCount": 15,
+        "scope": "whole GPU, sampled once per second"
+      },
+      "pipelineSeconds": 15.565,
+      "runnerSeconds": 16.832,
+      "segmentCount": 1
+    },
+    "quality": {
+      "characterIssues": [
+        {
+          "alignedCharacterIndex": 0,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 1,
+          "sourceStart": 0
+        },
+        {
+          "alignedCharacterIndex": 4,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 5,
+          "sourceStart": 4
+        },
+        {
+          "alignedCharacterIndex": 5,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 6,
+          "sourceStart": 5
+        },
+        {
+          "alignedCharacterIndex": 10,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 11,
+          "sourceStart": 10
+        },
+        {
+          "alignedCharacterIndex": 18,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 19,
+          "sourceStart": 18
+        }
+      ],
+      "differences": [],
+      "lowScoreThreshold": 0.5,
+      "mappingMethod": "exact-text sequence matching; repeated text may be ambiguous",
+      "positionUnit": "zero-based Unicode code points, end exclusive",
+      "status": "needs_review"
+    },
+    "warnings": [
+      "Alignment needs review; inspect quality.differences and quality.characterIssues."
+    ],
+    "error": null
+  },
+  "deploymentBinding": {
+    "mainRawHashMatchesGitHub": false,
+    "pipelineRawHashMatchesGitHub": true,
+    "alignmentRawHashMatchesGitHub": true,
+    "currentMainLineEndingVariantsMatch": false,
+    "interpretation": "Current post-registration main.py byte hash differs from current GitHub. Other two files match. New route and source/quality fields were observed working; complete deployment equality is not established. No past-version search or another-PC inspection performed."
+  },
+  "resultChecks": {
+    "allFinitePositiveIntervals": true,
+    "startOrderAndNonoverlap": true,
+    "sourceIndexesExact": true,
+    "sourceEndpointInputExact": true,
+    "sourceKindAdopted": true,
+    "allCharactersPreserved": true,
+    "profileSameAsRegistration": true
+  },
+  "allCharacterCandidates": [
+    {
+      "sourceIndex": 0,
+      "char": "こ",
+      "originalSegmentId": 7716,
+      "originalStartMs": 2325025,
+      "originalEndMs": 2325045,
+      "candidateStartMs": 2321943,
+      "candidateEndMs": 2321963,
+      "score": 0.001,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 1,
+      "char": "こ",
+      "originalSegmentId": 7717,
+      "originalStartMs": 2325045,
+      "originalEndMs": 2325065,
+      "candidateStartMs": 2321963,
+      "candidateEndMs": 2322204,
+      "score": 0.916,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 2,
+      "char": "で",
+      "originalSegmentId": 7718,
+      "originalStartMs": 2325065,
+      "originalEndMs": 2325085,
+      "candidateStartMs": 2322204,
+      "candidateEndMs": 2322766,
+      "score": 0.964,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 3,
+      "char": "奴",
+      "originalSegmentId": 7719,
+      "originalStartMs": 2325085,
+      "originalEndMs": 2325105,
+      "candidateStartMs": 2322766,
+      "candidateEndMs": 2323007,
+      "score": 0.914,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 4,
+      "char": "を",
+      "originalSegmentId": 7720,
+      "originalStartMs": 2325105,
+      "originalEndMs": 2325125,
+      "candidateStartMs": 2323007,
+      "candidateEndMs": 2323027,
+      "score": 0.001,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 5,
+      "char": "食",
+      "originalSegmentId": 7721,
+      "originalStartMs": 2325125,
+      "originalEndMs": 2325145,
+      "candidateStartMs": 2323027,
+      "candidateEndMs": 2323067,
+      "score": 0.489,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 6,
+      "char": "い",
+      "originalSegmentId": 7722,
+      "originalStartMs": 2325145,
+      "originalEndMs": 2325165,
+      "candidateStartMs": 2323067,
+      "candidateEndMs": 2323207,
+      "score": 0.857,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 7,
+      "char": "止",
+      "originalSegmentId": 7723,
+      "originalStartMs": 2325165,
+      "originalEndMs": 2325185,
+      "candidateStartMs": 2323207,
+      "candidateEndMs": 2323408,
+      "score": 0.899,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 8,
+      "char": "め",
+      "originalSegmentId": 7724,
+      "originalStartMs": 2325185,
+      "originalEndMs": 2325205,
+      "candidateStartMs": 2323408,
+      "candidateEndMs": 2323569,
+      "score": 0.874,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 9,
+      "char": "な",
+      "originalSegmentId": 7725,
+      "originalStartMs": 2325205,
+      "originalEndMs": 2325225,
+      "candidateStartMs": 2323569,
+      "candidateEndMs": 2323689,
+      "score": 0.84,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 10,
+      "char": "け",
+      "originalSegmentId": 7726,
+      "originalStartMs": 2325225,
+      "originalEndMs": 2325245,
+      "candidateStartMs": 2323689,
+      "candidateEndMs": 2323709,
+      "score": 0.02,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 11,
+      "char": "れ",
+      "originalSegmentId": 7727,
+      "originalStartMs": 2325245,
+      "originalEndMs": 2325265,
+      "candidateStartMs": 2323709,
+      "candidateEndMs": 2323809,
+      "score": 0.8,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 12,
+      "char": "ば",
+      "originalSegmentId": 7728,
+      "originalStartMs": 2325265,
+      "originalEndMs": 2325285,
+      "candidateStartMs": 2323809,
+      "candidateEndMs": 2325013,
+      "score": 0.983,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 13,
+      "char": "世",
+      "originalSegmentId": 7729,
+      "originalStartMs": 2325285,
+      "originalEndMs": 2325305,
+      "candidateStartMs": 2325013,
+      "candidateEndMs": 2325334,
+      "score": 0.937,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 14,
+      "char": "界",
+      "originalSegmentId": 7730,
+      "originalStartMs": 2325305,
+      "originalEndMs": 2325325,
+      "candidateStartMs": 2325334,
+      "candidateEndMs": 2325455,
+      "score": 0.833,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 15,
+      "char": "が",
+      "originalSegmentId": 7731,
+      "originalStartMs": 2325325,
+      "originalEndMs": 2325345,
+      "candidateStartMs": 2325455,
+      "candidateEndMs": 2325676,
+      "score": 0.909,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 16,
+      "char": "終",
+      "originalSegmentId": 7732,
+      "originalStartMs": 2325345,
+      "originalEndMs": 2325365,
+      "candidateStartMs": 2325676,
+      "candidateEndMs": 2325816,
+      "score": 0.857,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 17,
+      "char": "わ",
+      "originalSegmentId": 7733,
+      "originalStartMs": 2325365,
+      "originalEndMs": 2325385,
+      "candidateStartMs": 2325816,
+      "candidateEndMs": 2325977,
+      "score": 0.875,
+      "alignmentPresent": true
+    },
+    {
+      "sourceIndex": 18,
+      "char": "る",
+      "originalSegmentId": 7734,
+      "originalStartMs": 2325385,
+      "originalEndMs": 2325405,
+      "candidateStartMs": 2325977,
+      "candidateEndMs": 2325997,
+      "score": 0.0,
+      "alignmentPresent": true
+    }
+  ],
+  "textDiagnostics": {
+    "sourceCharacterCount": 19,
+    "differences": [],
+    "missingAlignmentCount": 0,
+    "nullTimeCount": 0,
+    "nullScoreCount": 0,
+    "zeroScoreCount": 1,
+    "lowNonzeroScoreCount": 4,
+    "qualityStatus": "needs_review"
+  },
+  "worldCandidate": {
+    "text": "世界が終わる",
+    "sourceStartMs": 2325013,
+    "sourceEndMs": 2325997,
+    "durationMs": 984,
+    "oldRangeMs": [
+      2325285,
+      2325405
+    ],
+    "oldDurationMs": 120,
+    "lastCharacterZeroScore": true,
+    "oldNeighborOverlaps": [
+      {
+        "globalCueOrdinal": 462,
+        "sourceStartMs": 2323864,
+        "sourceEndMs": 2325025,
+        "startFrame": 24945,
+        "endFrameExclusive": 24980,
+        "text": "頼んだぞ…",
+        "overlapWithWorldCandidateMs": 12
+      },
+      {
+        "globalCueOrdinal": 463,
+        "sourceStartMs": 2325025,
+        "sourceEndMs": 2325125,
+        "startFrame": 24980,
+        "endFrameExclusive": 24983,
+        "text": "ここで奴を",
+        "overlapWithWorldCandidateMs": 100
+      },
+      {
+        "globalCueOrdinal": 464,
+        "sourceStartMs": 2325125,
+        "sourceEndMs": 2325285,
+        "startFrame": 24983,
+        "endFrameExclusive": 24988,
+        "text": "食い止めなければ",
+        "overlapWithWorldCandidateMs": 160
+      },
+      {
+        "globalCueOrdinal": 466,
+        "sourceStartMs": 2325405,
+        "sourceEndMs": 2325465,
+        "startFrame": 24991,
+        "endFrameExclusive": 24993,
+        "text": "なんか",
+        "overlapWithWorldCandidateMs": 60
+      },
+      {
+        "globalCueOrdinal": 467,
+        "sourceStartMs": 2325465,
+        "sourceEndMs": 2325846,
+        "startFrame": 24993,
+        "endFrameExclusive": 25004,
+        "text": "いい雰囲気にしないで!",
+        "overlapWithWorldCandidateMs": 381
+      },
+      {
+        "globalCueOrdinal": 468,
+        "sourceStartMs": 2325846,
+        "sourceEndMs": 2326206,
+        "startFrame": 25004,
+        "endFrameExclusive": 25015,
+        "text": "いい雰囲気に!",
+        "overlapWithWorldCandidateMs": 151
+      }
+    ],
+    "correctClockConfirmed": false,
+    "auditorySynchronyConfirmed": false,
+    "adopted": false
+  },
+  "correctionScope": {
+    "primaryTargetCue": 465,
+    "primarySourceSegmentIds": [
+      7729,
+      7730,
+      7731,
+      7732,
+      7733,
+      7734
+    ],
+    "observedPhraseSourceSegmentIds": [
+      7716,
+      7717,
+      7718,
+      7719,
+      7720,
+      7721,
+      7722,
+      7723,
+      7724,
+      7725,
+      7726,
+      7727,
+      7728,
+      7729,
+      7730,
+      7731,
+      7732,
+      7733,
+      7734
+    ],
+    "primaryGroup": 28,
+    "secondTargetCue": 571,
+    "secondSourceSegmentIds": [
+      8666,
+      8667
+    ],
+    "secondGroup": 31,
+    "secondExecutionStatus": "input prepared; no upload/inference"
+  },
+  "secondPreparedInput": {
+    "preparedAtUtc": "2026-10-05T02:10:59.693016+00:00",
+    "executionStatus": "prepared-only; no server request",
+    "audio": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/source-cue571-43m44s-to-43m53s.wav",
+      "bytes": 288078,
+      "sha256": "b73215015529c9c6e353fb4b8aa3cd07cefc447a7d3e2f079e5cfc4ff681c9e6",
+      "pcmSha256": "8f133da8c758c3447a3daf4479019a352800a04dd541a6e60c511705f151da2b",
+      "format": {
+        "sampleRate": 16000,
+        "channels": 1,
+        "sampleWidth": 2,
+        "frames": 144000
+      }
+    },
+    "sourceRangeMs": [
+      2624000,
+      2633000
+    ],
+    "adoptedSegments": [
+      {
+        "text": "何人いるの?お!早速鬼がいるんじゃねえか!",
+        "start": 0.0,
+        "end": 9.0
+      }
+    ],
+    "sourceVideo": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+      "bytes": 1016332396,
+      "sha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+      "stableBeforeAfter": true
+    },
+    "derivation": {
+      "ffmpegPath": "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+      "ffmpegSha256": "d105f770f53607ec1532b27e354ca7c3166a706dc1ccc6f96e3c8d3f54d7e798",
+      "command": [
+        "/opt/homebrew/Cellar/ffmpeg/8.0.1_1/bin/ffmpeg",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-n",
+        "-ss",
+        "2624",
+        "-i",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+        "-t",
+        "9",
+        "-map",
+        "0:a:0",
+        "-vn",
+        "-ac",
+        "1",
+        "-ar",
+        "16000",
+        "-c:a",
+        "pcm_s16le",
+        "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/source-cue571-43m44s-to-43m53s.wav"
+      ],
+      "method": "accurate input seek; audio-only extraction; mono 16kHz PCM conversion; no STT"
+    }
+  },
+  "minimalNextSteps": [
+    {
+      "item": "Resolve current server main.py byte-hash difference or provide its exact current non-secret code/diff; no past-version search",
+      "reason": "The current source binding is incomplete."
+    },
+    {
+      "item": "If further observation is authorized, use the already saved 20-second audio with preserved preceding/following text in alignment only, then inspect exact neighboring positions and the final zero-score character",
+      "reason": "The 19-character isolated window improved raw timing but overlaps old neighboring captions. More ASR crop retries would change text again and are not proposed."
+    },
+    {
+      "item": "Use the prepared 9-second cue571 audio and preserved question/interjection/reaction text in an explicitly authorized alignment-only call",
+      "reason": "The one authorized call was spent on cue465; cue571 has no new measured clock."
+    },
+    {
+      "item": "Confirm only the affected audio moments and neighboring order before adopting any source-clock correction",
+      "reason": "Machine scores and completed state do not prove correct acoustic timing."
+    }
+  ],
+  "effects": {
+    "lanAlignmentRequests": 1,
+    "paidApiCalls": 0,
+    "newModelDownloads": 0,
+    "externalUploadsOutsideExistingLan": 0,
+    "serverOrAuthConfigurationChanges": 0,
+    "sourceTranscriptOrAtomEdits": 0,
+    "videoManufacturesOrApplications": 0,
+    "oldResultsOverwrittenOrDeleted": 0,
+    "asrRequests": 0,
+    "asrExecutionEvidence": "Submitted operation=align and returned sourceKind=adopted; current GitHub branch bypasses ASR. Actual deployed main.py has an unresolved raw SHA difference, and runtime execution logs were not inspected."
+  },
+  "evidenceBindings": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/source-bindings.json",
+      "bytes": 2104,
+      "sha256": "a19cd8230ea7a4e0d1f09ff4a7e4d043408c0ca5a27746b3f7a9cb51d0d9e044"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/lan-health.json",
+      "bytes": 681,
+      "sha256": "a46874b3f11e73865790021db068680818a97332b7bde9ff3412496331dfa3b3"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/lan-openapi.json",
+      "bytes": 5312,
+      "sha256": "bb7eda68ceec39180319c5168b9a39e6f281acc9dc0b568fbdb54dd476ff5a4d"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/input-binding-cue465.json",
+      "bytes": 9716,
+      "sha256": "eca77b912947e05c392b2c3de14c0e2ece420d4fa03cdea9d0b269ae2a9ad402"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/adopted-cue465.json",
+      "bytes": 93,
+      "sha256": "4f8ea82860eba5ec2b928a3773431264e47b06d9d944b069aa052c0457c51597"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/align-execution-cue465.json",
+      "bytes": 1402,
+      "sha256": "5a392a1f50fe4fe033413911a48e0ed2755a5ff7799a446fa00973eebe1ad93f"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/align-registration-cue465.json",
+      "bytes": 2109,
+      "sha256": "27baa6a6889114257bf900a8db798e614899bb4735f69b7c06474c003e0cc774"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/align-source-cue465.json",
+      "bytes": 121,
+      "sha256": "450b47c540fb633e80032e4008958957dac900771379cd35251ecd4d801de48a"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/align-status-cue465.json",
+      "bytes": 3087,
+      "sha256": "42f04e4e72ef8c02358b0b177391620cfbd7937997606c0274fb64b0ab000cc2"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/align-result-cue465.json",
+      "bytes": 19368,
+      "sha256": "a5f229935d352d87ad0ffd3646aec6c12665d1a9ffa61cf27c824122fe53f919"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/current-main-line-ending-check.json",
+      "bytes": 728,
+      "sha256": "16dfca23331d7e272a1b50d32b4fe56aefb20f3dceff4d9f63eed92baa90392a"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/input-binding-cue571.json",
+      "bytes": 7497,
+      "sha256": "e654a1dd58356634604d9d59e2a09f681eec634073d176162d0a0291fd225daf"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/adopted-cue571.json",
+      "bytes": 93,
+      "sha256": "53b239f5437017a9a5d90b8463a960f1a171302ff4cbd63ac9b8506383fd1203"
+    }
+  ],
+  "status": "One permitted alignment complete; useful candidate saved, quality and deployment parity unconfirmed; video application withheld"
+}

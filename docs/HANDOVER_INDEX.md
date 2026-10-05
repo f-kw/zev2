@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v082
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v083
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05 02:15 UTC（STT修正の実利用確認と採用本文alignment一回、時計は未採用）
+
+本人のSTT修正済み報告と親の一回継続指示に従い、GitHub ad53ca78の四機能と既存LAN health/openapi200を確認。既存6秒音声＋採用19文字を新/alignで一回実行し、/sourceと全文字sourceCharacters、欠落・null・score・元ID/時計原点・隣接を実照合。[成果・根拠・不足・次範囲](reports/digest-new-material-SJvP9jhEdyI-20261004/adopted-alignment-observation-v001.md)。
+
+job8dfba0072e044a1b8e973e46172f60d3は02:07:13 UTC処理保存完了。19全文字/欠落null0、score0一字/低score4、quality needs_review。世界が終わる候補はsource38:45.013〜38:45.997の984msだが旧前後cueと重なり、正しい音声同期は未確認。実配備main.py SHAは現在GitHubと不一致、他2file一致、改行/BOMだけでは未説明。新入口と診断の実動作は確認、完全配備一致は未確認。本人報告34testは再実行していない。
+
+第二対象cue571「お!」の9秒音声＋保存21文字は入力準備だけ、未送信。元本文・atom時計・plan・動画適用0、追加ASR/課金/外部音声送信/サーバ設定変更0。資料と入力は参照中の監査証拠としてKEEP。保存資格修正0512e64dは01:17:52 UTCにmain/remote/cleanまで完了済み。[session log](work-logs/2026-10/2026-10-05T0215_Codex-SSD_ID9-adopted-alignment_0512e64d.md)。
+
+状態：今回の利用確認・一回の処理と二対象入力準備は完了、時計採用・動画適用は相談役待ち。次担当：親monaが現在main.pyの差の扱いと、必要な前後本文alignment/対象音声確認の具体的な次範囲を判断する。許可された一回を消費し、追加推論や製造へ自走しない。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 01:11 UTC（通常処理の重複資格確認を削減、STTコード読取へ）
 
