@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-06（JST） / revision：handover-index-20261006-v100
+更新日：2026-10-06（JST） / revision：handover-index-20261006-v101
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05T16:33:38+00:00（指定2字幕非表示の正式入力形式をSSDへ保存、製造未開始）
+
+親monaの指示どおり元651件を保持し、465「世界が終わる」/571「お!」だけ非表示、570「何人いるの?」と他は表示。表示649/非表示2、原本文/ID/時計/映像音声/総尺不変。新[manifest](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-visibility-two-cues-v001/manifest.json) SHA `fcfafc28c85c3e18c05b3179d1670165b46a54f54fdcc43c3b02f4c75978867e`、[採否JSON](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-visibility-two-cues-v001/visibility-adoption.json) SHA `077f96b34d6d6c1479e01b5f89119a8baf428c961b1ccd1683c64783bdb01dae`、専用SSD排他保存/0444/再読成功。16:32:54 UTCに既存readerの限定資格検査成功。実入力閉包＋synthetic control/構造planを用い、正式製造承認/owner/permit/媒体なし。probe初回依存探索環境の不足を既存NODE_PATHで補い、code/設定/118再試験0。
+
+旧job/authは補正650・実装4c79・使用済みoutput固定のため新製造へ流用不可。次には新方式製造の本人指示を根拠に、今回manifest/adoption・論理651・最終clean HEAD現57path/Node・未使用SSD出力・新代表policyをjob/authへ束縛し独立hashを渡す。代表570/571/後続572と非表示の実画像確認v002が必要。原データ/回答/font/styleは再利用できるが、正式Normalはbase/全651primary/新全尺合成を作り直す。前回実測1時間42分23.820秒を参考とし、新所要時間や短縮を保証しない。
+
+状態：入力準備と限定確認完了、製造未開始。次担当親monaが具体的製造指示/未反映commitの扱いを返す。詳細は同SHAの[CURRENT_GOAL](CURRENT_GOAL.md)、[検査結果](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/two-cue-visibility-input-qualification-v001.json)、[同session log](work-logs/2026-10/2026-10-05T1620_Codex-SSD_ID9-explicit-caption-visibility_bed2eeeb.md)。新code/一般規則文書/STT/媒体/追加push0。以下は履歴。
 
 ## 最新現在地 — 2026-10-05T16:20:10+00:00（明示的な字幕非表示の6path実装・限定検証完了）
 

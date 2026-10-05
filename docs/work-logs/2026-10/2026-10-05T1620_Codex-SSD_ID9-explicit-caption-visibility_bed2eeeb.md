@@ -25,3 +25,15 @@
 承認された既存6記録のcommit`104d6a1af7791caf7cfcd122aff0eed7017d8130`だけを通常pushし、remote main一致を確認。後続4local commitと今回実装/閉じ記録は含めない。追加push承認へ拡張せず、コードcheckpoint後の今回session logと既存CURRENT_GOAL/HANDOVER更新だけをローカル記録commitへ固定する。branch main、実装固定時Git clean/untracked0、閉じ記録後の最終HEAD/statusは完了報告で確定。
 
 状態：承認済み機能の実装・限定検証完了。次担当親monaが結果を本人へ渡し、具体的な全cue採否入力と次の製造範囲を扱う。自動共通基準・数値は未確定で未適用。再視聴/全字幕再採点/手動時刻再提出を本人へ要求せず、既知不具合の診断・補正や全尺再製造を自動再開しない。
+
+## 同エピックの追加指示：指定2字幕の採否入力準備（2026-10-05T16:33:38+00:00）
+
+親monaから世界/お!のみ非表示、質問は表示の入力準備・限定検査・次製造手順/見積根拠を返す指示を受領。全651採否を共通schemaで新SSD folderへ保存し、manifest86,098B SHA `fcfafc28c85c3e18c05b3179d1670165b46a54f54fdcc43c3b02f4c75978867e`、adoption1,950,260B SHA `077f96b34d6d6c1479e01b5f89119a8baf428c961b1ccd1683c64783bdb01dae`、実device16777243/0444/byte再読を確認。表示649・非表示2、世界465[24988,24991)、質問570[32545,32576)show、お!571[32576,32577)。元原本/旧成果不変、newcode/閾値/一般規則文書0。
+
+16:32:54.896 UTCに保存実byteを既存readerで一回限定検査し、全原本閉包・全件一致・2suppress・質問独立・採否再読・時計改変/旧auth拒否passed。controlは明記したsynthetic資格試験だけ、原行構造plan、正式job/auth・owner/permit/renderer plan/mediaは0。初回probeの既存NODE_PATH不足によるReact読込失敗を、正式caller同環境で修正し成功。118再試験・依存/code/設定変更0。controlをfinallyで整理しrepo/SSD testfixture残存0、probe終了。入力2fileと小さい[資格試験JSON](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/two-cue-visibility-input-qualification-v001.json)・probe sourceをKEEP。
+
+独立read reviewで旧job/authが4c79/補正650/使用済み出力に固定と確認。新製造には今回入力・論理651・最終clean HEAD/現57実装path/Node・未使用SSD出力・代表policyと実本人製造指示をnewjob/authへ束縛し、独立実hashを渡す。新政策やfake承認を作らない。旧代表571→新571は内容が違い、質問570/非表示571/後続572の対応を正式planで照合する。非表示2件の確認は新v002と実still/video、旧record流用不可。開始前resource/device/競合guardは再検査。
+
+通常入口の再利用を読取確認：素材/STT/元計画/31回答/font/styleは再利用、base/全651primary/新全尺合成/QCは新生成。採否ありで旧recoveryは拒否。前回result.jsonの初期20.317s/base1278.972s/renderAndQc4818.294s/未分離Core等26.237s/total6143.820sを確認。native区間約52:11、合成22:19、残り約5:49はrenderAndQc内数。新所要は未実測で参考約1h42m、2suppressだけで短縮を保証しない。CPU/human active時間ではない。
+
+今回追加準備は完了、製造未開始。親monaへ製造に必要な具体指示と未反映commit扱いを返す。GitHub承認待ちと独立した入力保存/検査は済ませ、追加push/新製造/STTなし。既存CURRENT/HANDOVERと本session logだけを同サイクル継続記録として更新し、新しい規則/調査文書は作らない。最終local HEAD/statusは完了報告で確定。

@@ -2,6 +2,20 @@
 
 更新日：2026-10-06（JST）
 
+## 最新現在地 — 2026-10-05T16:33:38+00:00（指定2字幕だけの非表示入力をSSD保存・限定資格検査、製造未開始）
+
+親monaの追加指示に従い、「世界が終わる」と「お!」だけを明示非表示、「何人いるの?」と他の字幕は表示する全651件の採否入力を、既存の共通方式で準備した。本文/元ID/原時計/映像音声/31区間/1042行/5450atom/37619frame/55299930sampleを保持し、表示649・非表示2。元素材専用の製品codeや数値条件は追加しない。指定は採否JSONのデータだけに置く。今回の非表示は全体の同期問題を解消したという意味ではない。
+
+SSD device16777243の未使用専用folderへ排他的保存し、同device/realpath/byte再読を確認、2fileは0444。新[manifest](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-visibility-two-cues-v001/manifest.json)は86,098B/SHA `fcfafc28c85c3e18c05b3179d1670165b46a54f54fdcc43c3b02f4c75978867e`、[採否JSON](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-visibility-two-cues-v001/visibility-adoption.json)は1,950,260B/SHA `077f96b34d6d6c1479e01b5f89119a8baf428c961b1ccd1683c64783bdb01dae`。元manifest/meaning/過去調整manifestの実SHAは前段と不変。非表示465は24988〜24991frame、非表示571は32576〜32577、表示570の質問は32545〜32576で独立のまま。
+
+16:32:54.896 UTCに既存readerで保存実byteの原本閉包・全651対応・指定2件・質問独立・原meaning/時計・採否再読・plan時計変更拒否・旧製造承認拒否を一回の限定probeで確認。資格検査用のsynthetic controlと原行構造planを使い、実製造の承認/owner/permit/正式renderer planは作らない。初回probeは正式callerの既存NODE_PATHが欠けReact読込前に止まり、同NODE_PATHを付けて成功。依存追加・code/設定変更・118再試験0。[検査結果](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/two-cue-visibility-input-qualification-v001.json)。test control残存0、probe終了。入力準備の技術成立であり、実映像品質や製造許可の成立ではない。
+
+旧job/authは実装4c79ba87・補正済み650manifest・使用済みoutputへ固定され、そのまま新入力に使えない。次の一本には本人の新方式製造指示を実根拠として、新manifest/adoption、論理件数651、最終clean HEADの現実装57path/Node実byte、未使用SSD出力先、代表確認policyを新job/authへ固定し、両controlの独立実SHAを渡す。GitHub未反映承認待ちと今回準備は分離し、fake承認/receipt/旧output流用なし。旧8代表の571は内容が新571「お!」と異なるため、質問570・非表示571・後続572の対応を新planで照合する。非表示の完成確認はv002と実画像/動画で行い、旧確認記録や本文時計だけの確認を流用しない。開始前に競合/実device/50GB開始と各reserve/RSS/pressure等の既存guardを再確認する。
+
+再利用できるのは元素材/STT/元計画/31実回答/font/style等。現Normal正式入口には保存済みbase/PNGの部分再利用入口がなく、base生成→全651primary→649表示だけの新全尺合成→既存QCとなる。復帰経路は採否あり入力では拒否する。前回実timingは初期20.317秒、base21分18.972秒、字幕Core組立等の未分離26.237秒、描画/合成/QC1時間20分18.294秒、総計1時間42分23.820秒。native区間約52分11秒/合成22分19秒/残り約5分49秒は後半工程の内数。新651の実測はなく、約1時間42分は計画の参考実績で、今回も同時間以下や短時間完了を保証しない。[前回実timing](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-current-display-v001/result.json)。
+
+状態：今回指示の入力準備と限定確認は完了、全尺製造は未開始。次担当親monaが具体的な製造指示と未反映commitの扱いを本人へ示し、指示後に同じMac実装者が新control/正式preflightへ進む。新仕組み/旧形式救済/STT/媒体/一般規則文書追加/追加push0。[今回同session log](work-logs/2026-10/2026-10-05T1620_Codex-SSD_ID9-explicit-caption-visibility_bed2eeeb.md)。以下は履歴。
+
 ## 最新現在地 — 2026-10-05T16:20:10+00:00（原文・時計を変えない明示的な字幕非表示の実装・限定検証が完了）
 
 本人「いいよ。というか待ってないで他の作業からできるなら進めて」（Sentinel_0c90201479688191abef56d1096f4561）を親mona経由で受領し、前回提示した6製品pathと関連する既存5testだけを変更。ローカル実装checkpointは`bed2eeeb672c0f84e95cfa8f970b2f26bfe9f992`。字幕ごとの「表示する／表示しない」を別の採否JSONへ明記し、合成に使う字幕画像だけを選ぶ。本文・元ID・行分割・時計・映像・音声・全命令・全primary検査は保持する。数値による自動除外基準、素材専用の補正・code例外、STT変更、旧形式の救済は追加しない。
