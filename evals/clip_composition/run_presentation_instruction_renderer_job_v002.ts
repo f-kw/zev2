@@ -772,8 +772,11 @@ export async function runPresentationInstructionRendererJobFileV002(
       const normalLayoutCli = storageContext.approvedJob !== undefined && command === job.runtimeBindings.tsx.path;
       const cliTemp = normalLayoutCli ? path.relative(storageContext.generatedRoot, storageContext.tempDirectory) : storageContext.tempDirectory;
       if (normalLayoutCli && cliTemp !== 'temp') throw new Error('approved-layout-temp-mismatch');
+      const normalRemotionStill = storageContext.approvedJob !== undefined
+        && command === job.runtimeBindings.remotion.path && args[0] === 'still';
+      const childArgs = normalRemotionStill ? [...args, '--bundle-cache=false'] : args;
       const result = await originalProcessObserver.run(normalLayoutCli ? process.execPath : command,
-        normalLayoutCli ? [command, ...args] : args, {
+        normalLayoutCli ? [command, ...childArgs] : childArgs, {
         ...options,
         ...(normalLayoutCli ? {cwd: storageContext.generatedRoot} : {}),
         env: {...process.env, ...options.env, TMPDIR: cliTemp,

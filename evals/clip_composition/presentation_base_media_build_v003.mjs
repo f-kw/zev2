@@ -173,7 +173,7 @@ const run = (command, args, options = {}) => new Promise((resolve, reject) => {
   const stderr = [];
   const child = spawn(command, args, {
     cwd: options.cwd ?? WORKSPACE_ROOT,
-    env: {...process.env, TMPDIR: '/private/tmp'},
+    env: {...process.env, TMPDIR: process.env.TMPDIR ?? '/private/tmp'},
   });
   if (options.stdin) child.stdin.end(options.stdin);
   child.stdout.on('data', (chunk) => stdout.push(chunk));
@@ -197,7 +197,7 @@ const runHashStdout = (command, args) => new Promise((resolve, reject) => {
   let byteCount = 0;
   const child = spawn(command, args, {
     cwd: WORKSPACE_ROOT,
-    env: {...process.env, TMPDIR: '/private/tmp'},
+    env: {...process.env, TMPDIR: process.env.TMPDIR ?? '/private/tmp'},
   });
   child.stdout.on('data', (chunk) => {
     hash.update(chunk);
@@ -826,7 +826,7 @@ const forEachFfprobeLine = (args, onLine) => new Promise((resolve, reject) => {
   let callbackError = null;
   const child = spawn('ffprobe', ['-v', 'error', ...args], {
     cwd: WORKSPACE_ROOT,
-    env: {...process.env, TMPDIR: '/private/tmp'},
+    env: {...process.env, TMPDIR: process.env.TMPDIR ?? '/private/tmp'},
   });
   const lines = createInterface({input: child.stdout, crlfDelay: Infinity});
   lines.on('line', (line) => {
