@@ -2,6 +2,14 @@
 
 更新日：2026-10-05（JST）
 
+## 最新現在地 — 2026-10-05 01:11 UTC（通常処理の重複資格確認を削減、STTコード読取へ）
+
+本人承認の限定修正で通常の前段重複確認を省き、後段の実ファイル資格確認を毎回維持。復旧経路は900ms/共有中も前段の新規確認を保持。製品一file/専用回帰一file、所有者/許可/device/容量と安定二回read・操作前後確認を変更0。[成果・検証・未測定事項](reports/digest-new-material-SJvP9jhEdyI-20261004/normal-storage-revalidation-result-v001.md)。
+
+実runner/private資格の専用33成功、既存52成功/旧入力SHA1拒否。最終型・構文・差分と独立readreview成功。初回の仮想device不一致はtest設営だけ補正し、拒否条件を維持。通常入口の資格確認2→1は件数削減で、全体時間短縮・実mount・本番製造は未検証。新推論/製造/課金/renderer/無関係cache変更0。01:08:52 UTCにown小fixture/対象process残存0。main反映・remote/cleanは最終実行報告で確定する。[session log](work-logs/2026-10/2026-10-05T0111_Codex-SSD_ID9-normal-storage-revalidation_827d68b2.md)。
+
+状態：今回の保存資格限定修正と検証は完了、明示された次のSTT読取へ。次担当：同じMac実装者。本人がSTTマシンはGitHubと差分なしと確認（2026-10-05受領）したため実file共有待ちは解消。取得済みGitHubコードから本文欠落とscore0時刻の生成経路・最小対策を整理する。旧実行hash不一致を現在配備差分と断定しない。別PC接続・過去版探索・新STT/モデル・サーバ変更・課金・動画製造は再開しない。以下は各時点の履歴。
+
 ## 最新現在地 — 2026-10-05 00:30 UTC（同じPNGの二回読み込みを解消）
 
 本人承認を受けた親monaの限定指示で、PNGの透明度最大値と輪郭を一回のImageMagick読込へまとめた。製品一file・回帰一file。全主画像の二項目を維持し、検査基準・返却項目・拒否条件・監視は保持。651主画像ならchild呼出は静的に1302→651。全体時間の短縮は未測定。[成果・検証・実SHA](reports/digest-new-material-SJvP9jhEdyI-20261004/alpha-bounds-single-decode-result-v001.md)。

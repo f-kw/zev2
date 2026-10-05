@@ -32,7 +32,11 @@ async function disk(root: string) {return JSON.parse((await exec('/usr/bin/pytho
 /** Only objects minted after explicit grant/plan/storage/owner validation qualify. */
 export async function assertQualifiedApprovedDigestStorageContextV001(context: unknown, plan?: Json): Promise<void> {
   assert(context && typeof context === 'object' && contexts.has(context), 'QUALIFIED_APPROVED_DIGEST_STORAGE_REQUIRED');
-  const record = contexts.get(context)!; await assertQualifiedDigestApprovedJobV001(record.qualified);
+  const record = contexts.get(context)!;
+  // Normal assertCurrent always revalidates below; recovery can reuse its check.
+  if (record.qualified.job.recoveryBinding !== undefined) {
+    await assertQualifiedDigestApprovedJobV001(record.qualified);
+  }
   if (plan !== undefined) {
     assert.equal(plan.planId, record.qualified.job.planId); assert.equal(plan.outputRoot, record.qualified.job.outputRoot);
     assert.deepEqual(plan.approvedJobBinding, record.qualified.jobBinding);

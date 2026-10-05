@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "digest-normal-storage-revalidation-result-v001",
+  "status": "limited implementation and validation complete; commit/push/remote equality confirmed in final execution report",
+  "observedAt": "2026-10-05T01:11:31.812128+00:00",
+  "startedAt": "2026-10-05T00:55:30+00:00",
+  "baseHead": "827d68b220cc74d1d093ae23c5684918d1e04950",
+  "authorization": {
+    "parentThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "userMessageId": "Sentinel_358a0af31e1c8191ba2851c11ffab0cc",
+    "implementationTestsRecordMainPushExplicitlyApproved": true
+  },
+  "implementation": {
+    "runner/src/digest-approved-job-runner-v001.ts": {
+      "bytes": 52162,
+      "sha256": "3012df767896c856a37cf7ba471390128661d38228a7fe7eaa6218c21b3759c5",
+      "baseBytes": 52012,
+      "baseSha256": "8ae322c664e5403805852592d3b556a4d52be21bc40deeabd85cb57ad6b8d4e4"
+    },
+    "runner/src/digest-approved-storage-revalidation-v001.test.ts": {
+      "bytes": 29930,
+      "sha256": "fe4e6cea088caa2ff053cc8fe7d63e66758ff6304c99271797a4d89b09908231"
+    }
+  },
+  "scope": {
+    "normalEntryQualificationPassesBefore": 2,
+    "normalEntryQualificationPassesAfter": 1,
+    "recoveryOuterFreshCheckKept": true,
+    "recovery900msAndInflightSharingChanged": false,
+    "individualTwoReadStabilityChanged": false,
+    "ownerPermitPidDeviceUuidCapacityChecksChanged": false,
+    "operationsBeforeAfterChecksChanged": false,
+    "fullProductionTimeMeasured": false,
+    "wholeOperationAtomicityClaim": false
+  },
+  "validation": {
+    "existingJobAndFailedWork": {
+      "exitCode": 0,
+      "passed": 46,
+      "failed": 0,
+      "durationMs": 332.778542
+    },
+    "existingInputs": {
+      "exitCode": 1,
+      "passed": 6,
+      "failed": 1,
+      "durationMs": 1025.390875,
+      "failureCode": "CAPTION_PREPARATION_SHA_MISMATCH",
+      "reference": "runtime/artifacts/digest-caption-input-preparation-20261003-v001/attempt-002/bundle/manifest.json $.inputReferences[31]",
+      "file": "runner/src/digest-plan-preparation-v001.ts",
+      "expectedSha256": "5100d8649c9151b831ce3174db40899e4ac229b0b4fde026d9b2bbe7b5eb6072",
+      "actualSha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "baseHeadActualFileEqualsCurrent": true,
+      "baselineTestExecuted": false,
+      "fixtureChanged": false,
+      "waiverAdded": false
+    },
+    "runnerTypeCheckBeforeNewTest": {
+      "exitCode": 0
+    },
+    "remotionTypeCheck": {
+      "exitCode": 0
+    },
+    "dedicatedRegression": {
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "durationMilliseconds": 16346.979541,
+      "exitCode": 0,
+      "artifact": {
+        "path": "docs/reports/digest-new-material-SJvP9jhEdyI-20261004/normal-storage-revalidation-regression-v001.tap",
+        "sha256": "5c32f1cb4542e2707e7b4ff1efc80fb98b6621dcc33b6fa52d568fca07350224",
+        "bytes": 8121
+      },
+      "verification": {
+        "schemaVersion": "digest-approved-storage-revalidation-test-evidence-v001",
+        "recordedAt": "2026-10-05T01:07:29.239135+00:00",
+        "head": "827d68b220cc74d1d093ae23c5684918d1e04950",
+        "tests": {
+          "passed": 33,
+          "failed": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "durationMilliseconds": 16346.979541
+        },
+        "command": [
+          "/Users/kawafmm/.nvm/versions/node/v20.19.6/bin/node",
+          "--import",
+          "/Users/kawafmm/workspace/zev2/runner/node_modules/tsx/dist/loader.mjs",
+          "--test",
+          "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-storage-revalidation-v001.test.ts"
+        ],
+        "environment": {
+          "NODE_PATH": "/Users/kawafmm/workspace/zev2/runner/node_modules"
+        },
+        "bindings": [
+          {
+            "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-storage-revalidation-v001.test.ts",
+            "fileSha256": "fe4e6cea088caa2ff053cc8fe7d63e66758ff6304c99271797a4d89b09908231",
+            "sizeBytes": 29930
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts",
+            "fileSha256": "3012df767896c856a37cf7ba471390128661d38228a7fe7eaa6218c21b3759c5",
+            "sizeBytes": 52162
+          },
+          {
+            "path": "/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-v001.ts",
+            "fileSha256": "48927f7734c127b1ab52866a1a9fbcbbf0fe86a0ceef3c8a1c1477e9dc14f01b",
+            "sizeBytes": 15846
+          },
+          {
+            "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/digest-approved-storage-revalidation-v001-tests-attempt002.tap",
+            "fileSha256": "5c32f1cb4542e2707e7b4ff1efc80fb98b6621dcc33b6fa52d568fca07350224",
+            "sizeBytes": 8121
+          }
+        ],
+        "scope": {
+          "actual": [
+            "runner private createStorage/current/currentRaw/private contexts membership",
+            "approved-job private qualification/readBytes and real control/code hashes",
+            "regular-file identity and double-read checks",
+            "owner/permit stable bytes and pins",
+            "real small-file publication/chmod/stable readback",
+            "real parent PID liveness in positive setup"
+          ],
+          "testOnlyModels": [
+            "unrelated input qualification (no input-contract acceptance claimed)",
+            "old recovery-origin qualification (no historical-media qualification claimed)",
+            "guest/host mapping/devices/diskutil/image plist/hdiutil/statfs hardware",
+            "supervisor ps argv and git dirty status",
+            "Date.now for 900ms branches",
+            "negative PID death/Node identity/HEAD mismatch observations"
+          ],
+          "notProven": [
+            "actual hardware/mount operation",
+            "production input qualification",
+            "old recovery-origin acceptance",
+            "whole-operation atomicity",
+            "production speed improvement",
+            "real manufacture/media/STT/AI inference"
+          ]
+        },
+        "freshQualifications": {
+          "normalSingle": 1,
+          "normalTwoSequential": 2,
+          "normalTwoConcurrent": 2,
+          "normalPublishThenReadBoundIncludingPublicationReadback": 3,
+          "recoveryWarmPublicCall": 1,
+          "recoveryExpiredPublicCall": 2,
+          "recoveryInflightDirectAndPublicCalls": 2
+        },
+        "history": {
+          "initialTargetedRun": {
+            "passed": 0,
+            "failed": 1,
+            "skipped": 32,
+            "failure": "unstable-file at actual stable read: test virtual lstat.dev disagreed with real FileHandle.stat.dev"
+          },
+          "setupCorrectionsAfterFailedRun": 1,
+          "correction": "Test-only open handle stat preserves all real identity fields while reporting the same virtual device as lstat; production checks unchanged",
+          "preExecutionReviewCorrections": [
+            "authorization-read observation corrected to four in shared-current case",
+            "cleanup rejection assertion awaited"
+          ],
+          "finalRunExitCode": 0
+        },
+        "cleanup": {
+          "uniqueIgnoredFixtures": 33,
+          "ownDirectoriesRemovedAndEnoentAsserted": 33,
+          "allWorkerChildrenClosedExitZero": true,
+          "existingMediaTouched": false,
+          "ssdWrites": false,
+          "gitMutations": false,
+          "productionChangesByThisAgent": false
+        }
+      }
+    },
+    "independentReadReview": {
+      "reviewer": "renderer_context",
+      "productAndFinalTestReviewed": true,
+      "blockingFindings": 0,
+      "preExecutionTestIssuesFixed": [
+        "concurrent authorization read expectation and readiness barrier",
+        "await cleanup ENOENT assertion"
+      ]
+    },
+    "runnerTypeCheckFinalNewTestIncluded": {
+      "exitCode": 0
+    },
+    "typescriptAndCompiledJsSyntax": {
+      "files": [
+        "runner/src/digest-approved-job-runner-v001.ts",
+        "runner/src/digest-approved-storage-revalidation-v001.test.ts"
+      ],
+      "exitCode": 0
+    },
+    "diffCheck": {
+      "exitCode": 0
+    },
+    "totalThisRevision": {
+      "tests": 86,
+      "passed": 85,
+      "failed": 1,
+      "failureIsHistoricalInputShaMismatch": true,
+      "failedTestWaived": false
+    }
+  },
+  "notExecuted": [
+    "production manufacturing",
+    "video regeneration",
+    "STT exploration or inference",
+    "paid API",
+    "storage format or permission changes",
+    "unrelated caches or renderer changes"
+  ],
+  "git": {
+    "preflightBranch": "main",
+    "preflightHead": "827d68b220cc74d1d093ae23c5684918d1e04950",
+    "preflightRemoteHead": "827d68b220cc74d1d093ae23c5684918d1e04950",
+    "preflightStatusShort": "",
+    "preflightProcessMatches": []
+  },
+  "cleanup": {
+    "observedAt": "2026-10-05T01:08:52.629540+00:00",
+    "storageOwnFixtureDirectoriesRemaining": 0,
+    "inputsOwnFixtureDirectoriesRemaining": 0,
+    "matchingOwnOrManufactureProcesses": 0,
+    "dedicatedFinalFixtureDirectoriesRemoved": 33,
+    "initialFailedFixtureRemoved": true,
+    "oldMediaDeleted": false,
+    "smallLinkedAuditTapAndVerificationInScratch": "kept as linked audit evidence; raw TAP also saved in repo",
+    "ownEvidenceDraftDeletedAfterConsolidation": true
+  },
+  "nextInstruction": {
+    "userMessageId": "Sentinel_3ad7f16dcf008191bde655fc2e0df2fb",
+    "userConfirmedCurrentSttMachineGithubNoDiff": true,
+    "userConfirmationReceivedDate": "2026-10-05",
+    "afterCurrentFix": "read acquired GitHub STT code for missing text/score-zero timestamp path; do not resume other-PC connection or history search",
+    "historicRuntimeShaMismatchIsCurrentDeploymentDifference": false
+  }
+}

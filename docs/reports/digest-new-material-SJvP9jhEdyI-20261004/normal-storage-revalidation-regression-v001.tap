@@ -1,0 +1,175 @@
+TAP version 13
+# Subtest: Normal actual storage gate performs one fresh qualification per call, serially and concurrently, and guards publication/readback
+ok 1 - Normal actual storage gate performs one fresh qualification per call, serially and concurrently, and guards publication/readback
+  ---
+  duration_ms: 727.229583
+  ...
+# Subtest: Recovery retains the external fresh qualification inside 900ms and after expiry; cached success cannot hide changed job bytes
+ok 2 - Recovery retains the external fresh qualification inside 900ms and after expiry; cached success cannot hide changed job bytes
+  ---
+  duration_ms: 643.816958
+  ...
+# Subtest: Recovery in-flight current is shared while the public call still performs its own fresh qualification
+ok 3 - Recovery in-flight current is shared while the public call still performs its own fresh qualification
+  ---
+  duration_ms: 556.21325
+  ...
+# Subtest: Actual private context/job membership and plan bindings reject forgeries/clones/mismatches before operation
+ok 4 - Actual private context/job membership and plan bindings reject forgeries/clones/mismatches before operation
+  ---
+  duration_ms: 444.484166
+  ...
+# Subtest: Actual revalidation rejects job-bytes before the guarded operation creates its output
+ok 5 - Actual revalidation rejects job-bytes before the guarded operation creates its output
+  ---
+  duration_ms: 448.828625
+  ...
+# Subtest: Actual revalidation rejects authorization-bytes before the guarded operation creates its output
+ok 6 - Actual revalidation rejects authorization-bytes before the guarded operation creates its output
+  ---
+  duration_ms: 449.475958
+  ...
+# Subtest: Actual revalidation rejects job-identity before the guarded operation creates its output
+ok 7 - Actual revalidation rejects job-identity before the guarded operation creates its output
+  ---
+  duration_ms: 448.193417
+  ...
+# Subtest: Actual revalidation rejects authorization-identity before the guarded operation creates its output
+ok 8 - Actual revalidation rejects authorization-identity before the guarded operation creates its output
+  ---
+  duration_ms: 448.76475
+  ...
+# Subtest: Actual revalidation rejects during-read-write before the guarded operation creates its output
+ok 9 - Actual revalidation rejects during-read-write before the guarded operation creates its output
+  ---
+  duration_ms: 450.85275
+  ...
+# Subtest: Actual revalidation rejects during-read-rename before the guarded operation creates its output
+ok 10 - Actual revalidation rejects during-read-rename before the guarded operation creates its output
+  ---
+  duration_ms: 452.363292
+  ...
+# Subtest: Actual revalidation rejects during-read-same-bytes before the guarded operation creates its output
+ok 11 - Actual revalidation rejects during-read-same-bytes before the guarded operation creates its output
+  ---
+  duration_ms: 453.495833
+  ...
+# Subtest: Actual revalidation rejects head-change before the guarded operation creates its output
+ok 12 - Actual revalidation rejects head-change before the guarded operation creates its output
+  ---
+  duration_ms: 449.668167
+  ...
+# Subtest: Actual revalidation rejects code-change before the guarded operation creates its output
+ok 13 - Actual revalidation rejects code-change before the guarded operation creates its output
+  ---
+  duration_ms: 487.23975
+  ...
+# Subtest: Actual revalidation rejects input-0 before the guarded operation creates its output
+ok 14 - Actual revalidation rejects input-0 before the guarded operation creates its output
+  ---
+  duration_ms: 490.317084
+  ...
+# Subtest: Actual revalidation rejects input-1 before the guarded operation creates its output
+ok 15 - Actual revalidation rejects input-1 before the guarded operation creates its output
+  ---
+  duration_ms: 499.083041
+  ...
+# Subtest: Actual revalidation rejects input-2 before the guarded operation creates its output
+ok 16 - Actual revalidation rejects input-2 before the guarded operation creates its output
+  ---
+  duration_ms: 485.91025
+  ...
+# Subtest: Actual revalidation rejects input-3 before the guarded operation creates its output
+ok 17 - Actual revalidation rejects input-3 before the guarded operation creates its output
+  ---
+  duration_ms: 488.705541
+  ...
+# Subtest: Actual revalidation rejects owner-bytes before the guarded operation creates its output
+ok 18 - Actual revalidation rejects owner-bytes before the guarded operation creates its output
+  ---
+  duration_ms: 484.389583
+  ...
+# Subtest: Actual revalidation rejects permit-bytes before the guarded operation creates its output
+ok 19 - Actual revalidation rejects permit-bytes before the guarded operation creates its output
+  ---
+  duration_ms: 483.88075
+  ...
+# Subtest: Actual revalidation rejects owner-identity before the guarded operation creates its output
+ok 20 - Actual revalidation rejects owner-identity before the guarded operation creates its output
+  ---
+  duration_ms: 481.163542
+  ...
+# Subtest: Actual revalidation rejects permit-identity before the guarded operation creates its output
+ok 21 - Actual revalidation rejects permit-identity before the guarded operation creates its output
+  ---
+  duration_ms: 482.762375
+  ...
+# Subtest: Actual revalidation rejects owner-dead before the guarded operation creates its output
+ok 22 - Actual revalidation rejects owner-dead before the guarded operation creates its output
+  ---
+  duration_ms: 470.294541
+  ...
+# Subtest: Actual revalidation rejects guest-device before the guarded operation creates its output
+ok 23 - Actual revalidation rejects guest-device before the guarded operation creates its output
+  ---
+  duration_ms: 469.910292
+  ...
+# Subtest: Actual revalidation rejects host-device before the guarded operation creates its output
+ok 24 - Actual revalidation rejects host-device before the guarded operation creates its output
+  ---
+  duration_ms: 485.766667
+  ...
+# Subtest: Actual revalidation rejects guest-uuid before the guarded operation creates its output
+ok 25 - Actual revalidation rejects guest-uuid before the guarded operation creates its output
+  ---
+  duration_ms: 495.163042
+  ...
+# Subtest: Actual revalidation rejects host-uuid before the guarded operation creates its output
+ok 26 - Actual revalidation rejects host-uuid before the guarded operation creates its output
+  ---
+  duration_ms: 495.865042
+  ...
+# Subtest: Actual revalidation rejects image-identity before the guarded operation creates its output
+ok 27 - Actual revalidation rejects image-identity before the guarded operation creates its output
+  ---
+  duration_ms: 490.816667
+  ...
+# Subtest: Actual revalidation rejects node-identity before the guarded operation creates its output
+ok 28 - Actual revalidation rejects node-identity before the guarded operation creates its output
+  ---
+  duration_ms: 477.500291
+  ...
+# Subtest: Actual revalidation rejects image-metadata before the guarded operation creates its output
+ok 29 - Actual revalidation rejects image-metadata before the guarded operation creates its output
+  ---
+  duration_ms: 481.802208
+  ...
+# Subtest: Actual revalidation rejects dirty-code before the guarded operation creates its output
+ok 30 - Actual revalidation rejects dirty-code before the guarded operation creates its output
+  ---
+  duration_ms: 477.97
+  ...
+# Subtest: Actual revalidation rejects guest-reserve before the guarded operation creates its output
+ok 31 - Actual revalidation rejects guest-reserve before the guarded operation creates its output
+  ---
+  duration_ms: 484.32975
+  ...
+# Subtest: Actual revalidation rejects internal-reserve before the guarded operation creates its output
+ok 32 - Actual revalidation rejects internal-reserve before the guarded operation creates its output
+  ---
+  duration_ms: 484.428667
+  ...
+# Subtest: Actual revalidation rejects next-unit-reserve before the guarded operation creates its output
+ok 33 - Actual revalidation rejects next-unit-reserve before the guarded operation creates its output
+  ---
+  duration_ms: 483.374084
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 16346.979541
