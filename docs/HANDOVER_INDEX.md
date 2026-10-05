@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v087
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v088
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05 06:02 UTC（STT精度追究を終了、短い字幕の表示時間を確保する最小案）
+
+本人の最新方針：時刻精度改善はSTT側へ任せ、約1秒のずれを厳密に排除する分析・手動精密確認・追加alignment・同じ本人確認を終了。1文字/短い発話でも読める表示時間を確保する。元STT時刻、本文/ID/音声は保護し、score0/needs_review/旧不採用を合格へ書換えない。先に用意した局所聴取案は未実行で取り下げた。
+
+現行fadeは濃さだけ改善し、1frame/3frameの長さは未解決。「お!」は質問と「何人いるの?お!」へ自然統合する既存32frame/約1.067秒案を使える。元ID/時計保持、group31の境界/行末・検査/trace/manifest更新だけ。「世界が終わる」は統合だけでは約0.267秒で不足し、前後と衝突しない派生表示時間を別に計画する。最小製品候補は新display adjustment helper＋通常readerの2path、原meaning/元STTを固定参照しmanifest/job/承認へ束縛。Core/renderer/合成器/Python変更は現読取では不要な見込み。[現仕様との差と最小範囲](reports/digest-new-material-SJvP9jhEdyI-20261004/short-caption-display-adjustment-plan-v001.md)。
+
+状態：今回の整理・提案は完了、表示方針更新の確認と具体実装指示は相談役待ち。次担当親mona、指示後は同じMac実装者。実装/試験/音声処理/新確認画面/製造0、代表実視聴と新候補正式通過は未実施。a3a771ceの通常push一回再試行は既存直接承認で成功、main/remote一致、初回拒否は履歴保持。元成果/音声/HTML/証拠KEEP、削除0。[session log](work-logs/2026-10/2026-10-05T0602_Codex-SSD_ID9-short-caption-display-plan_a3a771ce.md)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 05:33 UTC（本人の二つの開始位置を反映、正しい音声窓の一回照合も未採用）
 
