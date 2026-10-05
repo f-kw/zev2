@@ -2,6 +2,16 @@
 
 更新日：2026-10-05（JST）
 
+## 最新現在地 — 2026-10-05 06:42 UTC（短字幕表示調整を2path実装、局所実映像の入口は範囲外）
+
+親の具体実装指示を受け、新helper＋通常readerの製品2path、専用試験2pathを実装しコード`fa4c504b`へ固定。元STT/本文/ID/順序/音声/入力/旧不合格は保護。世界の旧4cueは32/9/27/14frameへ派生表示、次469の開始25070を維持。なんか＋ツッコミ統合は合法な2行境がないため採らず旧行を保持。お!は質問と一行「何人いるの?お!」に自然統合して32frame、元atom時計は変更0。新候補650cue/1041行/5450atom/31group/37619frame/55299930sample、世界27atomのretainedSpansだけ変更。元meaningと派生意味、原4binding・宣言/再導出/実helper SHAを保存/検査。[成果・表示表・実SHA・不足](reports/digest-new-material-SJvP9jhEdyI-20261004/short-caption-display-implementation-result-v001.md)。
+
+helper26＋reader11成功、fail0。無調整入力の旧3f/1f経路も保持。無関係旧2件は未実施、試験anchorは実製造許可/ownerではない。runner/Remotion型exit0、独立readreviewblocking0。正式Core/新glyph/通常速可読性/動画更新は未実施。STT精度追究・追加alignment・同じ本人確認・新HTML・媒体・API0。
+
+現正式contextはfull worker専用で、資格を保った局所2映像の入口がない。追加にはapproved job、approved runner、supervisorの3製品path＋現在readerの限定base接続が必要でscope外のため実装せず停止。旧receipt/復帰資格流用や架空contextを作らない。現入口の全尺更新は650新primary＋全尺新合成。旧全経過3:17:42、native2:29:34/合成22分は内数。改善後全工程未測定、2時間以内の根拠なし、長時間工程開始0。
+
+状態：実装/計算/保存JSON検査は完了、実映像確認は相談役待ち。次担当親monaが局所入口追加か長時間全尺更新の具体範囲を判断し、同じMac実装者へ渡す。旧issue-found/needs_review/score0/完成receipt未成立保持。証拠KEEP・削除0、2026-10-05T06:36:27.832573+00:00に今回process/試験fixture残存0、元成果/旧HTML保護。通常Git反映は既存本人承認で実行、最終remote/cleanは最終報告で確定。[session log](work-logs/2026-10/2026-10-05T0642_Codex-SSD_ID9-short-caption-display-implementation_fa4c504b.md)。以下は各時点の履歴。
+
 ## 最新現在地 — 2026-10-05 06:02 UTC（STT精度追究を終了、短い字幕の表示時間を確保する最小案）
 
 本人の最新方針：時刻精度改善はSTT側へ任せ、約1秒のずれを厳密に排除する分析・手動精密確認・追加alignment・同じ本人確認を終了。1文字/短い発話でも読める表示時間を確保する。元STT時刻、本文/ID/音声は保護し、score0/needs_review/旧不採用を合格へ書換えない。先に用意した局所聴取案は未実行で取り下げた。

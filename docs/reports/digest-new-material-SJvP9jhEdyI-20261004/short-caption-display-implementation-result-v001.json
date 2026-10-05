@@ -1,0 +1,378 @@
+{
+  "schemaVersion": "digest-short-caption-display-implementation-result-v001",
+  "observedAt": "2026-10-05T06:42:31.350753+00:00",
+  "implementationCheckpointSha": "fa4c504b79bfa7320026466ed8f6453e120fc060",
+  "candidateManifestBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-display-adjustment-v001/manifest.json",
+    "fileSha256": "fa9545b722d698c42adab5a348771f29fb1390914ab376fc43445cb481395c0f",
+    "sizeBytes": 82543
+  },
+  "status": "implementation-and-metadata-verified; local-media-blocked-by-current-scope",
+  "implementationBindings": [
+    {
+      "path": "runner/src/digest-caption-display-adjustment-v001.ts",
+      "fileSha256": "8a0afca821e3317e618ce4d0f5308e852a73c05863ca7d23ec53ab641da2cee0",
+      "sizeBytes": 16996
+    },
+    {
+      "path": "runner/src/digest-approved-inputs-v001.ts",
+      "fileSha256": "a3a6623fb2a9c8b9dc666374d7724346d24217b7236c5d57a1dc3f05cbd5960b",
+      "sizeBytes": 44763
+    }
+  ],
+  "originalMeaningBinding": {
+    "schemaVersion": "digest-caption-judgment-meaning-input-v001",
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-preparation/meaning-input.json",
+    "fileSha256": "2b66710b88283d0200d6955667a625996130b8859cd711bba26532e5e0b3d17b",
+    "canonicalSha256": "b85c46aea2348d24df54a78bf7088230ef731af0fc4627a989bc95dc404b2598"
+  },
+  "displayMeaningBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-display-adjustment-v001/display-meaning.json",
+    "fileSha256": "5679eca060e822d6f72698de47bfec689874e8008366a5d992bc9e21c276ab14",
+    "sizeBytes": 2867621
+  },
+  "displayAdjustmentBinding": {
+    "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-display-adjustment-v001/display-adjustment.json",
+    "fileSha256": "8276976e599c1313843d336b90f734c32b8999eb856d41c07f8a4682a17697d6",
+    "sizeBytes": 41850
+  },
+  "originalInputBindings": {
+    "originalMeaningBinding": {
+      "schemaVersion": "digest-caption-judgment-meaning-input-v001",
+      "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-preparation/meaning-input.json",
+      "fileSha256": "2b66710b88283d0200d6955667a625996130b8859cd711bba26532e5e0b3d17b",
+      "canonicalSha256": "b85c46aea2348d24df54a78bf7088230ef731af0fc4627a989bc95dc404b2598"
+    },
+    "originalCandidateManifestBinding": {
+      "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/manifest.json",
+      "fileSha256": "8da924bda9639478570a10d06dd0bab3573dede572250cd2d3ab9f045e0640dc"
+    },
+    "originalCorrespondenceBinding": {
+      "path": "runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/caption-candidate/correspondence.json",
+      "fileSha256": "0d0c2a297fce1e60620da006030ddf12fce27421cf2467ed1f50250a797c9712",
+      "sizeBytes": 3373055
+    },
+    "originalClockBinding": {
+      "path": "artifacts/draft_ef398a8dd5e241a3952ea152619fa67b/agent_726b01bbb7114409bd1b5d00c0f098b0/clock-resolution.json",
+      "fileSha256": "2d8b5f21dc6bb409f6d947f7b7efd19f255d30a13e45125ae15428c832a3781c"
+    }
+  },
+  "summary": {
+    "groups": 31,
+    "atoms": 5450,
+    "newCues": 650,
+    "newLines": 1041,
+    "minDisplayFrames": 1,
+    "maxDisplayFrames": 643,
+    "originalPlanEndFrame": 37619,
+    "originalPlanEndSample": 55299930
+  },
+  "displayChanges": [
+    {
+      "changeId": "world-local-display-v001",
+      "kind": "display-span",
+      "groupOrdinal": 28,
+      "candidateId": "candidate-0013",
+      "timelineSegmentId": "segment-0028",
+      "captionId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-segment-28",
+      "atomOccurrenceIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003955",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003956",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003957",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003958",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003959",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003960"
+      ],
+      "sourceSegmentIds": [
+        7729,
+        7730,
+        7731,
+        7732,
+        7733,
+        7734
+      ],
+      "semanticUtteranceIds": [
+        "common-utterance-000280"
+      ],
+      "text": "世界が終わる",
+      "sourceStartMs": 2325285,
+      "sourceEndMs": 2326367,
+      "sourceStartFrame30": 69759,
+      "sourceEndFrame30": 69791,
+      "startFrame": 24988,
+      "endFrameExclusive": 25020,
+      "displayFrameCount": 32
+    },
+    {
+      "changeId": "world-local-display-v001",
+      "kind": "display-span",
+      "groupOrdinal": 28,
+      "candidateId": "candidate-0013",
+      "timelineSegmentId": "segment-0028",
+      "captionId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-segment-28",
+      "atomOccurrenceIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003961",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003962",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003963"
+      ],
+      "sourceSegmentIds": [
+        7735,
+        7736,
+        7737
+      ],
+      "semanticUtteranceIds": [
+        "common-utterance-000280"
+      ],
+      "text": "なんか",
+      "sourceStartMs": 2326367,
+      "sourceEndMs": 2326667,
+      "sourceStartFrame30": 69791,
+      "sourceEndFrame30": 69800,
+      "startFrame": 25020,
+      "endFrameExclusive": 25029,
+      "displayFrameCount": 9
+    },
+    {
+      "changeId": "world-local-display-v001",
+      "kind": "display-span",
+      "groupOrdinal": 28,
+      "candidateId": "candidate-0013",
+      "timelineSegmentId": "segment-0028",
+      "captionId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-segment-28",
+      "atomOccurrenceIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003964",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003965",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003966",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003967",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003968",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003969",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003970",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003971",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003972",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003973",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003974"
+      ],
+      "sourceSegmentIds": [
+        7738,
+        7739,
+        7740,
+        7741,
+        7742,
+        7743,
+        7744,
+        7745,
+        7746,
+        7747,
+        7748
+      ],
+      "semanticUtteranceIds": [
+        "common-utterance-000280"
+      ],
+      "text": "いい雰囲気にしないで!",
+      "sourceStartMs": 2326667,
+      "sourceEndMs": 2327567,
+      "sourceStartFrame30": 69800,
+      "sourceEndFrame30": 69827,
+      "startFrame": 25029,
+      "endFrameExclusive": 25056,
+      "displayFrameCount": 27
+    },
+    {
+      "changeId": "world-local-display-v001",
+      "kind": "display-span",
+      "groupOrdinal": 28,
+      "candidateId": "candidate-0013",
+      "timelineSegmentId": "segment-0028",
+      "captionId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-segment-28",
+      "atomOccurrenceIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003975",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003976",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003977",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003978",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003979",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003980",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-003981"
+      ],
+      "sourceSegmentIds": [
+        7749,
+        7750,
+        7751,
+        7752,
+        7753,
+        7754,
+        7755
+      ],
+      "semanticUtteranceIds": [
+        "common-utterance-000281"
+      ],
+      "text": "いい雰囲気に!",
+      "sourceStartMs": 2327567,
+      "sourceEndMs": 2328027,
+      "sourceStartFrame30": 69827,
+      "sourceEndFrame30": 69841,
+      "startFrame": 25056,
+      "endFrameExclusive": 25070,
+      "displayFrameCount": 14
+    },
+    {
+      "changeId": "oh-natural-question-merge-v001",
+      "kind": "merge-only",
+      "groupOrdinal": 31,
+      "candidateId": "candidate-0015",
+      "timelineSegmentId": "segment-0031",
+      "captionId": "digest-SJvP9jhEdyI-20261004-v001-caption-input-caption-segment-31",
+      "atomOccurrenceIds": [
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004773",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004774",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004775",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004776",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004777",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004778",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004779",
+        "digest-SJvP9jhEdyI-20261004-v001-caption-atom-004780"
+      ],
+      "sourceSegmentIds": [
+        8660,
+        8661,
+        8662,
+        8663,
+        8664,
+        8665,
+        8666,
+        8667
+      ],
+      "semanticUtteranceIds": [
+        "common-utterance-000324",
+        "common-utterance-000325"
+      ],
+      "text": "何人いるの?お!",
+      "sourceStartMs": 2625898,
+      "sourceEndMs": 2626958,
+      "sourceStartFrame30": 78777,
+      "sourceEndFrame30": 78809,
+      "startFrame": 32545,
+      "endFrameExclusive": 32577,
+      "displayFrameCount": 32
+    }
+  ],
+  "changedAtomCount": 27,
+  "changedAtomFields": [
+    "retainedSpans"
+  ],
+  "unchanged": [
+    "original STT observations",
+    "text",
+    "source IDs",
+    "order",
+    "original audio/video",
+    "27 atoms other fields",
+    "all non-target atom fields"
+  ],
+  "validation": {
+    "helper": {
+      "pass": 26,
+      "fail": 0,
+      "skipped": 0,
+      "tap": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/display-adjustment-helper-draft-v001/tests-attempt002.tap",
+        "fileSha256": "84b3365439a4473ae8e18a12f4f538b437ec44b47c0e3c8f7ae7069c26a6d503",
+        "sizeBytes": 4831
+      }
+    },
+    "reader": {
+      "pass": 11,
+      "fail": 0,
+      "excludedUnrelatedTests": 2,
+      "tap": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/short-caption-reader-tests-final-v002.tap",
+        "fileSha256": "b06ecfe63fbefe97a2f9f50d51fb7bbf688022876a396052ae6eefe75bf613df",
+        "sizeBytes": 2817
+      },
+      "anchors": "explicitly synthetic test-only; no human manufacturing grant, owner or environment activation"
+    },
+    "runnerTypecheck": {
+      "exitCode": 0,
+      "output": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/short-caption-runner-typecheck-final.txt",
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sizeBytes": 0
+      }
+    },
+    "remotionTypecheck": {
+      "exitCode": 0,
+      "output": {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/short-caption-remotion-typecheck-final.txt",
+        "fileSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sizeBytes": 0
+      }
+    },
+    "independentReadReview": "no unresolved blocking code issue; real manifest/meaning differential checked",
+    "candidateTextCoverageOrderLineWidthFramesNonoverlap": "passed in saved candidate reader test",
+    "sourcePackageProvenance": "derived canonical SHA and adjustment binding checked; metadata remains unqualified for manufacture",
+    "formalCore": "not-executed",
+    "newGlyph": "not-measured",
+    "localMedia": "not-generated",
+    "normalSpeedReadability": "not-viewed",
+    "audioSynchrony": "not-evaluated",
+    "fullMovieUpdate": "not-started"
+  },
+  "actualCurrentOperations": {
+    "savedDisplayCandidate": 1,
+    "captionSkillInvocations": 1,
+    "newManualNaturalMergeResponse": 1,
+    "reusedOriginalGroups": 30,
+    "media": 0,
+    "sttOrAlignment": 0,
+    "api": 0,
+    "manufacturingGrant": 0,
+    "newOwner": 0
+  },
+  "copiedCandidateHistoryNote": "Manifest effects and acceptSkillValidationSaveWallMs retain original bundle history; current operations are listed separately here.",
+  "setupCorrections": {
+    "nodeDependencyResolution": 1,
+    "readerFixturePrefix": 1,
+    "readerFixtureMetadataContext": 1,
+    "helperTestTypeAnnotation": 1,
+    "total": 4
+  },
+  "blocker": {
+    "reason": "Current formal storage/Core entry requires live full-worker owner; no qualified local diagnostic entry within two product paths.",
+    "additionalProductPaths": [
+      "runner/src/digest-approved-job-v001.ts",
+      "runner/src/digest-approved-job-runner-v001.ts",
+      "tools/digest-quality/original-resolution-full-supervisor-v002.py"
+    ],
+    "existingReaderAdditionalConnection": "accept only the narrowly requalified saved base",
+    "changesRequireBinding": [
+      "actual two ranges",
+      "saved base bytes and provenance",
+      "one diagnostic operation",
+      "owner and fixed command",
+      "resource monitoring and own PGID"
+    ],
+    "implementedOutsideCurrentScope": false
+  },
+  "fullUpdate": {
+    "newPrimaryCount": 650,
+    "frames": 37619,
+    "seconds": 1253.9666666666667,
+    "oldManufactureElapsedSeconds": 11862.007,
+    "oldNativeElapsedSeconds": 8974.579,
+    "oldCompositeElapsedSeconds": 1320.55,
+    "intervalsAreNestedNotAdded": true,
+    "newWallTimeMeasured": false,
+    "planAllowance": "2–3.5 hours provisional; excludes preparation/human work and is not a promised bound",
+    "phaseAtLeastTwoHoursStarted": false,
+    "pngReuseViaCurrentFormalEntry": false
+  },
+  "cleanup": {
+    "checkedAt": "2026-10-05T06:36:27.832573+00:00",
+    "ownCurrentCandidateOrTestProcesses": [],
+    "readerTemporaryFixtures": [],
+    "otherProcessesChanged": false,
+    "priorReviewServerDisposition": "KEEP; not owned by this current cycle"
+  },
+  "nextState": "consultant waiting",
+  "nextOwner": "parent mona",
+  "preservedFailureQuality": "Existing issue-found/needs_review/score0 and lack of completed receipt retained."
+}
