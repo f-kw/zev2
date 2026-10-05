@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-06（JST） / revision：handover-index-20261006-v099
+更新日：2026-10-06（JST） / revision：handover-index-20261006-v100
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05T16:20:10+00:00（明示的な字幕非表示の6path実装・限定検証完了）
+
+本人の追加承認（Sentinel_0c90201479688191abef56d1096f4561）で、元本文・ID・時計・全命令を残し、別の全cue採否JSONから合成の表示/非表示だけを選ぶ機能を6製品path＋既存5testへ実装。ローカル実装checkpoint`bed2eeeb672c0f84e95cfa8f970b2f26bfe9f992`。自動数値基準・素材専用補正・旧形式救済なし。原本651件と新採否/manifest/planの閉包、合成の実投入証拠、pending/get/finalize/完成結果を再照合し、差替えを拒否する。全非表示でも映像/元音声と651件の記録を残す。非表示の代表確認はv002と実画像/動画を要求し、可視合格へ流用しない。
+
+reader15＋renderer/QC/保存再読89＋合成14の118件passed、2型検査/syntax/diffpassed。12frameの小実合成4ケースで尺/順序/元AAC保持、全表示は従来とMP4 byte一致。renderer再読はモデル化したbyte資格と実関数body、readerは実保存651原本使用、新651正式plan/全尺製造なし。既存履歴2testは変更前からのrenderer SHA不一致で停止し、全suite合格とはしない。技術試験は正式動画の視聴品質ではなく、既存不採用2clipと同期不具合は未解消のまま保持。
+
+本人の記録6件GitHub反映承認（Sentinel_812c2c3a9aa08191b40a724782d51ea7）で`104d6a1af7791caf7cfcd122aff0eed7017d8130`だけをremote mainへpushし一致確認。後続方針/補正撤去/今回実装・記録はローカルのみ。原manifest/meaning/調整履歴のSHA不変、今回fixture残存0、不要copy4fileだけ整理、試験process残存なし。既存閲覧server2件は保持。大容量製造/STT/alignment/API/HTML/品質採用0。
+
+状態：今回の承認済み実装・限定検証は完了。次担当親monaが具体的採否と次の製造範囲を扱う。自動基準は未確定で未適用、過去案を承認済み条件としない。詳細は同SHAの[CURRENT_GOAL](CURRENT_GOAL.md)と[session log](work-logs/2026-10/2026-10-05T1620_Codex-SSD_ID9-explicit-caption-visibility_bed2eeeb.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-05T15:24:14+00:00（表示時刻補正の撤去完了、共通基準による非表示の契約案を親へ返す）
 
