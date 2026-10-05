@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v094
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v095
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05T14:29:15.912+00:00（序盤99文字の一回LAN alignment完了、異常が残るため不採用）
+
+本人の既存LAN STT利用許可を親mona経由で受領し、元2:57〜3:29/32秒・原文99文字を一回だけ既存 /alignへ送信。元ID1〜47・72〜99の採用75と除外済み文脈24を区別、旧各文字時刻は入力せず探索窓0〜32秒。job dc52cde6ef2f46ef99ac03578e84845b、14:22:21〜14:22:45 UTC、runner24.287秒。全文字保持/差分0/時刻null0/score null0だがscore0が33（採用75内26）、低正値8、needs_review。原ID89「て」へ189.568〜199.814秒/10.246秒/.998、ID95「じ」へ201.495〜207.719秒/6.224秒/.997を割当て。旧の長い割当てが別文字にも残り、品質合格/時計修正としない。
+
+今回実サーバーmetadataはWhisperX3.8.6/interpolateMethod ignore/既存日本語wav2vec2同revision/offline。モデル/コード/設定を本sessionで変更0。入力/結果SHA、固定本文checkpoint、99文字・元ID対応を照合し、約1.24MBの再現束を専用SSDへKEEP。処理保存completedは品質採用ではなく、実発話同期は未確認。正本時計/字幕再採用/本文/計画/製造は変更0、窓替え反復なし。次担当親mona→既存LAN STT側が、この一件の長時間割当てのフレーム/文字経路と実音声を切り分ける。本人の全尺確認/手動時刻再提出を要求しない。[一回の結果](reports/digest-new-material-SJvP9jhEdyI-20261004/opening99-alignment-result-v001.md)・[session log](work-logs/2026-10/2026-10-05T1429_Codex-SSD_ID9-opening99-alignment_1365e481.md)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05T13:57:11.320588+00:00（本人の同期不具合報告を受理、短い2クリップHTML提供・原因切り分け完了）
 
