@@ -2,6 +2,14 @@
 
 更新日：2026-10-05（JST）
 
+## 最新現在地 — 2026-10-05 00:30 UTC（同じPNGの二回読み込みを解消）
+
+本人承認を受けた親monaの限定指示で、PNGの透明度最大値と輪郭を一回のImageMagick読込へまとめた。製品一file・回帰一file。全主画像の二項目を維持し、検査基準・返却項目・拒否条件・監視は保持。651主画像ならchild呼出は静的に1302→651。全体時間の短縮は未測定。[成果・検証・実SHA](reports/digest-new-material-SJvP9jhEdyI-20261004/alpha-bounds-single-decode-result-v001.md)。
+
+実PNG四種の旧方式一致、新8件＋既存41件の49件成功、runner/Remotion型・構文・差分成功、独立読取reviewの未解消blocking0。追加の古い統合試験一件は1462行の完成映像差分fixtureで失敗し、変更前main QCでも同じ理由を再現。合格扱い/fixture書換え/検査免除なし。storage資格変更、動画再生成、新STT、追加課金、本文/時計変更0。映像・音声・人間品質は今回未評価。
+
+状態：今回の限定修正と検証は完了、main反映とremote/cleanは最終報告で確定。最終process実確認2026-10-05 00:27:23 UTC、検証/製造残存0、own小fixture残存0。次担当：親monaが成果と未評価を説明し、具体的な次指示があれば同じMac実装者。旧発話時刻の本人回答待ちは今回修正の停止条件ではない。STTの実行main照合や既存動画の短字幕問題は別残件、動画completed receiptは未成立のまま。次の製造へ旧job資格を流用しない。[session log](work-logs/2026-10/2026-10-05T0030_Codex-SSD_ID9-alpha-bounds-single-decode_6af091a3.md)。以下は各時点の履歴。
+
 ## 最新現在地 — 2026-10-04 14:59 UTC（短字幕fadeと代表検査の3path接続を完了、発話境界回答待ち）
 
 親の明示継続指示で次回用の短字幕濃さとnative代表検査を製品3path・回帰6pathへ実装。全primary実alpha/bounds/ID/時計/設定/媒体/元音声、全必要calibrationと補正後maskを維持し、opaque実policyからrepeat/maskを選ぶ。現計画では651primary＋8repeat＋14mask、未実施643repeat/1028maskを正直に記録。coverageをplan/policy/job/auth/codeへ束縛し、technical/pending/get/record-only/completed読取まで保持。一般trust/default/Core/監視/保存先・browser共有・汎用cache変更0。[実装・検証・不足根拠](reports/digest-new-material-SJvP9jhEdyI-20261004/fade-native-implementation-result-v001.md)。

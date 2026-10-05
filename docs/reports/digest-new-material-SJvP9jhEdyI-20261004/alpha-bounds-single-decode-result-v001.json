@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "digest-alpha-bounds-single-decode-result-v001",
+  "observedAt": "2026-10-05T00:30:44.706670+00:00",
+  "baseHead": "6af091a33694681269f2e759be7e639d51c89c82",
+  "branch": "main",
+  "scope": "one PNG decode for unchanged alpha maximum and alpha bounds",
+  "authorization": {
+    "parentThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "userMessageIds": [
+      "Sentinel_f0ae30f89c7c81918fb53f99cdcc7505",
+      "Sentinel_4f8d4f72a2388191a9f7be4c2ef885f5"
+    ],
+    "implementationTestsMainPushExplicitlyApproved": true
+  },
+  "implementation": {
+    "evals/clip_composition/presentation_renderer_qc_v002.mjs": {
+      "bytes": 59386,
+      "sha256": "7f6b516e8815c8f4fb02978b4780a4023667c69d4ee4c0dc287e140e2986f22f"
+    },
+    "evals/clip_composition/presentation_renderer_alpha_bounds_single_decode_v001.test.mjs": {
+      "bytes": 6476,
+      "sha256": "04d805cf8cdbf46327b3538b16c5512199181fb695a716b3f5863f71025b6807"
+    }
+  },
+  "baselineQc": {
+    "bytes": 59624,
+    "sha256": "39b2dcb042a705cf8adee457c509b6aef5f31b96ccdfc74f3d18132ce214a161"
+  },
+  "runtime": {
+    "node": "v20.19.6",
+    "imageMagick": "7.1.2-12 Q16-HDRI aarch64"
+  },
+  "validation": {
+    "focusedRegression": {
+      "exitCode": 0,
+      "tests": 49,
+      "passed": 49,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 447.647708,
+      "suites": [
+        {
+          "file": "evals/clip_composition/presentation_renderer_alpha_bounds_single_decode_v001.test.mjs",
+          "tests": 8
+        },
+        {
+          "file": "evals/clip_composition/digest_native_sampling_qc_v001.test.mjs",
+          "tests": 37
+        },
+        {
+          "file": "evals/clip_composition/digest_native_sampling_renderer_v001.test.mjs",
+          "tests": 4
+        }
+      ]
+    },
+    "realPngComparison": {
+      "formerTwoCommandResultsEqual": true,
+      "fixtures": [
+        "fully transparent",
+        "corner-occupied translucent top band",
+        "offset translucent rectangle",
+        "opaque rectangle with faint disconnected ink"
+      ],
+      "observedCallsPerInspection": 1,
+      "pngInputOccurrencesPerCall": 1,
+      "allowedExitCodes": [
+        0
+      ],
+      "allReturnedMetadataPreserved": true
+    },
+    "emptyTrim": {
+      "exitCode": 0,
+      "stdout": "alpha 0\nbounds 1 1 -1 -1\n",
+      "stderrWarning": "geometry does not contain image",
+      "returnedAlphaMax": 0,
+      "returnedAlphaBounds": null,
+      "geometryIgnoredForEmptyAlpha": true
+    },
+    "failureChecks": [
+      "missing PNG observed/unobserved rejects",
+      "corrupt PNG observed/unobserved rejects",
+      "positive alpha missing/malformed geometry rejects"
+    ],
+    "syntax": [
+      {
+        "file": "evals/clip_composition/presentation_renderer_qc_v002.mjs",
+        "exitCode": 0
+      },
+      {
+        "file": "evals/clip_composition/presentation_renderer_alpha_bounds_single_decode_v001.test.mjs",
+        "exitCode": 0
+      }
+    ],
+    "typeChecks": [
+      {
+        "project": "runner/tsconfig.json",
+        "noEmit": true,
+        "exitCode": 0
+      },
+      {
+        "project": "runner/tsconfig.remotion.json",
+        "noEmit": true,
+        "exitCode": 0
+      }
+    ],
+    "diffCheck": {
+      "exitCode": 0
+    },
+    "additionalHistoricalIntegration": {
+      "file": "evals/clip_composition/presentation_renderer_v002.test.mjs",
+      "testNamePattern": "^12 行数",
+      "changedCode": {
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 19,
+        "durationMs": 138.93775
+      },
+      "baselineCode": {
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 19,
+        "durationMs": 188.624
+      },
+      "sameFailureLine": 1462,
+      "expectedCode": "OUTPUT_ELEMENT_NOT_VISIBLE",
+      "observedCode": "COMPLETED_FRAME_QC_INVALID",
+      "observedDetails": [
+        "mixedComparisonMethods",
+        "missingGlobalEvidence"
+      ],
+      "baselineMethod": "Node module loader substitutes only the QC source with git show baseHead:QC-file; all other repo files are the same",
+      "fixtureChanged": false,
+      "waiverAdded": false,
+      "status": "pre-existing failure reproduced; not passed"
+    },
+    "independentReview": {
+      "reviewer": "renderer_context",
+      "mode": "read-only",
+      "blockingFindings": 0,
+      "testsExecutedByReviewer": 0
+    }
+  },
+  "staticCount": {
+    "basis": "651 nonempty primary PNGs; each keeps maximum and bounds measurements",
+    "oldImageMagickCalls": 1302,
+    "newImageMagickCalls": 651,
+    "savedCalls": 651,
+    "fullProductionTimeMeasured": false,
+    "sampleTimingIsProductionBenchmark": false
+  },
+  "unchanged": [
+    "QC checks/thresholds/rejection rules",
+    "metadata/output schema",
+    "black border 1 / threshold 0 / offset subtraction 1",
+    "process observer allowed exit codes [0]",
+    "storage qualification",
+    "source/clock/owner/trust/default/formal output/old fixture"
+  ],
+  "notExecuted": [
+    "651-cue production rendering",
+    "video regeneration",
+    "new STT",
+    "paid API",
+    "formal authorization migration",
+    "full video/audio/human quality evaluation"
+  ],
+  "cleanup": {
+    "smallPngFixtureDirectoriesRemaining": 0,
+    "baselineLoaderFilesToDeleteAfterEvidence": [
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/alpha-bounds-baseline-qc-v001.mjs",
+        "bytes": 59624,
+        "sha256": "39b2dcb042a705cf8adee457c509b6aef5f31b96ccdfc74f3d18132ce214a161"
+      },
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/alpha-bounds-baseline-loader-v001.mjs",
+        "bytes": 409,
+        "sha256": "aa7343ceeb65823a27b501e72e5866b30bb26164798f7ba1489e62fc277220ce"
+      },
+      {
+        "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/alpha-bounds-baseline-import-v001.mjs",
+        "bytes": 108,
+        "sha256": "39f05a01441050033315800b0e48ba77ed79a7ab9bc242bc396f5350aff72629"
+      }
+    ],
+    "baselineLoaderBytes": 60141,
+    "matchedOwnTestOrManufactureProcesses": 0,
+    "processObservedAt": "2026-10-05T00:27:23+00:00",
+    "existingMediaDeleted": false
+  },
+  "git": {
+    "preflightLocalAndRemoteMain": "6af091a33694681269f2e759be7e639d51c89c82",
+    "remoteRecheckedAt": "2026-10-05T00:28:16+00:00",
+    "ownPathsOnly": true,
+    "finalCommitPushRemoteEqualityClean": "confirmed in final execution report; commit containing this file is the result binding"
+  }
+}

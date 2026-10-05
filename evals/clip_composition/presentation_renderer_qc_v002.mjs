@@ -775,12 +775,26 @@ async function inspectOverlayPngWithCommand({
   processObserver = null,
   observationLabelPrefix = 'overlay-inspection',
 }, imageMagickPath) {
-  const alpha = await runBuffer(
+  // Emit the maximum before thresholding, then reuse the decoded alpha image
+  // for bounds. The black border keeps corner-occupied translucent bands intact.
+  const inspection = await runBuffer(
     imageMagickPath,
-    [pngPath, '-alpha', 'extract', '-format', '%[fx:maxima]', 'info:'],
-    {processObserver, observationLabel: `${observationLabelPrefix}-alpha`},
+    [
+      pngPath,
+      '-alpha', 'extract',
+      '-format', '%[fx:maxima]\n',
+      '-write', 'info:',
+      '-threshold', '0',
+      '-bordercolor', 'black',
+      '-border', '1',
+      '-trim',
+      '-format', '%w %h %X %Y',
+      'info:',
+    ],
+    {processObserver, observationLabel: `${observationLabelPrefix}-alpha-bounds`},
   );
-  const alphaMax = Number(alpha.stdout.toString().trim());
+  const [alphaText, geometryText = ''] = inspection.stdout.toString().trim().split('\n');
+  const alphaMax = Number(alphaText);
   if (!(alphaMax > 0)) {
     return {
       instructionId,
@@ -797,28 +811,10 @@ async function inspectOverlayPngWithCommand({
       overlaySha256,
     };
   }
-  // `-trim` compares against the corner pixel.  A full-width translucent band
-  // legitimately occupies that corner, so trimming the source image directly
-  // would mistake the band for background and retain only the opaque text.
-  // Extract alpha, turn every non-zero alpha into foreground, and add a known
-  // transparent border before trimming.  The artificial border makes the
-  // reference background independent of the overlay's corner pixels.
-  const geometry = await runBuffer(
-    imageMagickPath,
-    [
-      pngPath,
-      '-alpha', 'extract',
-      '-threshold', '0',
-      '-bordercolor', 'black',
-      '-border', '1',
-      '-trim',
-      '-format', '%w %h %X %Y',
-      'info:',
-    ],
-    {processObserver, observationLabel: `${observationLabelPrefix}-bounds`},
-  );
-  const match = geometry.stdout.toString().trim().match(/^(\d+) (\d+) ([+-]\d+) ([+-]\d+)$/);
-  if (!match) throw new Error(`alpha bounds could not be parsed: ${geometry.stdout.toString().trim()}`);
+  // Fully transparent images still return the existing empty-alpha result;
+  // their trim geometry is irrelevant and must not become a visible rectangle.
+  const match = geometryText.trim().match(/^(\d+) (\d+) ([+-]\d+) ([+-]\d+)$/);
+  if (!match) throw new Error(`alpha bounds could not be parsed: ${geometryText.trim()}`);
   const width = Number(match[1]);
   const height = Number(match[2]);
   const left = Number(match[3]) - 1;
