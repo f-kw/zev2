@@ -1,0 +1,1047 @@
+{
+  "schemaVersion": 1,
+  "observedAtUtc": "2026-10-05T05:30:12+00:00",
+  "operation": "one adopted-text alignment; no ASR; no application or manufacture",
+  "jobId": "c2cdcbc04ee841a8a3e406b6828570e3",
+  "execution": {
+    "startedAtUtc": "2026-10-05T05:27:35.755+00:00",
+    "postAttempts": 1,
+    "operation": "align",
+    "asrRequested": false,
+    "forcedTimingOrInterpolation": false,
+    "registrationHttpStatus": 202,
+    "registeredAtObservedUtc": "2026-10-05T05:27:36.314+00:00",
+    "jobId": "c2cdcbc04ee841a8a3e406b6828570e3",
+    "finalState": "completed",
+    "completedAtObservedUtc": "2026-10-05T05:27:54.952+00:00",
+    "finishedAtUtc": "2026-10-05T05:27:54.952+00:00"
+  },
+  "statusStartedAtUtc": "2026-10-05T05:27:36.515105+00:00",
+  "statusEndedAtUtc": "2026-10-05T05:27:53.199234+00:00",
+  "serverMetrics": {
+    "gpu": {
+      "meanUtilizationPercent": 0.27,
+      "name": "NVIDIA GeForce RTX 4090",
+      "peakMemoryMiB": 478,
+      "peakUtilizationPercent": 1,
+      "sampleCount": 15,
+      "scope": "whole GPU, sampled once per second"
+    },
+    "pipelineSeconds": 15.419,
+    "runnerSeconds": 16.609,
+    "segmentCount": 1
+  },
+  "resultSha256": "eec0819dc76516aa36b6517db10888eac6122c5475c50f6c3b50797d007b82cf",
+  "sourceAndInputBindingsPassed": true,
+  "input": {
+    "preparedAtUtc": "2026-10-05T05:23:17+00:00",
+    "operation": "align",
+    "api": "http://192.168.1.7:8000/align",
+    "language": "ja",
+    "inputAudio": {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-oh-human-window-alignment-v001/source-43m39s-to-43m47s.wav",
+      "bytes": 256078,
+      "sha256": "6c06143dbbdf1726430ec536f7bace5aa200925a87b03767e709fad4da928808",
+      "pcmSha256": "0a14180971598a6863bd5651a9cf760c23acc8e0394e1cbf6c3b140ca8b975b6",
+      "sampleRate": 16000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "frames": 128000
+    },
+    "sourceAudioRangeMs": [
+      2619000,
+      2627000
+    ],
+    "clockOffsetMs": 2619000,
+    "adoptedSegments": [
+      {
+        "text": "何人いるの?お!早速鬼がいるんじゃねえか!",
+        "start": 0.0,
+        "end": 8.0
+      }
+    ],
+    "sourceOriginalSegments": [
+      {
+        "id": 8660,
+        "startMs": 2625898,
+        "endMs": 2625998,
+        "text": "何",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8661,
+        "startMs": 2625998,
+        "endMs": 2626158,
+        "text": "人",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8662,
+        "startMs": 2626158,
+        "endMs": 2626318,
+        "text": "い",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8663,
+        "startMs": 2626318,
+        "endMs": 2626338,
+        "text": "る",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8664,
+        "startMs": 2626338,
+        "endMs": 2626358,
+        "text": "の",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8665,
+        "startMs": 2626358,
+        "endMs": 2626918,
+        "text": "?",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8666,
+        "startMs": 2626918,
+        "endMs": 2626938,
+        "text": "お",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8667,
+        "startMs": 2626938,
+        "endMs": 2626958,
+        "text": "!",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8668,
+        "startMs": 2626958,
+        "endMs": 2627098,
+        "text": "早",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8669,
+        "startMs": 2627098,
+        "endMs": 2627118,
+        "text": "速",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8670,
+        "startMs": 2627118,
+        "endMs": 2627399,
+        "text": "鬼",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8671,
+        "startMs": 2627399,
+        "endMs": 2627519,
+        "text": "が",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8672,
+        "startMs": 2627519,
+        "endMs": 2628199,
+        "text": "い",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8673,
+        "startMs": 2628199,
+        "endMs": 2628219,
+        "text": "る",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8674,
+        "startMs": 2628219,
+        "endMs": 2628239,
+        "text": "ん",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8675,
+        "startMs": 2628239,
+        "endMs": 2628399,
+        "text": "じ",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8676,
+        "startMs": 2628399,
+        "endMs": 2628619,
+        "text": "ゃ",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8677,
+        "startMs": 2628619,
+        "endMs": 2628639,
+        "text": "ね",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8678,
+        "startMs": 2628639,
+        "endMs": 2628899,
+        "text": "え",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8679,
+        "startMs": 2628899,
+        "endMs": 2629260,
+        "text": "か",
+        "speaker": "unknown"
+      },
+      {
+        "id": 8680,
+        "startMs": 2629260,
+        "endMs": 2632061,
+        "text": "!",
+        "speaker": "unknown"
+      }
+    ],
+    "sourceSegmentIdMapping": [
+      8660,
+      8661,
+      8662,
+      8663,
+      8664,
+      8665,
+      8666,
+      8667,
+      8668,
+      8669,
+      8670,
+      8671,
+      8672,
+      8673,
+      8674,
+      8675,
+      8676,
+      8677,
+      8678,
+      8679,
+      8680
+    ],
+    "targetSourceSegmentIds": [
+      8666,
+      8667
+    ],
+    "textReference": {
+      "path": "/Users/kawafmm/workspace/zev2/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/normal-snapshot/artifacts/draft_ef398a8dd5e241a3952ea152619fa67b/agent_75c283aaf7764f31bb292d2a30769364--original-source-transcript.json",
+      "fileSha256": "c082654ab253534b457d0ccf4a0256f71eb22cd35b4572144a5e174fc4ffe407",
+      "sizeBytes": 1489253,
+      "declaredBindingCompared": true
+    },
+    "humanStartBandSourceMs": [
+      2622000,
+      2623000
+    ],
+    "humanStartBandRelativeSeconds": [
+      3,
+      4
+    ],
+    "humanBandIsOutputAcceptanceCondition": true,
+    "forcedTimingOrInterpolation": false,
+    "oldNeighborCues": [
+      {
+        "globalCueOrdinal": 561,
+        "text": "起き上がり方もキモ!",
+        "sourceStartMs": 2596656,
+        "sourceEndMs": 2597656,
+        "sourceSegmentIds": [
+          8596,
+          8597,
+          8598,
+          8599,
+          8600,
+          8601,
+          8602,
+          8603,
+          8604,
+          8605
+        ]
+      },
+      {
+        "globalCueOrdinal": 562,
+        "text": "このまま",
+        "sourceStartMs": 2597656,
+        "sourceEndMs": 2597856,
+        "sourceSegmentIds": [
+          8606,
+          8607,
+          8608,
+          8609
+        ]
+      },
+      {
+        "globalCueOrdinal": 563,
+        "text": "第二ラウンドとしゃれ込むか?",
+        "sourceStartMs": 2597856,
+        "sourceEndMs": 2602478,
+        "sourceSegmentIds": [
+          8610,
+          8611,
+          8612,
+          8613,
+          8614,
+          8615,
+          8616,
+          8617,
+          8618,
+          8619,
+          8620,
+          8621,
+          8622,
+          8623
+        ]
+      },
+      {
+        "globalCueOrdinal": 564,
+        "text": "テスモボ太郎!",
+        "sourceStartMs": 2602478,
+        "sourceEndMs": 2603678,
+        "sourceSegmentIds": [
+          8624,
+          8625,
+          8626,
+          8627,
+          8628,
+          8629,
+          8630
+        ]
+      },
+      {
+        "globalCueOrdinal": 565,
+        "text": "ここが鬼ヶ島",
+        "sourceStartMs": 2611970,
+        "sourceEndMs": 2613071,
+        "sourceSegmentIds": [
+          8631,
+          8632,
+          8633,
+          8634,
+          8635,
+          8636
+        ]
+      },
+      {
+        "globalCueOrdinal": 566,
+        "text": "ねえ、待って",
+        "sourceStartMs": 2613071,
+        "sourceEndMs": 2623316,
+        "sourceSegmentIds": [
+          8637,
+          8638,
+          8639,
+          8640,
+          8641,
+          8642
+        ]
+      },
+      {
+        "globalCueOrdinal": 567,
+        "text": "これガチモンの桃太郎来た?",
+        "sourceStartMs": 2623316,
+        "sourceEndMs": 2625117,
+        "sourceSegmentIds": [
+          8643,
+          8644,
+          8645,
+          8646,
+          8647,
+          8648,
+          8649,
+          8650,
+          8651,
+          8652,
+          8653,
+          8654,
+          8655
+        ]
+      },
+      {
+        "globalCueOrdinal": 568,
+        "text": "え?",
+        "sourceStartMs": 2625117,
+        "sourceEndMs": 2625618,
+        "sourceSegmentIds": [
+          8656,
+          8657
+        ]
+      },
+      {
+        "globalCueOrdinal": 569,
+        "text": "え?",
+        "sourceStartMs": 2625618,
+        "sourceEndMs": 2625898,
+        "sourceSegmentIds": [
+          8658,
+          8659
+        ]
+      },
+      {
+        "globalCueOrdinal": 570,
+        "text": "何人いるの?",
+        "sourceStartMs": 2625898,
+        "sourceEndMs": 2626918,
+        "sourceSegmentIds": [
+          8660,
+          8661,
+          8662,
+          8663,
+          8664,
+          8665
+        ]
+      },
+      {
+        "globalCueOrdinal": 571,
+        "text": "お!",
+        "sourceStartMs": 2626918,
+        "sourceEndMs": 2626958,
+        "sourceSegmentIds": [
+          8666,
+          8667
+        ]
+      },
+      {
+        "globalCueOrdinal": 572,
+        "text": "早速鬼がいるんじゃねえか!",
+        "sourceStartMs": 2626958,
+        "sourceEndMs": 2632061,
+        "sourceSegmentIds": [
+          8668,
+          8669,
+          8670,
+          8671,
+          8672,
+          8673,
+          8674,
+          8675,
+          8676,
+          8677,
+          8678,
+          8679,
+          8680
+        ]
+      },
+      {
+        "globalCueOrdinal": 573,
+        "text": "いや、鬼だけじゃねえな!",
+        "sourceStartMs": 2632061,
+        "sourceEndMs": 2634743,
+        "sourceSegmentIds": [
+          8681,
+          8682,
+          8683,
+          8684,
+          8685,
+          8686,
+          8687,
+          8688,
+          8689,
+          8690,
+          8691,
+          8692
+        ]
+      },
+      {
+        "globalCueOrdinal": 574,
+        "text": "バケモンぞろいだ!",
+        "sourceStartMs": 2634743,
+        "sourceEndMs": 2635343,
+        "sourceSegmentIds": [
+          8693,
+          8694,
+          8695,
+          8696,
+          8697,
+          8698,
+          8699,
+          8700,
+          8701
+        ]
+      },
+      {
+        "globalCueOrdinal": 575,
+        "text": "こりゃ倒しがいがあるぜ!",
+        "sourceStartMs": 2635343,
+        "sourceEndMs": 2636324,
+        "sourceSegmentIds": [
+          8702,
+          8703,
+          8704,
+          8705,
+          8706,
+          8707,
+          8708,
+          8709,
+          8710,
+          8711,
+          8712,
+          8713
+        ]
+      },
+      {
+        "globalCueOrdinal": 576,
+        "text": "おっと!",
+        "sourceStartMs": 2636324,
+        "sourceEndMs": 2636404,
+        "sourceSegmentIds": [
+          8714,
+          8715,
+          8716,
+          8717
+        ]
+      },
+      {
+        "globalCueOrdinal": 577,
+        "text": "名乗り遅れた俺は桃太郎!",
+        "sourceStartMs": 2636404,
+        "sourceEndMs": 2636744,
+        "sourceSegmentIds": [
+          8718,
+          8719,
+          8720,
+          8721,
+          8722,
+          8723,
+          8724,
+          8725,
+          8726,
+          8727,
+          8728,
+          8729
+        ]
+      },
+      {
+        "globalCueOrdinal": 578,
+        "text": "悪い鬼を倒す英雄様だぜ!",
+        "sourceStartMs": 2636744,
+        "sourceEndMs": 2637144,
+        "sourceSegmentIds": [
+          8730,
+          8731,
+          8732,
+          8733,
+          8734,
+          8735,
+          8736,
+          8737,
+          8738,
+          8739,
+          8740,
+          8741
+        ]
+      },
+      {
+        "globalCueOrdinal": 579,
+        "text": "やだな!",
+        "sourceStartMs": 2637144,
+        "sourceEndMs": 2637484,
+        "sourceSegmentIds": [
+          8742,
+          8743,
+          8744,
+          8745
+        ]
+      },
+      {
+        "globalCueOrdinal": 580,
+        "text": "こんな桃太郎もやだな!",
+        "sourceStartMs": 2637484,
+        "sourceEndMs": 2639705,
+        "sourceSegmentIds": [
+          8746,
+          8747,
+          8748,
+          8749,
+          8750,
+          8751,
+          8752,
+          8753,
+          8754,
+          8755,
+          8756
+        ]
+      },
+      {
+        "globalCueOrdinal": 581,
+        "text": "そしてこいつらが",
+        "sourceStartMs": 2639705,
+        "sourceEndMs": 2640426,
+        "sourceSegmentIds": [
+          8757,
+          8758,
+          8759,
+          8760,
+          8761,
+          8762,
+          8763,
+          8764
+        ]
+      }
+    ],
+    "maxAlignPosts": 1,
+    "onMismatch": "not adopted; stop without repeat",
+    "oldInputExcludedHumanAnswer": {
+      "sourceAudioRangeMs": [
+        2624000,
+        2633000
+      ]
+    },
+    "sourceVideo": {
+      "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/source-acquisition-v002/source-video.mp4",
+      "declaredSha256": "907de6d045d4c94cec8798bd1a1d9411a90675c08a1c1f809db72e3b9fd5b4d1",
+      "bytes": 1016332396,
+      "mtime": 1791093353.6106684,
+      "fullSourceRehashed": false
+    },
+    "existingWorldHumanAnswer": "38:42 second band; keep, no extra alignment"
+  },
+  "summary": {
+    "sourceCharacters": 21,
+    "missingCharacters": 0,
+    "nullTimeCharacters": 0,
+    "nullScoreCharacters": 0,
+    "scoreZeroCharacters": 7,
+    "scoreZeroSourceSegmentIds": [
+      8663,
+      8664,
+      8665,
+      8666,
+      8669,
+      8671,
+      8675
+    ],
+    "positiveSubThresholdCharacters": 0,
+    "positiveOrderedNonOverlappingWithinResult": true,
+    "quality": "needs_review"
+  },
+  "target": {
+    "sourceSegmentIds": [
+      8666,
+      8667
+    ],
+    "sourceRangeMs": [
+      2623371,
+      2623471
+    ],
+    "durationMs": 100,
+    "humanStartBandMs": [
+      2622000,
+      2623000
+    ],
+    "humanStartMatches": false,
+    "millisecondsAfterExclusiveBandEnd": 371
+  },
+  "phraseRangesMs": {
+    "question": [
+      2619000,
+      2623371
+    ],
+    "oh": [
+      2623371,
+      2623471
+    ],
+    "followingReaction": [
+      2623471,
+      2627000
+    ]
+  },
+  "sourceCharacterMapping": [
+    {
+      "sourceSegmentId": 8660,
+      "sourceIndex": 0,
+      "char": "何",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 0.0,
+      "relativeEndSeconds": 0.421,
+      "sourceStartMs": 2619000,
+      "sourceEndMs": 2619421,
+      "score": 0.952,
+      "oldSourceStartMs": 2625898,
+      "oldSourceEndMs": 2625998
+    },
+    {
+      "sourceSegmentId": 8661,
+      "sourceIndex": 1,
+      "char": "人",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 0.421,
+      "relativeEndSeconds": 4.211,
+      "sourceStartMs": 2619421,
+      "sourceEndMs": 2623211,
+      "score": 0.995,
+      "oldSourceStartMs": 2625998,
+      "oldSourceEndMs": 2626158
+    },
+    {
+      "sourceSegmentId": 8662,
+      "sourceIndex": 2,
+      "char": "い",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.211,
+      "relativeEndSeconds": 4.311,
+      "sourceStartMs": 2623211,
+      "sourceEndMs": 2623311,
+      "score": 0.8,
+      "oldSourceStartMs": 2626158,
+      "oldSourceEndMs": 2626318
+    },
+    {
+      "sourceSegmentId": 8663,
+      "sourceIndex": 3,
+      "char": "る",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.311,
+      "relativeEndSeconds": 4.331,
+      "sourceStartMs": 2623311,
+      "sourceEndMs": 2623331,
+      "score": 0.0,
+      "oldSourceStartMs": 2626318,
+      "oldSourceEndMs": 2626338
+    },
+    {
+      "sourceSegmentId": 8664,
+      "sourceIndex": 4,
+      "char": "の",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.331,
+      "relativeEndSeconds": 4.351,
+      "sourceStartMs": 2623331,
+      "sourceEndMs": 2623351,
+      "score": 0.0,
+      "oldSourceStartMs": 2626338,
+      "oldSourceEndMs": 2626358
+    },
+    {
+      "sourceSegmentId": 8665,
+      "sourceIndex": 5,
+      "char": "?",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.351,
+      "relativeEndSeconds": 4.371,
+      "sourceStartMs": 2623351,
+      "sourceEndMs": 2623371,
+      "score": 0.0,
+      "oldSourceStartMs": 2626358,
+      "oldSourceEndMs": 2626918
+    },
+    {
+      "sourceSegmentId": 8666,
+      "sourceIndex": 6,
+      "char": "お",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.371,
+      "relativeEndSeconds": 4.391,
+      "sourceStartMs": 2623371,
+      "sourceEndMs": 2623391,
+      "score": 0.0,
+      "oldSourceStartMs": 2626918,
+      "oldSourceEndMs": 2626938
+    },
+    {
+      "sourceSegmentId": 8667,
+      "sourceIndex": 7,
+      "char": "!",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.391,
+      "relativeEndSeconds": 4.471,
+      "sourceStartMs": 2623391,
+      "sourceEndMs": 2623471,
+      "score": 0.75,
+      "oldSourceStartMs": 2626938,
+      "oldSourceEndMs": 2626958
+    },
+    {
+      "sourceSegmentId": 8668,
+      "sourceIndex": 8,
+      "char": "早",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.471,
+      "relativeEndSeconds": 4.551,
+      "sourceStartMs": 2623471,
+      "sourceEndMs": 2623551,
+      "score": 0.75,
+      "oldSourceStartMs": 2626958,
+      "oldSourceEndMs": 2627098
+    },
+    {
+      "sourceSegmentId": 8669,
+      "sourceIndex": 9,
+      "char": "速",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.551,
+      "relativeEndSeconds": 4.571,
+      "sourceStartMs": 2623551,
+      "sourceEndMs": 2623571,
+      "score": 0.0,
+      "oldSourceStartMs": 2627098,
+      "oldSourceEndMs": 2627118
+    },
+    {
+      "sourceSegmentId": 8670,
+      "sourceIndex": 10,
+      "char": "鬼",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.571,
+      "relativeEndSeconds": 4.772,
+      "sourceStartMs": 2623571,
+      "sourceEndMs": 2623772,
+      "score": 0.9,
+      "oldSourceStartMs": 2627118,
+      "oldSourceEndMs": 2627399
+    },
+    {
+      "sourceSegmentId": 8671,
+      "sourceIndex": 11,
+      "char": "が",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.772,
+      "relativeEndSeconds": 4.792,
+      "sourceStartMs": 2623772,
+      "sourceEndMs": 2623792,
+      "score": 0.0,
+      "oldSourceStartMs": 2627399,
+      "oldSourceEndMs": 2627519
+    },
+    {
+      "sourceSegmentId": 8672,
+      "sourceIndex": 12,
+      "char": "い",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.792,
+      "relativeEndSeconds": 4.932,
+      "sourceStartMs": 2623792,
+      "sourceEndMs": 2623932,
+      "score": 0.857,
+      "oldSourceStartMs": 2627519,
+      "oldSourceEndMs": 2628199
+    },
+    {
+      "sourceSegmentId": 8673,
+      "sourceIndex": 13,
+      "char": "る",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 4.932,
+      "relativeEndSeconds": 6.617,
+      "sourceStartMs": 2623932,
+      "sourceEndMs": 2625617,
+      "score": 0.988,
+      "oldSourceStartMs": 2628199,
+      "oldSourceEndMs": 2628219
+    },
+    {
+      "sourceSegmentId": 8674,
+      "sourceIndex": 14,
+      "char": "ん",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 6.617,
+      "relativeEndSeconds": 6.737,
+      "sourceStartMs": 2625617,
+      "sourceEndMs": 2625737,
+      "score": 0.833,
+      "oldSourceStartMs": 2628219,
+      "oldSourceEndMs": 2628239
+    },
+    {
+      "sourceSegmentId": 8675,
+      "sourceIndex": 15,
+      "char": "じ",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 6.737,
+      "relativeEndSeconds": 6.757,
+      "sourceStartMs": 2625737,
+      "sourceEndMs": 2625757,
+      "score": 0.0,
+      "oldSourceStartMs": 2628239,
+      "oldSourceEndMs": 2628399
+    },
+    {
+      "sourceSegmentId": 8676,
+      "sourceIndex": 16,
+      "char": "ゃ",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 6.757,
+      "relativeEndSeconds": 6.897,
+      "sourceStartMs": 2625757,
+      "sourceEndMs": 2625897,
+      "score": 0.857,
+      "oldSourceStartMs": 2628399,
+      "oldSourceEndMs": 2628619
+    },
+    {
+      "sourceSegmentId": 8677,
+      "sourceIndex": 17,
+      "char": "ね",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 6.897,
+      "relativeEndSeconds": 6.997,
+      "sourceStartMs": 2625897,
+      "sourceEndMs": 2625997,
+      "score": 0.8,
+      "oldSourceStartMs": 2628619,
+      "oldSourceEndMs": 2628639
+    },
+    {
+      "sourceSegmentId": 8678,
+      "sourceIndex": 18,
+      "char": "え",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 6.997,
+      "relativeEndSeconds": 7.338,
+      "sourceStartMs": 2625997,
+      "sourceEndMs": 2626338,
+      "score": 0.941,
+      "oldSourceStartMs": 2628639,
+      "oldSourceEndMs": 2628899
+    },
+    {
+      "sourceSegmentId": 8679,
+      "sourceIndex": 19,
+      "char": "か",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 7.338,
+      "relativeEndSeconds": 7.98,
+      "sourceStartMs": 2626338,
+      "sourceEndMs": 2626980,
+      "score": 0.969,
+      "oldSourceStartMs": 2628899,
+      "oldSourceEndMs": 2629260
+    },
+    {
+      "sourceSegmentId": 8680,
+      "sourceIndex": 20,
+      "char": "!",
+      "alignmentPresent": true,
+      "relativeStartSeconds": 7.98,
+      "relativeEndSeconds": 8.0,
+      "sourceStartMs": 2626980,
+      "sourceEndMs": 2627000,
+      "score": 1.0,
+      "oldSourceStartMs": 2629260,
+      "oldSourceEndMs": 2632061
+    }
+  ],
+  "outsideOldClockCollisions": [
+    {
+      "globalCueOrdinal": 566,
+      "text": "ねえ、待って",
+      "sourceStartMs": 2613071,
+      "sourceEndMs": 2623316,
+      "sourceSegmentIds": [
+        8637,
+        8638,
+        8639,
+        8640,
+        8641,
+        8642
+      ],
+      "full21CharacterOverlapMs": 4316,
+      "targetTwoCharacterOverlapMs": 0
+    },
+    {
+      "globalCueOrdinal": 567,
+      "text": "これガチモンの桃太郎来た?",
+      "sourceStartMs": 2623316,
+      "sourceEndMs": 2625117,
+      "sourceSegmentIds": [
+        8643,
+        8644,
+        8645,
+        8646,
+        8647,
+        8648,
+        8649,
+        8650,
+        8651,
+        8652,
+        8653,
+        8654,
+        8655
+      ],
+      "full21CharacterOverlapMs": 1801,
+      "targetTwoCharacterOverlapMs": 100
+    },
+    {
+      "globalCueOrdinal": 568,
+      "text": "え?",
+      "sourceStartMs": 2625117,
+      "sourceEndMs": 2625618,
+      "sourceSegmentIds": [
+        8656,
+        8657
+      ],
+      "full21CharacterOverlapMs": 501,
+      "targetTwoCharacterOverlapMs": 0
+    },
+    {
+      "globalCueOrdinal": 569,
+      "text": "え?",
+      "sourceStartMs": 2625618,
+      "sourceEndMs": 2625898,
+      "sourceSegmentIds": [
+        8658,
+        8659
+      ],
+      "full21CharacterOverlapMs": 280,
+      "targetTwoCharacterOverlapMs": 0
+    }
+  ],
+  "boundaryObservations": {
+    "firstCharacterTouchesSearchStart": true,
+    "lastCharacterTouchesSearchEnd": true,
+    "longCharacter": {
+      "sourceSegmentId": 8661,
+      "char": "人",
+      "durationMs": 3790
+    },
+    "theseDoNotProveActualClippingOrCorrectAlignment": true
+  },
+  "humanEvidence": {
+    "worldStartBandMs": [
+      2322000,
+      2323000
+    ],
+    "worldText": "世界が終わる",
+    "ohStartBandMs": [
+      2622000,
+      2623000
+    ],
+    "ohText": "お!",
+    "coarseStartOnly": true,
+    "endingOrMillisecondClocksConfirmed": false,
+    "repeatHumanQuestionRequired": false
+  },
+  "decision": "not-adopted; stop further alignment in this task",
+  "reasons": [
+    "Oh start does not match human 43:42-second band",
+    "Oh character score is zero; seven of 21 characters have zero scores",
+    "Replacing only these characters conflicts with unchanged neighboring old cues"
+  ],
+  "formalInputApplied": false,
+  "captionMergeApplied": false,
+  "videoManufactured": false,
+  "extraAlignmentPosts": 0,
+  "sourceVideoStatAfter": {
+    "bytes": 1016332396,
+    "mtimeNs": 1791093353610668420
+  },
+  "sourceVideoFullShaRecomputed": false,
+  "remaining": [
+    "Exact end and character clocks for both target phrases",
+    "Bounded coherent clocks for adjacent phrases",
+    "Formal derived-input/plan/manifest authority before any application",
+    "Actual listening and final movie quality remain unevaluated by this executor"
+  ]
+}
