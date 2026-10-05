@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-05（JST） / revision：handover-index-20261005-v090
+更新日：2026-10-05（JST） / revision：handover-index-20261005-v091
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05 07:42 UTC（SSD退避で容量回復、制御JSONの保存例外回答待ち）
+
+本人「消せるものは消しておいてほしい。移動できるものは移動して」に従い、今回ZEVの再生成可能Webpack cache2file/105,623,049Bだけを既存SSDへcopy→size/hash/再読確認→内蔵重複整理。実空き回復105,627,648B、元媒体/成果/必要証拠/無関係fileの削除0。07:42:48 UTC内蔵12,062,740,480Bで既存12GB保護条件は成立。追加の広範cleanupを続けない。
+
+準備記録10file/297,191BをSSDへ同一性確認付きで保管。制御JSON約38.9KBは現契約がリポジトリ内参照を要求し、内蔵へ残す例外を親が本人へ質問中。回答前の制御JSON再書込/その例外を前提にした製造0。実装の最小提案は正式stillだけ既存--bundle-cache=falseと、共通ffmpeg helper3箇所の親SSD TMPDIR継承の2path。後者は当初列挙範囲外のため親へ具体diffを提示、適用0。一般保存契約/権限/保護値変更0。
+
+状態：人間待ち（親が確認中の制御JSON保存例外）＋相談役待ち（限定差分の扱い）。次担当親mona、回答後は同じMac実装者。描画/合成/owner/新output rootは未開始。準備jobは470d226a束縛、この文書反映後のclean実装へ再束縛が必要だが、回答前には行わない。実glyph/新動画技術QC/通常速可読性/音声聴取/人間品質は未評価。[SSD上の最新根拠](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/current-status-before-parent-answer.json)・[最小差分](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/minimum-storage-delta-proposal.diff)。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05 07:21 UTC（正式全尺更新の入力検査成功、内蔵空き不足で実開始前停止）
 
