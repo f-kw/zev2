@@ -7,7 +7,6 @@ import {createHash} from 'node:crypto';
 import {readPreparedDigestCaptionJudgmentInputsV001} from './digest-caption-input-preparation-v001.js';
 import {assertQualifiedDigestApprovedJobV001} from './digest-approved-job-v001.js';
 import {resolveDigestTypographySettingsV001} from './digest-formal-handoff-v001.js';
-import {assertDigestCaptionDisplayAdjustmentV001} from './digest-caption-display-adjustment-v001.js';
 import {assertDigestCaptionRegistrationMigrationV001} from './digest-caption-registration-migration-v001.js';
 import {digestApprovedJobInputRootV001} from './digest-approved-job-v001.js';
 
@@ -190,12 +189,11 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   same(groups.flatMap(group => group.atomOccurrenceIds), originalAtoms.map(atom => atom.atomOccurrenceId));
   assert.equal(prepared.meaning.captions.length, 1);
   const manifest = await read(specs.candidateManifestBinding);
-  assert(['digest-caption-current-registration-candidate-bundle-v001', 'digest-caption-current-display-adjustment-candidate-bundle-v001'].includes(manifest.schemaVersion), 'APPROVED_DIGEST_CURRENT_CANDIDATE_REQUIRED');
-  const originalMeaning = await read(object(manifest.meaningBinding)); same(originalMeaning, prepared.meaning);
-  let meaning = originalMeaning, displayAdjustment: Json | undefined;
-  const migrated = manifest.schemaVersion === 'digest-caption-current-display-adjustment-candidate-bundle-v001'
-    ? await read(object(manifest.originalCandidateManifestBinding)) : manifest;
-  assert.equal(migrated.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_CURRENT_REGISTRATION_REQUIRED');
+  assert.equal(manifest.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_CURRENT_CANDIDATE_REQUIRED');
+  for (const field of ['originalCandidateManifestBinding', 'displayMeaningBinding', 'displayAdjustmentBinding'])
+    assert.equal(manifest[field], undefined, 'APPROVED_DIGEST_UNDECLARED_DISPLAY_ADJUSTMENT');
+  const meaning = await read(object(manifest.meaningBinding)); same(meaning, prepared.meaning);
+  const migrated = manifest;
   same(migrated.preparationManifestBinding, specs.preparationManifestBinding); same(migrated.meaningBinding, manifest.meaningBinding);
   same(manifest.registrationMigrationBinding, migrated.registrationMigrationBinding);
   const migrationProof = await read(object(migrated.registrationMigrationBinding));
@@ -243,35 +241,6 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
   assert.equal(inspection.media.source.video.frameRate, map.sourceFrameClock.inputFrameRate);
   assert.equal(inspection.media.decodedFrameCount, map.sourceFrameClock.decodedFrameCount);
   assert.equal(inspection.media.source.video.presentationOffsetMs, map.sourceFrameClock.videoPresentationOffsetMs);
-  // An adjusted display clock is an explicit, byte-bound input. Original normal/STT inputs remain exact.
-  if (manifest.schemaVersion === 'digest-caption-current-display-adjustment-candidate-bundle-v001') {
-    const helperPath = 'runner/src/digest-caption-display-adjustment-v001.ts';
-    const helperBindings = list(job.implementation.bindings).filter(binding => binding.path === helperPath);
-    assert.equal(helperBindings.length, 1, 'APPROVED_DIGEST_DISPLAY_HELPER_BINDING_REQUIRED');
-    const helperBytes = await readFile(path.join(root, helperPath));
-    assert.equal(sha(helperBytes), helperBindings[0].fileSha256, 'APPROVED_DIGEST_DISPLAY_HELPER_SHA_CHANGED');
-    const originalCandidateManifestBinding = object(manifest.originalCandidateManifestBinding);
-    const originalManifest = await read(originalCandidateManifestBinding);
-    assert.equal(originalManifest.schemaVersion, 'digest-caption-current-registration-candidate-bundle-v001', 'APPROVED_DIGEST_DISPLAY_CURRENT_ORIGINAL_REQUIRED');
-    same(originalManifest.meaningBinding, manifest.meaningBinding);
-    same(originalManifest.preparationManifestBinding, specs.preparationManifestBinding);
-    const originalCorrespondence = await read(object(originalManifest.correspondenceBinding));
-    const originalMap = await read(object(originalManifest.mapBinding));
-    same(originalMap.originalMappings, mappings); same(originalMap.sourceFrameClock, map.sourceFrameClock);
-    same(originalMap.originalClockBinding, normalExecution.clockResolutionBinding);
-    displayAdjustment = await read(object(manifest.displayAdjustmentBinding));
-    const bindings = {originalMeaningBinding: manifest.meaningBinding, originalCandidateManifestBinding,
-      originalCorrespondenceBinding: originalManifest.correspondenceBinding, originalClockBinding: normalExecution.clockResolutionBinding};
-    same(displayAdjustment.bindings, bindings);
-    meaning = await read(object(manifest.displayMeaningBinding));
-    const candidateCorrespondence = await read(object(manifest.correspondenceBinding));
-    await assertDigestCaptionDisplayAdjustmentV001({originalMeaning, originalRows: list(originalCorrespondence.rows), mappings,
-      sourceFrameClock: map.sourceFrameClock, declaredChanges: displayAdjustment.declaredChanges, bindings,
-      derivedMeaning: meaning, candidateRows: list(candidateCorrespondence.rows), adoption: displayAdjustment});
-  } else {
-    for (const field of ['originalCandidateManifestBinding', 'displayMeaningBinding', 'displayAdjustmentBinding'])
-      assert.equal(manifest[field], undefined, 'APPROVED_DIGEST_UNDECLARED_DISPLAY_ADJUSTMENT');
-  }
   const atoms = list(meaning.atomOccurrences), atomById = new Map(atoms.map(atom => [atom.atomOccurrenceId, atom]));
   assert.equal(atomById.size, originalAtoms.length);
   const candidate = object(manifest.technicalCandidate), propsRecord = await read(object(candidate.source));
@@ -400,7 +369,6 @@ export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQual
     atomOccurrenceIds: atoms.map(atom => atom.atomOccurrenceId), styleLimits: clone(requests[0].input.styleLimits), taskDescription: rules.newTaskDescription};
   const value = {workspaceRoot: root, inputRoot:specs.inputRoot,inputPrefix:specs.inputPrefix,registrationMigration:migrationProof, manifestBinding: clone(specs.candidateManifestBinding), manifest, preparation,
     preparationManifestBinding: clone(specs.preparationManifestBinding), meaning, requests, responses, results, traces, correspondence,
-    ...(displayAdjustment === undefined ? {} : {originalMeaning, displayAdjustment}),
     normalState, normalPlan, normalExecution, normalPreparation, adoption, edit, manufacturing, inspection, clock, styleTemplate, rendererTemplate,
     sourcePhysicalPath: sourcePhysicalBinding.path, sourcePhysicalBinding, sourceLogicalBinding: normalPlan.sourceVideoBinding,
     normalOwners, normalReferenceMap: clone(preparation.logicalToPhysical), sourceDeclaration, aggregateView, candidateRules: rules,
@@ -476,9 +444,7 @@ export async function buildApprovedDigestSourcePackageValueV001(inputs: Json, qu
   value.provenance = {sourcePackageJobBinding: c.planBinding,
     implementationBindings: qualified.job.implementation.bindings.map((binding: Json, i: number) => ({role: 'approved-digest-' + (i + 1), path: binding.path, fileSha256: binding.fileSha256})),
     approvedContractBindings: [control(qualified.jobBinding), control(qualified.authorizationBinding), control(c.plan.authorization), inputs.manifestBinding,
-      inputs.preparationManifestBinding, inputs.manifest.candidateRulesBinding, inputs.typographySettingsBinding,
-      ...(inputs.displayAdjustment === undefined ? [] : [inputs.manifest.originalCandidateManifestBinding,
-        inputs.manifest.displayMeaningBinding, inputs.manifest.displayAdjustmentBinding])]};
+      inputs.preparationManifestBinding, inputs.manifest.candidateRulesBinding, inputs.typographySettingsBinding]};
   return value;
 }
 
@@ -530,8 +496,6 @@ export async function prepareApprovedDigestCaptionCoreV001(inputs: Json, qualifi
     acceptedManifestBinding: inputs.manifestBinding, originalMeaningBinding: inputs.manifest.meaningBinding,
     authorizationBinding: qualified.authorizationBinding, approvedJobBinding: qualified.jobBinding,
     originalRequests: inputs.manifest.responses, traces: inputs.traces, aggregateViewOnly: true, judgmentCount: 0,
-    humanQuality: 'not-evaluated', outlineChoice: null,
-    ...(inputs.displayAdjustment === undefined ? {} : {displayMeaningBinding: inputs.manifest.displayMeaningBinding,
-      displayAdjustmentBinding: inputs.manifest.displayAdjustmentBinding, timingInterpretation: inputs.displayAdjustment.timingInterpretation})};
+    humanQuality: 'not-evaluated', outlineChoice: null};
   return core.assembleAdoptedCaptionCoreV001(c, {meaning: inputs.meaning, sourcePackage}, base, adoption, inputs.traces, context);
 }

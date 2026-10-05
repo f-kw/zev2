@@ -2,6 +2,37 @@
 
 更新日：2026-10-06（JST）
 
+## 最新現在地 — 2026-10-05T15:24:14+00:00（表示時刻補正の撤去完了、共通基準による非表示は契約案まで）
+
+親monaの個別承認で、素材専用の表示時刻補正を撤去した。製品変更は`runner/src/digest-approved-inputs-v001.ts`の補正入力受理・派生意味接続の削除、`digest-caption-display-adjustment-v001.ts`と専用testの削除、対応する入力reader test更新の4pathだけ。commit単位の巻戻しはせず、後続のSSD保存・現行登録移行・元時計検証を保持。原STT/本文/ID/時計/入力/旧成果/調整JSON/旧実装履歴を変更・削除していない。
+
+補正前の保存済み現行登録manifest（SHA256 `ee2f038ba7a47e4547b9d656e6205d9ca7bf813d7f6642f45c3170d471dfabfa`）を読む正式readerが通り、補正schemaと原schemaへ混入した補正binding3種は拒否する。全651cue/1042行/5450atom/31group/37619frame/55299930sampleを保持。元の表示区間は「世界が終わる」24988〜24991frame、後続「なんか」24991〜24993、「いい雰囲気にしないで!」24993〜25004、「いい雰囲気に!」25004〜25015。「何人いるの?」32545〜32576は独立の字幕として残し、「お!」32576〜32577と結合しない。質問を非表示にする指示ではなく、質問の同期・品質を合格と推定したものでもない。
+
+15:22:53 UTCの読取で補正前manifest85,807B/SHA上記、補正済みmanifest85,832B/SHA `6a9c72a31c0efffc36472f874ce7301a27a95cf915d32fc0d33b64d7e0c880eb`、原meaning2,867,621B/SHA `52077cedff0306f5136beb51a5d7472c91df9fc6fc5c5f78e699f00db1e81982`を照合。入力資格化と原時計・独立字幕・補正拒否の10test passed、runner/Remotionの2型検査passed、diff空白検査passed。既存test fixtureだけをv001から現行v002/SSD入力へ直し、合成の実行権限・ownerは作らない。test専用制御JSONと変異manifestは終了時に整理し残存0。媒体生成・新STT・再alignment・時計補正・新HTML・全尺再製造0。既存動画は補正を含む過去成果のままKEEPし、今回撤去で動画まで更新されたとはしない。技術検査の合格と本人が不採用にした視聴品質を区別する。
+
+親から本人の追加方針Sentinel_2c7ff45512048191b870d4964f8d8500「ありえない発話を除去した方が良さそう」を受領。今回検討するのは字幕表示への採用から外す仕組みで、原STTや映像・音声を削除する意味ではない。短い/長い表示をこの素材のID・本文・個別秒数で補正しない。共通の文字数・時間等の基準を承認済み入力として固定し、その基準を全字幕へ同じように適用する案を親へ返す。閾値・文字数定義・短い相づちの保護条件は未確定で、値を仮置きしない。今回2件だけが落ちるよう逆算もしない。文字数・時間だけで実際の発話の真偽や同期を保証することはできない。以前の7字/0.24秒・11字/0.36秒の圧縮、10字/18.525秒・一文字10.243秒の伸長は基準検討の例で、追加診断・再採点を始めない。絶対最短時間だけで正常な「うん」「お!」等を一律除外しない。
+
+### 未適用の最小契約案
+
+全cueの本文・元ID・元時計と全表示命令を保持し、別の採否JSONを束縛して、合成時だけshowの字幕を使う。`CAPTION_CUE_WITHOUT_INSTRUCTION`とCoreの全atom被覆契約を変えず、命令の削除や素材IDのcode例外を入れない。新candidate schema案は`digest-caption-current-visibility-candidate-bundle-v001`、元登録manifestの内容と追加`visibilityAdoptionBinding`だけを持つ。新job/authは従来どおりこのmanifestの全byte SHAを束縛する案で、job/authへの新fieldやPythonの変更は不要の見込み。実装/承認前の既存job/controlを書き換えない。
+
+採否JSON案`digest-caption-visibility-adoption-v001`には、元candidate manifest・meaning・correspondence・clock/mapのbinding、`criteriaBinding`、全cue順序の`decisions`、`counts`を持たせる。decisionは原`groupOrdinal/cueOrdinal/cueEndBoundaryId`、元atom IDs、原時計、`show|suppress`、実測metrics、適用rule ID、理由を記録。metricsは原文字数・sourceDurationMs・displayFrameCount・明示した文字数単位によるrate等で、本文/時計の修正値を持たない。criteria JSON案`digest-caption-visibility-criteria-v001`には文字数と時間の定義、共通rulesと承認された閾値、短い相づちを誤除外しない扱いを束縛する。定義・閾値が未確定のまま採否/製造へ進まない。totalCuesは元全件数、visibleCues+suppressedCues=totalCuesを要求し、非表示を消失した原文として扱わない。共通基準の適用結果が今回「何人いるの?」を残す指示と衝突する場合も、勝手に非表示や例外化をしない。
+
+必要な製品変更候補は次の6pathで、まだ未適用。テストは各責務に対応する既存検査へ追加する。実接続でこの範囲を超えることが判明したら差分を親へ返す。
+
+| path | 必要な最小差分 |
+|---|---|
+| `runner/src/digest-approved-inputs-v001.ts` | 原登録とcriteria/全cue採否のSHA閉包・完全被覆・原本文/ID/時計不変を資格化 |
+| `runner/src/digest-approved-job-runner-v001.ts` | 資格済み採否だけをopaque contextから合成へ渡す |
+| `tools/digest-quality/original-resolution-low-memory-composite.mjs` | 全plan/recordを保持しshowだけを合成、採否binding・実投入ID/件数をreceiptへ保存 |
+| `evals/clip_composition/render_presentation_v002.mjs` | 同じ採否と合成receiptをQC/technicalへ渡す、全primary検査保持 |
+| `evals/clip_composition/presentation_renderer_qc_v002.mjs` | 表示対象と承認済み非表示を明示区別し、非表示を可視合格と記録しない |
+| `evals/clip_composition/digest_representative_completion_v001.mjs` | get/finalize/completedでも同じ採否を再資格化し旧確認record流用を拒否 |
+
+欠落/重複/未知cue、本文/ID/時計の改変、criteria差替え、実測と判定の不一致、件数不一致、非表示IDの合成投入を拒否する。全primary生成/検査を保持し、描画省略による別の最適化を加えない。代表確認IDは表示対象から選び直し、非表示確認を通常の字幕可視合格へ流用しない。採否と合成投入の構造検査は全frameの非表示実測ではない。既存全件可視比較を無言で緩めず、まず現在の代表確認の正式経路に限定する案を親へ返す。
+
+状態：承認された補正撤去と必要検査は完了。非表示契約・共通基準は相談役待ちで未適用。次担当は親mona（共通基準と正式非表示契約の扱いを判断）。本人に全字幕再採点・再STT・再視聴を要求しない。15:24 UTCに今回のtest/型検査process残存なし、保持指定の閲覧server PID54217/68661と127.0.0.1:63610/49504待受を確認。GitHub pushは親の指示どおり保留。以下は各時点の履歴。
+
 ## 最新現在地 — 2026-10-05T15:07:53.153+00:00（本人方針：素材専用の補正は禁止、問題字幕は使わない方向／適合性の限定確認完了）
 
 親mona経由で本人の追加指示を受領。Sentinel_43b2483c60448191b4f9f25b0e44042d「まず、STTの結果を補正しようとするのは禁止。できるわけないだろ」、Sentinel_1e3c86ed185c8191b5120306735e6766「補正処理はその素材専用の値にしかならないので禁止だ」。禁止は推測補間だけに限定しない。素材専用の値・ID・条件でSTT結果または表示時刻を帳尻合わせする補正処理を使わない。Sentinel_412169bb60c08191891d86446ae3460d「つかわないか、字幕がなくても動画としては成立するからない方がいい」に対し、親は時刻が不適切な字幕を無理に補正せず非表示とする方向を回答した。映像・音声・原STT本文・既存未採用成果は保持し、全字幕削除や本文改変の許可と解釈しない。

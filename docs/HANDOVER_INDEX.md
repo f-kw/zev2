@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-06（JST） / revision：handover-index-20261006-v098
+更新日：2026-10-06（JST） / revision：handover-index-20261006-v099
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-05T15:24:14+00:00（表示時刻補正の撤去完了、共通基準による非表示の契約案を親へ返す）
+
+親monaの個別承認で、表示時刻補正のreader接続・helper/専用test・対応入力testの4pathだけを変更。後続SSD/現行登録移行を保護し、commit単位の巻戻しなし。原STT/本文/ID/時計/保存済み調整JSON/旧成果/実装履歴はKEEP。原登録manifest SHA256 `ee2f038ba7a47e4547b9d656e6205d9ca7bf813d7f6642f45c3170d471dfabfa`の651cueを読む経路は資格化成功、補正schema/隠した補正bindingは拒否。「世界が終わる」は元3frame、後続3字幕は元2/11/11frameの時計へ戻り、「何人いるの?」31frameと「お!」1frameは独立している。質問を非表示にする指示ではない。10test・2型検査・diff空白検査passed、test専用一時物残存0。新媒体/新STT/再alignment/新補正/製造0、以前の動画は変更していない。本人が2クリップを不採用とした品質判定は維持。
+
+本人追加方針Sentinel_2c7ff45512048191b870d4964f8d8500「ありえない発話を除去した方が良さそう」を受領。字幕の表示採用から外す共通基準の設計まで行い、原STT/映像/音声は消さない。文字数・時間の圧縮/伸長等を同じ基準で扱うが、定義/閾値/短い相づち保護は未確定。素材の2件に合わせた逆算、素材IDのcode例外、絶対最短時間だけの一律除外をしない。文字数・時間だけで実発話の真偽・同期を保証しない。
+
+[CURRENT_GOALの未適用案](CURRENT_GOAL.md)に、原candidate/meaning/correspondence/時計/criteriaのSHA束縛、全cueのshow/suppress採否と実測/理由、総数=表示+非表示のschema/fieldを記録。全命令/Core被覆を残し、合成だけ表示採用を反映する。入力reader・jobrunner・low-memory合成・renderer・QC・representative completionの製品6pathが最小候補。Core/caller/命令契約の変更不要、job/auth新fieldとPython変更不要の見込み。全primary検査を維持し、非表示を可視合格へ読み替えず、合成receiptとget/finalizeを同じ採否で検証する。schema変更/閾値適用/製造はまだ行わない。「何人いるの?」を残す指示と共通基準が衝突した場合も適用前に親へ返す。
+
+状態：補正撤去・検査は完了、非表示契約/共通基準は相談役待ち。次担当は親mona。15:24 UTCに今回test/型検査の残存なし、既存閲覧server PID54217/68661と127.0.0.1:63610/49504待受KEEP。本人の全字幕再採点/再STT/再視聴依頼なし。GitHub pushは親の指示どおり保留。以下は各時点の履歴。
 
 ## 最新現在地 — 2026-10-05T15:07:53.153+00:00（本人方針：素材専用の補正は禁止、問題字幕は使わない方向／適合性の限定確認完了）
 
