@@ -1,0 +1,1906 @@
+{
+  "schemaVersion": "zev-two-context-alignment-result-v001",
+  "readAtUtc": "2026-10-05T02:47:21.207317+00:00",
+  "authorization": {
+    "userMessageIds": [
+      "Sentinel_9410ee6481408191a949eca2e5943a41",
+      "Sentinel_afdb2a29c99c8191a2ca0a6913cda63c"
+    ],
+    "words": [
+      "STTはいつ送ってもいい",
+      "そのために自力で立ててるんだから許可をとるな"
+    ],
+    "scope": "Two current subtitle observations via existing free LAN /align; no repeated observations or video manufacture; same-server STT sends do not need renewed user approval",
+    "limit": 2
+  },
+  "requestCount": 2,
+  "allJobsCompleted": true,
+  "allResultsReceived": true,
+  "inputsAndLimits": {
+    "cue465": "Reuse 20s38:35-55 audio. One search window38:35.457-48.027 with all68 chars of complete saved utterances279-281. End uses saved next outside utterance282 start; no original short character times passed.",
+    "cue571": "Reuse prepared 9s43:44-53 audio and all21 chars of question/interjection/reaction. Broad search window cuts across old outside cues567/573; it is not a confirmed speech interval."
+  },
+  "summaries": [
+    {
+      "readAtUtc": "2026-10-05T02:44:15.932730+00:00",
+      "targetCue": 465,
+      "jobId": "a24dcf1575014622afb746ecd111329d",
+      "sourceKind": "adopted",
+      "state": "completed",
+      "startedAt": "2026-10-05T02:42:05.682992+00:00",
+      "endedAt": "2026-10-05T02:42:14.353460+00:00",
+      "metrics": {
+        "gpu": {
+          "meanUtilizationPercent": 6.62,
+          "name": "NVIDIA GeForce RTX 4090",
+          "peakMemoryMiB": 479,
+          "peakUtilizationPercent": 9,
+          "sampleCount": 8,
+          "scope": "whole GPU, sampled once per second"
+        },
+        "pipelineSeconds": 7.382,
+        "runnerSeconds": 8.611,
+        "segmentCount": 1
+      },
+      "characters": 68,
+      "textDifferences": [],
+      "nullTimeCount": 0,
+      "missingAlignmentCount": 0,
+      "nullScoreCount": 0,
+      "zeroScoreCount": 42,
+      "lowNonzeroScoreCount": 2,
+      "qualityStatus": "needs_review",
+      "sourceIndexesExact": true,
+      "sourceInputExact": true,
+      "profileMatchesRegistration": true,
+      "fullCandidateRangeMs": [
+        2315457,
+        2327947
+      ],
+      "targetCandidates": [
+        {
+          "sourceIndex": 41,
+          "char": "世",
+          "sourceSegmentId": 7729,
+          "oldStartMs": 2325285,
+          "oldEndMs": 2325305,
+          "startMs": 2323804,
+          "endMs": 2323824,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 42,
+          "char": "界",
+          "sourceSegmentId": 7730,
+          "oldStartMs": 2325305,
+          "oldEndMs": 2325325,
+          "startMs": 2323824,
+          "endMs": 2323844,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 43,
+          "char": "が",
+          "sourceSegmentId": 7731,
+          "oldStartMs": 2325325,
+          "oldEndMs": 2325345,
+          "startMs": 2323844,
+          "endMs": 2323884,
+          "score": 0.5,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 44,
+          "char": "終",
+          "sourceSegmentId": 7732,
+          "oldStartMs": 2325345,
+          "oldEndMs": 2325365,
+          "startMs": 2323884,
+          "endMs": 2325005,
+          "score": 0.982,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 45,
+          "char": "わ",
+          "sourceSegmentId": 7733,
+          "oldStartMs": 2325365,
+          "oldEndMs": 2325385,
+          "startMs": 2325005,
+          "endMs": 2325025,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 46,
+          "char": "る",
+          "sourceSegmentId": 7734,
+          "oldStartMs": 2325385,
+          "oldEndMs": 2325405,
+          "startMs": 2325025,
+          "endMs": 2325045,
+          "score": 0.0,
+          "alignmentPresent": true
+        }
+      ],
+      "targetRangeMs": [
+        2323804,
+        2325045
+      ],
+      "targetDurationMs": 1241,
+      "internalOverlaps": [],
+      "nonpositiveIntervals": [],
+      "oldOutsideNeighborOverlaps": [],
+      "allCharacterCandidates": [
+        {
+          "sourceIndex": 0,
+          "char": "お",
+          "sourceSegmentId": 7688,
+          "oldStartMs": 2315457,
+          "oldEndMs": 2315537,
+          "startMs": 2315457,
+          "endMs": 2319820,
+          "score": 0.995,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 1,
+          "char": "前",
+          "sourceSegmentId": 7689,
+          "oldStartMs": 2315537,
+          "oldEndMs": 2315557,
+          "startMs": 2319820,
+          "endMs": 2321462,
+          "score": 0.988,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 2,
+          "char": "ら",
+          "sourceSegmentId": 7690,
+          "oldStartMs": 2315557,
+          "oldEndMs": 2315577,
+          "startMs": 2321462,
+          "endMs": 2321662,
+          "score": 0.9,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 3,
+          "char": "も",
+          "sourceSegmentId": 7691,
+          "oldStartMs": 2315577,
+          "oldEndMs": 2315597,
+          "startMs": 2321662,
+          "endMs": 2321942,
+          "score": 0.929,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 4,
+          "char": "そ",
+          "sourceSegmentId": 7692,
+          "oldStartMs": 2315597,
+          "oldEndMs": 2315617,
+          "startMs": 2321942,
+          "endMs": 2321962,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 5,
+          "char": "の",
+          "sourceSegmentId": 7693,
+          "oldStartMs": 2315617,
+          "oldEndMs": 2315637,
+          "startMs": 2321962,
+          "endMs": 2321982,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 6,
+          "char": "武",
+          "sourceSegmentId": 7694,
+          "oldStartMs": 2315637,
+          "oldEndMs": 2315657,
+          "startMs": 2321982,
+          "endMs": 2322002,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 7,
+          "char": "器",
+          "sourceSegmentId": 7695,
+          "oldStartMs": 2315657,
+          "oldEndMs": 2315757,
+          "startMs": 2322002,
+          "endMs": 2322102,
+          "score": 0.8,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 8,
+          "char": "で",
+          "sourceSegmentId": 7696,
+          "oldStartMs": 2315757,
+          "oldEndMs": 2318820,
+          "startMs": 2322102,
+          "endMs": 2322182,
+          "score": 0.75,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 9,
+          "char": "戦",
+          "sourceSegmentId": 7697,
+          "oldStartMs": 2318820,
+          "oldEndMs": 2320982,
+          "startMs": 2322182,
+          "endMs": 2322202,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 10,
+          "char": "え",
+          "sourceSegmentId": 7698,
+          "oldStartMs": 2320982,
+          "oldEndMs": 2322763,
+          "startMs": 2322202,
+          "endMs": 2322222,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 11,
+          "char": "ば",
+          "sourceSegmentId": 7699,
+          "oldStartMs": 2322763,
+          "oldEndMs": 2322783,
+          "startMs": 2322222,
+          "endMs": 2322302,
+          "score": 0.75,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 12,
+          "char": "い",
+          "sourceSegmentId": 7700,
+          "oldStartMs": 2322783,
+          "oldEndMs": 2322803,
+          "startMs": 2322302,
+          "endMs": 2322763,
+          "score": 0.957,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 13,
+          "char": "い",
+          "sourceSegmentId": 7701,
+          "oldStartMs": 2322803,
+          "oldEndMs": 2323424,
+          "startMs": 2322763,
+          "endMs": 2322783,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 14,
+          "char": "じ",
+          "sourceSegmentId": 7702,
+          "oldStartMs": 2323424,
+          "oldEndMs": 2323444,
+          "startMs": 2322783,
+          "endMs": 2322923,
+          "score": 0.857,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 15,
+          "char": "ゃ",
+          "sourceSegmentId": 7703,
+          "oldStartMs": 2323444,
+          "oldEndMs": 2323484,
+          "startMs": 2322923,
+          "endMs": 2322943,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 16,
+          "char": "ん",
+          "sourceSegmentId": 7704,
+          "oldStartMs": 2323484,
+          "oldEndMs": 2323604,
+          "startMs": 2322943,
+          "endMs": 2322963,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 17,
+          "char": "!",
+          "sourceSegmentId": 7705,
+          "oldStartMs": 2323604,
+          "oldEndMs": 2323624,
+          "startMs": 2322963,
+          "endMs": 2322983,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 18,
+          "char": "お",
+          "sourceSegmentId": 7706,
+          "oldStartMs": 2323624,
+          "oldEndMs": 2323644,
+          "startMs": 2322983,
+          "endMs": 2323003,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 19,
+          "char": "前",
+          "sourceSegmentId": 7707,
+          "oldStartMs": 2323644,
+          "oldEndMs": 2323804,
+          "startMs": 2323003,
+          "endMs": 2323023,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 20,
+          "char": "た",
+          "sourceSegmentId": 7708,
+          "oldStartMs": 2323804,
+          "oldEndMs": 2323824,
+          "startMs": 2323023,
+          "endMs": 2323043,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 21,
+          "char": "ち",
+          "sourceSegmentId": 7709,
+          "oldStartMs": 2323824,
+          "oldEndMs": 2323844,
+          "startMs": 2323043,
+          "endMs": 2323063,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 22,
+          "char": "…",
+          "sourceSegmentId": 7710,
+          "oldStartMs": 2323844,
+          "oldEndMs": 2323864,
+          "startMs": 2323063,
+          "endMs": 2323083,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 23,
+          "char": "頼",
+          "sourceSegmentId": 7711,
+          "oldStartMs": 2323864,
+          "oldEndMs": 2323884,
+          "startMs": 2323083,
+          "endMs": 2323103,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 24,
+          "char": "ん",
+          "sourceSegmentId": 7712,
+          "oldStartMs": 2323884,
+          "oldEndMs": 2323904,
+          "startMs": 2323103,
+          "endMs": 2323203,
+          "score": 0.8,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 25,
+          "char": "だ",
+          "sourceSegmentId": 7713,
+          "oldStartMs": 2323904,
+          "oldEndMs": 2323924,
+          "startMs": 2323203,
+          "endMs": 2323223,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 26,
+          "char": "ぞ",
+          "sourceSegmentId": 7714,
+          "oldStartMs": 2323924,
+          "oldEndMs": 2325005,
+          "startMs": 2323223,
+          "endMs": 2323263,
+          "score": 0.5,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 27,
+          "char": "…",
+          "sourceSegmentId": 7715,
+          "oldStartMs": 2325005,
+          "oldEndMs": 2325025,
+          "startMs": 2323263,
+          "endMs": 2323283,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 28,
+          "char": "こ",
+          "sourceSegmentId": 7716,
+          "oldStartMs": 2325025,
+          "oldEndMs": 2325045,
+          "startMs": 2323283,
+          "endMs": 2323303,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 29,
+          "char": "こ",
+          "sourceSegmentId": 7717,
+          "oldStartMs": 2325045,
+          "oldEndMs": 2325065,
+          "startMs": 2323303,
+          "endMs": 2323383,
+          "score": 0.75,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 30,
+          "char": "で",
+          "sourceSegmentId": 7718,
+          "oldStartMs": 2325065,
+          "oldEndMs": 2325085,
+          "startMs": 2323383,
+          "endMs": 2323403,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 31,
+          "char": "奴",
+          "sourceSegmentId": 7719,
+          "oldStartMs": 2325085,
+          "oldEndMs": 2325105,
+          "startMs": 2323403,
+          "endMs": 2323423,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 32,
+          "char": "を",
+          "sourceSegmentId": 7720,
+          "oldStartMs": 2325105,
+          "oldEndMs": 2325125,
+          "startMs": 2323423,
+          "endMs": 2323443,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 33,
+          "char": "食",
+          "sourceSegmentId": 7721,
+          "oldStartMs": 2325125,
+          "oldEndMs": 2325145,
+          "startMs": 2323443,
+          "endMs": 2323463,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 34,
+          "char": "い",
+          "sourceSegmentId": 7722,
+          "oldStartMs": 2325145,
+          "oldEndMs": 2325165,
+          "startMs": 2323463,
+          "endMs": 2323483,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 35,
+          "char": "止",
+          "sourceSegmentId": 7723,
+          "oldStartMs": 2325165,
+          "oldEndMs": 2325185,
+          "startMs": 2323483,
+          "endMs": 2323543,
+          "score": 0.667,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 36,
+          "char": "め",
+          "sourceSegmentId": 7724,
+          "oldStartMs": 2325185,
+          "oldEndMs": 2325205,
+          "startMs": 2323543,
+          "endMs": 2323563,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 37,
+          "char": "な",
+          "sourceSegmentId": 7725,
+          "oldStartMs": 2325205,
+          "oldEndMs": 2325225,
+          "startMs": 2323563,
+          "endMs": 2323583,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 38,
+          "char": "け",
+          "sourceSegmentId": 7726,
+          "oldStartMs": 2325225,
+          "oldEndMs": 2325245,
+          "startMs": 2323583,
+          "endMs": 2323603,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 39,
+          "char": "れ",
+          "sourceSegmentId": 7727,
+          "oldStartMs": 2325245,
+          "oldEndMs": 2325265,
+          "startMs": 2323603,
+          "endMs": 2323623,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 40,
+          "char": "ば",
+          "sourceSegmentId": 7728,
+          "oldStartMs": 2325265,
+          "oldEndMs": 2325285,
+          "startMs": 2323623,
+          "endMs": 2323804,
+          "score": 0.889,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 41,
+          "char": "世",
+          "sourceSegmentId": 7729,
+          "oldStartMs": 2325285,
+          "oldEndMs": 2325305,
+          "startMs": 2323804,
+          "endMs": 2323824,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 42,
+          "char": "界",
+          "sourceSegmentId": 7730,
+          "oldStartMs": 2325305,
+          "oldEndMs": 2325325,
+          "startMs": 2323824,
+          "endMs": 2323844,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 43,
+          "char": "が",
+          "sourceSegmentId": 7731,
+          "oldStartMs": 2325325,
+          "oldEndMs": 2325345,
+          "startMs": 2323844,
+          "endMs": 2323884,
+          "score": 0.5,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 44,
+          "char": "終",
+          "sourceSegmentId": 7732,
+          "oldStartMs": 2325345,
+          "oldEndMs": 2325365,
+          "startMs": 2323884,
+          "endMs": 2325005,
+          "score": 0.982,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 45,
+          "char": "わ",
+          "sourceSegmentId": 7733,
+          "oldStartMs": 2325365,
+          "oldEndMs": 2325385,
+          "startMs": 2325005,
+          "endMs": 2325025,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 46,
+          "char": "る",
+          "sourceSegmentId": 7734,
+          "oldStartMs": 2325385,
+          "oldEndMs": 2325405,
+          "startMs": 2325025,
+          "endMs": 2325045,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 47,
+          "char": "な",
+          "sourceSegmentId": 7735,
+          "oldStartMs": 2325405,
+          "oldEndMs": 2325425,
+          "startMs": 2325045,
+          "endMs": 2325065,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 48,
+          "char": "ん",
+          "sourceSegmentId": 7736,
+          "oldStartMs": 2325425,
+          "oldEndMs": 2325445,
+          "startMs": 2325065,
+          "endMs": 2325085,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 49,
+          "char": "か",
+          "sourceSegmentId": 7737,
+          "oldStartMs": 2325445,
+          "oldEndMs": 2325465,
+          "startMs": 2325085,
+          "endMs": 2325125,
+          "score": 0.5,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 50,
+          "char": "い",
+          "sourceSegmentId": 7738,
+          "oldStartMs": 2325465,
+          "oldEndMs": 2325485,
+          "startMs": 2325125,
+          "endMs": 2325145,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 51,
+          "char": "い",
+          "sourceSegmentId": 7739,
+          "oldStartMs": 2325485,
+          "oldEndMs": 2325505,
+          "startMs": 2325145,
+          "endMs": 2325165,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 52,
+          "char": "雰",
+          "sourceSegmentId": 7740,
+          "oldStartMs": 2325505,
+          "oldEndMs": 2325525,
+          "startMs": 2325165,
+          "endMs": 2325185,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 53,
+          "char": "囲",
+          "sourceSegmentId": 7741,
+          "oldStartMs": 2325525,
+          "oldEndMs": 2325686,
+          "startMs": 2325185,
+          "endMs": 2325225,
+          "score": 0.5,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 54,
+          "char": "気",
+          "sourceSegmentId": 7742,
+          "oldStartMs": 2325686,
+          "oldEndMs": 2325706,
+          "startMs": 2325225,
+          "endMs": 2325245,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 55,
+          "char": "に",
+          "sourceSegmentId": 7743,
+          "oldStartMs": 2325706,
+          "oldEndMs": 2325726,
+          "startMs": 2325245,
+          "endMs": 2325265,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 56,
+          "char": "し",
+          "sourceSegmentId": 7744,
+          "oldStartMs": 2325726,
+          "oldEndMs": 2325766,
+          "startMs": 2325265,
+          "endMs": 2325325,
+          "score": 0.667,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 57,
+          "char": "な",
+          "sourceSegmentId": 7745,
+          "oldStartMs": 2325766,
+          "oldEndMs": 2325786,
+          "startMs": 2325325,
+          "endMs": 2325425,
+          "score": 0.8,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 58,
+          "char": "い",
+          "sourceSegmentId": 7746,
+          "oldStartMs": 2325786,
+          "oldEndMs": 2325806,
+          "startMs": 2325425,
+          "endMs": 2325445,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 59,
+          "char": "で",
+          "sourceSegmentId": 7747,
+          "oldStartMs": 2325806,
+          "oldEndMs": 2325826,
+          "startMs": 2325445,
+          "endMs": 2325465,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 60,
+          "char": "!",
+          "sourceSegmentId": 7748,
+          "oldStartMs": 2325826,
+          "oldEndMs": 2325846,
+          "startMs": 2325465,
+          "endMs": 2325485,
+          "score": 0.001,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 61,
+          "char": "い",
+          "sourceSegmentId": 7749,
+          "oldStartMs": 2325846,
+          "oldEndMs": 2325866,
+          "startMs": 2325485,
+          "endMs": 2325505,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 62,
+          "char": "い",
+          "sourceSegmentId": 7750,
+          "oldStartMs": 2325866,
+          "oldEndMs": 2326106,
+          "startMs": 2325505,
+          "endMs": 2325665,
+          "score": 0.875,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 63,
+          "char": "雰",
+          "sourceSegmentId": 7751,
+          "oldStartMs": 2326106,
+          "oldEndMs": 2326126,
+          "startMs": 2325665,
+          "endMs": 2325685,
+          "score": 0.069,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 64,
+          "char": "囲",
+          "sourceSegmentId": 7752,
+          "oldStartMs": 2326126,
+          "oldEndMs": 2326146,
+          "startMs": 2325685,
+          "endMs": 2325805,
+          "score": 0.833,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 65,
+          "char": "気",
+          "sourceSegmentId": 7753,
+          "oldStartMs": 2326146,
+          "oldEndMs": 2326166,
+          "startMs": 2325805,
+          "endMs": 2325825,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 66,
+          "char": "に",
+          "sourceSegmentId": 7754,
+          "oldStartMs": 2326166,
+          "oldEndMs": 2326186,
+          "startMs": 2325825,
+          "endMs": 2327927,
+          "score": 0.99,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 67,
+          "char": "!",
+          "sourceSegmentId": 7755,
+          "oldStartMs": 2326186,
+          "oldEndMs": 2326206,
+          "startMs": 2327927,
+          "endMs": 2327947,
+          "score": 0.643,
+          "alignmentPresent": true
+        }
+      ],
+      "allCharacterIssues": [
+        {
+          "alignedCharacterIndex": 4,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 5,
+          "sourceStart": 4
+        },
+        {
+          "alignedCharacterIndex": 5,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 6,
+          "sourceStart": 5
+        },
+        {
+          "alignedCharacterIndex": 6,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 7,
+          "sourceStart": 6
+        },
+        {
+          "alignedCharacterIndex": 9,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 10,
+          "sourceStart": 9
+        },
+        {
+          "alignedCharacterIndex": 10,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 11,
+          "sourceStart": 10
+        },
+        {
+          "alignedCharacterIndex": 13,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 14,
+          "sourceStart": 13
+        },
+        {
+          "alignedCharacterIndex": 15,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 16,
+          "sourceStart": 15
+        },
+        {
+          "alignedCharacterIndex": 16,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 17,
+          "sourceStart": 16
+        },
+        {
+          "alignedCharacterIndex": 17,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 18,
+          "sourceStart": 17
+        },
+        {
+          "alignedCharacterIndex": 18,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 19,
+          "sourceStart": 18
+        },
+        {
+          "alignedCharacterIndex": 19,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 20,
+          "sourceStart": 19
+        },
+        {
+          "alignedCharacterIndex": 20,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 21,
+          "sourceStart": 20
+        },
+        {
+          "alignedCharacterIndex": 21,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 22,
+          "sourceStart": 21
+        },
+        {
+          "alignedCharacterIndex": 22,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 23,
+          "sourceStart": 22
+        },
+        {
+          "alignedCharacterIndex": 23,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 24,
+          "sourceStart": 23
+        },
+        {
+          "alignedCharacterIndex": 25,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 26,
+          "sourceStart": 25
+        },
+        {
+          "alignedCharacterIndex": 27,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 28,
+          "sourceStart": 27
+        },
+        {
+          "alignedCharacterIndex": 28,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 29,
+          "sourceStart": 28
+        },
+        {
+          "alignedCharacterIndex": 30,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 31,
+          "sourceStart": 30
+        },
+        {
+          "alignedCharacterIndex": 31,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 32,
+          "sourceStart": 31
+        },
+        {
+          "alignedCharacterIndex": 32,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 33,
+          "sourceStart": 32
+        },
+        {
+          "alignedCharacterIndex": 33,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 34,
+          "sourceStart": 33
+        },
+        {
+          "alignedCharacterIndex": 34,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 35,
+          "sourceStart": 34
+        },
+        {
+          "alignedCharacterIndex": 36,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 37,
+          "sourceStart": 36
+        },
+        {
+          "alignedCharacterIndex": 37,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 38,
+          "sourceStart": 37
+        },
+        {
+          "alignedCharacterIndex": 38,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 39,
+          "sourceStart": 38
+        },
+        {
+          "alignedCharacterIndex": 39,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 40,
+          "sourceStart": 39
+        },
+        {
+          "alignedCharacterIndex": 41,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 42,
+          "sourceStart": 41
+        },
+        {
+          "alignedCharacterIndex": 42,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 43,
+          "sourceStart": 42
+        },
+        {
+          "alignedCharacterIndex": 45,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 46,
+          "sourceStart": 45
+        },
+        {
+          "alignedCharacterIndex": 46,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 47,
+          "sourceStart": 46
+        },
+        {
+          "alignedCharacterIndex": 47,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 48,
+          "sourceStart": 47
+        },
+        {
+          "alignedCharacterIndex": 48,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 49,
+          "sourceStart": 48
+        },
+        {
+          "alignedCharacterIndex": 50,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 51,
+          "sourceStart": 50
+        },
+        {
+          "alignedCharacterIndex": 51,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 52,
+          "sourceStart": 51
+        },
+        {
+          "alignedCharacterIndex": 52,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 53,
+          "sourceStart": 52
+        },
+        {
+          "alignedCharacterIndex": 54,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 55,
+          "sourceStart": 54
+        },
+        {
+          "alignedCharacterIndex": 55,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 56,
+          "sourceStart": 55
+        },
+        {
+          "alignedCharacterIndex": 58,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 59,
+          "sourceStart": 58
+        },
+        {
+          "alignedCharacterIndex": 59,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 60,
+          "sourceStart": 59
+        },
+        {
+          "alignedCharacterIndex": 60,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 61,
+          "sourceStart": 60
+        },
+        {
+          "alignedCharacterIndex": 61,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 62,
+          "sourceStart": 61
+        },
+        {
+          "alignedCharacterIndex": 63,
+          "reasons": [
+            "low_score"
+          ],
+          "sourceEnd": 64,
+          "sourceStart": 63
+        },
+        {
+          "alignedCharacterIndex": 65,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 66,
+          "sourceStart": 65
+        }
+      ],
+      "correctClockConfirmed": false,
+      "auditorySynchronyConfirmed": false,
+      "adopted": false,
+      "targetOnlyOldNeighborOverlaps": [
+        {
+          "globalCueOrdinal": 461,
+          "text": "お前たち…",
+          "sourceStartMs": 2323624,
+          "sourceEndMs": 2323864,
+          "sourceSegmentIds": [
+            7706,
+            7707,
+            7708,
+            7709,
+            7710
+          ],
+          "overlapWithTargetOnlyMs": 60
+        },
+        {
+          "globalCueOrdinal": 462,
+          "text": "頼んだぞ…",
+          "sourceStartMs": 2323864,
+          "sourceEndMs": 2325025,
+          "sourceSegmentIds": [
+            7711,
+            7712,
+            7713,
+            7714,
+            7715
+          ],
+          "overlapWithTargetOnlyMs": 1161
+        },
+        {
+          "globalCueOrdinal": 463,
+          "text": "ここで奴を",
+          "sourceStartMs": 2325025,
+          "sourceEndMs": 2325125,
+          "sourceSegmentIds": [
+            7716,
+            7717,
+            7718,
+            7719,
+            7720
+          ],
+          "overlapWithTargetOnlyMs": 20
+        }
+      ],
+      "targetZeroScoreCount": 4,
+      "interpretation": "Candidate spans and internal ordering are machine output only. Whole sourceCharacters/quality retained. No audio synchrony or correct replacement clock has been established."
+    },
+    {
+      "readAtUtc": "2026-10-05T02:44:15.934538+00:00",
+      "targetCue": 571,
+      "jobId": "8f6dbad6a81949efa03772375d45b9f0",
+      "sourceKind": "adopted",
+      "state": "completed",
+      "startedAt": "2026-10-05T02:42:15.019549+00:00",
+      "endedAt": "2026-10-05T02:42:22.582316+00:00",
+      "metrics": {
+        "gpu": {
+          "meanUtilizationPercent": 7.71,
+          "name": "NVIDIA GeForce RTX 4090",
+          "peakMemoryMiB": 465,
+          "peakUtilizationPercent": 10,
+          "sampleCount": 7,
+          "scope": "whole GPU, sampled once per second"
+        },
+        "pipelineSeconds": 6.292,
+        "runnerSeconds": 7.504,
+        "segmentCount": 1
+      },
+      "characters": 21,
+      "textDifferences": [],
+      "nullTimeCount": 0,
+      "missingAlignmentCount": 0,
+      "nullScoreCount": 0,
+      "zeroScoreCount": 8,
+      "lowNonzeroScoreCount": 0,
+      "qualityStatus": "needs_review",
+      "sourceIndexesExact": true,
+      "sourceInputExact": true,
+      "profileMatchesRegistration": true,
+      "fullCandidateRangeMs": [
+        2624000,
+        2633000
+      ],
+      "targetCandidates": [
+        {
+          "sourceIndex": 6,
+          "char": "お",
+          "sourceSegmentId": 8666,
+          "oldStartMs": 2626918,
+          "oldEndMs": 2626938,
+          "startMs": 2625122,
+          "endMs": 2625443,
+          "score": 0.937,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 7,
+          "char": "!",
+          "sourceSegmentId": 8667,
+          "oldStartMs": 2626938,
+          "oldEndMs": 2626958,
+          "startMs": 2625443,
+          "endMs": 2625604,
+          "score": 0.875,
+          "alignmentPresent": true
+        }
+      ],
+      "targetRangeMs": [
+        2625122,
+        2625604
+      ],
+      "targetDurationMs": 482,
+      "internalOverlaps": [],
+      "nonpositiveIntervals": [],
+      "oldOutsideNeighborOverlaps": [
+        {
+          "globalCueOrdinal": 567,
+          "text": "これガチモンの桃太郎来た?",
+          "sourceStartMs": 2623316,
+          "sourceEndMs": 2625117,
+          "sourceSegmentIds": [
+            8643,
+            8644,
+            8645,
+            8646,
+            8647,
+            8648,
+            8649,
+            8650,
+            8651,
+            8652,
+            8653,
+            8654,
+            8655
+          ],
+          "overlapMs": 1117
+        },
+        {
+          "globalCueOrdinal": 568,
+          "text": "え?",
+          "sourceStartMs": 2625117,
+          "sourceEndMs": 2625618,
+          "sourceSegmentIds": [
+            8656,
+            8657
+          ],
+          "overlapMs": 501
+        },
+        {
+          "globalCueOrdinal": 569,
+          "text": "え?",
+          "sourceStartMs": 2625618,
+          "sourceEndMs": 2625898,
+          "sourceSegmentIds": [
+            8658,
+            8659
+          ],
+          "overlapMs": 280
+        },
+        {
+          "globalCueOrdinal": 573,
+          "text": "いや、鬼だけじゃねえな!",
+          "sourceStartMs": 2632061,
+          "sourceEndMs": 2634743,
+          "sourceSegmentIds": [
+            8681,
+            8682,
+            8683,
+            8684,
+            8685,
+            8686,
+            8687,
+            8688,
+            8689,
+            8690,
+            8691,
+            8692
+          ],
+          "overlapMs": 939
+        }
+      ],
+      "allCharacterCandidates": [
+        {
+          "sourceIndex": 0,
+          "char": "何",
+          "sourceSegmentId": 8660,
+          "oldStartMs": 2625898,
+          "oldEndMs": 2625998,
+          "startMs": 2624000,
+          "endMs": 2624120,
+          "score": 0.833,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 1,
+          "char": "人",
+          "sourceSegmentId": 8661,
+          "oldStartMs": 2625998,
+          "oldEndMs": 2626158,
+          "startMs": 2624120,
+          "endMs": 2625042,
+          "score": 0.978,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 2,
+          "char": "い",
+          "sourceSegmentId": 8662,
+          "oldStartMs": 2626158,
+          "oldEndMs": 2626318,
+          "startMs": 2625042,
+          "endMs": 2625062,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 3,
+          "char": "る",
+          "sourceSegmentId": 8663,
+          "oldStartMs": 2626318,
+          "oldEndMs": 2626338,
+          "startMs": 2625062,
+          "endMs": 2625082,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 4,
+          "char": "の",
+          "sourceSegmentId": 8664,
+          "oldStartMs": 2626338,
+          "oldEndMs": 2626358,
+          "startMs": 2625082,
+          "endMs": 2625102,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 5,
+          "char": "?",
+          "sourceSegmentId": 8665,
+          "oldStartMs": 2626358,
+          "oldEndMs": 2626918,
+          "startMs": 2625102,
+          "endMs": 2625122,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 6,
+          "char": "お",
+          "sourceSegmentId": 8666,
+          "oldStartMs": 2626918,
+          "oldEndMs": 2626938,
+          "startMs": 2625122,
+          "endMs": 2625443,
+          "score": 0.937,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 7,
+          "char": "!",
+          "sourceSegmentId": 8667,
+          "oldStartMs": 2626938,
+          "oldEndMs": 2626958,
+          "startMs": 2625443,
+          "endMs": 2625604,
+          "score": 0.875,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 8,
+          "char": "早",
+          "sourceSegmentId": 8668,
+          "oldStartMs": 2626958,
+          "oldEndMs": 2627098,
+          "startMs": 2625604,
+          "endMs": 2625864,
+          "score": 0.923,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 9,
+          "char": "速",
+          "sourceSegmentId": 8669,
+          "oldStartMs": 2627098,
+          "oldEndMs": 2627118,
+          "startMs": 2625864,
+          "endMs": 2625884,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 10,
+          "char": "鬼",
+          "sourceSegmentId": 8670,
+          "oldStartMs": 2627118,
+          "oldEndMs": 2627399,
+          "startMs": 2625884,
+          "endMs": 2626165,
+          "score": 0.929,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 11,
+          "char": "が",
+          "sourceSegmentId": 8671,
+          "oldStartMs": 2627399,
+          "oldEndMs": 2627519,
+          "startMs": 2626165,
+          "endMs": 2627107,
+          "score": 0.979,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 12,
+          "char": "い",
+          "sourceSegmentId": 8672,
+          "oldStartMs": 2627519,
+          "oldEndMs": 2628199,
+          "startMs": 2627107,
+          "endMs": 2628209,
+          "score": 0.982,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 13,
+          "char": "る",
+          "sourceSegmentId": 8673,
+          "oldStartMs": 2628199,
+          "oldEndMs": 2628219,
+          "startMs": 2628209,
+          "endMs": 2628229,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 14,
+          "char": "ん",
+          "sourceSegmentId": 8674,
+          "oldStartMs": 2628219,
+          "oldEndMs": 2628239,
+          "startMs": 2628229,
+          "endMs": 2628630,
+          "score": 0.95,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 15,
+          "char": "じ",
+          "sourceSegmentId": 8675,
+          "oldStartMs": 2628239,
+          "oldEndMs": 2628399,
+          "startMs": 2628630,
+          "endMs": 2628650,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 16,
+          "char": "ゃ",
+          "sourceSegmentId": 8676,
+          "oldStartMs": 2628399,
+          "oldEndMs": 2628619,
+          "startMs": 2628650,
+          "endMs": 2629252,
+          "score": 0.967,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 17,
+          "char": "ね",
+          "sourceSegmentId": 8677,
+          "oldStartMs": 2628619,
+          "oldEndMs": 2628639,
+          "startMs": 2629252,
+          "endMs": 2629272,
+          "score": 0.0,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 18,
+          "char": "え",
+          "sourceSegmentId": 8678,
+          "oldStartMs": 2628639,
+          "oldEndMs": 2628899,
+          "startMs": 2629272,
+          "endMs": 2630675,
+          "score": 0.986,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 19,
+          "char": "か",
+          "sourceSegmentId": 8679,
+          "oldStartMs": 2628899,
+          "oldEndMs": 2629260,
+          "startMs": 2630675,
+          "endMs": 2632980,
+          "score": 0.991,
+          "alignmentPresent": true
+        },
+        {
+          "sourceIndex": 20,
+          "char": "!",
+          "sourceSegmentId": 8680,
+          "oldStartMs": 2629260,
+          "oldEndMs": 2632061,
+          "startMs": 2632980,
+          "endMs": 2633000,
+          "score": 1.0,
+          "alignmentPresent": true
+        }
+      ],
+      "allCharacterIssues": [
+        {
+          "alignedCharacterIndex": 2,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 3,
+          "sourceStart": 2
+        },
+        {
+          "alignedCharacterIndex": 3,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 4,
+          "sourceStart": 3
+        },
+        {
+          "alignedCharacterIndex": 4,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 5,
+          "sourceStart": 4
+        },
+        {
+          "alignedCharacterIndex": 5,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 6,
+          "sourceStart": 5
+        },
+        {
+          "alignedCharacterIndex": 9,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 10,
+          "sourceStart": 9
+        },
+        {
+          "alignedCharacterIndex": 13,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 14,
+          "sourceStart": 13
+        },
+        {
+          "alignedCharacterIndex": 15,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 16,
+          "sourceStart": 15
+        },
+        {
+          "alignedCharacterIndex": 17,
+          "reasons": [
+            "zero_score"
+          ],
+          "sourceEnd": 18,
+          "sourceStart": 17
+        }
+      ],
+      "correctClockConfirmed": false,
+      "auditorySynchronyConfirmed": false,
+      "adopted": false,
+      "targetOnlyOldNeighborOverlaps": [
+        {
+          "globalCueOrdinal": 568,
+          "text": "え?",
+          "sourceStartMs": 2625117,
+          "sourceEndMs": 2625618,
+          "sourceSegmentIds": [
+            8656,
+            8657
+          ],
+          "overlapWithTargetOnlyMs": 482
+        }
+      ],
+      "targetZeroScoreCount": 0,
+      "interpretation": "Candidate spans and internal ordering are machine output only. Whole sourceCharacters/quality retained. No audio synchrony or correct replacement clock has been established."
+    }
+  ],
+  "currentServerBinding": {
+    "sourceSha256": {
+      "main.py": "246da4411c8c0a22f566d400d511b8d6c698cf1bb36a10ba5886ae8cf837d013",
+      "stt_pipeline.py": "01906fdca06231c8ec7ba855b45ace4c325857884ca83456cc13d3c282a8bff3",
+      "stt_alignment.py": "e4963404bf308f724f9e99770abc0c7850f0d55b59f1668ad2083d1abfe1f8f9"
+    },
+    "sameAsPreviousWorkingAlignRegistration": true,
+    "modelRevisionsAndSettingsUnchanged": true,
+    "mainRawHashDifference": "Unconfirmed; retained as instructed. User deployment confirmation and observed new functionality are respected. No past-version exploration or extra investigation performed.",
+    "pipelineAndAlignmentRawHashesPreviouslyMatchedGitHub": true
+  },
+  "accepted": false,
+  "correctClocksConfirmed": false,
+  "audioActuallyListenedTo": false,
+  "additionalAlignmentsStopped": true,
+  "stopReason": "Both results needs_review; explicit two-observation limit reached; real audio/text correspondence remains unconfirmed",
+  "minimumPhysicalConfirmation": [
+    {
+      "cue465": "世界が終わる",
+      "existingAudioPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/short-clock-crop6-lan-v003/source-38m41s-to-38m47s.wav",
+      "sourceRangeMs": [
+        2321000,
+        2327000
+      ],
+      "purpose": "Listen to the actual conditional phrase, world phrase and following reaction; distinguish where each word is actually spoken. Compare candidates38:43.804-45.045 and earlier38:45.013-45.997 with preserved text. No new STT required."
+    },
+    {
+      "cue571": "お!",
+      "existingAudioPath": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-fixed-source-and-input-preparation-v001/source-cue571-43m44s-to-43m53s.wav",
+      "sourceRangeMs": [
+        2624000,
+        2633000
+      ],
+      "focusSourceRangeMs": [
+        2624600,
+        2627400
+      ],
+      "purpose": "Hear question, the neighboringえ? reactions andお!, then confirm which utterance the high-score candidate43:45.122-45.604 belongs to. Check the rest of the9s only if neighboring order is unclear."
+    }
+  ],
+  "nextActor": "Parent mona to arrange minimal actual audio/text confirmation through an audio-capable read path, then decide exact scoped corrections. No request for old full reviews or all-caption scoring.",
+  "effects": {
+    "alignmentRequests": 2,
+    "asrRequests": 0,
+    "paidApiCalls": 0,
+    "newModelsOrServerConfigurationChanges": 0,
+    "externalAudioUploadsOutsideExistingLan": 0,
+    "transcriptAtomClockOrVideoApplication": 0,
+    "videoManufactures": 0,
+    "originalOrPreviousResultsDeletedOrOverwritten": 0
+  },
+  "cleanup": {
+    "keep": "Existing input audio, adopted text/bindings, source checkpoints and results are referenced evidence; no new audio generated in this cycle",
+    "deletedBytes": 0,
+    "macChildProcesses": "curl calls completed; no own long-running process",
+    "existingServerWorker": "Keep running; not stopped"
+  },
+  "evidenceBindings": [
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/health-before.json",
+      "bytes": 682,
+      "sha256": "b235d18649317681e460f19e304b1008e187378dd5a65d747008fdc419b2841f"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/input-cue465-context.json",
+      "bytes": 18945,
+      "sha256": "4ca809e6b35a8554dd806abc16782a37f0a8ddbfb619fac7213f44df61aa9562"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/adopted-cue465-context.json",
+      "bytes": 239,
+      "sha256": "874a31145324ee7a10640526ae150eb4f3ba310dab4adcf39eb9befcfe7b829d"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/execution-cue465.json",
+      "bytes": 1290,
+      "sha256": "abaa6002ff4659dcfd36ff19d827100d8188f71dc7d470d40fc61f2adbef37cb"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/registration-cue465.json",
+      "bytes": 2255,
+      "sha256": "d353626c521fc335b9997e19bd42c98af98bcc282c405c6db0213b164a7afd2e"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/status-cue465.json",
+      "bytes": 6585,
+      "sha256": "a8f17bb9c137a1c9aa6bd05c70f7548790a61329a421dfc5248d3ebbc061db4b"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/source-cue465.json",
+      "bytes": 267,
+      "sha256": "775f3189329d782f2b28a0b099fd7b5c4b81532e1ef9bf380fe6eb15d500a8ae"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/result-cue465.json",
+      "bytes": 65136,
+      "sha256": "f9e4e68f0a0aa3f413d63c73299bdecb3f910819c6d024bc2799d121381ecae7"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/observation-cue465.json",
+      "bytes": 27059,
+      "sha256": "7b764e0d02cd8f298ace28c5451b2ccf51598e0f12905830859f4dd477e5cc9b"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/input-cue571-context.json",
+      "bytes": 10625,
+      "sha256": "f09d05378b8104fdda4747f8b86f071d8c411c17d74c5d45df3fd655c9b4ce36"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/adopted-cue571-context.json",
+      "bytes": 93,
+      "sha256": "53b239f5437017a9a5d90b8463a960f1a171302ff4cbd63ac9b8506383fd1203"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/execution-cue571.json",
+      "bytes": 1290,
+      "sha256": "9362d66fbe92b2a467a9e2977b7b1e9ebdaaf38d3aeeb7f26f35fd2164ad4a4c"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/registration-cue571.json",
+      "bytes": 2116,
+      "sha256": "b8d240c8f6e37fb894b6a9602c74c336cab06b933e13693ed6eaa0228a91266c"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/status-cue571.json",
+      "bytes": 3350,
+      "sha256": "0d65cef2bb1e5812019a1d88e1cd6044aa5131876071ed5a8f657f426b821523"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/source-cue571.json",
+      "bytes": 121,
+      "sha256": "3a2e61b7b80ee05a7b644a6a6cb3bb9bae92f7aea65af235cddcfa2966beb168"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/result-cue571.json",
+      "bytes": 21284,
+      "sha256": "c83bb37291f3cf1e49493c92c14eb32f909e795bc86582315085e50d2d781f1b"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/observation-cue571.json",
+      "bytes": 9869,
+      "sha256": "e3ef88eef604dec233292fc7de67be17b42c3ac908ae59e8aa6c7987a21b28bc"
+    },
+    {
+      "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/stt-two-context-alignments-v001/status-history.json",
+      "bytes": 201,
+      "sha256": "2367a664593e7332051a85359ab675cc1b543b72f6af98f00352b13cca0ee71c"
+    }
+  ],
+  "independentReadReview": {
+    "result": "Position/origin/original-ID/count checks agree. Both results needs_review, correct clocks/audio synchrony unconfirmed, no adoption.",
+    "targetPositionsInExistingAudioSeconds": {
+      "465": [
+        2.804,
+        4.045
+      ],
+      "571": [
+        1.122,
+        1.604
+      ]
+    },
+    "additionalActions": 0
+  }
+}
