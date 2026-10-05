@@ -2,6 +2,16 @@
 
 更新日：2026-10-05（JST）
 
+## 最新現在地 — 2026-10-05T12:47:25.229718+00:00（全尺一本製造・技術QC・代表8場面確認・SSD保存が完了）
+
+本人承認済みの現行字幕登録移行と2表示調整を実装 `4c79ba87b275fbd8c10e93ef8f83a1b1ac4df6c5` に固定し、10:31:24〜12:13:51 UTCに正式一本を製造。途中JSON/grid/PCM/背景/PNG/QCもSSDで保存・再読、内蔵は既承認4control/37,424Bだけ。20分53.967秒・約618MB、31区間/650字幕/1041行/5450atom/37619frame/55299930sample。新素材/STT/LLM/有料API0、元本文/ID/時計/owner/旧31回答と旧成果は保持。
+
+既存全primary/media/元AAC保持/必要native sampling QC passed。代表464〜469・570〜571の完成frame8枚を実際に静止画で確認し、465「世界が終わる」と570「何人いるの?お!」は各32frame/1.067秒。文字欠け/画面外は8枚では見られないが、元会話欄/人物への重なりと近隣5/9/14frameの短い字幕を記録。12:25:28.481 UTC completed receipt、12:37:16 UTC正式get-result completed/complete=true/passed-representative。通常速度の全尺実視聴・音声聴取・人間品質採用・縁の好みは未評価、fullVisibility比較は未実施。合格と混同しない。
+
+[このMacのChromeで完成動画を開く](http://127.0.0.1:63610/digest.mp4)。完成MP4一本だけを127.0.0.1で配信、12:33:34 UTCにRange/実byte一致/他path拒否を検証。最新親指示により配信PID54217だけ保持し、製造/抽出/登録/結果再読のown processは終了。不要cache93file/3,970,838B整理、必要な媒体/検査PNG/入力/新旧receipt KEEP。製造処理1時間42分23.820秒、移行準備約46分、経過2時間超の根拠は親へ報告済み。製造開始後の本人追加操作要求0。
+
+状態：今回の実装・製造・技術確認・保存引渡しは完了、人間品質は未評価。最終束縛/容量読取12:43:27 UTC。次担当は親mona（URLと成果/未評価を本人へ渡す）。人間品質未評価を異常扱いせず、追加製造を自動再開しない。[完成報告](reports/digest-new-material-SJvP9jhEdyI-20261004/current-display-full-manufacture-completion-v001.md)・[今回session log](work-logs/2026-10/2026-10-05T1247_Codex-SSD_ID9-current-display-full-manufacture_4c79ba87.md)。以下は各時点の履歴。
+
 ## 最新現在地 — 2026-10-05T10:19:16.322888+00:00（本人承認済みの正式登録移行、製造前）
 
 本人「いいよ」Sentinel_cf8aca8c66e88191900cd3508db6ba22を親mona経由で受領。旧31回答と元素材/STT/計画/旧登録を保ち、新正式検証→現行準備・候補へ移す一件を実装中。本人投稿時刻は未提供、記録時刻と区別。旧互換分岐の自分の未commit3fileだけをSSD証拠確認後09:45:19 UTCに除外、reset/stash・他者変更0。旧証拠をKEEPし再採用しない。

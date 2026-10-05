@@ -15,3 +15,5 @@
 [新正式登録の実結果](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/current-formal-registration-v001/result.json)・[現行準備の実結果](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/preparation-result.json)・[新字幕登録と移行検査](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-registration/result.json)・[表示調整候補](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/current-inputs-v001/caption-display-adjustment-v001/result.json)。
 
 10:24:19 UTCに最新差分のrunner/Remotion型検査exit0、job保存先・旧形式・承認偽装拒否23件pass。独立read review最終10:22:58 UTC、3指摘（原answer exact参照、新JSON prefix、結果再読の本人承認実bytes）を修正後追加blocking0。実移行helper18件passと保存先12/Python27の根拠はSSDにKEEP。正式入力と容量gateは実装固定後に実施し、製造を先行しない。
+
+2026-10-05T12:47:25.229718+00:00 追記：今回の正式全尺一本と既存技術QC・代表8場面の静止画確認・SSD保存が完了。通常速/音声実聴取/人間品質採用は未評価。[完成報告](current-display-full-manufacture-completion-v001.md)に実receipt・時間・cleanup・Chrome用URLを記録した。上記の製造前記述は当時の履歴として保持。
