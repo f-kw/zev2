@@ -361,7 +361,7 @@
     "oldCompositeElapsedSeconds": 1320.55,
     "intervalsAreNestedNotAdded": true,
     "newWallTimeMeasured": false,
-    "planAllowance": "2–3.5 hours provisional; excludes preparation/human work and is not a promised bound",
+    "planAllowance": "Current elapsed time unknown; old total is reference only, not a forecast. Report before starting any phase expected to take at least two hours.",
     "phaseAtLeastTwoHoursStarted": false,
     "pngReuseViaCurrentFormalEntry": false
   },
@@ -374,5 +374,58 @@
   },
   "nextState": "consultant waiting",
   "nextOwner": "parent mona",
-  "preservedFailureQuality": "Existing issue-found/needs_review/score0 and lack of completed receipt retained."
+  "preservedFailureQuality": "Existing issue-found/needs_review/score0 and lack of completed receipt retained.",
+  "reuseFollowupObservedAt": "2026-10-05T06:48:21.552275+00:00",
+  "reuseAssessment": {
+    "existingOfficialPartialUpdateEntryFound": false,
+    "reusableWithoutNewAcquisitionOrInference": [
+      "source video",
+      "STT",
+      "normal adopted plan",
+      "original clocks/inspection references",
+      "old caption responses and non-target boundaries",
+      "font/style"
+    ],
+    "normalEntryRegenerates": [
+      "base media",
+      "650 primary PNGs",
+      "full composite"
+    ],
+    "rejectedOrDisconnectedEntries": {
+      "specificRecovery": "old full plan and props must match",
+      "genericResume": "body and exact replay complete; old view/full plan/all PNG records/reservation exact; QC only",
+      "nativeAssetCache": "Normal approved caller rejects injected capabilities/adapter",
+      "localRepair": "different repo-only refs and human frame observation/UI qualification; full rendering"
+    },
+    "evidencePointers": [
+      "runner/src/digest-approved-job-runner-v001.ts:542",
+      "evals/clip_composition/render_presentation_v002.mjs:2739",
+      "evals/clip_composition/render_presentation_v002.mjs:2742",
+      "evals/clip_composition/render_presentation_v002.mjs:2764",
+      "evals/clip_composition/render_presentation_v002.mjs:2884",
+      "evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts:425",
+      "evals/clip_composition/render_presentation_v002.mjs:2402",
+      "evals/clip_composition/render_presentation_v002.mjs:2463"
+    ]
+  },
+  "currentCycleTiming": {
+    "startApproximate": "2026-10-05T06:08:00+00:00",
+    "implementationAndReadingApproximateWindow": "06:08–06:30 UTC",
+    "testingSetupCorrectionsApproximateWindow": "06:30–06:36 UTC",
+    "recordsAndGitApproximateWindow": "06:36–06:44 UTC",
+    "reuseFollowupStartedApproximate": "2026-10-05T06:44:00+00:00",
+    "intervalsAreApproximateElapsedWindowsNotActiveLabor": true,
+    "readerTapDurationsMs": {
+      "short-caption-reader-tests-attempt001.tap": 3829.026625,
+      "short-caption-reader-tests-attempt002.tap": 4230.749459,
+      "short-caption-reader-tests-final.tap": 5130.929625,
+      "short-caption-reader-tests-final-v002.tap": 5175.413125
+    },
+    "allFourReaderRunsTotalMs": 18366.118834,
+    "finalHelperTapDurationMs": 613.623917,
+    "toolWaitTotal": "not measured; per-call automatic approval delays mixed with actual execution",
+    "activeImplementationLabor": "not measured",
+    "typecheckElapsedTotal": "not measured",
+    "newBenchmarkOrTestForTiming": false
+  }
 }

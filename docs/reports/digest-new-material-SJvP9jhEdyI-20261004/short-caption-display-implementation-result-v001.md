@@ -44,8 +44,16 @@ helper26件、reader11件が成功、失敗0。readerは新候補の通過、実
 
 現入口では650 primaryの新描画と全37,619frame（20:53.967）の新合成が必要。物理的に旧PNGがあることは正式再利用許可の代わりにならない。旧全製造は3時間17分42.007秒。その内数は字幕描画/画像検査2時間29分34.579秒、合成22分00.550秒で、二重加算しない。[既存時間台帳](production-time-and-test-ledger-v001.md)。
 
-repeat/mask・重複読取削減後の実全工程は未測定。計画上は2〜3.5時間程度の枠を見込む必要があるが、これは実測や所要時間保証ではなく、初回準備/人間介入は別である。child件数減少率を時間へ換算しない。2時間以上の可能性がある工程は先に報告し、今回その工程は開始していない。大容量開始前には、新candidate/実装SHA/許可/owner/device/空きと既存保護条件を実確認する必要がある。
+repeat/mask・重複読取削減後の実全工程は未測定。今回の正確な所要時間は不明で、前回全3時間17分を新製造の見積へそのまま当てはめない。素材取得/STT/上流判断は再実行しない。初回準備/人間介入は別である。child件数減少率を時間へ換算しない。2時間以上の可能性がある工程は先に報告し、今回その工程は開始していない。大容量開始前には、新candidate/実装SHA/許可/owner/device/空きと既存保護条件を実確認する必要がある。
 
 状態：実装と計算/保存JSON検査は完了、局所実映像確認は相談役待ち。次担当は親monaが上の限定局所入口追加か、現正式入口の長時間全尺更新かを具体的に判断し、同じMac実装者へ指示する。旧STT不合格・issue-found・completed receipt未成立は保持、本人へ過去レビュー/開始位置確認/全字幕採点を再要求しない。
 
 cleanup：今回生成媒体0、巨大途中物0、削除0。新候補と失敗/成功の小証拠は後続入力/監査用にKEEP。試験fixtureは試験finallyで整理済み、2026-10-05T06:36:27.832573+00:00に残存0・今回候補/試験/型process0。元媒体/旧job/音声/HTML/旧確認serverは保護。他者process、スティッキーズ、監視設定、旧CUA往復は変更0。[session log](../../work-logs/2026-10/2026-10-05T0642_Codex-SSD_ID9-short-caption-display-implementation_fa4c504b.md)。Git反映の最終SHA/remote/cleanは親への最終報告で確定する。
+
+## 再利用入口の追加確認と今回の時間内訳
+
+原動画、STT、通常採用計画、元時計/検査参照、原字幕回答、変更外本文/境界、font/styleは再利用できる。素材取得・STT・上流判断は不要。しかし現Normalの[542行](/Users/kawafmm/workspace/zev2/runner/src/digest-approved-job-runner-v001.ts:542)ではrecoveryなしならbaseを新生成し、rendererの[2402行](/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:2402)の全drawStatesから[2463行](/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:2463)でprimaryを描画する。650新primaryと全尺新合成が今の入口の動作である。
+
+別の[generic resume](/Users/kawafmm/workspace/zev2/evals/clip_composition/render_presentation_v002.mjs:2884)は完成body/exact replay後のQCだけで、旧view/全plan/全PNGrecords/output/reservation一致が条件。表示変更/部分再描画の入口ではない。実props/profileに束縛するnative cacheはあるが、Normal callerは[425行](/Users/kawafmm/workspace/zev2/evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts:425)で注入capabilities/adapterを拒否し、別editing/orchestration入口だけに接続。local repairはrepo限定参照・人間frame観測/UI資格で今回のSSD/display-rule候補に対応せず、renderも全尺。今回の変更箇所だけ再描画してbase/他PNGを使う現行の正式入口は見つからなかった。再利用が原理的に不可能との判断ではなく、正式な接続の不足である。新接続・媒体・測定0。
+
+着手06:08 UTC頃。大まかな経過窓は実装/読取06:08〜06:30、試験/設営補正06:30〜06:36、記録/Git06:36〜06:44、その後は親の再利用確認を受けた読取。これは活動時間・ツール待ちの実測内訳ではない。readerの4回の実試験は合計18.366秒（最後5.175秒）、helper最終26件は0.614秒。型検査・実装・自動承認を含むツール待ち・資料保存の厳密な所要時間は未計測。新たな計測試験や製造を足していない。

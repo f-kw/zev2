@@ -8,7 +8,7 @@
 
 helper26＋reader11成功、fail0。無調整入力の旧3f/1f経路も保持。無関係旧2件は未実施、試験anchorは実製造許可/ownerではない。runner/Remotion型exit0、独立readreviewblocking0。正式Core/新glyph/通常速可読性/動画更新は未実施。STT精度追究・追加alignment・同じ本人確認・新HTML・媒体・API0。
 
-現正式contextはfull worker専用で、資格を保った局所2映像の入口がない。追加にはapproved job、approved runner、supervisorの3製品path＋現在readerの限定base接続が必要でscope外のため実装せず停止。旧receipt/復帰資格流用や架空contextを作らない。現入口の全尺更新は650新primary＋全尺新合成。旧全経過3:17:42、native2:29:34/合成22分は内数。改善後全工程未測定、2時間以内の根拠なし、長時間工程開始0。
+現正式contextはfull worker専用で、資格を保った局所2映像の入口がない。追加にはapproved job、approved runner、supervisorの3製品path＋現在readerの限定base接続が必要でscope外のため実装せず停止。旧receipt/復帰資格流用や架空contextを作らない。現入口の全尺更新は650新primary＋全尺新合成。旧全経過3:17:42、native2:29:34/合成22分は内数。改善後全工程未測定、旧3:17:42は新見積へ当てはめず、長時間工程開始0。再利用を追加読取し、原動画/STT/計画/原字幕回答/font/styleは再利用可、素材取得/推論不要。現Normalはbase/全primary新生成、genericresumeは旧全plan一致/QC専用、nativecacheはNormal注入拒否、localrepairは別資格。今回の正式な部分再利用入口なし。
 
 状態：実装/計算/保存JSON検査は完了、実映像確認は相談役待ち。次担当親monaが局所入口追加か長時間全尺更新の具体範囲を判断し、同じMac実装者へ渡す。旧issue-found/needs_review/score0/完成receipt未成立保持。証拠KEEP・削除0、2026-10-05T06:36:27.832573+00:00に今回process/試験fixture残存0、元成果/旧HTML保護。通常Git反映は既存本人承認で実行、最終remote/cleanは最終報告で確定。[session log](work-logs/2026-10/2026-10-05T0642_Codex-SSD_ID9-short-caption-display-implementation_fa4c504b.md)。以下は各時点の履歴。
 
