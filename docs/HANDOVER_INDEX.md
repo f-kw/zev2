@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-06（JST） / revision：handover-index-20261006-v102
+更新日：2026-10-07（JST） / revision：handover-index-20261007-v103
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-06T16:26:15.779268+00:00（字幕なし動画再利用の実装・限定確認の第一完成）
+
+本人承認の字幕なし動画再利用を4製品pathで実装、原証拠/素材/区間/時計/実依存/許可/保存prefixを厳密照合する。親が監視1pathを同目的の既存承認と確認。限定85件・型検査・元13記録/生成依存6の実再読passed、既存旧fixture未合格は隠さない。新製造/実短縮/作品品質採用は未実施。実装checkpoint `dd906a0c`。[報告](reports/digest-subtitle-base-reuse-20261006/implementation-and-validation.md)、[cycle log](work-logs/2026-10/2026-10-07T0126_Codex-SSD_subtitle-base-reuse_dd906a0c.md)、[現在地](CURRENT_GOAL.md)。文脈改善/別repo番号リンクはTODO、同じレビューや完了済み製造は再開しない。次担当monaが第一完成を監査。以下は履歴。
+
+## 最新現在地 — 2026-10-06T15:34:25.711313+00:00（文脈改善案を保存、本人承認の時間短縮改修へ）
+
+本人は今回2窓/62秒とも数秒の細切れで文脈を追えず、見どころ選定の方向は否定していない。構成Checkは回答受領済み、作品品質は改善必要。同じ確認は再要求しない。候補採否/内部保持の原因、元13:37.174〜16:34.402と25:53.819〜30:26.021の連続場面案、旧「脱出完了」説明の訂正を[CURRENT_GOAL](CURRENT_GOAL.md)と[同session log](work-logs/2026-10/2026-10-06T0334_Codex-SSD_ID9-two-cue-visibility-completion_6a855415.md)へ保存。新計画/製造/STTは0、文脈案はmonaが次の適用範囲を扱う。
+
+本人2026-10-07 00:26 JST「字幕修正の時間短縮は実行して。俺は寝るからよろしく」を親経由で受領。文脈調査を区切り、単独Mac担当が既存2製品path＋専用helper中心のbase4束明示再利用改修/限定検査/通常Git保存へ進む。新製造許可ではなく、短縮効果は未測定。別repo番号/Chromeリンクは未着手TODO。実状態/根拠/境界は[CURRENT_GOAL](CURRENT_GOAL.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-06T03:34:02.265661+00:00（指定2字幕だけ非表示の一本・技術確認・局所HTML・後始末完了）
 
