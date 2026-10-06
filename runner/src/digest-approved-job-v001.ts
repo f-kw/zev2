@@ -67,7 +67,9 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     positive(job.recoveryBinding.sizeBytes,'APPROVED_JOB_RECOVERY_BINDING_SIZE');
     assert(job.verificationPolicy?.mode === 'representative-plus-rules-v001', 'APPROVED_JOB_RECOVERY_REPRESENTATIVE_POLICY_REQUIRED');
   }
-  exact(job.inputs, ['inputRoot','inputPrefix','preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'], 'APPROVED_JOB_INPUTS_REQUIRED');
+  const hasBaseReuse = Object.hasOwn(job.inputs,'baseReuseBundleBinding');
+  assert(!(hasBaseReuse && hasRecovery),'APPROVED_JOB_BASE_REUSE_RECOVERY_CONFLICT');
+  exact(job.inputs, ['inputRoot','inputPrefix','preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding',...(hasBaseReuse?['baseReuseBundleBinding']:[])], 'APPROVED_JOB_INPUTS_REQUIRED');
   absolute(job.inputs.inputRoot, 'APPROVED_JOB_INPUT_ROOT_REQUIRED');
   assert.equal(job.inputs.inputRoot, job.storage.guestRoot, 'APPROVED_JOB_INPUT_ROOT_CHANGED');
   assert.equal(digestJobRelativePathV001(job.inputs.inputPrefix), `runtime/artifacts/${job.planId}/current-inputs-v001`, 'APPROVED_JOB_INPUT_PREFIX_CHANGED');
@@ -75,6 +77,12 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding']) {
     validateDigestJobBindingV001(job.inputs[k]);
     assert(job.inputs[k].path.startsWith(job.inputs.inputPrefix + '/'), 'APPROVED_JOB_INPUT_PREFIX_REQUIRED');
+  }
+  if(hasBaseReuse) {
+    validateDigestJobBindingV001(job.inputs.baseReuseBundleBinding);
+    positive(job.inputs.baseReuseBundleBinding.sizeBytes,'APPROVED_JOB_BASE_REUSE_SIZE_REQUIRED');
+    assert.equal(job.inputs.baseReuseBundleBinding.schemaVersion,'digest-approved-base-reuse-input-v001');
+    assert(job.inputs.baseReuseBundleBinding.path.startsWith(job.inputs.inputPrefix+'/'),'APPROVED_JOB_BASE_REUSE_INPUT_PREFIX_REQUIRED');
   }
   assert(job.inputs.preparationParameters && typeof job.inputs.preparationParameters === 'object'
     && !Array.isArray(job.inputs.preparationParameters), 'APPROVED_JOB_PREPARATION_REQUIRED');
@@ -122,11 +130,14 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
     'evals/clip_composition/digest_representative_completion_v001.mjs','runner/src/digest-approved-record-finalize-v001.ts'])
     assert(job.implementation.bindings.some((b: Json) => b.path === required), 'APPROVED_JOB_MISSING_CODE_BINDING ' + required);
+  if(hasBaseReuse) assert(job.implementation.bindings.some((b:Json)=>b.path==='runner/src/digest-approved-base-reuse-v001.ts'),'APPROVED_JOB_BASE_REUSE_HELPER_BINDING_REQUIRED');
+  assert.equal(Object.hasOwn(authorization,'baseReuseBundleBinding'),hasBaseReuse,'APPROVED_AUTHORIZATION_BASE_REUSE_PRESENCE_MISMATCH');
   assert.equal(Object.hasOwn(authorization,'recoveryBinding'),hasRecovery,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_PRESENCE_MISMATCH');
   exact(authorization, ['schemaVersion','recordId','userApproval','actions','jobBinding','planId','manifestBinding',
     'typographySettingsBinding','migrationApprovalEvidenceBinding','outputRoot','storage','guard','implementation','normalCandidates',
     ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
-    ...(hasRecovery?['recoveryBinding']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+    ...(hasRecovery?['recoveryBinding']:[]),...(hasBaseReuse?['baseReuseBundleBinding']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
+  if(hasBaseReuse) assert.deepEqual(authorization.baseReuseBundleBinding,job.inputs.baseReuseBundleBinding,'APPROVED_AUTHORIZATION_BASE_REUSE_BINDING_MISMATCH');
   if(hasRecovery) assert.deepEqual(authorization.recoveryBinding,job.recoveryBinding,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_MISMATCH');
   if(Object.hasOwn(job,'verificationPolicy')) assert.deepEqual(authorization.verificationPolicy,job.verificationPolicy,'APPROVED_AUTHORIZATION_VERIFICATION_POLICY_MISMATCH');
   assert.equal(authorization.schemaVersion, 'digest-approved-job-authorization-v002'); assert(ID.test(authorization.recordId));

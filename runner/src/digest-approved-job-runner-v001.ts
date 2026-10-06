@@ -94,6 +94,8 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   await assertApprovedDigestInputsV001(inputs, qualified);
   const job = qualified.job, s = job.storage, outputRoot = job.outputRoot, generatedRoot = path.join(s.guestRoot, outputRoot);
   const recovery = job.recoveryBinding === undefined ? null : await readSpecificDigestFailedWorkV001(qualified);
+  const reuseModule = job.inputs.baseReuseBundleBinding === undefined ? null : await load('runner/src/digest-approved-base-reuse-v001.ts');
+  const baseReuse = reuseModule === null ? null : await reuseModule.readQualifiedDigestApprovedBaseReuseV001(qualified,inputs);
   assert.equal(permit.schemaVersion, 'digest-approved-job-command-permit-v001'); assert.equal(permit.status, 'verified-approved-digest-job-v001');
   assert.deepEqual(Object.keys(permit).sort(), ['schemaVersion','status','jobBinding','authorizationBinding','bindings','storage','implementation','monitorDirectory','command','ownerBinding'].sort());
   assert.deepEqual(permit.jobBinding, qualified.jobBinding); assert.deepEqual(permit.authorizationBinding, qualified.authorizationBinding);
@@ -145,6 +147,7 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
   async function currentRaw() {
     await assertQualifiedDigestApprovedJobV001(qualified);
     if (recovery !== null) await recovery.assertCurrent();
+    if (baseReuse !== null) await reuseModule!.assertQualifiedDigestApprovedBaseReuseV001(baseReuse,qualified);
     for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'])
       await qualified.readBinding(job.inputs[key]);
     const nodeNow=await lstat(process.execPath,{bigint:true});
@@ -240,13 +243,14 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
         outputPath:args.outputPath,ffmpegPath:args.ffmpegPath,processObserver:args.processObserver,resourceCheck});
       const result={...evidence,approvedJobBinding:qualified.jobBinding,typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues};
       await publish(outputRoot+'/low-memory-composite.json',result);return result;}});
-  contexts.set(context,{qualified,inputs}); if (recovery !== null) failedWorkContexts.set(context,recovery);
+  contexts.set(context,{qualified,inputs}); if(baseReuse!==null) baseReuseContexts.set(context,baseReuse); if (recovery !== null) failedWorkContexts.set(context,recovery);
   await current(); return context;
 }
 
 // This entry is restricted to the one recorded representative-module failure.
 // Historical bytes are origins; they never qualify as current implementation.
 const failedWorkContexts = new WeakMap<object, Json>();
+const baseReuseContexts = new WeakMap<object, Readonly<Json>>();
 const FAILED_WORK_CASE = Object.freeze({
   planId: 'digest-SJvP9jhEdyI-20261004-v001',
   outputRoot: 'runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-v003',
@@ -534,17 +538,20 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const mappings=core.projectAdoptedMediaRangesV001(inputs.edit,inputs.inspection.media);
   assert.equal(mappings.mappings.at(-1).outputEndFrame,job.expected.frames);assert.equal(mappings.mappings.at(-1).audioSamples.outputEnd,job.expected.audioSamples);
   assert.deepEqual(mappings.mappings,inputs.clock.mappings,'APPROVED_JOB_ORIGINAL_CLOCK_CHANGED');
-  const source=await context.resolveApprovedDigestSourceV001(manufacturing.sourceArtifact);
+  const baseReuse=baseReuseContexts.get(context)??null;
+  const reuseModule=baseReuse===null?null:await load('runner/src/digest-approved-base-reuse-v001.ts');
+  const source=baseReuse===null?await context.resolveApprovedDigestSourceV001(manufacturing.sourceArtifact):await reuseModule!.qualifyDigestApprovedBaseReuseSourceV001(baseReuse,context);
   assert.equal(source.identity.fileSha256,manufacturing.sourceArtifact.fileSha256,'APPROVED_JOB_SOURCE_BYTES_CHANGED');
   const jobBinding=await context.publish(out+'/manufacturing-job.json',manufacturing);
   const invocation=await context.publish(out+'/core-invocation.json',{schemaVersion:'digest-approved-core-invocation-v001',
     approvedJobBinding:qualified.jobBinding,authorizationBinding:qualified.authorizationBinding,planBinding,jobBinding,
     acceptedManifestBinding:job.inputs.candidateManifestBinding,storagePermitFileSha256:sha(permitBytes),implementationSha:job.implementation.sha});
-  const minimumBaseBytes=estimateApprovedDigestBaseAllocationV001(source.identity.sizeBytes,inputs.inspection.media,job.expected);
+  const minimumBaseBytes=baseReuse===null?estimateApprovedDigestBaseAllocationV001(source.identity.sizeBytes,inputs.inspection.media,job.expected):baseReuse.minimumCopyBytes;
   assert(job.allocationBudget.baseBuildBytes>=minimumBaseBytes,'APPROVED_JOB_BASE_BUDGET_BELOW_INPUTS');
   await context.resourceCheck({stage:'start',newBytes:job.allocationBudget.baseBuildBytes});
   const baseStarted=Date.now(); const recovered = job.recoveryBinding === undefined ? null : await readQualifiedApprovedDigestFailedWorkV001(context);
-  const base = recovered === null ? await core.buildAdoptedBaseMediaV001(c,inputs.adoption,inputs.edit,manufacturing,jobBinding,invocation,
+  const reused=baseReuse===null?null:await reuseModule!.copyQualifiedDigestApprovedBaseReuseV001(baseReuse,context,inputs,{invocationBinding:invocation,manufacturingJobBinding:jobBinding,manufacturingJob:manufacturing,machineAdoptionBinding:adoptionBinding,editPlanBinding:m.bind(out+'/edit-plan.json',inputs.edit)});
+  const base = reused!==null?reused.base:recovered === null ? await core.buildAdoptedBaseMediaV001(c,inputs.adoption,inputs.edit,manufacturing,jobBinding,invocation,
     {inspection:'digest-approved-source-inspection-v001',receipt:'digest-approved-base-validation-v001'},context) : recovered.base;
   const baseMs=Date.now()-baseStarted;const artifacts=await prepareApprovedDigestCaptionCoreV001(inputs,qualified,c,base,style,context);
   assert.equal(artifacts.instruction.instructions.length,job.expected.cues);
@@ -561,6 +568,7 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
     timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,
       renderAndQcMs:Date.now()-renderStarted,totalMs:Date.now()-began},implementationSha:job.implementation.sha,
     humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,
+    ...(reused===null?{}:{baseReuse:reused.record}),
     ...(recovered === null ? {} : {recovery: {recoveryBinding:job.recoveryBinding, oldJobBinding:recovered.descriptor.oldJobBinding,
       oldAuthorizationBinding:recovered.descriptor.oldAuthorizationBinding, originalComposite:recovered.descriptor.videoBinding,
       baseMediaOrigin:recovered.base, nativeDraws:0, compositeRuns:0, technicalInspection:'actual-reinspection-of-saved-media-and-pngs'}}),

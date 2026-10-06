@@ -11,11 +11,11 @@ const binding=(p:string)=>({path:p,fileSha256:'a'.repeat(64)});
 function fixture(frames=61,font=144) {
   // Synthetic pure-validation data; these objects are never written or used to launch a worker.
   const paths=['runner/src/digest-approved-job-v001.ts','runner/src/digest-approved-job-runner-v001.ts','runner/src/digest-approved-inputs-v001.ts',
-    'runner/src/digest-formal-handoff-v001.ts','evals/clip_composition/adopted_media_manufacturing_v001.mts',
+    'runner/src/digest-formal-handoff-v001.ts','runner/src/digest-caption-registration-migration-v001.ts','evals/clip_composition/adopted_media_manufacturing_v001.mts',
     'evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs','evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts',
     'evals/clip_composition/render_presentation_v002.mjs','tools/digest-quality/original-resolution-low-memory-composite.mjs',
     'tools/digest-quality/original-resolution-full-supervisor-v002.py','evals/clip_composition/digest_representative_completion_v001.mjs','runner/src/digest-approved-record-finalize-v001.ts'];
-  const job:any={schemaVersion:'digest-approved-job-v001',planId:'test-only-'+frames+'-'+font,outputRoot:'runtime/artifacts/test-only-'+frames+'-'+font+'/attempt-001',
+  const job:any={schemaVersion:'digest-approved-job-v002',planId:'test-only-'+frames+'-'+font,outputRoot:'runtime/artifacts/test-only-'+frames+'-'+font+'/attempt-001',
     inputs:{preparationParameters:{testOnly:true},preparationManifestBinding:binding('runtime/artifacts/test-only/preparation.json'),
       candidateManifestBinding:binding('runtime/artifacts/test-only/candidate.json'),typographySettingsBinding:binding('runtime/artifacts/test-only/font-'+font+'.json'),
       rendererTemplateBinding:binding('runtime/artifacts/test-only/renderer.json')},
@@ -24,11 +24,15 @@ function fixture(frames=61,font=144) {
       hostMetadataReserveBytes:6_000_000_000,internalRoot:ROOT,guestDevice:11,hostDevice:12},
     expected:{frames,audioSamples:frames*1470,groups:1,atoms:4,cues:2},implementation:{sha:'b'.repeat(40),bindings:paths.map(binding),nodeBinding:binding(process.execPath)},guard:{...guard},
     allocationBudget:{baseBuildBytes:22_000_000_000,rendererPreparationBytes:1_000_000_000}};
+  const inputPrefix=`runtime/artifacts/${job.planId}/current-inputs-v001`;
+  job.inputs={...job.inputs,inputRoot:job.storage.guestRoot,inputPrefix,migrationApprovalEvidenceBinding:binding(inputPrefix+'/migration.json')};
+  for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding']) job.inputs[key].path=inputPrefix+'/'+key+'.json';
+  job.inputs.preparationParameters={workspaceRoot:ROOT,inputRoot:job.storage.guestRoot,inputPrefix,outputRoot:job.storage.guestRoot+'/'+inputPrefix+'/prepared',sourceRuntimeRoot:job.storage.guestRoot+'/'+inputPrefix+'/source',stateBinding:binding(inputPrefix+'/state.json'),styleTemplateBinding:binding(inputPrefix+'/style.json'),scopeBinding:binding('test-only/scope.json')};
   const jobBinding={...binding(ROOT+'/runtime/artifacts/test-only/job.json'),sizeBytes:123},authorizationBinding={...binding(ROOT+'/runtime/artifacts/test-only/authorization.json'),fileSha256:'c'.repeat(64),sizeBytes:456};
-  const authorization:any={schemaVersion:'digest-approved-job-authorization-v001',recordId:'test-only-synthetic-grant',
+  const authorization:any={schemaVersion:'digest-approved-job-authorization-v002',recordId:'test-only-synthetic-grant',
     userApproval:{at:'2026-10-04T00:00:00Z',messageId:'test-only',text:'Synthetic validation fixture; no manufacturing permission',sourceThreadId:'test-only'},
     actions:['manufacture-one-approved-plan'],jobBinding,planId:job.planId,manifestBinding:job.inputs.candidateManifestBinding,
-    typographySettingsBinding:job.inputs.typographySettingsBinding,outputRoot:job.outputRoot,storage:structuredClone(job.storage),guard:structuredClone(job.guard),
+    typographySettingsBinding:job.inputs.typographySettingsBinding,migrationApprovalEvidenceBinding:job.inputs.migrationApprovalEvidenceBinding,outputRoot:job.outputRoot,storage:structuredClone(job.storage),guard:structuredClone(job.guard),
     implementation:structuredClone(job.implementation),normalCandidates:1};
   return {job,authorization,options:{workspaceRoot:ROOT,jobBinding,authorizationBinding,trustedJobSha256:jobBinding.fileSha256,trustedAuthorizationSha256:authorizationBinding.fileSha256}};
 }
@@ -160,4 +164,25 @@ test('published adoption is projected to the unchanged base-job byte contract be
   assert.throws(()=>projectApprovedDigestBaseMediaJobV001(original,'test-only',out,{...published,path:out+'/other.json'}));
   assert.throws(()=>projectApprovedDigestBaseMediaJobV001(original,'test-only',out,{...published,fileSha256:'invalid'}));
   assert.equal(base.validatePresentationBaseMediaBuildJobV001({...projected,assemblyDecision:{...projected.assemblyDecision,extra:true}}).status,'failed');
+});
+
+function withBaseReuse() {
+  const f=fixture();f.job.inputs.baseReuseBundleBinding={...binding(f.job.inputs.inputPrefix+'/base-reuse.json'),sizeBytes:123,schemaVersion:'digest-approved-base-reuse-input-v001'};
+  f.job.implementation.bindings.push(binding('runner/src/digest-approved-base-reuse-v001.ts'));
+  f.authorization.baseReuseBundleBinding=structuredClone(f.job.inputs.baseReuseBundleBinding);f.authorization.implementation=structuredClone(f.job.implementation);return f;
+}
+test('reuse is opt-in and explicitly bound to current authorization, input prefix and helper bytes',()=>{
+  const f=withBaseReuse();assert.equal(validate(f.job,f.authorization,f.options).status,'validated-configuration');
+  for(const change of [(v:any)=>delete v.authorization.baseReuseBundleBinding,(v:any)=>delete v.job.inputs.baseReuseBundleBinding,
+    (v:any)=>v.authorization.baseReuseBundleBinding.fileSha256='f'.repeat(64),
+    (v:any)=>{v.job.inputs.baseReuseBundleBinding.path='runtime/artifacts/old/reuse.json';v.authorization.baseReuseBundleBinding=structuredClone(v.job.inputs.baseReuseBundleBinding);},
+    (v:any)=>{delete v.job.inputs.baseReuseBundleBinding.sizeBytes;v.authorization.baseReuseBundleBinding=structuredClone(v.job.inputs.baseReuseBundleBinding);},
+    (v:any)=>{v.job.implementation.bindings.pop();v.authorization.implementation=structuredClone(v.job.implementation);},
+    (v:any)=>{v.job.inputs.baseReuseBundleBinding.schemaVersion='old';v.authorization.baseReuseBundleBinding=structuredClone(v.job.inputs.baseReuseBundleBinding);}
+  ]){const v=withBaseReuse();change(v);assert.throws(()=>validate(v.job,v.authorization,v.options));}
+});
+test('reuse cannot be combined with failed-work recovery or turn pure validation into permission',async()=>{
+  const f=recoveryFixture();f.job.inputs.baseReuseBundleBinding={...binding(f.job.inputs.inputPrefix+'/reuse.json'),sizeBytes:1,schemaVersion:'digest-approved-base-reuse-input-v001'};
+  f.authorization.baseReuseBundleBinding=structuredClone(f.job.inputs.baseReuseBundleBinding);assert.throws(()=>validate(f.job,f.authorization,f.options),/BASE_REUSE_RECOVERY_CONFLICT/);
+  const r=withBaseReuse();await assert.rejects(assertQualifiedDigestApprovedJobV001(validate(r.job,r.authorization,r.options)),/QUALIFIED_APPROVED_DIGEST_JOB_REQUIRED/);
 });

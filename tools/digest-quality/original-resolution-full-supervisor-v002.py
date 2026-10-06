@@ -291,10 +291,14 @@ def absolute_input_binding(job, ref):
     required(ref['path'].startswith(inputs['inputPrefix'] + '/'), 'approved input binding outside current input prefix')
     return {**ref, 'path': str(Path(inputs['inputRoot']) / ref['path'])}
 
+def approved_input_binding_keys(job):
+    return APPROVED_INPUT_BINDING_KEYS | ({'baseReuseBundleBinding'}
+        if 'baseReuseBundleBinding' in job['inputs'] else set())
+
 def verify_approved_inputs(job):
     storage = job['storage']
     volume_identity(storage['guestRoot'], storage['guestVolumeUuid'], storage['guestDevice'], 'apfs')
-    for name in APPROVED_INPUT_BINDING_KEYS:
+    for name in approved_input_binding_keys(job):
         ref = absolute_input_binding(job, job['inputs'][name])
         inspect_output_ancestors(Path(ref['path']).parent, storage)
         stable_bound_bytes(ref, expected_device=storage['guestDevice'])
@@ -357,9 +361,15 @@ def validate_approved_job_config(job, authorization):
         validate_binding(job['recoveryBinding'], require_size=True)
         required(job.get('verificationPolicy', {}).get('mode') == 'representative-plus-rules-v001',
             'approved recovery requires representative verification policy')
-    exact_keys(job['inputs'], APPROVED_INPUT_KEYS, 'approved inputs')
+    has_base_reuse = 'baseReuseBundleBinding' in job['inputs']
+    required(not (has_base_reuse and 'recoveryBinding' in job), 'base reuse cannot combine with failed-work recovery')
+    exact_keys(job['inputs'], APPROVED_INPUT_KEYS | ({'baseReuseBundleBinding'} if has_base_reuse else set()), 'approved inputs')
+    if has_base_reuse:
+        ref = job['inputs']['baseReuseBundleBinding']
+        validate_binding(ref, require_size=True)
+        required(ref.get('schemaVersion') == 'digest-approved-base-reuse-input-v001', 'approved base reuse input schema required')
     required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
-    for name in APPROVED_INPUT_BINDING_KEYS:
+    for name in approved_input_binding_keys(job):
         absolute_input_binding(job, job['inputs'][name])
     inputs = job['inputs']; parameters = inputs['preparationParameters']
     required(parameters.get('inputRoot') == inputs['inputRoot']
@@ -413,11 +423,18 @@ def validate_approved_job_config(job, authorization):
     paths = [ref['path'] for ref in bindings]
     required(len(set(paths)) == len(paths) and set(APPROVED_CODE) <= set(paths),
         'unique complete approved implementation bindings required')
+    if has_base_reuse:
+        required('runner/src/digest-approved-base-reuse-v001.ts' in paths, 'approved base reuse helper binding required')
+    required(('baseReuseBundleBinding' in authorization) == has_base_reuse, 'authorization/job base reuse presence mismatch')
+    if has_base_reuse:
+        validate_binding(authorization['baseReuseBundleBinding'], require_size=True)
+        required(authorization['baseReuseBundleBinding'] == job['inputs']['baseReuseBundleBinding'], 'authorization/job base reuse binding mismatch')
     exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
         'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
         'implementation', 'normalCandidates', 'migrationApprovalEvidenceBinding'}
         | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set())
-        | ({'recoveryBinding'} if type(authorization) is dict and 'recoveryBinding' in authorization else set()), 'approved authorization')
+        | ({'recoveryBinding'} if type(authorization) is dict and 'recoveryBinding' in authorization else set())
+        | ({'baseReuseBundleBinding'} if has_base_reuse else set()), 'approved authorization')
     required(('recoveryBinding' in authorization) == ('recoveryBinding' in job),
         'authorization/job recovery binding presence mismatch')
     if 'recoveryBinding' in job:
