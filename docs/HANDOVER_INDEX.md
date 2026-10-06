@@ -1,8 +1,20 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-06（JST） / revision：handover-index-20261006-v101
+更新日：2026-10-06（JST） / revision：handover-index-20261006-v102
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-06T03:34:02.265661+00:00（指定2字幕だけ非表示の一本・技術確認・局所HTML・後始末完了）
+
+本人製造承認（2026-10-05 23:46:06 UTC）でmain `6a855415`/新job-auth/全651採否を固定し、正式経路で20:53.967/1920×1080/30fpsの[一本](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-visibility-two-cues-v001/render/presentation-rendered-v002.mp4)を製造。465「世界が終わる」/571「お!」の追加字幕だけ非表示、570「何人いるの?」と他を表示。本文/元ID/行/5450atom/31区間/時計/映像音声は保持し、論理651・表示649・非表示2。10月6日02:09:13 UTC（11:09 JST）製造exit0、計2時間11分23.286秒。途中物も専用SSD保存・再読済み。
+
+全primary規則・9代表native sampling・採否/合成・媒体・元AAC・9実画像確認はpassed。選択画像で2件の不在と質問/前後表示を確認し、元ゲーム内台詞は保持。全frame visibilityはnot-executed、全尺視聴/実音声同期/全体品質/正式採用は未評価。既知同期不具合・旧2clip本人NGは維持。[短い確認URL](http://127.0.0.1:60161/review.html)の5秒/6秒、音声decode/再生/停止/シークを専用Edgeで確認、12:21 JSTに本人へ提供済み。
+
+03:25:17.960 UTCに[completed receipt](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-visibility-two-cues-v001/record-finalization-v001/completed-receipt.json)（6,062,582B/SHA `c64ccb0676ec65d156c4afe983ab4135875666bf85928603e51ea62cf33dbfc1`）を作成し、03:28:12 UTCの正式getでcompleted/complete=trueを再読。原result.jsonは初期pendingのimmutable記録であり、現在状態をそれだけから判定しない。元job/auth/実行HEADは不変。
+
+自分の重複PNG14＋cache10/2,410,844Bだけ整理。固有mask/layout証拠/primary/base/元データ/旧動画/確認URLを保持。03:30:01に後確認scriptのfield取り違えで停止し、03:30:44限定再読で保存内容不変を確認。追加削除/製品修正/再QCなし。03:31:22実行process残存0、今回90370:60161と旧54217:63610/68661:49504を保持、HTTP200。
+
+状態：今回依頼は完了、Mac実装者は終了。次担当親monaが結果と未評価を伝え、次の明示指示を扱う。新製造/診断/全字幕採点を自動再開しない。03:08:40の本人継続承認は終了済み製造の再起動ではなく残工程に適用。詳細は同SHAの[CURRENT_GOAL](CURRENT_GOAL.md)、[session log](work-logs/2026-10/2026-10-06T0334_Codex-SSD_ID9-two-cue-visibility-completion_6a855415.md)。閉じ記録はこの3pathだけを通常Git反映し、remote一致/cleanを報告で確定する。以下は履歴。
 
 ## 最新現在地 — 2026-10-05T16:33:38+00:00（指定2字幕非表示の正式入力形式をSSDへ保存、製造未開始）
 

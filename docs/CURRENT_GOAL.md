@@ -2,6 +2,20 @@
 
 更新日：2026-10-06（JST）
 
+## 最新現在地 — 2026-10-06T03:34:02.265661+00:00（指定2字幕の非表示動画・技術検査・局所確認・後始末完了）
+
+本人の製造承認（2026-10-05 23:46:06.838 UTC、Sentinel_233ea65d48bc81918d7cf448aa3cd29f「いいよ」）と親monaの指示に従い、main `6a8554156c99f91bcf7e2318589ff551e12b9862` を固定して正式経路で一本製造した。全651件の元本文・ID・行・時計・5450atom・31区間を維持し、表示649、非表示は465「世界が終わる」と571「お!」の2件だけ。570「何人いるの?」は独立の字幕として表示する。今回の製造中に製品code・入力・承認・実装bindingを変更していない。
+
+20:53.967/1920×1080/30fpsの[完成動画](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-visibility-two-cues-v001/render/presentation-rendered-v002.mp4)は2026-10-06 02:09:13 UTC（11:09 JST）に製造exit0。実測は初期24.307秒、base42分46.431秒、描画/合成/QC1時間27分40.802秒、未分離31.746秒、計2時間11分23.286秒。前回1時間42分23.820秒より28分59.466秒長い。CLI内準備と処理時間であり、人間の確認時間や機能実装全体の時間ではない。途中物も専用SSDに保存・再読し、一般ROOTや他のSSD内容は変更していない。
+
+元651/1042行/5450atom/31区間/37619frame/55299930sampleを保持。既存全primary規則・9代表native sampling・採否/合成・媒体・元AAC保持・実画像代表確認はpassed、全frame visibility検査はnot-executed。実表示した9枚で指定2件の追加字幕がなく、質問570と前後字幕が残ることを確認。元ゲーム内の台詞は保持する。全尺視聴/音声を聞いての同期/全体可読性・構成/人間品質本採用は未評価。既知同期不具合と前回本人NGは維持し、今回を解消扱いにしない。
+
+[短い確認ページ](http://127.0.0.1:60161/review.html)は5秒/6秒・音声付き、再生/停止/シークが可能。03:20:15 UTCに専用Edgeの実動作/音声decode/外部request0を確認し、12:21 JSTに親が本人へ提供済み。03:25:17.960 UTCに正式[completed receipt](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/manufacture-visibility-two-cues-v001/record-finalization-v001/completed-receipt.json)を作成、03:28:12 UTCに正式getでcompleted/complete=trueを再読。receiptは6,062,582B/SHA `c64ccb0676ec65d156c4afe983ab4135875666bf85928603e51ea62cf33dbfc1`。元result.jsonは初期pendingのまま不変で、現在の完了判定は別completed receiptによる。job/auth/実行HEAD6a855415は差し替えていない。
+
+証拠固定後、自分の重複PNG14とcache10だけ整理、24file/2,410,844B。固有mask8＋layout JSON2（4,656,298B）、全正式primary/base/元データ/旧成果/確認ページ/監査JSONはKEEP。03:30:01の後確認scriptのfield取り違えで止まったが、03:30:44の限定再読で保持画像・正式JSON・MP4 identity・確認ページ不変を確認、追加削除/再QCなし。03:31:22のprocess再読で実行process残存0、今回server90370と旧54217/68661を保持、URL HTTP200。guest84,727,623,680B/host1,982,829,428,736B/内蔵15,431,106,560Bを別deviceで記録。
+
+状態：今回の製造・技術検査・局所確認・付随記録/後始末は完了。次担当親monaが結果と未評価を本人へ伝え、次の明示指示を扱う。Mac実装者はURLを保持して終了する。新STT/時計補正/新製造/新検査反復/追加UI/旧成果削除を自動再開しない。詳細は[今回session log](work-logs/2026-10/2026-10-06T0334_Codex-SSD_ID9-two-cue-visibility-completion_6a855415.md)、[正式再読](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/visibility-two-cues-post-manufacture-v001/formal-completed-get.operation.json)、[cleanup再読](/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/preparation-storage-20261005-v001/visibility-two-cues-post-manufacture-v001/scratch-cleanup-readback.json)。本人03:08:40 UTCの同じ作業続行承認は製造終了後の残工程根拠として記録し、元製造承認へ遡及差替えしない。以下は履歴。
+
 ## 最新現在地 — 2026-10-05T16:33:38+00:00（指定2字幕だけの非表示入力をSSD保存・限定資格検査、製造未開始）
 
 親monaの追加指示に従い、「世界が終わる」と「お!」だけを明示非表示、「何人いるの?」と他の字幕は表示する全651件の採否入力を、既存の共通方式で準備した。本文/元ID/原時計/映像音声/31区間/1042行/5450atom/37619frame/55299930sampleを保持し、表示649・非表示2。元素材専用の製品codeや数値条件は追加しない。指定は採否JSONのデータだけに置く。今回の非表示は全体の同期問題を解消したという意味ではない。
