@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-08（JST） / revision：handover-index-20261008-v105
+更新日：2026-10-08（JST） / revision：handover-index-20261008-v106
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-08T10:55:16.873964+00:00（本人の単発API承認受領、料金根拠が不足し送信前停止）
+
+本人10/08 19:48 JST「いいよ」で保存53字幕文脈/6質問/一回・再試行なし/1.50USD以内、送信前に予算内を確認できなければ停止の条件を承認。10:50:05 UTCから原83,132byte/SHA05b66930...と53字幕/6質問、原input SHAad8bfc4b...を再読一致し、現行公式料金を照合。基本入力0.10USD/Mと長文2/地域1.10は確認したが、共通入力・質問/選択肢・反復を課金input_tokensへ合算する上側根拠は得られず停止。前回1.386USDの六回仮定を確定receiptへ昇格しない。実際の予算超過が判明したわけではない。
+
+API送信/再試行/新課金/鍵読込み/新認証/永続権限拡大/動画/STT0。応答・usage・API所要時間・参照6件比較・実費/請求照合は未実施（null）。原packet/製品code/旧成果を保持。承認不足ではなく料金の根拠不足で、状態は相談役待ち、次担当mona。同じCheck44へ停止と本人条件付き承認受領済みを保存し、Done45/59と文脈TODO54を保持。[停止記録](reports/openai-decisions-j16-integration-20261008/approved-trial-budget-stop-v001.md)、[session log](work-logs/2026-10/2026-10-08T1955_Codex-SSD_OpenAI-J16-approved-budget-stop_4f41d4fe.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-08T07:21:52.330006+00:00（OpenAI単発有料試験の条件確認、送信0）
 
