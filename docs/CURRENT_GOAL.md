@@ -1,6 +1,14 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
-更新日：2026-10-08（JST）
+更新日：2026-10-09（JST）
+
+## 最新現在地 — 2026-10-08T15:02:06.350Z（OpenAI J16の次工程範囲を整理、TODO60は未着工）
+
+親monaが単発実API結果を受領・本人報告済み。今回の追加指示は再送/製品変更なしの範囲整理だけ。既存正式入口は演出種類・許可preset・部分強調・理由/根拠まで必要で、3択だけでは置換不可。接続候補はacceptOrchestrationのfixOrchestrationJudgmentV001直前で、原source/request/response/ID/時計/文脈を束縛したoffline照合部を作り、詳細情報を保持し、矛盾/不足/未判定を正式保存前に保留する。想定3path・約2〜3時間、保存6応答と少数fixtureで検証、追加送信/API費用/通常キュー/本番受理切替/新動画0の次TODO60。実装は未着工・承認待ち。
+
+全6normal/参照5一致1不一致を全体精度にしない。000002の旧詳細はColor部分「ドッグセラピー」と理由を持ち、API normalとの違いを無言で上書きしない。原fresh-input/詳細replyは15:00:17.942UTCにmanifest再読一致。旧回答は技術fixtureのみで新判断には流用しない。本番で要否前段へ分割する段階入力と詳細生成者の責務、通常行の理由、新判断の送信条件は別の具体判断で、fresh-inputへ過去回答を混入しない。OpenAI選定は完了し比較/全件試験を再開しない。
+
+正式MCPでCheck44 item9からTODO60 item1（pending/waiting）へリンク、board118を15:02:06.359UTCに再読。Done45/59・mona比較Done3/4・文脈TODO54・他者/削除履歴を保持。文脈改善未適用、新動画未製造。状態は範囲整理完了・相談役待ち、次担当monaが次の限定実装の着工範囲を扱う。[接続案・検証・見積もり・残る判断](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[session log](work-logs/2026-10/2026-10-09T0002_Codex-SSD_OpenAI-J16-next-scope_a57dd95c.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-08T14:45:52.466Z（OpenAI J16の実API一回試験終了、6回答と利用量を確認）
 
