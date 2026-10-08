@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-08（JST） / revision：handover-index-20261008-v106
+更新日：2026-10-08（JST） / revision：handover-index-20261008-v107
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-08T14:45:52.466Z（OpenAI J16の実API一回試験終了、6回答と利用量を確認）
+
+本人10/08 23:34 JST「おk」で、1.50USD内を事前保証できない不確実性と仮定付き1.386USD見積を認め、同じ保存53字幕文脈・6質問の一回試験を承認。旧19:48の条件付き未送信停止は履歴へ保持し、今回一回についての条件変更と区別する。原83,132byte/request SHA05b66930...・source SHAad8bfc4b...を完全再構成照合し、既存認証で23:44:48.067JSTにPOST、23:44:51.571終了、HTTP200、driver3.505秒、再送0。
+
+gpt-6-lunaの6回答は元name/被覆/3択/確率検査passed。全normal、保存参照と5一致/1不一致（000002「ノエちゃん家でドッグセラピー受けたんで。」の参照effect）。拒否/保留0。参照は過去判断で正解保証でなく、6件の一致を全体品質や本番採用にはしない。usage input/total22,894、output/cache0。公開単価計算0.0022894USD（地域10%仮定0.00251834USD）、実請求は未照合。原応答1800B/SHA915d34f7...と全証拠をprivate保存し、原packet/参照/本番code/DECISIONS/旧媒体は不変。
+
+試験と所有processは終了。新認証/永続権限/製造組込/新動画/STT0、削除0。同じCheck44へ結果を正式MCP保存・再読（14:47:54.388UTC、board116、item8）、Done45/59・文脈TODO54・他者項目/削除履歴を保持。状態は相談役待ち、次担当mona。追加試験や本番統合は自動開始しない。[実結果・6件比較・費用と請求の区別](reports/openai-decisions-j16-integration-20261008/single-live-trial-v001.md)、[session log](work-logs/2026-10/2026-10-08T2345_Codex-SSD_OpenAI-J16-single-live_129b3f95.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-08T10:55:16.873964+00:00（本人の単発API承認受領、料金根拠が不足し送信前停止）
 
