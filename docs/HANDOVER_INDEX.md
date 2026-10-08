@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-08（JST） / revision：handover-index-20261008-v104
+更新日：2026-10-08（JST） / revision：handover-index-20261008-v105
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-08T07:21:52.330006+00:00（OpenAI単発有料試験の条件確認、送信0）
+
+親の個別指示で保存83,132byte/53字幕文脈/6質問/一回・再試行0の料金と制限を確認。共通入力65,899文字、最大質問231/名前64/選択肢説明50文字・各3択は公開の個別フィールド制限内。正確なmodel token数、Decisions専用の質問数/裸文字列入力上限、質問/choice単位の課金算式は未確認。公式token countはResponses用、今回外部計測や新依存を導入せず、byteを実token数にしない。入力上限超過の根拠がなく文脈縮小0。
+
+専用入力0.10USD/M、モデル最大context1,050,000を質問ごと六回、長文2倍・地域1.10倍も含めた条件付き見積1.386USD。本人に示す予算案1.50USDは未承認でAPI側強制上限でもなく、課金単位を確定した保証にはしない。送信前の料金/入力条件で上限内と説明できなければ未送信停止。実API/token count送信/費用/新認証/新動画/STT0、原packet・製品code・既存回答経路保持。[条件・確認文案](reports/openai-decisions-j16-integration-20261008/paid-trial-preparation-v001.md)、[session log](work-logs/2026-10/2026-10-08T1621_Codex-SSD_OpenAI-J16-paid-preparation_574fc49b.md)。Done45/59・文脈TODO54を保持し、Check44で次担当monaが予算案と未確認を扱う。以下は履歴。
 
 ## 最新現在地 — 2026-10-08T07:04:34.137093+00:00（OpenAI選定・J16接続部とmockの第一完成）
 
