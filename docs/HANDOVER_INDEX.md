@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-09（JST） / revision：handover-index-20261009-v108
+更新日：2026-10-09（JST） / revision：handover-index-20261009-v109
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-09T07:43:31.199Z（TODO60の本人承認を受領・実着手、実装中）
+
+本人10/09 16:38 JST「作業は進めて良い」（Sentinel_b0236bc2005c81919771acb546668bf2）を親mona経由で16:39:48 JSTに受領。現行AGENTS・保存scope・main c0c6d2ed/cleanを確認し、16:43:31.199 JST（07:43:31.199 UTC）にTODO60の実装設計とコード作業へ実着手。公式MCPでTODO60をDoing/current active、item2/board119へ保存・再読済み。表示更新を着工条件にはしていない。
+
+現在は原source/request/response/正式inputのSHA・元ID/時計/文脈を照合する純粋helperと、正式受理直前の検査を再利用する明示的offline呼出しを作業用copyで実装中。次は対応試験を追加し、保存6応答と少数fixture・関連unit/型検査を行う。検査はまだ未実施、完了/本番採用ではない。実際の阻害要因なし。追加API/認証/費用/通常キュー/本番切替/新動画0、文脈TODO54・Done45/59を保持。親の途中状態確認に合わせ、この受領・実着手・現在地を正本へ中間保存する。[今回の承認範囲](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。以下は履歴。
 
 ## 最新現在地 — 2026-10-08T15:02:06.350Z（OpenAI J16の次工程範囲を整理、TODO60は未着工）
 

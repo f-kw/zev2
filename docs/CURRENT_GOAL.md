@@ -2,6 +2,12 @@
 
 更新日：2026-10-09（JST）
 
+## 最新現在地 — 2026-10-09T07:43:31.199Z（TODO60の本人承認を受領・実着手、実装中）
+
+本人10/09 16:38 JST「作業は進めて良い」（Sentinel_b0236bc2005c81919771acb546668bf2）を親mona経由で16:39:48 JSTに受領。現行AGENTS・保存scope・main c0c6d2ed/cleanを確認し、16:43:31.199 JST（07:43:31.199 UTC）にTODO60の実装設計とコード作業へ実着手。公式MCPでTODO60をDoing/current active、item2/board119へ保存・再読済み。表示更新を着工条件にはしていない。
+
+現在は原source/request/response/正式inputのSHA・元ID/時計/文脈を照合する純粋helperと、正式受理直前の検査を再利用する明示的offline呼出しを作業用copyで実装中。次は対応試験を追加し、保存6応答と少数fixture・関連unit/型検査を行う。検査はまだ未実施、完了/本番採用ではない。実際の阻害要因なし。追加API/認証/費用/通常キュー/本番切替/新動画0、文脈TODO54・Done45/59を保持。親の途中状態確認に合わせ、この受領・実着手・現在地を正本へ中間保存する。[今回の承認範囲](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。以下は履歴。
+
 ## 最新現在地 — 2026-10-08T15:02:06.350Z（OpenAI J16の次工程範囲を整理、TODO60は未着工）
 
 親monaが単発実API結果を受領・本人報告済み。今回の追加指示は再送/製品変更なしの範囲整理だけ。既存正式入口は演出種類・許可preset・部分強調・理由/根拠まで必要で、3択だけでは置換不可。接続候補はacceptOrchestrationのfixOrchestrationJudgmentV001直前で、原source/request/response/ID/時計/文脈を束縛したoffline照合部を作り、詳細情報を保持し、矛盾/不足/未判定を正式保存前に保留する。想定3path・約2〜3時間、保存6応答と少数fixtureで検証、追加送信/API費用/通常キュー/本番受理切替/新動画0の次TODO60。実装は未着工・承認待ち。
