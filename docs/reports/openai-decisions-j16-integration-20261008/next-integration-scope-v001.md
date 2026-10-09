@@ -1,5 +1,53 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## 結果受領とTODO61の条件整理 — 2026-10-09 18:43 JST
+
+monaから実装・模擬検証結果の受領とGitHub差分確認中の指示を現地2026-10-09 18:30:22 JSTに読了し、2026-10-09T09:31:32.163Zに公式ボードCheck44へ確認作業と時刻を保存・再読。追加の読み取り監査でmock範囲の必須差戻しは見つからなかったと受領。Check44/60を維持し、品質採用/本番化へ読み替えない。同じ範囲整理で、応答取得の再試験ではなく**実API原応答→今回の接続→候補受理→保存後再読**を次の目的とした。今回の製品code/新API送信/製造/本番切替0、既存資料とTODO61に集約し設計文書は増やさない。
+
+### 送信前に必要な追加実装
+
+現createJ16StageInputV001はmode:mock固定、replayもそのmock束を再構成する。外側だけliveへ変えると一致しない。現在の結果を実API対応済みとは扱わず、実原応答をmockと呼び替えない。
+
+追加の最小候補は**暫定6path（製品3＋型1＋試験2）**。既存のmock schema/入口はそのまま残し、live専用schema/明示入口で実transport由来を持たせる。すでに承認・完成した7pathのmock工事とは別の追加範囲で、今回着工/変更しない。
+
+| path | 必要な限定追加 |
+|---|---|
+| presentation_j16_staged_boundary_v001.mjs | live専用段階束/生成と共有再構成。原input/request/response/model/name/usageの原byteとSHAに、実attempt/transportのPOST1・再試行0・HTTP/完結・raw response SHA、当該新送信承認への参照を結び付ける。mode文字列だけを由来/権限にしない。mockへ変換しない |
+| 同名.d.mts | live由来と専用envelopeの型。既存mock型を無言で緩めない |
+| runner/src/openai-decisions-j16-v001.ts | 型付きlive段階生成の明示入口。既存mock交換portのlive拒否とブランドrequestチェックは保持し、汎用live dispatcher/新鍵読込みを追加しない |
+| run_new_material_digest_20260926_presentation.mts | 新送信承認・実attempt/transport・原byteのファイル参照を照合し、live専用の準備/受理/再読で新規候補へ保存。既存selectionRecord.origin→compile→validateStateが共有境界を呼ぶ形を使う。通常accept/queue/renderは切替しない |
+| runner/src/openai-decisions-j16-v001.test.ts | 少数live由来fixtureで実caller経路/原raw byte/モード差替え/旧attempt混入/不足/改変を検査。fixtureを実通信の成功にしない |
+| presentation_orchestration_v001.test.mjs | live専用束の初回受理と既存保存state再読、choice対応・全被覆・元の理由/根拠/部分範囲/物理制約・接続の保持/不正拒否を限定検査 |
+
+Core本体と原観測prepareの再読/詳細検査は読み取り上そのまま使える候補で、独立した意味validatorや台帳を増やさない。実装時にCore/prepare等への別差分が必要と判明したら、その箇所/理由/最小差分を先に返す。6pathで小入力の準備まで必ず収まるとは保証しない。認証は既存利用環境を使う方針だけで、今回は鍵・.envを読まず、永続権限は変更しない。前回の一回driverは旧request SHA/6質問/10月8日の許可へ固定されており再利用起動しない。将来送信時には、新許可と新requestに固定した別の一回attempt・新規出力が必要。常設provider基盤は作らない。
+
+### 小さい実入力と質問数
+
+現地2026-10-09T09:37:15.516Zの再読で、正式fresh-inputはv003/fresh-codex、326字幕/5場面（53/84/61/101/27）。実SHA 08699608e7cad5583af6f62829a2853efabc0d2e8f6de00ce483f4c4c6df0922、input自己SHA 8628f1205674558cd54b0fd181a0bb4f15be7dd07356d1915dbb92a72cbe2618、3025211B。対象Coreの元plan/contextも全326を被覆する。runtimeの既存fresh-inputを調べた範囲で独立した少数字幕の正式入力は確認できなかった。9月30日のscene別API資料は正式orchestration inputではなく、過去experiment manifestを新受理の権限へ移さない。
+
+推奨する最小の既存**丸ごと一場面**はcandidate-0005、全27字幕、元ID new-material-digest-20260926-v001-instruction-instruction-000300〜000326、元表示frame25064〜27901（end exclusive）。前回の送信済み質問ID000001〜000006との重複0。少数6件を再取得する案ではなく、この一場面を独立した検証用原入力へ正式に束縛できた場合に、**全27質問・POST1回・再試行0**とする。全326送信は自動の前提にしない。
+
+必要データはその27の元ID/本文/時計/場面全体、境界の元299と隣場面説明、制作目的、有限vocabulary、保存済み物理観測・音響metric/ASRテキスト/limitations、原source/clock/native evidenceの束縛。画像/音声/動画byte、旧参照ラベル/旧詳細理由、秘密情報は送信しない。現在326入力からのlabel-free射影を読み取り生成すると共有context69,011B/request89,490B、SHA bd21ce2ad44787e62da6349b5fa4526fbb473c291ebc295bd97839d599c80c99。これは料金/範囲の検算用射影で、**送信可能な独立27字幕の正式input/requestではない**。独立入力の固定後にrequest原byte/SHAを再確定する。
+
+**未成立の点：独立した27対象の原input/source/clock/plan/前後文脈の閉包をまだ固定していない。** 現326入力へ仮の27回答を純粋関数で検算するとtarget326/missing299/status held。架空の実応答や成功記録は保存していない。candidate-0005の27だけを選んでも、Coreの元context/planが326のままなら全被覆の受理検査は通らない。全27を新しい検証入力として束縛するデータ準備と既存factoryでの受理成立を、送信前に確認する必要がある。元326を上書きしない。文脈を削る・残299をNormalで埋める・古い詳細を流用する・全被覆gateを緩める方法は採らない。少数入力の生成に既存reader/prepare/Core/schemaの変更が必要なら追加の具体差分を先に返し、単なるlive対応6pathの承認へ隠して入れない。新cut/製造計画/媒体/工事を今回作っていない。
+
+### 料金・回数・送信条件
+
+2026-10-09に[Decisions公式ガイド](https://developers.openai.com/api/docs/guides/decisions)で入力0.10USD/100万token、出力/cache課金なし、長文/地域倍率の適用を再照合。[モデル公式](https://developers.openai.com/api/docs/models/gpt-6-luna)は272K超の入力2倍、地域10%加算を示す。前回の実usage22,894/input、83,132B・6質問・場面53から、今回の**検算射影89,490Bに同じtoken/byte密度を仮定**すると約24,645token、共通入力一回課金なら基本約0.00246USD。質問ごとに同量を27回計上すると約0.06654USD、さらに2×1.10倍率を仮定した感度例は約0.14639USD。説明用の仮定付き目安は**約0.003〜0.15USD**。
+
+これはDecisionsの事前token実測/確定合算式/上側保証ではなく、独立小入力の最終requestでもない。該当倍率と内部合算の適用は未確定。新request固定後に再計算し、料金根拠と不確実性をmonaへ示して、新しい対象/27件/1回/再試行0/予算/出力の送信許可を得る。費用上限を自分で設定しない。前回の1.50USD許可や課金不確実性の受容を新27件へ流用しない。許可に事前上限保証が必要なら、それが取れない限り送信しない。外部token計測APIや価格probeも行わない。今回の追加API起動/新課金0。
+
+### 完了条件と次に進める判断
+
+1. **送信前**：追加live実装と少数試験の範囲承認・検証、独立27対象の原入力/時計/文脈/参照/実装SHAの固定、最終request/出力/予算・不確実性の扱いを含む新送信許可がそろう。不足なら送らない。
+2. **承認済み実走**：新しい一回attemptで27全質問を送り、原response/model/name/usage/時間/HTTP/実transport/承認・SHAをそのまま保存。refusal/unresolved/欠落/不正は保持し、追い送信やNormal補完をしない。
+3. **後段接続**：J16のresolved choiceを変更せず、既存の詳細判断役が同じ27の新しいreason/evidence/preset/範囲と当該全接続の回答を作る。過去の理由をコピーせず、別の詳細生成APIは追加しない。live専用束から既存Coreで候補を受理・排他保存する。
+4. **再読**：保存したcandidateのlive由来・request/response原byte・全27被覆・理由/根拠/部分範囲/元時計/接続を同じcompile→validateStateで再構成一致。実usageに基づく計算・請求未照合/時間/人間介入と限界を記録し、cleanup/Git/Checkまで閉じる。
+
+HTTP200・応答取得だけでは未完了。保留/拒否の場合は正しく止まった結果を保存できても、positiveなlive受理→再読の実証は未達とする。全normalで通った場合はその経路の実証だけで、effectの実応答成立や品質/全体精度へ広げない。希望するeffectを得るため再送しない。成功しても通常本番切替/製造/映像品質採用/全字幕採点は別。現時点は条件整理完了・live実装/独立小入力の固定/新許可が未成立、次担当mona。
+
+公式MCP 2026-10-09T09:43:44.569Zのboard132でCheck44 item19・TODO61 item2へ同じ残件を保存。Check60 item3・文脈TODO54 item3・他項目/削除履歴を保持。詳細な小JSON証拠はworkspace j16-next-live-scope-readback-20261009-v001.json、mona-j16-staged-reviewing-save-20261009-v001.json、j16-next-live-conditions-board-20261009-v001.json。以下は直前の第一完成と時点付き履歴。
+
 ## 第一完成 — 2026-10-09 18:25 JST（承認済み7path、mock限定）
 
 **今回の7pathは実装と限定検証まで完了した。** 元の観測入力を変えず、J16の要否回答と詳しい演出回答を一緒に保存し、最初の受理でも保存後の再読でも同じ検査を行う。J16 normal/effectとの矛盾・欠落・拒否・保留・別入力・原byte改変をNormalで補わず止める。部分Colorの文字範囲、Pulseの実ピーク束縛、理由/根拠、全接続は既存の詳細検査と保存記録へ保持する。人工mockによる成立確認であり、新しい字幕の実判断・品質採用・本番切替ではない。
