@@ -1,11 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
-import {resolve} from 'node:path';
+import {createHash, randomUUID} from 'node:crypto';
+import {readFile, writeFile, mkdtemp, mkdir, rm, stat} from 'node:fs/promises';
+import {resolve, join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {pathToFileURL} from 'node:url';
 import {buildDecisionsJ16RequestV001, validateDecisionsJ16AnswersV001, runDecisionsJ16MockV001,
   DECISIONS_J16_ENDPOINT_V001, DECISIONS_J16_MODEL_V001, type DecisionsJ16MockPortV001,
-  type DecisionsJ16RequestV001, type J16ChoiceV001} from './openai-decisions-j16-v001.js';
+  type DecisionsJ16RequestV001, type J16ChoiceV001,
+  reviewDecisionsJ16OrchestrationV001} from './openai-decisions-j16-v001.js';
 
 const bytes = (value: unknown) => Buffer.from(JSON.stringify(value));
 const hash = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
@@ -47,6 +50,163 @@ test('full scene is shared once; instructions, finite meanings and ID binding su
   assert(!r.body.input.includes('referenceLabels'));
   assert.throws(() => { (r.body.questions[0] as any).name = 'other'; }, TypeError);
   assert.throws(() => { (r.localCaptionIds as string[]).push('other'); }, TypeError);
+});
+
+// Real finite-orchestration fixture/receiver, loaded at runtime so the runner's
+// TS rootDir is unchanged. This invokes no renderer or external service.
+async function offlineFixture(indices?: number[]) {
+  const root = resolve(import.meta.dirname, '../..');
+  const module = (p: string) => import(pathToFileURL(resolve(root, p)).href);
+  const [{fixture: richFixture}, core, rules] = await Promise.all([
+    module('evals/clip_composition/presentation_orchestration_v001.test.mjs'),
+    module('evals/clip_composition/presentation_orchestration_v001.mjs'),
+    module('evals/clip_composition/presentation_auto_effects_v001.mjs')]);
+  const legacy = richFixture({ids: ['c-1', 'c-2', 'c-3']}), source = structuredClone(legacy.source);
+  source.captionContext.renderingRulesRef = structuredClone(rules.AUTO_PRESENTATION_RULES_REF_V009);
+  const evidence = structuredClone(legacy.evidence);
+  evidence.contexts = [{contextId: 'scene-1', description: '前後を共有する合成fixture'}];
+  for (const row of evidence.captions) row.contextId = 'scene-1';
+  evidence.audioEvidence.limitations = ['合成fixtureの観測。実音声ではない'];
+  Object.assign(evidence.audioCandidates[0], {startSec: 1, endSec: 2, peakSec: 1.5, metrics: {rms: 0.1},
+    reasons: ['合成fixture'], captionIds: ['c-2'], asrSegments: [], asrContext: []});
+  const context = core.createOrchestrationContextV001(source);
+  const input = core.createOrchestrationJudgmentInputV001({context, evidence});
+  const reply = structuredClone(legacy.reply);reply.schemaVersion = 'presentation-orchestration-judgment-v003';reply.inputSha256 = input.inputSha256;
+  for (const row of reply.captions) Object.assign(row, {semanticRole: 'normal', allowedPresets: [{preset: 'normal'}]});
+  Object.assign(reply.captions[1], {semanticRole: 'focus', allowedPresets: [{preset: 'color', scope: 'partial-caption', targetText: '字幕'}],
+    reason: '原文の字幕という語を強調する。'});
+  const doc = fixture();
+  doc.context = {productionPurpose: input.productionPurpose, scene: input.contexts[0], captions: input.captions,
+    adjacentCaptions: [], adjacentScenes: [], availableVocabulary: input.captionRolePresets,
+    physicalObservations: input.observations, audioLimitations: input.audioEvidence.limitations,
+    audioCandidates: input.audioCandidates.map((row: any) => ({candidateId: row.candidateId, startSec: row.startSec,
+      endSec: row.endSec, peakSec: row.peakSec, metrics: row.metrics, reasons: row.reasons,
+      captionIds: row.captionIds, asrSegments: row.asrSegments, asrContext: row.asrContext}))} as any;
+  const b = bound(doc), request = buildDecisionsJ16RequestV001(b.source, b.binding, indices);
+  const response = {model: 'gpt-6-luna', usage: {input_tokens: 123}, answers: request.localCaptionIds.map(id => choice(id, id === 'c-2' ? 'effect' : 'normal'))};
+  const makeOptions = (replyValue: any = reply, responseValue: any = response, inputValue: any = input) => {
+    const inputBytes = bytes(inputValue), replyBytes = bytes(replyValue), responseBytes = bytes(responseValue);
+    return {request, inputBytes, inputBinding: {sha256: hash(inputBytes), bytes: inputBytes.length},
+      replyBytes, replyBinding: {sha256: hash(replyBytes), bytes: replyBytes.length},
+      responseBytes, responseBinding: {sha256: hash(responseBytes), bytes: responseBytes.length},
+      assertDetailedReply: (i: any, raw: string) => {core.fixOrchestrationJudgmentV001({context, input: i, replyBytes: raw});}};
+  };
+  return {request, input, reply, response, makeOptions};
+}
+
+test('offline rich receiver preserves effect type, exact partial text, reason/evidence and original bytes', async () => {
+  const f = await offlineFixture(), options = f.makeOptions(), before = hash(options.replyBytes);
+  const result = reviewDecisionsJ16OrchestrationV001(options);
+  assert.equal(result.status, 'consistent');assert.equal(result.detailValidation, 'passed');
+  assert.deepEqual(result.rows[1].detail, f.reply.captions[1]);
+  assert.equal(result.rows[1].detail.allowedPresets[0].targetText, '字幕');
+  assert.equal(hash(options.replyBytes), before);assert.equal(result.detailReplyFile.sha256, before);
+  assert.equal(result.authoritative, false);assert.equal(result.readyForFormalAcceptance, false);
+  assert.equal(result.responseModel, 'gpt-6-luna');assert.deepEqual(result.usage, {input_tokens: 123});
+  assert.throws(() => {result.rows[1].detail.reason = '変更';}, TypeError);
+});
+
+test('normal/effect disagreement is held without overwriting either decision or rich information', async () => {
+  const f = await offlineFixture(), response = structuredClone(f.response);response.answers[1] = choice('c-2', 'normal');
+  const result = reviewDecisionsJ16OrchestrationV001(f.makeOptions(f.reply, response));
+  assert.equal(result.status, 'held');assert.equal(result.counts.consistent, 2);assert.equal(result.counts.held, 1);
+  assert(result.rows[1].issues.includes('J16_DETAIL_CONFLICT'));assert.equal(result.rows[1].j16Answer?.choice, 'normal');
+  assert.deepEqual(result.rows[1].detail, f.reply.captions[1]);
+});
+
+test('partial J16 coverage keeps unreviewed IDs pending and never declares formal completion', async () => {
+  const f = await offlineFixture([0]), result = reviewDecisionsJ16OrchestrationV001(f.makeOptions());
+  assert.equal(result.status, 'held');assert.equal(result.rows[0].status, 'consistent');
+  assert.deepEqual(result.unreviewedCaptionIds, ['c-2', 'c-3']);assert.equal(result.completeJ16Coverage, false);
+  assert(result.globalIssues.includes('J16_PARTIAL_COVERAGE'));assert.equal(result.readyForFormalAcceptance, false);
+});
+
+test('refusal, unresolved and unrepresentable remain held with distinct issues and no fabricated normal', async () => {
+  const f = await offlineFixture();
+  for (const [answer, code] of [[{name: 'c-2', type: 'refusal'}, 'J16_REFUSAL'], [choice('c-2', 'unresolved'), 'J16_UNRESOLVED']] as const) {
+    const response = structuredClone(f.response);response.answers[1] = answer as any;
+    const result = reviewDecisionsJ16OrchestrationV001(f.makeOptions(f.reply, response));
+    assert.equal(result.status, 'held');assert(result.rows[1].issues.includes(code));
+    assert.notEqual(result.rows[1].j16Answer?.choice, 'normal');assert.deepEqual(result.rows[1].detail, f.reply.captions[1]);
+  }
+  const reply = structuredClone(f.reply);Object.assign(reply.captions[1], {status: 'unrepresentable', semanticRole: null, allowedPresets: []});
+  const r = reviewDecisionsJ16OrchestrationV001(f.makeOptions(reply));
+  assert(r.rows[1].issues.includes('DETAIL_UNRESOLVED_OR_UNREPRESENTABLE'));assert.equal(r.readyForFormalAcceptance, false);
+});
+
+test('missing reason/evidence, omitted detail, invalid range/preset and incomplete rich coverage are held', async () => {
+  const f = await offlineFixture();
+  for (const edit of [(r: any) => {delete r.captions[1].reason;}, (r: any) => {r.captions[1].evidenceIds = [];},
+    (r: any) => {r.captions.splice(1, 1);}, (r: any) => {r.captions[1].allowedPresets[0].targetText = '本文にない範囲';},
+    (r: any) => {r.captions[1].allowedPresets[0].preset = 'unknown';}]) {
+    const reply = structuredClone(f.reply);edit(reply);const result = reviewDecisionsJ16OrchestrationV001(f.makeOptions(reply));
+    assert.equal(result.status, 'held');assert.equal(result.detailValidation, 'held');
+    assert(result.globalIssues.includes('J16_DETAILS_INVALID'));assert.equal(result.readyForFormalAcceptance, false);
+  }
+});
+
+test('altered bindings, caption clocks, shared context and observations cannot reuse the saved J16 answer', async () => {
+  const f = await offlineFixture(), options = f.makeOptions();
+  assert.throws(() => reviewDecisionsJ16OrchestrationV001({...options, inputBinding: {...options.inputBinding, sha256: '0'.repeat(64)}}), /J16_ORCHESTRATION_INPUT_BINDING/);
+  assert.throws(() => reviewDecisionsJ16OrchestrationV001({...options, responseBinding: {...options.responseBinding, bytes: 1}}), /J16_RESPONSE_BINDING/);
+  const canonical = (v: any): any => Array.isArray(v) ? v.map(canonical) : v && typeof v === 'object'
+    ? Object.fromEntries(Object.keys(v).sort().map(k => [k, canonical(v[k])])) : v;
+  for (const edit of [(i: any) => {i.captions[0].startFrame++;}, (i: any) => {i.productionPurpose += '変更';},
+    (i: any) => {i.contexts[0].description += '変更';}, (i: any) => {i.audioCandidates[0].metrics.rms = 999;}]) {
+    const input = structuredClone(f.input);edit(input);const {inputSha256: ignored, ...body} = input;
+    input.inputSha256 = hash(bytes(canonical(body)));
+    assert.throws(() => reviewDecisionsJ16OrchestrationV001(f.makeOptions(f.reply, f.response, input)), /J16_ORCHESTRATION_PROJECTION/);
+  }
+});
+
+test('wrong response model and incomplete provider coverage are held without semantic fallback', async () => {
+  const f = await offlineFixture();
+  for (const edit of [(r: any) => {r.model = 'another-model';}, (r: any) => {r.answers.pop();}]) {
+    const response = structuredClone(f.response);edit(response);
+    const result = reviewDecisionsJ16OrchestrationV001(f.makeOptions(f.reply, response));
+    assert.equal(result.status, 'held');assert(result.globalIssues.includes('J16_RESPONSE_INVALID'));
+    assert(result.rows.every(row => row.j16Answer === null));
+  }
+});
+
+test('saved six real answers use the explicit offline caller: five consistent, one conflict, 320 unreviewed; no original or production state writes',
+  {skip: process.env.ZEV_J16_SAVED_TRIAL_ROOT === undefined}, async () => {
+  const root = resolve(import.meta.dirname, '../..'), trial = resolve(process.env.ZEV_J16_SAVED_TRIAL_ROOT!);
+  const manifestPath = resolve(root, 'docs/reports/openai-decisions-evaluation-20260930/experiment-input-manifest.json');
+  const inputPath = resolve(root, 'runtime/artifacts/digest-new-material-20260926-v001/presentation/saved/fresh-input.json');
+  const savedRoot = resolve(root, 'runtime/artifacts/digest-new-material-20260926-v001/presentation/saved');
+  const originals = ['fresh-input.json', 'raw-ai-response-v001.json', 'source-bindings.json', 'captionAuto.json', 'captionOverrides.json',
+    'connectionAuto.json', 'connectionOverrides.json', 'selectionRecord.json'];
+  const before = Object.fromEntries(await Promise.all(originals.map(async p => [p, hash(await readFile(join(savedRoot, p)))])));
+  const ref = async (path: string) => {const data = await readFile(path);return {path, sha256: hash(data), bytes: data.length};};
+  const spec = {schemaVersion: 'zev-j16-offline-review-files-v001', manifest: await ref(manifestPath), batchContextId: 'candidate-0001',
+    captionIndices: [0, 1, 2, 3, 4, 5], request: await ref(join(trial, 'openai-decisions-j16-first-request-v001.json')),
+    response: await ref(join(trial, 'decisions-j16-single-live-raw-response-20261008-v001.bin')),
+    detailReply: await ref(join(savedRoot, 'raw-ai-response-v001.json')), sourceBindings: await ref(join(savedRoot, 'source-bindings.json'))};
+  const specDir = await mkdtemp(join(tmpdir(), 'zev-j16-offline-test-')), specPath = join(specDir, 'spec.json');
+  const output = resolve(root, 'runtime/artifacts/openai-decisions-j16-offline-review-v001', 'test-' + randomUUID());
+  let created = false;
+  try {
+    await writeFile(specPath, JSON.stringify(spec));
+    const {reviewDecisionsOrchestrationV001: run} = await import(pathToFileURL(resolve(root, 'evals/clip_composition/run_new_material_digest_20260926_presentation.mts')).href);
+    await assert.rejects(run(specPath, resolve(specDir, 'forbidden-output')), /Explicit new offline review directory required/);
+    const result = await run(specPath, output);created = true;
+    assert.equal(result.status, 'held');assert.equal(result.readyForFormalAcceptance, false);
+    assert.deepEqual(result.counts, {target: 6, consistent: 5, held: 1, unreviewed: 320});
+    const review = JSON.parse(await readFile(result.reviewPath, 'utf8'));
+    assert.equal(review.detailValidation, 'passed');assert(review.rows[1].issues.includes('J16_DETAIL_CONFLICT'));
+    assert.equal(review.rows[1].detail.allowedPresets[0].targetText, 'ドッグセラピー');
+    assert.equal(review.rows[1].detail.reason, '犬の話を始める題材を静かに示す。');
+    assert.equal(review.usage.input_tokens, 22894);assert.equal((await stat(result.reviewPath)).mode & 0o777, 0o600);
+    const outputBefore = hash(await readFile(result.reviewPath));
+    await assert.rejects(run(specPath, output), (e: any) => e.code === 'EEXIST');
+    assert.equal(hash(await readFile(result.reviewPath)), outputBefore);
+    assert.equal(hash(await readFile(inputPath)), before['fresh-input.json']);
+    for (const p of originals) assert.equal(hash(await readFile(join(savedRoot, p))), before[p]);
+  } finally {
+    if (created) await rm(output, {recursive: true});
+    await rm(specDir, {recursive: true});
+  }
 });
 
 test('explicit subset keeps complete shared context and original positions; silent truncation is absent', () => {

@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {createReadStream} from 'node:fs';
-import {mkdir, readFile, writeFile} from 'node:fs/promises';
+import {mkdir, readFile, writeFile, lstat, realpath} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {ROOT, ARTIFACTS, PLAN} from './run_new_material_digest_20260926.mts';
@@ -27,6 +27,8 @@ import {buildOrchestrationBackgroundV001, inspectOrchestrationEncodedAudioV001}
 import {inspectRenderedMediaWithToolsV001} from './presentation_renderer_qc_v002.mjs';
 import {createPresentationRendererProcessObserverV001} from './presentation_renderer_process_observation_v001.mjs';
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
+import {buildDecisionsJ16RequestV001, reviewDecisionsJ16OrchestrationV001}
+  from '../../runner/src/openai-decisions-j16-v001.js';
 
 type Json = Record<string, any>;
 const absolute = (p: string) => path.resolve(ROOT, p);
@@ -187,6 +189,65 @@ async function saved() {
   return {source, state, context, view};
 }
 
+/** Explicit offline review beside the rich-answer receiver below. Neither the
+ * normal accept command nor a production state is changed by this operation. */
+export async function reviewDecisionsOrchestrationV001(specPath: string, outputDirectory: string) {
+  const exactKeys = (value: Json, keys: string[]) => assert(value && !Array.isArray(value)
+    && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key)));
+  const readBound = async (file: Json) => {
+    exactKeys(file, ['path', 'sha256', 'bytes']);
+    assert(path.isAbsolute(file.path) && /^[a-f0-9]{64}$/.test(file.sha256)
+      && Number.isSafeInteger(file.bytes) && file.bytes > 0);
+    assert((await lstat(file.path)).isFile(), 'Offline review inputs must be regular files');
+    const bytes = await readFile(file.path);
+    assert.equal(bytes.length, file.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
+    return bytes;
+  };
+  assert(path.isAbsolute(specPath) && (await lstat(specPath)).isFile());
+  const specBytes = await readFile(specPath), spec = JSON.parse(specBytes.toString('utf8'));
+  exactKeys(spec, ['schemaVersion', 'manifest', 'batchContextId', 'captionIndices', 'request', 'response', 'detailReply', 'sourceBindings']);
+  assert.equal(spec.schemaVersion, 'zev-j16-offline-review-files-v001');
+  assert(Array.isArray(spec.captionIndices) && typeof spec.batchContextId === 'string');
+  const manifest = JSON.parse((await readBound(spec.manifest)).toString('utf8'));
+  assert.equal(manifest.kind, 'offline-experiment-input-freeze-not-api-payload');
+  const batches = manifest.batches.filter((row: Json) => row.context_id === spec.batchContextId);assert.equal(batches.length, 1);
+  const batch = batches[0];
+  const sourceRef = {path: absolute(path.join(manifest.runtime_directory, batch.file)), sha256: batch.sha256, bytes: batch.utf8_bytes};
+  const sourceBytes = await readBound(sourceRef);
+  const request = buildDecisionsJ16RequestV001(sourceBytes,
+    {sha256: batch.sha256, bytes: batch.utf8_bytes, captionIds: batch.caption_ids}, spec.captionIndices);
+  const requestBytes = await readBound(spec.request);
+  assert.equal(requestBytes.toString('utf8'), JSON.stringify(request.body), 'Original request byte readback differs');
+  const origins = Object.keys(manifest.source_fingerprints).filter(key => key.endsWith('/presentation/saved/fresh-input.json'));
+  assert.equal(origins.length, 1);
+  const inputRef = {path: absolute(origins[0]), ...manifest.source_fingerprints[origins[0]]};
+  const inputBytes = await readBound(inputRef), responseBytes = await readBound(spec.response), replyBytes = await readBound(spec.detailReply);
+  const sourceBindingsBytes = await readBound(spec.sourceBindings), source = JSON.parse(sourceBindingsBytes.toString('utf8'));
+  const context = createOrchestrationContextV001(source);
+  const review = reviewDecisionsJ16OrchestrationV001({request, inputBytes, inputBinding: inputRef,
+    responseBytes, responseBinding: spec.response, replyBytes, replyBinding: spec.detailReply,
+    assertDetailedReply: (input, replyBytes) => {fixOrchestrationJudgmentV001({context, input, replyBytes});}});
+  const files = {spec: {path: specPath, bytes: specBytes.length, sha256: createHash('sha256').update(specBytes).digest('hex')},
+    manifest: spec.manifest, j16Source: sourceRef, input: inputRef, request: spec.request,
+    response: spec.response, detailReply: spec.detailReply, sourceBindings: spec.sourceBindings};
+  // Re-read each bound file before the new review write; no original is copied or updated.
+  for (const file of Object.values(files)) await readBound(file);
+  const reviewRoot = absolute('runtime/artifacts/openai-decisions-j16-offline-review-v001');
+  assert(path.isAbsolute(outputDirectory) && path.dirname(outputDirectory) === reviewRoot
+    && /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(path.basename(outputDirectory)), 'Explicit new offline review directory required');
+  assert.equal(await realpath(path.dirname(reviewRoot)), path.dirname(reviewRoot));
+  await mkdir(reviewRoot, {recursive: true});
+  assert((await lstat(reviewRoot)).isDirectory());assert.equal(await realpath(reviewRoot), reviewRoot);
+  await mkdir(outputDirectory); // Existing output, including a symlink, is never reused.
+  const reviewPath = path.join(outputDirectory, 'review.json'), filesPath = path.join(outputDirectory, 'review-files.json');
+  const reviewText = JSON.stringify(review, null, 2) + '\n', filesText = JSON.stringify(files, null, 2) + '\n';
+  await writeFile(reviewPath, reviewText, {flag: 'wx', mode: 0o600});
+  await writeFile(filesPath, filesText, {flag: 'wx', mode: 0o600});
+  assert.equal(await readFile(reviewPath, 'utf8'), reviewText);assert.equal(await readFile(filesPath, 'utf8'), filesText);
+  return {mode: 'offline-review', status: review.status, reviewPath, filesPath, reviewSha256: review.reviewSha256,
+    counts: review.counts, completeJ16Coverage: review.completeJ16Coverage, readyForFormalAcceptance: false};
+}
+
 export async function acceptOrchestration(responsePath: string) {
   const source = await read(`${output}/saved/source-bindings.json`), input = await read(`${output}/saved/fresh-input.json`);
   const replyBytes = await readFile(absolute(responsePath), 'utf8');
@@ -245,7 +306,11 @@ export async function render() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const [stage, input] = process.argv.slice(2);
+  const [stage, input, reviewDirectory] = process.argv.slice(2);
+  if (stage === 'review-decisions') {
+    assert.equal(process.argv.slice(2).length, 3);
+    console.log(JSON.stringify(await reviewDecisionsOrchestrationV001(input, reviewDirectory)));
+  } else {
   const stages: Record<string, () => Promise<unknown>> = {prepare: preparePresentation, native: prepareNativeInput,
     'prepare-orchestration': prepareOrchestration, orchestration: () => acceptOrchestration(input), background, render};
   assert(stages[stage]); const startedAt = new Date().toISOString(), start = performance.now();
@@ -258,5 +323,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
     await save(`${output}/execution/${stage}-${startedAt.replaceAll(':', '-')}.json`, {stage, startedAt,
       endedAt: new Date().toISOString(), elapsedSeconds: (performance.now() - start) / 1000, status: 'failed', error: String(error)});
     throw error;
+  }
   }
 }
