@@ -4,6 +4,8 @@
 
 ## 最新現在地 — 2026-10-09T09:25:36.022Z（TODO44の7path段階接続は第一完成、Check44・次TODO61）
 
+5requestの一括承認候補へ置換 — 2026-10-09T09:59:43.059Z：親指示で27字幕専用input/plan/clock案を撤回し、本来の既存326字幕/5場面を保持。既存builderの53/84/61/101/27質問を5requestへ排他固定/再読、合計689,414B、326 IDの重複/欠落0。manifest SHA ead316c1a1740438e14dc88651790da90a8be9cfb02d1f4b8de6b5237faaad52。live由来追加の暫定6path＋必要検査＋5送信各1回/retry0＋既存詳細判断役の新326詳細/4接続＋受理再読/終了まで約4〜7h。前回usageのbyte比で基本例約0.019USD、反復/加算感度約3.00USD、上限保証/新予算許可なし。保留はraw/対象/由来を再読して成果とし、positive受理未達を明記。補完/再送で通さない。今回は準備・見積だけcode/API/製造/本番切替0。board134/Check44 item20/TODO61 item3、Check60/54 item3・他者/削除履歴保持。次担当monaが本人へこの具体範囲・費用不確実性を含む一括承認を扱う。[現行候補と固定request](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。以前の27案は以下の時点付き履歴。
+
 結果受領と残件の更新 — 2026-10-09T09:43:44.053Z：monaが実装/模擬検証結果を受領しGitHub差分を読み取り確認中。追加監査ではmock範囲の必須差戻しなし。Check44/60を保持し、次TODO61にlive専用由来の追加（暫定6path）、既存最小一場面candidate-0005の全27字幕/1送信/再試行0、仮定付き料金目安0.003〜0.15USDと完了条件を集約。現inputは326対象なので27だけでは299不足のheld。独立27の正式原入力/source/clock/plan/前後閉包は未固定で、追加live実装・小入力準備・新送信許可が送信前に必要。実応答をmockへ変換せず、全326送信へ自動拡大しない。今回code/新API/製造/本番切替0。board132/Check44 item19/TODO61 item2、Check60/54 item3・他項目/削除履歴不変。次担当monaがこの具体条件と範囲を扱う。[既存資料にまとめた条件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
 
 本人10/09 17:47 JST「いいよ」を17:48:57 JSTに受領し、17:50:21.730 JSTに実着手した7pathの接続を2026-10-09 18:25 JSTに第一完成として固定。元の観測入力を変えず、今回のJ16要否回答と詳しい演出回答を結び付ける段階入力・専用受理・保存後再読を実装。共有境界はJ16 choice対応/全対象被覆/原byte・由来だけを検査し、理由/根拠/部分範囲/物理制約/接続は既存evaluateReplyへ残す。原観測prepare、既存五record、selectionRecord.origin→compile→validateStateの再構成を保持。通常accept/queue/renderは切替していない。

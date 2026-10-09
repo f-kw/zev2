@@ -1,5 +1,71 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## 次の一括承認候補を326字幕・5場面へ固定 — 2026-10-09 18:59 JST
+
+親monaの新指示を現地2026-10-09 18:48:46 JSTに読み取り確認。**27字幕専用の独立input/plan/clockを新設する案は撤回し、既存326字幕・5場面のまま検証する候補へ置換した。** 少数試験のための新契約を避け、本来の全被覆/時計/受理経路を確かめるため。旧27案は下の時点付き履歴に残すが、次の承認候補ではない。今回は準備・見積だけで、コード変更・API送信・鍵読込み・製造・通常本番切替0。まだ着工/新送信/費用の承認ではない。
+
+### 固定した送信内容
+
+2026-10-09T09:52:27.695Z（18:52:27 JST）に既存のpublic buildDecisionsJ16SceneRequestV001で5requestを固定。原inputの326 ID/本文/時計/5場面をそのまま使い、53/84/61/101/27の各場面を1request、各1回・retry0、最大5 POSTの候補とする。1送信へ統合する新形式は作らない。毎requestは場面全文・必要前後・制作目的/有限vocabulary/物理観測/保存音響metric・ASRテキスト/limitationsを保持。画像/動画/音声byte、旧参照ラベル/保存詳細理由、秘密情報を含めない。
+
+| request | 全質問数 | request byte | 原request SHA256 |
+|---|---:|---:|---|
+| candidate-0001 | 53 | 108,564 | 1cd6efb11785dcc9f16ba5293cb7b82ba9d3f1ecb15c89028a191e316cb938af |
+| candidate-0002 | 84 | 166,346 | 314a3af0449e51c282ca0d270ac860b415b7818171cd0d61bb6870033f7b70e5 |
+| candidate-0003 | 61 | 135,715 | 32616f8301716103413ca7711ff5c7ab3fe0f0069b9e40a9340a5c0a4c04eca9 |
+| candidate-0004 | 101 | 189,299 | cdb9e9ea32127b7b98a58d4a01b3090ba5ee6b8e7192bfd83a2e2500f0d08a54 |
+| candidate-0005 | 27 | 89,490 | bd21ce2ad44787e62da6349b5fa4526fbb473c291ebc295bd97839d599c80c99 |
+
+合計request **689,414B**（共有context計460,472B、source計571,370B）。全326質問ID、unique326、重複0/欠落0/外国ID0、原順序一致/5場面全文保持。原fresh-input SHA 08699608e7cad5583af6f62829a2853efabc0d2e8f6de00ce483f4c4c6df0922/自己SHA 8628f1205674558cd54b0fd181a0bb4f15be7dd07356d1915dbb92a72cbe2618、source-bindings SHA 7c5c6138415966b6a55051ac9638e0a2b85a83c26cc2e070536c32de8fa2c5d8、元sourceClock 1d2350ba9d01213f20205d82e6b8e4f553f17ec7fc418e5dc250de42a7a71ef2を再読一致。既存Coreでsourceから原fresh入力を再構成一致し、元plan/contextは326/接続4のまま。原input/plan/clock・過去成果・DECISIONS/設定/実装7pathは不変。
+
+保存束は/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-five-requests-20261009-v001。source/request10file＋manifestを排他0600保存し、同じpublic builderで再生成→全byte/SHA再読一致。manifest SHA **ead316c1a1740438e14dc88651790da90a8be9cfb02d1f4b8de6b5237faaad52**、38553B。原応答・APIattempt・送信成功receiptはまだ存在せず、仮応答を作っていない。先頭53のうち6 IDは前回質問にも含まれるが、今回の原request/質問被覆とは異なるため、旧6応答を新requestへ流用しない。今回5件を新しく送る許可が必要。
+
+送信候補先はhttps://api.openai.com/v1/decisions、model gpt-6-luna。承認後のraw/attempt/transport候補root /Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-five-responses-20261009-v001、stage-input候補root /Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-input、candidate候補root /Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-candidateは今回読み取りで不存在を確認し、まだ作成していない。実行前に新許可・最終live実装SHA・この5requestの実byte/SHA・未使用出力を束縛して再確認する。live対応でbuilder byteが変わったら、固定済み5requestを無言で差替えず停止して親へ返す。
+
+### 必要な追加実装だけ
+
+既承認7pathのmock第一完成は保持する。追加候補は**暫定6path（製品3＋型1＋試験2）**：共有presentation_j16_staged_boundary_v001.mjs/同名.d.mts、runner/src/openai-decisions-j16-v001.ts、既存caller run_new_material_digest_20260926_presentation.mts、既存TS/Coreの2test。live専用schema/明示入口と実attempt/transport/新送信承認への参照、原request/response/model/name/usageのbyte/SHA束縛だけを追加し、mode文字列だけを由来/権限にしない。mock-v001 schemaとmock portのlive拒否を保持。実原応答をmockへ変換しない。
+
+共有stageの全326被覆、choice対応、元由来の再構成→既存selectionRecord.origin/compile/validateStateを使い、理由/根拠/種類/部分範囲/物理制約/接続は既存evaluateReplyへ残す。Core本体/原観測prepare・通常accept/queue/render/全被覆gate/元input whitelistを変更する必要は読み取り上ない。独立小入力の契約/新plan/新時計、別台帳/再読専用の意味validator、一般live HTTP基盤/新provider/新鍵/永続権限を作らない。実装時に外への必要差分が見つかれば箇所/理由/最小差分を先に返す。6pathで必ず収まる保証ではない。
+
+実送信時の一件用driverは既存のsingle POST/原byte保存/attempt-before-networkの形を、今回5つの固定requestと新許可へ限定して使う。旧6質問driverを再起動せず、新しい排他attemptと各1回/retry0を保存。実implementation SHAと5request manifestへ束縛する。transport failure時の空raw byte/未応答もそのまま区別し、架空JSON/receiptへ補完しない。現在はdriverの追加実装/起動も未着工。
+
+### 費用の一度の見積と不確実性
+
+10月9日に再照合した[公式Decisions料金](https://developers.openai.com/api/docs/guides/decisions)は入力0.10USD/100万token、出力/cache課金なし。[公式モデル](https://developers.openai.com/api/docs/models/gpt-6-luna)の長文入力2倍/地域10%加算も感度例に含める。
+
+前回6質問/53字幕/83,132Bの実usage22,894を、今回各requestのbyte比へ換算。同じtoken/byte密度で共通入力を一回計上する仮定なら、合計約189,860 tokenで**基本約0.01899USD（約0.019USD）**。各場面の推定量を質問数53/84/61/101/27倍で反復計上する仮定なら**約1.36433USD**。さらに長文2×地域1.10を一律仮定した感度例は**約3.00152USD（約3.00USD）**。この3ケースは予測の幅を見るための仮定で、課金上限ではない。実際の長文倍率がDecisions内部合算へどう適用されるかは未確定。
+
+byte比はtoken実測や課金合算式ではない。公式資料から送信前の総課金入力の確定上側値はまだ得ておらず、約3.00USDも保証上限にしない。前回の1.50USD許可・課金不確実性の受容は新5requestへ流用しない。本人への一括承認では、**この5回/326質問/live限定実装/新詳細回答/受理再読の範囲と、本人が決める新予算・料金不確実性の扱い**を明示する。事前上限保証を条件にするなら、それが取れない限り送信しない。外部token計測/API価格probe/新支出設定は行わない。今回API0/新費用0、実請求未照合。
+
+### 実装から第一完成までの時間見積
+
+**約4〜7時間（承認後、本人/相談役の返信待ち時間を除く）**。内訳を一つにまとめる。API待ち、詳細判断の難所、未発見の実装差分で増える可能性があり、保証ではない。
+
+| 作業 | 見積 |
+|---|---:|
+| 上記live由来の6path限定追加・固定5request/新許可/実transportの配線 | 1.5〜2.5h |
+| 少数positive/negative fixture、原byte/許可/モード/不足/改変/旧mock保持、runner型とcallerの必要検査 | 0.5〜1h |
+| 5request各1回・retry0、raw/HTTP/usage/時間/全IDの保存と確認 | 0.25〜0.5h（API待ち未保証） |
+| 既存詳細判断役がJ16 choiceに沿う新326詳細回答と全4接続を作成・既存検査 | 1〜2h |
+| live受理→保存再読、元記録不変、証拠/cleanup/process/既存記録/Git/Check | 0.5〜1h |
+
+内訳合計3.75〜7hを約4〜7hと示す。別の詳細生成API・新Codex作業・STT・媒体製造は加えない。過去の詳細理由を新回答へコピーせず、正常行も新reason/evidenceを残す。既存326字幕/5場面の観測を使い、J16 choiceを後段が勝手に決め直さない。少数mockの成立/数秒のCLIを実制作短縮の実測にしない。
+
+### 保留を含む完了条件
+
+送信前に追加実装の限定検査、新しい明示承認/費用条件/最終SHA/5request/未使用出力の束縛を満たす。満たさなければ送信しない。5つは各一回の予定requestで、通常は順に送る。各HTTP/raw/usageと名前対応・モデル・由来を保存。拒否/保留があっても同じ質問の再送や正常補完はせず、予定外の6回目は起動しない。transport/HTTP等の失敗で残送信を止めた場合は、実送信数と未送信を区別し残件として保存する。
+
+全326がresolvedで既存詳細判断役が新詳細326/接続4を完成した場合：live専用段階束から既存Coreで候補受理→排他保存→同じcompile/validateStateで再読し、原request/response・元ID/時計・理由/根拠/演出種類/部分範囲/全接続を再構成一致する。usage計算/請求未照合/時間/人間介入とcleanup/Git/Checkを閉じる。応答取得だけで完成にはしない。
+
+**refusal/unresolved/欠落/矛盾/transport失敗などが出た場合は、保留そのものを成果にする。** 実rawと解消していない対象・未送信・理由・由来を保存/同じ共有境界で再読し、候補のpositive受理→再読は未達と明記して閉じる。元stateを上書きせず、残件をNormalで補わない。通すための追い送信/追加API/旧詳細流用はしない。保留で重い詳細生成が不要ならそこで止め、未実施と実時間を記録する。保留を正常な成果/品質合格へ読み替えない。
+
+どちらの終了も本番切替/製造/映像QC/品質採用/全字幕採点は含まない。本人に過去確認のやり直しを要求しない。Check44/60・文脈TODO54を保持。現在は5request固定と見積の準備完了、live実装/新送信は未着工、次担当monaが本人へ上記を一括説明し必要承認を扱う。
+
+準備起動の初回はworkspace cwdでpnpm11とrunner要求10.28.0の版検査によりscript開始/ファイル作成前に停止。正確な失敗時刻は未採取（観測区間09:48:46〜09:52:19 UTC）。09:52:19 UTCにrepo cwdの従来呼出しへ直し09:52:27成功。設定/依存/製品変更なし、今回の設営呼出し修正1、API再試行0。証拠j16-live-five-preparation-startup-repair-20261009-v001.jsonを保持。
+
+公式MCP 2026-10-09T09:59:43.288Zのboard134、Check44 item20/TODO61 item3へ同じ候補を保存・再読。Check60/54 item3と他項目/削除履歴不変。request/source10＋manifest11file計1299337B、準備script/原データ/小さい検算JSONを監査用にKEEP。新design文書0、旧成果削除0。以下の27案は撤回理由を含む履歴で、現行の承認候補ではない。
+
 ## 結果受領とTODO61の条件整理 — 2026-10-09 18:43 JST
 
 monaから実装・模擬検証結果の受領とGitHub差分確認中の指示を現地2026-10-09 18:30:22 JSTに読了し、2026-10-09T09:31:32.163Zに公式ボードCheck44へ確認作業と時刻を保存・再読。追加の読み取り監査でmock範囲の必須差戻しは見つからなかったと受領。Check44/60を維持し、品質採用/本番化へ読み替えない。同じ範囲整理で、応答取得の再試験ではなく**実API原応答→今回の接続→候補受理→保存後再読**を次の目的とした。今回の製品code/新API送信/製造/本番切替0、既存資料とTODO61に集約し設計文書は増やさない。
