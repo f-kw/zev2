@@ -1,4 +1,46 @@
-# OpenAI J16 — 情報を失わない接続の次工程案
+# OpenAI J16 — 正式段階接続の実装と次工程
+
+## 第一完成 — 2026-10-09 18:25 JST（承認済み7path、mock限定）
+
+**今回の7pathは実装と限定検証まで完了した。** 元の観測入力を変えず、J16の要否回答と詳しい演出回答を一緒に保存し、最初の受理でも保存後の再読でも同じ検査を行う。J16 normal/effectとの矛盾・欠落・拒否・保留・別入力・原byte改変をNormalで補わず止める。部分Colorの文字範囲、Pulseの実ピーク束縛、理由/根拠、全接続は既存の詳細検査と保存記録へ保持する。人工mockによる成立確認であり、新しい字幕の実判断・品質採用・本番切替ではない。
+
+### 実装の固定と責務
+
+- 実装main 39af05b762627ba80b4e9c3baa121a6cb10714ba、監査checkpoint commit/push済み。差分は承認された製品4＋型宣言1＋試験2の7pathだけ。原観測prepare/DECISIONS/runner・base tsconfigの実SHA不変。
+- 共有presentation_j16_staged_boundary_v001.mjsはIO/HTTP/認証/描画なし。元v003 fresh-inputと各scene全体/前後のlabel-free source・request/responseの原text/SHA/byte、全字幕のtarget、usage/保留を段階束へ持たせる。TS facadeのrequestブランド検査と既存mock portは保持。
+- Coreは専用originからcompileで共有検査を呼ぶ。既存validateStateが同じcompileへ戻るため、再読専用の意味validator・別台帳・第6state fieldを増やしていない。理由/根拠/強調範囲/Panel/Pulse/接続の検査は既存evaluateReply。元inputのfresh-codex検査modeと専用originを区別。
+- callerはprepare-j16-stage / accept-j16-stage / read-j16-stageという明示mock操作だけ。専用新規directoryへ排他保存、0600、SHA/byte再読・実path・symlink/再利用拒否。stage-files/filesはIO参照束で、意味の唯一の由来は既存selectionRecord.origin。通常のaccept/queue/renderの既定経路は保持。HTTP dispatcher・新鍵/認証・権限拡張なし。
+
+### 実際に行った検証と限界
+
+| 検証 | 実結果 |
+|---|---|
+| Core既存18＋段階8 | 26/26合格、skip0。専用origin再読/改変、不足・拒否・保留、normal/effect矛盾、理由/根拠/部分文字/Pulse/接続、全場面と前後の保持 |
+| runner既存18＋段階4 | 20合格/22、skip2。新4件は実caller prepare/accept/read、排他・保存後改変拒否、元状態不変を含め全合格。旧保存6件と5入力は環境変数未設定で未実施 |
+| runner公式型検査 | tsc -p tsconfig.json --noEmit exit0 |
+| caller単独strict比較 | 同一条件でbaseline357/current357、新規0。既存357診断は残り、全体型検査合格とは扱わない |
+| 専用CLIの原byte保存→受理→再読 | 2026-10-09T09:17:08.565Zに全3操作exit0。Normal1/部分Color1/Pulse1、接続2、既存五recordを保持。準備1.223秒/受理1.054秒/再読1.063秒。実API応答ではなく人工mock |
+| 原本保護 | 旧fresh-input/詳細reply/source/五recordの8記録、原観測prepare/AGENTS/DECISIONS/tsconfig2の計13実SHA一致 |
+
+2026-10-09T09:09:58.466Z（18:09:58 JST）の初回Core試験は25合格/1不合格。原文にないtargetTextは既存処理が拒否しており、試験側が外側エラー接頭辞を期待していたため失敗した。現行の具体的拒否文言へ試験期待値だけを修正し2026-10-09T09:15:11.686Z（18:15:11 JST）に26件合格。元の失敗ログを保持。検査設営修正1、製品欠陥の追加修正0、停止/新API0。以前の関連試験の旧HRB/C-all fixture不足2件は復旧・再実行していない。不合格の履歴を合格へ書き換えない。
+
+実判断精度、実視聴/音声、動画QC、人間の品質採用、実工程の短縮は未評価。今回は媒体0なので動画QCを実施/合格にしない。J16のconfidenceを採用閾値にせず、部分試験を全素材の判断済みにしない。古い6応答や演出理由を新字幕の回答へ流用していない。
+
+### 保存成果・証拠・後始末
+
+模擬段階入力：/Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/implementation-20261009-v001-input/stage-input.json。候補：/Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/implementation-20261009-v001-candidate/state.json。付随source/IO参照束と合わせ5file/72203Bを保持。候補record SHA 11a03050b3ea2c73fb697cef7c9226b534b7253b93eb0b9ba6254807f60d1adf。入力fixtureには人工と明示し、sourceのfixture参照やmock応答を実製造のreceiptにしない。
+
+現地監査証拠はworkspace /Users/kawafmm/Documents/Codex/2026-10-03/task-3 内のj16-staged-final-validation-20261009-v001.json、j16-staged-formal-mock-evidence-20261009-v001.json、runner/core試験ログv001/v002、runner型検査ログ、j16-staged-caller-types-20261009-v001.json、j16-staged-implementation-commit/cleanup/board-final/doc-record/delivery各20261009-v001.json。人工入力/spec・再現scriptを保持。元request/response/attempt、旧state/媒体は変更/削除しない。秘密情報や私的な元字幕の全量をGitへ入れない。
+
+2026-10-09T09:21:13.682Zに自分のcommit同一copy7件186266Bを整理し、今回の試験/CLIprocess0と保存候補のSHAを再読。test専用一時directoryはfinallyで除去。大容量媒体生成0、旧成果削除0、他者process停止0。実着手から終了summary固定まで35分14秒で、記録/Git/報告はこの後に閉じる。前の6〜8.5hは見積もりであり、mock CLI数秒も制作全工程や実APIの所要時間ではない。人間の追加操作要求0。
+
+### Checkと次のTODO
+
+公式MCPで2026-10-09T09:21:22.631Zにboard129を再読。TODO44 Doing→Check44（item17/request waiting）、次TODO61（item1/pending waiting）を保存。他項目と削除履歴、Check60 item3、文脈TODO54 item3、Done45/59とmona Done3/4を保持。Check44はmona監査待ち、正式品質採用ではない。
+
+**次TODO61は未着工。** 次担当monaが新字幕/元ID/原byte/全場面/request/質問対象/回数/費用/認証/出力束縛を選び、必要な送信許可・通常本番への適用・製造の具体範囲を別に扱う。旧一回API許可・mock候補を実判断/製造へ流用しない。新送信・費用・本番切替・新動画は今回0であり、次指示前に自動開始しない。Check60/既知skip・旧素材不足/既存型診断、文脈TODO54は保持。比較や全字幕採点を再開しない。[今回cycle log](../../work-logs/2026-10/2026-10-09T1825_Codex-SSD_J16-staged-integration_39af05b7.md)。
+
+以下は承認受領・範囲案・過去工程の時点付き履歴。以前の「未実装/未承認」は当時の状態で、現在の第一完成を取り消すものではない。
 
 ## 着工承認受領 — 2026-10-09 17:50 JST
 

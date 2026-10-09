@@ -2,6 +2,14 @@
 
 更新日：2026-10-09（JST）
 
+## 最新現在地 — 2026-10-09T09:25:36.022Z（TODO44の7path段階接続は第一完成、Check44・次TODO61）
+
+本人10/09 17:47 JST「いいよ」を17:48:57 JSTに受領し、17:50:21.730 JSTに実着手した7pathの接続を2026-10-09 18:25 JSTに第一完成として固定。元の観測入力を変えず、今回のJ16要否回答と詳しい演出回答を結び付ける段階入力・専用受理・保存後再読を実装。共有境界はJ16 choice対応/全対象被覆/原byte・由来だけを検査し、理由/根拠/部分範囲/物理制約/接続は既存evaluateReplyへ残す。原観測prepare、既存五record、selectionRecord.origin→compile→validateStateの再構成を保持。通常accept/queue/renderは切替していない。
+
+Core26/26、runner20/22（環境変数未設定の旧保存6件/5入力testはskip2）、計46合格/2未実施、runner型検査合格。専用CLIの人工mock入力→受理→再読でNormal1・部分Color1・Pulse1と全接続を保持。候補は専用runtimeへ排他0600保存、元8記録とprepare/DECISIONS/tsconfigは実SHA不変。caller standalone strictはbaseline357/current357/new0で全体合格ではない。2026-10-09T09:09:58.466ZのCore初回試験1件は、原文にない強調範囲を既存検査が拒否した際の試験期待値の違い。試験期待値だけを修正し2026-10-09T09:15:11.686Zに26件合格、設営修正1/製品欠陥修正0。旧HRB/C-all素材欠落2件は未解消のまま保持。
+
+実装checkpoint 39af05b762627ba80b4e9c3baa121a6cb10714baをmainへ通常push、remote一致/clean/untracked0確認済み。成果固定後、重複copy7件186266Bだけ整理、試験/CLIprocess0。2026-10-09T09:21:22.631Zの公式MCP再読board129でDoing44→Check44 item17、次TODO61 item1/pending waitingを保存。Check60 item3、文脈TODO54 item3、他者/削除履歴は不変。今回の追加API/新字幕送信/費用/STT/動画製造0。新字幕の実API/通常本番適用/製造許可はTODO61で別の具体判断へ、未着工。実判断精度/実視聴品質/制作負担の短縮は未評価。次担当monaがCheck44を監査し次の範囲を扱う。[実装・証拠・残件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[今回cycle log](work-logs/2026-10/2026-10-09T1825_Codex-SSD_J16-staged-integration_39af05b7.md)。今回のMac実装は終了し、次の明示指示まで待つ。以下は時点付き履歴。
+
 ## 最新現在地 — 2026-10-09T08:50:21.730Z（TODO44の本人承認を受領・実着手、作業中）
 
 途中確認 — 2026-10-09T09:04:44Z：18:04:44 JSTの現地読み取りでMac実行継続を確認。共有境界・Core受理/compile・caller配線の作業用コードとCore試験を作成し、TS側の呼出し全体試験を追加中。検査は未実施、まだrepoへ製品差分を適用していない。重複起動なし、阻害要因なし。同じ実着手17:50:21の作業を続行中。 ボード再読board127/Doing44 item16。
