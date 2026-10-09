@@ -1,0 +1,32 @@
+# Codex-SSD — TODO60 情報保持オフライン接続の第一完成
+
+- session: Codex-SSD / existing Mac maker
+- instruction: mona thread 01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6
+- authorization: 2026-10-09 16:38 JST「作業は進めて良い」/ Sentinel_b0236bc2005c81919771acb546668bf2
+- receivedAt: 2026-10-09T07:39:48Z
+- startedAt: 2026-10-09T07:43:31.199Z
+- closedAt: 2026-10-09T08:19:23.921Z / 2026-10-09 17:19 JST（終了summary固定。最終Git再読はdelivery証拠）
+- baseHead: c0c6d2ed169e96b9569ee5150ecd92397fc511b7
+- startCheckpoint: 20f1c08e88ab27bc9809d5a8b6f0697b8b676531
+- implementationCheckpoint / finalImplementationHead: c0661c3834551486ab2875b74d5d99373747057c
+- status: complete within approved offline scope; Check60 awaiting adviser audit
+
+## 指示・実作業
+
+[固定した範囲](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)の既存helper/試験/callerの3pathで、3択と詳しい演出回答を同じ原入力へ束縛して照合する。元byte/SHA/ID/本文/時計/前後場面/観測を確認し、演出種類・部分強調・理由/根拠を保持。矛盾/不足/拒否/保留を残す明示的offline操作を実装した。正式受理の既存検査を純粋なチェックとして使い、正式stateを保存しない。追加API/認証/費用/通常キュー切替/新動画/STT0。
+
+## 検証・意味
+
+18/18・skip0とrunner既存型検査exit0、実caller/CLI保存6件は5整合/1矛盾保留/320未判定。000002の「ドッグセラピー」部分Colorと元理由/根拠を保持。旧回答を正解や新判断へ流用しない。原8記録とrequest/response/sourceを再読一致。関連32中30passed、旧HRB/C-all fixtureのENOENT2件はfailedとして残す。関連core/testとDECISIONSの元SHA不変。caller単独strict比較はbaseline357/current357/new0で全体型合格ではない。diff合格、実視聴/全体精度/正式品質/時短は未評価。[実装・結果・限界](../../reports/openai-decisions-j16-integration-20261008/offline-join-implementation-v001.md)。
+
+17:12 JSTごろ終了証拠scriptのtest出力形式取り違えとsandbox ps EPERMが出た。ℹ形式への対応と読み取り終了確認のescalationで17:13:25.808に復旧。製品修正/新試験/旧素材復旧を増やさず、実試験の成功とこの証拠scriptの失敗を区別。
+
+## cleanup・Git
+
+保存review2JSON/34,714B、原一回request/response/attempt、入力/旧正式state、試験/typecheck/readback/log/spec/reproducerをKEEP。自分の最終code同一の重複copy3件66,754Bを17:14:52.043に整理、検査/CLIprocess残存0。試験固有tempはfinallyで除去。大容量媒体0、旧成果/他者process/閲覧server変更0。
+
+3実装pathはc0661c3834551486ab2875b74d5d99373747057cへcommit/push、main remote一致/clean/untracked0確認済み。終了report/log/CURRENT_GOAL/HANDOVERの4記録は別commitで保存し、実SHA/remote一致/最終statusをdelivery記録と親最終報告へ残す。新branch/worktree/reset/stash/tag/release0。他者変更混入0、DECISIONSへの記録追加0。
+
+## 次状態
+
+17:15:54.431 JSTに公式MCPでboard121、Check60 item3、Check44 item10を保存・再読。他者項目/削除履歴、文脈TODO54とDone45/59、mona Done3/4不変。今回の第一完成はCheck60でmona監査待ち。正式段階入力/詳細生成責務/新入力送信の対象・費用・回数・束縛/本番受理切替はCheck44の別残件で未着工。追加API/比較/全件採点/新製造を自動開始しない。純粋な最終AUDIT_ONLYを親へ返してこの一件を終了する。

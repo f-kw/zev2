@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-09（JST） / revision：handover-index-20261009-v109
+更新日：2026-10-09（JST） / revision：handover-index-20261009-v110
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-09T08:15:54.431Z（TODO60の情報保持オフライン接続が第一完成、Checkへ）
+
+本人10/09 16:38 JST承認を16:39:48に受領し、16:43:31.199に実着手。既存helper/試験/callerの3pathで、原byte/SHA・正式input・元ID/本文/時計/場面文脈を照合する明示的offline reviewを実装。詳細の演出種類/部分強調/理由/根拠を保持し、矛盾/不足/拒否/保留を残す。通常accept/render/queue・正式stateは変更せず、追加API/本番切替/新動画/STT0。実装checkpoint c0661c3834551486ab2875b74d5d99373747057cをmainへpush、remote一致/cleanを確認。
+
+18/18・skip0、runner型検査、保存6件の実caller/CLIと原8記録再読はpassed。5整合/1矛盾保留、残320未判定。「ドッグセラピー」の部分Colorと元理由を残し、古い判断の再採用/新判断へ流用しない。関連32中30passed、旧HRB/C-all fixtureのENOENT2件はfailedのまま。caller単独strict比較は旧357/current357/new0で全体合格ではない。動画の実視聴・全体精度・正式採用・時短は未評価。
+
+成果固定後、自分の重複copy3件66,754Bだけ整理、検査process0。17:15:54.431 JSTの公式MCP再読はboard121、TODO60 Doing→Check item3、Check44 item10へ残件リンク。他者/削除履歴、文脈TODO54・Done45/59・mona Done3/4を保持。次担当monaがCheck60を監査し、正式段階入力/詳細生成責務/新送信条件/本番受理への適用をCheck44の別範囲として扱う。[実装・検証・API既知事実・残件](reports/openai-decisions-j16-integration-20261008/offline-join-implementation-v001.md)、[session log](work-logs/2026-10/2026-10-09T1719_Codex-SSD_J16-offline-join_c0661c38.md)。今回の限定作業は第一完成、相談役待ち。次の明示指示まで実行を終了し、完了済み製造や旧比較を再開しない。以下は履歴。
 
 ## 最新現在地 — 2026-10-09T07:43:31.199Z（TODO60の本人承認を受領・実着手、実装中）
 
