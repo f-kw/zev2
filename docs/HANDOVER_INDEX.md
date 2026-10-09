@@ -1,12 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-09（JST） / revision：handover-index-20261009-v112
+更新日：2026-10-09（JST） / revision：handover-index-20261009-v113
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-## 最新現在地 — 2026-10-09T08:26:11Z（限定実装をmona受領、TODO44の次工程範囲整理完了）
+## 最新現在地 — 2026-10-09T08:44:59.835Z（TODO44の7path範囲確認完了、承認判断待ち）
 
-monaは限定offline接続の3実装fileと終了報告をGitHubで読み取り受領し、差し戻し必須の具体的不具合なしと2026-10-09 17:26:11 JSTに連絡。18試験は担当実行報告として扱い、保存6testの環境変数なしskip、関連旧素材不足2件、caller既存型診断を残件として保持。Check60は本人確認用に維持。既存TODO44へ「新字幕の要否をJ16で判断→既存詳細判断役が種類/範囲/理由/根拠を生成」の正式段階入力と専用受理/再読の範囲を具体化。想定8path・6.5〜9h、mockと限定検査だけで成立確認し、追加APIは不要。通常行の理由/接続を残し、上流回答を元fresh-inputへ混入せず専用envelope/明示originへ束縛。新入力の実API利用は対象/件数/回数/費用を別承認、本番適用・製造も別。今回は範囲整理のみで、新実装/試験再実行/API/製造0。次担当monaが着工候補と必要承認を扱う。[TODO44の正式入力・受理条件・変更範囲・見積もり](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
+TODO44の範囲確認を2026-10-09 17:44:59 JSTに終了、承認判断待ち。親指示で原観測prepareを変更対象から外し、共有境界のstage envelope純粋生成→既存caller排他保存、既存selectionRecord.origin→compile→validateStateの同じ共有検査を使う7path案は現行codeの読み取り上成立。理由/根拠/範囲/物理制約は既存evaluateReply、追加はJ16 choice対応/全対象被覆/由来だけ。別台帳/再読専用validatorを増やさない。想定製品4/型1/試験2=7path、実装3.5〜4.5h・検証2〜3h・終了0.5〜1h、計6〜8.5h。今は範囲整理だけでコード変更/試験再実行/API/製造0、成立の実試験は未実施。Check60の本人確認、既知skip/素材不足/型診断とTODO54を保持。本番適用/新送信は別承認。次担当monaが着工範囲と必要承認を扱う。[7pathの根拠・受理条件・再見積もり](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
 
 第一完成と検証の記録（2026-10-09T08:15:54.431Z）：
 

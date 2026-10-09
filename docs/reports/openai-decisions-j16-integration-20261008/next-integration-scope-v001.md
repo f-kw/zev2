@@ -4,7 +4,17 @@
 
 2026-10-09 17:26:11 JSTに親monaの監査結果と範囲整理指示を受領。monaはGitHubの指定3実装fileと終了報告を読み取り、限定offline接続を受領し、差し戻し必須の具体的不具合は見つからなかった。18件の実行結果は担当の報告として扱う。Check60は本人確認用に保持。保存6件testはZEV_J16_SAVED_TRIAL_ROOTなしではskip、保存5入力testも別環境変数で条件化される点、関連2件の旧素材不足、caller既存型診断は残件へ保持する。
 
-**次に勧める一件は「OpenAIによる要否の結果を正式な段階入力に束縛し、詳細回答の専用受理器を外部送信なしで実装・検証する」こと。** 想定8path、実装4〜5時間・検証2〜3時間・記録/後始末/Git0.5〜1時間、計6.5〜9時間。今回の指示はこの範囲整理だけであり、この新工事・本番適用・API送信は未着工/未承認。先のTODO60の3path・2〜3時間見積を流用しない。
+**次に勧める一件は「OpenAIによる要否の結果を正式な段階入力に束縛し、詳細回答の専用受理器を外部送信なしで実装・検証する」こと。** 想定7path、実装3.5〜4.5時間・検証2〜3時間・記録/後始末/Git0.5〜1時間、計6〜8.5時間。今回の指示はこの範囲整理だけであり、この新工事・本番適用・API送信は未着工/未承認。先のTODO60の3path・2〜3時間見積を流用しない。
+
+### 7path案の現行コード上の成立確認 — 2026-10-09 17:44:59 JST
+
+親の縮小確認指示を2026-10-09 17:40:15 JSTに受領。読み取り上、この7path構成は成立する。presentation_orchestration_prepare_v001.mjsは変更対象から外し、原観測入力生成のまま保持する。理由は次の3点。実装/試験による成立確認はまだ行っていない。
+
+1. prepareのbuildOrchestrationInputFilesV001（18〜42行）は既に原参照を検証してsource/input/provenanceを返す。callerのprepareOrchestration（177〜181行）はその返却を保存しているため、共有境界へ渡す原fresh入力の生成を変更する必要がない。新stage envelopeは保存済み原inputと当該J16原束から純粋生成し、既存callerの明示操作が新規領域へflag wxで保存する。
+2. Coreのcompile（499〜538行）はoriginと原input/replyからselectionRecordを作り、validateState（568〜575行）はrecord.originをcompileへ渡して全記録を再構成一致する。compileへ一つの明示stage-origin分岐を追加して同じ共有検査を呼べば、初回受理と既存再読に検査が届く。再読専用validator、stage台帳、saved stateの第6fieldを増やさない。
+3. 既存evaluateReply（286〜370行）へ元v003 inputと既存形式の詳細replyを渡せば、理由/根拠/範囲/物理制約/接続/詳細全被覆は従来の検査を使える。専用originは上流J16の由来であり、元inputのjudgmentModeを新origin文字列へ変えない。compileのその分岐では元観測のfresh-codex検査modeを使い、共有境界はJ16 choiceとの対応・その対象被覆・由来だけを追加する。range/Panel/Pulse等の再実装やconfidence閾値は作らない。
+
+normal/effectの対応規則、不足/拒否/保留を正常へしない規則、元byteと全場面束縛は保持。機械QCや媒体は対象外。7pathを超える具体的なreader/権限変更が実装時に見つかったら、差分を親へ返し無言で広げない。
 
 ### 責務と現物から分かった制約
 
@@ -20,7 +30,7 @@ prepare_v001は原観測6fieldをwhitelistで再構成し、CoreのcheckInputは
 | J16上流判断 | 各sceneのlabel-free projection、原request/response byteとSHA、model、質問name→原ID、usage、明示target ID集合。複数batchを使う場合は重複なく同じ原入力へ束縛して合算 |
 | 詳細生成用stage-input | 原観測の参照と、今回検証したJ16結果の参照、全対象ID、要否固定/許可vocabulary/保留規則を持つ専用envelopeと自己SHA。元fresh入力を改変しない |
 | 詳細stage-reply | stage-input SHAをechoする外側束と、元fresh input SHAに結び付く既存形式の完全な字幕/接続詳細回答の原byte。J16結果と詳細の両方を保存し、一方へ潰さない |
-| 専用受理記録 | 明示的staged originに原入力/J16/stage-input/stage-replyの由来を残し、保存state再読でも同じ制約を再検査。生成済み旧回答のtechnical-recompileやfresh-codex単独originに偽装しない |
+| 既存selectionRecordの専用origin | 既存selectionRecord.origin内に原入力/J16/stage-input/stage-replyの束縛を保持し、compileから同じ共有検査を行う。別の受理台帳や再読専用validatorを作らず、旧originへ偽装しない |
 
 対象集合は「今回採用する新字幕の全ID」を明示し、詳細と接続は現行の全被覆を維持する。部分requestの結果はpendingとして保存できるが、全対象のJ16回答が集まるまで正式採用にしない。今回の旧6回答やmockから、別の新字幕の実判断を作ったふりをしない。
 
@@ -32,26 +42,25 @@ prepare_v001は原観測6fieldをwhitelistで再構成し、CoreのcheckInputは
 4. unresolved/refusal/不正応答/詳細不足/矛盾は元の別状態として保存し、正式受理可にしない。既存のoverride権限、接続判断、媒体QC、人間の品質採用は別の現行責務として保つ。
 5. 専用受理時と保存state再読時の双方で上記を検査する。stage-originや返却byteの改竄、J16要否と詳細の不一致は正式保存/後続利用より前に止める。通常キューや旧acceptの既定動作は変えない。
 
-### 想定する最小変更8path
+### 絞り込んだ変更7path
 
 | path | 次工事で変更する候補 |
 |---|---|
 | runner/src/openai-decisions-j16-v001.ts | 同じ新fresh入力からscene/requestを作り、原応答を検査し、全対象集合の被覆を束ねる型付き入口。現offline reviewは別操作として保持 |
-| evals/clip_composition/presentation_j16_staged_boundary_v001.mjs（新規候補） | 段階envelope/由来/要否制約を検査する純粋な共有境界。原応答チェックを重複実装せずTS側とCoreの両方から使う |
+| evals/clip_composition/presentation_j16_staged_boundary_v001.mjs（新規候補） | 段階envelopeを純粋生成し、J16 choice対応/全対象被覆/原byteと場面への由来だけを検査する共有境界。受理/再読ともcompileから同じ検査を使う |
 | 同名presentation_j16_staged_boundary_v001.d.mts（新規候補） | JS境界の型宣言。runner strictとNode直実行のCore双方に使い、tsconfig/依存/loaderの一般変更を避ける |
-| evals/clip_composition/presentation_orchestration_prepare_v001.mjs | 原観測v003は保持し、検証済み上流判断を参照する専用stage-inputと詳細生成指示を排他保存 |
-| evals/clip_composition/presentation_orchestration_v001.mjs | 独立したstage受理入口/明示originとcompile・validateStateでの再検査。既存有限preset/範囲/理由/接続/QCを維持 |
-| evals/clip_composition/run_new_material_digest_20260926_presentation.mts | 明示prepare-stage/accept-stage操作と原参照束縛。次工事では専用候補/fixture領域だけで実行し、通常受理/queue/renderは切替しない |
+| evals/clip_composition/presentation_orchestration_v001.mjs | 専用受理入口とcompileの明示stage-origin分岐だけを追加。元input/詳細は既存evaluateReplyで検査し、J16対応は共有境界へ。既存validateStateのcompile再構成をそのまま使う |
+| evals/clip_composition/run_new_material_digest_20260926_presentation.mts | 原fresh-input/sourceを再読して共有境界のstage envelopeを新規領域へ排他保存する明示操作。専用受理入口へ渡し、通常受理/queue/renderは切替しない |
 | runner/src/openai-decisions-j16-v001.test.ts | current新入力の模擬batch、ID被覆、拒否/保留/差替え、TS入口と実callerの限定検査 |
 | evals/clip_composition/presentation_orchestration_v001.test.mjs | 正常なnormal/effect/部分範囲・理由/根拠・接続、専用origin再読、不足/矛盾/別SHAの拒否、旧受理の保持 |
 
-想定は製品5＋型宣言1＋試験2の8pathで、新たなフレームワークを作る案ではない。CoreはNodeで直接動くmjs、runnerはstrict TSでrootDir=srcなので、型付き共有境界を独立させる候補にした。実装時に別のreader/schema/job/permission等へ変更が必要と分かったら、具体箇所・理由・最小差分を先に親へ返し、path上限を勝手に増やさない。この8pathを既に着工許可された上限とは扱わない。
+想定は製品4＋型宣言1＋試験2の7pathで、新たなフレームワークを作る案ではない。CoreはNodeで直接動くmjs、runnerはstrict TSでrootDir=srcなので、型付き共有境界を独立させる候補にした。実装時に別のreader/schema/job/permission等へ変更が必要と分かったら、具体箇所・理由・最小差分を先に親へ返し、path上限を勝手に増やさない。この7pathを既に着工許可された上限とは扱わない。
 
 ### 外部送信なしで完了できる範囲と見積もり
 
 専用段階入力/受理器/再読とcallerまでの実装、人工字幕と明示mockの少数positive/negative fixture、変更に対応するunit/typecheck、保存/排他/readback/元state不変、必要な旧受理互換の限定検査、記録/cleanup/通常Gitまで。fixtureは原観測→mock J16→新mock詳細→候補stateを一つの束として扱い、模擬結果を新字幕の実判断や品質採用にしない。保存6件の再試験・旧素材復旧・モデル比較・全字幕採点を新工事の前提にはしない。試験で実入力が必須なら必要参照を明示して準備し、未設定によるskipを合格件数へ入れない。
 
-見積：段階schema/共有境界・由来2〜2.5h、prepare/caller/受理/再読2〜2.5h、少数fixtureと関連型検査2〜3h、終了処理0.5〜1h、計6.5〜9h。見積であり実測ではない。HTTP dispatcher/新認証/永続権限/新素材API送信/詳細生成API/provider/通常本番切替/新媒体は含まない。段階入力を増やすだけで仕事が減る保証はなく、実工程短縮は後の承認済み利用時に測る。
+再見積：段階schema/純粋な共有生成と由来1.5〜2h、caller排他保存/compileの専用origin接続2〜2.5h、少数fixtureと関連型検査2〜3h、終了処理0.5〜1h、計6〜8.5h。原観測prepare変更と重複した再読検査を除いた分だけ狭くした見積で、大幅な時間短縮を保証しない。見積であり実測ではない。HTTP dispatcher/新認証/永続権限/新素材API送信/詳細生成API/provider/通常本番切替/新媒体は含まない。段階入力を増やすだけで仕事が減る保証はなく、実工程短縮は後の承認済み利用時に測る。
 
 ### 実API利用は別に判断する
 
@@ -61,7 +70,7 @@ prepare_v001は原観測6fieldをwhitelistで再構成し、CoreのcheckInputは
 
 ### 親が次に決められる具体範囲
 
-次の限定工事候補：上記8path/計6.5〜9hで、正式段階入力と専用受理/再読をmockだけで実装・限定検証してよいか。**追加送信/費用/本番適用/製造は含めない。** 実API利用候補は別判断。現在はTODO44の範囲整理を完了し、次担当monaがこの候補を本人へ説明して必要な承認を扱う。文脈TODO54は未適用のまま。以下は、受領済みTODO60の承認前に固定した過去の範囲案であり、現在の着工承認を取り消す記述ではない。
+次の限定工事候補：上記7path/計6〜8.5hで、正式段階入力と専用受理/再読をmockだけで実装・限定検証してよいか。**追加送信/費用/本番適用/製造は含めない。** 実API利用候補は別判断。現在は7path構成の読み取り確認と範囲整理を完了し、TODO44は承認判断待ち。次担当monaがこの候補を本人へ説明して必要な承認を扱う。文脈TODO54は未適用のまま。以下は、受領済みTODO60の承認前に固定した過去の範囲案であり、現在の着工承認を取り消す記述ではない。
 
 
 2026-10-09 00:02 JST（2026-10-08 15:02 UTC）に範囲を固定。親monaは一回試験の結果を受領・本人へ報告済み。今回の個別指示は次工程の範囲整理だけで、追加API、本番への組込み、製品実装の着工は許可されていない。コード変更・API送信・新動画0。読み取り基準main a57dd95ccf0a1cac17039b9c9d5b8138da5048e8。

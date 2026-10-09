@@ -42,3 +42,9 @@ mona：OpenAI判定接続の変更内容・残件を確認中。2026-10-09 17:23
 monaは限定offline接続の3実装fileと終了報告をGitHubで読み取り受領し、差し戻し必須の具体的不具合なしと2026-10-09 17:26:11 JSTに連絡。18試験は担当実行報告として扱い、保存6testの環境変数なしskip、関連旧素材不足2件、caller既存型診断を残件として保持。Check60は本人確認用に維持。既存TODO44へ「新字幕の要否をJ16で判断→既存詳細判断役が種類/範囲/理由/根拠を生成」の正式段階入力と専用受理/再読の範囲を具体化。想定8path・6.5〜9h、mockと限定検査だけで成立確認し、追加APIは不要。通常行の理由/接続を残し、上流回答を元fresh-inputへ混入せず専用envelope/明示originへ束縛。新入力の実API利用は対象/件数/回数/費用を別承認、本番適用・製造も別。今回は範囲整理のみで、新実装/試験再実行/API/製造0。次担当monaが着工候補と必要承認を扱う。[TODO44の正式入力・受理条件・変更範囲・見積もり](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
 
 現物再読：prepare原観測whitelist、checkInput一致、reply全被覆/理由/根拠、compileのoriginとvalidateState再構成を確認。既存決定的Coreに理由生成機能があるとは扱わず、詳細判断役は残す。正式段階入力の共有境界と型宣言を含む8pathを候補として示し、現行tsconfigや全体基盤を変えない。OpenAI公式の価格/返却仕様だけread-only再確認、素材送信/API試験0。追加資料fileは作らず既存next-integration-scopeを更新。
+
+## 同じ範囲整理の7pathへの縮小確認
+
+受領2026-10-09T08:40:15Z、範囲確認終了2026-10-09T08:44:59.835Z。TODO44の範囲確認を2026-10-09 17:44:59 JSTに終了、承認判断待ち。親指示で原観測prepareを変更対象から外し、共有境界のstage envelope純粋生成→既存caller排他保存、既存selectionRecord.origin→compile→validateStateの同じ共有検査を使う7path案は現行codeの読み取り上成立。理由/根拠/範囲/物理制約は既存evaluateReply、追加はJ16 choice対応/全対象被覆/由来だけ。別台帳/再読専用validatorを増やさない。想定製品4/型1/試験2=7path、実装3.5〜4.5h・検証2〜3h・終了0.5〜1h、計6〜8.5h。今は範囲整理だけでコード変更/試験再実行/API/製造0、成立の実試験は未実施。Check60の本人確認、既知skip/素材不足/型診断とTODO54を保持。本番適用/新送信は別承認。次担当monaが着工範囲と必要承認を扱う。[7pathの根拠・受理条件・再見積もり](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
+
+8path案のprepare変更を外し、純粋生成を既存共有境界へ、排他保存を既存callerへ集約。compileに専用origin分岐を足せばvalidateState既存再構成が同じ検査を使うことを現行codeから確認し、元fresh入力の検査modeと専用originを混同しない。読み取りだけで実装/実試験成功とはしない。外部API資料の再照合や旧test再実行も追加していない。
