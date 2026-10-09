@@ -1,4 +1,8 @@
 import {createHash} from 'node:crypto';
+import {buildJ16RequestSnapshotV001, validateJ16AnswerRowsV001, projectJ16SceneV001,
+  bindJ16TextV001, createJ16ScenePacketV001, createJ16StageInputV001,
+  type J16TextBindingV001, type J16StageBatchV001}
+  from '../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs';
 
 // Local J16 adapter only. Import, construction and validation perform no I/O.
 // Live HTTP, credential lookup, workflow wiring and production adoption are absent.
@@ -51,41 +55,8 @@ function freeze<T>(value: T): T {
 export function buildDecisionsJ16RequestV001(source: Uint8Array,
   binding: {sha256: string; bytes: number; captionIds: readonly string[]},
   captionIndices?: readonly number[]): DecisionsJ16RequestV001 {
-  check(/^[a-f0-9]{64}$/u.test(binding.sha256) && Number.isSafeInteger(binding.bytes)
-    && binding.bytes > 0 && source.byteLength === binding.bytes
-    && sha(source) === binding.sha256, 'J16_SOURCE_BINDING');
-  const text = new TextDecoder('utf-8', {fatal: true}).decode(source);
-  const document: unknown = JSON.parse(text);
-  exact(document, ['documentKind', 'context', 'answerMeaning', 'questions'], 'J16_DOCUMENT_FIELDS');
-  check(document.documentKind === 'zev-j16-offline-input-v001', 'J16_DOCUMENT_KIND');
-  exact(document.context, ['productionPurpose', 'scene', 'captions', 'adjacentCaptions', 'adjacentScenes',
-    'availableVocabulary', 'physicalObservations', 'audioLimitations', 'audioCandidates'], 'J16_CONTEXT_FIELDS');
-  exact(document.answerMeaning, [...J16_CHOICES_V001], 'J16_MEANING_FIELDS');
-  check(J16_CHOICES_V001.every(choice => nonempty(document.answerMeaning[choice])), 'J16_MEANING_EMPTY');
-  check(Array.isArray(document.questions) && document.questions.length > 0
-    && Array.isArray(document.context.captions)
-    && document.context.captions.length === document.questions.length, 'J16_INPUT_COVERAGE');
-  check(binding.captionIds.length === document.questions.length
-    && binding.captionIds.every(nonempty)
-    && new Set(binding.captionIds).size === binding.captionIds.length, 'J16_BOUND_IDS');
-  for (const [index, question] of document.questions.entries()) {
-    exact(question, ['localCaptionId', 'captionIndex', 'question'], 'J16_QUESTION_FIELDS');
-    check(question.localCaptionId === binding.captionIds[index] && question.captionIndex === index
-      && document.context.captions[index]?.captionId === question.localCaptionId
-      && nonempty(question.question), 'J16_QUESTION_BINDING');
-  }
-  const selected = captionIndices === undefined ? document.questions.map((_: unknown, i: number) => i) : [...captionIndices];
-  check(selected.length > 0 && selected.every((i: number, p: number) => Number.isSafeInteger(i)
-    && i >= 0 && i < document.questions.length && (p === 0 || i > selected[p - 1])), 'J16_SELECTED_INDICES');
-  const questions: Question[] = selected.map((i: number) => ({type: 'choice',
-    name: document.questions[i].localCaptionId, instructions: document.questions[i].question,
-    choices: J16_CHOICES_V001.map(value => ({value, description: document.answerMeaning[value]}))}));
-  // The complete scene and boundary context is shared even for a selected subset of questions.
-  const body = {model: DECISIONS_J16_MODEL_V001, input: JSON.stringify(document.context), questions};
-  const result = freeze({sourceSha256: binding.sha256, sourceBytes: binding.bytes,
-    requestSha256: sha(JSON.stringify(body)), localCaptionIds: questions.map(q => q.name), body});
-  requests.add(result);
-  return result;
+  const result = buildJ16RequestSnapshotV001(source, binding, captionIndices);
+  requests.add(result);return result;
 }
 
 function assertRequest(request: DecisionsJ16RequestV001): void {
@@ -97,31 +68,7 @@ function assertRequest(request: DecisionsJ16RequestV001): void {
 export function validateDecisionsJ16AnswersV001(request: DecisionsJ16RequestV001,
   response: unknown): J16AnswerV001[] {
   assertRequest(request);
-  check(isObject(response) && Array.isArray(response.answers)
-    && response.answers.length === request.localCaptionIds.length, 'J16_ANSWER_COVERAGE');
-  const allowedIds = new Set(request.localCaptionIds), rows = new Map<string, J16AnswerV001>();
-  for (const answer of response.answers) {
-    check(isObject(answer) && nonempty(answer.name) && allowedIds.has(answer.name)
-      && !rows.has(answer.name), 'J16_ANSWER_ID');
-    if (answer.type === 'refusal') {
-      rows.set(answer.name, {localCaptionId: answer.name, outcome: 'refusal', choice: null});
-      continue;
-    }
-    check(answer.type === 'choice' && J16_CHOICES_V001.includes(answer.choice)
-      && probability(answer.confidence) && Array.isArray(answer.probabilities)
-      && answer.probabilities.length === J16_CHOICES_V001.length, 'J16_ANSWER_TYPE');
-    const values = new Set<string>();
-    const distribution = answer.probabilities.map((row: unknown) => {
-      check(isObject(row) && J16_CHOICES_V001.includes(row.value)
-        && !values.has(row.value) && probability(row.probability), 'J16_PROBABILITIES');
-      values.add(row.value);
-      return {value: row.value as J16ChoiceV001, probability: row.probability as number};
-    });
-    rows.set(answer.name, {localCaptionId: answer.name, outcome: 'choice', choice: answer.choice,
-      confidence: answer.confidence, probabilities: distribution});
-  }
-  // Match by echoed name; provider array order is not a caption ID or a source clock.
-  return request.localCaptionIds.map(id => rows.get(id)!);
+  return validateJ16AnswerRowsV001(request.localCaptionIds, response);
 }
 
 /** Mock-only exchange: live mode is rejected before dispatch; no retry or automatic fallback. */
@@ -169,38 +116,7 @@ function readBoundJson(bytes: Uint8Array, binding: J16ByteBindingV001, code: str
   const text = new TextDecoder('utf-8', {fatal: true}).decode(bytes);
   return {text, value: JSON.parse(text)};
 }
-function projectOrchestrationScene(input: JsonObject, sceneId: string): JsonObject {
-  check(Array.isArray(input.captions) && Array.isArray(input.contexts)
-    && Array.isArray(input.observations) && Array.isArray(input.audioCandidates)
-    && isObject(input.audioEvidence) && Array.isArray(input.audioEvidence.limitations), 'J16_ORCHESTRATION_FIELDS');
-  const contexts = new Map(input.contexts.map((row: JsonObject) => [row.contextId, row]));
-  check(contexts.size === input.contexts.length && contexts.has(sceneId), 'J16_ORCHESTRATION_SCENE');
-  const positions = input.captions.flatMap((row: JsonObject, i: number) => row.contextId === sceneId ? [i] : []);
-  check(positions.length > 0 && positions.every((p: number, i: number) => p === positions[0] + i), 'J16_ORCHESTRATION_CONTIGUITY');
-  const captions = positions.map((i: number) => input.captions[i]);
-  const adjacentCaptions = [positions[0] - 1, positions.at(-1)! + 1]
-    .filter(i => i >= 0 && i < input.captions.length).map(i => input.captions[i]);
-  const ids = new Set([...captions, ...adjacentCaptions].map(row => row.captionId));
-  const copyKeys = (row: JsonObject, keys: string[]): JsonObject => {
-    check(isObject(row) && keys.every(key => Object.hasOwn(row, key)), 'J16_ORCHESTRATION_OBSERVATION');
-    return Object.fromEntries(keys.map(key => [key, row[key]]));
-  };
-  // Same label-free projection as the saved J16 experiment; compare every observation,
-  // boundary, caption clock and scene, rather than accepting matching text/IDs alone.
-  const audioCandidates = input.audioCandidates.filter((row: JsonObject) =>
-    Array.isArray(row.captionIds) && row.captionIds.some((id: string) => ids.has(id))).map((row: JsonObject) => ({
-    ...copyKeys(row, ['candidateId', 'startSec', 'endSec', 'peakSec', 'metrics', 'reasons', 'captionIds']),
-    ...Object.fromEntries(['asrSegments', 'asrContext'].map(key => {
-      check(Array.isArray(row[key]), 'J16_ORCHESTRATION_ASR');
-      return [key, row[key].map((part: JsonObject) => copyKeys(part, ['id', 'startSec', 'endSec', 'text']))];
-    }))}));
-  return {productionPurpose: input.productionPurpose, scene: contexts.get(sceneId), captions, adjacentCaptions,
-    adjacentScenes: [...new Set(adjacentCaptions.map(row => row.contextId))].map(id => contexts.get(id)),
-    availableVocabulary: input.captionRolePresets,
-    physicalObservations: input.observations.filter((row: JsonObject) =>
-      Array.isArray(row.captionIds) && row.captionIds.some((id: string) => ids.has(id))),
-    audioLimitations: input.audioEvidence.limitations, audioCandidates};
-}
+const projectOrchestrationScene = projectJ16SceneV001;
 
 /** Offline, non-authoritative review beside the current rich-answer receiver.
  * It never changes a rich answer, infers missing choices, starts HTTP or fixes a state.
@@ -273,4 +189,20 @@ export function reviewDecisionsJ16OrchestrationV001(options: J16OfflineReviewOpt
     counts: {target: rows.length, consistent: rows.filter(row => row.status === 'consistent').length,
       held: rows.filter(row => row.status === 'held').length, unreviewed: unreviewedCaptionIds.length}, rows};
   return freeze({...body, reviewSha256: sha(canonical(body))});
+}
+
+/** New original scene request, still construction only; the existing mock port
+ * and branded response checker are unchanged. No credential or live dispatcher. */
+export function buildDecisionsJ16SceneRequestV001(inputBytes: Uint8Array,
+  binding: J16ByteBindingV001, sceneId: string, captionIndices?: readonly number[]) {
+  const original = readBoundJson(inputBytes, binding, 'J16_STAGE_INPUT_BINDING');
+  const packet = createJ16ScenePacketV001(bindJ16TextV001(original.text), sceneId, captionIndices);
+  const sourceBytes = Buffer.from(packet.source.text);
+  const document = JSON.parse(packet.source.text);
+  const request = buildDecisionsJ16RequestV001(sourceBytes,
+    {...packet.source, captionIds: document.questions.map((q: JsonObject) => q.localCaptionId)}, packet.captionIndices);
+  return {packet, request};
+}
+export function prepareDecisionsJ16StageV001(originalInput: J16TextBindingV001, batches: readonly J16StageBatchV001[]) {
+  return createJ16StageInputV001({originalInput, batches});
 }

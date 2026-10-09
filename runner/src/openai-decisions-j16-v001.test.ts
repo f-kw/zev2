@@ -1,14 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash, randomUUID} from 'node:crypto';
-import {readFile, writeFile, mkdtemp, mkdir, rm, stat} from 'node:fs/promises';
+import {readFile, writeFile, mkdtemp, mkdir, rm, stat, symlink} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {buildDecisionsJ16RequestV001, validateDecisionsJ16AnswersV001, runDecisionsJ16MockV001,
   DECISIONS_J16_ENDPOINT_V001, DECISIONS_J16_MODEL_V001, type DecisionsJ16MockPortV001,
   type DecisionsJ16RequestV001, type J16ChoiceV001,
-  reviewDecisionsJ16OrchestrationV001} from './openai-decisions-j16-v001.js';
+  reviewDecisionsJ16OrchestrationV001, buildDecisionsJ16SceneRequestV001, prepareDecisionsJ16StageV001} from './openai-decisions-j16-v001.js';
+
+import {bindJ16TextV001} from '../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs';
 
 const bytes = (value: unknown) => Buffer.from(JSON.stringify(value));
 const hash = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
@@ -324,4 +326,89 @@ test('existing five frozen scene inputs map all 326 IDs without loading referenc
     assert.equal(result.status, 'complete');questions += r.body.questions.length;
   }
   assert.equal(questions, 326);assert.equal(mockExchanges, 5);
+});
+
+
+async function currentStagedFixture() {
+  const root = resolve(import.meta.dirname, '../..');
+  const {stagedFixture} = await import(pathToFileURL(resolve(root, 'evals/clip_composition/presentation_orchestration_v001.test.mjs')).href);
+  return stagedFixture();
+}
+test('new original scene uses the branded adapter and mock port, preserving scene boundaries and original byte identity', async () => {
+  const f = await currentStagedFixture(), inputBytes = Buffer.from(f.originalInput.text);
+  const {packet,request} = buildDecisionsJ16SceneRequestV001(inputBytes,f.originalInput,'context-1');
+  assert.equal(packet.request.text,JSON.stringify(request.body));
+  assert.equal(JSON.parse(request.body.input).adjacentCaptions.length,2);
+  let calls=0;
+  const result=await runDecisionsJ16MockV001(request,{mode:'mock',exchange:async()=>{calls++;
+    return {status:200,body:JSON.stringify({model:'gpt-6-luna',answers:request.localCaptionIds.map(id=>choice(id,'effect'))})};}});
+  assert.equal(calls,1);assert.equal(result.status,'complete');
+  assert.throws(()=>buildDecisionsJ16SceneRequestV001(inputBytes,{...f.originalInput,sha256:'a'.repeat(64)},'context-1'),/J16_STAGE_INPUT_BINDING/);
+});
+test('typed stage facade keeps incomplete judgment pending and constructs full coverage without normal filling', async () => {
+  const f=await currentStagedFixture(), whole=prepareDecisionsJ16StageV001(f.originalInput,f.batches);
+  assert.equal(whole.status,'ready-for-details');assert.equal(whole.mode,'mock');assert.equal(whole.targetCaptionIds.length,3);
+  const partial=prepareDecisionsJ16StageV001(f.originalInput,f.batches.slice(1));
+  assert.equal(partial.status,'held');assert.deepEqual(partial.missingCaptionIds,['caption-1']);assert.equal(partial.decisions.length,2);
+  assert.throws(()=>{(whole.decisions as any)[0].choice='normal';},TypeError);
+});
+
+test('actual caller prepares, accepts and reads a mock stage through existing saved-state validation; originals and old state remain unchanged', async () => {
+  const root=resolve(import.meta.dirname,'../..'), f=await currentStagedFixture();
+  const {prepareJ16StagedInputFilesV001:prepare,acceptJ16StagedInputFilesV001:accept,readJ16StagedCandidateFilesV001:read}=await import(
+    pathToFileURL(resolve(root,'evals/clip_composition/run_new_material_digest_20260926_presentation.mts')).href);
+  const temp=await mkdtemp(join(tmpdir(),'zev-j16-stage-test-'));
+  const prefix=resolve(root,'runtime/artifacts/openai-decisions-j16-staged-v001'), prepared=join(prefix,'test-input-'+randomUUID()),candidate=join(prefix,'test-state-'+randomUUID());
+  const originals: Array<{path:string;sha256:string;bytes:number}>=[];
+  const save=async(name:string,text:string)=>{const path=join(temp,name);await writeFile(path,text);const b=Buffer.from(text);
+    const ref={path,sha256:hash(b),bytes:b.length};originals.push(ref);return ref;};
+  const source=await save('source.json',JSON.stringify(f.source)),input=await save('input.json',f.originalInput.text), batches=[];
+  for(const [i,b]of f.batches.entries())batches.push({sceneId:b.sceneId,captionIndices:b.captionIndices,
+    source:await save(`source-${i}.json`,b.source.text),request:await save(`request-${i}.json`,b.request.text),response:await save(`response-${i}.json`,b.response.text)});
+  const spec=await save('spec.json',JSON.stringify({schemaVersion:'presentation-j16-stage-files-v001',originalInput:input,sourceBindings:source,batches}));
+  const reply=await save('reply.json',f.envelope(f.reply).text);let hasPrepared=false,hasCandidate=false;
+  const oldSaved=join(root,'runtime/artifacts/digest-new-material-20260926-v001/presentation/saved');
+  const oldNames=['fresh-input.json','raw-ai-response-v001.json','source-bindings.json','captionAuto.json','captionOverrides.json','connectionAuto.json','connectionOverrides.json','selectionRecord.json'];
+  // Optional old bytes are preservation controls only, never a response fixture.
+  const oldHashes=new Map<string,string>();for(const name of oldNames){try{oldHashes.set(name,hash(await readFile(join(oldSaved,name))));}catch(e:any){if(e.code!=='ENOENT')throw e;}}
+  try {
+    await assert.rejects(prepare(spec.path,join(temp,'forbidden')),/Explicit staged candidate directory required/);
+    const start=await prepare(spec.path,prepared);hasPrepared=true;assert.equal(start.status,'ready-for-details');assert.equal(start.productionActivated,false);
+    await assert.rejects(prepare(spec.path,prepared),(e:any)=>e.code==='EEXIST');
+    const result=await accept(prepared,reply.path,candidate);hasCandidate=true;assert.equal(result.status,'candidate-validated');assert.equal(result.productionActivated,false);
+    assert.equal(result.counts.captions.explicitNormal,1);assert.equal(result.counts.captions.selected,2);
+    const replay=await read(candidate);assert.equal(replay.recordSha256,result.recordSha256);
+    const statePath=join(candidate,'state.json'),stateBytes=await readFile(statePath),state=JSON.parse(stateBytes.toString());
+    assert.equal(state.selectionRecord.origin.kind,'openai-j16-staged-v001');assert.equal(state.selectionRecord.origin.stageInput.mode,'mock');
+    assert.equal(state.selectionRecord.captions[0].allowedPresets[0].targetText,'字幕');assert.equal((await stat(statePath)).mode&0o777,0o600);
+    assert.deepEqual(Object.keys(state).sort(),['captionAuto','captionOverrides','connectionAuto','connectionOverrides','selectionRecord']);
+    await assert.rejects(accept(prepared,reply.path,candidate),(e:any)=>e.code==='EEXIST');assert.equal(hash(await readFile(statePath)),hash(stateBytes));
+    const filesPath=join(candidate,'files.json'),files=JSON.parse(await readFile(filesPath,'utf8'));
+    state.selectionRecord.origin.stageInput.decisions[0].choice='normal';const altered=Buffer.from(JSON.stringify(state));await writeFile(statePath,altered);
+    files.state.sha256=hash(altered);files.state.bytes=altered.length;await writeFile(filesPath,JSON.stringify(files));
+    await assert.rejects(read(candidate),/J16_STAGE_REPLAY/); // Rehashed file manifest cannot bypass compile's origin replay.
+    for(const ref of originals)assert.equal(hash(await readFile(ref.path)),ref.sha256);
+    for(const [name,h]of oldHashes)assert.equal(hash(await readFile(join(oldSaved,name))),h);
+  } finally {if(hasCandidate)await rm(candidate,{recursive:true});if(hasPrepared)await rm(prepared,{recursive:true});await rm(temp,{recursive:true});}
+});
+
+test('caller keeps held mock input saved, denies candidate writes, and refuses symlink output or changed originals', async () => {
+  const root=resolve(import.meta.dirname,'../..'),f=await currentStagedFixture();
+  const {prepareJ16StagedInputFilesV001:prepare,acceptJ16StagedInputFilesV001:accept}=await import(
+    pathToFileURL(resolve(root,'evals/clip_composition/run_new_material_digest_20260926_presentation.mts')).href);
+  const temp=await mkdtemp(join(tmpdir(),'zev-j16-stage-held-')),prefix=resolve(root,'runtime/artifacts/openai-decisions-j16-staged-v001');
+  const prepared=join(prefix,'test-held-'+randomUUID()),candidate=join(prefix,'test-denied-'+randomUUID()),link=join(prefix,'test-link-'+randomUUID());let created=false,linked=false;
+  const put=async(name:string,text:string)=>{const path=join(temp,name);await writeFile(path,text);const b=Buffer.from(text);return {path,sha256:hash(b),bytes:b.length};};
+  const input=await put('input.json',f.originalInput.text),sourceBindings=await put('source.json',JSON.stringify(f.source)),batch=f.batches[0];
+  const spec=await put('spec.json',JSON.stringify({schemaVersion:'presentation-j16-stage-files-v001',originalInput:input,sourceBindings,batches:[{sceneId:batch.sceneId,captionIndices:batch.captionIndices,
+    source:await put('batch-source.json',batch.source.text),request:await put('request.json',batch.request.text),response:await put('response.json',batch.response.text)}]}));
+  const reply=await put('reply.json',f.envelope(f.reply).text);
+  try {
+    const result=await prepare(spec.path,prepared);created=true;assert.equal(result.status,'held');assert.equal(result.missingCount,2);
+    await assert.rejects(accept(prepared,reply.path,candidate),/J16_STAGE_HELD/);
+    await assert.rejects(stat(candidate),(e:any)=>e.code==='ENOENT');
+    await symlink(temp,link);linked=true;await assert.rejects(prepare(spec.path,link),(e:any)=>e.code==='EEXIST');
+    await writeFile(input.path,input.path+'altered');await assert.rejects(accept(prepared,reply.path,candidate),/Expected values to be strictly deep-equal/);
+    await assert.rejects(stat(candidate),(e:any)=>e.code==='ENOENT');
+  } finally {if(linked)await rm(link);if(created)await rm(prepared,{recursive:true});await rm(temp,{recursive:true});}
 });

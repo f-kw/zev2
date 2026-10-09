@@ -1,5 +1,7 @@
 /** Finite semantic choices, four independent saved records, and one drawing clock. */
 import {createHash} from 'node:crypto';
+import {J16_STAGE_ORIGIN_V001, readJ16StageDetailsV001, assertJ16StagedOriginV001}
+  from './presentation_j16_staged_boundary_v001.mjs';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
 import {decodePresentationCaptionB1StrictJsonV001} from './presentation_caption_semantic_source_package_v001.mjs';
 import {omitPresentationPanelPlateForInspectionV002, PRESENTATION_PANEL_ALLOWED_PALETTES_V003}
@@ -497,10 +499,12 @@ function preparePanelPaletteRecompile(context, original) {
 }
 
 function compile(context, input, replyBytes, origin) {
-  require(object(origin) && ['fresh-codex', 'technical-recompile'].includes(origin.kind), 'judgment origin required');
+  require(object(origin) && ['fresh-codex', 'technical-recompile', J16_STAGE_ORIGIN_V001].includes(origin.kind), 'judgment origin required');
   let recompilation;
   if (origin.kind === 'fresh-codex') exact(origin, ['kind'], 'fresh judgment origin');
-  else {
+  else if (origin.kind === J16_STAGE_ORIGIN_V001) {
+    assertJ16StagedOriginV001({input, replyBytes: utf8(replyBytes, 'staged detail reply'), origin});
+  } else {
     if (wireVersion(context) === 'v003') {
       exact(origin, ['kind', 'original', 'palettePolicy'], 'technical palette recompilation origin');
       require(same(origin.palettePolicy, paletteRecompilePolicy), 'technical palette policy differs');
@@ -513,7 +517,8 @@ function compile(context, input, replyBytes, origin) {
     require(same(input, recompilation.input) && utf8(replyBytes, 'recompiled reply') === recompilation.replyBytes,
       'recompiled semantic judgments or background policy differ');
   }
-  const data = contextData(context), evaluated = evaluateReply(context, input, replyBytes, origin.kind);
+  const data = contextData(context), evaluated = evaluateReply(context, input, replyBytes,
+    origin.kind === J16_STAGE_ORIGIN_V001 ? 'fresh-codex' : origin.kind);
   if (recompilation) for (const key of ['captions', 'connections']) {
     const idKey = key === 'captions' ? 'captionId' : 'connectionId';
     for (const row of evaluated[key]) require(same(row.selection,
@@ -539,6 +544,15 @@ function compile(context, input, replyBytes, origin) {
 }
 export function fixOrchestrationJudgmentV001({context, input, replyBytes}) {
   const compiled = compile(context, input, replyBytes, {kind: 'fresh-codex'});
+  return initializeSavedOverrides(context, compiled);
+}
+/** Same compile path is replayed by existing validateState. Stage choices add
+ * only source/coverage/correspondence checks; evaluateReply owns rich details. */
+export function fixJ16StagedOrchestrationJudgmentV001({context, stageInput, stageReply}) {
+  const replyBytes = readJ16StageDetailsV001(stageInput, stageReply);
+  const input = json(stageInput.originalInput.text, 'staged original input');
+  const compiled = compile(context, input, replyBytes,
+    {kind: J16_STAGE_ORIGIN_V001, stageInput, stageReply});
   return initializeSavedOverrides(context, compiled);
 }
 /** This explicit operation retains old semantic decisions and their original

@@ -1,16 +1,18 @@
 import test from 'node:test';
 import {pathToFileURL} from 'node:url';
+import {bindJ16TextV001, createJ16ScenePacketV001, createJ16StageInputV001, J16_STAGE_ORIGIN_V001}
+  from './presentation_j16_staged_boundary_v001.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {canonicalJson} from './presentation_caption_contract_v002.mjs';
-import {AUTO_PRESENTATION_RULES_REF_V008, sha256AutoPresentationV001,
+import {AUTO_PRESENTATION_RULES_REF_V008, AUTO_PRESENTATION_RULES_REF_V009, sha256AutoPresentationV001,
   materializeFiniteAutoPresentationCaptionV001} from './presentation_auto_effects_v001.mjs';
 import {getPresentationCaptionMotionProgramV001} from './presentation_caption_motion_v001.mjs';
 import {createOrchestrationContextV001, createOrchestrationJudgmentInputV001, fixOrchestrationJudgmentV001,
   selectOrchestrationPresetV001, editOrchestrationOverrideV001, resolveOrchestrationDrawingViewV001,
   assertOrchestrationDrawingViewV001, assertOrchestrationDrawingViewMatchesStateV001,
   exportOrchestrationDrawingViewEvidenceV001, restoreOrchestrationDrawingViewEvidenceV001,
-  buildOrchestrationNativeQcAlternativeElementsV001} from './presentation_orchestration_v001.mjs';
+  buildOrchestrationNativeQcAlternativeElementsV001, fixJ16StagedOrchestrationJudgmentV001} from './presentation_orchestration_v001.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 const hash = value => sha(canonicalJson(value));
@@ -61,6 +63,34 @@ export function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'c
 const fixed = (f, reply = f.reply) => fixOrchestrationJudgmentV001({context: f.context, input: f.input, replyBytes: serialize(reply)});
 const view = (f, state) => resolveOrchestrationDrawingViewV001({context: f.context, state});
 const edit = (f, state, kind, itemId, selection) => editOrchestrationOverrideV001({context: f.context, state, kind, itemId, selection});
+
+// Original synthetic observations only. Responses below are labeled mock data,
+// not saved judgments, a new material, provider results or manufacturing permission.
+export function stagedFixture() {
+  const f = fixture(), source = copy(f.source), evidence = copy(f.evidence);
+  source.captionContext.renderingRulesRef = copy(AUTO_PRESENTATION_RULES_REF_V009);
+  evidence.audioEvidence.limitations = ['人工fixture。実音声は使っていない。'];
+  Object.assign(evidence.audioCandidates[0], {startSec: 3.875, endSec: 6.25, peakSec: 5,
+    metrics: {rms: 0.1}, reasons: ['人工の音量観測'], captionIds: ['caption-2'], asrSegments: [], asrContext: []});
+  const context = createOrchestrationContextV001(source), input = createOrchestrationJudgmentInputV001({context, evidence});
+  const reply = copy(f.reply);reply.schemaVersion = 'presentation-orchestration-judgment-v003';reply.inputSha256 = input.inputSha256;
+  Object.assign(reply.captions[0], {allowedPresets: [{preset: 'color', scope: 'partial-caption', targetText: '字幕'}]});
+  Object.assign(reply.captions[1], {semanticRole: 'vocal-energy', allowedPresets: [{preset: 'pulse', anchorPeakId: 'peak-1'}]});
+  Object.assign(reply.captions[2], {semanticRole: 'normal', allowedPresets: [{preset: 'normal'}], reason: '人工fixtureの通常説明をそのまま表示する。'});
+  const originalInput = bindJ16TextV001(serialize(input));
+  const batches = input.contexts.map(scene => {
+    const packet = createJ16ScenePacketV001(originalInput, scene.contextId), request = JSON.parse(packet.request.text);
+    const response = {model: 'gpt-6-luna', usage: {input_tokens: 10}, fixtureOnly: true,
+      answers: request.questions.map(q => {const value = q.name === 'caption-3' ? 'normal' : 'effect';
+        return {type: 'choice', name: q.name, choice: value, confidence: 0.7,
+          probabilities: ['normal', 'effect', 'unresolved'].map(v => ({value: v, probability: v === value ? 0.8 : 0.1}))};})};
+    return {...packet, response: bindJ16TextV001(serialize(response))};
+  });
+  const stageInput = createJ16StageInputV001({originalInput, batches});
+  const envelope = detail => bindJ16TextV001(serialize({schemaVersion: 'presentation-j16-stage-reply-v001',
+    stageInputSha256: stageInput.stageInputSha256, detailReplyBytes: serialize(detail)}));
+  return {source, context, evidence, input, reply, originalInput, batches, stageInput, envelope};
+}
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 test('fresh complete semantic judgment seals four independent saved systems without a prior answer', () => {
@@ -291,4 +321,114 @@ test('AI input retains every native candidate and the measured sample clock cann
   source.captionContext.decisionInputRef.fileSha256 = sha(source.decisionInputBytes);
   assert.throws(() => createOrchestrationContextV001(source), /sample clocks differ/);
 });
+
+test('staged mock acceptance preserves partial Color, Pulse, Normal, reasons and connections in existing five records', () => {
+  const f = stagedFixture(), original = serialize(f.input), details = serialize(f.reply);
+  const state = fixJ16StagedOrchestrationJudgmentV001({context: f.context, stageInput: f.stageInput, stageReply: f.envelope(f.reply)});
+  assert.equal(state.selectionRecord.origin.kind, J16_STAGE_ORIGIN_V001);
+  assert.deepEqual(state.selectionRecord.input, f.input);assert.equal(state.selectionRecord.replyBytes, details);
+  assert.equal(state.selectionRecord.captions[0].allowedPresets[0].targetText, '字幕');
+  assert.equal(state.selectionRecord.captions[0].reason, f.reply.captions[0].reason);
+  assert.deepEqual(state.selectionRecord.captions[0].evidenceIds, f.reply.captions[0].evidenceIds);
+  assert.equal(state.selectionRecord.captions[1].finalCaptionChoice.anchorPeakId, 'peak-1');
+  assert.equal(state.selectionRecord.captions[2].semanticRole, 'normal');
+  assert.deepEqual(state.selectionRecord.connections.map(r => r.reason), f.reply.connections.map(r => r.reason));
+  assert.deepEqual(Object.keys(state).sort(), ['captionAuto','captionOverrides','connectionAuto','connectionOverrides','selectionRecord']);
+  assert.equal(serialize(f.input), original);
+  const restored = JSON.parse(serialize(state)), replay = resolveOrchestrationDrawingViewV001({context: f.context, state: restored});
+  assert.deepEqual(replay.resolution.counts.captions, {total: 3, explicitNormal: 1, selected: 2, unresolved: 0, unrepresentable: 0});
+  assert.deepEqual(state.captionAuto, fixOrchestrationJudgmentV001({context: f.context, input: f.input, replyBytes: details}).captionAuto);
+});
+
+test('existing saved-state replay rejects altered stage provenance, raw answers, source clocks, reply or origin', () => {
+  const f = stagedFixture(), state = fixJ16StagedOrchestrationJudgmentV001({context: f.context, stageInput: f.stageInput, stageReply: f.envelope(f.reply)});
+  for (const mutate of [
+    s => {s.selectionRecord.origin.stageInput.decisions[0].choice = 'normal';},
+    s => {s.selectionRecord.origin.stageInput.stageInputSha256 = 'a'.repeat(64);},
+    s => {s.selectionRecord.origin.stageInput.mode = 'live';},
+    s => {s.selectionRecord.origin.stageInput.originalInput.text += ' ';},
+    s => {s.selectionRecord.origin.stageInput.batches[0].response.text += ' ';},
+    s => {s.selectionRecord.origin.stageReply.text += ' ';},
+    s => {s.selectionRecord.input.sourceClockSha256 = 'a'.repeat(64);},
+    s => {s.selectionRecord.origin.kind = 'fresh-codex';},
+    s => {s.selectionRecord.replyBytes += ' ';},
+    s => {s.captionAuto.proposal.effects[0].scope = 'whole-caption';}
+  ]) {const changed = copy(state);mutate(changed);assert.throws(() => resolveOrchestrationDrawingViewV001({context: f.context, state: changed}));}
+});
+
+test('partial coverage, refusal, unresolved and malformed responses remain held and cannot create candidate state', () => {
+  const f = stagedFixture();
+  const cases = [f.batches.slice(0, 2), ...['refusal','unresolved','malformed','wrong-model'].map(kind => {
+    const batches = copy(f.batches), response = JSON.parse(batches[0].response.text);
+    if (kind === 'refusal') response.answers[0] = {type: 'refusal', name: response.answers[0].name};
+    if (kind === 'unresolved') response.answers[0].choice = 'unresolved';
+    if (kind === 'wrong-model') response.model = 'other';
+    batches[0].response = bindJ16TextV001(kind === 'malformed' ? '{' : serialize(response));return batches;
+  })];
+  for (const batches of cases) {
+    const stageInput = createJ16StageInputV001({originalInput: f.originalInput, batches});
+    assert.equal(stageInput.status, 'held');assert(stageInput.issues.length > 0);
+    assert.equal(stageInput.batches[0].response.text, batches[0].response.text);
+    const stageReply = bindJ16TextV001(serialize({schemaVersion:'presentation-j16-stage-reply-v001',
+      stageInputSha256:stageInput.stageInputSha256,detailReplyBytes:serialize(f.reply)}));
+    assert.throws(() => fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput,stageReply}), /J16_STAGE_HELD/);
+  }
+});
+
+test('J16 normal versus effect conflicts stop without overwriting either decision or detailed answer', () => {
+  const f = stagedFixture();
+  for (const mutate of [r => {r.captions[0].semanticRole='normal';r.captions[0].allowedPresets=[{preset:'normal'}];},
+    r => {r.captions[2].semanticRole='focus';r.captions[2].allowedPresets=[{preset:'color',scope:'whole-caption'}];},
+    r => {r.captions[0].allowedPresets.push({preset:'normal'});},
+    r => {r.captions[0].status='unrepresentable';r.captions[0].semanticRole=null;r.captions[0].allowedPresets=[];}
+  ]) {const reply=copy(f.reply);mutate(reply);const original=serialize(reply);
+    assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput:f.stageInput,stageReply:f.envelope(reply)}),/J16_STAGE_/);
+    assert.equal(serialize(reply),original);
+  }
+});
+
+test('existing evaluateReply still rejects missing reasons, foreign evidence, invalid partial text, Pulse and connection choices', () => {
+  const f=stagedFixture();
+  for(const [mutate, expected] of [
+    [r=>{r.captions[2].reason='';}, /ORCHESTRATION_INVALID/],
+    [r=>{r.captions[0].evidenceIds=['not-an-observation'];}, /ORCHESTRATION_INVALID/],
+    [r=>{r.captions[0].allowedPresets[0].targetText='原文にない文字';}, /partial target text was not found/],
+    [r=>{r.captions[1].allowedPresets[0].anchorPeakId='unknown';}, /ORCHESTRATION_INVALID/],
+    [r=>{r.connections[0].allowedPresets=['unknown'];}, /ORCHESTRATION_INVALID/]
+  ]) {const reply=copy(f.reply);mutate(reply);
+    assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput:f.stageInput,stageReply:f.envelope(reply)}), expected);
+  }
+});
+
+test('a stage reply must echo this stage hash; original observation inputs cannot acquire hidden saved answers', () => {
+  const f=stagedFixture(), wrong=JSON.parse(f.envelope(f.reply).text);wrong.stageInputSha256='b'.repeat(64);
+  assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput:f.stageInput,
+    stageReply:bindJ16TextV001(serialize(wrong))}),/J16_STAGE_REPLY_BINDING/);
+  const input=copy(f.input);input.savedPriorAnswer=f.reply;const {inputSha256:unused,...body}=input;input.inputSha256=hash(body);
+  const originalInput=bindJ16TextV001(serialize(input));
+  const batches=f.batches.map(b=>({...createJ16ScenePacketV001(originalInput,b.sceneId),response:b.response}));
+  const stageInput=createJ16StageInputV001({originalInput,batches}), reply=copy(f.reply);reply.inputSha256=input.inputSha256;
+  const envelope=bindJ16TextV001(serialize({schemaVersion:'presentation-j16-stage-reply-v001',stageInputSha256:stageInput.stageInputSha256,detailReplyBytes:serialize(reply)}));
+  assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput,stageReply:envelope}),/judgment input source or hash differs/);
+});
+
+test('scene request projection retains adjacent captions and observations, with no rich answers in the API payload', () => {
+  const f=stagedFixture(), middle=JSON.parse(f.batches[1].request.text), shared=JSON.parse(middle.input);
+  assert.equal(middle.questions.length,1);assert.equal(shared.captions[0].captionId,'caption-2');
+  assert.deepEqual(shared.adjacentCaptions.map(r=>r.captionId),['caption-1','caption-3']);
+  assert.equal(shared.audioCandidates[0].metrics.rms,0.1);
+  assert(!middle.input.includes('semanticRole'));assert(!middle.input.includes(f.reply.captions[0].reason));
+  assert.equal(JSON.parse(f.batches[1].response.text).usage.input_tokens,10);
+});
+
+test('duplicated target questions and altered request or projection bytes stop before stage acceptance', () => {
+  const f=stagedFixture();
+  assert.throws(()=>createJ16StageInputV001({originalInput:f.originalInput,batches:[...f.batches,f.batches[0]]}),/J16_STAGE_DUPLICATE_ID/);
+  for(const field of ['source','request']) {const batches=copy(f.batches), value=JSON.parse(batches[0][field].text);
+    if(field==='source')value.context.captions[0].startFrame+=1;else value.questions[0].instructions+='別の指示';
+    batches[0][field]=bindJ16TextV001(serialize(value));
+    assert.throws(()=>createJ16StageInputV001({originalInput:f.originalInput,batches}),/J16_STAGE_SCENE_REQUEST_BINDING/);
+  }
+});
+
 }

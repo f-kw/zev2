@@ -20,7 +20,8 @@ import {PRESENTATION_CAPTION_MOTION_PRESETS_V001, getPresentationCaptionMotionPr
 import {loadBoundAudioEvidenceV005, buildPresentationFocusSelectionInputV005} from './presentation_focus_selection_v001.mts';
 import {buildOrchestrationInputFilesV001} from './presentation_orchestration_prepare_v001.mjs';
 import {createOrchestrationContextV001, fixOrchestrationJudgmentV001, resolveOrchestrationDrawingViewV001,
-  exportOrchestrationDrawingViewEvidenceV001, assertOrchestrationDrawingViewMatchesStateV001}
+  exportOrchestrationDrawingViewEvidenceV001, assertOrchestrationDrawingViewMatchesStateV001,
+  createOrchestrationJudgmentInputV001, fixJ16StagedOrchestrationJudgmentV001}
   from './presentation_orchestration_v001.mjs';
 import {buildOrchestrationBackgroundV001, inspectOrchestrationEncodedAudioV001}
   from './presentation_orchestration_background_v001.mjs';
@@ -29,6 +30,8 @@ import {createPresentationRendererProcessObserverV001} from './presentation_rend
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
 import {buildDecisionsJ16RequestV001, reviewDecisionsJ16OrchestrationV001}
   from '../../runner/src/openai-decisions-j16-v001.js';
+import {bindJ16TextV001, createJ16StageInputV001, J16_STAGE_ORIGIN_V001}
+  from './presentation_j16_staged_boundary_v001.mjs';
 
 type Json = Record<string, any>;
 const absolute = (p: string) => path.resolve(ROOT, p);
@@ -248,6 +251,106 @@ export async function reviewDecisionsOrchestrationV001(specPath: string, outputD
     counts: review.counts, completeJ16Coverage: review.completeJ16Coverage, readyForFormalAcceptance: false};
 }
 
+
+const stagedRoot = absolute('runtime/artifacts/openai-decisions-j16-staged-v001');
+function exactStagedKeys(value: Json, keys: string[]) {
+  assert(value && typeof value === 'object' && !Array.isArray(value)
+    && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key)));
+}
+async function stagedFile(pathname: string) {
+  assert(path.isAbsolute(pathname) && (await lstat(pathname)).isFile(), 'Regular absolute stage file required');
+  const bytes = await readFile(pathname), text = new TextDecoder('utf-8', {fatal: true}).decode(bytes);
+  return {ref: {path: pathname, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length}, text};
+}
+async function stagedReadBound(ref: Json) {
+  exactStagedKeys(ref, ['path', 'sha256', 'bytes']);
+  assert(/^[a-f0-9]{64}$/.test(ref.sha256) && Number.isSafeInteger(ref.bytes) && ref.bytes > 0);
+  const actual = await stagedFile(ref.path);assert.deepEqual(actual.ref, ref);return actual.text;
+}
+async function stagedDirectory(directory: string, create: boolean) {
+  assert(path.isAbsolute(directory) && path.dirname(directory) === stagedRoot
+    && /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(path.basename(directory)), 'Explicit staged candidate directory required');
+  assert.equal(await realpath(path.dirname(stagedRoot)), path.dirname(stagedRoot));
+  if (create) await mkdir(stagedRoot, {recursive: true});
+  assert((await lstat(stagedRoot)).isDirectory());assert.equal(await realpath(stagedRoot), stagedRoot);
+  if (create) await mkdir(directory); // Exclusive; no previous output or symlink reuse.
+  assert((await lstat(directory)).isDirectory());assert.equal(await realpath(directory), directory);
+}
+async function stagedSave(directory: string, name: string, text: string) {
+  const target = path.join(directory, name);await writeFile(target, text, {flag: 'wx', mode: 0o600});
+  const saved = await stagedFile(target);assert.equal(saved.text, text);return saved.ref;
+}
+
+/** Explicit mock preparation only. The original observation producer is unchanged. */
+export async function prepareJ16StagedInputFilesV001(specPath: string, directory: string) {
+  const specFile = await stagedFile(specPath), spec = JSON.parse(specFile.text);
+  exactStagedKeys(spec, ['schemaVersion', 'originalInput', 'sourceBindings', 'batches']);
+  assert.equal(spec.schemaVersion, 'presentation-j16-stage-files-v001');assert(Array.isArray(spec.batches));
+  const originalFiles = [specFile.ref, spec.originalInput, spec.sourceBindings];
+  const inputText = await stagedReadBound(spec.originalInput), sourceText = await stagedReadBound(spec.sourceBindings);
+  const input = JSON.parse(inputText), source = JSON.parse(sourceText), context = createOrchestrationContextV001(source);
+  // Reuse the existing original-input reconstruction, never widen its whitelist.
+  assert.deepEqual(input, createOrchestrationJudgmentInputV001({context, connectionPolicy: input.connectionPolicy,
+    evidence: Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence', 'audioCandidates'].map(k => [k, input[k]]))}));
+  const batches = [];
+  for (const batch of spec.batches) {
+    exactStagedKeys(batch, ['sceneId', 'captionIndices', 'source', 'request', 'response']);
+    const values: Json = {sceneId: batch.sceneId, captionIndices: batch.captionIndices};
+    for (const key of ['source', 'request', 'response']) {values[key] = bindJ16TextV001(await stagedReadBound(batch[key]));originalFiles.push(batch[key]);}
+    batches.push(values as any);
+  }
+  const stageInput = createJ16StageInputV001({originalInput: bindJ16TextV001(inputText), batches});
+  for (const ref of originalFiles) await stagedReadBound(ref);
+  await stagedDirectory(directory, true);
+  const stageRef = await stagedSave(directory, 'stage-input.json', JSON.stringify(stageInput, null, 2) + '\n');
+  const sourceRef = await stagedSave(directory, 'source-bindings.json', sourceText);
+  const files = {schemaVersion: 'presentation-j16-stage-prepared-files-v001', mode: 'mock', originalFiles,
+    stageInput: stageRef, sourceBindings: sourceRef};
+  await stagedSave(directory, 'stage-files.json', JSON.stringify(files, null, 2) + '\n');
+  return {mode: 'mock', status: stageInput.status, stageInputPath: stageRef.path,
+    stageInputSha256: stageInput.stageInputSha256, targetCount: stageInput.targetCaptionIds.length,
+    missingCount: stageInput.missingCaptionIds.length, issues: stageInput.issues, productionActivated: false};
+}
+
+/** Existing validateState, reached through resolveDrawingView, is the semantic
+ * replay check. This reader only checks saved byte identities and original IO. */
+export async function readJ16StagedCandidateFilesV001(directory: string) {
+  await stagedDirectory(directory, false);
+  const manifest = JSON.parse((await stagedFile(path.join(directory, 'files.json'))).text);
+  exactStagedKeys(manifest, ['schemaVersion', 'mode', 'sourceBindings', 'state']);
+  assert.equal(manifest.schemaVersion, 'presentation-j16-candidate-files-v001');assert.equal(manifest.mode, 'mock');
+  assert.equal(manifest.state.path, path.join(directory, 'state.json'));
+  const source = JSON.parse(await stagedReadBound(manifest.sourceBindings)), state = JSON.parse(await stagedReadBound(manifest.state));
+  assert.equal(state.selectionRecord.origin.kind, J16_STAGE_ORIGIN_V001);
+  const context = createOrchestrationContextV001(source), view = resolveOrchestrationDrawingViewV001({context, state});
+  return {mode: 'mock', status: 'candidate-validated', recordSha256: state.selectionRecord.recordSha256,
+    stageInputSha256: state.selectionRecord.origin.stageInput.stageInputSha256,
+    counts: view.resolution.counts, productionActivated: false};
+}
+
+/** New candidate records only; no normal accept, queue, render or authority change. */
+export async function acceptJ16StagedInputFilesV001(preparedDirectory: string, replyPath: string, directory: string) {
+  await stagedDirectory(preparedDirectory, false);
+  const filesFile = await stagedFile(path.join(preparedDirectory, 'stage-files.json')), files = JSON.parse(filesFile.text);
+  exactStagedKeys(files, ['schemaVersion', 'mode', 'originalFiles', 'stageInput', 'sourceBindings']);
+  assert.equal(files.schemaVersion, 'presentation-j16-stage-prepared-files-v001');assert.equal(files.mode, 'mock');
+  assert.equal(files.stageInput.path, path.join(preparedDirectory, 'stage-input.json'));
+  assert.equal(files.sourceBindings.path, path.join(preparedDirectory, 'source-bindings.json'));
+  assert(Array.isArray(files.originalFiles));for (const ref of files.originalFiles) await stagedReadBound(ref);
+  const stageText = await stagedReadBound(files.stageInput), sourceText = await stagedReadBound(files.sourceBindings);
+  const stageInput = JSON.parse(stageText), source = JSON.parse(sourceText), replyFile = await stagedFile(replyPath);
+  const context = createOrchestrationContextV001(source), state = fixJ16StagedOrchestrationJudgmentV001({context,
+    stageInput, stageReply: bindJ16TextV001(replyFile.text)});
+  resolveOrchestrationDrawingViewV001({context, state});
+  // Re-read before writes; compile stores all semantic provenance in existing origin.
+  for (const ref of [...files.originalFiles, filesFile.ref, files.stageInput, files.sourceBindings, replyFile.ref]) await stagedReadBound(ref);
+  await stagedDirectory(directory, true);
+  const stateRef = await stagedSave(directory, 'state.json', JSON.stringify(state, null, 2) + '\n');
+  const manifest = {schemaVersion: 'presentation-j16-candidate-files-v001', mode: 'mock', sourceBindings: files.sourceBindings, state: stateRef};
+  await stagedSave(directory, 'files.json', JSON.stringify(manifest, null, 2) + '\n');
+  return {...await readJ16StagedCandidateFilesV001(directory), statePath: stateRef.path};
+}
+
 export async function acceptOrchestration(responsePath: string) {
   const source = await read(`${output}/saved/source-bindings.json`), input = await read(`${output}/saved/fresh-input.json`);
   const replyBytes = await readFile(absolute(responsePath), 'utf8');
@@ -306,8 +409,17 @@ export async function render() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const [stage, input, reviewDirectory] = process.argv.slice(2);
-  if (stage === 'review-decisions') {
+  const [stage, input, reviewDirectory, candidateDirectory] = process.argv.slice(2);
+  if (stage === 'prepare-j16-stage') {
+    assert.equal(process.argv.slice(2).length, 3);
+    console.log(JSON.stringify(await prepareJ16StagedInputFilesV001(input, reviewDirectory)));
+  } else if (stage === 'accept-j16-stage') {
+    assert.equal(process.argv.slice(2).length, 4);
+    console.log(JSON.stringify(await acceptJ16StagedInputFilesV001(input, reviewDirectory, candidateDirectory)));
+  } else if (stage === 'read-j16-stage') {
+    assert.equal(process.argv.slice(2).length, 2);
+    console.log(JSON.stringify(await readJ16StagedCandidateFilesV001(input)));
+  } else if (stage === 'review-decisions') {
     assert.equal(process.argv.slice(2).length, 3);
     console.log(JSON.stringify(await reviewDecisionsOrchestrationV001(input, reviewDirectory)));
   } else {
