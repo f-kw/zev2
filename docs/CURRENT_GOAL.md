@@ -4,6 +4,8 @@
 
 ## 最新現在地 — 2026-10-09T08:50:21.730Z（TODO44の本人承認を受領・実着手、作業中）
 
+途中確認 — 2026-10-09T09:04:44Z：18:04:44 JSTの現地読み取りでMac実行継続を確認。共有境界・Core受理/compile・caller配線の作業用コードとCore試験を作成し、TS側の呼出し全体試験を追加中。検査は未実施、まだrepoへ製品差分を適用していない。重複起動なし、阻害要因なし。同じ実着手17:50:21の作業を続行中。 ボード再読board127/Doing44 item16。
+
 本人10/09 17:47 JST「いいよ」（Sentinel_07bab4a842e08191b782ecad8d67900f）で7path/6〜8.5hの正式段階入力・受理接続を承認。17:48:57 JSTに親経由で受領し、main cb99f269/remote一致/clean・対象processなし・AGENTS/範囲を確認して17:50:21.730 JSTに実装設計とコードへ実着手。公式MCPでTODO44 Doing/current active item15/board126を保存・再読。原観測prepareは保持、共有境界でstage生成しcallerが排他保存、selectionRecord.origin→compile→既存validateStateで同じ共有検査を使う。理由/根拠/範囲/物理制約は既存evaluateReply、追加はJ16 choice対応/被覆/由来。mockで入力/受理/保存後再読を検証する。検査未実施、追加API/新字幕送信/比較/STT/動画製造0。Check60と文脈TODO54・既知検査制約を保持。現在は作業中、次担当Mac実装者。
 
 ## 最新現在地 — 2026-10-09T08:44:59.835Z（TODO44の7path範囲確認完了、承認判断待ち）
