@@ -2,6 +2,10 @@
 
 更新日：2026-10-09（JST）
 
+## 最新現在地 — 2026-10-09T08:50:21.730Z（TODO44の本人承認を受領・実着手、作業中）
+
+本人10/09 17:47 JST「いいよ」（Sentinel_07bab4a842e08191b782ecad8d67900f）で7path/6〜8.5hの正式段階入力・受理接続を承認。17:48:57 JSTに親経由で受領し、main cb99f269/remote一致/clean・対象processなし・AGENTS/範囲を確認して17:50:21.730 JSTに実装設計とコードへ実着手。公式MCPでTODO44 Doing/current active item15/board126を保存・再読。原観測prepareは保持、共有境界でstage生成しcallerが排他保存、selectionRecord.origin→compile→既存validateStateで同じ共有検査を使う。理由/根拠/範囲/物理制約は既存evaluateReply、追加はJ16 choice対応/被覆/由来。mockで入力/受理/保存後再読を検証する。検査未実施、追加API/新字幕送信/比較/STT/動画製造0。Check60と文脈TODO54・既知検査制約を保持。現在は作業中、次担当Mac実装者。
+
 ## 最新現在地 — 2026-10-09T08:44:59.835Z（TODO44の7path範囲確認完了、承認判断待ち）
 
 TODO44の範囲確認を2026-10-09 17:44:59 JSTに終了、承認判断待ち。親指示で原観測prepareを変更対象から外し、共有境界のstage envelope純粋生成→既存caller排他保存、既存selectionRecord.origin→compile→validateStateの同じ共有検査を使う7path案は現行codeの読み取り上成立。理由/根拠/範囲/物理制約は既存evaluateReply、追加はJ16 choice対応/全対象被覆/由来だけ。別台帳/再読専用validatorを増やさない。想定製品4/型1/試験2=7path、実装3.5〜4.5h・検証2〜3h・終了0.5〜1h、計6〜8.5h。今は範囲整理だけでコード変更/試験再実行/API/製造0、成立の実試験は未実施。Check60の本人確認、既知skip/素材不足/型診断とTODO54を保持。本番適用/新送信は別承認。次担当monaが着工範囲と必要承認を扱う。[7pathの根拠・受理条件・再見積もり](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
