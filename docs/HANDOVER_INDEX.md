@@ -1,10 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-09（JST） / revision：handover-index-20261009-v110
+更新日：2026-10-09（JST） / revision：handover-index-20261009-v112
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
-## 最新現在地 — 2026-10-09T08:15:54.431Z（TODO60の情報保持オフライン接続が第一完成、Checkへ）
+## 最新現在地 — 2026-10-09T08:26:11Z（限定実装をmona受領、TODO44の次工程範囲整理完了）
+
+monaは限定offline接続の3実装fileと終了報告をGitHubで読み取り受領し、差し戻し必須の具体的不具合なしと2026-10-09 17:26:11 JSTに連絡。18試験は担当実行報告として扱い、保存6testの環境変数なしskip、関連旧素材不足2件、caller既存型診断を残件として保持。Check60は本人確認用に維持。既存TODO44へ「新字幕の要否をJ16で判断→既存詳細判断役が種類/範囲/理由/根拠を生成」の正式段階入力と専用受理/再読の範囲を具体化。想定8path・6.5〜9h、mockと限定検査だけで成立確認し、追加APIは不要。通常行の理由/接続を残し、上流回答を元fresh-inputへ混入せず専用envelope/明示originへ束縛。新入力の実API利用は対象/件数/回数/費用を別承認、本番適用・製造も別。今回は範囲整理のみで、新実装/試験再実行/API/製造0。次担当monaが着工候補と必要承認を扱う。[TODO44の正式入力・受理条件・変更範囲・見積もり](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
+
+第一完成と検証の記録（2026-10-09T08:15:54.431Z）：
 
 本人10/09 16:38 JST承認を16:39:48に受領し、16:43:31.199に実着手。既存helper/試験/callerの3pathで、原byte/SHA・正式input・元ID/本文/時計/場面文脈を照合する明示的offline reviewを実装。詳細の演出種類/部分強調/理由/根拠を保持し、矛盾/不足/拒否/保留を残す。通常accept/render/queue・正式stateは変更せず、追加API/本番切替/新動画/STT0。実装checkpoint c0661c3834551486ab2875b74d5d99373747057cをmainへpush、remote一致/cleanを確認。
 
