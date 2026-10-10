@@ -1,8 +1,18 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-10（JST） / revision：handover-index-20261010-v121
+更新日：2026-10-10（JST） / revision：handover-index-20261010-v122
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-10T06:10:15.664Z（driver静的確認終了、本人承認済み・実行側確認不能）
+
+mona：送信前コードの静的確認は終了／API送信は承認確認の不具合で停止、本人は承認済み。親がGitHub上のlive受理/再読6fileを監査し必須差戻しなしと受領。Macは保存済みdriverを実行せず読み、ネットワーク前のwx0600 attempt保存、排他raw root作成、各request一回/再試行なし、redirect追跡なし、通常エラー/途中切断後の原raw保存を該当行とともに確認。rawは終了イベントまでRAMにあり、強制kill/電源断/書込み失敗までの保存は保証されない。driver固定HEAD02f9c6cfと現mainは不一致で、そのまま再開できない。本人の同じ許可を取り直す残件ではなく、実行側の既存承認確認が正常化し、現在の実装/固定5wire/未使用出力を照合して束縛を更新できることが再開条件。承認JSONは実行審査の代替にしない。今回API/認証読込み/拒否済みcall再試行/別経路探索/製品・driver変更0、証拠KEEP/削除0B、own process0。2026-10-10 15:10 JSTにDoingを空にしCheck61 item10/board143を再読、Check44/60・TODO54・Backlog62/他項目/削除履歴不変。状態は相談役待ち、次担当mona。
+
+[該当コード行・保証範囲・再開条件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[新cycle log](work-logs/2026-10/2026-10-10T1510_Codex-SSD_J16-driver-static-audit_157ca23c.md)。以前の許可取り直し依頼は訂正済み、原拒否理由は時点付き履歴として保持。
+
+## 最新現在地 — 2026-10-10T06:06:02.331Z（送信前driverの静的確認、本人承認済み）
+
+mona：送信前コードの確認中／API送信は承認確認の不具合で停止、本人は承認済み。10/09 19:03 JSTの送信範囲/料金不確実性の質問と10/10 14:27 JSTの本人回答を承認として保持する。Macは保存済みdriverの静的読み取りだけを行い、API/認証読込み/拒否済みcall再試行/別経路探索なし。承認記録JSONを実行審査の代替と扱わない。次担当monaがこの確認結果と実行側の承認確認不能を扱う。同じ本人許可の取り直しを依頼しない。
 
 ## 最新現在地 — 2026-10-10T06:00:07.586Z（TODO61の一度再審査も拒否・Check61）
 
@@ -14,7 +24,7 @@
 
 ## 最新現在地 — 2026-10-10T05:52:40.633Z（TODO61実装終了、実送信は審査停止・Check61）
 
-TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが具体的な外部送信承認を扱う。製造/本番切替/動画QC/品質採用は未実施。
+TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが本人承認済みの外部送信について実行側の承認確認不能を扱う。製造/本番切替/動画QC/品質採用は未実施。
 
 [限定実装・停止・残件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[新cycle log](work-logs/2026-10/2026-10-10T1452_Codex-SSD_J16-live-blocked_157ca23c.md)。以下は時点付き履歴。
 

@@ -1,5 +1,97 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — 保存driverの静的確認と承認状態の訂正 — 2026-10-10 15:10 JST
+
+mona：送信前コードの静的確認は終了／API送信は承認確認の不具合で停止、本人は承認済み。親がGitHub上のlive受理/再読6fileを監査し必須差戻しなしと受領。Macは保存済みdriverを実行せず読み、ネットワーク前のwx0600 attempt保存、排他raw root作成、各request一回/再試行なし、redirect追跡なし、通常エラー/途中切断後の原raw保存を該当行とともに確認。rawは終了イベントまでRAMにあり、強制kill/電源断/書込み失敗までの保存は保証されない。driver固定HEAD02f9c6cfと現mainは不一致で、そのまま再開できない。本人の同じ許可を取り直す残件ではなく、実行側の既存承認確認が正常化し、現在の実装/固定5wire/未使用出力を照合して束縛を更新できることが再開条件。承認JSONは実行審査の代替にしない。今回API/認証読込み/拒否済みcall再試行/別経路探索/製品・driver変更0、証拠KEEP/削除0B、own process0。2026-10-10 15:10 JSTにDoingを空にしCheck61 item10/board143を再読、Check44/60・TODO54・Backlog62/他項目/削除履歴不変。状態は相談役待ち、次担当mona。
+
+本人は10/09 19:03 JSTの具体的な質問へ10/10 14:27 JST「進めて」と回答し、親monaが承認済みと確認している。先の「本人の明示承認が不足」「同じ外部送信を再承認してもらう」という解釈・依頼を訂正する。二度の自動審査の原文理由と送信0の記録は事実として保持し、本人の承認有無と、実行側がその承認を確認できるかを分ける。停止の具体原因は後者。承認記録JSON/hashを実行審査の代替にしない。
+
+対象は保存済み[一回driver](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-five-post-once-20261010-v001.mjs:17)、SHA256 **0ab722063dd6c6869fc55c72c5496f1b67b647533e0fe70bb2eec24f762f5827**、10322B、97行。以下の行番号はこの固定byteに対応する。driverをimport/eval/起動せず静的に読んだ。今回ネットワーク実験・認証読込み・新trial/test・拒否済みcall再試行はしていない。
+
+| 確認点 | 該当行 | 実コードの動作と保証範囲 |
+|---|---|---|
+| ネットワーク前の排他attempt | 17・46・49・50・63 | saveはwx/0600。既存出力を拒否し、attemptの書込みをawaitした後だけhttps.requestへ進む。attemptは原request/許可/実装SHAと一回/retry0を束縛。awaitは書込み処理完了であり、電源断時の永続化保証ではない |
+| 二重起動の防止 | 37・39・46・50 | 全出力rootは未使用を要求、raw rootのmkdirはrecursiveなしの排他作成。同じrootへ同時起動してもmkdir成功は一方だけ。各attemptにもwxがあり、既存root/attemptを消すfallbackはない |
+| 再試行0 | 28・41・49・63・71・87・97 | 固定5行を順に一回ずつ処理し、各行のhttps.requestは一箇所のみ。SDK/再送loop/再送callbackなし。transport/不完結/非200は残りの予定送信をbreak。最上位catchも再試行せず終了する |
+| redirect | 63・65・66・76・87 | host/pathをapi.openai.com/v1/decisionsへ固定。Locationを読まず追跡処理なし。3xxも原body/statusを保存し、非200として残送信を止める。別hostへの認証header転送処理はない |
+| 失敗/途中切断のraw | 57・59・60・67・68・71・72・74・75・76・77・87 | dataをBufferへ取り込み、end/error/aborted/request errorとdeadlineのdestroy後、finishを一度だけ通る。受信分を加工せずconcatし、空なら0byte、SHA/長さを付けてraw→transportの順に保存/再読。HTTP失敗でも保存が先 |
+| 保存の限界 | 17・57・67・75・76・97 | rawはfinishまでRAM上。強制kill/電源断/捕捉されないprocess終了/書込み失敗の前に、rawが必ずdiskへ残る保証はない。stream追記・終了signal保存・fsync・二ファイル一括確定はない。attempt/rootは自動再送を許さないが、raw保存成功を代用しない |
+
+以下は同じ固定driverから抜き出したコード。省略箇所を含み、実行用指示ではない。
+
+### 排他出力とネットワーク前attempt
+
+```js
+// 17
+const save=(path,value)=>writeFile(path,typeof value==='string'||value instanceof Uint8Array?value:JSON.stringify(value,null,2)+'\n',{flag:'wx',mode:0o600});
+// 37
+ for(const dirname of authorization.outputRoots)await assert.rejects(lstat(dirname),{code:'ENOENT'});
+// 39
+ await mkdir(rawRoot,{mode:0o700}); // Exclusive run ownership; a rerun refuses this root before any POST.
+// 46
+  for(const pathname of [responsePath,attemptPath,transportPath])await assert.rejects(lstat(pathname),{code:'ENOENT'});
+// 49
+   model:'gpt-6-luna',endpoint:'https://api.openai.com/v1/decisions',method:'POST',attemptLimit:1,retries:0,consumedBeforeNetwork:true,startedAt,pid:process.pid,rawResponsePath:responsePath};
+// 50
+  const attemptText=JSON.stringify(attempt,null,2)+'\n';await save(attemptPath,attemptText);
+```
+
+### 送信先固定・イベント処理・原raw保存・失敗停止
+
+```js
+// 59
+   let finished=false,req;const deadline=setTimeout(()=>{const e=new Error();e.code='TRIAL_DEADLINE';req?.destroy(e);},120000);
+// 60
+   const finish=error=>{if(finished)return;finished=true;clearTimeout(deadline);if(error)record.transportErrorCode=safeCode(error);resolve();};
+// 62
+    record.requestInitiatedAt=new Date().toISOString();record.httpsRequestCalls=1;
+// 63
+    req=https.request({hostname:'api.openai.com',port:443,path:'/v1/decisions',method:'POST',headers:{Authorization:'Bearer '+key,
+// 64
+     'Content-Type':'application/json','Content-Length':payload.length},agent:false},res=>{
+// 65
+      record.responseStartedAt=new Date().toISOString();record.httpStatus=res.statusCode??null;
+// 67
+      res.on('data',chunk=>chunks.push(Buffer.from(chunk)));res.on('end',()=>{record.responseComplete=res.complete;finish();});
+// 68
+      res.on('error',finish);res.on('aborted',()=>{const e=new Error();e.code='RESPONSE_ABORTED';finish(e);});
+// 71
+    req.on('finish',()=>{record.requestFinishedAt=new Date().toISOString();});req.on('error',finish);req.end(payload);
+// 74
+  record.endedAt=new Date().toISOString();record.elapsedMs=Math.round(performance.now()-mono);
+// 75
+  const raw=Buffer.concat(chunks);record.rawResponseSha256=sha(raw);record.rawResponseBytes=raw.length;
+// 76
+  await save(responsePath,raw);await save(transportPath,record);
+// 77
+  assert.equal(sha(await readFile(responsePath)),record.rawResponseSha256);
+// 87
+  if(record.transportErrorCode!==null||!record.responseComplete||record.httpStatus!==200){stoppedReason='TRANSPORT_OR_HTTP_FAILURE';break;}
+```
+
+### 終了時のみ失敗表示、再送なし
+
+```js
+// 97
+main().catch(e=>{console.log(JSON.stringify({status:'local-preflight-or-record-failure',safeErrorCode:safeCode(e),retryAllowed:false}));process.exitCode=1;});
+```
+
+
+### 再開前に確認できる条件
+
+1. **本人承認は済んでいる。** 実行側の承認確認が、その既存の質問回答に基づく承認を確認できる状態へ正常化すること。今回の再審査枠は消費済みで、追加試行の指示はない。別経路や承認JSONによる代替を使わない。
+2. driver24行はHEAD02f9c6cfを要求するが、この静的確認開始時点のmainは33351328。終了docsが進むたび、そのまま起動すると送信前に不一致で止まる。再開が指示された場合だけ、実装157ca23cの6path hash、固定5request/manifest/source/input、現在HEADと差分を再読一致させ、実行時の束縛を更新する。検査を外す変更ではない。今回はdriverを変更していない。
+3. raw root・new execution-input root・candidate rootが未使用で、attempt/raw/transportが存在しないこと。今回lstatで3root不存在、旧held snapshot SHA不変を再読した。既存attemptが見つかったら消して再送せず、実送信の有無を照合して扱う。元の未送信snapshotを上書きしない。
+4. 上表の「通常のエラー処理と書込み成功まで到達すれば原raw保存」という範囲を、無条件の障害耐性へ読み替えない。monaがこの限界を今回の一回実行にどう扱うか確認する。強制終了まで必須の保存条件なら、その具体的な限定修正を別に扱う必要がある。今回、修正や試験を先行していない。
+
+固定5requestのdriver定数は全て64桁/原manifest SHA一致、実payloadのSHAも再読一致。6製品file、driver、旧stageは変更0。API/attempt/鍵読込み/新費用0、raw/usage/新326詳細/接続4/実候補受理は未達。既存Core30/30・runner23/25（任意skip2）・runner型passed・caller旧357/現357/新0は前回の結果で、今回再実行していない。
+
+正本/ボードの読返しは本人承認済み・実行側確認不能・Doing空・Check61・次担当monaを確認。静的audit JSONと読返し/新cycle logをKEEP、cleanup削除0、own process0。証拠：private workspaceのj16-live-driver-static-audit-20261010-v001.json、j16-live-driver-static-audit-final-20261010-v001.json。[新cycle log](../../work-logs/2026-10/2026-10-10T1510_Codex-SSD_J16-driver-static-audit_157ca23c.md)。以下の拒否原文と過去の実状態は時点付き履歴。
+
+## 最新現在地 — 2026-10-10T06:06:02.331Z（送信前driverの静的確認、本人承認済み）
+
+mona：送信前コードの確認中／API送信は承認確認の不具合で停止、本人は承認済み。10/09 19:03 JSTの送信範囲/料金不確実性の質問と10/10 14:27 JSTの本人回答を承認として保持する。Macは保存済みdriverの静的読み取りだけを行い、API/認証読込み/拒否済みcall再試行/別経路探索なし。承認記録JSONを実行審査の代替と扱わない。次担当monaがこの確認結果と実行側の承認確認不能を扱う。同じ本人許可の取り直しを依頼しない。
+
 ## TODO61 — 質問回答の組で一度再審査したが再拒否 — 2026-10-10 15:00 JST
 
 親が具体的な送信先/326字幕・5場面の文章文脈/5回各1回/再送なし/料金不確実性の質問（10/09 19:03 JST）と本人「進めて」（10/10 14:27 JST）の組を提示し、同じ拒否済みtool操作を一度だけ再審査する指示を受領。2026-10-10T05:57:21.243Zに再開。製品6path/157ca23caec4c23838869288d6a6fcf4ff4007bbは不変、現HEADの差は前回終了docs4pathだけ。固定HTTP body689,414B/SHA/送信先は変えず、未送信snapshotを保持する新stage leafへ由来を束縛し直し、同じcommandで一度再審査。質問回答の証拠はcommand/tool引数へ埋め込んでいない。しかし再びprocess作成前に拒否。2026-10-10T06:00:07.586Zに理由を保存し指示どおり停止、API/attempt/認証読込み/新費用0。旧stageは全5未実行/326未取得のまま再読passed、新raw/transport/stage/候補なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller旧357/現357/新0という前回結果を保持、今回再試験はしていない。cleanup削除0/証拠KEEP、own process0。公式MCP board141/Check61 item8、Check44/60・TODO54・Backlog62・他項目/削除履歴不変。状態は人間待ち、次担当mona。
@@ -18,7 +110,7 @@
 
 ## TODO61 — 実装完了、実送信は自動承認審査で停止 — 2026-10-10 14:52 JST
 
-TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが具体的な外部送信承認を扱う。製造/本番切替/動画QC/品質採用は未実施。
+TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが本人承認済みの外部送信について実行側の承認確認不能を扱う。製造/本番切替/動画QC/品質採用は未実施。
 
 今回の開始は2026-10-10T05:34:41.960Z（14:34:41.960 JST）、独立作業終了は2026-10-10T05:52:40.633Z。開始から1079秒。これは実装・設営・確認・停止処理の経過時間であり、予定していたAPI待ち・326詳細判断・実候補受理を含む全工程の所要時間ではない。新しい人間介入は自動審査が求める送信の明示承認で、実装中の品質レビューを本人へ再要求していない。実費・API latency・全体精度・制作短縮は測れない。
 
@@ -26,9 +118,9 @@ TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff40
 
 未送信stage: /Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-input/stage-input.json、fileSHA 33f780dcf869453efda9650e9150e4adffa99eb2900d5dc76733cb080625add8、3377921B、stage自己SHA 0c6fd3d025952371c9d0ecefd724f992cf2ed8cf654d8086ff98e7a3dd0cf31a。batches0、target326/missing326、未実行candidate-0001〜0005、J16_UNATTEMPTED_REQUESTS/J16_PARTIAL_COVERAGE。source-bindings/stage-filesを同じ専用領域へ排他保存/再読。raw rootとcandidate rootは不存在。空の原応答やtransportを作ったのではなく、実行前に止まった状態そのものを記録した。
 
-残件は、本人が**326字幕の本文、5場面と必要前後の文脈、保存した物理観測・音響数値・ASRテキストを、OpenAI Decisions https://api.openai.com/v1/decisions / gpt-6-lunaへ、固定5request合計689,414B・各1回/再試行0で外部送信する**ことを明示承認すること。画像/動画/音声byte、旧詳細理由/正解ラベル、秘密情報はpayloadに含まない。料金不確実性を含む14:27 JSTの既承認を保持し、旧6質問の許可へ戻さない。今回の自動審査停止を迂回しない。
+訂正：この外部送信（326字幕/5場面の文章・文脈、OpenAI Decisions gpt-6-luna、固定5request689,414B・各1回/再送なし）は本人承認済み。残件は実行側がその既存承認を確認できない不具合の扱いであり、同じ許可の取り直しではない。画像/動画/音声byte、旧詳細理由/正解ラベル、秘密情報はpayloadに含まない。料金不確実性を含む14:27 JSTの既承認を保持し、旧6質問の許可へ戻さない。今回の自動審査停止を迂回しない。
 
-明示承認後は新承認を実装SHA/固定manifestへ結び直し、今回の未実行snapshotを上書きしない新しいstage leafを使う必要がある。raw/attemptはまだないためAPI再送ではない。5送信→全確定時のみ新詳細326/接続4→実候補受理/再読はこの先の未達。保留なら原raw/対象/由来を成果保存する既承認方針を維持。Check44/60の監査、Digest文脈改善TODO54、別ショートBacklog62は別の未完了を保持する。
+実行側が既存本人承認を確認できる状態になり再開が指示された場合は、既存承認の参照を実装SHA/固定manifestへ結び直し、今回の未実行snapshotを上書きしない新しいstage leafを使う必要がある。raw/attemptはまだないためAPI再送ではない。5送信→全確定時のみ新詳細326/接続4→実候補受理/再読はこの先の未達。保留なら原raw/対象/由来を成果保存する既承認方針を維持。Check44/60の監査、Digest文脈改善TODO54、別ショートBacklog62は別の未完了を保持する。
 
 料金は10月10日に[公式Decisions資料](https://developers.openai.com/api/docs/guides/decisions)で入力0.10USD/100万token・出力/cache料金なし、[モデル資料](https://developers.openai.com/api/docs/models/gpt-6-luna)で272K超の入力2倍/地域10%加算を再照合。今回は送信0でusageと実請求は存在しない。過去の約0.019USD/約3USDは仮定付き見積のまま、確定請求/上限にはしない。
 
