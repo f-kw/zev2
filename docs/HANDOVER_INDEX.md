@@ -1,8 +1,12 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-09（JST） / revision：handover-index-20261009-v118
+更新日：2026-10-09（JST） / revision：handover-index-20261010-v119
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-10T05:34:41.960Z（TODO61本人承認を受領、live限定実装に着手）
+
+本人10/10 14:27 JST「進めて」（Sentinel_b5e1427c26c8819199043fb29b411c77）で、10/09の326字幕・5場面/固定5request/限定6path/約4〜7h/費用不確実性を含む範囲を承認。親mona経由で受領し、2026-10-10 14:34:41.960 JST（2026-10-10T05:34:41.960Z）に実着手。main/remote b8b5aaa6/clean、固定manifest ead316c1a1740438e14dc88651790da90a8be9cfb02d1f4b8de6b5237faaad52、689,414B/全326ID/原13記録と既存7pathのSHAを再読一致。今回3出力root/5件attemptは未作成、API/認証読込み0。live由来限定実装と検査から進め、送信は各1回/retry0、旧6回答・旧理由を新判断へ流用しない。保留は原応答/対象/由来を保存再読しpositive受理未達を明示。通常本番切替/製造/新27input・plan・clockなし。公式MCP board136/Doing61 item4、Check44/60・TODO54と他項目/削除履歴保持。別ショート企画を重複なしBacklogへ記録し、未着工。状態は作業中、次担当Codex-SSD。
 
 ## 最新現在地 — 2026-10-09T09:25:36.022Z（TODO44の7path段階接続は第一完成、Check44・次TODO61）
 
