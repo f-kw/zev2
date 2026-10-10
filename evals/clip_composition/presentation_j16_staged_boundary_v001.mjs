@@ -18,6 +18,18 @@ export function bindJ16TextV001(text) {
   check(typeof text === 'string' && Buffer.from(text).toString('utf8') === text, 'J16_STAGE_UTF8');
   return freeze({text, sha256: sha(text), bytes: Buffer.byteLength(text)});
 }
+/** Raw transport bytes, including an empty or non-UTF8 failure body. */
+export function bindJ16RawV001(bytes) {
+  check(bytes instanceof Uint8Array, 'J16_LIVE_RAW_TYPE');
+  const raw = Buffer.from(bytes);
+  return freeze({base64: raw.toString('base64'), sha256: sha(raw), bytes: raw.length});
+}
+function readRaw(ref) {
+  exact(ref, ['base64', 'sha256', 'bytes'], 'J16_LIVE_RAW_FIELDS');
+  check(typeof ref.base64 === 'string', 'J16_LIVE_RAW_TYPE');
+  const raw = Buffer.from(ref.base64, 'base64');
+  check(same(bindJ16RawV001(raw), ref), 'J16_LIVE_RAW_BINDING');return raw;
+}
 function readText(ref) {
   exact(ref, ['text', 'sha256', 'bytes'], 'J16_STAGE_BYTE_FIELDS');
   check(same(bindJ16TextV001(ref.text), ref), 'J16_STAGE_BYTE_BINDING');return ref.text;
@@ -121,7 +133,7 @@ export function createJ16ScenePacketV001(originalInput, sceneId, captionIndices)
   return freeze({sceneId, captionIndices: indices, source, request: bindJ16TextV001(JSON.stringify(snapshot.body))});
 }
 
-/** Only mock stage construction is admitted by this implementation's scope. */
+/** Explicit mock construction remains separate from the live entry. */
 export function createJ16StageInputV001({originalInput, batches}) {
   const input = readInput(originalInput), ids = input.captions.map(row => row.captionId);
   check(Array.isArray(batches) && batches.length > 0, 'J16_STAGE_BATCHES');
@@ -148,12 +160,125 @@ export function createJ16StageInputV001({originalInput, batches}) {
     instruction: 'J16の要否を固定し、通常行を含む全字幕の新しい理由/根拠と全接続回答を作る。effectだけ既存の種類/原文内範囲を選ぶ。保留/拒否/欠落をNormalで補わない。原本文/ID/時計/観測は変えない。'};
   return freeze({...body, stageInputSha256: sha(canonical(body))});
 }
+const liveEndpoint = 'https://api.openai.com/v1/decisions';
+const hashString = v => typeof v === 'string' && /^[a-f0-9]{64}$/u.test(v);
+const time = v => typeof v === 'string' && Number.isFinite(Date.parse(v));
+const fingerprint = (ref, bound) => ref?.sha256 === bound.sha256 && ref?.bytes === bound.bytes;
+
+function liveScope(originalInput, authorization, requestManifest) {
+  const input = readInput(originalInput), permission = JSON.parse(readText(authorization));
+  exact(permission, ['schemaVersion', 'approval', 'implementationSha', 'requestManifestSha256', 'requestManifestBytes',
+    'originalInputSha256', 'originalInputBytes', 'sourceBindings', 'endpoint', 'model', 'attemptsPerRequest',
+    'retries', 'maxRequests', 'outputRoots'], 'J16_LIVE_AUTHORIZATION_FIELDS');
+  check(permission.schemaVersion === 'presentation-j16-live-authorization-v001'
+    && (typeof permission.implementationSha === 'string' && /^[a-f0-9]{40}$/u.test(permission.implementationSha)) && permission.endpoint === liveEndpoint
+    && permission.model === J16_MODEL_V001 && permission.attemptsPerRequest === 1
+    && permission.retries === 0, 'J16_LIVE_AUTHORIZATION');
+  const approval = JSON.parse(readText(permission.approval));
+  check(approval.schemaVersion === 'zev-j16-live-user-approval-v001'
+    && nonempty(approval.sourceThreadId) && nonempty(approval.userMessageId) && nonempty(approval.userText)
+    && nonempty(approval.authority) && time(approval.recordedAt) && time(approval.receivedFirstObservedAt)
+    && approval.acceptedBillingUncertainty === true && approval.attemptsPerRequest === 1 && approval.retries === 0
+    && approval.endpoint === liveEndpoint && approval.model === J16_MODEL_V001
+    && fingerprint(approval.manifest, requestManifest) && same(approval.outputRoots, permission.outputRoots), 'J16_LIVE_APPROVAL_BINDING');
+  check(fingerprint({sha256: permission.originalInputSha256, bytes: permission.originalInputBytes}, originalInput)
+    && fingerprint({sha256: permission.requestManifestSha256, bytes: permission.requestManifestBytes}, requestManifest), 'J16_LIVE_AUTHORIZATION_BINDING');
+  const manifest = JSON.parse(readText(requestManifest));
+  check(manifest.schemaVersion === 'zev-j16-five-request-preparation-v001' && manifest.method === 'POST'
+    && manifest.endpoint === liveEndpoint && manifest.model === J16_MODEL_V001
+    && fingerprint(manifest.input, originalInput) && same(manifest.sourceBindings, permission.sourceBindings)
+    && Array.isArray(manifest.requests) && manifest.requests.length > 0 && manifest.requests.length <= 5
+    && permission.maxRequests === manifest.requests.length && approval.requestCount === manifest.requests.length,
+  'J16_LIVE_MANIFEST_BINDING');
+  check(Array.isArray(permission.outputRoots) && permission.outputRoots.length === 3
+    && permission.outputRoots.every(nonempty) && new Set(permission.outputRoots).size === 3, 'J16_LIVE_OUTPUT_ROOTS');
+  const ids = [], scenes = new Set();let totalBytes = 0;
+  for (const row of manifest.requests) {
+    check(!scenes.has(row.sceneId), 'J16_LIVE_DUPLICATE_SCENE');scenes.add(row.sceneId);
+    const expected = createJ16ScenePacketV001(originalInput, row.sceneId);
+    const selectedIds = JSON.parse(expected.request.text).questions.map(q => q.name);
+    check(same(row.captionIndices, expected.captionIndices) && same(row.captionIds, selectedIds)
+      && fingerprint(row.source, expected.source) && fingerprint(row.request, expected.request)
+      && row.model === J16_MODEL_V001 && row.questions === selectedIds.length
+      && row.proposedPosts === 1 && row.proposedRetries === 0, 'J16_LIVE_FROZEN_REQUEST');
+    ids.push(...selectedIds);totalBytes += expected.request.bytes;
+  }
+  check(same(ids, input.captions.map(r => r.captionId)) && new Set(ids).size === ids.length
+    && approval.questionCount === ids.length && approval.requestBytes === totalBytes,
+  'J16_LIVE_AUTHORIZED_COVERAGE');
+  return {input, permission, approval, manifest};
+}
+
+/** A recorded user authorization and actual attempt/transport are bound to each
+ * frozen request. No HTTP or credentials are provided by this pure function. */
+export function createJ16LiveStageInputV001({originalInput, authorization, requestManifest, batches}) {
+  const scope = liveScope(originalInput, authorization, requestManifest), ids = scope.input.captions.map(r => r.captionId);
+  check(Array.isArray(batches) && batches.length <= scope.manifest.requests.length, 'J16_LIVE_BATCHES');
+  const decisions = [], issues = [], used = new Set();
+  for (const [i, batch] of batches.entries()) {
+    exact(batch, ['sceneId', 'captionIndices', 'source', 'request', 'response', 'attempt', 'transport'], 'J16_LIVE_BATCH_FIELDS');
+    const row = scope.manifest.requests.find(r => r.sceneId === batch.sceneId);
+    check(row && !used.has(batch.sceneId), 'J16_LIVE_DUPLICATE_OR_FOREIGN_BATCH');used.add(batch.sceneId);
+    const expected = createJ16ScenePacketV001(originalInput, batch.sceneId);
+    check(same({sceneId: batch.sceneId, captionIndices: batch.captionIndices, source: batch.source, request: batch.request}, expected),
+      'J16_LIVE_SCENE_REQUEST_BINDING');
+    const raw = readRaw(batch.response), attempt = JSON.parse(readText(batch.attempt)), transport = JSON.parse(readText(batch.transport));
+    check(attempt.schemaVersion === 'presentation-j16-live-attempt-v001'
+      && attempt.sceneId === batch.sceneId && attempt.authorizationSha256 === authorization.sha256
+      && attempt.manifestSha256 === requestManifest.sha256 && attempt.implementationSha === scope.permission.implementationSha
+      && attempt.sourceSha256 === batch.source.sha256 && attempt.requestSha256 === batch.request.sha256
+      && attempt.requestBytes === batch.request.bytes && attempt.model === J16_MODEL_V001
+      && attempt.endpoint === liveEndpoint && attempt.method === 'POST' && attempt.attemptLimit === 1
+      && attempt.retries === 0 && attempt.consumedBeforeNetwork === true && time(attempt.startedAt)
+      && Date.parse(attempt.startedAt) >= Date.parse(scope.approval.receivedFirstObservedAt)
+      && Number.isSafeInteger(attempt.pid) && attempt.pid > 0
+      && attempt.rawResponsePath === `${scope.permission.outputRoots[0]}/${batch.sceneId}.raw.bin`, 'J16_LIVE_ATTEMPT_BINDING');
+    check(transport.schemaVersion === 'presentation-j16-live-transport-v001' && transport.mode === 'live'
+      && transport.sceneId === batch.sceneId && transport.attemptSha256 === batch.attempt.sha256
+      && transport.authorizationSha256 === authorization.sha256 && transport.manifestSha256 === requestManifest.sha256
+      && transport.implementationSha === scope.permission.implementationSha && transport.requestSha256 === batch.request.sha256
+      && transport.requestBytes === batch.request.bytes && transport.method === 'POST' && transport.endpoint === liveEndpoint
+      && transport.model === J16_MODEL_V001 && transport.httpsRequestCalls === 1 && transport.retries === 0
+      && transport.startedAt === attempt.startedAt && time(transport.endedAt)
+      && Date.parse(transport.endedAt) >= Date.parse(attempt.startedAt)
+      && transport.rawResponsePath === attempt.rawResponsePath
+      && transport.rawResponseSha256 === batch.response.sha256 && transport.rawResponseBytes === raw.length
+      && (transport.httpStatus === null || Number.isSafeInteger(transport.httpStatus))
+      && typeof transport.responseComplete === 'boolean'
+      && (transport.transportErrorCode === null || nonempty(transport.transportErrorCode)), 'J16_LIVE_TRANSPORT_BINDING');
+    if (transport.transportErrorCode !== null || !transport.responseComplete) {issues.push({batchIndex: i, code: 'J16_TRANSPORT_FAILED'});continue;}
+    if (transport.httpStatus !== 200) {issues.push({batchIndex: i, code: 'J16_HTTP_FAILED'});continue;}
+    try {
+      const response = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(raw));
+      check(response.model === J16_MODEL_V001, 'J16_STAGE_RESPONSE_MODEL');
+      decisions.push(...validateJ16AnswerRowsV001(row.captionIds, response));
+    } catch {issues.push({batchIndex: i, code: 'J16_RESPONSE_INVALID'});}
+  }
+  const ordered = ids.flatMap(id => decisions.filter(d => d.localCaptionId === id)), missingCaptionIds = ids.filter(id => !decisions.some(d => d.localCaptionId === id));
+  for (const d of ordered) if (d.outcome === 'refusal' || d.choice === 'unresolved') issues.push({captionId: d.localCaptionId, code: d.outcome === 'refusal' ? 'J16_REFUSAL' : 'J16_UNRESOLVED'});
+  const unattemptedSceneIds = scope.manifest.requests.filter(r => !used.has(r.sceneId)).map(r => r.sceneId);
+  if (unattemptedSceneIds.length) issues.push({code: 'J16_UNATTEMPTED_REQUESTS'});
+  if (missingCaptionIds.length) issues.push({code: 'J16_PARTIAL_COVERAGE'});
+  const body = {schemaVersion: 'presentation-j16-live-stage-input-v001', mode: 'live', originalInput: structuredClone(originalInput),
+    inputSha256: scope.input.inputSha256, targetCaptionIds: ids, authorization: structuredClone(authorization), requestManifest: structuredClone(requestManifest),
+    batches: structuredClone(batches), decisions: ordered, missingCaptionIds, unattemptedSceneIds, issues,
+    status: issues.length ? 'held' : 'ready-for-details', instruction: 'J16の要否を固定し、通常行を含む全字幕の新しい理由/根拠と全接続回答を作る。effectだけ既存の種類/原文内範囲を選ぶ。保留/拒否/欠落をNormalで補わない。原本文/ID/時計/観測は変えない。'};
+  return freeze({...body, stageInputSha256: sha(canonical(body))});
+}
 function replayStage(stageInput) {
+  if (stageInput?.schemaVersion === 'presentation-j16-live-stage-input-v001') {
+    exact(stageInput, ['schemaVersion', 'mode', 'originalInput', 'inputSha256', 'targetCaptionIds', 'authorization', 'requestManifest', 'batches',
+      'decisions', 'missingCaptionIds', 'unattemptedSceneIds', 'issues', 'status', 'instruction', 'stageInputSha256'], 'J16_LIVE_STAGE_FIELDS');
+    const expected = createJ16LiveStageInputV001(stageInput);
+    check(same(stageInput, expected), 'J16_STAGE_REPLAY');return expected;
+  }
   exact(stageInput, ['schemaVersion', 'mode', 'originalInput', 'inputSha256', 'targetCaptionIds', 'batches', 'decisions',
     'missingCaptionIds', 'issues', 'status', 'instruction', 'stageInputSha256'], 'J16_STAGE_INPUT_FIELDS');
   const expected = createJ16StageInputV001(stageInput);
   check(same(stageInput, expected), 'J16_STAGE_REPLAY');return expected;
 }
+/** The same reconstruction used by compile, also admitting held outcomes. */
+export function replayJ16StageInputV001(stageInput) {return replayStage(stageInput);}
 export function readJ16StageDetailsV001(stageInput, stageReply) {
   const stage = replayStage(stageInput);check(stage.status === 'ready-for-details', 'J16_STAGE_HELD');
   const reply = JSON.parse(readText(stageReply));exact(reply, ['schemaVersion', 'stageInputSha256', 'detailReplyBytes'], 'J16_STAGE_REPLY_FIELDS');

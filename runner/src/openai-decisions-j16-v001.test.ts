@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash, randomUUID} from 'node:crypto';
-import {readFile, writeFile, mkdtemp, mkdir, rm, stat, symlink} from 'node:fs/promises';
+import {readFile, writeFile, mkdtemp, mkdir, rm, stat, symlink, realpath} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {buildDecisionsJ16RequestV001, validateDecisionsJ16AnswersV001, runDecisionsJ16MockV001,
   DECISIONS_J16_ENDPOINT_V001, DECISIONS_J16_MODEL_V001, type DecisionsJ16MockPortV001,
   type DecisionsJ16RequestV001, type J16ChoiceV001,
-  reviewDecisionsJ16OrchestrationV001, buildDecisionsJ16SceneRequestV001, prepareDecisionsJ16StageV001} from './openai-decisions-j16-v001.js';
+  reviewDecisionsJ16OrchestrationV001, buildDecisionsJ16SceneRequestV001, prepareDecisionsJ16StageV001, prepareDecisionsJ16LiveStageV001} from './openai-decisions-j16-v001.js';
 
-import {bindJ16TextV001} from '../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs';
+import {bindJ16TextV001, bindJ16RawV001} from '../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs';
 
 const bytes = (value: unknown) => Buffer.from(JSON.stringify(value));
 const hash = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
@@ -411,4 +411,80 @@ test('caller keeps held mock input saved, denies candidate writes, and refuses s
     await writeFile(input.path,input.path+'altered');await assert.rejects(accept(prepared,reply.path,candidate),/Expected values to be strictly deep-equal/);
     await assert.rejects(stat(candidate),(e:any)=>e.code==='ENOENT');
   } finally {if(linked)await rm(link);if(created)await rm(prepared,{recursive:true});await rm(temp,{recursive:true});}
+});
+
+async function liveCallerFixture() {
+  const root=resolve(import.meta.dirname,'../..'),module=await import(pathToFileURL(resolve(root,'evals/clip_composition/presentation_orchestration_v001.test.mjs')).href);
+  const original=module.stagedFixture();
+  const temp=await realpath(await mkdtemp(join(tmpdir(),'zev-j16-live-test-')));
+  const prefix=join(root,'runtime/artifacts/openai-decisions-j16-staged-v001');
+  const prepared=join(prefix,'test-live-input-'+randomUUID()),candidate=join(prefix,'test-live-candidate-'+randomUUID());
+  const rawRoot=join(temp,'raw');await mkdir(rawRoot);
+  const put=async(name:string,body:string|Uint8Array)=>{const path=join(temp,name),b=typeof body==='string'?Buffer.from(body):Buffer.from(body);
+    await writeFile(path,b,{flag:'wx',mode:0o600});return {path,sha256:hash(b),bytes:b.length};};
+  const inputRef=await put('input.json',original.originalInput.text),sourceBindings=await put('source.json',JSON.stringify(original.source));
+  const requestRefs=[];for(const [i,b] of original.batches.entries())requestRefs.push({source:await put('source-'+i+'.json',b.source.text),request:await put('request-'+i+'.json',b.request.text)});
+  const f=module.liveStagedFixture({outputRoots:[rawRoot,prepared,candidate],sourceBindings,inputRef,requestRefs});
+  const authorization=await put('authorization.json',f.authorization.text),requestManifest=await put('manifest.json',f.requestManifest.text);
+  const batches=[];for(const [i,b] of f.batches.entries())batches.push({sceneId:b.sceneId,captionIndices:b.captionIndices,...requestRefs[i],
+    response:await put('raw/'+b.sceneId+'.raw.bin',Buffer.from(b.response.base64,'base64')),
+    attempt:await put('raw/'+b.sceneId+'.attempt.json',b.attempt.text),transport:await put('raw/'+b.sceneId+'.transport.json',b.transport.text)});
+  const specBody={schemaVersion:'presentation-j16-live-stage-files-v001',originalInput:inputRef,sourceBindings,authorization,requestManifest,batches};
+  const spec=await put('spec.json',JSON.stringify(specBody)),reply=await put('reply.json',f.envelope(f.reply).text);
+  const caller=await import(pathToFileURL(resolve(root,'evals/clip_composition/run_new_material_digest_20260926_presentation.mts')).href);
+  return {f,temp,prepared,candidate,rawRoot,spec,specBody,reply,put,caller};
+}
+test('typed explicit live construction preserves raw provenance without using or weakening the mock live rejection',async()=>{
+  const root=resolve(import.meta.dirname,'../..'),{liveStagedFixture}=await import(pathToFileURL(resolve(root,'evals/clip_composition/presentation_orchestration_v001.test.mjs')).href);
+  const f=liveStagedFixture(),stage=prepareDecisionsJ16LiveStageV001(f);
+  assert.equal(stage.mode,'live');assert.deepEqual(stage,f.stageInput);assert.equal(stage.targetCaptionIds.length,3);
+  let calls=0;await assert.rejects(runDecisionsJ16MockV001(request(),{mode:'live',exchange:async()=>{calls++;return {status:200,body:'{}'};}} as any),/J16_LIVE_NOT_ADMITTED/);
+  assert.equal(calls,0);
+});
+test('actual live caller prepares/accepts/saves/replays through existing five-record state; raw files and stage mode cannot be substituted',async()=>{
+  const x=await liveCallerFixture(),{caller:c}=x;
+  try {
+    const start=await c.prepareJ16LiveStagedInputFilesV001(x.spec.path,x.prepared);
+    assert.equal(start.mode,'live');assert.equal(start.status,'ready-for-details');assert.equal(start.productionActivated,false);
+    assert.equal((await c.readJ16LiveStagedInputFilesV001(x.prepared)).stageInputSha256,start.stageInputSha256);
+    await assert.rejects(c.prepareJ16StagedInputFilesV001(x.spec.path,x.candidate));
+    const result=await c.acceptJ16LiveStagedInputFilesV001(x.prepared,x.reply.path,x.candidate);
+    assert.equal(result.status,'candidate-validated');assert.equal(result.mode,'live');assert.equal(result.productionActivated,false);
+    const replay=await c.readJ16LiveStagedCandidateFilesV001(x.candidate);assert.equal(replay.recordSha256,result.recordSha256);
+    const statePath=join(x.candidate,'state.json'),state=JSON.parse(await readFile(statePath,'utf8'));
+    assert.deepEqual(Object.keys(state).sort(),['captionAuto','captionOverrides','connectionAuto','connectionOverrides','selectionRecord']);
+    assert.equal(state.selectionRecord.origin.stageInput.mode,'live');assert.equal(state.selectionRecord.captions[0].allowedPresets[0].targetText,'字幕');
+    assert.equal((await stat(statePath)).mode&0o777,0o600);
+    await assert.rejects(c.readJ16StagedCandidateFilesV001(x.candidate));
+    await assert.rejects(c.acceptJ16LiveStagedInputFilesV001(x.prepared,x.reply.path,x.candidate),(e:any)=>e.code==='EEXIST');
+    const rawPath=x.specBody.batches[0].response.path,originalRaw=await readFile(rawPath);await writeFile(rawPath,Buffer.from('changed'));
+    await assert.rejects(c.readJ16LiveStagedCandidateFilesV001(x.candidate));await writeFile(rawPath,originalRaw);
+    const filesPath=join(x.candidate,'files.json'),files=JSON.parse(await readFile(filesPath,'utf8'));
+    state.selectionRecord.origin.stageInput.mode='mock';const altered=Buffer.from(JSON.stringify(state));await writeFile(statePath,altered);
+    files.state.sha256=hash(altered);files.state.bytes=altered.length;await writeFile(filesPath,JSON.stringify(files));
+    await assert.rejects(c.readJ16LiveStagedCandidateFilesV001(x.candidate));
+  } finally {await rm(x.candidate,{recursive:true,force:true});await rm(x.prepared,{recursive:true,force:true});await rm(x.temp,{recursive:true});}
+});
+test('actual live caller preserves zero-byte transport failure and unattempted targets, denies details/foreign directory/symlink and saves no candidate',async()=>{
+  const x=await liveCallerFixture(),{caller:c}=x,body=structuredClone(x.specBody);
+  const empty=bindJ16RawV001(Buffer.alloc(0));await writeFile(body.batches[0].response.path,Buffer.alloc(0));
+  body.batches[0].response.sha256=empty.sha256;body.batches[0].response.bytes=0;
+  const transport=JSON.parse(x.f.batches[0].transport.text);Object.assign(transport,{httpStatus:null,responseComplete:false,transportErrorCode:'TRIAL_DEADLINE',rawResponseSha256:empty.sha256,rawResponseBytes:0});
+  const b=Buffer.from(JSON.stringify(transport));await writeFile(body.batches[0].transport.path,b);
+  body.batches[0].transport.sha256=hash(b);body.batches[0].transport.bytes=b.length;body.batches=body.batches.slice(0,1);
+  const heldSpec=await x.put('held-spec.json',JSON.stringify(body));
+  const link=join(resolve(import.meta.dirname,'../..'),'runtime/artifacts/openai-decisions-j16-staged-v001','test-live-link-'+randomUUID());
+  let linked=false;try {
+    await assert.rejects(c.prepareJ16LiveStagedInputFilesV001(heldSpec.path,join(x.temp,'foreign')));
+    const saved=await c.prepareJ16LiveStagedInputFilesV001(heldSpec.path,x.prepared);
+    assert.equal(saved.status,'held');assert.equal(saved.missingCount,3);assert.equal(saved.unattemptedSceneIds.length,2);
+    assert(saved.issues.some((i:any)=>i.code==='J16_TRANSPORT_FAILED'));
+    const stage=JSON.parse(await readFile(saved.stageInputPath,'utf8'));assert.equal(stage.batches[0].response.bytes,0);assert.equal(stage.batches[0].response.base64,'');
+    assert.equal((await c.readJ16LiveStagedInputFilesV001(x.prepared)).status,'held');
+    await assert.rejects(c.acceptJ16LiveStagedInputFilesV001(x.prepared,x.reply.path,x.candidate),/J16_STAGE_HELD/);
+    await assert.rejects(stat(x.candidate),(e:any)=>e.code==='ENOENT');
+    const ref=body.batches[0].attempt;await symlink(ref.path,join(x.temp,'attempt-link.json'));linked=true;
+    body.batches[0].attempt={...ref,path:join(x.temp,'attempt-link.json')};
+    const linkSpec=await x.put('link-spec.json',JSON.stringify(body));await assert.rejects(c.prepareJ16LiveStagedInputFilesV001(linkSpec.path,x.prepared));
+  } finally {if(linked)await rm(join(x.temp,'attempt-link.json'));await rm(x.prepared,{recursive:true,force:true});await rm(x.candidate,{recursive:true,force:true});await rm(x.temp,{recursive:true});}
 });

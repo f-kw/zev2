@@ -1,11 +1,11 @@
 import {createHash} from 'node:crypto';
 import {buildJ16RequestSnapshotV001, validateJ16AnswerRowsV001, projectJ16SceneV001,
   bindJ16TextV001, createJ16ScenePacketV001, createJ16StageInputV001,
-  type J16TextBindingV001, type J16StageBatchV001}
+  createJ16LiveStageInputV001, type J16TextBindingV001, type J16StageBatchV001, type J16LiveStageBatchV001}
   from '../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs';
 
 // Local J16 adapter only. Import, construction and validation perform no I/O.
-// Live HTTP, credential lookup, workflow wiring and production adoption are absent.
+// Live stage provenance has an explicit pure entry; HTTP, credentials and production dispatch remain absent.
 export const DECISIONS_J16_ENDPOINT_V001 = 'https://api.openai.com/v1/decisions';
 export const DECISIONS_J16_MODEL_V001 = 'gpt-6-luna';
 export const J16_CHOICES_V001 = ['normal', 'effect', 'unresolved'] as const;
@@ -205,4 +205,11 @@ export function buildDecisionsJ16SceneRequestV001(inputBytes: Uint8Array,
 }
 export function prepareDecisionsJ16StageV001(originalInput: J16TextBindingV001, batches: readonly J16StageBatchV001[]) {
   return createJ16StageInputV001({originalInput, batches});
+}
+
+/** Explicit live-provenance construction only; never dispatches the mock port. */
+export function prepareDecisionsJ16LiveStageV001(options: {originalInput: J16TextBindingV001;
+ authorization: J16TextBindingV001; requestManifest: J16TextBindingV001;
+ batches: readonly J16LiveStageBatchV001[]}) {
+  return createJ16LiveStageInputV001(options);
 }

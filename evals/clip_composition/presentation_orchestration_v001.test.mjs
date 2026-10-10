@@ -1,6 +1,6 @@
 import test from 'node:test';
 import {pathToFileURL} from 'node:url';
-import {bindJ16TextV001, createJ16ScenePacketV001, createJ16StageInputV001, J16_STAGE_ORIGIN_V001}
+import {bindJ16TextV001, bindJ16RawV001, createJ16ScenePacketV001, createJ16StageInputV001, createJ16LiveStageInputV001, replayJ16StageInputV001, J16_STAGE_ORIGIN_V001}
   from './presentation_j16_staged_boundary_v001.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -90,6 +90,51 @@ export function stagedFixture() {
   const envelope = detail => bindJ16TextV001(serialize({schemaVersion: 'presentation-j16-stage-reply-v001',
     stageInputSha256: stageInput.stageInputSha256, detailReplyBytes: serialize(detail)}));
   return {source, context, evidence, input, reply, originalInput, batches, stageInput, envelope};
+}
+
+
+/** Synthetic live-provenance contract fixture. No provider call or real approval. */
+export function liveStagedFixture(options = {}) {
+  const f = stagedFixture(), ref = (path, bound) => ({path,sha256:bound.sha256,bytes:bound.bytes});
+  const roots = options.outputRoots ?? ['/synthetic/raw','/synthetic/prepared','/synthetic/candidate'];
+  const sourceBindings = options.sourceBindings ?? ref('/synthetic/source.json',bindJ16TextV001(serialize(f.source)));
+  const inputRef = options.inputRef ?? ref('/synthetic/input.json',f.originalInput);
+  const rows = f.batches.map((batch,i) => ({sceneId:batch.sceneId,captionIndices:batch.captionIndices,
+    captionIds:JSON.parse(batch.request.text).questions.map(q=>q.name),
+    source:options.requestRefs?.[i]?.source ?? ref('/synthetic/'+batch.sceneId+'.source.json',batch.source),
+    request:options.requestRefs?.[i]?.request ?? ref('/synthetic/'+batch.sceneId+'.request.json',batch.request),
+    model:'gpt-6-luna',questions:batch.captionIndices.length,proposedPosts:1,proposedRetries:0}));
+  const requestManifest = bindJ16TextV001(serialize({schemaVersion:'zev-j16-five-request-preparation-v001',fixtureOnly:true,
+    input:inputRef,sourceBindings,method:'POST',endpoint:'https://api.openai.com/v1/decisions',model:'gpt-6-luna',requests:rows}));
+  const approval = bindJ16TextV001(serialize({schemaVersion:'zev-j16-live-user-approval-v001',fixtureOnly:true,
+    sourceThreadId:'synthetic-no-parent',userMessageId:'synthetic-no-user',userText:'synthetic fixture only',authority:'synthetic fixture, no network authority',
+    recordedAt:'2026-10-10T05:00:00Z',receivedFirstObservedAt:'2026-10-10T05:00:00Z',acceptedBillingUncertainty:true,
+    attemptsPerRequest:1,retries:0,endpoint:'https://api.openai.com/v1/decisions',model:'gpt-6-luna',
+    manifest:{sha256:requestManifest.sha256,bytes:requestManifest.bytes},outputRoots:roots,
+    requestCount:rows.length,questionCount:3,requestBytes:rows.reduce((n,r)=>n+r.request.bytes,0)}));
+  const authorization = bindJ16TextV001(serialize({schemaVersion:'presentation-j16-live-authorization-v001',approval,
+    implementationSha:'a'.repeat(40),requestManifestSha256:requestManifest.sha256,requestManifestBytes:requestManifest.bytes,
+    originalInputSha256:f.originalInput.sha256,originalInputBytes:f.originalInput.bytes,sourceBindings,
+    endpoint:'https://api.openai.com/v1/decisions',model:'gpt-6-luna',attemptsPerRequest:1,retries:0,maxRequests:rows.length,outputRoots:roots}));
+  const batches = f.batches.map(batch => {
+    const response = bindJ16RawV001(Buffer.from(batch.response.text));
+    const attempt = bindJ16TextV001(serialize({schemaVersion:'presentation-j16-live-attempt-v001',fixtureOnly:true,
+      sceneId:batch.sceneId,authorizationSha256:authorization.sha256,manifestSha256:requestManifest.sha256,implementationSha:'a'.repeat(40),
+      sourceSha256:batch.source.sha256,requestSha256:batch.request.sha256,requestBytes:batch.request.bytes,
+      model:'gpt-6-luna',endpoint:'https://api.openai.com/v1/decisions',method:'POST',attemptLimit:1,retries:0,
+      consumedBeforeNetwork:true,startedAt:'2026-10-10T05:01:00Z',pid:123,rawResponsePath:roots[0]+'/'+batch.sceneId+'.raw.bin'}));
+    const transport = bindJ16TextV001(serialize({schemaVersion:'presentation-j16-live-transport-v001',fixtureOnly:true,mode:'live',
+      sceneId:batch.sceneId,attemptSha256:attempt.sha256,authorizationSha256:authorization.sha256,manifestSha256:requestManifest.sha256,
+      implementationSha:'a'.repeat(40),requestSha256:batch.request.sha256,requestBytes:batch.request.bytes,method:'POST',
+      endpoint:'https://api.openai.com/v1/decisions',model:'gpt-6-luna',httpsRequestCalls:1,retries:0,
+      startedAt:'2026-10-10T05:01:00Z',endedAt:'2026-10-10T05:01:01Z',rawResponsePath:roots[0]+'/'+batch.sceneId+'.raw.bin',
+      rawResponseSha256:response.sha256,rawResponseBytes:response.bytes,httpStatus:200,responseComplete:true,transportErrorCode:null}));
+    return {...batch,response,attempt,transport};
+  });
+  const stageInput = createJ16LiveStageInputV001({originalInput:f.originalInput,authorization,requestManifest,batches});
+  const envelope = detail => bindJ16TextV001(serialize({schemaVersion:'presentation-j16-stage-reply-v001',
+    stageInputSha256:stageInput.stageInputSha256,detailReplyBytes:serialize(detail)}));
+  return {...f,authorization,requestManifest,batches,stageInput,envelope};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
@@ -428,6 +473,78 @@ test('duplicated target questions and altered request or projection bytes stop b
     if(field==='source')value.context.captions[0].startFrame+=1;else value.questions[0].instructions+='別の指示';
     batches[0][field]=bindJ16TextV001(serialize(value));
     assert.throws(()=>createJ16StageInputV001({originalInput:f.originalInput,batches}),/J16_STAGE_SCENE_REQUEST_BINDING/);
+  }
+});
+
+
+test('explicit live provenance uses existing first acceptance and saved state replay, preserving raw usage and detailed partial/Pulse/normal answers', () => {
+  const f=liveStagedFixture(),state=fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput:f.stageInput,stageReply:f.envelope(f.reply)});
+  assert.equal(f.stageInput.mode,'live');assert.equal(f.stageInput.status,'ready-for-details');
+  assert.equal(state.selectionRecord.origin.stageInput.schemaVersion,'presentation-j16-live-stage-input-v001');
+  assert.deepEqual(state.selectionRecord.origin.stageInput.batches,f.batches);
+  assert.deepEqual(JSON.parse(Buffer.from(f.batches[0].response.base64,'base64')).usage,{input_tokens:10});
+  assert.equal(state.selectionRecord.captions[0].allowedPresets[0].targetText,'字幕');
+  assert.equal(state.selectionRecord.captions[1].allowedPresets[0].preset,'pulse');
+  assert.equal(state.selectionRecord.captions[2].reason,f.reply.captions[2].reason);
+  assert.equal(view(f,state).resolution.counts.captions.explicitNormal,1);
+  for(const mutate of [s=>{s.selectionRecord.origin.stageInput.mode='mock';},
+    s=>{s.selectionRecord.origin.stageInput.schemaVersion='presentation-j16-stage-input-v001';},
+    s=>{s.selectionRecord.origin.stageInput.batches[0].response.base64+='AA==';},
+    s=>{s.selectionRecord.origin.stageInput.authorization.text+=' ';},
+    s=>{s.selectionRecord.origin.stageInput.batches[0].transport.text+=' ';}]) {
+    const changed=copy(state);mutate(changed);assert.throws(()=>view(f,changed));
+  }
+});
+test('live authorization, frozen requests, one attempt, transport/raw and old attempt mixing are checked before acceptance', () => {
+  const f=liveStagedFixture(),make=o=>createJ16LiveStageInputV001({originalInput:f.originalInput,authorization:f.authorization,requestManifest:f.requestManifest,batches:f.batches,...o});
+  for(const [field,mutate] of [['authorization',v=>{v.implementationSha='bad';}],
+    ['authorization',v=>{v.requestManifestSha256='b'.repeat(64);}],
+    ['authorization',v=>{v.retries=1;}],['requestManifest',v=>{v.requests[0].request.sha256='b'.repeat(64);}]] ) {
+    const value=JSON.parse(f[field].text);mutate(value);assert.throws(()=>make({[field]:bindJ16TextV001(serialize(value))}));
+  }
+  for(const [field,mutate] of [['attempt',v=>{v.requestSha256='b'.repeat(64);}],
+    ['attempt',v=>{v.authorizationSha256='b'.repeat(64);}],['attempt',v=>{v.startedAt='2026-10-08T00:00:00Z';}],
+    ['transport',v=>{v.httpsRequestCalls=2;}],['transport',v=>{v.retries=1;}],
+    ['transport',v=>{v.attemptSha256='b'.repeat(64);}],['transport',v=>{v.rawResponseSha256='b'.repeat(64);}],
+    ['transport',v=>{v.mode='mock';}]]) {
+    const batches=copy(f.batches),value=JSON.parse(batches[0][field].text);mutate(value);
+    batches[0][field]=bindJ16TextV001(serialize(value));assert.throws(()=>make({batches}),/J16_LIVE_/);
+  }
+  assert.throws(()=>make({batches:[...f.batches,f.batches[0]]}),/J16_LIVE_BATCHES|J16_LIVE_DUPLICATE/);
+  const mixed=copy(f.batches);mixed[0].request=f.batches[1].request;assert.throws(()=>make({batches:mixed}),/J16_LIVE_SCENE_REQUEST_BINDING/);
+});
+test('live failure, refusal, unresolved, invalid UTF8/model/JSON and unsent scenes stay held with original raw bytes and no detail acceptance', () => {
+  const f=liveStagedFixture();
+  const cases=['empty','non-utf8','malformed','wrong-model','refusal','unresolved','http','partial'];
+  for(const kind of cases) {
+    const batches=copy(f.batches);
+    if(kind==='partial')batches.pop();
+    else {
+      const response=JSON.parse(Buffer.from(batches[0].response.base64,'base64'));
+      if(kind==='wrong-model')response.model='other';
+      if(kind==='refusal')response.answers[0]={type:'refusal',name:response.answers[0].name};
+      if(kind==='unresolved')response.answers[0].choice='unresolved';
+      const raw=kind==='empty'?Buffer.alloc(0):kind==='non-utf8'?Buffer.from([255]):kind==='malformed'?Buffer.from('{'):Buffer.from(serialize(response));
+      batches[0].response=bindJ16RawV001(raw);const t=JSON.parse(batches[0].transport.text);
+      t.rawResponseSha256=batches[0].response.sha256;t.rawResponseBytes=raw.length;
+      if(kind==='empty'){t.httpStatus=null;t.responseComplete=false;t.transportErrorCode='TRIAL_DEADLINE';}
+      if(kind==='http')t.httpStatus=429;
+      batches[0].transport=bindJ16TextV001(serialize(t));
+    }
+    const stageInput=createJ16LiveStageInputV001({originalInput:f.originalInput,authorization:f.authorization,requestManifest:f.requestManifest,batches});
+    assert.equal(stageInput.status,'held');assert.deepEqual(stageInput.batches,batches);assert.deepEqual(replayJ16StageInputV001(stageInput),stageInput);
+    if(kind==='empty')assert.equal(stageInput.batches[0].response.bytes,0);
+    if(kind==='partial')assert.deepEqual(stageInput.unattemptedSceneIds,[f.batches.at(-1).sceneId]);
+    const stageReply=bindJ16TextV001(serialize({schemaVersion:'presentation-j16-stage-reply-v001',stageInputSha256:stageInput.stageInputSha256,detailReplyBytes:serialize(f.reply)}));
+    assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput,stageReply}),/J16_STAGE_HELD/);
+  }
+});
+test('live still uses existing detailed reason, evidence, range, Pulse and connection gates', () => {
+  const f=liveStagedFixture();
+  for(const mutate of [r=>{r.captions[2].reason='';},r=>{r.captions[0].evidenceIds=['foreign'];},
+    r=>{r.captions[0].allowedPresets[0].targetText='foreign';},r=>{r.captions[1].allowedPresets[0].anchorPeakId='foreign';},
+    r=>{r.connections[0].allowedPresets=['foreign'];},r=>{r.captions[0].semanticRole='normal';r.captions[0].allowedPresets=[{preset:'normal'}];}]) {
+    const reply=copy(f.reply);mutate(reply);assert.throws(()=>fixJ16StagedOrchestrationJudgmentV001({context:f.context,stageInput:f.stageInput,stageReply:f.envelope(reply)}));
   }
 });
 

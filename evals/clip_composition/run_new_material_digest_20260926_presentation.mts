@@ -30,7 +30,7 @@ import {createPresentationRendererProcessObserverV001} from './presentation_rend
 import {PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001} from './presentation_integrity_state_qc_v001.mjs';
 import {buildDecisionsJ16RequestV001, reviewDecisionsJ16OrchestrationV001}
   from '../../runner/src/openai-decisions-j16-v001.js';
-import {bindJ16TextV001, createJ16StageInputV001, J16_STAGE_ORIGIN_V001}
+import {bindJ16TextV001, bindJ16RawV001, createJ16StageInputV001, createJ16LiveStageInputV001, replayJ16StageInputV001, J16_STAGE_ORIGIN_V001}
   from './presentation_j16_staged_boundary_v001.mjs';
 
 type Json = Record<string, any>;
@@ -351,6 +351,115 @@ export async function acceptJ16StagedInputFilesV001(preparedDirectory: string, r
   return {...await readJ16StagedCandidateFilesV001(directory), statePath: stateRef.path};
 }
 
+
+/** Live IO has its own schema and commands. Raw response bytes can be empty;
+ * this does not weaken any existing text/mock reader. */
+async function liveStageRead(ref: Json, kind: 'text' | 'raw' = 'text') {
+  exactStagedKeys(ref, ['path', 'sha256', 'bytes']);
+  assert(path.isAbsolute(ref.path) && /^[a-f0-9]{64}$/.test(ref.sha256)
+    && Number.isSafeInteger(ref.bytes) && (kind === 'raw' ? ref.bytes >= 0 : ref.bytes > 0));
+  assert((await lstat(ref.path)).isFile(), 'Regular live stage file required');
+  assert.equal(await realpath(ref.path), ref.path, 'Live file symlink is not admitted');
+  const bytes = await readFile(ref.path);
+  assert.equal(bytes.length, ref.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'), ref.sha256);
+  return kind === 'raw' ? bindJ16RawV001(bytes) : bindJ16TextV001(new TextDecoder('utf-8', {fatal: true}).decode(bytes));
+}
+
+export async function prepareJ16LiveStagedInputFilesV001(specPath: string, directory: string) {
+  const specFile = await stagedFile(specPath), spec = JSON.parse(specFile.text);
+  exactStagedKeys(spec, ['schemaVersion', 'originalInput', 'sourceBindings', 'authorization', 'requestManifest', 'batches']);
+  assert.equal(spec.schemaVersion, 'presentation-j16-live-stage-files-v001');assert(Array.isArray(spec.batches));
+  const originalFiles: Array<{ref: Json; kind: 'text' | 'raw'}> = [{ref: specFile.ref, kind: 'text'}];
+  const readOriginal = async (ref: Json, kind: 'text' | 'raw' = 'text') => {
+    const bound = await liveStageRead(ref, kind);originalFiles.push({ref, kind});return bound;
+  };
+  const originalInput = await readOriginal(spec.originalInput) as any;
+  const sourceBinding = await readOriginal(spec.sourceBindings) as any;
+  const authorization = await readOriginal(spec.authorization) as any;
+  const requestManifest = await readOriginal(spec.requestManifest) as any;
+  const input = JSON.parse(originalInput.text), source = JSON.parse(sourceBinding.text), context = createOrchestrationContextV001(source);
+  assert.deepEqual(input, createOrchestrationJudgmentInputV001({context, connectionPolicy: input.connectionPolicy,
+    evidence: Object.fromEntries(['productionPurpose', 'captions', 'contexts', 'observations', 'audioEvidence', 'audioCandidates'].map(k => [k, input[k]]))}));
+  const permission = JSON.parse(authorization.text), manifest = JSON.parse(requestManifest.text);
+  assert.equal(directory, permission.outputRoots[1]);assert.deepEqual(permission.sourceBindings, spec.sourceBindings);
+  assert.deepEqual(manifest.sourceBindings, spec.sourceBindings);assert.equal(manifest.input.path, spec.originalInput.path);
+  const batches = [];
+  for (const batch of spec.batches) {
+    exactStagedKeys(batch, ['sceneId', 'captionIndices', 'source', 'request', 'response', 'attempt', 'transport']);
+    const row = manifest.requests.find((r: Json) => r.sceneId === batch.sceneId);assert(row);
+    assert.deepEqual(batch.source, row.source);assert.deepEqual(batch.request, row.request);
+    assert.equal(batch.response.path, path.join(permission.outputRoots[0],batch.sceneId+'.raw.bin'));
+    assert.equal(batch.attempt.path, path.join(permission.outputRoots[0],batch.sceneId+'.attempt.json'));
+    assert.equal(batch.transport.path, path.join(permission.outputRoots[0],batch.sceneId+'.transport.json'));
+    const values: Json = {sceneId: batch.sceneId, captionIndices: batch.captionIndices};
+    for (const key of ['source', 'request', 'response', 'attempt', 'transport']) values[key] = await readOriginal(batch[key], key === 'response' ? 'raw' : 'text');
+    batches.push(values as any);
+  }
+  const stageInput = createJ16LiveStageInputV001({originalInput, authorization, requestManifest, batches});
+  for (const {ref,kind} of originalFiles) await liveStageRead(ref,kind);
+  await stagedDirectory(directory,true);
+  const stageRef = await stagedSave(directory,'stage-input.json',JSON.stringify(stageInput,null,2)+'\n');
+  const sourceRef = await stagedSave(directory,'source-bindings.json',sourceBinding.text);
+  await stagedSave(directory,'stage-files.json',JSON.stringify({schemaVersion:'presentation-j16-live-stage-prepared-files-v001',mode:'live',
+    originalFiles,stageInput:stageRef,sourceBindings:sourceRef},null,2)+'\n');
+  return await readJ16LiveStagedInputFilesV001(directory);
+}
+
+async function loadJ16LivePrepared(directory: string) {
+  await stagedDirectory(directory,false);
+  const file = await stagedFile(path.join(directory,'stage-files.json')), files = JSON.parse(file.text);
+  exactStagedKeys(files,['schemaVersion','mode','originalFiles','stageInput','sourceBindings']);
+  assert.equal(files.schemaVersion,'presentation-j16-live-stage-prepared-files-v001');assert.equal(files.mode,'live');
+  assert.equal(files.stageInput.path,path.join(directory,'stage-input.json'));
+  assert.equal(files.sourceBindings.path,path.join(directory,'source-bindings.json'));
+  assert(Array.isArray(files.originalFiles));
+  for (const item of files.originalFiles) {exactStagedKeys(item,['ref','kind']);assert(['text','raw'].includes(item.kind));await liveStageRead(item.ref,item.kind);}
+  const stageInput = JSON.parse(await stagedReadBound(files.stageInput)), source = JSON.parse(await stagedReadBound(files.sourceBindings));
+  assert.equal(stageInput.schemaVersion,'presentation-j16-live-stage-input-v001');assert.equal(stageInput.mode,'live');
+  replayJ16StageInputV001(stageInput); // Same pure reconstruction as compile/validateState, including held results.
+  const permission = JSON.parse(stageInput.authorization.text);assert.equal(permission.outputRoots[1],directory);
+  const context = createOrchestrationContextV001(source), input = JSON.parse(stageInput.originalInput.text);
+  assert.deepEqual(input,createOrchestrationJudgmentInputV001({context,connectionPolicy:input.connectionPolicy,
+    evidence:Object.fromEntries(['productionPurpose','captions','contexts','observations','audioEvidence','audioCandidates'].map(k=>[k,input[k]]))}));
+  return {file,files,stageInput,source,context,permission};
+}
+export async function readJ16LiveStagedInputFilesV001(directory: string) {
+  const {files,stageInput} = await loadJ16LivePrepared(directory);
+  return {mode:'live',status:stageInput.status,stageInputPath:files.stageInput.path,stageInputSha256:stageInput.stageInputSha256,
+    targetCount:stageInput.targetCaptionIds.length,missingCount:stageInput.missingCaptionIds.length,
+    unattemptedSceneIds:stageInput.unattemptedSceneIds,issues:stageInput.issues,productionActivated:false};
+}
+export async function readJ16LiveStagedCandidateFilesV001(directory: string) {
+  await stagedDirectory(directory,false);
+  const manifest = JSON.parse((await stagedFile(path.join(directory,'files.json'))).text);
+  exactStagedKeys(manifest,['schemaVersion','mode','preparedFiles','sourceBindings','state']);
+  assert.equal(manifest.schemaVersion,'presentation-j16-live-candidate-files-v001');assert.equal(manifest.mode,'live');
+  assert.equal(manifest.state.path,path.join(directory,'state.json'));
+  await liveStageRead(manifest.preparedFiles);
+  assert.equal(path.basename(manifest.preparedFiles.path),'stage-files.json');
+  const prepared = await loadJ16LivePrepared(path.dirname(manifest.preparedFiles.path));
+  assert.equal(directory,prepared.permission.outputRoots[2]);assert.deepEqual(manifest.sourceBindings,prepared.files.sourceBindings);
+  const state = JSON.parse(await stagedReadBound(manifest.state));
+  assert.equal(state.selectionRecord.origin.kind,J16_STAGE_ORIGIN_V001);
+  assert.deepEqual(state.selectionRecord.origin.stageInput,prepared.stageInput);
+  const view = resolveOrchestrationDrawingViewV001({context:prepared.context,state}); // Existing validateState, no new semantic validator.
+  return {mode:'live',status:'candidate-validated',recordSha256:state.selectionRecord.recordSha256,
+    stageInputSha256:state.selectionRecord.origin.stageInput.stageInputSha256,counts:view.resolution.counts,productionActivated:false};
+}
+export async function acceptJ16LiveStagedInputFilesV001(preparedDirectory: string, replyPath: string, directory: string) {
+  const prepared = await loadJ16LivePrepared(preparedDirectory);
+  assert.equal(directory,prepared.permission.outputRoots[2]);
+  const replyFile = await stagedFile(replyPath);
+  const state = fixJ16StagedOrchestrationJudgmentV001({context:prepared.context,stageInput:prepared.stageInput,stageReply:bindJ16TextV001(replyFile.text)});
+  resolveOrchestrationDrawingViewV001({context:prepared.context,state});
+  await loadJ16LivePrepared(preparedDirectory);await stagedReadBound(replyFile.ref);
+  await stagedDirectory(directory,true);
+  const stateRef = await stagedSave(directory,'state.json',JSON.stringify(state,null,2)+'\n');
+  await stagedSave(directory,'files.json',JSON.stringify({schemaVersion:'presentation-j16-live-candidate-files-v001',mode:'live',
+    preparedFiles:prepared.file.ref,sourceBindings:prepared.files.sourceBindings,state:stateRef},null,2)+'\n');
+  return {...await readJ16LiveStagedCandidateFilesV001(directory),statePath:stateRef.path};
+}
+
 export async function acceptOrchestration(responsePath: string) {
   const source = await read(`${output}/saved/source-bindings.json`), input = await read(`${output}/saved/fresh-input.json`);
   const replyBytes = await readFile(absolute(responsePath), 'utf8');
@@ -410,7 +519,15 @@ export async function render() {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const [stage, input, reviewDirectory, candidateDirectory] = process.argv.slice(2);
-  if (stage === 'prepare-j16-stage') {
+  if (stage === 'prepare-j16-live-stage') {
+    assert.equal(process.argv.slice(2).length,3);console.log(JSON.stringify(await prepareJ16LiveStagedInputFilesV001(input,reviewDirectory)));
+  } else if (stage === 'read-j16-live-input') {
+    assert.equal(process.argv.slice(2).length,2);console.log(JSON.stringify(await readJ16LiveStagedInputFilesV001(input)));
+  } else if (stage === 'accept-j16-live-stage') {
+    assert.equal(process.argv.slice(2).length,4);console.log(JSON.stringify(await acceptJ16LiveStagedInputFilesV001(input,reviewDirectory,candidateDirectory)));
+  } else if (stage === 'read-j16-live-stage') {
+    assert.equal(process.argv.slice(2).length,2);console.log(JSON.stringify(await readJ16LiveStagedCandidateFilesV001(input)));
+  } else if (stage === 'prepare-j16-stage') {
     assert.equal(process.argv.slice(2).length, 3);
     console.log(JSON.stringify(await prepareJ16StagedInputFilesV001(input, reviewDirectory)));
   } else if (stage === 'accept-j16-stage') {
