@@ -31,7 +31,7 @@ export function fixture({sampleRate = 44100, ids = ['caption-1', 'caption-2', 'c
       background: {color: '#00000000'}}}))};
   const planBytes = serialize(plan), mediaRef = ref('base.mp4');
   const timeline = {schemaVersion: 'presentation-base-media-timeline-v003',
-    baseMedia: {frameRate: '30/1', expectedFrameCount: 360, fileSha256: mediaRef.fileSha256},
+    baseMedia: {frameRate: '30/1', expectedFrameCount: ids.length * 120, fileSha256: mediaRef.fileSha256},
     segments: ids.map((id, i) => ({segmentId: 'segment-' + (i + 1), outputStartFrame: i * 120,
       outputEndFrame: (i + 1) * 120, sourceStartFrame30: i * 1000, sourceEndFrame30: i * 1000 + 120}))};
   const timelineBytes = serialize(timeline);

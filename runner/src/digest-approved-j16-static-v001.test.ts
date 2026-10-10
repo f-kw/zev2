@@ -82,3 +82,90 @@ test('J16 binds its original Core style instead of applying a different Digest t
   assert.throws(()=>projectApprovedJ16BoundCoreStyleV001(changed,f.plan));
   assert.throws(()=>projectApprovedJ16BoundCoreStyleV001({fontSizePx:133},f.plan));
 });
+
+/** Reads the saved candidate through the real opaque job/input readers. These
+ * controls qualify JSON only: no owner, permit, environment or media operation.
+ * All original artifacts remain read-only; only the UUID fixture is removed. */
+test('saved J16 input qualifies through the opaque byte boundary and re-reads the identical display selection',async()=>{
+  const {readFile,writeFile,mkdir,rm,lstat,realpath}=await import('node:fs/promises');
+  const {randomUUID}=await import('node:crypto');
+  const {execFile}=await import('node:child_process');
+  const {promisify}=await import('node:util');
+  const exec=promisify(execFile),id='test-approved-j16-'+randomUUID(),relative='runtime/artifacts/'+id;
+  const jobModule=await import('./digest-approved-job-v001.js');
+  const inputModule=await import('./digest-approved-inputs-v001.js');
+  const runner=await import('./digest-approved-job-runner-v001.js');
+  const savedStorage=JSON.parse(await readFile(root+'/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/job.json','utf8')).storage;
+  const storage={...savedStorage,guestDevice:(await lstat(savedStorage.guestRoot)).dev,hostDevice:(await lstat(savedStorage.hostRoot)).dev};
+  assert.equal(await realpath(storage.guestRoot),storage.guestRoot);
+  await exec('git',['check-ignore','-q',relative+'/job.json'],{cwd:root});
+  const controlDirectory=root+'/'+relative,currentPrefix=relative+'/current-inputs-v001',inputDirectory=storage.guestRoot+'/'+currentPrefix;
+  let ownsControl=false,ownsInput=false;
+  try {
+    await mkdir(controlDirectory);ownsControl=true;
+    await mkdir(storage.guestRoot+'/'+relative);ownsInput=true;await mkdir(inputDirectory);
+    const bind=async(p:string,base=root)=>{const b=await readFile(base+'/'+p);return {path:p,fileSha256:createHash('sha256').update(b).digest('hex'),sizeBytes:b.length};};
+    const copy=async(name:string,p:string)=>{const b=await readFile(root+'/'+p);await writeFile(inputDirectory+'/'+name,b,{flag:'wx',mode:0o600});return bind(currentPrefix+'/'+name,storage.guestRoot);};
+    const original='runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-candidate/files.json';
+    const adoptionRoot='runtime/artifacts/openai-decisions-j16-staged-v001/cue69-explicit-visibility-20261010-v001';
+    const candidateManifestBinding={...await bind(original),schemaVersion:'presentation-j16-live-candidate-files-v001'};
+    const visibilitySelectionBinding=await copy('selection.json',adoptionRoot+'/visibility-selection.json');
+    const visibilityAdoptionBinding=await copy('adoption.json',adoptionRoot+'/individual-adoption-record.json');
+    const closure=await stage.readJ16LiveCandidateClosureV001(path.dirname(root+'/'+original));
+    const typographySettingsBinding=await copy('original-core-plan.json',path.relative(root,closure.source.planRef.path));
+    const rendererTemplateBinding=await copy('original-renderer-job.json','runtime/artifacts/digest-new-material-20260926-v001/caption-attempt-003/renderer-job.json');
+    const normal=JSON.parse(closure.source.planBytes),timeline=JSON.parse(closure.source.timelineBytes);
+    const codePaths=['runner/src/digest-approved-job-v001.ts','runner/src/digest-approved-job-runner-v001.ts','runner/src/digest-approved-inputs-v001.ts',
+      'runner/src/digest-formal-handoff-v001.ts','runner/src/digest-caption-registration-migration-v001.ts','runner/src/digest-approved-record-finalize-v001.ts',
+      'evals/clip_composition/adopted_media_manufacturing_v001.mts','evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
+      'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts','evals/clip_composition/render_presentation_v002.mjs',
+      'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
+      'evals/clip_composition/digest_representative_completion_v001.mjs',...['presentation_j16_staged_boundary_v001.mjs','presentation_orchestration_v001.mjs','presentation_orchestration_projection_v001.mjs','presentation_orchestration_background_v001.mjs'].map(p=>'evals/clip_composition/'+p)];
+    const nodePath=await realpath(process.execPath),nodeBytes=await readFile(nodePath);
+    const job={schemaVersion:'digest-approved-job-v002',planId:id,outputRoot:relative+'/attempt-001',
+      inputs:{kind:'j16-staged-static-v001',inputRoot:storage.guestRoot,inputPrefix:currentPrefix,candidateManifestBinding,visibilitySelectionBinding,visibilityAdoptionBinding,typographySettingsBinding,rendererTemplateBinding},storage,
+      expected:{frames:closure.view.projection.displayFrameCount,audioSamples:closure.view.projection.displayPlaybackSampleCount,
+        groups:timeline.segments.length,atoms:normal.elements.flatMap((r:any)=>r.targetProvenance.sourceAtomIds).length,cues:normal.elements.length},
+      implementation:{sha:(await exec('git',['rev-parse','HEAD'],{cwd:root})).stdout.trim(),bindings:await Promise.all(codePaths.map(p=>bind(p))),nodeBinding:{path:nodePath,fileSha256:createHash('sha256').update(nodeBytes).digest('hex'),sizeBytes:nodeBytes.length}},
+      guard:{...DIGEST_APPROVED_JOB_GUARD_V001},allocationBudget:{baseBuildBytes:1,rendererPreparationBytes:1},
+      verificationPolicy:{schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',representativeInstructionIds:[normal.elements[0].instructionId],permittedMethods:['still-frame'],confirmationRecordPath:relative+'/attempt-001/confirmation.json'}};
+    const saveControl=async(name:string,value:unknown)=>{await writeFile(controlDirectory+'/'+name,JSON.stringify(value,null,2)+'\n',{flag:'wx',mode:0o600});const b=await bind(relative+'/'+name);return {...b,path:root+'/'+b.path};};
+    const jobBinding=await saveControl('job.json',job);
+    const authorization={schemaVersion:'digest-approved-job-authorization-v002',recordId:id+'-synthetic-json-only',
+      userApproval:{at:new Date().toISOString(),messageId:'TEST-SYNTHETIC-NO-HUMAN-GRANT',sourceThreadId:'TEST-JSON-QUALIFICATION-ONLY',text:'SYNTHETIC TEST CONTROLS ONLY. No manufacturing grant; no owner, permit, supervisor, environment or media operation.'},
+      actions:['manufacture-one-approved-plan'],jobBinding,planId:job.planId,manifestBinding:candidateManifestBinding,typographySettingsBinding,
+      inputKind:job.inputs.kind,visibilitySelectionBinding,visibilityAdoptionBinding,rendererTemplateBinding,
+      outputRoot:job.outputRoot,storage,guard:job.guard,implementation:job.implementation,normalCandidates:1,verificationPolicy:job.verificationPolicy};
+    const authorizationBinding=await saveControl('synthetic-json-only-authorization.json',authorization);
+    const q=await jobModule.readQualifiedDigestApprovedJobV001({workspaceRoot:root,jobBinding,authorizationBinding,
+      trustedJobSha256:jobBinding.fileSha256,trustedAuthorizationSha256:authorizationBinding.fileSha256});
+    const inputs=await inputModule.readApprovedDigestInputsV001(q);
+    await inputModule.assertApprovedDigestInputsV001(inputs,q);
+    assert.equal(inputs.kind,'j16-staged-static-v001');assert.equal(inputs.normalPlan.elements.length,job.expected.cues);
+    assert.equal(inputs.j16View.resolvedPlan.elements.length,job.expected.cues);
+    assert.deepEqual(inputs.normalPlan,normal);assert.deepEqual(inputs.typographySettings,normal);
+    const selected=await inputModule.buildApprovedDigestCaptionVisibilitySelectionV001(inputs,q,inputs.j16View.resolvedPlan);
+    const reread=await inputModule.readApprovedDigestCaptionVisibilitySelectionV001(q,inputs.j16View.resolvedPlan);
+    assert.deepEqual(reread,selected);assert.deepEqual(selected.entries,inputs.visibilitySelection.entries);
+    assert.deepEqual(selected.counts,inputs.visibilitySelection.counts);
+    assert.deepEqual(selected.adoptionBinding,visibilityAdoptionBinding);
+    assert.deepEqual(selected.manifestBinding,candidateManifestBinding);
+    for(const [i,row] of inputs.j16View.resolvedPlan.elements.entries()) {
+      assert.equal(row.text,normal.elements[i].text);assert.deepEqual(row.targetProvenance,normal.elements[i].targetProvenance);
+    }
+    await assert.rejects(inputModule.readApprovedDigestInputsV001({...q}),/QUALIFIED_APPROVED_DIGEST_JOB_REQUIRED/);
+    await assert.rejects(inputModule.assertApprovedDigestInputsV001(structuredClone(inputs),q),/QUALIFIED_APPROVED_DIGEST_INPUTS_REQUIRED/);
+    await assert.rejects(runner.resolveQualifiedApprovedJ16DrawingV001({approvedJob:q,outputRoot:job.outputRoot,assertCurrent:async()=>{}}),/QUALIFIED_APPROVED_DIGEST_STORAGE_REQUIRED/);
+    const altered=structuredClone(inputs.j16View.resolvedPlan);altered.elements[0].endFrameExclusive++;
+    await assert.rejects(inputModule.buildApprovedDigestCaptionVisibilitySelectionV001(inputs,q,altered));
+    const selectionPath=inputDirectory+'/selection.json',originalBytes=await readFile(selectionPath);
+    await writeFile(selectionPath,Buffer.concat([originalBytes,Buffer.from(' ')]));
+    await assert.rejects(q.assertCurrent(),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
+    await assert.rejects(inputModule.assertApprovedDigestInputsV001(inputs,q),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
+    await assert.rejects(lstat(storage.guestRoot+'/'+job.outputRoot),(e:any)=>e.code==='ENOENT');
+    await closure.assertCurrent();
+  } finally {
+    if(ownsInput)await rm(storage.guestRoot+'/'+relative,{recursive:true});
+    if(ownsControl)await rm(controlDirectory,{recursive:true});
+  }
+});
