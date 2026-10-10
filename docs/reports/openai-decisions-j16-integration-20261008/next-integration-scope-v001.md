@@ -1,5 +1,23 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — 実装完了、実送信は自動承認審査で停止 — 2026-10-10 14:52 JST
+
+TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが具体的な外部送信承認を扱う。製造/本番切替/動画QC/品質採用は未実施。
+
+今回の開始は2026-10-10T05:34:41.960Z（14:34:41.960 JST）、独立作業終了は2026-10-10T05:52:40.633Z。開始から1079秒。これは実装・設営・確認・停止処理の経過時間であり、予定していたAPI待ち・326詳細判断・実候補受理を含む全工程の所要時間ではない。新しい人間介入は自動審査が求める送信の明示承認で、実装中の品質レビューを本人へ再要求していない。実費・API latency・全体精度・制作短縮は測れない。
+
+変更は提案された製品3/型1/試験2の6path内。live専用schemaと明示入口で、記録済み本人承認/固定manifest/元input/実装SHA/一回attempt/transport/原byteを保持し、既存stage origin→compile→validateStateを再利用。mock schema/portのlive拒否、既存理由/根拠/範囲/Pulse/接続検査を保持。通常accept/queue/renderや元観測prepareは変更していない。模擬fixtureの通過を実APIの成功にはしない。
+
+未送信stage: /Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-input/stage-input.json、fileSHA 33f780dcf869453efda9650e9150e4adffa99eb2900d5dc76733cb080625add8、3377921B、stage自己SHA 0c6fd3d025952371c9d0ecefd724f992cf2ed8cf654d8086ff98e7a3dd0cf31a。batches0、target326/missing326、未実行candidate-0001〜0005、J16_UNATTEMPTED_REQUESTS/J16_PARTIAL_COVERAGE。source-bindings/stage-filesを同じ専用領域へ排他保存/再読。raw rootとcandidate rootは不存在。空の原応答やtransportを作ったのではなく、実行前に止まった状態そのものを記録した。
+
+残件は、本人が**326字幕の本文、5場面と必要前後の文脈、保存した物理観測・音響数値・ASRテキストを、OpenAI Decisions https://api.openai.com/v1/decisions / gpt-6-lunaへ、固定5request合計689,414B・各1回/再試行0で外部送信する**ことを明示承認すること。画像/動画/音声byte、旧詳細理由/正解ラベル、秘密情報はpayloadに含まない。料金不確実性を含む14:27 JSTの既承認を保持し、旧6質問の許可へ戻さない。今回の自動審査停止を迂回しない。
+
+明示承認後は新承認を実装SHA/固定manifestへ結び直し、今回の未実行snapshotを上書きしない新しいstage leafを使う必要がある。raw/attemptはまだないためAPI再送ではない。5送信→全確定時のみ新詳細326/接続4→実候補受理/再読はこの先の未達。保留なら原raw/対象/由来を成果保存する既承認方針を維持。Check44/60の監査、Digest文脈改善TODO54、別ショートBacklog62は別の未完了を保持する。
+
+料金は10月10日に[公式Decisions資料](https://developers.openai.com/api/docs/guides/decisions)で入力0.10USD/100万token・出力/cache料金なし、[モデル資料](https://developers.openai.com/api/docs/models/gpt-6-luna)で272K超の入力2倍/地域10%加算を再照合。今回は送信0でusageと実請求は存在しない。過去の約0.019USD/約3USDは仮定付き見積のまま、確定請求/上限にはしない。
+
+監査証拠はprivate workspaceのj16-live-code-checkpoint-20261010-v001.json、j16-live-send-auto-review-block-20261010-v001.json、j16-live-blocked-final-evidence-20261010-v001.json、j16-live-board-close-20261010-v001.json。4編集scriptだけ削除し、固定request/source/manifest、本人指示記録、未使用一回driverとsyntax確認、型診断・試験結果、未送信specとstageをKEEP。旧成果削除0。API一回driverは起動しておらず、認証値/hash/header記録0。[新cycle log](../../work-logs/2026-10/2026-10-10T1452_Codex-SSD_J16-live-blocked_157ca23c.md)。
+
 ## 最新現在地 — 2026-10-10T05:34:41.960Z（TODO61本人承認を受領、live限定実装に着手）
 
 本人10/10 14:27 JST「進めて」（Sentinel_b5e1427c26c8819199043fb29b411c77）で、10/09の326字幕・5場面/固定5request/限定6path/約4〜7h/費用不確実性を含む範囲を承認。親mona経由で受領し、2026-10-10 14:34:41.960 JST（2026-10-10T05:34:41.960Z）に実着手。main/remote b8b5aaa6/clean、固定manifest ead316c1a1740438e14dc88651790da90a8be9cfb02d1f4b8de6b5237faaad52、689,414B/全326ID/原13記録と既存7pathのSHAを再読一致。今回3出力root/5件attemptは未作成、API/認証読込み0。live由来限定実装と検査から進め、送信は各1回/retry0、旧6回答・旧理由を新判断へ流用しない。保留は原応答/対象/由来を保存再読しpositive受理未達を明示。通常本番切替/製造/新27input・plan・clockなし。公式MCP board136/Doing61 item4、Check44/60・TODO54と他項目/削除履歴保持。別ショート企画を重複なしBacklogへ記録し、未着工。状態は作業中、次担当Codex-SSD。
