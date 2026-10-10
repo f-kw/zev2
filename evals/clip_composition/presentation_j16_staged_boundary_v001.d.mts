@@ -40,3 +40,10 @@ export function createJ16LiveStageInputV001(options: {originalInput: J16TextBind
  authorization: J16TextBindingV001; requestManifest: J16TextBindingV001;
  batches: readonly J16LiveStageBatchV001[]}): J16LiveStageInputV001;
 export function replayJ16StageInputV001(stage: J16AnyStageInputV001): J16AnyStageInputV001;
+
+export function readJ16LiveCandidateClosureV001(directory: string): Promise<Readonly<{
+  manifest: Record<string,any>; manifestRef: {path:string;sha256:string;bytes:number};
+  source: Record<string,any>; state: Record<string,any>; context: any; view: any;
+  fileBindings: Array<{path:string;sha256:string;bytes:number}>; assertCurrent: ()=>Promise<void>;
+}>>;
+export function assertJ16StaticManufacturingViewV001(view: any): any;

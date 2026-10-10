@@ -1,5 +1,19 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-10T15:55:05.666Z（J16汎用接続の部分実装・第6回設営修正の相談役判断待ち）
+
+2026-10-11 00:28 JSTの本人「いいよ」をmona経由で受領し、00:38:22 JSTに実着手した汎用製造接続は、2026-10-11T00:55:05 JST時点で実装途中・相談役待ち。完了ではない。私用適用helper edit-j16-integration-v001.py:437が置換条件の一致2箇所を検出して停止。片方はorchestration、もう片方はMotionのcombined-QC制約で、同じ短い条件文だけでは区別できなかった。旧設営修正累積5/5を保持し、第6回の個別設営修正についてGPT_DECISIONを返す。一括置換、上限自己承認、枠リセットは行わない。停止の正確な秒は未取得、証拠確認は00:52:09 JST。途中のcommentaryで00:55ごろとした概算表記は誤りで、訂正済み。公式MCP board162/Check61 item22をrequest/waitingへ戻し、他未完了/削除履歴を保持。次担当monaがこの一件の例外を判断し、承認後は同じCodex-SSDが既承認の実装範囲を続ける。
+
+合格：既存Normal approved-job検査16/16、共通J16 readerによる保存済み原本閉包の再読、static-viewと全326個別採否の純粋metadata照合（show325/suppress1、27949frame/41085030sample/5group/4124atom）、変更したmjs2件の構文、git diff --check。不合格：runner tsc --noEmitは新規TS7016が2件（digest-approved-inputs-v001.ts:593/595のmjs静的dynamic importに型宣言なし）。通常の実装段階で既存load/helperへ統一する限定修正が必要で、未修正。未実施：新しい任意素材・異なる件数のfixture、正式J16 job/input資格化、SSD出力/背景/別AAC/低メモリgraphの接続、pending/get/finalize/完成再読の同一採否確認、追加Remotion型検査/必要なcaller baseline比較/関連suite、実媒体の非表示成立、通常速視聴/音声/品質採用。原本再読や純粋検査を正式製造資格化・動画品質合格としない。
+
+[根拠・限定再開案](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[今回cycle log](work-logs/2026-10/2026-10-11T0038_Codex-SSD_J16-production-integration.md)。以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-10T15:38:22.728Z（汎用J16製造接続を承認・実着手）
+
+本人2026-10-11 00:28 JST「いいよ」（Sentinel_77f6279139b88191a4f4337244ba5a21）をmona経由で受領し、2026-10-11T00:38:22 JSTに同じCodex-SSDで汎用製造接続の実装・検証・保存を実着手。初動読み取りはこの時刻より前、正確な秒は未取得。base main c91010e2d1d1e8b2c588abe93e2147656044213e、開始時tracked/staged/untracked変更なし。J16原本＋明示採否を正規job種別として資格化し、静的Normal/Color・既存接続・別AAC・SSD監視・低メモリ合成・完成再読へ接続する。全論理記録を残し、合成対象のみ選ぶ。任意素材fixtureで専用分岐がないことを確認する。今回承認は実装・テスト・保存まで、API再送・実素材の動画製造・本番切替は含まない。既存候補/採否/原回答を保護。設営修正累積5/5をリセットしない。映像品質未確認。公式MCP board156/Check61 item21、同項目をcurrent/activeへ移し他未完了/削除履歴保持。次担当Codex-SSD。
+
+[今回cycle log](work-logs/2026-10/2026-10-11T0038_Codex-SSD_J16-production-integration.md)。以下は以前の時点の記録。
+
 ## 最新現在地 — 2026-10-10T15:07:30.744Z（J16採否→汎用製造経路の調査終了）
 
 表示採否→J16製造経路を読み取り調査し、2026-10-11 00:07 JSTに調査を終了。稼働記録開始2026-10-10 23:57:17.151 JST（その前の初動読み取りの正確な秒は未取得）。base main a56a4ed9dca55fde92cbb09cb5abca702ada04ea。69の承認済み個別採否データ保存/再読は前cycleで終了しているが、「汎用製造入力が採否を受理し非表示を適用できる」状態は未完成。今回は実装・候補変更・試験実行・製造・API送信0。コードと候補の実SHA不変を確認し、公式MCP board153/Check61 item20を相談役待ちに戻して稼働欄0を再読。他未完了/削除履歴を保持、次担当mona。

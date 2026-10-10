@@ -19,6 +19,7 @@ export type ApprovedDigestInputsV001 = Json;
 type InputRecord = {qualified: ApprovedDigestQualifiedJobV001; bodySha256: string; bindings: Json[]; absoluteBindings: {binding:Json; originalAnswerBinding?:Json}[]};
 type SourceRecord = {inputs: Json; qualified: ApprovedDigestQualifiedJobV001; context: Json; bodySha256: string};
 const qualifiedInputs = new WeakMap<object, InputRecord>();
+const j16Closures = new WeakMap<object, {assertCurrent:()=>Promise<void>}>();
 const qualifiedSources = new WeakMap<object, SourceRecord>();
 const publishedBodies = new WeakMap<object, SourceRecord>();
 const sha = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
@@ -107,6 +108,7 @@ export async function assertApprovedDigestInputsV001(inputs: unknown, qualified:
   const wire = await load(qualified.workspaceRoot, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
   assert.equal(sha(wire.formal(inputs)), record.bodySha256, 'APPROVED_DIGEST_INPUTS_MUTATED');
   for (const binding of record.bindings) await qualified.readBinding(binding);
+  await j16Closures.get(inputs)?.assertCurrent();
   for (const entry of record.absoluteBindings) await readAbsoluteMigrationBytes(entry.binding, qualified, entry.originalAnswerBinding);
   await qualified.assertCurrent();
 }
@@ -130,6 +132,7 @@ async function readAbsoluteMigrationBytes(binding: Json, qualified: ApprovedDige
 export async function readApprovedDigestInputsV001(qualified: ApprovedDigestQualifiedJobV001): Promise<ApprovedDigestInputsV001> {
   await assertQualifiedDigestApprovedJobV001(qualified);
   const root = await realpath(qualified.workspaceRoot), job = qualified.job, specs = object(job.inputs);
+  if(specs.kind==='j16-staged-static-v001') return readApprovedJ16StaticInputsV001(qualified);
   const observed = new Map<string, Json>();
   const readOrigin = async (binding: Json) => {const value = await qualified.readBinding(binding);
     observed.set(JSON.stringify(binding), clone(binding)); return value;};
@@ -534,6 +537,11 @@ function assertExplicitCaptionVisibilityAdoptionV001(adoption: Json, rows: Json[
 /** Derive display decisions only from opaque, byte-qualified original inputs; never from caller options. */
 export async function buildApprovedDigestCaptionVisibilitySelectionV001(inputs: Json, qualified: ApprovedDigestQualifiedJobV001, plan: Json): Promise<Json | null> {
   await assertApprovedDigestInputsV001(inputs, qualified);
+  if(inputs.kind==='j16-staged-static-v001') {
+    same(plan,inputs.j16View.resolvedPlan);
+    return freeze({...clone(inputs.visibilitySelection),adoptionBinding:clone(qualified.job.inputs.visibilityAdoptionBinding),
+      manifestBinding:clone(qualified.job.inputs.candidateManifestBinding)});
+  }
   const rows = list(inputs.correspondence.rows), elements = list(plan.elements);
   assert.equal(elements.length, rows.length, 'APPROVED_DIGEST_VISIBILITY_PLAN_COVERAGE');
   const ids = new Set<string>();
@@ -573,4 +581,115 @@ export async function prepareApprovedDigestCaptionCoreV001(inputs: Json, qualifi
     originalRequests: inputs.manifest.responses, traces: inputs.traces, aggregateViewOnly: true, judgmentCount: 0,
     humanQuality: 'not-evaluated', outlineChoice: null};
   return core.assembleAdoptedCaptionCoreV001(c, {meaning: inputs.meaning, sourcePackage}, base, adoption, inputs.traces, context);
+}
+
+
+/** Pure feature/adoption validation for arbitrary IDs and lengths. No trust is
+ * granted here; the opaque job reader below re-reads every bound source. */
+export async function validateApprovedJ16StaticInputV001(value: Json) {
+  const {view,source,selection,adoption,manifestBinding,adoptionBinding,expected}=value;
+  const stage=await import('../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs');
+  stage.assertJ16StaticManufacturingViewV001(view);
+  const {assertOrchestrationDrawingViewV001}=await import('../../evals/clip_composition/presentation_orchestration_v001.mjs');
+  assertOrchestrationDrawingViewV001(view);
+  const {validateDigestCaptionVisibilitySelectionV001}=await import('../../evals/clip_composition/presentation_renderer_qc_v002.mjs');
+  assert.equal(validateDigestCaptionVisibilitySelectionV001({plan:view.resolvedPlan,selection,
+    manifestBinding:selection.manifestBinding}).status,'passed','APPROVED_J16_VISIBILITY_INVALID');
+  const bytesBinding=(b:Json)=>({path:b.path,fileSha256:b.fileSha256,sizeBytes:b.sizeBytes});
+  same(bytesBinding(selection.manifestBinding),bytesBinding(manifestBinding));
+  assert.equal(selection.adoptionBinding.fileSha256,adoptionBinding.fileSha256,'APPROVED_J16_ADOPTION_BYTES_CHANGED');
+  assert.equal(selection.adoptionBinding.sizeBytes,adoptionBinding.sizeBytes,'APPROVED_J16_ADOPTION_SIZE_CHANGED');
+  assert.equal(adoption.mode,'explicit-cue-adoption-v001');
+  same(bytesBinding(adoption.sourceCandidateManifestBinding),bytesBinding(manifestBinding));
+  assert.equal(adoption.sourceSelectionRecordSha256,view.selectionRecordSha256,'APPROVED_J16_ORIGINAL_SELECTION_CHANGED');
+  assert.equal(adoption.sourceClockSha256,view.projection.sourceClockSha256,'APPROVED_J16_CLOCK_CHANGED');
+  assert(adoption.approval&&typeof adoption.approval.userMessageId==='string'&&adoption.approval.userMessageId.trim()
+    &&typeof adoption.approval.userText==='string'&&adoption.approval.userText.trim()
+    &&typeof adoption.approval.sourceThreadId==='string'&&adoption.approval.sourceThreadId.trim(),
+    'APPROVED_J16_EXPLICIT_ADOPTION_EVIDENCE_REQUIRED');
+  const decisions=list(adoption.decisions);assert.equal(decisions.length,view.resolvedPlan.elements.length);
+  for(const [index,row] of decisions.entries()) {
+    visibilityExact(row,['instructionId','decision','reason'],'APPROVED_J16_DECISION_FIELDS');
+    same({instructionId:row.instructionId,decision:row.decision},selection.entries[index]);
+    assert(typeof row.reason==='string'&&row.reason.trim(),'APPROVED_J16_DECISION_REASON_REQUIRED');
+  }
+  same(adoption.counts,{totalCues:selection.counts.totalInstructions,visibleCues:selection.counts.shownInstructions,
+    suppressedCues:selection.counts.suppressedInstructions});
+  const normal=JSON.parse(source.planBytes),timeline=JSON.parse(source.timelineBytes);
+  assert.equal(normal.elements.length,view.resolvedPlan.elements.length);
+  assert.equal(expected.frames,view.projection.displayFrameCount,'APPROVED_J16_FULL_FRAME_CLOCK_CHANGED');
+  assert.equal(expected.audioSamples,view.projection.displayPlaybackSampleCount,'APPROVED_J16_FULL_SAMPLE_CLOCK_CHANGED');
+  assert.equal(expected.cues,normal.elements.length,'APPROVED_J16_ALL_LOGICAL_CUES_REQUIRED');
+  assert.equal(expected.groups,timeline.segments.length,'APPROVED_J16_SOURCE_GROUPS_CHANGED');
+  const atoms=normal.elements.flatMap((row:Json)=>row.targetProvenance?.sourceAtomIds??[]);
+  assert(atoms.length>0&&new Set(atoms).size===atoms.length,'APPROVED_J16_SOURCE_ATOMS_REQUIRED');
+  assert.equal(expected.atoms,atoms.length,'APPROVED_J16_ALL_LOGICAL_ATOMS_REQUIRED');
+  return {status:'validated',logicalCueCount:normal.elements.length,visibilityCounts:clone(selection.counts)};
+}
+
+async function readApprovedJ16StaticInputsV001(qualified:ApprovedDigestQualifiedJobV001):Promise<ApprovedDigestInputsV001> {
+  const {job,workspaceRoot:root}=qualified,specs=job.inputs,bindings=new Map<string,Json>();
+  const read=async(b:Json)=>{const plain={path:b.path,fileSha256:b.fileSha256,
+    ...(b.sizeBytes===undefined?{}:{sizeBytes:b.sizeBytes}),...(b.canonicalSha256===undefined?{}:{canonicalSha256:b.canonicalSha256})};
+    const value=await qualified.readBinding(plain);bindings.set(JSON.stringify(plain),clone(plain));return value;};
+  const manifest=await read(specs.candidateManifestBinding);
+  const stage=await import('../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs');
+  const closure=await stage.readJ16LiveCandidateClosureV001(path.dirname(path.join(root,specs.candidateManifestBinding.path)));
+  same(manifest,closure.manifest);
+  assert.equal(closure.manifestRef.sha256,specs.candidateManifestBinding.fileSha256);
+  assert.equal(closure.manifestRef.bytes,specs.candidateManifestBinding.sizeBytes);
+  const source=closure.source,view=closure.view;
+  // References used for actual rendering must be the original repository files.
+  for(const ref of [source.planRef,source.timelineRef,source.captionContext.decisionInputRef,
+    source.captionContext.pulseTimingEvidence.candidatesRef,source.captionContext.pulseTimingEvidence.peaksRef]) {
+    assert(ref.path.startsWith(root+'/'),'APPROVED_J16_ORIGINAL_SOURCE_ROOT_REQUIRED');
+    const value=await read({path:safe(path.relative(root,ref.path)),fileSha256:ref.fileSha256});
+    if(ref===source.planRef)same(value,JSON.parse(source.planBytes));
+    if(ref===source.timelineRef)same(value,JSON.parse(source.timelineBytes));
+  }
+  const visibilitySelection=await read(specs.visibilitySelectionBinding),visibilityAdoption=await read(specs.visibilityAdoptionBinding);
+  // The saved selection's original adoption is still read, even when the new
+  // job binds a byte-identical current-input copy of that record.
+  same(await read(visibilitySelection.adoptionBinding),visibilityAdoption);
+  await validateApprovedJ16StaticInputV001({view,source,selection:visibilitySelection,adoption:visibilityAdoption,
+    manifestBinding:specs.candidateManifestBinding,adoptionBinding:specs.visibilityAdoptionBinding,expected:job.expected});
+  const typography=await read(specs.typographySettingsBinding),typographyValues=resolveDigestTypographySettingsV001(typography.settings??typography);
+  const normalPlan=JSON.parse(source.planBytes);
+  assert(normalPlan.elements.every((row:Json)=>row.visualState.textStyle.fontSizePx===typographyValues.fontSizePx),
+    'APPROVED_J16_TYPOGRAPHY_CHANGED');
+  const rendererTemplate=await read(specs.rendererTemplateBinding);
+  const renderer=await load(root,'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts');
+  const admission=await load(root,'evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs');
+  assert.equal(admission.validatePresentationInstructionRendererJobV002(rendererTemplate).status,'passed','APPROVED_J16_RENDERER_TEMPLATE_INVALID');
+  // Preserve the saved typed Core artifacts; no registration or clock-map is
+  // invented to make this new input kind resemble the earlier Normal input.
+  const coreValues=new Map<string,Json>();
+  const walk=async(value:any):Promise<void>=>{
+    if(!value||typeof value!=='object')return;
+    if(typeof value.path==='string'&&value.path.endsWith('.json')&&/^[a-f0-9]{64}$/u.test(value.fileSha256??'')) {
+      assert(!path.isAbsolute(value.path),'APPROVED_J16_CORE_RELATIVE_REFERENCE_REQUIRED');
+      if(!coreValues.has(value.path)){const body=await read(value);coreValues.set(value.path,body);await walk(body);}return;
+    }
+    for(const item of Object.values(value))await walk(item);
+  };
+  await walk(rendererTemplate);
+  const instruction=coreValues.get(rendererTemplate.instructionArtifactBinding.path);assert(instruction);
+  const meaning=coreValues.get(instruction.sourceBindings.meaningInformationPackage.path);assert(meaning);
+  assert.equal(instruction.instructions.length,normalPlan.elements.length);
+  for(const [index,row] of list(instruction.instructions).entries()) {
+    const element=normalPlan.elements[index];assert.equal(row.instructionId,element.instructionId);
+    assert.equal(row.content.text,element.text);assert.equal(row.outputTime.startFrame,element.startFrame);
+    assert.equal(row.outputTime.endFrameExclusive,element.endFrameExclusive);
+    same(row.targetProvenance.atomOccurrenceIds,element.targetProvenance.sourceAtomIds);
+  }
+  await renderer.observePresentationRendererRuntimeBindingsV001(rendererTemplate.runtimeBindings);
+  const wire=await load(root,'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
+  const value={kind:specs.kind,workspaceRoot:root,inputRoot:specs.inputRoot,inputPrefix:specs.inputPrefix,
+    manifest,manifestBinding:clone(specs.candidateManifestBinding),j16Source:source,j16State:closure.state,j16View:view,
+    normalPlan,rendererTemplate,visibilitySelection,visibilityAdoption,meaning,
+    typographySettings:typography.settings??typography,typographyValues,typographySettingsBinding:clone(specs.typographySettingsBinding),
+    authorizationBinding:clone(qualified.authorizationBinding),jobBinding:clone(qualified.jobBinding)};
+  await closure.assertCurrent();await qualified.assertCurrent();freeze(value);
+  qualifiedInputs.set(value,{qualified,bodySha256:sha(wire.formal(value)),bindings:[...bindings.values()],absoluteBindings:[]});
+  j16Closures.set(value,closure);return value;
 }

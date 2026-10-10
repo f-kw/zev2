@@ -148,7 +148,9 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
     await assertQualifiedDigestApprovedJobV001(qualified);
     if (recovery !== null) await recovery.assertCurrent();
     if (baseReuse !== null) await reuseModule!.assertQualifiedDigestApprovedBaseReuseV001(baseReuse,qualified);
-    for(const key of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'])
+    for(const key of job.inputs.kind==='j16-staged-static-v001'
+      ? ['candidateManifestBinding','visibilitySelectionBinding','visibilityAdoptionBinding','typographySettingsBinding','rendererTemplateBinding']
+      : ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding'])
       await qualified.readBinding(job.inputs[key]);
     const nodeNow=await lstat(process.execPath,{bigint:true});
     for(const key of ['ino','dev','size','mtimeNs','ctimeNs'] as const) assert.equal(nodeNow[key],nodeIdentity[key],'APPROVED_JOB_NODE_IDENTITY_CHANGED');
@@ -201,8 +203,8 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
     assert.equal(sha(bytes),b.fileSha256); if(b.sizeBytes!==undefined) assert.equal(bytes.length,b.sizeBytes);
     const value=JSON.parse(bytes.toString()); if(b.canonicalSha256!==undefined) assert.equal(m.canonicalSha(value),b.canonicalSha256);
     if(b.schemaVersion!==undefined) {
-      const oldStyle=inputs.styleTemplate.reconstructionMap.caseContexts[0].styleBindings;
-      const qualifiedRegistryIndex=[oldStyle.presetValidationIndex,oldStyle.materialValidationIndex].some((original:Json)=>m.same(original,b));
+      const oldStyle=inputs.styleTemplate?.reconstructionMap.caseContexts[0].styleBindings;
+      const qualifiedRegistryIndex=oldStyle!==undefined&&[oldStyle.presetValidationIndex,oldStyle.materialValidationIndex].some((original:Json)=>m.same(original,b));
       if(qualifiedRegistryIndex&&value.schemaVersion===undefined) assert.equal(value.registryVersion,b.schemaVersion,'APPROVED_JOB_BOUND_REGISTRY_VERSION_CHANGED');
       else assert.equal(value.schemaVersion,b.schemaVersion);
     }
@@ -238,7 +240,13 @@ async function createStorage(permitPath: string, permitBytes: Buffer, permit: Js
       assert(args.outputPath.startsWith(generatedRoot+'/')); const compositor=await load('tools/digest-quality/original-resolution-low-memory-composite.mjs');
       const visibilitySelection=await buildApprovedDigestCaptionVisibilitySelectionV001(inputs,qualified,args.plan);
       assert.deepEqual(args.visibilitySelection??null,visibilitySelection,'APPROVED_JOB_COMPOSE_VISIBILITY_SUBSTITUTION');
-      const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,plan:args.plan,visibilitySelection,
+      if(inputs.kind==='j16-staged-static-v001') {
+        const drawing=await resolveQualifiedApprovedJ16DrawingV001(context,inputs.normalPlan);
+        assert.equal(args.baseMediaPath,drawing.background.video.path,'APPROVED_J16_BACKGROUND_SUBSTITUTION');
+        assert.equal(args.audioMediaPath,drawing.background.audio.path,'APPROVED_J16_AUDIO_SUBSTITUTION');
+      } else assert(args.audioMediaPath===null||args.audioMediaPath===undefined,'APPROVED_NORMAL_SEPARATE_AUDIO_FORBIDDEN');
+      const evidence=await compositor.runFormalLowMemoryCompositeV001({baseMediaPath:args.baseMediaPath,
+        ...(inputs.kind==='j16-staged-static-v001'?{audioMediaPath:args.audioMediaPath}:{}),plan:args.plan,visibilitySelection,
         overlayRecords:args.overlayRecords,expectedFrameCount:args.expectedFrameCount,expectedOverlayCount:job.expected.cues,
         outputPath:args.outputPath,ffmpegPath:args.ffmpegPath,processObserver:args.processObserver,resourceCheck});
       const result={...evidence,approvedJobBinding:qualified.jobBinding,typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues};
@@ -516,6 +524,7 @@ export async function runApprovedDigestJobV001(permitPath:string,jobSha:string,a
   const job=qualified.job,m=await load('evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts');
   const inputs=await readApprovedDigestInputsV001(qualified); const context=await createStorage(permitPath,permitBytes,permit,qualified,inputs,m);
   Object.assign(process.env,{TMPDIR:context.tempDirectory,TMP:context.tempDirectory,TEMP:context.tempDirectory,MAGICK_TEMPORARY_PATH:context.tempDirectory});
+  if(inputs.kind==='j16-staged-static-v001')return runApprovedJ16StaticJobV001(qualified,inputs,context,m,began);
   const baseModule=await load('evals/clip_composition/presentation_base_media_build_v003.mjs');
   assert.deepEqual(await baseModule.inspectPresentationBaseMediaToolProfileV001(),baseModule.PRESENTATION_BASE_MEDIA_EXPECTED_TOOL_PROFILE,'APPROVED_JOB_TOOL_PROFILE_CHANGED');
   const timeline=await load('evals/clip_composition/presentation_base_media_timeline_v004.mjs');
@@ -581,4 +590,113 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   void(async()=>{try {assert.equal(process.argv.length,8);assert.equal(process.argv[2],'--permit');assert.equal(process.argv[4],'--job-sha256');assert.equal(process.argv[6],'--authorization-sha256');
     const result=await runApprovedDigestJobV001(path.resolve(process.argv[3]),process.argv[5],process.argv[7]);process.stdout.write(JSON.stringify({event:result.status,result})+'\n');
   }catch(error){process.stderr.write(String((error as Error).stack)+'\n');process.exitCode=1;}finally{process.stdin.destroy();}})();
+}
+
+
+const j16Backgrounds=new WeakMap<object,Json>();
+/** Only the owned job can supply a drawing view, its background and its AAC.
+ * File renderer admission still checks the unchanged original typed Core. */
+export async function resolveQualifiedApprovedJ16DrawingV001(context:unknown,commonPlan:Json):Promise<Json> {
+  await assertQualifiedApprovedDigestStorageContextV001(context);
+  const {inputs,qualified}=contexts.get(context as object)!;
+  assert.equal(inputs.kind,'j16-staged-static-v001','QUALIFIED_J16_STATIC_JOB_REQUIRED');
+  await assertApprovedDigestInputsV001(inputs,qualified);
+  assert.deepEqual(commonPlan,inputs.normalPlan,'APPROVED_J16_ORIGINAL_CORE_PLAN_CHANGED');
+  const saved=j16Backgrounds.get(context as object);assert(saved,'APPROVED_J16_BACKGROUND_NOT_BUILT');
+  const owned=context as Json;
+  const proof=await owned.readJson(qualified.job.outputRoot+'/orchestration-background/proof.json');
+  assert.deepEqual(proof,saved.proof,'APPROVED_J16_BACKGROUND_PROOF_CHANGED');
+  assert.equal(proof.projectionSha256,inputs.j16View.projection.projectionSha256);
+  assert.deepEqual(proof.concreteConnections,inputs.j16View.projection.connections);
+  for(const binding of [proof.outputs.background,proof.outputs.audio]) {
+    assert(binding.path.startsWith(owned.generatedRoot+'/orchestration-background/'));
+    await boundAbsolute({path:binding.path,fileSha256:binding.fileSha256,sizeBytes:binding.bytes});
+    assert.equal((await lstat(binding.path)).dev,qualified.job.storage.guestDevice,'APPROVED_J16_BACKGROUND_DEVICE_CHANGED');
+  }
+  return Object.freeze({view:inputs.j16View,background:Object.freeze({projectionSha256:proof.projectionSha256,
+    displayFrameCount:proof.displayFrameCount,video:proof.outputs.background,audio:proof.outputs.audio}),
+    mediaInspection:saved.mediaInspection});
+}
+
+/** Verify the small immutable feature boundary before starting any large unit. */
+async function runApprovedJ16StaticJobV001(qualified:ApprovedDigestQualifiedJobV001,inputs:Json,context:Json,m:any,began:number) {
+  const job=qualified.job,out=context.outputRoot,template=structuredClone(inputs.rendererTemplate);
+  const renderer=await load('evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts');
+  await renderer.observePresentationRendererRuntimeBindingsV001(template.runtimeBindings);
+  const trust=structuredClone(await context.readBound(template.registryBindings.rendererTrust));
+  const code=new Map(job.implementation.bindings.map((b:Json)=>[b.path,b.fileSha256]));
+  for(const binding of [...trust.rendererDependencies,...template.rendererImplementationBindings]) {
+    const actual=await m.fileSha(path.join(ROOT,safe(binding.path)));
+    assert(actual===binding.fileSha256||actual===code.get(binding.path),'APPROVED_J16_IMPLEMENTATION_NOT_APPROVED '+binding.path);
+    binding.fileSha256=actual;
+  }
+  for(const binding of trust.fontAssets)assert.equal(await m.fileSha(path.join(ROOT,safe(binding.path))),binding.fileSha256,'APPROVED_J16_FONT_CHANGED');
+  const trustBinding=await context.publish(out+'/candidate-style/trust.json',trust);
+  template.registryBindings.rendererTrust=trustBinding;
+  template.registryBindings.fontLedger={...trustBinding,jsonPointer:'/fontAssets',valueCanonicalSha256:m.canonicalSha(trust.fontAssets)};
+  template.jobId=job.planId+'-renderer';template.attemptId=job.planId;
+  template.publication={admissionReceiptPath:out+'/admission-receipt.json',lineLayoutPath:out+'/line-layout.json',renderOutputRoot:out+'/render'};
+  const authorization=await context.publish(out+'/authorization.json',qualified.authorization);
+  const plan={schemaVersion:'digest-approved-candidate-core-plan-v001',planId:job.planId,outputRoot:out,
+    verificationPolicy:job.verificationPolicy,approvedJobBinding:qualified.jobBinding,approvalRecordBinding:qualified.authorizationBinding,
+    authorization,implementationBindings:job.implementation.bindings,acceptedManifestBinding:job.inputs.candidateManifestBinding,
+    typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues,
+    request:{sourceVideo:inputs.j16Source.mediaRef,originalCore:template.instructionArtifactBinding},inputKind:inputs.kind,
+    visibilitySelectionBinding:job.inputs.visibilitySelectionBinding,visibilityAdoptionBinding:job.inputs.visibilityAdoptionBinding};
+  const planBinding=await context.publish(out+'/core-plan.json',plan);
+  const invocation=await context.publish(out+'/core-invocation.json',{schemaVersion:'digest-approved-core-invocation-v001',
+    approvedJobBinding:qualified.jobBinding,authorizationBinding:qualified.authorizationBinding,planBinding,
+    acceptedManifestBinding:job.inputs.candidateManifestBinding,implementationSha:job.implementation.sha,inputKind:inputs.kind,
+    visibilitySelectionBinding:job.inputs.visibilitySelectionBinding,visibilityAdoptionBinding:job.inputs.visibilityAdoptionBinding});
+  const projection=inputs.j16View.projection;
+  const minimumBytes=(projection.sourceFrameCount+projection.displayFrameCount)*1920*1080*3/2
+    +(projection.sourcePlaybackSampleCount+projection.displayPlaybackSampleCount)*8;
+  assert(Number.isSafeInteger(minimumBytes)&&job.allocationBudget.baseBuildBytes>=minimumBytes,'APPROVED_J16_BACKGROUND_BUDGET_BELOW_INPUTS');
+  await context.resourceCheck({stage:'start',newBytes:job.allocationBudget.baseBuildBytes});
+  const {createPresentationRendererProcessObserverV001}=await load('evals/clip_composition/presentation_renderer_process_observation_v001.mjs');
+  const processObserver=createPresentationRendererProcessObserverV001({observationDirectory:context.resolve(out+'/background-process-observations')});
+  const backgroundModule=await load('evals/clip_composition/presentation_orchestration_background_v001.mjs');
+  const baseStarted=Date.now();
+  const background=await backgroundModule.buildOrchestrationBackgroundV001({repositoryRoot:ROOT,
+    outputDirectory:context.resolve(out+'/orchestration-background'),projection,expectedProjectionSha256:projection.projectionSha256,
+    ffmpegPath:template.runtimeBindings.ffmpeg.path,ffprobePath:template.runtimeBindings.ffprobe.path,
+    storageContext:context,processObserver});
+  const {proofRef:_,...proof}=background;
+  const {inspectRenderedMediaWithToolsV001}=await load('evals/clip_composition/presentation_renderer_qc_v002.mjs');
+  const mediaInspection=await inspectRenderedMediaWithToolsV001(proof.outputs.background.path,
+    {ffmpegPath:template.runtimeBindings.ffmpeg.path,ffprobePath:template.runtimeBindings.ffprobe.path,processObserver,
+      observationLabelPrefix:'approved-j16-background'});
+  assert.equal(proof.status,'passed');assert.equal(proof.displayFrameCount,job.expected.frames);
+  assert.equal(proof.verification.audio.displaySampleCount,job.expected.audioSamples);
+  j16Backgrounds.set(context,{proof,mediaInspection});
+  await resolveQualifiedApprovedJ16DrawingV001(context,inputs.normalPlan);
+  const baseMs=Date.now()-baseStarted,rendererJobBinding=await context.publish(out+'/renderer-job.json',template);
+  await context.resourceCheck({stage:'body',newBytes:job.allocationBudget.rendererPreparationBytes});
+  const renderStarted=Date.now(),core=await load('evals/clip_composition/adopted_media_manufacturing_v001.mts');
+  const result=await core.renderAdoptedVideoV001({plan,planBinding,authorization:qualified.authorization,rendererTemplate:template},
+    {rendererJob:rendererJobBinding},'digest-approved-render-execution-v001',context);
+  const completion=projectApprovedDigestManufacturingCompletionV001(result);
+  const receipt={schemaVersion:'digest-approved-manufacturing-result-v001',...completion,approvedJobBinding:qualified.jobBinding,
+    authorizationBinding:qualified.authorizationBinding,planBinding,invocationBinding:invocation,
+    typographySettingsBinding:inputs.typographySettingsBinding,derivedTypographyValues:inputs.typographyValues,result,
+    inputKind:inputs.kind,visibilitySelectionBinding:job.inputs.visibilitySelectionBinding,visibilityAdoptionBinding:job.inputs.visibilityAdoptionBinding,
+    publishedMediaBinding:result.publishedMediaBinding,
+    ...(result.technicalEvidenceBinding===undefined?{}:{technicalEvidenceBinding:result.technicalEvidenceBinding}),
+    timing:{initialPreparationMs:baseStarted-began,baseMediaMs:baseMs,renderAndQcMs:Date.now()-renderStarted,totalMs:Date.now()-began},
+    implementationSha:job.implementation.sha,humanQuality:'not-evaluated',outlineChoice:null,originalJudgmentReruns:0,
+    recordedAt:new Date().toISOString(),completedAt:completion.status==='completed'?new Date().toISOString():null};
+  await context.publish(out+'/result.json',receipt);
+  const bytes=await readFile(context.resolve(out+'/result.json'));
+  return {...receipt,receiptBinding:{path:out+'/result.json',fileSha256:sha(bytes),sizeBytes:bytes.length}};
+}
+
+
+export async function assertQualifiedApprovedJ16BackgroundBuildV001(context:unknown,projection:Json,outputDirectory:string) {
+  await assertQualifiedApprovedDigestStorageContextV001(context);
+  const {inputs,qualified}=contexts.get(context as object)!;
+  assert.equal(inputs.kind,'j16-staged-static-v001','QUALIFIED_J16_STATIC_JOB_REQUIRED');
+  await assertApprovedDigestInputsV001(inputs,qualified);
+  assert.deepEqual(projection,inputs.j16View.projection,'APPROVED_J16_BACKGROUND_PROJECTION_SUBSTITUTION');
+  assert.equal(outputDirectory,(context as Json).resolve(qualified.job.outputRoot+'/orchestration-background'),
+    'APPROVED_J16_BACKGROUND_OUTPUT_ROOT_CHANGED');
 }

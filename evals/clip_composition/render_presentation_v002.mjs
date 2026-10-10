@@ -2137,8 +2137,16 @@ export async function executeValidatedPresentationDrawAndQcV001({
   counterfactualQcMethod,
 }) {
   await qualifyDigestStorageContextV001(storageContext);
+  const approvedJ16 = storageContext?.approvedJob?.job?.inputs?.kind==='j16-staged-static-v001';
+  if(approvedJ16) {
+    const {resolveQualifiedApprovedJ16DrawingV001}=await import(
+      pathToFileURL(path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../runner/src/digest-approved-job-runner-v001.ts')).href);
+    const drawing=await resolveQualifiedApprovedJ16DrawingV001(storageContext,JSON.parse(orchestrationDrawingView?.projection?.sourceClock?.planBytes??'null'));
+    if(drawing.view!==orchestrationDrawingView||canonicalJson(drawing.background)!==canonicalJson(orchestrationBackground))
+      throw new TypeError('Approved J16 drawing or background substitution');
+  }
   if (storageContext !== undefined && (autoPresentation !== undefined || effects !== undefined
-    || orchestrationDrawingView !== undefined || renderRange !== null || !runCounterfactualQc)) {
+    || (!approvedJ16&&orchestrationDrawingView !== undefined) || renderRange !== null || !runCounterfactualQc)) {
     throw new TypeError('Digest storage only permits the bound complete Normal render with QC');
   }
   if (storageContext !== undefined && (typeof storageContext.composeMedia !== 'function'

@@ -521,6 +521,9 @@ export async function executePresentationInstructionRendererJobV002({
     rendererTrust,
   });
   if (common.status !== 'built') return {exitCode: 1, result: common};
+  const j16 = (storageContext?.approvedJob as Record<string,any>|undefined)?.job?.inputs?.kind==='j16-staged-static-v001';
+  const qualifiedDrawing = j16 ? await (await import(pathToFileURL(path.resolve(MODULE_DIRECTORY,
+    '../../runner/src/digest-approved-job-runner-v001.ts')).href)).resolveQualifiedApprovedJ16DrawingV001(storageContext,common.plan) : null;
   const savedRecovery = (storageContext?.approvedJob as Record<string, any> | undefined)?.job?.recoveryBinding !== undefined;
   const executeDraw = savedRecovery ? resumeApprovedDigestFailedDrawAndQcV001
     : capabilities.executeDraw ?? executeValidatedPresentationDrawAndQcV001;
@@ -533,11 +536,13 @@ export async function executePresentationInstructionRendererJobV002({
     : undefined;
   const draw = await executeDraw({
     outputDirectory: generatedAbsolute(workspaceRoot, job.publication.renderOutputRoot, storageContext),
-    plan: common.plan,
+    plan: qualifiedDrawing?.view.projectedNormalPlan ?? common.plan,
     presetRegistry: styleProfileRegistry,
-    baseMediaPath: referencedAbsolute(workspaceRoot, job.cropAppliedBaseMedia.baseMedia.path, storageContext),
-    baseMediaInspection: {media: renderMediaInspection},
-    expectedFrameCount: mediaInspection.frameCount,
+    baseMediaPath: qualifiedDrawing?.background.video.path
+      ?? referencedAbsolute(workspaceRoot, job.cropAppliedBaseMedia.baseMedia.path, storageContext),
+    baseMediaInspection: {media: qualifiedDrawing?.mediaInspection ?? renderMediaInspection},
+    expectedFrameCount: qualifiedDrawing?.view.projection.displayFrameCount ?? mediaInspection.frameCount,
+    ...(qualifiedDrawing===null?{}:{orchestrationDrawingView:qualifiedDrawing.view,orchestrationBackground:qualifiedDrawing.background}),
     evaluateQc: input => evaluatePresentationRendererQcWithProfileV001(input, {
       schemaVersion: 'presentation-render-qc-v002',
       planFile: 'presentation-render-plan-v002.json',
@@ -555,7 +560,7 @@ export async function executePresentationInstructionRendererJobV002({
     ...(overlayAdapter === undefined ? {} : {overlayAdapter}),
     ...(serializePngAndFilters ? {serializePngAndFilters: true} : {}),
     ...(autoPresentation === undefined ? {} : {autoPresentation}),
-    counterfactualQcMethod: autoPresentation === undefined ? 'encoded-omission-v2' : 'exact-replay-native-v1',
+    counterfactualQcMethod: qualifiedDrawing!==null||autoPresentation!==undefined ? 'exact-replay-native-v1' : 'encoded-omission-v2',
     processObserver,
     ...(storageContext === undefined ? {} : {storageContext}),
   });

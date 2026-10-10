@@ -431,18 +431,8 @@ export async function readJ16LiveStagedInputFilesV001(directory: string) {
 }
 export async function readJ16LiveStagedCandidateFilesV001(directory: string) {
   await stagedDirectory(directory,false);
-  const manifest = JSON.parse((await stagedFile(path.join(directory,'files.json'))).text);
-  exactStagedKeys(manifest,['schemaVersion','mode','preparedFiles','sourceBindings','state']);
-  assert.equal(manifest.schemaVersion,'presentation-j16-live-candidate-files-v001');assert.equal(manifest.mode,'live');
-  assert.equal(manifest.state.path,path.join(directory,'state.json'));
-  await liveStageRead(manifest.preparedFiles);
-  assert.equal(path.basename(manifest.preparedFiles.path),'stage-files.json');
-  const prepared = await loadJ16LivePrepared(path.dirname(manifest.preparedFiles.path));
-  assert.equal(directory,prepared.permission.outputRoots[2]);assert.deepEqual(manifest.sourceBindings,prepared.files.sourceBindings);
-  const state = JSON.parse(await stagedReadBound(manifest.state));
-  assert.equal(state.selectionRecord.origin.kind,J16_STAGE_ORIGIN_V001);
-  assert.deepEqual(state.selectionRecord.origin.stageInput,prepared.stageInput);
-  const view = resolveOrchestrationDrawingViewV001({context:prepared.context,state}); // Existing validateState, no new semantic validator.
+  const {readJ16LiveCandidateClosureV001} = await import('./presentation_j16_staged_boundary_v001.mjs');
+  const {state,view} = await readJ16LiveCandidateClosureV001(directory);
   return {mode:'live',status:'candidate-validated',recordSha256:state.selectionRecord.recordSha256,
     stageInputSha256:state.selectionRecord.origin.stageInput.stageInputSha256,counts:view.resolution.counts,productionActivated:false};
 }

@@ -67,16 +67,34 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     positive(job.recoveryBinding.sizeBytes,'APPROVED_JOB_RECOVERY_BINDING_SIZE');
     assert(job.verificationPolicy?.mode === 'representative-plus-rules-v001', 'APPROVED_JOB_RECOVERY_REPRESENTATIVE_POLICY_REQUIRED');
   }
+  const j16 = job.inputs.kind === 'j16-staged-static-v001';
   const hasBaseReuse = Object.hasOwn(job.inputs,'baseReuseBundleBinding');
+  if(j16) {
+    assert(!hasBaseReuse&&!hasRecovery,'APPROVED_J16_REUSE_RECOVERY_FORBIDDEN');
+    assert.equal(job.verificationPolicy?.mode,'representative-plus-rules-v001','APPROVED_J16_REPRESENTATIVE_POLICY_REQUIRED');
+  }
   assert(!(hasBaseReuse && hasRecovery),'APPROVED_JOB_BASE_REUSE_RECOVERY_CONFLICT');
-  exact(job.inputs, ['inputRoot','inputPrefix','preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding',...(hasBaseReuse?['baseReuseBundleBinding']:[])], 'APPROVED_JOB_INPUTS_REQUIRED');
+  exact(job.inputs, j16 ? ['kind','inputRoot','inputPrefix','candidateManifestBinding','visibilitySelectionBinding',
+    'visibilityAdoptionBinding','typographySettingsBinding','rendererTemplateBinding']
+    : ['inputRoot','inputPrefix','preparationParameters','preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding',...(hasBaseReuse?['baseReuseBundleBinding']:[])], 'APPROVED_JOB_INPUTS_REQUIRED');
   absolute(job.inputs.inputRoot, 'APPROVED_JOB_INPUT_ROOT_REQUIRED');
   assert.equal(job.inputs.inputRoot, job.storage.guestRoot, 'APPROVED_JOB_INPUT_ROOT_CHANGED');
   assert.equal(digestJobRelativePathV001(job.inputs.inputPrefix), `runtime/artifacts/${job.planId}/current-inputs-v001`, 'APPROVED_JOB_INPUT_PREFIX_CHANGED');
   assert(prefix !== job.inputs.inputPrefix && !prefix.startsWith(job.inputs.inputPrefix + '/') && !job.inputs.inputPrefix.startsWith(prefix + '/'), 'APPROVED_JOB_INPUT_OUTPUT_OVERLAP');
-  for (const k of ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding']) {
+  for (const k of j16 ? ['visibilitySelectionBinding','visibilityAdoptionBinding','typographySettingsBinding','rendererTemplateBinding']
+    : ['preparationManifestBinding','candidateManifestBinding','typographySettingsBinding','rendererTemplateBinding','migrationApprovalEvidenceBinding']) {
     validateDigestJobBindingV001(job.inputs[k]);
     assert(job.inputs[k].path.startsWith(job.inputs.inputPrefix + '/'), 'APPROVED_JOB_INPUT_PREFIX_REQUIRED');
+    if(j16) positive(job.inputs[k].sizeBytes,'APPROVED_J16_INPUT_SIZE_REQUIRED');
+  }
+  if(j16) {
+    validateDigestJobBindingV001(job.inputs.candidateManifestBinding);
+    positive(job.inputs.candidateManifestBinding.sizeBytes,'APPROVED_J16_INPUT_SIZE_REQUIRED');
+    assert.equal(job.inputs.candidateManifestBinding.schemaVersion,'presentation-j16-live-candidate-files-v001');
+    assert(job.inputs.candidateManifestBinding.path.startsWith('runtime/artifacts/')
+      &&job.inputs.candidateManifestBinding.path.endsWith('/files.json')
+      &&!job.inputs.candidateManifestBinding.path.startsWith(job.inputs.inputPrefix+'/'),
+      'APPROVED_J16_ORIGINAL_REPOSITORY_CANDIDATE_REQUIRED');
   }
   if(hasBaseReuse) {
     validateDigestJobBindingV001(job.inputs.baseReuseBundleBinding);
@@ -84,6 +102,7 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     assert.equal(job.inputs.baseReuseBundleBinding.schemaVersion,'digest-approved-base-reuse-input-v001');
     assert(job.inputs.baseReuseBundleBinding.path.startsWith(job.inputs.inputPrefix+'/'),'APPROVED_JOB_BASE_REUSE_INPUT_PREFIX_REQUIRED');
   }
+  if(!j16) {
   assert(job.inputs.preparationParameters && typeof job.inputs.preparationParameters === 'object'
     && !Array.isArray(job.inputs.preparationParameters), 'APPROVED_JOB_PREPARATION_REQUIRED');
   assert.equal(job.inputs.preparationParameters.inputRoot, job.inputs.inputRoot, 'APPROVED_JOB_PREPARATION_INPUT_ROOT_CHANGED');
@@ -99,6 +118,7 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
     assert(parameters[name].path.endsWith('.json') && parameters[name].path.startsWith(job.inputs.inputPrefix+'/'), 'APPROVED_JOB_PREPARATION_JSON_PREFIX_REQUIRED');
   }
   validateDigestJobBindingV001(parameters.scopeBinding);
+  }
 
   exact(job.expected, ['frames','audioSamples','groups','atoms','cues'], 'APPROVED_JOB_EXPECTED_REQUIRED');
   for (const [k, v] of Object.entries(job.expected)) positive(v, 'APPROVED_JOB_EXPECTED_' + k);
@@ -134,7 +154,8 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   assert.equal(Object.hasOwn(authorization,'baseReuseBundleBinding'),hasBaseReuse,'APPROVED_AUTHORIZATION_BASE_REUSE_PRESENCE_MISMATCH');
   assert.equal(Object.hasOwn(authorization,'recoveryBinding'),hasRecovery,'APPROVED_AUTHORIZATION_RECOVERY_BINDING_PRESENCE_MISMATCH');
   exact(authorization, ['schemaVersion','recordId','userApproval','actions','jobBinding','planId','manifestBinding',
-    'typographySettingsBinding','migrationApprovalEvidenceBinding','outputRoot','storage','guard','implementation','normalCandidates',
+    'typographySettingsBinding',...(j16?['inputKind','visibilitySelectionBinding','visibilityAdoptionBinding','rendererTemplateBinding']:['migrationApprovalEvidenceBinding']),
+    'outputRoot','storage','guard','implementation','normalCandidates',
     ...(Object.hasOwn(job,'verificationPolicy')?['verificationPolicy']:[]),
     ...(hasRecovery?['recoveryBinding']:[]),...(hasBaseReuse?['baseReuseBundleBinding']:[])], 'APPROVED_AUTHORIZATION_EXACT_FIELDS');
   if(hasBaseReuse) assert.deepEqual(authorization.baseReuseBundleBinding,job.inputs.baseReuseBundleBinding,'APPROVED_AUTHORIZATION_BASE_REUSE_BINDING_MISMATCH');
@@ -150,7 +171,15 @@ export function validateDigestApprovedJobConfigurationV001(job: Json, authorizat
   for (const k of ['planId','outputRoot','storage','guard','implementation']) assert.deepEqual(authorization[k], job[k], 'APPROVED_AUTHORIZATION_' + k + '_MISMATCH');
   assert.deepEqual(authorization.manifestBinding, job.inputs.candidateManifestBinding, 'APPROVED_AUTHORIZATION_MANIFEST_MISMATCH');
   assert.deepEqual(authorization.typographySettingsBinding, job.inputs.typographySettingsBinding, 'APPROVED_AUTHORIZATION_SETTINGS_MISMATCH');
-  assert.deepEqual(authorization.migrationApprovalEvidenceBinding, job.inputs.migrationApprovalEvidenceBinding, 'APPROVED_AUTHORIZATION_MIGRATION_EVIDENCE_MISMATCH');
+  if(j16) {
+    assert.equal(authorization.inputKind,job.inputs.kind,'APPROVED_AUTHORIZATION_INPUT_KIND_MISMATCH');
+    for(const field of ['visibilitySelectionBinding','visibilityAdoptionBinding','rendererTemplateBinding'])
+      assert.deepEqual(authorization[field],job.inputs[field],'APPROVED_AUTHORIZATION_J16_BINDING_MISMATCH '+field);
+    for(const required of ['evals/clip_composition/presentation_j16_staged_boundary_v001.mjs',
+      'evals/clip_composition/presentation_orchestration_v001.mjs','evals/clip_composition/presentation_orchestration_projection_v001.mjs',
+      'evals/clip_composition/presentation_orchestration_background_v001.mjs'])
+      assert(job.implementation.bindings.some((b:Json)=>b.path===required),'APPROVED_J16_CODE_BINDING_REQUIRED '+required);
+  } else assert.deepEqual(authorization.migrationApprovalEvidenceBinding, job.inputs.migrationApprovalEvidenceBinding, 'APPROVED_AUTHORIZATION_MIGRATION_EVIDENCE_MISMATCH');
   return Object.freeze({status: 'validated-configuration', planId: job.planId, expected: structuredClone(job.expected)});
 }
 
@@ -213,7 +242,9 @@ export async function readQualifiedDigestApprovedJobV001(externalOptions: Parame
     }
     assert.equal((await exec('git', ['rev-parse','HEAD'], {cwd: root})).stdout.trim(), job.implementation.sha, 'APPROVED_JOB_IMPLEMENTATION_HEAD_CHANGED');
     for (const binding of job.implementation.bindings) await readBytes(binding, root);
-    await readBinding(job.inputs.migrationApprovalEvidenceBinding);
+    if(job.inputs.kind==='j16-staged-static-v001') {
+      for(const field of ['candidateManifestBinding','visibilitySelectionBinding','visibilityAdoptionBinding','rendererTemplateBinding'])await readBinding(job.inputs[field]);
+    } else await readBinding(job.inputs.migrationApprovalEvidenceBinding);
   };
   freeze(job); freeze(authorization);
   const qualified = Object.freeze({job, authorization, inputRoot: job.inputs.inputRoot, inputPrefix: job.inputs.inputPrefix, jobBinding: Object.freeze({...options.jobBinding}),

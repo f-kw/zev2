@@ -1,4 +1,4 @@
-/** Pure J16 stage boundary. No files, HTTP, keys, renderer or saved-state IO. */
+/** J16 stage reconstruction and stable saved-candidate readback. No HTTP or execution authority. */
 import {createHash} from 'node:crypto';
 export const J16_STAGE_ORIGIN_V001 = 'openai-j16-staged-v001';
 export const J16_MODEL_V001 = 'gpt-6-luna';
@@ -301,4 +301,83 @@ export function assertJ16StagedOriginV001({input, replyBytes, origin}) {
       && row.allowedPresets.every(p => p?.preset !== 'normal'), 'J16_STAGE_CHOICE_CONFLICT');
   }
   return true;
+}
+
+
+/** Read the original live candidate at its expressly granted stage root. A copy
+ * at a different root is not an original candidate or manufacturing grant. */
+export async function readJ16LiveCandidateClosureV001(directory) {
+  const assert = (await import('node:assert/strict')).default;
+  const {readFile,lstat,realpath} = await import('node:fs/promises');
+  const path = (await import('node:path')).default;
+  const {createOrchestrationContextV001,createOrchestrationJudgmentInputV001,
+    resolveOrchestrationDrawingViewV001} = await import('./presentation_orchestration_v001.mjs');
+  assert(path.isAbsolute(directory) && path.normalize(directory)===directory,'J16_ORIGINAL_DIRECTORY_REQUIRED');
+  assert.equal(await realpath(directory),directory,'J16_ORIGINAL_DIRECTORY_SYMLINK');
+  assert((await lstat(directory)).isDirectory());
+  const refs=new Map();
+  async function read(ref,raw=false) {
+    exact(ref,['path','sha256','bytes'],'J16_SAVED_REFERENCE_FIELDS');
+    assert(path.isAbsolute(ref.path)&&path.normalize(ref.path)===ref.path&&/^[a-f0-9]{64}$/u.test(ref.sha256)
+      &&Number.isSafeInteger(ref.bytes)&&ref.bytes>=(raw?0:1),'J16_SAVED_REFERENCE_INVALID');
+    assert.equal(await realpath(ref.path),ref.path,'J16_SAVED_REFERENCE_SYMLINK');
+    const before=await lstat(ref.path,{bigint:true});assert(before.isFile()&&!before.isSymbolicLink()&&before.nlink===1n);
+    const first=await readFile(ref.path),second=await readFile(ref.path),after=await lstat(ref.path,{bigint:true});
+    assert(first.equals(second),'J16_SAVED_REFERENCE_UNSTABLE');
+    for(const key of ['dev','ino','size','mtimeNs','ctimeNs'])assert.equal(before[key],after[key],'J16_SAVED_REFERENCE_UNSTABLE');
+    assert.equal(first.length,ref.bytes);assert.equal(sha(first),ref.sha256,'J16_SAVED_REFERENCE_CHANGED');
+    refs.set(ref.path,{ref:structuredClone(ref),raw});
+    return raw?bindJ16RawV001(first):bindJ16TextV001(new TextDecoder('utf-8',{fatal:true}).decode(first));
+  }
+  const manifestPath=path.join(directory,'files.json'),manifestBytes=await readFile(manifestPath);
+  const manifestRef={path:manifestPath,sha256:sha(manifestBytes),bytes:manifestBytes.length};
+  const manifest=JSON.parse((await read(manifestRef)).text);
+  exact(manifest,['schemaVersion','mode','preparedFiles','sourceBindings','state'],'J16_SAVED_CANDIDATE_FIELDS');
+  assert.equal(manifest.schemaVersion,'presentation-j16-live-candidate-files-v001');assert.equal(manifest.mode,'live');
+  assert.equal(manifest.state.path,path.join(directory,'state.json'));
+  assert.equal(path.basename(manifest.preparedFiles.path),'stage-files.json');
+  const prepared=JSON.parse((await read(manifest.preparedFiles)).text),preparedDirectory=path.dirname(manifest.preparedFiles.path);
+  exact(prepared,['schemaVersion','mode','originalFiles','stageInput','sourceBindings'],'J16_SAVED_PREPARED_FIELDS');
+  assert.equal(prepared.schemaVersion,'presentation-j16-live-stage-prepared-files-v001');assert.equal(prepared.mode,'live');
+  assert.equal(prepared.stageInput.path,path.join(preparedDirectory,'stage-input.json'));
+  assert.equal(prepared.sourceBindings.path,path.join(preparedDirectory,'source-bindings.json'));
+  assert(same(manifest.sourceBindings,prepared.sourceBindings),'J16_SAVED_SOURCE_BINDING_CHANGED');
+  assert(Array.isArray(prepared.originalFiles));
+  for(const item of prepared.originalFiles) {
+    exact(item,['ref','kind'],'J16_SAVED_ORIGIN_FIELDS');assert(['text','raw'].includes(item.kind));await read(item.ref,item.kind==='raw');
+  }
+  const stageInput=JSON.parse((await read(prepared.stageInput)).text);
+  assert.equal(stageInput.schemaVersion,'presentation-j16-live-stage-input-v001');assert.equal(stageInput.mode,'live');
+  replayJ16StageInputV001(stageInput);
+  const permission=JSON.parse(stageInput.authorization.text);
+  assert.equal(permission.outputRoots[1],preparedDirectory,'J16_PREPARED_ORIGINAL_ROOT_CHANGED');
+  assert.equal(permission.outputRoots[2],directory,'J16_CANDIDATE_ORIGINAL_ROOT_CHANGED');
+  const source=JSON.parse((await read(prepared.sourceBindings)).text),context=createOrchestrationContextV001(source);
+  const input=JSON.parse(stageInput.originalInput.text);
+  assert.deepEqual(input,createOrchestrationJudgmentInputV001({context,connectionPolicy:input.connectionPolicy,
+    evidence:Object.fromEntries(['productionPurpose','captions','contexts','observations','audioEvidence','audioCandidates'].map(k=>[k,input[k]]))}));
+  const state=JSON.parse((await read(manifest.state)).text);
+  assert.equal(state.selectionRecord.origin.kind,J16_STAGE_ORIGIN_V001);
+  assert.deepEqual(state.selectionRecord.origin.stageInput,stageInput);
+  const view=resolveOrchestrationDrawingViewV001({context,state});
+  const assertCurrent=async()=>{for(const {ref,raw} of [...refs.values()])await read(ref,raw);};
+  await assertCurrent();
+  return Object.freeze({manifest,manifestRef,source,state,context,view,
+    fileBindings:[...refs.values()].map(({ref})=>structuredClone(ref)),assertCurrent});
+}
+
+/** A feature gate, never an adoption decision. Keeps every logical caption. */
+export function assertJ16StaticManufacturingViewV001(view) {
+  check(object(view)&&Array.isArray(view.resolvedPlan?.elements),'J16_STATIC_VIEW_REQUIRED');
+  for(const element of view.resolvedPlan.elements) {
+    check(!Object.hasOwn(element,'presentationPulse')&&!Object.hasOwn(element,'presentationMotion')
+      &&!Object.hasOwn(element,'presentationPanel'),'J16_STATIC_NORMAL_COLOR_ONLY');
+  }
+  for(const kind of ['captions','connections'])check(view.resolution?.counts?.[kind]?.unresolved===0
+    &&view.resolution.counts[kind].unrepresentable===0,'J16_STATIC_RESOLVED_SELECTION_REQUIRED');
+  check(Array.isArray(view.effectiveSelections)&&view.effectiveSelections.every(row=>row.selection.role==='Normal'
+    ||row.selection.role==='Focus'&&row.selection.presentation==='provisional-focus'),'J16_STATIC_NORMAL_COLOR_ONLY');
+  check(view.projection.connections.every(row=>['straight-cut','soft-separator'].includes(row.preset)),
+    'J16_STATIC_EXISTING_CONNECTIONS_ONLY');
+  return view;
 }
