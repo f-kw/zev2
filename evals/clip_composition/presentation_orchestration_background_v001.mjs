@@ -1,7 +1,8 @@
 /** Build and independently check subtitle-free connection backgrounds. No AI selection. */
 import {createHash} from 'node:crypto';
+import {AsyncLocalStorage} from 'node:async_hooks';
 import {createReadStream} from 'node:fs';
-import {readFile, writeFile, mkdir, stat, lstat} from 'node:fs/promises';
+import {readFile, writeFile, mkdir, stat, lstat, realpath, chmod} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -21,7 +22,23 @@ const copy = value => structuredClone(value);
 const fail = message => {throw new TypeError('ORCHESTRATION_BACKGROUND_INVALID: ' + message);};
 const require = (condition, message) => {if (!condition) fail(message);};
 const json = value => JSON.stringify(value, null, 2) + '\n';
-const save = (file, value) => writeFile(file, json(value), {flag: 'wx'});
+const backgroundExecution=new AsyncLocalStorage();
+async function checkOwnedBackgroundPath(scope,file) {
+  require(file.startsWith(scope.outputDirectory+'/'),'owned background prefix required');
+  let current=scope.context.generatedRoot;
+  for(const component of ['',...path.relative(current,path.dirname(file)).split(path.sep).filter(Boolean)]) {
+    if(component)current=path.join(current,component);
+    const info=await lstat(current);require(info.isDirectory()&&!info.isSymbolicLink()
+      &&info.dev===scope.context.approvedJob.job.storage.guestDevice&&await realpath(current)===current,
+      'owned background directory/device changed');
+  }
+}
+async function save(file,value) {
+  const scope=backgroundExecution.getStore();
+  if(scope){await scope.context.assertCurrent();await checkOwnedBackgroundPath(scope,file);}
+  const bytes=json(value);await writeFile(file,bytes,{flag:'wx'});
+  if(scope){require((await readFile(file,'utf8'))===bytes,'owned background JSON readback differs');await chmod(file,0o444);}
+}
 async function fileHash(file) {
   const result = digest();
   for await (const chunk of createReadStream(file)) result.update(chunk);
@@ -32,7 +49,16 @@ function requireAbsolute(file, name) {require(typeof file === 'string' && path.i
 
 /** Commands capture bounded text; raw decoded streams use the streaming reader below. */
 async function command(executable, args, {outputDirectory, label} = {}) {
-  const result = await new Promise((resolve, reject) => {
+  const scope=backgroundExecution.getStore();
+  if(scope){
+    await scope.context.assertCurrent();await checkOwnedBackgroundPath(scope,path.join(scope.outputDirectory,'command.json'));
+    const allocation=label==='logical-source'?scope.sourceBytes:label==='connection-background'?scope.displayBytes:
+      label==='encode-audio-once'?Math.ceil(scope.sampleCount/scope.sampleRate*192000/8)+10000000:0;
+    await scope.context.resourceCheck({stage:'body',newBytes:allocation});
+  }
+  const result = scope ? await scope.observer.run(executable,args,{observationLabel:'background-command-'+(++scope.sequence),
+    env:{...process.env,TMPDIR:scope.context.tempDirectory,TMP:scope.context.tempDirectory,TEMP:scope.context.tempDirectory}})
+    : await new Promise((resolve, reject) => {
     const child = spawn(executable, args, {stdio: ['ignore', 'pipe', 'pipe']});
     let stdout = '', stderr = '';
     child.stdout.setEncoding('utf8'); child.stderr.setEncoding('utf8');
@@ -47,7 +73,8 @@ async function command(executable, args, {outputDirectory, label} = {}) {
     await writeFile(path.join(outputDirectory, label + '.log'), result.stderr, {flag: 'wx'});
   }
   require(result.code === 0, `${label ?? executable} failed: ${result.stderr.slice(-2000)}`);
-  return result.stdout;
+  if(scope)await scope.context.assertCurrent();
+  return Buffer.isBuffer(result.stdout)?result.stdout.toString('utf8'):result.stdout;
 }
 async function probe(ffprobePath, file) {
   return JSON.parse(await command(ffprobePath, ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', file]));
@@ -86,7 +113,22 @@ async function checkedSource({projection, expectedProjectionSha256, sourceMediaP
 }
 
 /** Fixed-size reads keep full-HD comparisons bounded to a few decoded frames. */
-function decodedReader(executable, args) {
+function decodedReader(executable,args) {
+  const scope=backgroundExecution.getStore();if(!scope)return directDecodedReader(executable,args);
+  let reader,readyResolve,readyReject;
+  const ready=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject;});
+  const operation=scope.observer.observeOperation({observationLabel:'background-decoder-'+(++scope.sequence),
+    operationKind:'bounded-decoded-stream',input:{executable,args}},async()=>{
+      await scope.context.assertCurrent();await scope.context.resourceCheck({stage:'body',newBytes:0});
+      reader=directDecodedReader(executable,args);readyResolve(reader);
+      const result=await reader.closed;require(result.code===0,'background decoder did not complete');return result;
+    });
+  operation.catch(readyReject);
+  return {read:async(...args)=>(await ready).read(...args),
+    finish:async()=>{await (await ready).finish();await operation;},
+    stop:async()=>{await (await ready).stop();await operation.catch(()=>{});}};
+}
+function directDecodedReader(executable, args) {
   const child = spawn(executable, args, {stdio: ['ignore', 'pipe', 'pipe']});
   let stderr = '', pending = Buffer.alloc(0), ended = false;
   child.stderr.on('data', chunk => {stderr = (stderr + chunk.toString('utf8')).slice(-65536);});
@@ -130,7 +172,7 @@ function decodedReader(executable, args) {
     child.stdout.destroy();
     await exit;
   }
-  return {read, finish, stop};
+  return {read, finish, stop, closed:exit};
 }
 const videoDecode = file => ['-v', 'error', '-nostdin', '-i', file, '-map', '0:v:0', '-an',
   '-pix_fmt', 'yuv420p', '-fps_mode', 'passthrough', '-f', 'rawvideo', '-'];
@@ -371,10 +413,37 @@ export async function finalizeOrchestrationBackgroundAudioV001({repositoryRoot, 
   }
 }
 
-export async function buildOrchestrationBackgroundV001({repositoryRoot, outputDirectory, projection,
+export async function buildOrchestrationBackgroundV001(options) {
+  const {storageContext:context,processObserver:observer,...plain}=options;
+  if(context===undefined)return buildOrchestrationBackgroundFilesV001(plain);
+  const {assertQualifiedApprovedJ16BackgroundBuildV001}=await import(
+    new URL('../../runner/src/digest-approved-job-runner-v001.ts',import.meta.url).href);
+  await assertQualifiedApprovedJ16BackgroundBuildV001(context,plain.projection,plain.outputDirectory);
+  require(observer&&typeof observer.run==='function'&&typeof observer.observeOperation==='function','owned background observer required');
+  const p=plain.projection,frameBytes=1920*1080*3/2;
+  const scope={context,observer,outputDirectory:plain.outputDirectory,sequence:0,
+    sourceBytes:p.sourceFrameCount*frameBytes+p.sourcePlaybackSampleCount*SAMPLE_BYTES,
+    displayBytes:p.displayFrameCount*frameBytes+p.displayPlaybackSampleCount*SAMPLE_BYTES,
+    sampleCount:p.displayPlaybackSampleCount,sampleRate:p.sourceClock.playbackSampleRate};
+  await context.resourceCheck({stage:'body',newBytes:scope.sourceBytes+scope.displayBytes});
+  return backgroundExecution.run(scope,()=>observer.observeOperation({observationLabel:'approved-j16-background',
+    operationKind:'full-clock-background-and-aac',input:{projectionSha256:p.projectionSha256,outputDirectory:plain.outputDirectory}},
+    ()=>buildOrchestrationBackgroundFilesV001(plain)));
+}
+
+async function buildOrchestrationBackgroundFilesV001({repositoryRoot, outputDirectory, projection,
   expectedProjectionSha256, ffmpegPath = 'ffmpeg', ffprobePath = 'ffprobe'}) {
   // No file is created before the shared unused-directory/ignore rule gate.
-  const outputGuard = assertIgnoredPresentationOutputDirectoryV001({repositoryRoot, outputDirectory});
+  const scope=backgroundExecution.getStore();
+  let outputGuard;
+  if(scope){
+    await scope.context.assertCurrent();require(outputDirectory===scope.outputDirectory,'owned background output changed');
+    try{await lstat(outputDirectory);fail('owned background output already exists');}catch(error){if(error.code!=='ENOENT')throw error;}
+    require(path.dirname(outputDirectory)===scope.context.generatedRoot,'owned background must be a direct job child');
+    const parent=await lstat(scope.context.generatedRoot);require(parent.isDirectory()&&!parent.isSymbolicLink()
+      &&await realpath(scope.context.generatedRoot)===scope.context.generatedRoot,'owned background parent changed');
+    outputGuard={status:'qualified-unused-ssd-output',outputDirectory,approvedJobBinding:scope.context.approvedJob.jobBinding};
+  }else outputGuard=assertIgnoredPresentationOutputDirectoryV001({repositoryRoot,outputDirectory});
   const sourceMediaPath = projection?.sourceClock?.mediaRef?.path;
   const input = await checkedSource({projection, expectedProjectionSha256, sourceMediaPath, ffprobePath});
   await mkdir(outputDirectory, {recursive: true});

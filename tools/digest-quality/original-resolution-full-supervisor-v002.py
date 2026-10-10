@@ -223,6 +223,13 @@ APPROVED_GUARD = dict(startBytes=50_000_000_000, reserveBytes=12_000_000_000,
 APPROVED_INPUT_BINDING_KEYS = {'preparationManifestBinding', 'candidateManifestBinding',
     'typographySettingsBinding', 'rendererTemplateBinding', 'migrationApprovalEvidenceBinding'}
 APPROVED_INPUT_KEYS = APPROVED_INPUT_BINDING_KEYS | {'inputRoot', 'inputPrefix', 'preparationParameters'}
+J16_INPUT_BINDING_KEYS = {'candidateManifestBinding', 'visibilitySelectionBinding', 'visibilityAdoptionBinding',
+    'typographySettingsBinding', 'rendererTemplateBinding'}
+J16_INPUT_KEYS = J16_INPUT_BINDING_KEYS | {'kind', 'inputRoot', 'inputPrefix'}
+J16_CODE = {'evals/clip_composition/presentation_j16_staged_boundary_v001.mjs',
+    'evals/clip_composition/presentation_orchestration_v001.mjs',
+    'evals/clip_composition/presentation_orchestration_projection_v001.mjs',
+    'evals/clip_composition/presentation_orchestration_background_v001.mjs'}
 APPROVED_STORAGE_KEYS = {'guestRoot', 'guestVolumeUuid', 'guestDevice', 'hostRoot',
     'hostVolumeUuid', 'hostDevice', 'imagePath', 'imageMaximumBytes',
     'hostMetadataReserveBytes', 'internalRoot'}
@@ -288,11 +295,17 @@ def absolute_input_binding(job, ref):
         'approved input root must remain the bound guest root')
     required(inputs['inputPrefix'] == 'runtime/artifacts/' + job['planId'] + '/current-inputs-v001'
         and safe_relative(inputs['inputPrefix']), 'approved current input prefix differs')
+    if inputs.get('kind') == 'j16-staged-static-v001' and ref == inputs['candidateManifestBinding']:
+        validate_binding(ref, require_size=True)
+        required(ref.get('schemaVersion') == 'presentation-j16-live-candidate-files-v001'
+            and ref['path'].startswith('runtime/artifacts/') and ref['path'].endswith('/files.json')
+            and not ref['path'].startswith(inputs['inputPrefix'] + '/'), 'original J16 repository candidate required')
+        return absolute_repo_binding(ref)
     required(ref['path'].startswith(inputs['inputPrefix'] + '/'), 'approved input binding outside current input prefix')
     return {**ref, 'path': str(Path(inputs['inputRoot']) / ref['path'])}
 
 def approved_input_binding_keys(job):
-    return APPROVED_INPUT_BINDING_KEYS | ({'baseReuseBundleBinding'}
+    return (J16_INPUT_BINDING_KEYS if job['inputs'].get('kind') == 'j16-staged-static-v001' else APPROVED_INPUT_BINDING_KEYS) | ({'baseReuseBundleBinding'}
         if 'baseReuseBundleBinding' in job['inputs'] else set())
 
 def verify_approved_inputs(job):
@@ -300,9 +313,13 @@ def verify_approved_inputs(job):
     volume_identity(storage['guestRoot'], storage['guestVolumeUuid'], storage['guestDevice'], 'apfs')
     for name in approved_input_binding_keys(job):
         ref = absolute_input_binding(job, job['inputs'][name])
-        inspect_output_ancestors(Path(ref['path']).parent, storage)
-        stable_bound_bytes(ref, expected_device=storage['guestDevice'])
-        inspect_output_ancestors(Path(ref['path']).parent, storage)
+        original = job['inputs'].get('kind') == 'j16-staged-static-v001' and name == 'candidateManifestBinding'
+        if original:
+            stable_bound_bytes(ref, expected_device=Path(FORMAL_REPO).stat().st_dev)
+        else:
+            inspect_output_ancestors(Path(ref['path']).parent, storage)
+            stable_bound_bytes(ref, expected_device=storage['guestDevice'])
+            inspect_output_ancestors(Path(ref['path']).parent, storage)
 
 def stable_bound_bytes(ref, expected_device=None):
     validate_binding(ref, absolute=True)
@@ -361,30 +378,38 @@ def validate_approved_job_config(job, authorization):
         validate_binding(job['recoveryBinding'], require_size=True)
         required(job.get('verificationPolicy', {}).get('mode') == 'representative-plus-rules-v001',
             'approved recovery requires representative verification policy')
+    j16 = job['inputs'].get('kind') == 'j16-staged-static-v001'
     has_base_reuse = 'baseReuseBundleBinding' in job['inputs']
+    if j16:
+        required(not has_base_reuse and 'recoveryBinding' not in job, 'J16 cannot reuse a base or failed-work recovery')
+        required(job.get('verificationPolicy', {}).get('mode') == 'representative-plus-rules-v001', 'J16 representative policy required')
     required(not (has_base_reuse and 'recoveryBinding' in job), 'base reuse cannot combine with failed-work recovery')
-    exact_keys(job['inputs'], APPROVED_INPUT_KEYS | ({'baseReuseBundleBinding'} if has_base_reuse else set()), 'approved inputs')
+    exact_keys(job['inputs'], (J16_INPUT_KEYS if j16 else APPROVED_INPUT_KEYS) | ({'baseReuseBundleBinding'} if has_base_reuse else set()), 'approved inputs')
     if has_base_reuse:
         ref = job['inputs']['baseReuseBundleBinding']
         validate_binding(ref, require_size=True)
         required(ref.get('schemaVersion') == 'digest-approved-base-reuse-input-v001', 'approved base reuse input schema required')
-    required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
+    inputs = job['inputs']
     for name in approved_input_binding_keys(job):
-        absolute_input_binding(job, job['inputs'][name])
-    inputs = job['inputs']; parameters = inputs['preparationParameters']
-    required(parameters.get('inputRoot') == inputs['inputRoot']
-        and parameters.get('inputPrefix') == inputs['inputPrefix'], 'approved preparation input root or prefix differs')
-    required(parameters.get('workspaceRoot') == FORMAL_REPO, 'approved preparation code workspace differs')
-    current_input_root = str(Path(inputs['inputRoot']) / inputs['inputPrefix'])
-    for name in ('outputRoot', 'sourceRuntimeRoot'):
-        required(absolute_path(parameters.get(name)) and parameters[name].startswith(current_input_root + '/'),
-            'approved preparation path outside current input prefix: ' + name)
-    for name in ('stateBinding', 'styleTemplateBinding'):
-        ref = parameters.get(name)
-        validate_binding(ref)
-        required(ref['path'].endswith('.json'), 'approved preparation JSON binding required: ' + name)
-        absolute_input_binding(job, ref)
-    validate_binding(parameters.get('scopeBinding'))  # The approval document remains repository-bound bytes.
+        if j16:
+            validate_binding(inputs[name], require_size=True)
+        absolute_input_binding(job, inputs[name])
+    if not j16:
+        required(type(job['inputs']['preparationParameters']) is dict, 'preparation parameters object required')
+        inputs = job['inputs']; parameters = inputs['preparationParameters']
+        required(parameters.get('inputRoot') == inputs['inputRoot']
+            and parameters.get('inputPrefix') == inputs['inputPrefix'], 'approved preparation input root or prefix differs')
+        required(parameters.get('workspaceRoot') == FORMAL_REPO, 'approved preparation code workspace differs')
+        current_input_root = str(Path(inputs['inputRoot']) / inputs['inputPrefix'])
+        for name in ('outputRoot', 'sourceRuntimeRoot'):
+            required(absolute_path(parameters.get(name)) and parameters[name].startswith(current_input_root + '/'),
+                'approved preparation path outside current input prefix: ' + name)
+        for name in ('stateBinding', 'styleTemplateBinding'):
+            ref = parameters.get(name)
+            validate_binding(ref)
+            required(ref['path'].endswith('.json'), 'approved preparation JSON binding required: ' + name)
+            absolute_input_binding(job, ref)
+        validate_binding(parameters.get('scopeBinding'))  # The approval document remains repository-bound bytes.
     required(job['outputRoot'] != inputs['inputPrefix']
         and not job['outputRoot'].startswith(inputs['inputPrefix'] + '/')
         and not inputs['inputPrefix'].startswith(job['outputRoot'] + '/'), 'approved input/output roots overlap')
@@ -431,7 +456,8 @@ def validate_approved_job_config(job, authorization):
         required(authorization['baseReuseBundleBinding'] == job['inputs']['baseReuseBundleBinding'], 'authorization/job base reuse binding mismatch')
     exact_keys(authorization, {'schemaVersion', 'recordId', 'userApproval', 'actions', 'jobBinding',
         'planId', 'manifestBinding', 'typographySettingsBinding', 'outputRoot', 'storage', 'guard',
-        'implementation', 'normalCandidates', 'migrationApprovalEvidenceBinding'}
+        'implementation', 'normalCandidates'}
+        | ({'inputKind', 'visibilitySelectionBinding', 'visibilityAdoptionBinding', 'rendererTemplateBinding'} if j16 else {'migrationApprovalEvidenceBinding'})
         | ({'verificationPolicy'} if type(authorization) is dict and 'verificationPolicy' in authorization else set())
         | ({'recoveryBinding'} if type(authorization) is dict and 'recoveryBinding' in authorization else set())
         | ({'baseReuseBundleBinding'} if has_base_reuse else set()), 'approved authorization')
@@ -465,8 +491,14 @@ def validate_approved_job_config(job, authorization):
         required(authorization[key] == job[key], 'authorization/job mismatch: ' + key)
     required(authorization['manifestBinding'] == job['inputs']['candidateManifestBinding'], 'authorized manifest differs')
     required(authorization['typographySettingsBinding'] == job['inputs']['typographySettingsBinding'], 'authorized settings differ')
-    required(authorization['migrationApprovalEvidenceBinding'] == job['inputs']['migrationApprovalEvidenceBinding'],
-        'authorized migration approval evidence differs')
+    if j16:
+        required(authorization['inputKind'] == inputs['kind'], 'authorized J16 input kind differs')
+        for name in ('visibilitySelectionBinding', 'visibilityAdoptionBinding', 'rendererTemplateBinding'):
+            required(authorization[name] == inputs[name], 'authorized J16 binding differs: ' + name)
+        required(J16_CODE <= set(paths), 'J16 implementation bindings missing')
+    else:
+        required(authorization['migrationApprovalEvidenceBinding'] == job['inputs']['migrationApprovalEvidenceBinding'],
+            'authorized migration approval evidence differs')
     return job
 
 def approved_image_identity(storage):

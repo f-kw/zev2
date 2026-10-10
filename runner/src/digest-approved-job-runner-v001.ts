@@ -596,12 +596,12 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
 const j16Backgrounds=new WeakMap<object,Json>();
 /** Only the owned job can supply a drawing view, its background and its AAC.
  * File renderer admission still checks the unchanged original typed Core. */
-export async function resolveQualifiedApprovedJ16DrawingV001(context:unknown,commonPlan:Json):Promise<Json> {
+export async function resolveQualifiedApprovedJ16DrawingV001(context:unknown,commonPlan?:Json):Promise<Json> {
   await assertQualifiedApprovedDigestStorageContextV001(context);
   const {inputs,qualified}=contexts.get(context as object)!;
   assert.equal(inputs.kind,'j16-staged-static-v001','QUALIFIED_J16_STATIC_JOB_REQUIRED');
   await assertApprovedDigestInputsV001(inputs,qualified);
-  assert.deepEqual(commonPlan,inputs.normalPlan,'APPROVED_J16_ORIGINAL_CORE_PLAN_CHANGED');
+  if(commonPlan!==undefined)assert.deepEqual(commonPlan,inputs.normalPlan,'APPROVED_J16_ORIGINAL_CORE_PLAN_CHANGED');
   const saved=j16Backgrounds.get(context as object);assert(saved,'APPROVED_J16_BACKGROUND_NOT_BUILT');
   const owned=context as Json;
   const proof=await owned.readJson(qualified.job.outputRoot+'/orchestration-background/proof.json');

@@ -590,9 +590,10 @@ export async function validateApprovedJ16StaticInputV001(value: Json) {
   const {view,source,selection,adoption,manifestBinding,adoptionBinding,expected}=value;
   const stage=await import('../../evals/clip_composition/presentation_j16_staged_boundary_v001.mjs');
   stage.assertJ16StaticManufacturingViewV001(view);
-  const {assertOrchestrationDrawingViewV001}=await import('../../evals/clip_composition/presentation_orchestration_v001.mjs');
+  const implementationRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+  const {assertOrchestrationDrawingViewV001}=await load(implementationRoot,'evals/clip_composition/presentation_orchestration_v001.mjs');
   assertOrchestrationDrawingViewV001(view);
-  const {validateDigestCaptionVisibilitySelectionV001}=await import('../../evals/clip_composition/presentation_renderer_qc_v002.mjs');
+  const {validateDigestCaptionVisibilitySelectionV001}=await load(implementationRoot,'evals/clip_composition/presentation_renderer_qc_v002.mjs');
   assert.equal(validateDigestCaptionVisibilitySelectionV001({plan:view.resolvedPlan,selection,
     manifestBinding:selection.manifestBinding}).status,'passed','APPROVED_J16_VISIBILITY_INVALID');
   const bytesBinding=(b:Json)=>({path:b.path,fileSha256:b.fileSha256,sizeBytes:b.sizeBytes});
@@ -653,10 +654,8 @@ async function readApprovedJ16StaticInputsV001(qualified:ApprovedDigestQualified
   same(await read(visibilitySelection.adoptionBinding),visibilityAdoption);
   await validateApprovedJ16StaticInputV001({view,source,selection:visibilitySelection,adoption:visibilityAdoption,
     manifestBinding:specs.candidateManifestBinding,adoptionBinding:specs.visibilityAdoptionBinding,expected:job.expected});
-  const typography=await read(specs.typographySettingsBinding),typographyValues=resolveDigestTypographySettingsV001(typography.settings??typography);
-  const normalPlan=JSON.parse(source.planBytes);
-  assert(normalPlan.elements.every((row:Json)=>row.visualState.textStyle.fontSizePx===typographyValues.fontSizePx),
-    'APPROVED_J16_TYPOGRAPHY_CHANGED');
+  const typography=await read(specs.typographySettingsBinding),normalPlan=JSON.parse(source.planBytes);
+  const typographyValues=projectApprovedJ16BoundCoreStyleV001(typography,normalPlan);
   const rendererTemplate=await read(specs.rendererTemplateBinding);
   const renderer=await load(root,'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts');
   const admission=await load(root,'evals/clip_composition/presentation_renderer_admission_receipt_v002.mjs');
@@ -687,9 +686,21 @@ async function readApprovedJ16StaticInputsV001(qualified:ApprovedDigestQualified
   const value={kind:specs.kind,workspaceRoot:root,inputRoot:specs.inputRoot,inputPrefix:specs.inputPrefix,
     manifest,manifestBinding:clone(specs.candidateManifestBinding),j16Source:source,j16State:closure.state,j16View:view,
     normalPlan,rendererTemplate,visibilitySelection,visibilityAdoption,meaning,
-    typographySettings:typography.settings??typography,typographyValues,typographySettingsBinding:clone(specs.typographySettingsBinding),
+    typographySettings:typography,typographyValues,typographySettingsBinding:clone(specs.typographySettingsBinding),
     authorizationBinding:clone(qualified.authorizationBinding),jobBinding:clone(qualified.jobBinding)};
   await closure.assertCurrent();await qualified.assertCurrent();freeze(value);
   qualifiedInputs.set(value,{qualified,bodySha256:sha(wire.formal(value)),bindings:[...bindings.values()],absoluteBindings:[]});
   j16Closures.set(value,closure);return value;
+}
+
+
+/** J16 preserves the existing typed Core style, including its own outline/glow
+ * and margins. A settings file for a different Normal candidate is not a
+ * substitute; no typography formula, new preset or numeric default is applied. */
+export function projectApprovedJ16BoundCoreStyleV001(typography:Json,normalPlan:Json) {
+  assert.equal(typography.schemaVersion,'presentation-output-common-core-plan-v001','APPROVED_J16_BOUND_CORE_STYLE_REQUIRED');
+  same(typography,normalPlan);
+  return freeze({mode:'preserve-bound-core-style-v001',canvas:clone(normalPlan.canvas),layoutRules:clone(normalPlan.layoutRules),
+    instructions:list(normalPlan.elements).map(row=>({instructionId:row.instructionId,presetId:row.presetId,
+      stateId:row.stateId,visualState:clone(row.visualState),transition:clone(row.transition)}))});
 }

@@ -83,10 +83,10 @@ export function producerArgumentsV001({baseMediaPath,plan,records,scopeStart,ran
 export async function runFormalLowMemoryCompositeV001(input){
   assert(input&&typeof input==='object'&&!Array.isArray(input));
   const allowed=['baseMediaPath','plan','overlayRecords','expectedFrameCount','expectedOverlayCount','outputPath','ffmpegPath',
-    'maxFrames','processObserver','resourceCheck','visibilitySelection'];
+    'maxFrames','processObserver','resourceCheck','visibilitySelection','audioMediaPath'];
   assert(Object.keys(input).every(key=>allowed.includes(key)),'unsupported formal composite options');
   const {baseMediaPath,plan,overlayRecords,expectedFrameCount,expectedOverlayCount,outputPath,ffmpegPath,
-    maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck,visibilitySelection=null}=input;
+    maxFrames=DEFAULT_MAX_FRAMES,processObserver,resourceCheck,visibilitySelection=null,audioMediaPath=null}=input;
   assert.equal(process.env.ZEV_FULL_SUPERVISED,'1','SUPERVISOR_REQUIRED');
   assert(Number.isSafeInteger(expectedFrameCount)&&expectedFrameCount>0
     &&Number.isSafeInteger(expectedFrameCount*FRAME_BYTES),'explicit complete frame clock required');
@@ -140,8 +140,9 @@ export async function runFormalLowMemoryCompositeV001(input){
     return {...command,shownInstructionIds};
   });
   assert.equal(commands.reduce((n,c)=>n+c.range.endFrameExclusive-c.range.startFrame,0),expectedFrameCount);
+  assert(audioMediaPath===null||typeof audioMediaPath==='string'&&path.isAbsolute(audioMediaPath),'explicit separate audio path required');
   const encoderArgs=['-hide_banner','-loglevel','error','-n','-f','rawvideo','-pixel_format','yuv420p',
-    '-video_size','1920x1080','-framerate','30','-i','pipe:0','-i',baseMediaPath,
+    '-video_size','1920x1080','-framerate','30','-i','pipe:0','-i',audioMediaPath??baseMediaPath,
     '-map','0:v:0','-map','1:a:0','-vf','setsar=1/1','-frames:v',String(expectedFrameCount),
     '-c:v','libx264','-preset','fast','-crf','20','-pix_fmt','yuv420p','-c:a','copy',
     '-movie_timescale','30','-movflags','+faststart',outputPath];
@@ -150,7 +151,7 @@ export async function runFormalLowMemoryCompositeV001(input){
   // watches actual free space each second. No full raw-YUV file is allocated.
   const allocationBytes=Math.min(maxFrames,expectedFrameCount)*FRAME_BYTES;
   return processObserver.observeOperation({observationLabel:'formal-low-memory-composite',
-    operationKind:'sequential-stream-composite',input:{baseMediaPath,expectedFrameCount,outputPath,
+    operationKind:'sequential-stream-composite',input:{baseMediaPath,audioMediaPath,expectedFrameCount,outputPath,
       ffmpegPath,maxFrames,expectedOverlayCount,visibilitySelection:selection,
       visibilityComposition:visibilityCompositionV001(selection,commands),
       encoderArgs,segments:commands.map(c=>({...c,args:c.args}))}},async()=>{
@@ -214,7 +215,7 @@ export async function runFormalLowMemoryCompositeV001(input){
         maximumStates:Math.max(...segments.map(s=>s.stateCount)),
         maximumInputs:Math.max(...segments.map(s=>s.inputCount)),maximumProcesses:2,
         rawYuvStorage:'pipe-only',rawYuvBytes:bytes,rawYuvSha256:digest.digest('hex'),
-        frameBytes:FRAME_BYTES,frameCoverage:'complete-contiguous-once',encoderArgs,output:await bind(outputPath)};
+        frameBytes:FRAME_BYTES,frameCoverage:'complete-contiguous-once',encoderArgs,audioMediaPath,output:await bind(outputPath)};
     }catch(error){await closeOwn(active);await closeOwn(encoder);throw error;}
   });
 }

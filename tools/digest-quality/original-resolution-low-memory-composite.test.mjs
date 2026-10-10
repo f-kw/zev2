@@ -279,12 +279,14 @@ test('small actual composites preserve visible choices, 12-frame clock and every
       {encoding:null})).stdout;
     const backgroundFrames=async file=>(await execute(ffmpeg,['-v','error','-nostdin','-i',file,'-vf',
       'crop=2:2:100:100','-pix_fmt','gray','-f','rawvideo','pipe:1'],{encoding:null})).stdout;
+    const losslessVideo=path.join(directory,'separate-background.nut');
+    await execute(ffmpeg,['-hide_banner','-loglevel','error','-nostdin','-n','-i',base,'-map','0:v:0','-an','-c:v','ffv1','-f','nut',losslessVideo]);
     const originalAudio=await audio(base),originalBackground=await backgroundFrames(base),results=[];
     const originalSamples=await Promise.all([pixel(base,2),pixel(base,8)]);
     assert.equal(originalBackground.length,12*4);
     assert(new Set(originalBackground).size>4,'fixture must expose changing source frames');
     for(const [name,decisions] of [['legacy',null],['all-show',['show','show']],
-      ['partial',['show','suppress']],['all-suppress',['suppress','suppress']]]){
+      ['partial',['show','suppress']],['all-suppress',['suppress','suppress']],['separate-aac',['show','suppress']]]){
       const selection=decisions===null?null:visibilityFixture(fixture.plan,decisions);
       // Bind actual test-only JSON bytes; these fixtures are not approval records.
       if(selection!==null)for(const [fileName,body] of [
@@ -297,8 +299,8 @@ test('small actual composites preserve visible choices, 12-frame clock and every
         assert.equal(hash(await readFile(file)),binding.fileSha256);
       }
       const outputPath=path.join(directory,name+'.mp4');
-      const result=await withSupervision(()=>runFormalLowMemoryCompositeV001({...fixture,baseMediaPath:base,
-        outputPath,ffmpegPath:ffmpeg,visibilitySelection:selection,
+      const result=await withSupervision(()=>runFormalLowMemoryCompositeV001({...fixture,baseMediaPath:name==='separate-aac'?losslessVideo:base,
+        ...(name==='separate-aac'?{audioMediaPath:base}:{}),outputPath,ffmpegPath:ffmpeg,visibilitySelection:selection,
         resourceCheck:async({newBytes})=>{
           const space=await statfs(directory);assert(space.bavail*space.bsize>12_000_000_000+newBytes);
           assert(process.memoryUsage().rss<16*1024**3);
@@ -310,6 +312,7 @@ test('small actual composites preserve visible choices, 12-frame clock and every
       assert.deepEqual(await audio(outputPath),originalAudio,name+' original AAC packets or clock changed');
       assert.equal(result.rawYuvBytes,12*1920*1080*3/2);assert.equal(result.frameCoverage,'complete-contiguous-once');
       assert.equal(result.expectedOverlayCount,2);assert.equal(result.scope.frameCount,12);
+      if(name==='separate-aac')assert.equal(result.audioMediaPath,base);
       const background=await backgroundFrames(outputPath);assert.equal(background.length,originalBackground.length);
       assert([...background].every((value,index)=>Math.abs(value-originalBackground[index])<=2),
         name+' source background frame content or order changed');

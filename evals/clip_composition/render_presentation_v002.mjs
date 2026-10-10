@@ -2141,7 +2141,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
   if(approvedJ16) {
     const {resolveQualifiedApprovedJ16DrawingV001}=await import(
       pathToFileURL(path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../runner/src/digest-approved-job-runner-v001.ts')).href);
-    const drawing=await resolveQualifiedApprovedJ16DrawingV001(storageContext,JSON.parse(orchestrationDrawingView?.projection?.sourceClock?.planBytes??'null'));
+    const drawing=await resolveQualifiedApprovedJ16DrawingV001(storageContext);
     if(drawing.view!==orchestrationDrawingView||canonicalJson(drawing.background)!==canonicalJson(orchestrationBackground))
       throw new TypeError('Approved J16 drawing or background substitution');
   }
@@ -2181,7 +2181,7 @@ export async function executeValidatedPresentationDrawAndQcV001({
       : {startFrame: renderRange.startFrame, endFrameExclusive: renderRange.endFrameExclusive});
     assertPresentationRenderRangeV001(renderRange, expectedFrameCount);
     if (canonicalJson(renderRange) !== canonicalJson(orchestrationScope.renderRange)) throw new TypeError('range full clock differs');
-    if (!effectiveCounterfactualQc || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
+    if ((!effectiveCounterfactualQc&&!approvedJ16) || counterfactualQcMethod !== PRESENTATION_INTEGRITY_STATE_QC_METHOD_V001) {
       throw new TypeError('orchestration requires combined whole-video replay and native state QC');
     }
     if (validatedLayoutInspection !== null || baseTimeline !== undefined

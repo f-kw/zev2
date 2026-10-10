@@ -377,7 +377,7 @@ export function assertJ16StaticManufacturingViewV001(view) {
     &&view.resolution.counts[kind].unrepresentable===0,'J16_STATIC_RESOLVED_SELECTION_REQUIRED');
   check(Array.isArray(view.effectiveSelections)&&view.effectiveSelections.every(row=>row.selection.role==='Normal'
     ||row.selection.role==='Focus'&&row.selection.presentation==='provisional-focus'),'J16_STATIC_NORMAL_COLOR_ONLY');
-  check(view.projection.connections.every(row=>['straight-cut','soft-separator'].includes(row.preset)),
+  check(view.projection.connections.every(row=>['normal-cut','soft-separator'].includes(row.preset)),
     'J16_STATIC_EXISTING_CONNECTIONS_ONLY');
   return view;
 }

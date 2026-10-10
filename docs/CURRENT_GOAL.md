@@ -1,5 +1,25 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-10T16:27:51.898Z（第6回適用済み・別件の人工fixture第7回判断待ち）
+
+変更結果：前checkpointの途中実装に、opaque SSD contextとown observerでの背景生成、next-unit reserve、別AACのcopy入力、Python/TSの入力と独立許可の整合、正規file rendererへの静的J16投影、既存normal-cut/soft-separatorの限定gateを接続した。元Common Coreを設定入力として束縛し、元96px/縁8/glow12/余白0.04等を従来Digest計算のglow4/余白0.025等へ変えない。まだ汎用接続の完成ではない。実素材製造・API再送・本番切替・製造許可作成は0。
+
+過程：本人の第6回一件限り承認（Sentinel_2f77d8d39e948191ae45447ddd433f38）を受領し、2026-10-11 01:05:05.941 JSTに再開。適用前の旧短条件2/新条件1・Motion guard不変・残り差分のメモリ上preflight passedを確認してhelperを適用。型TS7016の2件は既存load方式で解消。累積5/5＋第6回個別承認をリセットしていない。今回dirty14pathは実装7・test3・文書4。前checkpointからの合計は実装10＋型宣言1＋test3・文書4。
+
+確認合格：runner tsc --noEmit（新fixture追加後）、背景/描画/低メモリmjs構文、Python AST、git diff --check。approved-job17/17（既存16＋J16 kind/採否/template/コード参照/移動candidate/reuse・recovery拒否）。人工12frame物理試験1/1 passed、5方式（従来/全表示/一部非表示/全非表示/別AAC）を既存production compositorで実行。背景全12frame順序、表示pixel、原AAC19packetのpayload/pts/dts/duration/side-data一致を検査。別AAC方式は論理2cue保持・合成1/非表示1とrange graph/集計を記録。人工媒体は実素材の完成や視聴品質を意味しない。
+
+確認失敗・停止：任意ID/件数fixture4件は共通設営でcreateOrchestrationJudgmentInputV001のPulse候補検査に止まる。font87/133や6frameへ変更した人工データに既存helperのeligiblePulsePeakIdsを継承したため、未使用Pulseの96px条件へ入った。製品/実素材の欠陥や検査免除としない。jobと合算21件中17passed/4failed/skip0。失敗log終端2026-10-11 01:21:25.575 JST、未適用1行案保存確認01:24:02.717 JST。追加作用停止、別件第7回を自己承認しない。停止記録helperの最初のfunctions.exec送信は引用符構文エラーで工具起動前に拒否され、ファイル/boardへの作用0。安全なstructured apply_patchで私用記録helperを作成し、構文確認後に記録する。第7回のfixture案は適用・実行していない。
+
+未確認・残件：任意ID/件数の正試験合格、正式J16 job/input資格化、opaque SSD contextから背景/音声/正式Core描画/同一selection/合成までの通し、representative pending/get/finalize/完成再読の同一adoption/graph/全primary確認、Python parity suite/必要なcaller比較。小さな物理合成・純粋job検査を完了条件の代替にしない。通常速視聴/音声品質/本採用は未評価。状態は相談役待ち、次担当mona。
+
+[同じ報告](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[同じcycle log](work-logs/2026-10/2026-10-11T0038_Codex-SSD_J16-production-integration.md)。以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-10T16:05:05.941Z（第6回一件限り承認を受領・汎用接続再開）
+
+本人「いいよ」（Sentinel_2f77d8d39e948191ae45447ddd433f38）をmona経由で受領し、第6回の私用適用helper修正を今回1件に限って明示承認。2026-10-11T01:05:05 JSTに同じCodex-SSDがmain abc35bb44aa2464e011cfb648d3433675ff8a7faの部分実装から再開。開始時tracked/staged/untracked変更なし。修正対象はorchestration固有のエラー文まで一致条件を絞り、1箇所だけへ適用するhelper修正。適用前に旧短条件2箇所、新条件1箇所、Motion guard不変を確認し、未適用の残り接続差分をメモリ上で事前検証passed。累積5/5＋今回個別第6回を保持し、上限の恒久変更・他の不具合への例外ではない。既承認の汎用接続、型エラー2件、任意素材fixture、必要な合成・完成再読検証を続ける。API再送・実素材動画製造・本番切替なし。原本/採否保持、実映像品質未確認。公式MCP board165/Check61 item25をcurrent/activeへ、titleは本人指定の具体的な作業名を保持。他未完了/削除履歴不変。次担当Codex-SSD。
+
+以下は以前の時点の記録。
+
 ## 最新現在地 — 2026-10-10T15:55:05.666Z（J16汎用接続の部分実装・第6回設営修正の相談役判断待ち）
 
 2026-10-11 00:28 JSTの本人「いいよ」をmona経由で受領し、00:38:22 JSTに実着手した汎用製造接続は、2026-10-11T00:55:05 JST時点で実装途中・相談役待ち。完了ではない。私用適用helper edit-j16-integration-v001.py:437が置換条件の一致2箇所を検出して停止。片方はorchestration、もう片方はMotionのcombined-QC制約で、同じ短い条件文だけでは区別できなかった。旧設営修正累積5/5を保持し、第6回の個別設営修正についてGPT_DECISIONを返す。一括置換、上限自己承認、枠リセットは行わない。停止の正確な秒は未取得、証拠確認は00:52:09 JST。途中のcommentaryで00:55ごろとした概算表記は誤りで、訂正済み。公式MCP board162/Check61 item22をrequest/waitingへ戻し、他未完了/削除履歴を保持。次担当monaがこの一件の例外を判断し、承認後は同じCodex-SSDが既承認の実装範囲を続ける。

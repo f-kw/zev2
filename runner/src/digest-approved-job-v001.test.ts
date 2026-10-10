@@ -186,3 +186,35 @@ test('reuse cannot be combined with failed-work recovery or turn pure validation
   f.authorization.baseReuseBundleBinding=structuredClone(f.job.inputs.baseReuseBundleBinding);assert.throws(()=>validate(f.job,f.authorization,f.options),/BASE_REUSE_RECOVERY_CONFLICT/);
   const r=withBaseReuse();await assert.rejects(assertQualifiedDigestApprovedJobV001(validate(r.job,r.authorization,r.options)),/QUALIFIED_APPROVED_DIGEST_JOB_REQUIRED/);
 });
+
+
+function j16Fixture() {
+  const f=fixture(),prefix=f.job.inputs.inputPrefix;
+  f.job.inputs={kind:'j16-staged-static-v001',inputRoot:f.job.storage.guestRoot,inputPrefix:prefix,
+    candidateManifestBinding:{...binding('runtime/artifacts/arbitrary-original-live-candidate/files.json'),sizeBytes:123,schemaVersion:'presentation-j16-live-candidate-files-v001'},
+    ...Object.fromEntries(['visibilitySelectionBinding','visibilityAdoptionBinding','typographySettingsBinding','rendererTemplateBinding'].map(key=>[key,{...binding(prefix+'/'+key+'.json'),sizeBytes:234}]))};
+  f.job.verificationPolicy={schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',representativeInstructionIds:['arbitrary-cue'],permittedMethods:['still-frame'],confirmationRecordPath:f.job.outputRoot+'/confirmation.json'};
+  for(const p of ['presentation_j16_staged_boundary_v001.mjs','presentation_orchestration_v001.mjs','presentation_orchestration_projection_v001.mjs','presentation_orchestration_background_v001.mjs'])f.job.implementation.bindings.push(binding('evals/clip_composition/'+p));
+  delete f.authorization.migrationApprovalEvidenceBinding;
+  Object.assign(f.authorization,{inputKind:f.job.inputs.kind,manifestBinding:f.job.inputs.candidateManifestBinding,
+    typographySettingsBinding:f.job.inputs.typographySettingsBinding,visibilitySelectionBinding:f.job.inputs.visibilitySelectionBinding,
+    visibilityAdoptionBinding:f.job.inputs.visibilityAdoptionBinding,rendererTemplateBinding:f.job.inputs.rendererTemplateBinding,
+    implementation:structuredClone(f.job.implementation),verificationPolicy:structuredClone(f.job.verificationPolicy)});
+  return f;
+}
+test('J16 is an explicit generic input kind with independently bound adoption and original candidate',()=>{
+  const f=j16Fixture();assert.equal(validate(f.job,f.authorization,f.options).status,'validated-configuration');
+  assert.equal(f.job.inputs.preparationManifestBinding,undefined);assert.equal(f.job.inputs.migrationApprovalEvidenceBinding,undefined);
+  for(const change of [(x:any)=>x.authorization.inputKind='normal',
+    (x:any)=>x.authorization.visibilityAdoptionBinding={...x.authorization.visibilityAdoptionBinding,fileSha256:'f'.repeat(64)},
+    (x:any)=>x.authorization.visibilitySelectionBinding={...x.authorization.visibilitySelectionBinding,sizeBytes:235},
+    (x:any)=>x.authorization.rendererTemplateBinding={...x.authorization.rendererTemplateBinding,path:x.job.inputs.inputPrefix+'/other.json'},
+    (x:any)=>{x.job.inputs.candidateManifestBinding={...x.job.inputs.candidateManifestBinding,path:x.job.inputs.inputPrefix+'/files.json'};x.authorization.manifestBinding=x.job.inputs.candidateManifestBinding;},
+    (x:any)=>{delete x.job.verificationPolicy;delete x.authorization.verificationPolicy;},
+    (x:any)=>x.job.inputs.baseReuseBundleBinding=binding(x.job.inputs.inputPrefix+'/reuse.json'),
+    (x:any)=>{x.job.recoveryBinding={...binding('runtime/artifacts/synthetic-recovery.json'),sizeBytes:1};x.authorization.recoveryBinding=x.job.recoveryBinding;},
+    (x:any)=>{x.job.implementation.bindings.pop();x.authorization.implementation=x.job.implementation;},
+    (x:any)=>x.job.inputs.visibilitySelectionBinding.sizeBytes=0]){
+    const changed=j16Fixture();change(changed);assert.throws(()=>validate(changed.job,changed.authorization,changed.options));
+  }
+});
