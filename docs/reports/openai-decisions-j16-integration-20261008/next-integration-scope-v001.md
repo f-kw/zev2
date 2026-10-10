@@ -1,5 +1,21 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — 質問回答の組で一度再審査したが再拒否 — 2026-10-10 15:00 JST
+
+親が具体的な送信先/326字幕・5場面の文章文脈/5回各1回/再送なし/料金不確実性の質問（10/09 19:03 JST）と本人「進めて」（10/10 14:27 JST）の組を提示し、同じ拒否済みtool操作を一度だけ再審査する指示を受領。2026-10-10T05:57:21.243Zに再開。製品6path/157ca23caec4c23838869288d6a6fcf4ff4007bbは不変、現HEADの差は前回終了docs4pathだけ。固定HTTP body689,414B/SHA/送信先は変えず、未送信snapshotを保持する新stage leafへ由来を束縛し直し、同じcommandで一度再審査。質問回答の証拠はcommand/tool引数へ埋め込んでいない。しかし再びprocess作成前に拒否。2026-10-10T06:00:07.586Zに理由を保存し指示どおり停止、API/attempt/認証読込み/新費用0。旧stageは全5未実行/326未取得のまま再読passed、新raw/transport/stage/候補なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller旧357/現357/新0という前回結果を保持、今回再試験はしていない。cleanup削除0/証拠KEEP、own process0。公式MCP board141/Check61 item8、Check44/60・TODO54・Backlog62・他項目/削除履歴不変。状態は人間待ち、次担当mona。
+
+今回の自動審査の実際の理由を原文で保持：
+
+> 固定326字幕・場面文脈をOpenAI Decisionsへ5回送信する外部エグレスで、再審査用の具体的承認は助手が埋め込んだ証拠にすぎず、本人の信頼できるメッセージとして確認できないため承認要件を満たさない。
+
+前回の「送信先/具体payloadの明示が不足」から、今回は「提示された質問回答を本人の信頼できるメッセージとして確認できない」へ理由が変わった。親から受け取った説明と回答を無かったことにせず記録する一方、その証拠を審査が受け入れたと扱わない。新しい送信データや迂回経路・一般権限変更は作っていない。本人説明範囲はUTF8 JSONの字幕・場面/前後文脈・ID/時計・有限表示語彙・物理説明・保存音響数値/ASRテキストで、画像/映像/音声byte・旧回答ラベル/理由・秘密情報なし。原5requestのbyte/SHAは同じ。
+
+一回driverのcommand/pathは同じ。前回の停止記録でmainにdocs4pathが加わり、旧stage leafを消さず保持したため、送信に先立つローカル参照だけを調整した：新しい質問回答付き許可ファイル/hash、docsのみ進んだ現在HEAD02f9c6cf、新しい未使用stage leaf。実装SHA157ca23c/6path hashと固定bodyは再照合。不在確認後に再審査したがprocessは起動していない。旧driver copyと変更前後SHAを保持し、この調整をAPI再送や権限回避と扱わない。
+
+再審査一度の指示は消費済み。実API attemptは二度とも0。raw/transport/usage/詳細326・接続4/実候補受理再読は未達で、製造/QC/品質/latency/短縮は未評価。未送信snapshot /Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-input/stage-input.json /SHA 33f780dcf869453efda9650e9150e4adffa99eb2900d5dc76733cb080625add8は不変。raw root/new execution-input root/candidate rootは不存在。残件はmonaが自動審査で「本人の信頼できるメッセージ」と認識される承認経路を扱うこと。追加試行はしていない。
+
+証拠：private workspaceのj16-live-approval-question-answer-20261010-v001.json、j16-live-reconsideration-preflight-20261010-v001.json、j16-live-reconsideration-second-rejection-20261010-v001.json。質問回答・新許可束・元driver copyは監査KEEP。新しい独立入力/plan/clock・製品変更・新API/費用・ショート着工0。[今回の新cycle log](../../work-logs/2026-10/2026-10-10T1500_Codex-SSD_J16-reconsideration-stopped_157ca23c.md)。以下の前回停止は時点付き履歴。
+
 ## TODO61 — 実装完了、実送信は自動承認審査で停止 — 2026-10-10 14:52 JST
 
 TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが具体的な外部送信承認を扱う。製造/本番切替/動画QC/品質採用は未実施。

@@ -1,5 +1,13 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-10T06:00:07.586Z（TODO61の一度再審査も拒否・Check61）
+
+親が具体的な送信先/326字幕・5場面の文章文脈/5回各1回/再送なし/料金不確実性の質問（10/09 19:03 JST）と本人「進めて」（10/10 14:27 JST）の組を提示し、同じ拒否済みtool操作を一度だけ再審査する指示を受領。2026-10-10T05:57:21.243Zに再開。製品6path/157ca23caec4c23838869288d6a6fcf4ff4007bbは不変、現HEADの差は前回終了docs4pathだけ。固定HTTP body689,414B/SHA/送信先は変えず、未送信snapshotを保持する新stage leafへ由来を束縛し直し、同じcommandで一度再審査。質問回答の証拠はcommand/tool引数へ埋め込んでいない。しかし再びprocess作成前に拒否。2026-10-10T06:00:07.586Zに理由を保存し指示どおり停止、API/attempt/認証読込み/新費用0。旧stageは全5未実行/326未取得のまま再読passed、新raw/transport/stage/候補なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller旧357/現357/新0という前回結果を保持、今回再試験はしていない。cleanup削除0/証拠KEEP、own process0。公式MCP board141/Check61 item8、Check44/60・TODO54・Backlog62・他項目/削除履歴不変。状態は人間待ち、次担当mona。
+
+実際の再拒否理由：固定326字幕・場面文脈をOpenAI Decisionsへ5回送信する外部エグレスで、再審査用の具体的承認は助手が埋め込んだ証拠にすぎず、本人の信頼できるメッセージとして確認できないため承認要件を満たさない。
+
+[報告と残件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[新cycle log](work-logs/2026-10/2026-10-10T1500_Codex-SSD_J16-reconsideration-stopped_157ca23c.md)。以下は時点付き履歴。
+
 ## 最新現在地 — 2026-10-10T05:52:40.633Z（TODO61実装終了、実送信は審査停止・Check61）
 
 TODO61のlive由来限定実装6pathはmain 157ca23caec4c23838869288d6a6fcf4ff4007bb に固定しremote一致。実装/模擬検証は終了したが、実POSTの起動が自動承認審査で拒否され、実API接続は未達。拒否の観測 2026-10-10T05:48:24.495Z（正確な拒否瞬間は未採取）：本人「進めて」はあるが、送信先と具体的payloadの外部送信への本人明示承認が不足、という理由。API/attempt/認証読込み/新費用0。全5件未実行・全326未取得のheld stageを新規保存し、同じ共有境界/正式readerで再読passed。raw応答/usage/新詳細326・接続4/実候補受理再読は未実施で、架空receiptやNormal補完なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller strict旧357/現357/新0で全合格ではない。原13記録/Core本体/原prepare不変。2026-10-10 14:52 JSTに独立作業を閉じ、不要編集script4件/34001B整理、KEEPのstage3file/6092853Bと固定入力/証拠を保持、own process0。相対CLI pathの設営失敗1を絶対pathで復旧、APIretry0。公式MCP board139/Check61 item6、Check44/60・TODO54・Backlog62・他項目/削除履歴保持。状態は人間待ち、次担当monaが具体的な外部送信承認を扱う。製造/本番切替/動画QC/品質採用は未実施。

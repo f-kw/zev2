@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-10（JST） / revision：handover-index-20261010-v120
+更新日：2026-10-10（JST） / revision：handover-index-20261010-v121
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-10T06:00:07.586Z（TODO61の一度再審査も拒否・Check61）
+
+親が具体的な送信先/326字幕・5場面の文章文脈/5回各1回/再送なし/料金不確実性の質問（10/09 19:03 JST）と本人「進めて」（10/10 14:27 JST）の組を提示し、同じ拒否済みtool操作を一度だけ再審査する指示を受領。2026-10-10T05:57:21.243Zに再開。製品6path/157ca23caec4c23838869288d6a6fcf4ff4007bbは不変、現HEADの差は前回終了docs4pathだけ。固定HTTP body689,414B/SHA/送信先は変えず、未送信snapshotを保持する新stage leafへ由来を束縛し直し、同じcommandで一度再審査。質問回答の証拠はcommand/tool引数へ埋め込んでいない。しかし再びprocess作成前に拒否。2026-10-10T06:00:07.586Zに理由を保存し指示どおり停止、API/attempt/認証読込み/新費用0。旧stageは全5未実行/326未取得のまま再読passed、新raw/transport/stage/候補なし。Core30/30、runner23/25（既存任意skip2）、runner型passed、caller旧357/現357/新0という前回結果を保持、今回再試験はしていない。cleanup削除0/証拠KEEP、own process0。公式MCP board141/Check61 item8、Check44/60・TODO54・Backlog62・他項目/削除履歴不変。状態は人間待ち、次担当mona。
+
+実際の再拒否理由：固定326字幕・場面文脈をOpenAI Decisionsへ5回送信する外部エグレスで、再審査用の具体的承認は助手が埋め込んだ証拠にすぎず、本人の信頼できるメッセージとして確認できないため承認要件を満たさない。
+
+[報告と残件](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[新cycle log](work-logs/2026-10/2026-10-10T1500_Codex-SSD_J16-reconsideration-stopped_157ca23c.md)。以下は時点付き履歴。
 
 ## 最新現在地 — 2026-10-10T05:52:40.633Z（TODO61実装終了、実送信は審査停止・Check61）
 
