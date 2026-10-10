@@ -23,3 +23,5 @@ monaの9件意味評価が完了し、69の明示非表示を個別推奨した�
 新API/費用/実装/試験/製造/本番反映0、不要物なし削除0B、既存processに操作なし。本log新規→同じreport/CURRENT/HANDOVER更新→4docsのみの監査commit/pushとremote一致/clean/untracked0を確認する。候補不変と正本・公式ボード読返しの証拠はprivate workspaceにKEEP。映像可読性/品質、人間採用、本番反映は未確認・未実施。
 
 [同じ報告](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。純粋AUDIT_ONLYで保存結果を返し、本人への同じ質問や次の作用を追加しない。
+
+最終読返しhelperは2026-10-10T13:12:25.512Z（22:12:25.512 JST）に、sticky_getの変動する取得時刻readAtまで保存時の値と比較したためassertで終了した。ボードrevision149/Check61 item16と全項目内容は一致していた。旧helperをprivate workspaceにKEEPし、比較からreadAtだけを除き、項目・削除履歴・更新時刻・revisionの一致検査を保持した。今回の検査設営修正1回で累積5/上限5（過去4を保持、リセットなし）。製品実装/候補/API/製造への作用は0。修正と失敗を合格結果へ書き換えず、再読証拠を別に保存する。
