@@ -22,10 +22,10 @@
 
 最初prepareはspec refに余分なmanifest identityを入れ、root作成前にexact key検査で停止。新spec v002でpath/hash/bytesへ投影だけを直してpassed。spec修正1に加え、私用終了記録scriptの引用符による起動前構文失敗を最小修正1で復旧。私用Git照合helperもstatusの先頭空白をtrimしてpath誤読をstage前に検出、trimEndのみへ直して復旧1。今cycle設営修正計3/製品修正0/API再送0、前cycle相対CLI修正1を含む累積4/枠5。read-only summary2件は誤った入力shape想定で失敗し読み直し、作用なし。実装/旧13記録/Coreは不変。前cycleのCore30/30、runner23/25（任意skip2/fail0）、runner型exit0を再利用、caller strict旧357/現357/新0は全体未合格。今回はcode変更なしにつきtest反復なし。実API保存再読を新検証として記録。
 
-最初確認から終了1231秒はこのMac cycleの経過で、実装前cycleは含まない。API時間とその他経過は分けるが、その他各工程や本人の人間確認の純時間は個別未計測。実制作/動画可読性/品質採用未評価。
+最初確認から21:45 JSTの終了記録作成開始までの1231秒はこのMac cycleの経過で、実装前cycleは含まない。API時間とその他経過は分けるが、その他各工程や本人の人間確認の純時間は個別未計測。実制作/動画可読性/品質採用未評価。
 
 ## 後始末・引継ぎ
 
 実成果固定2026-10-10T12:41:04.570Z→不要準備script2件10621Bだけ整理2026-10-10T12:41:04.670Z→own API/CLI process0。原bundle/実raw/attempt/transport/usage/auth/新理由/詳細/段階/候補/過去拒否/旧snapshotはKEEP。他者file/SSD/旧成果変更削除0。本log新規保存→既存report/CURRENT/HANDOVER更新→docs4fileだけ通常main commit/pushし、最終remote一致/clean/untracked0はprivate j16-live-real-delivery-20261010-v001.jsonに保存する。
 
-公式MCP board146/Check61 item13、全current0。Check44/60・TODO54・Backlog62と他項目/削除履歴不変。状態は相談役待ち、次担当mona。純粋AUDIT_ONLYで現物を返し、追加API/製造や次エピックを開始しない。詳細と証拠：[既存報告](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
+終了記録開始は21:45 JST、helper修正のボード追記は21:48:35 JST、初回docs push/remote一致は21:48:50 JST。時刻表記の照合後、同じ4docsの小さな記録修正を追加保存した。公式MCP board146/Check61 item13、全current0。Check44/60・TODO54・Backlog62と他項目/削除履歴不変。状態は相談役待ち、次担当mona。純粋AUDIT_ONLYで現物を返し、追加API/製造や次エピックを開始しない。詳細と証拠：[既存報告](../../reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。
