@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-10（JST） / revision：handover-index-20261010-v123
+更新日：2026-10-10（JST） / revision：handover-index-20261010-v124
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-10T13:00:56.928Z（結果受領済み、monaが演出9件確認中）
+
+親monaが実送信5回成功・候補受理再読の結果を受領し、本人への報告済みと連絡。受領連絡の最初の確認は2026-10-10 21:53:37 JST（親発言の正確な時刻は取得不可）。monaが演出9件の内容と根拠を確認する段階で、21:56 JSTから既存Check61の本文に確認中を表示。2026-10-10 22:00 JSTに同じ報告へ9件の本文・前後の意味・色の範囲・保存済み理由・frame/秒・要否APIのconfidence/全probabilitiesと4接続の理由を整理し、board148/Check61 item15へ保存再読。Check61は未完了、Backlog62/Check44/60/TODO54/他項目/削除履歴を保持。API要否と後段のColor/範囲選択を分け、0.19〜0.33を正答率やColorの確信度と解釈しない。69「私はね」は元6frame=0.2秒のまま、時計保持は可読性合格ではなく、既存の明示非表示方針との関係を示すだけで新しい非表示は適用していない。本文/時刻/候補・製品code不変。追加API/新評価系/閾値/時刻補正/自動延長/別試験/製造/本番反映0。残るのは意味上の強調の妥当性と実映像の可読性・品質評価。Macの資料整理は終了、状態は相談役待ち、次担当mona（9件の確認中）。
+
+[9件の本文・期間・根拠・API値と最小確認](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、[今回cycle log](work-logs/2026-10/2026-10-10T2200_Codex-SSD_J16-nine-review-summary.md)。以下は以前の時点の経過。
 
 ## 最新現在地 — 2026-10-10T12:45:03.312Z（固定5件実API・新326詳細/4接続・候補再読の第一完成）
 

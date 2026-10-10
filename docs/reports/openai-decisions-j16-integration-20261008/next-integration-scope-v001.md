@@ -1,5 +1,206 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — monaの演出9件確認用の一覧 — 2026-10-10 22:00 JST
+
+親monaが実送信5回成功・候補受理再読の結果を受領し、本人への報告済みと連絡。受領連絡の最初の確認は2026-10-10 21:53:37 JST（親発言の正確な時刻は取得不可）。monaが演出9件の内容と根拠を確認する段階で、21:56 JSTから既存Check61の本文に確認中を表示。2026-10-10 22:00 JSTに同じ報告へ9件の本文・前後の意味・色の範囲・保存済み理由・frame/秒・要否APIのconfidence/全probabilitiesと4接続の理由を整理し、board148/Check61 item15へ保存再読。Check61は未完了、Backlog62/Check44/60/TODO54/他項目/削除履歴を保持。API要否と後段のColor/範囲選択を分け、0.19〜0.33を正答率やColorの確信度と解釈しない。69「私はね」は元6frame=0.2秒のまま、時計保持は可読性合格ではなく、既存の明示非表示方針との関係を示すだけで新しい非表示は適用していない。本文/時刻/候補・製品code不変。追加API/新評価系/閾値/時刻補正/自動延長/別試験/製造/本番反映0。残るのは意味上の強調の妥当性と実映像の可読性・品質評価。Macの資料整理は終了、状態は相談役待ち、次担当mona（9件の確認中）。
+
+### 何が完了し、何を確認しているか
+
+実API5回と新詳細326/4接続の受理・保存後再読は、構造と原本対応の技術確認まで完了。monaは結果を受領して本人へ報告した。今回の文章整理を、monaによる意味評価の完了、Colorの見た目の合格、人間の品質採用、本番反映へ読み替えない。これらは残る確認事項。
+
+演出9件はすべてcandidate-0002。原文脈は「勤続15年のベテラン、悲鳴より仕事。自信満々のベテラン役と恐怖反応の落差が一連の発話で成立し、犬の実体験とは別の実況の面白さを加える。」。APIが返したのは各字幕の演出要否で、Colorという種類と強調対象の語は既存Codex詳細判断の選択。下のconfidenceとprobabilitiesは原API値をそのまま掲載したもので、Colorや範囲への回答値ではない。新しい合否閾値や確率の補正は加えていない。
+
+### 9件の一覧
+
+表示期間は保存済みの計画上の30fps時計からframe/30で換算。秒は小数第3位に丸め、終了frameは含まない。新しく作った動画の実測値でも、時刻補正値でもない。normalは通常表示、effectは演出あり、unresolvedは判断保留。confidenceとprobabilitiesは別の返却項目であり、どちらもこの9件の正答率の確認ではない。
+
+| 字幕 | 本文 | 色で示す部分 | 表示期間 | confidence | normal / effect / unresolved |
+|---:|---|---|---:|---:|---|
+| 61 | ここに葉っぱなんか落ちてたっけ? | 葉っぱ | 43frame / 1.433秒 | 0.22 | 0.41 / 0.48 / 0.11 |
+| 63 | 新しく出てきたくない? | 新しく | 50frame / 1.667秒 | 0.22 | 0.44 / 0.48 / 0.08 |
+| 65 | 君花瓶はさずっとあったでしょ | ずっとあった | 135frame / 4.500秒 | 0.27 | 0.33 / 0.51 / 0.16 |
+| 67 | 私みたいにね | 私 | 87frame / 2.900秒 | 0.30 | 0.38 / 0.53 / 0.09 |
+| 69 | 私はね | 私 | 6frame / 0.200秒 | 0.19 | 0.40 / 0.46 / 0.14 |
+| 72 | ドアバーンドアバーンね | 全文 | 184frame / 6.133秒 | 0.20 | 0.43 / 0.47 / 0.10 |
+| 120 | ちょ、これやらな、 | やらな | 24frame / 0.800秒 | 0.33 | 0.39 / 0.55 / 0.06 |
+| 124 | 正社員としての金属15年 | 15年 | 63frame / 2.100秒 | 0.22 | 0.46 / 0.48 / 0.06 |
+| 125 | 正社員としてのこれ責任ですから | 責任 | 127frame / 4.233秒 | 0.19 | 0.43 / 0.46 / 0.11 |
+
+### 字幕61 — 「ここに葉っぱなんか落ちてたっけ?」
+
+直前 60：「君さぁ何回ここ見てんすか」 → 当該字幕 → 直後 62：「なんかこれ新しくない?」。
+
+前後の意味：何度も見たはずの場所に葉っぱがあったかを問い、そのあと新しい物かを確かめる。観察している物の名前が焦点。
+
+既存候補の選択：「葉っぱ」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：存在を確かめている対象は葉っぱであり、その語を色で絞ると観察の焦点を示せる。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[3888, 3931) frame、129.600〜131.033秒。期間 43frame / 1.433秒。
+
+APIの要否：effect。confidence 0.22、probabilities は normal 0.41 / effect 0.48 / unresolved 0.11。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000061。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000061、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000060、new-material-digest-20260926-v001-instruction-instruction-000062、new-material-scale-physical-unrepresentable、new-material-pulse-physical-unrepresentable、new-material-bounce-physical-unrepresentable。
+
+### 字幕63 — 「新しく出てきたくない?」
+
+直前 62：「なんかこれ新しくない?」 → 当該字幕 → 直後 64：「これもともとあったか」。
+
+前後の意味：直前の「新しくない？」を言い直し、直後に「もともとあったか」と見直す。新しいか以前からかという比較が焦点。
+
+既存候補の選択：「新しく」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：直前から新しさを確かめる問いが続くため、新しくという原文内の語を色で示す。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[3998, 4048) frame、133.267〜134.933秒。期間 50frame / 1.667秒。
+
+APIの要否：effect。confidence 0.22、probabilities は normal 0.44 / effect 0.48 / unresolved 0.08。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000063。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000063、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000062、new-material-digest-20260926-v001-instruction-instruction-000064、new-material-pulse-physical-unrepresentable。
+
+### 字幕65 — 「君花瓶はさずっとあったでしょ」
+
+直前 64：「これもともとあったか」 → 当該字幕 → 直後 66：「これだから新入りは困るんですよ」。
+
+前後の意味：もともとあったと確認してから、花瓶はずっとあったと相手へ小言を言う。新しいという疑いと以前からの存在の対比。
+
+既存候補の選択：「ずっとあった」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：新しく見えたものとの対比の中心はずっとあったことであり、その語句に色を付ける。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[4197, 4332) frame、139.900〜144.400秒。期間 135frame / 4.500秒。
+
+APIの要否：effect。confidence 0.27、probabilities は normal 0.33 / effect 0.51 / unresolved 0.16。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000065。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000065、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000064、new-material-digest-20260926-v001-instruction-instruction-000066、new-material-scale-physical-unrepresentable、new-material-pulse-physical-unrepresentable。
+
+### 字幕67 — 「私みたいにね」
+
+直前 66：「これだから新入りは困るんですよ」 → 当該字幕 → 直後 68：「この仕事金属15年やってるんですよ」。
+
+前後の意味：新入りを責めてから、自分の15年の経験を語る前置き。新入りと自分という立場の対比。
+
+既存候補の選択：「私」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：新入りと自分を対比するベテラン役の入口なので、私の一語だけを色で示す。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[4510, 4597) frame、150.333〜153.233秒。期間 87frame / 2.900秒。
+
+APIの要否：effect。confidence 0.30、probabilities は normal 0.38 / effect 0.53 / unresolved 0.09。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000067。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000067、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000066、new-material-digest-20260926-v001-instruction-instruction-000068、new-material-pulse-physical-unrepresentable。
+
+### 字幕69 — 「私はね」
+
+直前 68：「この仕事金属15年やってるんですよ」 → 当該字幕 → 直後 70：「あなたみたいなね、新入りがねぇ」。
+
+前後の意味：15年の経験を述べた後に再び自分を指し、次に新入りへ話を戻す短い半句。67番と同じ「私」の繰返しで、追加の強調が必要かが確認点。
+
+既存候補の選択：「私」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：新入りとの対比で自分を再度指す私を色で示す。6frameの元期間は延長せず、読みやすさの実確認は別に残す。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[4694, 4700) frame、156.467〜156.667秒。期間 6frame / 0.200秒。
+
+APIの要否：effect。confidence 0.19、probabilities は normal 0.40 / effect 0.46 / unresolved 0.14。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000069。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000069、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000068、new-material-digest-20260926-v001-instruction-instruction-000070、new-material-pulse-physical-unrepresentable、new-material-bounce-physical-unrepresentable、new-material-shake-physical-unrepresentable。
+
+### 字幕72 — 「ドアバーンドアバーンね」
+
+直前 71：「うわっ!」 → 当該字幕 → 直後 73：「あなたみたいな新入りがねぇ」。
+
+前後の意味：突然の「うわっ！」の後にドアの音を言葉で反復し、その後は新入りへの小言を再開する。ベテラン役の自信が一瞬の驚きで中断する箇所。
+
+既存候補の選択：字幕全文を色で示す。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：驚きの対象をドアバーンと反復して名付けているため、全文の色で音を言葉にした反応へ焦点を置く。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[4801, 4985) frame、160.033〜166.167秒。期間 184frame / 6.133秒。
+
+APIの要否：effect。confidence 0.20、probabilities は normal 0.43 / effect 0.47 / unresolved 0.10。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000072。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000072、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000071、new-material-digest-20260926-v001-instruction-instruction-000073、new-material-pulse-physical-unrepresentable。
+
+### 字幕120 — 「ちょ、これやらな、」
+
+直前 119：「うわあああああ」 → 当該字幕 → 直後 121：「これやらなあかんて」。
+
+前後の意味：長い驚きの発声の後に対処へ戻ろうと言いかけ、次に「これやらなあかんて」と続く。驚くより仕事をするという転換の入口。
+
+既存候補の選択：「やらな」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：驚きからやるべき対処へ戻る言いかけなので、やらなの語だけを色で示す。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[9112, 9136) frame、303.733〜304.533秒。期間 24frame / 0.800秒。
+
+APIの要否：effect。confidence 0.33、probabilities は normal 0.39 / effect 0.55 / unresolved 0.06。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000120。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000120、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000119、new-material-digest-20260926-v001-instruction-instruction-000121、new-material-pulse-physical-unrepresentable。
+
+### 字幕124 — 「正社員としての金属15年」
+
+直前 123：「責任だからこれは」 → 当該字幕 → 直後 125：「正社員としてのこれ責任ですから」。
+
+前後の意味：責任だから対処すると述べた後に、正社員と15年の経験を再掲し、次の責任の説明へつなぐ。ベテラン役の自己位置付け。
+
+既存候補の選択：「15年」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：ベテラン役の経験年数を再掲する箇所なので、原文内の15年を色で示す。金属という保存本文は改変しない。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[9315, 9378) frame、310.500〜312.600秒。期間 63frame / 2.100秒。
+
+APIの要否：effect。confidence 0.22、probabilities は normal 0.46 / effect 0.48 / unresolved 0.06。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000124。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000124、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000123、new-material-digest-20260926-v001-instruction-instruction-000125、new-material-pulse-physical-unrepresentable。
+
+### 字幕125 — 「正社員としてのこれ責任ですから」
+
+直前 124：「正社員としての金属15年」 → 当該字幕 → 直後 126：「これギャーじゃないからね」。
+
+前後の意味：15年の経験の説明を受けて責任を主張し、その後は「これギャーじゃないからね」と言い聞かせる。驚きながら職務を優先する可笑しさ。
+
+既存候補の選択：「責任」だけを色で示す。ほかの文字は通常の色。 種類はColor、意味上の役割はFocus。
+
+保存済み採用理由：驚いても職務を優先する言い分の中心は責任なので、その語だけを色で示す。今回取得したJ16の演出ありを固定し、本文・期間・改行を変えず既存Colorだけで具体化する。音の数値から声量や感情を断定しない。
+
+元の表示区間：[9378, 9505) frame、312.600〜316.833秒。期間 127frame / 4.233秒。
+
+APIの要否：effect。confidence 0.19、probabilities は normal 0.43 / effect 0.46 / unresolved 0.11。
+
+原ID：new-material-digest-20260926-v001-instruction-instruction-000125。根拠ID：new-material-digest-20260926-v001-instruction-instruction-000125、candidate-0002、new-material-digest-20260926-v001-instruction-instruction-000124、new-material-digest-20260926-v001-instruction-instruction-000126、new-material-scale-physical-unrepresentable、new-material-pulse-physical-unrepresentable。
+
+### 既存の非表示方針との関係
+
+本人は、時刻が不適切な字幕を素材専用の補正で帳尻合わせしない方針を示している。実装済みの明示的な非表示は、本文・原ID・時計・全命令を残し、別の表示採否JSONで合成する字幕だけを選ぶ方式。数値による自動除外基準は未確定・未適用。[既存方式の記録](../../work-logs/2026-10/2026-10-05T1620_Codex-SSD_ID9-explicit-caption-visibility_bed2eeeb.md)。
+
+前回の465「世界が終わる」と571「お!」の個別非表示は、別のSJv素材/651字幕の成果に対する指定であり、今回のnew-material/326字幕の69へその番号や採否を継承しない。今回の段階候補は演出要否・種類・範囲の記録で、69の新しい表示採否を作成・適用していない。演出のunresolved/unrepresentableも、字幕を自動非表示にする指示と同一ではない。
+
+69の0.2秒は、原時刻を保持した事実を示すだけで、読めることを証明しない。また短いという数値だけで自動除外する根拠にもしていない。monaは、半句の「私」にもう一度色を付ける意味があるかと、表示採否の扱いを分けて確認する。必要な場合の非表示も既存の明示採否と原本保持の方式で扱う事項で、今回は候補の変更、時刻補正、自動延長、非表示適用をしていない。
+
+### 4接続のsoft-separatorの理由
+
+4接続も下記の保存済み詳細判断で、APIの326字幕の要否質問から返された接続判断ではない。いずれも話題の切り替わりを柔らかく区切る既存soft-separatorを選択した。今回実描画しておらず、繋がりの自然さの品質合格とはしない。
+
+| 接続 | 直前 → 直後 | 保存済みの短い理由 |
+|---|---|---|
+| connection-01 | 「やれるかな」 → 「花瓶あったっけ?」 | 犬とアレルギーの体験談が「やれるかな」で終わり、花瓶の存在確認というゲーム中の観察に移る。別の見どころの始まりが分かるsoft-separatorを選ぶ。犬の話の続きとは見せない。 |
+| connection-02 | 「これラッキーな霊障だから」 → 「いやいや、行ってきな!」 | ご馳走を幸運な霊障と見立てる話の締めから、離席してよいかという別のやり取りに移る。ベテラン役は共通でも問いの対象が変わるので、soft-separatorで場面を区切る。 |
+| connection-03 | 「ちょっと格がやっぱ違うのかなって感じがしますよね」 → 「あのーXとかで話したんですけど」 | 貞子のデジタル化と格の違いの話が閉じ、Xで伝えたバッグの説明へ入る。作品比較と商品設計を別の話題として伝えるためsoft-separatorを選ぶ。 |
+| connection-04 | 「ということではいでした」 → 「え、え、えうん、」 | 二通りで使えるバッグの説明が挨拶で閉じ、ダンスの限界への問いと返答へ入る。設計上の工夫と身体技能の話の切り替わりをsoft-separatorで示す。 |
+
+### 次の最小確認
+
+まず、この一覧の67→68→69→70の文章と期間を並べて、69の0.2秒の半句と「私」の再強調に追加の意味があるかを確認する。次に61/63/65の「新しい／もともと」と、120/124/125の「驚き／仕事の責任」の対比で、色の対象が伝えたい意味と合うかを見る。72は驚きの後の全文色が、その反応を伝えるために必要かを見る。この三つの短い文脈群と72で9件を判断でき、全326字幕の再採点は要らない。
+
+文章・期間・根拠で進むのは意味上の判断まで。色の見え方や69が通常速で読めるかは実映像の確認が必要で、この候補の新動画は存在しない。既存の元動画を見ても今回Colorの完成表示を見たことにはならない。今回、確認用の新動画・画像・別試験を作らず、実視聴品質を未評価として残す。4接続は上の前後の発話が別の話題へ切り替わるかをまず確認する。
+
+### 原本と今回の保存範囲
+
+候補は [state.json](/Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-candidate/state.json)、file SHA eacf51cc30e502083bf8a12ffd02ec94f9d2d3815fa8cd4291d73e46082999cc、record SHA 922cbec96ee966736da9ecea434f38921d0f43915099d26d0b94d2066df07067 のまま。本文/表示frame/詳細理由/API原応答/選択肢/採用範囲は再生成していない。[9件の純粋な抽出記録](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-nine-review-extract-20261010-v001.json)は表と説明の照合用で、新しい評価器や判断結果ではない。資料整理のみのため新tests0、cleanup削除0（今回の抽出/指示/読返し証拠をKEEP）、own API/製造process0。新cycle log→既存報告/CURRENT/HANDOVER→docsだけの監査checkpointで保存する。
+
+[この整理のcycle log](../../work-logs/2026-10/2026-10-10T2200_Codex-SSD_J16-nine-review-summary.md)。以下は実送信時点と以前の経過。
+
 ## TODO61 — 固定5件の実送信・新詳細・候補保存再読 — 2026-10-10 21:45 JST
 
 TODO61の実API取得から新詳細・候補保存後再読まで第一完成。現在の実行会話で本人の具体的な明示承認を受領（最初の確認21:24:32 JST、発言の正確な到着時刻/メッセージIDは取得不可）。送信を止めていた実行側の承認確認は今回の起動で通過した。10/10 21:30:31.201〜21:30:38.535 JSTに固定5件689,414Bを各一回送信、全HTTP200/応答完結、再送0、7.332秒。元326 ID/5場面を保持し、通常317/演出9/保留拒否0。入力203,926token、公開基本単価計算0.0203926USD、請求額未照合。今回の要否を固定してCodex-SSDが新しい326理由/根拠と4接続を作成、部分Color8/全文Color1・soft-separator4を既存Coreで受理、専用候補保存・独立正式readerの再読passed。旧理由流用/Normal補完なし。9件の確信度0.19〜0.33、69の元6frame期間を保持し実可読性は未確認。実装157ca23cの6path/元13記録/Core不変。今回の設営修正3（spec参照形1・私用終了記録scriptの引用符1・Git照合helperの先頭空白1）、不要準備script2件10,621Bのみ整理、own API/CLI process0。製造/通常本番切替/動画品質採用0。2026-10-10 21:45 JSTにCheck61へ戻し、21:48 JSTの追記後にitem13/board146を保存再読、Doing0、Check44/60・TODO54・Backlog62/他者/削除履歴不変。状態は相談役待ち、次担当monaが今回候補と実結果を監査する。
