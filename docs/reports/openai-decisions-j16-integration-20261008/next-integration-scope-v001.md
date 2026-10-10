@@ -1,5 +1,68 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — 固定5件の実送信・新詳細・候補保存再読 — 2026-10-10 21:45 JST
+
+TODO61の実API取得から新詳細・候補保存後再読まで第一完成。現在の実行会話で本人の具体的な明示承認を受領（最初の確認21:24:32 JST、発言の正確な到着時刻/メッセージIDは取得不可）。送信を止めていた実行側の承認確認は今回の起動で通過した。10/10 21:30:31.201〜21:30:38.535 JSTに固定5件689,414Bを各一回送信、全HTTP200/応答完結、再送0、7.332秒。元326 ID/5場面を保持し、通常317/演出9/保留拒否0。入力203,926token、公開基本単価計算0.0203926USD、請求額未照合。今回の要否を固定してCodex-SSDが新しい326理由/根拠と4接続を作成、部分Color8/全文Color1・soft-separator4を既存Coreで受理、専用候補保存・独立正式readerの再読passed。旧理由流用/Normal補完なし。9件の確信度0.19〜0.33、69の元6frame期間を保持し実可読性は未確認。実装157ca23cの6path/元13記録/Core不変。今回の設営修正3（spec参照形1・私用終了記録scriptの引用符1・Git照合helperの先頭空白1）、不要準備script2件10,621Bのみ整理、own API/CLI process0。製造/通常本番切替/動画品質採用0。2026-10-10 21:45 JSTにCheck61 item13/board146へ保存再読、Doing0、Check44/60・TODO54・Backlog62/他者/削除履歴不変。状態は相談役待ち、次担当monaが今回候補と実結果を監査する。
+
+### 承認と実行
+
+今回の本人発言は「固定済み326字幕と5場面の文章・文脈・ASRテキスト・観測数値を、OpenAI Decisions APIへ5回、各1回・再送なしで送信することを承認します。料金は目安約0.019〜3ドルで、上限保証がないことも了承します。動画製造はしません。」。実行会話で届いた本人指示として受領し、以前の親が引用した承認だけに依存する状態から進んだ。本人の今回発言のplatform IDと正確な発言時刻は取得できず、ローカル記録のuserMessageIdは not-provided/native-current-user-message という非実IDであることを明記した。記録JSONを外部サービスが発行した承認receiptとして扱わない。以前の二回の拒否と未送信snapshotは不変の経過証拠として保持。
+
+最初の確認2026-10-10T12:24:32Z、今回の実着手記録2026-10-10T12:30:12.285Z。main/remote 7b4955dfa1e9a289a2cc766f53b16e057ea09731、clean、実装6pathと元13記録/Core、全5wire byte、全326ID、未使用3rootを再読照合。native承認はSHA 087cc9312f39e365aeef2c2af35d402c6b8c668cc97095987bc899ecaab7c6e8 のauthorizationに固定し、私用driverのauth path/hash、本人発言参照、current HEADだけを更新。HTTP body/送信先/各一回/retry0は不変。前driverの固定byteは [before-native保存copy](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-five-post-once-before-native-20261010-v001.mjs) に保持し、下の15:10静的auditはそのbyteを対象とした時点付き履歴である。
+
+Nodeの既存.env認証だけを使用。認証値/hash/headerの保存・表示なし。OpenAI Decisions https://api.openai.com/v1/decisions / gpt-6-luna へ、固定manifest SHA **ead316c1a1740438e14dc88651790da90a8be9cfb02d1f4b8de6b5237faaad52** / 38,553Bの5request合計689,414Bを送信。音声/映像byte、旧理由/旧ラベルは送らず、ASRテキストと混合音の観測数値を含む。API以外の新有料probe/比較/STTなし。
+
+### 実応答と利用量
+
+全5回HTTP200、完結、各1回/retry0、未送信0、通信error0。実開始2026-10-10T12:30:31.201Z、終了2026-10-10T12:30:38.535Z、計7.332秒。第3正式attemptの結果は同じtool出力で5件終了と同時に観測し、そこで費用/残工程を報告した。
+
+| 場面 | 質問 | 通常 | 演出 | input_tokens | 処理ms | 原raw B |
+|---|---:|---:|---:|---:|---:|---:|
+| candidate-0001 | 53 | 53 | 0 | 31,970 | 3794 | 14187 |
+| candidate-0002 | 84 | 75 | 9 | 49,723 | 1170 | 22353 |
+| candidate-0003 | 61 | 61 | 0 | 40,162 | 830 | 16301 |
+| candidate-0004 | 101 | 101 | 0 | 56,265 | 1003 | 26846 |
+| candidate-0005 | 27 | 27 | 0 | 25,806 | 499 | 7340 |
+| 合計 | 326 | 317 | 9 | 203,926 | 全体7,332 | 87,027 |
+
+判断保留/拒否/欠落/重複0。input_tokensは実usageの値で、byteからの推計ではない。output_tokens/cache-read/cache-writeは各0。[Decisions公式料金](https://developers.openai.com/api/docs/guides/decisions)の入力0.10USD/1Mで計算すると **0.0203926USD**。各requestは272K未満で長文倍額の境界には達していない。[モデル公式条件](https://developers.openai.com/api/docs/models/gpt-6-luna)の地域10%が該当する場合の算術例は0.02243186USDだが、地域設定/請求書は未照合。これは請求額の確認でも、承認時の見積約3USDを保証上限へ変更するものでもない。料金ページを12:28UTC頃に再確認。
+
+原rawは5file/87,027Bで、各attempt/transportの実時刻・一回呼出し・request/許可/実装/原raw SHA・HTTP/usageとともに0600保存・再読した。[実送信結果](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-five-responses-20261009-v001/run-result.json)、[最終照合証拠](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-real-final-validation-20261010-v001.json)。
+
+### 新しい詳細判断と候補受理
+
+APIが回答したのは演出の要否だけ。理由・根拠・演出種類/範囲・4接続は、この既存Codex-SSDセッションが原326本文、全5場面の文脈、元の物理観測、今回liveの要否から新しく作成した。新規Codex task/別判断APIを起動せず、旧詳細返信・旧理由・旧ラベルを読み込んで作り直していない。通常317行も個別に新しい内容解釈と根拠IDを持ち、保留をNormalへ埋めた行はない。
+
+| 字幕index | 強調対象 | 具体表現 |
+|---:|---|---|
+| 61 | 葉っぱ | 部分Color |
+| 63 | 新しく | 部分Color |
+| 65 | ずっとあった | 部分Color |
+| 67 | 私 | 部分Color |
+| 69 | 私 | 部分Color |
+| 72 | 全文「ドアバーンドアバーンね」 | 全文Color |
+| 120 | やらな | 部分Color |
+| 124 | 15年 | 部分Color |
+| 125 | 責任 | 部分Color |
+
+9件は本文内の色によるFocus。期間/本文/改行を変えない。物理観測で全326Pulse不可は保持し、混合音のenergyから声量/感情/実聴取を断定しない。9件のAPI confidenceは0.19〜0.33で、全体の正答率や品質採用の証拠とはしない。特に69は「私はね」の元6frame（0.2秒、156.467〜156.667秒）を保持しており、色を付けても実際に読めるかは今回の非製造範囲では確認していない。新しい閾値や時刻延長で救済していない。
+
+4接続はすべて新しいseparator判断/soft-separator。犬の体験→ゲーム内観察、霊障のご馳走→離席のやり取り、貞子のデジタル化→バッグ説明、バッグ説明→ダンスへの問いという切替を元の前後caption/context IDに結び付けた。既存の有限語彙・semantic-choiceを保持し、本番のtimelineを変更していない。
+
+新詳細[326行/4接続](/Users/kawafmm/Documents/Codex/2026-10-03/task-3/j16-live-fresh-detailed-reply-20261010-v001.json) 232,061B/SHA **7519264a36e380d40e9524126030e03a7f5ade43972f2defbcf7ae593203e794**、段階reply248,527B。新stage-input5,002,953B/実file SHA **22f69c58ee2ff27b9a4a9c2cb3236e3d9470951a0d702f0fdf6d7fb6f537e8a5**、self SHA **2026c1697677b9e5a2d02332af6d5f5cd54490d7bc0c8528c31aa04d5a06b491**。既存共有境界→compile/evaluateReply→validateStateで受理し、正式CLI accept-j16-live-stage で保存、別呼出し read-j16-live-stage（exit0）で原ファイル再読・再構成一致。statusは **candidate-validated**。selectionRecord originのlive由来と既存五state fieldを保持。
+
+候補 [state.json](/Users/kawafmm/workspace/zev2/runtime/artifacts/openai-decisions-j16-staged-v001/live-five-scenes-20261009-v001-candidate/state.json) **9,948,038B / file SHA eacf51cc30e502083bf8a12ffd02ec94f9d2d3815fa8cd4291d73e46082999cc**、record SHA **922cbec96ee966736da9ecea434f38921d0f43915099d26d0b94d2066df07067**。保存readerの自動/根拠/部分範囲/物理/接続の検査passedと、API意味精度/実視聴品質は分ける。通常accept/queue/render/ACTIVEを切替していない。
+
+### 限定的な失敗と検証・後始末
+
+最初のstage prepareは保存用specのoriginalInput refへmanifest固有のidentity項目を余分に渡し、exact path/hash/bytes検査で停止（root作成前）。2026-10-10 21:33 JST頃、原byteを変えず私用spec v002の参照形だけに限定修正し、prepare/readback passed。specの設営修正1/製品修正0/API再送0。原spec v001もKEEP。読み取り要約command2件も存在しないscenes/arrayと違うaudioEvidence形を仮定して失敗したが、形を読み直して復旧し、API/成果への作用なし。私用終了記録scriptは文中の引用符による構文失敗を開始前に検出し、引用符だけを修正して再実行した（追加の設営修正1、終了記録/ボードへの先行作用なし）。私用Git照合helperはstatus出力先頭の空白をtrimして最初のpathを誤読し、stage前に停止した。trimEndだけに直して復旧（設営修正1、Gitへの先行作用0）。今cycleの設営修正は計3、前cycleの相対CLI path修正1と合わせTODO61の累積は4/枠5。未合格を合格に書き換えない。
+
+実装157ca23caec4c23838869288d6a6fcf4ff4007bbの6製品path、Core本体/原prepare、元13保護ファイルは実SHA不変。今回は製品変更なしのため前回2026-10-10 05:40〜05:44UTCのCore30/30（skip0）、runner23/25（既存任意skip2/fail0）、runner型exit0を再利用し、試験を繰り返していない。caller standalone strictは旧357/現357/新0で全体合格とはしない。今回の実API/正式保存再読が新しい検証である。
+
+2026-10-10T12:41:04.570Zに実成果を固定し、2026-10-10T12:41:04.670Zに今回の不要準備script2件/10,621Bだけを削除、旧成果/原記録/他SSD内容の変更削除0、今回API/CLI process0を読取確認。fixed request、全raw/attempt/transport、usage、native承認/authorization、spec v001/v002、個別理由、詳細/段階reply、作成用script、候補、過去の拒否/未送信snapshot/既存証拠はKEEP。新monthly cycle log→既存report/CURRENT/HANDOVER→通常Git保存で閉じる。
+
+今回確認から終了までのMac経過は1231秒（検査・詳細作成・記録を含みAPIは7.332秒）。ユーザーの実確認時間と各非API工程の純処理時間は個別計測しておらず、約4〜7h見積を一般的な短縮実績にしない。実装は前cycleで完成済み。現在作業0、Check61で純粋な成果監査へ返す。追加判断/API/製造を求めず、次の明示指示まで別作業へ自走しない。動画未製造のため今回の媒体QC/実glyph/通常速視聴/聴取/構成・可読性/人間品質採用は未評価。[新cycle log](../../work-logs/2026-10/2026-10-10T2145_Codex-SSD_J16-five-live-completed_157ca23c.md)。以下は過去時点の経過。
+
 ## TODO61 — 保存driverの静的確認と承認状態の訂正 — 2026-10-10 15:10 JST
 
 mona：送信前コードの静的確認は終了／API送信は承認確認の不具合で停止、本人は承認済み。親がGitHub上のlive受理/再読6fileを監査し必須差戻しなしと受領。Macは保存済みdriverを実行せず読み、ネットワーク前のwx0600 attempt保存、排他raw root作成、各request一回/再試行なし、redirect追跡なし、通常エラー/途中切断後の原raw保存を該当行とともに確認。rawは終了イベントまでRAMにあり、強制kill/電源断/書込み失敗までの保存は保証されない。driver固定HEAD02f9c6cfと現mainは不一致で、そのまま再開できない。本人の同じ許可を取り直す残件ではなく、実行側の既存承認確認が正常化し、現在の実装/固定5wire/未使用出力を照合して束縛を更新できることが再開条件。承認JSONは実行審査の代替にしない。今回API/認証読込み/拒否済みcall再試行/別経路探索/製品・driver変更0、証拠KEEP/削除0B、own process0。2026-10-10 15:10 JSTにDoingを空にしCheck61 item10/board143を再読、Check44/60・TODO54・Backlog62/他項目/削除履歴不変。状態は相談役待ち、次担当mona。
