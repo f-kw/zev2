@@ -1,5 +1,75 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## TODO61 — 汎用製造入力への採否接続の読み取り調査 — 2026-10-11 00:07 JST
+
+表示採否→J16製造経路を読み取り調査し、2026-10-11 00:07 JSTに調査を終了。稼働記録開始2026-10-10 23:57:17.151 JST（その前の初動読み取りの正確な秒は未取得）。base main a56a4ed9dca55fde92cbb09cb5abca702ada04ea。69の承認済み個別採否データ保存/再読は前cycleで終了しているが、「汎用製造入力が採否を受理し非表示を適用できる」状態は未完成。今回は実装・候補変更・試験実行・製造・API送信0。コードと候補の実SHA不変を確認し、公式MCP board153/Check61 item20を相談役待ちに戻して稼働欄0を再読。他未完了/削除履歴を保持、次担当mona。
+
+### 結論と推奨する再利用経路
+
+結論：readerへvisibility pathを1個追加するだけでは足りない。既存の承認済み製造jobと入力資格化・採否resolver・低メモリ合成・完成再読を再利用するのが最小の筋。ただしJ16の原本/投影/背景/別音声をその承認済み境界へ接続する改修が要る。旧Normal guardの無条件解除や、採否JSONを任意callerが渡すだけのtrustは提案しない。主変更候補は10path（実装9＋型宣言1）、追加候補2path。実装なしの読み取り段階なので厳密な最少path・許可上限を確定したとはしない。以前の6実装path内だけの軽微修正とは扱わず、入力契約/許可適用範囲を明示して次の着工承認を要する。新しいAI入力/回答形式や監査基盤を先行増設せず、既存candidate/state/visibility-selectionを原本として再利用する。
+
+### 保存済み採否と正式受理の不足
+
+現在のcandidate-record.jsonは未採用候補の参照束、individual-adoption-record.jsonは本人承認と個別採否の監査データであり、どちらにも正式Digest入力schemaVersionはない。visibility-selection.jsonだけは既存汎用selection schemaに合う。正式Digest adoptionはschemaVersion/mode/bindings/decisions/countsと完全なcue対応を要求するため、この監査recordをschema名だけ付け替えて通さない。既存J16原本を資格化し、正規jobが宣言・承認した同じselectionへ接続する。元のJ16許可はAPI5回と段階候補rootに固定しているので、移動copyを元候補と偽ることやAPI許可を製造許可と解釈することも不可。通常render()のsaved旧stateから新候補を読めたと扱わない。
+
+### 現物で確認した経路と根拠
+
+- [runner/src/digest-approved-inputs-v001.ts:193](../../../runner/src/digest-approved-inputs-v001.ts#L193) — 正式readerは現行登録済みの原本と採否付き原本の束を受ける。採否には登録・意味・全cue対応・元時計・mapの一致を要し、J16候補や今回の監査recordはその束ではない。
+- [runner/src/digest-approved-inputs-v001.ts:520](../../../runner/src/digest-approved-inputs-v001.ts#L520) — 既存の全件採否検証とselection生成は全論理行を保持する。J16もこの選別境界を使い、存在しない登録情報を捏造しない入力資格化が必要。
+- [runner/src/digest-approved-job-v001.ts:72](../../../runner/src/digest-approved-job-v001.ts#L72) — jobと許可は必須フィールドと相互参照が固定されている。J16を追加するのは入力契約・許可対象の明示変更で、renderer引数を増やすだけではない。
+- [evals/clip_composition/run_new_material_digest_20260926_presentation.mts:187](../../../evals/clip_composition/run_new_material_digest_20260926_presentation.mts#L187) — saved()は旧素材専用の保存stateを読む。新しい段階候補を読んではいない。480行のrender()も承認済みstorage contextなしで直接描画を呼ぶ。
+- [evals/clip_composition/run_new_material_digest_20260926_presentation.mts:432](../../../evals/clip_composition/run_new_material_digest_20260926_presentation.mts#L432) — 現在のJ16段階readerは5系統の固定stateだけを再読し、保存rootを元のAPI許可に一致させる。移動copyや拡張候補を同じ原本と扱ってこの束縛を外してはいけない。
+- [evals/clip_composition/render_presentation_v002.mjs:2140](../../../evals/clip_composition/render_presentation_v002.mjs#L2140) — 承認済みstorageは現在orchestration viewや自動演出を拒否する。2225行ではapprovedJobがある時だけ採否を取得する。1142行の一般合成は採否引数を受けず選別receiptも返さない。
+- [runner/src/digest-approved-job-runner-v001.ts:235](../../../runner/src/digest-approved-job-runner-v001.ts#L235) — 既存contextは採否を資格化・再読し、差替えを拒否して同じ低メモリ合成へ渡す。この検証と受渡しを再利用する。
+- [evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts:533](../../../evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts#L533) — 正式file rendererはNormalの共通planを再構築して描画を呼び、承認済みJ16 viewは渡していない。受渡しの拡張でもadmission/job/runtimeの束縛を保ち、旧素材adapterの直接描画で飛ばさない。
+- [tools/digest-quality/original-resolution-low-memory-composite.mjs:123](../../../tools/digest-quality/original-resolution-low-memory-composite.mjs#L123) — 既存選別は物理overlayだけを外し、全plan・全記録・時計を保持する。選別したID、区間graph、集計の保存もすでにある。
+- [tools/digest-quality/original-resolution-low-memory-composite.mjs:141](../../../tools/digest-quality/original-resolution-low-memory-composite.mjs#L141) — 現在のencoderは背景fileから音声をコピーする。J16は別AACも用いるため、その実参照と時計を束縛して受け渡す対応が必要。無検査muxや時刻補正で代用しない。
+- [evals/clip_composition/presentation_orchestration_background_v001.mjs:374](../../../evals/clip_composition/presentation_orchestration_background_v001.mjs#L374) — 背景builderはrepo内出力専用のguardと直接file/process操作を使う。SSDの承認済み保存・容量監視・process監視へつながってはいない。
+- [evals/clip_composition/digest_representative_completion_v001.mjs:76](../../../evals/clip_composition/digest_representative_completion_v001.mjs#L76) — 既存の代表検査と完成再読は資格化した採否と実合成を読み直す。非表示代表の確認には実still/videoを要し、データ検証を映像品質合格にしない。
+
+### 主変更候補と条件付き範囲
+
+| 主変更候補 | 最小責務 |
+|---|---|
+| `runner/src/digest-approved-job-v001.ts` | 既存job/authorizationへ、承認対象のJ16 candidateと採否bindingを明示束縛する入力種別を追加。旧Normalの必須閉包・SHA/サイズ/root/実装/permit/製造許可は保持。入力契約の適用範囲変更として次の明示承認が必要。 |
+| `runner/src/digest-approved-inputs-v001.ts` | 既存の資格化・採否readerを再利用。J16原本を再読してCore view/全ID/本文/時計/4接続と採否を照合し、同じvisibility selectionを返す。過去31登録や意味/対応表/clock-mapを架空補完しない。未束縛のcaller配列を信用しない。 |
+| `runner/src/digest-approved-job-runner-v001.ts` | 同じqualified storage/現在性/監視/製造recordへ、承認済みJ16 view・背景・別音声の受渡しを接続。resolveCaptionVisibilitySelectionとcompose時の再読/差替え拒否を使う。旧owner/permitを流用しない。 |
+| `evals/clip_composition/presentation_j16_staged_boundary_v001.mjs` | source-specific .mtsにある既存stage/candidateの保存再読処理を汎用部へ移して共有する。既存manifest/stateとCoreの原本資格化を使い、素材固定rootやID条件を共通処理へ持ち込まない。新API質問/回答形式や別監査基盤は作らない。 |
+| `evals/clip_composition/presentation_j16_staged_boundary_v001.d.mts` | 共有した既存readerと資格化済みview/採否参照の型を明示する。値だけを渡して資格化済みと扱う型の抜け道を作らない。 |
+| `evals/clip_composition/run_new_material_digest_20260926_presentation.mts` | 既存CLI/初回段階readerを共有readerへ委譲する互換配線だけ。今回素材専用の非表示条件を足さず、旧saved()を新候補とみなさない。製造実行は共通qualified runner側へ接続する。 |
+| `evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts` | 正式file rendererが承認済みcontextからJ16 view/背景/audioを取り出し、既存admission/job/実装/runtime/出力検査を維持してdrawへ渡す。既存Normalルート保持、単なる外部visibility引数への信任はしない。 |
+| `evals/clip_composition/render_presentation_v002.mjs` | opaqueなapprovedJobが資格化したJ16 viewだけを受け入れる。Normal-only guardを無条件に外さず、全論理captionのprimary検査を残し、同じ採否resolver→compositor→completionを使う。QC免除や全件目視の追加はしない。 |
+| `tools/digest-quality/original-resolution-low-memory-composite.mjs` | 静的Normal/Colorの既存PNG合成と既存show/suppress選別を再利用し、資格化された別AAC入力を元packetのままコピーできるようにする。未承認Pulse/Motionや新効果へ一般化せず、plan/全論理数/選別数/graphの証拠を保持。 |
+| `evals/clip_composition/presentation_orchestration_background_v001.mjs` | 既存projection/background照合は使い、qualified SSD output・unused/no-symlink・resource check・監視process observerへ接続する。repo専用output guardの単純削除、無制限外部path許可、黙った一般ROOT変更はしない。 |
+
+| 条件付き追加候補 | 判断点 |
+|---|---|
+| `evals/clip_composition/adopted_media_manufacturing_v001.mts` | 現状のNormal instruction→rendererJob受渡しだけでJ16 view/背景の束縛を保てない場合、既存Core handoffへ限定配線を追加する。直接drawでCore/owner/admissionを飛ばす代替は不可。 |
+| `evals/clip_composition/digest_representative_completion_v001.mjs` | 共通入力資格化の拡張だけで既存pending/get/finalize/完成再読がJ16由来bindingを再検証できるかを確認。schema/pathや保存source束の追加が必要なら限定変更。他の再読/record-finalize pathが必要になったら差分を親へ返し、範囲を無断追加しない。 |
+
+### 必要な検査（今回は未実施）
+
+- 入力・許可：既存digest-approved-job-v001.test.ts / digest-approved-inputs-v001.test.ts。J16 source kindでも原本SHA/サイズ/全ID/順序/本文/6frame/原clockと投影clock/4接続/採否bindingが一致。欠落/重複/未承認binding/clock改変/古いauthorization/任意output/mutable sourceは拒否。旧Normalの必須閉包を保持。
+- 汎用性：既存openai-decisions-j16-v001.test.ts / presentation_orchestration_v001.test.mjsへ任意の別素材名・ID・文言・区間でも同じ契約を通るfixtureを追加。0.2秒や69への一致条件なし。全表示/nullと1件/複数件/全部非表示の既存動作・全論理記録保持を確認。
+- 製造入力→描画→合成：既存run_presentation_instruction_renderer_job_v002.test.mjs / presentation_orchestration_renderer_v001.test.mjs / tools/digest-quality/original-resolution-low-memory-composite.test.mjs。qualified current inputを経由してrendererの同じresolverが採否を取得、全326のprimaryは維持し、実投入overlay/filter graphだけ325となることを準備段階で確認する。採否非受理/null fallback/旧saved状態/差替えを拒否。今回はこの試験自体は未実施。
+- 背景/audio/保存境界：既存presentation_orchestration_background_v001.test.mjs / digest-approved-storage-revalidation-v001.test.ts。元projection frame/sample clock、別AACのpacket payload/時刻、SSD/no-symlink/未使用出力/next-unit reserve/再読を確認。音声再encode・延長・時刻補正で通さない。
+- 保存・完成再読：既存digest_representative_completion_v001.test.mjs / digest_representative_publication_v001.test.mts / digest-approved-record-finalize-v001.test.ts。pending/get/finalizeで同じ原本/採否/plan/graph/集計を再計算し、旧完成record・採否・合成証拠差替えを拒否。非表示の実画像/動画確認要件は維持。
+- 構文/型/差分：変更に対応した既存suite、runner/必要なRemotion型検査、caller strict baseline比較、diff check。既存未合格fixtureやskipは保持し、実行しなかった検査を合格としない。実行対象suiteは実装差分に合わせ、無関係な全件反復を増やさない。
+
+### 完了条件と映像確認の分離
+
+完了条件を分ける。①採否保存（済）：元326を保持したshow325/suppress1のデータが保存再読できる。②今回調査が示す必要な実装完了（未）：汎用の承認済み製造入力が、J16原本・採否・本文/ID/時計/背景/音声・実装SHA/出力root/許可を一致させて受理し、rendererが同じ採否を取得し、全326論理記録/primaryを残したまま合成投入だけ325/非表示1にし、graph/集計と保存再読が一致する。任意素材fixtureで同じ契約を通り、69・文言・秒数に条件分岐を持たない。単に新readerがJSONを読めるだけ、試験が保存fileだけを照合するだけでは②を完了にしない。③実製造・実媒体の非表示成立/可読性/演出品質（未）：別の具体的製造許可後に現物で確認し、代表確認を既存方針どおり行う。②の構造/拒否/準備graph試験を③の品質合格へ変換しない。今は②の実装も未着手。
+
+### 工数と未確定範囲
+
+未実装の概算工数：実装6〜12時間、既存suiteを使う限定検証4〜8時間、記録/監査2〜4時間、合計12〜24時間。Codex実走/CPU/本人active時間の測定値ではなく、読み取りからの作業量見積。全尺媒体処理・本人確認/承認待ち・STT/API・新base再利用機能を含めない。Coreの登録/owner/source-package対応や保存再読の別pathが必要なら、原因と最小差分を親へ返し範囲追加前に止める。10pathを必ず守れる上限、既存5/5設営枠のリセット、費用/製造許可、品質採用の承認にはしない。
+
+### 終了記録
+
+コード/設定/採否/原本変更0、検査実行0（上記は必要な将来検査）、媒体/worker/API生成0。調査helper/公式MCPを閉じ、不要物なし削除0B。受領/開始/調査/保存再読証拠はKEEP。既存設営修正累積5/5を保持し、今回修正0。今回report/CURRENT/HANDOVER/new月別logの4docsだけを監査checkpoint commit/通常pushしremote一致/clean/untracked0を確認して返す。映像確認、具体的製造承認、入力契約適用差分の着工判断を相談役へ残す。
+
+[今回cycle log](../../work-logs/2026-10/2026-10-11T0007_Codex-SSD_J16-visibility-production-route-research.md)。以下は先の個別データ保存時点の経過。
+
 ## TODO61 — 69の個別非表示データ保存・再読終了 — 2026-10-10 23:50 JST
 
 本人23:39 JST「いいよ、いいけどどんなルールになる？」（Sentinel_187f5ee89b6081918cac80f6ed18f699）を親monaが69の個別非表示承認として伝達。追加「検証素材専用の仕組みにならないことだけは厳重に注意して」も受領。2026-10-10 23:44:56.733 JSTに同じCodex-SSDで実着手し、2026-10-10 23:50 JSTに候補データ保存・再読まで終了。69だけsuppress、他325字幕は明示show、他8強調と4接続を保持。旧候補の9演出判断・全326論理記録と原本文/ID/時計/音声参照/API原回答を変更しない。状態は相談役待ち、次担当mona。Check61は未完了で残る映像品質確認と将来の正式入力接続を扱う。公式MCP board151/Check61 item18、稼働欄0を再読。Check44/60・TODO54・Backlog62など他未完了/削除履歴不変。
