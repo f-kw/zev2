@@ -662,18 +662,27 @@ async function readApprovedJ16StaticInputsV001(qualified:ApprovedDigestQualified
   assert.equal(admission.validatePresentationInstructionRendererJobV002(rendererTemplate).status,'passed','APPROVED_J16_RENDERER_TEMPLATE_INVALID');
   // Preserve the saved typed Core artifacts; no registration or clock-map is
   // invented to make this new input kind resemble the earlier Normal input.
-  const coreValues=new Map<string,Json>();
-  const walk=async(value:any):Promise<void>=>{
-    if(!value||typeof value!=='object')return;
-    if(typeof value.path==='string'&&value.path.endsWith('.json')&&/^[a-f0-9]{64}$/u.test(value.fileSha256??'')) {
-      assert(!path.isAbsolute(value.path),'APPROVED_J16_CORE_RELATIVE_REFERENCE_REQUIRED');
-      if(!coreValues.has(value.path)){const body=await read(value);coreValues.set(value.path,body);await walk(body);}return;
-    }
-    for(const item of Object.values(value))await walk(item);
+  // Follow the file renderer's declared Core inputs. A provenance document
+  // may contain directory-relative output names; they are data inside its
+  // byte-bound record, not additional repository-root input bindings.
+  const readCore=async(binding:Json):Promise<Json>=>{
+    assert(binding&&typeof binding.path==='string'&&binding.path.endsWith('.json'),
+      'APPROVED_J16_CORE_JSON_BINDING_REQUIRED');
+    assert(!path.isAbsolute(binding.path),'APPROVED_J16_CORE_RELATIVE_REFERENCE_REQUIRED');
+    return read(binding);
   };
-  await walk(rendererTemplate);
-  const instruction=coreValues.get(rendererTemplate.instructionArtifactBinding.path);assert(instruction);
-  const meaning=coreValues.get(instruction.sourceBindings.meaningInformationPackage.path);assert(meaning);
+  const instruction=await readCore(rendererTemplate.instructionArtifactBinding);
+  const meaning=await readCore(instruction.sourceBindings.meaningInformationPackage);
+  await readCore(instruction.sourceBindings.timeline??rendererTemplate.cropAppliedBaseMedia.timeline);
+  if(instruction.sourceBindings.cueEndProjection!==null)await readCore(instruction.sourceBindings.cueEndProjection);
+  if(rendererTemplate.lineEndProjectionBinding!==null) {
+    const lineEnd=await readCore(rendererTemplate.lineEndProjectionBinding);
+    await readCore(lineEnd.sourcePackageBinding);
+  }
+  for(const binding of [rendererTemplate.registryBindings.styleProfileRegistry,
+    rendererTemplate.registryBindings.materialRegistry,rendererTemplate.registryBindings.rendererTrust,
+    rendererTemplate.cropAppliedBaseMedia.generationManifest,rendererTemplate.cropAppliedBaseMedia.validationReceipt])
+    await readCore(binding);
   assert.equal(instruction.instructions.length,normalPlan.elements.length);
   for(const [index,row] of list(instruction.instructions).entries()) {
     const element=normalPlan.elements[index];assert.equal(row.instructionId,element.instructionId);

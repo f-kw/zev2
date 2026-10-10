@@ -145,6 +145,7 @@ test('saved J16 input qualifies through the opaque byte boundary and re-reads th
     assert.equal(inputs.j16View.resolvedPlan.elements.length,job.expected.cues);
     assert.deepEqual(inputs.normalPlan,normal);assert.deepEqual(inputs.typographySettings,normal);
     const selected=await inputModule.buildApprovedDigestCaptionVisibilitySelectionV001(inputs,q,inputs.j16View.resolvedPlan);
+    assert(selected,'J16 explicit selection must be present');
     const reread=await inputModule.readApprovedDigestCaptionVisibilitySelectionV001(q,inputs.j16View.resolvedPlan);
     assert.deepEqual(reread,selected);assert.deepEqual(selected.entries,inputs.visibilitySelection.entries);
     assert.deepEqual(selected.counts,inputs.visibilitySelection.counts);
@@ -158,6 +159,31 @@ test('saved J16 input qualifies through the opaque byte boundary and re-reads th
     await assert.rejects(runner.resolveQualifiedApprovedJ16DrawingV001({approvedJob:q,outputRoot:job.outputRoot,assertCurrent:async()=>{}}),/QUALIFIED_APPROVED_DIGEST_STORAGE_REQUIRED/);
     const altered=structuredClone(inputs.j16View.resolvedPlan);altered.elements[0].endFrameExclusive++;
     await assert.rejects(inputModule.buildApprovedDigestCaptionVisibilitySelectionV001(inputs,q,altered));
+    // Read the actual formal timeline independently, and deny substituted
+    // bytes/paths without changing the original timeline or candidate files.
+    const templatePath=inputDirectory+'/original-renderer-job.json',templateBytes=await readFile(templatePath);
+    const template=JSON.parse(templateBytes.toString()),formalTimeline=template.cropAppliedBaseMedia.timeline;
+    assert.deepEqual(await q.readBinding(formalTimeline),timeline);
+    await assert.rejects(q.readBinding({...formalTimeline,fileSha256:'0'.repeat(64)}),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
+    await assert.rejects(q.readBinding({...formalTimeline,path:currentPrefix+'/missing-timeline.json'}),(e:any)=>e.code==='ENOENT');
+    await assert.rejects(q.readBinding({...formalTimeline,path:'../timeline.json'}),/APPROVED_JOB_PATH_INVALID/);
+    template.cropAppliedBaseMedia.timeline={...formalTimeline,path:currentPrefix+'/substituted-timeline.json'};
+    await writeFile(templatePath,JSON.stringify(template)+'\n');
+    await assert.rejects(inputModule.assertApprovedDigestInputsV001(inputs,q),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
+    await writeFile(templatePath,templateBytes);await inputModule.assertApprovedDigestInputsV001(inputs,q);
+    await assert.rejects(q.readBinding({...candidateManifestBinding,fileSha256:'0'.repeat(64)}),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
+    // Even a self-consistent synthetic JSON-only control cannot relabel a
+    // copied saved manifest as another original candidate directory.
+    const originalManifestBytes=await readFile(root+'/'+original);
+    await writeFile(controlDirectory+'/files.json',originalManifestBytes,{flag:'wx',mode:0o600});
+    const movedManifestBinding={...candidateManifestBinding,path:relative+'/files.json'};
+    const movedJob={...job,inputs:{...job.inputs,candidateManifestBinding:movedManifestBinding}};
+    const movedJobBinding=await saveControl('moved-manifest-job.json',movedJob);
+    const movedAuthorization={...authorization,jobBinding:movedJobBinding,manifestBinding:movedManifestBinding};
+    const movedAuthorizationBinding=await saveControl('moved-manifest-synthetic-authorization.json',movedAuthorization);
+    const moved=await jobModule.readQualifiedDigestApprovedJobV001({workspaceRoot:root,jobBinding:movedJobBinding,authorizationBinding:movedAuthorizationBinding,
+      trustedJobSha256:movedJobBinding.fileSha256,trustedAuthorizationSha256:movedAuthorizationBinding.fileSha256});
+    await assert.rejects(inputModule.readApprovedDigestInputsV001(moved),/state.json/);
     const selectionPath=inputDirectory+'/selection.json',originalBytes=await readFile(selectionPath);
     await writeFile(selectionPath,Buffer.concat([originalBytes,Buffer.from(' ')]));
     await assert.rejects(q.assertCurrent(),/APPROVED_JOB_ACTUAL_HASH_CHANGED/);
