@@ -27,7 +27,7 @@ function staticFixture(ids:string[],font=87) {
   const timeline=JSON.parse(source.timelineBytes);timeline.baseMedia.expectedFrameCount=ids.length*120;
   source.timelineBytes=text(timeline);source.timelineRef.fileSha256=hash(source.timelineBytes);
   const evidence=structuredClone(f.evidence);
-  evidence.captions=plan.elements.map((r:any,i:number)=>({...evidence.captions[i],text:r.text,startFrame:r.startFrame,endFrameExclusive:r.endFrameExclusive}));
+  evidence.captions=plan.elements.map((r:any,i:number)=>({...evidence.captions[i],text:r.text,startFrame:r.startFrame,endFrameExclusive:r.endFrameExclusive,eligiblePulsePeakIds:[]}));
   const context=orchestration.createOrchestrationContextV001(source);
   const input=orchestration.createOrchestrationJudgmentInputV001({context,evidence});
   const reply=structuredClone(f.reply);reply.inputSha256=input.inputSha256;
