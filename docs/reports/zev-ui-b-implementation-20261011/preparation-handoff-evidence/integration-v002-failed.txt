@@ -1,0 +1,30 @@
+✔ unfinished current producer leaves preparation unregistered without approval, rerun or manufacture (68.796375ms)
+✖ failed STT with retained recognition text is not registered as a completed preparation (0.80425ms)
+✔ normal completed results from two distinct artificial sources reach the existing qualified registration endpoint (1394.009542ms)
+✔ CLI consumes saved normal parameters and the actual completed manifest reference without printing authentication (466.1535ms)
+✔ missing completed result, unexpected producer authority, other draft and agent-only credentials never register (12.02525ms)
+✔ same-ID different source and manifest bytes are rejected by the unchanged server qualifications without retry (74.890083ms)
+✔ draft replacement between current-state read and POST is refused, not retried with the new identity (15.692917ms)
+✔ non-loopback origins and redirects cannot send the existing human credential elsewhere (9.143791ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3666.555084
+
+✖ failing tests:
+
+test at backend/test/digest-ui-handoff.test.mjs:54:1
+✖ failed STT with retained recognition text is not registered as a completed preparation (0.80425ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'fileRefIds')
+      at TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-handoff.test.mjs:59:36)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3)

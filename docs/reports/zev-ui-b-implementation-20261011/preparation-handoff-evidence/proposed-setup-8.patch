@@ -1,0 +1,13 @@
+--- a/backend/test/digest-ui-handoff.test.mjs
++++ b/backend/test/digest-ui-handoff.test.mjs
+@@ -53,8 +53,8 @@
+ });
+ test('failed STT with retained recognition text is not registered as a completed preparation', async () => {
+   const f = fixtures[0], failed = structuredClone(f.state);
+-  failed.agentRequests = failed.agentRequests.filter(r => r.type === 'import_video' || r.type === 'run_stt');
+-  const source = failed.agentRequests.find(r => r.type === 'import_video'), stt = failed.agentRequests.find(r => r.type === 'run_stt');
++  failed.agentRequests = failed.agentRequests.filter(r => r.type === 'prepare_video' || r.type === 'run_stt');
++  const source = failed.agentRequests.find(r => r.type === 'prepare_video'), stt = failed.agentRequests.find(r => r.type === 'run_stt');
+   stt.status = 'failed';stt.error = '人工STT失敗。認識原文だけ保持';delete stt.result;stt.fileRefIds = [];
+   const sourceIds = new Set(source.fileRefIds);failed.fileRefs = failed.fileRefs.filter(f => sourceIds.has(f.id));
+   const outputIds = new Set(failed.fileRefs.map(f => f.ownerId));failed.outputs = failed.outputs.filter(o => outputIds.has(o.id));
