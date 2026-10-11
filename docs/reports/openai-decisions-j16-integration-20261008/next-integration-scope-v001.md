@@ -1408,8 +1408,8 @@ OpenAIの採用方向は本人が選択済みで、モデル比較を問い直�
 
 新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。
 
-### 修正後STTの再開と現在地（2026-10-11 15:48:58 JST実観測）
+### 修正後STTの再開と現在地（2026-10-11 16:31:14 JST実観測）
 
-同job `23c09ec3da7141d9a7252f004847c7bd` はrunning、試行2/最大3、保存原文から再開中。試行1は15:21:36 JSTに終了コード3（44分47.52秒）、試行2は15:21:46 JST開始。Mac登録1回・追加送信0、有料API/製造0、完成文字時刻結果は未取得。入力/実装SHA/設定/resultIdentity不変。原ASR396区間の診断は既存証拠を保持し、再実行しない。
+同job `23c09ec3da7141d9a7252f004847c7bd` はrunning、試行2/最大3、原文再開中。新しいエラー/試行3移行なし。登録から1時間54分26秒、試行2開始から1時間9分28秒のwall経過で、CPU処理だけの時間は不明。APIに段階/進捗率なし。Mac登録1回・再送0、原ASRの追加取得0、有料API/製造0。完成文字時刻結果は未取得。
 
-詳しい試行履歴・原HTTP参照・コード照合の限界・計測の区別は既存No.61作業ログへ保存。今回の読取証拠は `new-no61-latest-attempt2-documentation-readback-v001.json`。No71の終了はSTT完成ではない。次担当Codex-SSDが同jobを追い、旧logの提出要求・再登録はしない。
+今回のsnapshot/readbackは `stt-after-cpu-fix-wait-readback-v001`、詳しい履歴/参照は既存No.61作業ログと機械台帳へ保存。次担当Codex-SSDが同jobの完了/最終失敗まで追う。

@@ -202,3 +202,9 @@ SSD stt-after-cpu-fix-attempt2-readback-v001 に原HTTPとreadback.jsonを保存
 15:41:59 JSTに既存接続でf-kw/zev-stt-server main e83c2ae6b5a8f2a17e8f83f1c66cbca3975a0638を再照合。Gitのmain.py/stt_pipeline.py SHAは今回runtime受付SHAと異なり、stt_alignment.pyだけ一致。公開Gitは10/5版のままで、今回CPU修正のruntimeソース全体を取得できたとは扱わない。実行中profileのSHA・thread1変更はAPI観測、CPU原因は本人報告、code3の具体的な工程/原因は未確定。server/元checkout変更0。新しい認証・推測log route・旧No71要求は作らない。
 
 同文の固定326字幕/5場面送信承認を再受領したため、既存5 request/source/raw/attempt/transportの計25参照をhash/bytes再読照合。10/10 21:30:31〜21:30:38 JSTの5回は各HTTP200/完全応答、再送0、通常317/強調候補9。今回追加API0、動画製造0。旧固定素材の許可を今回新素材へ転用しない。製品コード変更0なのでsuite再実行0、今回5資料のdiff/参照/旧ledger・保護資料不変を検査する。
+
+### 親から求められた同job待機観測（2026-10-11 16:31:14 JST）
+
+既存clientの成功GET観測 `2026-10-11T07:31:14.211Z` は試行2/最大3、running、error null、resumedFromSource true。attemptErrorsは試行1のcode3だけで、新しいエラー/再試行変更はなし。登録→観測 6865.773081秒（1時間54分26秒）、試行2開始→観測 4167.755857秒（1時間9分28秒）はwall経過で、CPU時間ではない。APIに段階/進捗率なしのため詳細進捗は不明。原ASRの再取得0を進捗に使わない。16:13:19 JSTのhealthはHTTP200/ok/apiAlive/workerActive、CUDA freshness内だが処理段階やメイン相談会話モデルの正常性を証明しない。
+
+専用SSD `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-wait-readback-v001/readback.json`（SHA `9ea961aebb9ae2dd28808f971c154e383e6d8391ea35c100656934837384ca1b`）へjob/client snapshotと計測を保存再読しfile444で固定。入力/実装/設定/resultIdentityは既存受付を維持、Mac追加登録0、製造0。native client/guard継続。親からUI保存1e440b0cとGit枠を受領し、自分の短い現在地5文書をcheckpoint対象とする。長い待ち時間だけで停止判定せず、同jobの完了/最終失敗まで追う。
