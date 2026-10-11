@@ -1,4 +1,6 @@
-# Codex-UI｜No.68 制作資料の受渡し接続・GPT_DECISION
+# Codex-UI｜No.68 制作資料の受渡し接続・検証記録
+
+最新：設営8回目の個別承認を受領し、工程名2箇所だけを修正。同じ8件のv003は8/8合格。STT失敗・原文保持の状態は登録せず、HTTP409・state不変・原文保持・承認/実行呼出しなしを確認した。人工検証とconsumer helperは検査済み。実素材への受渡しとSSD caller組込みは未実施、No.68全体/No.70は未完成。以下の旧停止記録は当時の結果として保持する。
 
 2026-10-11 04:26 UTC。既存の準備結果をUIへ渡すconsumer helperを実装した。人工の異素材を通す7検査は合格。追加したSTT失敗の検査は設営ミスで未検証であり、この一件は未完成。No.68全体・No.70も未完成。
 
@@ -59,3 +61,35 @@ v001/v002とも自分のSSD fixtureとrepo人工source rootはafter hookで削�
 未確認の一件を完成/Doneにしない。自分のsource2pathと専用report/evidenceだけを監査checkpointへ保存し、別担当差分を含めない。実commit/push・HEAD・Git状態とGit枠返却は親への報告で示す。次は設営8回目の個別返信を受領して同No.68で続行。正式producer callerのimport/保存後呼出しは親経由でSSDへ渡し、実素材の未完成STTを登録しない。次工程2/3、実素材通しNo.70は未着手のまま。
 
 source/証拠/reportの自分10pathを `9928f12f456a1995d7f47272c9d0e1b1d14e1faf` に監査checkpoint保存。staged対象は明示所有pathと一致、他担当混入0、直後のtracked/untracked差分0。この保存結果追記と[専用log](../../work-logs/2026-10/2026-10-11T0429_Codex-UI_No68-preparation-handoff_9928f12f.md)を記録commitへ保存してmainにpushする。最終HEAD/push結果とGit枠返却は親へ実観測を渡す。
+
+## 設営8回目の承認受領・v003結果
+
+親が `0ca79b40` の提案patch・拒否assertion・AGENTSの例外/強制停止規定を独立読取し、2箇所の `import_video` → `prepare_video` と同じ8件だけを個別承認した返信本文を受領。適用前に記録を照合した。明示的なGPT判断待ち停止は03:12読取境界、03:42設営6/7同一停止、04:29設営8の3回。正常な段階handoff、Git受渡し待ち、個々のunit exitを設営修正数へ混同しない。新契約追補0、費用US$0、同日作業で3日上限未到達。強制停止条件への到達証拠なし。今回適用後の設営修正累積は8回、一般枠5回を保持。
+
+検査内の工程名2箇所だけを修正し、他のsource変更0。旧HEADのtest全文へこの2置換だけを適用した結果が現fileとbyte一致するため、HTTP409・登録なし・state不変・原文保持・approve/claim/resume/complete呼出しなしを含む全assertionは不変。helper本体、正式reader/準備/製造/登録口/契約/素材値/費用は変更0。[適用と停止回数の証拠](preparation-handoff-evidence/setup-8-applied-v003.json)。
+
+[v003結合検査](preparation-handoff-evidence/integration-v003-passed.txt)は**8/8合格**。人工A/Bの正常受渡し、CLI新process、欠損/別依頼/認証/差替え/競合/redirect拒否に加え、失敗STTと保持された認識原文を完成準備へ登録しないことを確認。v001 7/7、v002 7/8と例外承認前patchは保持し、旧失敗を合格へ書き換えない。再検証はこの同じ8件一回だけ。新有料API/実素材処理/実動画製造は0。
+
+v003終了0、自分のSSD/local fixture root残件0、テストserver/CLI終了、browser作成0、他担当process停止0。回収bytes未測定。[cleanup](preparation-handoff-evidence/cleanup-v003.json)。
+
+## SSD callerへ渡す正確な関数・呼出し位置・入力
+
+- consumer関数：`scripts/digest-ui-preparation-handoff.mjs:27` の `handOffPreparedDigestUiMaterials(parameters, manifestBinding, {backendOrigin, humanToken})`。
+- 正式準備関数：`runner/src/digest-caption-input-preparation-v001.ts:329` の `prepareDigestCaptionJudgmentInputsV001(p)`。line339の正常返却は、すべての出力/manifest保存と最終directory資格確認が済んだ後。**callerでそのawaitが成功した直後**にconsumer関数を呼ぶ。正式関数本体へHTTP副作用を追加しない。
+- `parameters` はその呼出しに使った **p全体**：`workspaceRoot/inputRoot/inputPrefix/sourceRuntimeRoot/outputRoot/preparationId/stateBinding/scopeBinding/styleTemplateBinding/expected` の10項目。各bindingは既存の `{path,fileSha256}`、expectedは今回の `requestDraftId/planRequestId/executionRequestId/planSha256/executionSha256`。他素材・昔のID/数値を流用せず、欠損を補わない。workspaceRootはconsumerがserverへ送らない。
+- `manifestBinding` は同じ正常返却の **prepared.manifestBindingそのもの**。inputRoot内の既存相対pathと実SHAであり、partial原文や別manifestから生成しない。
+- `backendOrigin` は使用中の明示HTTP loopback origin（IPv4 `127.0.0.1` またはIPv6 `[::1]`、path/queryなし）。`humanToken` は既存人間API認証。agent tokenへの権限拡張はせず、credentialをjob/argv/ログへ保存しない。portと認証値をUI担当が仮置きしない。
+- 前提：backendの同じ現在依頼に、正規source/STT/plan/executionのproducer/output/FileRefとsnapshotが登録済みで、正常な保存字幕準備があること。helperは承認やproducer登録を補作しない。STT失敗/原文保持だけでは前提を満たさず、未登録のまま。登録後は既存UIの資料再読で表示し、採用/製造を開始しない。
+
+repoで確認できる正常呼出し例は `backend/test/digest-ui-fixture.mts:105` と過去の検査用 `docs/reports/digest-caption-input-preparation-20261003/prepare-test.mts:137`。これらを実素材callerとして流用しない。**現No.61のSSD private callerのfile pathは本repo内で特定できず、親/SSD担当が現在の正規prepare呼出し箇所を指定する必要がある。** 渡す最小差分は次の2呼出しの間の保存後hookのみ。
+
+```js
+const prepared = await prepareDigestCaptionJudgmentInputsV001(p);
+// この位置：正常保存が終わってから。pとpreparedの値をそのまま渡す。
+await handOffPreparedDigestUiMaterials(p, prepared.manifestBinding, {
+  backendOrigin: currentLoopbackBackendOrigin,
+  humanToken: existingHumanApiToken
+});
+```
+
+consumer登録失敗はその未登録/不一致として保存し、STTや正規prepareを再実行しない。実素材callerへのこの組込み、実素材受渡し、次工程2/3は本cycleで未実施。今回の限定修正と検証結果を保存/pushし、Git枠返却後は次の明示指示まで停止する。
