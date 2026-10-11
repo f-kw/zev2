@@ -1,5 +1,28 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## AUDIT_ONLY / 容量#67・No.61次工程 — 2026-10-11T01:55:17.044Z
+
+### 容量の阻害要因解消と残件
+
+本人承認と担当調整後、旧4配信だけを正常終了し、holder0確認→通常detach→SSD上の全バックアップ照合→上限確認→512000000000Bへ一回resize→同じmount path/UUIDへ通常attachを完了。バックアップ2087file/17465734116Bの集合・size・SHA不一致0。2026-10-11T01:43:55.025833Z（10:43:55 JST）に `/Volumes/ZEV-Digest-20261003-01` / `/dev/disk6s1` / device16777243 / UUID7212F3BB-32FB-4F02-A71C-E570421FF2E0、total511790243840B、free495997661184B、permissions enabled/writableを実確認。65保護参照size/SHA一致。同一SSD上のbackupは操作失敗からの復旧用としてKEEPし、物理故障への別媒体backupとは扱わない。
+
+配信4件は元URL/port63610・49504・60161・61560へ復旧。新PID83241/83253/83264/83275を配信用にKEEPし、新recordを専用rootへ排他保存。全許可routeのHEAD200/Range206/内容一致、Host/query/未指定path拒否、CSP維持を確認、旧server記録は不変。確認完了記録 `zev-storage-expansion-before-board-handoff-v001.json` は2026-10-11T01:47:07.098Z（10:47:07 JST）。ボード起動はmonaがボード担当へ依頼済みで、この記録時点は通常起動・DB/PDFリンク/表示の確認受領待ち。No.67の全体完了はその受領後。旧PDF/DB/素材/採否を戻さず、force/delete/API/製造0。
+
+### No.61で次に行う準備と、実動画の判断
+
+既存scopeの2026-10-11 00:28 JST本人「いいよ」は汎用接続の実装・検査・保存までで、実素材製造/API再送/本番切替を含まない。容量拡張承認も実動画製造許可へ読み替えない。現在の実装は保存監視34/34、Python50/50、完成記録8/8＋型検査まで通過済み。今回それらを同条件で再試験せず、実動画更新・映像音声品質は未完了のまま記録する。
+
+| 次工程 | 入出力・変更されるもの | 承認と費用 |
+|---|---|---|
+| 非製造の新準備 | 元J16 manifest/state・326cue/5場面・本文/ID/元と投影の時計・4接続・明示採否show325/suppress1・元media/font/runtimeを保持。開始時の最新main SHA/必要code bindings、拡張後の実UUID/device/free、同一計画の未使用outputRootを新たに観測し、正規reader/純粋な検証と、実行前のjob/input参照・容量/監視条件の案へ束縛する。元input/採否/承認/旧recordは書換えない。今回の記録はこの準備の設計であり、新しい正式job/permitの発行・実行はまだしていない。 | 既存の実装・検査・保存承認内で進められる。既存sourceを読むローカル作業なので追加API/STT/素材費0。実際に必要な新準備だけ行い、合格済み検査の反復や診断仕事を増やさない。 |
+| 実動画一本と既存QC・代表確認 | 上の新準備と具体的一計画の製造承認を一致させた新authorization/job/permit/implementation SHA/output rootを正規入口へ渡す。背景・別AAC→実glyph/PNG→低メモリ合成→既存技術QC→pending/get/finalize/完成再読を通し、新しい完成MP4・中間物・QC/製造記録をSSD専用出力へ保存。元データと旧完成品は保持。全論理326の記録を残し表示投入325/非表示1、代表確認は既存方針で行う。 | この一計画の実素材製造について具体的な本人判断が必要。API5回の既承認を代用しない。保存済み回答と素材を再利用するため追加API費は0だが、ローカル処理時間・容量は消費する。新素材/API/演出/公開は追加しない。 |
+
+正規runner `runApprovedDigestJobV001` は製造許可を要求し、`runApprovedJ16StaticJobV001` 内の `buildOrchestrationBackgroundV001` から実媒体処理へ進む。準備のつもりでこのrunnerを起動しない。製造許可を必須とするvalidatorへ、準備の承認をfabricated manufacture receiptとして入れない。元承認を現SHA/deviceへ書換えることも不可。製造開始の最終bindingは担当間Git受渡し後の最新mainと、その開始直前の実storage観測で固定する。読取時mainは `c65877cfe52801455207bada148b90503a1f0b31`（UI checkpointを保持）。
+
+容量見積りは現runnerの式 `(27901+27949)*1920*1080*3/2 + (41014470+41085030)*8 = 174372636000B`（背景YUV420＋stereo float32相当）を根拠にする。12GB reserve込みの開始必要空きは186372636000B、上記実freeはこれを約309.6GB上回るため、以前の100GB上限による阻害は解消。これは開始gateの見積で、全中間物の実サイズ/持続速度/全工程成功保証ではない。後続の描画・合成・QCは既存next-unit＋reserve監視で継続判定し、内外freeを合算しない。全尺の処理時間はまだ未測定で、過去の実装12–24hやfixture時間を動画所要時間へ流用しない。次回は準備/媒体処理/人間介入の実時間を分けて既存logへ記録する。
+
+今回の結果は容量と配信の復旧であり、実装検査合格・技術QC・実視聴品質の三つを混同しない。今回媒体QCと実視聴は未実施。証拠はCodex-SSD workspaceの `zev-storage-expansion-backup-verified-v001.json` / `limits-v001.json` / `resize-result-v001.json` / `mounted-verified-v001.json` / `review-restored-v001.json`（短名は全て `zev-storage-expansion-` prefix）と、[今回log](../../work-logs/2026-10/2026-10-11T1043_Codex-SSD_Storage-expansion-next-preparation_c65877cf.md)。次担当mona→同Codex-SSD。旧履歴は以下にそのまま残す。
+
 ## AUDIT_ONLY / 容量#67 — 2026-10-11T01:16:17.002Z（共通2file実装検証完了・停止拡張復旧手順の確認待ち）
 
 ## 実装・検証の結果

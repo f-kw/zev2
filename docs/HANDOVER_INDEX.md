@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v144
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v145
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-11T01:55:17.044Z（容量不足解消・No.61の非製造準備と実動画判断を分離）
+
+容量#67のSSD拡張は実施済み。バックアップ2087file/17465734116Bは全size/SHA一致、512000000000Bへ一度だけresize成功。同じmount pathとvolume UUIDで通常再attachし、2026-10-11T01:43:55.025833Z（10:43:55 JST）のguest実観測はtotal511790243840B/free495997661184B、65保護参照size/SHA一致。既存4配信は同じURLへ復旧しHEAD/Rangeと公開制限を確認、旧記録は保持。バックアップは同じSSD上の操作失敗復旧用としてKEEP。No.67はボード担当の通常起動・DB/PDF/表示確認の受領待ちで、まだ全体Doneではない。
+
+No.61の326cue/5場面・本文/時計/採否（show325/suppress1）を変えない。容量による開始阻害は解消したが、背景/別AAC/実glyph/合成/完成動画更新・映像音声確認は未実施。次は既存承認内で、開始時の最新main実装・実storage・既存原本と採否・font/runtimeの参照を正規readerで照合し、未使用出力先と容量予算を新しい非実行の準備案へ束縛する。旧承認/recordの書換えや、製造許可があるように見せる補完はしない。実動画一本の製造と代表視聴は別の具体的本人判断後。追加API0、実媒体処理0。詳細と見積根拠は[既存次工程report](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)、実操作は[今回log](work-logs/2026-10/2026-10-11T1043_Codex-SSD_Storage-expansion-next-preparation_c65877cf.md)。次担当mona（ボード復帰受領・No.61次指示）→同Codex-SSD。現在地記録時刻 2026-10-11T01:55:17.044Z（2026-10-11 10:55:17 JST）；storage確認時刻は上記の実読取時刻。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T01:16:17.002Z（共通再開2file検査合格・容量手順確認待ち）
 
