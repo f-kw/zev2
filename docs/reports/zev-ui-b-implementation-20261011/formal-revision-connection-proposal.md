@@ -1,5 +1,7 @@
 # Codex-UI｜No.68 人間の構成追加を正式新版へ接続する具体案
 
+**最新読取追記（2026-10-11 07:34 UTC）：** client接続の`1e440b0c`を親が受領した後、「正式保持回答→変更後の時計/字幕準備」の最小境界を再調査した。現在は不変snapshot・構成データ・追加sceneごとの未回答要求の保存まで実装済みで、本文下部の「次の境界・現行sourceによる絞り込み」が今回の具体案。既存保持provenance validatorは今回の要求全文をそのまま照合でき、保持Skill/区間時計/字幕要求builderは再利用できる。全体統合と人間新版の正式writer/readerは未接続。調査とこの報告/logだけで、制作source改訂・回答生成・テスト再実行・有料送信・実素材・製造なし。
+
 2026-10-11、読取基準main `46de9c4fb112a04b30ed49c7ade9674d2668b11f`。**実装・契約改訂・着工承認ではない具体案。** 親の指示「採否AI記録を人間要求で上書きせず、人間変更の根拠と元資料を保持」に従う。先行した[拒否時表示修正](rejection-checks.md)は15件/build検証済み・同SHAへ保存/push済み。この調査で制作担当source/runner/契約へ変更0、UI再検査0、実素材/有料送信/製造0。No.68全体未完、No.70未着手。
 
 [読取現物29fileのpath/byte数/SHA](formal-revision-source-evidence-v001.json)、[このcycleのwork log](../../work-logs/2026-10/2026-10-11T0533_Codex-UI_No68-formal-revision-proposal_46de9c4f.md)。
@@ -91,3 +93,39 @@
 採用済みB案の意味や今回の追加操作の本人採否を再確認する必要はない。一方、この正式入力/producer/対応receiptは現contractにない。新設/改訂する契約と任せる範囲は三者規則の第1層、範囲内の具体的な技術接続は第2層の判断として親が整理する。この読取案から実装許可を自己導出しない。
 
 保持回答/aggregate、全体時計、字幕準備、対応receipt、正式製造入力へは、それぞれ成立を確認してから続ける。No.61の新素材はsource clock検査passedだが、CURRENT_GOALの最新保存ではLAN STTの完成aligned結果がなく、正規caption callerも未確定。原ASRを完成STTと認定したり、旧素材専用caller/計画を現No.61へ流用したりしない。今回の提案はそれを進行済みにするものではない。
+
+## 次の境界・現行sourceによる絞り込み（07:34 UTC）
+
+親の個別指示は調査と既存報告への具体案まで。開始main/originは`1e440b0c4fb112f530784722a334b8f60dbdb3e0`、途中でSSD担当の5文書commit `bbfb801ff471da85cf0ccb54cc7753064a126354`を観測した。Git枠はSSD。今回のsourceは両HEAD間で同一で、他担当5文書・制作serveとtest・runnerを編集しない。以前の「UI→不変入力が未実装」という部分は当時の状態で、現在は`backend/src/domain/digest-ui-composition-data.ts`がsnapshot/構成2JSONと未回答要求bundleを保存・現在chainから再構築する。正式な回答受入と全体統合はまだない。
+
+### そのまま再利用できるものと、流用しない入口
+
+| 現物・位置 | 今回の再利用範囲 / 境界 |
+| --- | --- |
+| `candidate-internal-retention-v001.ts:45–94` | 閉じた本文input/answer/resultの型、`runInternalRetentionV001`の結果包装を再利用。実際の意味回答は別途必要で、この関数だけでは回答の意味/所属/権限を検証しない。 |
+| `candidate_internal_retention_validation_v001.mts:12–49` | **`validateInternalRetentionProvenanceV001`を追加要求へそのまま使える。** 要求schemaを通常AI採否に固定せず、復元input一致、`response.requestFileSha256 === sha(formal(request))`、response/result回答一致を検査する。`validateInternalRetentionIdsV001`が候補順・全文IDのkeep/drop網羅・隙間/重複/逆順・最低1keepを閉じる。低層validatorの条件緩和や別の汎用回答validatorは不要。 |
+| 同validator `:53–108` | `resolveInternalRetentionV001`へ一場面の正式parentと保存済み音響境界を渡す。元候補外端を継承し、内部cutは一意の元観測だけから解く。未解決なら`requires-new-meaning-judgment`で停止し、時刻の補間・全keepへの代替・勝手な再判断をしない。 |
+| `run_candidate_discovery_digest_skill_e2e_v001.mts:277–289` | strict transport decodeとstdout要求/stdin回答の輸送を再利用候補にできる。APIは呼ばない。ただし既存`executeDigestE2EV001`/`executeInternalEditV001`の全callerは別plan資格や後続作用を持つので実行しない。新callerは承認済みの追加保持だけへ閉じる。 |
+| `presentation_base_media_build_v003.mjs:1180–1314` | `validatePresentationBaseMediaSegmentPlanV002`へ検証済み全体keep順と同一source inspectionのvideo/audio clockを渡し、全体frame/sampleと出力開始位置を再計算できる。source順/重複/外端/表現不能を拒否する純粋検査で、媒体を作らない。 |
+| `adopted_caption_judgment_inputs_v001.mts:24–80` | `buildAdoptedCaptionJudgmentInputsV001`は検証済み全体parts/保持・削除ID/元本文・発話/styleから意味atomとdisplay要求を作れる。本文/元範囲/重複/keep-drop混入を検査し、回答・表示境界選択・描画をしない。`machineAdoptionBinding`は渡されたJsonBindingを保持するだけなので、**人間新版の真のschema/SHAのbinding**を渡し、callerの新readerが来歴を閉じる。名称だけでAI採用に偽装しない。 |
+| `digest-plan-consumption-v001.ts:49–136` / `digest-caption-input-preparation-v001.ts:172–217,280–327` | 現entrypointは通常の依頼/命令/元AI選択と元保持を再構築する。人間追加をそのまま渡せない。旧selection/retentionを書換えず、上記純粋builderを呼ぶ人間新版用の明示writer/readonly readerへ分ける。既存normal readerの条件をfallbackで省略しない。 |
+
+### 最小の入力と版束縛
+
+1. **既にある未回答bundleのbinding**：`artifacts/<draftId>/ui-retention-inputs-<requestHash>.json`の実bytes SHAを入口にする。bundleの依頼ID/identity、snapshot/構成binding、全editRequest ID順、source/元保持binding、各要求ID/候補ID/要求全文・inputCanonicalSha256を現在chainから再構築して照合する。公開GETはsummaryだけで、正式callerがこれを完全inputと誤認しない。現`retentionInputs`はprivateなので、制作callerへ完全bundleとbindingを渡す**限定readonly export/reconstruction接続**が必要。準備POSTを回答取り込み口にしない。
+2. **回答は今回の要求全文へ束縛**：既存`candidate-internal-retention-response-v001`の厳密4項目（schemaVersion/requestFileSha256/answer/judgmentNote）を使う。requestFileSha256は保存された各`ui-digest-additional-retention-request-v001`を既存`formal`で直列化したSHAと一致させる。bundle全file SHA・inputCanonicalSha256とは異なる値。旧AI採用要求や別chainのSHAを付替えない。要求の元本文/ID/探索要約を復元してから既存provenance→ID検査→境界resolveへ渡す。`abstained`・不足・改変・未解決の回答を全体準備へ昇格しない。
+3. **時計/字幕用の追加参照**：同一baselineのplan/execution/sourceInspectionのbindingと、正式STT/共通発話/元動画・元音声時計、採用済みstyle templateを資格化する。現在bundleの`sourceBindings`は動画/本文/発話までで、inspectionのvideo/audio clockやstyleそのものは含まない。候補のmin/max・UI合計秒・raw ASRをこの追加inputの代用品にしない。SSDの実inputRoot/outputRootとscope/実装bindingsは制作所有者の既定値を使い、数値やpath枠をこの案で設置しない。
+
+### 最小の受入結果から時計/字幕へ
+
+**次の最小一件は「保存済み追加回答の受入・独立再読・全体keep/drop統合」**。新しい汎用回答service/ledgerや探索/AI採否の再走は必要ない。制作所有者の承認済みcallerが、上の限定bundle readerと既存保持検証を接続し、追加要求ごとのresponse/result/resolve結果を別来歴で保存する。元採用sceneは元の要求/回答/結果/validationを全体のまま再検証して参照し、人間追加の回答へ混ぜたり書換えたりしない。
+
+新しい全体結果は、元AI採否binding・人間snapshot/構成/bundle binding・反映対象editRequest全chain・各sceneの採用由来（原AI/人間要求）・元/追加保持の4記録binding・保持/削除本文IDと元区間/理由・実装/scopeを含める。各sceneは元の候補順、keepはそのsceneの検査済みblock順で統合する。別sceneの`segment-0001`が重なるため、新全体のsegment ID/output ordinalを決定的に割当て、元scene/要求/保持blockとの対応を保存する。元記録のID/本文/元時刻は変えない。全体の元ID重複・正の区間重なり・保持候補欠落は拒否し、勝手なtrim/意味削除で整えない。独立readerが元資料と回答から同じ全体bytesを復元できた時点までが、この一件の成立条件候補。
+
+全体統合成立後、同じ正式結果bindingから既存区間clock validatorを呼び、変更後edit planとclock-resolutionを別identityで保存する。時計がpassedなら、新全体parts/keep/drop/source/styleを既存字幕要求builderへ渡し、`meaning-input`、各display要求、これらのinput/output/clock/code bindingを含む**人間新版manifest**を保存し、別processのreadonly readerで同じbytesを再構築する。通常`digest-caption-input-preparation-v002`を名乗ったり元normalの計画/回答を書換えたりせず、正式な人間新版契約を制作所有者と確定する。
+
+この時点の出力は「追加回答を受けた全体保持結果」「変更後編集区間と時計」「字幕の意味/表示判断入力とmanifest」。display回答・字幕描画・完成動画・製造permit・人間品質承認は含まない。UIへ作成前確認として戻す段階には、現在の依頼/全chainと新manifestを正式readerで照合する対応receiptも必要で、旧要求の削除や通常UI登録の流用だけでは反映完了にならない。
+
+回答待ちの間にsource/basis/下書き/追加chainが変われば、旧回答は元要求の証拠として保持しcurrentへの登録を止める。別chainへの回答付替え・自動再送・自動費用発生をしない。今回、既存Skill回答形式と低層validatorの再利用はsource読取で確認したが、提案した新export/全体writer/readerを実行検証したとは書かない。No.61のSTT進捗と新素材資格は親/SSD担当の現検査結果を待ち、同URLの旧結果を今回結果へ使わない。
+
+今回の[調査session log](../../work-logs/2026-10/2026-10-11T0734_Codex-UI_No68-retention-answer-boundary_bbfb801f.md)へ読取sourceのSHAとGit状態を保存する。Git枠SSDのためUIはstage/commit/pushを行わず、自分のこの報告とlog2文書だけを保存待ちの対象として親へ返す。調査内容は保存・再読済みでもGit保存未完了を完了扱いにしない。実装/counter増分0、累積設営10・実装修正5・明示停止7・追補0・費用US$0、No.68全体未完成/No.70未着手を維持する。
