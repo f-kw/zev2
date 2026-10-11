@@ -14,7 +14,7 @@ import time
 import unittest
 from datetime import datetime, timezone
 from unittest import mock
-from contextlib import redirect_stdout
+from contextlib import redirect_stdout, contextmanager
 
 SOURCE = Path(__file__).with_name('original-resolution-full-supervisor-v002.py')
 spec = importlib.util.spec_from_file_location('approved_supervisor', SOURCE)
@@ -44,19 +44,32 @@ class ApprovedJobTest(unittest.TestCase):
             hostDevice=22, imagePath='/Volumes/Approved-Fixture-Host/fixture.sparsebundle',
             imageMaximumBytes=80_000_000_000, hostMetadataReserveBytes=900_000_000,
             internalRoot=str(self.repo))
-        inputs = dict(preparationParameters={'fixtureOnly': True})
-        for key in m.APPROVED_INPUT_KEYS - {'preparationParameters'}:
-            path = self.repo / 'inputs' / (key + '.json')
-            path.parent.mkdir(exist_ok=True)
+        self.guest_physical = self.repo / 'guest'
+        self.guest_physical.mkdir()
+        prefix = 'runtime/artifacts/different-approved-plan/current-inputs-v001'
+        def input_ref(key):
+            path = self.guest_physical / prefix / (key + '.json')
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text('{}\n')
-            inputs[key] = {**bind(path), 'path': path.relative_to(self.repo).as_posix()}
+            return {**bind(path), 'path': path.relative_to(self.guest_physical).as_posix()}
+        scope = self.repo / 'scope.json'
+        scope.write_text('{"fixtureOnly":true}\n')
+        inputs = dict(inputRoot=self.storage['guestRoot'], inputPrefix=prefix,
+            preparationParameters=dict(workspaceRoot=str(self.repo), inputRoot=self.storage['guestRoot'], inputPrefix=prefix,
+                outputRoot=self.storage['guestRoot'] + '/' + prefix + '/preparation-output',
+                sourceRuntimeRoot=self.storage['guestRoot'] + '/' + prefix + '/source-runtime',
+                stateBinding=input_ref('state'), styleTemplateBinding=input_ref('style'),
+                scopeBinding={**bind(scope), 'path': 'scope.json'}))
+        # Root/prefix are strings. Only the five binding fields describe byte-bound files.
+        for key in m.APPROVED_INPUT_BINDING_KEYS:
+            inputs[key] = input_ref(key)
         implementations = []
         for name in m.APPROVED_CODE:
             path = self.repo / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text('// approved fixture source ' + name + '\n')
             implementations.append({**bind(path), 'path': name})
-        self.job = dict(schemaVersion='digest-approved-job-v001', planId='different-approved-plan',
+        self.job = dict(schemaVersion='digest-approved-job-v002', planId='different-approved-plan',
             outputRoot='runtime/artifacts/different-approved-plan/attempt-005', inputs=inputs,
             storage=self.storage, expected=dict(frames=600, audioSamples=960000, groups=2, atoms=41, cues=7),
             implementation=dict(sha=self.head, bindings=implementations,
@@ -64,12 +77,13 @@ class ApprovedJobTest(unittest.TestCase):
             allocationBudget=dict(baseBuildBytes=8_000_000_000, rendererPreparationBytes=3_000_000_000))
         self.job_file = self.repo / 'job.json'
         self.job_file.write_text(json.dumps(self.job))
-        self.authorization = dict(schemaVersion='digest-approved-job-authorization-v001',
+        self.authorization = dict(schemaVersion='digest-approved-job-authorization-v002',
             recordId='real-approval-fixture', userApproval=dict(at='2026-10-04T02:12:00Z',
                 messageId='different-recorded-message', text='Proceed with this approved job.', sourceThreadId='fixture-thread'),
             actions=['manufacture-one-approved-plan'], jobBinding=bind(self.job_file),
             planId=self.job['planId'], manifestBinding=self.job['inputs']['candidateManifestBinding'],
-            typographySettingsBinding=self.job['inputs']['typographySettingsBinding'], outputRoot=self.job['outputRoot'],
+            typographySettingsBinding=self.job['inputs']['typographySettingsBinding'],
+            migrationApprovalEvidenceBinding=self.job['inputs']['migrationApprovalEvidenceBinding'], outputRoot=self.job['outputRoot'],
             storage=self.storage, guard=self.job['guard'], implementation=self.job['implementation'], normalCandidates=1)
         self.auth_file = self.repo / 'authorization.json'
         self.auth_file.write_text(json.dumps(self.authorization))
@@ -88,16 +102,53 @@ class ApprovedJobTest(unittest.TestCase):
         self.permit = dict(schemaVersion='digest-approved-job-command-permit-v001',
             status='verified-approved-digest-job-v001', jobBinding=bind(self.job_file), authorizationBinding=bind(self.auth_file),
             bindings=dict(planId=self.job['planId'], logicalPrefix=self.job['outputRoot'],
-                planManifest=m.absolute_repo_binding(self.job['inputs']['candidateManifestBinding']),
+                planManifest=m.absolute_input_binding(self.job, self.job['inputs']['candidateManifestBinding']),
                 approvalRecord=bind(self.auth_file), implementationSha=self.head, commandPermitPath=str(self.permit_file)),
             storage=self.storage, implementation=[m.absolute_repo_binding(ref) for ref in self.job['implementation']['bindings']],
             monitorDirectory=self.directory, command=self.command, ownerBinding=self.owner_ref)
         self.permit_file.write_text(json.dumps(self.permit))
 
+    @contextmanager
+    def input_fixture_hardware(self):
+        # Model mount/device observations, while production byte, path, symlink and
+        # stable-identity checks still run against real tiny files owned by this test.
+        stable_bytes, inspect = m.stable_bound_bytes, m.inspect_output_ancestors
+        guest = Path(self.storage['guestRoot'])
+        physical_device = self.guest_physical.stat().st_dev
+        def mapped(target):
+            target = Path(target)
+            return self.guest_physical / target.relative_to(guest) if target.is_relative_to(guest) else target
+        def read_bytes(ref, expected_device=None):
+            target = mapped(ref['path'])
+            if target != Path(ref['path']):
+                self.assertEqual(expected_device, self.storage['guestDevice'])
+                return stable_bytes({**ref, 'path': str(target)}, expected_device=physical_device)
+            return stable_bytes(ref, expected_device=expected_device)
+        def ancestors(root, storage, allow_missing=False):
+            self.assertEqual(storage, self.storage)
+            return inspect(mapped(root), {**storage, 'guestRoot': str(self.guest_physical),
+                'guestDevice': physical_device}, allow_missing=allow_missing)
+        def volume(root, uuid, device, filesystem):
+            self.assertEqual((root, uuid, device, filesystem),
+                (str(guest), self.storage['guestVolumeUuid'], self.storage['guestDevice'], 'apfs'))
+            return {'writable': True, 'permissionsEnabled': True}
+        with mock.patch.object(m, 'volume_identity', side_effect=volume), \
+            mock.patch.object(m, 'inspect_output_ancestors', side_effect=ancestors):
+            yield read_bytes
+
+    def rebind_fixture_guest(self, configured, guest, device):
+        # Used only by the existing modeled launch/record tests, never a real grant.
+        job = configured['job']
+        job['storage'].update(guestRoot=str(guest), guestDevice=device)
+        inputs = job['inputs']; inputs['inputRoot'] = str(guest)
+        parameters = inputs['preparationParameters']; parameters['inputRoot'] = str(guest)
+        for key, suffix in (('outputRoot', 'preparation-output'), ('sourceRuntimeRoot', 'source-runtime')):
+            parameters[key] = str(guest / inputs['inputPrefix'] / suffix)
+        configured['authorization']['storage'] = copy.deepcopy(job['storage'])
+
     def qualify(self, permit=None, job_sha=None, auth_sha=None):
         permit = self.permit if permit is None else permit
         stable_json = m.stable_bound_json
-        stable_bytes = m.stable_bound_bytes
         file_identity = m.bound_file_identity
         verify_identity = m.verify_file_identity
         def identity(ref):
@@ -106,15 +157,16 @@ class ApprovedJobTest(unittest.TestCase):
             return None if value.get('fixtureOwner') else verify_identity(value)
         def read_json(ref):
             return copy.deepcopy(self.owner) if ref['path'] == self.owner_ref['path'] else stable_json(ref)
-        def read_bytes(ref):
-            return b'bound owner fixture' if ref['path'] == self.owner_ref['path'] else stable_bytes(ref)
+        def read_bytes(ref, expected_device=None):
+            return b'bound owner fixture' if ref['path'] == self.owner_ref['path'] else input_bytes(ref, expected_device=expected_device)
         def git(args, **kwargs):
             if args[-2:] == ['rev-parse', 'HEAD']:
                 return getattr(self, 'observed_head', self.head) + '\n'
             if args[-2:] == ['status', '--porcelain=v1']:
                 return getattr(self, 'observed_git_status', '')
             raise AssertionError('unexpected subprocess: ' + repr(args))
-        with mock.patch.object(m, 'stable_bound_json', side_effect=read_json), \
+        with self.input_fixture_hardware() as input_bytes, \
+            mock.patch.object(m, 'stable_bound_json', side_effect=read_json), \
             mock.patch.object(m, 'stable_bound_bytes', side_effect=read_bytes), \
             mock.patch.object(m, 'bound_file_identity', side_effect=identity), \
             mock.patch.object(m, 'verify_file_identity', side_effect=current_identity), \
@@ -128,6 +180,14 @@ class ApprovedJobTest(unittest.TestCase):
                 self.permit['authorizationBinding']['fileSha256'] if auth_sha is None else auth_sha)
             result['revalidate']()
             return result
+
+    def test_v001_job_and_authorization_are_rejected_before_qualification(self):
+        for kind in ('job', 'authorization'):
+            job, authorization = copy.deepcopy(self.job), copy.deepcopy(self.authorization)
+            if kind == 'job': job['schemaVersion'] = 'digest-approved-job-v001'
+            else: authorization['schemaVersion'] = 'digest-approved-job-authorization-v001'
+            with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, 'schema'):
+                m.validate_approved_job_config(job, authorization)
 
     def test_accepts_other_approved_plan_and_counts_without_old_values(self):
         result = self.qualify()
@@ -215,7 +275,9 @@ class ApprovedJobTest(unittest.TestCase):
             if args[-2:] == ['rev-parse', 'HEAD']: return self.head + '\n'
             if args[-2:] == ['status', '--porcelain=v1']: return ''
             raise AssertionError('unexpected fixture subprocess: ' + repr(args))
-        with mock.patch.object(m.subprocess, 'check_output', side_effect=fixture_git):
+        with self.input_fixture_hardware() as read_bytes, \
+            mock.patch.object(m, 'stable_bound_bytes', side_effect=read_bytes), \
+            mock.patch.object(m.subprocess, 'check_output', side_effect=fixture_git):
             configured = m.read_approved_job_files(str(self.job_file), str(self.auth_file),
                 bind(self.job_file)['fileSha256'], bind(self.auth_file)['fileSha256'])
         self.assertEqual(configured['job']['recoveryBinding'], configured['authorization']['recoveryBinding'])
@@ -307,8 +369,13 @@ class ApprovedJobTest(unittest.TestCase):
         guest = self.repo / 'record-guest'
         root = guest / self.job['outputRoot']
         root.mkdir(parents=True)
-        configured['job']['storage']['guestRoot'] = str(guest)
-        configured['job']['storage']['guestDevice'] = root.stat().st_dev
+        # The record-only qualifier rereads the same five current inputs. Preserve
+        # their bytes under this modeled guest instead of bypassing verification.
+        for original in self.guest_physical.rglob('*.json'):
+            target = guest / original.relative_to(self.guest_physical)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(original.read_bytes())
+        self.rebind_fixture_guest(configured, guest, root.stat().st_dev)
         configured['authorization']['verificationPolicy'] = configured['job']['verificationPolicy']
         configured['authorization']['storage'] = configured['job']['storage']
         self.job_file.write_text(json.dumps(configured['job']))
@@ -323,9 +390,14 @@ class ApprovedJobTest(unittest.TestCase):
         return configured, bind(pending), bind(bundle)
 
     def prepare_record(self, configured, pending, bundle=None, finalize=False, node_path=None):
+        def volume(root, uuid, device, filesystem):
+            storage = configured['job']['storage']
+            self.assertEqual((root, uuid, device, filesystem),
+                (storage['guestRoot'], storage['guestVolumeUuid'], storage['guestDevice'], 'apfs'))
+            return {'writable': True, 'permissionsEnabled': True}
         with mock.patch.object(m, 'read_approved_job_files', return_value=configured) as read, \
             mock.patch.object(m, 'approved_image_identity', return_value={}), \
-            mock.patch.object(m, 'inspect_output_ancestors'), \
+            mock.patch.object(m, 'volume_identity', side_effect=volume), \
             mock.patch.object(m, 'approved_current_implementation'), \
             mock.patch.object(m.os, 'geteuid', return_value=501):
             # Qualification may read real tiny fixture bytes but cannot claim a
@@ -461,7 +533,7 @@ class ApprovedJobTest(unittest.TestCase):
                 m.validate_approved_job_config(job, self.authorization)
 
     def test_rejects_changed_source_hash_and_size(self):
-        path = self.repo / self.job['inputs']['candidateManifestBinding']['path']
+        path = self.guest_physical / self.job['inputs']['candidateManifestBinding']['path']
         path.write_text('{"changed":true}\n')
         with self.assertRaisesRegex(ValueError, 'SHA'):
             self.qualify()
@@ -624,9 +696,8 @@ class ApprovedJobTest(unittest.TestCase):
     def launch_fixture(self):
         configured = self.prepared_fixture()
         guest = self.repo / 'guest'
-        guest.mkdir()
-        configured['job']['storage']['guestRoot'] = str(guest)
-        configured['job']['storage']['guestDevice'] = guest.stat().st_dev
+        guest.mkdir(exist_ok=True)
+        self.rebind_fixture_guest(configured, guest, guest.stat().st_dev)
         configured['outputDirectory'] = str(guest / self.job['outputRoot'])
         return configured
 

@@ -16,7 +16,7 @@ const hash=(v:Buffer|string)=>createHash('sha256').update(v).digest('hex');
 async function fileHash(p:string){const h=createHash('sha256');for await(const c of createReadStream(p))h.update(c);return h.digest('hex');}
 const bytes=(v:any)=>Buffer.from(JSON.stringify(v,null,2)+'\n');
 const implementationPaths=['runner/src/digest-approved-job-v001.ts','runner/src/digest-approved-job-runner-v001.ts',
-  'runner/src/digest-approved-inputs-v001.ts','runner/src/digest-approved-record-finalize-v001.ts','runner/src/digest-formal-handoff-v001.ts',
+  'runner/src/digest-approved-inputs-v001.ts','runner/src/digest-caption-registration-migration-v001.ts','runner/src/digest-approved-record-finalize-v001.ts','runner/src/digest-formal-handoff-v001.ts',
   'evals/clip_composition/adopted_media_manufacturing_v001.mts','evals/clip_composition/presentation_output_caption_cue_source_package_v001.mjs',
   'evals/clip_composition/run_presentation_instruction_renderer_job_v002.ts','evals/clip_composition/render_presentation_v002.mjs',
   'tools/digest-quality/original-resolution-low-memory-composite.mjs','tools/digest-quality/original-resolution-full-supervisor-v002.py',
@@ -46,7 +46,9 @@ export async function realpath(p,...a){return logical(await original.realpath(ma
 export const readFile=(p,...a)=>original.readFile(mapped(p),...a);
 export const writeFile=(p,...a)=>original.writeFile(mapped(p),...a);
 export const mkdir=(p,...a)=>original.mkdir(mapped(p),...a);
-export const open=(p,...a)=>original.open(mapped(p),...a);
+// Path and handle observations model the same guest device; all other file identity fields stay real.
+export async function open(p,...a){const handle=await original.open(mapped(p),...a),stat=handle.stat.bind(handle),dev=device(p);
+ handle.stat=async(...args)=>{const st=await stat(...args);if(dev!==null)st.dev=typeof st.dev==='bigint'?BigInt(dev):dev;return st;};return handle;}
 export const chmod=(p,...a)=>original.chmod(mapped(p),...a);
 export const unlink=(p,...a)=>original.unlink(mapped(p),...a);
 export const rmdir=(p,...a)=>original.rmdir(mapped(p),...a);
@@ -164,10 +166,19 @@ async function fixture(action:(f:Fixture)=>Promise<void>,initialMode='pending') 
   try {
     await mkdir(directory+'/guest');await mkdir(directory+'/host');await mkdir(directory+'/host/test-only.sparsebundle');
     await writeFile(directory+'/host/test-only.sparsebundle/Info.plist','TEST-ONLY VIRTUAL IMAGE METADATA\n');
-    const controls:any={};for(const key of ['prep','candidate','typography','renderer']) {const b=await save(key+'.json',{schemaVersion:'test-only-'+key});controls[key]={...b,path:path.relative(ROOT,b.path)};}
     const guestRoot='/Volumes/TEST-RECORD-GUEST-'+id,hostRoot='/Volumes/TEST-RECORD-HOST-'+id;
-    const job:any={schemaVersion:'digest-approved-job-v001',planId:id,outputRoot:relative+'/attempt-001',
-      inputs:{preparationParameters:{testOnly:true},preparationManifestBinding:controls.prep,candidateManifestBinding:controls.candidate,typographySettingsBinding:controls.typography,rendererTemplateBinding:controls.renderer},
+    const inputPrefix=relative+'/current-inputs-v001',inputPhysical=directory+'/guest/'+inputPrefix;
+    await mkdir(inputPhysical,{recursive:true});
+    const saveInput=async(key:string)=>{const raw=bytes({schemaVersion:'test-only-'+key}),relativePath=inputPrefix+'/'+key+'.json';
+      await writeFile(directory+'/guest/'+relativePath,raw,{flag:'wx'});return {path:relativePath,fileSha256:hash(raw),sizeBytes:raw.length};};
+    const controls:any={};for(const key of ['prep','candidate','typography','renderer','migration'])controls[key]=await saveInput(key);
+    const stateBinding=await saveInput('state'),styleTemplateBinding=await saveInput('style');
+    const scope=await save('test-only-scope.json',{testOnly:true}),scopeBinding={...scope,path:path.relative(ROOT,scope.path)};
+    const job:any={schemaVersion:'digest-approved-job-v002',planId:id,outputRoot:relative+'/attempt-001',
+      inputs:{inputRoot:guestRoot,inputPrefix,preparationParameters:{workspaceRoot:ROOT,inputRoot:guestRoot,inputPrefix,
+        outputRoot:guestRoot+'/'+inputPrefix+'/preparation-output',sourceRuntimeRoot:guestRoot+'/'+inputPrefix+'/source-runtime',stateBinding,styleTemplateBinding,scopeBinding},
+        preparationManifestBinding:controls.prep,candidateManifestBinding:controls.candidate,typographySettingsBinding:controls.typography,
+        rendererTemplateBinding:controls.renderer,migrationApprovalEvidenceBinding:controls.migration},
       storage:{guestRoot,hostRoot,imagePath:hostRoot+'/test-only.sparsebundle',guestVolumeUuid:'11111111-1111-1111-1111-111111111111',hostVolumeUuid:'22222222-2222-2222-2222-222222222222',
         guestDevice:19001,hostDevice:19002,imageMaximumBytes:100_000_000_000,hostMetadataReserveBytes:6_000_000_000,internalRoot:ROOT},expected:{frames:2,audioSamples:2940,groups:1,atoms:1,cues:1},
       implementation:{sha:(await exec('git',['rev-parse','HEAD'],{cwd:ROOT})).stdout.trim(),bindings:await Promise.all(implementationPaths.map(async p=>({path:p,fileSha256:await fileHash(ROOT+'/'+p)}))),
@@ -175,9 +186,9 @@ async function fixture(action:(f:Fixture)=>Promise<void>,initialMode='pending') 
       verificationPolicy:{schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',representativeInstructionIds:['fixture-caption-1'],
         permittedMethods:['text-clock-context'],confirmationRecordPath:relative+'/attempt-001/representative/confirmation.json'}};
     if(initialMode==='full')delete job.verificationPolicy;
-    const jobBinding=await save('job.json',job),authorizationBinding=await save('synthetic-test-authorization.json',{schemaVersion:'digest-approved-job-authorization-v001',recordId:id+'-synthetic',
+    const jobBinding=await save('job.json',job),authorizationBinding=await save('synthetic-test-authorization.json',{schemaVersion:'digest-approved-job-authorization-v002',recordId:id+'-synthetic',
       userApproval:{at:new Date().toISOString(),messageId:'TEST-NOT-A-USER-MESSAGE',sourceThreadId:'TEST-ONLY-NO-HUMAN-APPROVAL',text:'SYNTHETIC TEST ONLY. No real manufacturing or human grant; hardware virtualized, no real media generated.'},
-      actions:['manufacture-one-approved-plan'],jobBinding,planId:job.planId,manifestBinding:job.inputs.candidateManifestBinding,typographySettingsBinding:job.inputs.typographySettingsBinding,
+      actions:['manufacture-one-approved-plan'],jobBinding,planId:job.planId,manifestBinding:job.inputs.candidateManifestBinding,typographySettingsBinding:job.inputs.typographySettingsBinding,migrationApprovalEvidenceBinding:job.inputs.migrationApprovalEvidenceBinding,
       outputRoot:job.outputRoot,storage:job.storage,guard:job.guard,implementation:job.implementation,normalCandidates:1,...(job.verificationPolicy?{verificationPolicy:job.verificationPolicy}:{})});
     const options={workspaceRoot:ROOT,jobBinding,authorizationBinding,trustedJobSha256:jobBinding.fileSha256,trustedAuthorizationSha256:authorizationBinding.fileSha256};
     const cfg:any={fixture:directory,repo:ROOT,initialMode,guestRoot,hostRoot,guestPhysical:directory+'/guest',hostPhysical:directory+'/host',guestDevice:job.storage.guestDevice,hostDevice:job.storage.hostDevice,

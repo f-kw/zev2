@@ -1,5 +1,17 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-11T00:09:47.279Z（部分検査通過・完全Normal fixtureと容量拡張の配信復旧調整）
+
+保存監視34件・Python監視50件と型検査は通過。完成後の記録再読TSは8件中1件通過・7件未通過で、元入力の完全なNormal閉包をtiny fixtureへ用意する追加方針が必要。期待弱化/null代替/J16置換/製品変更なし。個別設営承認11・対象3test、初期枠履歴不変、詳細は同reportと今回月別log。容量#67は別仕事で本人拡張了承済み、512GB試算454.127GBを提示。guest free84.035GBで開始要求186.373GB未達。旧KEEP配信4serverがguestログを保持し、remount後device固定helperの復旧範囲を相談役へ返す。Macボードappは最新観測で終了済み。拡張・detach・backup・旧server停止・媒体/API/製造/旧成果削除0、元35/製品23不変、#61相談役待ち/#67mona Doing。最終確認 2026-10-11T00:09:47.279Z（2026-10-11T09:09:47 JST）、次担当mona。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-10T23:54:37.757Z（既存Normal/recovery 3fixture修正の個別承認・媒体なし検査再開）
+
+親が媒体なしNormal/recoveryの3fixture更新を個別承認。対象 runner/src/digest-approved-storage-revalidation-v001.test.ts / runner/src/digest-approved-record-finalize-v001.test.ts / tools/digest-quality/original-resolution-full-supervisor-v002.approved-job.test.py。版名だけでなくcurrent root/prefix・migration・permit manifest・inputPaths・preparation workspace/root/output/state/style/scopeを現契約へそろえ、元の拒否assertと媒体tool禁止を保持。J16へ置換せず、製品変更なし。累積初期5/5＋個別6～10を保持し、今回まとまった更新を個別11として記録。受領 2026-10-10T23:54:37.364Z、実着手 2026-10-10T23:54:37.757Z（2026-10-11T08:54:37 JST）、base 5bb8f5472a8bb6ecc00961f835e12e12568d545c clean/untracked0、製品23/元31/採否4不変。容量67はmona/Doingの別taskで、容量変更/削除/製造/APIをこのfixture作業へ混ぜない。本人は別にSSD拡張を認めたが、現在は既存レビューserver4件とMacボードappがguestを使用中、拡張は未実施。対象3検査・型を検証し、J16 actual通しとは分けて報告する。
+
+以下は以前の時点の記録。
+
 ## 最新現在地 — 2026-10-10T23:41:14.704Z（第10回read-only準備合格・保存容量と次検証を相談役へ）
 
 変更結果：第10回は検査用private helperの2行/事前8固定SHAだけに適用し、read-only Core準備はpassed。実font/runtime/contract hash・元base-media SHA/ffprobe・pure admission・元326全Common Core plan再構築・timeline/manifest差替え拒否が通過。今回製品コード変更0、native glyph/背景/AAC/動画/API0、実映像品質は未確認。一般trust/default/元font/style/採否/時計は不変、正式job/製造権限に転用しない。
