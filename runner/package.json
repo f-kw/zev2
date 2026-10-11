@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./digest-readonly": {
+      "types": "./dist/digest-ui-readonly-v001.d.ts",
+      "import": "./dist/digest-ui-readonly-v001.js"
+    }
+  },
   "scripts": {
     "dry-run": "corepack pnpm --filter @zev2/shared build && tsx src/index.ts",
     "dry-run:no-build": "tsx src/index.ts",

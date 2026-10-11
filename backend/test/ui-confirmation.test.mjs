@@ -309,7 +309,7 @@ test('registered recommendation has a real candidate ID and reason; absence neve
 test('preview state requires an explicit saved candidate job and an actual claim for preparing',async()=>{
   for (const status of ['queued','running','succeeded','failed']) {
     const {state,review}=await fixture();const job=state.agentRequests.find(r=>r.type==='render_video');
-    job.status=status;if (status==='running') Object.assign(job,{claimOwnerId:'fixture-runner',claimedAt:'2026-10-11T02:00:00Z'});
+    job.status=status;if (status==='running') Object.assign(job,{claimOwnerId:'fixture-runner',claimedAt:'2026-10-11T02:00:00Z',claimExpiresAt:new Date(Date.now()+60_000).toISOString()});
     review.options[0].evidenceRefs.push({kind:'agent_request',refId:job.id,meaning:'この候補の登録済みプレビュー作業'});await saveState(state);
     const m=await materials();assert.deepEqual(m.blockers,[]);
     assert.equal(m.candidates[0].previewStatus.state,{queued:'not_created',running:'preparing',succeeded:'ready',failed:'failed'}[status]);
@@ -343,4 +343,18 @@ test('foreign or nonexistent preview links and expired claims cannot appear as p
   review.options[0].evidenceRefs.push({kind:'agent_request',refId:job.id,meaning:'期限切れ作業'});await saveState(state);
   const before=await readFile(path.join(root,'state.json'));assert.equal((await materials()).candidates[0].previewStatus.state,'unknown');
   assert.deepEqual(await readFile(path.join(root,'state.json')),before);
+});
+
+test('missing or invalid preview claim expiry stays unknown without state changes',async()=>{
+  const {state,review}=await fixture(),job=state.agentRequests.find(r=>r.type==='render_video');
+  Object.assign(job,{status:'running',claimOwnerId:'qa',claimedAt:new Date(Date.now()-1000).toISOString()});
+  review.options[0].evidenceRefs.push({kind:'agent_request',refId:job.id,meaning:'この候補の登録作業'});
+  for (const expiry of [undefined,'','invalid']) {
+    job.claimExpiresAt=expiry;await saveState(state);
+    const before=await readFile(path.join(root,'state.json'));
+    assert.equal((await materials()).candidates[0].previewStatus.state,'unknown');
+    assert.deepEqual(await readFile(path.join(root,'state.json')),before);
+  }
+  job.claimExpiresAt=new Date(Date.now()+60_000).toISOString();await saveState(state);
+  assert.equal((await materials()).candidates[0].previewStatus.state,'preparing');
 });

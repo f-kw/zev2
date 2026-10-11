@@ -76,7 +76,7 @@ function previewJobState(request: AgentRequest): NonNullable<UiSavedCandidate['p
   if (request.status==='cancelled' || request.status==='superseded') return {state:'cancelled',requestId:request.id};
   if (request.status==='running' && request.claimOwnerId?.trim() && request.claimedAt
     && Number.isFinite(Date.parse(request.claimedAt)) && Date.parse(request.claimedAt)<=Date.now()
-    && (!request.claimExpiresAt || Date.parse(request.claimExpiresAt)>Date.now())) return {state:'preparing',requestId:request.id};
+    && request.claimExpiresAt && Date.parse(request.claimExpiresAt)>Date.now()) return {state:'preparing',requestId:request.id};
   return {state:'unknown',requestId:request.id};
 }
 export async function buildUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<UiReviewMaterials> {
