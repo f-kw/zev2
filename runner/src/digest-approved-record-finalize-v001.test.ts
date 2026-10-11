@@ -38,37 +38,40 @@ const fsPromisesSource=`import * as original from 'node:fs/promises';import {rea
 export * from 'node:fs/promises';
 const cfg=JSON.parse(readFileSync(process.env.ZEV_RECORD_FIXTURE_PATH+'/hardware.json','utf8'));
 function text(p){return p instanceof URL?fileURLToPath(p):p;}
-function mapped(p){p=text(p);if(typeof p!=='string')return p;for(const [logical,actual] of [[cfg.guestRoot,cfg.guestPhysical],[cfg.hostRoot,cfg.hostPhysical]])if(p===logical||p.startsWith(logical+'/'))return actual+p.slice(logical.length);return p;}
+function readonlyInput(p){p=text(p);return typeof p==='string'&&(p===cfg.inputReadonlyPrefix||p.startsWith(cfg.inputReadonlyPrefix+'/')
+ ||(p.startsWith(cfg.guestRoot+'/')&&cfg.inputReadonlyPrefix.startsWith(p+'/')));}
+function mapped(p){p=text(p);if(typeof p!=='string'||readonlyInput(p))return p;for(const [logical,actual] of [[cfg.guestRoot,cfg.guestPhysical],[cfg.hostRoot,cfg.hostPhysical]])if(p===logical||p.startsWith(logical+'/'))return actual+p.slice(logical.length);return p;}
 function logical(p){for(const [prefix,actual] of [[cfg.guestRoot,cfg.guestPhysical],[cfg.hostRoot,cfg.hostPhysical]])if(p===actual||p.startsWith(actual+'/'))return prefix+p.slice(actual.length);return p;}
 function device(p){p=text(p);return typeof p==='string'&&(p===cfg.guestRoot||p.startsWith(cfg.guestRoot+'/'))?cfg.guestDevice:typeof p==='string'&&(p===cfg.hostRoot||p.startsWith(cfg.hostRoot+'/'))?cfg.hostDevice:null;}
 export async function lstat(p,...a){const st=await original.lstat(mapped(p),...a),dev=device(p);if(dev!==null)st.dev=typeof st.dev==='bigint'?BigInt(dev):dev;return st;}
 export async function realpath(p,...a){return logical(await original.realpath(mapped(p),...a));}
 export const readFile=(p,...a)=>original.readFile(mapped(p),...a);
-export const writeFile=(p,...a)=>original.writeFile(mapped(p),...a);
-export const mkdir=(p,...a)=>original.mkdir(mapped(p),...a);
+function writable(p){const actual=mapped(p);if(typeof actual!=='string'||!actual.startsWith(cfg.fixture+'/'))throw Error('TEST_NONFIXTURE_WRITE_FORBIDDEN');return actual;}
+export const writeFile=(p,...a)=>original.writeFile(writable(p),...a);
+export const mkdir=(p,...a)=>original.mkdir(writable(p),...a);
 // Path and handle observations model the same guest device; all other file identity fields stay real.
-export async function open(p,...a){const handle=await original.open(mapped(p),...a),stat=handle.stat.bind(handle),dev=device(p);
+export async function open(p,...a){const actual=a[0]==='r'?mapped(p):writable(p),handle=await original.open(actual,...a),stat=handle.stat.bind(handle),dev=device(p);
  handle.stat=async(...args)=>{const st=await stat(...args);if(dev!==null)st.dev=typeof st.dev==='bigint'?BigInt(dev):dev;return st;};return handle;}
-export const chmod=(p,...a)=>original.chmod(mapped(p),...a);
-export const unlink=(p,...a)=>original.unlink(mapped(p),...a);
-export const rmdir=(p,...a)=>original.rmdir(mapped(p),...a);
-export const copyFile=(a,b,...c)=>original.copyFile(mapped(a),mapped(b),...c);
+export const chmod=(p,...a)=>original.chmod(writable(p),...a);
+export const unlink=(p,...a)=>original.unlink(writable(p),...a);
+export const rmdir=(p,...a)=>original.rmdir(writable(p),...a);
+export const copyFile=(a,b,...c)=>original.copyFile(mapped(a),writable(b),...c);
 export async function statfs(p,...a){const st=await original.statfs(mapped(p),...a);return {...st,bavail:100_000_000,bsize:4096};}
 export async function link(a,b,...c){
  if(text(b).endsWith('/completed-receipt.json')){
   if(process.env.ZEV_FIXTURE_PRECOMMIT_FAIL==='1')throw Object.assign(Error('TEST_PRECOMMIT_FAILURE'),{code:'ENOSPC'});
   if(process.env.ZEV_FIXTURE_HOLD_COMMIT==='1'){
    await original.writeFile(cfg.fixture+'/commit-ready','1');let ready=false;
-   for(let i=0;i<200;i++){try{await original.access(cfg.fixture+'/release-commit');ready=true;break;}catch{}await new Promise(r=>setTimeout(r,25));}
+   for(let i=0;i<7200;i++){try{await original.access(cfg.fixture+'/release-commit');ready=true;break;}catch{}await new Promise(r=>setTimeout(r,25));}
    if(!ready)throw Error('TEST_COMMIT_BARRIER_TIMEOUT');
   }
  }
- return original.link(mapped(a),mapped(b),...c);
+ return original.link(mapped(a),writable(b),...c);
 }
 export default {...original,lstat,realpath,readFile,writeFile,mkdir,open,chmod,unlink,rmdir,copyFile,statfs,link};
 `;
 const fsSource=`import * as original from 'node:fs';export * from 'node:fs';const cfg=JSON.parse(original.readFileSync(process.env.ZEV_RECORD_FIXTURE_PATH+'/hardware.json','utf8'));
-function mapped(p){if(typeof p!=='string')return p;for(const [logical,actual] of [[cfg.guestRoot,cfg.guestPhysical],[cfg.hostRoot,cfg.hostPhysical]])if(p===logical||p.startsWith(logical+'/'))return actual+p.slice(logical.length);return p;}
+function mapped(p){if(typeof p!=='string'||p===cfg.inputReadonlyPrefix||p.startsWith(cfg.inputReadonlyPrefix+'/'))return p;for(const [logical,actual] of [[cfg.guestRoot,cfg.guestPhysical],[cfg.hostRoot,cfg.hostPhysical]])if(p===logical||p.startsWith(logical+'/'))return actual+p.slice(logical.length);return p;}
 export const createReadStream=(p,...a)=>original.createReadStream(mapped(p),...a);
 export default {...original,createReadStream};
 `;
@@ -99,21 +102,38 @@ const sha=v=>createHash('sha256').update(v).digest('hex'),canonical=v=>sha(contr
 async function save(logical,value,binary=false){const file=cfg.guestRoot+'/'+logical;await mkdir(path.dirname(file),{recursive:true});const raw=binary?value:Buffer.from(JSON.stringify(value,null,2)+'\\n');await writeFile(file,raw,{flag:'wx'});await chmod(file,0o444);return {path:logical,fileSha256:sha(raw),sizeBytes:raw.length};}
 const media=await save(out+'/render/presentation-rendered-v002.mp4',Buffer.from('TEST ONLY OPAQUE MEDIA BYTES; NO VIDEO GENERATED'),true);
 const png=await save(out+'/render/overlays/fixture.png',Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aLlQAAAAASUVORK5CYII=','base64'),true);
-const element={instructionId:'fixture-caption-1',startFrame:0,endFrameExclusive:2,displayFrameCount:2,text:'Synthetic fixture',presetId:'fixture-preset',registryVersion:'fixture-registry',indexedLines:[{text:'Synthetic fixture'}],visualState:{layout:{maxLines:2},position:{preset:'bottom'},background:{kind:'none'}}};
-const plan={schemaVersion:'presentation-render-plan-v002',canvas:{width:64,height:64,fps:30,safeAreaPx:{left:0,right:0,top:0,bottom:0}},elements:[element]};
-const app={instructionId:element.instructionId,requestedPresetId:element.presetId,appliedPresetId:element.presetId,appliedPresetRegistryVersion:element.registryVersion,
- overlayFile:'overlays/fixture.png',overlaySha256:png.fileSha256,appliedOverlayPropsCanonicalSha256:'e'.repeat(64),finalPlanElementReference:{planFile:'presentation-render-plan-v002.json',instructionId:element.instructionId,canonicalSha256:canonical({...element,overlaySha256:png.fileSha256})}};
-const inspection={instructionId:element.instructionId,overlayFile:app.overlayFile,overlaySha256:png.fileSha256,appliedOverlayPropsCanonicalSha256:app.appliedOverlayPropsCanonicalSha256,
- alphaMax:255,alphaBounds:{left:10,top:10,right:20,bottom:20},lineCount:1,lineAlphaBounds:[{lineIndex:0,left:10,top:10,right:20,bottom:20}]};
-const outputMedia={durationMs:2*1000/30,video:{width:64,height:64,fps:30,frameCount:2}},expectedAudio={present:false};
-const rules=qc.evaluatePresentationRendererQcV002({plan,applicationResults:[app],overlayInspections:[inspection],mediaInspection:outputMedia,expectedAudio,expectedFrameCount:2,canvas:plan.canvas,requireFinalVisibility:false});
+// Reuse the saved Normal closure and the existing approved-inputs test's row-to-plan
+// assembly. Inputs are read-only; only opaque media and tiny PNG/record fixtures are written.
+const inputsReader=await import(pathToFileURL(cfg.repo+'/runner/src/digest-approved-inputs-v001.ts'));
+const inputs=await inputsReader.readApprovedDigestInputsV001(q);
+const elements=inputs.correspondence.rows.map((row,index)=>({instructionId:'fixture-caption-'+(index+1),
+ startFrame:row.startFrame,endFrameExclusive:row.endFrameExclusive,displayFrameCount:row.displayFrameCount,
+ text:row.lines.map(line=>line.text).join(''),targetProvenance:{sourceAtomIds:row.atomOccurrenceIds},
+ indexedLines:row.lines.map(line=>({text:line.text,sourceUnitIds:line.atomOccurrenceIds})),
+ presetId:'fixture-preset',registryVersion:'fixture-registry',visualState:{layout:{maxLines:2},position:{preset:'bottom'},background:{kind:'none'}}}));
+const plan={schemaVersion:'presentation-render-plan-v002',canvas:{width:64,height:64,fps:30,safeAreaPx:{left:0,right:0,top:0,bottom:0}},elements};
+if(elements.length!==q.job.expected.cues)throw Error('TEST_COMPLETE_NORMAL_PLAN_COVERAGE_REQUIRED');
+const overlayRecords=[],applicationResults=[];
+for(const [index,item] of elements.entries()){
+ const pngBinding=index===0?png:await save(out+'/render/overlays/fixture-'+(index+1)+'.png',await readFile(cfg.guestRoot+'/'+png.path),true);
+ const overlayFile=pngBinding.path.slice((out+'/render/').length);
+ const app={instructionId:item.instructionId,requestedPresetId:item.presetId,appliedPresetId:item.presetId,appliedPresetRegistryVersion:item.registryVersion,
+  overlayFile,overlaySha256:pngBinding.fileSha256,appliedOverlayPropsCanonicalSha256:'e'.repeat(64),finalPlanElementReference:{planFile:'presentation-render-plan-v002.json',instructionId:item.instructionId,canonicalSha256:canonical({...item,overlaySha256:pngBinding.fileSha256})}};
+ const inspection={instructionId:item.instructionId,overlayFile,overlaySha256:pngBinding.fileSha256,appliedOverlayPropsCanonicalSha256:app.appliedOverlayPropsCanonicalSha256,
+  alphaMax:255,alphaBounds:{left:10,top:10,right:20,bottom:20},lineCount:item.indexedLines.length,
+  lineAlphaBounds:item.indexedLines.map((line,lineIndex)=>({lineIndex,left:10,top:10+lineIndex*5,right:20,bottom:14+lineIndex*5}))};
+ applicationResults.push(app);overlayRecords.push({element:item,inspection,pngBinding});
+}
+const element=elements[0],expectedFrameCount=q.job.expected.frames,observedFrame=element.startFrame;
+const outputMedia={durationMs:expectedFrameCount*1000/30,video:{width:64,height:64,fps:30,frameCount:expectedFrameCount}},expectedAudio={present:false};
+const rules=qc.evaluatePresentationRendererQcV002({plan,applicationResults,overlayInspections:overlayRecords.map(r=>r.inspection),mediaInspection:outputMedia,expectedAudio,expectedFrameCount,canvas:plan.canvas,requireFinalVisibility:false});
 if(rules.status!=='passed')throw Error(JSON.stringify(rules.violations));
 const bindings={planId:q.job.planId,outputRoot:out,approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,manifestBinding:q.job.inputs.candidateManifestBinding,
  typographySettingsBinding:q.job.inputs.typographySettingsBinding,rendererPlanCanonicalSha256:canonical(plan),completedMedia:{...media,path:cfg.guestRoot+'/'+media.path}};
 let verification=q.job.verificationPolicy?shared.evaluateDigestRepresentativeCompletionV001({policy:q.job.verificationPolicy,bindings,plan,ruleQc:rules}):undefined;
 const technical={schemaVersion:'digest-representative-technical-evidence-v001',planId:q.job.planId,approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,
  manifestBinding:q.job.inputs.candidateManifestBinding,typographySettingsBinding:q.job.inputs.typographySettingsBinding,implementationSha:q.job.implementation.sha,
- verificationPolicy:q.job.verificationPolicy,publishedMediaBinding:media,rendererPlanCanonicalSha256:canonical(plan),plan,applicationResults:[app],overlayRecords:[{element,inspection,pngBinding:png}],outputMedia,expectedAudio,expectedFrameCount:2};
+ verificationPolicy:q.job.verificationPolicy,publishedMediaBinding:media,rendererPlanCanonicalSha256:canonical(plan),plan,applicationResults,overlayRecords,outputMedia,expectedAudio,expectedFrameCount};
 const technicalBinding=await save(out+'/representative-technical-evidence-v001.json',technical);
 const corePlan={schemaVersion:'digest-approved-candidate-core-plan-v001',planId:q.job.planId,outputRoot:out,approvedJobBinding:q.jobBinding,approvalRecordBinding:q.authorizationBinding,
  acceptedManifestBinding:q.job.inputs.candidateManifestBinding,typographySettingsBinding:q.job.inputs.typographySettingsBinding,verificationPolicy:q.job.verificationPolicy};
@@ -123,12 +143,12 @@ const pending={schemaVersion:'digest-approved-manufacturing-result-v001',status:
  technicalEvidenceBinding:technicalBinding,publishedMediaBinding:media,completedAt:null,humanQuality:'not-evaluated',originalJudgmentReruns:0,
  result:{status:'confirmation-pending',complete:false,qc:'confirmation-pending',verification,video:{path:media.path,fileSha256:media.fileSha256},technicalEvidenceBinding:technicalBinding,publishedMediaBinding:media}};
 let receiptBinding;
-const sample=Buffer.from(JSON.stringify({testOnly:true,instructionId:element.instructionId,text:element.text,frame:1})+'\\n'),sampleSource=cfg.fixture+'/sample-source.json';
+const sample=Buffer.from(JSON.stringify({testOnly:true,instructionId:element.instructionId,text:element.text,frame:observedFrame})+'\\n'),sampleSource=cfg.fixture+'/sample-source.json';
 await writeFile(sampleSource,sample,{flag:'wx'});const evidenceBinding={path:out+'/representative/evidence/context.json',fileSha256:sha(sample),sizeBytes:sample.length};
 const record={schemaVersion:'digest-representative-verification-record-v001',planId:q.job.planId,approvedJobBinding:q.jobBinding,authorizationBinding:q.authorizationBinding,
  manifestBinding:q.job.inputs.candidateManifestBinding,typographySettingsBinding:q.job.inputs.typographySettingsBinding,rendererPlanCanonicalSha256:canonical(plan),
- completedMedia:{fileSha256:media.fileSha256,sizeBytes:media.sizeBytes},confirmedAt:new Date().toISOString(),representatives:[{instructionId:element.instructionId,startFrame:0,endFrameExclusive:2,
- observedAtFrame:1,method:'text-clock-context',result:'accepted',evidenceBinding,note:'Synthetic structural test, not a real viewing or human approval'}],observations:{wholeVideoPlayback:'not-evaluated',audioListening:'not-evaluated',humanQualityAdoption:'not-evaluated'}};
+ completedMedia:{fileSha256:media.fileSha256,sizeBytes:media.sizeBytes},confirmedAt:new Date().toISOString(),representatives:[{instructionId:element.instructionId,startFrame:element.startFrame,endFrameExclusive:element.endFrameExclusive,
+ observedAtFrame:observedFrame,method:'text-clock-context',result:'accepted',evidenceBinding,note:'Synthetic structural test, not a real viewing or human approval'}],observations:{wholeVideoPlayback:'not-evaluated',audioListening:'not-evaluated',humanQualityAdoption:'not-evaluated'}};
 const recordRaw=Buffer.from(JSON.stringify(record,null,2)+'\\n'),recordSource=cfg.fixture+'/record-source.json';await writeFile(recordSource,recordRaw,{flag:'wx'});
 if(cfg.initialMode!=='pending'){
  const admission=await save(out+'/admission-receipt.json',{schemaVersion:'test-only-admission',status:'accepted'}),lineLayout=await save(out+'/line-layout.json',{schemaVersion:'test-only-layout',lines:['Synthetic fixture']});
@@ -148,7 +168,7 @@ const registration={schemaVersion:'digest-representative-registration-v001',appr
  record:{destinationPath:q.job.verificationPolicy?.confirmationRecordPath??out+'/representative/confirmation.json',sourceBinding:{path:recordSource,fileSha256:sha(recordRaw),sizeBytes:recordRaw.length}},
  evidence:[{destinationPath:evidenceBinding.path,sourceBinding:{path:sampleSource,fileSha256:sha(sample),sizeBytes:sample.length}}]};
 const bundleRaw=Buffer.from(JSON.stringify(registration,null,2)+'\\n'),bundle=cfg.fixture+'/registration-source.json';await writeFile(bundle,bundleRaw,{flag:'wx'});
-process.stdout.write(JSON.stringify({pendingReceiptBinding:receiptBinding,registrationBinding:{path:bundle,fileSha256:sha(bundleRaw),sizeBytes:bundleRaw.length},media,png,technicalBinding,coreBinding})+'\\n');
+process.stdout.write(JSON.stringify({pendingReceiptBinding:receiptBinding,registrationBinding:{path:bundle,fileSha256:sha(bundleRaw),sizeBytes:bundleRaw.length},media,png,technicalBinding,coreBinding,normalClosure:{schemaVersion:'test-complete-normal-closure-v001',manifestBinding:q.job.inputs.candidateManifestBinding,expected:q.job.expected,logicalCaptions:elements.length,visibilitySelection:await inputsReader.readApprovedDigestCaptionVisibilitySelectionV001(q,plan),mediaGenerated:0}})+'\\n');
 `;
 
 type Fixture={directory:string;cfg:any;options:any;seed:any;physical:(logical:string)=>string;run:(mode:string,env?:Record<string,string>,anchor?:any)=>ReturnType<typeof worker>};
@@ -166,21 +186,18 @@ async function fixture(action:(f:Fixture)=>Promise<void>,initialMode='pending') 
   try {
     await mkdir(directory+'/guest');await mkdir(directory+'/host');await mkdir(directory+'/host/test-only.sparsebundle');
     await writeFile(directory+'/host/test-only.sparsebundle/Info.plist','TEST-ONLY VIRTUAL IMAGE METADATA\n');
-    const guestRoot='/Volumes/TEST-RECORD-GUEST-'+id,hostRoot='/Volumes/TEST-RECORD-HOST-'+id;
-    const inputPrefix=relative+'/current-inputs-v001',inputPhysical=directory+'/guest/'+inputPrefix;
-    await mkdir(inputPhysical,{recursive:true});
-    const saveInput=async(key:string)=>{const raw=bytes({schemaVersion:'test-only-'+key}),relativePath=inputPrefix+'/'+key+'.json';
-      await writeFile(directory+'/guest/'+relativePath,raw,{flag:'wx'});return {path:relativePath,fileSha256:hash(raw),sizeBytes:raw.length};};
-    const controls:any={};for(const key of ['prep','candidate','typography','renderer','migration'])controls[key]=await saveInput(key);
-    const stateBinding=await saveInput('state'),styleTemplateBinding=await saveInput('style');
-    const scope=await save('test-only-scope.json',{testOnly:true}),scopeBinding={...scope,path:path.relative(ROOT,scope.path)};
-    const job:any={schemaVersion:'digest-approved-job-v002',planId:id,outputRoot:relative+'/attempt-001',
-      inputs:{inputRoot:guestRoot,inputPrefix,preparationParameters:{workspaceRoot:ROOT,inputRoot:guestRoot,inputPrefix,
-        outputRoot:guestRoot+'/'+inputPrefix+'/preparation-output',sourceRuntimeRoot:guestRoot+'/'+inputPrefix+'/source-runtime',stateBinding,styleTemplateBinding,scopeBinding},
-        preparationManifestBinding:controls.prep,candidateManifestBinding:controls.candidate,typographySettingsBinding:controls.typography,
-        rendererTemplateBinding:controls.renderer,migrationApprovalEvidenceBinding:controls.migration},
+    // Match the existing saved-Normal qualification fixture, without copying or
+    // rebinding real inputs. Current input JSON is passed through read-only, while
+    // every output operation remains in this test's owned, ignored directory.
+    const savedJob=JSON.parse(await readFile(ROOT+'/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/inputs-v001/approved-display-job-v001/job.json','utf8'));
+    const guestRoot=savedJob.inputs.inputRoot,hostRoot='/Volumes/TEST-RECORD-HOST-'+id,inputPrefix=savedJob.inputs.inputPrefix;
+    const candidatePath=inputPrefix+'/caption-registration/manifest.json',candidateRaw=await readFile(guestRoot+'/'+candidatePath),candidate=JSON.parse(candidateRaw.toString());
+    const inputs=structuredClone(savedJob.inputs);
+    inputs.candidateManifestBinding={path:candidatePath,fileSha256:hash(candidateRaw),sizeBytes:candidateRaw.length};
+    const summary=candidate.summary,expected={frames:summary.originalPlanEndFrame,audioSamples:summary.originalPlanEndSample,groups:summary.groups,atoms:summary.atoms,cues:summary.newCues};
+    const job:any={schemaVersion:'digest-approved-job-v002',planId:savedJob.planId,outputRoot:relative+'/attempt-001',inputs,
       storage:{guestRoot,hostRoot,imagePath:hostRoot+'/test-only.sparsebundle',guestVolumeUuid:'11111111-1111-1111-1111-111111111111',hostVolumeUuid:'22222222-2222-2222-2222-222222222222',
-        guestDevice:19001,hostDevice:19002,imageMaximumBytes:100_000_000_000,hostMetadataReserveBytes:6_000_000_000,internalRoot:ROOT},expected:{frames:2,audioSamples:2940,groups:1,atoms:1,cues:1},
+        guestDevice:19001,hostDevice:19002,imageMaximumBytes:100_000_000_000,hostMetadataReserveBytes:6_000_000_000,internalRoot:ROOT},expected,
       implementation:{sha:(await exec('git',['rev-parse','HEAD'],{cwd:ROOT})).stdout.trim(),bindings:await Promise.all(implementationPaths.map(async p=>({path:p,fileSha256:await fileHash(ROOT+'/'+p)}))),
         nodeBinding:{path:node,fileSha256:await fileHash(node),sizeBytes:(await lstat(node)).size}},guard:{...DIGEST_APPROVED_JOB_GUARD_V001},allocationBudget:{baseBuildBytes:1,rendererPreparationBytes:1},
       verificationPolicy:{schemaVersion:'digest-representative-verification-policy-v001',mode:'representative-plus-rules-v001',representativeInstructionIds:['fixture-caption-1'],
@@ -191,7 +208,7 @@ async function fixture(action:(f:Fixture)=>Promise<void>,initialMode='pending') 
       actions:['manufacture-one-approved-plan'],jobBinding,planId:job.planId,manifestBinding:job.inputs.candidateManifestBinding,typographySettingsBinding:job.inputs.typographySettingsBinding,migrationApprovalEvidenceBinding:job.inputs.migrationApprovalEvidenceBinding,
       outputRoot:job.outputRoot,storage:job.storage,guard:job.guard,implementation:job.implementation,normalCandidates:1,...(job.verificationPolicy?{verificationPolicy:job.verificationPolicy}:{})});
     const options={workspaceRoot:ROOT,jobBinding,authorizationBinding,trustedJobSha256:jobBinding.fileSha256,trustedAuthorizationSha256:authorizationBinding.fileSha256};
-    const cfg:any={fixture:directory,repo:ROOT,initialMode,guestRoot,hostRoot,guestPhysical:directory+'/guest',hostPhysical:directory+'/host',guestDevice:job.storage.guestDevice,hostDevice:job.storage.hostDevice,
+    const cfg:any={fixture:directory,repo:ROOT,initialMode,guestRoot,hostRoot,inputReadonlyPrefix:guestRoot+'/'+inputPrefix,guestPhysical:directory+'/guest',hostPhysical:directory+'/host',guestDevice:job.storage.guestDevice,hostDevice:job.storage.hostDevice,
       guestVolumeUuid:job.storage.guestVolumeUuid,hostVolumeUuid:job.storage.hostVolumeUuid,imagePath:job.storage.imagePath,options};
     await save('hardware.json',cfg);for(const [name,source] of Object.entries({'loader.mjs':loaderSource,'register.mjs':registerSource,'fs-promises-shim.mjs':fsPromisesSource,'fs-shim.mjs':fsSource,'child-process-shim.mjs':childProcessSource,'seed.mjs':seedSource}))await writeFile(directory+'/'+name,source,{flag:'wx'});
     const first=await worker(directory,[directory+'/seed.mjs']).done;assert.equal(first.code,0,first.stderr);const seed=JSON.parse(first.stdout.trim());
@@ -209,7 +226,8 @@ async function fixture(action:(f:Fixture)=>Promise<void>,initialMode='pending') 
   } finally {await rm(directory,{recursive:true,force:true});}
 }
 const parsed=(r:{code:number|null;stdout:string;stderr:string})=>{assert.equal(r.code,0,r.stderr);return JSON.parse(r.stdout.trim());};
-async function waitFor(file:string){for(let i=0;i<200;i++){try{await lstat(file);return;}catch{}await new Promise(r=>setTimeout(r,25));}throw Error('TEST_TIMEOUT '+file);}
+// Complete Normal requalification is real; event waits allow up to 3 minutes without weakening lock assertions.
+async function waitFor(file:string){for(let i=0;i<7200;i++){try{await lstat(file);return;}catch{}await new Promise(r=>setTimeout(r,25));}throw Error('TEST_TIMEOUT '+file);}
 
 test('plain JSON cannot forge a record-only context or replace the independent pending/registration anchors',async()=>{
   const jsonContext={scope:'digest-record-only-finalization-v001',approvedJob:{job:{}},pending:{}};
@@ -220,6 +238,7 @@ test('plain JSON cannot forge a record-only context or replace the independent p
 });
 
 test('pending seed process exits, a different process registers/requalifies, and a third read-only process retrieves completed',async()=>fixture(async f=>{
+  assert.equal(f.seed.normalClosure.schemaVersion,'test-complete-normal-closure-v001');assert.equal(f.seed.normalClosure.logicalCaptions,f.seed.normalClosure.expected.cues);assert.equal(f.seed.normalClosure.visibilitySelection,null);assert.equal(f.seed.normalClosure.mediaGenerated,0);
   const original=await readFile(f.physical(f.seed.pendingReceiptBinding.path)),before=await readdir(path.dirname(f.physical(f.seed.pendingReceiptBinding.path)));
   const pending=parsed(await f.run('--get-job-result').done);assert.equal(pending.result.status,'confirmation-pending');
   assert.deepEqual(await readdir(path.dirname(f.physical(f.seed.pendingReceiptBinding.path))),before,'get must not create a lock or owner');

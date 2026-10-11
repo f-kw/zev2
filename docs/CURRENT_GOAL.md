@@ -1,5 +1,17 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-11T00:52:20.928Z（Normal完成記録8/8通過・容量復旧は共通2file案のみ）
+
+完成記録の検査は8/8通過、型検査exit0。既に通過した保存監視34/34・Python監視50/50は対象変更なしのため再実行せず、今回承認の3検査がそろった。既存保存済みNormal入力（31group/651cue/1042line/5450atom/37619frame/55299930sample）を正規readerで再読し、検査用計画・参照を一貫させた。旧8callback/拒否assertは保持、製品gate変更0、J16置換/null資格化なし。Normal全入力読取に合わせ検査専用event waitだけ5秒→180秒。実素材動画・API追加・glyph/native・全尺品質確認なし。原本/採否35・製品23・配信対象/旧record/helper18・共通配信・app6/PDFregistry+4PDFのSHA/size不変を 2026-10-11T00:50:13.526Z に確認。小構文確認7file/29019Bを整理、own test root/process0、KEEP配信4件＋app PID75046を維持。容量#67は共通再開案の候補2file（serve_digest_review_v001.pyと新小test、目安2–3h）の提案のみ、4専用固定port案は非適用履歴。旧URL/allowlist/loopback/current identity/旧record保持と新record排他を保ち、入力port/root/現storage UUID+device/新recordを明示、競合時fallbackなし。app正常quit/同.app再開と内蔵DB/PDF保持をmonaが担当間調整。停止/backup/detach/resize/配信実装0。#61相談役待ち・全工程未完成、#67mona Doing、次担当mona。最終確認 2026-10-11T00:52:20.928Z（2026-10-11T09:52:20 JST）。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T00:17:37.420Z（完全Normal入力fixtureの追加継続・容量操作なし）
+
+親が残7件の完全Normal入力fixture追加を、個別設営承認11の継続として承認。既存digest-approved-inputs testの保存済みNormal inputs/正規factoryを再利用し、元字幕/書起し/編集/時計/31group移行参照とhashを保つ。製品reader/gate・旧期待拒否点は変更せず、元ファイルはread-only、生成は所有小fixtureのみ、同じ8検査/型を再実行。原稿/API/媒体製造なし。#67は別に4配信のport/公開範囲/主体/対象/KEEP理由/既存利用logとexact identifier pinの復旧最小差分を読み取りで整理、停止/unmount/resize/配信コード変更は禁止、親がPDF担当と調整。実着手 2026-10-11T00:17:37.420Z、base ee6f46bd clean/untracked0。
+
+以下は以前の時点の記録。
+
 ## 最新現在地 — 2026-10-11T00:09:47.279Z（部分検査通過・完全Normal fixtureと容量拡張の配信復旧調整）
 
 保存監視34件・Python監視50件と型検査は通過。完成後の記録再読TSは8件中1件通過・7件未通過で、元入力の完全なNormal閉包をtiny fixtureへ用意する追加方針が必要。期待弱化/null代替/J16置換/製品変更なし。個別設営承認11・対象3test、初期枠履歴不変、詳細は同reportと今回月別log。容量#67は別仕事で本人拡張了承済み、512GB試算454.127GBを提示。guest free84.035GBで開始要求186.373GB未達。旧KEEP配信4serverがguestログを保持し、remount後device固定helperの復旧範囲を相談役へ返す。Macボードappは最新観測で終了済み。拡張・detach・backup・旧server停止・媒体/API/製造/旧成果削除0、元35/製品23不変、#61相談役待ち/#67mona Doing。最終確認 2026-10-11T00:09:47.279Z（2026-10-11T09:09:47 JST）、次担当mona。

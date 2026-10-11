@@ -1,5 +1,122 @@
 # OpenAI J16 — 正式段階接続の実装と次工程
 
+## AUDIT_ONLY / TODO61・67 — 2026-10-11T00:52:20.928Z（Normal検査8/8完了・共通再開2file案の受渡し）
+
+## 結果と範囲
+
+完成記録の媒体なし検査8件をすべて通過した。別processでの登録・再読、失敗後の同じ登録による再試行、mkdir lockによる同時登録拒否、別登録による完成receipt上書き拒否、full/representative記録のread-only再読と媒体差替え拒否を確認。テスト自体の実行 670142.535166ms（約11分10秒）でexit0、skipped0。保存監視34件・Python監視50件は前checkpointで合格済みで今回変更していない。現在runner型検査exit0、diff--check合格。
+
+個別設営承認11の継続で、変更実装は runner/src/digest-approved-record-finalize-v001.test.ts 1fileのみ。既存 digest-approved-inputs test の保存済みNormal組立を再利用し、正規readApprovedDigestInputsV001/readApprovedDigestCaptionVisibilitySelectionV001を使用した。元Normal候補を31group/651cue/1042line/5450atom/37619frame/55299930sampleのまま読む。保存controlの撤回済みadjusted候補参照だけを検査内で元Normalのcaption-registration/manifestへ戻し、実bytesのSHA/sizeへ束縛。原本自体・J16固定326字幕/5場面・採否・時計・ownerを変えず、null modelや製品gate緩和を追加していない。
+
+元Normal入力とその必要な祖先directoryをread-only passthroughし、生成・変更・削除操作は所有fixture内へ限定。651行に対応したmetadataと小PNGを作るが、媒体はopaque test bytes、alpha/媒体観測は既存synthetic技術fixture、hardware観測は既存model。実glyph/ffprobe/音声/native/背景/合成を実行しておらず、この合格を実SSD全工程・J16製造・人間の視聴品質へ転用しない。旧8callbackとその拒否assertは完全保持、正試験の4assertを追加した。
+
+## 失敗履歴と復旧
+
+|今回run|結果|原因と同じ設営内の対応|
+|---|---|---|
+|v001|1pass/7fail|生成seed objectのclosing brace1個を修正|
+|v002|1pass/7fail|元Normal入力の祖先pathがfixtureへ誤写像され、read-only passthroughを補完|
+|v003|7pass/1fail|完全Normal再資格化に対しfixtureのcommit-ready待機5秒が先に切れた。目的のlock検査は未到達|
+|v004|8pass/0fail/0skip|fixture-only event waitを5秒→180秒にし、元の実lock/RECORD_FINALIZATION_BUSY拒否まで実行|
+
+旧失敗ログをKEEPし合格へ書き換えない。製品待機時間・判定条件は変更しない。累積初期5/5＋個別6–10＋今回11を維持し一般上限を増やさない。
+
+## 容量と配信・ボードの復旧提案（未実装）
+
+本人は容量拡張を了承済み。512GBは今回の具体提案で、親は停止/unmount/resize/配信code変更を認めず、具体案だけを求めた。現在guest free約84.0GB、既存開始要求background/PCM174.373GB＋固定reserve12GB＝186.373GBのため実媒体工程は開始できない。512GB案の454.127GB試算は32GB描画準備/200GBencoded/20GBQC等の計画余地を含み実測保証ではなく、各deviceのfreeは合算しない。
+
+現在のKEEP配信は full PID54217 port63610 /digest.mp4、original2short PID68661 port49504 /review.html、visibility2short PID90370 port60161 /review.html、scene-connection2short PID5165 port61560 /review.html。all127.0.0.1、操作者kawafmm/既存Codex-SSDで、引渡し用継続指定の記録を保持。既存logは過去アクセスを示すだけで現在human視聴とは扱わない。4helperともport0の再起動でURLが変わり、旧server.jsonのexclusive作成も衝突する。3helperのdevice固定、2helperの自己/buildSHA固定もある。従ってdeviceが同じでも無変更restartで同じURLの復旧を保証できない。
+
+親の最新方針は4専用固定port helperを作らず、既存共通 evals/clip_composition/serve_digest_review_v001.py の明示resumeモード＋同directoryのserve_digest_review_v001.test.py（新設）の2file案。port/servedRoot/routes/許可file SHA+size/再mount後実測storage UUID+device/旧originRecordBinding/別newRecordOutputを独立configSHAへ束縛し、既存HEAD/GET/Range/import経路を再利用。loopback/厳密Host/query拒否/allowlist/symlink/current identity/旧record非改変/新recordx、port競合時fallbackなしを保持。最小差分と小test/記録で2–3時間の見積り、まだcode0。詳細 proposal md/jsonと次節に保持し、前4helper draftは非適用履歴で後から適用しない。
+
+Macボードapp main PID75046/helper4はguest /dev/disk6s1、projectRoot/DB/userData/PDFregistry/4PDFは内蔵 /dev/disk3s5。アプリを通常終了し全child/bridge終了を確認、同じ.appを通常再開して同projectRoot/DB/taskID/PDFlinkを維持する段取りを配信4件の一時停止・復旧へ合わせる。PDF再取得・ボード実装/DB移動/Chrome既存PDFタブ変更は不要。これらも今回は操作していない。parentのUI正常確認はparent観測、こちらはpath/device/byte/hash/processだけを確認しUI視認したとはしない。
+
+## 保全・整理・次状態
+
+元31＋採否4の35file、製品23file、共通配信source、既存helper/record/配信対象18bindings、app6file、registry+4PDFは実SHA/size不変。live DB/WALについて静的copy整合を主張しない。証拠固定後、自分の構文確認7file計29019Bだけ削除、testroot/process残存0。原本、過去成果、failed/pass logs、最終patch、before pins、capacity/inventory/proposal、4KEEP server・appを保存。今回API/動画製造/native/容量/backup/detach/server停止/旧成果削除/製品変更0。
+
+#61は今回の検査工程が完了したが、正式J16全工程と視聴品質は未完了のためDoneにしない。#67はmona/Doingのまま、共通再開案の実装範囲とボード/PDF担当も含む一時停止・復旧の調整へ。次担当mona、こちらは追加指示まで媒体製造を開始しない。
+
+証拠：workspace normal-finalizer-closure-start-v001.json / assertion-preservation-v001.json / result-v001.json / cleanup-v001.json / final-v001.patch / test-v001–v004.log / typecheck-v004.log、zev-review-services-readonly-inventory-v001.json、zev-board-storage-restore-readonly-v002.json、zev-common-review-resume-proposal-v001.md/json。月別log docs/work-logs/2026-10/2026-10-11T0917_Codex-SSD_Normal-finalizer-closure_ee6f46bd.md。
+
+以下は以前の時点の記録。
+
+## 容量#67 — 共通配信経路の汎用再開案（親の指定反映 2026-10-11T00:42:24.016960+00:00）
+
+親は4つのポートを埋め込む専用4実装ではなく、任意の既存配信へ同じURLで再開できる共通手段を指定した。先の4新version templateは非適用の履歴として保持し、採用案から外す。今回も配信コード変更・起動・停止・unmount・resizeは行わない。
+
+変更候補は2ファイルに絞る。
+- 実装：evals/clip_composition/serve_digest_review_v001.py（既存共通のRange/HEAD/GET配信）
+- 検査：evals/clip_composition/serve_digest_review_v001.test.py（現在このtest fileは存在しないため、少量の意味あるHTTP/保存境界テストを新設）
+
+既存ReviewHandlerのRange/送出を再利用し、明示的なresumeモードだけを追加する。4旧helperのコード/portは変更せず、旧import APIと既存6file起動経路を保持する。resume時のポート・配信root・新起動recordをコードへ埋め込まず、たとえば --resume-config <file> --config-sha256 <independent SHA> で起動パラメータを渡す。これは閲覧配信の入力であり、製造許可/一般trust/接続時自動再開の仕組みではない。
+
+起動入力の具体項目：
+- port：既存配信の正確な正整数ポート。0/未指定/競合は拒否し、別ポートへ逃げない。
+- servedRoot：明示した既存配信directory。絶対path/実path一致/祖先symlink拒否。
+- routes：明示したURL pathと既存basenameの対応。fullの/digest.mp4 aliasもこの表で表現し、review.htmlや2clipの個別実装を作らない。
+- files：許可ファイルごとの既存size/SHA。現在のinventoryまたは既存build参照の独立pinsを渡す。一覧の自動走査/拡張はしない。
+- storageObservation：明示volumeRoot/UUID/device。再mount後に親が独立確認した現在値を渡し、起動時に現実と照合する。旧deviceを無言で信頼しない。
+- originRecordBinding：旧server.jsonのpath/SHA/size。読み取りだけ、既存port/配信対象の根拠として束縛する。再mountで旧inode/deviceが変わる可能性があるためcontent pinsを保全根拠とし、新identityを新recordへ記す。
+- recordOutput：既存recordや配信元と別の明示path。既存parent/現在device/実pathを確認しexclusive-create、上書き禁止。stdout/stderrも呼出側が新しい専用logへ保存する。
+
+共通処理の具体変更：
+1. resume入力と独立SHAを検査。許可files/routes/元recordとport/rootの対応、recordOutputが元データを指さないことを先に検査。
+2. 現storage UUID/device/実pathを照合し、全許可fileをregular/non-symlinkとしてsize/SHAと読取前後identityを確認。
+3. 共通handlerへ許可route/現在identityを渡す。bindは127.0.0.1固定、Hostは127.0.0.1:<指定port>のみ、query・未指定path・directory listingを拒否。毎requestで現在root/deviceと対象identityを照合し、既存Range/HEADを再利用。Cache-Control:no-store/nosniffを保持し、必要な既存HTML CSPは明示した固定値で保持。
+4. 指定portへbind。競合時は記録・再送・代替portなしで失敗。新recordのexclusive-create失敗時もsocketを閉じ、元recordを変更しない。
+5. 新recordへ元record/configのbindings、現在volume/対象identity、同じURL、PID/PGID/起動時刻を保存。SIGTERM/終了時に自分のserverだけを正常closeする。
+
+検証内容（媒体生成なし、小さな既存形式のopaque bytes/tempfileだけ）：
+- 明示した任意port/root/routesで同URLのHEAD/GET/Range200/206が同bytesを返す。
+- 未指定file/path、Host/query、traversal、symlink、size/SHA不一致、identity/device/UUID差異を拒否。
+- port競合時にfallback/listen/record追加なし、旧server.json不変、新record上書き拒否、失敗時のsocket解放、正常終了を確認。
+- 既存6file配信/ReviewHandler import利用の挙動が維持されることを確認。
+
+実装+小検査+記録の目安は2–3時間。現在の共有helperは約92行で、4旧wrapperのroute/identityガードを一度共通へ受け渡す程度の追加を想定する。行数や所要時間は確定保証ではなく、schemaや基盤の恒久拡張・他の製品path修正が必要と判明したら具体差分を返して止める。今回はこの2file案の確認だけで、実装は未着手。
+
+統合復旧手順は、親がPDF担当と時機/未保存入力/全holderを調整→許可後だけ4serverとボードをnormal stop/quit→対象image backup/hash/承認済み512GB拡張→同path再mount/UUID・新device・file/App pins確認→同一共通helperへ4つの明示入力を渡して元port/URL再開→同じ.appをnormal open、内蔵DB/PDF登録・task IDs・task-pdfリンクを再読。既存PDF/DBの移動・再取得・ボード改修・Chrome既存tabs操作はしない。
+4serverの正確な一覧（63610/49504/60161/61560）とボードPID75046/child75047–75050、disk6s1依存/内蔵disk3s5のDB・4PDF・登録簿という読み取り結果は有効。これらの値は起動入力の現物例でありコード定数にしない。
+
+以下は以前の時点の記録。
+
+## 容量#67 — 配信4件とMacボードの復旧前提（読み取りのみ 2026-10-11T00:31:39.032827+00:00）
+
+同じURLへの復旧にはdevice pinの更新だけでは足りない。全4helperがport0を選ぶため再起動でURLが変わり、全4のserver.jsonはexclusive-createで旧記録があると起動不能。旧helperを上書きせず専用新versionを作り、元exact port・fresh record/log・再mount後のexact deviceを固定するのが最小対応。今回はコード変更・起動・停止なし。
+
+| 内容 | PID / PGID | port | 元URL | 許可path |
+|---|---|---:|---|---|
+| full-current-digest | 54217 / 54217 | 63610 | http://127.0.0.1:63610/digest.mp4 | /digest.mp4 |
+| two-original-short-clips | 68661 / 68661 | 49504 | http://127.0.0.1:49504/review.html | /, /oh.mp4, /review.html, /world.mp4 |
+| two-visibility-short-clips | 90370 / 90370 | 60161 | http://127.0.0.1:60161/review.html | /, /oh.mp4, /review.html, /world.mp4 |
+| two-scene-connection-short-clips | 5165 / 5165 | 61560 | http://127.0.0.1:61560/review.html | /, /escape-village.mp4, /review.html, /weapon-grandfather.mp4 |
+
+全4はuser kawafmm、同workspaceの旧Codex-SSD引渡し用server、ppid1の閲覧process。PID別lsofで127.0.0.1 LISTENのみ確認。Host127.0.0.1:port・query禁止・許可pathのみ・symlink/起動時identity変化拒否を保持する。full MP4は617,651,421B/SHA5b9fa2f98579e08a130412d0f1f4ed28fd77b687f2fd239ab2720d49b7d0c7bc、各短片はHTML+2MP4のみ。served10fileのSHA/sizeとstart identityを再読照合。KEEP根拠は旧worklog/record intentionallyRunningForDelivery。現在の人間利用は未確認、今回は新しいHTTP requestを作っていない。
+
+既存logの最終access（server local表記、TZ記録なし、localhostから誰が見たかは識別できない）：full 06/Oct/2026 21:52:48 HEAD200、元short 06/Oct/2026 18:22:55 review GET200、visibility short 06/Oct/2026 22:11:09 review GET200、scene short 07/Oct/2026 00:22:24 weapon-grandfather GET206。起動日時/argv/file identity/logtailはworkspace inventoryへ全保存。これだけで現在利用中・不要・停止とは判定しない。
+
+旧コードの具体箇所（workspace）：full serve-current-digest-one-video-v001.py:62 port0 /74 record x; original short serve-current-two-short-clips-v001.py:37 st_dev16777243 /40 port0 /45 record x; visibility/scene各helper:51 device /54 port0 /59 record x、46–47 self helper/build SHA。
+提案差分 zev-review-restoration-minimal-diff-v001.txt は非適用templateで新deviceは未観測placeholder。4helper新versionは63610/49504/60161/61560を固定し、fresh records/logsはguest runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/storage-expansion-playback-restore-20261011-v001/<label>/へ置く案。2self-SHA helperは新copySHAをargvへ渡し旧buildSHAを保持。元shortは当inventoryの3fileSHA/sizeを独立固定して復旧前後同bytes検査を加える。旧root/files/routes/Host/query/symlink/identity/content検査は保持、port競合時fallbackなし。root UUID/deviceの事前独立照合と元fileSHA比較を必須とする。
+
+親がPDF担当完了/ボードPID75046起動を通知。2026-10-11T00:28:24.600996+00:00で再確認：app /Volumes/ZEV-Digest-20261003-01/mcp-sticky-notes/mcp-task-board.app、bundle ID local.mcpsticky.notes、disk6s1/st_dev16777243。子75047GPU/75048network/75049bridge/75050rendererもappに属しPGID75046。project-root.txtが/Users/kawafmm/workspace/mcp-task-boardを参照。DBdata/notes.sqlite、PDF登録data/pdf-documents.json、runtime/electron、既存PDF4冊は内蔵disk3s5/st_dev16777234。既存PDFbytes/%PDF/登録SHA一致確認のみ、Library再取得/Chrome操作/ボード実装0。登録SHA06b06536f477b97ad795fbc4d8ccaddd9de4c431d24ddeb17f959b522dc40b25。app dist main/paths/documents/chromeとpointer/packageのsource pinsを保存。SQLiteはliveでWAL/SHMあり得るため稼働中copyの整合は主張しない。最初のinventory helperはdiskutil infoをfileに指定して未完了、v002は実st_devと対応mount rootを照合して成功。原本や権限に変更なし。
+
+統合手順案：
+1. 親がPDF/ボード担当と時機・未保存入力なし・writer終了を調整。official board snapshot、PDF/registry、旧server/helper/log/served bytesを保全。
+2. 許可後だけ4exact PIDのuser/argv/start/listener一致を再照合してSIGTERM。ボードはbundle IDへnormal quit、main/helpers/bridgeの正常終了と全guest holder解放を確認。forceは使わない。
+3. normal detach、対象sparsebundleのみbackup全hash比較、承認済み512GB APFS resize、元pathへattach。新device/UUID/mappingと10servedfileSHA・app sourcepinsを再照合。旧job/auth/recordは履歴として保持。
+4. 専用4copyのexact port/freshrecordsで元URLを復旧。同じ.appをnormal open -aし、同project-root/internal DB/userData/registry/PDFと既存task ID/リンクを再読。既存Chrome PDF tabsには触れず、PDF再取得やDB移動・ボード改修はしない。
+5. normal quit/port/identity/再起動が成立しなければ、追加作用なしで停止・報告。
+
+本人の512GB拡張了承は既存。現在の親指示は停止/unmount/resize/配信コード変更をしない読み取り整理だけで、この境界を維持。次担当monaがPDF担当も含め安全な実施時機と専用復旧差分を調整。制作検証とは別task67を保持。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T00:17:37.420Z（完全Normal入力fixtureの追加継続・容量操作なし）
+
+親が残7件の完全Normal入力fixture追加を、個別設営承認11の継続として承認。既存digest-approved-inputs testの保存済みNormal inputs/正規factoryを再利用し、元字幕/書起し/編集/時計/31group移行参照とhashを保つ。製品reader/gate・旧期待拒否点は変更せず、元ファイルはread-only、生成は所有小fixtureのみ、同じ8検査/型を再実行。原稿/API/媒体製造なし。#67は別に4配信のport/公開範囲/主体/対象/KEEP理由/既存利用logとexact identifier pinの復旧最小差分を読み取りで整理、停止/unmount/resize/配信コード変更は禁止、親がPDF担当と調整。実着手 2026-10-11T00:17:37.420Z、base ee6f46bd clean/untracked0。
+
+以下は以前の時点の記録。
+
 ## GPT_DECISION / TODO61・67 — 2026-10-11T00:09:47.279Z（部分検査通過・完全Normal fixtureと容量拡張の配信復旧調整）
 
 受領・実着手 2026-10-11 08:54:37 JST、最終確認 2026-10-11T00:09:47.279Z（2026-10-11T09:09:47 JST）。個別承認11は既存Normal/recoveryの3テストfixtureのみ。一般上限・初期5＋個別6～10を保持し製品修正なし。入力場所/現在prefix/移行証拠/permit manifest絶対path/preparation workspace・input・output・source/state/style/scope・auth mirrorをv002へそろえた。Pythonはroot/prefix文字列と5bindingsを分離。保存先モデルは同じ実ファイルのpath/handle deviceを合わせ、hash・inode・同bytes置換・mtime/ctime・owner・独立anchor・symlink・容量・排他・receipt上書き拒否の期待を変更しなかった。

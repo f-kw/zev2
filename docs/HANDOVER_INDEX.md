@@ -1,8 +1,20 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v141
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v143
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-11T00:52:20.928Z（Normal完成記録8/8通過・容量復旧は共通2file案のみ）
+
+完成記録の検査は8/8通過、型検査exit0。既に通過した保存監視34/34・Python監視50/50は対象変更なしのため再実行せず、今回承認の3検査がそろった。既存保存済みNormal入力（31group/651cue/1042line/5450atom/37619frame/55299930sample）を正規readerで再読し、検査用計画・参照を一貫させた。旧8callback/拒否assertは保持、製品gate変更0、J16置換/null資格化なし。Normal全入力読取に合わせ検査専用event waitだけ5秒→180秒。実素材動画・API追加・glyph/native・全尺品質確認なし。原本/採否35・製品23・配信対象/旧record/helper18・共通配信・app6/PDFregistry+4PDFのSHA/size不変を 2026-10-11T00:50:13.526Z に確認。小構文確認7file/29019Bを整理、own test root/process0、KEEP配信4件＋app PID75046を維持。容量#67は共通再開案の候補2file（serve_digest_review_v001.pyと新小test、目安2–3h）の提案のみ、4専用固定port案は非適用履歴。旧URL/allowlist/loopback/current identity/旧record保持と新record排他を保ち、入力port/root/現storage UUID+device/新recordを明示、競合時fallbackなし。app正常quit/同.app再開と内蔵DB/PDF保持をmonaが担当間調整。停止/backup/detach/resize/配信実装0。#61相談役待ち・全工程未完成、#67mona Doing、次担当mona。最終確認 2026-10-11T00:52:20.928Z（2026-10-11T09:52:20 JST）。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T00:17:37.420Z（完全Normal入力fixtureの追加継続・容量操作なし）
+
+親が残7件の完全Normal入力fixture追加を、個別設営承認11の継続として承認。既存digest-approved-inputs testの保存済みNormal inputs/正規factoryを再利用し、元字幕/書起し/編集/時計/31group移行参照とhashを保つ。製品reader/gate・旧期待拒否点は変更せず、元ファイルはread-only、生成は所有小fixtureのみ、同じ8検査/型を再実行。原稿/API/媒体製造なし。#67は別に4配信のport/公開範囲/主体/対象/KEEP理由/既存利用logとexact identifier pinの復旧最小差分を読み取りで整理、停止/unmount/resize/配信コード変更は禁止、親がPDF担当と調整。実着手 2026-10-11T00:17:37.420Z、base ee6f46bd clean/untracked0。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T00:09:47.279Z（部分検査通過・完全Normal fixtureと容量拡張の配信復旧調整）
 
