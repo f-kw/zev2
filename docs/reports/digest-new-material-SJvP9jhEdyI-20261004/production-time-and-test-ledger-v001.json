@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T07:31:15.377390+00:00",
+      "checkedAt": "2026-10-11T08:00:12.096482+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -2590,7 +2590,7 @@
       },
       "cpuFixAttempt": {
         "startedAt": "2026-10-11T05:36:41.310499+00:00",
-        "readAt": "2026-10-11T07:31:14.211Z",
+        "readAt": "2026-10-11T07:59:48.377Z",
         "jobId": "23c09ec3da7141d9a7252f004847c7bd",
         "currentServerState": "running",
         "attemptCount": 2,
@@ -2748,11 +2748,29 @@
           "fileSha256": "9ea961aebb9ae2dd28808f971c154e383e6d8391ea35c100656934837384ca1b",
           "sizeBytes": 1516
         },
-        "registrationToObservationSeconds": 6865.773081,
-        "currentAttemptElapsedSeconds": 4167.755857,
+        "registrationToObservationSeconds": 8579.939081,
+        "currentAttemptElapsedSeconds": 5881.921857,
         "stageInformationAvailable": false,
         "stage": "unknown",
-        "progress": "unknown"
+        "progress": "unknown",
+        "latestGetObserverBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-get-observer-switch-readback-v001/readback.json",
+          "fileSha256": "bd4784c21022d5283053f8d62a72269bb6097bda5938ba903a3019e64cb0e7ab",
+          "sizeBytes": 3185
+        },
+        "clientTimeoutReadbackBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-client-timeout-readback-v001/readback.json",
+          "fileSha256": "d280875edcd63a7bac306176f12e5dcfdc04d5256ab63e2d06e9981a8e35f2ef"
+        },
+        "clientLocalPollingTimeoutAt": "2026-10-11T07:36:48.342Z",
+        "clientTimeoutRemoteFailure": false,
+        "getOnlyObserverStartedAt": "2026-10-11T07:40:42.484630+00:00",
+        "getOnlyObserverMonitorRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-get-observer-monitor-v001",
+        "latestGetCheckpointBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-get-observer-checkpoint-readback-v001/readback.json",
+          "fileSha256": "3b88d6e6005e920f5229e7ef432d7346ff4bb22f01dd83a99675cea48ec6202e",
+          "sizeBytes": 969
+        }
       },
       "sourceClockClosure": {
         "at": "2026-10-11T04:52:25.183519+00:00",

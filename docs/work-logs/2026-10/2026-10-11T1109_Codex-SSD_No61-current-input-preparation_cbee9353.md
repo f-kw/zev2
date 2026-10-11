@@ -208,3 +208,17 @@ SSD stt-after-cpu-fix-attempt2-readback-v001 に原HTTPとreadback.jsonを保存
 既存clientの成功GET観測 `2026-10-11T07:31:14.211Z` は試行2/最大3、running、error null、resumedFromSource true。attemptErrorsは試行1のcode3だけで、新しいエラー/再試行変更はなし。登録→観測 6865.773081秒（1時間54分26秒）、試行2開始→観測 4167.755857秒（1時間9分28秒）はwall経過で、CPU時間ではない。APIに段階/進捗率なしのため詳細進捗は不明。原ASRの再取得0を進捗に使わない。16:13:19 JSTのhealthはHTTP200/ok/apiAlive/workerActive、CUDA freshness内だが処理段階やメイン相談会話モデルの正常性を証明しない。
 
 専用SSD `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-wait-readback-v001/readback.json`（SHA `9ea961aebb9ae2dd28808f971c154e383e6d8391ea35c100656934837384ca1b`）へjob/client snapshotと計測を保存再読しfile444で固定。入力/実装/設定/resultIdentityは既存受付を維持、Mac追加登録0、製造0。native client/guard継続。親からUI保存1e440b0cとGit枠を受領し、自分の短い現在地5文書をcheckpoint対象とする。長い待ち時間だけで停止判定せず、同jobの完了/最終失敗まで追う。
+
+### Mac確認期限後の同job GET追跡（2026-10-11 16:43:13 JST）
+
+旧clientは16:36:48.342 JSTにpolling-timeoutで終了。Mac client実測7206.635秒/旧guard monitor7207.549339秒は別のscope。旧PGID20465残存0、guard reason null、最大RSS330940416B、pressure1。16:38:24 JSTの直接GETはHTTP200、同job running/試行2/最大3、入力/実装/設定/resultIdentity不変、原HTTP2085B/SHA76ff3265…をstt-after-cpu-fix-client-timeout-readback-v001に保存再読。ローカル期限をserver失敗・取消へ読み替えない。
+
+16:40:42 JSTから既存resumeGpuSttJobだけを呼ぶGET観測を再開。新しいCodex taskやSTT登録ではなく、保存済み同receiptを読むMac observer/controller65298/own PGID65307。POST/health/source routeを呼ばず、30秒ごとの状態確認で原音声bytes/SHAとreceiptを照合。既存HTTP/local期限と承認済みstorage/memory guardを維持、server retry設定変更0。旧execution/timeoutを上書きせず、新観測の終了記録はexecution-get-observer-v001.jsonへ分ける。旧monitorの自分の閉じた6fileをhash/bytes確認して444固定、削除0。他者processを停止しない。
+
+最新GET `2026-10-11T07:43:13.539Z` はrunning/試行2、段階/進捗率なし。登録→観測7585.101081秒、試行2→観測4887.083857秒はwall経過でCPU時間は不明。新保存 `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-get-observer-switch-readback-v001/readback.json`（SHA `bd4784c21022d5283053f8d62a72269bb6097bda5938ba903a3019e64cb0e7ab`）とsnapshotを再読固定。原ASRの再取得0、有料API/製造0。その時点はGit枠親保持でown5資料を編集保存。今回、親がUI監査保存148e67bfを確認してGit枠を返却し、この同jobの最新現在地5文書のcheckpoint/pushを明示指示。完成結果まで同jobを追い、最終失敗なら追加登録せず実エラー/試行履歴を返す。
+
+### GET追跡の最新保存とUIの判断待ち（2026-10-11 16:59:48 JST）
+
+最新GET `2026-10-11T07:59:48.377Z` はrunning/試行2/最大3、error null、試行1のcode3履歴以外に新しいエラー/再試行変更なし。登録→観測8579.939081秒、試行2→観測5881.921857秒はwall経過でCPU時間ではない。段階/進捗率はAPI非提供のまま。原ASR再取得0、同receipt GET観測の登録0、製造0。新snapshot/proof `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-get-observer-checkpoint-readback-v001/readback.json`（SHA `3b88d6e6005e920f5229e7ef432d7346ff4bb22f01dd83a99675cea48ec6202e`）を再読444固定。
+
+親からUI保存148e67bfとGit枠受領、自分の5文書だけをcheckpoint/push対象とする。CURRENT_GOALは42行のまま現在地を置換。UIは親の明示受領どおり累計停止8で本人再開判断待ちと記載し、No61へUI修正を移さない。既存上限/契約/AGENTS/DECISIONS/人間台帳変更0、product code変更0、旧ledger fields不変を検査。GET observer/controller65298/own PGID65307は継続し、Git保存で止めない。

@@ -1408,8 +1408,8 @@ OpenAIの採用方向は本人が選択済みで、モデル比較を問い直�
 
 新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。
 
-### 修正後STTの再開と現在地（2026-10-11 16:31:14 JST実観測）
+### 同jobの確認継続（2026-10-11 16:59:48 JST実観測）
 
-同job `23c09ec3da7141d9a7252f004847c7bd` はrunning、試行2/最大3、原文再開中。新しいエラー/試行3移行なし。登録から1時間54分26秒、試行2開始から1時間9分28秒のwall経過で、CPU処理だけの時間は不明。APIに段階/進捗率なし。Mac登録1回・再送0、原ASRの追加取得0、有料API/製造0。完成文字時刻結果は未取得。
+同jobはrunning/試行2、最大3、新しいエラー/試行3移行なし。Mac確認期限は16:36:48 JSTに終了したがserver失敗/取消ではなく、同receiptのGET観測を継続。追加登録/音声再送/原ASR再取得/有料API/製造は0。登録から2時間23分0秒、試行2から1時間38分2秒のwall経過で、段階/進捗率/CPU時間は不明。旧client残存0、原timeout/入力/設定/実装を保持。
 
-今回のsnapshot/readbackは `stt-after-cpu-fix-wait-readback-v001`、詳しい履歴/参照は既存No.61作業ログと機械台帳へ保存。次担当Codex-SSDが同jobの完了/最終失敗まで追う。
+専用SSD `stt-after-cpu-fix-get-observer-checkpoint-readback-v001` に最新確認を固定。詳しい参照は既存No.61ログ/機械台帳。次担当Codex-SSDが同jobの完成/最終失敗まで追う。UIの停止8による本人判断待ちは独立した範囲であり、担当変更で再開せずSTT確認だけを継続する。
