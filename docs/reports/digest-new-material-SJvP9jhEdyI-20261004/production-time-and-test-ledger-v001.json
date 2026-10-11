@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T02:54:10.765260+00:00",
+      "checkedAt": "2026-10-11T03:10:57.458515+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -642,6 +642,28 @@
             "status": "interrupted",
             "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
             "includeInOverallSum": false
+          },
+          {
+            "startedAt": "2026-10-11T02:58:59.981499+00:00",
+            "endedAt": "2026-10-11T02:59:05.674495+00:00",
+            "durationSeconds": 5.692739959,
+            "attempt": 1,
+            "exitCode": 0,
+            "captionDownloaded": true,
+            "category": "public-ja-original-caption-read",
+            "status": "completed",
+            "includeInOverallSum": false,
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/public-ja-caption-v001/read-summary.json"
+          },
+          {
+            "category": "public-caption-only-context-scout",
+            "startedAt": "2026-10-11T03:05:48.362Z",
+            "endedAt": "2026-10-11T03:09:52.190Z",
+            "durationSeconds": 243.828,
+            "status": "tentative evidence saved and read back",
+            "meaning": "observed work interval includes reading, evidence saving, setup and instructions; not CPU or human labor",
+            "includeInOverallSum": false,
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-context-candidates-v001.json"
           }
         ],
         "overallFinishedAt": null,
@@ -698,10 +720,20 @@
           {
             "category": "mona next acquisition action",
             "startedAt": "2026-10-11T02:52:52.760Z",
+            "endedAt": "2026-10-11T02:58:13.503Z",
+            "durationSeconds": null,
+            "status": "resumed",
+            "meaning": "wait board to next Doing observation window; actual parent reply timestamp unavailable, not exact wait duration",
+            "observedStateWindowSeconds": 320.743,
+            "actualReplyReceivedAtUnknown": true
+          },
+          {
+            "category": "mona regular source acquisition and current LAN endpoint",
+            "startedAt": "2026-10-11T03:01:35.732Z",
             "endedAt": null,
             "durationSeconds": null,
             "status": "waiting",
-            "meaning": "one normal acquisition failed with HTTP403; no restriction bypass or duplicate live worker"
+            "meaning": "regular acquisition investigation continues in parent; user LAN endpoint reply pending, parallel with caption-only scout"
           }
         ],
         "manufactureNotStarted": true,
@@ -727,12 +759,205 @@
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/download.log"
       ],
-      "currentState": "相談役待ち（通常取得のHTTP403とLAN接続未確認）",
-      "nextOwner": "mona（通常取得の次対応・現在のLAN接続）→同Codex-SSD",
+      "currentState": "相談役待ち（通常元動画取得・本人LAN接続先回答）、公開字幕だけの暫定下調べ済み",
+      "nextOwner": "mona（通常取得方法・LAN本人回答）→同Codex-SSD",
       "sourceWholeAcquired": false,
       "sourceWholeSha256": null,
       "earlierWebReadTimingUnknown": true,
-      "overallCompletionAndProductionTotalUnknown": true
+      "overallCompletionAndProductionTotalUnknown": true,
+      "accessFollowup": {
+        "media403": {
+          "checkedAt": "2026-10-11T03:00:53.701475+00:00",
+          "sourceId": "-2UUTkv9qvk",
+          "toolVersion": {
+            "version": "2026.08.19",
+            "release_git_head": "594bd50c2c78ac432f81600d309fdc4e0a92d82c",
+            "repository": "yt-dlp/yt-dlp"
+          },
+          "toolSha256": "1fa6733c37ea6fb51c99ad8fe785e7b7e5f3246c9b980230329d4fb72ed8d4d6",
+          "sourceInfoSha256": "1a22e9512b18ecb1ae61ad0f9690dcb52de0b81cfdc73176978c07c4d8c32f39",
+          "downloadLogSha256": "7139b45960b8b0c13049756f31a0c3e069f03e8b2e1c3473432e5e113727df42",
+          "failure": "HTTP403 after video format299 partial40944617B; audio140 not started",
+          "formats": [
+            {
+              "formatId": "140",
+              "protocol": "https",
+              "host": "rr2---sn-ajogu5-5x.googlevideo.com",
+              "expiresAt": "2026-10-11T08:49:09+00:00",
+              "expiryAfterFailedAttemptSeconds": 21575.651918,
+              "filesize": 194791442
+            },
+            {
+              "formatId": "299",
+              "protocol": "https",
+              "host": "rr2---sn-ajogu5-5x.googlevideo.com",
+              "expiresAt": "2026-10-11T08:49:09+00:00",
+              "expiryAfterFailedAttemptSeconds": 21575.651918,
+              "filesize": 8640257893
+            }
+          ],
+          "urlRefreshAtAcquisitionConfirmed": true,
+          "urlExpiryExplainsFailure": false,
+          "explicitLoginRegionMembershipBotRestrictionInLog": false,
+          "transientFailureProven": false,
+          "cause": "unknown; public metadata success does not establish unrestricted media access",
+          "sameConditionMediaRetryPerformed": false,
+          "retryDecision": "parent permits one retry only if evidence supports expiry/transient condition; not established, so no retry",
+          "noCookieProxyAuthenticationClientOverride": true
+        },
+        "lanConfiguration": {
+          "checkedAt": "2026-10-11T02:59:48.281Z",
+          "currentConfiguration": {
+            "startedAt": "2026-10-11T02:59:48.277Z",
+            "endedAt": "2026-10-11T02:59:48.281Z",
+            "durationSeconds": 0.0026849160000000155,
+            "source": "current source runtime reader, repo .env, current process environment and runner fallback names; no configuration changes",
+            "sttMode": "fixed",
+            "language": "ja-JP",
+            "runtimeLocalServer": {
+              "present": false
+            },
+            "environment": {
+              "STT_BASE_URL": {
+                "present": false
+              },
+              "ZEV2_STT_SERVER_URL": {
+                "present": false
+              },
+              "ZEV_STT_SERVER_URL": {
+                "present": false
+              },
+              "ZEV2_RUNTIME_CONFIG_PATH": {
+                "present": false,
+                "path": null
+              },
+              "ZEV2_WORKSPACE_ROOT": {
+                "present": false,
+                "path": null
+              }
+            }
+          },
+          "readScope": [
+            "current config/runtime.jsonc via source loadRuntimeConfig",
+            "repo .env and current process STT_BASE_URL/ZEV2_STT_SERVER_URL/ZEV_STT_SERVER_URL/runtime override",
+            "runner/src/index.ts endpoint fallback definitions",
+            "relevant docs/work-logs/2026-10",
+            "UI latest server-evidence/browser-mutations.json",
+            "known dedicated SSD */stt-input-v*.json"
+          ],
+          "knownSavedEndpoint": "http://192.168.1.7:8000",
+          "knownSavedEndpointEvidence": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/stt-input-v001.json",
+          "currentEndpointFound": false,
+          "freshHealthCalls": 0,
+          "priorHealth": "2026-10-11T02:46:03.695221Z to 02:46:18.719703Z timeout; server offline not established",
+          "noNetworkScanConfigurationEditServerOperation": true,
+          "needed": "currently functioning LAN STT endpoint; preserve blanket LAN consent"
+        },
+        "publicCaptionProvenance": {
+          "source": "YouTube automatic original Japanese ja-orig json3",
+          "videoId": "-2UUTkv9qvk",
+          "sourceUrl": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
+          "binding": {
+            "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/public-ja-caption-v001/source.ja-orig.json3",
+            "bytes": 2586458,
+            "sha256": "f982c2b0494a6be8c531a830d937c998ece4adca629005f4e4aed38892201a8a",
+            "jsonReadable": true,
+            "events": 6520,
+            "textSegments": 28283,
+            "firstTimestampMs": 0,
+            "lastTimestampMs": 12038000,
+            "semanticAndClockQualityChecked": false
+          },
+          "downloadStartedAt": "2026-10-11T02:58:59.981499+00:00",
+          "downloadEndedAt": "2026-10-11T02:59:05.674495+00:00",
+          "durationSeconds": 5.692739959,
+          "attempts": 1,
+          "retries": 0,
+          "readbackSizeSha256Json": "pass",
+          "rawBytesAndTimestampsUnmodified": true,
+          "eventCountIsNotFixedCaptionCueCount": true,
+          "metadataDurationMs": 12036000,
+          "lastEventEndMinusMetadataDurationMs": 2000,
+          "timeMismatchNotCorrected": true,
+          "notEquivalentToLanStt": true,
+          "formalAdoption": false,
+          "semanticAsrClockQuality": "not evaluated",
+          "paidApiCalls": 0,
+          "sttCalls": 0,
+          "manufacturingCalls": 0
+        },
+        "evidenceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/access-followup-v001",
+        "startedAt": "2026-10-11T02:58:13.503Z",
+        "endedAt": "2026-10-11T03:01:35.732Z",
+        "observedIntervalSeconds": 202.229,
+        "intervalIsNotHumanLabor": true
+      },
+      "captionScout": {
+        "startedAt": "2026-10-11T03:05:48.362Z",
+        "source": "public YouTube ja-orig JSON3 only; tentative",
+        "doing": {
+          "boardRevision": 318,
+          "revision": 57,
+          "status": "active"
+        },
+        "lanWaitContinues": true,
+        "sourceAcquisitionOwnedByParent": true,
+        "paidApiCalls": 0,
+        "manufacturingCalls": 0,
+        "gitOwner": "Codex-SSD after explicit parent return",
+        "result": {
+          "summarizedAt": "2026-10-11T03:09:05.689441+00:00",
+          "evidenceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001",
+          "jsonPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-context-candidates-v001.json",
+          "markdownPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-context-candidates-v001.md",
+          "candidateCount": 3,
+          "sourceUnchanged": true,
+          "binding": {
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-02-raw-window.json": {
+              "bytes": 69504,
+              "sha256": "3b579340e09ab2b18a86b023ffe1fe13ceffeed717e3faf02cf55592a1ae68a3"
+            },
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-context-candidates-v001.md": {
+              "bytes": 8588,
+              "sha256": "f3d0884aa27b2e50ac8f8f55752b6aa1df1b26420542c40b95abc564d6ebb85c"
+            },
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-03-raw-window.json": {
+              "bytes": 51536,
+              "sha256": "3761c0da35fd62e0f5499dbac4b54b1feccd4f686afb405edb7d1dc3c3c57ad9"
+            },
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-01-raw-window.json": {
+              "bytes": 72864,
+              "sha256": "9cbc1fd3a4882d16766bb77174223448c57982adeb7f203556ac2ada0669435b"
+            },
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/caption-scout-v001/tentative-context-candidates-v001.json": {
+              "bytes": 81446,
+              "sha256": "c5c3e4159c636805ad91c5fc17eccb245892e14520a2853d2f842e4c13d042d3"
+            }
+          },
+          "noAudioVideoVerification": true
+        },
+        "endedAt": "2026-10-11T03:09:52.190Z",
+        "observedIntervalSeconds": 243.828,
+        "intervalIncludesReadingEvidenceSaveAndSetupNotHumanLabor": true,
+        "board": {
+          "at": "2026-10-11T03:09:52.190Z",
+          "revision": 58,
+          "boardRevision": 320,
+          "status": "waiting",
+          "section": "pending",
+          "noteLength": 19813
+        },
+        "existingDownloadLogRead": {
+          "mediaLogWarningCount": 0,
+          "mediaError": "HTTP403 only",
+          "metadataStderrEmpty": true,
+          "captionLogWarning": "impersonation target unavailable; captions download succeeded",
+          "explainsMedia403": false,
+          "existingVerboseDebugArtifactFound": false,
+          "extraDownloadOrSearch": 0
+        },
+        "initialSaveFailure": "UTF-8 SyntaxError before execution; independent raw UTF-8 decode/compile pass; explicit encoding header then save v002 exit0; no source changes"
+      }
     }
   ]
 }
