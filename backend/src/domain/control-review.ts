@@ -1,5 +1,6 @@
 import {
   findById,
+  runtimeConfirmationIdentity,
   hasText,
   WORKFLOW_STEPS,
   type AgentDecisionInput,
@@ -16,6 +17,8 @@ import {
 } from '@zev2/shared';
 import { loadState, saveState } from '../store/json-store.js';
 import { appendAgentRequestOperationLog } from './operation-log.js';
+import { assertReviewConfirmation } from './ui-review.js';
+import { loadRuntimeConfig } from '../config/runtime-config.js';
 import { createId, nowIso, reviewActionLabel } from './support.js';
 import {
   fileRefForAgentRequest,
@@ -290,9 +293,10 @@ export async function applyHumanReviewAction(
   action: HumanReviewActionType,
   reasonInput: unknown,
   selectedOptionInput?: unknown,
-  changeScopeInput?: unknown
+  changeScopeInput?: unknown,
+  confirmationInput?: unknown
 ): Promise<
-  | { status: 'ok'; reviewItem: ControlReviewItem; humanReviewAction: HumanReviewAction; state: Zev2State }
+  | { status: 'ok'; reviewItem: ControlReviewItem; humanReviewAction: HumanReviewAction; state: Zev2State; executionDraftId: string; executionRuntimeIdentity: string }
   | { status: 'error'; statusCode: number; error: string; state?: Zev2State }
 > {
   const state = await loadState();
@@ -305,6 +309,10 @@ export async function applyHumanReviewAction(
   if (reviewItem.status !== 'review_required') {
     return { status: 'error', statusCode: 409, error: 'この確認項目はすでに処理済みです', state };
   }
+
+  const runtimeConfig = await loadRuntimeConfig();
+  try { await assertReviewConfirmation(state, reviewItemId, confirmationInput, runtimeConfig, action === 'approve'); }
+  catch (e) { return {status:'error',statusCode:409,error:e instanceof Error?e.message:'確認資料を照合できません',state}; }
 
   const hasExplicitReason = hasText(reasonInput);
   const changeScopeResult = action === 'request_changes' ? reviewChangeScopeFromInput(changeScopeInput) : 'edit_plan';
@@ -458,5 +466,6 @@ export async function applyHumanReviewAction(
   }
   await saveState(state);
 
-  return { status: 'ok', reviewItem, humanReviewAction, state };
+  return { status: 'ok', reviewItem, humanReviewAction, state, executionDraftId:copiedRestart?.draft.id ?? reviewItem.requestDraftId,
+    executionRuntimeIdentity:runtimeConfirmationIdentity(runtimeConfig) };
 }

@@ -1,0 +1,95 @@
+{
+  "browser-mutations.json": [
+    {
+      "method": "POST",
+      "path": "/api/control-reviews/review-2/approve",
+      "body": {
+        "reason": "確認済みとして進める",
+        "confirmation": {
+          "requestDraftId": "draft-1",
+          "reviewId": "review-2",
+          "fingerprint": "mock-review-2"
+        },
+        "selectedOptionId": "turn"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/__qa/scenario",
+      "body": {}
+    }
+  ],
+  "scoped-resume-mutations.json": [
+    {
+      "method": "POST",
+      "path": "/api/agent-requests/resume",
+      "body": {
+        "scope": {
+          "requestDraftId": "draft-3",
+          "draftIdentity": "{\"id\":\"draft-3\",\"status\":\"approved\",\"productionType\":\"clip\",\"purpose\":\"待機中の依頼\",\"source\":{\"kind\":\"video_source\",\"uri\":\"file:///saved/mock-conversation.mp4\"},\"settings\":{\"durationLabel\":\"60秒以内\",\"themeCountLabel\":\"3候補\",\"geminiModelName\":\"gemini-3.8-flash\",\"preset\":\"shorts_default\"},\"policy\":{\"humanApprovalRequiredBeforeRender\":false},\"steps\":[{\"type\":\"prepare_video\",\"label\":\"動画取り込み\",\"requiresHumanApproval\":false},{\"type\":\"run_stt\",\"label\":\"STT\",\"requiresHumanApproval\":false},{\"type\":\"propose_clip_themes\",\"label\":\"テーマ作成\",\"requiresHumanApproval\":false},{\"type\":\"build_clip_composition\",\"label\":\"切り口作成\",\"requiresHumanApproval\":false},{\"type\":\"create_edit_plan\",\"label\":\"演出作成\",\"requiresHumanApproval\":false},{\"type\":\"apply_adjustment\",\"label\":\"微調整\",\"requiresHumanApproval\":false},{\"type\":\"render_video\",\"label\":\"動画生成\",\"requiresHumanApproval\":false}],\"createdAt\":\"2026-10-11T02:24:53.359Z\",\"updatedAt\":\"2026-10-11T02:24:53.359Z\"}",
+          "runtimeIdentity": "{\"stt\":{\"mode\":\"fixed\",\"localServerUrl\":\"\",\"language\":\"ja\"},\"contentDiscovery\":{\"mode\":\"fixed\"},\"editPlan\":{\"mode\":\"fixed\"},\"adjustment\":{\"mode\":\"fixed\"},\"videoOutput\":{\"encoder\":\"libx264\",\"extraArgs\":[]},\"agentClaim\":{\"ttlMilliseconds\":60000},\"artifactDelivery\":{\"mode\":\"local\"},\"source\":{\"defaultUri\":\"file:///saved/mock-conversation.mp4\",\"defaultPurpose\":\"会話の見どころをまとめる\"}}"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/request-drafts",
+      "body": {
+        "productionType": "clip",
+        "purpose": "接続確認用の保存済み入力",
+        "sourceUri": "file:///saved/mock-conversation.mp4",
+        "durationLabel": "60秒以内",
+        "themeCountLabel": "3候補",
+        "geminiModelName": "gemini-3.8-flash",
+        "preset": "shorts_default"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/request-drafts",
+      "body": {
+        "productionType": "clip",
+        "purpose": "戻って修正した保存版",
+        "sourceUri": "file:///saved/mock-conversation.mp4",
+        "durationLabel": "60秒以内",
+        "themeCountLabel": "3候補",
+        "geminiModelName": "gemini-3.8-flash",
+        "preset": "shorts_default"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/request-drafts/draft-21/approve",
+      "body": {
+        "confirmation": {
+          "draftIdentity": "{\"id\":\"draft-21\",\"status\":\"draft\",\"productionType\":\"clip\",\"purpose\":\"戻って修正した保存版\",\"source\":{\"kind\":\"video_source\",\"uri\":\"file:///saved/mock-conversation.mp4\"},\"settings\":{\"durationLabel\":\"60秒以内\",\"themeCountLabel\":\"3候補\",\"geminiModelName\":\"gemini-3.8-flash\",\"preset\":\"shorts_default\"},\"policy\":{\"humanApprovalRequiredBeforeRender\":false},\"steps\":[{\"type\":\"prepare_video\",\"label\":\"動画取り込み\",\"requiresHumanApproval\":false},{\"type\":\"run_stt\",\"label\":\"STT\",\"requiresHumanApproval\":false},{\"type\":\"propose_clip_themes\",\"label\":\"テーマ作成\",\"requiresHumanApproval\":false},{\"type\":\"build_clip_composition\",\"label\":\"切り口作成\",\"requiresHumanApproval\":false},{\"type\":\"create_edit_plan\",\"label\":\"演出作成\",\"requiresHumanApproval\":false},{\"type\":\"apply_adjustment\",\"label\":\"微調整\",\"requiresHumanApproval\":false},{\"type\":\"render_video\",\"label\":\"動画生成\",\"requiresHumanApproval\":false}],\"createdAt\":\"2026-10-11T02:25:58.419Z\",\"updatedAt\":\"2026-10-11T02:25:58.419Z\"}",
+          "runtimeIdentity": "{\"stt\":{\"mode\":\"fixed\",\"localServerUrl\":\"\",\"language\":\"ja\"},\"contentDiscovery\":{\"mode\":\"fixed\"},\"editPlan\":{\"mode\":\"fixed\"},\"adjustment\":{\"mode\":\"fixed\"},\"videoOutput\":{\"encoder\":\"libx264\",\"extraArgs\":[]},\"agentClaim\":{\"ttlMilliseconds\":60000},\"artifactDelivery\":{\"mode\":\"local\"},\"source\":{\"defaultUri\":\"file:///saved/mock-conversation.mp4\",\"defaultPurpose\":\"会話の見どころをまとめる\"}}"
+        }
+      }
+    }
+  ],
+  "output-mutations.json": [
+    {
+      "method": "POST",
+      "path": "/api/request-drafts/draft-1/request-generated-video-changes",
+      "body": {
+        "reason": "字幕を読みやすく調整",
+        "scope": "edit_plan",
+        "runtimeIdentity": "{\"stt\":{\"mode\":\"fixed\",\"localServerUrl\":\"\",\"language\":\"ja\"},\"contentDiscovery\":{\"mode\":\"fixed\"},\"editPlan\":{\"mode\":\"fixed\"},\"adjustment\":{\"mode\":\"fixed\"},\"videoOutput\":{\"encoder\":\"libx264\",\"extraArgs\":[]},\"agentClaim\":{\"ttlMilliseconds\":60000},\"artifactDelivery\":{\"mode\":\"local\"},\"source\":{\"defaultUri\":\"file:///saved/mock-conversation.mp4\",\"defaultPurpose\":\"会話の見どころをまとめる\"}}",
+        "confirmation": {
+          "fileRefId": "file-3",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  ],
+  "failure-mutations.json": [
+    {
+      "method": "POST",
+      "path": "/api/agent-requests/queued-4/retry",
+      "body": {
+        "runtimeIdentity": "{\"stt\":{\"mode\":\"fixed\",\"localServerUrl\":\"\",\"language\":\"ja\"},\"contentDiscovery\":{\"mode\":\"fixed\"},\"editPlan\":{\"mode\":\"fixed\"},\"adjustment\":{\"mode\":\"fixed\"},\"videoOutput\":{\"encoder\":\"libx264\",\"extraArgs\":[]},\"agentClaim\":{\"ttlMilliseconds\":60000},\"artifactDelivery\":{\"mode\":\"local\"},\"source\":{\"defaultUri\":\"file:///saved/mock-conversation.mp4\",\"defaultPurpose\":\"会話の見どころをまとめる\"}}"
+      }
+    }
+  ]
+}

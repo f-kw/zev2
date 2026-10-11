@@ -4,6 +4,8 @@ import {
   createInitialState,
   findById,
   findReadyAgentRequest,
+  runtimeConfirmationIdentity,
+  executionScopeForDraft,
   isAgentRequestReady,
   type FinalReviewActionType,
   type HumanReviewActionType,
@@ -12,6 +14,7 @@ import {
   type WorkflowStep,
   type Zev2State
 } from '@zev2/shared';
+import type { UiReviewMaterials } from '@zev2/shared';
 import {
   applyWebGeminiReview as applyWebGeminiReviewRequest,
   approveDraft,
@@ -20,6 +23,7 @@ import {
   fetchRuntimeConfig,
   fetchState,
   fetchWorkflow,
+  fetchUiReviewMaterials,
   formatApiError,
   requestGeneratedVideoChanges,
   resumeAgentWork,
@@ -41,6 +45,8 @@ interface ControlQueueStoreState {
   runPhase: 'idle' | 'saving' | 'handing_off' | 'running' | 'review_required' | 'completed' | 'error';
   runNumber: number;
   stateReadNumber: number;
+  uiMaterialReadNumber: number;
+  reviewMaterials: UiReviewMaterials | null;
 }
 
 function wait(milliseconds: number): Promise<void> {
@@ -103,9 +109,24 @@ export const useControlQueueStore = defineStore('controlQueue', {
     activePurpose: '',
     runPhase: 'idle',
     stateReadNumber: 0,
+    uiMaterialReadNumber: 0,
+    reviewMaterials: null,
     runNumber: 0
   }),
   actions: {
+    async refreshUiReviewMaterials(id: string) {
+      const number = ++this.uiMaterialReadNumber;
+      this.reviewMaterials = null;
+      const draft = findById(this.state.requestDrafts,id);
+      if (!draft) return;
+      const identity = draftIdentity(draft);
+      try {
+        const material = await fetchUiReviewMaterials(id);
+        const current = findById(this.state.requestDrafts,this.activeDraftId);
+        if (number === this.uiMaterialReadNumber && current?.id === id && draftIdentity(current) === identity
+          && material.draftIdentity === identity) this.reviewMaterials = material;
+      } catch (e) { if (number === this.uiMaterialReadNumber) this.errorMessage = formatApiError(e); }
+    },
     async refresh() {
       const readNumber = ++this.stateReadNumber;
       try {
@@ -223,7 +244,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.lastChangedAt = new Date().toISOString();
       this.message = '作成を始めています';
       try {
-        this.state = await approveDraft(id);
+        this.state = await approveDraft(id, {draftIdentity:expectedIdentity,runtimeIdentity:runtimeConfirmationIdentity(this.runtimeConfig!)});
         this.lastChangedAt = new Date().toISOString();
         this.runPhase = 'running';
         await this.refreshUntilAgentSettled(Date.now());
@@ -301,8 +322,11 @@ export const useControlQueueStore = defineStore('controlQueue', {
       const reviewItem = findById(this.state.controlReviewItems, id);
       const reviewedDraft = reviewItem && findById(this.state.requestDrafts, reviewItem.requestDraftId);
       if (!reviewItem || !reviewedDraft || reviewedDraft.id !== this.activeDraftId || reviewItem.status !== 'review_required') return;
+      const materials = this.reviewMaterials;
+      if (!materials || materials.review?.id !== reviewItem.id || materials.requestDraftId !== reviewedDraft.id
+        || materials.draftIdentity !== draftIdentity(reviewedDraft)) { this.errorMessage = '表示した確認資料を再取得してください'; return; }
       if (action === 'approve') {
-        const blockers = [...reviewBlockers(this.state, reviewedDraft, reviewItem), ...executionBlockers(this.runtimeConfig)];
+        const blockers = Array.from(new Set([...reviewBlockers(this.state, reviewedDraft, reviewItem, materials), ...materials.blockers, ...executionBlockers(this.runtimeConfig)]));
         if (reviewItem.kind === 'theme_selection' && !reviewItem.options.some(o => o.id === selectedOptionId)) blockers.push('採用する候補を確認してください');
         if (blockers.length) { this.errorMessage = blockers.join(' '); return; }
       }
@@ -323,7 +347,8 @@ export const useControlQueueStore = defineStore('controlQueue', {
           ? '修正依頼を保存して作り直しています'
           : '確認結果を保存して続きを実行しています';
       try {
-        this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId, scope);
+        this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId, scope,
+          {requestDraftId:reviewedDraft.id,reviewId:id,fingerprint:materials.fingerprint});
         if (action === 'request_changes') {
           const newDraft = this.state.requestDrafts.find(d => !previousDraftIds.has(d.id) && d.source.uri === reviewedDraft.source.uri);
           if (newDraft) { this.activeDraftId = newDraft.id; this.activePurpose = newDraft.purpose; }
@@ -370,7 +395,8 @@ export const useControlQueueStore = defineStore('controlQueue', {
           ? '微調整から作り直しています'
           : '演出を作り直しています';
       try {
-        const result = await requestGeneratedVideoChanges(id, reason, scope);
+        const result = await requestGeneratedVideoChanges(id, reason, scope, runtimeConfirmationIdentity(this.runtimeConfig!),
+          {fileRefId:currentOutput(this.state,id)!.id,sha256:currentOutput(this.state,id)!.sha256});
         this.activeDraftId = result.draft.id;
         this.activePurpose = result.draft.purpose;
         this.state = result.state;
@@ -399,7 +425,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.lastChangedAt = new Date().toISOString();
       this.message = '再生成方針を反映して演出を作り直しています';
       try {
-        const result = await applyWebGeminiReviewRequest(id, revisionBriefText);
+        const result = await applyWebGeminiReviewRequest(id, revisionBriefText, runtimeConfirmationIdentity(this.runtimeConfig!));
         this.activeDraftId = result.draft.id;
         this.activePurpose = result.draft.purpose;
         this.state = result.state;
@@ -428,7 +454,8 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       try {
-        const result = await submitFinalReviewRequest(id, action);
+        const output = currentOutput(this.state,id)!;
+        const result = await submitFinalReviewRequest(id, action, {fileRefId:output.id,sha256:output.sha256});
         this.state = result.state;
         this.message = action === 'publish_ready'
           ? '投稿可能として記録しました'
@@ -465,7 +492,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       try {
-        const result = await retryAgentRequest(id);
+        const result = await retryAgentRequest(id, runtimeConfirmationIdentity(this.runtimeConfig!));
         this.activeDraftId = result.draft.id;
         this.activePurpose = result.draft.purpose;
         this.state = result.state;
@@ -493,7 +520,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.runNumber += 1;
       this.lastChangedAt = new Date().toISOString();
       try {
-        this.state = await resumeAgentWork();
+        this.state = await resumeAgentWork(executionScopeForDraft(findById(this.state.requestDrafts,this.activeDraftId)!,runtimeConfirmationIdentity(this.runtimeConfig!)));
         this.lastChangedAt = new Date().toISOString();
         await this.refreshUntilAgentSettled(Date.now());
       } catch (error) {

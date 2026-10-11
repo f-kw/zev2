@@ -3,6 +3,7 @@ import {
   buildWebGeminiExternalReviewCommand,
   buildWebGeminiReviewPromptText,
   findById,
+  executionScopeForDraft,
   hasText,
   unknownErrorMessage,
   type FileRef,
@@ -502,7 +503,7 @@ webGeminiReviewRouter.post('/request-drafts/:id/apply-web-gemini-review', async 
   upsertWebGeminiReviewState(state, draft.id, { revisionBrief, runLog }, createdAt);
   await saveState(state);
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(restart.draft,response.locals.runtimeIdentity));
 
   response.json({
     draft: restart.draft,

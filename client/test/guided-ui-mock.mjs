@@ -50,6 +50,23 @@ function seedQueue(draft) {
   state.agentRequests.push(...requests);return requests;
 }
 seedReview(draftCopy());
+function seedScenario(scenario) {
+        let draft = state.requestDrafts[0];
+        state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
+        if (scenario === 'output') registeredResult(draft, 'render_video');
+        if (scenario === 'readiness') seedReview(draft, 'render_readiness');
+        if (scenario === 'failure') {
+          draft = draftCopy('失敗からの復帰');const queue = seedQueue(draft);queue[0].status = 'failed';
+          queue[0].errorMessage = 'mockの失敗。元素材は保持されています。';
+        }
+        if (scenario === 'waiting' || scenario === 'mixed-waiting') {
+          state = shared.createInitialState();draft = draftCopy('待機中の依頼');seedQueue(draft);
+          if (scenario === 'mixed-waiting') { const other = draftCopy('別の実行対象');seedQueue(other);state.requestDrafts.reverse(); }
+        }
+        if (scenario === 'new-version') { draft = draftCopy('新しい保存版');seedReview(draft); }
+        if (scenario === 'fee') { state = shared.createInitialState();config.editPlan.mode = 'gemini'; }
+}
+if (process.env.ZEV_UI_QA_SCENARIO) seedScenario(process.env.ZEV_UI_QA_SCENARIO);
 const server = await createServer({ root: root + '/client', configFile: root + '/client/vite.config.ts',
   server: { host: '127.0.0.1', port: 5179, strictPort: true }, plugins: [{ name: 'isolated-ui-mock', configureServer(server) {
     server.middlewares.use(async (req, res, next) => {
@@ -64,20 +81,7 @@ const server = await createServer({ root: root + '/client', configFile: root + '
       }
       const send = x => res.end(JSON.stringify(x));
       if (url.pathname === '/__qa/scenario') {
-        const scenario = url.searchParams.get('name');let draft = state.requestDrafts[0];
-        state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
-        if (scenario === 'output') registeredResult(draft, 'render_video');
-        if (scenario === 'readiness') seedReview(draft, 'render_readiness');
-        if (scenario === 'failure') {
-          draft = draftCopy('失敗からの復帰');const queue = seedQueue(draft);queue[0].status = 'failed';
-          queue[0].errorMessage = 'mockの失敗。元素材は保持されています。';
-        }
-        if (scenario === 'waiting' || scenario === 'mixed-waiting') {
-          state = shared.createInitialState();draft = draftCopy('待機中の依頼');seedQueue(draft);
-          if (scenario === 'mixed-waiting') { const other = draftCopy('別の実行対象');seedQueue(other);state.requestDrafts.reverse(); }
-        }
-        if (scenario === 'new-version') { draft = draftCopy('新しい保存版');seedReview(draft); }
-        if (scenario === 'fee') { state = shared.createInitialState();config.editPlan.mode = 'gemini'; }
+        seedScenario(url.searchParams.get('name'));
         return send({ state, calls });
       }
       if (url.pathname === '/__qa/calls') return send({ calls, state });
@@ -85,6 +89,14 @@ const server = await createServer({ root: root + '/client', configFile: root + '
       if (url.pathname === '/api/runtime-config') return send(config);
       if (url.pathname === '/api/workflow') return send({ steps: shared.WORKFLOW_STEPS });
       if (url.pathname === '/api/state') return send(state);
+      if (url.pathname.endsWith('/ui-review')) {
+        const id=url.pathname.split('/')[3], draft=state.requestDrafts.find(d=>d.id===id);
+        const review=state.controlReviewItems.filter(r=>r.requestDraftId===id&&r.status==='review_required').at(-1);
+        const candidates=themes.map((t,i)=>({...t,speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+        return send({requestDraftId:id,draftIdentity:shared.draftConfirmationIdentity(draft),review,fingerprint:'mock-'+review?.id,candidates,bindings:[],
+          segments:review?.kind==='render_readiness'?[{startMs:1000,endMs:2000,caption:'保存済みの字幕',speechIds:[1],displaySummary:'話者を表示'}]:[],
+          blockers:review?.kind==='render_readiness'?['元音声保持・品質条件の正式な確認結果が既存資料にありません。動画作成の承認は停止しています。']:[]});
+      }
       if (url.pathname === '/api/request-drafts' && req.method === 'POST') {
         const draft = shared.createRequestDraft(data, now(), () => 'draft-' + (++sequence));state.requestDrafts.unshift(draft);return send({ draft, state });
       }
@@ -117,7 +129,12 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         return send({ draft, state });
       }
       if (url.pathname === '/api/agent-requests/resume') {
-        const ready = shared.findReadyAgentRequest(state), target = state.requestDrafts.find(d => d.id === ready.requestDraftId);
+        let scope;
+        try { scope = shared.assertAgentExecutionScope(state,data.scope);shared.assertExecutionRuntime(scope,config); }
+        catch(e) { res.statusCode=409;return send({error:e.message}); }
+        const ready = shared.findReadyAgentRequest({...state,agentRequests:state.agentRequests.filter(r=>r.requestDraftId===scope.requestDraftId)});
+        const target = state.requestDrafts.find(d => d.id === ready?.requestDraftId);
+        if (!target) {res.statusCode=409;return send({error:'mock: 再開できる対象がありません'});}
         state.agentRequests.filter(r => r.requestDraftId === target.id).forEach(r => r.status = 'superseded');seedReview(target);return send({ state });
       }
       res.statusCode = 404;return send({ error: 'isolated mock: endpoint unavailable (no real media)' });

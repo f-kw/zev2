@@ -729,6 +729,7 @@ export function createAgentRequestsFromDraft(
   });
 }
 export type {PresentationEffects} from './presentation-effects.js';
+export * from './ui-confirmation.js';
 export type {AutoPresentationFileRef, AutoPresentationContext, AutoPresentationFocus,
   AutoPresentationWholeFocus, AutoPresentationPartialFocus, AutoPresentationVocal, AutoPresentationPanel, AutoPresentationPulse, AutoPresentationPulseTimingEvidence,
   AutoPresentationEffect, AutoPresentationSelection,

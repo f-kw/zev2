@@ -575,7 +575,7 @@ const statusDetailText = computed(() => {
   }
 
   if (outputVideoUri.value) {
-    return '確認用動画を再生できます';
+    return outputMediaError.value || '保存済みの確認用動画です。再生して内容を確認してください';
   }
 
   if (currentDraft.value?.productionType === 'digest') return '内容確認・作成前確認・動画作成への通常接続が未完成です。計画の検証を完成動画として扱いません';
@@ -1529,7 +1529,9 @@ watch(
   { immediate: true }
 );
 const activeReviewBlockers = computed(() => currentDraft.value && activeReviewItem.value
-  ? [...reviewBlockers(store.state, currentDraft.value, activeReviewItem.value), ...executionBlockers(store.runtimeConfig)] : []);
+  ? Array.from(new Set([...reviewBlockers(store.state, currentDraft.value, activeReviewItem.value, store.reviewMaterials),
+    ...(store.reviewMaterials?.review?.id === activeReviewItem.value.id && store.reviewMaterials.draftIdentity === draftIdentity(currentDraft.value)
+      ? store.reviewMaterials.blockers : ['表示する登録資料を取得・照合中です。']), ...executionBlockers(store.runtimeConfig)])) : []);
 const startBlockers = computed(() => currentDraft.value ? draftStartBlockers(currentDraft.value, store.runtimeConfig) : []);
 const currentGuideStep = computed(() => guideStep(currentDraft.value, activeReviewItem.value, Boolean(outputVideoUri.value), showRequestPage.value,
   failedRequest.value?.type || runningRequest.value?.type || nextWaitingRequest.value?.type || cancelledRequest.value?.type || visibleRequests.value[visibleRequests.value.length - 1]?.type));
@@ -1542,6 +1544,7 @@ const savedCandidateReview = computed(() => {
     .reverse().sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
 });
 const browsingOption = computed(() => savedCandidateReview.value?.options.find(o => o.id === browsingOptionId.value));
+const browsingSavedCandidate = computed(() => store.reviewMaterials?.candidates.find(c => c.id === browsingOptionId.value));
 const candidateIdentity = computed(() => currentDraft.value && savedCandidateReview.value
   ? draftIdentity(currentDraft.value) + ':' + JSON.stringify(savedCandidateReview.value) : '');
 const canAdoptCandidate = computed(() => Boolean(browsingOption.value && savedCandidateReview.value?.id === activeReviewItem.value?.id
@@ -1597,6 +1600,10 @@ watch(() => currentDraft.value && draftIdentity(currentDraft.value), () => {
   outputChangeReason.value = '';
 });
 watch(() => JSON.stringify(store.runtimeConfig), () => { confirmedDraftIdentity.value = ''; });
+watch(() => JSON.stringify([showRequestPage.value, currentDraft.value, activeReviewItem.value, savedCandidateReview.value, currentRequests.value,
+  currentRequests.value.map(r=>findById(store.state.fileRefs,r.result?.fileRefId)), store.runtimeConfig]), () => {
+  void store.refreshUiReviewMaterials(!showRequestPage.value && currentDraft.value ? currentDraft.value.id : '');
+});
 watch(outputVideoUri, () => { outputMediaError.value = ''; outputChangeOpen.value = false; });
 function dismissDialog() { closeCandidates(); closeReviewChangeDialog(); closeActivityDialog(); outputChangeOpen.value = false; }
 const dialogIsOpen = computed(() => candidatesOpen.value || outputChangeOpen.value || activityDialogOpen.value || Boolean(pendingReviewChange.value));
@@ -1775,7 +1782,7 @@ function trapDialogFocus(event: KeyboardEvent) {
               <span class="option-number">{{ optionIndex + 1 }}</span><span class="review-option-text"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small></span>
             </article>
           </div>
-          <div v-else class="incomplete-panel">
+          <div v-else-if="!store.reviewMaterials?.segments.length" class="incomplete-panel">
             <p class="eyebrow">作りかけ</p>
             <h3>この確認画面の詳細表示はまだ未接続です</h3>
             <p v-if="activeReviewItem.kind === 'render_readiness'">
@@ -1786,9 +1793,18 @@ function trapDialogFocus(event: KeyboardEvent) {
             </p>
           </div>
 
-          <div class="preview-placeholder"><strong>プレビュー未接続</strong><p>候補の作成状態・動画との対応・再生は未接続です。候補を見るだけでは動画を作りません。</p></div>
+          <section v-if="store.reviewMaterials?.segments.length" aria-label="登録済みの作成前資料">
+            <h3>保存済みの構成と字幕</h3>
+            <ol><li v-for="(segment,index) in store.reviewMaterials.segments" :key="index">
+              <strong>{{ index + 1 }} · {{ (segment.startMs / 1000).toFixed(2) }}〜{{ (segment.endMs / 1000).toFixed(2) }}秒</strong>
+              <p>{{ segment.caption }}</p><p>{{ segment.displaySummary }}</p><small>発話 {{ segment.speechIds.join('、') }}</small>
+            </li></ol>
+            <details><summary>保存資料との対応</summary><ul><li v-for="binding in store.reviewMaterials.bindings" :key="binding.fileRefId">{{ binding.fileRefId }} · {{ binding.sha256 }}</li></ul></details>
+          </section>
+          <div v-if="activeReviewItem.kind === 'theme_selection'" class="preview-placeholder"><strong>保存済みプレビューの有無は他の候補から確認できます</strong><p>推薦の指定と未作成・実際の準備中の対応は未接続です。候補を見るだけでは動画を作りません。</p></div>
           <ul v-if="activeReviewBlockers.length" class="connection-notice"><li v-for="reason in activeReviewBlockers" :key="reason">{{ reason }}</li></ul>
           <div class="review-actions">
+            <button type="button" class="secondary-button" :disabled="store.loading" @click="store.refreshUiReviewMaterials(currentDraft!.id)">資料を再読み込み</button>
             <button v-if="savedCandidateReview?.options.length" type="button" class="secondary-button" @click="openCandidates">他の候補を見る</button>
             <button
               type="button"
@@ -2106,9 +2122,9 @@ function trapDialogFocus(event: KeyboardEvent) {
     <div v-if="humanAuthReady && candidatesOpen" class="dialog-overlay" @click.self="closeCandidates">
       <section class="change-dialog candidate-dialog" role="dialog" aria-modal="true" aria-labelledby="candidate-title" tabindex="-1">
         <div class="dialog-heading"><h2 id="candidate-title">保存済みのシーン候補</h2><button type="button" class="secondary-button" @click="closeCandidates">閉じる ×</button></div>
-        <p>題名と短い要約だけを表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>現在の保存資料はテーマ候補です。シーン区間と候補プレビューの対応は未接続です。</p>
-        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in savedCandidateReview?.options" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" @click="browsingOptionId = option.id"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span>プレビュー未接続</span></button></div>
-          <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>まだ採用案は変わっていません。</p><div class="preview-placeholder"><strong>プレビュー未接続</strong><p>候補に対応する保存済み動画の取得と再生は未接続です。</p></div><p v-if="!canAdoptCandidate">この段階では閲覧のみです。採用変更は内容選択の確認に戻って行います。</p><button type="button" :disabled="!canAdoptCandidate" @click="adoptCandidate">採用案に反映する</button><small>内容確認で次へ進むと、この選択を保存します。</small></div>
+        <p>保存済みの題名・短い要約・発話区間を表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>保存済みのテーマ候補と発話区間を表示します。推薦の指定とプレビューの作成状況は未接続です。</p>
+        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in savedCandidateReview?.options" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" @click="browsingOptionId = option.id"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span>{{ store.reviewMaterials?.candidates.find(c => c.id === option.id)?.preview ? '保存済みプレビューあり' : 'プレビューの作成状況は未接続' }}</span></button></div>
+          <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>まだ採用案は変わっていません。</p><section v-if="browsingSavedCandidate"><p v-for="speech in browsingSavedCandidate.speeches" :key="speech.id">{{ (speech.startMs / 1000).toFixed(2) }}〜{{ (speech.endMs / 1000).toFixed(2) }}秒 · {{ speech.text }}</p><video v-if="browsingSavedCandidate.preview" :key="browsingSavedCandidate.preview.id" controls preload="none" :src="uriWithRef(browsingSavedCandidate.preview.uri, browsingSavedCandidate.preview.id)" /><p v-else>候補に対応する登録済みプレビューはありません。未作成・実際の準備中の判定は未接続です。</p></section><p v-else>登録資料を照合できていません。</p><p v-if="!canAdoptCandidate">この段階では閲覧のみです。採用変更は内容選択の確認に戻って行います。</p><button type="button" :disabled="!canAdoptCandidate" @click="adoptCandidate">採用案に反映する</button><small>内容確認で次へ進むと、この選択を保存します。</small></div>
         </div>
       </section>
     </div>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { AgentExecutionScope, DraftApprovalConfirmation, ReviewApprovalConfirmation, OutputApprovalConfirmation, UiReviewMaterials } from '@zev2/shared';
 import {
   uriWithRef,
   type AgentCompletionInput,
@@ -133,8 +134,8 @@ export async function createDraft(input: RequestDraftInput): Promise<{
   return response.data;
 }
 
-export async function approveDraft(id: string): Promise<Zev2State> {
-  const response = await api.post(`/request-drafts/${id}/approve`);
+export async function approveDraft(id: string, confirmation: DraftApprovalConfirmation): Promise<Zev2State> {
+  const response = await api.post(`/request-drafts/${id}/approve`, { confirmation });
   return response.data.state;
 }
 
@@ -146,28 +147,28 @@ export async function rejectDraft(id: string, reason: string): Promise<{
   return response.data;
 }
 
-export async function fetchNextAgentRequest(): Promise<AgentRequest | null> {
-  const response = await api.get('/agent-requests/next');
+export async function fetchNextAgentRequest(scope: AgentExecutionScope): Promise<AgentRequest | null> {
+  const response = await api.get('/agent-requests/next',{params:{scope:JSON.stringify(scope)}});
   return response.data.request;
 }
 
-export async function claimAgentRequest(id: string, input: AgentClaimInput): Promise<Zev2State> {
-  const response = await api.post(`/agent-requests/${id}/claim`, input);
+export async function claimAgentRequest(id: string, input: AgentClaimInput, scope: AgentExecutionScope): Promise<Zev2State> {
+  const response = await api.post(`/agent-requests/${id}/claim`, {...input,scope});
   return response.data.state;
 }
 
-export async function completeAgentRequest(id: string, input: AgentCompletionInput): Promise<Zev2State> {
-  const response = await api.post(`/agent-requests/${id}/complete`, input);
+export async function completeAgentRequest(id: string, input: AgentCompletionInput, scope: AgentExecutionScope): Promise<Zev2State> {
+  const response = await api.post(`/agent-requests/${id}/complete`, {...input,scope});
   return response.data.state;
 }
 
-export async function failAgentRequest(id: string, input: AgentFailureInput): Promise<Zev2State> {
-  const response = await api.post(`/agent-requests/${id}/fail`, input);
+export async function failAgentRequest(id: string, input: AgentFailureInput, scope: AgentExecutionScope): Promise<Zev2State> {
+  const response = await api.post(`/agent-requests/${id}/fail`, {...input,scope});
   return response.data.state;
 }
 
-export async function resumeAgentWork(): Promise<Zev2State> {
-  const response = await api.post('/agent-requests/resume');
+export async function resumeAgentWork(scope: AgentExecutionScope): Promise<Zev2State> {
+  const response = await api.post('/agent-requests/resume',{scope});
   return response.data.state;
 }
 
@@ -184,12 +185,14 @@ export async function submitHumanReviewAction(
   action: HumanReviewActionType,
   reason: string,
   selectedOptionId?: string,
-  scope?: 'edit_plan' | 'theme_reselect' | 'theme_options_regenerate' | 'material_reselect' | 'adjustment'
+  scope?: 'edit_plan' | 'theme_reselect' | 'theme_options_regenerate' | 'material_reselect' | 'adjustment',
+  confirmation?: ReviewApprovalConfirmation
 ): Promise<Zev2State> {
   const actionPath =
     action === 'approve' ? 'approve' : action === 'reject' ? 'reject' : 'request-changes';
   const response = await api.post(`/control-reviews/${id}/${actionPath}`, {
     reason,
+    confirmation,
     ...(selectedOptionId ? { selectedOptionId } : {}),
     ...(scope ? { scope } : {})
   });
@@ -199,11 +202,15 @@ export async function submitHumanReviewAction(
 export async function requestGeneratedVideoChanges(
   id: string,
   reason: string,
-  scope: 'edit_plan' | 'theme_selection' | 'adjustment'
+  scope: 'edit_plan' | 'theme_selection' | 'adjustment',
+  runtimeIdentity: string,
+  confirmation: OutputApprovalConfirmation
 ): Promise<{ draft: RequestDraft; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/request-generated-video-changes`, {
     reason,
-    scope
+    scope,
+    runtimeIdentity,
+    confirmation
   });
   return {
     draft: response.data.draft,
@@ -214,13 +221,19 @@ export async function requestGeneratedVideoChanges(
 export async function submitFinalReview(
   id: string,
   action: FinalReviewActionType,
+  confirmation: OutputApprovalConfirmation,
   reason?: string
 ): Promise<{ finalReviewAction: FinalReviewAction; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/final-review`, {
     action,
+    confirmation,
     ...(reason ? { reason } : {})
   });
   return response.data;
+}
+
+export async function fetchUiReviewMaterials(id: string): Promise<UiReviewMaterials> {
+  return (await api.get(`/request-drafts/${id}/ui-review`)).data;
 }
 
 export async function fetchWebGeminiReview(id: string): Promise<{
@@ -245,10 +258,12 @@ export async function prepareWebGeminiReview(id: string): Promise<{
 
 export async function applyWebGeminiReview(
   id: string,
-  revisionBriefText: string
+  revisionBriefText: string,
+  runtimeIdentity: string
 ): Promise<{ draft: RequestDraft; revisionBrief: WebGeminiRevisionBriefArtifact; state: Zev2State }> {
   const response = await api.post(`/request-drafts/${id}/apply-web-gemini-review`, {
-    revisionBriefText
+    revisionBriefText,
+    runtimeIdentity
   });
   return {
     draft: response.data.draft,
@@ -257,8 +272,8 @@ export async function applyWebGeminiReview(
   };
 }
 
-export async function retryAgentRequest(id: string): Promise<{ draft: RequestDraft; state: Zev2State }> {
-  const response = await api.post(`/agent-requests/${id}/retry`);
+export async function retryAgentRequest(id: string, runtimeIdentity: string): Promise<{ draft: RequestDraft; state: Zev2State }> {
+  const response = await api.post(`/agent-requests/${id}/retry`,{runtimeIdentity});
   return {
     draft: response.data.draft,
     state: response.data.state

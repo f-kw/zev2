@@ -12,6 +12,9 @@ import {
   ARTIFACT_FILE_NAME_BY_KIND,
   assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifactFileNameV001, digestArtifactPathFromUriV001, digestProducerRequestIdsV001, type DigestByteBindingV001,
   DEFAULT_GEMINI_MODEL,
+  assertAgentExecutionScope,
+  type AgentExecutionScope,
+  type RuntimeConfig,
   findById,
   lastMatching,
   recordValue as recordFrom,
@@ -852,52 +855,62 @@ function formatSeconds(milliseconds: number): string {
 }
 
 async function claimRequest(request: AgentRequest): Promise<{request:AgentRequest;state:Zev2State}> {
+  assertRequestScope(request);
   return requestJson<{request:AgentRequest;state:Zev2State}>(`/agent-requests/${request.id}/claim`, {
     method: 'POST',
-    body: JSON.stringify(buildClaimInput())
+    body: JSON.stringify({...buildClaimInput(),scope:executionScope})
   });
 }
 
 async function completeRequest(request: AgentRequest,state:Zev2State): Promise<void> {
+  assertAgentExecutionScope(state,executionScope,request);
   const artifact = await buildArtifactForRequest(request,state);
   const completedArtifact = await uploadArtifactToBackend(artifact,request,state);
   await requestJson<StateResponse>(`/agent-requests/${request.id}/complete`, {
     method: 'POST',
-    body: JSON.stringify(buildCompletion(request, completedArtifact))
+    body: JSON.stringify({...buildCompletion(request, completedArtifact),scope:executionScope})
   });
 }
 
 async function failRequest(request: AgentRequest, error: unknown): Promise<void> {
+  assertRequestScope(request);
   const message = error instanceof Error ? error.message : 'runnerで不明な失敗が発生しました';
 
   await requestJson<StateResponse>(`/agent-requests/${request.id}/fail`, {
     method: 'POST',
-    body: JSON.stringify({ ownerId: agentOwnerId, message })
+    body: JSON.stringify({ ownerId: agentOwnerId, message, scope:executionScope })
   });
 }
 
 async function runDryRunLoop(): Promise<void> {
   for (let index = 0; index < runnerOptions.maxSteps; index += 1) {
-    const { request } = await requestJson<NextResponse>('/agent-requests/next');
+    const { request } = await requestJson<NextResponse>(scopedNextPath);
 
     if (!request) {
       console.log('実行できるAI作業はありません。runnerを終了します。');
       return;
     }
 
+    assertRequestScope(request);
+
     console.log(`AIエージェント実行開始: ${request.label} (${request.type})`);
 
+    let claimedRequest: AgentRequest | undefined;
     try {
       const claimed=await claimRequest(request);
+      if (claimed.request.id !== request.id) throw new Error('取得応答が指定した作業と一致しません');
+      assertAgentExecutionScope(claimed.state,executionScope,claimed.request);
+      claimedRequest = claimed.request;
       await completeRequest(claimed.request,claimed.state);
       console.log(`AIエージェント実行完了: ${request.label}`);
     } catch (error) {
-      await failRequest(request, error);
+      if (claimedRequest) await failRequest(claimedRequest, error);
       throw error;
     }
   }
 
-  const { request } = await requestJson<NextResponse>('/agent-requests/next');
+  const { request } = await requestJson<NextResponse>(scopedNextPath);
+  if (request) assertRequestScope(request);
   if (!request) {
     console.log('実行できるAI作業はありません。runnerを終了します。');
     return;
@@ -906,5 +919,28 @@ async function runDryRunLoop(): Promise<void> {
   throw new Error(`最大処理件数 ${runnerOptions.maxSteps} 件に到達したため停止しました`);
 }
 
+const executionScope = JSON.parse(process.env.ZEV2_EXECUTION_SCOPE_JSON ?? 'null') as AgentExecutionScope | null;
+if (!executionScope || typeof executionScope.requestDraftId !== 'string' || typeof executionScope.draftIdentity !== 'string' || typeof executionScope.runtimeIdentity !== 'string') {
+  throw new Error('runnerには対象の依頼と期待版の明示が必要です');
+}
+if (!useFixedEditPlan) throw new Error('外部送信・料金承認の資料がないため、このUI実行scopeではGemini APIを起動できません');
+const expectedRuntime = JSON.parse(executionScope.runtimeIdentity) as RuntimeConfig;
+// Verify the effective injected configuration before fetching or claiming work.
+if (expectedRuntime.stt.mode !== process.env.ZEV2_STT_RUNTIME_MODE
+  || expectedRuntime.stt.language !== process.env.ZEV2_STT_LANGUAGE
+  || (expectedRuntime.stt.mode === 'local' && expectedRuntime.stt.localServerUrl !== sttServerUrl)
+  || expectedRuntime.contentDiscovery.mode !== contentDiscoveryMode
+  || expectedRuntime.editPlan.mode !== process.env.ZEV2_EDIT_PLAN_MODE
+  || expectedRuntime.adjustment.mode !== adjustmentMode
+  || expectedRuntime.artifactDelivery.mode !== artifactDeliveryMode
+  || expectedRuntime.videoOutput.encoder !== confirmationVideoEncoder
+  || JSON.stringify(expectedRuntime.videoOutput.extraArgs) !== JSON.stringify(parseFfmpegExtraArgs(process.env.ZEV2_FFMPEG_VIDEO_EXTRA_ARGS))
+  || expectedRuntime.agentClaim.ttlMilliseconds !== agentClaimTtlMs) {
+  throw new Error('確認済みの実行設定とrunnerの実効設定が一致しません');
+}
+const scopedNextPath = `/agent-requests/next?scope=${encodeURIComponent(JSON.stringify(executionScope))}`;
+function assertRequestScope(request: AgentRequest): void {
+  if (request.requestDraftId !== executionScope!.requestDraftId) throw new Error('指定外の依頼が返されたため処理を拒否しました');
+}
 const runnerOptions = parseOptions();
 await runDryRunLoop();

@@ -1,10 +1,14 @@
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { assertExecutionRuntime, type AgentExecutionScope } from '@zev2/shared';
+import { assertUiExecutionAllowed } from '../domain/ui-review.js';
 import { createRunnerEnvironmentFromConfig, loadRuntimeConfig, workspaceRoot } from '../config/runtime-config.js';
 
 let runningDryRun: Promise<void> | null = null;
-let rerunRequested = false;
+export function assertNoActiveUiRunner(): void {
+  if (runningDryRun) throw new Error('別の実行が処理中です。競合するrunner起動を拒否しました');
+}
 
 function apiBaseUrl(): string {
   return process.env.ZEV2_API_BASE_URL ?? `http://localhost:${process.env.PORT ?? '8080'}/api`;
@@ -38,8 +42,10 @@ function runnerCommand(): { command: string; args: string[]; cwd: string } {
   };
 }
 
-async function runDryRunOnce(): Promise<void> {
+async function runDryRunOnce(scope: AgentExecutionScope): Promise<void> {
   const runtimeConfig = await loadRuntimeConfig();
+  assertUiExecutionAllowed(runtimeConfig);
+  assertExecutionRuntime(scope,runtimeConfig);
   const runner = runnerCommand();
 
   return new Promise<void>((resolve, reject) => {
@@ -51,7 +57,8 @@ async function runDryRunOnce(): Promise<void> {
         ...createRunnerEnvironmentFromConfig(runtimeConfig),
         CI: 'true',
         npm_config_confirm_modules_purge: 'false',
-        ZEV2_API_BASE_URL: apiBaseUrl()
+        ZEV2_API_BASE_URL: apiBaseUrl(),
+        ZEV2_EXECUTION_SCOPE_JSON: JSON.stringify(scope)
       }
     });
 
@@ -76,18 +83,12 @@ async function runDryRunOnce(): Promise<void> {
   });
 }
 
-export async function runDryRunRunner(): Promise<void> {
-  if (runningDryRun) {
-    rerunRequested = true;
-    return runningDryRun;
-  }
+export async function runDryRunRunner(scope: AgentExecutionScope): Promise<void> {
+  assertNoActiveUiRunner();
 
   runningDryRun = (async () => {
     try {
-      do {
-        rerunRequested = false;
-        await runDryRunOnce();
-      } while (rerunRequested);
+      await runDryRunOnce(scope);
     } finally {
       runningDryRun = null;
     }
@@ -96,12 +97,12 @@ export async function runDryRunRunner(): Promise<void> {
   return runningDryRun;
 }
 
-export function startDryRunRunner(): void {
+export function startDryRunRunner(scope: AgentExecutionScope): void {
   if (process.env.ZEV2_DISABLE_AUTO_RUNNER === '1') {
     return;
   }
 
-  void runDryRunRunner().catch((error: unknown) => {
+  void runDryRunRunner(scope).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : 'AIエージェント実行で不明な失敗が発生しました';
     console.error(message);
   });

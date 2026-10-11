@@ -44,6 +44,11 @@ import {
   findAgentRequestDependency,
   findBlockingControlReview,
   findReadyAgentRequest,
+  assertAgentExecutionScope,
+  assertExecutionRuntime,
+  runtimeConfirmationIdentity,
+  executionScopeForDraft,
+  type AgentExecutionScope,
   getFileRefKindForRequest,
   getOutputTypeForRequest,
   getRequiredControlReviewKind,
@@ -58,7 +63,7 @@ import {
 } from '@zev2/shared';
 import {readStateSnapshot} from '../store/json-store.js';
 import { loadState, runExclusiveStateOperation, saveState } from '../store/json-store.js';
-import { startDryRunRunner } from '../runner/auto-runner.js';
+import { assertNoActiveUiRunner, startDryRunRunner } from '../runner/auto-runner.js';
 import { loadRuntimeConfig } from '../config/runtime-config.js';
 import { resolveRuntimeDir } from '../config/runtime-dir.js';
 import {
@@ -119,6 +124,7 @@ import {
   loadStateWithClaimRecovery,
   readAgentClaimInput
 } from '../domain/agent-lifecycle.js';
+import { recoverExpiredClaims } from '../domain/agent-lifecycle.js';
 import {
   ensureWebGeminiReviewMatchesOutputVideo,
   ensureWebGeminiRevisionBriefMatchesReview,
@@ -141,6 +147,7 @@ import {
 } from '../web-gemini/run-status.js';
 import { upsertWebGeminiReviewState, webGeminiReviewStateForDraft } from '../web-gemini/state.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
+import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMaterials, confirmedOutput } from '../domain/ui-review.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -230,7 +237,32 @@ router.use((_, response, next) => {
   );
 });
 
+router.use(async (request, response, next) => {
+  const dispatch = request.method === 'POST' && (
+    /^\/request-drafts\/[^/]+\/(approve|request-generated-video-changes|apply-web-gemini-review)$/.test(request.path)
+    || /^\/control-reviews\/[^/]+\/(approve|request-changes)$/.test(request.path)
+    || /^\/agent-requests\/(resume|[^/]+\/retry)$/.test(request.path));
+  if (dispatch) {
+    try {
+      assertNoActiveUiRunner();
+      const config = await loadRuntimeConfig();
+      assertUiExecutionAllowed(config);
+      if (!request.path.startsWith('/control-reviews/')) {
+        const expected = request.body?.runtimeIdentity ?? request.body?.scope?.runtimeIdentity ?? request.body?.confirmation?.runtimeIdentity;
+        if (expected !== runtimeConfirmationIdentity(config)) throw new Error('表示した実行設定が変更されています。再確認してください');
+        response.locals.runtimeIdentity = expected;
+      }
+    }
+    catch (e) { response.status(409).json({ error: unknownErrorMessage(e) });return; }
+  }
+  next();
+});
 router.use(webGeminiReviewRouter);
+
+router.get('/request-drafts/:id/ui-review', async (request, response) => {
+  try { response.json(await buildUiReviewMaterials(await loadState(), routeParamText(request.params.id), await loadRuntimeConfig())); }
+  catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
 
 function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string>): AgentRequest[] {
   return stateAgentRequests.filter((request) => ids.has(request.id));
@@ -238,6 +270,17 @@ function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string
 
 function routeParamText(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] ?? '' : value ?? '';
+}
+
+function scopedState(state: LoadedState, input: unknown, request?: AgentRequest): { scope: AgentExecutionScope; state: LoadedState } {
+  const scope = assertAgentExecutionScope(state,input,request);
+  return {scope,state:{...state,agentRequests:state.agentRequests.filter(r=>r.requestDraftId===scope.requestDraftId)}};
+}
+
+async function recoverScopedClaims(state: LoadedState, input: unknown, request: AgentRequest): Promise<void> {
+  const scoped = scopedState(state,input,request);
+  assertExecutionRuntime(scoped.scope,await loadRuntimeConfig());
+  if (recoverExpiredClaims(scoped.state,nowIso())) await saveState(state);
 }
 
 function cancelActiveAgentRequests(
@@ -441,11 +484,9 @@ router.post('/request-drafts/:id/final-review', async (request, response) => {
     return;
   }
 
-  const outputVideo = latestOutputVideoFileRef(state, draft.id);
-  if (!outputVideo) {
-    response.status(409).json({ error: '完成動画がまだありません' });
-    return;
-  }
+  let outputVideo: FileRef;
+  try { outputVideo = await confirmedOutput(state, draft.id, input.confirmation); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e),state});return; }
 
   const outputVideoError = await validateWebGeminiOutputVideo(draft, outputVideo);
   if (outputVideoError) {
@@ -517,6 +558,9 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
     return;
   }
 
+  try { assertDraftConfirmation(draft, await loadRuntimeConfig(), request.body?.confirmation); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e),state});return; }
+
   draft.status = 'approved';
   draft.updatedAt = nowIso();
   appendAgentOperationLog(state, {
@@ -547,7 +591,7 @@ router.post('/request-drafts/:id/approve', async (request, response) => {
   }
   await saveState(state);
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(draft,request.body.confirmation.runtimeIdentity));
   response.json({
     draft,
     agentRequests: selectAgentRequests(state.agentRequests, agentRequestIds),
@@ -592,9 +636,15 @@ router.post('/request-drafts/:id/reject', async (request, response) => {
   response.json({ draft, state });
 });
 
-router.get('/agent-requests/next', requireAgentApiToken, async (_, response) => {
-  const state = await loadStateWithClaimRecovery();
-  const agentRequest = findReadyAgentRequest(state);
+router.get('/agent-requests/next', requireAgentApiToken, async (request, response) => {
+  try { assertUiExecutionAllowed(await loadRuntimeConfig()); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
+  const state = await loadState();
+  let scoped: ReturnType<typeof scopedState>;
+  try { scoped = scopedState(state, JSON.parse(String(request.query.scope))); assertExecutionRuntime(scoped.scope,await loadRuntimeConfig()); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
+  const recovered = recoverExpiredClaims(scoped.state,nowIso());
+  const agentRequest = findReadyAgentRequest(scoped.state);
   if (agentRequest) {
     appendAgentRequestOperationLog(
       state,
@@ -608,29 +658,43 @@ router.get('/agent-requests/next', requireAgentApiToken, async (_, response) => 
     );
     await saveState(state);
   }
+  else if (recovered) await saveState(state);
   response.json({ request: agentRequest ?? null });
 });
 
-router.post('/agent-requests/resume', async (_, response) => {
-  const state = await loadStateWithClaimRecovery();
-  const agentRequest = findReadyAgentRequest(state);
+router.post('/agent-requests/resume', async (request, response) => {
+  const state = await loadState();
+  let scoped: ReturnType<typeof scopedState>;
+  try { scoped=scopedState(state,request.body?.scope); assertExecutionRuntime(scoped.scope,await loadRuntimeConfig()); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
+  if (state.agentRequests.some(r=>r.status==='running')) { response.status(409).json({error:'取得中の作業があるため競合起動を拒否しました'});return; }
+  const agentRequest = findReadyAgentRequest(scoped.state);
 
   if (!agentRequest) {
     response.status(409).json({ error: '再開できる待機中のAI作業がありません', state });
     return;
   }
 
-  startDryRunRunner();
+  startDryRunRunner(scoped.scope);
   response.json({ request: agentRequest, state });
 });
 
 router.post('/agent-requests/:id/claim', requireAgentApiToken, async (request, response) => {
-  const state = await loadStateWithClaimRecovery();
+  try { assertUiExecutionAllowed(await loadRuntimeConfig()); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
+  const state = await loadState();
   const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
     return;
+  }
+
+  try { await recoverScopedClaims(state,request.body?.scope,agentRequest); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
+
+  if (state.agentRequests.some(r=>r.status==='running' && r.id!==agentRequest.id)) {
+    response.status(409).json({error:'取得中の別作業があるため競合claimを拒否しました'});return;
   }
 
   const input = readAgentClaimInput(request.body);
@@ -700,13 +764,16 @@ router.post('/agent-requests/:id/claim', requireAgentApiToken, async (request, r
 });
 
 router.post('/agent-requests/:id/complete', requireAgentApiToken, async (request, response) => {
-  const state = await loadStateWithClaimRecovery();
+  const state = await loadState();
   const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
     return;
   }
+
+  try { await recoverScopedClaims(state,request.body?.scope,agentRequest); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
 
   if (isStatusIn(agentRequest.status, ['cancelled', 'superseded'])) {
     response.json({ request: agentRequest, state });
@@ -810,19 +877,21 @@ router.post('/control-reviews/:id/approve', async (request, response) => {
     request.params.id,
     'approve',
     request.body?.reason,
-    request.body?.selectedOptionId
+    request.body?.selectedOptionId,
+    undefined,
+    request.body?.confirmation
   );
   if (result.status === 'error') {
     response.status(result.statusCode).json({ error: result.error, state: result.state });
     return;
   }
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(findById(result.state.requestDrafts,result.executionDraftId)!,result.executionRuntimeIdentity));
   response.json(result);
 });
 
 router.post('/control-reviews/:id/reject', async (request, response) => {
-  const result = await applyHumanReviewAction(request.params.id, 'reject', request.body?.reason);
+  const result = await applyHumanReviewAction(request.params.id, 'reject', request.body?.reason, undefined, undefined, request.body?.confirmation);
   if (result.status === 'error') {
     response.status(result.statusCode).json({ error: result.error, state: result.state });
     return;
@@ -837,14 +906,15 @@ router.post('/control-reviews/:id/request-changes', async (request, response) =>
     'request_changes',
     request.body?.reason,
     undefined,
-    request.body?.scope
+    request.body?.scope,
+    request.body?.confirmation
   );
   if (result.status === 'error') {
     response.status(result.statusCode).json({ error: result.error, state: result.state });
     return;
   }
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(findById(result.state.requestDrafts,result.executionDraftId)!,result.executionRuntimeIdentity));
   response.json(result);
 });
 
@@ -892,7 +962,9 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
     response.status(409).json({ error: '生成済み動画がないため、生成後の修正依頼を開始できません', state });
     return;
   }
-  const outputVideo = latestOutputVideoFileRef(state, draft.id);
+  let outputVideo: FileRef;
+  try { outputVideo = await confirmedOutput(state,draft.id,request.body?.confirmation); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e),state});return; }
   const finalCompleteError = finalCompletedOutputChangeError(state, draft.id, outputVideo);
   if (finalCompleteError) {
     response.status(409).json({ error: finalCompleteError, state });
@@ -915,7 +987,7 @@ router.post('/request-drafts/:id/request-generated-video-changes', async (reques
   appendCopiedRestartToState(state, restart);
   await saveState(state);
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(restart.draft,response.locals.runtimeIdentity));
   response.json({
     draft: restart.draft,
     agentRequests: selectAgentRequests(state.agentRequests, new Set(restart.queuedRequests.map((item) => item.id))),
@@ -935,7 +1007,7 @@ router.post('/agent-requests/:id/retry', async (request, response) => {
   appendCopiedRestartToState(state, restart);
   await saveState(state);
 
-  startDryRunRunner();
+  startDryRunRunner(executionScopeForDraft(restart.draft,response.locals.runtimeIdentity));
   response.json({
     draft: restart.draft,
     agentRequests: selectAgentRequests(state.agentRequests, new Set(restart.queuedRequests.map((item) => item.id))),
@@ -944,13 +1016,16 @@ router.post('/agent-requests/:id/retry', async (request, response) => {
 });
 
 router.post('/agent-requests/:id/fail', requireAgentApiToken, async (request, response) => {
-  const state = await loadStateWithClaimRecovery();
+  const state = await loadState();
   const agentRequest = findById(state.agentRequests, routeParamText(request.params.id));
 
   if (!agentRequest) {
     response.status(404).json({ error: 'AI操作が見つかりません' });
     return;
   }
+
+  try { await recoverScopedClaims(state,request.body?.scope,agentRequest); }
+  catch (e) { response.status(409).json({error:unknownErrorMessage(e)});return; }
 
   if (isStatusIn(agentRequest.status, ['cancelled', 'superseded'])) {
     response.json({ request: agentRequest, state });

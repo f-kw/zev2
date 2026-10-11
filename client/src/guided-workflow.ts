@@ -1,4 +1,4 @@
-import { findById, getFileRefKindForRequest, getOutputTypeForRequest, isAgentRequestReady, type AgentRequest, type ControlReviewItem, type FileRef, type RequestDraft, type RuntimeConfig, type Zev2State } from '@zev2/shared';
+import { draftConfirmationIdentity, findById, getFileRefKindForRequest, getOutputTypeForRequest, isAgentRequestReady, type AgentRequest, type ControlReviewItem, type FileRef, type RequestDraft, type RuntimeConfig, type UiReviewMaterials, type Zev2State } from '@zev2/shared';
 
 export const GUIDE_STEPS = ['依頼', '下書き', '内容確認', '作成前確認', '作成', '動画確認'];
 
@@ -24,8 +24,8 @@ export function currentOutput(state: Zev2State, draftId: string): FileRef | unde
 export function resumeBlockers(state: Zev2State, draftId: string): string[] {
   const ready = state.agentRequests.filter(r => isAgentRequestReady(state, r));
   if (!draftId || !ready.some(r => r.requestDraftId === draftId)) return ['この依頼に再開できる工程がありません。'];
-  if (state.agentRequests.some(r => r.requestDraftId !== draftId && (r.status === 'running' || isAgentRequestReady(state, r)))) {
-    return ['他の依頼にも実行対象があります。現在の再開APIは依頼を指定できないため、再開を停止しています。'];
+  if (state.agentRequests.some(r => r.status === 'running')) {
+    return ['取得中の作業があるため、競合する再開を停止しています。'];
   }
   return [];
 }
@@ -45,7 +45,7 @@ export function draftStartBlockers(draft: RequestDraft, config: RuntimeConfig | 
   return blockers;
 }
 
-export function reviewBlockers(state: Zev2State, draft: RequestDraft, review: ControlReviewItem): string[] {
+export function reviewBlockers(state: Zev2State, draft: RequestDraft, review: ControlReviewItem, materials?: UiReviewMaterials | null): string[] {
   const blockers: string[] = [];
   const producer = findById(state.agentRequests, review.agentRequestId);
   const latest = state.controlReviewItems.filter(r => r.requestDraftId === draft.id && r.status === 'review_required')
@@ -60,8 +60,7 @@ export function reviewBlockers(state: Zev2State, draft: RequestDraft, review: Co
     blockers.push('保存済みの確認資料への参照が不足しています。');
   }
   if (review.kind === 'render_readiness') {
-    // A JSON reference or an arbitrary option is not a render confirmation package.
-    blockers.push('作成前確認の動画断片・表示枠・字幕・発話対応・実行条件の詳細表示が未接続です。動画作成は停止しています。');
+    blockers.push(...(materials?.blockers ?? ['登録済みの作成前確認資料を取得できていません。動画作成は停止しています。']));
   } else if (!review.options.length || review.options.some(o => !o.id || !o.title.trim() || !o.summary.trim() || !o.evidenceRefs.length)
     || new Set(review.options.map(o => o.id)).size !== review.options.length) {
     blockers.push('内容確認に必要な候補と判断材料が不足しています。');
@@ -81,5 +80,5 @@ export function guideStep(draft: RequestDraft | undefined, review: ControlReview
 }
 
 export function draftIdentity(draft: RequestDraft): string {
-  return JSON.stringify([draft.id, draft.updatedAt, draft.productionType, draft.purpose, draft.source, draft.settings, draft.policy]);
+  return draftConfirmationIdentity(draft);
 }

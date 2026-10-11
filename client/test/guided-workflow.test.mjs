@@ -19,7 +19,7 @@ async function compiled(file, imports) {
 }
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
 const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep } = await import(guideURL);
-const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','submitHumanReviewAction',
+const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
   'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview'];
 const apiURL = dataURL(`export const handlers = {}; ${apiNames.map(n => `export const ${n} = (...args) => handlers.${n}(...args);`).join('\n')}
 export const formatApiError = e => e.message;`);
@@ -138,14 +138,18 @@ test('registered content requires the producer output ID and file owner to agree
   const {state,draft,review}=reviewFixture();assert.equal(reviewBlockers(state,draft,review).length,0);
   state.fileRefs[0].ownerId=draft.id;assert(reviewBlockers(state,draft,review).length);
 });
-test('global resume cannot accidentally run another saved request',async()=>{
+test('resume sends the active approved version even when another request is ready',async()=>{
   const {state,draft}=fixture();draft.status='approved';let index=0;
   state.agentRequests=shared.createAgentRequestsFromDraft(draft,'2026-10-11T01:00:00Z',()=> 'queue-'+(++index));
   assert.deepEqual(resumeBlockers(state,draft.id),[]);
   const other=shared.createRequestDraft(input,'2026-10-11T01:20:00Z',()=> 'other');other.status='approved';state.requestDrafts.push(other);
   state.agentRequests.push(...shared.createAgentRequestsFromDraft(other,other.createdAt,()=> 'queue-'+(++index)));
-  const s=storeFor(state);s.activeDraftId=draft.id;let calls=0;handlers.resumeAgentWork=async()=>{calls++;return state;};
-  await s.resumeAgentWork();assert.equal(calls,0);assert.match(s.errorMessage,/他の依頼/);
+  const s=storeFor(state);s.activeDraftId=draft.id;let calls=0;
+  handlers.resumeAgentWork=async scope=>{calls++;assert.deepEqual(scope,shared.executionScopeForDraft(draft));
+    const next=structuredClone(state);next.agentRequests.filter(r=>r.requestDraftId===draft.id).forEach(r=>r.status='cancelled');return next;};
+  await s.resumeAgentWork();assert.equal(calls,1);assert(s.state.agentRequests.some(r=>r.requestDraftId===other.id&&r.status==='queued'));
+  s.state.agentRequests.find(r=>r.requestDraftId===other.id).status='running';
+  s.state.agentRequests.find(r=>r.requestDraftId===draft.id).status='queued';await s.resumeAgentWork();assert.equal(calls,1);
 });
 test('retry and cancel are scoped to the active saved request',async()=>{
   const {state,draft}=fixture();state.agentRequests.push({id:'old-failure',requestDraftId:'other',status:'failed'});
@@ -162,4 +166,16 @@ test('revision cannot create a copy from an absent or different current output',
 test('a newer attempt with the same saved clock hides an older video',()=>{
   const {state,draft,request}=renderFixture();state.agentRequests.push({...request,id:'render-new',status:'failed',result:undefined});
   assert.equal(currentOutput(state,draft.id),undefined);
+});
+
+
+test('late material fetch cannot replace another draft or a newer displayed confirmation',async()=>{
+  const {state,draft,review}=reviewFixture();const s=storeFor(state);let pending=[];
+  handlers.fetchUiReviewMaterials=()=>new Promise(r=>pending.push(r));
+  const model={requestDraftId:draft.id,draftIdentity:draftIdentity(draft),review,fingerprint:'latest',candidates:[],segments:[],bindings:[],blockers:[]};
+  const older=s.refreshUiReviewMaterials(draft.id),newer=s.refreshUiReviewMaterials(draft.id);
+  pending[1](model);await newer;pending[0]({...model,fingerprint:'stale'});await older;
+  assert.equal(s.reviewMaterials.fingerprint,'latest');
+  const late=s.refreshUiReviewMaterials(draft.id);s.activeDraftId='other';pending[2](model);await late;
+  assert.equal(s.reviewMaterials,null);
 });
