@@ -27,3 +27,5 @@
 自分のEdgeタブを閉じ、mock session62770へCtrl-Cを送り終了。5179 listener0、今回build/unit/mock process0を確認。他担当process/アプリ/配信は停止しない。監査コピーのbyte一致再読後に自分の/tmp重複28,174bytesを削除し、4枚の軽量画面とAX/原log/観測記録を保持。新fixture/大容量媒体0、元素材/正式/退避物への作用0。空き観測Mac17,220,224KiB/SSD1,903,313,408KiB。共有変動をcleanup回収量へ換算しない。
 
 最新mainの開始側観測は24f1ef18a1b0863bd6dd02cdcbd0da43d7a863ef。UI Git枠で自分の初稿/検証/失敗証拠だけを監査checkpointへ固定・pushし、親へ現物と未適用の一件を返す。No.68全体未完成、No.70未着手。正式保持回答/全体統合・新版時計・字幕/要求反映・UI再資格確認/作成・実媒体/人間品質は後続境界として維持する。
+
+監査checkpointは`7e34cf8b67f45a54a73e221e71b9b6df5f4f9bcc`（対象17file）。[停止session log](../../work-logs/2026-10/2026-10-11T0707_Codex-UI_No68-client-retention-stop_7e34cf8b.md)とこの参照行を後続doc commitへ保存し、両checkpointをpush後に親へ実結果を返す。理由保持5の修正は未適用、ブラウザー未完了を維持する。
