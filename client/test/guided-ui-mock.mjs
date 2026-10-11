@@ -1,6 +1,7 @@
 // Isolated local UI QA. Every /api request is intercepted; no production backend or provider is contacted.
 // Run: node client/test/guided-ui-mock.mjs   (127.0.0.1:5179)
 import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../../', import.meta.url)).replace(/\/$/, '');
@@ -10,6 +11,8 @@ const shared = await import(pathToFileURL(root + '/packages/shared/dist/index.js
 let state = shared.createInitialState(), sequence = 0;
 const calls = [];
 let digestAdditionIds = [];
+const digestCompositions = new Map(), digestConfirmationRequests = new Map();
+let digestConfirmationMode = 'normal';
 const config = { stt: { mode: 'fixed', localServerUrl: '', language: 'ja' }, contentDiscovery: { mode: 'fixed' },
   editPlan: { mode: 'fixed' }, adjustment: { mode: 'fixed' }, videoOutput: { encoder: 'libx264', extraArgs: [] },
   agentClaim: { ttlMilliseconds: 60000 }, artifactDelivery: { mode: 'local' },
@@ -30,7 +33,18 @@ function digestMockMaterials(draft) {
       currentDurationMs:1000,addedContextDurationMs:digestAdditionIds.length*1000,contextTotalUpperBoundMs:1000+digestAdditionIds.length*1000,editRequestIds:digestAdditionIds.map(id=>'mock-edit-'+id)},
     creationChecks:{inputValidation:digestAdditionIds.length?'failed':'verified',audioPreservation:'preserve-source-only',sourceAudioReference:'registered',runtimeIdentity:JSON.stringify(config)},
     segments:[{startMs:0,endMs:1000,caption:'人工入力の元本文',speechIds:[1],displaySummary:'保持済み本文。字幕の表示境界・描画は後続工程で確認します。'}],
-    blockers:[...(digestAdditionIds.length?['場面追加の編集要求を保存しました。変更後の正式な新版準備・再照合は未接続です。旧準備では作成前確認へ進めません。']:[]),'動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']};
+    blockers:[...(digestAdditionIds.length?['場面追加の編集要求を保存しました。変更後の正式な新版準備・再照合は未接続です。旧準備では作成前確認へ進めません。',
+      ...themes.filter(t=>digestAdditionIds.includes(t.id)).map(t=>`追加場面「${t.title}」の確認は未回答です。`)]:[]),'動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']};
+}
+function digestMockComposition(m) {
+  // Synthetic API view only, not a production request hash or formal qualification proof.
+  const hash=createHash('sha256').update(JSON.stringify(m)).digest('hex'),snapshotBinding={path:`artifacts/${m.requestDraftId}/ui-composition-${hash}--snapshot.json`,fileSha256:hash};
+  return {status:'composition-data-only',requestDraftId:m.requestDraftId,requestHash:hash,snapshotBinding,
+    compositionBinding:{path:`artifacts/${m.requestDraftId}/ui-composition-${hash}--composition.json`,fileSha256:'d'.repeat(64)},representedEditRequestIds:m.digestComposition.editRequestIds,
+    composition:{schemaVersion:'ui-digest-human-composition-data-v001',status:'composition-data-only',requestDraftId:m.requestDraftId,draftIdentity:m.draftIdentity,requestHash:hash,
+      snapshotBinding,representedEditRequestIds:m.digestComposition.editRequestIds,beforeCandidateIds:m.digestComposition.currentCandidateIds,
+      requestedCandidateIds:m.digestComposition.requestedCandidateIds,originalAiSelectionBinding:m.digestComposition.basis.selectionAdoptionBinding,
+      scenes:m.digestComposition.requestedCandidateIds.map(candidateId=>({candidateId}))}};
 }
 function draftCopy(purpose = config.source.defaultPurpose, productionType = 'clip') {
   const draft = shared.createRequestDraft({ productionType, purpose, sourceUri: config.source.defaultUri,
@@ -68,6 +82,7 @@ function seedScenario(scenario) {
         state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
         if (scenario === 'digest-precreation') {
           digestAdditionIds=[];
+          digestCompositions.clear();digestConfirmationRequests.clear();digestConfirmationMode='normal';
           state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認', 'digest');
           const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
         }
@@ -100,7 +115,7 @@ const server = await createServer({ root: root + '/client', configFile: root + '
       const url = new URL(req.url, 'http://127.0.0.1:5179');let body = '';
       for await (const chunk of req) body += chunk;
       const data = body ? JSON.parse(body) : {};
-      if (req.method !== 'GET' || url.pathname.startsWith('/__qa/')) {
+      if (req.method !== 'GET' || url.pathname.startsWith('/__qa/') || /\/ui-digest-(composition-data|additional-retention-inputs)\//u.test(url.pathname)) {
         calls.push({ method: req.method, path: url.pathname, body: data });
         if (process.env.ZEV_UI_QA_LOG) writeFileSync(process.env.ZEV_UI_QA_LOG, JSON.stringify(calls, null, 2));
       }
@@ -110,6 +125,11 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         return send({ state, calls });
       }
       if (url.pathname === '/__qa/calls') return send({ calls, state });
+      if (url.pathname === '/__qa/digest-confirmation') {
+        digestConfirmationMode=url.searchParams.get('mode')||'normal';
+        if (url.searchParams.get('add')==='ending'&&!digestAdditionIds.includes('ending')) digestAdditionIds.push('ending');
+        return send({mode:digestConfirmationMode,calls});
+      }
       if (url.pathname === '/api/human-auth/status') return send({ required: false, authenticated: true });
       if (url.pathname === '/api/runtime-config') return send(config);
       if (url.pathname === '/api/workflow') return send({ steps: shared.WORKFLOW_STEPS });
@@ -136,6 +156,26 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         const draft = shared.createRequestDraft(data, now(), () => 'draft-' + (++sequence));state.requestDrafts.unshift(draft);return send({ draft, state });
       }
       const draft = state.requestDrafts.find(d => d.id === url.pathname.split('/')[3]);
+      if (/\/ui-digest-(composition-data|additional-retention-inputs)(\/|$)/u.test(url.pathname)) {
+        const m=draft?.productionType==='digest'?digestMockMaterials(draft):null;
+        if (!m || m.digestComposition.status!=='revision_requested') {res.statusCode=409;return send({error:'現在の追加場面の資料がありません。'});}
+        const c=digestMockComposition(m),readHash=url.pathname.split('/')[5],isComposition=url.pathname.includes('/ui-digest-composition-data');
+        if (req.method==='GET') {
+          const saved=(isComposition?digestCompositions:digestConfirmationRequests).get(readHash);
+          if (!saved || readHash!==c.requestHash || digestConfirmationMode==='missing') {res.statusCode=409;return send({error:'保存済みの発話資料が不足、または保存版が変わっています。資料を再読み込みしてください。'});}
+          return send(digestConfirmationMode==='stale'?{...saved,requestHash:'0'.repeat(64)}:saved);
+        }
+        if (req.method!=='POST'||data.draftIdentity!==m.draftIdentity||data.fingerprint!==m.fingerprint
+          ||Object.keys(data).length!==(isComposition?2:3)) {res.statusCode=409;return send({error:'現在の依頼・追加場面を再確認してください。'});}
+        if (isComposition) {digestCompositions.set(c.requestHash,c);return send(c);}
+        if (data.requestHash!==c.requestHash||!digestCompositions.has(c.requestHash)||digestConfirmationMode==='missing') {res.statusCode=409;return send({error:'保存済みの発話資料が不足しています。確認要求は未準備です。'});}
+        const result={status:'awaiting-retention-answers',requestDraftId:draft.id,requestHash:c.requestHash,preparationHash:'e'.repeat(64),
+          pendingCandidates:m.digestComposition.addedCandidateIds.map(id=>({candidateId:id,title:themes.find(t=>t.id===id).title,answerStatus:'unanswered'})),
+          message:'人工mockの未回答要求。AI処理なし。',admission:{retentionIntegration:'not-prepared',captionPreparation:'not-prepared',executionPermission:'not-approved',humanQuality:'pending'}};
+        digestConfirmationRequests.set(c.requestHash,result);
+        if (process.env.ZEV_UI_QA_RETENTION_DELAY_MS) await new Promise(r=>setTimeout(r,Number(process.env.ZEV_UI_QA_RETENTION_DELAY_MS)));
+        return send(result);
+      }
       if (url.pathname.endsWith('/ui-digest-scene-additions')) {
         const m=draft?.productionType==='digest'?digestMockMaterials(draft):null;
         if (!m || data.draftIdentity!==m.draftIdentity || data.fingerprint!==m.fingerprint || !themes.some(t=>t.id===data.candidateId)) {res.statusCode=409;return send({error:'現在の構成を再確認してください'});}

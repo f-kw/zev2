@@ -1,0 +1,27 @@
+{
+  "browser": "Edge",
+  "ownTab": "1516875462 (closed)",
+  "url": "http://127.0.0.1:5179/",
+  "environment": "all /api intercepted by synthetic mock; no real backend/provider/media",
+  "browseAndClose": "no API POST; no automatic input preparation",
+  "confirmationCancel": "only prior scene-addition POST; zero new preparation POST",
+  "doubleClick": "one composition POST + one input preparation POST; genuine request-pending UI/disabled controls observed",
+  "matchingRead": "two GETs at same requestHash; no POST",
+  "requestPageReturn": "same version summary returns, no save",
+  "browserReload": "summary unknown and read disabled; explicit re-prepare produced identical body/requestHash to earlier version",
+  "missingMockMode": "missing",
+  "missingMaterials": "failed composition GET initially showed shortage reason and removed prior summary",
+  "failure": "after existing 2-second state polling, shortage reason disappeared; summary remained unknown",
+  "unverifiedBrowserCases": [
+    "retry after shortage",
+    "mismatched response hash",
+    "stale displayed confirmation submitted to changed server version",
+    "new candidate version hides former summary"
+  ],
+  "unitCoverageForUnverifiedBrowserCases": "targeted store tests cover stale display/hash/late response, error retry and changed version; not a substitute for browser completion",
+  "primaryRequestHash": "340c4e4634cb24bf48fc49591e18bf57ffc7dac3c1149076626bb5c23748c0bf",
+  "preparationPostCount": 2,
+  "compositionPostCount": 2,
+  "keyedGetCount": 3,
+  "executionPosts": 0
+}

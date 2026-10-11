@@ -14,7 +14,7 @@ import {
   type WorkflowStep,
   type Zev2State
 } from '@zev2/shared';
-import type { UiReviewMaterials } from '@zev2/shared';
+import type { UiReviewMaterials, UiDigestCompositionDataView, UiDigestRetentionPreparationSummary } from '@zev2/shared';
 import {
   applyWebGeminiReview as applyWebGeminiReviewRequest,
   approveDraft,
@@ -30,7 +30,11 @@ import {
   retryAgentRequest,
   submitFinalReview as submitFinalReviewRequest,
   submitHumanReviewAction,
-  saveDigestSceneAddition
+  saveDigestSceneAddition,
+  saveDigestCompositionData,
+  fetchDigestCompositionData,
+  prepareDigestRetentionInputs,
+  fetchDigestRetentionInputs
 } from '../api';
 
 interface ControlQueueStoreState {
@@ -48,6 +52,49 @@ interface ControlQueueStoreState {
   stateReadNumber: number;
   uiMaterialReadNumber: number;
   reviewMaterials: UiReviewMaterials | null;
+  digestRetentionOperation: 'idle' | 'preparing' | 'reading';
+  digestRetentionRequest: { requestDraftId: string; draftIdentity: string; fingerprint: string; requestHash: string;
+    summary: UiDigestRetentionPreparationSummary | null } | null;
+}
+
+function retentionContext(s: ControlQueueStoreState) {
+  const draft = findById(s.state.requestDrafts, s.activeDraftId), materials = s.reviewMaterials;
+  if (!draft || draft.productionType !== 'digest' || draft.status !== 'approved' || !materials
+    || materials.requestDraftId !== draft.id || materials.draftIdentity !== draftIdentity(draft)
+    || materials.digestPreparation?.status !== 'verified' || materials.digestComposition?.status !== 'revision_requested'
+    || !materials.digestComposition.addedCandidateIds.length || !materials.digestComposition.editRequestIds.length) return;
+  return { draft, materials, composition: materials.digestComposition };
+}
+function retainedRequest(s: ControlQueueStoreState) {
+  const c = retentionContext(s), saved = s.digestRetentionRequest;
+  return c && saved?.requestDraftId === c.draft.id && saved.draftIdentity === c.materials.draftIdentity
+    && saved.fingerprint === c.materials.fingerprint ? saved : undefined;
+}
+const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+function checkedComposition(c: NonNullable<ReturnType<typeof retentionContext>>, result: UiDigestCompositionDataView) {
+  const hash = result?.requestHash, value = result?.composition;
+  if (result?.status !== 'composition-data-only' || result.requestDraftId !== c.draft.id || !/^[0-9a-f]{64}$/u.test(hash)
+    || result.snapshotBinding?.fileSha256 !== hash || !/^[0-9a-f]{64}$/u.test(result.compositionBinding?.fileSha256)
+    || result.snapshotBinding.path !== `artifacts/${c.draft.id}/ui-composition-${hash}--snapshot.json`
+    || result.compositionBinding.path !== `artifacts/${c.draft.id}/ui-composition-${hash}--composition.json`
+    || !equal(result.representedEditRequestIds, c.composition.editRequestIds)
+    || value?.status !== 'composition-data-only' || value.schemaVersion !== 'ui-digest-human-composition-data-v001'
+    || value.requestDraftId !== c.draft.id || value.draftIdentity !== c.materials.draftIdentity || value.requestHash !== hash
+    || !equal(value.snapshotBinding, result.snapshotBinding) || !equal(value.representedEditRequestIds, c.composition.editRequestIds)
+    || !equal(value.beforeCandidateIds, c.composition.currentCandidateIds) || !equal(value.requestedCandidateIds, c.composition.requestedCandidateIds)
+    || !equal(value.originalAiSelectionBinding, c.composition.basis.selectionAdoptionBinding)
+    || !equal(value.scenes?.map(scene => scene.candidateId), c.composition.requestedCandidateIds))
+    throw new Error('保存構成が現在の依頼・追加した場面と一致しません。資料を再読み込みしてください。');
+  return hash;
+}
+function checkedRetention(c: NonNullable<ReturnType<typeof retentionContext>>, hash: string, result: UiDigestRetentionPreparationSummary) {
+  const expected = c.composition.addedCandidateIds.map(id => ({ candidateId: id,
+    title: c.materials.candidates.find(v => v.id === id)?.title, answerStatus: 'unanswered' }));
+  if (result?.status !== 'awaiting-retention-answers' || result.requestDraftId !== c.draft.id || result.requestHash !== hash
+    || !/^[0-9a-f]{64}$/u.test(result.preparationHash) || !equal(result.pendingCandidates, expected)
+    || !equal(result.admission, { retentionIntegration: 'not-prepared', captionPreparation: 'not-prepared', executionPermission: 'not-approved', humanQuality: 'pending' }))
+    throw new Error('確認要求が現在の追加場面・保存版と一致しません。資料を再読み込みしてください。');
+  return result;
 }
 
 function wait(milliseconds: number): Promise<void> {
@@ -112,9 +159,61 @@ export const useControlQueueStore = defineStore('controlQueue', {
     stateReadNumber: 0,
     uiMaterialReadNumber: 0,
     reviewMaterials: null,
+    digestRetentionOperation: 'idle',
+    digestRetentionRequest: null,
     runNumber: 0
   }),
+  getters: {
+    canPrepareDigestRetention: state => Boolean(retentionContext(state)),
+    canReadDigestRetention: state => Boolean(retainedRequest(state)),
+    displayedDigestRetention: state => retainedRequest(state)?.summary ?? null
+  },
   actions: {
+    async prepareDigestConfirmation(fingerprint: string) {
+      if (this.loading) return false;
+      const c = retentionContext(this);
+      if (!c || c.materials.fingerprint !== fingerprint) { this.errorMessage = '現在の追加場面と資料を再読み込みしてください。';return false; }
+      const number = ++this.uiMaterialReadNumber, stillCurrent = () => {
+        const now = retentionContext(this);
+        return number === this.uiMaterialReadNumber && now?.draft.id === c.draft.id && now.materials.draftIdentity === c.materials.draftIdentity
+          && now.materials.fingerprint === fingerprint;
+      };
+      this.loading = true;this.digestRetentionOperation = 'preparing';this.digestRetentionRequest = null;this.errorMessage = '';
+      this.message = '追加した場面の確認要求を準備しています。AI処理・課金・動画作成は始まりません。';
+      try {
+        const result = await saveDigestCompositionData(c.draft.id, { draftIdentity: c.materials.draftIdentity, fingerprint });
+        if (!stillCurrent()) return false;
+        const hash = checkedComposition(c, result);
+        this.digestRetentionRequest = { requestDraftId: c.draft.id, draftIdentity: c.materials.draftIdentity, fingerprint, requestHash: hash, summary: null };
+        const summary = await prepareDigestRetentionInputs(c.draft.id, { draftIdentity: c.materials.draftIdentity, fingerprint, requestHash: hash });
+        if (!stillCurrent()) return false;
+        this.digestRetentionRequest.summary = checkedRetention(c, hash, summary);
+        this.message = '確認要求を保存しました。追加した場面の確認は未回答です。AI処理・課金・動画作成は始まりません。';return true;
+      } catch (e) { if (stillCurrent()) { this.errorMessage = formatApiError(e);this.message = ''; }return false; }
+      finally { this.loading = false;this.digestRetentionOperation = 'idle'; }
+    },
+    async rereadDigestConfirmation() {
+      if (this.loading) return false;
+      const c = retentionContext(this), saved = retainedRequest(this);
+      if (!c || !saved) { this.errorMessage = '現在の画面で確認要求を準備し、保存版を確認してください。';return false; }
+      const number = ++this.uiMaterialReadNumber, stillCurrent = () => {
+        const now = retentionContext(this);
+        return number === this.uiMaterialReadNumber && now?.draft.id === c.draft.id && now.materials.draftIdentity === saved.draftIdentity
+          && now.materials.fingerprint === saved.fingerprint;
+      };
+      this.loading = true;this.digestRetentionOperation = 'reading';saved.summary = null;this.errorMessage = '';
+      this.message = '保存した確認要求を読み直しています。AI処理・課金・動画作成は始まりません。';
+      try {
+        const composition = await fetchDigestCompositionData(c.draft.id, saved.requestHash);
+        if (!stillCurrent()) return false;
+        if (checkedComposition(c, composition) !== saved.requestHash) throw new Error('保存した構成の版が変更されています。');
+        const summary = await fetchDigestRetentionInputs(c.draft.id, saved.requestHash);
+        if (!stillCurrent()) return false;
+        saved.summary = checkedRetention(c, saved.requestHash, summary);
+        this.message = '保存版との一致を確認しました。追加した場面の確認は未回答です。';return true;
+      } catch (e) { if (stillCurrent()) { this.errorMessage = formatApiError(e);this.message = ''; }return false; }
+      finally { this.loading = false;this.digestRetentionOperation = 'idle'; }
+    },
     async requestDigestSceneAddition(candidateId: string, fingerprint: string) {
       if (this.loading) return false;
       const draft = findById(this.state.requestDrafts, this.activeDraftId), materials = this.reviewMaterials;

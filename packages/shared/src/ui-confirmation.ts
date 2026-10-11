@@ -48,6 +48,25 @@ export interface UiDigestComposition {
   currentDurationMs: number; addedContextDurationMs: number; contextTotalUpperBoundMs: number;
   editRequestIds: string[];
 }
+// Consumer views of the existing data-only endpoints. None of these references grant execution permission.
+export interface UiDigestCompositionDataView {
+  status: 'composition-data-only'; requestDraftId: string; requestHash: string;
+  snapshotBinding: { path: string; fileSha256: string }; compositionBinding: { path: string; fileSha256: string };
+  representedEditRequestIds: string[];
+  composition: { schemaVersion: 'ui-digest-human-composition-data-v001'; status: 'composition-data-only';
+    requestDraftId: string; draftIdentity: string; requestHash: string;
+    snapshotBinding: { path: string; fileSha256: string }; representedEditRequestIds: string[];
+    beforeCandidateIds: string[]; requestedCandidateIds: string[];
+    originalAiSelectionBinding: { path: string; fileSha256: string }; scenes: Array<{ candidateId: string }> };
+}
+export interface UiDigestRetentionPreparationInput { draftIdentity: string; fingerprint: string; requestHash: string }
+export interface UiDigestRetentionPreparationSummary {
+  status: 'awaiting-retention-answers'; requestDraftId: string; requestHash: string; preparationHash: string;
+  pendingCandidates: Array<{ candidateId: string; title: string; answerStatus: 'unanswered' }>;
+  message: string;
+  admission: { retentionIntegration: 'not-prepared'; captionPreparation: 'not-prepared';
+    executionPermission: 'not-approved'; humanQuality: 'pending' };
+}
 export interface UiReviewMaterials {
   requestDraftId: string; draftIdentity: string; review?: ControlReviewItem; fingerprint: string;
   candidates: UiSavedCandidate[];

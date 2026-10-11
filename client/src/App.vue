@@ -75,6 +75,7 @@ const candidatesOpen = ref(false);
 const browsingOptionId = ref('');
 const browsingReviewIdentity = ref('');
 const digestAdditionCandidateId = ref('');
+const digestConfirmationFingerprint = ref('');
 const outputChangeOpen = ref(false);
 const outputChangeReason = ref('');
 const outputChangeScope = ref<RedoScope>('edit_plan');
@@ -1562,6 +1563,16 @@ const canAddDigestCandidate = computed(() => Boolean(currentDraft.value?.product
   && browsingReviewIdentity.value === candidateIdentity.value && digestAdditionState.value === 'available' && !agentOperationLocked.value));
 const digestCompositionScenes = computed(() => store.reviewMaterials?.digestComposition?.requestedCandidateIds
   .map(id => store.reviewMaterials!.candidates.find(c => c.id === id)).filter(c => c !== undefined) ?? []);
+const digestConfirmationScenes = computed(() => digestCompositionScenes.value
+  .filter(c => store.reviewMaterials?.digestComposition?.addedCandidateIds.includes(c.id)));
+function openDigestConfirmation() {
+  if (store.canPrepareDigestRetention && !store.loading) digestConfirmationFingerprint.value = store.reviewMaterials!.fingerprint;
+}
+async function saveDigestConfirmation() {
+  if (!digestConfirmationFingerprint.value || store.loading) return;
+  const fingerprint = digestConfirmationFingerprint.value;
+  await store.prepareDigestConfirmation(fingerprint);digestConfirmationFingerprint.value = '';
+}
 const digestAdditionDurationMs = computed(() => browsingSavedCandidate.value?.ranges.length
   ? Math.max(...browsingSavedCandidate.value.ranges.map(r => r.endMs)) - Math.min(...browsingSavedCandidate.value.ranges.map(r => r.startMs)) : 0);
 const executionNotices = computed(() => [...executionBlockers(store.runtimeConfig), ...resumeNotices.value]);
@@ -1619,6 +1630,7 @@ async function confirmOutputChanges() {
   await redoVideo(outputChangeScope.value, outputChangeReason.value);
 }
 watch(candidateIdentity, () => { closeCandidates(); });
+watch(candidateIdentity, () => { digestConfirmationFingerprint.value = ''; });
 watch(() => store.reviewMaterials, materials => {
   const review=activeReviewItem.value;
   if (!candidateWasAdopted.value && review?.kind==='theme_selection' && materials?.draftIdentity===draftIdentity(currentDraft.value!)) {
@@ -1912,6 +1924,22 @@ function trapDialogFocus(event: KeyboardEvent) {
           <p>作成前の入力検査：{{ store.reviewMaterials.creationChecks?.inputValidation === 'verified' ? '現在の登録資料との一致を確認' : '未完了' }}</p>
           <p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).audio }}</p><p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).source }}</p><p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).completion }}</p>
           <ul class="connection-notice"><li v-for="reason in store.reviewMaterials.blockers" :key="reason">{{ reason }}</li></ul>
+          <section v-if="store.canPrepareDigestRetention" aria-label="追加した場面の確認要求">
+            <h3>追加した場面の確認</h3>
+            <p>確認要求を保存する準備です。AI処理・課金・動画作成は始まりません。確認の回答と変更後の動画はまだありません。</p>
+            <template v-if="store.displayedDigestRetention">
+              <p>確認要求を保存済み · 未回答</p>
+              <ul><li v-for="scene in store.displayedDigestRetention.pendingCandidates" :key="scene.candidateId">{{ scene.title }} · 未回答</li></ul>
+            </template>
+            <p v-else>この画面では準備状況を未確認です。不足資料があれば準備を止め、理由を表示します。</p>
+            <template v-if="digestConfirmationFingerprint">
+              <p>次の追加場面の確認要求を保存します。</p>
+              <ul><li v-for="scene in digestConfirmationScenes" :key="scene.id">{{ scene.title }}</li></ul>
+              <p>元の採用場面と判断記録は保持します。送信前に取り消せます。</p>
+              <div class="review-actions"><button type="button" class="secondary-button" :disabled="store.loading" @click="digestConfirmationFingerprint = ''">準備を取り消す</button><button type="button" :disabled="store.loading" @click="saveDigestConfirmation">{{ store.digestRetentionOperation === 'preparing' ? '確認要求を準備中' : '確認要求を保存' }}</button></div>
+            </template>
+            <div v-else class="review-actions"><button type="button" class="secondary-button" :disabled="store.loading" @click="openDigestConfirmation">追加した場面の確認を準備</button><button type="button" class="secondary-button" :disabled="store.loading || !store.canReadDigestRetention" @click="store.rereadDigestConfirmation">{{ store.digestRetentionOperation === 'reading' ? '確認要求を読込中' : '確認要求を読み直す' }}</button></div>
+          </section>
           <div class="review-actions"><button type="button" class="secondary-button" :disabled="store.loading" @click="store.refreshUiReviewMaterials(currentDraft!.id)">資料を再読み込み</button><button v-if="candidateOptions.length" type="button" class="secondary-button" @click="openCandidates">他の候補を見る</button></div>
         </section>
 

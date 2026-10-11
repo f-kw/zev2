@@ -1,5 +1,7 @@
 import axios from 'axios';
-import type { AgentExecutionScope, DraftApprovalConfirmation, ReviewApprovalConfirmation, OutputApprovalConfirmation, UiReviewMaterials, UiDigestSceneAdditionInput, UiDigestEditRequest } from '@zev2/shared';
+import type { AgentExecutionScope, DraftApprovalConfirmation, ReviewApprovalConfirmation, OutputApprovalConfirmation, UiReviewMaterials,
+  UiDigestSceneAdditionInput, UiDigestEditRequest, UiDigestCompositionDataView, UiDigestRetentionPreparationInput,
+  UiDigestRetentionPreparationSummary } from '@zev2/shared';
 import {
   uriWithRef,
   type AgentCompletionInput,
@@ -91,6 +93,19 @@ export async function saveDigestSceneAddition(id: string, input: UiDigestSceneAd
 }> {
   const response = await api.post(`/request-drafts/${id}/ui-digest-scene-additions`, input);
   return response.data;
+}
+
+export async function saveDigestCompositionData(id: string, input: { draftIdentity: string; fingerprint: string }): Promise<UiDigestCompositionDataView> {
+  return (await api.post(`/request-drafts/${id}/ui-digest-composition-data`, input)).data;
+}
+export async function fetchDigestCompositionData(id: string, requestHash: string): Promise<UiDigestCompositionDataView> {
+  return (await api.get(`/request-drafts/${id}/ui-digest-composition-data/${requestHash}`)).data;
+}
+export async function prepareDigestRetentionInputs(id: string, input: UiDigestRetentionPreparationInput): Promise<UiDigestRetentionPreparationSummary> {
+  return (await api.post(`/request-drafts/${id}/ui-digest-additional-retention-inputs`, input)).data;
+}
+export async function fetchDigestRetentionInputs(id: string, requestHash: string): Promise<UiDigestRetentionPreparationSummary> {
+  return (await api.get(`/request-drafts/${id}/ui-digest-additional-retention-inputs/${requestHash}`)).data;
 }
 
 export async function fetchRuntimeConfig(): Promise<RuntimeConfig> {

@@ -20,7 +20,8 @@ async function compiled(file, imports) {
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
 const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState } = await import(guideURL);
 const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
-  'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview','saveDigestSceneAddition'];
+  'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview','saveDigestSceneAddition',
+  'saveDigestCompositionData','fetchDigestCompositionData','prepareDigestRetentionInputs','fetchDigestRetentionInputs'];
 const apiURL = dataURL(`export const handlers = {}; ${apiNames.map(n => `export const ${n} = (...args) => handlers.${n}(...args);`).join('\n')}
 export const formatApiError = e => e.message;`);
 const { handlers } = await import(apiURL);
@@ -103,6 +104,110 @@ function digestAdditionFixture() {
     digestPreparation:{status:'verified'},digestComposition:{status:'current',currentCandidateIds:['first'],requestedCandidateIds:['first'],addedCandidateIds:[],editRequestIds:[]}};
   return {state,draft,materials};
 }
+function digestConfirmationFixture() {
+  const f=digestAdditionFixture(),m=f.materials;m.fingerprint='added-scene-version';
+  m.digestComposition={...m.digestComposition,status:'revision_requested',requestedCandidateIds:['first','second'],addedCandidateIds:['second'],editRequestIds:['human-addition'],
+    basis:{selectionAdoptionBinding:{path:'original-selection.json',fileSha256:'b'.repeat(64)}}};
+  const hash='c'.repeat(64),snapshotBinding={path:`artifacts/${f.draft.id}/ui-composition-${hash}--snapshot.json`,fileSha256:hash};
+  const composition={status:'composition-data-only',requestDraftId:f.draft.id,requestHash:hash,snapshotBinding,
+    compositionBinding:{path:`artifacts/${f.draft.id}/ui-composition-${hash}--composition.json`,fileSha256:'d'.repeat(64)},representedEditRequestIds:['human-addition'],
+    composition:{schemaVersion:'ui-digest-human-composition-data-v001',status:'composition-data-only',requestDraftId:f.draft.id,draftIdentity:m.draftIdentity,requestHash:hash,
+      snapshotBinding,representedEditRequestIds:['human-addition'],beforeCandidateIds:['first'],requestedCandidateIds:['first','second'],
+      originalAiSelectionBinding:m.digestComposition.basis.selectionAdoptionBinding,scenes:[{candidateId:'first'},{candidateId:'second'}]}};
+  const summary={status:'awaiting-retention-answers',requestDraftId:f.draft.id,requestHash:hash,preparationHash:'e'.repeat(64),
+    pendingCandidates:[{candidateId:'second',title:'second',answerStatus:'unanswered'}],message:'未回答',
+    admission:{retentionIntegration:'not-prepared',captionPreparation:'not-prepared',executionPermission:'not-approved',humanQuality:'pending'}};
+  const s=storeFor(f.state);s.reviewMaterials=m;return {...f,s,composition,summary};
+}
+function digestConfirmationHandlers(f) {
+  handlers.saveDigestCompositionData=async(id,input)=>{assert.equal(id,f.draft.id);assert.deepEqual(input,{draftIdentity:f.materials.draftIdentity,fingerprint:f.materials.fingerprint});return f.composition;};
+  handlers.prepareDigestRetentionInputs=async(id,input)=>{assert.equal(id,f.draft.id);assert.deepEqual(input,{draftIdentity:f.materials.draftIdentity,fingerprint:f.materials.fingerprint,requestHash:f.composition.requestHash});return f.summary;};
+  handlers.fetchDigestCompositionData=async(id,hash)=>{assert.equal(id,f.draft.id);assert.equal(hash,f.composition.requestHash);return f.composition;};
+  handlers.fetchDigestRetentionInputs=async(id,hash)=>{assert.equal(id,f.draft.id);assert.equal(hash,f.composition.requestHash);return f.summary;};
+  handlers.approveDraft=handlers.submitHumanReviewAction=handlers.resumeAgentWork=()=>assert.fail('Input preparation must not execute');
+}
+test('Digest confirmation saves the exact version once during repeated clicks, with no execution or state changes',async()=>{
+  const f=digestConfirmationFixture();digestConfirmationHandlers(f);let resolve,saves=0,prepares=0;
+  const save=handlers.saveDigestCompositionData,prepare=handlers.prepareDigestRetentionInputs;
+  handlers.saveDigestCompositionData=async(...args)=>{saves++;await new Promise(r=>resolve=r);return save(...args);};
+  handlers.prepareDigestRetentionInputs=async(...args)=>{prepares++;return prepare(...args);};
+  const before=JSON.stringify(f.s.state),pending=f.s.prepareDigestConfirmation(f.materials.fingerprint);
+  assert.equal(f.s.digestRetentionOperation,'preparing');assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);
+  assert.equal(f.s.displayedDigestRetention,null);resolve();assert.equal(await pending,true);
+  assert.equal(saves,1);assert.equal(prepares,1);assert.equal(f.s.digestRetentionOperation,'idle');
+  assert.deepEqual(f.s.displayedDigestRetention,f.summary);assert.equal(JSON.stringify(f.s.state),before);
+  assert(f.s.message.includes('未回答')&&f.s.message.includes('課金')&&f.s.message.includes('始まりません'));
+});
+test('Digest confirmation rejects old display and absent/changed source before any preparation request',async()=>{
+  const f=digestConfirmationFixture();handlers.saveDigestCompositionData=()=>assert.fail('Invalid display must not write');
+  assert.equal(await f.s.prepareDigestConfirmation('old'),false);
+  f.s.reviewMaterials.digestComposition.status='source_changed';assert.equal(f.s.canPrepareDigestRetention,false);
+  assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);
+  f.s.reviewMaterials=null;assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);
+  assert.equal(await f.s.rereadDigestConfirmation(),false);
+});
+test('Digest confirmation checks the full displayed chain and original adoption reference before preparing new inputs',async()=>{
+  for(const kind of ['draft','hash','requests','before','scenes','original-adoption']) {
+    const f=digestConfirmationFixture();digestConfirmationHandlers(f);const changed=structuredClone(f.composition);
+    if(kind==='draft')changed.composition.draftIdentity='old';
+    if(kind==='hash')changed.snapshotBinding.fileSha256='0'.repeat(64);
+    if(kind==='requests')changed.representedEditRequestIds=['old-human-addition'];
+    if(kind==='before')changed.composition.beforeCandidateIds=['second'];
+    if(kind==='scenes')changed.composition.scenes.reverse();
+    if(kind==='original-adoption')changed.composition.originalAiSelectionBinding.fileSha256='0'.repeat(64);
+    handlers.saveDigestCompositionData=async()=>changed;handlers.prepareDigestRetentionInputs=()=>assert.fail('Mismatched chain must not prepare');
+    assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);assert.equal(f.s.displayedDigestRetention,null);
+  }
+});
+test('Digest confirmation does not display mismatched hashes/scenes or an invented answered/execution status',async()=>{
+  for(const kind of ['hash','draft','scene','title','answered','execution']) {
+    const f=digestConfirmationFixture();digestConfirmationHandlers(f);const changed=structuredClone(f.summary);
+    if(kind==='hash')changed.requestHash='0'.repeat(64);if(kind==='draft')changed.requestDraftId='other';
+    if(kind==='scene')changed.pendingCandidates[0].candidateId='first';if(kind==='title')changed.pendingCandidates[0].title='wrong';
+    if(kind==='answered')changed.pendingCandidates[0].answerStatus='answered';if(kind==='execution')changed.admission.executionPermission='approved';
+    handlers.prepareDigestRetentionInputs=async()=>changed;
+    assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);assert.equal(f.s.displayedDigestRetention,null);
+    assert(f.s.errorMessage.includes('一致しません'));assert.equal(f.s.canReadDigestRetention,true);
+  }
+});
+test('Digest confirmation read uses only GETs and checks the same stored request version',async()=>{
+  const f=digestConfirmationFixture();digestConfirmationHandlers(f);assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),true);
+  handlers.saveDigestCompositionData=handlers.prepareDigestRetentionInputs=()=>assert.fail('Read must not write');
+  let resolve,reads=0;const read=handlers.fetchDigestCompositionData;
+  handlers.fetchDigestCompositionData=async(...args)=>{reads++;await new Promise(r=>resolve=r);return read(...args);};
+  const before=JSON.stringify(f.s.state),pending=f.s.rereadDigestConfirmation();
+  assert.equal(f.s.digestRetentionOperation,'reading');assert.equal(f.s.displayedDigestRetention,null);
+  assert.equal(await f.s.rereadDigestConfirmation(),false);resolve();assert.equal(await pending,true);assert.equal(reads,1);
+  assert.deepEqual(f.s.displayedDigestRetention,f.summary);assert.equal(JSON.stringify(f.s.state),before);
+});
+test('Digest confirmation read failure clears the former result and permits a verified retry without writes',async()=>{
+  const f=digestConfirmationFixture();digestConfirmationHandlers(f);await f.s.prepareDigestConfirmation(f.materials.fingerprint);
+  const read=handlers.fetchDigestRetentionInputs;handlers.fetchDigestRetentionInputs=async()=>{throw new Error('保存済みの発話資料が不足しています。');};
+  assert.equal(await f.s.rereadDigestConfirmation(),false);assert.equal(f.s.displayedDigestRetention,null);assert(f.s.errorMessage.includes('不足'));
+  handlers.fetchDigestRetentionInputs=read;assert.equal(await f.s.rereadDigestConfirmation(),true);assert.deepEqual(f.s.displayedDigestRetention,f.summary);
+  handlers.fetchDigestCompositionData=async()=>({...f.composition,requestHash:'0'.repeat(64)});
+  handlers.fetchDigestRetentionInputs=()=>assert.fail('Wrong stored version must not be read as current');
+  assert.equal(await f.s.rereadDigestConfirmation(),false);assert.equal(f.s.displayedDigestRetention,null);
+});
+test('Digest confirmation hides an older result on source/display change, even if its original request hash still exists',async()=>{
+  const f=digestConfirmationFixture();digestConfirmationHandlers(f);await f.s.prepareDigestConfirmation(f.materials.fingerprint);
+  f.s.reviewMaterials={...f.s.reviewMaterials,fingerprint:'newer-display'};
+  assert.equal(f.s.displayedDigestRetention,null);assert.equal(f.s.canReadDigestRetention,false);
+  handlers.fetchDigestCompositionData=()=>assert.fail('Old request version cannot be read from a new display');
+  assert.equal(await f.s.rereadDigestConfirmation(),false);
+});
+test('Digest confirmation ignores late save/read responses after navigation or material refresh',async()=>{
+  for(const phase of ['composition','inputs','read']) {
+    const f=digestConfirmationFixture();digestConfirmationHandlers(f);let resolve;
+    if(phase==='read')await f.s.prepareDigestConfirmation(f.materials.fingerprint);
+    const name=phase==='composition'?'saveDigestCompositionData':phase==='inputs'?'prepareDigestRetentionInputs':'fetchDigestCompositionData';
+    const original=handlers[name];handlers[name]=(...args)=>new Promise(r=>resolve=()=>r(original(...args)));
+    const pending=phase==='read'?f.s.rereadDigestConfirmation():f.s.prepareDigestConfirmation(f.materials.fingerprint);
+    while(!resolve)await new Promise(r=>setImmediate(r));
+    f.s.activeDraftId='other';f.s.uiMaterialReadNumber++;resolve();assert.equal(await pending,false);
+    assert.equal(f.s.displayedDigestRetention,null);assert.equal(f.s.digestRetentionOperation,'idle');
+  }
+});
 test('Digest scene addition saves only an editing request once and returns to content confirmation',async()=>{
   const {state,draft,materials}=digestAdditionFixture(),s=storeFor(state);s.reviewMaterials=materials;let calls=0,resolve;
   handlers.saveDigestSceneAddition=(id,input)=>{calls++;assert.equal(id,draft.id);assert.deepEqual(input,{draftIdentity:materials.draftIdentity,fingerprint:materials.fingerprint,candidateId:'second'});return new Promise(r=>resolve=r);};

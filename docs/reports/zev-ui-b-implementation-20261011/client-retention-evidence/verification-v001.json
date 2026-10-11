@@ -1,0 +1,309 @@
+{
+  "recordedAt": "2026-10-11T07:05:08.749587+00:00",
+  "session": "Codex-UI",
+  "task": "No.68 client confirmation preparation/read",
+  "observedHead": "24f1ef18a1b0863bd6dd02cdcbd0da43d7a863ef",
+  "gitLease": "UI returned by parent after SSD 24f1ef18",
+  "sources": [
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 107121,
+      "sha256": "b57a93c7e18026b8d5c10aba691dfe5c46acda8cde708ec8164724c4492643cc"
+    },
+    {
+      "path": "client/src/api.ts",
+      "sizeBytes": 10248,
+      "sha256": "0eaee9f07daf431f933b4c7b1de33a115f251842b55fcb2e69673d3af49c7d9d"
+    },
+    {
+      "path": "client/src/stores/controlQueue.ts",
+      "sizeBytes": 32676,
+      "sha256": "225a3a47e4c8342b46a3e0f527760de0635965dae48bbd36c52c24c45c9a8328"
+    },
+    {
+      "path": "client/test/guided-ui-mock.mjs",
+      "sizeBytes": 20451,
+      "sha256": "418bcfed7b36aea5882071876969d4c3e0deacadb5efaf9754cb435730191a4b"
+    },
+    {
+      "path": "client/test/guided-workflow.test.mjs",
+      "sizeBytes": 31183,
+      "sha256": "828bc18f61ef4363b0e72725a5211b3f111aed9a417eeb1f92a4cad9953196fc"
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 5804,
+      "sha256": "aa1dca62f69e29a2e9ada4e257df38b00ce47019ab96c2b9971daf6b8ee2ab04"
+    }
+  ],
+  "protectedInventory": [
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "sizeBytes": 49965,
+      "sha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-ui-readonly-v001.ts",
+      "sizeBytes": 563,
+      "sha256": "3246fbee5d1de1bb7729c954e1e77c2102caf4d83e8dbf99ba2c783131027b9f",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "sizeBytes": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 5804,
+      "sha256": "aa1dca62f69e29a2e9ada4e257df38b00ce47019ab96c2b9971daf6b8ee2ab04",
+      "role": "authorized current UI source",
+      "matchesObservedHead": false
+    },
+    {
+      "path": "backend/src/store/digest-ui-edit-requests.ts",
+      "sizeBytes": 3858,
+      "sha256": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-edit-requests.ts",
+      "sizeBytes": 5655,
+      "sha256": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 10729,
+      "sha256": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 107121,
+      "sha256": "b57a93c7e18026b8d5c10aba691dfe5c46acda8cde708ec8164724c4492643cc",
+      "role": "authorized current UI source",
+      "matchesObservedHead": false
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "sizeBytes": 6348,
+      "sha256": "9621781a10f21e28690be511ac5f97d072516505ae43fb95d714aeedb9ad97e4",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/HANDOVER_INDEX.md",
+      "sizeBytes": 4909,
+      "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "sizeBytes": 521386,
+      "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "role": "protected external source/document",
+      "matchesObservedHead": true
+    }
+  ],
+  "previousEvidenceUnchanged": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v001.txt",
+      "sizeBytes": 805,
+      "sha256": "ae42333e66b17addf76fc0007d67c14e9d24c879f3e8402e8e2f7dda225d4e0f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-unit-v001.txt",
+      "sizeBytes": 1535,
+      "sha256": "7611469bde0681b0aa271c4ceffadafc3f700cf5dd2dba25023066504a93d89d",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/verification-v002.json",
+      "sizeBytes": 8995,
+      "sha256": "f97b7a63c52cd932b7d10704688f6c71902462a331bb1987f0fe9a3e9cee230d",
+      "matchesObservedHead": true
+    }
+  ],
+  "rawLogs": {
+    "build": {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-build-v001.txt",
+      "sizeBytes": 3489,
+      "sha256": "beaf4acdad7c5df22cee935e20b4bd9a21ad33ed40514d4dab261b0738b97326"
+    },
+    "unit": {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-unit-v001.txt",
+      "sizeBytes": 3392,
+      "sha256": "9cde6e1475edd6d34aaf4cbfeb847f196c9a74b9f86ba36bccf14f07023c14d6"
+    },
+    "browser": {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-calls-v001.json",
+      "sizeBytes": 10884,
+      "sha256": "0a4c945dc52b7e17d3beae0774834d7bb4382af57ef0ac8fd791dc2d73e56fc2"
+    }
+  },
+  "browserEvidence": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-calls-v001.json",
+      "sizeBytes": 10884,
+      "sha256": "0a4c945dc52b7e17d3beae0774834d7bb4382af57ef0ac8fd791dc2d73e56fc2"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-observations-v001.json",
+      "sizeBytes": 1556,
+      "sha256": "ea63fd5dfeb5d328cd5431c64e86688bb20585ddf60feb91a4d00deba4f92f54"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-build-v001.txt",
+      "sizeBytes": 3489,
+      "sha256": "beaf4acdad7c5df22cee935e20b4bd9a21ad33ed40514d4dab261b0738b97326"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-unit-v001.txt",
+      "sizeBytes": 3392,
+      "sha256": "9cde6e1475edd6d34aaf4cbfeb847f196c9a74b9f86ba36bccf14f07023c14d6"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/confirmation-v001.jpg",
+      "sizeBytes": 173946,
+      "sha256": "8a83a7345877309ccda3f7724a7a8e5d5922393fb2cdcb53ed001b55bc48fa39"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-after-refresh-v001.jpg",
+      "sizeBytes": 165337,
+      "sha256": "c7e8b393e0597ca3faa803141c25ad67383af85103b1831a1b13584465b122ea"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-after-refresh-v001.txt",
+      "sizeBytes": 4068,
+      "sha256": "e7039f269dfbe8db34624f9d5020f596acfb8ec620ee8bb688084b4913c37758"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-materials-v001.jpg",
+      "sizeBytes": 165799,
+      "sha256": "cf22666fd9a9105f58d20c431e6792999bbf0dbfd84c6cc7cbbf78d337e9134b"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/saved-unanswered-v001.jpg",
+      "sizeBytes": 163222,
+      "sha256": "a8b503daa62c2339c4ab27d8cc316f38e8f16e07b2ad433557643b0af3adab6e"
+    }
+  ],
+  "validation": {
+    "clientBuildAndTypeCheck": "passed exit0",
+    "relatedClientUnitTests": 32,
+    "newTargetedUnitTests": 8,
+    "unitPass": 32,
+    "unitFail": 0,
+    "browser": "incomplete; observed error persistence defect",
+    "backend8Rerun": false
+  },
+  "stop": {
+    "reason": "2-second App state poll -> controlQueue.refresh clears global errorMessage; new operation shortage reason disappears",
+    "proposedUnappliedCorrection": "store a draftIdentity/fingerprint-bound preparation/read failure separately and render it in the existing panel; keep global refresh behavior unchanged; add persistence/clear-on-retry/changed-version test",
+    "classificationRecommendation": "limited implementation correction 5, individual exception",
+    "applied": false
+  },
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "limitedImplementationCorrectionsApplied": 4,
+    "explicitStops": 7,
+    "addenda": 0,
+    "costUSD": 0
+  },
+  "cleanup": {
+    "ownEdgeTab": "closed",
+    "mockServer": "own session 62770 Ctrl-C ended",
+    "ownProcessesMatching": [],
+    "port5179": "no listener after cleanup",
+    "newLargeMedia": 0,
+    "ownedTmpDuplicateBytesRemoved": 28174,
+    "foreignProcessStops": 0,
+    "freeKiBAfter": {
+      "mac": 17220224,
+      "ssd": 1903313408
+    }
+  },
+  "admission": {
+    "No68": "unfinished",
+    "No70": "unstarted",
+    "AIExecution": "not-started",
+    "manufacturing": "not-approved",
+    "formalRetentionAnswers": "not-prepared",
+    "formalClockCaption": "not-prepared",
+    "humanQuality": "pending"
+  }
+}
