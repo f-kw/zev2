@@ -14,6 +14,8 @@
 
 cleanup：人工SSD/source root残件0、今回test server/processとbuild process終了。監査コピーをbyte一致再読後、自己/tmp重複1,909bytesを削除。fixture回収量は未測定、大容量媒体0、原本/正式/他担当/退避物と他担当processは保持。空き観測は検査中Mac17,243,356KiB/SSD1,903,287,808KiB、検査後Mac17,240,708KiB/SSD1,903,312,384KiBで、共有変動を回収量としない。保護対象20件中19件は観測HEADとbytes一致、CURRENT_GOALだけ別担当変更。制作sourceと他担当5文書は操作せず、自分の対象だけをUI Git枠で保存する。
 
+今回の型訂正/new test/成功証拠を対象6fileだけのcheckpoint `9ccf282079a174ef2f4451db567c923ab70e6f4b`へ保存。[今回のsession log](../../work-logs/2026-10/2026-10-11T0642_Codex-UI_No68-retention-inputs-verified_9ccf2820.md)とこの参照行を後続doc checkpointへ保存し、両方をpushして親へ限定接続の検査結果を返す。全体完成/正式採用を意味せず、共有checkoutの別担当5fileは保持する。
+
 ## 次の一件の読取提案（2026-10-11 06:19 UTC、未実装）
 
 **「追加場面の保持Skill要求を準備・保存・再読する接続」だけを次対象にする。** 既存snapshot/構成を現在のformal baselineへ再照合し、変更しない採用場面の元保持request/response/result/validationを原bindingで参照する。追加場面だけに未回答の保持要求を作る。回答生成・全区間keepの仮採用・全体保持の合成・字幕回答・製造はこの一件へ含めない。
