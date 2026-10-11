@@ -93,3 +93,5 @@ await handOffPreparedDigestUiMaterials(p, prepared.manifestBinding, {
 ```
 
 consumer登録失敗はその未登録/不一致として保存し、STTや正規prepareを再実行しない。実素材callerへのこの組込み、実素材受渡し、次工程2/3は本cycleで未実施。今回の限定修正と検証結果を保存/pushし、Git枠返却後は次の明示指示まで停止する。
+
+検査2置換と新版証拠・この追記の自分5pathを `7ca2ee9222b63516ff6692fe8cc9b517659f97b5` に保存。対象stage一致、他担当混入0、直後Git clean/untracked0。[今回log](../../work-logs/2026-10/2026-10-11T0436_Codex-UI_No68-handoff-setup8_7ca2ee92.md)と保存記録だけを追加保存してpushする。最終HEAD/main-origin一致とGit枠返却は親へ実観測を渡す。
