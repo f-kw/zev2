@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: current A/B composition is read from real saved selection; viewing never saves or executes
+ok 1 - current A/B composition is read from real saved selection; viewing never saves or executes
+  ---
+  duration_ms: 1449.381125
+  type: 'test'
+  ...
+# Subtest: explicit addition records intent once, preserves every producer byte and never approves fees or execution
+ok 2 - explicit addition records intent once, preserves every producer byte and never approves fees or execution
+  ---
+  duration_ms: 2528.260083
+  type: 'test'
+  ...
+# Subtest: same save retried in parallel is idempotent; already adopted and requested scenes are no-ops
+ok 3 - same save retried in parallel is idempotent; already adopted and requested scenes are no-ops
+  ---
+  duration_ms: 1989.826875
+  type: 'test'
+  ...
+# Subtest: editing request reconstruction failure clears qualified input and audio checks without saving anything
+ok 4 - editing request reconstruction failure clears qualified input and audio checks without saving anything
+  ---
+  duration_ms: 1140.613834
+  type: 'test'
+  ...
+# Subtest: stale or missing choices, extra authority fields and agent credentials cannot save
+ok 5 - stale or missing choices, extra authority fields and agent credentials cannot save
+  ---
+  duration_ms: 1409.695458
+  type: 'test'
+  ...
+# Subtest: changed source or manifest bytes invalidate current choices without writing or retrying preparation
+ok 6 - changed source or manifest bytes invalidate current choices without writing or retrying preparation
+  ---
+  duration_ms: 744.841208
+  type: 'test'
+  ...
+# Subtest: new formally qualified base never silently fulfills an older human request
+ok 7 - new formally qualified base never silently fulfills an older human request
+  ---
+  duration_ms: 1328.375416
+  type: 'test'
+  ...
+# Subtest: overlapping context is refused rather than silently dropping or replacing another scene
+ok 8 - overlapping context is refused rather than silently dropping or replacing another scene
+  ---
+  duration_ms: 589.558459
+  type: 'test'
+  ...
+# Subtest: new backend process rereads the editing request and retains the preparation blocker
+ok 9 - new backend process rereads the editing request and retains the preparation blocker
+  ---
+  duration_ms: 1169.930959
+  type: 'test'
+  ...
+# Subtest: two different artificial sources qualify through actual readers and display only precreation instructions
+ok 10 - two different artificial sources qualify through actual readers and display only precreation instructions
+  ---
+  duration_ms: 1528.623541
+  type: 'test'
+  ...
+# Subtest: human authentication and exact server-owned parameter boundary cannot become producer authority
+ok 11 - human authentication and exact server-owned parameter boundary cannot become producer authority
+  ---
+  duration_ms: 25.600333
+  type: 'test'
+  ...
+# Subtest: different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes
+ok 12 - different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes
+  ---
+  duration_ms: 106.082833
+  type: 'test'
+  ...
+# Subtest: clock bytes tampering is rejected and stale candidates/audio disappear on reread
+ok 13 - clock bytes tampering is rejected and stale candidates/audio disappear on reread
+  ---
+  duration_ms: 357.56125
+  type: 'test'
+  ...
+# Subtest: saved reader works in a fresh compiled backend process with its existing TSX loader
+ok 14 - saved reader works in a fresh compiled backend process with its existing TSX loader
+  ---
+  duration_ms: 897.875917
+  type: 'test'
+  ...
+# Subtest: missing registration never guesses preparation data and a non-SSD root remains rejected
+ok 15 - missing registration never guesses preparation data and a non-SSD root remains rejected
+  ---
+  duration_ms: 9.365083
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14054.271875

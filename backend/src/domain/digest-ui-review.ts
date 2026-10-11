@@ -155,6 +155,7 @@ export async function populateDigestUiReview(state: Zev2State, model: UiReviewMa
     model.blockers.push('動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。');
   } catch (e) {
     model.candidates = [];model.segments = [];model.bindings = [];delete model.digestComposition;
+    model.creationChecks = { ...model.creationChecks, inputValidation: 'failed', audioPreservation: 'unknown', sourceAudioReference: 'unknown' };
     model.digestPreparation = { status: 'rejected', message: '保存準備と現在の依頼の対応を確認できません。再登録が必要です。' };
     model.blockers.push(`${model.digestPreparation.message} ${e instanceof Error ? e.message : ''}`);
   }

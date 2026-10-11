@@ -63,6 +63,30 @@ test('same save retried in parallel is idempotent; already adopted and requested
   const m=await get(f);for(const id of ['candidate-0001','candidate-0002']){const r=await api(f,'ui-digest-scene-additions',input(m,id));assert.equal(r.status,200);assert.equal(r.body.changed,false);}
   assert.deepEqual(await edits(),before);
 });
+test('editing request reconstruction failure clears qualified input and audio checks without saving anything',async()=>{
+  const f=fixtures[0];await activate(f);const current=await get(f);
+  assert.equal(current.digestPreparation.status,'verified');assert.equal(current.creationChecks.audioPreservation,'preserve-source-only');
+  assert.equal(current.creationChecks.sourceAudioReference,'registered');assert.equal(current.digestComposition.status,'revision_requested');
+  const original=await edits(),corrupt=JSON.parse(original.toString());
+  const request=corrupt.requests.find(r=>r.requestDraftId===f.draft.id);
+  // Structurally valid add-one request, but its before/after set does not match the formally qualified base.
+  request.beforeCandidateIds=['absent'];request.requestedCandidateIds=['absent',request.candidateId];
+  await writeFile(editPath,JSON.stringify(corrupt));
+  try {
+    const before=[await readFile(statePath),await edits(),await directoryBytes(f)],rejected=await get(f);
+    assert.equal(rejected.digestPreparation.status,'rejected');assert.deepEqual(rejected.candidates,[]);
+    assert.deepEqual(rejected.segments,[]);assert.deepEqual(rejected.bindings,[]);assert.equal(rejected.digestComposition,undefined);
+    assert.equal(rejected.creationChecks.inputValidation,'failed');assert.equal(rejected.creationChecks.audioPreservation,'unknown');
+    assert.equal(rejected.creationChecks.sourceAudioReference,'unknown');
+    assert.deepEqual(rejected.creationChecks,{...current.creationChecks,inputValidation:'failed',audioPreservation:'unknown',sourceAudioReference:'unknown'});
+    assert(rejected.blockers.some(s=>s.includes('再登録が必要')));
+    assert.deepEqual([await readFile(statePath),await edits(),await directoryBytes(f)],before);
+    await rejectUnchanged(f,input(current));
+  } finally {await writeFile(editPath,original);}
+  const restored=await get(f);assert.equal(restored.digestComposition.status,'revision_requested');
+  assert.equal(restored.creationChecks.inputValidation,'failed');assert(restored.blockers.some(s=>s.includes('旧準備では作成前確認へ進めません')));
+  assert(restored.blockers.some(s=>s.includes('動画作成の承認・製造経路は未接続')));
+});
 test('stale or missing choices, extra authority fields and agent credentials cannot save',async()=>{
   const f=fixtures[0];await activate(f);const m=await get(f);
   await rejectUnchanged(f,{...input(m),fingerprint:'stale'});await rejectUnchanged(f,{...input(m),candidateId:'absent'});
