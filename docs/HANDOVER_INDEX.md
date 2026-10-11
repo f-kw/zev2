@@ -1,8 +1,16 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v145
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v146
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-11T02:03:59.432465+00:00（容量No.67 Done・No.61の既承認準備へ）
+
+monaが2026-10-11 11:00 JST（秒未取得）にボード担当の復帰を確認。PID83567で通常起動・表示/読取更新、最新版PDFのChrome表示、DB/PDF保存内容保持、本人削除No.63非復元、復旧阻害なしを受領。No.67は2026-10-11T02:03:12.436ZにDone（completed/confirmation、rev13、board300）へ更新し保存再読一致。人間判断を再要求するCheckには入れない。SSD512GB拡張と旧4配信復旧は完了、backup/旧記録/元資料を保持。
+
+No.61は全体未完成。親が固定326字幕/5場面/採否保持の非製造準備を明示指示したので、追加承認なしで同Codex-SSDが新しい実storage/最新実装/入力/未使用出力先/容量予算を確認し具体的実行案へまとめる。今回のGit保存結果を先に親へ返しGit枠をUIへ戻す。正式job/permit発行・実動画更新・映像音声確認はまだ未実施、API追加費0、全尺処理時間は未測定。旧承認を現状態へ書換えない。参照は[既存report](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)。次担当同Codex-SSD（No.61準備）、mona（具体的実動画判断の整理）。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T01:55:17.044Z（容量不足解消・No.61の非製造準備と実動画判断を分離）
 

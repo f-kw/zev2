@@ -17,3 +17,5 @@ Git: 既存CURRENT_GOAL/HANDOVER_INDEX/reportと本logだけを更新。他担�
 親の追加照会 2026-10-11T01:57:10.967022+00:00：UI担当へ runner/src/index.ts の依頼限定 /next取得・claim・後続loop部分の限定所有を渡してよいと回答。このfileを現在変更しておらず、No.61の非製造準備で同部分の近日変更予定なし。正式DigestPlan/ExecutionInput→資格付きjob/authorization/permit→同draft完成FileRefの製造接続はCodex-SSD所有に維持する。これを実動画開始・製造契約変更の許可にはしない。
 
 Git受渡し 2026-10-11T01:59:28.340719+00:00：親がUI担当のstage/commit/push一時保留を確認し、Codex-SSDに文書4件だけの保存/pushを指示。直前main c65877cfe52801455207bada148b90503a1f0b31、cached0、Git writer process0、index/HEAD/ref lockなし、own文書4件だけdirty、diff check通過。exact own pathのみ監査checkpointへ保存し、他担当の変更でcleanを作らない。結果full SHA/remote/残変更はworkspace storage-capacity-next-preparation-docs-v001.jsonと親への先行報告へ固定する。Git保存後はUIへGit枠を返し、No.61の非製造準備を続ける。
+
+容量close 2026-10-11T02:03:59.432465+00:00：親の11:00JSTボード復帰確認（秒未取得）を受領し、No67をDone rev13/board300へ保存・再読。Doneはcompleted/confirmation、Check=requestと現UIで照合。原保存内容・No63削除を保持、本人再判断不要。No61非製造準備の指示を受領、Git保存を先に返す明示順序で継続。c695523a文書4件push/remote一致済み、続くclose追記もown同4pathのみ保存し、UI変更を混入させない。API/動画0。
