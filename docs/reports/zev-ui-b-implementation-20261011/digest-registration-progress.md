@@ -87,3 +87,9 @@ Gitはmain、開始HEAD `afc5d7f50526170b67463524947ba03a253ef367`。対象path�
 親がSSD担当からGit枠返却を確認し、UIへ枠を渡した返信本文を受領。検証済みの設営修正6・7、その証拠と既存記録だけのcommit/pushを許可された。現在mainは `f18fbd5999cb4bf5360a39cf119f3576257dc1b1`。SSD担当がその後追記したCURRENT_GOAL/HANDOVER/制作時間台帳md/json/統合scope/同担当work logの6文書は未commitのまま保持し、保存対象に含めない。
 
 親から新素材の通常取得・原音声検査が完了し、13:06 JSTから同じLAN STTを処理中と受領。これはUIからの実素材通し確認の成功を意味しない。No.70の実素材通し確認は未開始。Git枠返却後に既存計画と現codeを照合し、次に必要な接続を具体化する指示であり、未承認の製造/API/契約変更を始める指示ではない。
+
+## Git保存結果（2026-10-11 04:13 UTC）
+
+設営修正6・7、v002の検証証拠、本人向け詳細、このreportと先のhandoff logの21pathだけを `0bba76da0c00c952cca987d5ee7a095c64ea2694` に保存。stage対象21件と明示した所有pathの完全一致を確認した。pushは `f18fbd59..0bba76da main -> main` で成功、main/originの同一SHAを確認。staged0、untracked0、自分の未commit差分0。残るtracked差分はSSD担当の6文書だけで、共有ツリー全体はcleanではない。
+
+前の「Git枠待ち」「Git保存が残る」は当時の記録として保持する。今回の検査修正とその保存は終了したが、No.68全体およびNo.70は未完成。この保存結果と専用logの追記だけを別の記録commitで保存し、実際の最終HEAD/push結果とGit枠返却は親への通知で示す。タスクボードの保存・再読は親側の担当であり、ローカルから更新済みとは扱わない。
