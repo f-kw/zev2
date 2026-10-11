@@ -538,5 +538,201 @@
     "generalGuarantee": false,
     "newTests": 0,
     "newThresholds": 0
-  }
+  },
+  "newMaterialRuns": [
+    {
+      "sourceId": "-2UUTkv9qvk",
+      "sourceUrl": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
+      "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
+      "sourceDurationSeconds": 12036,
+      "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
+      "checkedAt": "2026-10-11T02:54:10.765260+00:00",
+      "trackingStartedAt": "2026-10-11T02:37:40.546Z",
+      "timeZoneForDisplay": "Asia/Tokyo",
+      "oldMaterialAndLedgerRowsUnchanged": true,
+      "trimStartSeconds": null,
+      "timing": {
+        "trackingStartedAt": "2026-10-11T02:37:40.546Z",
+        "trackingStartMeaning": "recorded No61 material-switch Doing start; earlier initial reads have no exact start",
+        "earlierWebRead": {
+          "failedObservedBy": "2026-10-11T02:35:46Z",
+          "startUnknown": true,
+          "finishUnknown": true,
+          "error": "web tool online fetch throttled; no media"
+        },
+        "rows": [
+          {
+            "category": "source-public-metadata",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:40:10.445287+00:00",
+            "endedAt": "2026-10-11T02:40:32.126684+00:00",
+            "durationSeconds": 21.681020791999998,
+            "overlaps": [],
+            "status": "completed",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-read-v001/read-summary.json",
+            "includeInOverallSum": false
+          },
+          {
+            "category": "public-video-access",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:46:03.694665+00:00",
+            "method": "HEAD",
+            "host": "rr2---sn-ajogu5-5x.googlevideo.com",
+            "overlappingReadGroup": "new-no61-initial-free-reads-v001",
+            "status": 200,
+            "contentLength": "8640257893",
+            "contentType": "video/mp4",
+            "endedAt": "2026-10-11T02:46:04.904706+00:00",
+            "durationSeconds": 1.209913249942474,
+            "includeInOverallSum": false,
+            "mediaDownloaded": false,
+            "sttSubmitted": false
+          },
+          {
+            "category": "public-audio-access",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:46:03.695086+00:00",
+            "method": "HEAD",
+            "host": "rr2---sn-ajogu5-5x.googlevideo.com",
+            "overlappingReadGroup": "new-no61-initial-free-reads-v001",
+            "status": 200,
+            "contentLength": "194791442",
+            "contentType": "audio/mp4",
+            "endedAt": "2026-10-11T02:46:04.899902+00:00",
+            "durationSeconds": 1.2048392919823527,
+            "includeInOverallSum": false,
+            "mediaDownloaded": false,
+            "sttSubmitted": false
+          },
+          {
+            "category": "LAN-STT-health",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:46:03.695221+00:00",
+            "method": "GET",
+            "host": "192.168.1.7",
+            "overlappingReadGroup": "new-no61-initial-free-reads-v001",
+            "status": null,
+            "error": "URLError: <urlopen error timed out>",
+            "endedAt": "2026-10-11T02:46:18.719703+00:00",
+            "durationSeconds": 15.024450917029753,
+            "includeInOverallSum": false,
+            "mediaDownloaded": false,
+            "sttSubmitted": false
+          },
+          {
+            "category": "free-public-access-and-LAN-group",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:46:03.694665+00:00",
+            "endedAt": "2026-10-11T02:46:18.719703+00:00",
+            "durationSeconds": 15.030926582985558,
+            "includesCategories": [
+              "public-video-access",
+              "public-audio-access",
+              "LAN-STT-health"
+            ],
+            "includeInOverallSum": false,
+            "groupTotalNotAdditionalWork": true
+          },
+          {
+            "category": "source-download",
+            "attempt": 1,
+            "startedAt": "2026-10-11T02:49:07.029176+00:00",
+            "endedAt": "2026-10-11T02:49:33.348082+00:00",
+            "durationSeconds": 26.318492083000002,
+            "status": "interrupted",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
+            "includeInOverallSum": false
+          }
+        ],
+        "overallFinishedAt": null,
+        "overallElapsedSeconds": null,
+        "stageDurationSumIsNotOverall": true,
+        "laterStages": {
+          "source-download": {
+            "status": "interrupted",
+            "startedAt": "2026-10-11T02:49:07.029176+00:00",
+            "endedAt": "2026-10-11T02:49:33.348082+00:00",
+            "durationSeconds": 26.318492083000002,
+            "attempt": 1
+          },
+          "audio-preparation": {
+            "status": "not-started",
+            "startedAt": null,
+            "endedAt": null,
+            "durationSeconds": null
+          },
+          "LAN-STT": {
+            "status": "not-started",
+            "startedAt": null,
+            "endedAt": null,
+            "durationSeconds": null
+          },
+          "scene-selection-and-composition": {
+            "status": "not-started",
+            "startedAt": null,
+            "endedAt": null,
+            "durationSeconds": null
+          },
+          "render-audio-composite": {
+            "status": "not-started",
+            "startedAt": null,
+            "endedAt": null,
+            "durationSeconds": null
+          },
+          "confirmation": {
+            "status": "not-started",
+            "startedAt": null,
+            "endedAt": null,
+            "durationSeconds": null
+          }
+        },
+        "waits": [
+          {
+            "category": "LAN connection availability",
+            "startedAt": "2026-10-11T02:46:18.720233Z",
+            "endedAt": null,
+            "durationSeconds": null,
+            "status": "waiting",
+            "meaning": "health timed out; offline is not established"
+          },
+          {
+            "category": "mona next acquisition action",
+            "startedAt": "2026-10-11T02:52:52.760Z",
+            "endedAt": null,
+            "durationSeconds": null,
+            "status": "waiting",
+            "meaning": "one normal acquisition failed with HTTP403; no restriction bypass or duplicate live worker"
+          }
+        ],
+        "manufactureNotStarted": true,
+        "paidApiCalls": 0
+      },
+      "download": {
+        "state": "interrupted",
+        "attempt": 1,
+        "startedAt": "2026-10-11T02:49:07.029176+00:00",
+        "endedAt": "2026-10-11T02:49:33.348082+00:00",
+        "seconds": 26.318492083000002,
+        "exitCode": 1,
+        "failureDetail": "HTTP Error 403: Forbidden after 40944617 bytes; full media absent",
+        "partialBytes": 40944617,
+        "maximumObservedRssBytes": 171384832
+      },
+      "paidApiCalls": 0,
+      "sttCalls": 0,
+      "manufacturingCalls": 0,
+      "evidence": [
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-read-v001/read-summary.json",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-read-v001/access-observation-v001.json",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
+        "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/download.log"
+      ],
+      "currentState": "相談役待ち（通常取得のHTTP403とLAN接続未確認）",
+      "nextOwner": "mona（通常取得の次対応・現在のLAN接続）→同Codex-SSD",
+      "sourceWholeAcquired": false,
+      "sourceWholeSha256": null,
+      "earlierWebReadTimingUnknown": true,
+      "overallCompletionAndProductionTotalUnknown": true
+    }
+  ]
 }

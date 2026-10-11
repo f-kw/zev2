@@ -1,8 +1,39 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v146
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v149
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+
+## 最新現在地 — 2026-10-11T02:54:10.765260+00:00（No.61新素材へ変更・取得403とLAN接続未確認）
+
+本人の「61 OKだが新素材を使って」という回答をmona経由で受領し、対象を [新しい公開動画](https://www.youtube.com/watch?v=-2UUTkv9qvk) へ変更した。URLの17秒は共有時の再生位置として扱い、冒頭は除外しない。旧326字幕・5場面の準備と成果は保持し、その計画での製造は行わない。新素材の通常取得・既存許可内のLAN文字起こし準備までが今回の実行範囲。新素材を有料APIへ送る許可は未取得。
+
+2026-10-11 11:40:32 JSTの公開情報読取で、題名「【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】」、動画尺12036秒（3時間20分36秒）、1080p/60fps、公開済みを確認。日本語自動字幕は存在するが内容は未取得・未検査。既知のrepo/SSD専用artifact直下には保存済み同IDの素材なし（Mac/SSD全域の不存在証明ではない）。映像299・元音声140の通常HEADはともにHTTP200、計8835049335B（約8.84GB）の見積。全素材取得は11:49:07.029〜11:49:33.348 JSTに1回試し、40944617Bを受信した後HTTP403で終了（26.318秒）。完成MP4なし、処理PGID86889の残存0。最初のURL確認成功を全素材取得成功と扱わず、認証・制限回避・別経路の自動試行はしていない。
+
+LAN文字起こしは現runtimeに接続先がなく、過去の保存済み入力にある `http://192.168.1.7:8000/health` が11:46:03〜11:46:18 JSTの確認で15.024秒タイムアウト。停止とは断定せず、接続未確認として音声送信なし。No.61をTODO→Doingの保存再読後、2026-10-11T02:52:52.760Zに待機（pending/waiting、rev54/board312）へ保存再読。現在は相談役待ち、次担当mona（通常取得の次対応・現在のLAN接続先）→同Codex-SSD。No.67 Done、旧No.54/UI担当の範囲は維持。
+
+時間記録は11:37:40.546 JSTのDoingから開始。公開情報21.681秒、同時実施した映像/音声HEAD＋LAN接続確認の壁時計15.031秒、取得失敗26.318秒を実値で記録。並列時間を合算しない。音声準備/STT/場面構成/描画・音声・合成/確認は未着手、全体完了時刻と制作総時間は未確定。以前の初動Web読取はthrottledで正確な開始終了が不明、推定で埋めない。取得1回・再送0、新API/STT/実製造0。既存の制作時間台帳へ新素材を独立して追加し、旧行・旧評価は変更しない。接続待ちとmona待ちは継続中として別記。
+
+実証拠はSSD専用root `/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001` の `source-read-v001`（metadata/公開アクセス）と `source-acquisition-v001`（失敗ログ/未完成part/資源観測/終了確認）。partとログは原因確認・正常取得再開のためKEEP、他素材移動/削除0。実資源開始観測11:49:07 JSTはguest空き495994597376B、host1965352812544B、内蔵17464561664B、pressure1、取得親子RSS最大171384832B。50GB開始/12GB予備/16GiB RSS/pressure1/1秒観測/個別device判定は維持。範囲の製品code変更なし、合格済suiteの再実行なし、Gitは明示的に返却された保存枠で自分の記録6pathだけを監査checkpointへ保存する。現在地記録 2026-10-11T11:54:10.765260+09:00；実読取時刻は上記。Git結果は今回logと親への返答で確定する。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T02:29:13.169064+00:00（No.61 Check・本人の確認用一本製造回答待ち）
+
+非製造準備の入力4件・job案・資源観測は保存再読済み。monaが現個別scopeでは実製造が除外されるため、保存済み5場面/固定326字幕と今回採否・演出で確認用動画を一本作る判断を本人へ具体確認。No.61は2026-10-11T02:28:29.948ZにCheck（request/waiting、rev51、board305）へ移し、指定の平易な本文をそのまま保存再読一致。326本文/時計/表示採否維持、追加API費0、旧動画KEEP/SSD別file、容量確保済み/全尺時間未測定、承認後の基本映像音声確認と短い確認抜粋を明示した。内部のplan/hash/正式prepare/authorization/Git調整はAI note。
+
+現在は人間待ち、次担当mona→同Codex-SSD。本人回答・製造承認束は未受領、実動画/API/native/permit/owner0。No.67 Doneを保持し、UI作業は独立継続。既存現在地/引継ぎ/report/月logの自分4文書は実file更新済みだが、Git枠はUI担当でcommit/push待ちを区別する。前提詳細は[既存report](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)へ。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T02:24:00.277Z（No.61入力4件とjob案を実保存・正式製造承認待ち）
+
+No.61は同Codex-SSDが2026-10-11T02:09:22.299Z（11:09:22 JST）に非製造準備へ実着手。固定326cue/5場面/4124atom、317 Normal/9 Color、show325/suppress1、原本文/ID/時計/4 soft-separatorを保持。元35参照とCore/2font/6runtime/contractを実SHA照合し、現main `cbee9353a61b7ef7eb01fc18b8323dc4b08039c1` と23製造codeの一致を確認。SSD専用root `digest-j16-live-five-scenes-20261011-v001` にbyte同一の入力4件と非実行job案・準備結果・資源観測を排他保存し再読、7file/2213166B。製造output rootは未使用・未claimのまま。表示設定は元Normalの96px/縁8px/glow12px/最大2行など原本のまま保持。
+
+2026-10-11T02:19:42.692134Z（11:19:42 JST）の実観測はguest空き495995363328B、host1965352288256B、内蔵17607213056B、pressure1。既存supervisorの開始前資源判定は合格。背景開始必要186372636000B、後続の見積枠込み追加438372636000B（残約57.6GB、実使用量保証ではない）。正規 `--prepare-job` 全体はmanufacture-one-approved-planの実承認束が必要なので未実行。authorization/permit/ownerは発行せず、API/native/動画0、全尺時間・映像音声品質は未評価。次はmonaがこの一本の具体的製造判断とUI/Git保存調整を行い、その後に最新mainへ新jobを束縛して正式prepare→launch。No.67はDoneを維持。詳細は[既存report](reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md)・[今回log](work-logs/2026-10/2026-10-11T1109_Codex-SSD_No61-current-input-preparation_cbee9353.md)。現在地記録 2026-10-11T02:24:00.277Z（2026-10-11 11:24:00 JST）；資源の読取時刻は上記。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T02:03:59.432465+00:00（容量No.67 Done・No.61の既承認準備へ）
 
