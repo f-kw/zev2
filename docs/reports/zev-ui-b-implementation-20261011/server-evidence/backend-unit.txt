@@ -1,25 +1,26 @@
-✔ saved candidate and speech clock are read without manufacturing or recommendation (22.553833ms)
-✔ review fingerprint rejects changed content, wrong request and missing confirmation without state writes (81.09825ms)
-✔ registered artifact bytes replacement is rejected even when state metadata stays unchanged (13.510667ms)
-✔ concurrent duplicate review approval is serialized and saved once (20.883875ms)
-✔ readiness displays registered segments but missing audio/quality verdict still rejects approval (14.753042ms)
-✔ draft approval binds displayed contents and current runtime, without legacy empty-body acceptance (32.928584ms)
-✔ final approval rejects a different newest video instead of silently choosing it (16.61625ms)
-✔ final approval binds the shown FileRef/hash and records it only once (12.951375ms)
-✔ server rejects UI dispatch with absent external cost approval before touching state (16.718458ms)
-✔ resume/next stay in the selected older request and reject missing or stale scope (18.486875ms)
-✔ claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once (20.925875ms)
-✔ expired claim recovery stays within scope and does not accept the expired owner completion (9.27ms)
-✔ actual runner refuses a foreign next response before claim or media work (802.580375ms)
-✔ actual runner refuses a changed claim response before building or reporting failure against a request (715.241042ms)
-✔ actual runner refuses a different effective STT endpoint before any queue call (667.769458ms)
-✔ runtime setting changes reject scoped resume, next and claim without touching either queue (10.706667ms)
-✔ video revision rejects the older displayed output without creating a copied request (5.645375ms)
-ℹ tests 17
+✔ saved candidate and speech clock are read without manufacturing or recommendation (23.197875ms)
+✔ review fingerprint rejects changed content, wrong request and missing confirmation without state writes (62.280167ms)
+✔ registered artifact bytes replacement is rejected even when state metadata stays unchanged (12.65075ms)
+✔ concurrent duplicate review approval is serialized and saved once (17.597333ms)
+✔ readiness displays registered segments but missing audio/quality verdict still rejects approval (12.405709ms)
+✔ draft approval binds displayed contents and current runtime, without legacy empty-body acceptance (26.106333ms)
+✔ final approval rejects a different newest video instead of silently choosing it (13.397959ms)
+✔ final approval binds the shown FileRef/hash and records it only once (13.095833ms)
+✔ server rejects UI dispatch with absent external cost approval before touching state (10.910584ms)
+✔ resume/next stay in the selected older request and reject missing or stale scope (13.236625ms)
+✔ claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once (17.478792ms)
+✔ expired claim recovery stays within scope and does not accept the expired owner completion (4.947542ms)
+✔ actual runner refuses a foreign next response before claim or media work (597.467166ms)
+✔ actual runner refuses a changed claim response before building or reporting failure against a request (597.331709ms)
+✔ actual runner refuses a different effective STT endpoint before any queue call (576.545375ms)
+✔ runtime setting changes reject scoped resume, next and claim without touching either queue (8.777959ms)
+✔ video revision rejects the older displayed output without creating a copied request (7.182208ms)
+✔ streamed video hash verification rejects replaced bytes with unchanged registered metadata (3.825666ms)
+ℹ tests 18
 ℹ suites 0
-ℹ pass 17
+ℹ pass 18
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2976.309208
+ℹ duration_ms 2515.161666

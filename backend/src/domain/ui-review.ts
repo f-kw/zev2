@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
 import { readFile, lstat } from 'node:fs/promises';
 import { findById, getFileRefKindForRequest, getOutputTypeForRequest, getRequiredControlReviewKind,
   draftConfirmationIdentity, runtimeConfirmationIdentity, recordValue,
@@ -25,9 +26,18 @@ export async function readRegisteredUiBytes(draftId: string, file: FileRef): Pro
   if ('error' in validated) return conflict(validated.error);
   const before = await lstat(validated.artifactPath);
   if (!before.isFile() || before.isSymbolicLink()) return conflict('確認資料が通常ファイルではありません');
-  const bytes = await readFile(validated.artifactPath), after = await lstat(validated.artifactPath);
+  let bytes: Buffer, observedHash: string, observedSize: number;
+  if (file.mimeType.startsWith('video/')) {
+    // Media is verified in a stream; review reads must not buffer a complete source video.
+    const digest = createHash('sha256');observedSize = 0;
+    for await (const chunk of createReadStream(validated.artifactPath)) { digest.update(chunk);observedSize += chunk.length; }
+    observedHash = digest.digest('hex');bytes = Buffer.alloc(0);
+  } else {
+    bytes = await readFile(validated.artifactPath);observedSize = bytes.length;observedHash = hash(bytes);
+  }
+  const after = await lstat(validated.artifactPath);
   if (before.ino !== after.ino || before.size !== after.size || before.mtimeMs !== after.mtimeMs
-    || bytes.length !== file.byteSize || hash(bytes) !== file.sha256) return conflict('確認資料のbytesが登録時から変更されています');
+    || observedSize !== file.byteSize || observedHash !== file.sha256) return conflict('確認資料のbytesが登録時から変更されています');
   return bytes;
 }
 export function assertUiExecutionAllowed(config: RuntimeConfig): void {

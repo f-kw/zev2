@@ -219,3 +219,9 @@ test('video revision rejects the older displayed output without creating a copie
   const body={reason:'字幕を修正',scope:'adjustment',runtimeIdentity:shared.runtimeConfirmationIdentity(await loadRuntimeConfig()),confirmation:{fileRefId:'older-file',sha256:file.sha256}};
   await unchangedAfter(()=>post(`/request-drafts/${draft.id}/request-generated-video-changes`,body));
 });
+
+test('streamed video hash verification rejects replaced bytes with unchanged registered metadata',async()=>{
+  const {state,draft}=await fixture();const file=state.fileRefs.find(f=>f.kind==='output_video');
+  await writeFile(path.join(root,'artifacts',draft.id,'render_video.mp4'),Buffer.from('0000ftypisom-fixture-onlz'));
+  await unchangedAfter(()=>post(`/request-drafts/${draft.id}/final-review`,{action:'final_complete',confirmation:{fileRefId:file.id,sha256:file.sha256}}));
+});
