@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AgentExecutionScope, DraftApprovalConfirmation, ReviewApprovalConfirmation, OutputApprovalConfirmation, UiReviewMaterials } from '@zev2/shared';
+import type { AgentExecutionScope, DraftApprovalConfirmation, ReviewApprovalConfirmation, OutputApprovalConfirmation, UiReviewMaterials, UiDigestSceneAdditionInput, UiDigestEditRequest } from '@zev2/shared';
 import {
   uriWithRef,
   type AgentCompletionInput,
@@ -83,6 +83,13 @@ export async function logoutHumanUi(): Promise<HumanAuthStatus> {
 
 export async function fetchWorkflow(): Promise<{ steps: WorkflowStep[] }> {
   const response = await api.get('/workflow');
+  return response.data;
+}
+
+export async function saveDigestSceneAddition(id: string, input: UiDigestSceneAdditionInput): Promise<{
+  changed: boolean; editRequest?: UiDigestEditRequest; materials: UiReviewMaterials;
+}> {
+  const response = await api.post(`/request-drafts/${id}/ui-digest-scene-additions`, input);
   return response.data;
 }
 

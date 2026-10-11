@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-10-11T05:14:04.165Z",
+  "session": "Codex-UI",
+  "task": "No.68",
+  "sourceBaseHead": "3893d3b54bfdb10a4d0f875c5404329eaac8546c",
+  "sourceHashes": {
+    "backend/src/domain/digest-ui-edit-requests.ts": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+    "backend/src/store/digest-ui-edit-requests.ts": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+    "backend/src/domain/digest-ui-review.ts": "47b3bb0cc578de8c6b652dce1b2072d04b36dccc10d87c3e4ea33b98fafd3a24",
+    "backend/src/routes/control.ts": "e0b21dee24b5dcab6d9d98dfa7f039d5a4e92e084bd00d0e74cd90f8949fe036",
+    "backend/test/digest-ui-fixture.mts": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+    "backend/test/digest-ui-edit-requests.test.mjs": "fde9d5680c5924741cc19917c1eb34974233a7845db69828d100c8c88d87271d",
+    "client/src/App.vue": "9f32f4db810f9a20db1f65471c5c7759e4715925d45e051c92736a4a04a514bb",
+    "client/src/api.ts": "144bbaf81d41f9b53bad5781695f4a217d88557d21a756b4f0d1149e8663dc87",
+    "client/src/guided-workflow.ts": "6ec254f61a455e7cbffefe998c613645e1cde901efc702cc3d4a4fd9f116b44b",
+    "client/src/stores/controlQueue.ts": "2544edb7eda2fd4baa3a9ae1b19836f5f691f20eda2a24688346e83c2ed5e76c",
+    "client/test/guided-ui-mock.mjs": "7d9cfd8357553db5fb44a7888258bb42ae10ff603577709316a8a7692eb7be48",
+    "client/test/guided-workflow.test.mjs": "19d6dd6244ba18ed7a8048eb0dbfa0ba41058158e5bf6e24702c456a2c542904",
+    "packages/shared/src/ui-confirmation.ts": "ef5a9ff556af5c1c7f03bd5658351a9201a6b86b4aee31a1ad935af1a78d5e94"
+  },
+  "protectedDiff": [],
+  "pdf": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-05/task-2/library-pdf-materialized-20261010/ZEV_UI案B_順番が見える案内型.pdf",
+    "size": 105260,
+    "sha256": "763225ae91db31dc8a4b49f3b8d2d87617ef9db6653e60eaf1c37bf5f0069b17",
+    "pages": 4,
+    "visualRead": "all four pages in prior candidate-choice-unit evidence; not re-rendered in this implementation cycle"
+  },
+  "tests": {
+    "backend": {
+      "passed": 22,
+      "failed": 0,
+      "exitCode": 0,
+      "newSceneAdditionCases": 8
+    },
+    "client": {
+      "passed": 24,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "backendBuild": 0,
+    "clientBuild": 0,
+    "uiContract": 0
+  },
+  "browser": {
+    "isolatedOrigin": "http://127.0.0.1:5179",
+    "productionRequests": false,
+    "postCount": 1,
+    "sceneAdditionCount": 1,
+    "approveResumeClaimCompleteManufactureCount": 0,
+    "observations": [
+      "Viewing/first confirmation/cancel/Escape caused no POST before explicit save",
+      "Focus escaped dialog after confirmation/cancel before the App fix; after fixing focus retention, cancel then Escape closed and restored opener",
+      "Double-click explicit save produced exactly one POST",
+      "One existing adopted scene preserved and one added request shown in source order",
+      "Pending input validation and unconnected formal-preparation blocker shown",
+      "Read/reload preserved pending request; reopening same scene showed disabled addition",
+      "New request view hid old composition; return restored pending request",
+      "History opened and closed without mutation",
+      "No captured browser error logs"
+    ],
+    "formalReaderQualification": "real backend artificial fixtures separately; browser mock is not formal preparation evidence"
+  },
+  "cleanup": {
+    "artificialSsdRootsRemaining": 0,
+    "artificialSourceRootsRemaining": 0,
+    "mockServerSession": 22285,
+    "mockServerExitCode": 130,
+    "ownTabClosed": true,
+    "logsCopiedWithHashVerification": true,
+    "tmpLogBytesToRemove": 23935,
+    "fixtureReclaimedBytes": "not measured",
+    "largeMediaCreated": 0,
+    "sourcePdfPreserved": true,
+    "tmpLogsRemoved": true,
+    "helperRemoved": true,
+    "helperBytes": 5565,
+    "measuredTmpBytesRemoved": 29500
+  },
+  "costUsd": 0,
+  "setupCorrections": {
+    "appliedCumulative": 8,
+    "generalCap": 5,
+    "additionalInThisCycle": 0,
+    "sandboxRetry": "v001 mkdtemp EPERM before tests; same command with existing SSD approval passed v002, no code/helper change"
+  },
+  "knownLimitedImplementationCorrections": {
+    "total": 2,
+    "current": "App dialog focus after confirm/cancel",
+    "previous": "streamed artifact hashing"
+  },
+  "explicitStopsCumulative": 4,
+  "contractAddenda": 0,
+  "remainingBoundary": "Formal producer must explicitly bind human editing request to a new full adoption/retention/clock/caption-preparation revision; changed base does not silently fulfill previous intent. Consumer refuses old preparation for creation."
+}

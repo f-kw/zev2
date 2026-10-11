@@ -18,9 +18,9 @@ async function compiled(file, imports) {
   return dataURL(js);
 }
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
-const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels } = await import(guideURL);
+const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState } = await import(guideURL);
 const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
-  'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview'];
+  'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview','saveDigestSceneAddition'];
 const apiURL = dataURL(`export const handlers = {}; ${apiNames.map(n => `export const ${n} = (...args) => handlers.${n}(...args);`).join('\n')}
 export const formatApiError = e => e.message;`);
 const { handlers } = await import(apiURL);
@@ -86,7 +86,7 @@ test('digest registration and absent runtime are blocked without pretending vide
 });
 test('Digest precreation progress requires current qualified material and never implies media completion',()=>{
   const {draft}=fixture();draft.productionType='digest';draft.status='approved';
-  const m={requestDraftId:draft.id,draftIdentity:draftIdentity(draft),digestPreparation:{status:'verified'}};
+  const m={requestDraftId:draft.id,draftIdentity:draftIdentity(draft),digestPreparation:{status:'verified'},digestComposition:{status:'current'}};
   assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',m),3);
   assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',{...m,draftIdentity:'old'}),2);
   assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',{...m,requestDraftId:'other'}),2);
@@ -94,6 +94,42 @@ test('Digest precreation progress requires current qualified material and never 
   const text=creationCheckLabels({audioPreservation:'preserve-source-only',sourceAudioReference:'registered'});
   assert.equal(text.audio,'元の音声を保持する指定');assert(text.completion.includes('未実施'));
   assert(creationCheckLabels(undefined).audio.includes('未確認'));assert(creationCheckLabels(undefined).source.includes('未確認'));
+});
+
+function digestAdditionFixture() {
+  const {state,draft}=fixture();draft.productionType='digest';draft.status='approved';
+  const candidates=['first','second'].map((id,i)=>({id,title:id,summary:id,speeches:[],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+  const materials={requestDraftId:draft.id,draftIdentity:draftIdentity(draft),fingerprint:'current-digest',candidates,segments:[],bindings:[],blockers:['製造未接続'],
+    digestPreparation:{status:'verified'},digestComposition:{status:'current',currentCandidateIds:['first'],requestedCandidateIds:['first'],addedCandidateIds:[],editRequestIds:[]}};
+  return {state,draft,materials};
+}
+test('Digest scene addition saves only an editing request once and returns to content confirmation',async()=>{
+  const {state,draft,materials}=digestAdditionFixture(),s=storeFor(state);s.reviewMaterials=materials;let calls=0,resolve;
+  handlers.saveDigestSceneAddition=(id,input)=>{calls++;assert.equal(id,draft.id);assert.deepEqual(input,{draftIdentity:materials.draftIdentity,fingerprint:materials.fingerprint,candidateId:'second'});return new Promise(r=>resolve=r);};
+  handlers.approveDraft=handlers.submitHumanReviewAction=handlers.resumeAgentWork=()=>{assert.fail('Saving intent must not execute');};
+  const first=s.requestDigestSceneAddition('second',materials.fingerprint);assert.equal(await s.requestDigestSceneAddition('second',materials.fingerprint),false);
+  const after={...materials,fingerprint:'after-addition',digestComposition:{...materials.digestComposition,status:'revision_requested',requestedCandidateIds:['first','second'],addedCandidateIds:['second']}};
+  resolve({changed:true,materials:after});assert.equal(await first,true);assert.equal(calls,1);assert.deepEqual(s.state,state);
+  assert.equal(s.runPhase,'review_required');assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',s.reviewMaterials),2);
+  assert.equal(await s.requestDigestSceneAddition('second',after.fingerprint),false);assert.equal(calls,1);
+});
+test('Digest addition refuses stale, absent, already adopted and changed-base candidates without sending',async()=>{
+  const {state,materials}=digestAdditionFixture(),s=storeFor(state);s.reviewMaterials=materials;
+  handlers.saveDigestSceneAddition=()=>assert.fail('Invalid choice must not be sent');
+  for(const [id,fp] of [['first',materials.fingerprint],['absent',materials.fingerprint],['second','old']]) assert.equal(await s.requestDigestSceneAddition(id,fp),false);
+  s.reviewMaterials.digestComposition.status='source_changed';assert.equal(await s.requestDigestSceneAddition('second',materials.fingerprint),false);
+  assert.equal(digestCandidateAdditionState(materials,'second'),'unavailable');
+});
+test('late Digest addition response never replaces another draft or newer material read',async()=>{
+  const {state,materials}=digestAdditionFixture(),s=storeFor(state);s.reviewMaterials=materials;let resolve;
+  handlers.saveDigestSceneAddition=()=>new Promise(r=>resolve=r);const pending=s.requestDigestSceneAddition('second',materials.fingerprint);
+  s.activeDraftId='other';s.reviewMaterials=null;resolve({changed:true,materials});assert.equal(await pending,false);assert.equal(s.reviewMaterials,null);
+});
+test('Digest candidate state separates base adoption, requested addition, unavailable and overlapping scenes',()=>{
+  const {materials}=digestAdditionFixture();assert.equal(digestCandidateAdditionState(materials,'first'),'adopted');assert.equal(digestCandidateAdditionState(materials,'second'),'available');
+  materials.digestComposition.requestedCandidateIds.push('second');assert.equal(digestCandidateAdditionState(materials,'second'),'requested');
+  materials.digestComposition.requestedCandidateIds.pop();materials.candidates[1].ranges=[{startMs:500,endMs:1500}];assert.equal(digestCandidateAdditionState(materials,'second'),'overlap');
+  assert.equal(digestCandidateAdditionState(materials,'absent'),'unavailable');
 });
 test('current output binds owner, kind, bytes, output record and newest producer',()=>{
   const {state,draft,file}=renderFixture();assert.equal(currentOutput(state,draft.id)?.id,file.id);

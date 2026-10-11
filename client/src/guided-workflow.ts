@@ -76,7 +76,8 @@ export function guideStep(draft: RequestDraft | undefined, review: ControlReview
   if (hasOutput) return 5;
   if (draft.productionType === 'digest' && requestType === 'validate_digest_plan'
     && materials?.requestDraftId === draft.id && materials.draftIdentity === draftConfirmationIdentity(draft)
-    && materials.digestPreparation?.status === 'verified') return 3;
+    && materials.digestPreparation?.status === 'verified'
+    && materials.digestComposition?.status === 'current') return 3;
   if (requestType === 'render_video') return 4;
   if (requestType === 'create_edit_plan' || requestType === 'apply_adjustment') return 3;
   return 2;
@@ -104,4 +105,16 @@ export function initialCandidateId(review: ControlReviewItem, materials?: UiRevi
   return rec && materials?.review?.id===review.id && materials.requestDraftId===review.requestDraftId
     && !materials.blockers.length && review.options.some(o=>o.id===rec.candidateId)
     ? rec.candidateId : review.options[0]?.id ?? '';
+}
+export function digestCandidateAdditionState(materials: UiReviewMaterials | null | undefined, id: string): 'unavailable' | 'adopted' | 'requested' | 'overlap' | 'available' {
+  const composition = materials?.digestComposition, candidate = materials?.candidates.find(c => c.id === id);
+  if (materials?.digestPreparation?.status !== 'verified' || !composition || composition.status === 'source_changed' || !candidate?.ranges.length) return 'unavailable';
+  if (composition.currentCandidateIds.includes(id)) return 'adopted';
+  if (composition.requestedCandidateIds.includes(id)) return 'requested';
+  const start = Math.min(...candidate.ranges.map(r => r.startMs)), end = Math.max(...candidate.ranges.map(r => r.endMs));
+  if (composition.requestedCandidateIds.some(other => {
+    const ranges = materials.candidates.find(c => c.id === other)?.ranges;
+    return !ranges?.length || (start < Math.max(...ranges.map(r => r.endMs)) && Math.min(...ranges.map(r => r.startMs)) < end);
+  })) return 'overlap';
+  return 'available';
 }

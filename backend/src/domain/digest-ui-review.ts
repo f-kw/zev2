@@ -9,6 +9,7 @@ import { assertApprovedAgentRequestInput, assertDigestArtifactV001, digestArtifa
   type DigestByteBindingV001, type FileRef, type UiReviewMaterials, type RuntimeConfig, type Zev2State } from '@zev2/shared';
 import { workspaceRoot } from '../config/runtime-config.js';
 import { loadDigestUiPreparations, type DigestUiPreparationRegistration } from '../store/digest-ui-preparations.js';
+import { populateDigestRequestedComposition } from './digest-ui-edit-requests.js';
 
 type Obj = Record<string, any>;
 const same = (a: unknown, b: unknown) => assert.deepEqual(a, b, '現在の登録資料が保存準備時から変更されています');
@@ -89,6 +90,7 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
   };
   const transcript = await document(plan.transcriptBinding), preparation = await document(plan.preparationBinding);
   const candidates = await document(preparation.artifacts['candidate-set.json']);
+  const selection = await document(preparation.artifacts['selection-adoption.json']);
   const discovery = await document(preparation.artifacts['candidate-response.json']);
   const utterances = await document(plan.utteranceBinding);
   assert(execution.sourceInspectionBinding && execution.clockResolutionBinding, '元時計の登録が不足しています');
@@ -102,7 +104,9 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
   const audioPreservation = Array.isArray(contexts) && contexts.length && contexts.every(c => c?.resolvedStyle?.audioMode === 'preserve-source-only')
     ? 'preserve-source-only' as const : 'unknown' as const;
   // Caption preparation intentionally leaves declared media bytes unqualified; this is input provenance, never output QC.
-  return { caption, transcript, candidates, discovery, utterances, planFile, executionFile, audioPreservation, sourceAudioReference };
+  return { caption, transcript, candidates, selection, candidateSetBinding: preparation.artifacts['candidate-set.json'] as DigestByteBindingV001,
+    selectionAdoptionBinding: preparation.artifacts['selection-adoption.json'] as DigestByteBindingV001,
+    discovery, utterances, planFile, executionFile, audioPreservation, sourceAudioReference };
 }
 
 export async function populateDigestUiReview(state: Zev2State, model: UiReviewMaterials, config: RuntimeConfig,
@@ -139,11 +143,18 @@ export async function populateDigestUiReview(state: Zev2State, model: UiReviewMa
       outputId: f.ownerId, fileRefId: f.id, sha256: f.sha256 });
     model.creationChecks = { ...model.creationChecks, inputValidation: 'verified', audioPreservation: result.audioPreservation, sourceAudioReference: result.sourceAudioReference };
     model.digestPreparation = { status: 'verified', message: '現在の計画・実行入力・保存字幕準備を再照合しました。' };
+    const basisReferences = { candidateSetBinding: { path: result.candidateSetBinding.path, fileSha256: result.candidateSetBinding.fileSha256 },
+      selectionAdoptionBinding: { path: result.selectionAdoptionBinding.path, fileSha256: result.selectionAdoptionBinding.fileSha256 },
+      captionManifestBinding: registration.manifestBinding, producerBindings: model.bindings };
+    await populateDigestRequestedComposition(model, {
+      identity: createHash('sha256').update(JSON.stringify([model.requestDraftId, model.draftIdentity, basisReferences])).digest('hex'), ...basisReferences
+    }, result.selection.adoptedCandidates.map((c: Obj) => c.candidateId),
+    model.segments.reduce((total, s) => total + s.endMs - s.startMs, 0));
     if (result.audioPreservation === 'unknown') model.blockers.push('元の音声を保持する指定が保存資料で確認できません。');
     if (result.sourceAudioReference === 'unknown') model.blockers.push('元音声の参照と入力時計が保存資料で確認できません。');
     model.blockers.push('動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。');
   } catch (e) {
-    model.candidates = [];model.segments = [];model.bindings = [];
+    model.candidates = [];model.segments = [];model.bindings = [];delete model.digestComposition;
     model.digestPreparation = { status: 'rejected', message: '保存準備と現在の依頼の対応を確認できません。再登録が必要です。' };
     model.blockers.push(`${model.digestPreparation.message} ${e instanceof Error ? e.message : ''}`);
   }

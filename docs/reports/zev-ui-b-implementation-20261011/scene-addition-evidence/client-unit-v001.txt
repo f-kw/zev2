@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: saving a draft performs one save and zero approvals, even after repeated click
+ok 1 - saving a draft performs one save and zero approvals, even after repeated click
+  ---
+  duration_ms: 5.569208
+  type: 'test'
+  ...
+# Subtest: draft approval requires the exact confirmed version and available execution conditions
+ok 2 - draft approval requires the exact confirmed version and available execution conditions
+  ---
+  duration_ms: 14.784375
+  type: 'test'
+  ...
+# Subtest: digest registration and absent runtime are blocked without pretending video support
+ok 3 - digest registration and absent runtime are blocked without pretending video support
+  ---
+  duration_ms: 0.52525
+  type: 'test'
+  ...
+# Subtest: Digest precreation progress requires current qualified material and never implies media completion
+ok 4 - Digest precreation progress requires current qualified material and never implies media completion
+  ---
+  duration_ms: 0.192291
+  type: 'test'
+  ...
+# Subtest: Digest scene addition saves only an editing request once and returns to content confirmation
+ok 5 - Digest scene addition saves only an editing request once and returns to content confirmation
+  ---
+  duration_ms: 3.532208
+  type: 'test'
+  ...
+# Subtest: Digest addition refuses stale, absent, already adopted and changed-base candidates without sending
+ok 6 - Digest addition refuses stale, absent, already adopted and changed-base candidates without sending
+  ---
+  duration_ms: 1.292375
+  type: 'test'
+  ...
+# Subtest: late Digest addition response never replaces another draft or newer material read
+ok 7 - late Digest addition response never replaces another draft or newer material read
+  ---
+  duration_ms: 0.819708
+  type: 'test'
+  ...
+# Subtest: Digest candidate state separates base adoption, requested addition, unavailable and overlapping scenes
+ok 8 - Digest candidate state separates base adoption, requested addition, unavailable and overlapping scenes
+  ---
+  duration_ms: 0.251083
+  type: 'test'
+  ...
+# Subtest: current output binds owner, kind, bytes, output record and newest producer
+ok 9 - current output binds owner, kind, bytes, output record and newest producer
+  ---
+  duration_ms: 9.866208
+  type: 'test'
+  ...
+# Subtest: missing or stale content material is rejected at the store approval boundary
+ok 10 - missing or stale content material is rejected at the store approval boundary
+  ---
+  duration_ms: 2.969125
+  type: 'test'
+  ...
+# Subtest: render readiness never treats an arbitrary text option as a complete confirmation package
+ok 11 - render readiness never treats an arbitrary text option as a complete confirmation package
+  ---
+  duration_ms: 0.679833
+  type: 'test'
+  ...
+# Subtest: same-request older pending review cannot authorize current review
+ok 12 - same-request older pending review cannot authorize current review
+  ---
+  duration_ms: 0.377958
+  type: 'test'
+  ...
+# Subtest: latest refresh wins and late read cannot overwrite saved draft mutation
+ok 13 - latest refresh wins and late read cannot overwrite saved draft mutation
+  ---
+  duration_ms: 0.92375
+  type: 'test'
+  ...
+# Subtest: final review cannot save a different draft or an output with missing registration
+ok 14 - final review cannot save a different draft or an output with missing registration
+  ---
+  duration_ms: 2.068375
+  type: 'test'
+  ...
+# Subtest: guide maps saved draft, content, readiness and completed video without reusing past result
+ok 15 - guide maps saved draft, content, readiness and completed video without reusing past result
+  ---
+  duration_ms: 0.115708
+  type: 'test'
+  ...
+# Subtest: reload binds the displayed saved draft before final actions
+ok 16 - reload binds the displayed saved draft before final actions
+  ---
+  duration_ms: 0.774
+  type: 'test'
+  ...
+# Subtest: registered content requires the producer output ID and file owner to agree
+ok 17 - registered content requires the producer output ID and file owner to agree
+  ---
+  duration_ms: 0.091125
+  type: 'test'
+  ...
+# Subtest: resume sends the active approved version even when another request is ready
+ok 18 - resume sends the active approved version even when another request is ready
+  ---
+  duration_ms: 6.732625
+  type: 'test'
+  ...
+# Subtest: retry and cancel are scoped to the active saved request
+ok 19 - retry and cancel are scoped to the active saved request
+  ---
+  duration_ms: 1.624125
+  type: 'test'
+  ...
+# Subtest: revision cannot create a copy from an absent or different current output
+ok 20 - revision cannot create a copy from an absent or different current output
+  ---
+  duration_ms: 0.438834
+  type: 'test'
+  ...
+# Subtest: a newer attempt with the same saved clock hides an older video
+ok 21 - a newer attempt with the same saved clock hides an older video
+  ---
+  duration_ms: 0.09625
+  type: 'test'
+  ...
+# Subtest: late material fetch cannot replace another draft or a newer displayed confirmation
+ok 22 - late material fetch cannot replace another draft or a newer displayed confirmation
+  ---
+  duration_ms: 0.59725
+  type: 'test'
+  ...
+# Subtest: registered recommendation selects only a candidate in the current matching review
+ok 23 - registered recommendation selects only a candidate in the current matching review
+  ---
+  duration_ms: 0.143666
+  type: 'test'
+  ...
+# Subtest: preview labels distinguish unknown, registered waiting, claimed preparing and generated
+ok 24 - preview labels distinguish unknown, registered waiting, claimed preparing and generated
+  ---
+  duration_ms: 0.182917
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 750.343542

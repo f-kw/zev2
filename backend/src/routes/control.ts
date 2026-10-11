@@ -150,6 +150,7 @@ import { requireAgentApiToken } from '../security/agent-auth.js';
 import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMaterials, confirmedOutput, registeredUiFile } from '../domain/ui-review.js';
 import { digestUiRegistrationInput, qualifyDigestUiPreparation } from '../domain/digest-ui-review.js';
 import { saveDigestUiPreparation } from '../store/digest-ui-preparations.js';
+import { saveDigestSceneAddition } from '../domain/digest-ui-edit-requests.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -273,6 +274,15 @@ router.post('/request-drafts/:id/ui-digest-preparation', async (request, respons
     await qualifyDigestUiPreparation(state, registration, registeredUiFile);
     const saved = await saveDigestUiPreparation(registration);
     response.json({ registration: saved, materials: await buildUiReviewMaterials(state, saved.requestDraftId, await loadRuntimeConfig()) });
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+
+router.post('/request-drafts/:id/ui-digest-scene-additions', async (request, response) => {
+  try {
+    const id = routeParamText(request.params.id), state = await loadState(), config = await loadRuntimeConfig();
+    const materials = await buildUiReviewMaterials(state, id, config);
+    const saved = await saveDigestSceneAddition(materials, request.body);
+    response.json({ ...saved, materials: await buildUiReviewMaterials(state, id, config) });
   } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
 });
 

@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "zev-ui68-candidate-choice-unit-observation-v001",
+  "observedAt": "2026-10-11T04:52:55.998756+00:00",
+  "session": "Codex-UI",
+  "head": "3893d3b54bfdb10a4d0f875c5404329eaac8546c",
+  "pdf": {
+    "path": "/Users/kawafmm/Documents/Codex/2026-10-05/task-2/library-pdf-materialized-20261010/ZEV_UI案B_順番が見える案内型.pdf",
+    "byteSize": 105260,
+    "sha256": "763225ae91db31dc8a4b49f3b8d2d87617ef9db6653e60eaf1c37bf5f0069b17",
+    "pages": 4,
+    "visualPagesRead": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "renderer": "macOS PDFKit; rendered PNGs via NSBitmapImageRep",
+    "libraryRefetched": false,
+    "relevantPage2Text": [
+      "おすすめの構成",
+      "1 話のきっかけ",
+      "2 考え方が変わったところ",
+      "3 最後のまとめ",
+      "この推奨案で進める"
+    ],
+    "relevantPage3Text": [
+      "保存済みのシーン候補",
+      "題名と短い要約だけを表示",
+      "まだ採用案は変わっていません。",
+      "採用案に反映する"
+    ],
+    "targetReplacementSlotShown": false,
+    "addRemoveControlsShown": false,
+    "multipleSelectionControlsShown": false
+  },
+  "savedDataExample": {
+    "role": "Historical saved normal-request plan, structural read example only; not current No.61 registration or authority",
+    "files": [
+      {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--candidate-set.json",
+        "byteSize": 8422,
+        "sha256": "c896a4348055cd01cea35c0d14c439551ee77cfd6c594fc714a418ee4a1249ac",
+        "schema": "candidate-selection-candidate-set-v001"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--selection-adoption.json",
+        "byteSize": 180362,
+        "sha256": "11b8dda61151ff1350e77898bae81e51f783da5b29a8b6ce6a38eaa787136974",
+        "schema": "candidate-selection-machine-adoption-v001"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_xKOu8eZKSNa5viNENtJ4L--retention-validation.json",
+        "byteSize": 224320,
+        "sha256": "578121e2f0a274f73362530f4ac9cd63a8ea1b0ea07e2ca1905754b289cf085a",
+        "schema": "new-material-retention-validation-v001"
+      },
+      {
+        "path": "runtime/artifacts/request-intent-real-judgment-20261002-v001/attempt-001/artifacts/draft_eCg3g-IMIzEWMtJuMyJWB/agent_wGiuVx5QiJvjGUxEW8Qxa--edit-plan.json",
+        "byteSize": 53733,
+        "sha256": "cde0e6a292de011475b4d4cf3d0a418f4b839a1b9bf7eca5209e3e78e023caf6",
+        "schema": "new-material-digest-edit-plan-v001"
+      }
+    ],
+    "candidateCount": 12,
+    "candidateRowFields": [
+      "candidateId",
+      "sourceId",
+      "title",
+      "contextStartUtteranceId",
+      "contextEndUtteranceId",
+      "evidenceUtteranceIds"
+    ],
+    "adoptedIds": [
+      "candidate-0001",
+      "candidate-0002",
+      "candidate-0003",
+      "candidate-0004",
+      "candidate-0005",
+      "candidate-0006",
+      "candidate-0007"
+    ],
+    "rejectedIds": [
+      "candidate-0008",
+      "candidate-0009",
+      "candidate-0010",
+      "candidate-0011",
+      "candidate-0012"
+    ],
+    "retentionCandidateIds": [
+      "candidate-0001",
+      "candidate-0002",
+      "candidate-0003",
+      "candidate-0004",
+      "candidate-0005",
+      "candidate-0006",
+      "candidate-0007"
+    ],
+    "retainedSegmentCount": 9,
+    "segmentCandidateIds": [
+      "candidate-0001",
+      "candidate-0002",
+      "candidate-0003",
+      "candidate-0004",
+      "candidate-0005",
+      "candidate-0006",
+      "candidate-0006",
+      "candidate-0006",
+      "candidate-0007"
+    ],
+    "order": "source-order-without-reordering",
+    "individualHumanApproval": "not-performed",
+    "humanQuality": "not-evaluated",
+    "bindingQualificationRerun": false,
+    "largeSourceMediaRehashed": false
+  },
+  "contracts": [
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "sameAsHead": true
+    },
+    {
+      "path": "evals/clip_composition/run_thin_plan_candidate_selection_v0.mts",
+      "sha256": "88abb651e704156d98b078e9916db675e99a756ca4a2831862f49116057dddb8",
+      "sameAsHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "sameAsHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "sameAsHead": true
+    }
+  ],
+  "conclusion": {
+    "observedSelectionUnit": "one saved scene",
+    "observedCompositionUnit": "multiple adopted scenes, possibly multiple retained segments per scene",
+    "recommendation": "Preserve other adopted scenes; explicitly reflect chosen unadopted scene in a new whole-composition adoption set. Already adopted is a no-op. Do not infer a replacement target.",
+    "recommendationImplemented": false,
+    "newRecordAndProducerRebindingApprovalPending": true
+  },
+  "activity": {
+    "productSourceEdits": 0,
+    "testsRun": 0,
+    "paidApi": 0,
+    "realMediaManufacturing": 0,
+    "gitStageCommitPush": 0,
+    "gitLease": "SSD"
+  },
+  "cleanup": {
+    "root": "/tmp/zev-ui68-pdf-meaning.t3KjNY",
+    "ownFilesRemoved": 232,
+    "logicalBytesRemoved": 236426939,
+    "categories": [
+      "4 rendered PDF pages",
+      "own Swift PDFKit reader",
+      "own module cache"
+    ],
+    "swiftExitCode": 0,
+    "sourcePdfPreserved": true,
+    "otherSessionRemoved": 0,
+    "rootExistsAfter": false
+  }
+}

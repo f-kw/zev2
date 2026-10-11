@@ -9,6 +9,7 @@ const { createServer } = await import(pathToFileURL(require.resolve('vite')));
 const shared = await import(pathToFileURL(root + '/packages/shared/dist/index.js'));
 let state = shared.createInitialState(), sequence = 0;
 const calls = [];
+let digestAdditionIds = [];
 const config = { stt: { mode: 'fixed', localServerUrl: '', language: 'ja' }, contentDiscovery: { mode: 'fixed' },
   editPlan: { mode: 'fixed' }, adjustment: { mode: 'fixed' }, videoOutput: { encoder: 'libx264', extraArgs: [] },
   agentClaim: { ttlMilliseconds: 60000 }, artifactDelivery: { mode: 'local' },
@@ -19,6 +20,18 @@ const themes = [
   { id: 'turn', title: '考え方が変わったところ', summary: '会話が動く場面' },
   { id: 'ending', title: '最後のまとめ', summary: '結論が伝わる短い場面' }
 ].map((t, i) => ({ ...t, evidenceRefs: [{ kind: 'time_range', refId: 'range-' + i, meaning: '保存済み素材の場面' }] }));
+const mockCandidates = () => themes.map((t,i)=>({...t,previewStatus:{state:'unknown'},speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+function digestMockMaterials(draft) {
+  const candidates=mockCandidates(),requested=themes.filter(t=>t.id==='opening'||digestAdditionIds.includes(t.id)).map(t=>t.id);
+  return {requestDraftId:draft.id,draftIdentity:shared.draftConfirmationIdentity(draft),fingerprint:'mock-digest-'+JSON.stringify([draft,digestAdditionIds]),candidates,bindings:[],
+    digestPreparation:{status:'verified',message:'人工UI入力：現在の計画・実行入力・保存字幕準備を再照合しました。'},
+    digestComposition:{basis:{identity:'a'.repeat(64),candidateSetBinding:{path:'artificial/candidates.json',fileSha256:'a'.repeat(64)},selectionAdoptionBinding:{path:'artificial/selection.json',fileSha256:'b'.repeat(64)},captionManifestBinding:{path:'artificial/manifest.json',fileSha256:'c'.repeat(64)},producerBindings:[]},
+      status:digestAdditionIds.length?'revision_requested':'current',currentCandidateIds:['opening'],requestedCandidateIds:requested,addedCandidateIds:[...digestAdditionIds],
+      currentDurationMs:1000,addedContextDurationMs:digestAdditionIds.length*1000,contextTotalUpperBoundMs:1000+digestAdditionIds.length*1000,editRequestIds:digestAdditionIds.map(id=>'mock-edit-'+id)},
+    creationChecks:{inputValidation:digestAdditionIds.length?'failed':'verified',audioPreservation:'preserve-source-only',sourceAudioReference:'registered',runtimeIdentity:JSON.stringify(config)},
+    segments:[{startMs:0,endMs:1000,caption:'人工入力の元本文',speechIds:[1],displaySummary:'保持済み本文。字幕の表示境界・描画は後続工程で確認します。'}],
+    blockers:[...(digestAdditionIds.length?['場面追加の編集要求を保存しました。変更後の正式な新版準備・再照合は未接続です。旧準備では作成前確認へ進めません。']:[]),'動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']};
+}
 function draftCopy(purpose = config.source.defaultPurpose, productionType = 'clip') {
   const draft = shared.createRequestDraft({ productionType, purpose, sourceUri: config.source.defaultUri,
     durationLabel: '60秒以内', themeCountLabel: '3候補', geminiModelName: shared.DEFAULT_GEMINI_MODEL,
@@ -54,6 +67,7 @@ function seedScenario(scenario) {
         let draft = state.requestDrafts[0];
         state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
         if (scenario === 'digest-precreation') {
+          digestAdditionIds=[];
           state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認', 'digest');
           const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
         }
@@ -103,14 +117,8 @@ const server = await createServer({ root: root + '/client', configFile: root + '
       if (url.pathname.endsWith('/ui-review')) {
         const id=url.pathname.split('/')[3], draft=state.requestDrafts.find(d=>d.id===id);
         const review=state.controlReviewItems.filter(r=>r.requestDraftId===id&&r.status==='review_required').at(-1);
-        const candidates=themes.map((t,i)=>({...t,previewStatus:{state:'unknown'},speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
-        if (process.env.ZEV_UI_QA_SCENARIO==='digest-precreation') {
-          return send({requestDraftId:id,draftIdentity:shared.draftConfirmationIdentity(draft),fingerprint:'mock-digest-current',candidates,bindings:[],
-            digestPreparation:{status:'verified',message:'人工UI入力：現在の計画・実行入力・保存字幕準備を再照合しました。'},
-            creationChecks:{inputValidation:'verified',audioPreservation:'preserve-source-only',sourceAudioReference:'registered',runtimeIdentity:JSON.stringify(config)},
-            segments:[{startMs:1000,endMs:2000,caption:'人工入力の元本文',speechIds:[1],displaySummary:'保持済み本文。字幕の表示境界・描画は後続工程で確認します。'}],
-            blockers:['動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']});
-        }
+        const candidates=mockCandidates();
+        if (draft?.productionType==='digest' && process.env.ZEV_UI_QA_SCENARIO==='digest-precreation') return send(digestMockMaterials(draft));
         if (process.env.ZEV_UI_QA_SCENARIO==='registered-metadata') {
           for (const candidate of candidates) {
             const option=review?.options.find(o=>o.id===candidate.id),ref=option?.evidenceRefs.find(r=>r.kind==='agent_request');
@@ -128,6 +136,13 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         const draft = shared.createRequestDraft(data, now(), () => 'draft-' + (++sequence));state.requestDrafts.unshift(draft);return send({ draft, state });
       }
       const draft = state.requestDrafts.find(d => d.id === url.pathname.split('/')[3]);
+      if (url.pathname.endsWith('/ui-digest-scene-additions')) {
+        const m=draft?.productionType==='digest'?digestMockMaterials(draft):null;
+        if (!m || data.draftIdentity!==m.draftIdentity || data.fingerprint!==m.fingerprint || !themes.some(t=>t.id===data.candidateId)) {res.statusCode=409;return send({error:'現在の構成を再確認してください'});}
+        const changed=!m.digestComposition.requestedCandidateIds.includes(data.candidateId);
+        if (changed) digestAdditionIds.push(data.candidateId);
+        return send({changed,materials:digestMockMaterials(draft)});
+      }
       if (url.pathname.endsWith('/approve') && draft) { draft.status = 'approved';draft.updatedAt = now();seedReview(draft);return send({ state }); }
       if (url.pathname.startsWith('/api/control-reviews/') && url.pathname.endsWith('/approve')) {
         const review = state.controlReviewItems.find(r => r.id === url.pathname.split('/')[3]);review.status = 'approved';

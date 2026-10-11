@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "zev-ui68-candidate-adoption-boundary-observation-v001",
+  "observedAt": "2026-10-11T04:45:52.438519+00:00",
+  "session": "Codex-UI",
+  "head": "fe88cc3611db039e5d98058e31d9d0f884e3b0cf",
+  "branch": "main",
+  "gitLease": "SSD",
+  "productSourceEdits": 0,
+  "unit": {
+    "command": "node --test client/test/guided-workflow.test.mjs",
+    "tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "exitCode": 0,
+    "scope": "Existing UI reuse only; new Digest choice save is not tested."
+  },
+  "sources": [
+    {
+      "path": "client/src/App.vue",
+      "byteSize": 99012,
+      "sha256": "4d8fd0b6ac41ed55681f1b3b4c8e44a01b9442c8d64627bdcddced96f2b015d9",
+      "sameAsHead": true
+    },
+    {
+      "path": "client/src/stores/controlQueue.ts",
+      "byteSize": 22634,
+      "sha256": "41903ee40aa6258a901368ef0afd3a419cefd516b30f484e33ec2b2325f8448c",
+      "sameAsHead": true
+    },
+    {
+      "path": "client/src/guided-workflow.ts",
+      "byteSize": 6991,
+      "sha256": "3097b6e915976259f4c4bda1dee11542c2d8c591def33ce36f7b6d2349767538",
+      "sameAsHead": true
+    },
+    {
+      "path": "client/test/guided-workflow.test.mjs",
+      "byteSize": 16763,
+      "sha256": "1ba6df344948b575134fa2b46842b60834d6b8361a04ec95e99584b8a314d83a",
+      "sameAsHead": true
+    },
+    {
+      "path": "backend/src/domain/control-review.ts",
+      "byteSize": 15892,
+      "sha256": "83e1b24907c3fa8c8a325c109649c975bcce92aa34acd2d39e0a954ff0136c90",
+      "sameAsHead": true
+    },
+    {
+      "path": "backend/src/domain/ui-review.ts",
+      "byteSize": 16330,
+      "sha256": "4a9071684c31331a04afc0a2043708f2215bd3d3ef2a9c0e9782f52a0a19f154",
+      "sameAsHead": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "byteSize": 13807,
+      "sha256": "d95fd9e41b03d1ae4420560a8b34daf312547a43ab293480101e02225747be1e",
+      "sameAsHead": true
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "byteSize": 38156,
+      "sha256": "c02931284f35f4a4322961a2e2bb762a00def22ac85e0d2676a8c3eff999c45d",
+      "sameAsHead": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "byteSize": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "sameAsHead": true
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "byteSize": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "sameAsHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "byteSize": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "sameAsHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "byteSize": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "sameAsHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "byteSize": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "sameAsHead": true
+    },
+    {
+      "path": "evals/clip_composition/unseen_material_thin_plan_v001.mts",
+      "byteSize": 8353,
+      "sha256": "76fd363d5cf9125f5e66ea44201e753da6c2b3466db62ae265f304a8cdb5b176",
+      "sameAsHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "byteSize": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "sameAsHead": true
+    }
+  ],
+  "ownProcesses": {
+    "unit": "exited 0",
+    "serversStarted": 0,
+    "browserTabsOpened": 0,
+    "renderersStarted": 0
+  },
+  "cleanup": {
+    "temporaryMediaCreated": 0,
+    "ssdFixtureRootsCreated": 0,
+    "reclaimedBytes": 0,
+    "otherSessionDeletedOrStopped": 0
+  },
+  "restrictions": {
+    "productContractsChanged": 0,
+    "paidApiCalls": 0,
+    "realMediaManufactured": 0,
+    "stageCommitPush": 0,
+    "setupCorrectionsAppliedTotal": 8,
+    "setupGeneralLimit": 5,
+    "explicitGptDecisionStopsIncludingThisBoundary": 4
+  },
+  "evidenceCollectionAttempt": {
+    "firstExitCode": 1,
+    "cause": "Expected TAP markers; actual saved stdout was spec format.",
+    "testChanges": 0,
+    "testReruns": 0
+  }
+}

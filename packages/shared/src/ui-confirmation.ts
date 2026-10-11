@@ -27,6 +27,27 @@ export interface UiSavedCandidate {
   ranges: Array<{ startMs: number; endMs: number }>; preview?: FileRef;
   previewStatus?: { state: 'unknown' | 'not_created' | 'preparing' | 'ready' | 'failed' | 'cancelled'; requestId?: string };
 }
+// Human editing intent only. These references never authorize AI, fees or manufacturing.
+export interface UiDigestCompositionBasis {
+  identity: string;
+  candidateSetBinding: { path: string; fileSha256: string };
+  selectionAdoptionBinding: { path: string; fileSha256: string };
+  captionManifestBinding: { path: string; fileSha256: string };
+  producerBindings: UiReviewMaterials['bindings'];
+}
+export interface UiDigestSceneAdditionInput { draftIdentity: string; fingerprint: string; candidateId: string }
+export interface UiDigestEditRequest {
+  id: string; requestDraftId: string; draftIdentity: string; basis: UiDigestCompositionBasis;
+  confirmationFingerprint: string; candidateId: string; beforeCandidateIds: string[];
+  requestedCandidateIds: string[]; createdAt: string;
+}
+export interface UiDigestComposition {
+  basis: UiDigestCompositionBasis;
+  status: 'current' | 'revision_requested' | 'source_changed';
+  currentCandidateIds: string[]; requestedCandidateIds: string[]; addedCandidateIds: string[];
+  currentDurationMs: number; addedContextDurationMs: number; contextTotalUpperBoundMs: number;
+  editRequestIds: string[];
+}
 export interface UiReviewMaterials {
   requestDraftId: string; draftIdentity: string; review?: ControlReviewItem; fingerprint: string;
   candidates: UiSavedCandidate[];
@@ -36,6 +57,7 @@ export interface UiReviewMaterials {
     runtimeIdentity: string;
   };
   digestPreparation?: { status: 'not_registered' | 'verified' | 'rejected'; message: string };
+  digestComposition?: UiDigestComposition;
   bindings: Array<{ producerId: string; outputId: string; fileRefId: string; sha256: string }>;
   segments: Array<{ startMs: number; endMs: number; caption: string; speechIds: number[]; displaySummary: string }>;
   blockers: string[];

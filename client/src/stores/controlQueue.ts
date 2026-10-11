@@ -29,7 +29,8 @@ import {
   resumeAgentWork,
   retryAgentRequest,
   submitFinalReview as submitFinalReviewRequest,
-  submitHumanReviewAction
+  submitHumanReviewAction,
+  saveDigestSceneAddition
 } from '../api';
 
 interface ControlQueueStoreState {
@@ -114,6 +115,32 @@ export const useControlQueueStore = defineStore('controlQueue', {
     runNumber: 0
   }),
   actions: {
+    async requestDigestSceneAddition(candidateId: string, fingerprint: string) {
+      if (this.loading) return false;
+      const draft = findById(this.state.requestDrafts, this.activeDraftId), materials = this.reviewMaterials;
+      if (!draft || draft.productionType !== 'digest' || draft.status !== 'approved' || !materials
+        || materials.requestDraftId !== draft.id || materials.draftIdentity !== draftIdentity(draft)
+        || materials.fingerprint !== fingerprint || materials.digestPreparation?.status !== 'verified'
+        || !materials.digestComposition || materials.digestComposition.status === 'source_changed'
+        || !materials.candidates.some(c => c.id === candidateId)) {
+        this.errorMessage = '現在の構成と保存候補を再読み込みしてください';return false;
+      }
+      if (materials.digestComposition.requestedCandidateIds.includes(candidateId)) return false;
+      const readNumber = ++this.uiMaterialReadNumber;
+      this.loading = true;this.errorMessage = '';this.message = '場面追加の編集要求を保存しています';
+      try {
+        const result = await saveDigestSceneAddition(draft.id, { draftIdentity: materials.draftIdentity, fingerprint, candidateId });
+        if (this.activeDraftId !== draft.id || draftIdentity(findById(this.state.requestDrafts, draft.id)!) !== materials.draftIdentity
+          || readNumber !== this.uiMaterialReadNumber) return false;
+        if (result.materials.requestDraftId !== draft.id || result.materials.draftIdentity !== materials.draftIdentity) throw new Error('保存応答の依頼が一致しません');
+        this.reviewMaterials = result.materials;
+        this.runPhase = 'review_required';this.message = '場面追加の編集要求を保存しました。変更後の正式準備は未接続です。';
+        this.lastChangedAt = new Date().toISOString();return true;
+      } catch (e) {
+        if (this.activeDraftId === draft.id) { this.errorMessage = formatApiError(e);this.message = ''; }
+        return false;
+      } finally { this.loading = false; }
+    },
     async refreshUiReviewMaterials(id: string) {
       const number = ++this.uiMaterialReadNumber;
       this.reviewMaterials = null;

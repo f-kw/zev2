@@ -1,0 +1,85 @@
+TAP version 13
+# node:internal/fs/promises:1183
+#   return await PromisePrototypeThen(
+#          ^
+# Error: EPERM: operation not permitted, mkdtemp '/Volumes/KIOXIA/zev-ui68-json-test-1c8wlo'
+#     at async mkdtemp (node:internal/fs/promises:1183:10)
+#     at async createFixtureWorkspace (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-fixture.mts:15:36)
+#     at async <anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-edit-requests.test.mjs:9:14) {
+#   errno: -1,
+#   code: 'EPERM',
+#   syscall: 'mkdtemp',
+#   path: '/Volumes/KIOXIA/zev-ui68-json-test-1c8wlo'
+# }
+# Node.js v23.7.0
+# Subtest: backend/test/digest-ui-edit-requests.test.mjs
+not ok 1 - backend/test/digest-ui-edit-requests.test.mjs
+  ---
+  duration_ms: 688.872333
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-edit-requests.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# node:internal/fs/promises:1183
+#   return await PromisePrototypeThen(
+#          ^
+# Error: EPERM: operation not permitted, mkdtemp '/Volumes/KIOXIA/zev-ui68-json-test-aHuk2J'
+#     at async mkdtemp (node:internal/fs/promises:1183:10)
+#     at async createFixtureWorkspace (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-fixture.mts:15:36)
+#     at async <anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-handoff.test.mjs:12:14) {
+#   errno: -1,
+#   code: 'EPERM',
+#   syscall: 'mkdtemp',
+#   path: '/Volumes/KIOXIA/zev-ui68-json-test-aHuk2J'
+# }
+# Node.js v23.7.0
+# Subtest: backend/test/digest-ui-handoff.test.mjs
+not ok 2 - backend/test/digest-ui-handoff.test.mjs
+  ---
+  duration_ms: 687.48525
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-handoff.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# node:internal/fs/promises:1183
+#   return await PromisePrototypeThen(
+#          ^
+# Error: EPERM: operation not permitted, mkdtemp '/Volumes/KIOXIA/zev-ui68-json-test-g88iyi'
+#     at async mkdtemp (node:internal/fs/promises:1183:10)
+#     at async createFixtureWorkspace (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-fixture.mts:15:36)
+#     at async <anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-review.test.mjs:8:14) {
+#   errno: -1,
+#   code: 'EPERM',
+#   syscall: 'mkdtemp',
+#   path: '/Volumes/KIOXIA/zev-ui68-json-test-g88iyi'
+# }
+# Node.js v23.7.0
+# Subtest: backend/test/digest-ui-review.test.mjs
+not ok 3 - backend/test/digest-ui-review.test.mjs
+  ---
+  duration_ms: 679.532125
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-review.test.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 705.425875

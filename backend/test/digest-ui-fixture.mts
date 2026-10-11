@@ -20,7 +20,7 @@ export async function createFixtureWorkspace() {
   return { inputRoot, prefix, runtime, sourceRoot,
     cleanup: async () => { await rm(inputRoot, { recursive: true });await rm(sourceRoot, { recursive: true }); } };
 }
-export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof createFixtureWorkspace>>, variant: 'a' | 'b') {
+export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof createFixtureWorkspace>>, variant: 'a' | 'b', selection: 'all' | 'first-only' = 'all') {
   const state = shared.createInitialState(), at = '2026-10-11T04:00:00.000Z';
   const bytes = Buffer.from(`artificial-${variant}-not-a-playable-media-file`), sourcePath = path.join(area.sourceRoot, `${variant}.mp4`);
   await writeFile(sourcePath, bytes, { flag: 'wx' });
@@ -72,8 +72,8 @@ export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof create
         evidenceUtteranceIds: [r.input.utterances[start].utteranceId], contextStartUtteranceId: r.input.utterances[start].utteranceId,
         contextEndUtteranceId: r.input.utterances[end].utteranceId })) };
     } else if (stage === 'selection') {
-      answer = { status: 'complete', decisions: r.input.candidates.map((c: any) => ({ candidateId: c.candidateId, sourceId: c.sourceId,
-        decision: 'adopt', basis: 'distinct-highlight', reason: '人工入力の配線確認', evidenceUtteranceIds: [c.utterances[0].utteranceId],
+      answer = { status: 'complete', decisions: r.input.candidates.map((c: any, index: number) => ({ candidateId: c.candidateId, sourceId: c.sourceId,
+        decision: selection === 'first-only' && index > 0 ? 'reject' : 'adopt', basis: selection === 'first-only' && index > 0 ? 'weak' : 'distinct-highlight', reason: '人工入力の配線確認', evidenceUtteranceIds: [c.utterances[0].utteranceId],
         comparisons: r.input.candidates.filter((o: any) => o.candidateId !== c.candidateId).map((o: any) => ({ candidateId: o.candidateId, evidenceUtteranceIds: [o.utterances[0].utteranceId] })) })) };
     } else {
       answer = { status: 'complete', candidates: r.input.candidates.map((c: any) => { const atoms = c.utterances.flatMap((u: any) => u.atoms);
