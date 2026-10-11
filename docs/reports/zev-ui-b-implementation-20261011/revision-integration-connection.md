@@ -156,3 +156,5 @@ Edgeは今回新規の専用tabだけで、127.0.0.1:5179の全API隔離mockを�
 全test after hookで今回のSSD/local人工rootだけを削除。最近生成した自分のprefix残root0、残mock/test process0、専用Edge tab閉鎖を[cleanup証拠](revision-view-evidence/cleanup-v001.json)で確認した。新媒体/巨大中間物0、fixture回収bytesは未計測。自分の/tmp log重複22,221bytesだけ削除。source/来歴の保護20件は停止checkpointとSHA一致、他担当アプリ/配信/STT process停止0、元素材/他成果/archive操作0。
 
 累積は**設営11・限定実装修正7・停止10・追補0・US$0**。修正増分1は親の個別承認、停止増分0。旧型検査exit2と旧counterを保持する。今回の反映照合の限定範囲は検証成立。No.68全体は正式製造/完成QC/実素材通し/人間品質を残し未完成、No.70未着手。検査中に届いた新本人方針を受領し、B導線を維持した保存根拠の短い選択案とSTT原本文/時刻保持へ進むため[次の最小境界案](context-choice-boundary.md)を返す。PDF更新待ちを開始条件にしない。追加作業のボード登録は親が別担当へ依頼済み、番号/登録完了は未受領。新しい候補生成や正式な非表示採用契約を自己変更していない。
+
+検証済み型注記/test/画面証拠/次案の監査checkpointは`f2462954beddf5325bdfca04dd7161ed2f9211a8`。[今回のsession log](../../work-logs/2026-10/2026-10-11T1012_Codex-UI_No68-revision-view-verified_f2462954.md)とこの索引をdoc commitへ保存し、最終push/statusを親へ返す。c35ae4adの初稿停止記録は保持する。
