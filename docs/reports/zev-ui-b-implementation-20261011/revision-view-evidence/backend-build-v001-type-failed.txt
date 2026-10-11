@@ -1,0 +1,25 @@
+
+> backend@0.1.0 build /Users/kawafmm/workspace/zev2/backend
+> corepack pnpm --filter @zev2/agent-runner build && tsc -p tsconfig.json
+
+
+> @zev2/agent-runner@0.1.0 build /Users/kawafmm/workspace/zev2/runner
+> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+src/domain/digest-ui-revision-view.ts(46,118): error TS2339: Property 'resolution' does not exist on type 'Obj | { schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+  Property 'resolution' does not exist on type '{ schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+src/domain/digest-ui-revision-view.ts(47,32): error TS2339: Property 'scenes' does not exist on type 'Obj | { schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+  Property 'scenes' does not exist on type '{ schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+src/domain/digest-ui-revision-view.ts(49,32): error TS2339: Property 'scenes' does not exist on type 'Obj | { schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+  Property 'scenes' does not exist on type '{ schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+src/domain/digest-ui-revision-view.ts(56,49): error TS2339: Property 'atomOccurrences' does not exist on type 'Obj | { schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+  Property 'atomOccurrences' does not exist on type '{ schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+src/domain/digest-ui-revision-view.ts(57,59): error TS2339: Property 'segments' does not exist on type 'Obj | { schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+  Property 'segments' does not exist on type '{ schemaVersion: string; status: string; preparationId: string; requestDraftId: string; draftIdentity: string; requestHash: string; input: { draftIdentity: string; fingerprint: string; preparationHash: string; answers: { ...; }[]; output: { ...; }; }; ... 18 more ...; backendCompletionRegistered: boolean; }'.
+/Users/kawafmm/workspace/zev2/backend:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  backend@0.1.0 build: `corepack pnpm --filter @zev2/agent-runner build && tsc -p tsconfig.json`
+Exit status 2

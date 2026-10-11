@@ -155,6 +155,7 @@ import { readDigestUiCompositionData, saveDigestUiCompositionData, prepareDigest
   readDigestUiAdditionalRetentionInputs, readDigestUiRetentionCallerInputs, saveDigestUiRetentionCallerAnswer,
   readDigestUiRetentionCallerAnswer } from '../domain/digest-ui-composition-data.js';
 import { prepareDigestUiRevision, readDigestUiRevision } from '../domain/digest-ui-revision-preparation.js';
+import { registerDigestUiRevisionReference } from '../domain/digest-ui-revision-view.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -212,6 +213,13 @@ router.get('/agent-digest-retention/:id/:requestHash/revision-preparation/:prepa
     response.json(await runExclusiveStateOperation(async () => readDigestUiRevision(await retentionCallerState(),
       routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash),
       outputRoot, routeParamText(request.params.preparationHash))));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+router.post('/agent-digest-retention/:id/:requestHash/revision-reference', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    response.json(await runExclusiveStateOperation(async () => registerDigestUiRevisionReference(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash), request.body)));
   } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
 });
 

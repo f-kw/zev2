@@ -81,7 +81,12 @@ function previewJobState(request: AgentRequest): NonNullable<UiSavedCandidate['p
   return {state:'unknown',requestId:request.id};
 }
 export async function buildUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<UiReviewMaterials> {
-  return (await readUiReviewMaterials(state, draftId, config)).materials;
+  const result = await readUiReviewMaterials(state, draftId, config);
+  if (result.digestQualification) {
+    const { populateDigestUiRevisionView } = await import('./digest-ui-revision-view.js');
+    await populateDigestUiRevisionView(state, result.materials, config);
+  }
+  return result.materials;
 }
 /** Internal readback shares the qualified Digest inputs; never exposes them in the existing UI response. */
 export async function readUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<{

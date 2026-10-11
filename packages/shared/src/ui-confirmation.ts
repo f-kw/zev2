@@ -67,6 +67,15 @@ export interface UiDigestRetentionPreparationSummary {
   admission: { retentionIntegration: 'not-prepared'; captionPreparation: 'not-prepared';
     executionPermission: 'not-approved'; humanQuality: 'pending' };
 }
+// A live readback of human-revision input preparation, never a production or quality approval.
+export interface UiDigestRevisionView {
+  status: 'verified' | 'rejected'; message: string;
+  requestDraftId: string; draftIdentity: string; fingerprint: string; requestHash: string; preparationHash: string;
+  representedEditRequestIds: string[]; candidateIds: string[];
+  appliedEdits: Array<{ id: string; candidateId: string; title: string }>;
+  segments: UiReviewMaterials['segments']; durationMs?: number; remainingChecks: string[];
+  admission: { captionDisplayAnswers: 'unanswered'; executionPermission: 'not-approved'; humanQuality: 'pending' };
+}
 export interface UiReviewMaterials {
   requestDraftId: string; draftIdentity: string; review?: ControlReviewItem; fingerprint: string;
   candidates: UiSavedCandidate[];
@@ -77,6 +86,7 @@ export interface UiReviewMaterials {
   };
   digestPreparation?: { status: 'not_registered' | 'verified' | 'rejected'; message: string };
   digestComposition?: UiDigestComposition;
+  digestRevision?: UiDigestRevisionView;
   bindings: Array<{ producerId: string; outputId: string; fileRefId: string; sha256: string }>;
   segments: Array<{ startMs: number; endMs: number; caption: string; speechIds: number[]; displaySummary: string }>;
   blockers: string[];

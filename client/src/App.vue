@@ -35,7 +35,7 @@ import {
   type WebGeminiRevisionBriefArtifact
 } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
-import { GUIDE_STEPS, currentOutput, draftIdentity, draftStartBlockers, executionBlockers, guideStep, resumeBlockers, reviewBlockers, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState } from './guided-workflow';
+import { GUIDE_STEPS, currentOutput, draftIdentity, draftStartBlockers, executionBlockers, guideStep, resumeBlockers, reviewBlockers, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState, verifiedDigestRevision } from './guided-workflow';
 
 type AppPage = 'workspace' | 'request';
 type RedoScope = 'theme_selection' | 'edit_plan';
@@ -1563,6 +1563,10 @@ const canAddDigestCandidate = computed(() => Boolean(currentDraft.value?.product
   && browsingReviewIdentity.value === candidateIdentity.value && digestAdditionState.value === 'available' && !agentOperationLocked.value));
 const digestCompositionScenes = computed(() => store.reviewMaterials?.digestComposition?.requestedCandidateIds
   .map(id => store.reviewMaterials!.candidates.find(c => c.id === id)).filter(c => c !== undefined) ?? []);
+const digestRevisionView = computed(() => currentDraft.value && store.reviewMaterials?.requestDraftId === currentDraft.value.id
+  && store.reviewMaterials.draftIdentity === draftIdentity(currentDraft.value) ? verifiedDigestRevision(store.reviewMaterials) : undefined);
+const digestDisplayedSegments = computed(() => digestRevisionView.value?.segments ?? store.reviewMaterials?.segments ?? []);
+const digestRemainingChecks = computed(() => digestRevisionView.value?.remainingChecks ?? store.reviewMaterials?.blockers ?? []);
 const digestConfirmationScenes = computed(() => digestCompositionScenes.value
   .filter(c => store.reviewMaterials?.digestComposition?.addedCandidateIds.includes(c.id)));
 function openDigestConfirmation() {
@@ -1912,19 +1916,23 @@ function trapDialogFocus(event: KeyboardEvent) {
         <section v-else-if="currentDraft?.productionType === 'digest' && !outputVideoUri && store.reviewMaterials?.digestPreparation" class="review-panel" aria-label="Digest作成前の保存資料">
           <p class="eyebrow">保存済みの準備情報</p><h2>{{ store.reviewMaterials.digestComposition?.status === 'current' ? '作成前の資料を確認' : '構成の変更を確認' }}</h2>
           <p>{{ store.reviewMaterials.digestPreparation.message }}</p>
-          <section v-if="store.reviewMaterials.digestComposition"><h3>{{ store.reviewMaterials.digestComposition.status === 'current' ? '現在の構成' : '追加を依頼した構成（正式準備前）' }}</h3>
-            <ol><li v-for="scene in digestCompositionScenes" :key="scene.id"><strong>{{ scene.title }}</strong><span v-if="store.reviewMaterials.digestComposition.addedCandidateIds.includes(scene.id)"> · 追加要求を保存済み</span><p>{{ scene.summary }}</p></li></ol>
+          <p v-if="digestRevisionView" role="status">{{ digestRevisionView.message }} 字幕表示の判断と動画作成は未完了です。</p>
+          <p v-else-if="store.reviewMaterials.digestRevision" class="error-message" role="status">{{ store.reviewMaterials.digestRevision.message }}</p>
+          <section v-if="store.reviewMaterials.digestComposition"><h3>{{ digestRevisionView ? '追加を反映した構成（字幕表示・製造前）' : store.reviewMaterials.digestComposition.status === 'current' ? '現在の構成' : '追加を依頼した構成（正式準備前）' }}</h3>
+            <ol><li v-for="scene in digestCompositionScenes" :key="scene.id"><strong>{{ scene.title }}</strong><span v-if="store.reviewMaterials.digestComposition.addedCandidateIds.includes(scene.id)">{{ digestRevisionView ? ' · 新版準備へ反映を確認' : ' · 追加要求を保存済み' }}</span><p>{{ scene.summary }}</p></li></ol>
             <p>依頼の尺条件：{{ currentDraft.settings.durationLabel }}</p>
-            <p>現在の内容：{{ (store.reviewMaterials.digestComposition.currentDurationMs / 1000).toFixed(2) }}秒（保存区間の合計）</p>
-            <template v-if="store.reviewMaterials.digestComposition.addedCandidateIds.length"><p>追加する場面の元区間：合計{{ (store.reviewMaterials.digestComposition.addedContextDurationMs / 1000).toFixed(2) }}秒。未編集の区間を含みます。</p><p>変更後の完成尺は未確定です。保存区間と追加元区間の合計は{{ (store.reviewMaterials.digestComposition.contextTotalUpperBoundMs / 1000).toFixed(2) }}秒です。正式準備で内容と尺を確認します。</p></template>
+            <p>{{ digestRevisionView ? '変更前の内容' : '現在の内容' }}：{{ (store.reviewMaterials.digestComposition.currentDurationMs / 1000).toFixed(2) }}秒（保存区間の合計）</p>
+            <p v-if="digestRevisionView">準備した構成の予定尺：{{ (digestRevisionView.durationMs! / 1000).toFixed(2) }}秒。完成動画の尺は製造後に確認します。</p>
+            <template v-else-if="store.reviewMaterials.digestComposition.addedCandidateIds.length"><p>追加する場面の元区間：合計{{ (store.reviewMaterials.digestComposition.addedContextDurationMs / 1000).toFixed(2) }}秒。未編集の区間を含みます。</p><p>変更後の完成尺は未確定です。保存区間と追加元区間の合計は{{ (store.reviewMaterials.digestComposition.contextTotalUpperBoundMs / 1000).toFixed(2) }}秒です。正式準備で内容と尺を確認します。</p></template>
           </section>
-          <section v-if="store.reviewMaterials.segments.length"><h3>{{ store.reviewMaterials.digestComposition?.status === 'current' ? '保存済みの本文' : '変更前の保存本文（追加後には未適用）' }}</h3>
-            <ol><li v-for="(segment,index) in store.reviewMaterials.segments" :key="index"><strong>{{ index + 1 }} · {{ (segment.startMs / 1000).toFixed(2) }}〜{{ (segment.endMs / 1000).toFixed(2) }}秒</strong><p>{{ segment.caption }}</p><p>{{ segment.displaySummary }}</p></li></ol>
+          <section v-if="digestDisplayedSegments.length"><h3>{{ digestRevisionView ? '追加後の保持本文（字幕表示の判断前）' : store.reviewMaterials.digestComposition?.status === 'current' ? '保存済みの本文' : '変更前の保存本文（追加後には未適用）' }}</h3>
+            <ol><li v-for="(segment,index) in digestDisplayedSegments" :key="index"><strong>{{ index + 1 }} · {{ (segment.startMs / 1000).toFixed(2) }}〜{{ (segment.endMs / 1000).toFixed(2) }}秒</strong><p>{{ segment.caption }}</p><p>{{ segment.displaySummary }}</p></li></ol>
           </section>
           <p>作成前の入力検査：{{ store.reviewMaterials.creationChecks?.inputValidation === 'verified' ? '現在の登録資料との一致を確認' : '未完了' }}</p>
+          <p v-if="digestRevisionView">新版の準備資料と追加要求の対応：照合済み。製造へ進む入力資格は未完了です。</p>
           <p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).audio }}</p><p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).source }}</p><p>{{ creationCheckLabels(store.reviewMaterials.creationChecks).completion }}</p>
-          <ul class="connection-notice"><li v-for="reason in store.reviewMaterials.blockers" :key="reason">{{ reason }}</li></ul>
-          <section v-if="store.canPrepareDigestRetention" aria-label="追加した場面の確認要求">
+          <ul class="connection-notice"><li v-for="reason in digestRemainingChecks" :key="reason">{{ reason }}</li></ul>
+          <section v-if="store.canPrepareDigestRetention && !digestRevisionView" aria-label="追加した場面の確認要求">
             <h3>追加した場面の確認</h3>
             <p>確認要求を保存する準備です。AI処理・課金・動画作成は始まりません。確認の回答と変更後の動画はまだありません。</p>
             <template v-if="store.displayedDigestRetention">
@@ -2206,10 +2214,10 @@ function trapDialogFocus(event: KeyboardEvent) {
       <section class="change-dialog candidate-dialog" role="dialog" aria-modal="true" aria-labelledby="candidate-title" tabindex="-1">
         <div class="dialog-heading"><h2 id="candidate-title">保存済みのシーン候補</h2><button type="button" class="secondary-button" @click="closeCandidates">閉じる ×</button></div>
         <p>保存済みの題名・短い要約・発話区間を表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>保存済みの発話区間と、登録情報のある推薦・プレビュー状態を表示します。情報がない場合は不明です。</p>
-        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in candidateOptions" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" :disabled="agentOperationLocked" @click="selectBrowsingCandidate(option.id)"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span v-if="currentDraft?.productionType === 'digest' && store.reviewMaterials?.digestComposition?.currentCandidateIds.includes(option.id)">現在の構成に採用中</span><span v-else-if="currentDraft?.productionType === 'digest' && store.reviewMaterials?.digestComposition?.addedCandidateIds.includes(option.id)">追加要求を保存済み</span><span>{{ previewStatusLabel(store.reviewMaterials?.candidates.find(c => c.id === option.id)) }}</span></button></div>
+        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in candidateOptions" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" :disabled="agentOperationLocked" @click="selectBrowsingCandidate(option.id)"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span v-if="currentDraft?.productionType === 'digest' && store.reviewMaterials?.digestComposition?.currentCandidateIds.includes(option.id)">現在の構成に採用中</span><span v-else-if="currentDraft?.productionType === 'digest' && store.reviewMaterials?.digestComposition?.addedCandidateIds.includes(option.id)">{{ digestRevisionView ? '新版準備へ反映を確認' : '追加要求を保存済み' }}</span><span>{{ previewStatusLabel(store.reviewMaterials?.candidates.find(c => c.id === option.id)) }}</span></button></div>
           <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>閲覧だけでは構成は変わりません。</p><section v-if="browsingSavedCandidate"><p v-for="speech in browsingSavedCandidate.speeches" :key="speech.id">{{ (speech.startMs / 1000).toFixed(2) }}〜{{ (speech.endMs / 1000).toFixed(2) }}秒 · {{ speech.text }}</p><video v-if="browsingSavedCandidate.preview" :key="browsingSavedCandidate.preview.id" controls preload="none" :src="uriWithRef(browsingSavedCandidate.preview.uri, browsingSavedCandidate.preview.id)" /><p>{{ previewStatusLabel(browsingSavedCandidate) }}</p><p v-if="browsingSavedCandidate.previewStatus?.requestId">登録作業：{{ browsingSavedCandidate.previewStatus.requestId }}</p></section><p v-else>登録資料を照合できていません。</p>
             <template v-if="currentDraft?.productionType === 'digest'">
-              <p v-if="digestAdditionState === 'adopted'">この場面は現在の構成に入っています。変更はありません。</p><p v-else-if="digestAdditionState === 'requested'">この場面の追加要求は保存済みです。正式な新版準備は未接続です。</p><p v-else-if="digestAdditionState === 'overlap'">現在の構成と元区間が重複しています。追加には対象を明示した構成見直しが必要です。</p><p v-else-if="digestAdditionState === 'unavailable'">現在の資料と編集要求の対応を確認できません。再読み込みが必要です。</p>
+              <p v-if="digestAdditionState === 'adopted'">この場面は現在の構成に入っています。変更はありません。</p><p v-else-if="digestAdditionState === 'reflected'">この場面は新版準備へ反映されています。字幕表示の判断と動画作成は未完了です。</p><p v-else-if="digestAdditionState === 'requested'">この場面の追加要求は保存済みです。現在の新版準備への反映は未確認です。</p><p v-else-if="digestAdditionState === 'overlap'">現在の構成と元区間が重複しています。追加には対象を明示した構成見直しが必要です。</p><p v-else-if="digestAdditionState === 'unavailable'">現在の資料と編集要求の対応を確認できません。再読み込みが必要です。</p>
               <template v-if="digestAdditionCandidateId === browsingOptionId && canAddDigestCandidate"><h4>この場面を構成に追加する要求を保存</h4><p>{{ browsingOption.title }}を追加します。他の採用場面は保持します。</p><p>追加場面の元区間：{{ (digestAdditionDurationMs / 1000).toFixed(2) }}秒。変更後の完成尺は正式準備まで未確定です。</p><p>保存ではAI処理も動画作成も始まりません。送信・費用・動画作成の承認にはなりません。</p><div class="dialog-actions"><button type="button" class="secondary-button" @click="setDigestAdditionConfirmation('')">取消</button><button type="button" :disabled="!canAddDigestCandidate" @click="confirmDigestSceneAddition">追加要求を保存</button></div></template>
               <button v-else type="button" :disabled="!canAddDigestCandidate" @click="setDigestAdditionConfirmation(browsingOptionId)">この場面を構成に追加</button>
             </template>

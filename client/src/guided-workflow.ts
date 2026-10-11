@@ -77,7 +77,7 @@ export function guideStep(draft: RequestDraft | undefined, review: ControlReview
   if (draft.productionType === 'digest' && requestType === 'validate_digest_plan'
     && materials?.requestDraftId === draft.id && materials.draftIdentity === draftConfirmationIdentity(draft)
     && materials.digestPreparation?.status === 'verified'
-    && materials.digestComposition?.status === 'current') return 3;
+    && (materials.digestComposition?.status === 'current' || verifiedDigestRevision(materials))) return 3;
   if (requestType === 'render_video') return 4;
   if (requestType === 'create_edit_plan' || requestType === 'apply_adjustment') return 3;
   return 2;
@@ -106,11 +106,32 @@ export function initialCandidateId(review: ControlReviewItem, materials?: UiRevi
     && !materials.blockers.length && review.options.some(o=>o.id===rec.candidateId)
     ? rec.candidateId : review.options[0]?.id ?? '';
 }
-export function digestCandidateAdditionState(materials: UiReviewMaterials | null | undefined, id: string): 'unavailable' | 'adopted' | 'requested' | 'overlap' | 'available' {
+/** Match the live preparation view to the displayed chain; it never changes server execution blockers. */
+export function verifiedDigestRevision(materials: UiReviewMaterials | null | undefined) {
+  const v = materials?.digestRevision, c = materials?.digestComposition;
+  const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+  if (!v || v.status !== 'verified' || !c || c.status !== 'revision_requested' || materials?.digestPreparation?.status !== 'verified'
+    || v.requestDraftId !== materials.requestDraftId || v.draftIdentity !== materials.draftIdentity || v.fingerprint !== materials.fingerprint
+    || !/^[0-9a-f]{64}$/u.test(v.requestHash) || !/^[0-9a-f]{64}$/u.test(v.preparationHash)
+    || !equal(v.representedEditRequestIds, c.editRequestIds) || !equal(v.candidateIds, c.requestedCandidateIds)
+    || !Array.isArray(v.appliedEdits) || !equal(v.appliedEdits.map(a => a.id), c.editRequestIds)
+    || new Set(v.appliedEdits.map(a => a.candidateId)).size !== c.addedCandidateIds.length
+    || !v.appliedEdits.every(a => c.addedCandidateIds.includes(a.candidateId) && materials.candidates.some(s => s.id === a.candidateId && s.title === a.title))
+    || !Number.isFinite(v.durationMs) || !(v.durationMs! > 0) || !Array.isArray(v.segments) || !v.segments.length
+    || !Array.isArray(v.remainingChecks) || !v.remainingChecks.length || !v.remainingChecks.every(b => typeof b === 'string' && b)
+    || !equal(v.admission, { captionDisplayAnswers: 'unanswered', executionPermission: 'not-approved', humanQuality: 'pending' })) return;
+  const source = new Map(materials.candidates.filter(s => c.requestedCandidateIds.includes(s.id)).flatMap(s => s.speeches.map(a => [a.id, a] as const)));
+  const ids = v.segments.flatMap(s => s.speechIds);
+  if (new Set(ids).size !== ids.length || !v.segments.every((s, i) => Number.isFinite(s.startMs) && Number.isFinite(s.endMs)
+    && s.startMs >= 0 && s.endMs > s.startMs && (!i || v.segments[i - 1]!.endMs <= s.startMs) && s.speechIds.length
+    && s.speechIds.every(id => source.has(id)) && s.caption === s.speechIds.map(id => source.get(id)!.text).join(''))) return;
+  return v;
+}
+export function digestCandidateAdditionState(materials: UiReviewMaterials | null | undefined, id: string): 'unavailable' | 'adopted' | 'requested' | 'reflected' | 'overlap' | 'available' {
   const composition = materials?.digestComposition, candidate = materials?.candidates.find(c => c.id === id);
   if (materials?.digestPreparation?.status !== 'verified' || !composition || composition.status === 'source_changed' || !candidate?.ranges.length) return 'unavailable';
   if (composition.currentCandidateIds.includes(id)) return 'adopted';
-  if (composition.requestedCandidateIds.includes(id)) return 'requested';
+  if (composition.requestedCandidateIds.includes(id)) return verifiedDigestRevision(materials)?.appliedEdits.some(a => a.candidateId === id) ? 'reflected' : 'requested';
   const start = Math.min(...candidate.ranges.map(r => r.startMs)), end = Math.max(...candidate.ranges.map(r => r.endMs));
   if (composition.requestedCandidateIds.some(other => {
     const ranges = materials.candidates.find(c => c.id === other)?.ranges;
