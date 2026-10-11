@@ -1,0 +1,497 @@
+{
+  "recordedAt": "2026-10-11T07:24:04.028559+00:00",
+  "session": "Codex-UI",
+  "task": "No68 client issue persistence individual correction5",
+  "observedHead": "37bf299fc1f0e3b49883bd5cc6a63946aed4f0ed",
+  "gitLease": "UI explicitly retained by parent",
+  "changedSources": [
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 107261,
+      "sha256": "6d3b0e1e8cd0d12e834bf7249135f6e4047e2931c1be9688cc76715d37bce4a8"
+    },
+    {
+      "path": "client/src/stores/controlQueue.ts",
+      "sizeBytes": 33492,
+      "sha256": "e06ca4a7b9cf2e44440f2cfb824fe485614d55502bd16697015eb2a57784be49"
+    },
+    {
+      "path": "client/test/guided-workflow.test.mjs",
+      "sizeBytes": 33513,
+      "sha256": "ceae2c70d5e2dbcbce9a5efd32ce89a402602d30f2e00dedfc6d4c9a56ab743b"
+    }
+  ],
+  "priorConsumerSourcesUnchanged": [
+    {
+      "path": "client/src/api.ts",
+      "sizeBytes": 10248,
+      "sha256": "0eaee9f07daf431f933b4c7b1de33a115f251842b55fcb2e69673d3af49c7d9d",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 5804,
+      "sha256": "aa1dca62f69e29a2e9ada4e257df38b00ce47019ab96c2b9971daf6b8ee2ab04",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "client/test/guided-ui-mock.mjs",
+      "sizeBytes": 20451,
+      "sha256": "418bcfed7b36aea5882071876969d4c3e0deacadb5efaf9754cb435730191a4b",
+      "matchesObservedHead": true
+    }
+  ],
+  "protectedInventory": [
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "sizeBytes": 49965,
+      "sha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "runner/src/digest-ui-readonly-v001.ts",
+      "sizeBytes": 563,
+      "sha256": "3246fbee5d1de1bb7729c954e1e77c2102caf4d83e8dbf99ba2c783131027b9f",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "sizeBytes": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 5804,
+      "sha256": "aa1dca62f69e29a2e9ada4e257df38b00ce47019ab96c2b9971daf6b8ee2ab04",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "backend/src/store/digest-ui-edit-requests.ts",
+      "sizeBytes": 3858,
+      "sha256": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-edit-requests.ts",
+      "sizeBytes": 5655,
+      "sha256": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 10729,
+      "sha256": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 107261,
+      "sha256": "6d3b0e1e8cd0d12e834bf7249135f6e4047e2931c1be9688cc76715d37bce4a8",
+      "matchesObservedHead": false,
+      "role": "authorized limited correction 5"
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "sizeBytes": 6348,
+      "sha256": "9621781a10f21e28690be511ac5f97d072516505ae43fb95d714aeedb9ad97e4",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "docs/HANDOVER_INDEX.md",
+      "sizeBytes": 4909,
+      "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    },
+    {
+      "path": "DECISIONS.md",
+      "sizeBytes": 521386,
+      "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "matchesObservedHead": true,
+      "role": "unchanged protected source/document"
+    }
+  ],
+  "previousEvidenceUnchanged": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-calls-v001.json",
+      "sizeBytes": 10884,
+      "sha256": "0a4c945dc52b7e17d3beae0774834d7bb4382af57ef0ac8fd791dc2d73e56fc2",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-observations-v001.json",
+      "sizeBytes": 1556,
+      "sha256": "ea63fd5dfeb5d328cd5431c64e86688bb20585ddf60feb91a4d00deba4f92f54",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-build-v001.txt",
+      "sizeBytes": 3489,
+      "sha256": "beaf4acdad7c5df22cee935e20b4bd9a21ad33ed40514d4dab261b0738b97326",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-unit-v001.txt",
+      "sizeBytes": 3392,
+      "sha256": "9cde6e1475edd6d34aaf4cbfeb847f196c9a74b9f86ba36bccf14f07023c14d6",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/confirmation-v001.jpg",
+      "sizeBytes": 173946,
+      "sha256": "8a83a7345877309ccda3f7724a7a8e5d5922393fb2cdcb53ed001b55bc48fa39",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-after-refresh-v001.jpg",
+      "sizeBytes": 165337,
+      "sha256": "c7e8b393e0597ca3faa803141c25ad67383af85103b1831a1b13584465b122ea",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-after-refresh-v001.txt",
+      "sizeBytes": 4068,
+      "sha256": "e7039f269dfbe8db34624f9d5020f596acfb8ec620ee8bb688084b4913c37758",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-materials-v001.jpg",
+      "sizeBytes": 165799,
+      "sha256": "cf22666fd9a9105f58d20c431e6792999bbf0dbfd84c6cc7cbbf78d337e9134b",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/saved-unanswered-v001.jpg",
+      "sizeBytes": 163222,
+      "sha256": "a8b503daa62c2339c4ab27d8cc316f38e8f16e07b2ad433557643b0af3adab6e",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/verification-v001.json",
+      "sizeBytes": 11917,
+      "sha256": "c51db17170a36b9109c149855f325bf67a98ab60b34fcbb093d035c28ed598d2",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v001.txt",
+      "sizeBytes": 805,
+      "sha256": "ae42333e66b17addf76fc0007d67c14e9d24c879f3e8402e8e2f7dda225d4e0f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-unit-v001.txt",
+      "sizeBytes": 1535,
+      "sha256": "7611469bde0681b0aa271c4ceffadafc3f700cf5dd2dba25023066504a93d89d",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/verification-v002.json",
+      "sizeBytes": 8995,
+      "sha256": "f97b7a63c52cd932b7d10704688f6c71902462a331bb1987f0fe9a3e9cee230d",
+      "matchesObservedHead": true
+    }
+  ],
+  "newEvidence": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-calls-v002.json",
+      "sizeBytes": 22669,
+      "sha256": "fffdd04a7e6fc943640a1be8e1af4495fc2e99ff02e7480fd33f81610f212ce5"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-observations-v002.json",
+      "sizeBytes": 3268,
+      "sha256": "71a4cb6d96fbfad65dcb48d2612f090c939a2c11d6745775608454a81800767d"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-post-keyed-get-v002.json",
+      "sizeBytes": 18632,
+      "sha256": "3e10a70bd7a077c7622688f9e58dd294c6c6e566d528d012ef20d48edf0f142e"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/browser-state-before-other-draft-v002.json",
+      "sizeBytes": 21316,
+      "sha256": "c2c5b76db1c9ab1ac848cda01c8634f9454caf855fe51437205224746df2bba5"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-build-v002.txt",
+      "sizeBytes": 3489,
+      "sha256": "c1f2f22ecec56c3649e305255de87896c61296c69d641438ad1745258c604e8c"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-build-v003.txt",
+      "sizeBytes": 3489,
+      "sha256": "f5bece9e5a9b068e5bc5b5c300972bfa77689f9e4f7a4640064ca8ca93819597"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-unit-v002.txt",
+      "sizeBytes": 3539,
+      "sha256": "735d2a15d8f6872586ce97fb18621a0e744b7715f70ac789cf6c7b1771af680a"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/client-unit-v003.txt",
+      "sizeBytes": 3541,
+      "sha256": "5731da7442a0dbead4e7e2941404d2ef399002380bf84e2f395f669d98714b1f"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/current-two-additions-v002.jpg",
+      "sizeBytes": 171316,
+      "sha256": "25bd184be25aa97f250805b6a3dd578fbb90ea2837d6b638196351747d790506"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/current-two-additions-v002.txt",
+      "sizeBytes": 4347,
+      "sha256": "59757e10c128edc35d68abdb09d608a87a189b4665e542875c817d0afef8aee9"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-fixed-after-poll-v002.jpg",
+      "sizeBytes": 171762,
+      "sha256": "a96d5ba341aab2ef45c879614c1f26b048140483fee6e6716296314316d83b52"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-fixed-after-poll-v002.txt",
+      "sizeBytes": 4209,
+      "sha256": "777df863dd14a7973a7dbee7943905763ed187a558833fe9bbf4012800d90dd1"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-fixed-first-v002.jpg",
+      "sizeBytes": 171762,
+      "sha256": "a96d5ba341aab2ef45c879614c1f26b048140483fee6e6716296314316d83b52"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-fixed-first-v002.txt",
+      "sizeBytes": 818,
+      "sha256": "b8e21608e96129112eabf83ec6e207d9283368f242253669f17d470edf3ad59c"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-prepare-after-return-full-v002.txt",
+      "sizeBytes": 3575,
+      "sha256": "8d5098e49f4539e04d7207c170d2be4360b806737d033779c6d86546ee1db408"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-prepare-after-return-v002.txt",
+      "sizeBytes": 4304,
+      "sha256": "5a043e20d80c8709f45c77963ad52358d52015d9f225585e1ceab22ff9df0681"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/missing-prepare-rejected-v002.txt",
+      "sizeBytes": 751,
+      "sha256": "ac763f83320f1e86a3560349eac84cff9e953bfe1b36e6e89551d78b88d85d06"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/new-version-hides-old-issue-v002.txt",
+      "sizeBytes": 4371,
+      "sha256": "6b86f794ce26a5e3932e38dd21db339ee80ccd817a8698cde85b3854ea36bca8"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/other-draft-no-old-result-full-v002.txt",
+      "sizeBytes": 1300,
+      "sha256": "625de946b1fb8d9687fbb6d575bc8511ee41002b8feb448f36e77e9265f9673c"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/other-draft-no-old-result-v002.txt",
+      "sizeBytes": 1815,
+      "sha256": "795c5dcaf8f62b3f0bfafe09c10b6e4fbc09611d967d633fc5b1e1b61afe88bb"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/prepare-retry-cleared-pending-v002.txt",
+      "sizeBytes": 544,
+      "sha256": "bc308016542585ebb8ceca92869c4932d0f3a5c553f639dea2b25b7cb4568fb4"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/retry-success-v002.txt",
+      "sizeBytes": 493,
+      "sha256": "b8461c21e29049ab93227bc9761c524d7409a0234495268769111c776fb942d4"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/stale-confirmation-rejected-v002.txt",
+      "sizeBytes": 858,
+      "sha256": "964cd83fe20031c79a3bc5e0ad766456dcbd74471c784862364a0100c9601d65"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/client-retention-evidence/stale-read-rejected-v002.txt",
+      "sizeBytes": 604,
+      "sha256": "44a815825cacfd386c26b8e76b2df54cc6599bcc8af3179f4424432a2ced22c5"
+    }
+  ],
+  "validation": {
+    "clientBuildTypeCheckFinal": "v003 exit0",
+    "relatedUnitFinal": "v003 33/33 (9 target + 24 existing)",
+    "intermediateAuthoring": "v002 passed33 but predates final scoped-only error binding; retained separately",
+    "backendRerun": false,
+    "diffCheck": "source 3file exit0; newly staged verbatim AX text includes AXListMarker trailing spaces; all-evidence whitespace check reported these raw markers, retained unchanged",
+    "remainingBrowserCases": "completed synthetic checks; see observations v002"
+  },
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "limitedImplementationCorrectionsApplied": 5,
+    "explicitStops": 7,
+    "addenda": 0,
+    "costUSD": 0
+  },
+  "cleanup": {
+    "ownEdgeTab": "1516875464 closed",
+    "ownMockSession": "61569 Ctrl-C completed",
+    "port5179": "lsof exit1 no listener",
+    "processInspection": "only inspecting shell/rg; no owned mock/build processes",
+    "ownTmpRemoved": [
+      {
+        "path": "/tmp/zev-ui68-retention-client-build-v002.txt",
+        "sizeBytes": 3489,
+        "sha256": "c1f2f22ecec56c3649e305255de87896c61296c69d641438ad1745258c604e8c"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-unit-v002.txt",
+        "sizeBytes": 3539,
+        "sha256": "735d2a15d8f6872586ce97fb18621a0e744b7715f70ac789cf6c7b1771af680a"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-build-v003.txt",
+        "sizeBytes": 3489,
+        "sha256": "f5bece9e5a9b068e5bc5b5c300972bfa77689f9e4f7a4640064ca8ca93819597"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-unit-v003.txt",
+        "sizeBytes": 3541,
+        "sha256": "5731da7442a0dbead4e7e2941404d2ef399002380bf84e2f395f669d98714b1f"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-browser-calls-v002.json",
+        "sizeBytes": 18632,
+        "sha256": "3e10a70bd7a077c7622688f9e58dd294c6c6e566d528d012ef20d48edf0f142e"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-browser-final-v002.json",
+        "sizeBytes": 21316,
+        "sha256": "c2c5b76db1c9ab1ac848cda01c8634f9454caf855fe51437205224746df2bba5"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-client-browser-final-v003.json",
+        "sizeBytes": 22669,
+        "sha256": "fffdd04a7e6fc943640a1be8e1af4495fc2e99ff02e7480fd33f81610f212ce5"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-missing-v002.json",
+        "sizeBytes": 6074,
+        "sha256": "8389481c0c41bc7d8ca6a175a48345c71cf9bf151e9d22d12696c3c870c255e7"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-normal-v002.json",
+        "sizeBytes": 6291,
+        "sha256": "76c692639f7f1bd4e9c3471f16586975af4d34c2ce8bd1471e0e498183139a68"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-normal2-v002.json",
+        "sizeBytes": 6894,
+        "sha256": "b1bc5256bd6f812f4d3a8364e63fcca7a25babf0f4657169080c8e12e65b676a"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-missing-prepare-v002.json",
+        "sizeBytes": 9302,
+        "sha256": "1874dfc3701cfb0047eab707712be01b950d769e26de04e1cb3f46a038087160"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-stale-v002.json",
+        "sizeBytes": 6675,
+        "sha256": "325fe83c2f5219e3efcfd7634ff77c8af92455d869cc071954d285e4157e6e64"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-normal3-v002.json",
+        "sizeBytes": 13397,
+        "sha256": "8b348923899a244a28a6978436984e7b981afc990100eedd9d14dbc44d22722f"
+      },
+      {
+        "path": "/tmp/zev-ui68-retention-mode-newversion-v002.json",
+        "sizeBytes": 7279,
+        "sha256": "818a9865c38eefd4930bd4702ff49432854be83df16362bc82a51e222ce18457"
+      }
+    ],
+    "ownTmpBytesRemoved": 132587,
+    "newLargeMedia": 0,
+    "foreignProcessStops": 0,
+    "freeKiBAfterObserved": {
+      "mac": 17247488,
+      "KIOXIA": 1903312896
+    }
+  },
+  "admission": {
+    "No68": "unfinished",
+    "No70": "unstarted",
+    "AIExecution": "not-started",
+    "manufacturing": "not-approved",
+    "formalRetentionAnswers": "not-prepared",
+    "formalClockCaption": "not-prepared",
+    "humanQuality": "pending"
+  }
+}

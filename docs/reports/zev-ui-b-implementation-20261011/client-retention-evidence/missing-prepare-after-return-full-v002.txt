@@ -1,0 +1,62 @@
+- main:
+  - region "制作の案内":
+    - strong: ZEV
+    - generic: 人工Digestの保存資料確認
+    - generic: 保存版 2026/10/11 16:14 · raft-3
+    - button "履歴"
+    - button "新しく作る"
+  - paragraph: 3 / 6
+  - heading "mock操作検証" [level=2]
+  - paragraph: 実動画・AI処理なし
+  - list "動画制作の順番":
+    - listitem: 1 依頼
+    - listitem: 2 下書き
+    - listitem: 3 内容確認
+    - listitem: 4 作成前確認
+    - listitem: 5 作成
+    - listitem: 6 動画確認
+  - region "Digest作成前の保存資料":
+    - paragraph: 保存済みの準備情報
+    - heading "構成の変更を確認" [level=2]
+    - paragraph: 人工UI入力：現在の計画・実行入力・保存字幕準備を再照合しました。
+    - heading "追加を依頼した構成（正式準備前）" [level=3]
+    - list:
+      - strong: 話のきっかけ
+      - paragraph: 何の話かが伝わる場面
+      - strong: 考え方が変わったところ
+      - text: · 追加要求を保存済み
+      - paragraph: 会話が動く場面
+      - strong: 最後のまとめ
+      - text: · 追加要求を保存済み
+      - paragraph: 結論が伝わる短い場面
+    - paragraph: 依頼の尺条件：60秒以内
+    - paragraph: 現在の内容：1.00秒（保存区間の合計）
+    - paragraph: 追加する場面の元区間：合計2.00秒。未編集の区間を含みます。
+    - paragraph: 変更後の完成尺は未確定です。保存区間と追加元区間の合計は3.00秒です。正式準備で内容と尺を確認します。
+    - heading "変更前の保存本文（追加後には未適用）" [level=3]
+    - list:
+      - strong: 1 · 0.00〜1.00秒
+      - paragraph: 人工入力の元本文
+      - paragraph: 保持済み本文。字幕の表示境界・描画は後続工程で確認します。
+    - paragraph: 作成前の入力検査：未完了
+    - paragraph: 元の音声を保持する指定
+    - paragraph: 元音声の参照と入力時計：登録資料との一致を確認
+    - paragraph: 完成動画の実媒体検査と人間の採用判断：未実施（動画作成後に確認）
+    - list:
+      - listitem: 場面追加の編集要求を保存しました。変更後の正式な新版準備・再照合は未接続です。旧準備では作成前確認へ進めません。
+      - listitem: 追加場面「考え方が変わったところ」の確認は未回答です。
+      - listitem: 追加場面「最後のまとめ」の確認は未回答です。
+      - listitem: 動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。
+    - region "追加した場面の確認要求":
+      - heading "追加した場面の確認" [level=3]
+      - paragraph: 確認要求を保存する準備です。AI処理・課金・動画作成は始まりません。確認の回答と変更後の動画はまだありません。
+      - paragraph: この画面では準備状況を未確認です。不足資料があれば準備を止め、理由を表示します。
+      - status: 保存済みの発話資料が不足しています。確認要求は未準備です。
+      - button "追加した場面の確認を準備"
+      - button "確認要求を読み直す"
+    - button "資料を再読み込み"
+    - button "他の候補を見る"
+  - group "実行情報":
+    - generic "制作情報と保存記録"
+- generic "Toggle devtools panel":
+- generic "Toggle Component Inspector":

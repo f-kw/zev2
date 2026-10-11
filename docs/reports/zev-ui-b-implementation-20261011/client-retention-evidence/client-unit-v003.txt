@@ -1,0 +1,41 @@
+✔ saving a draft performs one save and zero approvals, even after repeated click (5.625625ms)
+✔ draft approval requires the exact confirmed version and available execution conditions (21.530167ms)
+✔ digest registration and absent runtime are blocked without pretending video support (0.218291ms)
+✔ Digest precreation progress requires current qualified material and never implies media completion (0.473041ms)
+✔ Digest confirmation saves the exact version once during repeated clicks, with no execution or state changes (7.48325ms)
+✔ Digest confirmation rejects old display and absent/changed source before any preparation request (1.907583ms)
+✔ Digest confirmation checks the full displayed chain and original adoption reference before preparing new inputs (10.142833ms)
+✔ Digest confirmation does not display mismatched hashes/scenes or an invented answered/execution status (8.476333ms)
+✔ Digest confirmation read uses only GETs and checks the same stored request version (2.546167ms)
+✔ Digest confirmation read failure clears the former result and permits a verified retry without writes (4.72225ms)
+✔ Digest confirmation hides an older result on source/display change, even if its original request hash still exists (1.94975ms)
+✔ Digest confirmation ignores late save/read responses after navigation or material refresh (16.302667ms)
+✔ Digest confirmation shortage survives same-version state refresh, hides on another version/draft and clears on explicit retry (5.857125ms)
+✔ Digest scene addition saves only an editing request once and returns to content confirmation (1.117667ms)
+✔ Digest addition refuses stale, absent, already adopted and changed-base candidates without sending (0.5965ms)
+✔ late Digest addition response never replaces another draft or newer material read (0.255833ms)
+✔ Digest candidate state separates base adoption, requested addition, unavailable and overlapping scenes (0.106834ms)
+✔ current output binds owner, kind, bytes, output record and newest producer (9.619167ms)
+✔ missing or stale content material is rejected at the store approval boundary (1.099166ms)
+✔ render readiness never treats an arbitrary text option as a complete confirmation package (0.089041ms)
+✔ same-request older pending review cannot authorize current review (0.184458ms)
+✔ latest refresh wins and late read cannot overwrite saved draft mutation (0.547209ms)
+✔ final review cannot save a different draft or an output with missing registration (0.380375ms)
+✔ guide maps saved draft, content, readiness and completed video without reusing past result (0.056334ms)
+✔ reload binds the displayed saved draft before final actions (0.418583ms)
+✔ registered content requires the producer output ID and file owner to agree (0.0655ms)
+✔ resume sends the active approved version even when another request is ready (4.256292ms)
+✔ retry and cancel are scoped to the active saved request (0.30825ms)
+✔ revision cannot create a copy from an absent or different current output (0.395375ms)
+✔ a newer attempt with the same saved clock hides an older video (0.061833ms)
+✔ late material fetch cannot replace another draft or a newer displayed confirmation (0.3995ms)
+✔ registered recommendation selects only a candidate in the current matching review (0.087291ms)
+✔ preview labels distinguish unknown, registered waiting, claimed preparing and generated (0.13025ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 856.454042

@@ -1932,6 +1932,7 @@ function trapDialogFocus(event: KeyboardEvent) {
               <ul><li v-for="scene in store.displayedDigestRetention.pendingCandidates" :key="scene.candidateId">{{ scene.title }} · 未回答</li></ul>
             </template>
             <p v-else>この画面では準備状況を未確認です。不足資料があれば準備を止め、理由を表示します。</p>
+            <p v-if="store.displayedDigestRetentionIssue" class="error-message" role="status">{{ store.displayedDigestRetentionIssue }}</p>
             <template v-if="digestConfirmationFingerprint">
               <p>次の追加場面の確認要求を保存します。</p>
               <ul><li v-for="scene in digestConfirmationScenes" :key="scene.id">{{ scene.title }}</li></ul>

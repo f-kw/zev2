@@ -1,0 +1,106 @@
+{
+  "recordedAt": "2026-10-11T07:24:03.473555+00:00",
+  "tab": "1516875464",
+  "environment": "isolated synthetic mock; all /api local; no backend/provider/render",
+  "earlierEvidence": "v001 preserved; browse/close, cancellation, double click, reload, GET-only and same-version reuse were checked there",
+  "newChecks": [
+    {
+      "check": "missing read clears former summary; reason remains after several seconds and unchanged 2-second state poll",
+      "evidence": [
+        "missing-fixed-first-v002.txt",
+        "missing-fixed-after-poll-v002.txt",
+        "missing-fixed-after-poll-v002.jpg"
+      ]
+    },
+    {
+      "check": "explicit read retry success clears scoped issue; same hash GET only",
+      "calls": [
+        7,
+        8
+      ],
+      "evidence": [
+        "retry-success-v002.txt"
+      ],
+      "pending": "read finished before AX capture; immediate clearing during deferred read proven by unit"
+    },
+    {
+      "check": "wrong requestHash read rejects and hides prior summary; verified normal retry restores",
+      "calls": [
+        10,
+        12,
+        13
+      ],
+      "evidence": [
+        "stale-read-rejected-v002.txt"
+      ]
+    },
+    {
+      "check": "confirmation opened on old version then server fixture adds ending; old composition POST rejected; no retention POST",
+      "calls": [
+        14,
+        15,
+        16
+      ],
+      "evidence": [
+        "stale-confirmation-rejected-v002.txt"
+      ]
+    },
+    {
+      "check": "explicit materials reread current two additions hides old issue/result; read old handle disabled; no new prepare POST",
+      "evidence": [
+        "new-version-hides-old-issue-v002.txt"
+      ]
+    },
+    {
+      "check": "current prepare missing retention materials fails; reason stays through request-page return and cancelling opened prepare; no POST on cancel",
+      "calls": [
+        17,
+        18
+      ],
+      "evidence": [
+        "missing-prepare-rejected-v002.txt",
+        "missing-prepare-after-return-full-v002.txt"
+      ]
+    },
+    {
+      "check": "explicit prepare retry clears reason while actual response pending, controls disabled, then current two candidates only unanswered",
+      "calls": [
+        20,
+        21
+      ],
+      "evidence": [
+        "prepare-retry-cleared-pending-v002.txt",
+        "current-two-additions-v002.txt",
+        "current-two-additions-v002.jpg"
+      ]
+    },
+    {
+      "check": "another synthetic draft remains saved unapproved, no old digest result; history opens/closes without mutation",
+      "calls": [
+        23
+      ],
+      "evidence": [
+        "other-draft-no-old-result-full-v002.txt"
+      ]
+    }
+  ],
+  "counts": {
+    "allRecordedCalls": 24,
+    "compositionPOST": 4,
+    "retentionPOST": 3,
+    "sceneAdditionPOST": 1,
+    "newSyntheticDraftPOST": 1,
+    "compositionGET": 4,
+    "retentionGET": 2,
+    "qaFixtureGET": 9,
+    "approveDispatchManufacturePOST": 0
+  },
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "limitedImplementationCorrectionsApplied": 5,
+    "explicitStops": 7,
+    "addenda": 0,
+    "costUSD": 0
+  },
+  "scopeResult": "current client correction and remaining client mock checks passed; No68 whole unfinished; No70 unstarted; no formal production or human quality claim"
+}

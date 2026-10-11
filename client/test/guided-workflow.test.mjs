@@ -167,7 +167,7 @@ test('Digest confirmation does not display mismatched hashes/scenes or an invent
     if(kind==='answered')changed.pendingCandidates[0].answerStatus='answered';if(kind==='execution')changed.admission.executionPermission='approved';
     handlers.prepareDigestRetentionInputs=async()=>changed;
     assert.equal(await f.s.prepareDigestConfirmation(f.materials.fingerprint),false);assert.equal(f.s.displayedDigestRetention,null);
-    assert(f.s.errorMessage.includes('一致しません'));assert.equal(f.s.canReadDigestRetention,true);
+    assert(f.s.displayedDigestRetentionIssue.includes('一致しません'));assert.equal(f.s.canReadDigestRetention,true);
   }
 });
 test('Digest confirmation read uses only GETs and checks the same stored request version',async()=>{
@@ -183,7 +183,7 @@ test('Digest confirmation read uses only GETs and checks the same stored request
 test('Digest confirmation read failure clears the former result and permits a verified retry without writes',async()=>{
   const f=digestConfirmationFixture();digestConfirmationHandlers(f);await f.s.prepareDigestConfirmation(f.materials.fingerprint);
   const read=handlers.fetchDigestRetentionInputs;handlers.fetchDigestRetentionInputs=async()=>{throw new Error('保存済みの発話資料が不足しています。');};
-  assert.equal(await f.s.rereadDigestConfirmation(),false);assert.equal(f.s.displayedDigestRetention,null);assert(f.s.errorMessage.includes('不足'));
+  assert.equal(await f.s.rereadDigestConfirmation(),false);assert.equal(f.s.displayedDigestRetention,null);assert(f.s.displayedDigestRetentionIssue.includes('不足'));
   handlers.fetchDigestRetentionInputs=read;assert.equal(await f.s.rereadDigestConfirmation(),true);assert.deepEqual(f.s.displayedDigestRetention,f.summary);
   handlers.fetchDigestCompositionData=async()=>({...f.composition,requestHash:'0'.repeat(64)});
   handlers.fetchDigestRetentionInputs=()=>assert.fail('Wrong stored version must not be read as current');
@@ -206,6 +206,30 @@ test('Digest confirmation ignores late save/read responses after navigation or m
     while(!resolve)await new Promise(r=>setImmediate(r));
     f.s.activeDraftId='other';f.s.uiMaterialReadNumber++;resolve();assert.equal(await pending,false);
     assert.equal(f.s.displayedDigestRetention,null);assert.equal(f.s.digestRetentionOperation,'idle');
+  }
+});
+test('Digest confirmation shortage survives same-version state refresh, hides on another version/draft and clears on explicit retry',async()=>{
+  for(const phase of ['prepare','read']) {
+    const f=digestConfirmationFixture();digestConfirmationHandlers(f);
+    if(phase==='read')await f.s.prepareDigestConfirmation(f.materials.fingerprint);
+    const name=phase==='prepare'?'prepareDigestRetentionInputs':'fetchDigestRetentionInputs',original=handlers[name];
+    handlers[name]=async()=>{throw new Error('保存済みの発話資料が不足しています。');};
+    const operation=()=>phase==='prepare'?f.s.prepareDigestConfirmation(f.materials.fingerprint):f.s.rereadDigestConfirmation();
+    assert.equal(await operation(),false);assert.equal(f.s.displayedDigestRetention,null);
+    const reason=f.s.displayedDigestRetentionIssue;assert(reason.includes('不足'));
+    assert.equal(f.s.errorMessage,'','This operation never leaks an unbound error into another draft');
+    handlers.fetchWorkflow=async()=>({steps:[]});handlers.fetchRuntimeConfig=async()=>config;handlers.fetchState=async()=>structuredClone(f.state);
+    await f.s.refresh();assert.equal(f.s.errorMessage,'','General refresh behavior stays unchanged');
+    assert.equal(f.s.displayedDigestRetentionIssue,reason);
+    f.s.reviewMaterials={...f.materials,fingerprint:'different-version'};assert.equal(f.s.displayedDigestRetentionIssue,'');
+    f.s.reviewMaterials=f.materials;f.s.activeDraftId='other';assert.equal(f.s.displayedDigestRetentionIssue,'');
+    f.s.activeDraftId=f.draft.id;assert.equal(f.s.displayedDigestRetentionIssue,reason);
+    const purpose=f.s.state.requestDrafts[0].purpose;f.s.state.requestDrafts[0].purpose+=' changed';assert.equal(f.s.displayedDigestRetentionIssue,'');
+    f.s.state.requestDrafts[0].purpose=purpose;handlers[name]=original;
+    let resolve;const firstName=phase==='prepare'?'saveDigestCompositionData':'fetchDigestCompositionData',first=handlers[firstName];
+    handlers[firstName]=(...args)=>new Promise(r=>resolve=()=>r(first(...args)));
+    const retry=operation();assert.equal(f.s.displayedDigestRetentionIssue,'');resolve();assert.equal(await retry,true);
+    assert.equal(f.s.displayedDigestRetentionIssue,'');assert.deepEqual(f.s.displayedDigestRetention,f.summary);
   }
 });
 test('Digest scene addition saves only an editing request once and returns to content confirmation',async()=>{

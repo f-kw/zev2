@@ -55,6 +55,7 @@ interface ControlQueueStoreState {
   digestRetentionOperation: 'idle' | 'preparing' | 'reading';
   digestRetentionRequest: { requestDraftId: string; draftIdentity: string; fingerprint: string; requestHash: string;
     summary: UiDigestRetentionPreparationSummary | null } | null;
+  digestRetentionIssue: { requestDraftId: string; draftIdentity: string; fingerprint: string; message: string } | null;
 }
 
 function retentionContext(s: ControlQueueStoreState) {
@@ -161,12 +162,18 @@ export const useControlQueueStore = defineStore('controlQueue', {
     reviewMaterials: null,
     digestRetentionOperation: 'idle',
     digestRetentionRequest: null,
+    digestRetentionIssue: null,
     runNumber: 0
   }),
   getters: {
     canPrepareDigestRetention: state => Boolean(retentionContext(state)),
     canReadDigestRetention: state => Boolean(retainedRequest(state)),
-    displayedDigestRetention: state => retainedRequest(state)?.summary ?? null
+    displayedDigestRetention: state => retainedRequest(state)?.summary ?? null,
+    displayedDigestRetentionIssue: state => {
+      const c = retentionContext(state), issue = state.digestRetentionIssue;
+      return c && issue?.requestDraftId === c.draft.id && issue.draftIdentity === c.materials.draftIdentity
+        && issue.fingerprint === c.materials.fingerprint ? issue.message : '';
+    }
   },
   actions: {
     async prepareDigestConfirmation(fingerprint: string) {
@@ -179,6 +186,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
           && now.materials.fingerprint === fingerprint;
       };
       this.loading = true;this.digestRetentionOperation = 'preparing';this.digestRetentionRequest = null;this.errorMessage = '';
+      this.digestRetentionIssue = null;
       this.message = '追加した場面の確認要求を準備しています。AI処理・課金・動画作成は始まりません。';
       try {
         const result = await saveDigestCompositionData(c.draft.id, { draftIdentity: c.materials.draftIdentity, fingerprint });
@@ -189,7 +197,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
         if (!stillCurrent()) return false;
         this.digestRetentionRequest.summary = checkedRetention(c, hash, summary);
         this.message = '確認要求を保存しました。追加した場面の確認は未回答です。AI処理・課金・動画作成は始まりません。';return true;
-      } catch (e) { if (stillCurrent()) { this.errorMessage = formatApiError(e);this.message = ''; }return false; }
+      } catch (e) { if (stillCurrent()) {
+        this.message = '';
+        this.digestRetentionIssue = { requestDraftId: c.draft.id, draftIdentity: c.materials.draftIdentity, fingerprint, message: formatApiError(e) };
+      }return false; }
       finally { this.loading = false;this.digestRetentionOperation = 'idle'; }
     },
     async rereadDigestConfirmation() {
@@ -202,6 +213,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
           && now.materials.fingerprint === saved.fingerprint;
       };
       this.loading = true;this.digestRetentionOperation = 'reading';saved.summary = null;this.errorMessage = '';
+      this.digestRetentionIssue = null;
       this.message = '保存した確認要求を読み直しています。AI処理・課金・動画作成は始まりません。';
       try {
         const composition = await fetchDigestCompositionData(c.draft.id, saved.requestHash);
@@ -211,7 +223,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
         if (!stillCurrent()) return false;
         saved.summary = checkedRetention(c, saved.requestHash, summary);
         this.message = '保存版との一致を確認しました。追加した場面の確認は未回答です。';return true;
-      } catch (e) { if (stillCurrent()) { this.errorMessage = formatApiError(e);this.message = ''; }return false; }
+      } catch (e) { if (stillCurrent()) {
+        this.message = '';
+        this.digestRetentionIssue = { requestDraftId: c.draft.id, draftIdentity: saved.draftIdentity, fingerprint: saved.fingerprint, message: formatApiError(e) };
+      }return false; }
       finally { this.loading = false;this.digestRetentionOperation = 'idle'; }
     },
     async requestDigestSceneAddition(candidateId: string, fingerprint: string) {
