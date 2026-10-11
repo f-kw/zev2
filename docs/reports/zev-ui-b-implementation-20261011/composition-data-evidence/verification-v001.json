@@ -1,0 +1,67 @@
+{
+  "session": "Codex-UI",
+  "task": "No.68 composition-data-only connection",
+  "status": "stopped-gpt-uncommitted-unverified",
+  "observedHead": "3ca4bc5fe71606222c58415a2bd5905ece8248d1",
+  "sources": [
+    { "path": "backend/src/domain/digest-ui-composition-data.ts", "sha256": "6234b27e3c57c1dd432a97c4b24e7697b83b5d5f0058566d506935b15d5879e0" },
+    { "path": "backend/src/domain/digest-ui-review.ts", "sha256": "633cf59c3386ea87be382456a13c3dadae7c3366d5a93df92183a47d312baa3e" },
+    { "path": "backend/src/domain/ui-review.ts", "sha256": "1f9299c7405e2057253347ae5e0a7afd5848b651ae162597cf5871f51267289b" },
+    { "path": "backend/src/routes/control.ts", "sha256": "e61571e526ecf7161aafcae6cbb9837cbf5b12a622fd8e1a7c88f0a8a757b2b9" },
+    { "path": "backend/test/digest-ui-composition-data.test.mjs", "sha256": "18cf824f48b98f6e0eed5c197d8a57dec184ac00cb0f48b361e82f69c979eb41" }
+  ],
+  "rawLogs": [
+    { "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/backend-build-v001.txt", "sizeBytes": 374, "sha256": "c4e0dfcde446d4cc3905f877cfb3bd8e13d61ae0ce1aeeda551d9c547cabe62d", "exitCode": 0 },
+    { "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/backend-unit-v001.txt", "sizeBytes": 15824, "sha256": "30107d06383c6f181cd8839c8a5c3e78064838dfd225c4b290016c154da16f4b", "exitCode": 1 }
+  ],
+  "validation": {
+    "backendSharedRunnerBuildExit": 0,
+    "tests": 51,
+    "pass": 48,
+    "fail": 3,
+    "existingPass": 44,
+    "newPass": 4,
+    "newFail": 3,
+    "firstFailure": "ExFAT SSD inventory includes two matching ._ auxiliary files besides two new composition JSON files",
+    "dependentFailures": ["Other-source B result absent", "Fresh process B readback not attempted"],
+    "appleDoubleHeaderRead": false,
+    "sourceAFullByteInvariantAfterSave": "not-completed",
+    "sourceBAndFreshProcess": "not-completed",
+    "productCorrectionApplied": false,
+    "testCorrectionApplied": false
+  },
+  "evidenceHelper": {
+    "status": "failed-not-rerun",
+    "error": "RuntimeError: Expected protected file missing: evals/clip_composition/test_serve_digest_review_v001.py",
+    "actualTestPathFromRg": "evals/clip_composition/serve_digest_review_v001.test.py",
+    "fullProtectedShaIndex": "not-produced",
+    "sourceShaMethod": "independent read-only shasum command",
+    "countDisposition": "parent decision; keep separate from proposed inventory correction 9"
+  },
+  "limits": {
+    "setupCorrectionsApplied": 8,
+    "setupGeneralLimit": 5,
+    "proposedSetupCorrection": 9,
+    "implementationCorrectionsApplied": 3,
+    "implementationGeneralLimit": 3,
+    "explicitStops": 5,
+    "contractAddenda": 0,
+    "feeUsd": 0
+  },
+  "cleanup": {
+    "fixtureRootsRemaining": 0,
+    "testProcessesRemaining": 0,
+    "temporaryLogsDeletedBytes": 16198,
+    "fixtureRecoveredBytes": "not-measured",
+    "newMediaBytes": 0
+  },
+  "git": {
+    "leaseOwner": "SSD",
+    "stageCommitPushAttempted": false,
+    "stagedFiles": 0,
+    "trackedOwnChanges": 3,
+    "untrackedOwnFiles": 7,
+    "clean": false
+  },
+  "next": "Parent technical decision on exact inventory setup correction and separate evidence-helper issue; no manufacturing qualification"
+}

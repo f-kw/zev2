@@ -81,6 +81,12 @@ function previewJobState(request: AgentRequest): NonNullable<UiSavedCandidate['p
   return {state:'unknown',requestId:request.id};
 }
 export async function buildUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<UiReviewMaterials> {
+  return (await readUiReviewMaterials(state, draftId, config)).materials;
+}
+/** Internal readback shares the qualified Digest inputs; never exposes them in the existing UI response. */
+export async function readUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<{
+  materials: UiReviewMaterials; digestQualification?: Awaited<ReturnType<typeof populateDigestUiReview>>;
+}> {
   const draft = findById(state.requestDrafts, draftId);
   if (!draft) return conflict('確認する依頼がありません');
   const review = state.controlReviewItems.filter(r => r.requestDraftId === draftId && r.status === 'review_required')
@@ -88,9 +94,9 @@ export async function buildUiReviewMaterials(state: Zev2State, draftId: string, 
   const model: UiReviewMaterials = { requestDraftId: draftId, draftIdentity: draftConfirmationIdentity(draft), review,
     fingerprint: '', candidates: [], bindings: [], segments: [], blockers: [] };
   if (draft.productionType === 'digest') {
-    await populateDigestUiReview(state, model, config, registeredUiFile);
+    const digestQualification = await populateDigestUiReview(state, model, config, registeredUiFile);
     model.fingerprint = hash(JSON.stringify([model, runtimeConfirmationIdentity(config)]));
-    return model;
+    return { materials: model, digestQualification };
   }
   async function read(type: AgentRequest['type']) {
     const producer = newest(state, draftId, type);
@@ -187,7 +193,7 @@ export async function buildUiReviewMaterials(state: Zev2State, draftId: string, 
     }
   } catch (e) { model.blockers.push(e instanceof Error ? e.message : '確認資料を読めません'); }
   model.fingerprint = hash(JSON.stringify([model, runtimeConfirmationIdentity(config)]));
-  return model;
+  return { materials: model };
 }
 export async function assertReviewConfirmation(state: Zev2State, reviewId: string, input: unknown, config: RuntimeConfig, approve: boolean) {
   const expected = recordValue(input), review = findById(state.controlReviewItems,reviewId);

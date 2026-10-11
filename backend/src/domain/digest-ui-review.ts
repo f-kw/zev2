@@ -110,7 +110,7 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
 }
 
 export async function populateDigestUiReview(state: Zev2State, model: UiReviewMaterials, config: RuntimeConfig,
-  registeredFile: Parameters<typeof qualifyDigestUiPreparation>[2]): Promise<void> {
+  registeredFile: Parameters<typeof qualifyDigestUiPreparation>[2]): Promise<Awaited<ReturnType<typeof qualifyDigestUiPreparation>> | undefined> {
   model.creationChecks = { inputValidation: 'failed', audioPreservation: 'unknown', sourceAudioReference: 'unknown', runtimeIdentity: runtimeConfirmationIdentity(config) };
   try {
     const registration = (await loadDigestUiPreparations()).find(r => r.requestDraftId === model.requestDraftId);
@@ -153,6 +153,7 @@ export async function populateDigestUiReview(state: Zev2State, model: UiReviewMa
     if (result.audioPreservation === 'unknown') model.blockers.push('元の音声を保持する指定が保存資料で確認できません。');
     if (result.sourceAudioReference === 'unknown') model.blockers.push('元音声の参照と入力時計が保存資料で確認できません。');
     model.blockers.push('動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。');
+    return result;
   } catch (e) {
     model.candidates = [];model.segments = [];model.bindings = [];delete model.digestComposition;
     model.creationChecks = { ...model.creationChecks, inputValidation: 'failed', audioPreservation: 'unknown', sourceAudioReference: 'unknown' };

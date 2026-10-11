@@ -1,0 +1,364 @@
+TAP version 13
+# Subtest: current additions in A/B produce only two immutable JSON files, keep original adoption and original AI reject reason
+not ok 1 - current additions in A/B produce only two immutable JSON files, keep original adoption and original AI reject reason
+  ---
+  duration_ms: 1194.744166
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   '._ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--composition.json',
+    +   '._ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--snapshot.json',
+        'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--composition.json',
+        'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--snapshot.json'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--composition.json'
+    1: 'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--snapshot.json'
+  actual:
+    0: '._ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--composition.json'
+    1: '._ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--snapshot.json'
+    2: 'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--composition.json'
+    3: 'ui-composition-960982e289f34192ff18a241257478a048783e70ef03b30a15f4e51332747fd2--snapshot.json'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:55:44)
+    async Test.run (node:internal/test_runner/test:981:9)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3)
+  ...
+# Subtest: human auth, stale confirmation, extra execution fields and another source cannot write or re-read
+not ok 2 - human auth, stale confirmation, extra execution fields and another source cannot write or re-read
+  ---
+  duration_ms: 608.068125
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:63:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'requestHash')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    <anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:69:82)
+    unchanged (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:31:17)
+    async TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:69:3)
+    async Test.run (node:internal/test_runner/test:981:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:678:7)
+  ...
+# Subtest: snapshot or composition tampering is refused on read and repeat save, without repair or overwrite
+ok 3 - snapshot or composition tampering is refused on read and repeat save, without repair or overwrite
+  ---
+  duration_ms: 1055.883833
+  type: 'test'
+  ...
+# Subtest: a changed chain hash cannot silently reuse the former snapshot or old displayed confirmation
+ok 4 - a changed chain hash cannot silently reuse the former snapshot or old displayed confirmation
+  ---
+  duration_ms: 806.298583
+  type: 'test'
+  ...
+# Subtest: duplicate, reversed order and mismatched before sets are rejected before saving a snapshot
+ok 5 - duplicate, reversed order and mismatched before sets are rejected before saving a snapshot
+  ---
+  duration_ms: 781.944625
+  type: 'test'
+  ...
+# Subtest: source graph bytes are requalified; original AI changes cannot be hidden in a data revision
+ok 6 - source graph bytes are requalified; original AI changes cannot be hidden in a data revision
+  ---
+  duration_ms: 428.096958
+  type: 'test'
+  ...
+# Subtest: new compiled backend process reconstructs the saved chain and result without changing its files
+not ok 7 - new compiled backend process reconstructs the saved chain and result without changing its files
+  ---
+  duration_ms: 255.101042
+  type: 'test'
+  location: '/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:101:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'requestHash')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-composition-data.test.mjs:103:365)
+    async Test.run (node:internal/test_runner/test:981:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:678:7)
+  ...
+# Subtest: current A/B composition is read from real saved selection; viewing never saves or executes
+ok 8 - current A/B composition is read from real saved selection; viewing never saves or executes
+  ---
+  duration_ms: 1328.347917
+  type: 'test'
+  ...
+# Subtest: explicit addition records intent once, preserves every producer byte and never approves fees or execution
+ok 9 - explicit addition records intent once, preserves every producer byte and never approves fees or execution
+  ---
+  duration_ms: 1881.752875
+  type: 'test'
+  ...
+# Subtest: same save retried in parallel is idempotent; already adopted and requested scenes are no-ops
+ok 10 - same save retried in parallel is idempotent; already adopted and requested scenes are no-ops
+  ---
+  duration_ms: 1336.552667
+  type: 'test'
+  ...
+# Subtest: editing request reconstruction failure clears qualified input and audio checks without saving anything
+ok 11 - editing request reconstruction failure clears qualified input and audio checks without saving anything
+  ---
+  duration_ms: 757.208083
+  type: 'test'
+  ...
+# Subtest: stale or missing choices, extra authority fields and agent credentials cannot save
+ok 12 - stale or missing choices, extra authority fields and agent credentials cannot save
+  ---
+  duration_ms: 985.557459
+  type: 'test'
+  ...
+# Subtest: changed source or manifest bytes invalidate current choices without writing or retrying preparation
+ok 13 - changed source or manifest bytes invalidate current choices without writing or retrying preparation
+  ---
+  duration_ms: 611.367958
+  type: 'test'
+  ...
+# Subtest: new formally qualified base never silently fulfills an older human request
+ok 14 - new formally qualified base never silently fulfills an older human request
+  ---
+  duration_ms: 950.606625
+  type: 'test'
+  ...
+# Subtest: overlapping context is refused rather than silently dropping or replacing another scene
+ok 15 - overlapping context is refused rather than silently dropping or replacing another scene
+  ---
+  duration_ms: 460.238917
+  type: 'test'
+  ...
+# Subtest: new backend process rereads the editing request and retains the preparation blocker
+ok 16 - new backend process rereads the editing request and retains the preparation blocker
+  ---
+  duration_ms: 1108.174917
+  type: 'test'
+  ...
+# Subtest: two different artificial sources qualify through actual readers and display only precreation instructions
+ok 17 - two different artificial sources qualify through actual readers and display only precreation instructions
+  ---
+  duration_ms: 1556.368833
+  type: 'test'
+  ...
+# Subtest: human authentication and exact server-owned parameter boundary cannot become producer authority
+ok 18 - human authentication and exact server-owned parameter boundary cannot become producer authority
+  ---
+  duration_ms: 28.216791
+  type: 'test'
+  ...
+# Subtest: different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes
+ok 19 - different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes
+  ---
+  duration_ms: 96.69075
+  type: 'test'
+  ...
+# Subtest: clock bytes tampering is rejected and stale candidates/audio disappear on reread
+ok 20 - clock bytes tampering is rejected and stale candidates/audio disappear on reread
+  ---
+  duration_ms: 366.34225
+  type: 'test'
+  ...
+# Subtest: saved reader works in a fresh compiled backend process with its existing TSX loader
+ok 21 - saved reader works in a fresh compiled backend process with its existing TSX loader
+  ---
+  duration_ms: 928.698542
+  type: 'test'
+  ...
+# Subtest: missing registration never guesses preparation data and a non-SSD root remains rejected
+ok 22 - missing registration never guesses preparation data and a non-SSD root remains rejected
+  ---
+  duration_ms: 5.880167
+  type: 'test'
+  ...
+# Subtest: saved candidate and speech clock are read without manufacturing or recommendation
+ok 23 - saved candidate and speech clock are read without manufacturing or recommendation
+  ---
+  duration_ms: 19.003875
+  type: 'test'
+  ...
+# Subtest: review fingerprint rejects changed content, wrong request and missing confirmation without state writes
+ok 24 - review fingerprint rejects changed content, wrong request and missing confirmation without state writes
+  ---
+  duration_ms: 73.179375
+  type: 'test'
+  ...
+# Subtest: registered artifact bytes replacement is rejected even when state metadata stays unchanged
+ok 25 - registered artifact bytes replacement is rejected even when state metadata stays unchanged
+  ---
+  duration_ms: 14.088541
+  type: 'test'
+  ...
+# Subtest: concurrent duplicate review approval is serialized and saved once
+ok 26 - concurrent duplicate review approval is serialized and saved once
+  ---
+  duration_ms: 19.669125
+  type: 'test'
+  ...
+# Subtest: readiness displays validated inputs but missing precreation audio instruction/reference rejects approval
+ok 27 - readiness displays validated inputs but missing precreation audio instruction/reference rejects approval
+  ---
+  duration_ms: 18.361541
+  type: 'test'
+  ...
+# Subtest: draft approval binds displayed contents and current runtime, without legacy empty-body acceptance
+ok 28 - draft approval binds displayed contents and current runtime, without legacy empty-body acceptance
+  ---
+  duration_ms: 37.258917
+  type: 'test'
+  ...
+# Subtest: final approval rejects a different newest video instead of silently choosing it
+ok 29 - final approval rejects a different newest video instead of silently choosing it
+  ---
+  duration_ms: 18.638167
+  type: 'test'
+  ...
+# Subtest: final approval binds the shown FileRef/hash and records it only once
+ok 30 - final approval binds the shown FileRef/hash and records it only once
+  ---
+  duration_ms: 21.226333
+  type: 'test'
+  ...
+# Subtest: server rejects UI dispatch with absent external cost approval before touching state
+ok 31 - server rejects UI dispatch with absent external cost approval before touching state
+  ---
+  duration_ms: 20.082667
+  type: 'test'
+  ...
+# Subtest: resume/next stay in the selected older request and reject missing or stale scope
+ok 32 - resume/next stay in the selected older request and reject missing or stale scope
+  ---
+  duration_ms: 23.343958
+  type: 'test'
+  ...
+# Subtest: claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once
+ok 33 - claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once
+  ---
+  duration_ms: 23.676917
+  type: 'test'
+  ...
+# Subtest: expired claim recovery stays within scope and does not accept the expired owner completion
+ok 34 - expired claim recovery stays within scope and does not accept the expired owner completion
+  ---
+  duration_ms: 5.999958
+  type: 'test'
+  ...
+# Subtest: actual runner refuses a foreign next response before claim or media work
+ok 35 - actual runner refuses a foreign next response before claim or media work
+  ---
+  duration_ms: 767.409
+  type: 'test'
+  ...
+# Subtest: actual runner refuses a changed claim response before building or reporting failure against a request
+ok 36 - actual runner refuses a changed claim response before building or reporting failure against a request
+  ---
+  duration_ms: 733.085583
+  type: 'test'
+  ...
+# Subtest: actual runner refuses a different effective STT endpoint before any queue call
+ok 37 - actual runner refuses a different effective STT endpoint before any queue call
+  ---
+  duration_ms: 718.761917
+  type: 'test'
+  ...
+# Subtest: runtime setting changes reject scoped resume, next and claim without touching either queue
+ok 38 - runtime setting changes reject scoped resume, next and claim without touching either queue
+  ---
+  duration_ms: 12.517375
+  type: 'test'
+  ...
+# Subtest: video revision rejects the older displayed output without creating a copied request
+ok 39 - video revision rejects the older displayed output without creating a copied request
+  ---
+  duration_ms: 7.035042
+  type: 'test'
+  ...
+# Subtest: streamed video hash verification rejects replaced bytes with unchanged registered metadata
+ok 40 - streamed video hash verification rejects replaced bytes with unchanged registered metadata
+  ---
+  duration_ms: 6.894042
+  type: 'test'
+  ...
+# Subtest: runner and backend use the same shared pure validators, with the original rejection semantics
+ok 41 - runner and backend use the same shared pure validators, with the original rejection semantics
+  ---
+  duration_ms: 4.019458
+  type: 'test'
+  ...
+# Subtest: different source URIs, speech IDs, candidate counts and lengths display their own saved data
+ok 42 - different source URIs, speech IDs, candidate counts and lengths display their own saved data
+  ---
+  duration_ms: 22.761584
+  type: 'test'
+  ...
+# Subtest: cross-artifact source mismatch is rejected before approval even with matching stored hashes
+ok 43 - cross-artifact source mismatch is rejected before approval even with matching stored hashes
+  ---
+  duration_ms: 57.210292
+  type: 'test'
+  ...
+# Subtest: unknown speech IDs, wrong counts, lengths and altered speech clocks are rejected
+ok 44 - unknown speech IDs, wrong counts, lengths and altered speech clocks are rejected
+  ---
+  duration_ms: 66.210709
+  type: 'test'
+  ...
+# Subtest: a same-ID artifact with a new registered hash invalidates the displayed confirmation
+ok 45 - a same-ID artifact with a new registered hash invalidates the displayed confirmation
+  ---
+  duration_ms: 14.038541
+  type: 'test'
+  ...
+# Subtest: registered recommendation has a real candidate ID and reason; absence never manufactures one
+ok 46 - registered recommendation has a real candidate ID and reason; absence never manufactures one
+  ---
+  duration_ms: 14.530459
+  type: 'test'
+  ...
+# Subtest: preview state requires an explicit saved candidate job and an actual claim for preparing
+ok 47 - preview state requires an explicit saved candidate job and an actual claim for preparing
+  ---
+  duration_ms: 21.304792
+  type: 'test'
+  ...
+# Subtest: a newer failed preview job never restores the old generated preview
+ok 48 - a newer failed preview job never restores the old generated preview
+  ---
+  duration_ms: 4.176458
+  type: 'test'
+  ...
+# Subtest: a newer saved review makes the older review confirmation unusable
+ok 49 - a newer saved review makes the older review confirmation unusable
+  ---
+  duration_ms: 11.463208
+  type: 'test'
+  ...
+# Subtest: foreign or nonexistent preview links and expired claims cannot appear as preparing
+ok 50 - foreign or nonexistent preview links and expired claims cannot appear as preparing
+  ---
+  duration_ms: 9.348417
+  type: 'test'
+  ...
+# Subtest: missing or invalid preview claim expiry stays unknown without state changes
+ok 51 - missing or invalid preview claim expiry stays unknown without state changes
+  ---
+  duration_ms: 10.611834
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 48
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11340.672791
