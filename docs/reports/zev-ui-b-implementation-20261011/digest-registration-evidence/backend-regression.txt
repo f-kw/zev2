@@ -1,0 +1,37 @@
+✔ saved candidate and speech clock are read without manufacturing or recommendation (26.687625ms)
+✔ review fingerprint rejects changed content, wrong request and missing confirmation without state writes (63.080083ms)
+✔ registered artifact bytes replacement is rejected even when state metadata stays unchanged (11.416583ms)
+✔ concurrent duplicate review approval is serialized and saved once (21.173541ms)
+✔ readiness displays validated inputs but missing precreation audio instruction/reference rejects approval (13.855292ms)
+✔ draft approval binds displayed contents and current runtime, without legacy empty-body acceptance (26.372542ms)
+✔ final approval rejects a different newest video instead of silently choosing it (13.8035ms)
+✔ final approval binds the shown FileRef/hash and records it only once (14.283042ms)
+✔ server rejects UI dispatch with absent external cost approval before touching state (9.373041ms)
+✔ resume/next stay in the selected older request and reject missing or stale scope (14.053375ms)
+✔ claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once (17.519542ms)
+✔ expired claim recovery stays within scope and does not accept the expired owner completion (5.242916ms)
+✔ actual runner refuses a foreign next response before claim or media work (767.629833ms)
+✔ actual runner refuses a changed claim response before building or reporting failure against a request (621.308416ms)
+✔ actual runner refuses a different effective STT endpoint before any queue call (583.321792ms)
+✔ runtime setting changes reject scoped resume, next and claim without touching either queue (9.656375ms)
+✔ video revision rejects the older displayed output without creating a copied request (6.751709ms)
+✔ streamed video hash verification rejects replaced bytes with unchanged registered metadata (7.849ms)
+✔ runner and backend use the same shared pure validators, with the original rejection semantics (2.938708ms)
+✔ different source URIs, speech IDs, candidate counts and lengths display their own saved data (17.801375ms)
+✔ cross-artifact source mismatch is rejected before approval even with matching stored hashes (40.587667ms)
+✔ unknown speech IDs, wrong counts, lengths and altered speech clocks are rejected (54.5665ms)
+✔ a same-ID artifact with a new registered hash invalidates the displayed confirmation (9.730208ms)
+✔ registered recommendation has a real candidate ID and reason; absence never manufactures one (8.66625ms)
+✔ preview state requires an explicit saved candidate job and an actual claim for preparing (18.939333ms)
+✔ a newer failed preview job never restores the old generated preview (3.076542ms)
+✔ a newer saved review makes the older review confirmation unusable (8.3875ms)
+✔ foreign or nonexistent preview links and expired claims cannot appear as preparing (4.262167ms)
+✔ missing or invalid preview claim expiry stays unknown without state changes (10.740667ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2855.20675

@@ -32,9 +32,10 @@ export interface UiReviewMaterials {
   candidates: UiSavedCandidate[];
   recommendation?: { candidateId: string; reason: string; producerId: string; fileRefId: string; sha256: string };
   creationChecks?: {
-    inputValidation: 'verified' | 'failed'; audioPreservation: 'unknown'; sourceAudioReference: 'unknown';
+    inputValidation: 'verified' | 'failed'; audioPreservation: 'unknown' | 'preserve-source-only'; sourceAudioReference: 'unknown' | 'registered';
     runtimeIdentity: string;
   };
+  digestPreparation?: { status: 'not_registered' | 'verified' | 'rejected'; message: string };
   bindings: Array<{ producerId: string; outputId: string; fileRefId: string; sha256: string }>;
   segments: Array<{ startMs: number; endMs: number; caption: string; speechIds: number[]; displaySummary: string }>;
   blockers: string[];

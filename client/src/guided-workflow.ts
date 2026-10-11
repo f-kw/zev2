@@ -69,14 +69,25 @@ export function reviewBlockers(state: Zev2State, draft: RequestDraft, review: Co
 }
 
 export function guideStep(draft: RequestDraft | undefined, review: ControlReviewItem | undefined,
-  hasOutput: boolean, enteringRequest: boolean, requestType?: AgentRequest['type']): number {
+  hasOutput: boolean, enteringRequest: boolean, requestType?: AgentRequest['type'], materials?: UiReviewMaterials | null): number {
   if (enteringRequest || !draft) return 0;
   if (draft.status === 'draft' || draft.status === 'rejected') return 1;
   if (review) return review.kind === 'render_readiness' ? 3 : 2;
   if (hasOutput) return 5;
+  if (draft.productionType === 'digest' && requestType === 'validate_digest_plan'
+    && materials?.requestDraftId === draft.id && materials.draftIdentity === draftConfirmationIdentity(draft)
+    && materials.digestPreparation?.status === 'verified') return 3;
   if (requestType === 'render_video') return 4;
   if (requestType === 'create_edit_plan' || requestType === 'apply_adjustment') return 3;
   return 2;
+}
+
+export function creationCheckLabels(checks: UiReviewMaterials['creationChecks']) {
+  return {
+    audio: checks?.audioPreservation === 'preserve-source-only' ? '元の音声を保持する指定' : '元の音声を保持する指定：未確認',
+    source: checks?.sourceAudioReference === 'registered' ? '元音声の参照と入力時計：登録資料との一致を確認' : '元音声の参照と入力時計：未確認',
+    completion: '完成動画の実媒体検査と人間の採用判断：未実施（動画作成後に確認）'
+  };
 }
 
 export function draftIdentity(draft: RequestDraft): string {

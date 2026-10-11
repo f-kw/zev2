@@ -1,0 +1,73 @@
+✖ two different artificial sources qualify through actual readers and display only precreation instructions (889.179542ms)
+✔ human authentication and exact server-owned parameter boundary cannot become producer authority (28.476625ms)
+✔ different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes (133.054708ms)
+✔ clock bytes tampering is rejected and stale candidates/audio disappear on reread (424.144125ms)
+✖ saved reader works in a fresh compiled backend process with its existing TSX loader (294.381084ms)
+✔ missing registration never guesses preparation data and a non-SSD root remains rejected (8.07875ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3465.981917
+
+✖ failing tests:
+
+test at test/digest-ui-review.test.mjs:38:1
+✖ two different artificial sources qualify through actual readers and display only precreation instructions (889.179542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      bindings: [
+        {
+          fileRefId: 'file-a-request-3',
+          outputId: 'out-a-request-3',
+  ...
+      requestDraftId: 'digest-a',
+  +   review: undefined,
+      segments: [
+        {
+          caption: '人工aの発話1。人工aの発話2。人工aの発話3。',
+          displaySummary: '保持済み本文。字幕の表示境界・描画は後続工程で確認します。',
+          endMs: 2500,
+  
+      at TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-review.test.mjs:49:12)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { requestDraftId: 'digest-a', draftIdentity: '{"id":"digest-a","status":"approved","productionType":"digest","purpose":"人工素材aの要点を元順序で確認","source":{"kind":"video_source","uri":"file:///Users/kawafmm/workspace/zev2/runtime/ui68-artificial-source-XtEL13/a.mp4"},"settings":{"durationLabel":"入力の範囲内","themeCountLabel":"保存候補","geminiModelName":"gemini-3.8-flash","preset":"artificial-fixture"},"policy":{"humanApprovalRequiredBeforeRender":false},"steps":[{"type":"prepare_video","label":"動画取り込み","requiresHumanApproval":false},{"type":"run_stt","label":"STT","requiresHumanApproval":false},{"type":"prepare_digest_plan","label":"Digest採否・保持計画","requiresHumanApproval":false},{"type":"validate_digest_plan","label":"Digest登録計画の検証","requiresHumanApproval":false}],"createdAt":"2026-10-11T04:00:00.000Z","updatedAt":"2026-10-11T04:00:00.000Z"}', review: undefined, fingerprint: 'b8b8fe66db922139f95670d5510c9d79b02e3d04ee82b42ad645b84ba9f70029', candidates: [ [Object], [Object] ], bindings: [ [Object], [Object] ], segments: [ [Object], [Object] ], blockers: [ '動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。' ], creationChecks: { inputValidation: 'verified', audioPreservation: 'preserve-source-only', sourceAudioReference: 'registered', runtimeIdentity: '{"stt":{"mode":"fixed","localServerUrl":"","language":"ja-JP"},"contentDiscovery":{"mode":"fixed"},"editPlan":{"mode":"fixed"},"adjustment":{"mode":"fixed"},"videoOutput":{"encoder":"libx264","extraArgs":[]},"agentClaim":{"ttlMilliseconds":0},"artifactDelivery":{"mode":"local"},"source":{"defaultUri":"","defaultPurpose":""}}' }, digestPreparation: { status: 'verified', message: '現在の計画・実行入力・保存字幕準備を再照合しました。' } },
+    expected: { requestDraftId: 'digest-a', draftIdentity: '{"id":"digest-a","status":"approved","productionType":"digest","purpose":"人工素材aの要点を元順序で確認","source":{"kind":"video_source","uri":"file:///Users/kawafmm/workspace/zev2/runtime/ui68-artificial-source-XtEL13/a.mp4"},"settings":{"durationLabel":"入力の範囲内","themeCountLabel":"保存候補","geminiModelName":"gemini-3.8-flash","preset":"artificial-fixture"},"policy":{"humanApprovalRequiredBeforeRender":false},"steps":[{"type":"prepare_video","label":"動画取り込み","requiresHumanApproval":false},{"type":"run_stt","label":"STT","requiresHumanApproval":false},{"type":"prepare_digest_plan","label":"Digest採否・保持計画","requiresHumanApproval":false},{"type":"validate_digest_plan","label":"Digest登録計画の検証","requiresHumanApproval":false}],"createdAt":"2026-10-11T04:00:00.000Z","updatedAt":"2026-10-11T04:00:00.000Z"}', fingerprint: 'b8b8fe66db922139f95670d5510c9d79b02e3d04ee82b42ad645b84ba9f70029', candidates: [ [Object], [Object] ], bindings: [ [Object], [Object] ], segments: [ [Object], [Object] ], blockers: [ '動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。' ], creationChecks: { inputValidation: 'verified', audioPreservation: 'preserve-source-only', sourceAudioReference: 'registered', runtimeIdentity: '{"stt":{"mode":"fixed","localServerUrl":"","language":"ja-JP"},"contentDiscovery":{"mode":"fixed"},"editPlan":{"mode":"fixed"},"adjustment":{"mode":"fixed"},"videoOutput":{"encoder":"libx264","extraArgs":[]},"agentClaim":{"ttlMilliseconds":0},"artifactDelivery":{"mode":"local"},"source":{"defaultUri":"","defaultPurpose":""}}' }, digestPreparation: { status: 'verified', message: '現在の計画・実行入力・保存字幕準備を再照合しました。' } },
+    operator: 'deepStrictEqual'
+  }
+
+test at test/digest-ui-review.test.mjs:75:1
+✖ saved reader works in a fresh compiled backend process with its existing TSX loader (294.381084ms)
+  AssertionError [ERR_ASSERTION]: file:///Users/kawafmm/workspace/zev2/backend/[eval1]:1
+  import {loadState} from './dist/store/json-store.js';import {loadRuntimeConfig} from './dist/config/runtime-config.js';import {buildUiReviewMaterials} from './dist/domain/ui-review.js';const m=await buildUiReviewMaterials(await loadState(),'digest-b',await loadRuntimeConfig());if(m.digestPreparation?.status!=='verified')throw new Error(JSON.stringify(m));process.stdout.write(JSON.stringify({status:m.digestPreparation.status,segments:m.segments.length}));
+                                                                                                                                                                                                                                                                                                                                          ^
+  
+  Error: {"requestDraftId":"digest-b","draftIdentity":"{\"id\":\"digest-b\",\"status\":\"approved\",\"productionType\":\"digest\",\"purpose\":\"人工素材bの要点を元順序で確認\",\"source\":{\"kind\":\"video_source\",\"uri\":\"file:///Users/kawafmm/workspace/zev2/runtime/ui68-artificial-source-XtEL13/b.mp4\"},\"settings\":{\"durationLabel\":\"入力の範囲内\",\"themeCountLabel\":\"保存候補\",\"geminiModelName\":\"gemini-3.8-flash\",\"preset\":\"artificial-fixture\"},\"policy\":{\"humanApprovalRequiredBeforeRender\":false},\"steps\":[{\"type\":\"prepare_video\",\"label\":\"動画取り込み\",\"requiresHumanApproval\":false},{\"type\":\"run_stt\",\"label\":\"STT\",\"requiresHumanApproval\":false},{\"type\":\"prepare_digest_plan\",\"label\":\"Digest採否・保持計画\",\"requiresHumanApproval\":false},{\"type\":\"validate_digest_plan\",\"label\":\"Digest登録計画の検証\",\"requiresHumanApproval\":false}],\"createdAt\":\"2026-10-11T04:00:00.000Z\",\"updatedAt\":\"2026-10-11T04:00:00.000Z\"}","fingerprint":"ffde496bfaa947619320461e6f8330ce722fe3173145ac39df79b4259dc45b34","candidates":[],"bindings":[],"segments":[],"blockers":["保存済みの字幕準備情報が未登録です。作成前の指定は未確認です。"],"creationChecks":{"inputValidation":"failed","audioPreservation":"unknown","sourceAudioReference":"unknown","runtimeIdentity":"{\"stt\":{\"mode\":\"fixed\",\"localServerUrl\":\"\",\"language\":\"ja-JP\"},\"contentDiscovery\":{\"mode\":\"fixed\"},\"editPlan\":{\"mode\":\"fixed\"},\"adjustment\":{\"mode\":\"fixed\"},\"videoOutput\":{\"encoder\":\"libx264\",\"extraArgs\":[]},\"agentClaim\":{\"ttlMilliseconds\":0},\"artifactDelivery\":{\"mode\":\"local\"},\"source\":{\"defaultUri\":\"\",\"defaultPurpose\":\"\"}}"},"digestPreparation":{"status":"not_registered","message":"保存済みの字幕準備情報が未登録です。作成前の指定は未確認です。"}}
+      at file:///Users/kawafmm/workspace/zev2/backend/[eval1]:1:329
+  
+  Node.js v23.7.0
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/digest-ui-review.test.mjs:79:10)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual'
+  }
+undefined
+/Users/kawafmm/workspace/zev2/backend:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: tsx --test test/digest-ui-review.test.mjs

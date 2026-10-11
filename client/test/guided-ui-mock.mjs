@@ -53,6 +53,11 @@ seedReview(draftCopy());
 function seedScenario(scenario) {
         let draft = state.requestDrafts[0];
         state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
+        if (scenario === 'digest-precreation') {
+          state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認');draft.productionType='digest';
+          const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
+          const r=requests.at(-1);r.type='validate_digest_plan';
+        }
         if (scenario === 'output') registeredResult(draft, 'render_video');
         if (scenario === 'readiness') seedReview(draft, 'render_readiness');
         if (scenario === 'failure') {
@@ -100,6 +105,13 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         const id=url.pathname.split('/')[3], draft=state.requestDrafts.find(d=>d.id===id);
         const review=state.controlReviewItems.filter(r=>r.requestDraftId===id&&r.status==='review_required').at(-1);
         const candidates=themes.map((t,i)=>({...t,previewStatus:{state:'unknown'},speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+        if (process.env.ZEV_UI_QA_SCENARIO==='digest-precreation') {
+          return send({requestDraftId:id,draftIdentity:shared.draftConfirmationIdentity(draft),fingerprint:'mock-digest-current',candidates,bindings:[],
+            digestPreparation:{status:'verified',message:'人工UI入力：現在の計画・実行入力・保存字幕準備を再照合しました。'},
+            creationChecks:{inputValidation:'verified',audioPreservation:'preserve-source-only',sourceAudioReference:'registered',runtimeIdentity:JSON.stringify(config)},
+            segments:[{startMs:1000,endMs:2000,caption:'人工入力の元本文',speechIds:[1],displaySummary:'保持済み本文。字幕の表示境界・描画は後続工程で確認します。'}],
+            blockers:['動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']});
+        }
         if (process.env.ZEV_UI_QA_SCENARIO==='registered-metadata') {
           for (const candidate of candidates) {
             const option=review?.options.find(o=>o.id===candidate.id),ref=option?.evidenceRefs.find(r=>r.kind==='agent_request');

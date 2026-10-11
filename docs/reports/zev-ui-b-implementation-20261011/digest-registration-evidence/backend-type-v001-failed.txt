@@ -1,0 +1,27 @@
+
+> backend@0.1.0 type-check /Users/kawafmm/workspace/zev2/backend
+> corepack pnpm --filter @zev2/agent-runner build && tsc -p tsconfig.json --noEmit
+
+
+> @zev2/agent-runner@0.1.0 build /Users/kawafmm/workspace/zev2/runner
+> corepack pnpm --filter @zev2/shared build && tsc -p tsconfig.json
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+src/domain/digest-ui-review.ts(6,54): error TS7016: Could not find a declaration file for module '@zev2/agent-runner/digest-readonly'. '/Users/kawafmm/workspace/zev2/runner/dist/digest-ui-readonly-v001.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/zev2__agent-runner` if it exists or add a new declaration (.d.ts) file containing `declare module '@zev2/agent-runner/digest-readonly';`
+src/domain/digest-ui-review.ts(89,42): error TS2339: Property 'transcriptBinding' does not exist on type 'DigestPlanArtifactV001 | DigestExecutionInputArtifactV001'.
+  Property 'transcriptBinding' does not exist on type 'DigestExecutionInputArtifactV001'.
+src/domain/digest-ui-review.ts(89,96): error TS2339: Property 'preparationBinding' does not exist on type 'DigestPlanArtifactV001 | DigestExecutionInputArtifactV001'.
+  Property 'preparationBinding' does not exist on type 'DigestExecutionInputArtifactV001'.
+src/domain/digest-ui-review.ts(92,42): error TS2339: Property 'utteranceBinding' does not exist on type 'DigestPlanArtifactV001 | DigestExecutionInputArtifactV001'.
+  Property 'utteranceBinding' does not exist on type 'DigestExecutionInputArtifactV001'.
+src/domain/digest-ui-review.ts(113,50): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/domain/digest-ui-review.ts(114,39): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/store/digest-ui-preparations.ts(4,61): error TS7016: Could not find a declaration file for module '@zev2/agent-runner/digest-readonly'. '/Users/kawafmm/workspace/zev2/runner/dist/digest-ui-readonly-v001.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/zev2__agent-runner` if it exists or add a new declaration (.d.ts) file containing `declare module '@zev2/agent-runner/digest-readonly';`
+/Users/kawafmm/workspace/zev2/backend:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  backend@0.1.0 type-check: `corepack pnpm --filter @zev2/agent-runner build && tsc -p tsconfig.json --noEmit`
+Exit status 2

@@ -1,0 +1,11 @@
+{
+  "command": "ZEV_UI_QA_SCENARIO=digest-precreation ZEV_UI_QA_LOG=/tmp/zev-ui-digest-browser-calls.json node client/test/guided-ui-mock.mjs",
+  "observedExitCode": 1,
+  "observedError": "Error: 制作系統と保存工程列が一致しません",
+  "location": "client/test/guided-ui-mock.mjs:58 seedQueue, packages/shared/dist/index.js:326 createAgentRequestsFromDraft",
+  "cause": "mock mutated the production type of a clip draft to Digest without changing its approved factory-generated step list",
+  "productionValidationWeakened": false,
+  "browserQaStarted": false,
+  "serverStarted": false,
+  "correctionStatus": "GPT_DECISION pending; individual setup correction 7 proposed, not applied"
+}

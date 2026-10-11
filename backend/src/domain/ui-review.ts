@@ -5,6 +5,7 @@ import { findById, getFileRefKindForRequest, getOutputTypeForRequest, getRequire
   draftConfirmationIdentity, runtimeConfirmationIdentity, recordValue, assertJsonArtifactForKind, assertApprovedAgentRequestInput,
   type AgentRequest, type FileRef, type RuntimeConfig, type UiReviewMaterials, type UiSpeechReference, type UiSavedCandidate, type TranscriptArtifact, type ThemeArtifact, type ClipCompositionArtifact, type EditPlanArtifact, type Zev2State } from '@zev2/shared';
 import { validateArtifactFileRefForKind } from '../artifacts/validation.js';
+import { populateDigestUiReview } from './digest-ui-review.js';
 
 export class UiConfirmationConflict extends Error { readonly statusCode = 409; }
 const conflict = (message: string): never => { throw new UiConfirmationConflict(message); };
@@ -86,6 +87,11 @@ export async function buildUiReviewMaterials(state: Zev2State, draftId: string, 
     .reverse().sort((a,b) => b.createdAt.localeCompare(a.createdAt))[0];
   const model: UiReviewMaterials = { requestDraftId: draftId, draftIdentity: draftConfirmationIdentity(draft), review,
     fingerprint: '', candidates: [], bindings: [], segments: [], blockers: [] };
+  if (draft.productionType === 'digest') {
+    await populateDigestUiReview(state, model, config, registeredUiFile);
+    model.fingerprint = hash(JSON.stringify([model, runtimeConfirmationIdentity(config)]));
+    return model;
+  }
   async function read(type: AgentRequest['type']) {
     const producer = newest(state, draftId, type);
     if (!producer) return conflict(`${type}の登録資料がありません`);

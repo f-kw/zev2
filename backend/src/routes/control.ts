@@ -147,7 +147,9 @@ import {
 } from '../web-gemini/run-status.js';
 import { upsertWebGeminiReviewState, webGeminiReviewStateForDraft } from '../web-gemini/state.js';
 import { requireAgentApiToken } from '../security/agent-auth.js';
-import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMaterials, confirmedOutput } from '../domain/ui-review.js';
+import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMaterials, confirmedOutput, registeredUiFile } from '../domain/ui-review.js';
+import { digestUiRegistrationInput, qualifyDigestUiPreparation } from '../domain/digest-ui-review.js';
+import { saveDigestUiPreparation } from '../store/digest-ui-preparations.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -262,6 +264,16 @@ router.use(webGeminiReviewRouter);
 router.get('/request-drafts/:id/ui-review', async (request, response) => {
   try { response.json(await buildUiReviewMaterials(await loadState(), routeParamText(request.params.id), await loadRuntimeConfig())); }
   catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+
+router.post('/request-drafts/:id/ui-digest-preparation', async (request, response) => {
+  try {
+    const registration = digestUiRegistrationInput(routeParamText(request.params.id), request.body);
+    const state = await loadState();
+    await qualifyDigestUiPreparation(state, registration, registeredUiFile);
+    const saved = await saveDigestUiPreparation(registration);
+    response.json({ registration: saved, materials: await buildUiReviewMaterials(state, saved.requestDraftId, await loadRuntimeConfig()) });
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
 });
 
 function selectAgentRequests(stateAgentRequests: AgentRequest[], ids: Set<string>): AgentRequest[] {

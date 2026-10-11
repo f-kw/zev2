@@ -1,0 +1,12 @@
+--- a/client/test/guided-ui-mock.mjs
++++ b/client/test/guided-ui-mock.mjs
+@@
+-function draftCopy(purpose = config.source.defaultPurpose) {
+-  const draft = shared.createRequestDraft({ productionType: 'clip', purpose, sourceUri: config.source.defaultUri,
++function draftCopy(purpose = config.source.defaultPurpose, productionType = 'clip') {
++  const draft = shared.createRequestDraft({ productionType, purpose, sourceUri: config.source.defaultUri,
+@@
+-          state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認');draft.productionType='digest';
++          state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認', 'digest');
+           const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
+-          const r=requests.at(-1);r.type='validate_digest_plan';

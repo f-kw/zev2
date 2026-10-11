@@ -1,0 +1,5 @@
+--- a/backend/test/digest-ui-review.test.mjs
++++ b/backend/test/digest-ui-review.test.mjs
+@@
+-    assert.deepEqual(repeated,m);assert.deepEqual(await readdir(f.directory),filesBefore);assert.deepEqual(await readFile(statePath),before);
++    assert.deepEqual(JSON.parse(JSON.stringify(repeated)),m);assert.deepEqual(await readdir(f.directory),filesBefore);assert.deepEqual(await readFile(statePath),before);

@@ -10,6 +10,9 @@ importers:
 
   backend:
     dependencies:
+      '@zev2/agent-runner':
+        specifier: workspace:*
+        version: link:../runner
       '@zev2/shared':
         specifier: workspace:*
         version: link:../packages/shared

@@ -18,7 +18,7 @@ async function compiled(file, imports) {
   return dataURL(js);
 }
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
-const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId } = await import(guideURL);
+const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels } = await import(guideURL);
 const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
   'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview'];
 const apiURL = dataURL(`export const handlers = {}; ${apiNames.map(n => `export const ${n} = (...args) => handlers.${n}(...args);`).join('\n')}
@@ -83,6 +83,17 @@ test('draft approval requires the exact confirmed version and available executio
 test('digest registration and absent runtime are blocked without pretending video support',()=>{
   const {draft}=fixture();draft.productionType='digest';assert(draftStartBlockers(draft,config).length);
   draft.productionType='clip';assert(draftStartBlockers(draft,null).length);
+});
+test('Digest precreation progress requires current qualified material and never implies media completion',()=>{
+  const {draft}=fixture();draft.productionType='digest';draft.status='approved';
+  const m={requestDraftId:draft.id,draftIdentity:draftIdentity(draft),digestPreparation:{status:'verified'}};
+  assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',m),3);
+  assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',{...m,draftIdentity:'old'}),2);
+  assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',{...m,requestDraftId:'other'}),2);
+  assert.equal(guideStep(draft,undefined,false,false,'validate_digest_plan',{...m,digestPreparation:{status:'rejected'}}),2);
+  const text=creationCheckLabels({audioPreservation:'preserve-source-only',sourceAudioReference:'registered'});
+  assert.equal(text.audio,'元の音声を保持する指定');assert(text.completion.includes('未実施'));
+  assert(creationCheckLabels(undefined).audio.includes('未確認'));assert(creationCheckLabels(undefined).source.includes('未確認'));
 });
 test('current output binds owner, kind, bytes, output record and newest producer',()=>{
   const {state,draft,file}=renderFixture();assert.equal(currentOutput(state,draft.id)?.id,file.id);
