@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { currentOutput, draftIdentity, draftStartBlockers, executionBlockers, resumeBlockers, reviewBlockers } from '../guided-workflow';
 import {
   createInitialState,
   findById,
@@ -39,6 +40,7 @@ interface ControlQueueStoreState {
   activePurpose: string;
   runPhase: 'idle' | 'saving' | 'handing_off' | 'running' | 'review_required' | 'completed' | 'error';
   runNumber: number;
+  stateReadNumber: number;
 }
 
 function wait(milliseconds: number): Promise<void> {
@@ -80,10 +82,6 @@ function cancelledAgentRequestForDraft(state: Zev2State, requestDraftId: string)
   );
 }
 
-function hasAgentRequestsForDraft(state: Zev2State, requestDraftId: string): boolean {
-  return state.agentRequests.some((request) => request.requestDraftId === requestDraftId);
-}
-
 async function keepPhaseVisible(startedAt: number, minimumMilliseconds: number): Promise<void> {
   const remainingMilliseconds = minimumMilliseconds - (Date.now() - startedAt);
 
@@ -104,27 +102,33 @@ export const useControlQueueStore = defineStore('controlQueue', {
     activeDraftId: '',
     activePurpose: '',
     runPhase: 'idle',
+    stateReadNumber: 0,
     runNumber: 0
   }),
   actions: {
     async refresh() {
+      const readNumber = ++this.stateReadNumber;
       try {
         const [{ steps }, runtimeConfig, state] = await Promise.all([
           fetchWorkflow(),
           fetchRuntimeConfig(),
           fetchState()
         ]);
-        if (this.loading) {
+        if (this.loading || readNumber !== this.stateReadNumber) {
           return;
         }
 
         this.workflowSteps = steps;
         this.runtimeConfig = runtimeConfig;
         this.state = state;
+        if (!this.activeDraftId && state.requestDrafts[0]) {
+          this.activeDraftId = state.requestDrafts[0].id;
+          this.activePurpose = state.requestDrafts[0].purpose;
+        }
         this.errorMessage = '';
         this.syncRunPhaseFromState();
       } catch (error) {
-        if (!this.loading) {
+        if (!this.loading && readNumber === this.stateReadNumber) {
           this.errorMessage = formatApiError(error);
         }
       }
@@ -158,19 +162,24 @@ export const useControlQueueStore = defineStore('controlQueue', {
         return;
       }
 
+      const draft = findById(this.state.requestDrafts, activeDraftId);
+      if (draft?.status === 'draft') { this.runPhase = 'idle'; return; }
+
       const cancelledRequest = cancelledAgentRequestForDraft(this.state, activeDraftId);
       if (cancelledRequest) {
         this.runPhase = 'idle';
-        this.message = `${cancelledRequest.label}で中止しました`;
+        this.message = 'この依頼の作業を中止しました';
         return;
       }
 
-      if (hasAgentRequestsForDraft(this.state, activeDraftId)) {
+      if (currentOutput(this.state, activeDraftId)) {
         this.runPhase = 'completed';
         this.message = '';
       }
     },
     async createRequestDraft(input: RequestDraftInput) {
+      if (this.loading) return;
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       this.activeDraftId = '';
@@ -180,15 +189,12 @@ export const useControlQueueStore = defineStore('controlQueue', {
       this.lastChangedAt = new Date().toISOString();
       this.message = '依頼を保存しています';
       try {
-        const { draft } = await createDraft(input);
+        const { draft, state } = await createDraft(input);
+        this.state = state;
         this.activeDraftId = draft.id;
         this.lastChangedAt = new Date().toISOString();
-        this.runPhase = 'handing_off';
-        this.message = '作成を始めています';
-        this.state = await approveDraft(draft.id);
-        this.lastChangedAt = new Date().toISOString();
-        this.runPhase = 'running';
-        await this.refreshUntilAgentSettled(Date.now());
+        this.runPhase = 'idle';
+        this.message = '下書きを保存しました。内容と実行条件を確認してから開始してください';
       } catch (error) {
         this.errorMessage = formatApiError(error);
         this.message = '';
@@ -198,7 +204,16 @@ export const useControlQueueStore = defineStore('controlQueue', {
         this.loading = false;
       }
     },
-    async approveRequestDraft(id: string) {
+    async approveRequestDraft(id: string, expectedIdentity: string) {
+      if (this.loading) return;
+      const draft = findById(this.state.requestDrafts, id);
+      if (!draft || draftIdentity(draft) !== expectedIdentity) {
+        this.errorMessage = '下書きが変更されました。もう一度確認してください';
+        return;
+      }
+      const blockers = draftStartBlockers(draft, this.runtimeConfig);
+      if (blockers.length) { this.errorMessage = blockers.join(' '); return; }
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       this.activeDraftId = id;
@@ -260,7 +275,7 @@ export const useControlQueueStore = defineStore('controlQueue', {
         if (!hasRunnableRequest) {
           await keepPhaseVisible(startedAt, 700);
           this.message = '';
-          this.runPhase = 'completed';
+          this.runPhase = activeDraftId && currentOutput(this.state, activeDraftId) ? 'completed' : 'idle';
           this.lastChangedAt = new Date().toISOString();
           return;
         }
@@ -282,9 +297,22 @@ export const useControlQueueStore = defineStore('controlQueue', {
       selectedOptionId?: string,
       scope?: 'edit_plan' | 'theme_reselect' | 'theme_options_regenerate' | 'material_reselect' | 'adjustment'
     ) {
+      if (this.loading) return;
+      const reviewItem = findById(this.state.controlReviewItems, id);
+      const reviewedDraft = reviewItem && findById(this.state.requestDrafts, reviewItem.requestDraftId);
+      if (!reviewItem || !reviewedDraft || reviewedDraft.id !== this.activeDraftId || reviewItem.status !== 'review_required') return;
+      if (action === 'approve') {
+        const blockers = [...reviewBlockers(this.state, reviewedDraft, reviewItem), ...executionBlockers(this.runtimeConfig)];
+        if (reviewItem.kind === 'theme_selection' && !reviewItem.options.some(o => o.id === selectedOptionId)) blockers.push('採用する候補を確認してください');
+        if (blockers.length) { this.errorMessage = blockers.join(' '); return; }
+      }
+      if (action === 'request_changes' && executionBlockers(this.runtimeConfig).length) {
+        this.errorMessage = executionBlockers(this.runtimeConfig).join(' '); return;
+      }
+      const previousDraftIds = new Set(this.state.requestDrafts.map(d => d.id));
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
-      const reviewItem = findById(this.state.controlReviewItems, id);
       if (reviewItem) {
         this.activeDraftId = reviewItem.requestDraftId;
         this.activePurpose = findById(this.state.requestDrafts, reviewItem.requestDraftId)?.purpose ?? '';
@@ -296,9 +324,9 @@ export const useControlQueueStore = defineStore('controlQueue', {
           : '確認結果を保存して続きを実行しています';
       try {
         this.state = await submitHumanReviewAction(id, action, reason, selectedOptionId, scope);
-        if (action === 'request_changes' && this.state.requestDrafts[0]) {
-          this.activeDraftId = this.state.requestDrafts[0].id;
-          this.activePurpose = this.state.requestDrafts[0].purpose;
+        if (action === 'request_changes') {
+          const newDraft = this.state.requestDrafts.find(d => !previousDraftIds.has(d.id) && d.source.uri === reviewedDraft.source.uri);
+          if (newDraft) { this.activeDraftId = newDraft.id; this.activePurpose = newDraft.purpose; }
         }
         this.lastChangedAt = new Date().toISOString();
 
@@ -324,6 +352,10 @@ export const useControlQueueStore = defineStore('controlQueue', {
       reason: string,
       scope: 'edit_plan' | 'theme_selection' | 'adjustment'
     ) {
+      if (this.loading) return;
+      if (id !== this.activeDraftId || !currentOutput(this.state, id) || !reason.trim()) return;
+      if (executionBlockers(this.runtimeConfig).length) { this.errorMessage = executionBlockers(this.runtimeConfig).join(' '); return; }
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       const draft = findById(this.state.requestDrafts, id);
@@ -354,6 +386,9 @@ export const useControlQueueStore = defineStore('controlQueue', {
       }
     },
     async applyWebGeminiReview(id: string, revisionBriefText: string) {
+      if (this.loading) return;
+      if (executionBlockers(this.runtimeConfig).length) { this.errorMessage = executionBlockers(this.runtimeConfig).join(' '); return; }
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       const draft = findById(this.state.requestDrafts, id);
@@ -380,6 +415,8 @@ export const useControlQueueStore = defineStore('controlQueue', {
       }
     },
     async submitFinalReview(id: string, action: FinalReviewActionType) {
+      if (this.loading || this.activeDraftId !== id || !currentOutput(this.state, id)) return;
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       const draft = findById(this.state.requestDrafts, id);
@@ -408,6 +445,11 @@ export const useControlQueueStore = defineStore('controlQueue', {
       }
     },
     async retryAgentRequest(id: string) {
+      if (this.loading) return;
+      const failed = findById(this.state.agentRequests, id);
+      if (!failed || failed.requestDraftId !== this.activeDraftId || failed.status !== 'failed') return;
+      if (executionBlockers(this.runtimeConfig).length) { this.errorMessage = executionBlockers(this.runtimeConfig).join(' '); return; }
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       const failedRequest = findById(this.state.agentRequests, id);
@@ -439,6 +481,11 @@ export const useControlQueueStore = defineStore('controlQueue', {
       }
     },
     async resumeAgentWork() {
+      if (this.loading) return;
+      const blockers = resumeBlockers(this.state, this.activeDraftId);
+      if (blockers.length) { this.errorMessage = blockers.join(' '); return; }
+      if (executionBlockers(this.runtimeConfig).length) { this.errorMessage = executionBlockers(this.runtimeConfig).join(' '); return; }
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       this.message = '待機中のAI作業を再開しています';
@@ -459,6 +506,8 @@ export const useControlQueueStore = defineStore('controlQueue', {
       }
     },
     async cancelDraftAgentWork(id: string) {
+      if (this.loading || id !== this.activeDraftId || !findById(this.state.requestDrafts, id)) return;
+      this.stateReadNumber += 1;
       this.loading = true;
       this.errorMessage = '';
       const draft = findById(this.state.requestDrafts, id);

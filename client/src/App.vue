@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import {
   DEFAULT_GEMINI_MODEL,
   findById,
@@ -35,6 +35,7 @@ import {
   type WebGeminiRevisionBriefArtifact
 } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
+import { GUIDE_STEPS, currentOutput, draftIdentity, draftStartBlockers, executionBlockers, guideStep, resumeBlockers, reviewBlockers } from './guided-workflow';
 
 type AppPage = 'workspace' | 'request';
 type RedoScope = 'theme_selection' | 'edit_plan';
@@ -68,6 +69,15 @@ const cancellingAgentWork = ref(false);
 const selectedReviewOptionId = ref('');
 const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
+const confirmedDraftIdentity = ref('');
+const candidatesOpen = ref(false);
+const browsingOptionId = ref('');
+const browsingReviewIdentity = ref('');
+const outputChangeOpen = ref(false);
+const outputChangeReason = ref('');
+const outputChangeScope = ref<RedoScope>('edit_plan');
+const outputChangeIdentity = ref('');
+const outputMediaError = ref('');
 const pendingReviewChange = ref<{ reviewId: string; scope?: ReviewChangeScope } | null>(null);
 const changeReasonInput = ref('');
 const webGeminiReview = ref<WebGeminiReviewArtifact | null>(null);
@@ -180,6 +190,7 @@ const activeReviewItem = computed<ControlReviewItem | undefined>(() => {
 
   return [...store.state.controlReviewItems]
     .filter((item) => item.requestDraftId === draft.id && item.status === 'review_required')
+    .reverse()
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
 });
 
@@ -212,7 +223,7 @@ const failedRequest = computed(() =>
 );
 
 const cancelledRequest = computed(() =>
-  [...visibleRequests.value].reverse().find((request) => request.status === 'cancelled')
+  visibleRequests.value.find((request) => request.status === 'cancelled')
 );
 
 const runningRequest = computed(() =>
@@ -241,14 +252,7 @@ const renderRequest = computed(() =>
   )
 );
 
-const outputVideoFileRef = computed(() => {
-  const fileRefId = renderRequest.value?.result?.fileRefId;
-  if (!fileRefId) {
-    return undefined;
-  }
-
-  return findById(store.state.fileRefs, fileRefId);
-});
+const outputVideoFileRef = computed(() => currentDraft.value ? currentOutput(store.state, currentDraft.value.id) : undefined);
 
 const outputVideoUri = computed(() => {
   const fileRef = outputVideoFileRef.value;
@@ -275,7 +279,7 @@ const finalReviewActionsForCurrentOutput = computed<FinalReviewAction[]>(() => {
   }
 
   return store.state.finalReviewActions
-    .filter((action) => action.requestDraftId === draft.id && action.outputVideoUri === fileRef.uri)
+    .filter((action) => action.requestDraftId === draft.id && action.outputVideoUri === fileRef.uri && action.createdAt >= fileRef.createdAt)
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
 });
 
@@ -315,6 +319,7 @@ const canApplyWebGeminiReview = computed(() =>
   Boolean(
     currentDraft.value &&
       outputVideoUri.value &&
+      webGeminiRunLog.value?.outputVideoUri === outputVideoFileRef.value?.uri &&
       webGeminiReview.value &&
       webGeminiRevisionBriefInput.value.trim() &&
       webGeminiRunLog.value?.status !== 'applied' &&
@@ -493,8 +498,10 @@ const webGeminiSavedReviewMeta = computed(() => {
 });
 
 const canResumeAgentWork = computed(() =>
-  Boolean(waitingAgentRequest.value && !runningRequest.value && !store.loading)
+  Boolean(waitingAgentRequest.value && !failedRequest.value && !runningRequest.value && !store.loading && !resumeNotices.value.length)
 );
+const resumeNotices = computed(() => currentDraft.value && waitingAgentRequest.value && !failedRequest.value
+  ? resumeBlockers(store.state, currentDraft.value.id) : []);
 
 const canCancelAgentWork = computed(() =>
   Boolean(currentDraft.value && (runningRequest.value || waitingAgentRequest.value) && !store.loading)
@@ -526,15 +533,17 @@ const statusText = computed(() => {
   }
 
   if (cancelledRequest.value) {
-    return `${cancelledRequest.value.label}で中止`;
+    return 'この依頼の作業を中止しました';
   }
 
   if (outputVideoUri.value) {
     return '動画生成完了';
   }
 
+  if (currentDraft.value?.productionType === 'digest' && currentRequests.value.length && currentRequests.value.every(r => r.status === 'succeeded')) return '計画検証まで完了・動画未作成';
+  if (currentDraft.value?.status === 'rejected') return 'この下書きは却下されています';
   if (currentDraft.value) {
-    return '作成開始前';
+    return currentDraft.value.status === 'draft' ? '下書きの確認待ち' : '次の工程の接続待ち';
   }
 
   return '新規依頼を入力してください';
@@ -569,8 +578,9 @@ const statusDetailText = computed(() => {
     return '確認用動画を再生できます';
   }
 
+  if (currentDraft.value?.productionType === 'digest') return '内容確認・作成前確認・動画作成への通常接続が未完成です。計画の検証を完成動画として扱いません';
   if (currentDraft.value) {
-    return '次の操作を選べます';
+    return '保存した内容と実行条件を確認してください';
   }
 
   return '作成する動画を入力してください';
@@ -628,7 +638,7 @@ const hudStatusEyebrowText = computed(() => {
 });
 
 const hudStatusDetailText = computed(() =>
-  showRequestPage.value ? '作りたいショートを入力して、動画作成を開始できます' : activitySummaryDetail.value
+  showRequestPage.value ? '素材と作りたい動画を入力して、まず下書きを保存します' : activitySummaryDetail.value
 );
 
 const hudVisibleStatusMessage = computed(() =>
@@ -636,7 +646,7 @@ const hudVisibleStatusMessage = computed(() =>
 );
 
 const hudHintText = computed(() =>
-  showRequestPage.value ? '作りたい動画を入力して開始します' : activitySummaryNextAction.value
+  showRequestPage.value ? '下書きでは処理を開始しません。確認後に開始します' : activitySummaryNextAction.value
 );
 
 const hudProgressText = computed(() =>
@@ -668,7 +678,7 @@ const activeMode = computed(() => {
 });
 
 const sessionSourceText = computed(() =>
-  store.runtimeConfig?.source.defaultUri ?? currentDraft.value?.source.uri ?? '未設定'
+  currentDraft.value?.source.uri ?? store.runtimeConfig?.source.defaultUri ?? '未設定'
 );
 
 const sessionModelText = computed(() =>
@@ -886,10 +896,9 @@ async function createVideo() {
   }
 
   submitting.value = true;
-  requestInput.sourceUri = runtimeConfig.source.defaultUri;
   try {
     await store.createRequestDraft({ ...requestInput });
-    activePage.value = 'workspace';
+    if (store.activeDraftId) activePage.value = 'workspace';
   } finally {
     submitting.value = false;
   }
@@ -897,6 +906,9 @@ async function createVideo() {
 
 function openRequestPage() {
   activePage.value = 'request';
+  closeCandidates();
+  closeReviewChangeDialog();
+  outputChangeOpen.value = false;
 }
 
 function closeRequestPage() {
@@ -913,14 +925,14 @@ function isMaterialConfirmationReview(review: ControlReviewItem): boolean {
 
 function approveReviewLabel(review: ControlReviewItem): string {
   if (isContentSelectionReview(review)) {
-    return 'このテーマで切り口を作る';
+    return selectedReviewOptionId.value === review.options[0]?.id ? 'この案で進める' : 'この採用案で進める';
   }
 
   if (isMaterialConfirmationReview(review)) {
-    return 'この切り口で演出へ進む';
+    return 'この構成で進める';
   }
 
-  return '確認用動画を作る';
+  return '確認して動画を作成';
 }
 
 function defaultReviewReason(
@@ -1021,9 +1033,8 @@ async function sendReviewAction(
   reason: string,
   scope?: ReviewChangeScope
 ) {
-  if (agentOperationLocked.value) {
-    return;
-  }
+  if (agentOperationLocked.value || !currentDraft.value || review.requestDraftId !== currentDraft.value.id
+    || review.id !== activeReviewItem.value?.id || (action === 'approve' && activeReviewBlockers.value.length)) return;
 
   activeReviewAction.value = scope ? `${action}:${scope}` : action;
   try {
@@ -1042,7 +1053,7 @@ async function sendReviewAction(
 async function confirmReviewChange() {
   const pending = pendingReviewChange.value;
   const review = pendingReviewItem.value;
-  if (!pending || !review || agentOperationLocked.value) {
+  if (!pending || !review || review.id !== activeReviewItem.value?.id || agentOperationLocked.value) {
     return;
   }
 
@@ -1070,7 +1081,7 @@ async function submitActiveReview(action: 'approve' | 'request_changes', scope?:
   await sendReviewAction(review, action, defaultReviewReason(review, action, scope), scope);
 }
 
-async function redoVideo(scope: RedoScope) {
+async function redoVideo(scope: RedoScope, reasonInput = '') {
   const draft = currentDraft.value;
   if (!draft || agentOperationLocked.value || hasFinalCompleteForCurrentOutput.value) {
     return;
@@ -1083,7 +1094,7 @@ async function redoVideo(scope: RedoScope) {
   };
 
   try {
-    await store.requestGeneratedVideoChanges(draft.id, reasonByScope[scope], scope);
+    await store.requestGeneratedVideoChanges(draft.id, reasonInput.trim() || reasonByScope[scope], scope);
   } finally {
     activeRedoScope.value = '';
   }
@@ -1186,8 +1197,10 @@ async function refreshWebGeminiReview() {
 
   webGeminiReviewLoading.value = true;
   webGeminiReviewMessage.value = '';
+  const outputIdentity = outputVideoUri.value;
   try {
     const result = await fetchWebGeminiReview(draft.id);
+    if (currentDraft.value?.id !== draft.id || outputVideoUri.value !== outputIdentity) return;
     if (webGeminiPreparedPromptText.value !== result.preparedPromptText) {
       webGeminiPromptOpen.value = false;
     }
@@ -1210,6 +1223,7 @@ async function refreshWebGeminiReview() {
       loadedWebGeminiReviewCreatedAt.value = result.review.createdAt;
     }
   } catch (error) {
+    if (currentDraft.value?.id !== draft.id || outputVideoUri.value !== outputIdentity) return;
     webGeminiReview.value = null;
     webGeminiRevisionBrief.value = null;
     webGeminiRunLog.value = null;
@@ -1272,7 +1286,7 @@ async function applyWebGeminiReviewChanges() {
   const draft = currentDraft.value;
   const revisionBriefText = normalizeWebGeminiReviewText(webGeminiRevisionBriefInput.value);
   if (
-    !draft ||
+    !canApplyWebGeminiReview.value || !draft ||
     !webGeminiReview.value ||
     !revisionBriefText ||
     hasFinalCompleteForCurrentOutput.value ||
@@ -1474,6 +1488,8 @@ watch(
   () => activeReviewItem.value?.id,
   () => {
     const review = activeReviewItem.value;
+    closeCandidates();
+    closeReviewChangeDialog();
     selectedReviewOptionId.value = review?.kind === 'theme_selection'
       ? review.options[0]?.id ?? ''
       : '';
@@ -1502,34 +1518,113 @@ watch(
 watch(
   () => [currentDraft.value?.id ?? '', outputVideoUri.value],
   () => {
+    webGeminiReview.value = null;
+    webGeminiRevisionBrief.value = null;
+    webGeminiRunLog.value = null;
+    webGeminiRevisionBriefInput.value = '';
+    webGeminiPreparedPromptText.value = '';
+    loadedWebGeminiReviewCreatedAt.value = '';
     void refreshWebGeminiReview();
   },
   { immediate: true }
 );
+const activeReviewBlockers = computed(() => currentDraft.value && activeReviewItem.value
+  ? [...reviewBlockers(store.state, currentDraft.value, activeReviewItem.value), ...executionBlockers(store.runtimeConfig)] : []);
+const startBlockers = computed(() => currentDraft.value ? draftStartBlockers(currentDraft.value, store.runtimeConfig) : []);
+const currentGuideStep = computed(() => guideStep(currentDraft.value, activeReviewItem.value, Boolean(outputVideoUri.value), showRequestPage.value,
+  failedRequest.value?.type || runningRequest.value?.type || nextWaitingRequest.value?.type || cancelledRequest.value?.type || visibleRequests.value[visibleRequests.value.length - 1]?.type));
+const adoptedOption = computed(() => activeReviewItem.value?.options.find(o => o.id === selectedReviewOptionId.value));
+const displayedOptions = computed(() => activeReviewItem.value?.kind === 'theme_selection'
+  ? adoptedOption.value ? [adoptedOption.value] : [] : activeReviewItem.value?.options ?? []);
+const savedCandidateReview = computed(() => {
+  if (!currentDraft.value) return;
+  return store.state.controlReviewItems.filter(r => r.requestDraftId === currentDraft.value?.id && r.kind === 'theme_selection')
+    .reverse().sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+});
+const browsingOption = computed(() => savedCandidateReview.value?.options.find(o => o.id === browsingOptionId.value));
+const candidateIdentity = computed(() => currentDraft.value && savedCandidateReview.value
+  ? draftIdentity(currentDraft.value) + ':' + JSON.stringify(savedCandidateReview.value) : '');
+const canAdoptCandidate = computed(() => Boolean(browsingOption.value && savedCandidateReview.value?.id === activeReviewItem.value?.id
+  && activeReviewItem.value?.kind === 'theme_selection' && !activeReviewBlockers.value.length
+  && browsingReviewIdentity.value === candidateIdentity.value && !agentOperationLocked.value));
+const executionNotices = computed(() => [...executionBlockers(store.runtimeConfig), ...resumeNotices.value]);
+const displayedVersion = computed(() => !showRequestPage.value && currentDraft.value ? `保存版 ${formatDisplayDateTime(currentDraft.value.createdAt)} · ${currentDraft.value.id.slice(-6)}` : '新しい依頼');
+const canStartDraft = computed(() => Boolean(currentDraft.value && !startBlockers.value.length && !store.loading
+  && confirmedDraftIdentity.value === draftIdentity(currentDraft.value)));
+
+function confirmDraftConditions(event: Event) {
+  confirmedDraftIdentity.value = (event.target as HTMLInputElement).checked && currentDraft.value ? draftIdentity(currentDraft.value) : '';
+}
+async function approveSavedDraft() {
+  if (!currentDraft.value || !canStartDraft.value) return;
+  await store.approveRequestDraft(currentDraft.value.id, confirmedDraftIdentity.value);
+  confirmedDraftIdentity.value = '';
+}
+function editSavedDraft() {
+  const draft = currentDraft.value;
+  if (!draft || store.loading) return;
+  Object.assign(requestInput, { productionType: draft.productionType, purpose: draft.purpose, sourceUri: draft.source.uri, ...draft.settings });
+  confirmedDraftIdentity.value = '';
+  openRequestPage();
+}
+function openCandidates() {
+  if (!savedCandidateReview.value) return;
+  browsingOptionId.value = selectedReviewOptionId.value || savedCandidateReview.value.options[0]?.id || '';
+  browsingReviewIdentity.value = candidateIdentity.value;
+  candidatesOpen.value = true;
+}
+function closeCandidates() { candidatesOpen.value = false; browsingOptionId.value = ''; browsingReviewIdentity.value = ''; }
+function adoptCandidate() {
+  if (!canAdoptCandidate.value) return;
+  selectedReviewOptionId.value = browsingOptionId.value;
+  closeCandidates();
+}
+function showOutputChanges(scope: RedoScope) {
+  if (!canRedoVideo.value) return;
+  outputChangeScope.value = scope;
+  outputChangeIdentity.value = `${currentDraft.value?.id}:${outputVideoFileRef.value?.id}`;
+  outputChangeOpen.value = true;
+}
+async function confirmOutputChanges() {
+  if (!canRedoVideo.value || outputChangeIdentity.value !== `${currentDraft.value?.id}:${outputVideoFileRef.value?.id}`) return;
+  outputChangeOpen.value = false;
+  await redoVideo(outputChangeScope.value, outputChangeReason.value);
+}
+watch(candidateIdentity, () => { closeCandidates(); });
+watch(() => currentDraft.value && draftIdentity(currentDraft.value), () => {
+  confirmedDraftIdentity.value = '';
+  outputChangeOpen.value = false;
+  outputChangeReason.value = '';
+});
+watch(() => JSON.stringify(store.runtimeConfig), () => { confirmedDraftIdentity.value = ''; });
+watch(outputVideoUri, () => { outputMediaError.value = ''; outputChangeOpen.value = false; });
+function dismissDialog() { closeCandidates(); closeReviewChangeDialog(); closeActivityDialog(); outputChangeOpen.value = false; }
+const dialogIsOpen = computed(() => candidatesOpen.value || outputChangeOpen.value || activityDialogOpen.value || Boolean(pendingReviewChange.value));
+let dialogTrigger: HTMLElement | null = null;
+watch(dialogIsOpen, async open => {
+  if (open) {
+    dialogTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    await nextTick();
+    document.querySelector<HTMLElement>('[role="dialog"] button, [role="dialog"] textarea')?.focus();
+  } else { await nextTick(); dialogTrigger?.focus(); dialogTrigger = null; }
+});
+function trapDialogFocus(event: KeyboardEvent) {
+  if (!dialogIsOpen.value || event.key !== 'Tab') return;
+  const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
+  const elements = [...dialog?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), summary, a[href]') ?? []];
+  const first = elements[0], last = elements[elements.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+}
 </script>
 
 <template>
-  <main :class="['app-shell', { 'request-mode': showRequestPage }]">
-    <span class="shell-corner corner-tl" aria-hidden="true"></span>
-    <span class="shell-corner corner-tr" aria-hidden="true"></span>
-    <span class="shell-corner corner-bl" aria-hidden="true"></span>
-    <span class="shell-corner corner-br" aria-hidden="true"></span>
-
-    <section class="sys-bar" aria-label="システム状態">
-      <div class="sys-brand">
-        <span :class="['led', { active: agentLedActive }]" aria-hidden="true"></span>
-        <span>zev2 // AI AGENT - ONLINE</span>
-        <span class="session-code">CTRL HUD</span>
-      </div>
-
-      <div class="mode-tabs" aria-label="現在の画面">
-        <span :class="['mode-tab', { active: activeMode === 'review' }]">REVIEW</span>
-        <span :class="['mode-tab', { active: activeMode === 'new' }]">NEW</span>
-        <span :class="['mode-tab', { active: activeMode === 'output' }]">OUTPUT</span>
-        <span :class="['mode-tab', { active: activeMode === 'wait' }]">WAIT</span>
-      </div>
-
+  <main :class="['app-shell', { 'request-mode': showRequestPage }]" @keydown.esc="dismissDialog" @keydown.tab="trapDialogFocus">
+    <section class="sys-bar" aria-label="制作の案内" :inert="dialogIsOpen">
+      <div class="sys-brand"><strong>ZEV</strong><span>{{ showRequestPage ? '新しい動画を作る' : currentDraft?.purpose }}</span></div>
+      <span class="version-pill">{{ displayedVersion }}</span>
       <div class="sys-actions">
+        <button v-if="currentDraft && !showRequestPage" type="button" class="secondary-button" @click="openActivityDialog">履歴</button>
         <button
           v-if="canResumeAgentWork"
           type="button"
@@ -1555,7 +1650,7 @@ watch(
           :disabled="submitting"
           @click="openRequestPage"
         >
-          新規作成
+          新しく作る
         </button>
         <button
           v-if="showRequestPage && currentDraft"
@@ -1577,10 +1672,10 @@ watch(
       </div>
     </section>
 
-    <section v-if="humanAuthReady" class="agent-status-bar" aria-live="polite">
+    <section v-if="humanAuthReady" class="agent-status-bar" aria-live="polite" :inert="dialogIsOpen">
       <div class="status-main">
         <div>
-          <p class="eyebrow">{{ hudStatusEyebrowText }}</p>
+          <p class="eyebrow">{{ currentGuideStep + 1 }} / 6</p>
           <h2 class="glitch-title">{{ hudStatusText }}</h2>
         </div>
         <p v-if="hudVisibleStatusMessage" class="status-message">{{ hudVisibleStatusMessage }}</p>
@@ -1588,25 +1683,8 @@ watch(
         <p v-if="!showRequestPage && operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
       </div>
 
-      <div class="progress-readout">
-        <span v-if="hudProgressText" class="progress-pill">{{ hudProgressText }}</span>
-        <strong>{{ hudProgressPercent }}%</strong>
-      </div>
-
-      <div class="progress-track" aria-hidden="true">
-        <span :style="hudProgressBarStyle"></span>
-      </div>
-
-      <ol v-if="!showRequestPage && visibleRequests.length" class="step-list">
-        <li
-          v-for="(request, requestIndex) in visibleRequests"
-          :key="request.id"
-          :class="['step-item', `step-${request.status}`]"
-        >
-          <span class="step-cell">{{ stepMark(request, requestIndex) }}</span>
-          <span class="step-name">{{ request.label }}</span>
-          <strong>{{ formatStepCode(requestIndex) }}</strong>
-        </li>
+      <ol class="guide-steps" aria-label="動画制作の順番">
+        <li v-for="(step, index) in GUIDE_STEPS" :key="step" :class="{ active: index === currentGuideStep, passed: index < currentGuideStep }" :aria-current="index === currentGuideStep ? 'step' : undefined"><span>{{ index + 1 }}</span> {{ step }}</li>
       </ol>
     </section>
 
@@ -1637,46 +1715,50 @@ watch(
       </div>
     </section>
 
-    <div v-if="humanAuthReady" class="workspace-grid">
+    <div v-if="humanAuthReady" class="workspace-grid" :inert="dialogIsOpen">
       <section class="stage">
         <section v-if="showRequestPage" class="request-page">
           <div class="panel-corner" aria-hidden="true"></div>
           <div class="request-header">
             <div>
-              <p class="eyebrow">zev2 // create</p>
-              <h1>ショート動画を作成</h1>
+              <p class="eyebrow">動画の依頼</p>
+              <h1>新しい動画を作る</h1>
             </div>
           </div>
 
           <form class="request-form" @submit.prevent="createVideo">
-            <div class="runtime-summary">
-              <div
-                v-for="summary in runtimeSummaries"
-                :key="summary.label"
-                class="runtime-summary-item"
-              >
-                <div>
-                  <p class="eyebrow">{{ summary.label }}</p>
-                  <h2>{{ summary.title }}</h2>
-                </div>
-                <p>{{ summary.description }}</p>
+            <div class="request-columns">
+              <div class="request-fields">
+                <label>使う素材<input v-model="requestInput.sourceUri" placeholder="登録済み素材の参照を指定" :disabled="requestCreationLocked" required /></label>
+                <small>素材の新規取得・アップロードは未接続です。保存済み素材の参照を指定します。</small>
+                <label>作る動画<select v-model="requestInput.productionType" :disabled="requestCreationLocked"><option value="clip">ショート動画</option><option value="digest">ダイジェスト</option></select></label>
+                <label>どんな動画にしたい？<textarea v-model="requestInput.purpose" rows="4" placeholder="見せたい内容をひとことで" :disabled="requestCreationLocked" required /></label>
+                <label>目標の長さ<input v-model="requestInput.durationLabel" :disabled="requestCreationLocked" required /></label>
+                <details class="request-details"><summary>詳しい条件</summary>
+                  <label>候補数<input v-model="requestInput.themeCountLabel" :disabled="requestCreationLocked" required /></label>
+                  <label>実行モデル<input v-model="requestInput.geminiModelName" :disabled="requestCreationLocked" required /></label>
+                  <label>制作設定<input v-model="requestInput.preset" :disabled="requestCreationLocked" required /></label>
+                  <p>画面の選択だけでは、制作設定の内容を変更しません。</p>
+                </details>
               </div>
+              <aside class="start-summary">
+                <h2>始める前の確認</h2>
+                <dl><dt>素材</dt><dd>{{ requestInput.sourceUri || '未指定' }}</dd><dt>作る動画</dt><dd>{{ requestInput.purpose }}</dd><dt>目標の長さ</dt><dd>{{ requestInput.durationLabel }}</dd></dl>
+                <p>下書きを保存した後、素材と送信・実行条件を確認します。保存だけではAI処理も動画作成も始めません。</p>
+                <p v-if="requestInput.productionType === 'digest'" class="connection-notice">ダイジェストは内容確認から動画作成までの通常経路が未接続です。下書き保存まで利用できます。</p>
+                <button type="submit" :disabled="requestCreationLocked || !requestInput.purpose.trim() || !requestInput.sourceUri.trim()">{{ submitting ? '保存中' : '下書きを見る' }}</button>
+              </aside>
             </div>
-
-            <label>
-              作りたいショート
-              <textarea
-                v-model="requestInput.purpose"
-                rows="4"
-                placeholder="例: 面白い会話を短いショート動画にする"
-                :disabled="requestCreationLocked"
-              />
-            </label>
-
-            <button type="submit" :disabled="requestCreationLocked">
-              {{ submitting ? '作成中' : '動画を作成' }}
-            </button>
           </form>
+        </section>
+
+        <section v-else-if="currentDraft?.status === 'draft'" class="review-panel">
+          <h2>下書きを確認</h2><p>保存済みです。内容を確認してから開始します。</p>
+          <dl class="draft-summary"><dt>依頼</dt><dd>{{ currentDraft.purpose }}</dd><dt>素材</dt><dd>{{ currentDraft.source.uri }}</dd><dt>作る動画</dt><dd>{{ currentDraft.productionType === 'digest' ? 'ダイジェスト' : 'ショート動画' }} / {{ currentDraft.settings.durationLabel }}</dd></dl>
+          <details><summary>送信・実行の条件</summary><div class="runtime-summary"><div v-for="summary in runtimeSummaries" :key="summary.label" class="runtime-summary-item"><strong>{{ summary.label }} · {{ summary.title }}</strong><p>{{ summary.description }}</p></div></div><p>設定モデル：{{ currentDraft.settings.geminiModelName }}</p><p>元素材を保持し、動画作成前には別の確認を行います。</p></details>
+          <ul v-if="startBlockers.length" class="connection-notice"><li v-for="reason in startBlockers" :key="reason">{{ reason }}</li></ul>
+          <label class="confirmation-check"><input type="checkbox" :checked="!!confirmedDraftIdentity" :disabled="store.loading || !!startBlockers.length" @change="confirmDraftConditions" />この保存版の素材・内容・送信と実行の条件を確認しました</label>
+          <div class="review-actions"><button type="button" class="secondary-button" :disabled="store.loading" @click="editSavedDraft">戻って修正</button><button type="button" :disabled="!canStartDraft" @click="approveSavedDraft">確認して開始</button></div>
         </section>
 
         <section v-else-if="activeReviewItem" class="review-panel">
@@ -1687,32 +1769,11 @@ watch(
           </div>
           <p class="review-summary">{{ activeReviewItem.summary }}</p>
 
-          <div v-if="activeReviewItem.options.length" class="review-options">
-            <label
-              v-for="(option, optionIndex) in activeReviewItem.options"
-              :key="option.id"
-              :class="[
-                'review-option',
-                {
-                  selectable: isContentSelectionReview(activeReviewItem),
-                  selected: isContentSelectionReview(activeReviewItem) && selectedReviewOptionId === option.id
-                }
-              ]"
-            >
-              <input
-                v-if="isContentSelectionReview(activeReviewItem)"
-                v-model="selectedReviewOptionId"
-                type="radio"
-                name="content-option"
-                :value="option.id"
-              />
-              <span class="review-marker" aria-hidden="true"></span>
-              <span class="review-option-text">
-                <strong>{{ option.title }}</strong>
-                <small>{{ option.summary }}</small>
-              </span>
-              <span class="option-id">{{ formatOptionIndex(optionIndex) }}</span>
-            </label>
+          <p v-if="activeReviewItem.kind === 'theme_selection'" class="adoption-note">{{ selectedReviewOptionId === activeReviewItem.options[0]?.id ? '保存済みの先頭案（推奨の指定は未接続）' : '今回の採用案（次へ進むと保存）' }}</p>
+          <div v-if="displayedOptions.length" class="review-options">
+            <article v-for="(option, optionIndex) in displayedOptions" :key="option.id" class="review-option">
+              <span class="option-number">{{ optionIndex + 1 }}</span><span class="review-option-text"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small></span>
+            </article>
           </div>
           <div v-else class="incomplete-panel">
             <p class="eyebrow">作りかけ</p>
@@ -1725,10 +1786,13 @@ watch(
             </p>
           </div>
 
+          <div class="preview-placeholder"><strong>プレビュー未接続</strong><p>候補の作成状態・動画との対応・再生は未接続です。候補を見るだけでは動画を作りません。</p></div>
+          <ul v-if="activeReviewBlockers.length" class="connection-notice"><li v-for="reason in activeReviewBlockers" :key="reason">{{ reason }}</li></ul>
           <div class="review-actions">
+            <button v-if="savedCandidateReview?.options.length" type="button" class="secondary-button" @click="openCandidates">他の候補を見る</button>
             <button
               type="button"
-              :disabled="agentOperationLocked || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
+              :disabled="agentOperationLocked || !!activeReviewBlockers.length || (isContentSelectionReview(activeReviewItem) && !selectedReviewOptionId)"
               @click="submitActiveReview('approve')"
             >
               {{ activeReviewAction === 'approve' ? '処理中' : approveReviewLabel(activeReviewItem) }}
@@ -1784,17 +1848,20 @@ watch(
         <section v-else-if="outputVideoUri" class="video-panel">
           <div class="panel-corner" aria-hidden="true"></div>
           <div>
-            <p class="eyebrow">Render Complete</p>
-            <h2>完成動画</h2>
+            <p class="eyebrow">{{ displayedVersion }}</p>
+            <h2>動画ができました</h2>
           </div>
 
           <div class="video-review-layout">
             <div class="video-preview">
-              <video controls playsinline :src="outputVideoUri" />
+              <video :key="outputVideoFileRef?.id" controls playsinline preload="metadata" :src="outputVideoUri" @error="outputMediaError = '保存済み動画を読み込めません。参照と配信状態の確認が必要です'" />
+              <p v-if="outputMediaError" class="error-message">{{ outputMediaError }}</p>
+              <a class="download-link" :href="outputVideoUri" download>動画を保存</a>
               <p class="video-reference">{{ outputVideoReferenceText }}</p>
             </div>
 
-            <section class="web-gemini-review" aria-label="Web Gemini演出レビュー">
+            <div class="output-change-panel"><label>直したいところ<textarea v-model="outputChangeReason" rows="4" placeholder="直したい内容を入力" :disabled="!canRedoVideo" /></label><label>作り直す範囲<select v-model="outputChangeScope" :disabled="!canRedoVideo"><option value="edit_plan">演出から作り直す（場面と順番を保持）</option><option value="theme_selection">内容の選択から見直す</option></select></label><button type="button" class="secondary-button" :disabled="!canRedoVideo || !outputChangeReason.trim()" @click="showOutputChanges(outputChangeScope)">作り直す範囲を確認</button><p>修正は新しい編集コピーへ保存し、元の動画は保持します。</p></div>
+            <details class="optional-review"><summary>追加の演出レビュー</summary><section class="web-gemini-review" aria-label="Web Gemini演出レビュー">
               <div class="web-gemini-header">
                 <div>
                   <p class="eyebrow">Web Gemini Review</p>
@@ -1893,7 +1960,7 @@ watch(
                   <pre v-if="webGeminiPromptOpen">{{ webGeminiPreparedPromptText }}</pre>
                 </div>
               </div>
-            </section>
+            </section></details>
           </div>
 
           <section class="final-review-panel" aria-label="完成動画のユーザー判断">
@@ -1925,7 +1992,7 @@ watch(
               type="button"
               class="secondary-button"
               :disabled="!canRedoVideo"
-              @click="redoVideo('theme_selection')"
+              @click="showOutputChanges('theme_selection')"
             >
               {{ activeRedoScope === 'theme_selection' ? '作り直し中' : 'テーマ選択前から作り直す' }}
             </button>
@@ -1933,7 +2000,7 @@ watch(
               type="button"
               class="secondary-button"
               :disabled="!canRedoVideo"
-              @click="redoVideo('edit_plan')"
+              @click="showOutputChanges('edit_plan')"
             >
               {{ activeRedoScope === 'edit_plan' ? '作り直し中' : '演出作成前から作り直す' }}
             </button>
@@ -1942,32 +2009,37 @@ watch(
 
         <section v-else class="work-wait-panel">
           <div class="panel-corner" aria-hidden="true"></div>
-          <div class="scanner" aria-hidden="true"></div>
+
           <div>
-            <p class="eyebrow">Processing</p>
+            <p class="eyebrow">{{ runningRequest ? '実行中' : '現在の状態' }}</p>
             <h2>{{ statusText }}</h2>
           </div>
           <p>
             {{ statusDetailText }}
           </p>
           <p v-if="operationLockNotice" class="lock-message">{{ operationLockNotice }}</p>
+          <ul v-if="executionNotices.length" class="connection-notice"><li v-for="reason in executionNotices" :key="reason">{{ reason }}</li></ul>
+          <button v-if="failedRequest" type="button" :disabled="store.loading" @click="store.retryAgentRequest(failedRequest.id)">失敗した工程を再試行</button>
+          <p v-if="cancelledRequest">中止した保存版は保持しています。新しい依頼を作るか、履歴を確認できます。</p>
         </section>
       </section>
 
-      <aside class="side-hud" aria-label="実行情報">
+      <details class="side-hud" aria-label="実行情報"><summary>制作情報と保存記録</summary>
         <section class="hud-card">
-          <p class="eyebrow">Session</p>
+          <p class="eyebrow">保存版の情報</p>
           <dl>
+            <div><dt>依頼ID</dt><dd>{{ currentDraft?.id || '未保存' }}</dd></div>
+            <div><dt>保存版</dt><dd>{{ displayedVersion }}</dd></div>
             <div>
-              <dt>Source</dt>
+              <dt>素材</dt>
               <dd>{{ sessionSourceText }}</dd>
             </div>
             <div>
-              <dt>Model</dt>
+              <dt>設定モデル</dt>
               <dd>{{ sessionModelText }}</dd>
             </div>
             <div>
-              <dt>Stage</dt>
+              <dt>工程</dt>
               <dd>{{ sessionStageText }}</dd>
             </div>
           </dl>
@@ -2028,9 +2100,21 @@ watch(
           <p class="eyebrow">Hint</p>
           <p>{{ hudHintText }}</p>
         </section>
-      </aside>
+      </details>
     </div>
 
+    <div v-if="humanAuthReady && candidatesOpen" class="dialog-overlay" @click.self="closeCandidates">
+      <section class="change-dialog candidate-dialog" role="dialog" aria-modal="true" aria-labelledby="candidate-title" tabindex="-1">
+        <div class="dialog-heading"><h2 id="candidate-title">保存済みのシーン候補</h2><button type="button" class="secondary-button" @click="closeCandidates">閉じる ×</button></div>
+        <p>題名と短い要約だけを表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>現在の保存資料はテーマ候補です。シーン区間と候補プレビューの対応は未接続です。</p>
+        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in savedCandidateReview?.options" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" @click="browsingOptionId = option.id"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span>プレビュー未接続</span></button></div>
+          <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>まだ採用案は変わっていません。</p><div class="preview-placeholder"><strong>プレビュー未接続</strong><p>候補に対応する保存済み動画の取得と再生は未接続です。</p></div><p v-if="!canAdoptCandidate">この段階では閲覧のみです。採用変更は内容選択の確認に戻って行います。</p><button type="button" :disabled="!canAdoptCandidate" @click="adoptCandidate">採用案に反映する</button><small>内容確認で次へ進むと、この選択を保存します。</small></div>
+        </div>
+      </section>
+    </div>
+    <div v-if="humanAuthReady && outputChangeOpen" class="dialog-overlay" @click.self="outputChangeOpen = false">
+      <section class="change-dialog" role="dialog" aria-modal="true" aria-labelledby="output-change-title"><h2 id="output-change-title">作り直す範囲を確認</h2><p>{{ outputChangeScope === 'edit_plan' ? '場面と順番を保持し、演出から新しい編集コピーを作ります。' : '保存済みの候補から内容を選び直します。その後、場面と演出の確認へ戻ります。' }}</p><p>{{ outputChangeReason }}</p><p>元の保存版は保持します。動画作成前の確認をもう一度行います。</p><div class="dialog-actions"><button type="button" class="secondary-button" @click="outputChangeOpen = false">取消</button><button type="button" :disabled="!canRedoVideo" @click="confirmOutputChanges">確認して作り直す</button></div></section>
+    </div>
     <div
       v-if="humanAuthReady && !showRequestPage && pendingReviewChange && pendingReviewItem"
       class="dialog-overlay"
@@ -2127,1619 +2211,110 @@ watch(
 </template>
 
 <style scoped>
-:global(html),
-:global(body),
-:global(#app) {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: #0a0a0c;
-}
-
-:global(body) {
-  color-scheme: dark;
-}
-
-:global(body::after) {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  pointer-events: none;
-  background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.28) 2px 3px);
-  mix-blend-mode: multiply;
-  opacity: 0.4;
-}
-
-.app-shell {
-  --bg: #0a0a0c;
-  --yellow: #fcee0a;
-  --cyan: #00f0ff;
-  --red: #ff003c;
-  --pink: #ff4fd8;
-  --text: #f2f3e8;
-  --text-dim: #9a9d88;
-  --text-faint: #5c604d;
-  --panel: #101013;
-  --panel-2: #15151a;
-  --line: rgba(252, 238, 10, 0.24);
-  --font-en: Rajdhani, Roboto, 'Noto Sans JP', system-ui, sans-serif;
-  --font-jp: 'Noto Sans JP', Roboto, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-
-  position: relative;
-  z-index: 1;
-  height: 100dvh;
-  min-height: 0;
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
-  gap: 10px;
-  padding: 12px;
-  overflow: hidden;
-  color: var(--text);
-  background:
-    linear-gradient(135deg, rgba(252, 238, 10, 0.07), transparent 28%),
-    repeating-linear-gradient(90deg, rgba(252, 238, 10, 0.035) 0 1px, transparent 1px 72px),
-    repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.025) 0 1px, transparent 1px 54px),
-    var(--bg);
-  font-family: var(--font-jp);
-  box-sizing: border-box;
-}
-
-.app-shell::before {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  z-index: -1;
-  border: 1px solid var(--line);
-  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
-  box-shadow: inset 0 0 52px rgba(252, 238, 10, 0.045);
-}
-
-.shell-corner {
-  position: absolute;
-  z-index: 2;
-  width: 30px;
-  height: 30px;
-  pointer-events: none;
-}
-
-.corner-tl {
-  top: 12px;
-  left: 12px;
-  border-top: 2px solid var(--yellow);
-  border-left: 2px solid var(--yellow);
-}
-
-.corner-tr {
-  top: 12px;
-  right: 12px;
-  border-top: 2px solid var(--yellow);
-  border-right: 2px solid var(--yellow);
-}
-
-.corner-bl {
-  bottom: 12px;
-  left: 12px;
-  border-bottom: 2px solid var(--yellow);
-  border-left: 2px solid var(--yellow);
-}
-
-.corner-br {
-  right: 12px;
-  bottom: 12px;
-  border-right: 2px solid var(--yellow);
-  border-bottom: 2px solid var(--yellow);
-}
-
-.sys-bar,
-.agent-status-bar,
-.auth-panel,
-.request-page,
-.review-panel,
-.video-panel,
-.work-wait-panel,
-.hud-card,
-.change-dialog {
-  position: relative;
-  min-width: 0;
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(21, 21, 26, 0.98), rgba(13, 13, 16, 0.98));
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-  box-shadow: inset 0 0 34px rgba(252, 238, 10, 0.035);
-  box-sizing: border-box;
-}
-
-.panel-corner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 16px;
-  height: 16px;
-  background: var(--yellow);
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-}
-
-.sys-bar {
-  display: grid;
-  grid-template-columns: minmax(210px, 1fr) auto auto;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--text-dim);
-}
-
-.sys-brand,
-.sys-actions,
-.mode-tabs {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-}
-
-.sys-brand {
-  gap: 9px;
-  overflow: hidden;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.session-code {
-  color: var(--text-faint);
-}
-
-.led {
-  width: 8px;
-  height: 8px;
-  flex: 0 0 auto;
-  background: var(--text-faint);
-  box-shadow: none;
-}
-
-.led.active {
-  background: var(--yellow);
-  box-shadow: 0 0 12px var(--yellow);
-  animation: blink 1.3s steps(1) infinite;
-}
-
-.mode-tabs {
-  gap: 4px;
-}
-
-.mode-tab {
-  border: 1px solid rgba(252, 238, 10, 0.2);
-  padding: 4px 8px;
-  color: var(--text-faint);
-  background: rgba(0, 0, 0, 0.35);
-  font-family: var(--font-en);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.mode-tab.active {
-  border-color: var(--yellow);
-  background: var(--yellow);
-  color: var(--bg);
-  box-shadow: 0 0 14px rgba(252, 238, 10, 0.45);
-}
-
-.sys-actions {
-  justify-content: flex-end;
-  gap: 7px;
-}
-
-.agent-status-bar {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 9px 14px;
-  padding: 12px 14px;
-}
-
-.status-main {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.status-main > div {
-  min-width: 190px;
-}
-
-.eyebrow {
-  margin: 0 0 7px;
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-h1,
-h2 {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--font-en);
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1.12;
-}
-
-h1 {
-  font-size: 28px;
-}
-
-h2 {
-  font-size: 21px;
-}
-
-.glitch-title {
-  width: fit-content;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  text-shadow: 0 0 16px color-mix(in srgb, var(--cyan) 50%, transparent);
-}
-
-.status-message,
-.error-message,
-.lock-message {
-  margin: 0;
-  padding: 8px 11px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.status-message {
-  flex: 1 1 260px;
-  border-left: 3px solid var(--yellow);
-  color: #e8e0a4;
-  background: rgba(252, 238, 10, 0.06);
-}
-
-.error-message {
-  border-left: 3px solid var(--red);
-  color: #ffb4c4;
-  background: rgba(255, 0, 60, 0.11);
-}
-
-.lock-message {
-  border-left: 3px solid #ffb454;
-  color: #ffdaa2;
-  background: rgba(255, 180, 84, 0.09);
-}
-
-.progress-readout {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  min-width: 142px;
-  color: var(--yellow);
-  font-family: var(--font-mono);
-}
-
-.progress-readout strong {
-  font-size: 25px;
-  line-height: 1;
-  text-shadow: 0 0 14px rgba(252, 238, 10, 0.5);
-}
-
-.progress-pill {
-  border: 1px solid rgba(252, 238, 10, 0.28);
-  padding: 5px 8px;
-  color: var(--text-dim);
-  background: #050506;
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.progress-track {
-  grid-column: 1 / -1;
-  height: 7px;
-  border: 1px solid var(--line);
-  background: #000;
-}
-
-.progress-track span {
-  display: block;
-  height: 100%;
-  background: var(--yellow);
-  box-shadow: 0 0 12px rgba(252, 238, 10, 0.65);
-}
-
-.step-list {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 7px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.step-item {
-  display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
-  grid-template-areas:
-    'cell name'
-    'cell code';
-  align-items: center;
-  gap: 2px 8px;
-  min-width: 0;
-  border: 1px solid rgba(252, 238, 10, 0.16);
-  padding: 6px;
-  background: rgba(0, 0, 0, 0.35);
-  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-}
-
-.step-cell {
-  grid-area: cell;
-  display: grid;
-  width: 28px;
-  height: 24px;
-  place-items: center;
-  border: 1px solid var(--text-faint);
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
-}
-
-.step-name {
-  grid-area: name;
-  overflow: hidden;
-  color: var(--text-dim);
-  font-size: 11px;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.step-item strong {
-  grid-area: code;
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-}
-
-.step-succeeded .step-cell {
-  border-color: var(--yellow);
-  color: var(--yellow);
-  background: rgba(252, 238, 10, 0.08);
-}
-
-.step-running .step-cell {
-  border-color: var(--yellow);
-  background: var(--yellow);
-  color: var(--bg);
-  box-shadow: 0 0 14px rgba(252, 238, 10, 0.7);
-}
-
-.step-running strong,
-.step-running .step-name {
-  color: var(--yellow);
-}
-
-.step-failed .step-cell {
-  border-color: var(--red);
-  color: var(--red);
-}
-
-.step-cancelled .step-cell {
-  border-color: #ffb454;
-  color: #ffb454;
-}
-
-.workspace-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 244px;
-  gap: 10px;
-  min-height: 0;
-}
-
-.stage {
-  min-height: 0;
-  overflow: hidden;
-}
-
-.auth-panel {
-  display: grid;
-  align-content: center;
-  justify-items: start;
-  gap: 16px;
-  min-height: 0;
-  padding: 28px;
-}
-
-.auth-panel h1 {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--font-en);
-  font-size: 34px;
-  line-height: 1;
-}
-
-.auth-form {
-  display: grid;
-  gap: 14px;
-  width: min(100%, 420px);
-}
-
-.request-page,
-.review-panel,
-.video-panel,
-.work-wait-panel {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  padding: 18px 20px;
-  overflow: hidden;
-}
-
-.request-page {
-  display: grid;
-  align-content: start;
-  gap: 14px;
-}
-
-.request-header {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.request-form {
-  display: grid;
-  gap: 13px;
-  max-width: 790px;
-}
-
-.runtime-summary {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.runtime-summary-item,
-.hud-card dl > div {
-  border: 1px solid rgba(252, 238, 10, 0.18);
-  background: #000;
-  padding: 10px 12px;
-}
-
-.runtime-summary-item {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-}
-
-.runtime-summary-item h2 {
-  overflow: hidden;
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.runtime-summary p {
-  margin: 0;
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-label {
-  display: grid;
-  gap: 8px;
-  color: var(--text-dim);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-textarea,
-input {
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 12px;
-  color: var(--text);
-  background: #000;
-  font-family: var(--font-jp);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-textarea {
-  min-height: 92px;
-  resize: none;
-}
-
-input {
-  min-height: 44px;
-}
-
-textarea:focus,
-input:focus {
-  outline: 0;
-  border-color: var(--yellow);
-  box-shadow: inset 0 0 18px rgba(252, 238, 10, 0.06);
-}
-
-textarea:disabled,
-input:disabled {
-  color: var(--text-faint);
-  cursor: not-allowed;
-}
-
-textarea::placeholder,
-input::placeholder {
-  color: var(--text-faint);
-}
-
-button {
-  width: fit-content;
-  min-height: 38px;
-  border: 0;
-  padding: 10px 18px;
-  color: var(--bg);
-  background: var(--yellow);
-  box-shadow: 0 0 18px rgba(252, 238, 10, 0.35);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  cursor: pointer;
-  font-family: var(--font-en);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
-}
-
-button:hover:not(:disabled) {
-  background: #fff84a;
-  box-shadow: 0 0 28px rgba(252, 238, 10, 0.65);
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.secondary-button {
-  border: 1px solid rgba(252, 238, 10, 0.42);
-  color: var(--yellow);
-  background: transparent;
-  box-shadow: none;
-}
-
-.secondary-button:hover:not(:disabled) {
-  border-color: var(--yellow);
-  color: var(--yellow);
-  background: rgba(252, 238, 10, 0.1);
-}
-
-.inline-text-button {
-  display: inline-flex;
-  width: fit-content;
-  min-height: auto;
-  border: 0;
-  padding: 0;
-  clip-path: none;
-  background: transparent;
-  box-shadow: none;
-  color: var(--cyan);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-}
-
-.inline-text-button:hover:not(:disabled) {
-  background: transparent;
-  box-shadow: none;
-  color: var(--yellow);
-}
-
-.danger-button {
-  border: 1px solid rgba(255, 0, 60, 0.55);
-  color: var(--red);
-  background: transparent;
-  box-shadow: none;
-}
-
-.danger-button:hover:not(:disabled) {
-  background: rgba(255, 0, 60, 0.12);
-}
-
-.review-panel {
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  gap: 12px;
-}
-
-.review-summary {
-  display: -webkit-box;
-  margin: 0;
-  overflow: hidden;
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.55;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.review-options {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 10px;
-  min-height: 0;
-  overflow: auto;
-  padding-right: 3px;
-}
-
-.incomplete-panel {
-  display: grid;
-  align-content: center;
-  min-height: 0;
-  border: 1px dashed rgba(252, 238, 10, 0.38);
-  padding: 22px;
-  background:
-    repeating-linear-gradient(45deg, rgba(252, 238, 10, 0.035) 0 10px, transparent 10px 20px),
-    rgba(0, 0, 0, 0.42);
-}
-
-.incomplete-panel h3 {
-  margin: 0;
-  color: var(--yellow);
-  font-family: var(--font-en);
-  font-size: 20px;
-  line-height: 1.25;
-}
-
-.incomplete-panel p:last-child {
-  max-width: 680px;
-  margin: 10px 0 0;
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.review-option {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 13px;
-  min-width: 0;
-  border: 1px solid rgba(252, 238, 10, 0.16);
-  padding: 13px 15px;
-  background: var(--panel-2);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
-  color: var(--text);
-  font-weight: 400;
-  transition: border-color 0.14s ease, background 0.14s ease, box-shadow 0.14s ease;
-}
-
-.review-option.selectable {
-  cursor: pointer;
-}
-
-.review-option:hover {
-  border-color: rgba(252, 238, 10, 0.5);
-  background: #1b1b14;
-}
-
-.review-option.selected {
-  border-color: var(--yellow);
-  background: rgba(252, 238, 10, 0.1);
-  box-shadow: inset 0 0 28px rgba(252, 238, 10, 0.06);
-}
-
-.review-option input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.review-marker {
-  width: 14px;
-  height: 24px;
-  border: 1px solid var(--text-faint);
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
-}
-
-.review-option.selected .review-marker {
-  border-color: var(--yellow);
-  background: var(--yellow);
-  box-shadow: 0 0 12px var(--yellow);
-}
-
-.review-option-text {
-  display: grid;
-  gap: 5px;
-  min-width: 0;
-}
-
-.review-option strong {
-  color: var(--text);
-  font-family: var(--font-en);
-  font-size: 17px;
-  line-height: 1.25;
-  white-space: normal;
-}
-
-.review-option small {
-  display: block;
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.55;
-  white-space: pre-line;
-}
-
-.option-id {
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.review-option.selected .option-id {
-  color: var(--yellow);
-}
-
-.review-actions,
-.redo-actions,
-.dialog-actions,
-.web-gemini-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.video-panel {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-  gap: 12px;
-}
-
-.video-review-layout {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.82fr) minmax(360px, 1fr);
-  gap: 12px;
-  min-height: 0;
-}
-
-.video-preview {
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 8px;
-  min-height: 0;
-  overflow: hidden;
-}
-
-video {
-  width: auto;
-  max-width: 100%;
-  height: 100%;
-  min-height: 0;
-  justify-self: center;
-  object-fit: contain;
-  border: 1px solid var(--line);
-  background:
-    repeating-linear-gradient(45deg, rgba(252, 238, 10, 0.04) 0 10px, transparent 10px 20px),
-    #000;
-}
-
-.video-reference {
-  margin: 0;
-  overflow: hidden;
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.web-gemini-review {
-  display: grid;
-  gap: 9px;
-  min-height: 0;
-  overflow: auto;
-  border: 1px solid rgba(0, 240, 255, 0.28);
-  padding: 12px;
-  background:
-    linear-gradient(135deg, rgba(0, 240, 255, 0.08), transparent 36%),
-    #050506;
-}
-
-.web-gemini-header {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.web-gemini-header h3 {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--font-en);
-  font-size: 18px;
-  line-height: 1.2;
-}
-
-.web-gemini-header-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
-  gap: 8px;
-}
-
-.web-gemini-review label {
-  gap: 6px;
-  color: #cfd1bd;
-}
-
-.web-gemini-review textarea {
-  height: 82px;
-  min-height: 0;
-  padding: 10px;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.web-gemini-review-detail {
-  display: grid;
-  gap: 7px;
-}
-
-.web-gemini-review-detail summary {
-  cursor: pointer;
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.web-gemini-review-detail[open] summary {
-  color: var(--cyan);
-}
-
-.web-gemini-result {
-  display: grid;
-  gap: 9px;
-}
-
-.web-gemini-status-card {
-  display: grid;
-  gap: 4px;
-  border: 1px solid rgba(0, 240, 255, 0.24);
-  padding: 8px 10px;
-  background: rgba(0, 240, 255, 0.06);
-}
-
-.web-gemini-status-card strong {
-  color: var(--cyan);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.web-gemini-status-card span,
-.web-gemini-status-card small {
-  color: var(--text-dim);
-  font-size: 11px;
-  line-height: 1.35;
-}
-
-.web-gemini-status-card small {
-  font-size: 11px;
-}
-
-.empty-review-state {
-  display: grid;
-  align-content: start;
-  gap: 6px;
-  min-height: 132px;
-  border: 1px dashed rgba(255, 242, 0, 0.32);
-  padding: 14px;
-  background: rgba(255, 242, 0, 0.05);
-}
-
-.empty-review-state strong {
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-.empty-review-state span {
-  color: var(--text-dim);
-  font-size: 12px;
-}
-
-.web-gemini-execution-notes {
-  display: grid;
-  gap: 4px;
-  margin: 2px 0 0;
-  padding-left: 18px;
-  color: #dfe2cc;
-  font-size: 11px;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-
-.web-gemini-prompt {
-  display: grid;
-  gap: 8px;
-  margin-top: 8px;
-  color: var(--text-muted);
-}
-
-.web-gemini-prompt pre {
-  max-height: 138px;
-  margin: 0;
-  overflow: auto;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.32);
-  color: #dfe2cc;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-.review-reason-list {
-  display: grid;
-  gap: 4px;
-  margin: 4px 0 0;
-  padding-left: 18px;
-  color: #ff9c9c;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.web-gemini-actions {
-  align-items: center;
-}
-
-.final-review-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border: 1px solid rgba(255, 242, 0, 0.26);
-  padding: 10px 12px;
-  background:
-    linear-gradient(90deg, rgba(255, 242, 0, 0.09), transparent 46%),
-    rgba(5, 5, 6, 0.88);
-}
-
-.final-review-panel h3 {
-  margin: 0;
-  color: var(--text);
-  font-family: var(--font-en);
-  font-size: 16px;
-  line-height: 1.25;
-}
-
-.final-review-panel p {
-  margin: 4px 0 0;
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.final-review-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.work-wait-panel {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 14px;
-  text-align: center;
-}
-
-.work-wait-panel p {
-  max-width: 560px;
-  margin: 0;
-  color: var(--text-dim);
-  line-height: 1.6;
-}
-
-.scanner {
-  width: 74px;
-  height: 74px;
-  border: 1px solid var(--line);
-  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-}
-
-.scanner::before {
-  content: '';
-  display: block;
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
-  margin: 8px;
-  border-top: 2px solid var(--yellow);
-  animation: spin 1s linear infinite;
-}
-
-.side-hud {
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  gap: 10px;
-  min-height: 0;
-}
-
-.hud-card {
-  min-height: 0;
-  padding: 13px;
-  overflow: hidden;
-}
-
-.hud-card-title-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 7px;
-}
-
-.hud-card-title-row .eyebrow {
-  margin-bottom: 0;
-}
-
-.hud-card-title-row span {
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 10px;
-}
-
-.artifact-hud-card {
-  padding: 0;
-  overflow: hidden;
-}
-
-.artifact-details {
-  padding: 13px;
-}
-
-.artifact-details[open] {
-  max-height: 214px;
-  overflow: auto;
-}
-
-.artifact-details summary {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.artifact-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.artifact-details summary::after {
-  content: '+';
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.artifact-details[open] summary {
-  margin-bottom: 8px;
-}
-
-.artifact-details[open] summary::after {
-  content: '-';
-}
-
-.artifact-details .eyebrow {
-  margin-bottom: 0;
-}
-
-.artifact-reference-list {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.artifact-reference-list li {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 8px;
-  border-top: 1px solid rgba(255, 242, 0, 0.14);
-  padding-top: 8px;
-}
-
-.artifact-reference-list li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.artifact-step {
-  display: inline-grid;
-  place-items: center;
-  min-height: 24px;
-  border: 1px solid rgba(255, 242, 0, 0.34);
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 10px;
-}
-
-.artifact-reference-list span:last-child {
-  display: grid;
-  gap: 3px;
-  min-width: 0;
-}
-
-.artifact-reference-list strong {
-  color: var(--text);
-  font-size: 12px;
-}
-
-.artifact-reference-list small,
-.artifact-reference-list em {
-  color: var(--text-dim);
-  font-size: 10px;
-  font-style: normal;
-  line-height: 1.35;
-}
-
-.artifact-reference-list code {
-  overflow-wrap: anywhere;
-  color: var(--cyan);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1.35;
-}
-
-.artifact-empty {
-  margin: 0;
-  color: var(--text-faint);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.hud-card dl {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-}
-
-.hud-card dt {
-  color: var(--text-faint);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.hud-card dd {
-  overflow: hidden;
-  margin: 4px 0 0;
-  color: var(--yellow);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.system-log {
-  display: grid;
-  gap: 7px;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-  list-style: none;
-}
-
-.system-log li {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
-  gap: 8px;
-  border-left: 2px solid var(--cyan);
-  padding-left: 8px;
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-.system-log li.needs-review {
-  border-left-color: var(--yellow);
-}
-
-.system-log li.user-action {
-  border-left-color: var(--pink);
-}
-
-.system-log li.agent-action {
-  border-left-color: var(--cyan);
-}
-
-.system-log time {
-  color: var(--text-faint);
-  font-size: 10px;
-  white-space: nowrap;
-}
-
-.system-log span {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.system-log strong {
-  overflow: hidden;
-  color: var(--text);
-  font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.system-log small {
-  display: -webkit-box;
-  overflow: hidden;
-  color: var(--text-dim);
-  font-family: var(--font-sans);
-  font-size: 11px;
-  line-height: 1.45;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.hint-card p:last-child {
-  margin: 0;
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  background: rgba(0, 0, 0, 0.72);
-}
-
-.change-dialog {
-  width: min(540px, 100%);
-  display: grid;
-  gap: 14px;
-  padding: 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 34px rgba(252, 238, 10, 0.14);
-  animation: dialogIn 0.16s ease-out;
-}
-
-.activity-dialog {
-  width: min(760px, 100%);
-  max-height: min(720px, calc(100dvh - 36px));
-  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-}
-
-.activity-dialog h2 {
-  display: -webkit-box;
-  overflow: hidden;
-  font-size: 18px;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.activity-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.activity-search {
-  display: grid;
-  gap: 5px;
-  color: var(--text-dim);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-.activity-search input {
-  width: 100%;
-  min-height: 34px;
-  border: 1px solid rgba(0, 240, 255, 0.24);
-  border-radius: 0;
-  padding: 7px 10px;
-  color: var(--text);
-  background: rgba(0, 0, 0, 0.26);
-  font-family: var(--font-jp);
-  font-size: 13px;
-}
-
-.activity-search input:focus {
-  border-color: var(--cyan);
-  outline: none;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
-}
-
-.activity-current-state {
-  display: grid;
-  gap: 4px;
-  border-left: 3px solid var(--yellow);
-  padding: 2px 0 2px 10px;
-}
-
-.activity-current-state span {
-  color: var(--cyan);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-.activity-current-state strong {
-  color: var(--text);
-  font-size: 14px;
-}
-
-.activity-current-state small,
-.activity-current-state em {
-  overflow-wrap: anywhere;
-  color: var(--text-dim);
-  font-family: var(--font-jp);
-  font-size: 12px;
-  font-style: normal;
-  line-height: 1.45;
-}
-
-.activity-current-state em {
-  color: var(--yellow);
-}
-
-.filter-button {
-  min-height: 28px;
-  border: 1px solid rgba(0, 240, 255, 0.28);
-  padding: 5px 10px;
-  clip-path: none;
-  color: var(--text-dim);
-  background: rgba(0, 0, 0, 0.22);
-  box-shadow: none;
-  font-family: var(--font-jp);
-  font-size: 11px;
-  letter-spacing: 0;
-}
-
-.filter-button.active,
-.filter-button:hover:not(:disabled) {
-  border-color: var(--yellow);
-  color: var(--bg);
-  background: var(--yellow);
-  box-shadow: 0 0 16px rgba(252, 238, 10, 0.28);
-}
-
-.activity-dialog-log {
-  padding-right: 4px;
-}
-
-.activity-dialog-log li {
-  grid-template-columns: 132px minmax(0, 1fr);
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.activity-dialog-log strong {
-  overflow: visible;
-  text-overflow: clip;
-  white-space: normal;
-}
-
-.activity-entry-head {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.activity-entry-head em {
-  flex: 0 0 auto;
-  border: 1px solid rgba(0, 240, 255, 0.26);
-  padding: 1px 5px;
-  color: var(--cyan);
-  font-family: var(--font-jp);
-  font-size: 10px;
-  font-style: normal;
-  line-height: 1.3;
-}
-
-.activity-dialog-log small {
-  -webkit-line-clamp: 3;
-}
-
-.dialog-actions {
-  justify-content: flex-end;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0.28;
-  }
-}
-
-@keyframes glitch {
-  0%,
-  92%,
-  100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-
-  93% {
-    opacity: 0.85;
-    transform: translate(-2px, -1px);
-  }
-
-  96% {
-    opacity: 0.85;
-    transform: translate(2px, 1px);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dialogIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 1000px) {
-  .app-shell {
-    height: 100dvh;
-    grid-template-rows: auto auto minmax(0, 1fr);
-    padding: 10px;
-  }
-
-  .sys-bar {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .mode-tabs {
-    display: none;
-  }
-
-  .workspace-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .side-hud {
-    display: none;
-  }
-
-  .step-list {
-    grid-template-columns: repeat(4, minmax(120px, 1fr));
-    overflow: auto;
-  }
-
-  .video-review-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .final-review-panel {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .final-review-actions {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 720px) {
-  .app-shell {
-    height: auto;
-    min-height: 100dvh;
-    overflow: auto;
-  }
-
-  :global(html),
-  :global(body),
-  :global(#app) {
-    overflow: auto;
-  }
-
-  .sys-bar,
-  .agent-status-bar {
-    clip-path: none;
-  }
-
-  .sys-bar,
-  .status-main,
-  .sys-actions,
-  .progress-readout {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .sys-bar {
-    display: flex;
-  }
-
-  .agent-status-bar {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .request-page,
-  .review-panel,
-  .video-panel,
-  .work-wait-panel {
-    height: auto;
-    min-height: 420px;
-    clip-path: none;
-  }
-
-  .runtime-summary,
-  .step-list {
-    grid-template-columns: 1fr;
-  }
-
-  .review-actions,
-  .redo-actions,
-  .dialog-actions,
-  .web-gemini-actions {
-    display: grid;
-  }
-
-  .web-gemini-review {
-    overflow: visible;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  video {
-    width: min(420px, 100%);
-    height: auto;
-    max-height: 70dvh;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation: none !important;
-    transition: none !important;
-  }
+:global(html), :global(body), :global(#app) { min-height: 100%; margin: 0; background: #f4f7f6; color-scheme: light; }
+.app-shell { --yellow: #176b62; --cyan: #176b62; --red: #ad3d35; --text: #202c2a; --text-dim: #596b68; --line: #cfddda; color: var(--text); font-family: system-ui, -apple-system, sans-serif; max-width: 1260px; margin: auto; padding: 28px; }
+button, input, textarea, select { font: inherit; }
+button, .download-link { border: 1px solid #176b62; border-radius: 8px; padding: 12px 20px; background: #176b62; color: white; font-weight: 650; cursor: pointer; text-decoration: none; }
+button:hover:not(:disabled), .download-link:hover { background: #12574f; }
+button:disabled { opacity: .48; cursor: not-allowed; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #e2b23c; outline-offset: 3px; }
+.secondary-button, .inline-text-button { background: white; border-color: #c6d6d2; color: #25443e; }
+.secondary-button:hover:not(:disabled), .inline-text-button:hover:not(:disabled) { background: #eaf3f0; }
+.danger-button { background: white; color: #a3372f; border-color: #d5b8b4; }
+.sys-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; padding: 20px 24px; background: #f0f6f4; border: 1px solid var(--line); border-radius: 12px 12px 0 0; }
+.sys-brand { display: flex; gap: 24px; align-items: center; flex: 1; min-width: 200px; }
+.sys-brand strong { font-size: 27px; color: #176b62; }
+.sys-brand span { font-weight: 600; max-width: 310px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.version-pill { color: #176b62; background: #e2eeea; padding: 8px 12px; border-radius: 20px; font-size: 13px; }
+.sys-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.sys-actions button { font-size: 13px; padding: 9px 12px; }
+.agent-status-bar { background: white; border: 1px solid var(--line); border-top: 0; padding: 22px 24px; }
+.status-main { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; }
+.status-main h2 { font-size: 19px; margin: 0; }
+.status-message { color: #596b68; flex: 1; }
+.eyebrow { color: #596b68; font-size: 12px; margin: 0 0 8px; }
+.guide-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; list-style: none; padding: 0; margin: 20px 0 0; }
+.guide-steps li { background: #f1f4f3; padding: 14px 10px; border: 1px solid transparent; border-radius: 7px; color: #62736e; font-size: 14px; }
+.guide-steps .active { background: #e4efea; border-color: #b7d3c6; color: #176b62; font-weight: 700; }
+.guide-steps .passed span { color: #176b62; }
+.workspace-grid { background: white; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 12px 12px; padding: 28px; }
+.stage, .request-page, .review-panel, .video-panel, .work-wait-panel { min-width: 0; }
+h1 { font-size: 27px; } h2 { font-size: 24px; } h3 { font-size: 18px; }
+h1, h2, h3 { margin: 0 0 16px; line-height: 1.5; }
+p, li, dd { line-height: 1.65; } p { margin: 10px 0; }
+label { display: grid; gap: 9px; font-weight: 600; }
+input:not([type=checkbox]):not([type=radio]), textarea, select { width: 100%; min-width: 0; padding: 12px 14px; border: 1px solid #c6d6d2; border-radius: 7px; background: white; color: #202c2a; }
+textarea { resize: vertical; line-height: 1.7; }
+small { color: #596b68; line-height: 1.6; font-weight: 400; }
+.request-header { margin-bottom: 24px; }
+.request-columns { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; }
+.request-fields { display: grid; gap: 18px; }
+.start-summary { display: flex; flex-direction: column; gap: 12px; border: 1px solid #d0e0d8; border-radius: 9px; padding: 24px; background: #f2f7f4; }
+.start-summary button { margin-top: auto; }
+dt { color: #62736e; font-weight: 600; margin: 12px 0 6px; }
+dd { margin: 0; overflow-wrap: anywhere; }
+summary { cursor: pointer; color: #35584e; padding: 10px 0; }
+.request-details label { margin: 16px 0; }
+.runtime-summary { display: grid; gap: 14px; margin: 16px 0; }
+.runtime-summary-item { padding: 14px; background: #f5f8f7; border-radius: 7px; }
+.draft-summary { padding: 20px; background: #f3f7f5; border-radius: 8px; }
+.confirmation-check { display: flex; align-items: center; gap: 12px; margin: 20px 0; line-height: 1.6; }
+.confirmation-check input { width: 20px; height: 20px; flex: 0 0 auto; }
+.connection-notice { padding: 16px 22px; border: 1px solid #e2d3b0; border-radius: 8px; background: #fffbf1; color: #745924; }
+.review-summary { color: #596b68; }
+.adoption-note { color: #176b62; font-weight: 650; }
+.review-options { display: grid; gap: 14px; margin: 20px 0; }
+.review-option { display: flex; gap: 18px; align-items: flex-start; padding: 22px; border: 1px solid #cee0d6; background: #f4f8f5; border-radius: 8px; }
+.option-number { background: #e0eee5; color: #176b62; padding: 7px 13px; border-radius: 25px; }
+.review-option-text { display: grid; gap: 8px; }
+.review-option-text small, .candidate-row small { white-space: pre-line; }
+.preview-placeholder { padding: 28px; border: 1px solid #d7e0e3; border-radius: 9px; background: #f0f4f5; color: #657278; margin: 18px 0; }
+.preview-placeholder strong { font-size: 20px; }
+.review-actions, .dialog-actions, .final-review-actions, .redo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.review-actions { justify-content: flex-end; }
+.incomplete-panel, .empty-review-state { display: grid; gap: 10px; padding: 20px; background: #f3f6f5; border-radius: 8px; }
+.video-review-layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 26px; }
+.video-preview video { width: 100%; max-height: 490px; background: #131c1a; border-radius: 9px; }
+.video-reference { font-size: 12px; overflow-wrap: anywhere; color: #62736e; }
+.download-link { display: inline-block; margin: 8px 0; }
+.output-change-panel { display: grid; align-content: start; gap: 18px; }
+.optional-review { grid-column: 1 / -1; }
+.web-gemini-review { padding: 20px; border: 1px solid var(--line); border-radius: 8px; }
+.web-gemini-header-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+.web-gemini-result, .web-gemini-status-card { display: grid; gap: 14px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.final-review-panel { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 28px; }
+.side-hud { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 10px; }
+.hud-card { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.hud-card dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 0; }
+.hud-card-title-row { display: flex; justify-content: space-between; }
+.artifact-reference-list, .system-log, .activity-log { display: grid; gap: 16px; list-style: none; padding: 0; }
+.artifact-reference-list li, .system-log li, .activity-log li { display: flex; gap: 12px; }
+.artifact-reference-list span, .system-log span, .activity-log span { display: grid; gap: 5px; }
+code { overflow-wrap: anywhere; color: #596b68; font-size: 12px; }
+.artifact-step, time { color: #596b68; font-size: 12px; }
+.error-message { color: #aa302c; white-space: pre-wrap; }
+.lock-message { color: #745924; }
+.dialog-overlay { position: fixed; z-index: 20; inset: 0; background: #163a3266; display: grid; align-items: center; justify-items: center; padding: 24px; }
+.change-dialog { width: min(700px, 100%); max-height: 88vh; overflow: auto; background: white; border: 1px solid #c6d6d2; border-radius: 12px; padding: 28px; box-shadow: 0 20px 70px #163a3230; }
+.candidate-dialog { width: min(1040px, 100%); }
+.dialog-heading { display: flex; gap: 24px; justify-content: space-between; align-items: start; }
+.candidate-columns { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; margin-top: 24px; }
+.candidate-list { display: grid; gap: 16px; align-content: start; }
+.candidate-row { display: grid; gap: 12px; text-align: left; padding: 20px; }
+.candidate-row.selected { background: #e8f3ed; border-color: #82b49b; }
+.candidate-row span { font-size: 12px; border-radius: 20px; padding: 5px 12px; background: #e4ebe8; width: fit-content; }
+.candidate-columns > div:last-child { border-left: 1px solid var(--line); padding-left: 28px; }
+.candidate-columns small { display: block; margin-top: 12px; }
+.activity-search { margin: 20px 0; }
+.activity-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.auth-panel { margin: 40px auto; max-width: 560px; padding: 28px; background: white; border: 1px solid var(--line); border-radius: 9px; }
+.auth-form { display: grid; gap: 20px; }
+@media (max-width: 850px) {
+ .app-shell { padding: 12px; } .sys-bar { gap: 12px; padding: 18px; } .workspace-grid { padding: 20px; }
+ .guide-steps { grid-template-columns: repeat(3, 1fr); }
+ .request-columns, .video-review-layout, .candidate-columns { grid-template-columns: 1fr; }
+ .candidate-columns > div:last-child { padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+ .change-dialog { padding: 20px; } .sys-brand { width: 100%; } .hud-card dl { grid-template-columns: 1fr; }
 }
 </style>

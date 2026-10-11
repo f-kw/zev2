@@ -1,0 +1,63 @@
+
+> client@0.1.0 build /Users/kawafmm/workspace/zev2/client
+> run-p type-check "build-only {@}" --
+
+
+> client@0.1.0 type-check /Users/kawafmm/workspace/zev2/client
+> corepack pnpm --filter @zev2/shared build && vue-tsc --build
+
+
+> client@0.1.0 build-only /Users/kawafmm/workspace/zev2/client
+> vite build
+
+
+> @zev2/shared@0.1.0 build /Users/kawafmm/workspace/zev2/packages/shared
+> tsc -p tsconfig.json
+
+vite v6.4.2 building for production...
+transforming...
+✓ 644 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                             0.38 kB │ gzip:   0.26 kB
+dist/assets/Roboto-Thin-NicBC1pN.woff2                     63.05 kB
+dist/assets/Roboto-Light-DHTugVNA.woff2                    64.32 kB
+dist/assets/Roboto-Regular-C6rbFxYz.woff2                  64.63 kB
+dist/assets/Roboto-Bold-hN3duQhD.woff2                     64.74 kB
+dist/assets/Roboto-Black-VhoA2qKx.woff2                    64.96 kB
+dist/assets/Roboto-Medium-ByKogCTi.woff2                   65.48 kB
+dist/assets/Roboto-ThinItalic-CKlCjrO_.woff2               68.33 kB
+dist/assets/Roboto-RegularItalic-CvPUdkvM.woff2            70.28 kB
+dist/assets/Roboto-BoldItalic-BWDm51uc.woff2               70.36 kB
+dist/assets/Roboto-LightItalic-JQyp2Y3P.woff2              70.76 kB
+dist/assets/Roboto-MediumItalic-i1eR0KbF.woff2             71.28 kB
+dist/assets/Roboto-BlackItalic-D4yie1YO.woff2              72.09 kB
+dist/assets/Roboto-Thin-BfJvJcog.woff                      84.22 kB
+dist/assets/Roboto-Light-Cu-PAxXt.woff                     85.69 kB
+dist/assets/Roboto-Regular-BX5l9hRW.woff                   85.88 kB
+dist/assets/Roboto-Bold-D9plYbeK.woff                      86.18 kB
+dist/assets/Roboto-Medium-b81vv18W.woff                    86.44 kB
+dist/assets/Roboto-Black-B0ZKieaB.woff                     86.51 kB
+dist/assets/Roboto-ThinItalic-DnIWFxRE.woff                90.78 kB
+dist/assets/Roboto-RegularItalic-BjnLZsam.woff             91.73 kB
+dist/assets/Roboto-BoldItalic-CyLKvOHD.woff                91.97 kB
+dist/assets/Roboto-LightItalic-CZg5kHIB.woff               92.86 kB
+dist/assets/Roboto-MediumItalic-DFQ-RYa0.woff              93.23 kB
+dist/assets/Roboto-BlackItalic-D0gSnuIb.woff               94.05 kB
+dist/assets/materialdesignicons-webfont-Dp5v-WZN.woff2    403.22 kB
+dist/assets/materialdesignicons-webfont-PXm3-2wK.woff     587.98 kB
+dist/assets/materialdesignicons-webfont-B7mPwVP_.ttf    1,307.66 kB
+dist/assets/materialdesignicons-webfont-CSr8KVlo.eot    1,307.88 kB
+dist/assets/App-CuVz0fIn.css                               10.39 kB │ gzip:   2.57 kB
+dist/assets/PresentationEditing-CqiP-0t-.css               10.53 kB │ gzip:   2.57 kB
+dist/assets/index-g0x6fdv4.css                            848.43 kB │ gzip: 119.03 kB
+dist/assets/_plugin-vue_export-helper-DlAUqK2U.js           0.09 kB │ gzip:   0.10 kB
+dist/assets/PresentationEditing-Dicg9t0V.js                37.17 kB │ gzip:  11.71 kB
+dist/assets/App-BvqC0Fnu.js                               115.60 kB │ gzip:  37.14 kB
+dist/assets/index-C_4nNRp9.js                             637.19 kB │ gzip: 203.00 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.92s

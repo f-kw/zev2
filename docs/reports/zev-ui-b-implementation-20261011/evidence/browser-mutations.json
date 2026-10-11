@@ -1,0 +1,204 @@
+[
+  {
+    "cycle": "mock-calls.json",
+    "calls": [
+      {
+        "method": "POST",
+        "path": "/api/request-drafts",
+        "body": {
+          "productionType": "clip",
+          "purpose": "会話の見どころをまとめる",
+          "sourceUri": "file:///saved/mock-conversation.mp4",
+          "durationLabel": "60秒以内",
+          "themeCountLabel": "3候補",
+          "geminiModelName": "gemini-3.8-flash",
+          "preset": "shorts_default"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts",
+        "body": {
+          "productionType": "clip",
+          "purpose": "初めて見る人に話の流れを伝える",
+          "sourceUri": "file:///saved/mock-conversation.mp4",
+          "durationLabel": "60秒以内",
+          "themeCountLabel": "3候補",
+          "geminiModelName": "gemini-3.8-flash",
+          "preset": "shorts_default"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-2/approve",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/control-reviews/review-3/approve",
+        "body": {
+          "reason": "確認済みとして進める",
+          "selectedOptionId": "turn"
+        }
+      }
+    ],
+    "readCounts": {
+      "/api/human-auth/status": 6,
+      "/api/workflow": 86,
+      "/api/runtime-config": 86,
+      "/api/state": 86,
+      "/api/request-drafts/draft-1/activity": 1,
+      "/api/request-drafts/draft-2/activity": 3
+    },
+    "totalRequestCount": 272
+  },
+  {
+    "cycle": "continued-calls.json",
+    "calls": [
+      {
+        "method": "POST",
+        "path": "/api/control-reviews/review-2/approve",
+        "body": {
+          "reason": "確認済みとして進める",
+          "selectedOptionId": "turn"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-1/final-review",
+        "body": {
+          "action": "publish_ready"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-1/request-generated-video-changes",
+        "body": {
+          "reason": "字幕を読みやすくしたい",
+          "scope": "edit_plan"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-6/final-review",
+        "body": {
+          "action": "final_complete"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/agent-requests/queued-11/retry",
+        "body": {}
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-19/cancel-agent-work",
+        "body": {}
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/agent-requests/resume",
+        "body": {}
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts/draft-36/cancel-agent-work",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts",
+        "body": {
+          "productionType": "digest",
+          "purpose": "会話の見どころをまとめる",
+          "sourceUri": "file:///saved/mock-conversation.mp4",
+          "durationLabel": "60秒以内",
+          "themeCountLabel": "3候補",
+          "geminiModelName": "gemini-3.8-flash",
+          "preset": "shorts_default"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/request-drafts",
+        "body": {
+          "productionType": "clip",
+          "purpose": "会話の見どころをまとめる",
+          "sourceUri": "file:///saved/mock-conversation.mp4",
+          "durationLabel": "60秒以内",
+          "themeCountLabel": "3候補",
+          "geminiModelName": "gemini-3.8-flash",
+          "preset": "shorts_default"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      }
+    ],
+    "readCounts": {
+      "/__qa/scenario": 8
+    },
+    "totalRequestCount": 18
+  },
+  {
+    "cycle": "retry-copy-calls.json",
+    "calls": [
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      },
+      {
+        "method": "POST",
+        "path": "/api/agent-requests/queued-4/retry",
+        "body": {}
+      },
+      {
+        "method": "GET",
+        "path": "/__qa/scenario",
+        "body": {}
+      }
+    ],
+    "readCounts": {
+      "/__qa/scenario": 2
+    },
+    "totalRequestCount": 3
+  }
+]
