@@ -146,13 +146,14 @@ import {
   webGeminiReviewSavedNextActionBySavedFrom
 } from '../web-gemini/run-status.js';
 import { upsertWebGeminiReviewState, webGeminiReviewStateForDraft } from '../web-gemini/state.js';
-import { requireAgentApiToken } from '../security/agent-auth.js';
+import { configuredAgentApiToken, requireAgentApiToken } from '../security/agent-auth.js';
 import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMaterials, confirmedOutput, registeredUiFile } from '../domain/ui-review.js';
 import { digestUiRegistrationInput, qualifyDigestUiPreparation } from '../domain/digest-ui-review.js';
 import { saveDigestUiPreparation } from '../store/digest-ui-preparations.js';
 import { saveDigestSceneAddition } from '../domain/digest-ui-edit-requests.js';
 import { readDigestUiCompositionData, saveDigestUiCompositionData, prepareDigestUiAdditionalRetentionInputs,
-  readDigestUiAdditionalRetentionInputs } from '../domain/digest-ui-composition-data.js';
+  readDigestUiAdditionalRetentionInputs, readDigestUiRetentionCallerInputs, saveDigestUiRetentionCallerAnswer,
+  readDigestUiRetentionCallerAnswer } from '../domain/digest-ui-composition-data.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -166,6 +167,35 @@ const router: express.Router = express.Router();
 const finalReviewActionTypes: FinalReviewActionType[] = ['publish_ready', 'final_complete'];
 type LoadedState = Awaited<ReturnType<typeof loadState>>;
 const runtimeDir = resolveRuntimeDir();
+
+// Narrow production-data routes precede human UI middleware and use the existing agent token and shared operation queue.
+// A missing agent token never makes these full-input/answer routes public. No existing auth default is changed.
+const requireRetentionCaller: express.RequestHandler = (request, response, next) => {
+  if (!configuredAgentApiToken()) { response.status(503).json({ error: '制作callerの認証が未設定です' });return; }
+  requireAgentApiToken(request, response, next);
+};
+async function retentionCallerState() { await readStateSnapshot();return loadState(); }
+router.get('/agent-digest-retention/:id/:requestHash/inputs', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    response.json(await runExclusiveStateOperation(async () => readDigestUiRetentionCallerInputs(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash))));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+router.post('/agent-digest-retention/:id/:requestHash/answers', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    response.json(await runExclusiveStateOperation(async () => saveDigestUiRetentionCallerAnswer(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash), request.body)));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+router.get('/agent-digest-retention/:id/:requestHash/answers/:answerHash', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    response.json(await runExclusiveStateOperation(async () => readDigestUiRetentionCallerAnswer(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash), routeParamText(request.params.answerHash))));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
 
 function isAgentExecutionApiRequest(request: express.Request): boolean {
   const path = request.path;

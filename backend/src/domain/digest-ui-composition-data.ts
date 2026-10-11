@@ -191,7 +191,84 @@ export async function prepareDigestUiAdditionalRetentionInputs(state: Zev2State,
   return retentionSummary(p);
 }
 export async function readDigestUiAdditionalRetentionInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
+  const p = await savedRetentionInputs(state, draftId, config, requestHash);
+  return retentionSummary(p);
+}
+
+async function savedRetentionInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
   const p = await retentionInputs(state, draftId, config, requestHash);
   assert.deepEqual(await p.r.read(p.binding), bytes(p.value), '保存した保持要求が改変されています');
-  return retentionSummary(p);
+  return p;
+}
+
+/** Full closed input only for the authenticated production caller. The ordinary UI keeps its summary. */
+export async function readDigestUiRetentionCallerInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
+  const p = await savedRetentionInputs(state, draftId, config, requestHash);
+  return { binding: p.binding, bundle: p.value };
+}
+
+async function retainedAnswer(p: Awaited<ReturnType<typeof savedRetentionInputs>>, requestId: unknown, response: unknown) {
+  const item = p.value.requests.find(v => v.request.requestId === requestId);
+  assert(item && typeof requestId === 'string', '回答対象の追加保持要求が現在の版にありません');
+  const root = workspaceRoot();
+  const skill = await import(pathToFileURL(path.join(root, 'runner/src/skills/candidate-internal-retention-v001.ts')).href);
+  const validator = await import(pathToFileURL(path.join(root, 'evals/clip_composition/candidate_internal_retention_validation_v001.mts')).href);
+  const wire = await import(pathToFileURL(path.join(root, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts')).href);
+  assert.equal(item.requestFileSha256, sha(wire.formal(item.request)), '保存した追加保持要求の全文SHAが不一致です');
+  assert.equal(item.request.inputCanonicalSha256, wire.canonicalSha(item.request.input), '保存した追加保持入力のSHAが不一致です');
+  const reply = response as Obj;
+  // This callback only wraps the supplied saved answer. It never generates a judgment or sends an API request.
+  const result = await skill.runInternalRetentionV001(item.request.input, async () => reply?.answer);
+  const token = validator.validateInternalRetentionProvenanceV001(item.request, reply, result, item.request.input);
+  const parent = p.r.parents.find(v => v.candidateId === item.request.candidateId);assert(parent, '元候補の所属がありません');
+  const validation = validator.resolveInternalRetentionV001(token, [parent], [{ transcriptBinding: p.r.q.sourceBindings.transcript,
+    units: p.r.q.transcript.segments.filter((a: Obj) => a.endMs > a.startMs).map((a: Obj) => ({ unitId: `source-fragment-${a.id}`,
+      startMs: a.startMs, endMs: a.endMs, startBoundary: { after: a.id }, endBoundary: { before: a.id },
+      startTimeRole: 'gpu-aligned-source-fragment', timeOrigin: 'saved-source-transcript' })) }]);
+  assert.equal(validation.status, 'resolved', '追加保持の元境界は未解決です。回答を全体準備へ適用できません');
+  const record = { schemaVersion: 'ui-digest-additional-retention-answer-v001', status: 'answer-validated-only',
+    requestDraftId: p.value.requestDraftId, draftIdentity: p.value.draftIdentity, requestHash: p.value.requestHash,
+    preparationBinding: p.binding, requestId: item.request.requestId, requestFileSha256: item.requestFileSha256,
+    response: reply, result, validation,
+    admission: p.value.admission };
+  const answerHash = sha(bytes(record));
+  const binding = { path: `artifacts/${p.value.requestDraftId}/ui-retention-answer-${p.value.requestHash}-${answerHash}.json`, fileSha256: answerHash };
+  return { record, binding, answerHash };
+}
+function answerSummary(a: Awaited<ReturnType<typeof retainedAnswer>>) {
+  return { status: 'answer-validated-only', requestDraftId: a.record.requestDraftId, requestHash: a.record.requestHash,
+    requestId: a.record.requestId, answerHash: a.answerHash, binding: a.binding, admission: a.record.admission };
+}
+
+/** Immutable supplied-answer acceptance only. No original rewrite, aggregate, queue, provider or execution grant. */
+export async function saveDigestUiRetentionCallerAnswer(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string, input: unknown) {
+  const b = input as Obj;
+  assert(b && typeof b === 'object' && !Array.isArray(b) && Object.keys(b).length === 5
+    && ['draftIdentity', 'fingerprint', 'preparationHash', 'requestId', 'response'].every(k => Object.hasOwn(b, k)), '追加保持回答の項目が一致しません');
+  const p = await savedRetentionInputs(state, draftId, config, requestHash);
+  assert.equal(b.draftIdentity, p.value.draftIdentity, '回答対象の依頼が変更されています');
+  assert.equal(b.fingerprint, p.r.m.fingerprint, '回答対象の構成・要求版が変更されています');
+  assert.equal(b.preparationHash, p.binding.fileSha256, '回答対象の未回答bundleが一致しません');
+  const a = await retainedAnswer(p, b.requestId, b.response), file = path.join(p.r.runtime, a.binding.path), data = bytes(a.record);
+  let info;
+  try { info = await lstat(file); } catch (e) { if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e; }
+  if (info) {
+    assert(info.isFile() && !info.isSymbolicLink() && await realpath(file) === file, '保存回答の参照が不正です');
+    assert.deepEqual(await p.r.read(a.binding), data, '保存回答が改変されています');
+  } else await writeFile(file, data, { flag: 'wx' });
+  assert.deepEqual(await p.r.read(a.binding), data, '保存回答の再読が一致しません');
+  return answerSummary(a);
+}
+
+/** Requalify the current bundle and repeat the existing validator from saved response bytes in a fresh process. */
+export async function readDigestUiRetentionCallerAnswer(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string, answerHash: string) {
+  assert(/^[0-9a-f]{64}$/u.test(answerHash), '保存回答のhashが不正です');
+  const p = await savedRetentionInputs(state, draftId, config, requestHash);
+  const binding = { path: `artifacts/${draftId}/ui-retention-answer-${requestHash}-${answerHash}.json`, fileSha256: answerHash };
+  const raw = await p.r.read(binding);assert.equal(sha(raw), answerHash, '保存回答のbytesが変更されています');
+  const saved = JSON.parse(raw.toString()) as Obj;
+  const a = await retainedAnswer(p, saved.requestId, saved.response);
+  assert.deepEqual(a.binding, binding, '保存回答の依頼・構成版が一致しません');
+  assert.deepEqual(raw, bytes(a.record), '保存回答の全記録を再構築できません');
+  return { ...answerSummary(a), record: a.record };
 }
