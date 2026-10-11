@@ -1,11 +1,43 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v151
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v153
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
 
 
 
+
+
+
+## 最新現在地 — 2026-10-11T03:47:53.972703+00:00（No.61同じ取得を継続・取得後の音声/LAN STTまで承認済み）
+
+monaの明示続行指示で、同じcontroller89138/worker-PGID89147の通常取得1回を終了まで確認し、完全ファイル/長さ/保存先/容量の実検査後、原音声をSSDへ準備して既存自前LAN STTへ進める。本人のSTT起動連絡と既存LAN送信許可があり、再許可不要。取得前の音声送信・重複取得なし。2026-10-11T03:47:53.972703+00:00実読取の動画partは3055573347B、まだ統合MP4/全尺検査/SHA未完。現在作業中、次担当同Codex-SSD。No.61rev61/board323の実作業を維持、素材不存在を全工程完了にしない。
+
+後続の安いtool preflightは12:42:42.509〜12:42:42.682 JST/0.172529秒、既存Node20.19.6＋ffmpeg/ffprobe8.0.1が正式expected profileと一致し、現binary diagnosticsと関連source3path SHAをworkspaceへ保存再読。最初はrelative logがread-only repoへ向いたためchild未起動、workspace absolute logへ直したv002がexit0。設定/製品code/既存suite変更0。音声は原AACを再圧縮せず取り出し、sourceとencoded audio SHA/長さ/開始clock等を実検査する方針。未作成音声や未確認値を合格扱いしない。STTは既存/jobsの単一受付とSHA/byte/IDを保存、切断時はreceiptを再読して同job観測し再投入しない。推測時刻補正0、公開字幕3候補は未採用。
+
+新素材向け外部有料APIには、過去の『固定326字幕/5場面・各1回5送信』承認を流用できない。その段階で実対象・回数・具体的費用と既承認の適用可否を親へ返し、未承認の有料送信だけ止める。素材取得/音声準備/自前LAN STTの既承認工程はそれを理由に止めない。今回API/STT/動画製造0、原source/字幕/旧成果/途中失敗はKEEP。新素材全体の開始11:37:40.546 JSTからの経過と各処理/待ち/失敗/並列を保持し、全体完了・総制作時間は未確定。
+
+UIがmain/remote `588134c6c654c79bac56c61f3c28a638c4f2d596` を保存してGit枠を返却、親が今回自分6文書の監査checkpointだけを許可。取得処理を止めず、このCURRENT/HANDOVER/report/月log/既存時間台帳md/jsonだけをstage/commit/pushし、結果後にUIへ枠返却する。他担当file混入0、正式採用/公開の承認にしない。実保存結果SHAはcommit後のworkspace証拠/親報告で示し、自己hashを本文へ捏造しない。
+
+以下は以前の時点の記録。
+
+## 最新現在地 — 2026-10-11T03:36:26.730242+00:00（No.61 STT復旧・途中Range403を切分け・通常取得1回を継続中）
+
+本人の「STT起動したよ」をmona経由で受け、以前の正規LAN `http://192.168.1.7:8000/health` へ1回GET。12:16:34.506 JSTにHTTP200、実応答 `ok:true` / `workerActive:true` / `model:large-v3` / `device:cuda`、0.037560秒、747B原応答/照合値とJSON再読をSSD `stt-health-recovery-v001` に保存。STT接続先の本人回答待ちを外した。設定変更/探索/再起動/音声送信0。前のtimeout→復旧観測までの窓1815.786秒は継続的な停止時間ではなく、正確な復旧時点も不明として分ける。
+
+追加の本人「映像取得できてない原因を調べろ」を受け、No.61を原因調査Doing rev60（12:17:46.514 JST）へ保存再読。旧取得は新規受信40944617B、Resumingなし、download-sections/外部downloaderなし。実コマンドを使用中公式zipへreadonly parseし、HTTPS299/140の選択はHttpFD、形式のchunk10485760B。元logには最後のContent-Rangeと403時の正確なRangeがなく、40944617開始は推定・今回probeの実値として原traceと区別する。使用tool2026.08.19/Python3.14.6、verbose一回simulate metadataは4.347秒成功・JS警告なし、Deno2.9.1とEJS0.8.0を認識。Nodev23.7.0は存在するがprovider未有効。採用形式はc=VISIONOS/nなし。インストール/JS/client/認証/経路の変更0。
+
+通常のHTTP小切分けは計9要求・再送0、206七件/403二件、受信20992000B。先頭と失敗位置の4KiBは新旧URLとも206。旧URL先頭10MiB206、失敗位置 `bytes=40944617-51430376` は10MiB403、旧URL8MiBも403。一方、新しい通常metadata URLの同位置10MiBは206・Content-Range一致・全10485760B保存。期限はいずれも未来。新旧は公式が自動生成する通常User-Agentとopaque resource IDにも差があるため、URLだけを単独原因にせず、サーバー/CDNの詳しい拒否理由は未特定。固定41MB制限/恒久拒否/JS不足/期限切れとは断定しない。
+
+HTTP/downloader/YouTube sourceと依存宣言・EJSガイドを公式GitHubへ通常HTTPSで読み、使用toolの3実装byteが同タグ公式sourceと一致。Range分割は[公式HTTP実装](https://github.com/yt-dlp/yt-dlp/blob/2026.08.19/yt_dlp/downloader/http.py)、JS標準設定は[公式EJSガイド](https://github.com/yt-dlp/yt-dlp/wiki/EJS)へ照合。公式issue限定検索は今回に一致する修正なし（全件保証ではない）。生の署名URL/通信logはSSD private専用領域に保持し、Git/会話へコピーしない。
+
+新しい通常発行のURLで失敗位置の元サイズを読める根拠から、一度だけ通常取得を再試行。途中物再利用preflightはopaque ID不一致を検出して実行前に停止し、旧partのsize/SHAを保持したまま、新しい `source-acquisition-v002` で0から開始。12:30:39.692 JST、controller89138/worker-PGID89147。2026-10-11T03:36:26.730242+00:00の実確認で動画part 811508503B（約811.5MB）、旧約41MB地点を越え、直近Content-Rangeも206。ps実観測で2process稼働、own KEEP。全素材取得/統合MP4/SHA/時計検査は未完で、完了時刻未確定。50GB開始/12GBreserve/16GiB RSS/pressure1/1秒/device別予算/own PGID停止と残存確認は継続。直近treeRSS 208994304B、pressure1、guest free495101505536B。これは全工程/持続速度保証ではない。
+
+No.61最新は作業中rev61/board323（12:33:14.209 JST）に保存再読、STT本人回答待ちなし。次担当同Codex-SSD（取得監視→結果の独立再読）、mona（本人へ診断と素材所在質問の整理）。取得重複/同条件自動再送/STT送信/有料API/製造0、公開字幕の3場面は採用未確定のまま。元資料/旧成果/旧326字幕・5場面計画/SSDbackup KEEP。UI接続は担当者が実装しこちらで重複しない。
+
+時間はhealth0.037560秒、metadata4.347秒、3小範囲0.476秒、旧URL比較0.379秒、元サイズ比較4.206秒、URL/サイズ比較5.602秒を台帳へ別記。失敗403・設営停止を成功に書換えず、素材待ちと取得処理、並列区間を合算しない。再取得の終了/全制作時間は未確定。根拠はSSD `media-diagnosis-v001/diagnostic-summary-v001.json`、各probe plan/results、継続取得traffic/resource/owner。終了済み診断helper/MCP close、継続取得2processは明示KEEP。cleanup削除0・原partと小診断証拠KEEP。今回自分6文書は編集保存/再読とdiff確認だけで、Git枠UI担当につきstage/commit/push0。直前自分checkpointは `bef8c0b8bfc3c76f6f99138addfdcab6c5d3f7f3`、今回の未commit追記を同SHAに含めない。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T03:10:57.458515+00:00（No.61公開字幕だけの3場面下調べ保存・媒体/LAN待ち）
 
