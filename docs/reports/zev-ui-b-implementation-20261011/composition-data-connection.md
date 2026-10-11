@@ -16,7 +16,7 @@ AppleDoubleはA/B各2件、計4件を観測した。いずれも4,096bytesで、
 
 cleanup：after-hookにより人工SSD/source root残件0、test process/server終了。今回raw logをbyte一致再読後、所有/tmp重複13,763bytesを削除。fixture回収量は未測定、新大容量媒体0、原本/正式/他担当/退避物と他担当processを保持。空き観測は開始Mac17,255,180KiB/SSD1,903,314,432KiB、検査後Mac17,262,160KiB/SSD1,903,312,896KiB。共有変動を含むため回収量の証明へ使わない。
 
-現在は返却されたUI Git枠で今回test・新証拠・自分の報告/logだけを保存する工程。中央CURRENT_GOAL/HANDOVER/DECISIONSへ長い経過は追記しない。正式保持/時計/字幕新版準備・正式な要求反映対応・UI再資格確認・通常製造許可・実媒体/人間品質は残る。保存構成データだけを製造資格にしない。
+返却されたUI Git枠で今回test・新証拠・自分の報告4fileだけを明示保存し、検証済みcheckpoint `7eaae3587040efd5391db3271fdb345e9bd5f271` をcommit/push成功（`3a1cca21..7eaae358 main -> main`）。[今回のsession log](../../work-logs/2026-10/2026-10-11T0607_Codex-UI_No68-composition-data-validation_7eaae358.md)とこの保存行を後続doc commitへ残す。中央CURRENT_GOAL/HANDOVER/DECISIONSへ長い経過は追記しない。正式保持/時計/字幕新版準備・正式な要求反映対応・UI再資格確認・通常製造許可・実媒体/人間品質は残る。保存構成データだけを製造資格にしない。
 
 ## 前回の停止・監査保存の記録
 
