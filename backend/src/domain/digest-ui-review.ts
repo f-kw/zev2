@@ -93,6 +93,12 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
   const selection = await document(preparation.artifacts['selection-adoption.json']);
   const discovery = await document(preparation.artifacts['candidate-response.json']);
   const utterances = await document(plan.utteranceBinding);
+  const retentionNames = { request: 'retention-request.json', response: 'retention-response.json',
+    result: 'retention-result.json', validation: 'retention-validation.json' } as const;
+  const retentionBindings: Record<string, Obj> = {}, retentionDocuments: Record<string, Obj> = {};
+  for (const [name, file] of Object.entries(retentionNames)) {
+    retentionBindings[name] = preparation.artifacts[file];retentionDocuments[name] = await document(retentionBindings[name]!);
+  }
   assert(execution.sourceInspectionBinding && execution.clockResolutionBinding, '元時計の登録が不足しています');
   const inspection = await document(execution.sourceInspectionBinding), clock = await document(execution.clockResolutionBinding);
   const sourceAudioReference = inspection.media?.audioClock && Number.isFinite(inspection.media.audioClock.sampleRate)
@@ -106,7 +112,10 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
   // Caption preparation intentionally leaves declared media bytes unqualified; this is input provenance, never output QC.
   return { caption, transcript, candidates, selection, candidateSetBinding: preparation.artifacts['candidate-set.json'] as DigestByteBindingV001,
     selectionAdoptionBinding: preparation.artifacts['selection-adoption.json'] as DigestByteBindingV001,
-    discovery, utterances, planFile, executionFile, audioPreservation, sourceAudioReference };
+    discovery, discoveryBinding: preparation.artifacts['candidate-response.json'] as DigestByteBindingV001,
+    sourceBindings: { sourceVideo: plan.sourceVideoBinding, transcript: plan.transcriptBinding, utterances: plan.utteranceBinding },
+    retention: { bindings: retentionBindings, documents: retentionDocuments },
+    utterances, planFile, executionFile, audioPreservation, sourceAudioReference };
 }
 
 export async function populateDigestUiReview(state: Zev2State, model: UiReviewMaterials, config: RuntimeConfig,
@@ -150,6 +159,10 @@ export async function populateDigestUiReview(state: Zev2State, model: UiReviewMa
       identity: createHash('sha256').update(JSON.stringify([model.requestDraftId, model.draftIdentity, basisReferences])).digest('hex'), ...basisReferences
     }, result.selection.adoptedCandidates.map((c: Obj) => c.candidateId),
     model.segments.reduce((total, s) => total + s.endMs - s.startMs, 0));
+    for (const id of model.digestComposition!.addedCandidateIds) {
+      const title = model.candidates.find(c => c.id === id)!.title;
+      model.blockers.push(`追加場面「${title}」の保持判断は未回答です。要求を準備・保存しても判断処理は実行しません。`);
+    }
     if (result.audioPreservation === 'unknown') model.blockers.push('元の音声を保持する指定が保存資料で確認できません。');
     if (result.sourceAudioReference === 'unknown') model.blockers.push('元音声の参照と入力時計が保存資料で確認できません。');
     model.blockers.push('動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。');

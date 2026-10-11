@@ -63,7 +63,7 @@ async function reconstruct(state: Zev2State, draftId: string, config: RuntimeCon
   assert.equal(await realpath(directory), directory, '構成データの既存出力先が変更されています');
   const stable = await import(pathToFileURL(path.join(root, 'evals/clip_composition/presentation_timeline_composition_decision_v001.mjs')).href);
   const read = (binding: Binding) => stable.readPresentationMeaningWorkspaceFileStableV001({ workspaceRoot: runtime, relativePath: binding.path }) as Promise<Buffer>;
-  return { m, snapshot, composition, snapshotBinding, compositionBinding, requestHash, runtime, read };
+  return { m, q, parents, snapshot, composition, snapshotBinding, compositionBinding, requestHash, runtime, read };
 }
 function result(r: Awaited<ReturnType<typeof reconstruct>>) {
   return { status: 'composition-data-only' as const, requestDraftId: r.m.requestDraftId, requestHash: r.requestHash,
@@ -104,4 +104,94 @@ export async function readDigestUiCompositionData(state: Zev2State, draftId: str
   for (const [binding, value] of [[r.snapshotBinding, r.snapshot], [r.compositionBinding, r.composition]] as const)
     assert.deepEqual(await r.read(binding), bytes(value), '保存構成データの再読が一致しません');
   return result(r);
+}
+
+/** Old retention stays bound to its entire original request. It is never relabelled as a human-addition answer. */
+async function retentionInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
+  assert(/^[0-9a-f]{64}$/u.test(requestHash), '保持要求の構成hashが不正です');
+  const r = await reconstruct(state, draftId, config);
+  assert.equal(requestHash, r.requestHash, '保持要求の構成・元資料が変更されています');
+  for (const [binding, value] of [[r.snapshotBinding, r.snapshot], [r.compositionBinding, r.composition]] as const)
+    assert.deepEqual(await r.read(binding), bytes(value), '構成データの再読が一致しません');
+  const root = workspaceRoot(), q = r.q;
+  const skill = await import(pathToFileURL(path.join(root, 'runner/src/skills/candidate-internal-retention-v001.ts')).href);
+  const validator = await import(pathToFileURL(path.join(root, 'evals/clip_composition/candidate_internal_retention_validation_v001.mts')).href);
+  const wire = await import(pathToFileURL(path.join(root, 'evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts')).href);
+  const purpose = state.requestDrafts.find(d => d.id === draftId)!.purpose;
+  const byUtterance = new Map<string, Obj>(q.utterances.utterances.map((u: Obj) => [u.utteranceId, u]));
+  const byAtom = new Map<number, Obj>(q.transcript.segments.map((a: Obj) => [a.id, a]));
+  const candidate = (p: Obj, reason: string) => ({ candidateId: p.candidateId, title: p.title, highlightReason: reason,
+    utterances: p.includedUtteranceIds.map((id: string) => { const u = byUtterance.get(id);assert(u, '元発話がありません');
+      return { utteranceId: id, atoms: u.sourceSegmentIds.map((id: number) => { const a = byAtom.get(id);assert(a, '元断片がありません');
+        return { sourceSegmentId: id, text: a.text }; }) }; }) });
+  const input = (candidates: Obj[]) => ({ schemaVersion: 'candidate-internal-retention-input-v001', taskDescription: purpose, candidates });
+  try {
+    const originalInput = input(q.selection.adoptedCandidates.map((p: Obj) => candidate(p, p.judgment.reason)));
+    const old = q.retention.documents;
+    const token = validator.validateInternalRetentionProvenanceV001(old.request, old.response, old.result, originalInput);
+    const resolved = validator.resolveInternalRetentionV001(token, q.selection.adoptedCandidates, [{ transcriptBinding: q.sourceBindings.transcript,
+      units: q.transcript.segments.filter((a: Obj) => a.endMs > a.startMs).map((a: Obj) => ({ unitId: `source-fragment-${a.id}`,
+        startMs: a.startMs, endMs: a.endMs, startBoundary: { after: a.id }, endBoundary: { before: a.id },
+        startTimeRole: 'gpu-aligned-source-fragment', timeOrigin: 'saved-source-transcript' })) }]);
+    assert.equal(resolved.status, 'resolved');
+    assert.deepEqual(old.validation, { schemaVersion: 'new-material-retention-validation-v001', ...resolved,
+      requestBinding: q.retention.bindings.request, transcriptBinding: q.sourceBindings.transcript });
+  } catch { throw new Error('原保持の要求・回答・結果・本文・境界を再照合できません。原記録は変更していません。'); }
+  const additions = r.composition.scenes.filter(s => s.inclusion.kind === 'human-addition');
+  assert(additions.length, '追加場面の保持要求がありません');
+  const requests = additions.map(scene => {
+    const p = r.parents.find(p => p.candidateId === scene.candidateId);assert(p, '追加場面が現在の候補にありません');
+    const index = q.candidates.candidates.findIndex((c: Obj) => c.candidateId === p.candidateId);
+    const summary = q.discovery.answer.candidates[index];
+    assert(summary && summary.title === p.title && summary.contextStartUtteranceId === p.contextStartUtteranceId
+      && summary.contextEndUtteranceId === p.contextEndUtteranceId && typeof summary.reason === 'string' && summary.reason.trim(),
+    `追加場面「${scene.title}」の探索要約が不足または不一致です`);
+    const value = input([candidate(p, summary.reason)]);skill.assertInternalRetentionInputV001(value);
+    const request = { schemaVersion: 'ui-digest-additional-retention-request-v001', requestDraftId: draftId,
+      requestId: `ui-retention-${r.requestHash}-${scene.candidateId}`, requestHash: r.requestHash,
+      snapshotBinding: r.snapshotBinding, compositionBinding: r.compositionBinding,
+      editRequestId: scene.inclusion.editRequestId, candidateId: scene.candidateId,
+      summarySource: { binding: q.discoveryBinding, candidateIndex: index }, input: value,
+      inputCanonicalSha256: wire.canonicalSha(value) };
+    return { request, requestFileSha256: sha(wire.formal(request)), answerStatus: 'unanswered' };
+  });
+  const value = { schemaVersion: 'ui-digest-additional-retention-inputs-v001', status: 'awaiting-retention-answers',
+    requestDraftId: draftId, draftIdentity: r.m.draftIdentity, requestHash: r.requestHash,
+    snapshotBinding: r.snapshotBinding, compositionBinding: r.compositionBinding,
+    representedEditRequestIds: r.composition.representedEditRequestIds, sourceBindings: q.sourceBindings,
+    originalRetentionBindings: q.retention.bindings, requests,
+    admission: { retentionIntegration: 'not-prepared', captionPreparation: 'not-prepared', executionPermission: 'not-approved', humanQuality: 'pending' } };
+  const binding = { path: `artifacts/${draftId}/ui-retention-inputs-${r.requestHash}.json`, fileSha256: sha(bytes(value)) };
+  return { r, value, binding };
+}
+function retentionSummary(p: Awaited<ReturnType<typeof retentionInputs>>) {
+  return { status: 'awaiting-retention-answers', requestDraftId: p.value.requestDraftId, requestHash: p.value.requestHash,
+    preparationHash: p.binding.fileSha256,
+    pendingCandidates: p.value.requests.map(v => ({ candidateId: v.request.candidateId,
+      title: v.request.input.candidates[0]!.title, answerStatus: v.answerStatus })),
+    message: '追加場面の保持要求を保存しました。保持判断は未回答です。保存だけでは判断処理を実行しません。',
+    admission: p.value.admission };
+}
+/** Explicit human-confirmed input preparation only; old references remain internal. No judge/queue/state write. */
+export async function prepareDigestUiAdditionalRetentionInputs(state: Zev2State, draftId: string, config: RuntimeConfig, input: unknown) {
+  const b = input as Obj;
+  assert(b && typeof b === 'object' && !Array.isArray(b) && Object.keys(b).length === 3
+    && ['draftIdentity', 'fingerprint', 'requestHash'].every(k => Object.hasOwn(b, k)), '保持要求確認の項目が一致しません');
+  const p = await retentionInputs(state, draftId, config, b.requestHash);
+  assert.equal(b.draftIdentity, p.r.m.draftIdentity, '表示した依頼が変更されています');
+  assert.equal(b.fingerprint, p.r.m.fingerprint, '表示した構成・要求が変更されています');
+  const file = path.join(p.r.runtime, p.binding.path), data = bytes(p.value);
+  let info;
+  try { info = await lstat(file); } catch (e) { if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e; }
+  if (info) {
+    assert(info.isFile() && !info.isSymbolicLink() && await realpath(file) === file, '保持要求の保存参照が不正です');
+    assert.deepEqual(await p.r.read(p.binding), data, '保存した保持要求が改変されています');
+  } else await writeFile(file, data, { flag: 'wx' });
+  assert.deepEqual(await p.r.read(p.binding), data, '保持要求の保存再読が一致しません');
+  return retentionSummary(p);
+}
+export async function readDigestUiAdditionalRetentionInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
+  const p = await retentionInputs(state, draftId, config, requestHash);
+  assert.deepEqual(await p.r.read(p.binding), bytes(p.value), '保存した保持要求が改変されています');
+  return retentionSummary(p);
 }

@@ -1,0 +1,191 @@
+{
+  "recordedAt": "2026-10-11T06:30:33.262272+00:00",
+  "session": "Codex-UI",
+  "task": "No.68 additional retention input preparation",
+  "observedHead": "871e4bbcbbaf76d938f4cee5e0956eb2f0354105",
+  "sources": [
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 16273,
+      "sha256": "4a6da75f985d5b7dd0fdb467493f8a42fdb71ddb3f87adfc81d06c792488f452"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 16832,
+      "sha256": "205f6e3bcf51d94b8eed7b879fe9b3bfb9f38bc5f16c6e8a15136cb5e9df15ff"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 40542,
+      "sha256": "b7f89b374405333294fee93d71bf31353bc25fa6d0b74aae01d03f37c729d8d2"
+    }
+  ],
+  "protectedPaths": [
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "sizeBytes": 49965,
+      "sha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-ui-readonly-v001.ts",
+      "sizeBytes": 563,
+      "sha256": "3246fbee5d1de1bb7729c954e1e77c2102caf4d83e8dbf99ba2c783131027b9f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "sizeBytes": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 4402,
+      "sha256": "ef5a9ff556af5c1c7f03bd5658351a9201a6b86b4aee31a1ad935af1a78d5e94",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/src/store/digest-ui-edit-requests.ts",
+      "sizeBytes": 3858,
+      "sha256": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-edit-requests.ts",
+      "sizeBytes": 5655,
+      "sha256": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 10729,
+      "sha256": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 104344,
+      "sha256": "9f32f4db810f9a20db1f65471c5c7759e4715925d45e051c92736a4a04a514bb",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "sizeBytes": 6356,
+      "sha256": "6d801048e14889898b8b521bbbc101bef9cc81828eb8ef351fa105c03cb2f6bf",
+      "matchesObservedHead": false
+    },
+    {
+      "path": "docs/HANDOVER_INDEX.md",
+      "sizeBytes": 4909,
+      "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "sizeBytes": 521386,
+      "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "matchesObservedHead": true
+    }
+  ],
+  "rawBuildLog": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v001.txt",
+    "sizeBytes": 805,
+    "sha256": "ae42333e66b17addf76fc0007d67c14e9d24c879f3e8402e8e2f7dda225d4e0f"
+  },
+  "validation": {
+    "build": "failed",
+    "buildReportedExitCode": 2,
+    "error": "TS2345 digest-ui-review.ts(100,101): Obj missing path and fileSha256",
+    "targetedArtificialTests": "not-authored/not-run",
+    "browser": "not-run",
+    "previous51Tests": "not-rerun"
+  },
+  "proposedUnappliedFix": {
+    "path": "backend/src/domain/digest-ui-review.ts",
+    "change": "retentionBindings: Record<string, Obj> -> Record<string, DigestByteBindingV001>",
+    "classificationRecommendation": "limited implementation correction 4, individually approved exception",
+    "applied": false
+  },
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "setupGeneralLimit": 5,
+    "limitedImplementationCorrectionsApplied": 3,
+    "limitedImplementationGeneralLimit": 3,
+    "explicitStops": 6,
+    "addenda": 0,
+    "costUSD": 0
+  },
+  "gitStatusAtEvidence": " M backend/src/domain/digest-ui-composition-data.ts\n M backend/src/domain/digest-ui-review.ts\n M backend/src/routes/control.ts\n M docs/CURRENT_GOAL.md\n M docs/reports/digest-new-material-SJvP9jhEdyI-20261004/production-time-and-test-ledger-v001.json\n M docs/reports/digest-new-material-SJvP9jhEdyI-20261004/production-time-and-test-ledger-v001.md\n M docs/reports/openai-decisions-j16-integration-20261008/next-integration-scope-v001.md\n M docs/reports/zev-ui-b-implementation-20261011/composition-data-connection.md\n M docs/work-logs/2026-10/2026-10-11T1109_Codex-SSD_No61-current-input-preparation_cbee9353.md\n?? docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v001.txt\n?? docs/work-logs/2026-10/2026-10-11T0619_Codex-UI_No68-next-retention-input-proposal_871e4bbc.md\n",
+  "admission": {
+    "wholeNo68": "unfinished",
+    "No70": "unstarted",
+    "retentionAnswer": "unanswered",
+    "retentionAggregation": "not-prepared",
+    "timeline": "not-prepared",
+    "captionPreparation": "not-prepared",
+    "manufacturing": "not-approved"
+  },
+  "cleanup": {
+    "ownBuildProcessesMatching": [],
+    "newFixtureRoots": 0,
+    "newBrowserTabs": 0,
+    "newMedia": 0,
+    "ownedTmpDuplicateBytesPendingRemoval": 805,
+    "foreignProcessesStopped": 0
+  }
+}

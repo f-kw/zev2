@@ -2,6 +2,27 @@
 
 2026-10-11。親が採用済みBの範囲内で承認した「immutable要求snapshot＋元AI採用binding→他の採用場面を残す全体構成→保存と別process再読」の一件。**データ専用接続の人工検査は51/51成功。No.68全体未完成、No.70未着手。** 実素材・通常製造・人間品質まで完成したとは扱わない。
 
+## 次の一件の読取提案（2026-10-11 06:19 UTC、未実装）
+
+**「追加場面の保持Skill要求を準備・保存・再読する接続」だけを次対象にする。** 既存snapshot/構成を現在のformal baselineへ再照合し、変更しない採用場面の元保持request/response/result/validationを原bindingで参照する。追加場面だけに未回答の保持要求を作る。回答生成・全区間keepの仮採用・全体保持の合成・字幕回答・製造はこの一件へ含めない。
+
+新しく束縛する入力は、snapshot/composition binding・requestHash・全represented ID、元source/STT/共通発話/候補/AI採否/保持4記録のbinding、追加場面の既存Skill入力（目的、candidateId/title、highlightReason、発話ID、断片IDと元本文）。highlightReasonは保存探索回答の候補要約を参照し、その原bindingも保持する案。人間追加の来歴は外側の要求IDで記録し、元AIのreject理由をadopt理由へ書き換えない。Skillの閉じたinputへ時計・課金/製造許可・人間品質を混入しない。準備ID/rootは担当の明示入力とし、新上限を置かない。
+
+再利用条件：旧保持は旧request全体と元回答/結果のbytes・目的・候補ID/title/理由・発話/断片列/本文・元境界を再照合し、既存provenance/ID/clock解決を通した**原記録参照**としてだけ使う。旧responseのrequest SHAを新版へ付け替えず、旧全候補回答を追加場面の回答にしない。追加場面に回答がなければ未回答を返す。新版保持回答の再利用も、その保存requestが現在の期待request/input/元参照と一致する場合だけで、候補IDや本文一致だけでは不可。
+
+再利用する実装は、既存UIの`readUiReviewMaterials`/構成reader/候補resolver、`assertInternalRetentionInputV001`、後続回答の`validateInternalRetentionProvenanceV001`→`resolveInternalRetentionV001`。保持inputの写像は通常producer385–393行と字幕reader199–210行にinlineで、公開builderはないため、同じ閉じた写像だけを薄く接続する。通常producerをextract/cloneしない。
+
+| 次一件の対象path（提案のみ） | 最小差分 |
+| --- | --- |
+| `backend/src/domain/digest-ui-review.ts` | 内部のqualified結果へ、既に閉じた元保持4記録のbinding/文書参照を返す。公開UI応答は変更しない |
+| `backend/src/domain/digest-ui-composition-data.ts` | 既存再構築・保存bytes再読を使う追加保持入力のprepare/read関数。原保持参照＋追加だけの閉じた未回答要求を一束へ保存。新ledger/serviceなし、既存構成保存の2JSON条件は変更しない |
+| `backend/src/routes/control.ts` | 必要なら専用の明示prepare/readを既存人間認証・操作キュー内へ接続。構成保存から自動起動せず、dispatch/通常queueに入れない |
+| `backend/test/digest-ui-revision-retention-inputs.test.mjs`（新規案） | 入力の原本文/IDと来歴、旧回答SHA不変、未回答/改変拒否と再読だけの対象検査。今回51件の繰返しは調査段階で実施しない |
+
+**制作側の境界：** 保持回答を正式受理し旧保持と統合するproducer、新版全体の元時計、字幕manifestは制作担当の明示所有/承認が必要。既存`runner/src/digest-plan-consumption-v001.ts`と`runner/src/digest-caption-input-preparation-v001.ts`は旧normal AI採否/保持を再構築するため、新構成を差し込むoptionは追加しない。純粋`buildAdoptedCaptionJudgmentInputsV001`は検査済み全keep/drop・part時計を必要とし、`machineAdoptionBinding`をそのまま出力する。context-only構成や人間構成bindingをAI採用bindingへ読み替えて呼ばない。正式な人間構成/全保持/時計から純粋本文builderへ渡す薄い制作adapterが後続境界となる。
+
+字幕の既存回答はinputのcaption/boundary ID・本文順・目的・styleLimits一致と原response/result/provenanceの再検査が必要。既存migrationの全体writer/readerは採用構成・meaning本文/ID/順序・時計不変（現コードでは31group）を要求し、追加場面への一般再利用には使えない。新版字幕要求は全保持がresolvedになった後に再準備する。製造資格・人間品質/採用・有料APIは新構成/保持入力束だけでは成立しない。今回source編集・検査/API再実行0、Git枠は親保持。
+
 ## 今回の検証結果（2026-10-11 06:06 UTC）
 
 親が報告された具体条件に基づき、成功時inventory検査の一件を設営9として個別承認した。親がpatch全差分を読了したとの記録ではない。製品readerを変更せず、test1fileに閉じて適用した。返却bindingのsnapshot/composition2件を必須にし、それ以外の新fileは、その2件に完全対応する`._`名のregular/single-link fileで、AppleDouble magic/version・entry table/参照区間の範囲・非重複・entry ID一意を満たす場合だけ分類する。名前だけの除外や全`._`除外はしない。元全file SHA、state/要求store bytes、UI応答、拒否時全inventoryの不変検査は保持した。
@@ -67,3 +88,16 @@ raw log2件はbyte一致で保存・再読後、所有/tmpの重複16,198bytes�
 Git枠はSSD担当のまま。stage/commit/pushは未実行。`main`の観測HEADは`3ca4bc5fe71606222c58415a2bd5905ece8248d1`。親/SSDが進めた入口文書等のcommitを保持し、開始時の他担当未commit6fileは現在HEADへ保存されており、今回そのfileへ操作していない。現在のdirtyは自分の未検証source/testと今回の記録だけ。最終statusは[session work log](../../work-logs/2026-10/2026-10-11T0552_Codex-UI_No68-composition-data-stop_3ca4bc5f.md)と親への報告へ示す。Git clean/完成/checkpoint保存済みとは扱わない。
 
 実装変更の限度を変えず、親の技術判定・必要再検査・Git枠返却・checkpoint保存が残る。その後にも保持判断/時計/字幕新版準備/要求反映の正式対応/UI再資格確認/通常製造承認/実媒体と人間品質が未接続・未確認。No.68をDoneにせず、No.70を開始しない。cloud親threadへこのdelegation最終応答が自動通知される経路を使い、別の相談役Web送信・返信受領は主張しない。
+# 今回の追加保持要求接続：build停止（2026-10-11 06:33 UTC）
+
+親が提案4pathのprepare/readを承認し、UI Git枠を返却したため、内部qualified結果・構成domain・専用routeの3sourceへ初稿を接続した。保存構成を再構築して両JSONのbytesを照合し、原保持4記録は全request/input/response/result・候補/元本文/ID・境界を既存validator/resolverで再照合する。原参照は内部束にだけ保存し、追加場面は保存探索要約を出典とする既存閉じたSkill inputの**未回答要求**として別JSONへexclusive保存する案。公開応答は追加場面名と未回答状態だけを返し、保存から判断処理を起動しない。既存UIの停止理由欄にも追加場面名と未回答を示す初稿を加えた。現時点は未検証で、動作済みとは扱わない。
+
+[今回のbackend build原log](retention-inputs-evidence/backend-build-v001.txt)はexit2。`digest-ui-review.ts(100,101)`の`retentionBindings: Record<string, Obj>`から既存`document(binding: DigestByteBindingV001)`へ渡す引数が、型として必須のpath/fileSha256を保持していない（TS2345）。これまでの51/51は今回sourceの合格証拠に転用しない。新しい対象人工testは未作成・未実行、ブラウザー未実施。旧51件の全体再実行0。
+
+**GPT_DECISION最小案・未適用：** この変数だけ`Record<string, DigestByteBindingV001>`へ型宣言を訂正する。元のruntime値、参照SHA、`document`の登録/binding/bytes照合、公開応答/製造条件は変えない。source型の訂正なので、限定実装修正4件目の個別例外として親の判定を求める。既存適用累積は限定実装修正3/一般枠3、設営/証拠収集修正10/一般枠5を維持し、未承認の4または11を自己適用しない。今回の明示停止を累積6とする。追補0・費用US$0。
+
+[今回の検証索引](retention-inputs-evidence/verification-v001.json)に3source SHAと保護対象20件を保存した。制作runner/正式契約/fixture/client/通常UI-wrapper等19件は観測HEAD bytesと一致。CURRENT_GOALのみ別担当の未commit変更を観測し、触れず保持した。その他の制作/SSD文書変更もstageしない。
+
+cleanup：今回生成fixture/media/browser/server0。build終了をprocess読取で確認、自己生成/tmpログ805bytesは監査コピーのbyte一致再読後に削除。原本・正式成果・他担当process・退避領域への操作0。今回の空き観測はMac17,240,488KiB/SSD1,903,312,384KiBで、共有変動を回収量としない。
+
+No.68全体未完成、No.70未着手。型訂正の個別判定後に新対象testを実装し、異素材・改変拒否・未所属候補・旧全file不変・別compiled process再読を確認する。保持回答の正式受理/全保持aggregate・新版時計・字幕manifest・要求反映の正式対応・UI再資格確認/作成接続・実媒体/人間品質は残る。cloud親へのdelegation応答が監査/判断の返却経路であり、別Web相談役への送信/返信受領は主張しない。

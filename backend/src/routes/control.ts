@@ -151,7 +151,8 @@ import { assertDraftConfirmation, assertUiExecutionAllowed, buildUiReviewMateria
 import { digestUiRegistrationInput, qualifyDigestUiPreparation } from '../domain/digest-ui-review.js';
 import { saveDigestUiPreparation } from '../store/digest-ui-preparations.js';
 import { saveDigestSceneAddition } from '../domain/digest-ui-edit-requests.js';
-import { readDigestUiCompositionData, saveDigestUiCompositionData } from '../domain/digest-ui-composition-data.js';
+import { readDigestUiCompositionData, saveDigestUiCompositionData, prepareDigestUiAdditionalRetentionInputs,
+  readDigestUiAdditionalRetentionInputs } from '../domain/digest-ui-composition-data.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -286,6 +287,16 @@ router.post('/request-drafts/:id/ui-digest-composition-data', async (request, re
 router.get('/request-drafts/:id/ui-digest-composition-data/:requestHash', async (request, response) => {
   try { response.json(await readDigestUiCompositionData(await loadState(), routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash))); }
   catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+
+router.post('/request-drafts/:id/ui-digest-additional-retention-inputs', async (request, response) => {
+  try { response.json(await prepareDigestUiAdditionalRetentionInputs(await loadState(), routeParamText(request.params.id), await loadRuntimeConfig(), request.body)); }
+  catch (e) { response.status(409).json({ error: `追加場面の保持要求を準備できません。${unknownErrorMessage(e)}` }); }
+});
+
+router.get('/request-drafts/:id/ui-digest-additional-retention-inputs/:requestHash', async (request, response) => {
+  try { response.json(await readDigestUiAdditionalRetentionInputs(await loadState(), routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash))); }
+  catch (e) { response.status(409).json({ error: `追加場面の保持要求を再読できません。${unknownErrorMessage(e)}` }); }
 });
 
 router.post('/request-drafts/:id/ui-digest-scene-additions', async (request, response) => {
