@@ -1,0 +1,36 @@
+- main:
+  - region "制作の案内":
+    - strong: ZEV
+    - generic: 新しい素材の未承認下書き
+    - generic: 保存版 2026/10/11 12:50 · raft-8
+    - button "履歴"
+    - button "新しく作る"
+  - paragraph: 2 / 6
+  - heading "mock操作検証" [level=2]
+  - paragraph: 実動画・AI処理なし
+  - list "動画制作の順番":
+    - listitem: 1 依頼
+    - listitem: 2 下書き
+    - listitem: 3 内容確認
+    - listitem: 4 作成前確認
+    - listitem: 5 作成
+    - listitem: 6 動画確認
+  - heading "下書きを確認" [level=2]
+  - paragraph: 保存済みです。内容を確認してから開始します。
+  - term: 依頼
+  - definition: 新しい素材の未承認下書き
+  - term: 素材
+  - definition: file:///saved/mock-other-source.mp4
+  - term: 作る動画
+  - definition: ダイジェスト / 60秒以内
+  - generic "送信・実行の条件"
+  - list:
+    - listitem: ダイジェストは計画検証まで接続済みです。内容確認から動画作成への接続が必要です。
+  - checkbox "この保存版の素材・内容・送信と実行の条件を確認しました" [disabled]
+  - text: この保存版の素材・内容・送信と実行の条件を確認しました
+  - button "戻って修正"
+  - button "確認して開始" [disabled]
+  - group "実行情報":
+    - generic "制作情報と保存記録"
+- generic "Toggle devtools panel":
+- generic "Toggle Component Inspector":

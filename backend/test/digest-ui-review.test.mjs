@@ -46,7 +46,7 @@ test('two different artificial sources qualify through actual readers and displa
     assert.deepEqual(await readFile(statePath),before);
     const registrationBefore=await registrations();assert.equal((await post(f)).status,200);assert.deepEqual(await registrations(),registrationBefore);
     const filesBefore=await readdir(f.directory);const repeated=await buildUiReviewMaterials(await loadState(),f.draft.id,await loadRuntimeConfig());
-    assert.deepEqual(repeated,m);assert.deepEqual(await readdir(f.directory),filesBefore);assert.deepEqual(await readFile(statePath),before);
+    assert.deepEqual(JSON.parse(JSON.stringify(repeated)),m);assert.deepEqual(await readdir(f.directory),filesBefore);assert.deepEqual(await readFile(statePath),before);
   }
 });
 test('human authentication and exact server-owned parameter boundary cannot become producer authority',async()=>{

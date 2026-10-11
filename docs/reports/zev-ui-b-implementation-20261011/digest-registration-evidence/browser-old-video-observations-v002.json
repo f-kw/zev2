@@ -1,0 +1,29 @@
+{
+  "scenario": "old registered video reference then a new artificial Digest draft",
+  "oldVideoPlayable": false,
+  "oldVideoId": "file-3",
+  "oldDraftId": "draft-1",
+  "newDraftId": "draft-4",
+  "apiMutations": [
+    {
+      "method": "POST",
+      "path": "/api/request-drafts",
+      "body": {
+        "productionType": "digest",
+        "purpose": "旧動画を混ぜない新しいDigest下書き",
+        "sourceUri": "file:///saved/mock-after-old-video.mp4",
+        "durationLabel": "60秒以内",
+        "themeCountLabel": "3候補",
+        "geminiModelName": "gemini-3.8-flash",
+        "preset": "shorts_default"
+      }
+    }
+  ],
+  "oldDraftAndAllProducerAndOutputRegistryUnchanged": true,
+  "oldVideoElementAbsentFromNewDraft": true,
+  "newDraftPersistsAcrossReload": true,
+  "manufacturingControlEnabled": false,
+  "manufacturingRequestsAdded": 0,
+  "paidApiCalls": 0,
+  "noMediaCreated": true
+}

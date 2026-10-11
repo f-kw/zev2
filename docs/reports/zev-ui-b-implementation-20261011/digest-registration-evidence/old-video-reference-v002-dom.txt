@@ -1,0 +1,45 @@
+- main:
+  - region "制作の案内":
+    - strong: ZEV
+    - generic: 会話の見どころをまとめる
+    - generic: 保存版 2026/10/11 12:52 · raft-1
+    - button "履歴"
+    - button "新しく作る"
+  - paragraph: 6 / 6
+  - heading "mock操作検証" [level=2]
+  - paragraph: 実動画・AI処理なし
+  - list "動画制作の順番":
+    - listitem: 1 依頼
+    - listitem: 2 下書き
+    - listitem: 3 内容確認
+    - listitem: 4 作成前確認
+    - listitem: 5 作成
+    - listitem: 6 動画確認
+  - paragraph: 保存版 2026/10/11 12:52 · raft-1
+  - heading "動画ができました" [level=2]
+  - paragraph: 保存済み動画を読み込めません。参照と配信状態の確認が必要です
+  - link "動画を保存":
+    - /url: /api/mock-video-3.mp4?ref=file-3
+  - paragraph: http://127.0.0.1:5179/api/mock-video-3.mp4?ref=file-3
+  - text: 直したいところ
+  - textbox "直したいところ":
+    - /placeholder: 直したい内容を入力
+  - text: 作り直す範囲
+  - combobox "作り直す範囲":
+    - option "演出から作り直す（場面と順番を保持）" [selected]
+    - option "内容の選択から見直す"
+  - button "作り直す範囲を確認" [disabled]
+  - paragraph: 修正は新しい編集コピーへ保存し、元の動画は保持します。
+  - generic "追加の演出レビュー"
+  - region "完成動画のユーザー判断":
+    - paragraph: User Gate
+    - heading "ユーザーの最終判断待ち" [level=3]
+    - paragraph: 動画を確認して、投稿候補として保存するか、この動画で作業完了にするか、作り直すかを選びます
+    - button "投稿候補として保存"
+    - button "この動画で作業完了"
+  - button "テーマ選択前から作り直す"
+  - button "演出作成前から作り直す"
+  - group "実行情報":
+    - generic "制作情報と保存記録"
+- generic "Toggle devtools panel":
+- generic "Toggle Component Inspector":

@@ -19,8 +19,8 @@ const themes = [
   { id: 'turn', title: '考え方が変わったところ', summary: '会話が動く場面' },
   { id: 'ending', title: '最後のまとめ', summary: '結論が伝わる短い場面' }
 ].map((t, i) => ({ ...t, evidenceRefs: [{ kind: 'time_range', refId: 'range-' + i, meaning: '保存済み素材の場面' }] }));
-function draftCopy(purpose = config.source.defaultPurpose) {
-  const draft = shared.createRequestDraft({ productionType: 'clip', purpose, sourceUri: config.source.defaultUri,
+function draftCopy(purpose = config.source.defaultPurpose, productionType = 'clip') {
+  const draft = shared.createRequestDraft({ productionType, purpose, sourceUri: config.source.defaultUri,
     durationLabel: '60秒以内', themeCountLabel: '3候補', geminiModelName: shared.DEFAULT_GEMINI_MODEL,
     preset: 'shorts_default' }, now(), () => 'draft-' + (++sequence));
   draft.status = 'approved';state.requestDrafts.unshift(draft);return draft;
@@ -54,9 +54,8 @@ function seedScenario(scenario) {
         let draft = state.requestDrafts[0];
         state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
         if (scenario === 'digest-precreation') {
-          state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認');draft.productionType='digest';
+          state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認', 'digest');
           const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
-          const r=requests.at(-1);r.type='validate_digest_plan';
         }
         if (scenario === 'output') registeredResult(draft, 'render_video');
         if (scenario === 'readiness') seedReview(draft, 'render_readiness');
