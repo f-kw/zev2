@@ -134,3 +134,29 @@ UIがmain/remote `588134c6c654c79bac56c61f3c28a638c4f2d596` を保存してGit�
 外部有料APIは今の失敗原因調査の代替として起動しない。旧固定326/5送信許可は新素材には不適用。13:17:47 JSTに公式Decisionsとgpt-6-luna文書をHTTPS/HTTP200で保存再読し、Decisionsは基本入力0.10USD/100万token、output/cache課金0、272K超入力2倍・地域10%加算が該当時に適用と確認。Python初回SSL経路の読取失敗も保持し、標準curlの検証付きHTTPSで再読、証明書検証の無効化0。新しい実場面/字幕とrequest byte/SHAが未固定なので回数/実見積はnull。後段の予算案は1USD（未承認・未設置・上限保証なし）。10万/100万課金inputという仮定なら基本0.01/0.10USD、2倍＋10%例0.022/0.22USDだが実見積でも保証でもない。対象固定後、実数で再計算し、目的/本文・文脈・ASRテキスト・数値/回数各1・再送0/費用不確実性を親へ返して新承認を得る。厳密な請求上限保証が必要なら保証なしで送信しない。提案を新permitや正式inputにしない。
 
 UI checkpoint `dedcc3354354591bd56938d481fc00201ef94cb3` 保存後、親がGit枠をCodex-SSDへ返却。今回の自分6文書だけを監査checkpoint保存してUIへ枠を返す。code/契約/他者変更を混入しない。Git結果は実保存後のworkspace証拠と親報告で示し、自己hashを本文に捏造しない。
+
+## 現行サーバー原因範囲・ログ取得手順・UI caller照合
+
+記録 — 2026-10-11T04:49:12.741568+00:00（No.61 現行STTコード/APIの失敗範囲と新素材UI callerの未確定を照合）
+
+音声認識直後の原ASR396区間/44,111文字の回収と元入力SHA/byte照合は完了済み、完成aligned結果はない。同jobのProcessExit3について、現在GitHub main `e83c2ae6b5a8f2a17e8f83f1c66cbca3975a0638`（10/5 15:29:57 JST、WhisperX3.8.6/interpolate ignore改訂）と既存API/原HTTP応答を照合。current `stt_jobs.py` は正常return0/捕捉Python例外return1で、Python treeにreturn3/exit3の定義なし。今回のcode3を特定の工程やOOM/native abortと分類しない。確定範囲は「認識直後文章が保存され、完成結果公開前に子processが終了」。ジョブ設定は時刻合わせCPU/話者分離false。CPU alignment model load/文字時刻合わせ/結果変換/検査・保存のどこかはまだ未確定。
+
+現Gitのstt_pipeline.pyとstt_alignment.pyはジョブ報告SHAに一致。main.pyは実報告4c0ac34d…に対し現Git08a854f9…で不一致、LF/CRLF/UTF8-BOMの標準4投影でも一致0。実行コード全文を取得したものではなく、差が機能変更かも不明なので、currentGitを全runtime同一と扱わない。既存Mac checkout main49005154…は古く、HEAD/refs/dirtyを不変のまま、既存Git origin/認証でworkspaceにrefs/branchなしのcommit object cacheを読み、12code/docと必要起動scriptを保存再読。接続GitHub tool404/gh未導入も経過保存、接続設定/新認証/checkout変更0。
+
+13:27:14 JST GET /openapi.jsonはHTTP200で既存8routeのみ、log/任意file読取口なし。13:30:05 JSTの同job GET resultは実HTTP409、detail/state/errorに同じProcessExit3だけ、追加のstage/tracebackなし。認識原文sourceは既にHTTP200保存済み、statusとreceiptとの入力対応を保持。Macの既存network filesystem mount0、現在のtoolsにWindows remote execなし。新SSH/SMB接続・port探索・server変更・同条件再投入0。
+
+runner.logは唯一と断定しない。GPU子process stdout/stderrの最短確認先は標準 `C:\work\zev-stt-server\jobs\2954534d570c4f668796964aedece20d\runner.log`。保存先ZEV_STT_STORE変更時は実rootへ置換が必要で、現在APIには絶対storepathがなく、この標準pathを実機確認済みにしない。parent経路でも読めない場合のPowerShell `Get-Content -LiteralPath '<同path>' -Tail 160` と、同実行時間帯/PID15668の既存Application/WER event読取をSSDの `server-assessment-and-composition-v001/read-only-log-retrieval-v001.md` へ保存再読。Windowsでは未実行、eventの存在/原因も未確認。
+
+原文の既存3窓だけを下調べし、「監視の前提→顔の見間違い」「異常なし→驚き/見直し→責任感の冗談とクリア発言」「見落とし警告→振り返り→再挑戦」の文章上の流れを記録。表示サイズ/音量相談・弁当等の脱線も原形で残し、画面の事実や実際の成否を文章だけで認定しない。新候補探索/採用/確定cut/全字幕採点/完成字幕化/有料API0。これは構成の下調べであり字幕完成の資格ではない。
+
+親がUI保存 `fe88cc3611db039e5d98058e31d9d0f884e3b0cf` とGit枠返却、UIの人工8/8を伝達。helper `scripts/digest-ui-preparation-handoff.mjs:27` とdocを読み、正規prepare成功後の同p10項目・同prepared.manifestBinding、既存明示loopback backendOrigin/humanTokenのみを渡す接続は限定hookで可能と評価。ただし**現在の新素材caller `prepare-new-no61-source-lan-v001.py` は字幕準備を呼ばず、新素材の正規caption caller/p/manifestはまだない**。旧 `prepare-current-caption-inputs-v001.mts:42` はSJv素材専用、旧 `new-material-snapshot-and-caption-prepare-v001.mts:33` は10項目を明示しておらず、そのまま新素材へ実行しない。新素材の正常字幕準備/既存reader再読の後に1import＋consumer呼出しを置き、consumer結果/失敗を別記録、正常prepareの失敗に変換せず再実行/再送なしというレビュー案をSSD `ui-caller-review-v001` へ保存。実コード適用/UI登録/認証新作成/永続設定/producer core HTTP追加0。正式計画/製造承認/job/permitはCodex-SSD所有を維持する。
+
+2026-10-11T04:49:12.741568+00:00実読取の時計検査は実結果 passed、証拠 /Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/result.json。同controller2902/worker-PGID2911を保持、監視guard/専用SSD保存を継承。次担当同Codex-SSDが同検査終了を確認し、monaが同jobのWindowsログと失敗後の対応を判断する。本人への同条件STT再投入依頼や新API承認を先行しない。取得済みsource/原音声/原ASR/失敗と検査証拠KEEP、不要削除0。現在6文書だけを監査checkpoint保存し、Git枠をUIへ返す。結果SHAは実保存後のworkspace証拠と親報告で示す。
+
+## 全時計検査と自分の処理終了の確認 — 2026-10-11T04:52:25.183519+00:00
+
+同じ検査が13:46:52.746 JSTにpassedで終了、Node stage実測2422.552960秒（40分22.553秒、検査内計測2417.797秒とは範囲が異なる）。722,162 decoded frame/361,081 logical frame、60fps、44100Hz stereo音声530,791,424sample。元動画SHA fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12 と検査binding SHA 10c85d231e6637919e06675ca8dbac7c8481e04edf28ac923496d7818add6c0c/2782Bを保存再読で照合。映像container/stream offset0、音声presentation end/stream end/packet endが一致。原時刻補正0。これは元動画の技術的な時計検査であり、完成字幕・構成採用・実視聴品質の認定ではない。
+
+監視controller2902/worker-PGID2911も13:46:54.943 JSTに終了し、残存実行0。一件全体のexit1は既知LAN STT失敗を含むためで、時計検査exit0や資源監視停止を失敗へ読み替えない。guard理由null、観測最大合計RSS653,230,080B。final guest空き486,865,158,144B、host/internalは別記録。検査と監視の閉じた証拠をread-only化。原動画/原音声/原ASR/失敗と検査証拠はSTT原因調査と正規準備への後続参照がありKEEP、今回不要削除0B。旧配信server/他者process変更0。
+
+現在は相談役待ち。次担当monaが同jobのWindows runner.logまたは既存障害イベントと必要な実機main.py確認を扱い、対応指示後に同Codex-SSDが再開する。同条件再投入/新認証/新source/有料API/UI登録/正式plan/製造0。失敗ASR原文だけを完成producerにしない。今回の新素材全体制作は未完で、制作全体の終了/所要時間は未確定。Gitは親返却fe88cc36から自分6文書だけを保存しUIへ枠返却する。

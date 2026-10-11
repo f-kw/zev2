@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T04:20:18.725268+00:00",
+      "checkedAt": "2026-10-11T04:52:25.183519+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -782,6 +782,15 @@
             "durationSeconds": 0.049602333,
             "status": "diagnosis saved; no complete aligned transcript or speech-truth claim",
             "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/diagnosis-result-v001.json",
+            "includeInOverallSum": false
+          },
+          {
+            "category": "sourceClockInspection",
+            "startedAt": "2026-10-11T04:06:30.767883+00:00",
+            "endedAt": "2026-10-11T04:46:53.370967+00:00",
+            "durationSeconds": 2422.552959625,
+            "status": "completed",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/result.json",
             "includeInOverallSum": false
           }
         ],
@@ -1737,11 +1746,31 @@
         ]
       },
       "sourceClockInspection": {
-        "status": "running",
+        "status": "completed",
         "startedAt": "2026-10-11T04:06:30.767883+00:00",
-        "workerPid": 3063,
-        "input": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-input-v001.json",
+        "endedAt": "2026-10-11T04:46:53.370967+00:00",
+        "durationSeconds": 2422.552959625,
+        "exitCode": 0,
         "artifactDir": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001",
+        "result": {
+          "status": "passed",
+          "completedAt": "2026-10-11T04:46:52.746Z",
+          "seconds": 2417.797,
+          "source": {
+            "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+            "fileSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+            "sizeBytes": 8846441226,
+            "allBytesRead": true
+          },
+          "inspectionBinding": {
+            "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/source-media-inspection.json",
+            "fileSha256": "10c85d231e6637919e06675ca8dbac7c8481e04edf28ac923496d7818add6c0c",
+            "sizeBytes": 2782
+          },
+          "decodedFrameCount": 722162,
+          "logicalFrameCount": 361081,
+          "sourceAudioGridSamples": 530791424
+        },
         "paidApiCalls": 0,
         "resubmitted": false
       },
@@ -2459,7 +2488,41 @@
         ],
         "sendCondition": "pin actual inputs/count/bytes/SHA and recalculate; ask parent for new user approval of scope/count/retries0/fee uncertainty/budget. If a guaranteed billing ceiling is required, do not send without that guarantee",
         "notRequestingPaidDiagnosisToReplaceFailedLAN": true
-      }
+      },
+      "serverCodeAssessmentBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/server-assessment-and-composition-v001/failure-stage-assessment-v001.json",
+        "sizeBytes": 5295,
+        "fileSha256": "56c3bc0de9163e25164046fc9db21f40b0ef1f27ea5b93eaeb78d7954c9faf91"
+      },
+      "originalAsrCompositionBackgroundBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/server-assessment-and-composition-v001/composition-background-v001.json",
+        "sizeBytes": 4694,
+        "fileSha256": "2b40bfcf6525e575e661b7f4d86227c851d34fa175098bebdff410712647bd6c"
+      },
+      "logRetrievalInstructionBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/server-assessment-and-composition-v001/read-only-log-retrieval-v001.md",
+        "sizeBytes": 2135,
+        "fileSha256": "e109fab56ca8d460f66133492aaf6af9c30cd50d4b8c7cf4cc90b4a211faea95"
+      },
+      "uiCallerReviewBinding": {
+        "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/ui-caller-review-v001/review-result-v001.json",
+        "sizeBytes": 4147,
+        "fileSha256": "35ed3100efb4ec08af8167207eea6f8cec3fc7fc7fdc59eba7e201e6a7b039bd"
+      },
+      "newApiCost": {
+        "paidCalls": 0,
+        "actualBillUsd": 0,
+        "proposalNotAuthorized": true
+      },
+      "sourcePreparationProcessClosure": {
+        "summaryPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/summary.json",
+        "endedAt": "2026-10-11T04:46:54.943077+00:00",
+        "remainingRunning": [],
+        "exitCode": 1,
+        "reason": "known LAN STT failed; source clock independently passed",
+        "maximumObservedRssBytes": 653230080
+      },
+      "currentStatus": "consultant-waiting for failed LAN job details; source clock finished"
     }
   ]
 }

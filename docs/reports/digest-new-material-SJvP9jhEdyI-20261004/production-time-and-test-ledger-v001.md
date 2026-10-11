@@ -130,3 +130,9 @@ LAN接続先の本人回答待ちと、monaの正規素材取得確認は、こ�
 ### 同LAN jobの実失敗と原ASR全文診断（2026-10-11）
 
 同jobのserver表示実処理13:06:39.742291〜13:09:38.027024 JST/178.284733秒でProcessExit3・完成結果なし。Mac client188.779439秒はupload/hash/polling等を含む別計測で、並列の時刻検査やserver wall clockと足さない。原ASR396区間44,111文字をGET source/HTTP200で保存し、全文構造と3暫定窓比較を13:15:42.557〜.606 JST/0.049602秒で独立診断、原text/clock/数値不変。完成字幕/原発話欠落確定/実視聴品質とは区別。全clock検査は同じworkerで継続、2026-10-11T04:20:18.725268+00:00時点未完。今回処理失敗・待ちを隠さず、新素材制作全体時間は未確定。追加API0、提案1USDは未承認・未設置であり実費/保証上限ではない。
+
+### 現行コード/API照合と独立時計検査の待ち（2026-10-11）
+
+server実処理178.284733秒とMac client188.779439秒は前記の別計測を維持。13:27:08〜13:27:09 JSTに既存Git originの現行e83c2ae6固定code/docをworkspaceの専用object cacheへ読取り、元checkout/refs不変。原HTTP openapi readは13:27:14 JST、result409 readは13:30:05 JST。資料解釈・3窓の構成下調べは保存scriptの処理時間ではなく、個別CPU時間は未測定として保持。2026-10-11T04:49:12.741568+00:00時点の同全時計検査は実結果 passed、証拠 /Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/result.json。この待ちとsource decode処理は並列診断と足して制作全体時間にしない。完成aligned字幕/正常caption preparation/UI実素材登録/動画製造/実視聴品質は未確定。今回追加API課金0、全素材制作の終了時間は未確定。
+
+全時計検査は13:46:52.746 JSTにpassed、stage2422.552960秒（40分22.553秒）、722162 decoded/361081 logical frame/530791424sample。監視一件は13:46:54.943 JSTに既知LAN失敗を含むexit1で終了、guard理由null/残存実行0。source時計合格とSTT完成失敗を分ける。現物/原ASR/証拠KEEPで回収0B、今回新素材制作全体の終了時間は未確定。
