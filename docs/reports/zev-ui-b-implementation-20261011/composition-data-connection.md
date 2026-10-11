@@ -1,6 +1,24 @@
-# Codex-UI｜No.68 人間要求と構成データの専用接続（検査停止）
+# Codex-UI｜No.68 人間要求と構成データの専用接続（人工検証済み）
 
-2026-10-11。親が採用済みBの範囲内で承認した「immutable要求snapshot＋元AI採用binding→他の採用場面を残す全体構成→保存と別process再読」の一件。**未完成・未commit**。No.68全体未完成、No.70未着手。
+2026-10-11。親が採用済みBの範囲内で承認した「immutable要求snapshot＋元AI採用binding→他の採用場面を残す全体構成→保存と別process再読」の一件。**データ専用接続の人工検査は51/51成功。No.68全体未完成、No.70未着手。** 実素材・通常製造・人間品質まで完成したとは扱わない。
+
+## 今回の検証結果（2026-10-11 06:06 UTC）
+
+親が報告された具体条件に基づき、成功時inventory検査の一件を設営9として個別承認した。親がpatch全差分を読了したとの記録ではない。製品readerを変更せず、test1fileに閉じて適用した。返却bindingのsnapshot/composition2件を必須にし、それ以外の新fileは、その2件に完全対応する`._`名のregular/single-link fileで、AppleDouble magic/version・entry table/参照区間の範囲・非重複・entry ID一意を満たす場合だけ分類する。名前だけの除外や全`._`除外はしない。元全file SHA、state/要求store bytes、UI応答、拒否時全inventoryの不変検査は保持した。
+
+元の[51件を再実行したraw log](composition-data-evidence/backend-unit-v002.txt)は51成功/失敗0/exit0（接続7＋編集要求9＋資料照合6＋UI確認29）。異素材A/Bで、各2JSON、同時二重保存の同一結果、元AI採用場面と不採用理由の保持、元資料・state・要求store不変、UIの追加要求待ち/製造停止維持を確認。異素材hash・古いchain/確認・余分な権限項目・重複/逆順/変更前集合の不整合・snapshot/構成/元AI資料改変を拒否する。**Bの別compiled backend processでも保存構成を再構築・再読し、同結果とbytes不変を確認した。**
+
+AppleDoubleはA/B各2件、計4件を観測した。いずれも4,096bytesで、name/size/SHAは原logと[今回の検証索引](composition-data-evidence/verification-v002.json)に保存。原JSON2件のbinding SHA検査と旧全file SHA検査は省略していない。
+
+別の証拠収集helperも親が独立した一件として承認した。inline Pythonのprotected配列の`evals/clip_composition/test_serve_digest_review_v001.py`を実在する`evals/clip_composition/serve_digest_review_v001.test.py`へ訂正しただけ。**保護対象20件を一つも削らず**、存在・HEAD bytes一致・size/SHAの収集を維持して成功した。これを証拠収集修正の累積10件目として独立記録し、設営9へまとめない。一般設営枠5の恒久増加/リセットはしない。
+
+適用累積は設営/証拠収集修正10（以前8＋inventory9＋別helper10）、明示停止累積5は据置、限定実装修正3/一般枠3、追補0。今回製品source/reader・fixtureの変更0。有料API/実素材製造/公開0、費用US$0。旧48/51・旧helper失敗・旧累積は下記原log/index/work logに保持し、失敗を合格へ書き換えない。
+
+cleanup：after-hookにより人工SSD/source root残件0、test process/server終了。今回raw logをbyte一致再読後、所有/tmp重複13,763bytesを削除。fixture回収量は未測定、新大容量媒体0、原本/正式/他担当/退避物と他担当processを保持。空き観測は開始Mac17,255,180KiB/SSD1,903,314,432KiB、検査後Mac17,262,160KiB/SSD1,903,312,896KiB。共有変動を含むため回収量の証明へ使わない。
+
+現在は返却されたUI Git枠で今回test・新証拠・自分の報告/logだけを保存する工程。中央CURRENT_GOAL/HANDOVER/DECISIONSへ長い経過は追記しない。正式保持/時計/字幕新版準備・正式な要求反映対応・UI再資格確認・通常製造許可・実媒体/人間品質は残る。保存構成データだけを製造資格にしない。
+
+## 前回の停止・監査保存の記録
 
 **後続の監査保存（2026-10-11 06:01 UTC）：** 親がSSDからUIへGit枠を返却したため、この停止時点の実装・原失敗証拠・記録11fileだけを監査checkpoint `ff061726c9e6bc0910d269a4e40194fa5516d9a6` にcommit/pushした。未承認の設営9案・別helper修正は未適用、再検査0。以下の「未commit」やdirty件数は保存前の状態を記録したもの。検査未合格とNo.68全体未完成は継続し、中央CURRENT_GOAL/HANDOVERには追記していない。Git枠返却後の保存結果は[後続session log](../../work-logs/2026-10/2026-10-11T0601_Codex-UI_No68-audit-checkpoint_ff061726.md)を参照。
 

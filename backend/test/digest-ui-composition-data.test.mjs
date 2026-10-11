@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test, after } from 'node:test';
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, lstat } from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -27,11 +27,40 @@ const current=async f=>{const r=await api(f,'ui-review');assert.equal(r.status,2
 const confirmation=m=>({draftIdentity:m.draftIdentity,fingerprint:m.fingerprint});
 async function activate(f){await saveState(f.state);const r=await api(f,'ui-digest-preparation',f.body);assert.equal(r.status,200,JSON.stringify(r.body));return r.body.materials;}
 async function files(f){const out={};for(const name of (await readdir(f.directory)).sort())out[name]=sha(await readFile(path.join(f.directory,name)));return out;}
+async function compositionInventory(f,before,after,result,t){
+  const json=[path.basename(result.snapshotBinding.path),path.basename(result.compositionBinding.path)].sort();
+  assert.equal(new Set(json).size,2);
+  assert(json.every(n=>!Object.hasOwn(before,n)&&Object.hasOwn(after,n)),'Expected two new composition JSON files');
+  const added=Object.keys(after).filter(n=>!Object.hasOwn(before,n)).sort(),metadata=[];
+  for(const name of added){
+    if(json.includes(name))continue;
+    assert(json.some(n=>name===`._${n}`),`Unexpected added file: ${name}`);
+    const p=path.join(f.directory,name),info=await lstat(p);
+    assert(info.isFile()&&!info.isSymbolicLink()&&info.nlink===1,'AppleDouble must be a regular single-link file');
+    const b=await readFile(p);assert.equal(sha(b),after[name]);assert(b.length>=26,'AppleDouble header missing');
+    assert.equal(b.readUInt32BE(0),0x00051607,'AppleDouble magic');
+    assert.equal(b.readUInt32BE(4),0x00020000,'AppleDouble version');
+    const count=b.readUInt16BE(24),tableEnd=26+12*count;
+    assert(count>0&&tableEnd<=b.length,'AppleDouble entry table bounds');
+    const ids=new Set(),ranges=[];
+    for(let i=0;i<count;i++){
+      const at=26+12*i,id=b.readUInt32BE(at),start=b.readUInt32BE(at+4),end=start+b.readUInt32BE(at+8);
+      assert(id>0&&!ids.has(id),'AppleDouble duplicate/invalid entry ID');ids.add(id);
+      assert(start>=tableEnd&&end<=b.length,`AppleDouble entry bounds: ${start}..${end}/${b.length}`);
+      ranges.push({start,end});
+    }
+    ranges.sort((a,b)=>a.start-b.start||a.end-b.end);
+    for(let i=1;i<ranges.length;i++)assert(ranges[i-1].end<=ranges[i].start,'AppleDouble overlapping entries');
+    metadata.push({name,sizeBytes:b.length,sha256:sha(b)});
+  }
+  assert.deepEqual(added,[...json,...metadata.map(v=>v.name)].sort());
+  t.diagnostic(JSON.stringify({filesystemAuxiliaryFiles:metadata}));
+}
 async function unchanged(f,operation,status=409){const before=[await readFile(statePath),await readFile(editPath),await files(f)];
   const r=await operation();assert.equal(r.status,status,JSON.stringify(r.body));assert.deepEqual([await readFile(statePath),await readFile(editPath),await files(f)],before);return r;}
 const reader=(f,result)=>api(f,`ui-digest-composition-data/${result.requestHash}`);
 
-test('current additions in A/B produce only two immutable JSON files, keep original adoption and original AI reject reason',async()=>{
+test('current additions in A/B produce only two immutable JSON files, keep original adoption and original AI reject reason',async t=>{
   for(const f of fixtures){
     const m=await activate(f),add=await api(f,'ui-digest-scene-additions',{...confirmation(m),candidateId:'candidate-0002'});assert.equal(add.status,200);
     const pending=await current(f),before=[await readFile(statePath),await readFile(editPath)],originalFiles=await files(f);
@@ -52,8 +81,7 @@ test('current additions in A/B produce only two immutable JSON files, keep origi
     assert.deepEqual(result.composition.admission,{sourceRanges:'candidate-context-only',retention:'not-prepared',captionPreparation:'not-prepared',executionPermission:'not-approved',humanQuality:'pending'});
     assert.equal(sha(await readFile(path.join(area.runtime,result.snapshotBinding.path))),result.snapshotBinding.fileSha256);
     assert.equal(sha(await readFile(path.join(area.runtime,result.compositionBinding.path))),result.compositionBinding.fileSha256);
-    const afterFiles=await files(f);assert.deepEqual(Object.keys(afterFiles).filter(n=>!Object.hasOwn(originalFiles,n)).sort(),
-      [path.basename(result.snapshotBinding.path),path.basename(result.compositionBinding.path)].sort());
+    const afterFiles=await files(f);await compositionInventory(f,originalFiles,afterFiles,result,t);
     for(const [name,hash]of Object.entries(originalFiles))assert.equal(afterFiles[name],hash);
     assert.deepEqual([await readFile(statePath),await readFile(editPath)],before);
     assert.deepEqual(await current(f),pending);assert.deepEqual((await reader(f,result)).body,result);

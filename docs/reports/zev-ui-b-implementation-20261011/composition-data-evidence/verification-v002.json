@@ -1,0 +1,251 @@
+{
+  "recordedAt": "2026-10-11T06:06:42.942719+00:00",
+  "session": "Codex-UI",
+  "task": "No.68 composition-data-only connection artificial validation",
+  "observedHead": "3a1cca211cc0913a06dbb2d4398977c7e3198dfe",
+  "sources": [
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 15180,
+      "sha256": "633cf59c3386ea87be382456a13c3dadae7c3366d5a93df92183a47d312baa3e"
+    },
+    {
+      "path": "backend/src/domain/ui-review.ts",
+      "sizeBytes": 16818,
+      "sha256": "1f9299c7405e2057253347ae5e0a7afd5848b651ae162597cf5871f51267289b"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 8839,
+      "sha256": "6234b27e3c57c1dd432a97c4b24e7697b83b5d5f0058566d506935b15d5879e0"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 39592,
+      "sha256": "e61571e526ecf7161aafcae6cbb9837cbf5b12a622fd8e1a7c88f0a8a757b2b9"
+    },
+    {
+      "path": "backend/test/digest-ui-composition-data.test.mjs",
+      "sizeBytes": 12785,
+      "sha256": "610a322b3387042fc181561801a987a691109b691ca29de9ce3911bcf62fc688"
+    }
+  ],
+  "protectedPaths": [
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "sizeBytes": 49965,
+      "sha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-ui-readonly-v001.ts",
+      "sizeBytes": 563,
+      "sha256": "3246fbee5d1de1bb7729c954e1e77c2102caf4d83e8dbf99ba2c783131027b9f",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "sizeBytes": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 4402,
+      "sha256": "ef5a9ff556af5c1c7f03bd5658351a9201a6b86b4aee31a1ad935af1a78d5e94",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "backend/src/store/digest-ui-edit-requests.ts",
+      "sizeBytes": 3858,
+      "sha256": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-edit-requests.ts",
+      "sizeBytes": 5655,
+      "sha256": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 10729,
+      "sha256": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 104344,
+      "sha256": "9f32f4db810f9a20db1f65471c5c7759e4715925d45e051c92736a4a04a514bb",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "sizeBytes": 6059,
+      "sha256": "a1994ff9a34166a4ac0efce52db4c7597b741e41bf002bdafe29e26034890e5f",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "docs/HANDOVER_INDEX.md",
+      "sizeBytes": 4909,
+      "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e",
+      "equalsObservedHead": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "sizeBytes": 521386,
+      "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "equalsObservedHead": true
+    }
+  ],
+  "rawUnitLog": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/backend-unit-v002.txt",
+    "sizeBytes": 13763,
+    "sha256": "0b360eba5ff677fbbd9cae7c13abd97b1bbbd93e639f4a13c1d5000928404ee3",
+    "exitCode": 0
+  },
+  "previousEvidence": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/verification-v001.json",
+    "sha256": "847aeedc269910c59b5fa75dc0a325ab23f856453ebb03fdb01393eb820eda2a",
+    "tests": 51,
+    "pass": 48,
+    "fail": 3,
+    "unchanged": true
+  },
+  "validation": {
+    "tests": 51,
+    "pass": 51,
+    "fail": 0,
+    "newPass": 7,
+    "existingPass": 44,
+    "sourceAAndBFullByteInvariantAfterDataSave": "passed",
+    "sourceBRejection": "passed",
+    "freshCompiledProcessReadback": "passed",
+    "snapshotCompositionTamperingRejection": "passed",
+    "currentChainRequalification": "passed",
+    "originalAiReasonsAndSelectionBytes": "unchanged",
+    "jsonOutputsPerSource": 2,
+    "filesystemAuxiliaryFiles": [
+      [
+        {
+          "name": "._ui-composition-dacccc0e8557c210c66ef3b3fd0dfb2b9901340e1ccc16637709ce871d6c8323--composition.json",
+          "sizeBytes": 4096,
+          "sha256": "e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"
+        },
+        {
+          "name": "._ui-composition-dacccc0e8557c210c66ef3b3fd0dfb2b9901340e1ccc16637709ce871d6c8323--snapshot.json",
+          "sizeBytes": 4096,
+          "sha256": "e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"
+        }
+      ],
+      [
+        {
+          "name": "._ui-composition-3e71b87131f2c4edf62e4d3030d55d1dec4fb6422c35af01654c25fb389b5527--composition.json",
+          "sizeBytes": 4096,
+          "sha256": "e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"
+        },
+        {
+          "name": "._ui-composition-3e71b87131f2c4edf62e4d3030d55d1dec4fb6422c35af01654c25fb389b5527--snapshot.json",
+          "sizeBytes": 4096,
+          "sha256": "e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"
+        }
+      ]
+    ],
+    "appleDoubleHeaderAndEntryBounds": "passed",
+    "productSourceOrReaderChanges": 0
+  },
+  "individualCorrections": [
+    {
+      "kind": "inventory-test-only",
+      "ordinal": 9,
+      "authority": "Parent limited decision by concrete conditions; not a claim of parent reading complete patch",
+      "applied": true
+    },
+    {
+      "kind": "evidence-helper-path-only",
+      "authority": "Separate parent decision after actual source confirmation",
+      "from": "evals/clip_composition/test_serve_digest_review_v001.py",
+      "to": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "protectedTargetCount": 20,
+      "targetsRemoved": 0,
+      "byteEqualityCheckPreserved": true,
+      "applied": true,
+      "keptSeparateFromInventory9": true
+    }
+  ],
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "setupGeneralLimit": 5,
+    "explicitStops": 5,
+    "implementationCorrectionsApplied": 3,
+    "implementationGeneralLimit": 3,
+    "contractAddenda": 0,
+    "feeUsd": 0
+  },
+  "admission": {
+    "status": "composition-data-only",
+    "sourceRanges": "candidate-context-only",
+    "retention": "not-prepared",
+    "captionPreparation": "not-prepared",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending"
+  },
+  "cleanup": {
+    "tmpDuplicateLogToDeleteBytes": 13763,
+    "newMediaBytes": 0
+  }
+}
