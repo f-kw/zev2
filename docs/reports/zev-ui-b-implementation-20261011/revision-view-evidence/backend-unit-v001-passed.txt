@@ -1,0 +1,18 @@
+✔ A/B and two additions prepare qualified current human manifests while UI remains unreflected until explicit reference registration (9147.244333ms)
+✔ explicit reference registration changes only the existing preparation record, is idempotent, and every UI GET matches current full outputs (9497.16075ms)
+ℹ {"draft":"digest-a","editIds":["digest-edit-6803032f-89e3-43d4-9893-e3117e83779e"],"parts":3,"durationMs":2500,"reflected":true,"manufacturing":false}
+ℹ {"draft":"digest-b","editIds":["digest-edit-5c5d0357-f5e5-42fe-b5e7-414f3b21be6d"],"parts":3,"durationMs":3500,"reflected":true,"manufacturing":false}
+ℹ {"draft":"digest-b-view-multi","editIds":["digest-edit-774ffbbc-bef1-48c4-ba34-a2c891d30182","digest-edit-78829206-b224-4bac-91ad-0df43e297a47"],"parts":5,"durationMs":3000,"reflected":true,"manufacturing":false}
+✔ registration refuses unauthenticated, old identity/hash/chain, wrong root/binding, normal AI manifest and invented permissions without writes (4802.003459ms)
+✔ all saved revision outputs and pending display inputs are requalified on every UI read; tamper, missing and symlink never repair or retain reflected status (21487.978584ms)
+✔ manifest, supplied answer, bundle and baseline style tampering remove reflection without changing old output bytes or granting execution (8127.693959ms)
+✔ changed request/source/represented edit IDs reject old references and a baseline re-registration retains the reference for live rejection (3419.836292ms)
+✔ fresh compiled backend reconstructs the multiple-addition display without writes, new authority, source changes or duplicate ledgers (3875.157917ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62413.659542

@@ -1,0 +1,353 @@
+{
+  "recordedAt": "2026-10-11T10:08:13.448691+00:00",
+  "session": "Codex-UI",
+  "task": "No68 current human revision preparation mapping UI readback; limited completion verified",
+  "observedHead": "c35ae4adc83a9e8497c0d1d1c3665b6b2b443a9b",
+  "gitLease": "UI received from parent",
+  "individualCorrectionAuthorization": {
+    "ordinal": 7,
+    "receivedText": "限定修正7の型注記と4参照の変更について、revision.outputs が既存readerで検証済みの返却値であることを前提に個別承認します。",
+    "applied": "const outputs: Record<string, Obj> = revision.outputs; plus four local output lookups",
+    "sourceReturnContract": "reconstruct outputs Array<{name:string,value:Obj}> plus concrete manifest object; reader compares full bytes and bindings before returning; not unknown",
+    "asAnyAdded": false,
+    "validatorDisabled": false,
+    "runtimeOutputOrAuthorityChange": false
+  },
+  "source": [
+    {
+      "path": "backend/src/domain/digest-ui-revision-view.ts",
+      "sizeBytes": 7420,
+      "sha256": "2ad4b70c80781e1b1edd2152c39530130529e6cb7107afe5e01b49d69658a04f"
+    },
+    {
+      "path": "backend/src/domain/ui-review.ts",
+      "sizeBytes": 17045,
+      "sha256": "2f9ca3e2dc642859b0efb5ecfcd16ed17591579b4c0c11f8280df64d7d8bb656"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 44912,
+      "sha256": "8f4ed33ef89ebce460a1c25cfefba8683e0a015ad42d8d7e1587029a491a47e5"
+    },
+    {
+      "path": "backend/src/store/digest-ui-preparations.ts",
+      "sizeBytes": 3816,
+      "sha256": "d0d71ce34b6e34837492794cb687e6364e03780fdf8c8f248934fa3af789e7b7"
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 108990,
+      "sha256": "26acddd35432c5a9b79a2a660c6a2cefabd27775e8420b878aa6bf12db6ab941"
+    },
+    {
+      "path": "client/src/guided-workflow.ts",
+      "sizeBytes": 10380,
+      "sha256": "ef506803b7ca3a6e9ae27bba15bb7fc3482c3f79014ab429ecfc044bcc8b4f54"
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 6496,
+      "sha256": "22211f407489e088c4bfc8a9f201c3cbd78e64dae3991c29c4b81576849885d5"
+    },
+    {
+      "path": "backend/test/digest-ui-revision-view.test.mjs",
+      "sizeBytes": 17112,
+      "sha256": "bce2409b9d9bf521232b82641650160c9ed27ad6aea61f92cf354fff07b236b1"
+    },
+    {
+      "path": "client/test/guided-workflow.test.mjs",
+      "sizeBytes": 38787,
+      "sha256": "4b7a9dccc25b88e6f0711ddd7b93f1d2805a42bdf281ae2b9f4e5ac5512fd068"
+    },
+    {
+      "path": "client/test/guided-ui-mock.mjs",
+      "sizeBytes": 22834,
+      "sha256": "2e3a06088cfb72ad51cb2f19695ccc11f9aca096fa1f568595390a91d675b463"
+    }
+  ],
+  "protectedSourcesUnchanged": [
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "sizeBytes": 5669,
+      "sha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "sizeBytes": 7026,
+      "sha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/adopted_caption_judgment_inputs_v001.mts",
+      "sizeBytes": 5647,
+      "sha256": "2e46b2d9c1902f4e1f6f0b3bf4aa221ac51bb932ac7bede23363749b99d4ccc7",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "sizeBytes": 111531,
+      "sha256": "834ef2cbe1c19548f356721b136ca7d6c092983da6387fc3b577eb4eaa7e9ed4",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "sizeBytes": 29454,
+      "sha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "sizeBytes": 16534,
+      "sha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-revision-preparation.ts",
+      "sizeBytes": 22256,
+      "sha256": "1804c078ced79ce9afccde52b2146cd9e2d26d82d152ac5166984325d5c8f29a",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 23554,
+      "sha256": "01563f84c69b781d1abe0df278e7df19ebc46c84cc3a39714b7d03a6633f6dd4",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 16620,
+      "sha256": "874095cd88fb4096d754af09c9398a084b2a41b93cb832d8c177cfd314275670",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 11115,
+      "sha256": "3371bfe94fca42d7713fc9a7a7a2d4278bcde5899128f66e6580380b754f9557",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "backend/test/digest-ui-revision-preparation.test.mjs",
+      "sizeBytes": 21756,
+      "sha256": "054e287aa0588d4f8d9cb0d68a1a0e76b0e56353fa11606f1946ec3c6ddd1656",
+      "matchesStopCheckpoint": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "matchesStopCheckpoint": true
+    }
+  ],
+  "rawLogs": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/backend-build-v002-passed.txt",
+      "sizeBytes": 374,
+      "sha256": "c4e0dfcde446d4cc3905f877cfb3bd8e13d61ae0ce1aeeda551d9c547cabe62d"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/client-build-v001-passed.txt",
+      "sizeBytes": 3489,
+      "sha256": "5ae0b9f23da8d7d28a61ffeaecd1e8c379637bd9cfc9f4bac882bd17eae61ed2"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/backend-unit-v001-passed.txt",
+      "sizeBytes": 1760,
+      "sha256": "bc15c3be839d577505249cdae69315be744141dbe8e16507a55e8fd76ff68999"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/client-unit-v001-passed.txt",
+      "sizeBytes": 4097,
+      "sha256": "b42e2795ceb65e411e8819687851fd196fa18beb5907bcdbafd858fa8a26c9e0"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/backend-regression-v001-passed.txt",
+      "sizeBytes": 9793,
+      "sha256": "018e0b27a054fbdd22b3598b3793f5c5128a9479286e403d85e81a37ebc312a8"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/mock-server-v001-listen-denied.txt",
+      "sizeBytes": 499,
+      "sha256": "7b24762e198cda0a160d3c26bc09bbcc49d1f65ef7cb617ba58a3f606d8549a7"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/mock-server-v002.txt",
+      "sizeBytes": 45,
+      "sha256": "7d048e559d904e6b57702069bfdaf1335a14369598e53da6680df87b9aa770a2"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/mock-server-v003.txt",
+      "sizeBytes": 45,
+      "sha256": "7d048e559d904e6b57702069bfdaf1335a14369598e53da6680df87b9aa770a2"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/browser-calls-v001.json",
+      "sizeBytes": 2119,
+      "sha256": "9197a6046cb5aaff53b640af577ea0391ada58ae20e914e5cb8559ce66da1dde"
+    }
+  ],
+  "screenshotsAndDom": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-qualified-v001.jpg",
+      "sizeBytes": 148074,
+      "sha256": "947b15e516b54b4fed4be6dce5bebc447e6b177693539a96416564cb3a325ed9"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-qualified-v001-dom.txt",
+      "sizeBytes": 3024,
+      "sha256": "f88bbd1d5a5176b2b2347ee807537eba77de5feabb6b35eef959e9c06673befa"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-stale-v001.jpg",
+      "sizeBytes": 182362,
+      "sha256": "e303f6bd692e53eeaf61f39029e5917c9355506d19cf35a1d362bc820d43a66b"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-stale-v001-dom.txt",
+      "sizeBytes": 3761,
+      "sha256": "befcff9053200c55af0c97999da543019d73b8a7e035710deac3043c971c19e2"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-stale-after-reload-v001-dom.txt",
+      "sizeBytes": 3752,
+      "sha256": "a4db0ee5fc5689397ae5533e69b5207c712369aa61851f865a7c53ed132dae87"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-restored-v001.jpg",
+      "sizeBytes": 147438,
+      "sha256": "f51769df80db98d21b506af14aaea0aa6b6555f4325c2a008d44548e5733c324"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/edge-restored-v001-dom.txt",
+      "sizeBytes": 3015,
+      "sha256": "8ce5fcf743981ecdf126e07bfb5db2cb004c2b8f26b753adece0e8be86c9e29a"
+    }
+  ],
+  "browserObservations": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/browser-observations-v001.json",
+    "sizeBytes": 1600,
+    "sha256": "a439d558ba41cd1b72c4bb7aa42481c2368507486480246412a65621d3c4e1fe"
+  },
+  "validation": {
+    "backendBuildTypesExit": 0,
+    "clientBuildTypesExit": 0,
+    "unitAndRegression": {
+      "backend-unit-v001-passed.txt": {
+        "tests": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "durationMs": 62413.659542
+      },
+      "client-unit-v001-passed.txt": {
+        "tests": 37,
+        "passed": 37,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "durationMs": 837.822375
+      },
+      "backend-regression-v001-passed.txt": {
+        "tests": 54,
+        "passed": 54,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "durationMs": 103852.367958
+      }
+    },
+    "node": "v23.7.0",
+    "backendCwd": "/Users/kawafmm/workspace/zev2/backend",
+    "SSD": "explicit /Volumes/KIOXIA isolated fixtures",
+    "testConcurrency": 1,
+    "scope": "A/B +two additions; current full-byte reconstruction; exact edit IDs/hash/binding; same fingerprint after reference registration; only existing preparation reference record written; old/other/tamper/missing/symlink/auth rejected; no authority promotion; fresh compiled process readonly; source/AI/state/queue unchanged; client37 including old response/draft races; Edge synthetic user operations",
+    "realMediaQuality": false,
+    "productionThroughConnection": false
+  },
+  "limits": {
+    "setupCorrectionsApplied": 11,
+    "limitedImplementationCorrectionsApplied": 7,
+    "explicitStops": 10,
+    "addenda": 0,
+    "costUSD": 0,
+    "countersReset": false
+  },
+  "cleanup": {
+    "testAfterHooks": "all successful processes await deletion of only own SSD/local fixture roots",
+    "ownFixtureRecoveredBytes": "not measured",
+    "ownMockStopped": true,
+    "ownEdgeTabClosed": true,
+    "tmpDuplicateBytesRemoved": 22221,
+    "newMedia": 0,
+    "foreignProcessStops": 0
+  },
+  "priorFailureRetained": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/revision-view-evidence/backend-build-v001-type-failed.txt",
+    "sizeBytes": 4463,
+    "sha256": "70cdfabdb4f6d6129a2703634ad021ffd66d902838aaeb6eae28ff927a35e3b4"
+  },
+  "admission": {
+    "No68Whole": "unfinished",
+    "No70": "unstarted",
+    "uiReadback": "limited-verified",
+    "captionDisplayAnswers": "unanswered",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "normalAIManifest": "not-impersonated",
+    "formalConsumerAndRunner": "unchanged",
+    "realMaterialProcessing": 0,
+    "paidApiTraffic": 0,
+    "manufacturing": 0,
+    "publish": 0
+  },
+  "newUserPolicy": "received during validation; keep B; saved-evidence short contextual choices; STT original text/time; no automatic removal threshold; no contract alteration begun"
+}

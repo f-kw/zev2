@@ -42,8 +42,9 @@ export async function populateDigestUiRevisionView(state: Zev2State, m: UiReview
     const revision = await readDigestUiRevision(state, m.requestDraftId, config, ref.requestHash, ref.outputRoot, ref.manifestBinding.fileSha256);
     assert.deepEqual(revision.manifestBinding, ref.manifestBinding, '新版準備参照が一致しません');
     assert.deepEqual(revision.manifest.representedEditRequestIds, m.digestComposition.editRequestIds, '編集要求の集合・順が変わっています');
-    const retention = revision.outputs['revision-retention.json']!, edit = revision.outputs['revision-edit-plan.json']!,
-      meaning = revision.outputs['meaning-input.json']!, clock = revision.outputs['revision-clock-resolution.json']!.resolution;
+    const outputs: Record<string, Obj> = revision.outputs;
+    const retention = outputs['revision-retention.json']!, edit = outputs['revision-edit-plan.json']!,
+      meaning = outputs['meaning-input.json']!, clock = outputs['revision-clock-resolution.json']!.resolution;
     assert.deepEqual(retention.scenes.map((s: Obj) => s.candidateId), m.digestComposition.requestedCandidateIds, '新版構成のsceneが変わっています');
     const appliedEdits = m.digestComposition.editRequestIds.map(id => {
       const scene = (retention.scenes as Obj[]).find(s => s.inclusion.kind === 'human-addition' && s.inclusion.editRequestId === id);

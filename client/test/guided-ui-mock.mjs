@@ -13,6 +13,7 @@ const calls = [];
 let digestAdditionIds = [];
 const digestCompositions = new Map(), digestConfirmationRequests = new Map();
 let digestConfirmationMode = 'normal';
+let digestSavedRevision = null, digestRevisionMode = 'verified';
 const config = { stt: { mode: 'fixed', localServerUrl: '', language: 'ja' }, contentDiscovery: { mode: 'fixed' },
   editPlan: { mode: 'fixed' }, adjustment: { mode: 'fixed' }, videoOutput: { encoder: 'libx264', extraArgs: [] },
   agentClaim: { ttlMilliseconds: 60000 }, artifactDelivery: { mode: 'local' },
@@ -26,7 +27,7 @@ const themes = [
 const mockCandidates = () => themes.map((t,i)=>({...t,previewStatus:{state:'unknown'},speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
 function digestMockMaterials(draft) {
   const candidates=mockCandidates(),requested=themes.filter(t=>t.id==='opening'||digestAdditionIds.includes(t.id)).map(t=>t.id);
-  return {requestDraftId:draft.id,draftIdentity:shared.draftConfirmationIdentity(draft),fingerprint:'mock-digest-'+JSON.stringify([draft,digestAdditionIds]),candidates,bindings:[],
+  const m={requestDraftId:draft.id,draftIdentity:shared.draftConfirmationIdentity(draft),fingerprint:'mock-digest-'+JSON.stringify([draft,digestAdditionIds]),candidates,bindings:[],
     digestPreparation:{status:'verified',message:'人工UI入力：現在の計画・実行入力・保存字幕準備を再照合しました。'},
     digestComposition:{basis:{identity:'a'.repeat(64),candidateSetBinding:{path:'artificial/candidates.json',fileSha256:'a'.repeat(64)},selectionAdoptionBinding:{path:'artificial/selection.json',fileSha256:'b'.repeat(64)},captionManifestBinding:{path:'artificial/manifest.json',fileSha256:'c'.repeat(64)},producerBindings:[]},
       status:digestAdditionIds.length?'revision_requested':'current',currentCandidateIds:['opening'],requestedCandidateIds:requested,addedCandidateIds:[...digestAdditionIds],
@@ -35,10 +36,17 @@ function digestMockMaterials(draft) {
     segments:[{startMs:0,endMs:1000,caption:'人工入力の元本文',speechIds:[1],displaySummary:'保持済み本文。字幕の表示境界・描画は後続工程で確認します。'}],
     blockers:[...(digestAdditionIds.length?['場面追加の編集要求を保存しました。変更後の正式な新版準備・再照合は未接続です。旧準備では作成前確認へ進めません。',
       ...themes.filter(t=>digestAdditionIds.includes(t.id)).map(t=>`追加場面「${t.title}」の確認は未回答です。`)]:[]),'動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。']};
+  if(digestSavedRevision) {
+    const valid=digestRevisionMode==='verified'&&digestSavedRevision.fingerprint===m.fingerprint;
+    m.digestRevision=valid?structuredClone(digestSavedRevision):{...structuredClone(digestSavedRevision),status:'rejected',
+      message:'保存した新版資料は現在の依頼・構成に対応していません。反映済みとは扱えません。',representedEditRequestIds:[],candidateIds:[],appliedEdits:[],segments:[],remainingChecks:[...m.blockers]};
+  }
+  return m;
 }
 function digestMockComposition(m) {
   // Synthetic API view only, not a production request hash or formal qualification proof.
-  const hash=createHash('sha256').update(JSON.stringify(m)).digest('hex'),snapshotBinding={path:`artifacts/${m.requestDraftId}/ui-composition-${hash}--snapshot.json`,fileSha256:hash};
+  const {digestRevision,...baseline}=m;
+  const hash=createHash('sha256').update(JSON.stringify(baseline)).digest('hex'),snapshotBinding={path:`artifacts/${m.requestDraftId}/ui-composition-${hash}--snapshot.json`,fileSha256:hash};
   return {status:'composition-data-only',requestDraftId:m.requestDraftId,requestHash:hash,snapshotBinding,
     compositionBinding:{path:`artifacts/${m.requestDraftId}/ui-composition-${hash}--composition.json`,fileSha256:'d'.repeat(64)},representedEditRequestIds:m.digestComposition.editRequestIds,
     composition:{schemaVersion:'ui-digest-human-composition-data-v001',status:'composition-data-only',requestDraftId:m.requestDraftId,draftIdentity:m.draftIdentity,requestHash:hash,
@@ -80,11 +88,23 @@ seedReview(draftCopy());
 function seedScenario(scenario) {
         let draft = state.requestDrafts[0];
         state.controlReviewItems.forEach(r => { if (r.status === 'review_required') r.status = 'approved'; });
-        if (scenario === 'digest-precreation') {
+        if (scenario === 'digest-precreation' || scenario === 'digest-reflected') {
           digestAdditionIds=[];
+          digestSavedRevision=null;digestRevisionMode='verified';
           digestCompositions.clear();digestConfirmationRequests.clear();digestConfirmationMode='normal';
           state = shared.createInitialState();draft = draftCopy('人工Digestの保存資料確認', 'digest');
           const requests=seedQueue(draft);requests.forEach(r=>r.status='succeeded');
+          if(scenario==='digest-reflected') {
+            digestAdditionIds=['turn'];const m=digestMockMaterials(draft),c=m.digestComposition;
+            digestSavedRevision={status:'verified',message:'保存した追加要求を、現在の新版準備資料への反映として再照合しました。',
+              requestDraftId:m.requestDraftId,draftIdentity:m.draftIdentity,fingerprint:m.fingerprint,requestHash:digestMockComposition(m).requestHash,preparationHash:'f'.repeat(64),
+              representedEditRequestIds:[...c.editRequestIds],candidateIds:[...c.requestedCandidateIds],
+              appliedEdits:c.addedCandidateIds.map(id=>({id:'mock-edit-'+id,candidateId:id,title:themes.find(t=>t.id===id).title})),
+              segments:m.candidates.filter(t=>c.requestedCandidateIds.includes(t.id)).map(t=>({startMs:t.speeches[0].startMs,endMs:t.speeches[0].endMs,
+                speechIds:[t.speeches[0].id],caption:t.speeches[0].text,displaySummary:'追加後の保持本文。字幕の表示判断と描画はまだです。'})),durationMs:2000,
+              remainingChecks:['動画作成の承認・製造経路は未接続です。完成動画の実媒体検査と人間の採用判断は未実施です。','追加後の字幕の表示判断は未回答です。動画作成は始めません。'],
+              admission:{captionDisplayAnswers:'unanswered',executionPermission:'not-approved',humanQuality:'pending'}};
+          }
         }
         if (scenario === 'output') registeredResult(draft, 'render_video');
         if (scenario === 'readiness') seedReview(draft, 'render_readiness');
@@ -125,6 +145,9 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         return send({ state, calls });
       }
       if (url.pathname === '/__qa/calls') return send({ calls, state });
+      if (url.pathname === '/__qa/digest-revision') {
+        digestRevisionMode=url.searchParams.get('mode')||'verified';return send({mode:digestRevisionMode,calls});
+      }
       if (url.pathname === '/__qa/digest-confirmation') {
         digestConfirmationMode=url.searchParams.get('mode')||'normal';
         if (url.searchParams.get('add')==='ending'&&!digestAdditionIds.includes('ending')) digestAdditionIds.push('ending');
@@ -138,7 +161,7 @@ const server = await createServer({ root: root + '/client', configFile: root + '
         const id=url.pathname.split('/')[3], draft=state.requestDrafts.find(d=>d.id===id);
         const review=state.controlReviewItems.filter(r=>r.requestDraftId===id&&r.status==='review_required').at(-1);
         const candidates=mockCandidates();
-        if (draft?.productionType==='digest' && process.env.ZEV_UI_QA_SCENARIO==='digest-precreation') return send(digestMockMaterials(draft));
+        if (draft?.productionType==='digest' && ['digest-precreation','digest-reflected'].includes(process.env.ZEV_UI_QA_SCENARIO)) return send(digestMockMaterials(draft));
         if (process.env.ZEV_UI_QA_SCENARIO==='registered-metadata') {
           for (const candidate of candidates) {
             const option=review?.options.find(o=>o.id===candidate.id),ref=option?.evidenceRefs.find(r=>r.kind==='agent_request');

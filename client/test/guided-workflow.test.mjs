@@ -18,7 +18,7 @@ async function compiled(file, imports) {
   return dataURL(js);
 }
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
-const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState } = await import(guideURL);
+const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId, creationCheckLabels, digestCandidateAdditionState, verifiedDigestRevision } = await import(guideURL);
 const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
   'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview','saveDigestSceneAddition',
   'saveDigestCompositionData','fetchDigestCompositionData','prepareDigestRetentionInputs','fetchDigestRetentionInputs'];
@@ -126,6 +126,55 @@ function digestConfirmationHandlers(f) {
   handlers.fetchDigestRetentionInputs=async(id,hash)=>{assert.equal(id,f.draft.id);assert.equal(hash,f.composition.requestHash);return f.summary;};
   handlers.approveDraft=handlers.submitHumanReviewAction=handlers.resumeAgentWork=()=>assert.fail('Input preparation must not execute');
 }
+
+function digestReflectedFixture() {
+  const f=digestConfirmationFixture(),m=f.materials;
+  m.candidates.forEach((c,i)=>{c.speeches=[{id:101+i,text:`保存済み本文${i+1}`,startMs:i*1000,endMs:(i+1)*1000}];});
+  m.digestRevision={status:'verified',message:'現在の新版準備に反映',requestDraftId:m.requestDraftId,draftIdentity:m.draftIdentity,fingerprint:m.fingerprint,
+    requestHash:'c'.repeat(64),preparationHash:'f'.repeat(64),representedEditRequestIds:[...m.digestComposition.editRequestIds],candidateIds:[...m.digestComposition.requestedCandidateIds],
+    appliedEdits:[{id:'human-addition',candidateId:'second',title:'second'}],segments:m.candidates.map(c=>({startMs:c.speeches[0].startMs,endMs:c.speeches[0].endMs,
+      speechIds:[c.speeches[0].id],caption:c.speeches[0].text,displaySummary:'保持本文。表示判断は未回答。'})),durationMs:2000,
+    remainingChecks:['字幕の表示判断は未回答です','動画製造は未接続です'],admission:{captionDisplayAnswers:'unanswered',executionPermission:'not-approved',humanQuality:'pending'}};
+  f.s.reviewMaterials=m;return f;
+}
+test('current revision reference reflects exact edits and retained text while precreation navigation preserves manufacturing blockers',()=>{
+  const f=digestReflectedFixture(),m=f.materials,before=JSON.stringify(m);
+  assert.equal(verifiedDigestRevision(m),m.digestRevision);assert.equal(digestCandidateAdditionState(m,'second'),'reflected');
+  assert.equal(digestCandidateAdditionState(m,'first'),'adopted');assert.equal(guideStep(f.draft,undefined,false,false,'validate_digest_plan',m),3);
+  assert.equal(JSON.stringify(m),before);assert(m.blockers.length);assert.equal(m.digestComposition.status,'revision_requested');
+  assert.equal(m.digestRevision.admission.executionPermission,'not-approved');assert(m.digestRevision.remainingChecks.some(b=>b.includes('未回答')));
+});
+test('old requests, alternate composition, changed identity/binding summary and invented authority never display reflected revision',()=>{
+  for(const kind of ['draft','identity','fingerprint','hash','preparation','requests','composition','edit','scene','title','duration','unanswered','execution','quality','caption','speech','order','overlap','duplicate']) {
+    const f=digestReflectedFixture(),m=f.materials,v=m.digestRevision;
+    if(kind==='draft')v.requestDraftId='other';if(kind==='identity')v.draftIdentity='old';if(kind==='fingerprint')v.fingerprint='old';
+    if(kind==='hash')v.requestHash='missing';if(kind==='preparation')v.preparationHash='missing';if(kind==='requests')v.representedEditRequestIds=['other'];
+    if(kind==='composition')v.candidateIds.reverse();if(kind==='edit')v.appliedEdits[0].id='other';if(kind==='scene')v.appliedEdits[0].candidateId='first';
+    if(kind==='title')v.appliedEdits[0].title='invented';if(kind==='duration')delete v.durationMs;if(kind==='unanswered')v.admission.captionDisplayAnswers='answered';
+    if(kind==='execution')v.admission.executionPermission='approved';if(kind==='quality')v.admission.humanQuality='passed';
+    if(kind==='caption')v.segments[0].caption+='invented';if(kind==='speech')v.segments[0].speechIds=[999];if(kind==='order')v.segments.reverse();
+    if(kind==='overlap')v.segments[1].startMs=999;if(kind==='duplicate')v.segments[1]={...v.segments[0],startMs:1000,endMs:2000};
+    assert.equal(verifiedDigestRevision(m),undefined,kind);assert.equal(digestCandidateAdditionState(m,'second'),'requested',kind);
+    assert.equal(guideStep(f.draft,undefined,false,false,'validate_digest_plan',m),2,kind);
+  }
+});
+test('new edit or rejected readback removes old reflection and valid re-read restores it without any command or authority mutation',()=>{
+  const f=digestReflectedFixture(),m=f.materials,valid=structuredClone(m);
+  m.digestComposition.editRequestIds.push('later');assert.equal(verifiedDigestRevision(m),undefined);assert.equal(digestCandidateAdditionState(m,'second'),'requested');
+  m.digestComposition.editRequestIds.pop();m.digestRevision.status='rejected';m.digestRevision.appliedEdits=[];
+  assert.equal(verifiedDigestRevision(m),undefined);assert.equal(digestCandidateAdditionState(m,'second'),'requested');
+  f.s.reviewMaterials=valid;assert(verifiedDigestRevision(f.s.reviewMaterials));assert.deepEqual(f.s.state,f.state);
+});
+test('overlapping refresh and switched drafts cannot restore an older reflected preparation after a newer rejection',async()=>{
+  const f=digestReflectedFixture(),s=f.s;let resolve,reads=0;
+  const invalid=structuredClone(f.materials);invalid.digestRevision.status='rejected';invalid.digestRevision.appliedEdits=[];
+  handlers.fetchUiReviewMaterials=async()=>++reads===1?new Promise(r=>resolve=r):invalid;
+  const old=s.refreshUiReviewMaterials(f.draft.id);assert.equal(s.reviewMaterials,null);
+  await s.refreshUiReviewMaterials(f.draft.id);assert.equal(verifiedDigestRevision(s.reviewMaterials),undefined);
+  resolve(f.materials);await old;assert.equal(s.reviewMaterials.digestRevision.status,'rejected');
+  handlers.fetchUiReviewMaterials=()=>new Promise(r=>resolve=r);
+  const switched=s.refreshUiReviewMaterials(f.draft.id);s.activeDraftId='another-draft';resolve(f.materials);await switched;assert.equal(s.reviewMaterials,null);
+});
 test('Digest confirmation saves the exact version once during repeated clicks, with no execution or state changes',async()=>{
   const f=digestConfirmationFixture();digestConfirmationHandlers(f);let resolve,saves=0,prepares=0;
   const save=handlers.saveDigestCompositionData,prepare=handlers.prepareDigestRetentionInputs;

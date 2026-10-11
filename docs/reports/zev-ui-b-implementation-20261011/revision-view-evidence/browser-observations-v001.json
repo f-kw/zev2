@@ -1,0 +1,27 @@
+{
+  "session": "Codex-UI",
+  "browser": "dedicated Edge tab 1516875466; closed",
+  "url": "http://127.0.0.1:5179/",
+  "data": "isolated mock; all /api intercepted; no production backend/provider/renderer",
+  "checks": [
+    "qualified request-to-revision mapping and retained original text plus planned duration",
+    "pending caption display/execution/quality remain visible",
+    "already reflected candidate double-click browses only; add disabled",
+    "unadded candidate confirmation cancelled; dialog close and reopen",
+    "page reload restores same qualified artificial view",
+    "new scene addition double-click sends one POST only; former planned duration/text/reflection hidden",
+    "pending preparation confirm opened and cancelled with zero preparation writes",
+    "material reread double-click and reload preserve rejected old version",
+    "mock restarted with fresh normal artificial state; displayed current qualified preparation restored"
+  ],
+  "postCalls": 1,
+  "preparationPostCalls": 0,
+  "approvalOrDispatchOrFeePostCalls": 0,
+  "compareVideosGenerated": 0,
+  "consoleErrorEntriesAfterReload": [],
+  "limitations": [
+    "QA /__qa/digest-revision navigation was blocked by Edge after the GET reached the isolated mock; returned with normal browser Back, did not override browser security",
+    "normal restoration was a fresh isolated mock scenario, not a repair of a real preparation",
+    "full backend qualification was independently tested in artificial HTTP and fresh compiled process; browser used synthetic response shape, not real media or production backend"
+  ]
+}

@@ -1,6 +1,6 @@
 # Codex-UI｜No.68 人間新版の全体保持・時計字幕準備と検証
 
-**最新結果（2026-10-11 09:21 UTC）：限定writer/独立readerの実装と人工検証が成立。** 元AI案と人間追加の採用/保持来歴を分け、変更後の全体保持・編集区間・時計・意味本文/未回答字幕表示要求を別の準備資料として保存し、新processから同じ全出力を再構築できるようになった。新版の人工8群と関連既存6fileの46件が全て合格、backend build/types exit0。保存と再読の接続だけで、画面への反映receipt・正式消費/製造reader・runner・製造・人間品質採用は未接続。No.68全体未完成、No.70未着手。
+**最新結果（2026-10-11 10:10 UTC）：人間新版準備と現在の編集要求の対応を、UI表示時に再照合する限定接続が成立。** 新人工7群・関連54件・client37件が全て合格、backend/client build/types exit0。専用Edgeの隔離mockで閲覧・取消・連打・旧版拒否・再表示を確認した。既存準備参照とrequest hash/反映ID/bindingを再利用し、別台帳や要求の消込を増やさない。保持本文と予定尺の準備成立は表示するが、字幕表示回答・正式製造・完成QC・人間品質は未完。実素材やproduction backendとの通し確認ではない。No.68全体未完成、No.70未着手。旧停止・失敗・過去の検証範囲は以下に保持する。
 
 以下の具体案・Git保存待ち・初稿型検査停止は各時刻の履歴として保持する。最新の許可・修正・検証・cleanupは末尾「型注記6の個別承認と今回の成立範囲」に記録する。[成功生ログと検証索引](revision-preparation-evidence/verification-v002.json)。
 
@@ -133,3 +133,26 @@ client初稿は反映ID/構成/identity/fingerprint/未承認状態/本文IDを�
 累積は設営11・適用済み限定実装修正6・明示停止10・追補0・US$0。修正7は提案のみで一般上限/counterをリセットしない。停止8からの本人再開許可を保持し、同じcwd了承を再要求しない。failure logをrepoへ固定後、自分の/tmp重複だけ削除。今回fixture/媒体生成0、今回build残processなしを読取確認、他担当process停止0。共有ツリーの別担当5文書は保持しstageしない。No.68全体未完成、No.70未着手。この停止証拠と初稿を監査checkpointへ保存して親cloud threadへdelegation応答で返し、別Web相談役への送信/返信受領を実施したとは書かない。
 
 初稿と失敗証拠の監査checkpointは`f03e1a503a1b909acd89f294f3ee65d78c6b6798`。[今回のsession log](../../work-logs/2026-10/2026-10-11T0949_Codex-UI_No68-revision-view-type-stop_f03e1a50.md)とこの索引をdoc commitへ保存し、最終push/statusを親へ返す。
+
+## 限定修正7の個別承認・現在反映の限定検証成立（10:10 UTC）
+
+親から「限定修正7の型注記と4参照の変更について、revision.outputs が既存readerで検証済みの返却値であることを前提に個別承認します」と受領した。既存reconstructの出力は`Array<{ name: string; value: Obj }>`に具体manifest objectが合流した型で、unknownではない。独立readerは現在入力/実装SHAと全出力bytesの一致を検証してから返す。その返却契約を確認して、new view内の`const outputs: Record<string, Obj> = revision.outputs;`と4lookupだけを承認どおり変更した。既存writer/reader返却型・runtime出力・validator・本文ID時計・費用/scope/権限・品質の意味を変えない型推論補足で、本人の低リスク判断委任に沿う親の技術判定。`as any`/検査省略/一般上限の変更なし。今後もreader返却契約を初稿前に確認する。同じ型推論失敗を追加の本人確認へ戻さない。
+
+| 今回の確認 | 実結果 |
+| --- | --- |
+| backend build/types | exit0。承認された型注記後の同じpnpm入口 |
+| client build/types | exit0。既存bundle-size警告のみ、今回ついでの最適化なし |
+| 新版参照・表示人工HTTP/新process | 7群・7合格・失敗/skip/cancel0、62,413.659542ms |
+| 既存関連backend 7file | 54件・54合格・失敗/skip/cancel0、103,852.367958ms |
+| client unit | 37件・37合格・失敗/skip/cancel0、837.822375ms |
+| 専用Edge隔離mock | 現在反映・未回答/未製造表示、閲覧/閉じる/再開/取消、再読/保存の連打、古版拒否/再表示を確認 |
+
+新人工A/B追加1件ずつと3scene/2追加で、現在要求IDの集合と順・元構成scene順・manifest hash/binding・全保持本文/元ID端点・予定尺を照合した。参照登録で変更されたfileは既存UI準備参照一件だけ。繰返し登録・UI GET・独立reader・compiled backend新processの再読はstate/queue/旧AI判断/本文/原出力を書き換えない。参照追加前後の確認fingerprintは一致する。全出力file/未回答display入力の改変、manifest/回答/bundle/style、欠落/symlink、古い依頼/元資料/編集要求ID、別root/別構成/別hash/binding/通常AI manifest、偽製造許可、認証不足を拒否した。基準準備を再登録しても旧人間新版参照を保持し、現在に不一致なら反映済みにしない。元要求を消さない。
+
+serverの既存blocker/creationChecksは変更せず、画面では照合済みの保持本文と予定尺だけを更新する。旧保持未回答などobsoleteな表示だけを置換し、追加後字幕の表示未回答・製造入力資格未完・人間品質未確認は残す。段階4表示は準備確認であり製造開始ではない。client unitは本文/ID/順/版/hash/対応ID/偽authorityと非同期旧応答/別依頼の混同を拒否した。既存AI由来manifest/正式consumer/runnerは変更しない。
+
+Edgeは今回新規の専用tabだけで、127.0.0.1:5179の全API隔離mockを使用した。反映済み候補の追加は無効、未追加候補の確認取消ではPOST0、追加保存のdouble-clickでは追加要求POST1だけ。確認要求準備の保存/承認/dispatch/課金はPOST0。候補追加後は旧新版本文/予定尺/反映badgeが外れ、変更前本文と反映未確認へ戻った。再読連打/準備取消/reloadで旧版を復活させない。最初のmock起動は通常sandboxのlocalhost listen EPERMで終了したため、同じsourceを環境権限付きで起動した。QA補助URLの表示はEdgeが拒否したがGETはmockへ到達しており、通常Backで元画面へ戻った。browserのsecurity設定を変更/迂回しない。正常表示への復帰は自分のmockを新しい正常人工状態で再起動して確認したもので、実資料の自動修復ではない。実backendの全byte資格化は別の人工HTTP/compiled process検査で行った。[観察/呼出/画像/DOM](revision-view-evidence/browser-observations-v001.json)と[全検証・SHA索引](revision-view-evidence/verification-v002.json)を保存・byte再読した。
+
+全test after hookで今回のSSD/local人工rootだけを削除。最近生成した自分のprefix残root0、残mock/test process0、専用Edge tab閉鎖を[cleanup証拠](revision-view-evidence/cleanup-v001.json)で確認した。新媒体/巨大中間物0、fixture回収bytesは未計測。自分の/tmp log重複22,221bytesだけ削除。source/来歴の保護20件は停止checkpointとSHA一致、他担当アプリ/配信/STT process停止0、元素材/他成果/archive操作0。
+
+累積は**設営11・限定実装修正7・停止10・追補0・US$0**。修正増分1は親の個別承認、停止増分0。旧型検査exit2と旧counterを保持する。今回の反映照合の限定範囲は検証成立。No.68全体は正式製造/完成QC/実素材通し/人間品質を残し未完成、No.70未着手。検査中に届いた新本人方針を受領し、B導線を維持した保存根拠の短い選択案とSTT原本文/時刻保持へ進むため[次の最小境界案](context-choice-boundary.md)を返す。PDF更新待ちを開始条件にしない。追加作業のボード登録は親が別担当へ依頼済み、番号/登録完了は未受領。新しい候補生成や正式な非表示採用契約を自己変更していない。
