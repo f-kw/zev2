@@ -1,5 +1,11 @@
 # CURRENT_GOAL — 現在の目的と復元入口
 
+## 最新現在地 — 2026-10-11T01:16:17.002Z（共通再開2file検査合格・容量手順確認待ち）
+
+共通配信再開の実装2fileが完成。Python3.12/既存3.9の小検査各10/10・exit0/skipped0、旧main/Range送出/import維持。現在storage/device/UUID・許可files SHA/size・Host/path/symlink/currentidentityを明示し、旧record読み取り不変/新recordx/指定port競合fallbackなし。旧証拠の現資格変換分岐なし。初回2run各9pass1errorのAPFS観測を実mount table＋diskutilへ修正し旧証拠KEEP。既存4配信LISTENとapp75046を継続、原35/製造code23/旧serverbindings18/app6不変。PDFB/registryは外部更新済み最新版（B version1/105260B）が実fileと一致、旧へ戻さず直前に担当間再固定。own candidate3/49914B整理、test temp/process0。容量の正常終了→通常detach→SSD backup全hash→512GB resize→同path再attach/現観測→同4URL/board復旧と、失敗image保全＋backup copy戻しの判断基準を既存report/logへ補完。現在は手順確認待ち、実停止/quit/detach/backup/resize/API/動画0。次mona、確認後は同Codex-SSDが実施。最終確認 2026-10-11T01:16:17.002Z（2026-10-11T10:16:17 JST）。
+
+以下は以前の時点の記録。
+
 ## 最新現在地 — 2026-10-11T00:52:20.928Z（Normal完成記録8/8通過・容量復旧は共通2file案のみ）
 
 完成記録の検査は8/8通過、型検査exit0。既に通過した保存監視34/34・Python監視50/50は対象変更なしのため再実行せず、今回承認の3検査がそろった。既存保存済みNormal入力（31group/651cue/1042line/5450atom/37619frame/55299930sample）を正規readerで再読し、検査用計画・参照を一貫させた。旧8callback/拒否assertは保持、製品gate変更0、J16置換/null資格化なし。Normal全入力読取に合わせ検査専用event waitだけ5秒→180秒。実素材動画・API追加・glyph/native・全尺品質確認なし。原本/採否35・製品23・配信対象/旧record/helper18・共通配信・app6/PDFregistry+4PDFのSHA/size不変を 2026-10-11T00:50:13.526Z に確認。小構文確認7file/29019Bを整理、own test root/process0、KEEP配信4件＋app PID75046を維持。容量#67は共通再開案の候補2file（serve_digest_review_v001.pyと新小test、目安2–3h）の提案のみ、4専用固定port案は非適用履歴。旧URL/allowlist/loopback/current identity/旧record保持と新record排他を保ち、入力port/root/現storage UUID+device/新recordを明示、競合時fallbackなし。app正常quit/同.app再開と内蔵DB/PDF保持をmonaが担当間調整。停止/backup/detach/resize/配信実装0。#61相談役待ち・全工程未完成、#67mona Doing、次担当mona。最終確認 2026-10-11T00:52:20.928Z（2026-10-11T09:52:20 JST）。

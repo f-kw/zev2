@@ -1,8 +1,14 @@
 # ZEV Build Loop — 引き継ぎインデックス
 
-更新日：2026-10-11（JST） / revision：handover-index-20261011-v143
+更新日：2026-10-11（JST） / revision：handover-index-20261011-v144
 正本：f-kw/zev2 main の docs/HANDOVER_INDEX.md
 固定入口：docs/ZEV_START_HERE.md。プロジェクトにはその写しを置く。
+
+## 最新現在地 — 2026-10-11T01:16:17.002Z（共通再開2file検査合格・容量手順確認待ち）
+
+共通配信再開の実装2fileが完成。Python3.12/既存3.9の小検査各10/10・exit0/skipped0、旧main/Range送出/import維持。現在storage/device/UUID・許可files SHA/size・Host/path/symlink/currentidentityを明示し、旧record読み取り不変/新recordx/指定port競合fallbackなし。旧証拠の現資格変換分岐なし。初回2run各9pass1errorのAPFS観測を実mount table＋diskutilへ修正し旧証拠KEEP。既存4配信LISTENとapp75046を継続、原35/製造code23/旧serverbindings18/app6不変。PDFB/registryは外部更新済み最新版（B version1/105260B）が実fileと一致、旧へ戻さず直前に担当間再固定。own candidate3/49914B整理、test temp/process0。容量の正常終了→通常detach→SSD backup全hash→512GB resize→同path再attach/現観測→同4URL/board復旧と、失敗image保全＋backup copy戻しの判断基準を既存report/logへ補完。現在は手順確認待ち、実停止/quit/detach/backup/resize/API/動画0。次mona、確認後は同Codex-SSDが実施。最終確認 2026-10-11T01:16:17.002Z（2026-10-11T10:16:17 JST）。
+
+以下は以前の時点の記録。
 
 ## 最新現在地 — 2026-10-11T00:52:20.928Z（Normal完成記録8/8通過・容量復旧は共通2file案のみ）
 
