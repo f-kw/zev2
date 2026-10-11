@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T05:47:00.152470+00:00",
+      "checkedAt": "2026-10-11T06:48:59.946238+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -889,7 +889,7 @@
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/download.log"
       ],
-      "currentState": "repaired-kawa-power-STT-running",
+      "currentState": "same-job-second-server-attempt-resumed-from-source",
       "nextOwner": "同Codex-SSD（取得監視・実媒体再読）；mona（本人へ診断結果・素材所在質問の整理）",
       "sourceWholeAcquired": false,
       "sourceWholeSha256": null,
@@ -2590,10 +2590,10 @@
       },
       "cpuFixAttempt": {
         "startedAt": "2026-10-11T05:36:41.310499+00:00",
-        "readAt": "2026-10-11T05:47:00.152470+00:00",
+        "readAt": "2026-10-11T06:48:58.304Z",
         "jobId": "23c09ec3da7141d9a7252f004847c7bd",
         "currentServerState": "running",
-        "attemptCount": 1,
+        "attemptCount": 2,
         "inputSha256": "dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608",
         "inputBytes": 194653570,
         "sourceUri": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
@@ -2680,6 +2680,68 @@
           "messageId": "Sentinel_97146286e2588191978db8ae2b3b6ced",
           "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
           "factSource": "user report relayed by mona; not API diagnosis"
+        },
+        "attempt2Readback": {
+          "readAt": "2026-10-11T06:24:15.721206+00:00",
+          "jobId": "23c09ec3da7141d9a7252f004847c7bd",
+          "rows": [
+            {
+              "route": "/jobs/23c09ec3da7141d9a7252f004847c7bd",
+              "httpStatus": 200,
+              "startedAt": "2026-10-11T06:24:15.694401+00:00",
+              "endedAt": "2026-10-11T06:24:15.721206+00:00",
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-attempt2-readback-v001/job.response.raw.json",
+              "sizeBytes": 2085,
+              "sha256": "76ff3265b6d2eadd47add775197cd03a9169f2ec326bfacec76f221d37af2f63"
+            },
+            {
+              "route": "/health",
+              "httpStatus": 200,
+              "startedAt": "2026-10-11T06:24:15.694700+00:00",
+              "endedAt": "2026-10-11T06:24:15.727543+00:00",
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-attempt2-readback-v001/health.response.raw.json",
+              "sizeBytes": 854,
+              "sha256": "469353c5874a759e3afae8788aaa0fbd8896c1fba61beebaf9393093e459134f"
+            }
+          ],
+          "state": "running",
+          "attemptCount": 2,
+          "firstAttemptStartedAt": "2026-10-11T05:36:48.652413+00:00",
+          "firstAttemptObservedExit": {
+            "at": "2026-10-11T06:21:36.172663+00:00",
+            "attempt": 1,
+            "message": "GPU runner exited without a completed result (exit code 3).",
+            "type": "ProcessExit"
+          },
+          "firstStartToObservedExitSeconds": 2687.52025,
+          "secondAttemptStartedAt": "2026-10-11T06:21:46.455143+00:00",
+          "resumedFromSource": true,
+          "inputAndPipelineUnchanged": true,
+          "healthSummary": {
+            "ok": true,
+            "workerActive": true,
+            "apiPid": 15744,
+            "runnerRetry": {
+              "maxAttempts": 3,
+              "delaySeconds": 10,
+              "resumeFromSource": true,
+              "scope": "unexpected-runner-exit"
+            }
+          },
+          "clientSubmissionCount": 1,
+          "clientResubmissionCount": 0,
+          "paidApiCalls": 0,
+          "manufacturingCalls": 0
+        },
+        "resumedFromSource": true,
+        "latestObservationBinding": {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-no61-latest-attempt2-documentation-readback-v001.json",
+          "fileSha256": "a90f056a512afd5a0c979864299468da1c5a66d35c89cfe6317a375e779dd9bf",
+          "sizeBytes": 5534
+        },
+        "repairedCodeReadbackBinding": {
+          "path": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-no61-stt-server-after-cpu-fix-code-read-v001/read-receipt.json",
+          "fileSha256": "0d2810fd19018a7b374a9be5514ebe9fe4106dfe6d5ce0bc90fc88fc1ffb0e95"
         }
       },
       "sourceClockClosure": {

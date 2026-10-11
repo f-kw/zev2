@@ -1407,3 +1407,9 @@ OpenAIの採用方向は本人が選択済みで、モデル比較を問い直�
 同job23c09ec3…のGET status/sourceを各1回読取、両HTTP200。状態running/attempt1、完成結果未取得。source raw160068B/SHA e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426、396区間/44111文字は旧失敗jobの原sourceとbyte完全一致。原ASRの構造診断/3場面文脈下調べは内容同一のため再実行不要。ただし今回jobとinputSHA/bytesの対応を新GET原応答で保持し、旧失敗の実行成功や完成aligned結果を流用したものではない。今回の完成STT、正式字幕準備、動画製造、品質は未完。サーバー実処理は継続、旧runner.logの再提出を停止条件にしない。過去No71等の親管理項目はこの担当から変更しない。
 
 新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。
+
+### 修正後STTの再開と現在地（2026-10-11 15:48:58 JST実観測）
+
+同job `23c09ec3da7141d9a7252f004847c7bd` はrunning、試行2/最大3、保存原文から再開中。試行1は15:21:36 JSTに終了コード3（44分47.52秒）、試行2は15:21:46 JST開始。Mac登録1回・追加送信0、有料API/製造0、完成文字時刻結果は未取得。入力/実装SHA/設定/resultIdentity不変。原ASR396区間の診断は既存証拠を保持し、再実行しない。
+
+詳しい試行履歴・原HTTP参照・コード照合の限界・計測の区別は既存No.61作業ログへ保存。今回の読取証拠は `new-no61-latest-attempt2-documentation-readback-v001.json`。No71の終了はSTT完成ではない。次担当Codex-SSDが同jobを追い、旧logの提出要求・再登録はしない。

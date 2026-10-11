@@ -186,3 +186,19 @@ CURRENT_GOALは1052行/133076字→42行/2820字。HANDOVER_INDEXは1086行/1316
 新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。
 
 Git保存前にUI担当のbackend3fileの並行未commit差分を観測。私用検査の「tree差分がown6だけ」という過剰な仮定は検査で拒否され、他者差分を保護したままown6を明示stageする条件へ修正した。STT/正式producer/他者コードの再実行や変更0。UI差分はcommitへ含めず、共有treeの未commit状態と自分の保存済みを分けて報告する。文書変更なので製品suite再実行0、必要なdiff/参照/履歴/承認保護の検査を実施。
+
+### 修正後STTの第1試行終了と第2試行の原文再開（2026-10-11 15:24:15 JST実観測）
+
+同job23c09ec3da7141d9a7252f004847c7bdのattemptErrorsが、試行1の15:21:36.172663 JST ProcessExit/code3を記録。初回startedAt14:36:48.652413 JST→workerの終了確認まで2687.520250秒（44分47.52秒）。これは終了観測までのwall時間で、CPU工程だけの時間や成功処理時間ではない。15:21:46.455143 JSTに試行2が開始され、resumedFromSource=true。既存server maxAttempts3/delay10s/resumeFromSource/unexpected-runner-exit設定により同jobを再開したもの。MacのPOSTは1回のまま、追加送信0。入力SHA/bytes・pipeline/profile/resultIdentityは初回読取と一致、現在running/error null。GET job/health各1回HTTP200、health ok/workerActive/API PID15744。APIから具体的な停止工程やCPU原因の独立確定はできず、本人のCPU修正報告と観測を区別する。
+
+SSD stt-after-cpu-fix-attempt2-readback-v001 に原HTTPとreadback.jsonを保存再読。同jobのstartedAtはserver再試行で上書きされるため、完成時の最後の試行時間と、初回/再試行待ちを含む登録→全体終了、Mac client実測を別に記録する。44分47秒を総制作時間へ単純加算しない。source原文396区間/44111文字は保存済みだが、完成aligned結果はまだない。No71は本人close許可→親がboard終了指示済みという受領で、STT完成ではない。この担当はNo71/他者項目を変更しない。
+
+短いCURRENT_GOALの現在地だけを置換し、HANDOVERは索引を維持。詳細はこの既存log/report/ledgerへ保存。親がUI保存c1ab70d2を確認してGit枠を返却。自分の5文書だけを監査checkpoint対象とする。native client-PGID20465/controller20456は同jobを継続、元動画取得/音声/時計検査の再実行0、有料API/製造0。既存原文・失敗証拠KEEP。次担当同Codex-SSDが同jobの完成/最終失敗まで追う。
+
+### 同jobの追跡・実装参照の限界（2026-10-11 15:48:58 JST）
+
+既存clientの成功GET観測 `2026-10-11T06:48:58.304Z` は同job running/試行2/resumedFromSource true。入力194653570B/SHA dc006291…、pipeline/profile/resultIdentity不変、完成aligned結果はまだない。追加POST0。今回の不変読取証拠 `/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-no61-latest-attempt2-documentation-readback-v001.json`（SHA `a90f056a512afd5a0c979864299468da1c5a66d35c89cfe6317a375e779dd9bf`）へ実job本文と観測時刻を保存。native controller20456/own PGID20465を継続し、Git保存で停止しない。
+
+15:41:59 JSTに既存接続でf-kw/zev-stt-server main e83c2ae6b5a8f2a17e8f83f1c66cbca3975a0638を再照合。Gitのmain.py/stt_pipeline.py SHAは今回runtime受付SHAと異なり、stt_alignment.pyだけ一致。公開Gitは10/5版のままで、今回CPU修正のruntimeソース全体を取得できたとは扱わない。実行中profileのSHA・thread1変更はAPI観測、CPU原因は本人報告、code3の具体的な工程/原因は未確定。server/元checkout変更0。新しい認証・推測log route・旧No71要求は作らない。
+
+同文の固定326字幕/5場面送信承認を再受領したため、既存5 request/source/raw/attempt/transportの計25参照をhash/bytes再読照合。10/10 21:30:31〜21:30:38 JSTの5回は各HTTP200/完全応答、再送0、通常317/強調候補9。今回追加API0、動画製造0。旧固定素材の許可を今回新素材へ転用しない。製品コード変更0なのでsuite再実行0、今回5資料のdiff/参照/旧ledger・保護資料不変を検査する。
