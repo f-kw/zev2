@@ -1,0 +1,18 @@
+✔ preparation requires both already-saved composition JSON files; it never creates them implicitly (2359.095625ms)
+✔ A/B prepare only added-scene closed inputs; duplicate clicks are idempotent and old full answers stay unchanged (2070.096375ms)
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-retention-inputs-d48148a0488c16baeacc33daada8ae0cdbb0d11b340a337f0e32f19f331febaf.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-retention-inputs-60a7a85d7a8a25c88e32177921d3242f7bbed970bdf01aded5401240d95b3f8b.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+✔ human auth, stale display, extra permissions, another material and unknown candidate never write (1350.598917ms)
+✔ missing or altered saved inputs/snapshot/composition reject read and preparation without overwrite (2373.270667ms)
+✔ old four retention records and source graph are requalified; missing/tampered originals cannot become added-scene answers (2275.9695ms)
+✔ an unsupported stored addition or changed chain cannot reuse a former request (1109.048166ms)
+✔ missing or incompatible saved discovery summary refuses preparation rather than inventing a reason (552.823292ms)
+✔ a fresh compiled backend process re-reads B with the same result, no state/queue/original writes (1596.238459ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15405.4155

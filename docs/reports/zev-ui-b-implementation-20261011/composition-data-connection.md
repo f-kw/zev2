@@ -2,6 +2,18 @@
 
 2026-10-11。親が採用済みBの範囲内で承認した「immutable要求snapshot＋元AI採用binding→他の採用場面を残す全体構成→保存と別process再読」の一件。**データ専用接続の人工検査は51/51成功。No.68全体未完成、No.70未着手。** 実素材・通常製造・人間品質まで完成したとは扱わない。
 
+## 最新：追加場面の保持要求prepare/read（2026-10-11 06:41 UTC）
+
+現在の保存構成を再照合し、追加場面だけの閉じた保持Skill要求を未回答として別小JSONへ保存・再読できるconsumer接続の人工検査を完了した。原保持4記録は原request全体・response/result SHA・元本文/ID/候補所属/境界を既存validator/resolverで再照合して内部参照に限る。原回答SHAを新版へ付替えず、原AIのreject理由を変更しない。新入力の理由は保存探索要約と原bindingに固定し、保存から判断・製造処理を起動しない。公開応答は追加場面名/未回答/未準備/未承認を返すだけで、原保持記録を公開しない。
+
+親が`retentionBindings`の型宣言一箇所だけを**限定実装修正4**として個別承認した。`Record<string, Obj>`を既存`DigestByteBindingV001`へそろえた差分だけを適用し、runtime値・SHA・照合・製造資格は不変、`as any`やvalidator緩和なし。これは既存work-order内の型整合で製品/人間判断の意味を変えないため相談役の個別技術判断となる。別不具合を含めず、一般枠/累積をリセットしない。適用累積は設営10/実装修正4/停止6、追補0・費用US$0。
+
+[backend build](retention-inputs-evidence/backend-build-v002.txt)はexit0、[新対象人工検査](retention-inputs-evidence/backend-unit-v001.txt)は**8/8成功・失敗0・exit0**。異素材A/B、構成2JSONの事前保存必須、同時繰返し保存の同一結果、原全file/state/要求store不変、追加だけの未回答・閉じた元本文/IDと理由出典、旧回答SHA不変、原参照非公開、古い確認/別素材/未所属候補/要求chain変更/余分な実行許可の拒否、原保持4記録/元資料/構成/新要求の欠損・改変拒否、Bの別compiled processで同結果再読を確認した。空欄/不一致の探索要約は保存回答の改変として通常SHA照合で拒否した検査であり、正式に再束縛した新producer版を製作したとは扱わない。以前の51件を再実行せず、原TS2345と旧48/51・51/51証拠のbytes不変も[検証索引](retention-inputs-evidence/verification-v002.json)へ保存した。
+
+準備保存前後でUI応答/fingerprint不変、場面名つき未回答と入力検査未完了をHTTPで確認した。既存App.vue1914行の停止理由欄へ渡る本文であり、**ブラウザー描画/ユーザー操作は今回未実施**。clientから新prepare/readを呼ぶ明示操作は未接続。今後表示が変わった場合も旧確認を付替えず、現在のfingerprintで再確認する。正式保持回答受理/全体統合・新版時計・字幕manifest・要求反映の正式対応・UI再資格確認/作成接続・実媒体/人間品質は残る。No.68全体未完成、No.70未着手を維持する。
+
+cleanup：人工SSD/source root残件0、今回test server/processとbuild process終了。監査コピーをbyte一致再読後、自己/tmp重複1,909bytesを削除。fixture回収量は未測定、大容量媒体0、原本/正式/他担当/退避物と他担当processは保持。空き観測は検査中Mac17,243,356KiB/SSD1,903,287,808KiB、検査後Mac17,240,708KiB/SSD1,903,312,384KiBで、共有変動を回収量としない。保護対象20件中19件は観測HEADとbytes一致、CURRENT_GOALだけ別担当変更。制作sourceと他担当5文書は操作せず、自分の対象だけをUI Git枠で保存する。
+
 ## 次の一件の読取提案（2026-10-11 06:19 UTC、未実装）
 
 **「追加場面の保持Skill要求を準備・保存・再読する接続」だけを次対象にする。** 既存snapshot/構成を現在のformal baselineへ再照合し、変更しない採用場面の元保持request/response/result/validationを原bindingで参照する。追加場面だけに未回答の保持要求を作る。回答生成・全区間keepの仮採用・全体保持の合成・字幕回答・製造はこの一件へ含めない。

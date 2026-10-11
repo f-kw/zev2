@@ -95,7 +95,7 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
   const utterances = await document(plan.utteranceBinding);
   const retentionNames = { request: 'retention-request.json', response: 'retention-response.json',
     result: 'retention-result.json', validation: 'retention-validation.json' } as const;
-  const retentionBindings: Record<string, Obj> = {}, retentionDocuments: Record<string, Obj> = {};
+  const retentionBindings: Record<string, DigestByteBindingV001> = {}, retentionDocuments: Record<string, Obj> = {};
   for (const [name, file] of Object.entries(retentionNames)) {
     retentionBindings[name] = preparation.artifacts[file];retentionDocuments[name] = await document(retentionBindings[name]!);
   }

@@ -1,0 +1,251 @@
+{
+  "recordedAt": "2026-10-11T06:41:23.721832+00:00",
+  "session": "Codex-UI",
+  "task": "No.68 additional retention input preparation",
+  "observedHead": "84aeb751c51a4be5c19bd0e9dd1ab5e36850c152",
+  "sources": [
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 16291,
+      "sha256": "60f616cf3dfd9104facadd9a1e9a75441759827a4e553e45cbaf421c2c590fd9"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 16832,
+      "sha256": "205f6e3bcf51d94b8eed7b879fe9b3bfb9f38bc5f16c6e8a15136cb5e9df15ff"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 40542,
+      "sha256": "b7f89b374405333294fee93d71bf31353bc25fa6d0b74aae01d03f37c729d8d2"
+    },
+    {
+      "path": "backend/test/digest-ui-revision-retention-inputs.test.mjs",
+      "sizeBytes": 19259,
+      "sha256": "e62ad9d13c8e3af96c4735f75533f4a3ee2542c3920d90037e8f558f3d552bdc"
+    }
+  ],
+  "protectedPaths": [
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_timeline_composition_decision_v001.mjs",
+      "sizeBytes": 49965,
+      "sha256": "6bd3adba0b12d118df93ffd978c29a727db49003c8391d47f82f23a14ea796ba",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "runner/src/digest-ui-readonly-v001.ts",
+      "sizeBytes": 563,
+      "sha256": "3246fbee5d1de1bb7729c954e1e77c2102caf4d83e8dbf99ba2c783131027b9f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/index.ts",
+      "sizeBytes": 23885,
+      "sha256": "495edd5b9bd503a68cd3ad628bf25238d6ec773f211dc51207c6bf66cc093d93",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/digest-plan-artifacts-v001.ts",
+      "sizeBytes": 12085,
+      "sha256": "156842fcf50f325cc42299fb1d73b5699f14680bacac39d725df4a1b1f5db596",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "packages/shared/src/ui-confirmation.ts",
+      "sizeBytes": 4402,
+      "sha256": "ef5a9ff556af5c1c7f03bd5658351a9201a6b86b4aee31a1ad935af1a78d5e94",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/src/store/digest-ui-edit-requests.ts",
+      "sizeBytes": 3858,
+      "sha256": "9e8084436d014918053dcea2d5c13a48ff261ca3408c5ae0e1a80069eed10d15",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/src/domain/digest-ui-edit-requests.ts",
+      "sizeBytes": 5655,
+      "sha256": "86d82a4868d2700e6c29a829fff25d08f2804d0973a38d700e2d25c3ce83a75e",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 10729,
+      "sha256": "584c530d3d7b1914d87ec17f0478dd67ffa1838a1df0e417815f5abe7c2bd847",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "client/src/App.vue",
+      "sizeBytes": 104344,
+      "sha256": "9f32f4db810f9a20db1f65471c5c7759e4715925d45e051c92736a4a04a514bb",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/CURRENT_GOAL.md",
+      "sizeBytes": 6356,
+      "sha256": "6d801048e14889898b8b521bbbc101bef9cc81828eb8ef351fa105c03cb2f6bf",
+      "matchesObservedHead": false
+    },
+    {
+      "path": "docs/HANDOVER_INDEX.md",
+      "sizeBytes": 4909,
+      "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "DECISIONS.md",
+      "sizeBytes": 521386,
+      "sha256": "d5fada5c70f2da127abb07d7bbbd522eccf0313057387735b02289bcca028e75",
+      "matchesObservedHead": true
+    }
+  ],
+  "priorEvidenceUnchanged": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v001.txt",
+      "sizeBytes": 805,
+      "sha256": "ae42333e66b17addf76fc0007d67c14e9d24c879f3e8402e8e2f7dda225d4e0f",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/verification-v001.json",
+      "sizeBytes": 7443,
+      "sha256": "3590b4e2acaebbac866a7db3c58884b6c3bf4aefbd342a528af02b94776c26c7",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/backend-unit-v001.txt",
+      "sizeBytes": 15824,
+      "sha256": "30107d06383c6f181cd8839c8a5c3e78064838dfd225c4b290016c154da16f4b",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/backend-unit-v002.txt",
+      "sizeBytes": 13763,
+      "sha256": "0b360eba5ff677fbbd9cae7c13abd97b1bbbd93e639f4a13c1d5000928404ee3",
+      "matchesObservedHead": true
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/composition-data-evidence/verification-v002.json",
+      "sizeBytes": 8833,
+      "sha256": "701fa77f54efe2e59aa9113d5b6bb90ef83dfebfe1baabfe4362b1c9594af1ef",
+      "matchesObservedHead": true
+    }
+  ],
+  "rawLogs": {
+    "build": {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-build-v002.txt",
+      "sizeBytes": 374,
+      "sha256": "c4e0dfcde446d4cc3905f877cfb3bd8e13d61ae0ce1aeeda551d9c547cabe62d",
+      "exitCode": 0
+    },
+    "unit": {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/retention-inputs-evidence/backend-unit-v001.txt",
+      "sizeBytes": 1535,
+      "sha256": "7611469bde0681b0aa271c4ceffadafc3f700cf5dd2dba25023066504a93d89d",
+      "exitCode": 0
+    }
+  },
+  "individualCorrection": {
+    "classification": "limited implementation correction 4",
+    "approvedBy": "parent advisor delegation",
+    "appliedChange": "retentionBindings Record<string, Obj> -> Record<string, DigestByteBindingV001>",
+    "runtimeValuesOrGuardsChanged": false,
+    "otherCorrectionIncluded": false
+  },
+  "validation": {
+    "build": "passed",
+    "targetedTestCount": 8,
+    "pass": 8,
+    "fail": 0,
+    "freshCompiledBackendProcess": "B readback equal and bytes unchanged",
+    "old51TestsRerun": false,
+    "browserVerification": "not-run",
+    "summaryInsufficientCheck": "blank/mismatched saved response tampering rejected by normal binding qualification; no new formally rebound producer version generated"
+  },
+  "limits": {
+    "setupCorrectionsApplied": 10,
+    "setupGeneralLimit": 5,
+    "limitedImplementationCorrectionsApplied": 4,
+    "limitedImplementationGeneralLimit": 3,
+    "explicitStops": 6,
+    "addenda": 0,
+    "costUSD": 0
+  },
+  "admission": {
+    "wholeNo68": "unfinished",
+    "No70": "unstarted",
+    "additionalRetentionAnswer": "unanswered",
+    "retentionAggregation": "not-prepared",
+    "timeline": "not-prepared",
+    "captionPreparation": "not-prepared",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending",
+    "clientPrepareReadAction": "not-connected"
+  },
+  "cleanup": {
+    "ownProcessesMatching": [],
+    "ssdFixtureRootsRemaining": [],
+    "sourceFixtureRootsRemaining": [],
+    "newLargeMedia": 0,
+    "ownedTmpDuplicateBytesRemoved": 1909,
+    "foreignProcessStops": 0,
+    "fixtureReclaimedBytes": "not-measured",
+    "freeKiBObservedDuringTest": {
+      "mac": 17243356,
+      "ssd": 1903287808
+    },
+    "freeKiBAfterTest": {
+      "mac": 17240708,
+      "ssd": 1903312384
+    },
+    "freeSpaceDifferenceAttributedToCleanup": false
+  }
+}
