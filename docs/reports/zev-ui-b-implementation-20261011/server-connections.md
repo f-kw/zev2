@@ -1,5 +1,7 @@
 # Codex-UI 接続工程検査報告｜68. B案UI実装（全体未完成）
 
+後続の共通validator・登録推薦/preview・作成前と完成後の分離は[限定接続差分](validator-and-precreation.md)を参照。以下の未接続一覧と18件検査は、本接続checkpoint当時の記録として保持する。
+
 2026-10-11 UTC。実装checkpoint: `a55b8bcdbf88d58369280422cf1e470593c6d572`（初回接続保存 `c8784b28b9a0bfae9eb008aa87ac5dab4c12d8e6`）。開始main: `cbee9353a61b7ef7eb01fc18b8323dc4b08039c1`。前のclient checkpoint `c65877cfe52801455207bada148b90503a1f0b31` に続く接続工程の記録。
 
 ## 変更結果
@@ -77,6 +79,15 @@ UI/ backend/runnerは同一checkpointのセットとして接続する必要が�
 3. **推奨・実際のpreview準備状況。** 現theme/reviewは推薦ID/根拠、候補動画の未作成/実job IDを返さない。制作producerの既存候補IDに対応する資格付き情報が必要。既存の明示FileRef previewは読めるが、推薦・準備中を推測しない。
 4. **外部送信と料金承認。** 送信対象/provider/model/見積/本人承認範囲が既存RuntimeConfigにない。正式資格が確定して初めてserver拒否を置換する。料金/上限/承認tokenの新設は今回範囲外。
 5. **Digest通常UIとの製造接続。** 既存Digest計画から正式人間承認・製造入力へ渡すadapterは未実装。制作担当のjob/permit/出力登録契約へ触れず、現UIは未接続を明示する。
+
+## 新素材への接続補足（親の追加指示）
+
+No.61の入力は `https://www.youtube.com/watch?v=-2UUTkv9qvk` へ変更。取得・STT確認は制作担当が行う。No.64の採用済み全体計画と並列TODO追加の情報は受領したが、UI担当の着手範囲を増やす指示として扱わない。
+
+- UIへ渡すのは、新素材の依頼版、登録producer/output/FileRef IDとhash、およびその登録STTに実在する発話ID・本文・clock。字幕数・場面数・順序は保存資料の配列から表示し、旧326字幕/5場面や今回URLを実装の固定値にしない。新素材の件数・品質は未確認。
+- sourceUri一致だけでは原本資格を完了としない。残る正式音声/品質資料とDigest adapterは、新素材のsource ID/hashからtranscript/composition/edit/patchまでの同じ登録関係へ束縛する必要がある。旧素材の品質報告・音声保持結果・発話clockを新素材へ転用しない。
+- 推薦ID、候補preview、実際の準備中job、完成動画は、その新素材の同じ依頼版と既存候補IDに対応させる。旧依頼のpreview/動画は履歴として保持し、新依頼の最新結果へ混在させない。既存readerは同draftの登録参照を要求する。
+- 新素材取得やSTTだけでUIの作成承認を解除しない。制作側が正式資料を登録してからreadiness/adapter境界を確認する。今回の補足ではコード変更、同じ検査の反復、実API、実動画処理、stage/commit/pushを行わない。Git枠は制作担当へ返却済み。
 
 ## cleanup・Git・受渡し
 
