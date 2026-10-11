@@ -102,3 +102,35 @@ monaの明示続行指示で、同じcontroller89138/worker-PGID89147の通常�
 新素材向け外部有料APIには、過去の『固定326字幕/5場面・各1回5送信』承認を流用できない。その段階で実対象・回数・具体的費用と既承認の適用可否を親へ返し、未承認の有料送信だけ止める。素材取得/音声準備/自前LAN STTの既承認工程はそれを理由に止めない。今回API/STT/動画製造0、原source/字幕/旧成果/途中失敗はKEEP。新素材全体の開始11:37:40.546 JSTからの経過と各処理/待ち/失敗/並列を保持し、全体完了・総制作時間は未確定。
 
 UIがmain/remote `588134c6c654c79bac56c61f3c28a638c4f2d596` を保存してGit枠を返却、親が今回自分6文書の監査checkpointだけを許可。取得処理を止めず、このCURRENT/HANDOVER/report/月log/既存時間台帳md/jsonだけをstage/commit/pushし、結果後にUIへ枠返却する。他担当file混入0、正式採用/公開の承認にしない。実保存結果SHAはcommit後のworkspace証拠/親報告で示し、自己hashを本文へ捏造しない。
+
+## 新素材取得完了・原音声照合・LAN単一受付
+
+記録 — 2026-10-11T04:08:09.356859+00:00（No.61 新素材の全取得・原音声検査済み、LAN STT単一受付）
+
+新しい素材 `-2UUTkv9qvk` の通常取得1回とMP4統合が13:05:51.572 JSTにexit0で終了。最終元動画8,846,441,226B、通常取得/統合の実測35分11.931423秒。旧失敗26.318492秒と診断/待ちを別に保持し、通常取得だけを新素材制作全体の時間にしない。取得owner89138/worker-PGID89147の残存実行0。Git枠は12:49:49 JSTにmain/remote `f18fbd5999cb4bf5360a39cf119f3576257dc1b1` の自分6文書保存後UIへ返却済み。今回以後は自分6文書の編集・保存再読だけ、stage/commit/pushなし。他者変更を保持。
+
+13:06:08.132〜13:06:30.743 JST/22.611581秒に全元動画byte読み取り/SHA、媒体metadata、原AACのstream copy、encoded payload一致、開始PTS/時間・sample rate/channel/time base・duration一致、最初のpacket/priming一致、保存音声全decode exit0を確認。元動画SHA `fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12`、1920×1080/60fps/映像stream 12036.033333秒/音声とcontainer 12036.086712秒。短縮、先頭17秒除去、再圧縮、ローカルresample、推測時刻補正はいずれも0。元動画と保存音声はread-only化。これは全フレームclock検査の合格や実視聴品質の確認ではない。
+
+既存自前LAN `http://192.168.1.7:8000` へ13:06:38.646 JSTに一度だけ受付。job `2954534d570c4f668796964aedece20d`、原音声194,653,570B/SHA `dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608` がreceiptのinputと一致、language ja/enableDiarization false、global設定変更0。受付後は既存同jobの観測で再投入なし。2026-10-11T04:08:09.356859+00:00時点の保存statusは `running`。生response/null/低confidence/元clockを保持し、client停止をremote失敗へ読み替えない。STT stage開始13:06:30.776 JST、結果/所要時間は未確定。
+
+正式既存toolを使う全フレーム/音声sample-grid時計検査も13:06:30.768 JSTに開始し、安いformat検査はpass、全域の検査結果はまだ `running`。STTと並列の時間は合算しない。同じ専用controller2902/worker-PGID2911下の一件で、既存50GB開始/12GBreserve/RSS16GiB/pressure1/1秒観測/next-unit+reserveを継承、内外の空きを別に確認し、自分のgroupだけを対象。source/音声/STT原本/検査証拠はKEEP、他者process停止・設定変更・汎用保存契約改修0。
+
+現在は作業中、次担当は同Codex-SSDが同じjobと検査の終了/生結果を確認。公開自動字幕の3場面案は未採用、新しい採用構成/字幕/動画製造/実視聴品質は未確定。新素材の外部有料API送信0で、旧『固定326字幕・5場面、各1回・再送なし』承認はこの新素材へ適用しない。必要段階で実対象・件数・費用と承認適用を親へ返す。新素材承認は親が本人の言葉として伝達済みだが、正規登録以降で使う新素材の元ユーザーmessageId/正確な発言時刻は未提示であり、古いIDや架空receiptで埋めない。LAN STTの承認済み工程にはこの後段照合を停止条件として追加しない。
+
+## LAN失敗・原ASR保存と全文診断・独立検査続行
+
+記録 — 2026-10-11T04:20:18.725268+00:00（No.61 LAN STTのサーバー失敗と原ASR396区間を保存・独立の全時計検査継続）
+
+新素材 `-2UUTkv9qvk` の取得と原音声照合はpassのまま。13:11:07 JSTの再読で同LAN job `2954534d570c4f668796964aedece20d` のserver state failedを確認。server表示の開始13:06:39.742291〜終了13:09:38.027024 JST/178.284733秒、ProcessExit『GPU runner exited without a completed result (exit code 3).』。Mac clientの経過188.779439秒とは別の値で、serverとMacのwall clockは揃えて補正/合算しない。これはclient切断からの推測ではなく、同jobのGET status原byteを保存して再読した実際のserver失敗。再投入/remote再起動/設定変更/製造/有料APIはいずれも0。
+
+13:12:12.689 JSTに同jobのGET status/source/healthを各1回読取・原body/HTTP status/SHA/byteをSSD保存。入力194,653,570B/SHAが送信済み原音声と一致。sourceはHTTP200で、ASR認識直後の原文396区間/44,111文字が残る。完成aligned resultはない。healthはok/workerActive trueであり、サービス接続断とは言わない。取得済みinputとの対応を同id・receipt・status SHA/byte・取得routeで束縛し、raw source内部にはないjob IDを捏造しない。既存ローカルserver code snapshotのmain/pipeline SHAは現server報告と異なるため、古いcodeのexit解釈で詳細原因を断定しない。現在の既知APIにはrunner stderr取得口がなく、具体原因にはこのjobのserver `runner.log` が必要。
+
+独立の無課金診断は13:15:42.557〜13:15:42.606 JST/0.049602秒。原ASR全文の構造を実読取し、原textをsegment順の別txtと原segment indexへ保存再読。396すべてに有限・正の開始/終了があり、逆転/重なり/媒体長超過0。span10.978〜11972.35秒、原音声12036.086712秒。単語/文字時刻は未取得。avg_logprob396値を原形で保持し、confidenceの恣意的な合否thresholdは設置しない。原segmentの空白や末尾63.736712秒を欠落発話と断定しない。最大130.308/110.884秒の空白は公開字幕上に曲や離席関連の記載があり、別26.340秒の空白にも反応らしい記載があるが、全音声聴取は未実施で、両ASRの違いは確定欠落/誤りではない。
+
+既存公開字幕の3暫定review窓との比較を別JSONへ保存。全文・時計・低confidence/null原形は不変。窓境界の元segment全体を残すため外側contextを含み、NFKC/空白除去は比較用文字列だけで原本/時計へ適用しない。類似度は0.804/0.842/0.770の構造観測で、WER/音声の真実/採否判定ではない。3案採用0、旧326/5場面の再実行0、未aligned396区間を完成字幕として正規登録しない。
+
+13:06:30.768 JST開始の同じ全フレーム/音声sample-grid時刻検査は独立して継続し、2026-10-11T04:20:18.725268+00:00時点は `running`。同controller2902/worker-PGID2911下で既存guard継承、途中物と証拠は専用SSD、原素材/ASR/失敗証拠KEEP、他者process操作0。現在作業中、次担当同Codex-SSDが同検査の終了/証拠固定を確認し、monaはSTT失敗に必要なserver同job logの読取と対応方針を判断する。純粋な未完をDone/本人Checkへ移さない。新しい採用構成/完成字幕/製造plan/permit/動画/実視聴品質/制作全体時間は未確定。
+
+外部有料APIは今の失敗原因調査の代替として起動しない。旧固定326/5送信許可は新素材には不適用。13:17:47 JSTに公式Decisionsとgpt-6-luna文書をHTTPS/HTTP200で保存再読し、Decisionsは基本入力0.10USD/100万token、output/cache課金0、272K超入力2倍・地域10%加算が該当時に適用と確認。Python初回SSL経路の読取失敗も保持し、標準curlの検証付きHTTPSで再読、証明書検証の無効化0。新しい実場面/字幕とrequest byte/SHAが未固定なので回数/実見積はnull。後段の予算案は1USD（未承認・未設置・上限保証なし）。10万/100万課金inputという仮定なら基本0.01/0.10USD、2倍＋10%例0.022/0.22USDだが実見積でも保証でもない。対象固定後、実数で再計算し、目的/本文・文脈・ASRテキスト・数値/回数各1・再送0/費用不確実性を親へ返して新承認を得る。厳密な請求上限保証が必要なら保証なしで送信しない。提案を新permitや正式inputにしない。
+
+UI checkpoint `dedcc3354354591bd56938d481fc00201ef94cb3` 保存後、親がGit枠をCodex-SSDへ返却。今回の自分6文書だけを監査checkpoint保存してUIへ枠を返す。code/契約/他者変更を混入しない。Git結果は実保存後のworkspace証拠と親報告で示し、自己hashを本文に捏造しない。

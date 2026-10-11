@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T03:47:53.972703+00:00",
+      "checkedAt": "2026-10-11T04:20:18.725268+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -736,6 +736,53 @@
             "status": "passed",
             "source": "/Users/kawafmm/Documents/Codex/2026-10-03/task-3/new-no61-media-tools-v001.json",
             "includeInOverallSum": false
+          },
+          {
+            "category": "source-download-normal-evidenced-retry",
+            "attempt": 2,
+            "startedAt": "2026-10-11T03:30:39.692316+00:00",
+            "endedAt": "2026-10-11T04:05:51.572055+00:00",
+            "durationSeconds": 2111.931423,
+            "status": "acquired-awaiting-independent-readback",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/acquisition-summary.json",
+            "includeInOverallSum": false
+          },
+          {
+            "category": "complete-source-read-and-original-audio-preparation",
+            "startedAt": "2026-10-11T04:06:08.131693+00:00",
+            "endedAt": "2026-10-11T04:06:30.743283+00:00",
+            "durationSeconds": 22.611580790999998,
+            "status": "passed source whole-byte read and metadata; preserved full original audio verified",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/verification-result.json",
+            "includeInOverallSum": false
+          },
+          {
+            "category": "lanStt",
+            "startedAt": "2026-10-11T04:06:30.775740+00:00",
+            "endedAt": "2026-10-11T04:09:39.554246+00:00",
+            "durationSeconds": 188.779438917,
+            "status": "interrupted-or-failed",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-v001/execution.json",
+            "includeInOverallSum": false
+          },
+          {
+            "category": "LAN-server-active-until-failure",
+            "startedAt": "2026-10-11T04:06:39.742291+00:00",
+            "endedAt": "2026-10-11T04:09:38.027024+00:00",
+            "durationSeconds": 178.284733,
+            "status": "server failed ProcessExit3",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/job-status.response.raw.json",
+            "includeInOverallSum": false,
+            "clientElapsedIsSeparate": true
+          },
+          {
+            "category": "preserved-original-ASR-whole-structure-and-three-public-caption-comparisons",
+            "startedAt": "2026-10-11T04:15:42.556687+00:00",
+            "endedAt": "2026-10-11T04:15:42.606436+00:00",
+            "durationSeconds": 0.049602333,
+            "status": "diagnosis saved; no complete aligned transcript or speech-truth claim",
+            "source": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/diagnosis-result-v001.json",
+            "includeInOverallSum": false
           }
         ],
         "overallFinishedAt": null,
@@ -743,10 +790,10 @@
         "stageDurationSumIsNotOverall": true,
         "laterStages": {
           "source-download": {
-            "status": "running",
+            "status": "acquired-awaiting-independent-readback",
             "startedAt": "2026-10-11T03:30:39.692316+00:00",
-            "endedAt": null,
-            "durationSeconds": null,
+            "endedAt": "2026-10-11T04:05:51.572055+00:00",
+            "durationSeconds": 2111.931423,
             "attempt": 2
           },
           "audio-preparation": {
@@ -1235,13 +1282,146 @@
         "rawSignedUrlOrPrivateTrafficPublished": false
       },
       "sourceNormalRetry": {
-        "state": "running",
-        "startedAt": "2026-10-11T03:30:39.692316+00:00",
+        "state": "acquired-awaiting-independent-readback",
         "attempt": 2,
         "normalRetryCount": 1,
-        "endUnknown": true,
-        "partialBytesObserved": 811508503,
-        "observedAt": "2026-10-11T03:36:26.730242+00:00"
+        "startedAt": "2026-10-11T03:30:39.692316+00:00",
+        "endedAt": "2026-10-11T04:05:51.572055+00:00",
+        "durationSeconds": 2111.931423,
+        "exitCode": 0,
+        "reason": null,
+        "target": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002",
+        "maximumObservedRssBytes": 490151936,
+        "owner": {
+          "controllerPid": 89138,
+          "workerPid": 89147,
+          "workerPgid": 89147,
+          "startedAt": "2026-10-11T03:30:39.692316+00:00",
+          "command": [
+            "/usr/local/Cellar/yt-dlp/2026.6.9/libexec/bin/python",
+            "-B",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest-SJvP9jhEdyI-20261004-v001/official-downloader-20260819/yt-dlp",
+            "--ignore-config",
+            "--no-playlist",
+            "--no-overwrites",
+            "--retries",
+            "0",
+            "--fragment-retries",
+            "0",
+            "--extractor-retries",
+            "0",
+            "--socket-timeout",
+            "20",
+            "--cache-dir",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/cache",
+            "--merge-output-format",
+            "mp4",
+            "-f",
+            "299+140",
+            "--write-info-json",
+            "--newline",
+            "--verbose",
+            "--print-traffic",
+            "-o",
+            "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.%(ext)s",
+            "https://www.youtube.com/watch?v=-2UUTkv9qvk"
+          ],
+          "target": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002",
+          "attempt": 2,
+          "normalRetryCount": 1,
+          "resumedPrefixBytes": 0,
+          "oldPartialKeptBytes": 40944617,
+          "opaqueResourceIdDiffers": true,
+          "initialResourceSample": {
+            "at": 1791689439.648132,
+            "availableBytes": 495926116352,
+            "pressure": 1,
+            "memoryBytes": 38654705664,
+            "parentRssBytes": 0,
+            "treeRssBytes": 0,
+            "processes": [],
+            "guest": {
+              "root": "/Volumes/ZEV-Digest-20261003-01",
+              "volumeUuid": "7212F3BB-32FB-4F02-A71C-E570421FF2E0",
+              "device": 16777243,
+              "deviceNode": "/dev/disk6s1",
+              "filesystem": "apfs",
+              "writable": true,
+              "permissionsEnabled": true
+            },
+            "host": {
+              "root": "/Volumes/KIOXIA",
+              "volumeUuid": "0E5DC84B-1E22-3C9B-9E3B-220EBA8607C1",
+              "device": 16777238,
+              "deviceNode": "/dev/disk4s2",
+              "filesystem": "exfat",
+              "writable": true,
+              "permissionsEnabled": false
+            },
+            "imagePath": "/Volumes/KIOXIA/zev2-digest-formal-handoff-20261003-v001/digest-100GB.sparsebundle",
+            "imageAllocatedBytes": 17473994752,
+            "imageRemainingGrowthBytes": 494526005248,
+            "hostAvailableBytes": 1965352812544,
+            "hostRequiredBytes": 512780236800,
+            "hostStartRequiredBytes": 530254231552,
+            "internalAvailableBytes": 17699864576,
+            "internalRoot": "/Users/kawafmm/workspace/zev2"
+          },
+          "nextUnitBytes": 18206969582,
+          "authorization": "parent explicit user 映像取得できてない原因を調べろ plus existing new-source acquisition; normal evidenced retry",
+          "retryEvidence": "fresh normal metadata URL has 10MiB206 at failed offset; old URL has 8/10MiB403 at same offset; no identity/authentication/proxy changes",
+          "rawTrafficPrivacy": "signed public URLs stay private on SSD; no raw traffic into Git/chat",
+          "sttSubmissionCount": 0,
+          "paidApiCalls": 0,
+          "manufacturingCalls": 0
+        },
+        "shutdown": {
+          "group": 89147,
+          "events": [
+            {
+              "at": 1791691551.3727438,
+              "action": "before-stop",
+              "members": [],
+              "treeRssBytes": 0,
+              "system": {
+                "at": 1791691551.405072,
+                "availableBytes": 487062970368,
+                "pressure": 1,
+                "memoryBytes": 38654705664,
+                "parentRssBytes": 0,
+                "treeRssBytes": 0,
+                "processes": []
+              }
+            },
+            {
+              "at": 1791691551.5404391,
+              "action": "after-stop",
+              "members": [],
+              "treeRssBytes": 0,
+              "system": {
+                "at": 1791691551.5716329,
+                "availableBytes": 487062966272,
+                "pressure": 1,
+                "memoryBytes": 38654705664,
+                "parentRssBytes": 0,
+                "treeRssBytes": 0,
+                "processes": []
+              }
+            }
+          ],
+          "remaining": [],
+          "remainingRunning": []
+        },
+        "mediaPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+        "mediaBytes": 8846441226,
+        "fullMediaSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+        "fullReadbackPending": false,
+        "sttCalls": 0,
+        "paidApiCalls": 0,
+        "manufacturingCalls": 0,
+        "wholeByteReadbackPassed": true,
+        "fullVideoClockInspectionPending": true,
+        "wholeByteReadbackEvidence": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/verification-result.json"
       },
       "mediaToolPreflight": {
         "startedAt": "2026-10-11T03:42:42.509Z",
@@ -1286,7 +1466,1000 @@
         "workerPgid": 89147,
         "fullSourceHashUnknown": true
       },
-      "paidGrantAppliesToThisNewSource": false
+      "paidGrantAppliesToThisNewSource": false,
+      "sourceAudioVerification": {
+        "status": "passed source whole-byte read and metadata; preserved full original audio verified",
+        "startedAt": "2026-10-11T04:06:08.131693+00:00",
+        "sourceId": "-2UUTkv9qvk",
+        "sourceUrl": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
+        "sourcePath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+        "outputRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001",
+        "sttSubmitted": false,
+        "manufacturingCalls": 0,
+        "paidApiCalls": 0,
+        "fullVideoClockInspectionPending": true,
+        "sourceBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+          "fileSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+          "sizeBytes": 8846441226,
+          "allBytesRead": true
+        },
+        "cheapSourceFormatRead": "passed",
+        "sourceFormatDurationSeconds": 12036.086712,
+        "sourceVideoStream": {
+          "codec_name": "h264",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "60/1",
+          "avg_frame_rate": "60/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 184873472,
+          "duration": "12036.033333",
+          "nb_frames": "722162"
+        },
+        "sourceAudioStream": {
+          "codec_name": "aac",
+          "sample_rate": "44100",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "time_base": "1/44100",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 530791424,
+          "duration": "12036.086712",
+          "nb_frames": "518351"
+        },
+        "encodedAudioPayloadSha256": "6802b442f45bed7a7597c21384be3e9130ac4821d8de5795aab69e49227ddfa4",
+        "audioBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a",
+          "fileSha256": "dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608",
+          "sizeBytes": 194653570,
+          "durationSeconds": 12036.086712,
+          "originalEncodedPayloadUnchanged": true,
+          "streamFieldsUnchanged": [
+            "codec_name",
+            "sample_rate",
+            "channels",
+            "channel_layout",
+            "time_base",
+            "start_pts",
+            "start_time",
+            "duration_ts",
+            "duration"
+          ],
+          "firstPacketTimingAndPrimingUnchanged": true,
+          "wholeAudioDecodedExit0": true,
+          "reencoded": false,
+          "resampledLocally": false,
+          "trimmed": false,
+          "timestampCorrection": false,
+          "sourceVideoBinding": {
+            "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+            "fileSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+            "sizeBytes": 8846441226,
+            "allBytesRead": true
+          },
+          "sourceUri": "https://www.youtube.com/watch?v=-2UUTkv9qvk"
+        },
+        "sourceReadbackAtThisStage": "whole source read/hash recorded; full video clock verification separately pending",
+        "endedAt": "2026-10-11T04:06:30.743283+00:00",
+        "durationSeconds": 22.611580790999998,
+        "rows": [
+          {
+            "name": "whole-source-sha256-read",
+            "startedAt": "2026-10-11T04:06:08.133805+00:00",
+            "endedAt": "2026-10-11T04:06:11.596567+00:00",
+            "durationSeconds": 3.462785791,
+            "bytes": 8846441226
+          },
+          {
+            "name": "source-format-probe",
+            "startedAt": "2026-10-11T04:06:11.596619+00:00",
+            "endedAt": "2026-10-11T04:06:11.861250+00:00",
+            "durationSeconds": 0.26465775,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffprobe",
+              "-v",
+              "error",
+              "-show_streams",
+              "-show_format",
+              "-of",
+              "json",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4"
+            ]
+          },
+          {
+            "name": "original-audio-stream-copy",
+            "startedAt": "2026-10-11T04:06:11.862081+00:00",
+            "endedAt": "2026-10-11T04:06:14.196177+00:00",
+            "durationSeconds": 2.334129166,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+              "-v",
+              "error",
+              "-nostdin",
+              "-n",
+              "-i",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+              "-map",
+              "0:a:0",
+              "-vn",
+              "-sn",
+              "-dn",
+              "-c:a",
+              "copy",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a"
+            ]
+          },
+          {
+            "name": "audio-format-probe",
+            "startedAt": "2026-10-11T04:06:14.196704+00:00",
+            "endedAt": "2026-10-11T04:06:14.303917+00:00",
+            "durationSeconds": 0.10723441699999992,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffprobe",
+              "-v",
+              "error",
+              "-show_streams",
+              "-show_format",
+              "-of",
+              "json",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a"
+            ]
+          },
+          {
+            "name": "source-encoded-audio-hash",
+            "startedAt": "2026-10-11T04:06:14.315921+00:00",
+            "endedAt": "2026-10-11T04:06:16.632149+00:00",
+            "durationSeconds": 2.316265499999999,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+              "-v",
+              "error",
+              "-nostdin",
+              "-i",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+              "-map",
+              "0:a:0",
+              "-vn",
+              "-sn",
+              "-dn",
+              "-c:a",
+              "copy",
+              "-f",
+              "hash",
+              "-hash",
+              "sha256",
+              "-"
+            ]
+          },
+          {
+            "name": "saved-encoded-audio-hash",
+            "startedAt": "2026-10-11T04:06:16.632412+00:00",
+            "endedAt": "2026-10-11T04:06:18.742722+00:00",
+            "durationSeconds": 2.110347417,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+              "-v",
+              "error",
+              "-nostdin",
+              "-i",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a",
+              "-map",
+              "0:a:0",
+              "-vn",
+              "-sn",
+              "-dn",
+              "-c:a",
+              "copy",
+              "-f",
+              "hash",
+              "-hash",
+              "sha256",
+              "-"
+            ]
+          },
+          {
+            "name": "source-first-audio-packets",
+            "startedAt": "2026-10-11T04:06:18.743697+00:00",
+            "endedAt": "2026-10-11T04:06:18.954246+00:00",
+            "durationSeconds": 0.21058149999999998,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffprobe",
+              "-v",
+              "error",
+              "-select_streams",
+              "a:0",
+              "-read_intervals",
+              "%+#5",
+              "-show_packets",
+              "-show_entries",
+              "packet=pts,dts,duration,flags:packet_side_data=side_data_type,skip_samples,discard_padding",
+              "-of",
+              "json",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4"
+            ]
+          },
+          {
+            "name": "audio-first-audio-packets",
+            "startedAt": "2026-10-11T04:06:18.954804+00:00",
+            "endedAt": "2026-10-11T04:06:19.065997+00:00",
+            "durationSeconds": 0.11121483300000001,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffprobe",
+              "-v",
+              "error",
+              "-select_streams",
+              "a:0",
+              "-read_intervals",
+              "%+#5",
+              "-show_packets",
+              "-show_entries",
+              "packet=pts,dts,duration,flags:packet_side_data=side_data_type,skip_samples,discard_padding",
+              "-of",
+              "json",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a"
+            ]
+          },
+          {
+            "name": "saved-audio-complete-decode",
+            "startedAt": "2026-10-11T04:06:19.067659+00:00",
+            "endedAt": "2026-10-11T04:06:30.667617+00:00",
+            "durationSeconds": 11.600038291000002,
+            "exitCode": 0,
+            "command": [
+              "/usr/local/Cellar/ffmpeg/8.0.1/bin/ffmpeg",
+              "-v",
+              "error",
+              "-xerror",
+              "-nostdin",
+              "-i",
+              "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a",
+              "-map",
+              "0:a:0",
+              "-vn",
+              "-sn",
+              "-dn",
+              "-f",
+              "null",
+              "-"
+            ]
+          }
+        ]
+      },
+      "sourceClockInspection": {
+        "status": "running",
+        "startedAt": "2026-10-11T04:06:30.767883+00:00",
+        "workerPid": 3063,
+        "input": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-input-v001.json",
+        "artifactDir": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001",
+        "paidApiCalls": 0,
+        "resubmitted": false
+      },
+      "lanStt": {
+        "status": "interrupted-or-failed",
+        "startedAt": "2026-10-11T04:06:30.775740+00:00",
+        "endedAt": "2026-10-11T04:09:39.554246+00:00",
+        "durationSeconds": 188.779438917,
+        "exitCode": 1,
+        "artifactDir": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-v001",
+        "result": {
+          "status": "interrupted-or-failed",
+          "endedAt": "2026-10-11T04:09:38.872Z",
+          "seconds": 187.86,
+          "error": "Error: GPU-STTのjobを完了できません: failed {\"message\":\"GPU runner exited without a completed result (exit code 3).\",\"type\":\"ProcessExit\"}。自動再投入しません",
+          "resubmitted": false,
+          "jobId": null,
+          "remoteState": "not inferred from local process exit"
+        },
+        "paidApiCalls": 0,
+        "resubmitted": false
+      },
+      "lanSttLatestSavedStatus": {
+        "at": "2026-10-11T04:08:09.356859+00:00",
+        "jobId": "2954534d570c4f668796964aedece20d",
+        "state": "running",
+        "receiptPath": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-v001/gpu-stt-job.json"
+      },
+      "preparationComplete": false,
+      "sttFailureReadback": {
+        "readAt": "2026-10-11T04:12:12.689243+00:00",
+        "jobId": "2954534d570c4f668796964aedece20d",
+        "serverState": "failed",
+        "serverStartedAt": "2026-10-11T04:06:39.742291+00:00",
+        "serverEndedAt": "2026-10-11T04:09:38.027024+00:00",
+        "serverActiveDurationSeconds": 178.284733,
+        "serverError": {
+          "message": "GPU runner exited without a completed result (exit code 3).",
+          "type": "ProcessExit"
+        },
+        "inputShaAndBytesMatchSavedAudio": true,
+        "rows": [
+          {
+            "name": "job-status",
+            "method": "GET",
+            "route": "/jobs/2954534d570c4f668796964aedece20d",
+            "startedAt": "2026-10-11T04:12:12.545411+00:00",
+            "endedAt": "2026-10-11T04:12:12.573666+00:00",
+            "durationSeconds": 0.028114458999999994,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/job-status.response.raw.json",
+              "sizeBytes": 1979,
+              "fileSha256": "0d208cf3e0f98e06d437e69a5fa39c7707ed2b6663f72f7aff5e37f6c53fec47"
+            },
+            "retried": false
+          },
+          {
+            "name": "source-result",
+            "method": "GET",
+            "route": "/jobs/2954534d570c4f668796964aedece20d/source",
+            "startedAt": "2026-10-11T04:12:12.573684+00:00",
+            "endedAt": "2026-10-11T04:12:12.667437+00:00",
+            "durationSeconds": 0.09376104100000002,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/source-result.response.raw.json",
+              "sizeBytes": 160068,
+              "fileSha256": "e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426"
+            },
+            "retried": false
+          },
+          {
+            "name": "health",
+            "method": "GET",
+            "route": "/health",
+            "startedAt": "2026-10-11T04:12:12.667510+00:00",
+            "endedAt": "2026-10-11T04:12:12.689223+00:00",
+            "durationSeconds": 0.021718708000000003,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/health.response.raw.json",
+              "sizeBytes": 747,
+              "fileSha256": "5fc899088e7ab8bfdd5b9f925c11ba1abb1e661eedae526fd6a081e3f1764ab2"
+            },
+            "retried": false
+          }
+        ],
+        "sourceEndpointStatus": 200,
+        "health": {
+          "ok": true,
+          "workerActive": true
+        },
+        "resubmitted": false,
+        "originalTimestampCorrected": false,
+        "paidApiCalls": 0,
+        "manufacturingCalls": 0,
+        "rawBodiesKept": true,
+        "rootCause": "server ProcessExit code3 confirmed; exact GPU process stderr not exposed by known status/source API"
+      },
+      "originalAsrDiagnosis": {
+        "schemaVersion": "new-no61-original-asr-diagnosis-v001",
+        "startedAt": "2026-10-11T04:15:42.556687+00:00",
+        "endedAt": "2026-10-11T04:15:42.606436+00:00",
+        "durationSeconds": 0.049602333,
+        "sourceKind": "ASR-only checkpoint from failed job; no completed aligned transcript",
+        "sourceBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/source-result.response.raw.json",
+          "sizeBytes": 160068,
+          "fileSha256": "e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426"
+        },
+        "publicCaptionBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/public-ja-caption-v001/source.ja-orig.json3",
+          "sizeBytes": 2586458,
+          "fileSha256": "f982c2b0494a6be8c531a830d937c998ece4adca629005f4e4aed38892201a8a"
+        },
+        "receiptBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-v001/gpu-stt-job.json",
+          "sizeBytes": 2997,
+          "fileSha256": "17f4db1b415fce516ae92e89f9c6d0d7cc309a7db8128d208dc39326a4047495"
+        },
+        "serverStatusBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-failure-readback-v001/job-status.response.raw.json",
+          "sizeBytes": 1979,
+          "fileSha256": "0d208cf3e0f98e06d437e69a5fa39c7707ed2b6663f72f7aff5e37f6c53fec47"
+        },
+        "sourceVideoBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+          "fileSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+          "sizeBytes": 8846441226,
+          "allBytesRead": true
+        },
+        "sourceAudioBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-verification-audio-v001/source-original-audio.m4a",
+          "fileSha256": "dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608",
+          "sizeBytes": 194653570,
+          "durationSeconds": 12036.086712,
+          "originalEncodedPayloadUnchanged": true,
+          "streamFieldsUnchanged": [
+            "codec_name",
+            "sample_rate",
+            "channels",
+            "channel_layout",
+            "time_base",
+            "start_pts",
+            "start_time",
+            "duration_ts",
+            "duration"
+          ],
+          "firstPacketTimingAndPrimingUnchanged": true,
+          "wholeAudioDecodedExit0": true,
+          "reencoded": false,
+          "resampledLocally": false,
+          "trimmed": false,
+          "timestampCorrection": false,
+          "sourceVideoBinding": {
+            "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v002/source-video.mp4",
+            "fileSha256": "fef3bb3b61d4c5ed68ee1e0c8f90de4ca49b33e111f0457b5f9c13acf9afeb12",
+            "sizeBytes": 8846441226,
+            "allBytesRead": true
+          },
+          "sourceUri": "https://www.youtube.com/watch?v=-2UUTkv9qvk"
+        },
+        "inputShaAndBytesMatch": true,
+        "sourcePayloadHasNoEmbeddedJobId": "HTTP route and matching saved receipt/status provide correspondence; no invented ID inside raw payload",
+        "language": "ja",
+        "segmentCount": 396,
+        "rawTextChars": 44111,
+        "firstSourceStart": 10.978,
+        "lastSourceEnd": 11972.35,
+        "sourceAudioDurationSeconds": 12036.086712,
+        "invalidIntervals": [],
+        "backwardsStarts": [],
+        "overlappingIntervals": [],
+        "sumSourceSegmentDurationsSeconds": 10822.875999999993,
+        "segmentDurationSeconds": {
+          "minimum": 0.572000000000001,
+          "median": 28.315999999999804,
+          "maximum": 29.980000000000473
+        },
+        "untimedTextSegments": 0,
+        "wordAndCharacterTimesAvailable": false,
+        "avgLogprob": {
+          "availableCount": 396,
+          "missingOrNullCount": 0,
+          "minimum": -0.7377929538488388,
+          "median": -0.15584088317438025,
+          "maximum": -0.022160456551668737,
+          "thresholdChosen": false,
+          "notPerCharacterConfidence": true
+        },
+        "largestUncoveredSourceSegmentGapsAndEdges": [
+          {
+            "previousSegmentIndex": 0,
+            "sourceSegmentIndex": 1,
+            "start": 11.55,
+            "end": 141.858,
+            "durationSeconds": 130.308,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 1,
+                "startMs": 10160,
+                "endMs": 13160,
+                "text": "もっとアイドルで言いさせてよ。やったの。"
+              },
+              {
+                "sourceEventIndex": 3,
+                "startMs": 15720,
+                "endMs": 17740,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 5,
+                "startMs": 19800,
+                "endMs": 22980,
+                "text": "きキャキぎキャキキャキキキぎキビのシえキュキュキュキュキュキュキュキュキュキュキュキュキュキュキュキュキュルでバレらメろよかなりも列にビチビチよでもさんでなんでサでなん"
+              },
+              {
+                "sourceEventIndex": 7,
+                "startMs": 20960,
+                "endMs": 22980,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 9,
+                "startMs": 35370,
+                "endMs": 37390,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 11,
+                "startMs": 45850,
+                "endMs": 47870,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 13,
+                "startMs": 48000,
+                "endMs": 51000,
+                "text": "サンデマンデソリ中アイブ全部アイブ全部アイブ全部マイ"
+              },
+              {
+                "sourceEventIndex": 15,
+                "startMs": 52600,
+                "endMs": 56385,
+                "text": "あも無理終わり全然可愛くないしさめんどくさいよねは消えたい消えよ"
+              },
+              {
+                "sourceEventIndex": 17,
+                "startMs": 54365,
+                "endMs": 56385,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 19,
+                "startMs": 59160,
+                "endMs": 62840,
+                "text": "えそこがいいばっかいいよな"
+              },
+              {
+                "sourceEventIndex": 21,
+                "startMs": 62039,
+                "endMs": 63800,
+                "text": "本当に"
+              },
+              {
+                "sourceEventIndex": 23,
+                "startMs": 62840,
+                "endMs": 64519,
+                "text": "お宝以上"
+              },
+              {
+                "sourceEventIndex": 25,
+                "startMs": 63800,
+                "endMs": 65439,
+                "text": "そっかな"
+              },
+              {
+                "sourceEventIndex": 27,
+                "startMs": 64519,
+                "endMs": 68120,
+                "text": "最後のヒロイン"
+              },
+              {
+                "sourceEventIndex": 29,
+                "startMs": 65439,
+                "endMs": 70140,
+                "text": "そっかにゃきバイバイとこらさそうかもねそうだよねんか元気になってきたサンデマンデサンデマンデサンデマンデストリチアイレブ全部アイレブ全"
+              },
+              {
+                "sourceEventIndex": 31,
+                "startMs": 68120,
+                "endMs": 70140,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 33,
+                "startMs": 74670,
+                "endMs": 76690,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 35,
+                "startMs": 77439,
+                "endMs": 80439,
+                "text": "全部アイブ全部私がまたく旅成なり響く"
+              },
+              {
+                "sourceEventIndex": 37,
+                "startMs": 82400,
+                "endMs": 85400,
+                "text": "s"
+              },
+              {
+                "sourceEventIndex": 39,
+                "startMs": 86000,
+                "endMs": 88480,
+                "text": "洗脳してあげるあけるこのリーチフォエバセブンセして完全中キしてバタくちゃえよセブンディセクシーセクシーセクシーセクシーレンジなしてあげるキしてあげい"
+              },
+              {
+                "sourceEventIndex": 41,
+                "startMs": 86460,
+                "endMs": 88480,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 43,
+                "startMs": 92355,
+                "endMs": 94375,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 45,
+                "startMs": 100216,
+                "endMs": 102236,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 47,
+                "startMs": 106719,
+                "endMs": 114960,
+                "text": "子がいい気持ち[音楽]がいいのして"
+              },
+              {
+                "sourceEventIndex": 49,
+                "startMs": 110119,
+                "endMs": 118000,
+                "text": "あげるあげるあげるもっと相なちゃきっと"
+              },
+              {
+                "sourceEventIndex": 51,
+                "startMs": 114960,
+                "endMs": 120560,
+                "text": "恋するだっちゃずっとアイドルでいさせて"
+              },
+              {
+                "sourceEventIndex": 53,
+                "startMs": 118000,
+                "endMs": 123560,
+                "text": "ね神様お"
+              },
+              {
+                "sourceEventIndex": 55,
+                "startMs": 120560,
+                "endMs": 123560,
+                "text": "キャピチキシキピキピキピ"
+              },
+              {
+                "sourceEventIndex": 57,
+                "startMs": 138800,
+                "endMs": 145560,
+                "text": "ああはいえ"
+              },
+              {
+                "sourceEventIndex": 59,
+                "startMs": 141480,
+                "endMs": 148040,
+                "text": "おりますでしょうか?あホいホロライブ"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "previousSegmentIndex": 255,
+            "sourceSegmentIndex": 256,
+            "start": 7851.966,
+            "end": 7962.85,
+            "durationSeconds": 110.88400000000001,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 3941,
+                "startMs": 7848719,
+                "endMs": 7854920,
+                "text": "動いた。よし。ちょっとちょっとちょっと"
+              },
+              {
+                "sourceEventIndex": 3943,
+                "startMs": 7850960,
+                "endMs": 7854920,
+                "text": "トイレていきます。"
+              },
+              {
+                "sourceEventIndex": 3945,
+                "startMs": 7958800,
+                "endMs": 7966480,
+                "text": "はあ。やっとすっきりした。"
+              },
+              {
+                "sourceEventIndex": 3947,
+                "startMs": 7962360,
+                "endMs": 7970440,
+                "text": "ああ、辛かった。辛かった。"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "previousSegmentIndex": 245,
+            "sourceSegmentIndex": 246,
+            "start": 7540.286,
+            "end": 7566.626,
+            "durationSeconds": 26.340000000000146,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 3801,
+                "startMs": 7537000,
+                "endMs": 7542960,
+                "text": "ぐちゃぐちゃになってる。めくれてる。"
+              },
+              {
+                "sourceEventIndex": 3803,
+                "startMs": 7538520,
+                "endMs": 7542960,
+                "text": "めくれてる。ええ"
+              },
+              {
+                "sourceEventIndex": 3805,
+                "startMs": 7543480,
+                "endMs": 7545741,
+                "text": "ええ。[叫び声]"
+              },
+              {
+                "sourceEventIndex": 3807,
+                "startMs": 7551239,
+                "endMs": 7556520,
+                "text": "え、何?何?何?何?あ、誰か寝てる。"
+              },
+              {
+                "sourceEventIndex": 3809,
+                "startMs": 7565840,
+                "endMs": 7573079,
+                "text": "この部屋さっきから何もないな。"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "previousSegmentIndex": 273,
+            "sourceSegmentIndex": 274,
+            "start": 8483.966,
+            "end": 8502.178,
+            "durationSeconds": 18.211999999999534,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 4259,
+                "startMs": 8479040,
+                "endMs": 8486479,
+                "text": "こうしてだね。"
+              },
+              {
+                "sourceEventIndex": 4261,
+                "startMs": 8481479,
+                "endMs": 8486479,
+                "text": "で、ここの氷を"
+              },
+              {
+                "sourceEventIndex": 4263,
+                "startMs": 8486800,
+                "endMs": 8490040,
+                "text": "うー、"
+              },
+              {
+                "sourceEventIndex": 4265,
+                "startMs": 8502160,
+                "endMs": 8505160,
+                "text": "どう"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "previousSegmentIndex": 394,
+            "sourceSegmentIndex": 395,
+            "start": 11933.534,
+            "end": 11950.69,
+            "durationSeconds": 17.15600000000086,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 6489,
+                "startMs": 11949680,
+                "endMs": 11953720,
+                "text": "ねえ、言ったよね。"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "kind": "before-first-source-segment",
+            "start": 0,
+            "end": 10.978,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 1,
+                "startMs": 10160,
+                "endMs": 13160,
+                "text": "もっとアイドルで言いさせてよ。やったの。"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          },
+          {
+            "kind": "after-last-source-segment",
+            "start": 11972.35,
+            "end": 12036.086712,
+            "publicCaptionOverlaps": [
+              {
+                "sourceEventIndex": 6493,
+                "startMs": 11973538,
+                "endMs": 11975558,
+                "text": "[音楽]"
+              },
+              {
+                "sourceEventIndex": 6495,
+                "startMs": 11979840,
+                "endMs": 11987319,
+                "text": "近頃で"
+              },
+              {
+                "sourceEventIndex": 6497,
+                "startMs": 11982319,
+                "endMs": 11995239,
+                "text": "の島にしてほしい気分"
+              },
+              {
+                "sourceEventIndex": 6499,
+                "startMs": 11987319,
+                "endMs": 11999279,
+                "text": "はせりたい君の1番目指してよろ本当は"
+              },
+              {
+                "sourceEventIndex": 6501,
+                "startMs": 11995239,
+                "endMs": 12001000,
+                "text": "自信ないけど頑張っちゃキュキュキュルン"
+              },
+              {
+                "sourceEventIndex": 6503,
+                "startMs": 11999279,
+                "endMs": 12002520,
+                "text": "キュキュキュルん"
+              },
+              {
+                "sourceEventIndex": 6505,
+                "startMs": 12001000,
+                "endMs": 12004399,
+                "text": "こいつ気持ち[音楽]"
+              },
+              {
+                "sourceEventIndex": 6507,
+                "startMs": 12002520,
+                "endMs": 12008439,
+                "text": "無駄なさい"
+              },
+              {
+                "sourceEventIndex": 6509,
+                "startMs": 12004399,
+                "endMs": 12008439,
+                "text": "になっちゃう大人の"
+              },
+              {
+                "sourceEventIndex": 6511,
+                "startMs": 12009479,
+                "endMs": 12016319,
+                "text": "ドキドキしてぬまだ"
+              },
+              {
+                "sourceEventIndex": 6513,
+                "startMs": 12013319,
+                "endMs": 12016319,
+                "text": "早いマリマリマリ"
+              },
+              {
+                "sourceEventIndex": 6515,
+                "startMs": 12023840,
+                "endMs": 12029268,
+                "text": "マリンじゃなくてマリン戦長"
+              },
+              {
+                "sourceEventIndex": 6517,
+                "startMs": 12026760,
+                "endMs": 12029268,
+                "text": "ああ[叫び声]"
+              },
+              {
+                "sourceEventIndex": 6519,
+                "startMs": 12035960,
+                "endMs": 12038000,
+                "text": "。"
+              }
+            ],
+            "isMissingSpeechConclusion": false
+          }
+        ],
+        "gapsAreNotMissingSpeechProof": true,
+        "fullAudioListeningPerformed": false,
+        "fullTextStructureReadPerformed": true,
+        "fullTextBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/ASR-full-text-original-segment-order.txt",
+          "sizeBytes": 129385,
+          "fileSha256": "1fa76707f0374ded79c90c719f896947fe6f29d7258ce017173963b6331987b4"
+        },
+        "originalSegmentIndexBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/original-segment-index-v001.json",
+          "sizeBytes": 204317,
+          "fileSha256": "b135ab77bde09b68c04323bb71886f81d4406baa41b1ebffc83692a764727954"
+        },
+        "tentativeCandidateComparisons": [
+          {
+            "candidateId": "tentative-01",
+            "asrSegments": 7,
+            "publicEvents": 52,
+            "asrComparisonChars": 876,
+            "publicComparisonChars": 781,
+            "sequenceSimilarity": 0.803862401931201,
+            "binding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/tentative-01-raw-text-comparison-v001.json",
+              "sizeBytes": 38532,
+              "fileSha256": "ee619d9b763bb238a9fd9973f83c18ec95ba8d83d32e6d5b6c828bbe39309a85"
+            },
+            "adopted": false
+          },
+          {
+            "candidateId": "tentative-02",
+            "asrSegments": 6,
+            "publicEvents": 51,
+            "asrComparisonChars": 737,
+            "publicComparisonChars": 729,
+            "sequenceSimilarity": 0.8417462482946794,
+            "binding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/tentative-02-raw-text-comparison-v001.json",
+              "sizeBytes": 31104,
+              "fileSha256": "d7a815be74a234b93452f52d9bf54032e0e7216c943cf382b9be71bd0d19c07f"
+            },
+            "adopted": false
+          },
+          {
+            "candidateId": "tentative-03",
+            "asrSegments": 8,
+            "publicEvents": 48,
+            "asrComparisonChars": 522,
+            "publicComparisonChars": 515,
+            "sequenceSimilarity": 0.7695274831243973,
+            "binding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/tentative-03-raw-text-comparison-v001.json",
+              "sizeBytes": 29357,
+              "fileSha256": "c07c2e06693756182ca9a084816e3390af625e6e65c9c90072e295949ceb94cb"
+            },
+            "adopted": false
+          }
+        ],
+        "noCandidateAdoption": true,
+        "rawTextAndTimesUnchanged": true,
+        "rawNullAndConfidencePreserved": true,
+        "paidApiCalls": 0,
+        "resubmissions": 0,
+        "manufacturingCalls": 0,
+        "diagnosisBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/original-asr-diagnosis-v001/diagnosis-result-v001.json",
+          "sizeBytes": 18312,
+          "fileSha256": "4fc256fcbff1cc4e835b69c9101fd2eb2cb7543e4d0ff1a9bb61773b7754810d"
+        }
+      },
+      "newPaidApiProposal": {
+        "at": "2026-10-11T04:20:18.725268+00:00",
+        "status": "proposal only; no request/manifest/permit created",
+        "nextPaidPurpose": "after complete aligned source and actual new plan/cues exist, existing Decisions J16 classifies the new selected cues with actual context and observations",
+        "dataScope": "actual new source adopted scene text/context/ASR text/observational numbers, original IDs/clocks/source bindings; no audio/video bytes, old labels/reasons or secrets",
+        "currentPrerequisiteMissing": "new complete aligned STT result, actual approved/adopted new scenes/cues and request bytes/SHA; public-caption tentative3 and ASR-only396 are not fixed J16 inputs",
+        "requestCount": null,
+        "actualRequestBytes": null,
+        "actualCostEstimateUsd": null,
+        "budgetProposalUsd": 1.0,
+        "budgetIsNotInstalledOrAuthorized": true,
+        "strictBillingGuaranteeAvailable": false,
+        "oldFixed326FiveCallGrantApplies": false,
+        "paidCalls": 0,
+        "pricingReadAt": "2026-10-11T04:17:47.822056+00:00",
+        "officialGuide": "https://developers.openai.com/api/docs/guides/decisions",
+        "officialModel": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "decisionsInputUsdPerMillionTokens": 0.1,
+        "decisionsOutputAndCacheCharges": 0,
+        "longContextInputMultiplierAbove272K": 2,
+        "regionalPremiumIfApplicable": 0.1,
+        "sensitivityExamplesNotEstimates": [
+          {
+            "totalBillableInputTokensAssumed": 100000,
+            "baseUsd": 0.01,
+            "twoTimesLongAndRegionalExampleUsd": 0.022
+          },
+          {
+            "totalBillableInputTokensAssumed": 1000000,
+            "baseUsd": 0.1,
+            "twoTimesLongAndRegionalExampleUsd": 0.22
+          }
+        ],
+        "sendCondition": "pin actual inputs/count/bytes/SHA and recalculate; ask parent for new user approval of scope/count/retries0/fee uncertainty/budget. If a guaranteed billing ceiling is required, do not send without that guarantee",
+        "notRequestingPaidDiagnosisToReplaceFailedLAN": true
+      }
     }
   ]
 }
