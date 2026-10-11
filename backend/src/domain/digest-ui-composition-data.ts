@@ -201,6 +201,11 @@ async function savedRetentionInputs(state: Zev2State, draftId: string, config: R
   return p;
 }
 
+/** Internal data-only revision input. Reuses the full original-request validation; no human UI exposure. */
+export async function readDigestUiRevisionSources(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
+  return savedRetentionInputs(state, draftId, config, requestHash);
+}
+
 /** Full closed input only for the authenticated production caller. The ordinary UI keeps its summary. */
 export async function readDigestUiRetentionCallerInputs(state: Zev2State, draftId: string, config: RuntimeConfig, requestHash: string) {
   const p = await savedRetentionInputs(state, draftId, config, requestHash);

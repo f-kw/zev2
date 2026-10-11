@@ -154,6 +154,7 @@ import { saveDigestSceneAddition } from '../domain/digest-ui-edit-requests.js';
 import { readDigestUiCompositionData, saveDigestUiCompositionData, prepareDigestUiAdditionalRetentionInputs,
   readDigestUiAdditionalRetentionInputs, readDigestUiRetentionCallerInputs, saveDigestUiRetentionCallerAnswer,
   readDigestUiRetentionCallerAnswer } from '../domain/digest-ui-composition-data.js';
+import { prepareDigestUiRevision, readDigestUiRevision } from '../domain/digest-ui-revision-preparation.js';
 import {
   clearHumanSessionCookie,
   configuredHumanApiToken,
@@ -194,6 +195,23 @@ router.get('/agent-digest-retention/:id/:requestHash/answers/:answerHash', requi
     response.setHeader('Cache-Control', 'no-store');
     response.json(await runExclusiveStateOperation(async () => readDigestUiRetentionCallerAnswer(await retentionCallerState(),
       routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash), routeParamText(request.params.answerHash))));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+router.post('/agent-digest-retention/:id/:requestHash/revision-preparation', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    response.json(await runExclusiveStateOperation(async () => prepareDigestUiRevision(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash), request.body)));
+  } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
+});
+router.get('/agent-digest-retention/:id/:requestHash/revision-preparation/:preparationHash', requireRetentionCaller, async (request, response) => {
+  try {
+    response.setHeader('Cache-Control', 'no-store');
+    if (Object.keys(request.query).length !== 1 || typeof request.query.outputRoot !== 'string') throw new Error('新版準備の読取rootを一つ明示してください');
+    const outputRoot = request.query.outputRoot;
+    response.json(await runExclusiveStateOperation(async () => readDigestUiRevision(await retentionCallerState(),
+      routeParamText(request.params.id), await loadRuntimeConfig(), routeParamText(request.params.requestHash),
+      outputRoot, routeParamText(request.params.preparationHash))));
   } catch (e) { response.status(409).json({ error: unknownErrorMessage(e) }); }
 });
 

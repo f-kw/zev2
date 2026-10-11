@@ -20,15 +20,17 @@ export async function createFixtureWorkspace() {
   return { inputRoot, prefix, runtime, sourceRoot,
     cleanup: async () => { await rm(inputRoot, { recursive: true });await rm(sourceRoot, { recursive: true }); } };
 }
-export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof createFixtureWorkspace>>, variant: 'a' | 'b', selection: 'all' | 'first-only' = 'all') {
+export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof createFixtureWorkspace>>, variant: 'a' | 'b', selection: 'all' | 'first-only' = 'all',
+  options: { candidateCount?: number; idSuffix?: string } = {}) {
   const state = shared.createInitialState(), at = '2026-10-11T04:00:00.000Z';
-  const bytes = Buffer.from(`artificial-${variant}-not-a-playable-media-file`), sourcePath = path.join(area.sourceRoot, `${variant}.mp4`);
+  const fixtureId = variant + (options.idSuffix ?? '');
+  const bytes = Buffer.from(`artificial-${fixtureId}-not-a-playable-media-file`), sourcePath = path.join(area.sourceRoot, `${fixtureId}.mp4`);
   await writeFile(sourcePath, bytes, { flag: 'wx' });
   const draft = shared.createRequestDraft({ productionType: 'digest', purpose: `人工素材${variant}の要点を元順序で確認`,
     sourceUri: new URL(`file://${sourcePath}`).href, durationLabel: '入力の範囲内', themeCountLabel: '保存候補',
-    geminiModelName: shared.DEFAULT_GEMINI_MODEL, preset: 'artificial-fixture' }, at, () => `digest-${variant}`);
+    geminiModelName: shared.DEFAULT_GEMINI_MODEL, preset: 'artificial-fixture' }, at, () => `digest-${fixtureId}`);
   draft.status = 'approved';state.requestDrafts.push(draft);
-  let n = 0;state.agentRequests = shared.createAgentRequestsFromDraft(draft, at, () => `${variant}-request-${++n}`);
+  let n = 0;state.agentRequests = shared.createAgentRequestsFromDraft(draft, at, () => `${fixtureId}-request-${++n}`);
   const request = (type: shared.AgentRequest['type']) => state.agentRequests.find(r => r.type === type)!;
   const video = request('prepare_video'), stt = request('run_stt'), plan = request('prepare_digest_plan'), execution = request('validate_digest_plan');
   const directory = path.join(area.runtime, 'artifacts', draft.id);await mkdir(directory);
@@ -45,6 +47,8 @@ export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof create
     return f;
   };
   const count = variant === 'a' ? 6 : 8, baseId = variant === 'a' ? 101 : 701;
+  const candidateCount = options.candidateCount ?? 2;
+  assert(Number.isSafeInteger(candidateCount) && candidateCount >= 2 && candidateCount <= count);
   const segments = Array.from({ length: count }, (_, i) => ({ id: baseId + i, startMs: 1000 + i * 500,
     endMs: 1500 + i * 500, text: `人工${variant}の発話${i + 1}。` }));
   const durationSec = (segments.at(-1)!.endMs + 1000) / 1000;
@@ -66,8 +70,9 @@ export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof create
   const judge = async (stage: string, r: any) => {
     let answer;
     if (stage === 'discovery') {
-      const split = Math.floor(r.input.utterances.length / 2);
-      answer = { status: 'complete', candidates: [[0, split - 1], [split, r.input.utterances.length - 1]].map(([start, end], i) => ({
+      const ranges = Array.from({ length: candidateCount }, (_, i) => [Math.floor(r.input.utterances.length * i / candidateCount),
+        Math.floor(r.input.utterances.length * (i + 1) / candidateCount) - 1]);
+      answer = { status: 'complete', candidates: ranges.map(([start, end], i) => ({
         sourceId: r.input.sourceId, title: `人工${variant}の場面${i + 1}`, reason: `保存済み要約${variant}-${i + 1}`,
         evidenceUtteranceIds: [r.input.utterances[start].utteranceId], contextStartUtteranceId: r.input.utterances[start].utteranceId,
         contextEndUtteranceId: r.input.utterances[end].utteranceId })) };
@@ -89,8 +94,8 @@ export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof create
   claim(execution);const consumed = await consumePreparedDigestPlanV001({ preparation: deps }, { state, request: execution });
   assert.equal(consumed.status, 'consumed');const executionFile = await register(execution, 'digest-execution.json', consumed.artifact);
   const json = (value: unknown) => Buffer.from(formal(value));
-  const snapshotPath = `${area.prefix}/state-${variant}.json`, stateBytes = json(state);await writeFile(path.join(area.inputRoot, snapshotPath), stateBytes);
-  const stylePath = `${area.prefix}/style-${variant}.json`, styleBytes = json({
+  const snapshotPath = `${area.prefix}/state-${fixtureId}.json`, stateBytes = json(state);await writeFile(path.join(area.inputRoot, snapshotPath), stateBytes);
+  const stylePath = `${area.prefix}/style-${fixtureId}.json`, styleBytes = json({
     promptInput: { schemaVersion: 'presentation-zevo-caption-selection-input-v001', taskDescription: '人工字幕の表示境界確認',
       captions: [{ captionId: 'artificial-caption', boundaryCandidates: [{ boundaryId: 'artificial-boundary', text: '人工本文' }] }],
       styleLimits: { maxLogicalWidthPerLine: 18, maxLinesPerCue: 2, characterWidthRule: '人工検査の文字幅' } },
@@ -98,7 +103,7 @@ export async function makeDigestUiFixture(area: Awaited<ReturnType<typeof create
   });await writeFile(path.join(area.inputRoot, stylePath), styleBytes);
   const scopePath = 'docs/reports/zev-ui-b-implementation-20261011/digest-read-boundary.md';
   const parameters = { inputRoot: area.inputRoot, inputPrefix: area.prefix, sourceRuntimeRoot: area.runtime,
-    outputRoot: path.join(area.inputRoot, area.prefix, `caption-${variant}`), preparationId: `artificial-caption-${variant}`,
+    outputRoot: path.join(area.inputRoot, area.prefix, `caption-${fixtureId}`), preparationId: `artificial-caption-${fixtureId}`,
     stateBinding: { path: snapshotPath, fileSha256: sha(stateBytes) }, scopeBinding: { path: scopePath, fileSha256: sha(await readFile(path.join(workspace, scopePath))) },
     styleTemplateBinding: { path: stylePath, fileSha256: sha(styleBytes) }, expected: { requestDraftId: draft.id, planRequestId: plan.id,
       executionRequestId: execution.id, planSha256: planFile.sha256, executionSha256: executionFile.sha256 } };

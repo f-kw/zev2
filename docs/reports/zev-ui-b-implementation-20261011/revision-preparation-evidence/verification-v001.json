@@ -1,0 +1,169 @@
+{
+  "recordedAt": "2026-10-11T09:07:47.187553+00:00",
+  "session": "Codex-UI",
+  "task": "No68 human revision writer/reader first draft type-check stop",
+  "observedHead": "b3b6096eaf003969ec830f5351ead82fc2389ecd",
+  "gitLease": "UI received from parent",
+  "sourceFirstDraft": [
+    {
+      "path": "backend/src/domain/digest-ui-revision-preparation.ts",
+      "sizeBytes": 22249,
+      "sha256": "63cb7e0ee5da192d6b2a6a66b262be806218f923dd3536a035f4f4f16256d0fd"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 23554,
+      "sha256": "01563f84c69b781d1abe0df278e7df19ebc46c84cc3a39714b7d03a6633f6dd4"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 16620,
+      "sha256": "874095cd88fb4096d754af09c9398a084b2a41b93cb832d8c177cfd314275670"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 44291,
+      "sha256": "2be69268059bf3ae97109c7fed120bb13b5f73ea48147cf0c04ece5f70932e3f"
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 11115,
+      "sha256": "3371bfe94fca42d7713fc9a7a7a2d4278bcde5899128f66e6580380b754f9557"
+    }
+  ],
+  "protectedSourcesUnchanged": [
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "sizeBytes": 5669,
+      "sha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "sizeBytes": 7026,
+      "sha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/adopted_caption_judgment_inputs_v001.mts",
+      "sizeBytes": 5647,
+      "sha256": "2e46b2d9c1902f4e1f6f0b3bf4aa221ac51bb932ac7bede23363749b99d4ccc7",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "sizeBytes": 111531,
+      "sha256": "834ef2cbe1c19548f356721b136ca7d6c092983da6387fc3b577eb4eaa7e9ed4",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "sizeBytes": 29454,
+      "sha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "sizeBytes": 16534,
+      "sha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesHead": true
+    }
+  ],
+  "validation": {
+    "backendBuildExit": 2,
+    "compilerErrors": 5,
+    "cause": "spread from Record<string, any> inferred only new fields in joined segments",
+    "artificialTestsAuthored": false,
+    "artificialCasesExecuted": 0
+  },
+  "rawLog": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/revision-preparation-evidence/backend-build-v001-type-failed.txt",
+    "sizeBytes": 1869,
+    "sha256": "ee9fb526add6018e240848d50de2e478aba1b2280b93f0f2d8199207d5a49004"
+  },
+  "proposedCorrection": {
+    "limitedImplementationOrdinal": 6,
+    "applied": false,
+    "path": "backend/src/domain/digest-ui-revision-preparation.ts",
+    "before": "const segments = sourceParts.map(",
+    "after": "const segments: Obj[] = sourceParts.map(",
+    "runtimeChanges": 0,
+    "sourceDeltaLines": 1,
+    "retryExecuted": false
+  },
+  "limits": {
+    "setupCorrectionsApplied": 11,
+    "limitedImplementationCorrectionsApplied": 5,
+    "proposedImplementationCorrection": 6,
+    "explicitStops": 9,
+    "addenda": 0,
+    "costUSD": 0,
+    "countersReset": false
+  },
+  "cleanup": {
+    "testFixtureCreated": false,
+    "newMedia": 0,
+    "buildProcess": "exit2; ended",
+    "remainingOwnBackgroundProcess": 0,
+    "foreignProcessStops": 0,
+    "ownTmpDuplicateBytesRemoved": 1869
+  },
+  "admission": {
+    "implementation": "first draft; new writer/reader runtime unverified",
+    "No68": "unfinished",
+    "No70": "unstarted",
+    "formalConsumerRunner": "unchanged",
+    "AIAnswerGeneration": 0,
+    "providerTraffic": 0,
+    "manufacturing": 0,
+    "humanQuality": "pending"
+  }
+}

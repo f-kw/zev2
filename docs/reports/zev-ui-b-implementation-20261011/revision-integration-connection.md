@@ -76,3 +76,15 @@ route候補は既存agent限定prefixの`POST /agent-digest-retention/:id/:reque
 この呼出を専用moduleの共通再構築関数へまとめ、writerとreadonly readerは同じ構築を使う案。人間新版の実bindingを渡す設計を維持し、既存AI由来manifestのschema/来歴を新構成へ偽装しない。
 
 人工検査の出力は既存`createFixtureWorkspace`が作る一時SSD rootと人工runtime内へ限定し、cleanupする。実製造側の出力は所有担当が指定した別root/prefix/scopeで扱い、fixture rootやそのmanifestを正式登録へ流用しない。今回どちらの新出力も製造せず、実出力scopeをCodexが仮置きしない。
+
+## 許可済み初稿と型検査停止（09:07 UTC）
+
+親が制作担当との衝突なし確認を返し、専用module/内部helper/agent route/対象testの最小差分でwriter・独立readerと人工検証を指示した。実素材/paid API/製造/正式消費reader/runnerは変更対象外、明示SSD fixtureへ隔離して今回の一時物だけcleanup、Git枠UI。開始main b3b6096eaf003969ec830f5351ead82fc2389ecd、Git clean/untracked0。
+
+初稿は新専用module、composition-dataの限定内部helper、digest-ui-reviewの資格化済みinspection/style返却、controlのagent/queue内2route、既存fixtureの一般候補数/idSuffix引数の5source/testに限定した。元block/ID/端点/evidenceを新scene記録へ保持し、新全体ID対応を別に記録する。元断片重複と区間衝突を新ID割当前に拒否する構築、既存clock validator/字幕builder、全出力の独立再構築、原出力と独立したSSD出力rootの検査、manifest最後の不変保存まで初稿を実装した。通常AI登録や製造資格を与える接続はない。
+
+`corepack pnpm --filter backend build`はexit2。新moduleの元segmentをspreadして新ID/対応を付けた配列で、TypeScriptが元のindex signature fieldsを推論せず、sourceSegmentIds/candidateId/sourceStartMs/sourceEndMsの参照5箇所を拒否した。runtime/媒体検証には進んでおらず、新人工testはまだ作成・実行していない。旧8/8を今回の初稿へ流用しない。[失敗ログ/型エラー/source SHA](revision-preparation-evidence/verification-v001.json)を保存・byte再読した。
+
+提案する**限定実装修正6は未適用**。新moduleの`const segments = sourceParts.map(`を`const segments: Obj[] = sourceParts.map(`へ変更する1行だけで、既存の元segment `Record<string, any>`を配列の型として明示する。実行時処理、出力shape、原本文/ID/時計、validator、scope/権限/品質の意味は変えない。新インストールやcaller再設計は不要。個別一件の軽微な型注記として親へGPT_DECISIONを返し、例外判定を待つ。自己適用/再buildなし。
+
+累積は適用済み設営11・限定実装修正5、修正6候補未適用、明示停止9、追補0・US$0。停止8からの本人再開許可と旧累積を保持し、同じcwd了承を再要求しない。今回の別型の一件を新しく自己承認しない。失敗raw logをrepoへ保存後に自分の/tmp重複1869bytesを削除。fixture/新媒体/残process0、他担当process停止0。制作serve/test・runner/Skill/低層validator/builderは変更0。No.68全体未完成・No.70未着手、初稿の実行成立は未確認。

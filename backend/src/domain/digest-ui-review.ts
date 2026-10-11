@@ -115,7 +115,10 @@ export async function qualifyDigestUiPreparation(state: Zev2State, registration:
     discovery, discoveryBinding: preparation.artifacts['candidate-response.json'] as DigestByteBindingV001,
     sourceBindings: { sourceVideo: plan.sourceVideoBinding, transcript: plan.transcriptBinding, utterances: plan.utteranceBinding },
     retention: { bindings: retentionBindings, documents: retentionDocuments },
-    utterances, planFile, executionFile, audioPreservation, sourceAudioReference };
+    utterances, planFile, executionFile, audioPreservation, sourceAudioReference,
+    // Internal qualified inputs only. populateDigestUiReview still returns the existing human summary.
+    inspection, inspectionBinding: execution.sourceInspectionBinding, style, styleTemplateBinding: p.styleTemplateBinding,
+    baseline: { parameters: registration.parameters, manifestBinding: registration.manifestBinding } };
 }
 
 export async function populateDigestUiReview(state: Zev2State, model: UiReviewMaterials, config: RuntimeConfig,
