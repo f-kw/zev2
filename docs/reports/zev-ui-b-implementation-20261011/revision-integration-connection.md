@@ -118,7 +118,7 @@ after hookで自分の隔離SSD fixtureとlocal人工sourceを削除した。run
 
 検証済みsource/test/成功証拠の監査checkpointは`854d9885c3a0f25a68ffff140f10f772e9932faf`。この追記と[session log](../../work-logs/2026-10/2026-10-11T0924_Codex-UI_No68-revision-preparation-verified_854d9885.md)をdoc commitへ保存し、両commitをmainへpushして最終SHA/statusを親へ報告する。型注記前の失敗checkpoint`0fe675ac`は履歴として保持する。
 
-## 現在の新版準備への反映再照合・初稿型検査停止（09:50 UTC）
+## 現在の新版準備への反映再照合・初稿型検査停止（09:49 UTC）
 
 親は01d5d326のwriter/readerを独立読取レビューし、限定範囲受領可・具体的差戻し欠陥なしとした。次の指示は、既存request hash/反映ID/bindingを再利用して「どの編集要求がどの新版準備へ反映されたか」をUIで再照合する最小読取・表示と人工検証。別台帳・古い要求/別構成/改変manifestの反映済み扱い・通常AI偽装は禁止。製造資格/表示未回答の停止を維持し、正式製造reader/runner/実素材/paid APIは未変更。Git枠UI。開始main/originは01d5d326634529d083212b0c7096f16a3c8f1cf0、staged0。
 
@@ -131,3 +131,5 @@ client初稿は反映ID/構成/identity/fingerprint/未承認状態/本文IDを�
 **GPT_DECISION：限定実装修正7の個別承認を求める。未適用。** 新view moduleで`const outputs: Record<string, Obj> = revision.outputs;`を一行追加し、既存4出力lookupだけをそのlocal aliasへ変更する。既存のJSON object型を読み手のlocal変数へ明示する推論補足で、既存writer/readerの返却型、出力bytes/来歴、runtime処理、validator、本文ID時計、scope/費用/素材/権限・品質の意味を変えない。`as any`や検査無効化を追加しない。親の一件の技術判定を待ち、自己適用/再buildをしない。
 
 累積は設営11・適用済み限定実装修正6・明示停止10・追補0・US$0。修正7は提案のみで一般上限/counterをリセットしない。停止8からの本人再開許可を保持し、同じcwd了承を再要求しない。failure logをrepoへ固定後、自分の/tmp重複だけ削除。今回fixture/媒体生成0、今回build残processなしを読取確認、他担当process停止0。共有ツリーの別担当5文書は保持しstageしない。No.68全体未完成、No.70未着手。この停止証拠と初稿を監査checkpointへ保存して親cloud threadへdelegation応答で返し、別Web相談役への送信/返信受領を実施したとは書かない。
+
+初稿と失敗証拠の監査checkpointは`f03e1a503a1b909acd89f294f3ee65d78c6b6798`。[今回のsession log](../../work-logs/2026-10/2026-10-11T0949_Codex-UI_No68-revision-view-type-stop_f03e1a50.md)とこの索引をdoc commitへ保存し、最終push/statusを親へ返す。
