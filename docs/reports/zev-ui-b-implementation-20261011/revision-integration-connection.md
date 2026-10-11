@@ -115,3 +115,5 @@ agent認証必須/共有operation queue内に限定したPOST保存とGET読取�
 after hookで自分の隔離SSD fixtureとlocal人工sourceを削除した。run log生成以降の同prefix残directory0、残server/子process0、他担当のアプリ/配信/STT process停止0。回収fixture容量は未計測、新playable媒体/巨大中間物0。成功log3fileをrepoへbyte一致で保存・再読し、自分の/tmp重複10,286bytesを削除。旧失敗log/checkpointは保持。
 
 累積は**設営11・限定実装修正6・停止9・追補0・US$0**。今回適用修正増分1、停止増分0。source型注記1line＋新人工testと自分の成功証拠/reportを監査checkpointへ保存し、そのSHAを含むsession logを追加してから最終push/Git確認/親報告を行う。正式完成/採用を意味しない。No.68全体未完成、No.70未着手、次の正式消費/receiptは明示指示まで待つ。
+
+検証済みsource/test/成功証拠の監査checkpointは`854d9885c3a0f25a68ffff140f10f772e9932faf`。この追記と[session log](../../work-logs/2026-10/2026-10-11T0924_Codex-UI_No68-revision-preparation-verified_854d9885.md)をdoc commitへ保存し、両commitをmainへpushして最終SHA/statusを親へ報告する。型注記前の失敗checkpoint`0fe675ac`は履歴として保持する。
