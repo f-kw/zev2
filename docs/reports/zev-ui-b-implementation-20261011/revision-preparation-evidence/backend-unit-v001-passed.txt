@@ -1,0 +1,19 @@
+✔ A/B and multiple additions use original qualified scene and saved-answer records without starting production (8330.132917ms)
+✔ immutable A/B and multiple-addition writer preserves origin IDs/text/cuts and prepares whole clock plus keep/drop caption inputs (6946.79225ms)
+ℹ {"draft":"digest-a","additions":1,"parts":3,"keepIds":[101,102,103,104,106],"dropIds":[105],"preparationHash":"9db5bd9b38763417ecd37ea9ecd7ef97d49fc0ba218d16ea8e4bfa759e614943","outputFrames":75}
+ℹ {"draft":"digest-b","additions":1,"parts":3,"keepIds":[701,702,703,704,705,707,708],"dropIds":[706],"preparationHash":"a4d80c0aaa2703c53d9923d68a27baef5b78fcda30b77a394f43c1988a9fb684","outputFrames":105}
+ℹ {"draft":"digest-b-multi","additions":2,"parts":5,"keepIds":[701,702,703,705,706,708],"dropIds":[704,707],"preparationHash":"71ac0dac13a1030f958070d9bd1b84135a8806db89c6848130b7f213c030d7de","outputFrames":90}
+✔ new writer/reader require configured agent auth and cannot register human revision as normal AI preparation (1505.796083ms)
+✔ missing/duplicate/other-chain answers, stale input, invented authority and unsafe output roots reject before writes (5375.984208ms)
+✔ saved output, source/style/inspection and manifest provenance tampering rejects; an explicit exact retry reuses known partial bytes (10568.675959ms)
+✔ the dedicated join refuses source ID reuse and cross-scene range conflicts before assigning whole-sequence IDs (5.291375ms)
+✔ changed current request/source/chain keeps saved revision bytes but refuses applying the old preparation (1943.607708ms)
+✔ a fresh compiled backend process reconstructs multiple-addition manifest and all outputs with original/state/queue bytes unchanged (1795.013583ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 38603.63475

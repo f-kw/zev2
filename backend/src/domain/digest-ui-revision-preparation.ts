@@ -85,7 +85,7 @@ export function integrateDigestUiRevisionRetentionScenes(composition: Obj, origi
       && s.sourceStartMs < s.sourceEndMs, '全体保持の元端点が不正です');
     assert(!previous || previous.sourceEndMs <= s.sourceStartMs, '全体保持の元区間が逆順または重複しています');
   }
-  const segments = sourceParts.map(({ scene, part }, i) => ({ ...structuredClone(part),
+  const segments: Obj[] = sourceParts.map(({ scene, part }, i) => ({ ...structuredClone(part),
     segmentId: `segment-${String(i + 1).padStart(4, '0')}`, outputOrdinal: i + 1,
     origin: { candidateId: part.candidateId, originalSegmentId: part.segmentId, blockOrdinal: part.blockOrdinal,
       retentionSource: structuredClone(scene.retentionSource) } }));

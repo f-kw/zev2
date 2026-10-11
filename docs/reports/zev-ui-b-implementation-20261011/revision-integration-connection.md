@@ -1,4 +1,8 @@
-# Codex-UI｜No.68 全体保持→変更後時計/字幕準備の最小接続案
+# Codex-UI｜No.68 人間新版の全体保持・時計字幕準備と検証
+
+**最新結果（2026-10-11 09:21 UTC）：限定writer/独立readerの実装と人工検証が成立。** 元AI案と人間追加の採用/保持来歴を分け、変更後の全体保持・編集区間・時計・意味本文/未回答字幕表示要求を別の準備資料として保存し、新processから同じ全出力を再構築できるようになった。新版の人工8群と関連既存6fileの46件が全て合格、backend build/types exit0。保存と再読の接続だけで、画面への反映receipt・正式消費/製造reader・runner・製造・人間品質採用は未接続。No.68全体未完成、No.70未着手。
+
+以下の具体案・Git保存待ち・初稿型検査停止は各時刻の履歴として保持する。最新の許可・修正・検証・cleanupは末尾「型注記6の個別承認と今回の成立範囲」に記録する。[成功生ログと検証索引](revision-preparation-evidence/verification-v002.json)。
 
 2026-10-11 08:45 UTC、読取main `e33c00318b4819f013e6c5302101c4bfaf2e2373`、開始Git clean/untracked0。親が追加保持受入の人工8/8を受領し、次の接続の対象path・入出力・旧保持再利用条件・人工検証範囲をまず返すよう指示した。**調整用の具体案で、以下の仮path/schema/routeを実装・新設承認したものではない。** 今回はsource編集/test/API/実素材/製造0、Git枠は親でstage/commit/pushしない。No.68全体未完成、No.70未着手。
 
@@ -88,3 +92,26 @@ route候補は既存agent限定prefixの`POST /agent-digest-retention/:id/:reque
 提案する**限定実装修正6は未適用**。新moduleの`const segments = sourceParts.map(`を`const segments: Obj[] = sourceParts.map(`へ変更する1行だけで、既存の元segment `Record<string, any>`を配列の型として明示する。実行時処理、出力shape、原本文/ID/時計、validator、scope/権限/品質の意味は変えない。新インストールやcaller再設計は不要。個別一件の軽微な型注記として親へGPT_DECISIONを返し、例外判定を待つ。自己適用/再buildなし。
 
 累積は適用済み設営11・限定実装修正5、修正6候補未適用、明示停止9、追補0・US$0。停止8からの本人再開許可と旧累積を保持し、同じcwd了承を再要求しない。今回の別型の一件を新しく自己承認しない。失敗raw logをrepoへ保存後に自分の/tmp重複1869bytesを削除。fixture/新媒体/残process0、他担当process停止0。制作serve/test・runner/Skill/低層validator/builderは変更0。No.68全体未完成・No.70未着手、初稿の実行成立は未確認。
+
+## 型注記6の個別承認と今回の成立範囲（09:21 UTC）
+
+親が「限定実装修正6として、報告されたsegments配列への型注記1行を承認します」と返信した。sourcePartsは旧全保持のprovenance/ID/元境界再検証と追加保存回答readerから取得されることを確認し、`const segments: Obj[] = sourceParts.map(`の1行だけを適用した。runtime処理・出力shape・本文ID時計・validator・scope/権限・品質の意味を変えない技術的な型推論補足であり、親の第2層判断として同じ承認済み一件内で扱った。`as any`/検査無効化/費用/素材/製造/契約/一般上限の変更はない。停止9と前の失敗証拠は消さない。
+
+専用moduleは元採用sceneの旧保持全要求を再検証して参照し、追加sceneは保存回答readerで現在bundle/全文SHA/元境界を照合する。全体の元断片重複/keep-drop衝突/区間重複や逆順を新IDの割当前に拒否する。元block/本文/端点/evidence/roles/reasonと旧segment IDをscene側へ残し、global segment ID/ordinalと原blockの対応を新資料へ記録する。その同じkeep列から既存clock validatorと字幕builderを直接呼び、原AI正本を上書きしない。旧UI summaryには内部inspection/styleや新版全文を出さない。
+
+agent認証必須/共有operation queue内に限定したPOST保存とGET読取を実装した。入力は現在identity/fingerprint/bundle SHA、追加要求ごとに一つの明示された回答hash、scope binding、出力root/preparationId。出力は現在登録したSSD inputRoot/prefix内で、旧source runtimeと旧字幕準備rootに重ならない専用directoryだけに保存する。全構築/検査後に不変bytesを保存、manifestを最後に書く。改変/symlink/別版の上書きなし。既知の同一partialは明示された同じPOST再試行でだけ補完する。GETは欠落を修復せず、現在原資料/回答/実装から全出力bytesを再構築する。root移動や原資料/現在chain変化の場合は旧記録を保持して適用拒否。
+
+| 今回の検証 | 実結果 |
+| --- | --- |
+| 型注記後backend build/types | exit0、同じpnpm入口。[生ログ](revision-preparation-evidence/backend-build-v002-passed.txt) |
+| 新版writer/独立reader人工検証 | 8群実行・8合格・失敗/skip/cancel0、38,603.63475ms。[生ログ](revision-preparation-evidence/backend-unit-v001-passed.txt) |
+| 関連既存UI/保持接続6file | 46件実行・46合格・失敗/skip/cancel0、64,956.915625ms。[生ログ](revision-preparation-evidence/backend-regression-v001-passed.txt) |
+| source/原本/権限 | 元資料/AI採否/旧保持/state/queue bytes不変、通常AI登録拒否、UI追加要求は未反映状態を保持。source6と保護14のSHAを検証索引へ保存 |
+
+人工A/Bは追加1sceneずつ、3sceneのB変種は追加2scene。keep区間は3/3/5、時計上の出力frame数75/105/90で、実媒体は生成しない。元ID/本文/端点/evidence、新全体IDと元block対応、frame/sample、keep網羅/drop不混入の意味atom/未回答display要求を検査した。認証、不足/余分/重複/別回答/偽authority/別root、元保持/inspection/style/保存出力改変、missing/partial/symlink、古い依頼/source/chain、偽実装来歴、繰返し/同時POST、compiled backend新processの全出力再読を検査した。既存fixtureは一般候補数/idSuffix引数だけを拡張し、既存2sceneの関連46件も通った。既存Node/tsx/backend cwd/明示SSD/直列入口を再利用し、新インストールなし。
+
+準備状態は`human-revision-inputs-prepared`、新manifestは`ui-digest-human-revision-preparation-v001`。本文builderの`machineAdoptionBinding`には実際の人間統合資料のschema/SHAを渡し、AI由来manifestを偽装しない。保持統合verified/clock passed/字幕入力preparedと、字幕表示回答unanswered/UI反映not-connected/execution not-approved/human quality pendingを区別する。正式消費口/製造reader/runnerは未変更。新表示回答・AI推論・実素材・有料API・媒体製造・公開・人間品質・今回のブラウザ目視は未実施。以前の8群やclient/動画の合格を今回の全体製品完成へ流用しない。
+
+after hookで自分の隔離SSD fixtureとlocal人工sourceを削除した。run log生成以降の同prefix残directory0、残server/子process0、他担当のアプリ/配信/STT process停止0。回収fixture容量は未計測、新playable媒体/巨大中間物0。成功log3fileをrepoへbyte一致で保存・再読し、自分の/tmp重複10,286bytesを削除。旧失敗log/checkpointは保持。
+
+累積は**設営11・限定実装修正6・停止9・追補0・US$0**。今回適用修正増分1、停止増分0。source型注記1line＋新人工testと自分の成功証拠/reportを監査checkpointへ保存し、そのSHAを含むsession logを追加してから最終push/Git確認/親報告を行う。正式完成/採用を意味しない。No.68全体未完成、No.70未着手、次の正式消費/receiptは明示指示まで待つ。

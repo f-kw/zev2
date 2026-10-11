@@ -1,0 +1,60 @@
+✔ current additions in A/B produce only two immutable JSON files, keep original adoption and original AI reject reason (3758.341167ms)
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-composition-0be4a26285556e649f3e2a03226e7bb3bcd09ffd84723ca83396479c8adde81e--composition.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"},{"name":"._ui-composition-0be4a26285556e649f3e2a03226e7bb3bcd09ffd84723ca83396479c8adde81e--snapshot.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-composition-8abfa853dbd2c86556dfcca10a2c58e8abf8e8598e9c9c27fbd38b0c2e4aba91--composition.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"},{"name":"._ui-composition-8abfa853dbd2c86556dfcca10a2c58e8abf8e8598e9c9c27fbd38b0c2e4aba91--snapshot.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+✔ human auth, stale confirmation, extra execution fields and another source cannot write or re-read (1120.955625ms)
+✔ snapshot or composition tampering is refused on read and repeat save, without repair or overwrite (1442.508625ms)
+✔ a changed chain hash cannot silently reuse the former snapshot or old displayed confirmation (1202.411042ms)
+✔ duplicate, reversed order and mismatched before sets are rejected before saving a snapshot (1182.126084ms)
+✔ source graph bytes are requalified; original AI changes cannot be hidden in a data revision (627.127ms)
+✔ new compiled backend process reconstructs the saved chain and result without changing its files (1219.655125ms)
+✔ current A/B composition is read from real saved selection; viewing never saves or executes (1423.916292ms)
+✔ explicit addition records intent once, preserves every producer byte and never approves fees or execution (2103.880625ms)
+✔ same save retried in parallel is idempotent; already adopted and requested scenes are no-ops (1558.875708ms)
+✔ editing request reconstruction failure clears qualified input and audio checks without saving anything (911.015167ms)
+✔ stale or missing choices, extra authority fields and agent credentials cannot save (1091.098667ms)
+✔ changed source or manifest bytes invalidate current choices without writing or retrying preparation (577.60475ms)
+✔ new formally qualified base never silently fulfills an older human request (967.733416ms)
+✔ overlapping context is refused rather than silently dropping or replacing another scene (421.805125ms)
+✔ new backend process rereads the editing request and retains the preparation blocker (1137.279666ms)
+✔ unfinished current producer leaves preparation unregistered without approval, rerun or manufacture (73.118458ms)
+✔ failed STT with retained recognition text is not registered as a completed preparation (19.911084ms)
+✔ normal completed results from two distinct artificial sources reach the existing qualified registration endpoint (1291.544625ms)
+✔ CLI consumes saved normal parameters and the actual completed manifest reference without printing authentication (459.618833ms)
+✔ missing completed result, unexpected producer authority, other draft and agent-only credentials never register (14.894208ms)
+✔ same-ID different source and manifest bytes are rejected by the unchanged server qualifications without retry (78.449583ms)
+✔ draft replacement between current-state read and POST is refused, not retried with the new identity (16.004125ms)
+✔ non-loopback origins and redirects cannot send the existing human credential elsewhere (8.230125ms)
+✔ two different artificial sources qualify through actual readers and display only precreation instructions (1654.049375ms)
+✔ human authentication and exact server-owned parameter boundary cannot become producer authority (26.947209ms)
+✔ different source, same ID changed SHA, unregistered references and replaced current producer are rejected without writes (122.944ms)
+✔ clock bytes tampering is rejected and stale candidates/audio disappear on reread (386.216334ms)
+✔ saved reader works in a fresh compiled backend process with its existing TSX loader (849.45375ms)
+✔ missing registration never guesses preparation data and a non-SSD root remains rejected (8.358334ms)
+✔ full caller input reuses current saved A/B bundles; ordinary UI exposes its unchanged summary only (3258.27325ms)
+✔ full input and supplied answers require configured agent auth; human UI token cannot substitute (521.048125ms)
+✔ A/B supplied answers pass the existing provenance/IDs/cut validator and save one immutable record on repeated clicks (1869.038875ms)
+ℹ {"draft":"digest-a","requestHash":"ed86283317bb9124ab945d01ce9fbc2df5df27275fdca29fb35269ce63cd8463","requestFileSha256":"c12533671a2021f198ac71a2d95623b0dc69a85e4c1d24ab5d565f2838b6270f","answerHash":"58bc3403bbb4bf6e154d6cbadbe055606c3290a5c46af2acc024c9dc5b4f9c45","newFiles":["._ui-retention-answer-ed86283317bb9124ab945d01ce9fbc2df5df27275fdca29fb35269ce63cd8463-58bc3403bbb4bf6e154d6cbadbe055606c3290a5c46af2acc024c9dc5b4f9c45.json","ui-retention-answer-ed86283317bb9124ab945d01ce9fbc2df5df27275fdca29fb35269ce63cd8463-58bc3403bbb4bf6e154d6cbadbe055606c3290a5c46af2acc024c9dc5b4f9c45.json"]}
+ℹ {"draft":"digest-b","requestHash":"ca7fbaafb5c53b1106fe540ae55fa8cd6930710667ad28f8eae078904a6e11e4","requestFileSha256":"e550241c7d810f64d4ede59eaf4bf3cb7f92907d2f7ec09df24566c0d1196e60","answerHash":"f0005ca24019f243bdbe23a8b131ad9a1f35afd132eed8b37ab533fec008837d","newFiles":["._ui-retention-answer-ca7fbaafb5c53b1106fe540ae55fa8cd6930710667ad28f8eae078904a6e11e4-f0005ca24019f243bdbe23a8b131ad9a1f35afd132eed8b37ab533fec008837d.json","ui-retention-answer-ca7fbaafb5c53b1106fe540ae55fa8cd6930710667ad28f8eae078904a6e11e4-f0005ca24019f243bdbe23a8b131ad9a1f35afd132eed8b37ab533fec008837d.json"]}
+✔ wrong full-request SHA, invented authority, incomplete text and invalid keep/drop answers are refused without writes (2504.377167ms)
+✔ stale confirmation, wrong bundle/request and extra execution fields cannot save an answer (1323.789125ms)
+✔ missing/tampered bundle, original source and saved answer reject without repair or overwrite (2916.777ms)
+✔ a changed current request or composition chain preserves old accepted bytes but refuses their application (1050.394709ms)
+✔ a fresh compiled backend process requalifies B full input and saved answer with no state/queue/original writes (2363.187708ms)
+✔ preparation requires both already-saved composition JSON files; it never creates them implicitly (2310.5115ms)
+✔ A/B prepare only added-scene closed inputs; duplicate clicks are idempotent and old full answers stay unchanged (2129.734791ms)
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-retention-inputs-cfd9d81dc83d84bf7077ff96952373835145a62bdfa1378ac54bec0060c6e3dd.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+ℹ {"filesystemAuxiliaryFiles":[{"name":"._ui-retention-inputs-cafc51622dd0c046b530d740e920649c19f3a8267c8f26d8ae8e01d9d00fdb89.json","sizeBytes":4096,"sha256":"e6efe8b033dafc3040408984b73922feacc9bd0485218f9183e8da84abbce62a"}]}
+✔ human auth, stale display, extra permissions, another material and unknown candidate never write (1419.992041ms)
+✔ missing or altered saved inputs/snapshot/composition reject read and preparation without overwrite (2466.847125ms)
+✔ old four retention records and source graph are requalified; missing/tampered originals cannot become added-scene answers (2293.673625ms)
+✔ an unsupported stored addition or changed chain cannot reuse a former request (1029.89075ms)
+✔ missing or incompatible saved discovery summary refuses preparation rather than inventing a reason (551.736833ms)
+✔ a fresh compiled backend process re-reads B with the same result, no state/queue/original writes (1647.709875ms)
+ℹ tests 46
+ℹ suites 0
+ℹ pass 46
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 64956.915625

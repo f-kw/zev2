@@ -1,0 +1,274 @@
+{
+  "recordedAt": "2026-10-11T09:21:33.028667+00:00",
+  "session": "Codex-UI",
+  "task": "No68 human revision preparation writer and independent reader; artificial qualification",
+  "observedHead": "0fe675acd82c4b52b7d37bf6dd7586d9830e5e11",
+  "gitLease": "UI received from parent",
+  "individualCorrectionAuthorization": {
+    "ordinal": 6,
+    "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+    "receivedText": "限定実装修正6として、報告されたsegments配列への型注記1行を承認します。",
+    "applied": "const segments: Obj[] = sourceParts.map(",
+    "qualifiedSourceParts": "original full-request provenance/IDs/cut validation and saved additional-answer reconstruction",
+    "runtimeShapeOrOutputOrAuthorityChange": false,
+    "asAnyAdded": false,
+    "validationDisabled": false
+  },
+  "source": [
+    {
+      "path": "backend/src/domain/digest-ui-revision-preparation.ts",
+      "sizeBytes": 22256,
+      "sha256": "1804c078ced79ce9afccde52b2146cd9e2d26d82d152ac5166984325d5c8f29a"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-composition-data.ts",
+      "sizeBytes": 23554,
+      "sha256": "01563f84c69b781d1abe0df278e7df19ebc46c84cc3a39714b7d03a6633f6dd4"
+    },
+    {
+      "path": "backend/src/domain/digest-ui-review.ts",
+      "sizeBytes": 16620,
+      "sha256": "874095cd88fb4096d754af09c9398a084b2a41b93cb832d8c177cfd314275670"
+    },
+    {
+      "path": "backend/src/routes/control.ts",
+      "sizeBytes": 44291,
+      "sha256": "2be69268059bf3ae97109c7fed120bb13b5f73ea48147cf0c04ece5f70932e3f"
+    },
+    {
+      "path": "backend/test/digest-ui-fixture.mts",
+      "sizeBytes": 11115,
+      "sha256": "3371bfe94fca42d7713fc9a7a7a2d4278bcde5899128f66e6580380b754f9557"
+    },
+    {
+      "path": "backend/test/digest-ui-revision-preparation.test.mjs",
+      "sizeBytes": 21756,
+      "sha256": "054e287aa0588d4f8d9cb0d68a1a0e76b0e56353fa11606f1946ec3c6ddd1656"
+    }
+  ],
+  "protectedSourcesUnchanged": [
+    {
+      "path": "runner/src/skills/candidate-internal-retention-v001.ts",
+      "sizeBytes": 5669,
+      "sha256": "092507cd677c320c1a4e6cabb21d671d92096ae2691a0da877fc9d8575db8291",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_internal_retention_validation_v001.mts",
+      "sizeBytes": 7026,
+      "sha256": "d162fc26038784ac156e2d217cee0234c387261feb5a782e7d88b73d693b4bac",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/candidate_selection_validation_v001.mts",
+      "sizeBytes": 11497,
+      "sha256": "354aad0bd7f6f38fc89e349b7b76e1d3b858e650a551429532d98a79d69178ec",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-preparation-v001.ts",
+      "sizeBytes": 33158,
+      "sha256": "5c0bb684033162bd75d46755b6fcc3efd8b2c94877068e706dfd4106c6b62d2f",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-plan-consumption-v001.ts",
+      "sizeBytes": 15417,
+      "sha256": "179a470a65580102081c7684c2b1b57df0b19d4347c5e97beac12779ff9b07d5",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/digest-caption-input-preparation-v001.ts",
+      "sizeBytes": 31658,
+      "sha256": "790fc87b75ab4592d3d63e6a93650cdf34b7aadbd1e1f87f1ecba7530d35c783",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/adopted_caption_judgment_inputs_v001.mts",
+      "sizeBytes": 5647,
+      "sha256": "2e46b2d9c1902f4e1f6f0b3bf4aa221ac51bb932ac7bede23363749b99d4ccc7",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/presentation_base_media_build_v003.mjs",
+      "sizeBytes": 111531,
+      "sha256": "834ef2cbe1c19548f356721b136ca7d6c092983da6387fc3b577eb4eaa7e9ed4",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_discovery_digest_skill_e2e_v001.mts",
+      "sizeBytes": 29454,
+      "sha256": "64ea91920e9cb82b3ee17b7fc89c47b2b0c97b2904fbeff475b22687a72debfb",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/run_candidate_internal_edit_v001.mts",
+      "sizeBytes": 16534,
+      "sha256": "cb336bd5000e39015cf830ed17e483cd74bdb73f235f895331c6feb26207f000",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/index.ts",
+      "sizeBytes": 36193,
+      "sha256": "6fbff955de78868a10651d62d01b6d46cd135681d31369bc007567cb7432da23",
+      "matchesHead": true
+    },
+    {
+      "path": "runner/src/workflow-step-builders.ts",
+      "sizeBytes": 13667,
+      "sha256": "ba60759c8bb4ceed249a99c076f9a762aff81f3bc84d3db27db2f4230bc6f681",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.py",
+      "sizeBytes": 18373,
+      "sha256": "f7c5fb5c7a7564b3de40fe0edec374ae917d8bc8b39ec5800f55c6505a8a5aab",
+      "matchesHead": true
+    },
+    {
+      "path": "evals/clip_composition/serve_digest_review_v001.test.py",
+      "sizeBytes": 17541,
+      "sha256": "5892501885da2319191364c96e9cd4073e7f9f7de07dfff8c0ee7c1c37d243e9",
+      "matchesHead": true
+    }
+  ],
+  "rawLogs": [
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-preparation-evidence/backend-build-v002-passed.txt",
+      "sizeBytes": 374,
+      "sha256": "c4e0dfcde446d4cc3905f877cfb3bd8e13d61ae0ce1aeeda551d9c547cabe62d"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-preparation-evidence/backend-unit-v001-passed.txt",
+      "sizeBytes": 1837,
+      "sha256": "2271a7ef00f3ccfdf2db20422fd086cffaeb5d6997f9c5f15fd2ebfc24807e66"
+    },
+    {
+      "path": "docs/reports/zev-ui-b-implementation-20261011/revision-preparation-evidence/backend-regression-v001-passed.txt",
+      "sizeBytes": 8075,
+      "sha256": "e514ed379b1da4753b2205fd61f091cb0dee367048d1d626bca76e8742d4ebb1"
+    }
+  ],
+  "validation": {
+    "backendBuildTypesExit": 0,
+    "newArtificialCases": 8,
+    "newPassed": 8,
+    "newFail": 0,
+    "newSkipped": 0,
+    "newCancelled": 0,
+    "newDurationMs": 38603.63475,
+    "relatedExistingFiles": 6,
+    "relatedExistingCases": 46,
+    "relatedPassed": 46,
+    "relatedFail": 0,
+    "relatedSkipped": 0,
+    "relatedDurationMs": 64956.915625,
+    "cwd": "/Users/kawafmm/workspace/zev2/backend",
+    "node": "/usr/local/bin/node; v23.7.0",
+    "tsx": "backend-local 4.22.3",
+    "testConcurrency": 1,
+    "SSD": "explicit /Volumes/KIOXIA isolated mkdtemp fixture",
+    "newCommand": "ZEV_UI_DIGEST_TEST_SSD=/Volumes/KIOXIA node --import tsx --test --test-concurrency=1 test/digest-ui-revision-preparation.test.mjs",
+    "regressionCommand": "ZEV_UI_DIGEST_TEST_SSD=/Volumes/KIOXIA node --import tsx --test --test-concurrency=1 test/digest-ui-review.test.mjs test/digest-ui-edit-requests.test.mjs test/digest-ui-handoff.test.mjs test/digest-ui-composition-data.test.mjs test/digest-ui-revision-retention-inputs.test.mjs test/digest-ui-revision-retention-answers.test.mjs",
+    "actualArtificialResults": [
+      {
+        "draft": "digest-a",
+        "additions": 1,
+        "parts": 3,
+        "keepIds": [
+          101,
+          102,
+          103,
+          104,
+          106
+        ],
+        "dropIds": [
+          105
+        ],
+        "preparationHash": "9db5bd9b38763417ecd37ea9ecd7ef97d49fc0ba218d16ea8e4bfa759e614943",
+        "outputFrames": 75
+      },
+      {
+        "draft": "digest-b",
+        "additions": 1,
+        "parts": 3,
+        "keepIds": [
+          701,
+          702,
+          703,
+          704,
+          705,
+          707,
+          708
+        ],
+        "dropIds": [
+          706
+        ],
+        "preparationHash": "a4d80c0aaa2703c53d9923d68a27baef5b78fcda30b77a394f43c1988a9fb684",
+        "outputFrames": 105
+      },
+      {
+        "draft": "digest-b-multi",
+        "additions": 2,
+        "parts": 5,
+        "keepIds": [
+          701,
+          702,
+          703,
+          705,
+          706,
+          708
+        ],
+        "dropIds": [
+          704,
+          707
+        ],
+        "preparationHash": "71ac0dac13a1030f958070d9bd1b84135a8806db89c6848130b7f213c030d7de",
+        "outputFrames": 90
+      }
+    ],
+    "scope": "A/B +3-scene2-additions; original ID/text/cut/evidence immutable; global ID-origin mapping; frame/sample correspondence; caption keep/drop; auth/normal-registration refusal; stale/tamper/symlink; retries and fresh compiled process readback",
+    "freshUserBrowserOperation": false,
+    "realMediaQuality": false
+  },
+  "previousFailureRetained": {
+    "path": "docs/reports/zev-ui-b-implementation-20261011/revision-preparation-evidence/backend-build-v001-type-failed.txt",
+    "sha256": "ee9fb526add6018e240848d50de2e478aba1b2280b93f0f2d8199207d5a49004",
+    "previousBuildExit": 2,
+    "unchanged": true
+  },
+  "limits": {
+    "setupCorrectionsApplied": 11,
+    "limitedImplementationCorrectionsApplied": 6,
+    "explicitStops": 9,
+    "addenda": 0,
+    "costUSD": 0,
+    "countersReset": false
+  },
+  "cleanup": {
+    "testAfterHooks": "new SSD/local fixture roots absent after both test processes exit0",
+    "remainingOwnRoots": [],
+    "fixtureRecoveredBytes": "not measured",
+    "ownTmpDuplicateBytesRemoved": 10286,
+    "newPlayableMedia": 0,
+    "largeIntermediateMedia": 0,
+    "remainingOwnProcess": 0,
+    "foreignProcessStops": 0,
+    "SSDfreeBytesObserved": 1948991356928,
+    "MacFreeBytesObserved": 17624768512
+  },
+  "admission": {
+    "newScope": "human revision data preparation and independent readback verified",
+    "No68Whole": "unfinished",
+    "No70": "unstarted",
+    "formalConsumerRunner": "unchanged",
+    "AIAnswerGeneration": 0,
+    "providerTraffic": 0,
+    "realMaterialProcessing": 0,
+    "manufacturing": 0,
+    "captionDisplayAnswers": "unanswered",
+    "uiApplication": "not-connected",
+    "executionPermission": "not-approved",
+    "humanQuality": "pending"
+  }
+}
