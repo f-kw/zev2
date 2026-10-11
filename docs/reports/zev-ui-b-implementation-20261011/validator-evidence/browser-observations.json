@@ -1,0 +1,34 @@
+{
+  "environment": "127.0.0.1:5179, dedicated Edge tabs, every /api intercepted by mock",
+  "scenarios": [
+    "registered-metadata",
+    "readiness"
+  ],
+  "observations": [
+    "registered recommendation selected before adoption",
+    "candidate list distinguishes unknown/not-created/claimed-preparing",
+    "view/close/reopen retained selection with no adoption POST",
+    "input consistency and missing precreation audio shown separately from postcreation QC",
+    "reread retained blocked readiness"
+  ],
+  "mutationPostCount": 0,
+  "mutationLogEvidence": "ZEV_UI_QA_LOG configured to own scratch paths; logger writes on each non-GET request, both log files absent at teardown",
+  "screenshots": [
+    {
+      "name": "preview-status.jpg",
+      "bytes": 84500,
+      "sha256": "21316e3150995dab02d63c04711a4bad10a3270b478c966b54eb5bcf69777461"
+    },
+    {
+      "name": "recommendation.jpg",
+      "bytes": 64080,
+      "sha256": "27c0434dbc36c28c2af27813b4707261225b192c69ccd745a6aaee9827fe992b"
+    },
+    {
+      "name": "precreation-vs-postcreation.jpg",
+      "bytes": 69244,
+      "sha256": "c2eb27b62bd506d36c6e7b34647f73f6935a85cc7f6f5c3b25de5a60cc94cf26"
+    }
+  ],
+  "playback": "not tested; mock has no actual media"
+}

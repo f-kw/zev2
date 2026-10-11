@@ -63,6 +63,13 @@ function seedScenario(scenario) {
           state = shared.createInitialState();draft = draftCopy('待機中の依頼');seedQueue(draft);
           if (scenario === 'mixed-waiting') { const other = draftCopy('別の実行対象');seedQueue(other);state.requestDrafts.reverse(); }
         }
+        if (scenario === 'registered-metadata') {
+          seedReview(draft);
+          const queued=registeredResult(draft,'render_video').request;queued.status='queued';queued.fileRefIds=[];delete queued.result;
+          const running=registeredResult(draft,'render_video').request;running.status='running';running.claimOwnerId='isolated-preview-worker';running.claimedAt=now();running.fileRefIds=[];delete running.result;
+          const review=state.controlReviewItems.at(-1);review.options[1].evidenceRefs.push({kind:'agent_request',refId:queued.id,meaning:'保存済みの候補作業'});
+          review.options[2].evidenceRefs.push({kind:'agent_request',refId:running.id,meaning:'実行取得中の候補作業'});
+        }
         if (scenario === 'new-version') { draft = draftCopy('新しい保存版');seedReview(draft); }
         if (scenario === 'fee') { state = shared.createInitialState();config.editPlan.mode = 'gemini'; }
 }
@@ -92,10 +99,19 @@ const server = await createServer({ root: root + '/client', configFile: root + '
       if (url.pathname.endsWith('/ui-review')) {
         const id=url.pathname.split('/')[3], draft=state.requestDrafts.find(d=>d.id===id);
         const review=state.controlReviewItems.filter(r=>r.requestDraftId===id&&r.status==='review_required').at(-1);
-        const candidates=themes.map((t,i)=>({...t,speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+        const candidates=themes.map((t,i)=>({...t,previewStatus:{state:'unknown'},speeches:[{id:i+1,text:t.summary,startMs:i*1000,endMs:(i+1)*1000}],ranges:[{startMs:i*1000,endMs:(i+1)*1000}]}));
+        if (process.env.ZEV_UI_QA_SCENARIO==='registered-metadata') {
+          for (const candidate of candidates) {
+            const option=review?.options.find(o=>o.id===candidate.id),ref=option?.evidenceRefs.find(r=>r.kind==='agent_request');
+            const job=state.agentRequests.find(r=>r.id===ref?.refId);
+            if (job) candidate.previewStatus={state:job.status==='running'?'preparing':'not_created',requestId:job.id};
+          }
+        }
         return send({requestDraftId:id,draftIdentity:shared.draftConfirmationIdentity(draft),review,fingerprint:'mock-'+review?.id,candidates,bindings:[],
+          recommendation:process.env.ZEV_UI_QA_SCENARIO==='registered-metadata'?{candidateId:'turn',reason:'保存資料にある推薦理由',producerId:review.agentRequestId,fileRefId:'fixture-themes',sha256:'a'.repeat(64)}:undefined,
+          creationChecks:review?.kind==='render_readiness'?{inputValidation:'verified',audioPreservation:'unknown',sourceAudioReference:'unknown',runtimeIdentity:JSON.stringify(config)}:undefined,
           segments:review?.kind==='render_readiness'?[{startMs:1000,endMs:2000,caption:'保存済みの字幕',speechIds:[1],displaySummary:'話者を表示'}]:[],
-          blockers:review?.kind==='render_readiness'?['元音声保持・品質条件の正式な確認結果が既存資料にありません。動画作成の承認は停止しています。']:[]});
+          blockers:review?.kind==='render_readiness'?['作成前の音声保持指定と元音声参照が登録資料にありません。完成後のQC・人間採用は動画作成後に確認します。']:[]});
       }
       if (url.pathname === '/api/request-drafts' && req.method === 'POST') {
         const draft = shared.createRequestDraft(data, now(), () => 'draft-' + (++sequence));state.requestDrafts.unshift(draft);return send({ draft, state });

@@ -1,0 +1,23 @@
+{
+  "baseHead": "fbb74599f54e7fcca81a8c6c4c3f2315e18daec2",
+  "originalPath": "runner/src/workflow-artifact-validation.ts",
+  "sharedPath": "packages/shared/src/workflow-artifact-validation.ts",
+  "bodyStart": "type JsonRecord",
+  "bodyByteIdentical": true,
+  "bodySha256": "97ce57104cfdfca753812478465764ad2fdf6d67bbe417d226dcd86c1499ada4",
+  "observedChecks": [
+    {
+      "command": "corepack pnpm --filter backend exec tsc -p tsconfig.json",
+      "exitCode": 0
+    },
+    {
+      "command": "corepack pnpm --filter @zev2/agent-runner exec tsc -p tsconfig.json",
+      "exitCode": 0
+    },
+    {
+      "command": "corepack pnpm --filter @zev2/agent-runner exec tsc -p tsconfig.remotion.json",
+      "exitCode": 0
+    }
+  ],
+  "note": "Exit codes recorded from tools; empty successful compile output. No paid API or media renderer."
+}

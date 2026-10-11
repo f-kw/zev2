@@ -1,0 +1,57 @@
+✔ saved candidate and speech clock are read without manufacturing or recommendation (26.919375ms)
+✔ review fingerprint rejects changed content, wrong request and missing confirmation without state writes (93.682042ms)
+✔ registered artifact bytes replacement is rejected even when state metadata stays unchanged (11.808791ms)
+✔ concurrent duplicate review approval is serialized and saved once (22.45375ms)
+✔ readiness displays validated inputs but missing precreation audio instruction/reference rejects approval (14.8825ms)
+✔ draft approval binds displayed contents and current runtime, without legacy empty-body acceptance (30.124833ms)
+✔ final approval rejects a different newest video instead of silently choosing it (14.5595ms)
+✔ final approval binds the shown FileRef/hash and records it only once (14.053667ms)
+✔ server rejects UI dispatch with absent external cost approval before touching state (10.848625ms)
+✔ resume/next stay in the selected older request and reject missing or stale scope (13.218459ms)
+✔ claim/complete/fail reject a request outside scope without a state write; duplicate claim runs once (17.465ms)
+✔ expired claim recovery stays within scope and does not accept the expired owner completion (5.662125ms)
+✔ actual runner refuses a foreign next response before claim or media work (694.537084ms)
+✔ actual runner refuses a changed claim response before building or reporting failure against a request (611.641083ms)
+✔ actual runner refuses a different effective STT endpoint before any queue call (572.535375ms)
+✔ runtime setting changes reject scoped resume, next and claim without touching either queue (9.686625ms)
+✔ video revision rejects the older displayed output without creating a copied request (4.934292ms)
+✔ streamed video hash verification rejects replaced bytes with unchanged registered metadata (7.827791ms)
+✔ runner and backend use the same shared pure validators, with the original rejection semantics (2.405417ms)
+✔ different source URIs, speech IDs, candidate counts and lengths display their own saved data (15.161375ms)
+✔ cross-artifact source mismatch is rejected before approval even with matching stored hashes (37.440291ms)
+✔ unknown speech IDs, wrong counts, lengths and altered speech clocks are rejected (47.260709ms)
+✔ a same-ID artifact with a new registered hash invalidates the displayed confirmation (8.73725ms)
+✔ registered recommendation has a real candidate ID and reason; absence never manufactures one (8.028542ms)
+✔ preview state requires an explicit saved candidate job and an actual claim for preparing (18.17925ms)
+✔ a newer failed preview job never restores the old generated preview (2.664416ms)
+✔ a newer saved review makes the older review confirmation unusable (11.217917ms)
+✖ foreign or nonexistent preview links and expired claims cannot appear as preparing (9.853208ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 27
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2858.0695
+
+✖ failing tests:
+
+test at test/ui-confirmation.test.mjs:336:1
+✖ foreign or nonexistent preview links and expired claims cannot appear as preparing (9.853208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'ready' !== 'unknown'
+
+      at TestContext.<anonymous> (/Users/kawafmm/workspace/zev2/backend/test/ui-confirmation.test.mjs:341:10)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ready',
+    expected: 'unknown',
+    operator: 'strictEqual'
+  }
+undefined
+/Users/kawafmm/workspace/zev2/backend:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: tsx --test test/ui-confirmation.test.mjs

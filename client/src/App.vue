@@ -35,7 +35,7 @@ import {
   type WebGeminiRevisionBriefArtifact
 } from './api';
 import { useControlQueueStore } from './stores/controlQueue';
-import { GUIDE_STEPS, currentOutput, draftIdentity, draftStartBlockers, executionBlockers, guideStep, resumeBlockers, reviewBlockers } from './guided-workflow';
+import { GUIDE_STEPS, currentOutput, draftIdentity, draftStartBlockers, executionBlockers, guideStep, resumeBlockers, reviewBlockers, previewStatusLabel, initialCandidateId } from './guided-workflow';
 
 type AppPage = 'workspace' | 'request';
 type RedoScope = 'theme_selection' | 'edit_plan';
@@ -67,6 +67,7 @@ const activeReviewAction = ref('');
 const resumingAgentWork = ref(false);
 const cancellingAgentWork = ref(false);
 const selectedReviewOptionId = ref('');
+const candidateWasAdopted = ref(false);
 const activePage = ref<AppPage>('workspace');
 const requestDefaultsApplied = ref(false);
 const confirmedDraftIdentity = ref('');
@@ -1485,11 +1486,12 @@ watch(
 );
 
 watch(
-  () => activeReviewItem.value?.id,
+  () => JSON.stringify(activeReviewItem.value),
   () => {
     const review = activeReviewItem.value;
     closeCandidates();
     closeReviewChangeDialog();
+    candidateWasAdopted.value=false;
     selectedReviewOptionId.value = review?.kind === 'theme_selection'
       ? review.options[0]?.id ?? ''
       : '';
@@ -1580,6 +1582,7 @@ function closeCandidates() { candidatesOpen.value = false; browsingOptionId.valu
 function adoptCandidate() {
   if (!canAdoptCandidate.value) return;
   selectedReviewOptionId.value = browsingOptionId.value;
+  candidateWasAdopted.value=true;
   closeCandidates();
 }
 function showOutputChanges(scope: RedoScope) {
@@ -1594,6 +1597,12 @@ async function confirmOutputChanges() {
   await redoVideo(outputChangeScope.value, outputChangeReason.value);
 }
 watch(candidateIdentity, () => { closeCandidates(); });
+watch(() => store.reviewMaterials, materials => {
+  const review=activeReviewItem.value;
+  if (!candidateWasAdopted.value && review?.kind==='theme_selection' && materials?.draftIdentity===draftIdentity(currentDraft.value!)) {
+    selectedReviewOptionId.value=initialCandidateId(review,materials);
+  }
+});
 watch(() => currentDraft.value && draftIdentity(currentDraft.value), () => {
   confirmedDraftIdentity.value = '';
   outputChangeOpen.value = false;
@@ -1776,7 +1785,8 @@ function trapDialogFocus(event: KeyboardEvent) {
           </div>
           <p class="review-summary">{{ activeReviewItem.summary }}</p>
 
-          <p v-if="activeReviewItem.kind === 'theme_selection'" class="adoption-note">{{ selectedReviewOptionId === activeReviewItem.options[0]?.id ? '保存済みの先頭案（推奨の指定は未接続）' : '今回の採用案（次へ進むと保存）' }}</p>
+          <p v-if="activeReviewItem.kind === 'theme_selection'" class="adoption-note">{{ store.reviewMaterials?.recommendation?.candidateId === selectedReviewOptionId ? '保存済みの推奨案' : selectedReviewOptionId === activeReviewItem.options[0]?.id && !store.reviewMaterials?.recommendation ? '保存済みの先頭案（推奨の指定は未提供）' : '今回の採用案（次へ進むと保存）' }}</p>
+          <p v-if="activeReviewItem.kind === 'theme_selection' && store.reviewMaterials?.recommendation">推薦の根拠：{{ store.reviewMaterials.recommendation.reason }}</p>
           <div v-if="displayedOptions.length" class="review-options">
             <article v-for="(option, optionIndex) in displayedOptions" :key="option.id" class="review-option">
               <span class="option-number">{{ optionIndex + 1 }}</span><span class="review-option-text"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small></span>
@@ -1801,7 +1811,11 @@ function trapDialogFocus(event: KeyboardEvent) {
             </li></ol>
             <details><summary>保存資料との対応</summary><ul><li v-for="binding in store.reviewMaterials.bindings" :key="binding.fileRefId">{{ binding.fileRefId }} · {{ binding.sha256 }}</li></ul></details>
           </section>
-          <div v-if="activeReviewItem.kind === 'theme_selection'" class="preview-placeholder"><strong>保存済みプレビューの有無は他の候補から確認できます</strong><p>推薦の指定と未作成・実際の準備中の対応は未接続です。候補を見るだけでは動画を作りません。</p></div>
+          <div v-if="activeReviewItem.kind === 'theme_selection'" class="preview-placeholder"><strong>保存済みプレビューの有無は他の候補から確認できます</strong><p>推薦とプレビューの状態は登録情報がある場合だけ表示します。候補を見るだけでは動画を作りません。</p></div>
+          <section v-if="store.reviewMaterials?.creationChecks" aria-label="作成前と完成後の確認">
+            <p>作成前の入力検査：{{ store.reviewMaterials.creationChecks.inputValidation === 'verified' ? '登録資料との一致を確認' : '未完了' }}</p>
+            <p>音声保持指定・元音声参照：提供待ち</p><p>完成後の実媒体QCと人間の採用判断は、動画作成後に確認します。</p>
+          </section>
           <ul v-if="activeReviewBlockers.length" class="connection-notice"><li v-for="reason in activeReviewBlockers" :key="reason">{{ reason }}</li></ul>
           <div class="review-actions">
             <button type="button" class="secondary-button" :disabled="store.loading" @click="store.refreshUiReviewMaterials(currentDraft!.id)">資料を再読み込み</button>
@@ -2122,9 +2136,9 @@ function trapDialogFocus(event: KeyboardEvent) {
     <div v-if="humanAuthReady && candidatesOpen" class="dialog-overlay" @click.self="closeCandidates">
       <section class="change-dialog candidate-dialog" role="dialog" aria-modal="true" aria-labelledby="candidate-title" tabindex="-1">
         <div class="dialog-heading"><h2 id="candidate-title">保存済みのシーン候補</h2><button type="button" class="secondary-button" @click="closeCandidates">閉じる ×</button></div>
-        <p>保存済みの題名・短い要約・発話区間を表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>保存済みのテーマ候補と発話区間を表示します。推薦の指定とプレビューの作成状況は未接続です。</p>
-        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in savedCandidateReview?.options" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" @click="browsingOptionId = option.id"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span>{{ store.reviewMaterials?.candidates.find(c => c.id === option.id)?.preview ? '保存済みプレビューあり' : 'プレビューの作成状況は未接続' }}</span></button></div>
-          <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>まだ採用案は変わっていません。</p><section v-if="browsingSavedCandidate"><p v-for="speech in browsingSavedCandidate.speeches" :key="speech.id">{{ (speech.startMs / 1000).toFixed(2) }}〜{{ (speech.endMs / 1000).toFixed(2) }}秒 · {{ speech.text }}</p><video v-if="browsingSavedCandidate.preview" :key="browsingSavedCandidate.preview.id" controls preload="none" :src="uriWithRef(browsingSavedCandidate.preview.uri, browsingSavedCandidate.preview.id)" /><p v-else>候補に対応する登録済みプレビューはありません。未作成・実際の準備中の判定は未接続です。</p></section><p v-else>登録資料を照合できていません。</p><p v-if="!canAdoptCandidate">この段階では閲覧のみです。採用変更は内容選択の確認に戻って行います。</p><button type="button" :disabled="!canAdoptCandidate" @click="adoptCandidate">採用案に反映する</button><small>内容確認で次へ進むと、この選択を保存します。</small></div>
+        <p>保存済みの題名・短い要約・発話区間を表示。閲覧では追加のAI処理も動画作成も行いません。</p><p>保存済みの発話区間と、登録情報のある推薦・プレビュー状態を表示します。情報がない場合は不明です。</p>
+        <div class="candidate-columns"><div class="candidate-list"><button v-for="option in savedCandidateReview?.options" :key="option.id" type="button" class="candidate-row secondary-button" :class="{ selected: browsingOptionId === option.id }" :aria-pressed="browsingOptionId === option.id" @click="browsingOptionId = option.id"><strong>{{ option.title }}</strong><small>{{ option.summary }}</small><span>{{ previewStatusLabel(store.reviewMaterials?.candidates.find(c => c.id === option.id)) }}</span></button></div>
+          <div v-if="browsingOption"><h3>閲覧中 {{ browsingOption.title }}</h3><p>まだ採用案は変わっていません。</p><section v-if="browsingSavedCandidate"><p v-for="speech in browsingSavedCandidate.speeches" :key="speech.id">{{ (speech.startMs / 1000).toFixed(2) }}〜{{ (speech.endMs / 1000).toFixed(2) }}秒 · {{ speech.text }}</p><video v-if="browsingSavedCandidate.preview" :key="browsingSavedCandidate.preview.id" controls preload="none" :src="uriWithRef(browsingSavedCandidate.preview.uri, browsingSavedCandidate.preview.id)" /><p>{{ previewStatusLabel(browsingSavedCandidate) }}</p><p v-if="browsingSavedCandidate.previewStatus?.requestId">登録作業：{{ browsingSavedCandidate.previewStatus.requestId }}</p></section><p v-else>登録資料を照合できていません。</p><p v-if="!canAdoptCandidate">この段階では閲覧のみです。採用変更は内容選択の確認に戻って行います。</p><button type="button" :disabled="!canAdoptCandidate" @click="adoptCandidate">採用案に反映する</button><small>内容確認で次へ進むと、この選択を保存します。</small></div>
         </div>
       </section>
     </div>

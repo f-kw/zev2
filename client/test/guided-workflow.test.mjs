@@ -18,7 +18,7 @@ async function compiled(file, imports) {
   return dataURL(js);
 }
 const guideURL = await compiled('client/src/guided-workflow.ts', { '@zev2/shared': sharedURL });
-const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep } = await import(guideURL);
+const { currentOutput, draftIdentity, draftStartBlockers, resumeBlockers, reviewBlockers, guideStep, previewStatusLabel, initialCandidateId } = await import(guideURL);
 const apiNames = ['createDraft','approveDraft','fetchState','fetchRuntimeConfig','fetchWorkflow','fetchUiReviewMaterials','submitHumanReviewAction',
   'requestGeneratedVideoChanges','submitFinalReview','retryAgentRequest','resumeAgentWork','cancelDraftAgentWork','applyWebGeminiReview'];
 const apiURL = dataURL(`export const handlers = {}; ${apiNames.map(n => `export const ${n} = (...args) => handlers.${n}(...args);`).join('\n')}
@@ -178,4 +178,19 @@ test('late material fetch cannot replace another draft or a newer displayed conf
   assert.equal(s.reviewMaterials.fingerprint,'latest');
   const late=s.refreshUiReviewMaterials(draft.id);s.activeDraftId='other';pending[2](model);await late;
   assert.equal(s.reviewMaterials,null);
+});
+
+
+test('registered recommendation selects only a candidate in the current matching review',()=>{
+  const {draft,review}=reviewFixture();review.options.push({...review.options[0],id:'scene-2'});
+  const m={requestDraftId:draft.id,review,blockers:[],recommendation:{candidateId:'scene-2',reason:'保存根拠'}};
+  assert.equal(initialCandidateId(review,m),'scene-2');assert.equal(initialCandidateId(review,{...m,requestDraftId:'other'}),'scene-1');
+  assert.equal(initialCandidateId(review,{...m,blockers:['資料不足']}),'scene-1');assert.equal(initialCandidateId(review,null),'scene-1');
+});
+test('preview labels distinguish unknown, registered waiting, claimed preparing and generated',()=>{
+  assert.match(previewStatusLabel(),/不明/);
+  assert.match(previewStatusLabel({preview:{id:'unqualified'}}),/不明/);
+  for (const [state,label] of [['not_created','未作成'],['preparing','準備中'],['ready','生成済み'],['failed','失敗'],['cancelled','中止']]) {
+    assert(previewStatusLabel({previewStatus:{state,requestId:'registered-job'}}).includes(label));
+  }
 });

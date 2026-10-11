@@ -736,3 +736,6 @@ export type {AutoPresentationFileRef, AutoPresentationContext, AutoPresentationF
   AutoPresentationCanonicalRange,
   AutoPresentationException, AutoPresentationProposal, FixedAutoPresentation,
   AutoPresentationOverrides, AutoPresentationInput, AutoPresentationResolution} from './auto-presentation.js';
+
+export * from './workflow-artifacts.js';
+export * from './workflow-artifact-validation.js';

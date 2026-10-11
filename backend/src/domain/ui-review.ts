@@ -2,8 +2,8 @@ import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { readFile, lstat } from 'node:fs/promises';
 import { findById, getFileRefKindForRequest, getOutputTypeForRequest, getRequiredControlReviewKind,
-  draftConfirmationIdentity, runtimeConfirmationIdentity, recordValue,
-  type AgentRequest, type FileRef, type RuntimeConfig, type UiReviewMaterials, type UiSpeechReference, type Zev2State } from '@zev2/shared';
+  draftConfirmationIdentity, runtimeConfirmationIdentity, recordValue, assertJsonArtifactForKind, assertApprovedAgentRequestInput,
+  type AgentRequest, type FileRef, type RuntimeConfig, type UiReviewMaterials, type UiSpeechReference, type UiSavedCandidate, type TranscriptArtifact, type ThemeArtifact, type ClipCompositionArtifact, type EditPlanArtifact, type Zev2State } from '@zev2/shared';
 import { validateArtifactFileRefForKind } from '../artifacts/validation.js';
 
 export class UiConfirmationConflict extends Error { readonly statusCode = 409; }
@@ -57,11 +57,27 @@ export async function confirmedOutput(state: Zev2State, draftId: string, input: 
   await readRegisteredUiBytes(draftId, file);return file;
 }
 function array(value: unknown): unknown[] { return Array.isArray(value) ? value : []; }
-function speech(value: unknown): UiSpeechReference {
-  const r = recordValue(value);
-  if (!Number.isInteger(r.id) || typeof r.text !== 'string' || typeof r.startMs !== 'number' || typeof r.endMs !== 'number'
-    || r.startMs < 0 || r.endMs <= r.startMs) return conflict('発話の本文・ID・区間が不足しています');
-  return { id: r.id as number, text: r.text, startMs: r.startMs, endMs: r.endMs };
+function assertSpeechBindings(ids: number[], units: Array<{id:number;sourceStartMs:number;sourceEndMs:number;text:string}>,
+  startMs: number, endMs: number, byId: Map<number,UiSpeechReference>, durationMs: number): void {
+  if (endMs > durationMs || new Set(ids).size !== ids.length || units.length !== ids.length
+    || new Set(units.map(u=>u.id)).size !== units.length) conflict('区間の長さまたは発話対応の件数が一致しません');
+  for (const unit of units) {
+    const original=byId.get(unit.id);
+    if (!ids.includes(unit.id) || !original || original.text !== unit.text || original.startMs !== unit.sourceStartMs
+      || original.endMs !== unit.sourceEndMs || unit.sourceStartMs < startMs || unit.sourceEndMs > endMs) {
+      conflict('発話のID・元本文・時計が登録STTと一致しません');
+    }
+  }
+}
+function previewJobState(request: AgentRequest): NonNullable<UiSavedCandidate['previewStatus']> {
+  if (request.status==='succeeded') return {state:'ready',requestId:request.id};
+  if (request.status==='queued' || request.status==='waiting') return {state:'not_created',requestId:request.id};
+  if (request.status==='failed') return {state:'failed',requestId:request.id};
+  if (request.status==='cancelled' || request.status==='superseded') return {state:'cancelled',requestId:request.id};
+  if (request.status==='running' && request.claimOwnerId?.trim() && request.claimedAt
+    && Number.isFinite(Date.parse(request.claimedAt)) && Date.parse(request.claimedAt)<=Date.now()
+    && (!request.claimExpiresAt || Date.parse(request.claimExpiresAt)>Date.now())) return {state:'preparing',requestId:request.id};
+  return {state:'unknown',requestId:request.id};
 }
 export async function buildUiReviewMaterials(state: Zev2State, draftId: string, config: RuntimeConfig): Promise<UiReviewMaterials> {
   const draft = findById(state.requestDrafts, draftId);
@@ -73,37 +89,57 @@ export async function buildUiReviewMaterials(state: Zev2State, draftId: string, 
   async function read(type: AgentRequest['type']) {
     const producer = newest(state, draftId, type);
     if (!producer) return conflict(`${type}の登録資料がありません`);
+    assertApprovedAgentRequestInput(state,producer);
     const file = registeredUiFile(state, producer), bytes = await readRegisteredUiBytes(draftId, file);
     model.bindings.push({ producerId: producer.id, outputId: file.ownerId, fileRefId: file.id, sha256: file.sha256 });
     if (file.mimeType.startsWith('video/')) return { file, value: {} };
     const value = recordValue(JSON.parse(bytes.toString('utf8')));
     if (value.kind !== file.kind) return conflict('資料の種類が登録内容と一致しません');
+    assertJsonArtifactForKind(file.kind,value,`${type}の登録資料`);
     return { file, value };
   }
   try {
     const themes = await read('propose_clip_themes'), transcript = await read('run_stt');
     if (themes.value.sourceUri !== draft.source.uri || transcript.value.sourceUri !== draft.source.uri) conflict('候補の元素材が依頼と一致しません');
-    const speeches = array(transcript.value.segments).map(speech), byId = new Map(speeches.map(s => [s.id,s]));
-    if (!speeches.length || byId.size !== speeches.length) conflict('発話資料が空またはIDが重複しています');
+    const transcriptData=transcript.value as unknown as TranscriptArtifact,themeData=themes.value as unknown as ThemeArtifact;
+    const durationMs=transcriptData.durationSec*1000;
+    const speeches = transcriptData.segments.map(({id,text,startMs,endMs})=>({id,text,startMs,endMs})), byId = new Map(speeches.map(s => [s.id,s]));
+    if (durationMs<=0 || speeches.some(s=>s.endMs>durationMs)) conflict('登録STTの長さと発話時計が一致しません');
     const themeReview = state.controlReviewItems.filter(r => r.requestDraftId === draftId && r.kind === 'theme_selection')
       .reverse().sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
-    for (const item of array(themes.value.themes)) {
+    if (themeReview?.agentRequestId !== newest(state,draftId,'propose_clip_themes')?.id
+      || themeReview?.options.length !== themeData.themes.length) conflict('保存候補と確認項目のproducer・件数が一致しません');
+    for (const item of themeData.themes) {
       const t = recordValue(item), option = themeReview?.options.find(o => o.id === t.id);
-      if (!option || typeof t.title !== 'string' || typeof t.summary !== 'string' || option.title !== t.title) conflict('保存候補と確認対象のID・題名が一致しません');
+      if (!option || option.title !== item.title) conflict('保存候補と確認対象のID・題名が一致しません');
       const ids = [...new Set([...array(t.representativeSpeechIds), ...array(t.relatedSpeechIds)])];
       if (!ids.length || ids.some(id => !byId.has(id as number))) conflict('保存候補の発話参照が不足しています');
       const refs = ids.map(id => byId.get(id as number)!);
-      const candidate = { id: option!.id, title: option!.title, summary: option!.summary, speeches: refs,
-        ranges: refs.map(s => ({startMs:s.startMs,endMs:s.endMs})), preview: undefined as FileRef | undefined };
-      // Only an explicit candidate evidence reference can bind a video; never borrow the latest final video.
-      for (const ref of option!.evidenceRefs.filter(r => r.kind === 'file_ref')) {
-        const producer = state.agentRequests.find(r => r.requestDraftId === draftId && r.result?.fileRefId === ref.refId && r.type === 'render_video');
-        if (!producer) continue;
-        const file = registeredUiFile(state, producer);await readRegisteredUiBytes(draftId,file);candidate.preview = file;
+      const candidate: UiSavedCandidate = { id: option!.id, title: option!.title, summary: option!.summary, speeches: refs,
+        ranges: refs.map(s => ({startMs:s.startMs,endMs:s.endMs})), previewStatus:{state:'unknown'} };
+      // An existing candidate evidence link is required; browsing never creates a job.
+      const previewJobs=option!.evidenceRefs.flatMap(ref=>state.agentRequests.filter(r=>r.requestDraftId===draftId && r.type==='render_video'
+        && ((ref.kind==='agent_request' && r.id===ref.refId) || (ref.kind==='file_ref' && r.result?.fileRefId===ref.refId))));
+      const job=[...new Map(previewJobs.map(r=>[r.id,r])).values()].reverse().sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
+      if (job) {
+        assertApprovedAgentRequestInput(state,job);
+        candidate.previewStatus=previewJobState(job);
+        if (job.status==='succeeded') {
+          const file=registeredUiFile(state,job);await readRegisteredUiBytes(draftId,file);candidate.preview=file;
+          model.bindings.push({producerId:job.id,outputId:file.ownerId,fileRefId:file.id,sha256:file.sha256});
+        }
       }
       model.candidates.push(candidate);
     }
-    if (!model.candidates.length || new Set(model.candidates.map(c=>c.id)).size !== model.candidates.length) conflict('保存候補が空またはIDが重複しています');
+    if (themes.value.recommendation !== undefined) {
+      const rec=recordValue(themes.value.recommendation);
+      if (typeof rec.candidateId !== 'string' || !model.candidates.some(c=>c.id===rec.candidateId)
+        || typeof rec.reason !== 'string' || !rec.reason.trim()) conflict('登録された推薦ID・根拠が保存候補に対応していません');
+      model.recommendation={candidateId:rec.candidateId as string,reason:rec.reason as string,
+        producerId:newest(state,draftId,'propose_clip_themes')!.id,fileRefId:themes.file.id,sha256:themes.file.sha256};
+    }
+
+    let compositionData: ClipCompositionArtifact | undefined;
     if (review) {
       const producer = findById(state.agentRequests, review.agentRequestId);
       if (!producer || producer.requestDraftId !== draftId || newest(state,draftId,producer.type)?.id !== producer.id
@@ -113,28 +149,34 @@ export async function buildUiReviewMaterials(state: Zev2State, draftId: string, 
       if (review.kind === 'material_confirmation' || review.kind === 'render_readiness') {
         const composition = await read('build_clip_composition');
         if (composition.value.sourceUri !== draft.source.uri) conflict('構成の元素材が依頼と一致しません');
-        for (const item of array(composition.value.parts)) {
+        compositionData=composition.value as unknown as ClipCompositionArtifact;
+        if (!themeData.themes.some(t=>t.id===compositionData!.selectedThemeId)) conflict('構成の採用候補IDが登録テーマと一致しません');
+        for (const item of compositionData.parts) {
           const part = recordValue(item), ids = array(part.speechIds);
-          if (typeof part.sourceStartMs !== 'number' || typeof part.sourceEndMs !== 'number' || part.sourceStartMs < 0
-            || part.sourceEndMs <= part.sourceStartMs || !ids.length || ids.some(id=>!byId.has(id as number))) conflict('構成の区間・発話対応が不足しています');
+          assertSpeechBindings(item.speechIds,item.speechUnits,item.sourceStartMs,item.sourceEndMs,byId,durationMs);
+          if (item.sourceStartMs<compositionData.sourceStartMs || item.sourceEndMs>compositionData.sourceEndMs) conflict('構成全体と断片の区間が一致しません');
           model.segments.push({startMs:part.sourceStartMs as number,endMs:part.sourceEndMs as number,
             caption: typeof part.transcriptText==='string'?part.transcriptText:'',speechIds:ids as number[],displaySummary:'演出の表示枠は準備前'});
         }
         if (!model.segments.length) conflict('構成の断片がありません');
       }
       if (review.kind === 'render_readiness') {
-        const edit = await read('create_edit_plan'), patch = await read('apply_adjustment');await read('prepare_video');
+        const edit = await read('create_edit_plan'), patch = await read('apply_adjustment'),source=await read('prepare_video');
+        const editData=edit.value as unknown as EditPlanArtifact;
+        if ((!source.file.mimeType.startsWith('video/') && source.value.sourceUri !== draft.source.uri)
+          || editData.selectedThemeId !== compositionData?.selectedThemeId
+          || editData.geminiApiInput.some(i=>i.sourceUri !== draft.source.uri)) conflict('編集案・元動画・構成の素材または採用IDが一致しません');
         if (patch.value.editPlanUri !== edit.file.uri || patch.value.renderReady !== true) conflict('調整結果と編集案の参照・作成条件が一致しません');
-        model.segments = array(edit.value.renderSegments).map(item => {
+        model.segments = editData.renderSegments.map(item => {
           const s = recordValue(item), layout = recordValue(s.screenLayout), ids = array(s.speechIds);
-          if (typeof s.sourceStartMs!=='number' || typeof s.sourceEndMs!=='number' || s.sourceStartMs<0 || s.sourceEndMs<=s.sourceStartMs
-            || typeof s.caption!=='string' || !ids.length || ids.some(id=>!byId.has(id as number)) || typeof layout.displaySummary!=='string') conflict('演出の区間・字幕・発話・表示枠が不足しています');
+          assertSpeechBindings(item.speechIds,item.speechUnits,item.sourceStartMs,item.sourceEndMs,byId,durationMs);
+          if (item.sourceStartMs<editData.sourceStartMs || item.sourceEndMs>editData.sourceEndMs) conflict('編集案全体と断片の区間が一致しません');
           return {startMs:s.sourceStartMs as number,endMs:s.sourceEndMs as number,caption:s.caption as string,
             speechIds:ids as number[],displaySummary:layout.displaySummary as string};
         });
         if (!model.segments.length) conflict('動画作成の断片がありません');
-        // Existing PatchArtifact has renderReady, but no retained-audio or formal quality verdict.
-        model.blockers.push('元音声保持・品質条件の正式な確認結果が既存資料にありません。動画作成の承認は停止しています。');
+        model.creationChecks={inputValidation:'verified',audioPreservation:'unknown',sourceAudioReference:'unknown',runtimeIdentity:runtimeConfirmationIdentity(config)};
+        model.blockers.push('作成前の音声保持指定と元音声参照が登録資料にありません。完成後のQC・人間採用は動画作成後に確認します。');
       }
     }
   } catch (e) { model.blockers.push(e instanceof Error ? e.message : '確認資料を読めません'); }

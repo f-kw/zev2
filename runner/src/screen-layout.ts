@@ -1,13 +1,5 @@
-import { findById, recordValue as recordFrom } from '@zev2/shared';
-
-export type ShortsScreenLayoutId =
-  | 'speaker_only'
-  | 'screen_speaker'
-  | 'speaker_pair';
-
-export type ShortsViewportKey = 'screen' | 'speaker' | 'speaker1' | 'speaker2';
-
-export type ViewportCoords = [number, number, number, number];
+import { findById, recordValue as recordFrom, type ShortsScreenLayoutId, type ShortsViewportKey, type ViewportCoords, type ShortsRawScreenDetections, type ShortsScreenLayoutPlan, type ShortsScreenLayoutCandidate } from '@zev2/shared';
+export type { ShortsScreenLayoutId, ShortsViewportKey, ViewportCoords, ShortsRawScreenDetections, ShortsScreenLayoutPlan, ShortsScreenLayoutCandidate } from '@zev2/shared';
 
 export type ScreenRect = {
   x: number;
@@ -16,38 +8,9 @@ export type ScreenRect = {
   h: number;
 };
 
+type ShortsRawSpeakerDetection = NonNullable<ShortsRawScreenDetections['speaker']>;
+
 type ShortsRawScreenDetectionKey = 'screen' | 'speaker' | 'speaker1' | 'speaker2';
-
-type ShortsRawSpeakerDetection = {
-  face: number[];
-  body: number[];
-};
-
-export type ShortsRawScreenDetections = {
-  screen?: number[];
-  speaker?: ShortsRawSpeakerDetection;
-  speaker1?: ShortsRawSpeakerDetection;
-  speaker2?: ShortsRawSpeakerDetection;
-};
-
-export type ShortsScreenLayoutPlan = {
-  screenLayoutId: ShortsScreenLayoutId;
-  classificationReason?: string;
-  detections: ShortsRawScreenDetections;
-  viewports: Partial<Record<ShortsViewportKey, ViewportCoords>>;
-  displaySummary: string;
-  selectedCandidateId?: string;
-  candidateSummary?: string;
-  selectionReason?: string;
-  candidateOptions?: ShortsScreenLayoutCandidate[];
-};
-
-export type ShortsScreenLayoutCandidate = {
-  id: string;
-  label: string;
-  reason: string;
-  viewports: Partial<Record<ShortsViewportKey, ViewportCoords>>;
-};
 
 export type ShortsScreenLayoutCandidateSet = {
   screenLayoutId: ShortsScreenLayoutId;

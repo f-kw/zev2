@@ -25,10 +25,16 @@ export interface UiSpeechReference { id: number; text: string; startMs: number; 
 export interface UiSavedCandidate {
   id: string; title: string; summary: string; speeches: UiSpeechReference[];
   ranges: Array<{ startMs: number; endMs: number }>; preview?: FileRef;
+  previewStatus?: { state: 'unknown' | 'not_created' | 'preparing' | 'ready' | 'failed' | 'cancelled'; requestId?: string };
 }
 export interface UiReviewMaterials {
   requestDraftId: string; draftIdentity: string; review?: ControlReviewItem; fingerprint: string;
   candidates: UiSavedCandidate[];
+  recommendation?: { candidateId: string; reason: string; producerId: string; fileRefId: string; sha256: string };
+  creationChecks?: {
+    inputValidation: 'verified' | 'failed'; audioPreservation: 'unknown'; sourceAudioReference: 'unknown';
+    runtimeIdentity: string;
+  };
   bindings: Array<{ producerId: string; outputId: string; fileRefId: string; sha256: string }>;
   segments: Array<{ startMs: number; endMs: number; caption: string; speechIds: number[]; displaySummary: string }>;
   blockers: string[];

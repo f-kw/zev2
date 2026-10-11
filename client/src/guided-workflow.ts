@@ -1,4 +1,4 @@
-import { draftConfirmationIdentity, findById, getFileRefKindForRequest, getOutputTypeForRequest, isAgentRequestReady, type AgentRequest, type ControlReviewItem, type FileRef, type RequestDraft, type RuntimeConfig, type UiReviewMaterials, type Zev2State } from '@zev2/shared';
+import { draftConfirmationIdentity, findById, getFileRefKindForRequest, getOutputTypeForRequest, isAgentRequestReady, type AgentRequest, type ControlReviewItem, type FileRef, type RequestDraft, type RuntimeConfig, type UiReviewMaterials, type UiSavedCandidate, type Zev2State } from '@zev2/shared';
 
 export const GUIDE_STEPS = ['依頼', '下書き', '内容確認', '作成前確認', '作成', '動画確認'];
 
@@ -81,4 +81,16 @@ export function guideStep(draft: RequestDraft | undefined, review: ControlReview
 
 export function draftIdentity(draft: RequestDraft): string {
   return draftConfirmationIdentity(draft);
+}
+
+export function previewStatusLabel(candidate?: UiSavedCandidate): string {
+  const state=candidate?.previewStatus?.state ?? 'unknown';
+  return {unknown:'作成状況不明（登録資料・実行状態の確認待ち）',not_created:'未作成（登録済みの待機作業）',
+    preparing:'準備中（処理実行中）',ready:'生成済みプレビュー',failed:'プレビュー準備失敗',cancelled:'プレビュー作業中止'}[state];
+}
+export function initialCandidateId(review: ControlReviewItem, materials?: UiReviewMaterials | null): string {
+  const rec=materials?.recommendation;
+  return rec && materials?.review?.id===review.id && materials.requestDraftId===review.requestDraftId
+    && !materials.blockers.length && review.options.some(o=>o.id===rec.candidateId)
+    ? rec.candidateId : review.options[0]?.id ?? '';
 }
