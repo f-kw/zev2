@@ -1,0 +1,18 @@
+✔ full caller input reuses current saved A/B bundles; ordinary UI exposes its unchanged summary only (3248.9485ms)
+✔ full input and supplied answers require configured agent auth; human UI token cannot substitute (529.433333ms)
+✔ A/B supplied answers pass the existing provenance/IDs/cut validator and save one immutable record on repeated clicks (1872.314167ms)
+ℹ {"draft":"digest-a","requestHash":"12b3847c59e50475aa6e4db972dc812638be1cede93795338ab513240ac31d9c","requestFileSha256":"882e29fc38ef28ab384b323f533502cad9a962c5b4af56e704353d4da3d3c0c6","answerHash":"5f55167656e272ea9e3b0b2cfcd3b56bee7ab5cdd901fbabe82311136a64e3ca","newFiles":["._ui-retention-answer-12b3847c59e50475aa6e4db972dc812638be1cede93795338ab513240ac31d9c-5f55167656e272ea9e3b0b2cfcd3b56bee7ab5cdd901fbabe82311136a64e3ca.json","ui-retention-answer-12b3847c59e50475aa6e4db972dc812638be1cede93795338ab513240ac31d9c-5f55167656e272ea9e3b0b2cfcd3b56bee7ab5cdd901fbabe82311136a64e3ca.json"]}
+ℹ {"draft":"digest-b","requestHash":"01f521ae21fb9a3816da4a0ff578091b6e5b77b086c6efb4c8dfe1d8ef60e019","requestFileSha256":"d6b17631f404fbdfcae7c0fe402a6a6d497337bc08d474fe866ed352da9afc46","answerHash":"150e5b0193ffb78a7e77423c34c72cf4aab838e3a3b403ae9a4afe53eadb4b19","newFiles":["._ui-retention-answer-01f521ae21fb9a3816da4a0ff578091b6e5b77b086c6efb4c8dfe1d8ef60e019-150e5b0193ffb78a7e77423c34c72cf4aab838e3a3b403ae9a4afe53eadb4b19.json","ui-retention-answer-01f521ae21fb9a3816da4a0ff578091b6e5b77b086c6efb4c8dfe1d8ef60e019-150e5b0193ffb78a7e77423c34c72cf4aab838e3a3b403ae9a4afe53eadb4b19.json"]}
+✔ wrong full-request SHA, invented authority, incomplete text and invalid keep/drop answers are refused without writes (2391.656625ms)
+✔ stale confirmation, wrong bundle/request and extra execution fields cannot save an answer (1313.55775ms)
+✔ missing/tampered bundle, original source and saved answer reject without repair or overwrite (2942.341792ms)
+✔ a changed current request or composition chain preserves old accepted bytes but refuses their application (1084.437833ms)
+✔ a fresh compiled backend process requalifies B full input and saved answer with no state/queue/original writes (2360.262875ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17488.185166

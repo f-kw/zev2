@@ -1,4 +1,8 @@
-# Codex-UI｜No.68 保存保持回答の受入初稿・強制停止8
+# Codex-UI｜No.68 保存保持回答の受入・停止8後の再開検証
+
+**最新結果（2026-10-11 08:38 UTC）：人工8群を実行し8/8合格、exit0。** 本人の今回再開許可を親経由で受領し、設営11として検査cwdと相対pathだけを修正した。製品source/reader変更・インストール0。全文読取、供給回答の受入/拒否、不変保存、古い版の適用拒否、別process再読が今回の人工A/B入力で成立した。[成功生ログ](retention-answer-evidence/backend-unit-v002-passed.txt)、[再開許可・累積・byte証拠](retention-answer-evidence/verification-v002.json)。No.68全体未完成、全体統合・時計字幕・receipt・製造資格は未接続、No.70未着手。
+
+以下の初稿・未検証・停止判断は07:50時点の履歴であり、旧失敗を合格へ書き換えない。今回の再開許可と成立範囲は末尾「再開許可と今回の受入結果」に記録する。
 
 2026-10-11 07:50 UTC。**未検証初稿の監査checkpoint。No.68全体未完成、No.70未着手。** 親の個別指示に従い、現在の未回答bundle全文を制作callerへ読み渡し、外から渡された人工回答を要求全文SHAへ束縛して既存保持validatorへ通す部分だけを実装した。backend型検査/buildはexit0。人工検査は起動場所の誤りでmodule読込前に終了し、作成した8群は0群実行・0群合格。再試行していない。
 
@@ -49,3 +53,17 @@ ZEV_UI_DIGEST_TEST_SSD=/Volumes/KIOXIA node --import tsx --test --test-concurren
 共有checkoutにはSSD担当のtracked5文書変更がある。自分のsourceとの競合はなく、stage/commit/reset/stash/deleteしない。Git cleanを達成したと報告しない。No.68は人工検証および後続統合/時計字幕/receiptが未完、No.70未着手である。
 
 監査checkpointは`0ee5c6574ddefdf64a7d85875b71c69c48bb885d`、自分の7fileだけを保存した。pushは`70c4bb7c..0ee5c657 main -> main`成功。直後のbranchはmain、HEADは同SHA、staged0・他担当tracked5・untracked0。この追記と[停止session log](../../work-logs/2026-10/2026-10-11T0754_Codex-UI_No68-retention-answer-stop_0ee5c657.md)を別doc commitへ保存し、最終HEAD/status/untracked件数とGit枠の返却は親への停止報告に記載する。
+
+## 再開許可と今回の受入結果（08:38 UTC）
+
+親が強制停止8と検査cwd修正による再開を説明した質問`Sentinel_98fbc31d7ff481919a6785d29e362eda`に、本人が`Sentinel_0886e69656508191843ceb2ecf031ccf`で「いいよ」、`Sentinel_ec983b2874b481918f156fedd27ea0ba`で「判断できるだろ」と答えた証拠を、親の今回指示で受領した。同じ承認済み作業の再開と設営11の一件へ適用し、一般安全条件・費用/API・製造許可へ広げない。今後の低リスク技術判断は親が扱う方針も受領した。
+
+再開preflightのmain HEADは`9d3cfe54901dc520ffe823214d4a181ceee3a42b`、Git clean/untracked0。Git枠はUI。自分のsource3fileと保護15sourceは初稿checkpointのbyte SHAと全て一致し、並行担当の保存を保持した。既存Node `/usr/local/bin/node`・backend-local tsx4.22.3・明示SSD fixture・直列条件を再利用し、上の提案どおりcwdとtest相対pathだけを合わせた。
+
+人工検査は8群実行・8合格・失敗/skip/cancel0、exit0、17,488.185166ms。現在のA/B bundle全文の再読、通常UI summaryへの全文非露出、agent認証、回答全文SHA/provenance/keep-drop/元境界、繰返し/同時保存の一意性、不正authority/古い確認値/改変/欠落/symlink拒否、依頼/source/要求chain変更時の旧回答byte保持と現版への適用拒否、別のcompiled backend processによるB入力と保存回答の再読を確認した。state/queue・元資料・元保持のbytes不変を人工入力で照合した。実素材・実回答の品質・通常UIで新全体を確認する操作は今回対象外かつ未確認。
+
+保持回答の受入recordは引き続き`answer-validated-only`。全体保持の統合・時計字幕・反映receiptは未準備、製造未承認、人間品質pendingである。8/8は今回の供給回答受入境界の人工検証合格で、全体製品完成や人間品質採用ではない。
+
+累積は**設営11適用済み、限定実装修正5、停止8、追補0、費用US$0**。今回増分は設営1だけで、停止/旧証拠/一般枠をリセットしない。buildは同一sourceの先行exit0証拠を保持し、今回の8群合格の代用には使わない。
+
+人工testのafter hookで自分のSSD fixtureとlocal人工sourceを削除し、run log生成以降に作られた同prefix directoryが残っていないことを確認した。削除容量は未計測、新playable媒体/巨大中間物0。成功logをrepoへbyte一致で保存・再読してから/tmp重複2306bytesを削除した。serverと子processは終了済み、他担当process停止0。成功証拠と[再開session log](../../work-logs/2026-10/2026-10-11T0838_Codex-UI_No68-retention-answer-resume_9d3cfe54.md)を保存し、最終commit/push・Git statusを親へ報告してUI Git枠を返す。
