@@ -546,7 +546,7 @@
       "sourceTitle": "【JSP3】真夏の恐怖のホラーバイト…事故物件の監視をします【ホロライブ/宝鐘マリン】",
       "sourceDurationSeconds": 12036,
       "sourceRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001",
-      "checkedAt": "2026-10-11T04:52:25.183519+00:00",
+      "checkedAt": "2026-10-11T05:47:00.152470+00:00",
       "trackingStartedAt": "2026-10-11T02:37:40.546Z",
       "timeZoneForDisplay": "Asia/Tokyo",
       "oldMaterialAndLedgerRowsUnchanged": true,
@@ -889,7 +889,7 @@
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/acquisition-summary.json",
         "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-acquisition-v001/download.log"
       ],
-      "currentState": "作業中（通常素材取得の一度の再試行）、STT接続済み",
+      "currentState": "repaired-kawa-power-STT-running",
       "nextOwner": "同Codex-SSD（取得監視・実媒体再読）；mona（本人へ診断結果・素材所在質問の整理）",
       "sourceWholeAcquired": false,
       "sourceWholeSha256": null,
@@ -2522,7 +2522,230 @@
         "reason": "known LAN STT failed; source clock independently passed",
         "maximumObservedRssBytes": 653230080
       },
-      "currentStatus": "consultant-waiting for failed LAN job details; source clock finished"
+      "currentStatus": "consultant-waiting for failed LAN job details; source clock finished",
+      "cpuFixReadback": {
+        "userReportedCpuFix": {
+          "text": "CPUエラーが原因だから再実行するように変更反映済み",
+          "messageId": "Sentinel_97146286e2588191978db8ae2b3b6ced",
+          "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+          "factSource": "user report relayed by mona; not API diagnosis"
+        },
+        "rows": [
+          {
+            "name": "health",
+            "route": "/health",
+            "readAt": "2026-10-11T05:31:02.630413+00:00",
+            "endedAt": "2026-10-11T05:31:02.722266+00:00",
+            "durationSeconds": 0.091710083,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-read-v001/health.response.raw.json",
+              "bytes": 852,
+              "sha256": "595f363fd1d601a626ca810fa86bff1172be11070c52918377c6fe2a5300a347"
+            }
+          },
+          {
+            "name": "old-job",
+            "route": "/jobs/2954534d570c4f668796964aedece20d",
+            "readAt": "2026-10-11T05:31:02.630716+00:00",
+            "endedAt": "2026-10-11T05:31:02.715129+00:00",
+            "durationSeconds": 0.084417708,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-read-v001/old-job.response.raw.json",
+              "bytes": 1979,
+              "sha256": "0d208cf3e0f98e06d437e69a5fa39c7707ed2b6663f72f7aff5e37f6c53fec47"
+            }
+          },
+          {
+            "name": "openapi",
+            "route": "/openapi.json",
+            "readAt": "2026-10-11T05:31:02.630889+00:00",
+            "endedAt": "2026-10-11T05:31:02.722054+00:00",
+            "durationSeconds": 0.091168958,
+            "httpStatus": 200,
+            "bodyBinding": {
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-read-v001/openapi.response.raw.json",
+              "bytes": 5312,
+              "sha256": "bb7eda68ceec39180319c5168b9a39e6f281acc9dc0b568fbdb54dd476ff5a4d"
+            }
+          }
+        ],
+        "healthSummary": {
+          "ok": true,
+          "workerActive": true,
+          "apiPid": 15744,
+          "runnerRetry": {
+            "maxAttempts": 3,
+            "delaySeconds": 10,
+            "resumeFromSource": true,
+            "scope": "unexpected-runner-exit"
+          },
+          "model": "large-v3",
+          "device": "cuda",
+          "alignDevice": "cpu"
+        },
+        "oldJobId": "2954534d570c4f668796964aedece20d",
+        "oldJobState": "failed"
+      },
+      "cpuFixAttempt": {
+        "startedAt": "2026-10-11T05:36:41.310499+00:00",
+        "readAt": "2026-10-11T05:47:00.152470+00:00",
+        "jobId": "23c09ec3da7141d9a7252f004847c7bd",
+        "currentServerState": "running",
+        "attemptCount": 1,
+        "inputSha256": "dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608",
+        "inputBytes": 194653570,
+        "sourceUri": "https://www.youtube.com/watch?v=-2UUTkv9qvk",
+        "clientSubmissionCount": 1,
+        "clientResubmissionCount": 0,
+        "reused": false,
+        "deduplicated": false,
+        "artifactRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-v001",
+        "monitorRoot": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-monitor-v001",
+        "registrationReceiptBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-v001/gpu-stt-job.json",
+          "sizeBytes": 3045,
+          "fileSha256": "647d9c145e41fed46990e20c1020b2f5bc3b92f1da5a1819987ce6ec17674ffc"
+        },
+        "guardOwnerBinding": {
+          "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-monitor-v001/owner.json",
+          "sizeBytes": 2252,
+          "fileSha256": "5dfb560a4b3f27f3f5e7fd05cdf72646ef03203cdd1e7b9b36c0a76add79ee72"
+        },
+        "originalAsrReadback": {
+          "jobId": "23c09ec3da7141d9a7252f004847c7bd",
+          "rows": [
+            {
+              "route": "/jobs/23c09ec3da7141d9a7252f004847c7bd",
+              "httpStatus": 200,
+              "startedAt": "2026-10-11T05:45:47.078188+00:00",
+              "endedAt": "2026-10-11T05:45:47.302247+00:00",
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-readback-v001/job.response.raw.json",
+              "sizeBytes": 1920,
+              "sha256": "0bde1d62bebd953c9e8a97085b823f356510731b909462581d55489f23ed5cab"
+            },
+            {
+              "route": "/jobs/23c09ec3da7141d9a7252f004847c7bd/source",
+              "httpStatus": 200,
+              "startedAt": "2026-10-11T05:45:47.078474+00:00",
+              "endedAt": "2026-10-11T05:45:47.362542+00:00",
+              "path": "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/stt-after-cpu-fix-readback-v001/source.response.raw.json",
+              "sizeBytes": 160068,
+              "sha256": "e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426"
+            }
+          ],
+          "state": "running",
+          "attemptCount": 1,
+          "sourceIsCompletedAlignedResult": false,
+          "inputSha256": "dc0062913c8ba6c2d9fd6aa7b09f819271896a599e17260dbaada35db6a93608",
+          "inputBytes": 194653570,
+          "paidApiCalls": 0,
+          "clientSubmissionCount": 1,
+          "sourceTopKeys": [
+            "language",
+            "segments"
+          ],
+          "sourceSegments": 396,
+          "originalTextCharacters": 44111,
+          "byteIdenticalToOldRawSource": true,
+          "reuseBoundary": "original-ASR diagnosis/context notes may reuse content; not old completed alignment or successful runtime"
+        },
+        "pipelineSourceSha256": {
+          "main.py": "2b998319e80a7d466c8ecf9d06fc078508cd8c8b81f36bdd70df14b283aa4697",
+          "stt_pipeline.py": "d43aa0a9d608673e5dd49bd994c753adab0732500be623905a0c185d55940afa",
+          "stt_alignment.py": "e4963404bf308f724f9e99770abc0c7850f0d55b59f1668ad2083d1abfe1f8f9"
+        },
+        "ompThreads": 1,
+        "mklThreads": 1,
+        "serverRetryPolicyObserved": {
+          "maxAttempts": 3,
+          "attemptCount": 1,
+          "health": {
+            "maxAttempts": 3,
+            "delaySeconds": 10,
+            "resumeFromSource": true,
+            "scope": "unexpected-runner-exit"
+          },
+          "notConfiguredByThisClient": true
+        },
+        "oldFailurePreserved": true,
+        "sourceClockRerun": false,
+        "finishedAt": null,
+        "durationSeconds": null,
+        "paidApiCalls": 0,
+        "manufacturingCalls": 0,
+        "userReportedCpuFix": {
+          "text": "CPUエラーが原因だから再実行するように変更反映済み",
+          "messageId": "Sentinel_97146286e2588191978db8ae2b3b6ced",
+          "sourceThreadId": "01a0ff1f-1ad3-70b5-bb7f-d0f3988a10e6",
+          "factSource": "user report relayed by mona; not API diagnosis"
+        }
+      },
+      "sourceClockClosure": {
+        "at": "2026-10-11T04:52:25.183519+00:00",
+        "status": "passed",
+        "inspectionSha256": "10c85d231e6637919e06675ca8dbac7c8481e04edf28ac923496d7818add6c0c",
+        "inspectionBytes": 2782,
+        "sourceShaMatchesOriginalVerifiedFile": true,
+        "decodedFrames": 722162,
+        "logicalFrames": 361081,
+        "sourceAudioGridSamples": 530791424,
+        "stageDurationSeconds": 2422.552959625,
+        "supervisorEndedAt": "2026-10-11T04:46:54.943077+00:00",
+        "remainingRunning": [],
+        "cleanupDeletedBytes": 0,
+        "protectedOwnEvidence": [
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/cheap-format-check.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/source-media-inspection.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-inspection-v001/result.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/summary.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/group-shutdown.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/owner.json",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/worker.log",
+          "/Volumes/ZEV-Digest-20261003-01/runtime/artifacts/digest--2UUTkv9qvk-20261011-v001/source-lan-preparation-monitor-v001/resource.jsonl"
+        ],
+        "sourceAudioAndASRKeptForNextStage": true
+      },
+      "entryDocsDistillation": {
+        "at": "2026-10-11T05:43:46.209815+00:00",
+        "baseHead": "fcc79b9cc5ca10aaae0ab2faf5981bd1f0c81706",
+        "before": {
+          "docs/CURRENT_GOAL.md": {
+            "lines": 1052,
+            "characters": 133076,
+            "sizeBytes": 244335,
+            "sha256": "e296f2744812b5d021ddf60574c006331c62e929ddf33f8cb101ef9b6a828367"
+          },
+          "docs/HANDOVER_INDEX.md": {
+            "lines": 1086,
+            "characters": 131650,
+            "sizeBytes": 239632,
+            "sha256": "100ed676c80712686abb50aa65800e04bfa6980d0c210b5f9176a22e0a24808e"
+          }
+        },
+        "after": {
+          "docs/CURRENT_GOAL.md": {
+            "lines": 42,
+            "characters": 2820,
+            "sizeBytes": 5940,
+            "sha256": "57385620ac1cca1173b459e5cca4816baeb07a40fd835eacdeb28e33d0fbf5e7"
+          },
+          "docs/HANDOVER_INDEX.md": {
+            "lines": 39,
+            "characters": 3181,
+            "sizeBytes": 4909,
+            "sha256": "720a60a603fe5e09abcba3a26f3aaac096cb5e5889866bfdd37664ff4a5c418e"
+          }
+        },
+        "historicalUrls": {
+          "docs/CURRENT_GOAL.md": "https://github.com/f-kw/zev2/blob/fcc79b9cc5ca10aaae0ab2faf5981bd1f0c81706/docs/CURRENT_GOAL.md",
+          "docs/HANDOVER_INDEX.md": "https://github.com/f-kw/zev2/blob/fcc79b9cc5ca10aaae0ab2faf5981bd1f0c81706/docs/HANDOVER_INDEX.md"
+        },
+        "relativeLinksChecked": 33,
+        "protectedFiveEqualHEAD": true,
+        "diffCheck": "passed"
+      }
     }
   ]
 }

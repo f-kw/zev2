@@ -1391,3 +1391,19 @@ OpenAIの採用方向は本人が選択済みで、モデル比較を問い直�
 **monaへの具体判断：TODO #60のオフライン接続部（想定3path・約2〜3時間・追加送信/本番切替/製造なし）を次の限定実装として着工してよいか、その範囲を扱う。** 次に本人へ上げる際はこの内容を説明し、追加APIや本番全演出置換の承認として扱わない。現在の親指示では範囲整理だけなので、未着工のまま待つ。
 
 正式MCPでCheck44からTODO60へリンクし、board116→118、Check44 item8→9、新TODO60 item1（pending/waiting）。Done45/59、終了したmonaの比較3/4、文脈TODO54と削除履歴を保持。文脈改善は未適用、新動画未製造。今回の状態は範囲整理完了・相談役待ち、次担当mona。記録はこのreport/session log/CURRENT_GOAL/HANDOVERの4pathだけ。製品code/DECISIONS/原入力/応答/旧成果は不変。
+
+## No.61 CPU修正反映後の既存kawa-power STT再実行 — 2026-10-11T05:38:45.739254+00:00
+
+本人「CPUエラーが原因だから再実行するように変更反映済み」をmona経由で受領（Sentinel_97146286e2588191978db8ae2b3b6ced）。これは本人報告であり、以前のProcessExit3のCPU起因をAPI独自診断済みにはしない。続く「STTはkawa-powerに立ってるから必ず使うこと」も受領し、既存LAN 192.168.1.7:8000のみ使用。14:31:02 JSTのGET healthはHTTP200/ok/workerActive、API PID15744、CUDA probe fresh。旧ジョブ2954534d…はfailedのまま、原文・失敗証拠を保持。OpenAPIにはGET job一覧がないため、既存正式POSTの同入力/設定/実装identity重複抑止を使用した。
+
+14:36:48.335 JST Mac受付保存、新job `23c09ec3da7141d9a7252f004847c7bd`、server登録2026-10-11T05:36:48.437919+00:00、server開始2026-10-11T05:36:48.652413+00:00。同じsource-original-audio.m4a、194653570B/SHA dc006291…を送信前と受付で照合。language ja/話者分離false、原音声全尺を維持。登録1回、reused=False/deduplicated=False。新receiptのmain.py SHA 2b998319…/stt_pipeline.py d43aa0a9…へ変化、alignment e4963404…は同じ、ompThreads/mklThreads=1。これは報告された修正反映を支持する観測であり、完走の保証ではない。既存server側runnerRetry maxAttempts3/delay10s/resumeFromSource/unexpected-runner-exitが健康応答とreceiptに見える。設定変更0、Mac側の再送0、実server試行回数は同jobを読取り追跡する。
+
+保存は新専用 `stt-after-cpu-fix-v001` と同monitorを使用し、旧 `stt-v001` を上書きしない。既存資源guardのdevice/UUID、50GB開始/12GBreserve/合計RSS16GiB/pressure1/1秒観測/nextUnit1GiBを継承。開始前sampleをowner.jsonに保存、server資源とMac guardは別。元動画取得/原音声抽出/全時計検査は再実行しない。自分のSTT client PGIDだけを監視・終了確認し、旧servers/他者処理を止めない。
+
+現在の同job実状態 `running`/attemptCount1、完成結果は未取得。既存SDKのboard表示はNode20でnode:sqlite読込前に停止したため、STTとは別の通常Node23でNo.61をactive/currentへ更新・再読（rev66/board332）。このSDK起動修正でSTT登録を繰り返していない。新素材の正規caption caller/manifest/UI consumer、正式plan/permit/製造、実視聴品質は引き続き未成立。paid API0。親がGit枠を返却、main fcc79b9c/UI成果保持。入口2文書は短い現在地だけ、詳細はこのlog/ledgerに保持。新CPU修正後の計測は旧失敗server178.284733秒/client188.779439秒と分け、並列工程を足して全体制作時間にしない。
+
+### 修正後STTの原ASR checkpoint（2026-10-11 14:45:47 JST）
+
+同job23c09ec3…のGET status/sourceを各1回読取、両HTTP200。状態running/attempt1、完成結果未取得。source raw160068B/SHA e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426、396区間/44111文字は旧失敗jobの原sourceとbyte完全一致。原ASRの構造診断/3場面文脈下調べは内容同一のため再実行不要。ただし今回jobとinputSHA/bytesの対応を新GET原応答で保持し、旧失敗の実行成功や完成aligned結果を流用したものではない。今回の完成STT、正式字幕準備、動画製造、品質は未完。サーバー実処理は継続、旧runner.logの再提出を停止条件にしない。過去No71等の親管理項目はこの担当から変更しない。
+
+新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。

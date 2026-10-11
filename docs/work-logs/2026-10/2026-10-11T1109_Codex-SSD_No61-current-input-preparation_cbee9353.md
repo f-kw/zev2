@@ -160,3 +160,29 @@ runner.logは唯一と断定しない。GPU子process stdout/stderrの最短確�
 監視controller2902/worker-PGID2911も13:46:54.943 JSTに終了し、残存実行0。一件全体のexit1は既知LAN STT失敗を含むためで、時計検査exit0や資源監視停止を失敗へ読み替えない。guard理由null、観測最大合計RSS653,230,080B。final guest空き486,865,158,144B、host/internalは別記録。検査と監視の閉じた証拠をread-only化。原動画/原音声/原ASR/失敗と検査証拠はSTT原因調査と正規準備への後続参照がありKEEP、今回不要削除0B。旧配信server/他者process変更0。
 
 現在は相談役待ち。次担当monaが同jobのWindows runner.logまたは既存障害イベントと必要な実機main.py確認を扱い、対応指示後に同Codex-SSDが再開する。同条件再投入/新認証/新source/有料API/UI登録/正式plan/製造0。失敗ASR原文だけを完成producerにしない。今回の新素材全体制作は未完で、制作全体の終了/所要時間は未確定。Gitは親返却fe88cc36から自分6文書だけを保存しUIへ枠返却する。
+
+## No.61 CPU修正反映後の既存kawa-power STT再実行 — 2026-10-11T05:38:45.739254+00:00
+
+本人「CPUエラーが原因だから再実行するように変更反映済み」をmona経由で受領（Sentinel_97146286e2588191978db8ae2b3b6ced）。これは本人報告であり、以前のProcessExit3のCPU起因をAPI独自診断済みにはしない。続く「STTはkawa-powerに立ってるから必ず使うこと」も受領し、既存LAN 192.168.1.7:8000のみ使用。14:31:02 JSTのGET healthはHTTP200/ok/workerActive、API PID15744、CUDA probe fresh。旧ジョブ2954534d…はfailedのまま、原文・失敗証拠を保持。OpenAPIにはGET job一覧がないため、既存正式POSTの同入力/設定/実装identity重複抑止を使用した。
+
+14:36:48.335 JST Mac受付保存、新job `23c09ec3da7141d9a7252f004847c7bd`、server登録2026-10-11T05:36:48.437919+00:00、server開始2026-10-11T05:36:48.652413+00:00。同じsource-original-audio.m4a、194653570B/SHA dc006291…を送信前と受付で照合。language ja/話者分離false、原音声全尺を維持。登録1回、reused=False/deduplicated=False。新receiptのmain.py SHA 2b998319…/stt_pipeline.py d43aa0a9…へ変化、alignment e4963404…は同じ、ompThreads/mklThreads=1。これは報告された修正反映を支持する観測であり、完走の保証ではない。既存server側runnerRetry maxAttempts3/delay10s/resumeFromSource/unexpected-runner-exitが健康応答とreceiptに見える。設定変更0、Mac側の再送0、実server試行回数は同jobを読取り追跡する。
+
+保存は新専用 `stt-after-cpu-fix-v001` と同monitorを使用し、旧 `stt-v001` を上書きしない。既存資源guardのdevice/UUID、50GB開始/12GBreserve/合計RSS16GiB/pressure1/1秒観測/nextUnit1GiBを継承。開始前sampleをowner.jsonに保存、server資源とMac guardは別。元動画取得/原音声抽出/全時計検査は再実行しない。自分のSTT client PGIDだけを監視・終了確認し、旧servers/他者処理を止めない。
+
+現在の同job実状態 `running`/attemptCount1、完成結果は未取得。既存SDKのboard表示はNode20でnode:sqlite読込前に停止したため、STTとは別の通常Node23でNo.61をactive/currentへ更新・再読（rev66/board332）。このSDK起動修正でSTT登録を繰り返していない。新素材の正規caption caller/manifest/UI consumer、正式plan/permit/製造、実視聴品質は引き続き未成立。paid API0。親がGit枠を返却、main fcc79b9c/UI成果保持。入口2文書は短い現在地だけ、詳細はこのlog/ledgerに保持。新CPU修正後の計測は旧失敗server178.284733秒/client188.779439秒と分け、並列工程を足して全体制作時間にしない。
+
+## 本人依頼の入口2文書の蒸留 — 2026-10-11 14:43:46 JST
+
+本人「暇な時は資料を確認して蒸留」「冗長な資料は修正して良い、少なく全体を表すのがベスト」をmona経由で受領。現main fcc79b9cc5ca10aaae0ab2faf5981bd1f0c81706へ原経緯の固定URLを両入口に置いた。自分の未commit CPU修正後登録記録は既存のこのlog/J16 report/制作台帳へ保持したまま、CURRENT_GOALは目的・三ライン・到達点・残件・次担当・現行境界へ、HANDOVER_INDEXは読む順と実在一次資料への索引へ再構成。旧時点の未承認/SSD未確認/待機を現在形から外し、旧本文はGit固定版から辿る。新archive/第四正本0。元log/reportの過去本文、AGENTS/DECISIONS/承認記録/旧開発計画は削除変更0。
+
+CURRENT_GOALは1052行/133076字→42行/2820字。HANDOVER_INDEXは1086行/131650字→39行/3181字。両文書のlocal相対link 33件が実在、保護5資料のHEAD byte一致を確認。旧開発計画v018と採用済みNo64の現在順序は区別し、旧計画全置換を広げない。board読取No64 completed/No68 active/No70 waiting、最新UI工程の細部は親の現指示を優先。固定Digest/遠方接続二系統第一完成、人間回答台帳/原回答、No54旧2場面、新素材のjob/inputSHA/attemptと9/26同URLの別結果、旧326/5件API許可の非転用、費用別承認を保持。No70未着手を残す。
+
+この保存時の修正後STTは処理中/attempt1、同jobとguarded clientを止めず継続。保存/資料整理をSTT成功・製造・品質採用へ読み替えない。次の実観測が出れば現在地とlogを更新する。Git枠は自分、未保存他者変更を混入せずown6資料だけcheckpointする。
+
+### 修正後STTの原ASR checkpoint（2026-10-11 14:45:47 JST）
+
+同job23c09ec3…のGET status/sourceを各1回読取、両HTTP200。状態running/attempt1、完成結果未取得。source raw160068B/SHA e971ec1ac51bb3eb3e845cc6a5de0c2bff6f8474c1701fe6066f43a3b109c426、396区間/44111文字は旧失敗jobの原sourceとbyte完全一致。原ASRの構造診断/3場面文脈下調べは内容同一のため再実行不要。ただし今回jobとinputSHA/bytesの対応を新GET原応答で保持し、旧失敗の実行成功や完成aligned結果を流用したものではない。今回の完成STT、正式字幕準備、動画製造、品質は未完。サーバー実処理は継続、旧runner.logの再提出を停止条件にしない。過去No71等の親管理項目はこの担当から変更しない。
+
+新保存proofは stt-after-cpu-fix-readback-v001/readback.json、sourceとstatus raw。ledgerは同raw/receipt/guard ownerのbyte/hash参照を使い、巨大なAPI本文の重複埋込を減らす。元rawは専用SSDに保持。入口2文書の蒸留、リンク実在33件、保護資料不変、旧ledger fields HEAD一致、own6 docs diff --checkを検査。STTの処理待ち中の監査checkpointであり、No61完了の宣言ではない。
+
+Git保存前にUI担当のbackend3fileの並行未commit差分を観測。私用検査の「tree差分がown6だけ」という過剰な仮定は検査で拒否され、他者差分を保護したままown6を明示stageする条件へ修正した。STT/正式producer/他者コードの再実行や変更0。UI差分はcommitへ含めず、共有treeの未commit状態と自分の保存済みを分けて報告する。文書変更なので製品suite再実行0、必要なdiff/参照/履歴/承認保護の検査を実施。
