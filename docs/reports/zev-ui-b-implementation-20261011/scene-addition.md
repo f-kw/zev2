@@ -44,4 +44,4 @@ build/unit/契約のraw log8件、[変更要求の実送信記録](scene-additio
 
 **残る制作側の境界：** 正式producerがこの人間の編集要求を明示入力として受け取り、変更後の全採用集合・保持判断・時計・字幕準備を新版へ束縛する接続が未実装。その新版がどの編集要求を満たすかも正式な対応記録が必要。候補IDがたまたま一致しただけで、今回の要求を自動的に実施済みとする処理は入れていない。製造承認・動画作成・完成媒体/人間品質確認の通常接続も未完成。このconsumer側の保存/停止表示を完了とし、No.68全体をDoneにしない。No.70を開始しない。
 
-Gitは親から返却されたUI leaseで、自分の必要fileだけを明示stageしmainへcheckpoint commit/pushする。最終SHA/status/untracked/pushと次状態はsession work log・親への報告で固定する。
+Gitは親から返却されたUI leaseで、自分の必要34fileだけを明示stageしmainへcheckpoint `632e81eecd09d9305ba75b8b50dae89e2849647b` をcommit/push成功。source/Markdown/JSONの差分check成功。raw stdout/AXの原空白は保持した。後続文書保存を含む最終SHA/status/untracked/pushと次状態は[session work log](../../work-logs/2026-10/2026-10-11T0516_Codex-UI_No68-scene-addition_632e81ee.md)・親への報告で固定する。
